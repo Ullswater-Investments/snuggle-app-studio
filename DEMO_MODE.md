@@ -15,8 +15,32 @@ El **Modo Demo** permite explorar todas las funcionalidades de PROCUREDATA sin a
    - Configura 6 organizaciones con sus roles
    - **Inserta 5 transacciones en diferentes estados**
    - **Crea 4 registros de datos de proveedores**
+   - **🎯 Inicia el tour guiado automáticamente**
    
 Todo el entorno demo se configura en segundos sin intervención manual.
+
+### 🎓 Tour Guiado Interactivo
+
+Al primer login, se activa automáticamente un **tour guiado** de 6 pasos que te muestra:
+
+1. **Bienvenida**: Introducción al sistema y datos demo disponibles
+2. **Selector de Organización**: Cómo cambiar entre las 6 organizaciones
+3. **Solicitudes Pendientes**: Dónde ver y aprobar transacciones
+4. **Visualización de Datos**: Acceso a datos de transacciones completadas
+5. **Catálogo**: Exploración de activos y creación de solicitudes
+6. **Escenarios Recomendados**: Guía de flujos completos
+
+**Características del Tour:**
+- ✨ Resaltado visual de elementos importantes
+- 📊 Información contextual en cada paso
+- ⏭️ Navegación: Siguiente, Atrás, Saltar
+- 🔄 Reiniciable en cualquier momento desde el botón de ayuda (?)
+- 💾 Se marca como completado automáticamente
+
+**Reiniciar el Tour:**
+- Hacer clic en el botón de ayuda (?) en el header
+- Seleccionar "Reiniciar Tour Guiado"
+- O eliminar `demo-tour-completed` de localStorage
 
 ### Opción 2: Credenciales Manuales
 - **Email**: `demo@procuredata.app`
@@ -158,6 +182,12 @@ Información completa de 4 proveedores vinculada a las transacciones:
 - Permite cambiar rápidamente entre organizaciones
 - Las organizaciones demo tienen un badge "Demo"
 
+### Botón de Ayuda (?)
+- Ubicado en el header del dashboard
+- Permite reiniciar el tour guiado
+- Muestra escenarios rápidos de uso
+- Siempre disponible en modo demo
+
 ## Datos Sintéticos Incluidos
 
 ### Organizaciones
@@ -192,6 +222,15 @@ Información completa de 4 proveedores vinculada a las transacciones:
   - Administradores legales
 
 ## Arquitectura Técnica
+
+### Tour Guiado
+- **Librería**: react-joyride
+- **Componente**: `DemoTour.tsx`
+- **Activación**: Automática al primer login del usuario demo en `/dashboard`
+- **Persistencia**: localStorage key `demo-tour-completed`
+- **Pasos**: 6 pasos interactivos con navegación
+- **Estilos**: Personalizados según el tema de la aplicación
+- **Localización**: Textos en español
 
 ### Base de Datos
 - Campo `is_demo` en tabla `organizations` identifica organizaciones demo

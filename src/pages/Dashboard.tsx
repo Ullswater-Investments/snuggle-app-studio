@@ -2,8 +2,11 @@ import { useAuth } from "@/hooks/useAuth";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoBanner } from "@/components/DemoBanner";
+import { DemoTour } from "@/components/DemoTour";
+import { DemoHelpButton } from "@/components/DemoHelpButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { HelpCircle } from "lucide-react";
 
 const Dashboard = () => {
   const { user, signOut } = useAuth();
@@ -11,11 +14,16 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <DemoTour />
+      
       <header className="border-b border-border">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 gap-4">
           <h1 className="text-2xl font-bold">PROCUREDATA</h1>
           <div className="flex items-center gap-4">
-            <OrganizationSwitcher />
+            <div data-tour="org-switcher">
+              <OrganizationSwitcher />
+            </div>
+            <DemoHelpButton />
             <span className="text-sm text-muted-foreground">{user?.email}</span>
             <Button variant="outline" onClick={signOut}>
               Cerrar Sesión
@@ -33,19 +41,23 @@ const Dashboard = () => {
             Sistema de Gobernanza de Datos - Fase 5 (Integraciones Externas) ✅
           </p>
           {availableOrgs.some(org => org.is_demo) && (
-            <div className="mt-3 p-4 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800">
+            <div className="mt-3 p-4 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 animate-fade-in">
               <p className="text-sm font-medium text-amber-900 dark:text-amber-100">
                 🎭 <strong>Modo Demo Activo</strong> - Tienes acceso a {availableOrgs.length} organizaciones
               </p>
               <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
                 5 transacciones demo en diferentes estados disponibles para explorar el flujo completo
               </p>
+              <p className="text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-center gap-1">
+                <HelpCircle className="h-3 w-3" />
+                Usa el botón de ayuda (?) para reiniciar el tour guiado
+              </p>
             </div>
           )}
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <Card>
+          <Card data-tour="catalog-link" className="transition-all hover:shadow-lg">
             <CardHeader>
               <CardTitle>Catálogo de Datos</CardTitle>
               <CardDescription>Explorar productos de datos disponibles</CardDescription>
@@ -57,7 +69,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card data-tour="requests-link" className="transition-all hover:shadow-lg">
             <CardHeader>
               <CardTitle>Solicitudes</CardTitle>
               <CardDescription>Gestionar solicitudes de datos</CardDescription>
@@ -69,14 +81,14 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card data-tour="data-view-link" className="transition-all hover:shadow-lg">
             <CardHeader>
-              <CardTitle>Configuración</CardTitle>
-              <CardDescription>Configurar integraciones y APIs</CardDescription>
+              <CardTitle>Visualización de Datos</CardTitle>
+              <CardDescription>Ver datos de transacciones completadas</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full" onClick={() => window.location.href = '/settings/erp-config'}>
-                Configurar ERP
+              <Button className="w-full" onClick={() => window.location.href = '/data-view'}>
+                Ver Datos
               </Button>
             </CardContent>
           </Card>

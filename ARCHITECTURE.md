@@ -8,10 +8,13 @@ PROCUREDATA incluye un **modo demo completo** que se configura automáticamente:
 - **6 organizaciones** con roles Consumer, Holder y Provider  
 - **5 transacciones** en estados: initiated, pending_subject, pending_holder, approved, completed
 - **4 registros de proveedores** con datos sintéticos completos
+- **🎓 Tour guiado interactivo** de 6 pasos al primer login
 
 👉 **Documentación completa**: [DEMO_MODE.md](./DEMO_MODE.md)
 
 **Configuración automática**: Al registrarse el usuario demo, un trigger de base de datos (`setup_demo_user`) inserta automáticamente todos los perfiles, roles, transacciones y datos de proveedores en una sola operación.
+
+**Tour Guiado**: Utilizando react-joyride, el sistema presenta automáticamente un recorrido interactivo que explica las funcionalidades principales y guía al usuario a través de los escenarios demo más importantes.
 
 ---
 
