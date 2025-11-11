@@ -38,6 +38,9 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    --gradient-primary: linear-gradient(135deg, hsl(214 85% 65%), hsl(214 80% 75%), hsl(214 75% 85%));
+    --gradient-primary-hover: linear-gradient(135deg, hsl(214 85% 60%), hsl(214 80% 70%), hsl(214 75% 80%));
+
     --sidebar-background: 214 20% 98%;
 
     --sidebar-foreground: 214 20% 25%;
