@@ -28,7 +28,7 @@ const App = () => (
         <AuthProvider>
           <OrganizationProvider>
             <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/dashboard"
