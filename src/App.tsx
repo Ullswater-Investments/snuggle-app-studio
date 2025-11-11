@@ -12,6 +12,8 @@ import Catalog from "./pages/Catalog";
 import ProductDetail from "./pages/ProductDetail";
 import Requests from "./pages/Requests";
 import RequestWizard from "./pages/RequestWizard";
+import DataView from "./pages/DataView";
+import ERPConfig from "./pages/ERPConfig";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -63,6 +65,22 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <RequestWizard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/data/view/:id"
+              element={
+                <ProtectedRoute>
+                  <DataView />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings/erp-config"
+              element={
+                <ProtectedRoute>
+                  <ERPConfig />
                 </ProtectedRoute>
               }
             />

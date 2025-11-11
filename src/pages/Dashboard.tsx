@@ -23,7 +23,7 @@ const Dashboard = () => {
         <div className="mb-6">
           <h2 className="mb-2 text-3xl font-bold">Dashboard Principal</h2>
           <p className="text-muted-foreground">
-            Sistema de Gobernanza de Datos - Fase 3 (Motor de Gobernanza) ✅
+            Sistema de Gobernanza de Datos - Fase 4 (Visualización y Exportación) ✅
           </p>
         </div>
 
@@ -58,8 +58,8 @@ const Dashboard = () => {
               <CardDescription>Configurar integraciones y APIs</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="w-full" disabled>
-                Próximamente
+              <Button className="w-full" onClick={() => window.location.href = '/settings/erp-config'}>
+                Configurar ERP
               </Button>
             </CardContent>
           </Card>
@@ -139,7 +139,29 @@ const Dashboard = () => {
               </div>
 
               <div>
-                <h3 className="mb-2 font-semibold">Fase 4 - Visualización y Exportación</h3>
+                <h3 className="mb-2 font-semibold">Fase 4 - Visualización y Exportación ✅</h3>
+                <div className="space-y-2 pl-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Visualización de Datos</span>
+                    <span className="text-sm text-green-600">✓ Tabla interactiva</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Exportación CSV</span>
+                    <span className="text-sm text-green-600">✓ Funcional</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Configuración ERP</span>
+                    <span className="text-sm text-green-600">✓ Implementada</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Datos de Proveedores</span>
+                    <span className="text-sm text-green-600">✓ Estructura</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="mb-2 font-semibold">Fase 5 - Integraciones Externas</h3>
                 <p className="text-sm text-muted-foreground pl-4">Próximamente...</p>
               </div>
             </CardContent>

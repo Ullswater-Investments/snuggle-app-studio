@@ -288,6 +288,123 @@ export type Database = {
           },
         ]
       }
+      erp_configurations: {
+        Row: {
+          api_key_encrypted: string | null
+          auth_method: Database["public"]["Enums"]["auth_method"]
+          auth_token_encrypted: string | null
+          config_name: string
+          config_type: Database["public"]["Enums"]["erp_config_type"]
+          created_at: string
+          endpoint_url: string
+          field_mapping: Json | null
+          id: string
+          is_active: boolean
+          last_test_date: string | null
+          last_test_status: string | null
+          organization_id: string
+          updated_at: string
+        }
+        Insert: {
+          api_key_encrypted?: string | null
+          auth_method?: Database["public"]["Enums"]["auth_method"]
+          auth_token_encrypted?: string | null
+          config_name: string
+          config_type: Database["public"]["Enums"]["erp_config_type"]
+          created_at?: string
+          endpoint_url: string
+          field_mapping?: Json | null
+          id?: string
+          is_active?: boolean
+          last_test_date?: string | null
+          last_test_status?: string | null
+          organization_id: string
+          updated_at?: string
+        }
+        Update: {
+          api_key_encrypted?: string | null
+          auth_method?: Database["public"]["Enums"]["auth_method"]
+          auth_token_encrypted?: string | null
+          config_name?: string
+          config_type?: Database["public"]["Enums"]["erp_config_type"]
+          created_at?: string
+          endpoint_url?: string
+          field_mapping?: Json | null
+          id?: string
+          is_active?: boolean
+          last_test_date?: string | null
+          last_test_status?: string | null
+          organization_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "erp_configurations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      export_logs: {
+        Row: {
+          created_at: string
+          erp_config_id: string | null
+          error_message: string | null
+          export_status: string
+          export_type: string
+          id: string
+          organization_id: string
+          transaction_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          erp_config_id?: string | null
+          error_message?: string | null
+          export_status: string
+          export_type: string
+          id?: string
+          organization_id: string
+          transaction_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          erp_config_id?: string | null
+          error_message?: string | null
+          export_status?: string
+          export_type?: string
+          id?: string
+          organization_id?: string
+          transaction_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "export_logs_erp_config_id_fkey"
+            columns: ["erp_config_id"]
+            isOneToOne: false
+            referencedRelation: "erp_configurations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "export_logs_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "export_logs_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "data_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           created_at: string
@@ -314,6 +431,65 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      supplier_data: {
+        Row: {
+          company_name: string
+          contact_person_email: string | null
+          contact_person_name: string | null
+          contact_person_phone: string | null
+          created_at: string
+          data_source: string | null
+          fiscal_address: Json
+          id: string
+          last_updated: string
+          legal_address: Json | null
+          legal_admin_name: string | null
+          legal_name: string
+          tax_id: string
+          transaction_id: string
+        }
+        Insert: {
+          company_name: string
+          contact_person_email?: string | null
+          contact_person_name?: string | null
+          contact_person_phone?: string | null
+          created_at?: string
+          data_source?: string | null
+          fiscal_address: Json
+          id?: string
+          last_updated?: string
+          legal_address?: Json | null
+          legal_admin_name?: string | null
+          legal_name: string
+          tax_id: string
+          transaction_id: string
+        }
+        Update: {
+          company_name?: string
+          contact_person_email?: string | null
+          contact_person_name?: string | null
+          contact_person_phone?: string | null
+          created_at?: string
+          data_source?: string | null
+          fiscal_address?: Json
+          id?: string
+          last_updated?: string
+          legal_address?: Json | null
+          legal_admin_name?: string | null
+          legal_name?: string
+          tax_id?: string
+          transaction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "supplier_data_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "data_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_profiles: {
         Row: {
@@ -417,6 +593,8 @@ export type Database = {
     Enums: {
       app_role: "admin" | "approver" | "viewer" | "api_configurator"
       approval_action: "pre_approve" | "approve" | "deny" | "cancel"
+      auth_method: "bearer" | "api_key" | "oauth" | "basic"
+      erp_config_type: "download" | "upload"
       organization_type: "consumer" | "provider" | "data_holder"
       transaction_status:
         | "initiated"
@@ -556,6 +734,8 @@ export const Constants = {
     Enums: {
       app_role: ["admin", "approver", "viewer", "api_configurator"],
       approval_action: ["pre_approve", "approve", "deny", "cancel"],
+      auth_method: ["bearer", "api_key", "oauth", "basic"],
+      erp_config_type: ["download", "upload"],
       organization_type: ["consumer", "provider", "data_holder"],
       transaction_status: [
         "initiated",

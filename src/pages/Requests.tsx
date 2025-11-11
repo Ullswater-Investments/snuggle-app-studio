@@ -314,9 +314,9 @@ const Requests = () => {
                       </div>
                       <Button
                         variant="outline"
-                        onClick={() => navigate(`/requests/${transaction.id}`)}
+                        onClick={() => navigate(`/data/view/${transaction.id}`)}
                       >
-                        Ver Detalle
+                        Ver Datos Recibidos
                       </Button>
                     </div>
                   </CardContent>

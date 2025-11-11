@@ -87,24 +87,30 @@
 - [x] RLS policies completas para multi-tenancy
 - [x] Integración completa con catálogo (botón "Solicitar Datos" funcional)
 
-### FASE 4: Visualización y Exportación (2 semanas) - PRÓXIMO
-- [ ] Página `/data/view/:transaction_id`
-- [ ] Página `/data/export/:transaction_id`
-- [ ] Integración básica con ERP
+### FASE 4: Visualización y Exportación ✅ COMPLETADA
+- [x] Tabla `supplier_data` con estructura Tabla VI.B del documento
+- [x] Tabla `erp_configurations` para gestión de APIs ERP
+- [x] Tabla `export_logs` para auditoría de exportaciones
+- [x] Página `/data/view/:transaction_id` con tabla interactiva
+- [x] Exportación a CSV con descarga automática
+- [x] Página `/settings/erp-config` para configurar integraciones
+- [x] Selector de configuración ERP para envío de datos
+- [x] RLS policies para datos sensibles de proveedores
+- [x] Visualización solo para transacciones completadas
+- [x] Logs de exportación (CSV, JSON, ERP)
 
-### FASE 5: Configuración de Sistemas (2 semanas)
-- [ ] Tabla `erp_configurations`
-- [ ] Página `/settings/api-config`
-- [ ] Test de conexión (Edge Function)
-- [ ] Mapeo de campos JSON
-
-### FASE 6: Integraciones Externas (3-4 semanas)
+### FASE 5: Integraciones Externas (3-4 semanas) - PRÓXIMO
 - [ ] Integración con EDC (Eclipse Dataspace Connector)
 - [ ] Integración con SSI Wallet
 - [ ] Edge Functions:
   - `edc-connector-orchestrator`
   - `ssi-wallet-manager`
   - `catalog-sync`
+  - `erp-api-tester`
+  - `erp-data-uploader`
+  - `notification-handler`
+- [ ] Test de conexión ERP automático
+- [ ] Envío real de datos a ERP configurado
 
 ## 🔐 Seguridad Implementada
 
@@ -159,6 +165,8 @@ src/
 │   ├── ProductDetail.tsx # Detalle de producto
 │   ├── Requests.tsx     # Gestión de solicitudes
 │   ├── RequestWizard.tsx # Wizard de solicitud (5 pasos)
+│   ├── DataView.tsx     # Visualización de datos recibidos
+│   ├── ERPConfig.tsx    # Configuración de ERP
 │   └── NotFound.tsx
 ├── App.tsx
 ├── index.css            # Design system
@@ -194,4 +202,13 @@ supabase/
 - Función DB para consultas eficientes
 - Integración completa con catálogo
 
-**Próximo Objetivo**: Iniciar Fase 4 (Visualización y Exportación)
+**Fase 4 (Visualización y Exportación): ✅ 100% COMPLETA**
+- Tablas de datos de proveedores y configuraciones ERP
+- Página de visualización con tabla interactiva
+- Exportación a CSV funcional
+- Página de configuración de ERP con gestión de endpoints
+- Sistema de logs de exportación
+- RLS policies para datos sensibles
+- Integración con requests (Ver Datos Recibidos)
+
+**Próximo Objetivo**: Iniciar Fase 5 (Integraciones Externas - EDC, SSI Wallet)
