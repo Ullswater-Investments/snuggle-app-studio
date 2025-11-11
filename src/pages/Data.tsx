@@ -5,7 +5,8 @@ import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Database, Download, Eye, FileText } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Database, Download, Eye, FileText, Info } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 
 const Data = () => {
@@ -165,6 +166,23 @@ const Data = () => {
                         <Badge variant="secondary">
                           {transaction.asset.product.category}
                         </Badge>
+                        {isDemo && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+                                  <Info className="h-3 w-3 mr-1" />
+                                  DEMO
+                                </Badge>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p className="text-xs max-w-xs">
+                                  Datos sintéticos de demostración. En producción, verás datos reales de tus transacciones completadas.
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                       </div>
                       <p className="text-sm text-muted-foreground">
                         Proveedor: {transaction.subject_org.name}

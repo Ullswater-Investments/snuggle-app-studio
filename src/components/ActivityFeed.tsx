@@ -3,7 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, Clock, ArrowRight } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { CheckCircle, XCircle, Clock, ArrowRight, Info } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
 
@@ -102,13 +103,32 @@ export const ActivityFeed = () => {
                 >
                   <Icon className={`h-5 w-5 mt-0.5 shrink-0 ${actionInfo.color}`} />
                   <div className="flex-1 space-y-1">
-                    <p className="text-sm">
-                      <span className="font-medium">{activity.actor_org.name}</span>
-                      {" "}{actionInfo.label}{" "}
-                      <span className="text-muted-foreground">
-                        {activity.transaction?.asset?.product?.name || "una solicitud"}
-                      </span>
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm">
+                        <span className="font-medium">{activity.actor_org.name}</span>
+                        {" "}{actionInfo.label}{" "}
+                        <span className="text-muted-foreground">
+                          {activity.transaction?.asset?.product?.name || "una solicitud"}
+                        </span>
+                      </p>
+                      {isDemo && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700 text-[10px] px-1 py-0">
+                                <Info className="h-2 w-2 mr-0.5" />
+                                DEMO
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="text-xs max-w-xs">
+                                Actividad sintética de demostración. En producción, verás el historial real de tu organización.
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                    </div>
                     <p className="text-xs text-muted-foreground">
                       {formatDistanceToNow(new Date(activity.created_at), {
                         addSuffix: true,

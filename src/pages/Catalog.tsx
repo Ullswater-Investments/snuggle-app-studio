@@ -2,16 +2,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, Package } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Search, Filter, Package, Info } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FadeIn } from "@/components/AnimatedSection";
 
 const Catalog = () => {
   const navigate = useNavigate();
+  const { isDemo } = useOrganizationContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
@@ -135,9 +138,28 @@ const Catalog = () => {
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <Package className="h-8 w-8 text-primary" />
-                    {product.category && (
-                      <Badge variant="secondary">{product.category}</Badge>
-                    )}
+                    <div className="flex gap-2">
+                      {product.category && (
+                        <Badge variant="secondary">{product.category}</Badge>
+                      )}
+                      {isDemo && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger onClick={(e) => e.stopPropagation()}>
+                              <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+                                <Info className="h-3 w-3 mr-1" />
+                                DEMO
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="text-xs max-w-xs">
+                                Este es un producto sintético para demostración. En producción, verás productos reales de tu catálogo.
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                    </div>
                   </div>
                   <CardTitle className="mt-4">{product.name}</CardTitle>
                   <CardDescription className="line-clamp-2">

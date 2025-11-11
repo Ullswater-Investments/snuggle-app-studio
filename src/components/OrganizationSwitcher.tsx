@@ -1,4 +1,4 @@
-import { Building2, ChevronDown } from "lucide-react";
+import { Building2, ChevronDown, Info } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const OrganizationSwitcher = () => {
   const { activeOrg, availableOrgs, switchOrganization, loading } = useOrganizationContext();
@@ -75,12 +76,28 @@ export const OrganizationSwitcher = () => {
                     <Building2 className="h-4 w-4" />
                     <span>{org.name}</span>
                   </div>
-                  {org.id === activeOrg?.id && (
-                    <Badge variant="secondary" className="text-xs">Activa</Badge>
-                  )}
-                  {org.is_demo && (
-                    <Badge variant="outline" className="text-xs">Demo</Badge>
-                  )}
+                  <div className="flex items-center gap-1">
+                    {org.id === activeOrg?.id && (
+                      <Badge variant="secondary" className="text-xs">Activa</Badge>
+                    )}
+                    {org.is_demo && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger onClick={(e) => e.stopPropagation()}>
+                            <Badge variant="outline" className="text-xs bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+                              <Info className="h-3 w-3 mr-1" />
+                              Demo
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p className="text-xs max-w-xs">
+                              Organización sintética para demostración. No representa una entidad real.
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+                  </div>
                 </DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />

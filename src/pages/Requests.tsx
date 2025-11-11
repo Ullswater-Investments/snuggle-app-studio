@@ -7,8 +7,9 @@ import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus } from "lucide-react";
+import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info } from "lucide-react";
 import { toast } from "sonner";
 import { FadeIn } from "@/components/AnimatedSection";
 
@@ -28,7 +29,7 @@ const Requests = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { sendNotification } = useNotifications();
-  const { activeOrg } = useOrganizationContext();
+  const { activeOrg, isDemo } = useOrganizationContext();
 
   // Obtener organización del usuario
   const { data: userProfile } = useQuery({
@@ -281,9 +282,28 @@ const Requests = () => {
                             Solicitado por: {transaction.consumer_org.name}
                           </CardDescription>
                         </div>
-                        <Badge variant={STATUS_LABELS[transaction.status].variant}>
-                          {STATUS_LABELS[transaction.status].label}
-                        </Badge>
+                        <div className="flex gap-2">
+                          <Badge variant={STATUS_LABELS[transaction.status].variant}>
+                            {STATUS_LABELS[transaction.status].label}
+                          </Badge>
+                          {isDemo && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger>
+                                  <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+                                    <Info className="h-3 w-3 mr-1" />
+                                    DEMO
+                                  </Badge>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p className="text-xs max-w-xs">
+                                    Transacción sintética de demostración. En producción, verás tus solicitudes reales.
+                                  </p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          )}
+                        </div>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -353,9 +373,28 @@ const Requests = () => {
                           Proveedor: {transaction.subject_org.name}
                         </CardDescription>
                       </div>
-                      <Badge variant={STATUS_LABELS[transaction.status].variant}>
-                        {STATUS_LABELS[transaction.status].label}
-                      </Badge>
+                      <div className="flex gap-2">
+                        <Badge variant={STATUS_LABELS[transaction.status].variant}>
+                          {STATUS_LABELS[transaction.status].label}
+                        </Badge>
+                        {isDemo && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+                                  <Info className="h-3 w-3 mr-1" />
+                                  DEMO
+                                </Badge>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p className="text-xs max-w-xs">
+                                  Transacción sintética de demostración. En producción, verás tus solicitudes reales.
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
+                      </div>
                     </div>
                   </CardHeader>
                   <CardContent>
@@ -402,6 +441,23 @@ const Requests = () => {
                         <Badge variant={STATUS_LABELS[transaction.status].variant}>
                           {STATUS_LABELS[transaction.status].label}
                         </Badge>
+                        {isDemo && (
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+                                  <Info className="h-3 w-3 mr-1" />
+                                  DEMO
+                                </Badge>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p className="text-xs max-w-xs">
+                                  Transacción sintética de demostración. En producción, verás tus solicitudes reales.
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        )}
                       </div>
                     </div>
                   </CardHeader>
