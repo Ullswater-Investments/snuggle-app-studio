@@ -14,6 +14,132 @@ export type Database = {
   }
   public: {
     Tables: {
+      catalog_metadata: {
+        Row: {
+          asset_id: string
+          categories: string[] | null
+          created_at: string
+          id: string
+          tags: string[] | null
+          updated_at: string
+          visibility: string
+        }
+        Insert: {
+          asset_id: string
+          categories?: string[] | null
+          created_at?: string
+          id?: string
+          tags?: string[] | null
+          updated_at?: string
+          visibility?: string
+        }
+        Update: {
+          asset_id?: string
+          categories?: string[] | null
+          created_at?: string
+          id?: string
+          tags?: string[] | null
+          updated_at?: string
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "catalog_metadata_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: true
+            referencedRelation: "data_assets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_assets: {
+        Row: {
+          created_at: string
+          custom_metadata: Json | null
+          holder_org_id: string
+          id: string
+          product_id: string
+          status: string
+          subject_org_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          custom_metadata?: Json | null
+          holder_org_id: string
+          id?: string
+          product_id: string
+          status?: string
+          subject_org_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          custom_metadata?: Json | null
+          holder_org_id?: string
+          id?: string
+          product_id?: string
+          status?: string
+          subject_org_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_assets_holder_org_id_fkey"
+            columns: ["holder_org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "data_assets_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "data_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "data_assets_subject_org_id_fkey"
+            columns: ["subject_org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_products: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          schema_definition: Json | null
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          schema_definition?: Json | null
+          updated_at?: string
+          version?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          schema_definition?: Json | null
+          updated_at?: string
+          version?: string
+        }
+        Relationships: []
+      }
       organizations: {
         Row: {
           created_at: string
