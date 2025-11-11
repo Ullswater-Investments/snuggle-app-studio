@@ -21,14 +21,26 @@ import {
 const COLORS = ["#10b981", "#f59e0b", "#3b82f6", "#8b5cf6", "#ef4444"];
 
 const Reports = () => {
-  const { activeOrg } = useOrganizationContext();
+  const { activeOrg, isDemo } = useOrganizationContext();
 
   const { data: transactionsByStatus } = useQuery({
-    queryKey: ["reports-by-status", activeOrg?.id],
+    queryKey: ["reports-by-status", activeOrg?.id, isDemo],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("data_transactions")
-        .select("status");
+      if (!activeOrg) return [];
+
+      let query = supabase.from("data_transactions").select("status");
+
+      // En modo demo, mostrar todas las transacciones demo
+      if (isDemo) {
+        const { data: demoOrgs } = await supabase
+          .from("organizations")
+          .select("id")
+          .eq("is_demo", true);
+        const demoOrgIds = demoOrgs?.map((o) => o.id) || [];
+        query = query.in("consumer_org_id", demoOrgIds);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
 
@@ -39,20 +51,33 @@ const Reports = () => {
 
       return Object.entries(statusCounts).map(([name, value]) => ({ name, value }));
     },
+    enabled: !!activeOrg,
   });
 
   const { data: topProducts } = useQuery({
-    queryKey: ["reports-top-products"],
+    queryKey: ["reports-top-products", activeOrg?.id, isDemo],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from("data_transactions")
-        .select(`
+      if (!activeOrg) return [];
+
+      let query = supabase.from("data_transactions").select(`
           asset:data_assets (
             product:data_products (
               name
             )
           )
         `);
+
+      // En modo demo, mostrar todos los productos demo
+      if (isDemo) {
+        const { data: demoOrgs } = await supabase
+          .from("organizations")
+          .select("id")
+          .eq("is_demo", true);
+        const demoOrgIds = demoOrgs?.map((o) => o.id) || [];
+        query = query.in("consumer_org_id", demoOrgIds);
+      }
+
+      const { data, error } = await query;
 
       if (error) throw error;
 
@@ -67,6 +92,7 @@ const Reports = () => {
         .sort((a: any, b: any) => b.count - a.count)
         .slice(0, 5);
     },
+    enabled: !!activeOrg,
   });
 
   return (

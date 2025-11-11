@@ -10,14 +10,14 @@ import { FadeIn } from "@/components/AnimatedSection";
 
 const Data = () => {
   const navigate = useNavigate();
-  const { activeOrg } = useOrganizationContext();
+  const { activeOrg, isDemo } = useOrganizationContext();
 
   const { data: transactions, isLoading } = useQuery({
-    queryKey: ["completed-transactions", activeOrg?.id],
+    queryKey: ["completed-transactions", activeOrg?.id, isDemo],
     queryFn: async () => {
       if (!activeOrg) return [];
 
-      const { data, error } = await supabase
+      let query = supabase
         .from("data_transactions")
         .select(`
           *,
@@ -33,14 +33,33 @@ const Data = () => {
           ),
           subject_org:organizations!data_transactions_subject_org_id_fkey (
             name
+          ),
+          supplier_data (
+            company_name,
+            tax_id,
+            contact_person_name,
+            contact_person_email
           )
         `)
-        .eq("consumer_org_id", activeOrg.id)
         .eq("status", "completed")
         .order("created_at", { ascending: false });
 
+      // En modo demo, mostrar todas las transacciones completadas demo
+      if (isDemo) {
+        const { data: demoOrgs } = await supabase
+          .from("organizations")
+          .select("id")
+          .eq("is_demo", true);
+        const demoOrgIds = demoOrgs?.map((o) => o.id) || [];
+        query = query.in("consumer_org_id", demoOrgIds);
+      } else {
+        query = query.eq("consumer_org_id", activeOrg.id);
+      }
+
+      const { data, error } = await query;
+
       if (error) throw error;
-      return data;
+      return data || [];
     },
     enabled: !!activeOrg,
   });

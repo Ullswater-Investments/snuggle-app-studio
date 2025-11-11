@@ -15,32 +15,50 @@ const ACTION_LABELS: Record<string, { label: string; icon: any; color: string }>
 };
 
 export const ActivityFeed = () => {
-  const { activeOrg } = useOrganizationContext();
+  const { activeOrg, isDemo } = useOrganizationContext();
 
   const { data: activities, isLoading } = useQuery({
-    queryKey: ["activity-feed", activeOrg?.id],
+    queryKey: ["activity-feed", activeOrg?.id, isDemo],
     queryFn: async () => {
-      const { data, error } = await supabase
+      if (!activeOrg) return [];
+
+      let query = supabase
         .from("approval_history")
         .select(`
           *,
           transaction:data_transactions (
             id,
+            consumer_org_id,
+            subject_org_id,
+            holder_org_id,
             asset:data_assets (
               product:data_products (
                 name
               )
             )
           ),
-          actor_org:organizations (
+          actor_org:organizations!approval_history_actor_org_id_fkey (
             name
           )
         `)
-        .order("created_at", { ascending: false })
-        .limit(10);
+        .order("created_at", { ascending: false });
+
+      // En modo demo, mostrar todas las actividades de orgs demo
+      if (isDemo) {
+        const { data: demoOrgs } = await supabase
+          .from("organizations")
+          .select("id")
+          .eq("is_demo", true);
+        const demoOrgIds = demoOrgs?.map((o) => o.id) || [];
+        query = query.in("actor_org_id", demoOrgIds);
+      }
+
+      query = query.limit(10);
+
+      const { data, error } = await query;
 
       if (error) throw error;
-      return data;
+      return data || [];
     },
     enabled: !!activeOrg,
   });

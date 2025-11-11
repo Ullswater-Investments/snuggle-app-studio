@@ -19,20 +19,24 @@ const Notifications = () => {
   const { data: notifications, isLoading } = useQuery({
     queryKey: ["notifications", user?.id, filter],
     queryFn: async () => {
-      // Por ahora mostramos el historial de aprobaciones como "notificaciones"
+      if (!user) return [];
+
       let query = supabase
         .from("approval_history")
         .select(`
           *,
           transaction:data_transactions (
             id,
+            consumer_org_id,
+            subject_org_id,
+            holder_org_id,
             asset:data_assets (
               product:data_products (
                 name
               )
             )
           ),
-          actor_org:organizations (
+          actor_org:organizations!approval_history_actor_org_id_fkey (
             name
           )
         `)
@@ -41,8 +45,9 @@ const Notifications = () => {
 
       const { data, error } = await query;
       if (error) throw error;
-      return data;
+      return data || [];
     },
+    enabled: !!user,
   });
 
   const getNotificationIcon = (action: string) => {

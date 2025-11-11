@@ -5,10 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Package, ClipboardList, Database, TrendingUp } from "lucide-react";
 
 export const DashboardStats = () => {
-  const { activeOrg } = useOrganizationContext();
+  const { activeOrg, isDemo } = useOrganizationContext();
 
   const { data: stats } = useQuery({
-    queryKey: ["dashboard-stats", activeOrg?.id],
+    queryKey: ["dashboard-stats", activeOrg?.id, isDemo],
     queryFn: async () => {
       if (!activeOrg) return null;
 
@@ -17,28 +17,59 @@ export const DashboardStats = () => {
         .from("data_products")
         .select("*", { count: "exact", head: true });
 
-      // Solicitudes pendientes para mi org
-      const { count: pendingCount } = await supabase
+      // En modo demo, obtener IDs de organizaciones demo
+      let demoOrgIds: string[] = [];
+      if (isDemo) {
+        const { data: demoOrgs } = await supabase
+          .from("organizations")
+          .select("id")
+          .eq("is_demo", true);
+        demoOrgIds = demoOrgs?.map((o) => o.id) || [];
+      }
+
+      // Solicitudes pendientes
+      let pendingQuery = supabase
         .from("data_transactions")
         .select("*", { count: "exact", head: true })
-        .or(`subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`)
         .in("status", ["pending_subject", "pending_holder"]);
+
+      if (isDemo) {
+        pendingQuery = pendingQuery.in("consumer_org_id", demoOrgIds);
+      } else {
+        pendingQuery = pendingQuery.or(
+          `subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`
+        );
+      }
+
+      const { count: pendingCount } = await pendingQuery;
 
       // Transacciones completadas este mes
       const firstDayOfMonth = new Date();
       firstDayOfMonth.setDate(1);
       firstDayOfMonth.setHours(0, 0, 0, 0);
 
-      const { count: completedCount } = await supabase
+      let completedQuery = supabase
         .from("data_transactions")
         .select("*", { count: "exact", head: true })
         .eq("status", "completed")
         .gte("created_at", firstDayOfMonth.toISOString());
 
-      // Total organizaciones activas
-      const { count: orgsCount } = await supabase
+      if (isDemo) {
+        completedQuery = completedQuery.in("consumer_org_id", demoOrgIds);
+      }
+
+      const { count: completedCount } = await completedQuery;
+
+      // Total organizaciones
+      let orgsQuery = supabase
         .from("organizations")
         .select("*", { count: "exact", head: true });
+
+      if (isDemo) {
+        orgsQuery = orgsQuery.eq("is_demo", true);
+      }
+
+      const { count: orgsCount } = await orgsQuery;
 
       return {
         products: productsCount || 0,
