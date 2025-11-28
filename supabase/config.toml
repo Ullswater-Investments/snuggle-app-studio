@@ -1,10 +1,1 @@
-project_id = "ylppnehdgxkipvbjlfks"
-
-[functions.erp-api-tester]
-verify_jwt = true
-
-[functions.erp-data-uploader]
-verify_jwt = true
-
-[functions.notification-handler]
-verify_jwt = false
+project_id = "ddnztglwszrpsvmfafsw"
