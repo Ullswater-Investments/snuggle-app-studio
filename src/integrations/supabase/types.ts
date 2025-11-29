@@ -485,6 +485,7 @@ export type Database = {
           id: string
           is_demo: boolean | null
           name: string
+          sector: string | null
           tax_id: string
           type: Database["public"]["Enums"]["organization_type"]
           updated_at: string
@@ -494,6 +495,7 @@ export type Database = {
           id?: string
           is_demo?: boolean | null
           name: string
+          sector?: string | null
           tax_id: string
           type: Database["public"]["Enums"]["organization_type"]
           updated_at?: string
@@ -503,6 +505,7 @@ export type Database = {
           id?: string
           is_demo?: boolean | null
           name?: string
+          sector?: string | null
           tax_id?: string
           type?: Database["public"]["Enums"]["organization_type"]
           updated_at?: string

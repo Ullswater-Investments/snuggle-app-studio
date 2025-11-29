@@ -24,10 +24,12 @@ const DataView = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  // Obtener transacción y datos
+  // Obtener transacción y datos con verificación de acceso
   const { data: transaction, isLoading: loadingTransaction } = useQuery({
-    queryKey: ["transaction-detail", id],
+    queryKey: ["transaction-detail", id, activeOrg?.id],
     queryFn: async () => {
+      if (!activeOrg) throw new Error("No active organization");
+
       const { data, error } = await supabase
         .from("data_transactions")
         .select(`
@@ -43,8 +45,19 @@ const DataView = () => {
         .single();
 
       if (error) throw error;
+      
+      // Security check: verify user has access to this transaction
+      const hasAccess = data.consumer_org_id === activeOrg.id || 
+                       data.subject_org_id === activeOrg.id || 
+                       data.holder_org_id === activeOrg.id;
+      
+      if (!hasAccess) {
+        throw new Error("Access denied: You don't have permission to view this transaction");
+      }
+      
       return data;
     },
+    enabled: !!id && !!activeOrg,
   });
 
   // Obtener datos flexibles de data_payloads (nuevos datos ESG, IoT, etc.)

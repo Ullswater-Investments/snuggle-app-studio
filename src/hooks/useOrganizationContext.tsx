@@ -9,6 +9,7 @@ interface Organization {
   name: string;
   type: 'consumer' | 'data_holder' | 'provider';
   is_demo: boolean;
+  sector?: string;
 }
 
 interface OrganizationContextType {
@@ -48,16 +49,17 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
         .map(role => role.organizations)
         .filter((org): org is { id: string; name: string; type: 'consumer' | 'data_holder' | 'provider' } => org !== null);
 
-      // Obtener el campo is_demo directamente de organizations
+      // Obtener el campo is_demo y sector directamente de organizations
       const { data: orgsWithDemo } = await supabase
         .from('organizations')
-        .select('id, is_demo')
+        .select('id, is_demo, sector')
         .in('id', orgIds.map(o => o.id)) as any; // Temporal hasta que se actualicen los tipos
 
       // Combinar los datos
       const orgs: Organization[] = orgIds.map(org => ({
         ...org,
         is_demo: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.is_demo ?? false,
+        sector: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.sector,
       }));
 
       return orgs;
