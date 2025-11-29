@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
+import SuccessStoriesSection from "@/components/SuccessStoriesSection";
 
 export default function Landing() {
   const { user } = useAuth();
@@ -160,6 +161,9 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
+        {/* CASOS DE ÉXITO */}
+        <SuccessStoriesSection />
 
         {/* FUNCIONALIDADES TÉCNICAS */}
         <section id="features" className="py-20 bg-slate-950 text-white">

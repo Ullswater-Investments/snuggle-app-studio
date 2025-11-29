@@ -509,6 +509,48 @@ export type Database = {
         }
         Relationships: []
       }
+      success_stories: {
+        Row: {
+          author_role: string | null
+          challenge: string
+          company_name: string
+          created_at: string | null
+          id: string
+          impact_highlight: string
+          is_featured: boolean | null
+          metrics: Json
+          quote: string | null
+          sector: string
+          solution: string
+        }
+        Insert: {
+          author_role?: string | null
+          challenge: string
+          company_name: string
+          created_at?: string | null
+          id?: string
+          impact_highlight: string
+          is_featured?: boolean | null
+          metrics: Json
+          quote?: string | null
+          sector: string
+          solution: string
+        }
+        Update: {
+          author_role?: string | null
+          challenge?: string
+          company_name?: string
+          created_at?: string | null
+          id?: string
+          impact_highlight?: string
+          is_featured?: boolean | null
+          metrics?: Json
+          quote?: string | null
+          sector?: string
+          solution?: string
+        }
+        Relationships: []
+      }
       supplier_data: {
         Row: {
           company_name: string
