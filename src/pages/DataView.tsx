@@ -2,13 +2,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Download, Send, FileText, Building2 } from "lucide-react";
+import { ArrowLeft, Download, Send, FileText, Building2, Info } from "lucide-react";
 import { toast } from "sonner";
 import { ESGDataView } from "@/components/ESGDataView";
 import { IoTDataView } from "@/components/IoTDataView";
@@ -17,6 +19,7 @@ import { GenericJSONView } from "@/components/GenericJSONView";
 const DataView = () => {
   const { id } = useParams<{ id: string }>();
   const { user, signOut } = useAuth();
+  const { activeOrg } = useOrganizationContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -323,15 +326,28 @@ const DataView = () => {
                 </CardContent>
               </Card>
             ) : !supplierData || supplierData.length === 0 && !payloadData ? (
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
-                  <h3 className="mt-4 text-lg font-semibold">Sin datos disponibles</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    Aún no se han compartido datos para esta transacción.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="space-y-4">
+                {activeOrg?.type !== 'consumer' && (
+                  <Alert>
+                    <Info className="h-4 w-4" />
+                    <AlertDescription>
+                      No hay datos completados para <strong>{activeOrg?.name}</strong>. 
+                      {activeOrg?.type === 'provider' && ' Los proveedores no reciben datos, solo los envían.'}
+                      {activeOrg?.type === 'data_holder' && ' Los holders custodian datos pero no los consumen directamente.'}
+                      {' '}Prueba a cambiar a una organización Consumer desde el selector superior.
+                    </AlertDescription>
+                  </Alert>
+                )}
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
+                    <h3 className="mt-4 text-lg font-semibold">Sin datos disponibles</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Aún no se han compartido datos para esta transacción.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
             ) : (
               <Tabs defaultValue={payloadData ? "payload" : "supplier"} className="w-full">
                 <TabsList>

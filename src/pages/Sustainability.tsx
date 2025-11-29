@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useOrgSector } from "@/hooks/useOrgSector";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,6 +24,7 @@ interface ESGData {
 
 const Sustainability = () => {
   const navigate = useNavigate();
+  const orgSector = useOrgSector();
 
   const { data: esgData, isLoading } = useQuery({
     queryKey: ["sustainability-data"],
@@ -42,17 +45,35 @@ const Sustainability = () => {
     },
   });
 
-  const processedData = esgData?.map((payload) => {
-    const content = payload.data_content as ESGData;
-    return {
-      provider: payload.transaction?.subject_org?.name || "Unknown",
-      scope1: content.scope1_total_tons || 0,
-      scope2: content.scope2_total_tons || 0,
-      total: (content.scope1_total_tons || 0) + (content.scope2_total_tons || 0),
-      renewable: content.energy_mix?.renewable || 0,
-      certifications: content.certifications || [],
-    };
-  });
+  const processedData = useMemo(() => {
+    const data = esgData?.map((payload) => {
+      const content = payload.data_content as ESGData;
+      const providerName = payload.transaction?.subject_org?.name || "Unknown";
+      return {
+        provider: providerName,
+        scope1: content.scope1_total_tons || 0,
+        scope2: content.scope2_total_tons || 0,
+        total: (content.scope1_total_tons || 0) + (content.scope2_total_tons || 0),
+        renewable: content.energy_mix?.renewable || 0,
+        certifications: content.certifications || [],
+        sector: providerName.toLowerCase(),
+      };
+    }) || [];
+
+    // Priorizar proveedores del mismo sector
+    if (orgSector !== "General") {
+      const sectorKeyword = orgSector.toLowerCase();
+      return data.sort((a, b) => {
+        const aMatch = a.sector.includes(sectorKeyword);
+        const bMatch = b.sector.includes(sectorKeyword);
+        if (aMatch && !bMatch) return -1;
+        if (!aMatch && bMatch) return 1;
+        return 0;
+      });
+    }
+
+    return data;
+  }, [esgData, orgSector]);
 
   const totalEmissions = processedData?.reduce((sum, p) => sum + p.total, 0) || 0;
   const auditedProviders = processedData?.length || 0;
