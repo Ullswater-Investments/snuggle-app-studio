@@ -437,6 +437,48 @@ export type Database = {
           },
         ]
       }
+      innovation_lab_concepts: {
+        Row: {
+          business_impact: string
+          category: string
+          chart_config: Json
+          chart_data: Json
+          chart_type: string
+          created_at: string | null
+          full_analysis: string
+          id: string
+          maturity_level: number | null
+          short_description: string
+          title: string
+        }
+        Insert: {
+          business_impact: string
+          category: string
+          chart_config: Json
+          chart_data: Json
+          chart_type: string
+          created_at?: string | null
+          full_analysis: string
+          id?: string
+          maturity_level?: number | null
+          short_description: string
+          title: string
+        }
+        Update: {
+          business_impact?: string
+          category?: string
+          chart_config?: Json
+          chart_data?: Json
+          chart_type?: string
+          created_at?: string | null
+          full_analysis?: string
+          id?: string
+          maturity_level?: number | null
+          short_description?: string
+          title?: string
+        }
+        Relationships: []
+      }
       organizations: {
         Row: {
           created_at: string
