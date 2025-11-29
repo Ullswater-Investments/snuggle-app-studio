@@ -596,6 +596,47 @@ export type Database = {
           },
         ]
       }
+      value_services: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string | null
+          icon_name: string | null
+          id: string
+          name: string
+          price_model: string | null
+          provider_org_id: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          name: string
+          price_model?: string | null
+          provider_org_id?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          name?: string
+          price_model?: string | null
+          provider_org_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "value_services_provider_org_id_fkey"
+            columns: ["provider_org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

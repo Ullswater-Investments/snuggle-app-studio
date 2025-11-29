@@ -9,6 +9,8 @@ import {
   Bell,
   Settings,
   Plus,
+  Leaf,
+  Sparkles,
 } from "lucide-react";
 import {
   Sidebar,
@@ -28,6 +30,8 @@ const menuItems = [
   { title: "Catálogo", url: "/catalog", icon: Package },
   { title: "Solicitudes", url: "/requests", icon: ClipboardList },
   { title: "Datos", url: "/data", icon: Database },
+  { title: "Sostenibilidad", url: "/sustainability", icon: Leaf },
+  { title: "Servicios", url: "/services", icon: Sparkles },
   { title: "Reportes", url: "/reports", icon: BarChart3 },
   { title: "Notificaciones", url: "/notifications", icon: Bell },
   { title: "Configuración", url: "/settings", icon: Settings },

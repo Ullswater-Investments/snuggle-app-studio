@@ -22,6 +22,8 @@ import Settings from "./pages/Settings";
 import ERPConfig from "./pages/ERPConfig";
 import SettingsOrganization from "./pages/SettingsOrganization";
 import SettingsPreferences from "./pages/SettingsPreferences";
+import Services from "./pages/Services";
+import Sustainability from "./pages/Sustainability";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +54,8 @@ const App = () => (
                 <Route path="/requests/new" element={<RequestWizard />} />
                 <Route path="/data" element={<Data />} />
                 <Route path="/data/view/:id" element={<DataView />} />
+                <Route path="/sustainability" element={<Sustainability />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="/settings" element={<Settings />} />
