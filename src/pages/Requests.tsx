@@ -46,10 +46,12 @@ const Requests = () => {
     },
   });
 
-  // Obtener transacciones
+  // Obtener transacciones filtradas por activeOrg
   const { data: transactions, isLoading } = useQuery({
-    queryKey: ["transactions"],
+    queryKey: ["transactions", activeOrg?.id],
     queryFn: async () => {
+      if (!activeOrg) return [];
+
       const { data, error } = await supabase
         .from("data_transactions")
         .select(`
@@ -71,11 +73,13 @@ const Requests = () => {
             name
           )
         `)
+        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
       return data;
     },
+    enabled: !!activeOrg,
   });
 
   const approveMutation = useMutation({
@@ -145,9 +149,9 @@ const Requests = () => {
   };
 
   const getRoleInTransaction = (transaction: any) => {
-    if (transaction.consumer_org_id === userProfile?.organization_id) return "consumer";
-    if (transaction.subject_org_id === userProfile?.organization_id) return "subject";
-    if (transaction.holder_org_id === userProfile?.organization_id) return "holder";
+    if (transaction.consumer_org_id === activeOrg?.id) return "consumer";
+    if (transaction.subject_org_id === activeOrg?.id) return "subject";
+    if (transaction.holder_org_id === activeOrg?.id) return "holder";
     return null;
   };
 
@@ -159,7 +163,7 @@ const Requests = () => {
   }) || [];
 
   const myRequests = transactions?.filter((t) => 
-    t.consumer_org_id === userProfile?.organization_id
+    t.consumer_org_id === activeOrg?.id
   ) || [];
 
   const allTransactions = transactions || [];

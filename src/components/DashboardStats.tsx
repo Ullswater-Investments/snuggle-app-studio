@@ -12,55 +12,47 @@ export const DashboardStats = () => {
     queryFn: async () => {
       if (!activeOrg) return null;
 
-      // Total productos en catálogo
-      const { count: productsCount } = await supabase
-        .from("data_products")
-        .select("*", { count: "exact", head: true });
-
-      // En modo demo, obtener IDs de organizaciones demo
-      let demoOrgIds: string[] = [];
-      if (isDemo) {
-        const { data: demoOrgs } = await supabase
-          .from("organizations")
-          .select("id")
-          .eq("is_demo", true);
-        demoOrgIds = demoOrgs?.map((o) => o.id) || [];
+      // Productos según rol
+      let productsQuery = supabase.from("data_assets").select("*", { count: "exact", head: true });
+      
+      if (activeOrg.type === 'provider') {
+        productsQuery = productsQuery.eq('subject_org_id', activeOrg.id);
+      } else if (activeOrg.type === 'data_holder') {
+        productsQuery = productsQuery.eq('holder_org_id', activeOrg.id);
       }
+      // Si es Consumer, ve el total del mercado (sin filtro)
+      
+      const { count: productsCount } = await productsQuery;
 
-      // Solicitudes pendientes
-      let pendingQuery = supabase
-        .from("data_transactions")
-        .select("*", { count: "exact", head: true })
-        .in("status", ["pending_subject", "pending_holder"]);
-
-      if (isDemo) {
-        pendingQuery = pendingQuery.in("consumer_org_id", demoOrgIds);
+      // Pendientes (solo lo que requiere MI atención)
+      let pendingQuery = supabase.from("data_transactions").select("*", { count: "exact", head: true });
+      
+      if (activeOrg.type === 'provider') {
+        // Provider aprueba cuando está en 'pending_subject'
+        pendingQuery = pendingQuery.eq('subject_org_id', activeOrg.id).eq('status', 'pending_subject');
+      } else if (activeOrg.type === 'data_holder') {
+        // Holder aprueba cuando está en 'pending_holder'
+        pendingQuery = pendingQuery.eq('holder_org_id', activeOrg.id).eq('status', 'pending_holder');
       } else {
-        pendingQuery = pendingQuery.or(
-          `subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`
-        );
+        // Consumer ve lo que está esperando de otros
+        pendingQuery = pendingQuery.eq('consumer_org_id', activeOrg.id).in('status', ['pending_subject', 'pending_holder']);
       }
 
       const { count: pendingCount } = await pendingQuery;
 
-      // Transacciones completadas este mes
+      // Completadas (histórico propio)
       const firstDayOfMonth = new Date();
       firstDayOfMonth.setDate(1);
       firstDayOfMonth.setHours(0, 0, 0, 0);
 
-      let completedQuery = supabase
+      const { count: completedCount } = await supabase
         .from("data_transactions")
         .select("*", { count: "exact", head: true })
         .eq("status", "completed")
-        .gte("created_at", firstDayOfMonth.toISOString());
+        .gte("created_at", firstDayOfMonth.toISOString())
+        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`);
 
-      if (isDemo) {
-        completedQuery = completedQuery.in("consumer_org_id", demoOrgIds);
-      }
-
-      const { count: completedCount } = await completedQuery;
-
-      // Total organizaciones
+      // Total organizaciones (solo demo si aplica)
       let orgsQuery = supabase
         .from("organizations")
         .select("*", { count: "exact", head: true });

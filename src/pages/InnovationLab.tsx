@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useOrgSector } from "@/hooks/useOrgSector";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,7 @@ const categoryColors: Record<string, string> = {
 export default function InnovationLab() {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [selectedConcept, setSelectedConcept] = useState<InnovationConcept | null>(null);
+  const orgSector = useOrgSector();
 
   const { data: concepts, isLoading } = useQuery({
     queryKey: ["innovation-concepts"],
@@ -56,9 +58,37 @@ export default function InnovationLab() {
     },
   });
 
-  const filteredConcepts = concepts?.filter(
-    (concept) => selectedCategory === "Todos" || concept.category === selectedCategory
-  );
+  // Mapeo sector -> categorías relevantes
+  const sectorCategoryMap: Record<string, string[]> = {
+    "Automotive": ["Product", "Supply Chain", "ESG"],
+    "Energy": ["ESG", "Operations", "Supply Chain"],
+    "Pharma": ["Supply Chain", "Legal", "Product"],
+    "Retail": ["Finance", "Supply Chain", "Product"],
+    "Finance": ["Finance", "Legal"],
+    "Logistics": ["Supply Chain", "Operations"],
+    "Tech": ["Product", "Operations"],
+    "AgriFood": ["ESG", "Supply Chain", "Product"],
+  };
+
+  const filteredConcepts = useMemo(() => {
+    let filtered = concepts?.filter(
+      (concept) => selectedCategory === "Todos" || concept.category === selectedCategory
+    ) || [];
+
+    // Priorizar conceptos del sector de la org
+    if (orgSector !== "General") {
+      const relevantCategories = sectorCategoryMap[orgSector] || [];
+      filtered = filtered.sort((a, b) => {
+        const aRelevant = relevantCategories.includes(a.category);
+        const bRelevant = relevantCategories.includes(b.category);
+        if (aRelevant && !bRelevant) return -1;
+        if (!aRelevant && bRelevant) return 1;
+        return 0;
+      });
+    }
+
+    return filtered;
+  }, [concepts, selectedCategory, orgSector]);
 
   return (
     <div className="container mx-auto py-8 space-y-8">
