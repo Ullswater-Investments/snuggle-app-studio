@@ -152,6 +152,38 @@ export type Database = {
           },
         ]
       }
+      data_payloads: {
+        Row: {
+          created_at: string | null
+          data_content: Json
+          id: string
+          schema_type: string
+          transaction_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          data_content: Json
+          id?: string
+          schema_type: string
+          transaction_id: string
+        }
+        Update: {
+          created_at?: string | null
+          data_content?: Json
+          id?: string
+          schema_type?: string
+          transaction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_payloads_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: true
+            referencedRelation: "data_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       data_policies: {
         Row: {
           generated_at: string

@@ -7,8 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, Download, Send, FileText, Building2 } from "lucide-react";
 import { toast } from "sonner";
+import { ESGDataView } from "@/components/ESGDataView";
+import { IoTDataView } from "@/components/IoTDataView";
+import { GenericJSONView } from "@/components/GenericJSONView";
 
 const DataView = () => {
   const { id } = useParams<{ id: string }>();
@@ -37,6 +41,22 @@ const DataView = () => {
       if (error) throw error;
       return data;
     },
+  });
+
+  // Obtener datos flexibles de data_payloads (nuevos datos ESG, IoT, etc.)
+  const { data: payloadData, isLoading: loadingPayload } = useQuery({
+    queryKey: ["payload-data", id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("data_payloads")
+        .select("*")
+        .eq("transaction_id", id)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: transaction?.status === "completed",
   });
 
   const { data: supplierData, isLoading: loadingData } = useQuery({
@@ -296,13 +316,13 @@ const DataView = () => {
                   </p>
                 </CardContent>
               </Card>
-            ) : loadingData ? (
+            ) : loadingData || loadingPayload ? (
               <Card>
                 <CardContent className="py-12 text-center">
                   <p className="text-muted-foreground">Cargando datos...</p>
                 </CardContent>
               </Card>
-            ) : !supplierData || supplierData.length === 0 ? (
+            ) : !supplierData || supplierData.length === 0 && !payloadData ? (
               <Card>
                 <CardContent className="py-12 text-center">
                   <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
@@ -313,63 +333,115 @@ const DataView = () => {
                 </CardContent>
               </Card>
             ) : (
-              <Card>
-                <CardHeader>
-                  <CardTitle>Datos del Proveedor</CardTitle>
-                  <CardDescription>
-                    {supplierData.length} registro(s) encontrado(s)
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="rounded-md border">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Razón Social</TableHead>
-                          <TableHead>CIF/NIF</TableHead>
-                          <TableHead>Nombre Legal</TableHead>
-                          <TableHead>Contacto</TableHead>
-                          <TableHead>Email</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {supplierData.map((item) => (
-                          <TableRow key={item.id}>
-                            <TableCell className="font-medium">{item.company_name}</TableCell>
-                            <TableCell>{item.tax_id}</TableCell>
-                            <TableCell>{item.legal_name}</TableCell>
-                            <TableCell>{item.contact_person_name || "-"}</TableCell>
-                            <TableCell>{item.contact_person_email || "-"}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+              <Tabs defaultValue={payloadData ? "payload" : "supplier"} className="w-full">
+                <TabsList>
+                  {payloadData && (
+                    <TabsTrigger value="payload">
+                      {payloadData.schema_type === "esg_report" ? "Datos ESG" : 
+                       payloadData.schema_type === "iot_telemetry" ? "Datos IoT" : 
+                       "Datos Flexibles"}
+                    </TabsTrigger>
+                  )}
+                  {supplierData && supplierData.length > 0 && (
+                    <TabsTrigger value="supplier">Datos de Proveedor</TabsTrigger>
+                  )}
+                </TabsList>
 
-                  {/* Detalles expandidos del primer registro */}
-                  {supplierData.length > 0 && (
-                    <div className="mt-6 space-y-4">
-                      <h4 className="font-semibold">Detalles Completos</h4>
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        <div>
-                          <p className="text-sm font-medium text-muted-foreground">Dirección Fiscal</p>
-                          <pre className="mt-1 rounded-md bg-muted p-2 text-xs">
-                            {JSON.stringify(supplierData[0].fiscal_address, null, 2)}
-                          </pre>
+                {/* Tab de Payload flexible (ESG, IoT, etc.) */}
+                {payloadData && (
+                  <TabsContent value="payload">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>
+                          {payloadData.schema_type === "esg_report" ? "Reporte de Sostenibilidad (ESG)" :
+                           payloadData.schema_type === "iot_telemetry" ? "Telemetría IoT" :
+                           "Datos del Payload"}
+                        </CardTitle>
+                        <CardDescription>
+                          Tipo de esquema: <Badge variant="outline">{payloadData.schema_type}</Badge>
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        {payloadData.schema_type === "esg_report" && (
+                          <ESGDataView data={payloadData.data_content as any} />
+                        )}
+                        {payloadData.schema_type === "iot_telemetry" && (
+                          <IoTDataView data={payloadData.data_content as any} />
+                        )}
+                        {!["esg_report", "iot_telemetry"].includes(payloadData.schema_type) && (
+                          <GenericJSONView 
+                            data={payloadData.data_content} 
+                            schemaType={payloadData.schema_type}
+                          />
+                        )}
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                )}
+
+                {/* Tab de Supplier Data (legacy) */}
+                {supplierData && supplierData.length > 0 && (
+                  <TabsContent value="supplier">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Datos del Proveedor</CardTitle>
+                        <CardDescription>
+                          {supplierData.length} registro(s) encontrado(s)
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="rounded-md border">
+                          <Table>
+                            <TableHeader>
+                              <TableRow>
+                                <TableHead>Razón Social</TableHead>
+                                <TableHead>CIF/NIF</TableHead>
+                                <TableHead>Nombre Legal</TableHead>
+                                <TableHead>Contacto</TableHead>
+                                <TableHead>Email</TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {supplierData.map((item) => (
+                                <TableRow key={item.id}>
+                                  <TableCell className="font-medium">{item.company_name}</TableCell>
+                                  <TableCell>{item.tax_id}</TableCell>
+                                  <TableCell>{item.legal_name}</TableCell>
+                                  <TableCell>{item.contact_person_name || "-"}</TableCell>
+                                  <TableCell>{item.contact_person_email || "-"}</TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
                         </div>
-                        {supplierData[0].legal_address && (
-                          <div>
-                            <p className="text-sm font-medium text-muted-foreground">Dirección Legal</p>
-                            <pre className="mt-1 rounded-md bg-muted p-2 text-xs">
-                              {JSON.stringify(supplierData[0].legal_address, null, 2)}
-                            </pre>
+
+                        {/* Detalles expandidos del primer registro */}
+                        {supplierData.length > 0 && (
+                          <div className="mt-6 space-y-4">
+                            <h4 className="font-semibold">Detalles Completos</h4>
+                            <div className="grid gap-4 sm:grid-cols-2">
+                              <div>
+                                <p className="text-sm font-medium text-muted-foreground">Dirección Fiscal</p>
+                                <pre className="mt-1 rounded-md bg-muted p-2 text-xs">
+                                  {JSON.stringify(supplierData[0].fiscal_address, null, 2)}
+                                </pre>
+                              </div>
+                              {supplierData[0].legal_address && (
+                                <div>
+                                  <p className="text-sm font-medium text-muted-foreground">Dirección Legal</p>
+                                  <pre className="mt-1 rounded-md bg-muted p-2 text-xs">
+                                    {JSON.stringify(supplierData[0].legal_address, null, 2)}
+                                  </pre>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         )}
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                )}
+              </Tabs>
             )}
           </div>
         </div>
