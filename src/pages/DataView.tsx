@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { ESGDataView } from "@/components/ESGDataView";
 import { IoTDataView } from "@/components/IoTDataView";
 import { GenericJSONView } from "@/components/GenericJSONView";
+import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const DataView = () => {
   const { id } = useParams<{ id: string }>();
@@ -371,6 +372,7 @@ const DataView = () => {
                         <CardTitle>
                           {payloadData.schema_type === "esg_report" ? "Reporte de Sostenibilidad (ESG)" :
                            payloadData.schema_type === "iot_telemetry" ? "Telemetría IoT" :
+                           payloadData.schema_type === "generic_timeseries" ? "Datos Históricos" :
                            "Datos del Payload"}
                         </CardTitle>
                         <CardDescription>
@@ -384,7 +386,89 @@ const DataView = () => {
                         {payloadData.schema_type === "iot_telemetry" && (
                           <IoTDataView data={payloadData.data_content as any} />
                         )}
-                        {!["esg_report", "iot_telemetry"].includes(payloadData.schema_type) && (
+                        {payloadData.schema_type === "generic_timeseries" && (
+                          <div className="space-y-6">
+                            {/* KPIs */}
+                            {(payloadData.data_content as any).current_value !== undefined && (
+                              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="p-4 rounded-lg border bg-card">
+                                  <p className="text-sm text-muted-foreground mb-1">Valor Actual</p>
+                                  <p className="text-2xl font-bold">{(payloadData.data_content as any).current_value}</p>
+                                </div>
+                                {(payloadData.data_content as any).quality_score !== undefined && (
+                                  <div className="p-4 rounded-lg border bg-card">
+                                    <p className="text-sm text-muted-foreground mb-1">Calidad</p>
+                                    <p className="text-2xl font-bold">{(payloadData.data_content as any).quality_score}%</p>
+                                  </div>
+                                )}
+                                {(payloadData.data_content as any).trend !== undefined && (
+                                  <div className="p-4 rounded-lg border bg-card">
+                                    <p className="text-sm text-muted-foreground mb-1">Tendencia</p>
+                                    <p className="text-2xl font-bold capitalize">{(payloadData.data_content as any).trend}</p>
+                                  </div>
+                                )}
+                                {(payloadData.data_content as any).data_points !== undefined && (
+                                  <div className="p-4 rounded-lg border bg-card">
+                                    <p className="text-sm text-muted-foreground mb-1">Puntos de Datos</p>
+                                    <p className="text-2xl font-bold">{(payloadData.data_content as any).data_points?.toLocaleString()}</p>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                            
+                            {/* Gráfico de Serie Temporal */}
+                            {(payloadData.data_content as any).history && Array.isArray((payloadData.data_content as any).history) && (
+                              <div className="mt-6">
+                                <h4 className="font-semibold mb-4">Evolución Temporal</h4>
+                                <ResponsiveContainer width="100%" height={300}>
+                                  <AreaChart data={(payloadData.data_content as any).history}>
+                                    <defs>
+                                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8}/>
+                                        <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                                      </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis 
+                                      dataKey="date" 
+                                      tick={{ fontSize: 12 }}
+                                    />
+                                    <YAxis tick={{ fontSize: 12 }} />
+                                    <Tooltip />
+                                    <Area 
+                                      type="monotone" 
+                                      dataKey="value" 
+                                      stroke="hsl(var(--primary))" 
+                                      fillOpacity={1}
+                                      fill="url(#colorValue)" 
+                                      name="Valor"
+                                    />
+                                    {(payloadData.data_content as any).history[0]?.efficiency !== undefined && (
+                                      <Area 
+                                        type="monotone" 
+                                        dataKey="efficiency" 
+                                        stroke="hsl(var(--accent))" 
+                                        fill="hsl(var(--accent))" 
+                                        fillOpacity={0.3}
+                                        name="Eficiencia"
+                                      />
+                                    )}
+                                  </AreaChart>
+                                </ResponsiveContainer>
+                              </div>
+                            )}
+
+                            {/* Sector Info */}
+                            {(payloadData.data_content as any).sector && (
+                              <div className="mt-4 p-4 rounded-lg bg-muted/30">
+                                <p className="text-sm text-muted-foreground">
+                                  Datos sectoriales: <Badge variant="secondary">{(payloadData.data_content as any).sector}</Badge>
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        {!["esg_report", "iot_telemetry", "generic_timeseries"].includes(payloadData.schema_type) && (
                           <GenericJSONView 
                             data={payloadData.data_content} 
                             schemaType={payloadData.schema_type}

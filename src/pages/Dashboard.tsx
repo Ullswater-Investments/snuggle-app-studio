@@ -1,18 +1,51 @@
-import { useAuth } from "@/hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useOrgSector } from "@/hooks/useOrgSector";
 import { DashboardStats } from "@/components/DashboardStats";
-import { ActivityFeed } from "@/components/ActivityFeed";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HelpCircle, Plus } from "lucide-react";
+import { HelpCircle, Plus, Rocket, Database, FileText, TrendingUp, Clock } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { useNavigate } from "react-router-dom";
+import { SectorIcon, getSectorColor } from "@/components/SectorIcon";
+import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 
 const Dashboard = () => {
-  const { user } = useAuth();
-  const { availableOrgs } = useOrganizationContext();
   const navigate = useNavigate();
+  const { availableOrgs, activeOrg } = useOrganizationContext();
+  const orgSector = useOrgSector();
+
+  // Obtener actividad reciente del sector
+  const { data: recentActivity } = useQuery({
+    queryKey: ["recent-activity", activeOrg?.id],
+    queryFn: async () => {
+      if (!activeOrg) return [];
+
+      const { data, error } = await supabase
+        .from("data_transactions")
+        .select(`
+          id,
+          purpose,
+          status,
+          created_at,
+          asset:data_assets (
+            product:data_products (name, category)
+          ),
+          consumer_org:organizations!data_transactions_consumer_org_id_fkey (name),
+          subject_org:organizations!data_transactions_subject_org_id_fkey (name)
+        `)
+        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`)
+        .order("created_at", { ascending: false })
+        .limit(5);
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!activeOrg,
+  });
 
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -31,10 +64,10 @@ const Dashboard = () => {
             {availableOrgs.some(org => org.is_demo) && (
               <div className="mt-3 p-4 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 animate-fade-in">
                 <p className="text-sm font-medium text-amber-900 dark:text-amber-100">
-                  🎭 <strong>Modo Demo Activo</strong> - Tienes acceso a {availableOrgs.length} organizaciones
+                  🎭 <strong>Modo Demo Activo</strong> - Tienes acceso a {availableOrgs.length} organizaciones multisectoriales
                 </p>
                 <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
-                  15 transacciones demo en diferentes estados, 5 proveedores con datos completos, y flujo de aprobación multi-actor
+                  Datos contextuales generados automáticamente por sector. Cambia de organización para ver datos diferentes.
                 </p>
                 <p className="text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-center gap-1">
                   <HelpCircle className="h-3 w-3" />
@@ -52,44 +85,94 @@ const Dashboard = () => {
         </div>
       </FadeIn>
 
+      {/* Quick Actions & Sector Activity */}
       <FadeIn delay={0.2}>
         <div className="grid gap-6 md:grid-cols-2">
+          {/* Left Column: Quick Actions */}
           <Card>
             <CardHeader>
-              <CardTitle>Acciones Rápidas</CardTitle>
-              <CardDescription>
-                Accede rápidamente a las funciones más utilizadas
-              </CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <Rocket className="h-5 w-5" />
+                Acciones Rápidas
+              </CardTitle>
+              <CardDescription>Operaciones frecuentes del sistema</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => navigate("/requests/new")}
-              >
+              <Button variant="outline" className="w-full justify-start" onClick={() => navigate("/requests/new")}>
                 <Plus className="mr-2 h-4 w-4" />
                 Nueva Solicitud de Datos
               </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => navigate("/catalog")}
-              >
+              <Button variant="outline" className="w-full justify-start" onClick={() => navigate("/catalog")}>
+                <Database className="mr-2 h-4 w-4" />
                 Explorar Catálogo
               </Button>
-              <Button 
-                className="w-full justify-start" 
-                variant="outline"
-                onClick={() => navigate("/requests")}
-              >
-                Ver Solicitudes Pendientes
+              <Button variant="outline" className="w-full justify-start" onClick={() => navigate("/requests")}>
+                <FileText className="mr-2 h-4 w-4" />
+                Ver Mis Solicitudes
+              </Button>
+              <Button variant="outline" className="w-full justify-start" onClick={() => navigate("/reports")}>
+                <TrendingUp className="mr-2 h-4 w-4" />
+                Generar Reportes
               </Button>
             </CardContent>
           </Card>
 
-          <div data-tour="activity-feed">
-            <ActivityFeed />
-          </div>
+          {/* Right Column: Sector Activity */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <SectorIcon sector={orgSector} className="h-5 w-5" />
+                    Actividad Reciente {orgSector !== "General" && `- ${orgSector}`}
+                  </CardTitle>
+                  <CardDescription>Transacciones de tu organización</CardDescription>
+                </div>
+                <Badge variant="outline" className={getSectorColor(orgSector)}>
+                  {orgSector}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {recentActivity && recentActivity.length > 0 ? (
+                <div className="space-y-3">
+                  {recentActivity.map((activity) => (
+                    <div
+                      key={activity.id}
+                      className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 transition-colors cursor-pointer"
+                      onClick={() => navigate(`/data/view/${activity.id}`)}
+                    >
+                      <div className={`mt-1 ${getSectorColor(orgSector)}`}>
+                        <SectorIcon sector={orgSector} className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">
+                          {activity.asset?.product?.name || "Producto"}
+                        </p>
+                        <p className="text-xs text-muted-foreground truncate">
+                          {activity.purpose}
+                        </p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Badge variant="outline" className="text-xs">
+                            {activity.status}
+                          </Badge>
+                          <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {formatDistanceToNow(new Date(activity.created_at), { addSuffix: true, locale: es })}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Database className="mx-auto h-8 w-8 mb-2 opacity-50" />
+                  <p className="text-sm">No hay actividad reciente</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </FadeIn>
 
