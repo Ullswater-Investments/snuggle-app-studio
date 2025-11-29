@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ const iconMap: Record<string, any> = {
 };
 
 const Services = () => {
+  const { activeOrg } = useOrganizationContext();
   const { data: services, isLoading } = useQuery({
     queryKey: ["value-services"],
     queryFn: async () => {

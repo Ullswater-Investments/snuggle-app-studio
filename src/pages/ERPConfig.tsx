@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -24,6 +25,7 @@ const erpConfigSchema = z.object({
 
 const ERPConfig = () => {
   const { user, signOut } = useAuth();
+  const { activeOrg, isDemo } = useOrganizationContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -43,6 +45,30 @@ const ERPConfig = () => {
 
   const [activeTab, setActiveTab] = useState<"upload" | "download">("upload");
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Pre-fill demo data based on active organization
+  useEffect(() => {
+    if (isDemo && activeOrg) {
+      const orgName = activeOrg.name.toLowerCase();
+      let demoEndpoint = "https://api.example.com/v1/webhook";
+      
+      if (orgName.includes("rapid")) {
+        demoEndpoint = "https://api.rapid-auto.com/v1/suppliers";
+      } else if (orgName.includes("solid")) {
+        demoEndpoint = "https://api.solid-energy.com/v1/data";
+      } else if (orgName.includes("future")) {
+        demoEndpoint = "https://api.future-pharma.com/v1/clinical";
+      } else if (orgName.includes("smart")) {
+        demoEndpoint = "https://api.smart-retail.com/v1/inventory";
+      }
+
+      setFormData(prev => ({
+        ...prev,
+        config_name: `ERP ${activeOrg.name}`,
+        endpoint_url: demoEndpoint,
+      }));
+    }
+  }, [isDemo, activeOrg]);
 
   const { data: userProfile } = useQuery({
     queryKey: ["user-profile"],
@@ -292,7 +318,12 @@ const ERPConfig = () => {
 
             {/* Lista de configuraciones existentes */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Configuraciones de Carga</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold">Configuraciones de Carga</h3>
+                {isDemo && (
+                  <Badge variant="secondary">DEMO MODE - Datos Simulados</Badge>
+                )}
+              </div>
               {isLoading ? (
                 <Card>
                   <CardContent className="py-6 text-center text-muted-foreground">

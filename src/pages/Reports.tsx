@@ -23,61 +23,50 @@ const COLORS = ["#10b981", "#f59e0b", "#3b82f6", "#8b5cf6", "#ef4444"];
 const Reports = () => {
   const { activeOrg, isDemo } = useOrganizationContext();
 
+  // Fetch transactions grouped by status for activeOrg
   const { data: transactionsByStatus } = useQuery({
-    queryKey: ["reports-by-status", activeOrg?.id, isDemo],
+    queryKey: ["transactions-by-status", activeOrg?.id],
     queryFn: async () => {
       if (!activeOrg) return [];
 
-      let query = supabase.from("data_transactions").select("status");
-
-      // En modo demo, mostrar todas las transacciones demo
-      if (isDemo) {
-        const { data: demoOrgs } = await supabase
-          .from("organizations")
-          .select("id")
-          .eq("is_demo", true);
-        const demoOrgIds = demoOrgs?.map((o) => o.id) || [];
-        query = query.in("consumer_org_id", demoOrgIds);
-      }
-
-      const { data, error } = await query;
+      const { data, error } = await supabase
+        .from("data_transactions")
+        .select("status")
+        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`);
 
       if (error) throw error;
 
-      const statusCounts = data.reduce((acc: any, t) => {
-        acc[t.status] = (acc[t.status] || 0) + 1;
+      const statusCount = data.reduce((acc, t) => {
+        const label = t.status === "pending_subject" ? "Pendiente Proveedor" :
+                     t.status === "pending_holder" ? "Pendiente Custodio" :
+                     t.status === "approved" ? "Aprobado" :
+                     t.status === "completed" ? "Completado" : "Otro";
+        
+        acc[label] = (acc[label] || 0) + 1;
         return acc;
-      }, {});
+      }, {} as Record<string, number>);
 
-      return Object.entries(statusCounts).map(([name, value]) => ({ name, value }));
+      return Object.entries(statusCount).map(([name, value]) => ({ name, value }));
     },
     enabled: !!activeOrg,
   });
 
+  // Fetch top products for activeOrg
   const { data: topProducts } = useQuery({
-    queryKey: ["reports-top-products", activeOrg?.id, isDemo],
+    queryKey: ["top-products", activeOrg?.id],
     queryFn: async () => {
       if (!activeOrg) return [];
 
-      let query = supabase.from("data_transactions").select(`
+      const { data, error } = await supabase
+        .from("data_transactions")
+        .select(`
           asset:data_assets (
             product:data_products (
               name
             )
           )
-        `);
-
-      // En modo demo, mostrar todos los productos demo
-      if (isDemo) {
-        const { data: demoOrgs } = await supabase
-          .from("organizations")
-          .select("id")
-          .eq("is_demo", true);
-        const demoOrgIds = demoOrgs?.map((o) => o.id) || [];
-        query = query.in("consumer_org_id", demoOrgIds);
-      }
-
-      const { data, error } = await query;
+        `)
+        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`);
 
       if (error) throw error;
 

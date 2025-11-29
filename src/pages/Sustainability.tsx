@@ -46,34 +46,40 @@ const Sustainability = () => {
   });
 
   const processedData = useMemo(() => {
-    const data = esgData?.map((payload) => {
-      const content = payload.data_content as ESGData;
+    if (!esgData || esgData.length === 0) return [];
+
+    const grouped = esgData.reduce((acc, payload) => {
       const providerName = payload.transaction?.subject_org?.name || "Unknown";
-      return {
-        provider: providerName,
-        scope1: content.scope1_total_tons || 0,
-        scope2: content.scope2_total_tons || 0,
-        total: (content.scope1_total_tons || 0) + (content.scope2_total_tons || 0),
-        renewable: content.energy_mix?.renewable || 0,
-        certifications: content.certifications || [],
-        sector: providerName.toLowerCase(),
-      };
-    }) || [];
+      const content = payload.data_content as any;
 
-    // Priorizar proveedores del mismo sector
-    if (orgSector !== "General") {
-      const sectorKeyword = orgSector.toLowerCase();
-      return data.sort((a, b) => {
-        const aMatch = a.sector.includes(sectorKeyword);
-        const bMatch = b.sector.includes(sectorKeyword);
-        if (aMatch && !bMatch) return -1;
-        if (!aMatch && bMatch) return 1;
-        return 0;
-      });
-    }
+      if (!acc[providerName]) {
+        acc[providerName] = {
+          provider: providerName,
+          scope1: 0,
+          scope2: 0,
+          total: 0,
+          renewable: 0,
+          certifications: [],
+        };
+      }
 
-    return data;
-  }, [esgData, orgSector]);
+      const co2 = content.co2_saved_tons || 0;
+      const kwh = content.kwh_usage || 0;
+
+      acc[providerName].scope1 += co2;
+      acc[providerName].scope2 += kwh;
+      acc[providerName].total += co2 + kwh;
+      acc[providerName].renewable = content.renewable_percentage || 0;
+
+      if (content.certifications) {
+        acc[providerName].certifications = content.certifications;
+      }
+
+      return acc;
+    }, {} as Record<string, any>);
+
+    return Object.values(grouped);
+  }, [esgData]);
 
   const totalEmissions = processedData?.reduce((sum, p) => sum + p.total, 0) || 0;
   const auditedProviders = processedData?.length || 0;

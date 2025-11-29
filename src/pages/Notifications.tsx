@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,16 +12,28 @@ import { es } from "date-fns/locale";
 import { toast } from "sonner";
 
 const Notifications = () => {
-  const { user } = useAuth();
+  const { activeOrg } = useOrganizationContext();
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState<"all" | "unread">("all");
 
   const { data: notifications, isLoading } = useQuery({
-    queryKey: ["notifications", user?.id, filter],
+    queryKey: ["notifications", activeOrg?.id, filter],
     queryFn: async () => {
-      if (!user) return [];
+      if (!activeOrg) return [];
 
-      let query = supabase
+      // First get transactions involving activeOrg
+      const { data: transactions, error: transError } = await supabase
+        .from("data_transactions")
+        .select("id")
+        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`);
+
+      if (transError) throw transError;
+      
+      const transactionIds = transactions?.map(t => t.id) || [];
+      
+      if (transactionIds.length === 0) return [];
+
+      const { data, error } = await supabase
         .from("approval_history")
         .select(`
           *,
@@ -40,14 +52,14 @@ const Notifications = () => {
             name
           )
         `)
+        .in("transaction_id", transactionIds)
         .order("created_at", { ascending: false })
         .limit(50);
 
-      const { data, error } = await query;
       if (error) throw error;
       return data || [];
     },
-    enabled: !!user,
+    enabled: !!activeOrg,
   });
 
   const getNotificationIcon = (action: string) => {
