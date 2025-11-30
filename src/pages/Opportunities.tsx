@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import type { MarketplaceOpportunity } from "@/types/database.extensions";
+import { EmptyState } from "@/components/EmptyState";
 
 // UI Components
 import { Button } from "@/components/ui/button";
@@ -255,16 +256,18 @@ export default function Opportunities() {
         </div>
       ) : opportunities.length === 0 ? (
         <Card className="border-dashed">
-          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-            <Megaphone className="h-16 w-16 text-muted-foreground/50 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">No hay demandas activas</h3>
-            <p className="text-muted-foreground mb-4 max-w-md">
-              Sé el primero en publicar una necesidad de datos. Los proveedores te contactarán con propuestas.
-            </p>
-            <Button onClick={() => setDialogOpen(true)} className="gap-2">
-              <Plus className="h-4 w-4" />
-              Crear Primera Demanda
-            </Button>
+          <CardContent>
+            <EmptyState
+              icon={Megaphone}
+              title="No hay oportunidades publicadas"
+              description="Sé el primero en publicar una necesidad de datos. Los proveedores te contactarán con propuestas personalizadas."
+              action={
+                <Button onClick={() => setDialogOpen(true)} className="gap-2">
+                  <Plus className="h-4 w-4" />
+                  Publicar Necesidad
+                </Button>
+              }
+            />
           </CardContent>
         </Card>
       ) : (

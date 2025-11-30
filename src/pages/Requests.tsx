@@ -22,6 +22,7 @@ import { FadeIn } from "@/components/AnimatedSection";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { formatDistanceToNow } from "date-fns";
 import { es } from "date-fns/locale";
+import { EmptyState } from "@/components/EmptyState";
 
 const STATUS_CONFIG: Record<string, { label: string; icon: any; color: string; tooltip: string }> = {
   initiated: { label: "Iniciada", icon: Clock, color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400", tooltip: "Solicitud creada, esperando validación" },
@@ -367,12 +368,17 @@ const Requests = () => {
           <TabsContent value="pending" className="space-y-4">
             {pendingForMe.length === 0 ? (
               <Card>
-                <CardContent className="py-12 text-center">
-                  <Clock className="mx-auto h-12 w-12 text-muted-foreground" />
-                  <h3 className="mt-4 text-lg font-semibold">No hay solicitudes pendientes</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    No tienes ninguna solicitud que requiera tu acción en este momento
-                  </p>
+                <CardContent>
+                  <EmptyState
+                    icon={Clock}
+                    title="Sin solicitudes activas"
+                    description="No tienes ninguna solicitud que requiera tu acción en este momento. Cuando recibas nuevas solicitudes, aparecerán aquí."
+                    action={
+                      <Button onClick={() => navigate("/catalog")}>
+                        Explorar Catálogo
+                      </Button>
+                    }
+                  />
                 </CardContent>
               </Card>
             ) : (

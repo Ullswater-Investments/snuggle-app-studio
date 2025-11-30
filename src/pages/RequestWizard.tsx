@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -49,6 +49,50 @@ const RequestWizard = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { sendNotification } = useNotifications();
+
+  const STORAGE_KEY = "procuredata_wizard_draft";
+
+  // Auto-save: Guardar en localStorage cuando cambie formData o step
+  useEffect(() => {
+    if (formData.purpose || formData.justification) {
+      const draft = {
+        formData,
+        step,
+        assetId,
+        timestamp: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+    }
+  }, [formData, step, assetId]);
+
+  // Cargar draft al montar el componente
+  useEffect(() => {
+    const savedDraft = localStorage.getItem(STORAGE_KEY);
+    if (savedDraft) {
+      try {
+        const draft = JSON.parse(savedDraft);
+        // Solo restaurar si es para el mismo asset
+        if (draft.assetId === assetId) {
+          toast(
+            "Borrador encontrado",
+            {
+              description: "Hemos recuperado tu solicitud pendiente. ¿Deseas continuarla?",
+              action: {
+                label: "Restaurar",
+                onClick: () => {
+                  setFormData(draft.formData);
+                  setStep(draft.step);
+                  toast.success("Borrador restaurado exitosamente");
+                },
+              },
+            }
+          );
+        }
+      } catch (error) {
+        console.error("Error al cargar el borrador:", error);
+      }
+    }
+  }, [assetId]);
 
   // Obtener información del activo
   const { data: asset, isLoading } = useQuery({
@@ -169,6 +213,8 @@ const RequestWizard = () => {
     },
     onSuccess: () => {
       toast.success("Solicitud creada exitosamente");
+      // Limpiar el draft guardado después del envío exitoso
+      localStorage.removeItem(STORAGE_KEY);
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
       navigate("/requests");
     },

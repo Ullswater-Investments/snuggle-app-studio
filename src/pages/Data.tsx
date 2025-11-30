@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Database, Download, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, ShoppingCart, Building } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
+import { EmptyState } from "@/components/EmptyState";
 
 const Data = () => {
   const navigate = useNavigate();
@@ -218,16 +219,16 @@ const Data = () => {
                 <p className="text-muted-foreground">Cargando datos...</p>
               </div>
             ) : !transactions || transactions.length === 0 ? (
-              <div className="text-center py-12">
-                <Database className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No hay datos disponibles</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Aún no tienes transacciones completadas con datos disponibles
-                </p>
-                <Button onClick={() => navigate("/catalog")}>
-                  Explorar Catálogo
-                </Button>
-              </div>
+              <EmptyState
+                icon={Database}
+                title="Tu biblioteca está vacía"
+                description="Cuando completes una transacción, los datos aparecerán aquí. Explora el catálogo para encontrar datasets que necesites."
+                action={
+                  <Button onClick={() => navigate("/catalog")}>
+                    Explorar Marketplace
+                  </Button>
+                }
+              />
             ) : filteredTransactions.length === 0 ? (
               <div className="text-center py-12">
                 <Database className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
