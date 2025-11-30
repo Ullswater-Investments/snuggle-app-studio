@@ -9,6 +9,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
+import Guide from "./pages/Guide";
 import Dashboard from "./pages/Dashboard";
 import Architecture from "./pages/Architecture";
 import Catalog from "./pages/Catalog";
@@ -43,10 +44,11 @@ const App = () => (
         <AuthProvider>
           <OrganizationProvider>
             <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<Landing />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/architecture" element={<Architecture />} />
+            {/* Public routes */}
+            <Route path="/" element={<Landing />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/guide" element={<Guide />} />
+            <Route path="/architecture" element={<Architecture />} />
               
               {/* Protected routes with AppLayout */}
               <Route element={

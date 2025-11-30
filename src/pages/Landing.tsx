@@ -197,6 +197,7 @@ export default function Landing() {
           </div>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <Link to="/auth" className="hover:text-foreground">Acceso Demo</Link>
+            <Link to="/guide" className="hover:text-foreground">Guía del Ecosistema</Link>
             <Link to="/architecture" className="hover:text-foreground">Documentación</Link>
           </div>
         </div>
