@@ -382,6 +382,47 @@ export type Database = {
           },
         ]
       }
+      esg_reports: {
+        Row: {
+          certifications: string[] | null
+          created_at: string | null
+          energy_renewable_percent: number | null
+          id: string
+          organization_id: string
+          report_year: number
+          scope1_total_tons: number | null
+          scope2_total_tons: number | null
+        }
+        Insert: {
+          certifications?: string[] | null
+          created_at?: string | null
+          energy_renewable_percent?: number | null
+          id?: string
+          organization_id: string
+          report_year: number
+          scope1_total_tons?: number | null
+          scope2_total_tons?: number | null
+        }
+        Update: {
+          certifications?: string[] | null
+          created_at?: string | null
+          energy_renewable_percent?: number | null
+          id?: string
+          organization_id?: string
+          report_year?: number
+          scope1_total_tons?: number | null
+          scope2_total_tons?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "esg_reports_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       export_logs: {
         Row: {
           created_at: string

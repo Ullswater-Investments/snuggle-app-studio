@@ -1,344 +1,335 @@
-import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { ESGDataView } from "@/components/ESGDataView";
 import { Button } from "@/components/ui/button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Leaf, TrendingUp, Award, ShoppingCart, Recycle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "sonner";
+import { Plus, Leaf, TrendingUp, History } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-// Helper function to extract ESG data from payload (can be in root or nested)
-const extractESG = (payload: any) => {
-  const data = payload.esg_data || payload;
-  return {
-    scope1: Number(data.scope1_co2_tons || 0),
-    scope2: Number(data.scope2_co2_tons || 0),
-    scope3: Number(data.scope3_co2_tons || 0),
-    renewable_kwh: Number(data.renewable_energy_kwh || 0),
-    waste: Number(data.waste_recycled_tons || 0),
-    water: Number(data.water_usage_m3 || 0),
-    audit_score: Number(data.audit_score || 0),
-    certifications: data.certifications || [],
-    provider_name: data.provider_name || '',
-    sector: data.sector || '',
-  };
-};
+// --- Schema de Validación (Zod) ---
+const esgFormSchema = z.object({
+  report_year: z.coerce.number().min(2000).max(2100),
+  scope1_total_tons: z.coerce.number().min(0, "Debe ser positivo"),
+  scope2_total_tons: z.coerce.number().min(0, "Debe ser positivo"),
+  energy_renewable_percent: z.coerce.number().min(0).max(100, "Entre 0 y 100"),
+});
 
-const Sustainability = () => {
-  const navigate = useNavigate();
+type ESGFormValues = z.infer<typeof esgFormSchema>;
+
+export default function Sustainability() {
   const { activeOrg } = useOrganizationContext();
+  const queryClient = useQueryClient();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const { data: esgData, isLoading } = useQuery({
-    queryKey: ["sustainability-data", activeOrg?.id],
+  // --- 1. Fetch de Datos ---
+  const { data: reports, isLoading } = useQuery({
+    queryKey: ["esg-reports", activeOrg?.id],
     queryFn: async () => {
-      if (!activeOrg?.id) return [];
-      
+      if (!activeOrg) return [];
       const { data, error } = await supabase
-        .from("data_payloads")
-        .select(`
-          *,
-          transaction:data_transactions!transaction_id (
-            id,
-            consumer_org_id,
-            subject_org_id,
-            holder_org_id,
-            subject_org:organizations!subject_org_id (name, sector)
-          )
-        `)
-        .or(`transaction.consumer_org_id.eq.${activeOrg.id},transaction.subject_org_id.eq.${activeOrg.id}`);
+        .from("esg_reports")
+        .select("*")
+        .eq("organization_id", activeOrg.id)
+        .order("report_year", { ascending: false }); // El más reciente primero
 
       if (error) throw error;
       return data || [];
     },
-    enabled: !!activeOrg?.id,
+    enabled: !!activeOrg,
   });
 
-  const processedData = useMemo(() => {
-    if (!esgData || esgData.length === 0 || !activeOrg) return [];
+  // --- 2. Mutación (Crear Reporte) ---
+  const createReportMutation = useMutation({
+    mutationFn: async (values: ESGFormValues) => {
+      if (!activeOrg) throw new Error("No hay organización activa");
+      
+      const { error } = await supabase.from("esg_reports").insert({
+        organization_id: activeOrg.id,
+        report_year: values.report_year,
+        scope1_total_tons: values.scope1_total_tons,
+        scope2_total_tons: values.scope2_total_tons,
+        energy_renewable_percent: values.energy_renewable_percent,
+        certifications: ["Auto-Declarado"], // Default para este ejemplo
+      });
 
-    // Filter for consumer org (showing providers' ESG data)
-    const relevantPayloads = esgData.filter(
-      (p) => p.transaction?.consumer_org_id === activeOrg.id
-    );
-
-    const grouped = relevantPayloads.reduce((acc, payload) => {
-      const providerName = payload.transaction?.subject_org?.name || "Unknown";
-      const esgInfo = extractESG(payload.data_content);
-
-      if (!acc[providerName]) {
-        acc[providerName] = {
-          provider: providerName,
-          sector: esgInfo.sector || payload.transaction?.subject_org?.sector || '',
-          scope1: 0,
-          scope2: 0,
-          scope3: 0,
-          total: 0,
-          renewable_kwh: 0,
-          waste: 0,
-          audit_score: 0,
-          certifications: [],
-          count: 0,
-        };
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Reporte ESG guardado correctamente");
+      queryClient.invalidateQueries({ queryKey: ["esg-reports"] });
+      setIsDialogOpen(false);
+      form.reset();
+    },
+    onError: (error: any) => {
+      // Manejo simple de error de duplicados
+      if (error.code === '23505') {
+        toast.error(`Ya existe un reporte para el año seleccionado.`);
+      } else {
+        toast.error("Error al guardar el reporte: " + error.message);
       }
+    },
+  });
 
-      acc[providerName].scope1 += esgInfo.scope1;
-      acc[providerName].scope2 += esgInfo.scope2;
-      acc[providerName].scope3 += esgInfo.scope3;
-      acc[providerName].total += esgInfo.scope1 + esgInfo.scope2 + esgInfo.scope3;
-      acc[providerName].renewable_kwh += esgInfo.renewable_kwh;
-      acc[providerName].waste += esgInfo.waste;
-      acc[providerName].audit_score += esgInfo.audit_score;
-      acc[providerName].count += 1;
+  // --- 3. Configuración del Formulario ---
+  const form = useForm<ESGFormValues>({
+    resolver: zodResolver(esgFormSchema),
+    defaultValues: {
+      report_year: new Date().getFullYear(),
+      scope1_total_tons: 0,
+      scope2_total_tons: 0,
+      energy_renewable_percent: 0,
+    },
+  });
 
-      if (esgInfo.certifications.length > 0) {
-        acc[providerName].certifications = Array.from(
-          new Set([...acc[providerName].certifications, ...esgInfo.certifications])
-        );
-      }
+  const onSubmit = (values: ESGFormValues) => {
+    createReportMutation.mutate(values);
+  };
 
-      return acc;
-    }, {} as Record<string, any>);
-
-    // Calculate averages and sort by total emissions
-    return Object.values(grouped)
-      .map((p: any) => ({
-        ...p,
-        audit_score: p.count > 0 ? Math.round(p.audit_score / p.count) : 0,
+  // --- 4. Preparación de Datos para Gráfico ---
+  // Recharts necesita los datos ordenados cronológicamente (ascendente)
+  const chartData = reports 
+    ? [...reports].sort((a, b) => a.report_year - b.report_year).map(r => ({
+        year: r.report_year,
+        total: Number(r.scope1_total_tons) + Number(r.scope2_total_tons),
+        renewable: Number(r.energy_renewable_percent)
       }))
-      .sort((a: any, b: any) => b.total - a.total);
-  }, [esgData, activeOrg]);
+    : [];
 
-  const totalEmissions = processedData?.reduce((sum, p) => sum + p.scope3, 0) || 0;
-  const auditedProviders = processedData?.length || 0;
-  const avgAuditScore =
-    auditedProviders > 0
-      ? Math.round(processedData!.reduce((sum, p) => sum + p.audit_score, 0) / auditedProviders)
-      : 0;
-  const totalWaste = processedData?.reduce((sum, p) => sum + p.waste, 0) || 0;
+  const latestReport = reports && reports.length > 0 ? reports[0] : null;
+
+  // --- Renderizado ---
+  if (isLoading) {
+    return <div className="p-8 text-center text-muted-foreground">Cargando datos de sostenibilidad...</div>;
+  }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto p-6 space-y-6">
-        {/* Header */}
+    <div className="container py-8 space-y-8 fade-in">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Hub de Sostenibilidad</h1>
-          <p className="text-muted-foreground">
-            Analítica ESG y huella de carbono de tu cadena de suministro
+          <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
+            <Leaf className="h-8 w-8 text-green-600" />
+            Sostenibilidad Corporativa
+          </h2>
+          <p className="text-muted-foreground mt-1">
+            Gestión de huella de carbono y métricas ESG para {activeOrg?.name}
           </p>
         </div>
 
-        {/* KPI Cards */}
-        <div className="grid gap-4 md:grid-cols-4">
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium flex items-center gap-2">
-                <Leaf className="h-4 w-4 text-green-600" />
-                Huella Total Alcance 3
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{totalEmissions.toLocaleString()}</div>
-              <p className="text-xs text-muted-foreground mt-1">tCO₂e de proveedores</p>
-            </CardContent>
-          </Card>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-green-700 hover:bg-green-800">
+              <Plus className="mr-2 h-4 w-4" /> Nuevo Reporte Anual
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Registrar Métricas ESG</DialogTitle>
+              <DialogDescription>
+                Ingresa los datos de emisiones y energía correspondientes al año fiscal.
+              </DialogDescription>
+            </DialogHeader>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
+                <FormField
+                  control={form.control}
+                  name="report_year"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Año del Reporte</FormLabel>
+                      <FormControl>
+                        <Input type="number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="scope1_total_tons"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Alcance 1 (tCO2e)</FormLabel>
+                        <FormControl>
+                          <Input type="number" step="0.01" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="scope2_total_tons"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Alcance 2 (tCO2e)</FormLabel>
+                        <FormControl>
+                          <Input type="number" step="0.01" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="energy_renewable_percent"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>% Energía Renovable</FormLabel>
+                      <FormControl>
+                        <Input type="number" step="0.1" max={100} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex justify-end pt-4">
+                  <Button type="submit" disabled={createReportMutation.isPending}>
+                    {createReportMutation.isPending ? "Guardando..." : "Guardar Reporte"}
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </DialogContent>
+        </Dialog>
+      </div>
 
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium flex items-center gap-2">
-                <Award className="h-4 w-4 text-blue-600" />
-                Proveedores Auditados
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{auditedProviders}</div>
-              <p className="text-xs text-muted-foreground mt-1">Con reporte ESG verificado</p>
-            </CardContent>
-          </Card>
+      {/* Contenido Principal */}
+      {reports && reports.length > 0 ? (
+        <Tabs defaultValue="overview" className="space-y-4">
+          <TabsList>
+            <TabsTrigger value="overview">Visión General</TabsTrigger>
+            <TabsTrigger value="trends">Tendencias</TabsTrigger>
+            <TabsTrigger value="history">Historial</TabsTrigger>
+          </TabsList>
 
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-yellow-600" />
-                Score de Auditoría
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{avgAuditScore}/100</div>
-              <p className="text-xs text-muted-foreground mt-1">Promedio de calidad</p>
-            </CardContent>
-          </Card>
+          <TabsContent value="overview" className="space-y-4">
+            {/* Adaptador para usar el componente existente ESGDataView */}
+            {latestReport && (
+              <div className="space-y-6">
+                <Card className="border-l-4 border-l-green-600">
+                  <CardHeader>
+                    <CardTitle>Reporte Actual ({latestReport.report_year})</CardTitle>
+                    <CardDescription>Resumen ejecutivo de impacto ambiental</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ESGDataView 
+                      data={{
+                        report_year: latestReport.report_year,
+                        scope1_total_tons: Number(latestReport.scope1_total_tons),
+                        scope2_total_tons: Number(latestReport.scope2_total_tons),
+                        energy_mix: {
+                          renewable: Number(latestReport.energy_renewable_percent),
+                          fossil: 100 - Number(latestReport.energy_renewable_percent)
+                        },
+                        certifications: latestReport.certifications as string[] || [],
+                      }} 
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+          </TabsContent>
 
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium flex items-center gap-2">
-                <Recycle className="h-4 w-4 text-emerald-600" />
-                Residuos Reciclados
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold">{totalWaste.toFixed(1)}</div>
-              <p className="text-xs text-muted-foreground mt-1">toneladas totales</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Chart */}
-        {isLoading ? (
-          <Card>
-            <CardContent className="py-12">
-              <div className="text-center text-muted-foreground">Cargando datos...</div>
-            </CardContent>
-          </Card>
-        ) : processedData && processedData.length > 0 ? (
-          <>
-            <div className="grid gap-4 md:grid-cols-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Top 5 Emisores</CardTitle>
-                  <CardDescription>Mayores contribuidores a huella de carbono (tCO₂e)</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={processedData.slice(0, 5)}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="provider" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="scope1" fill="hsl(var(--primary))" name="Alcance 1" />
-                      <Bar dataKey="scope2" fill="hsl(var(--accent))" name="Alcance 2" />
-                      <Bar dataKey="scope3" fill="hsl(var(--destructive))" name="Alcance 3" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Distribución de Certificaciones</CardTitle>
-                  <CardDescription>Proveedores con certificación ISO-14001</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <PieChart>
-                      <Pie
-                        data={[
-                          {
-                            name: "Certificados",
-                            value: processedData.filter((p) =>
-                              p.certifications.some((c: string) => c.includes("ISO"))
-                            ).length,
-                          },
-                          {
-                            name: "Sin Certificar",
-                            value: processedData.filter(
-                              (p) => !p.certifications.some((c: string) => c.includes("ISO"))
-                            ).length,
-                          },
-                        ]}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        outerRadius={100}
-                        fill="hsl(var(--primary))"
-                        dataKey="value"
-                      >
-                        <Cell fill="hsl(var(--primary))" />
-                        <Cell fill="hsl(var(--muted))" />
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Providers Table */}
+          <TabsContent value="trends">
             <Card>
               <CardHeader>
-                <CardTitle>Desglose por Proveedor</CardTitle>
-                <CardDescription>Métricas ESG y certificaciones verificadas</CardDescription>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" /> Evolución de Emisiones
+                </CardTitle>
+                <CardDescription>Histórico de toneladas CO2 equivalente</CardDescription>
+              </CardHeader>
+              <CardContent className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={chartData}>
+                    <defs>
+                      <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#16a34a" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#16a34a" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="year" />
+                    <YAxis />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))' }}
+                      itemStyle={{ color: 'hsl(var(--foreground))' }}
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="total" 
+                      stroke="#16a34a" 
+                      fillOpacity={1} 
+                      fill="url(#colorTotal)" 
+                      name="Total Emisiones"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="history">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <History className="h-5 w-5" /> Registro Histórico
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="rounded-md border">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Proveedor</TableHead>
-                        <TableHead>Sector</TableHead>
-                        <TableHead>Emisiones Totales</TableHead>
-                        <TableHead>Score Auditoría</TableHead>
-                        <TableHead>Residuos Reciclados</TableHead>
-                        <TableHead>Certificaciones</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {processedData.map((provider, idx) => (
-                        <TableRow key={idx}>
-                          <TableCell className="font-medium">{provider.provider}</TableCell>
-                          <TableCell>
-                            <Badge variant="outline">{provider.sector || 'General'}</Badge>
-                          </TableCell>
-                          <TableCell>{provider.total.toFixed(1)} tCO₂e</TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={
-                                provider.audit_score >= 90
-                                  ? "default"
-                                  : provider.audit_score >= 70
-                                  ? "secondary"
-                                  : "destructive"
-                              }
-                            >
-                              {provider.audit_score}/100
-                            </Badge>
-                          </TableCell>
-                          <TableCell>{provider.waste.toFixed(1)} t</TableCell>
-                          <TableCell>
-                            <div className="flex flex-wrap gap-1">
-                              {provider.certifications.length > 0 ? (
-                                provider.certifications.map((cert: string, i: number) => (
-                                  <Badge key={i} variant="outline" className="text-xs">
-                                    {cert}
-                                  </Badge>
-                                ))
-                              ) : (
-                                <span className="text-xs text-muted-foreground">Sin certificar</span>
-                              )}
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                <div className="space-y-4">
+                  {reports.map((report) => (
+                    <div key={report.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                      <div>
+                        <p className="font-bold text-lg">{report.report_year}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Creado el {new Date(report.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium text-green-700">
+                          {(Number(report.scope1_total_tons) + Number(report.scope2_total_tons)).toFixed(2)} tCO2e
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {report.energy_renewable_percent}% Renovable
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
-          </>
-        ) : (
-          <Card>
-            <CardContent className="py-12 text-center space-y-4">
-              <Leaf className="mx-auto h-12 w-12 text-muted-foreground" />
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Sin datos ESG disponibles</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Comienza solicitando reportes de emisiones a tus proveedores en el catálogo.
-                </p>
-                <Button onClick={() => navigate("/catalog")}>
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  Explorar Catálogo
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
+          </TabsContent>
+        </Tabs>
+      ) : (
+        // Empty State
+        <Card className="border-dashed border-2 bg-muted/20">
+          <CardContent className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="rounded-full bg-green-100 dark:bg-green-900/30 p-4 mb-4">
+              <Leaf className="h-10 w-10 text-green-600" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">No hay datos de sostenibilidad</h3>
+            <p className="text-muted-foreground max-w-md mb-6">
+              Comienza a realizar el seguimiento de tu huella de carbono agregando tu primer reporte anual.
+            </p>
+            <Button onClick={() => setIsDialogOpen(true)} variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
+              <Plus className="mr-2 h-4 w-4" /> Crear Primer Reporte
+            </Button>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
-};
-
-export default Sustainability;
+}
