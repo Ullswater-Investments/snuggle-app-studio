@@ -116,6 +116,7 @@ export type Database = {
           price: number | null
           pricing_model: string | null
           product_id: string
+          sample_data: Json | null
           status: string
           subject_org_id: string
           updated_at: string
@@ -131,6 +132,7 @@ export type Database = {
           price?: number | null
           pricing_model?: string | null
           product_id: string
+          sample_data?: Json | null
           status?: string
           subject_org_id: string
           updated_at?: string
@@ -146,6 +148,7 @@ export type Database = {
           price?: number | null
           pricing_model?: string | null
           product_id?: string
+          sample_data?: Json | null
           status?: string
           subject_org_id?: string
           updated_at?: string

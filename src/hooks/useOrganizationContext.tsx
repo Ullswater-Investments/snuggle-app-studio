@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
 import { toast } from "sonner";
@@ -25,6 +25,7 @@ const OrganizationContext = createContext<OrganizationContextType | undefined>(u
 
 export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const [activeOrgId, setActiveOrgId] = useState<string | null>(() => {
     // Recuperar organización activa del sessionStorage
     return sessionStorage.getItem('activeOrgId');
@@ -91,6 +92,10 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
 
     setActiveOrgId(orgId);
     sessionStorage.setItem('activeOrgId', orgId);
+    
+    // 🔐 CRÍTICO: Limpiar cache completo para evitar fuga de datos entre organizaciones
+    // Esto previene que datos de Org A sean visibles después de cambiar a Org B
+    queryClient.invalidateQueries();
     
     // Mensaje de cambio de contexto
     const roleLabel = org.type === 'consumer' ? 'Consumidor' : 
