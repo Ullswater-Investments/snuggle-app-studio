@@ -894,6 +894,101 @@ export type Database = {
           },
         ]
       }
+      wallet_transactions: {
+        Row: {
+          amount: number
+          created_at: string | null
+          currency: string | null
+          from_wallet_id: string | null
+          id: string
+          metadata: Json | null
+          reference_id: string | null
+          status: string | null
+          to_wallet_id: string | null
+          transaction_type: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          currency?: string | null
+          from_wallet_id?: string | null
+          id?: string
+          metadata?: Json | null
+          reference_id?: string | null
+          status?: string | null
+          to_wallet_id?: string | null
+          transaction_type?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          currency?: string | null
+          from_wallet_id?: string | null
+          id?: string
+          metadata?: Json | null
+          reference_id?: string | null
+          status?: string | null
+          to_wallet_id?: string | null
+          transaction_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wallet_transactions_from_wallet_id_fkey"
+            columns: ["from_wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wallet_transactions_to_wallet_id_fkey"
+            columns: ["to_wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wallets: {
+        Row: {
+          address: string
+          balance: number | null
+          created_at: string | null
+          currency: string | null
+          id: string
+          is_frozen: boolean | null
+          organization_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          address: string
+          balance?: number | null
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          is_frozen?: boolean | null
+          organization_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string
+          balance?: number | null
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          is_frozen?: boolean | null
+          organization_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wallets_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       marketplace_listings: {

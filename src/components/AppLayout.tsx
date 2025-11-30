@@ -5,6 +5,7 @@ import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoBanner } from "@/components/DemoBanner";
 import { DemoTour } from "@/components/DemoTour";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
+import { WalletButton } from "@/components/WalletButton";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -30,6 +31,7 @@ export const AppLayout = () => {
                 <div data-tour="org-switcher">
                   <OrganizationSwitcher />
                 </div>
+                <WalletButton />
                 <DemoHelpButton />
                 <span className="text-sm text-muted-foreground hidden sm:inline">
                   {user?.email}
