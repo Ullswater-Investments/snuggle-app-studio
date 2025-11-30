@@ -174,14 +174,14 @@ const Requests = () => {
     return transactionsToFilter.filter((t) => {
       const searchLower = searchQuery.toLowerCase();
       const matchesSearch = (
-        t.purpose?.toLowerCase().includes(searchLower) ||
-        t.asset?.product?.name?.toLowerCase().includes(searchLower) ||
-        t.consumer_org?.name?.toLowerCase().includes(searchLower) ||
-        t.subject_org?.name?.toLowerCase().includes(searchLower)
+        (t.purpose || "").toLowerCase().includes(searchLower) ||
+        (t.asset?.product?.name || "").toLowerCase().includes(searchLower) ||
+        (t.consumer_org?.name || "").toLowerCase().includes(searchLower) ||
+        (t.subject_org?.name || "").toLowerCase().includes(searchLower)
       );
       
       const matchesPriority = priorityFilter === "all" || 
-        (t.metadata?.priority?.toLowerCase() === priorityFilter.toLowerCase());
+        ((t.metadata?.priority || "").toLowerCase() === priorityFilter.toLowerCase());
       
       return matchesSearch && matchesPriority;
     });
@@ -907,7 +907,7 @@ const Requests = () => {
                       <div className="flex items-start gap-2 mb-2">
                         <Avatar className="h-8 w-8">
                           <AvatarFallback className="text-xs">
-                            {transaction.subject_org.name.substring(0, 2).toUpperCase()}
+                            {(transaction.subject_org?.name || "??").substring(0, 2).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">
@@ -946,7 +946,7 @@ const Requests = () => {
                       <div className="flex items-start gap-2 mb-2">
                         <Avatar className="h-8 w-8">
                           <AvatarFallback className="text-xs">
-                            {transaction.subject_org.name.substring(0, 2).toUpperCase()}
+                            {(transaction.subject_org?.name || "??").substring(0, 2).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">
@@ -985,7 +985,7 @@ const Requests = () => {
                       <div className="flex items-start gap-2 mb-2">
                         <Avatar className="h-8 w-8">
                           <AvatarFallback className="text-xs">
-                            {transaction.subject_org.name.substring(0, 2).toUpperCase()}
+                            {(transaction.subject_org?.name || "??").substring(0, 2).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">
@@ -1024,7 +1024,7 @@ const Requests = () => {
                       <div className="flex items-start gap-2 mb-2">
                         <Avatar className="h-8 w-8">
                           <AvatarFallback className="text-xs">
-                            {transaction.subject_org.name.substring(0, 2).toUpperCase()}
+                            {(transaction.subject_org?.name || "??").substring(0, 2).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1 min-w-0">

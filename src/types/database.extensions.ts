@@ -49,18 +49,18 @@ export interface MarketplaceOpportunity {
 
 export interface MarketplaceListing {
   asset_id: string;
-  product_id: string;
-  product_name: string;
-  product_description: string;
-  category: string;
-  version: string;
+  product_id: string | null;
+  product_name: string | null;
+  product_description: string | null;
+  category: string | null;
+  version: string | null;
   provider_id: string;
-  provider_name: string;
-  seller_category: string;
+  provider_name: string | null;
+  seller_category: string | null;
   kyb_verified: boolean;
-  pricing_model: 'free' | 'subscription' | 'one_time' | 'usage';
-  price: number;
-  currency: string;
+  pricing_model: 'free' | 'subscription' | 'one_time' | 'usage' | null;
+  price: number | null;
+  currency: string | null;
   billing_period: string | null;
   has_green_badge: boolean;
   energy_renewable_percent: number | null;

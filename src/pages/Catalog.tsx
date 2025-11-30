@@ -30,21 +30,21 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "sonner";
 
-// --- Tipos alineados con la vista SQL 'marketplace_listings' ---
+// --- Tipos alineados con la vista SQL 'marketplace_listings' (campos opcionales) ---
 interface MarketplaceListing {
   asset_id: string;
-  asset_name: string;
-  asset_description: string;
-  product_name: string;
-  category: string;
+  asset_name: string | null;
+  asset_description: string | null;
+  product_name: string | null;
+  category: string | null;
   provider_id: string;
-  provider_name: string;
-  seller_category: string;
+  provider_name: string | null;
+  seller_category: string | null;
   kyb_verified: boolean;
-  pricing_model: 'free' | 'one_time' | 'subscription' | 'usage';
-  price: number;
-  currency: string;
-  billing_period?: string;
+  pricing_model: 'free' | 'one_time' | 'subscription' | 'usage' | null;
+  price: number | null;
+  currency: string | null;
+  billing_period?: string | null;
   has_green_badge: boolean;
   reputation_score: number;
   review_count: number;
@@ -130,21 +130,21 @@ export default function Catalog() {
     }
   });
 
-  // --- Lógica de Filtrado en Cliente ---
+  // --- Lógica de Filtrado en Cliente (con Programación Defensiva) ---
   const filteredListings = listings?.filter(item => {
-    const matchesSearch = item.asset_name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          item.provider_name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeTab === 'all' || item.category === activeTab;
+    const matchesSearch = (item.asset_name || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (item.provider_name || "").toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeTab === 'all' || (item.category || "") === activeTab;
     const matchesGreen = !filters.onlyGreen || item.has_green_badge;
     const matchesVerified = !filters.onlyVerified || item.kyb_verified;
     const matchesPrice = filters.priceType === 'all' 
       ? true 
-      : filters.priceType === 'free' ? item.price === 0 : item.price > 0;
+      : filters.priceType === 'free' ? (item.price || 0) === 0 : (item.price || 0) > 0;
 
     return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
   });
 
-  const categories = ["all", ...new Set(listings?.map(l => l.category) || [])];
+  const categories = ["all", ...new Set(listings?.map(l => l.category || "General") || [])];
 
   // Funciones para wishlist
   const toggleWishlist = (assetId: string) => {
