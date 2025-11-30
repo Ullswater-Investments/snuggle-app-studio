@@ -79,6 +79,18 @@ export interface TransactionMessage {
   created_at: string;
 }
 
+export interface AuditLog {
+  id: string;
+  organization_id: string;
+  actor_id: string | null;
+  actor_email: string | null;
+  action: string;
+  resource: string | null;
+  details: Record<string, any> | null;
+  ip_address: string | null;
+  created_at: string;
+}
+
 export interface TransactionMessageWithSender extends TransactionMessage {
   sender: {
     name: string;
