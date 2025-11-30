@@ -85,6 +85,19 @@ export interface TransactionMessageWithSender extends TransactionMessage {
   };
 }
 
+// ============= NOTIFICATIONS =============
+
+export interface Notification {
+  id: string;
+  user_id: string;
+  title: string;
+  message: string | null;
+  type: 'info' | 'success' | 'warning' | 'error';
+  link: string | null;
+  is_read: boolean;
+  created_at: string;
+}
+
 // ============= ESG & SUSTAINABILITY =============
 
 export interface ESGReport {
