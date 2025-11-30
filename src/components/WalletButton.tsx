@@ -102,6 +102,7 @@ export const WalletButton = () => {
         <Button 
           variant="outline" 
           className="flex gap-2 border-blue-200/60 bg-blue-50/50 hover:bg-blue-100 text-blue-900 dark:bg-blue-950/30 dark:text-blue-200 dark:border-blue-800"
+          data-wallet-button
         >
           <Wallet className="h-4 w-4" />
           <span className="font-mono font-bold">
