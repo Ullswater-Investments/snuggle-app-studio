@@ -361,7 +361,9 @@ const Requests = () => {
                 const isSubject = role === "subject";
 
                 return (
-                  <Card key={transaction.id}>
+                  <Card key={transaction.id} className={cn(
+                    transaction.metadata?.priority === 'Crítica' && "border-l-4 border-destructive"
+                  )}>
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -385,7 +387,7 @@ const Requests = () => {
                             )}
                           </div>
                           {transaction.metadata?.ticket_id && (
-                            <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                            <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                           )}
                           <CardDescription>
                             Solicitado por: {transaction.consumer_org.name}
@@ -507,7 +509,9 @@ const Requests = () => {
               </Card>
             ) : (
               myRequests.map((transaction) => (
-                <Card key={transaction.id}>
+                <Card key={transaction.id} className={cn(
+                  transaction.metadata?.priority === 'Crítica' && "border-l-4 border-destructive"
+                )}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
@@ -531,7 +535,7 @@ const Requests = () => {
                           )}
                         </div>
                         {transaction.metadata?.ticket_id && (
-                          <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                          <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                         )}
                         <CardDescription>
                           Proveedor: {transaction.subject_org.name}
@@ -621,7 +625,10 @@ const Requests = () => {
                 const role = getRoleInTransaction(transaction);
                 
                 return (
-                  <Card key={transaction.id} className="opacity-90">
+                  <Card key={transaction.id} className={cn(
+                    "opacity-90",
+                    transaction.metadata?.priority === 'Crítica' && "border-l-4 border-destructive"
+                  )}>
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -645,7 +652,7 @@ const Requests = () => {
                             )}
                           </div>
                           {transaction.metadata?.ticket_id && (
-                            <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                            <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                           )}
                           <CardDescription>
                             {role === "consumer" && `Proveedor: ${transaction.subject_org.name}`}
@@ -706,7 +713,9 @@ const Requests = () => {
               const role = getRoleInTransaction(transaction);
               
               return (
-                <Card key={transaction.id}>
+                <Card key={transaction.id} className={cn(
+                  transaction.metadata?.priority === 'Crítica' && "border-l-4 border-destructive"
+                )}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
@@ -730,7 +739,7 @@ const Requests = () => {
                           )}
                         </div>
                         {transaction.metadata?.ticket_id && (
-                          <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                          <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                         )}
                         <CardDescription>
                           {role === "consumer" && `Proveedor: ${transaction.subject_org.name}`}
