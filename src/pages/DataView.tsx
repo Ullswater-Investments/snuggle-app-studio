@@ -17,6 +17,7 @@ import { IoTDataView } from "@/components/IoTDataView";
 import { GenericJSONView } from "@/components/GenericJSONView";
 import { ArrayDataView } from "@/components/ArrayDataView";
 import { CodeIntegrationModal } from "@/components/CodeIntegrationModal";
+import { DataLineage } from "@/components/DataLineage";
 import { Progress } from "@/components/ui/progress";
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
@@ -271,6 +272,11 @@ const DataView = () => {
           <p className="text-muted-foreground">
             Datos recibidos de: {transaction.subject_org.name}
           </p>
+        </div>
+
+        {/* Data Lineage Visualization */}
+        <div className="mb-6">
+          <DataLineage transaction={transaction} />
         </div>
 
         <div className="grid gap-6 lg:grid-cols-4">

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Settings as SettingsIcon, Server, Building2, User, Webhook } from "lucide-react";
+import { Settings as SettingsIcon, Server, Building2, User, Webhook, Shield } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 
 const Settings = () => {
@@ -21,6 +21,13 @@ const Settings = () => {
       icon: Webhook,
       path: "/settings/webhooks",
       color: "text-orange-600 dark:text-orange-400",
+    },
+    {
+      title: "Logs de Auditoría",
+      description: "Registro inmutable de acciones críticas (GDPR/EU Data Act)",
+      icon: Shield,
+      path: "/settings/audit",
+      color: "text-red-600 dark:text-red-400",
     },
     {
       title: "Perfil de Organización",
