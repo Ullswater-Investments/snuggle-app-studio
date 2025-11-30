@@ -255,6 +255,7 @@ export type Database = {
           holder_org_id: string
           id: string
           justification: string
+          metadata: Json | null
           purpose: string
           requested_by: string
           status: Database["public"]["Enums"]["transaction_status"]
@@ -269,6 +270,7 @@ export type Database = {
           holder_org_id: string
           id?: string
           justification: string
+          metadata?: Json | null
           purpose: string
           requested_by: string
           status?: Database["public"]["Enums"]["transaction_status"]
@@ -283,6 +285,7 @@ export type Database = {
           holder_org_id?: string
           id?: string
           justification?: string
+          metadata?: Json | null
           purpose?: string
           requested_by?: string
           status?: Database["public"]["Enums"]["transaction_status"]
@@ -687,30 +690,39 @@ export type Database = {
         Row: {
           category: string | null
           created_at: string | null
+          currency: string | null
           description: string | null
+          features: Json | null
           icon_name: string | null
           id: string
           name: string
+          price: number | null
           price_model: string | null
           provider_org_id: string | null
         }
         Insert: {
           category?: string | null
           created_at?: string | null
+          currency?: string | null
           description?: string | null
+          features?: Json | null
           icon_name?: string | null
           id?: string
           name: string
+          price?: number | null
           price_model?: string | null
           provider_org_id?: string | null
         }
         Update: {
           category?: string | null
           created_at?: string | null
+          currency?: string | null
           description?: string | null
+          features?: Json | null
           icon_name?: string | null
           id?: string
           name?: string
+          price?: number | null
           price_model?: string | null
           provider_org_id?: string | null
         }

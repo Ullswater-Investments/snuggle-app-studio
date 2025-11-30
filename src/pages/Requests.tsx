@@ -13,7 +13,9 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { FadeIn } from "@/components/AnimatedSection";
 import { formatDistanceToNow } from "date-fns";
@@ -37,6 +39,7 @@ const Requests = () => {
   const { sendNotification } = useNotifications();
   const { activeOrg, isDemo } = useOrganizationContext();
   const [searchQuery, setSearchQuery] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState<string>("all");
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
 
   // Obtener organización del usuario
@@ -163,33 +166,42 @@ const Requests = () => {
     return null;
   };
 
-  // Filtrar por búsqueda
-  const filteredTransactions = transactions?.filter((t) => {
-    const searchLower = searchQuery.toLowerCase();
-    return (
-      t.purpose?.toLowerCase().includes(searchLower) ||
-      t.asset?.product?.name?.toLowerCase().includes(searchLower) ||
-      t.consumer_org?.name?.toLowerCase().includes(searchLower) ||
-      t.subject_org?.name?.toLowerCase().includes(searchLower)
-    );
-  }) || [];
+  // Filtrar por búsqueda y prioridad
+  const applyFilters = (transactionsToFilter: any[]) => {
+    return transactionsToFilter.filter((t) => {
+      const searchLower = searchQuery.toLowerCase();
+      const matchesSearch = (
+        t.purpose?.toLowerCase().includes(searchLower) ||
+        t.asset?.product?.name?.toLowerCase().includes(searchLower) ||
+        t.consumer_org?.name?.toLowerCase().includes(searchLower) ||
+        t.subject_org?.name?.toLowerCase().includes(searchLower)
+      );
+      
+      const matchesPriority = priorityFilter === "all" || 
+        (t.metadata?.priority?.toLowerCase() === priorityFilter.toLowerCase());
+      
+      return matchesSearch && matchesPriority;
+    });
+  };
 
-  const pendingForMe = filteredTransactions.filter((t) => {
+  const filteredTransactions = transactions || [];
+
+  const pendingForMe = applyFilters(filteredTransactions.filter((t) => {
     const role = getRoleInTransaction(t);
     if (role === "subject" && t.status === "pending_subject") return true;
     if (role === "holder" && t.status === "pending_holder") return true;
     return false;
-  });
+  }));
 
-  const myRequests = filteredTransactions.filter((t) => 
+  const myRequests = applyFilters(filteredTransactions.filter((t) => 
     t.consumer_org_id === activeOrg?.id
-  );
+  ));
 
-  const historicalTransactions = filteredTransactions.filter((t) => 
+  const historicalTransactions = applyFilters(filteredTransactions.filter((t) => 
     ["completed", "approved", "denied_subject", "denied_holder", "cancelled"].includes(t.status)
-  );
+  ));
 
-  const allTransactions = filteredTransactions;
+  const allTransactions = applyFilters(filteredTransactions);
 
   if (isLoading) {
     return (
@@ -271,8 +283,8 @@ const Requests = () => {
       <FadeIn delay={0.2}>
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-4">
-              <div className="relative flex-1">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="relative flex-1 w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Buscar por propósito, producto u organización..."
@@ -281,6 +293,18 @@ const Requests = () => {
                   className="pl-10"
                 />
               </div>
+              <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+                <SelectTrigger className="w-full sm:w-[180px]">
+                  <SelectValue placeholder="Prioridad" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Todas</SelectItem>
+                  <SelectItem value="crítica">Crítica</SelectItem>
+                  <SelectItem value="alta">Alta</SelectItem>
+                  <SelectItem value="media">Media</SelectItem>
+                  <SelectItem value="baja">Baja</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </CardHeader>
         </Card>
@@ -340,13 +364,43 @@ const Requests = () => {
                   <Card key={transaction.id}>
                     <CardHeader>
                       <div className="flex items-start justify-between">
-                        <div>
-                          <CardTitle>{transaction.asset.product.name}</CardTitle>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <CardTitle>{transaction.asset.product.name}</CardTitle>
+                            {transaction.metadata?.priority && (
+                              <Badge 
+                                variant={
+                                  transaction.metadata.priority === 'Crítica' ? 'destructive' :
+                                  transaction.metadata.priority === 'Alta' ? 'default' :
+                                  'outline'
+                                }
+                                className={cn(
+                                  transaction.metadata.priority === 'Crítica' && "animate-pulse",
+                                  transaction.metadata.priority === 'Alta' && "bg-orange-500 hover:bg-orange-600"
+                                )}
+                              >
+                                {transaction.metadata.priority === 'Crítica' && <AlertCircle className="w-3 h-3 mr-1" />}
+                                {transaction.metadata.priority}
+                              </Badge>
+                            )}
+                          </div>
+                          {transaction.metadata?.ticket_id && (
+                            <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                          )}
                           <CardDescription>
                             Solicitado por: {transaction.consumer_org.name}
                           </CardDescription>
+                          {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {transaction.metadata.tags.map((tag: string, idx: number) => (
+                                <Badge key={idx} variant="outline" className="text-xs">
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-shrink-0">
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
@@ -456,13 +510,43 @@ const Requests = () => {
                 <Card key={transaction.id}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle>{transaction.asset.product.name}</CardTitle>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <CardTitle>{transaction.asset.product.name}</CardTitle>
+                          {transaction.metadata?.priority && (
+                            <Badge 
+                              variant={
+                                transaction.metadata.priority === 'Crítica' ? 'destructive' :
+                                transaction.metadata.priority === 'Alta' ? 'default' :
+                                'outline'
+                              }
+                              className={cn(
+                                transaction.metadata.priority === 'Crítica' && "animate-pulse",
+                                transaction.metadata.priority === 'Alta' && "bg-orange-500 hover:bg-orange-600"
+                              )}
+                            >
+                              {transaction.metadata.priority === 'Crítica' && <AlertCircle className="w-3 h-3 mr-1" />}
+                              {transaction.metadata.priority}
+                            </Badge>
+                          )}
+                        </div>
+                        {transaction.metadata?.ticket_id && (
+                          <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                        )}
                         <CardDescription>
                           Proveedor: {transaction.subject_org.name}
                         </CardDescription>
+                        {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {transaction.metadata.tags.map((tag: string, idx: number) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                       <div className="flex gap-2">
+                       <div className="flex gap-2 flex-shrink-0">
                          <TooltipProvider>
                            <Tooltip>
                              <TooltipTrigger>
@@ -540,15 +624,45 @@ const Requests = () => {
                   <Card key={transaction.id} className="opacity-90">
                     <CardHeader>
                       <div className="flex items-start justify-between">
-                        <div>
-                          <CardTitle className="text-base">{transaction.asset.product.name}</CardTitle>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <CardTitle className="text-base">{transaction.asset.product.name}</CardTitle>
+                            {transaction.metadata?.priority && (
+                              <Badge 
+                                variant={
+                                  transaction.metadata.priority === 'Crítica' ? 'destructive' :
+                                  transaction.metadata.priority === 'Alta' ? 'default' :
+                                  'outline'
+                                }
+                                className={cn(
+                                  transaction.metadata.priority === 'Crítica' && "animate-pulse",
+                                  transaction.metadata.priority === 'Alta' && "bg-orange-500 hover:bg-orange-600"
+                                )}
+                              >
+                                {transaction.metadata.priority === 'Crítica' && <AlertCircle className="w-3 h-3 mr-1" />}
+                                {transaction.metadata.priority}
+                              </Badge>
+                            )}
+                          </div>
+                          {transaction.metadata?.ticket_id && (
+                            <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                          )}
                           <CardDescription>
                             {role === "consumer" && `Proveedor: ${transaction.subject_org.name}`}
                             {role === "subject" && `Solicitado por: ${transaction.consumer_org.name}`}
                             {role === "holder" && `Consumer: ${transaction.consumer_org.name}`}
                           </CardDescription>
+                          {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
+                            <div className="flex flex-wrap gap-1 mt-2">
+                              {transaction.metadata.tags.map((tag: string, idx: number) => (
+                                <Badge key={idx} variant="outline" className="text-xs">
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-shrink-0">
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
@@ -595,15 +709,45 @@ const Requests = () => {
                 <Card key={transaction.id}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle>{transaction.asset.product.name}</CardTitle>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <CardTitle>{transaction.asset.product.name}</CardTitle>
+                          {transaction.metadata?.priority && (
+                            <Badge 
+                              variant={
+                                transaction.metadata.priority === 'Crítica' ? 'destructive' :
+                                transaction.metadata.priority === 'Alta' ? 'default' :
+                                'outline'
+                              }
+                              className={cn(
+                                transaction.metadata.priority === 'Crítica' && "animate-pulse",
+                                transaction.metadata.priority === 'Alta' && "bg-orange-500 hover:bg-orange-600"
+                              )}
+                            >
+                              {transaction.metadata.priority === 'Crítica' && <AlertCircle className="w-3 h-3 mr-1" />}
+                              {transaction.metadata.priority}
+                            </Badge>
+                          )}
+                        </div>
+                        {transaction.metadata?.ticket_id && (
+                          <p className="text-xs text-muted-foreground mb-1">ID: {transaction.metadata.ticket_id}</p>
+                        )}
                         <CardDescription>
                           {role === "consumer" && `Proveedor: ${transaction.subject_org.name}`}
                           {role === "subject" && `Solicitado por: ${transaction.consumer_org.name}`}
                           {role === "holder" && `Consumer: ${transaction.consumer_org.name}, Subject: ${transaction.subject_org.name}`}
                         </CardDescription>
+                        {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {transaction.metadata.tags.map((tag: string, idx: number) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                       <div className="flex gap-2">
+                       <div className="flex gap-2 flex-shrink-0">
                          <Badge variant="outline">{role?.toUpperCase()}</Badge>
                          <TooltipProvider>
                            <Tooltip>
