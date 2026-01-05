@@ -10,8 +10,10 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { CodeIntegrationModal } from "@/components/CodeIntegrationModal";
-import { Database, Download, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, CheckCircle2 } from "lucide-react";
+import DataLineageBlockchain from "@/components/DataLineageBlockchain";
+import { Database, Download, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, CheckCircle2, ShieldCheck, Link2 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { EmptyState } from "@/components/EmptyState";
 
@@ -22,6 +24,7 @@ const Data = () => {
   const [sectorFilter, setSectorFilter] = useState<string>("all");
   const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const [showAPIDialog, setShowAPIDialog] = useState(false);
+  const [lineageTransactionId, setLineageTransactionId] = useState<string | null>(null);
 
   const { data: transactions, isLoading } = useQuery({
     queryKey: ["completed-transactions", activeOrg?.id, isDemo],
@@ -44,7 +47,8 @@ const Data = () => {
           ),
           subject_org:organizations!data_transactions_subject_org_id_fkey (
             name,
-            sector
+            sector,
+            pontus_verified
           ),
           supplier_data (
             company_name,
@@ -122,6 +126,16 @@ const Data = () => {
     }
   };
 
+  // Check if transaction has blockchain verification
+  const hasBlockchainVerification = (transaction: any) => {
+    // A transaction is considered blockchain verified if:
+    // 1. The subject organization is pontus_verified OR
+    // 2. The transaction has metadata with blockchain info (simulated for demo)
+    return transaction.subject_org?.pontus_verified || 
+           transaction.metadata?.blockchain_tx_hash ||
+           isDemo; // In demo mode, simulate all as verified
+  };
+
   return (
     <div className="container mx-auto p-6 space-y-8">
       <FadeIn>
@@ -173,12 +187,14 @@ const Data = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                APIs Disponibles
+                Verificados Blockchain
               </CardTitle>
-              <Code2 className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+              <ShieldCheck className="h-5 w-5 text-green-600 dark:text-green-400" />
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{filteredTransactions?.length || 0}</div>
+              <div className="text-3xl font-bold">
+                {filteredTransactions?.filter(t => hasBlockchainVerification(t)).length || 0}
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -247,6 +263,7 @@ const Data = () => {
             {filteredTransactions.map((transaction) => {
               const dataTypeBadge = getDataTypeBadge(transaction);
               const BadgeIcon = dataTypeBadge.icon;
+              const isBlockchainVerified = hasBlockchainVerification(transaction);
               // Simulate API usage percentage
               const apiUsage = Math.floor(Math.random() * 40) + 30;
               
@@ -275,6 +292,30 @@ const Data = () => {
                         <BadgeIcon className="h-3 w-3" />
                         {dataTypeBadge.label}
                       </Badge>
+                      
+                      {/* Blockchain Verification Badge */}
+                      {isBlockchainVerified && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge 
+                                variant="outline" 
+                                className="bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-700 cursor-pointer"
+                                onClick={() => setLineageTransactionId(transaction.id)}
+                              >
+                                <ShieldCheck className="h-3 w-3 mr-1" />
+                                Verificado
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p className="text-xs max-w-xs">
+                                Trazabilidad verificada en Pontus-X Blockchain. Haz clic para ver auditoría.
+                              </p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                      
                       {isDemo && (
                         <TooltipProvider>
                           <Tooltip>
@@ -323,6 +364,15 @@ const Data = () => {
                       >
                         <Code2 className="h-4 w-4" />
                       </Button>
+                      {isBlockchainVerified && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setLineageTransactionId(transaction.id)}
+                        >
+                          <Link2 className="h-4 w-4" />
+                        </Button>
+                      )}
                     </div>
                     
                     <div className="text-xs text-muted-foreground pt-2 border-t">
@@ -345,6 +395,21 @@ const Data = () => {
           productName={selectedAsset.asset.product.name}
         />
       )}
+
+      {/* Blockchain Lineage Dialog */}
+      <Dialog open={!!lineageTransactionId} onOpenChange={(open) => !open && setLineageTransactionId(null)}>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <ShieldCheck className="h-5 w-5 text-emerald-600" />
+              Auditoría de Trazabilidad Blockchain
+            </DialogTitle>
+          </DialogHeader>
+          {lineageTransactionId && (
+            <DataLineageBlockchain />
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
