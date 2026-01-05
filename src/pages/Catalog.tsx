@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,8 @@ import {
   Database,
   ArrowRight,
   Heart,
-  BarChart3
+  BarChart3,
+  Wallet
 } from "lucide-react";
 
 // UI Components
@@ -77,10 +78,71 @@ export default function Catalog() {
     priceType: 'all' // all, free, paid
   });
   
-  // Estado para wishlist y comparación
-  const [wishlist, setWishlist] = useState<Set<string>>(new Set());
+  // Estado para comparación
   const [compareList, setCompareList] = useState<Set<string>>(new Set());
   const [compareDialogOpen, setCompareDialogOpen] = useState(false);
+
+  // --- Fetch Wishlist from Supabase ---
+  const { data: wishlistData } = useQuery({
+    queryKey: ["user-wishlist", user?.id],
+    queryFn: async () => {
+      if (!user) return [];
+      const { data, error } = await supabase
+        .from("user_wishlist")
+        .select("asset_id")
+        .eq("user_id", user.id);
+      
+      if (error) throw error;
+      return data?.map(item => item.asset_id) || [];
+    },
+    enabled: !!user,
+  });
+
+  const wishlist = new Set(wishlistData || []);
+
+  // --- Wishlist Mutation ---
+  const toggleWishlistMutation = useMutation({
+    mutationFn: async (assetId: string) => {
+      if (!user) throw new Error("User not authenticated");
+
+      const isInWishlist = wishlist.has(assetId);
+      
+      if (isInWishlist) {
+        const { error } = await supabase
+          .from("user_wishlist")
+          .delete()
+          .eq("user_id", user.id)
+          .eq("asset_id", assetId);
+        if (error) throw error;
+        return { action: "removed" };
+      } else {
+        const { error } = await supabase
+          .from("user_wishlist")
+          .insert({ user_id: user.id, asset_id: assetId });
+        if (error) throw error;
+        return { action: "added" };
+      }
+    },
+    onSuccess: (result) => {
+      queryClient.invalidateQueries({ queryKey: ["user-wishlist"] });
+      if (result.action === "added") {
+        toast("Añadido a favoritos", { icon: "❤️" });
+      } else {
+        toast("Eliminado de favoritos", { icon: "💔" });
+      }
+    },
+    onError: () => {
+      toast.error("Error al actualizar favoritos");
+    },
+  });
+
+  const toggleWishlist = (assetId: string) => {
+    if (!user) {
+      toast.error("Inicia sesión para guardar favoritos");
+      return;
+    }
+    toggleWishlistMutation.mutate(assetId);
+  };
 
   // --- Fetch de Datos (Conecta con la vista SQL) ---
   const { data: listings, isLoading } = useQuery({
@@ -99,6 +161,9 @@ export default function Catalog() {
           .select(`
             id,
             subject_org_id,
+            price,
+            currency,
+            pricing_model,
             product:data_products(name, category, description),
             org:organizations!subject_org_id(name)
           `);
@@ -113,9 +178,9 @@ export default function Catalog() {
           provider_name: a.org?.name || "Proveedor Desconocido",
           provider_id: a.subject_org_id,
           seller_category: '',
-          pricing_model: 'free',
-          price: 0,
-          currency: 'EUR',
+          pricing_model: (a.pricing_model as any) || 'free',
+          price: a.price || 0,
+          currency: a.currency || 'EUR',
           billing_period: undefined,
           reputation_score: 4.5, // Simulado
           review_count: 12, // Simulado
@@ -145,21 +210,6 @@ export default function Catalog() {
   });
 
   const categories = ["all", ...new Set(listings?.map(l => l.category || "General") || [])];
-
-  // Funciones para wishlist
-  const toggleWishlist = (assetId: string) => {
-    setWishlist(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(assetId)) {
-        newSet.delete(assetId);
-        toast("Eliminado de favoritos", { icon: "💔" });
-      } else {
-        newSet.add(assetId);
-        toast("Añadido a favoritos", { icon: "❤️" });
-      }
-      return newSet;
-    });
-  };
 
   // Funciones para comparador
   const toggleCompare = (assetId: string) => {
@@ -395,7 +445,12 @@ export default function Catalog() {
                       {p.price === 0 ? (
                         <Badge variant="outline" className="text-green-600">GRATIS</Badge>
                       ) : (
-                        `${p.price} ${p.currency}`
+                        <div className="flex items-center gap-1">
+                          {`${p.price} ${p.currency}`}
+                          {p.currency === 'EUROe' && (
+                            <Wallet className="h-3 w-3 text-purple-600" />
+                          )}
+                        </div>
                       )}
                     </TableCell>
                   ))}
@@ -481,7 +536,8 @@ function ProductCard({
   onCompareToggle?: () => void;
   isInCompare?: boolean;
 }) {
-  const isPaid = item.price > 0;
+  const isPaid = (item.price || 0) > 0;
+  const isWeb3Asset = item.currency === 'EUROe' || item.currency === 'GX';
 
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 border-muted/60 overflow-hidden flex flex-col h-full relative">
@@ -510,6 +566,13 @@ function ProductCard({
           
           {/* Insignias Superiores */}
           <div className="flex gap-1">
+            {/* Badge Web3 */}
+            {isWeb3Asset && (
+              <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 border-purple-200 px-1.5" title="Requiere Wallet Web3">
+                <Wallet className="h-3 w-3 mr-1" />
+                {item.currency}
+              </Badge>
+            )}
             {item.has_green_badge && (
               <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700 px-1.5" title="Sustainable Data">
                 <Leaf className="h-3 w-3" />
@@ -542,9 +605,17 @@ function ProductCard({
           <div className="text-right">
             {isPaid ? (
               <div className="flex flex-col items-end">
-                <span className="text-lg font-bold text-slate-900">
-                  {new Intl.NumberFormat('es-ES', { style: 'currency', currency: item.currency }).format(item.price)}
-                </span>
+                <div className="flex items-center gap-1">
+                  <span className="text-lg font-bold text-slate-900">
+                    {new Intl.NumberFormat('es-ES', { 
+                      style: item.currency === 'EUR' ? 'currency' : 'decimal', 
+                      currency: item.currency === 'EUR' ? 'EUR' : undefined 
+                    }).format(item.price || 0)}
+                  </span>
+                  {isWeb3Asset && (
+                    <span className="text-sm font-medium text-purple-700">{item.currency}</span>
+                  )}
+                </div>
                 {item.pricing_model === 'subscription' && (
                   <span className="text-[10px] text-muted-foreground uppercase font-medium">
                     / {item.billing_period === 'monthly' ? 'mes' : 'año'}
@@ -577,9 +648,19 @@ function ProductCard({
         
         <Button 
           onClick={onAction} 
-          className={`w-full group-hover:translate-x-1 transition-all ${isPaid ? 'bg-slate-900' : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-50'}`}
+          className={`w-full group-hover:translate-x-1 transition-all ${
+            isWeb3Asset 
+              ? 'bg-purple-600 hover:bg-purple-700' 
+              : isPaid 
+                ? 'bg-slate-900' 
+                : 'bg-white border border-slate-200 text-slate-900 hover:bg-slate-50'
+          }`}
         >
-          {isPaid ? (
+          {isWeb3Asset ? (
+            <>
+              <Wallet className="mr-2 h-4 w-4" /> Comprar con Wallet
+            </>
+          ) : isPaid ? (
             <>
               <ShoppingCart className="mr-2 h-4 w-4" /> Comprar Datos
             </>

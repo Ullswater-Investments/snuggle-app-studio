@@ -15,12 +15,12 @@ import { NegotiationChat } from "@/components/NegotiationChat";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2 } from "lucide-react";
+import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { FadeIn } from "@/components/AnimatedSection";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, format } from "date-fns";
 import { es } from "date-fns/locale";
 import { EmptyState } from "@/components/EmptyState";
 
@@ -212,6 +212,48 @@ const Requests = () => {
 
   const allTransactions = applyFilters(filteredTransactions);
 
+  // --- Función de exportación CSV ---
+  const handleExportCSV = () => {
+    if (!allTransactions || allTransactions.length === 0) {
+      toast.error("No hay datos para exportar");
+      return;
+    }
+
+    const headers = ["ID", "Fecha", "Producto", "Consumidor", "Proveedor", "Estado", "Propósito"];
+    
+    const rows = allTransactions.map((t) => [
+      t.id,
+      format(new Date(t.created_at), "yyyy-MM-dd HH:mm", { locale: es }),
+      t.asset?.product?.name || "Sin producto",
+      t.consumer_org?.name || "—",
+      t.subject_org?.name || "—",
+      STATUS_CONFIG[t.status]?.label || t.status,
+      `"${(t.purpose || "").replace(/"/g, '""')}"` // Escape quotes
+    ]);
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map(row => row.join(","))
+    ].join("\n");
+
+    const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const fileName = `procuredata-requests-${format(new Date(), "yyyy-MM-dd")}.csv`;
+    
+    link.setAttribute("href", url);
+    link.setAttribute("download", fileName);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    toast.success("Informe descargado correctamente", {
+      description: `${allTransactions.length} transacciones exportadas`,
+    });
+  };
+
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -237,14 +279,23 @@ const Requests = () => {
                 Administra solicitudes de datos según tu rol en cada transacción
               </p>
             </div>
-            <Button 
-              size="lg"
-              onClick={() => navigate("/requests/new")}
-              className="ml-4"
-            >
-              <Plus className="mr-2 h-5 w-5" />
-              Nueva Solicitud
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline"
+                onClick={handleExportCSV}
+                disabled={allTransactions.length === 0}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Exportar CSV
+              </Button>
+              <Button 
+                size="lg"
+                onClick={() => navigate("/requests/new")}
+              >
+                <Plus className="mr-2 h-5 w-5" />
+                Nueva Solicitud
+              </Button>
+            </div>
           </div>
         </div>
       </FadeIn>
