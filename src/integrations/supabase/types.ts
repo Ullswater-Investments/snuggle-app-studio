@@ -620,6 +620,30 @@ export type Database = {
         }
         Relationships: []
       }
+      login_attempts: {
+        Row: {
+          attempted_at: string | null
+          email: string
+          id: string
+          ip_address: string | null
+          success: boolean | null
+        }
+        Insert: {
+          attempted_at?: string | null
+          email: string
+          id?: string
+          ip_address?: string | null
+          success?: boolean | null
+        }
+        Update: {
+          attempted_at?: string | null
+          email?: string
+          id?: string
+          ip_address?: string | null
+          success?: boolean | null
+        }
+        Relationships: []
+      }
       marketplace_opportunities: {
         Row: {
           budget_range: string
@@ -666,6 +690,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          link: string | null
+          message: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string | null
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       organization_reviews: {
         Row: {
@@ -727,6 +784,7 @@ export type Database = {
           banner_url: string | null
           created_at: string
           description: string | null
+          did: string | null
           id: string
           is_demo: boolean | null
           kyb_verified: boolean | null
@@ -734,18 +792,21 @@ export type Database = {
           logo_url: string | null
           marketplace_description: string | null
           name: string
+          pontus_verified: boolean | null
           sector: string | null
           seller_category: string | null
           stripe_connect_id: string | null
           tax_id: string
           type: Database["public"]["Enums"]["organization_type"]
           updated_at: string
+          wallet_address: string | null
           website: string | null
         }
         Insert: {
           banner_url?: string | null
           created_at?: string
           description?: string | null
+          did?: string | null
           id?: string
           is_demo?: boolean | null
           kyb_verified?: boolean | null
@@ -753,18 +814,21 @@ export type Database = {
           logo_url?: string | null
           marketplace_description?: string | null
           name: string
+          pontus_verified?: boolean | null
           sector?: string | null
           seller_category?: string | null
           stripe_connect_id?: string | null
           tax_id: string
           type: Database["public"]["Enums"]["organization_type"]
           updated_at?: string
+          wallet_address?: string | null
           website?: string | null
         }
         Update: {
           banner_url?: string | null
           created_at?: string
           description?: string | null
+          did?: string | null
           id?: string
           is_demo?: boolean | null
           kyb_verified?: boolean | null
@@ -772,13 +836,48 @@ export type Database = {
           logo_url?: string | null
           marketplace_description?: string | null
           name?: string
+          pontus_verified?: boolean | null
           sector?: string | null
           seller_category?: string | null
           stripe_connect_id?: string | null
           tax_id?: string
           type?: Database["public"]["Enums"]["organization_type"]
           updated_at?: string
+          wallet_address?: string | null
           website?: string | null
+        }
+        Relationships: []
+      }
+      privacy_preferences: {
+        Row: {
+          access_alerts: boolean | null
+          anonymous_research: boolean | null
+          created_at: string | null
+          id: string
+          profile_visible: boolean | null
+          show_access_history: boolean | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_alerts?: boolean | null
+          anonymous_research?: boolean | null
+          created_at?: string | null
+          id?: string
+          profile_visible?: boolean | null
+          show_access_history?: boolean | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_alerts?: boolean | null
+          anonymous_research?: boolean | null
+          created_at?: string | null
+          id?: string
+          profile_visible?: boolean | null
+          show_access_history?: boolean | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -1216,6 +1315,7 @@ export type Database = {
       }
     }
     Functions: {
+      cleanup_old_login_attempts: { Args: never; Returns: undefined }
       get_org_kpis: { Args: { target_org_id: string }; Returns: Json }
       get_pending_transactions: {
         Args: { _user_id: string }
