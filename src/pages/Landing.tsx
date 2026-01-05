@@ -284,23 +284,65 @@ export default function Landing() {
         </section>
       </main>
 
-      <footer className="bg-background border-t py-12">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <span className="procuredata-gradient">PROCUREDATA</span>
-            <span className="text-xs text-muted-foreground">© 2024</span>
+      <footer className="bg-slate-950 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            {/* Brand */}
+            <div className="col-span-2 md:col-span-1">
+              <div className="flex items-center gap-2 font-bold text-xl mb-4">
+                <span className="procuredata-gradient">PROCUREDATA</span>
+              </div>
+              <p className="text-sm text-gray-400 mb-4">
+                Plataforma de soberanía de datos industriales con tecnología Web3.
+              </p>
+              <Badge variant="outline" className="text-xs border-gray-700">v3.1 Web3 Enabled</Badge>
+            </div>
+
+            {/* Plataforma */}
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Plataforma</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><Link to="/catalog" className="hover:text-white transition-colors">Catálogo de Datos</Link></li>
+                <li><Link to="/innovation" className="hover:text-white transition-colors">Innovation Lab</Link></li>
+                <li><Link to="/sustainability" className="hover:text-white transition-colors">Hub Sostenibilidad</Link></li>
+                <li><Link to="/services" className="hover:text-white transition-colors">Servicios</Link></li>
+              </ul>
+            </div>
+
+            {/* Recursos */}
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Recursos</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">Documentación Técnica</Link></li>
+                <li><Link to="/architecture" className="hover:text-white transition-colors">Arquitectura</Link></li>
+                <li><Link to="/whitepaper" className="hover:text-white transition-colors flex items-center gap-1">
+                  <Sparkles className="h-3 w-3" /> Tech Whitepaper
+                </Link></li>
+                <li><Link to="/guide" className="hover:text-white transition-colors">Guía del Ecosistema</Link></li>
+              </ul>
+            </div>
+
+            {/* Acceso */}
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Acceso</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><Link to="/auth" className="hover:text-white transition-colors">Iniciar Sesión</Link></li>
+                <li><Link to="/auth" className="hover:text-white transition-colors">Registrarse</Link></li>
+                <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
+              </ul>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <Link to="/auth" className="hover:text-foreground">Acceso Demo</Link>
-            <Link to="/guide" className="hover:text-foreground">Guía del Ecosistema</Link>
-            <Link to="/docs/tecnico" className="hover:text-foreground">Documentación Técnica</Link>
-            <Link 
-              to="/whitepaper" 
-              className="hover:text-foreground flex items-center gap-1.5 text-primary font-medium"
-            >
-              <Sparkles className="h-4 w-4" />
-              Cómo funciona (Tech Whitepaper)
-            </Link>
+
+          {/* Bottom bar */}
+          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-500">
+              © 2026 PROCUREDATA. Todos los derechos reservados.
+            </p>
+            <div className="flex items-center gap-6 text-sm text-gray-500">
+              <span>Powered by Pontus-X & Gaia-X</span>
+              <span className="hidden md:inline">•</span>
+              <span className="hidden md:inline">IDSA Compliant</span>
+            </div>
           </div>
         </div>
       </footer>
