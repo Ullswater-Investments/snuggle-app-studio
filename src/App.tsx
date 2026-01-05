@@ -31,6 +31,7 @@ import Services from "./pages/Services";
 import Sustainability from "./pages/Sustainability";
 import InnovationLab from "./pages/InnovationLab";
 import Opportunities from "./pages/Opportunities";
+import InteractiveWhitepaper from "./pages/InteractiveWhitepaper";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/guide" element={<Guide />} />
             <Route path="/architecture" element={<Architecture />} />
+            <Route path="/whitepaper" element={<InteractiveWhitepaper />} />
               
               {/* Protected routes with AppLayout */}
               <Route element={

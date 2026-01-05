@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle } from "lucide-react";
+import { ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle, BookOpen, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -195,10 +195,17 @@ export default function Landing() {
             <span className="procuredata-gradient">PROCUREDATA</span>
             <span className="text-xs text-muted-foreground">© 2024</span>
           </div>
-          <div className="flex gap-6 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
             <Link to="/auth" className="hover:text-foreground">Acceso Demo</Link>
             <Link to="/guide" className="hover:text-foreground">Guía del Ecosistema</Link>
             <Link to="/architecture" className="hover:text-foreground">Documentación</Link>
+            <Link 
+              to="/whitepaper" 
+              className="hover:text-foreground flex items-center gap-1.5 text-primary font-medium"
+            >
+              <Sparkles className="h-4 w-4" />
+              Cómo funciona (Tech Whitepaper)
+            </Link>
           </div>
         </div>
       </footer>
