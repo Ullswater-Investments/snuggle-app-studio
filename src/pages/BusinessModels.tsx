@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
   Coins, Shield, FileCheck, Activity, Cpu, Network, 
-  ArrowLeft, ArrowRight, Calculator, Sparkles, TrendingUp, GitBranch, Lock
+  ArrowLeft, ArrowRight, Calculator, Sparkles, TrendingUp, GitBranch, Lock,
+  Check, X, Zap, Crown, Building2
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 const MODELS = [
@@ -89,10 +91,85 @@ const cardVariants = {
   },
 };
 
+const PRICING_TIERS = [
+  {
+    id: "free",
+    name: "Free",
+    price: 0,
+    icon: Zap,
+    color: "slate",
+    description: "Para proveedores que comienzan",
+    cta: "Empezar Gratis",
+    ctaVariant: "outline" as const,
+    features: [
+      { name: "Recepción de solicitudes", included: true },
+      { name: "Perfil DID básico", included: true },
+      { name: "Dashboard básico", included: true },
+      { name: "1 conector ERP", included: true },
+      { name: "Trazabilidad básica", included: true },
+      { name: "Creación contratos ODRL", included: false },
+      { name: "Dashboard analítica avanzada", included: false },
+      { name: "Kill-Switch revocación", included: false },
+      { name: "SLAs dedicados", included: false },
+    ],
+    users: "1 usuario",
+    support: "Comunidad",
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: 99,
+    annualPrice: 79,
+    icon: Crown,
+    color: "blue",
+    description: "Para providers en crecimiento",
+    cta: "Probar Pro 14 días",
+    ctaVariant: "default" as const,
+    featured: true,
+    features: [
+      { name: "Recepción de solicitudes", included: true },
+      { name: "Perfil DID verificado", included: true },
+      { name: "Dashboard completo", included: true },
+      { name: "5 conectores ERP", included: true },
+      { name: "Trazabilidad blockchain completa", included: true },
+      { name: "Creación contratos ODRL", included: true },
+      { name: "Dashboard analítica avanzada", included: true },
+      { name: "Kill-Switch limitado", included: true },
+      { name: "SLAs dedicados", included: false },
+    ],
+    users: "5 usuarios",
+    support: "Email 24h",
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    price: null,
+    icon: Building2,
+    color: "violet",
+    description: "Para data holders y corporaciones",
+    cta: "Contactar Ventas",
+    ctaVariant: "secondary" as const,
+    features: [
+      { name: "Recepción de solicitudes", included: true },
+      { name: "Perfil DID premium", included: true },
+      { name: "Dashboard white-label", included: true },
+      { name: "Conectores ERP ilimitados", included: true },
+      { name: "Trazabilidad + API dedicada", included: true },
+      { name: "Creación contratos ODRL", included: true },
+      { name: "Dashboard analítica avanzada", included: true },
+      { name: "Kill-Switch ilimitado", included: true },
+      { name: "SLAs dedicados", included: true },
+    ],
+    users: "Ilimitados",
+    support: "Dedicado 24/7",
+  },
+];
+
 export default function BusinessModels() {
   const [volume, setVolume] = useState([50000]);
   const [suppliers, setSuppliers] = useState([100]);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [isAnnual, setIsAnnual] = useState(false);
 
   // Cálculos gamificados
   const feeRevenue = volume[0] * 0.03; // 3% fee promedio
@@ -487,6 +564,163 @@ sequenceDiagram
               </CardContent>
             </Card>
           </div>
+        </motion.section>
+
+        {/* Pricing Table Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-20"
+        >
+          <div className="text-center mb-10">
+            <Badge variant="secondary" className="mb-4">
+              <Sparkles className="h-3 w-3 mr-1" />
+              Planes flexibles
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Soberanía de Datos para Cada Etapa
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+              Desde proveedores que comienzan hasta corporaciones globales. 
+              Paga solo por lo que necesitas.
+            </p>
+            
+            {/* Toggle Mensual/Anual */}
+            <div className="flex items-center justify-center gap-3">
+              <span className={`text-sm font-medium transition-colors ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+                Mensual
+              </span>
+              <Switch 
+                checked={isAnnual} 
+                onCheckedChange={setIsAnnual}
+              />
+              <span className={`text-sm font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+                Anual
+              </span>
+              {isAnnual && (
+                <Badge variant="default" className="bg-green-500 text-white">
+                  Ahorra 20%
+                </Badge>
+              )}
+            </div>
+          </div>
+          
+          <motion.div 
+            className="grid md:grid-cols-3 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {PRICING_TIERS.map((tier, index) => {
+              const Icon = tier.icon;
+              const displayPrice = tier.price === null 
+                ? null 
+                : isAnnual && tier.annualPrice 
+                  ? tier.annualPrice 
+                  : tier.price;
+              
+              return (
+                <motion.div
+                  key={tier.id}
+                  variants={cardVariants}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Card className={`relative h-full flex flex-col ${
+                    tier.featured 
+                      ? 'border-primary shadow-lg shadow-primary/20 ring-2 ring-primary/20' 
+                      : 'border-border hover:border-primary/50'
+                  }`}>
+                    {tier.featured && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <Badge className="bg-primary text-primary-foreground shadow-lg">
+                          <Crown className="h-3 w-3 mr-1" />
+                          Popular
+                        </Badge>
+                      </div>
+                    )}
+                    
+                    <CardHeader className="text-center pb-4">
+                      <div className={`mx-auto p-3 rounded-xl mb-3 ${
+                        tier.color === 'slate' ? 'bg-slate-500/10' :
+                        tier.color === 'blue' ? 'bg-blue-500/10' :
+                        'bg-violet-500/10'
+                      }`}>
+                        <Icon className={`h-6 w-6 ${
+                          tier.color === 'slate' ? 'text-slate-600' :
+                          tier.color === 'blue' ? 'text-blue-600' :
+                          'text-violet-600'
+                        }`} />
+                      </div>
+                      <CardTitle className="text-xl">{tier.name}</CardTitle>
+                      <p className="text-sm text-muted-foreground">{tier.description}</p>
+                      
+                      <div className="mt-4">
+                        {displayPrice !== null ? (
+                          <div className="flex items-baseline justify-center gap-1">
+                            <span className="text-4xl font-bold">€{displayPrice}</span>
+                            <span className="text-muted-foreground">/mes</span>
+                          </div>
+                        ) : (
+                          <div className="text-2xl font-bold text-muted-foreground">
+                            Personalizado
+                          </div>
+                        )}
+                        {isAnnual && tier.annualPrice && (
+                          <p className="text-xs text-green-600 mt-1">
+                            Ahorras €{(tier.price! - tier.annualPrice) * 12}/año
+                          </p>
+                        )}
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent className="flex-1 flex flex-col">
+                      <ul className="space-y-3 mb-6 flex-1">
+                        {tier.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm">
+                            {feature.included ? (
+                              <Check className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
+                            ) : (
+                              <X className="h-4 w-4 text-muted-foreground/50 mt-0.5 shrink-0" />
+                            )}
+                            <span className={feature.included ? '' : 'text-muted-foreground/50'}>
+                              {feature.name}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      
+                      <div className="space-y-3 pt-4 border-t">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Usuarios</span>
+                          <span className="font-medium">{tier.users}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Soporte</span>
+                          <span className="font-medium">{tier.support}</span>
+                        </div>
+                        
+                        <Button 
+                          variant={tier.ctaVariant} 
+                          className={`w-full mt-4 ${tier.featured ? 'shadow-lg' : ''}`}
+                        >
+                          {tier.cta}
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+          
+          <p className="text-center text-xs text-muted-foreground mt-6">
+            Todos los planes incluyen certificación Gaia-X y cumplimiento GDPR. 
+            Precios sin IVA.
+          </p>
         </motion.section>
 
         {/* Simulador ROI Gamificado */}
