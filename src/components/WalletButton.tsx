@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -19,55 +18,12 @@ import {
   CreditCard, 
   ChevronDown 
 } from 'lucide-react';
-import { pontusXService, PONTUSX_NETWORK_CONFIG } from '@/services/pontusX';
-import type { WalletState } from '@/types/web3.types';
+import { PONTUSX_NETWORK_CONFIG } from '@/services/pontusX';
+import { useWeb3Wallet } from '@/hooks/useWeb3Wallet';
 import { toast } from 'sonner';
 
-const initialWalletState: WalletState = {
-  address: null,
-  chainId: null,
-  balance: null,
-  euroeBalance: null,
-  did: null,
-  isConnected: false
-};
-
 export const WalletButton = () => {
-  const [loading, setLoading] = useState(false);
-  const [wallet, setWallet] = useState<WalletState>(initialWalletState);
-  const [hasWeb3, setHasWeb3] = useState(false);
-
-  useEffect(() => {
-    setHasWeb3(pontusXService.isWeb3Available());
-  }, []);
-
-  const handleConnect = async () => {
-    setLoading(true);
-    try {
-      const walletState = await pontusXService.connectWallet();
-      setWallet(walletState);
-      
-      toast.success("Conexión Exitosa", {
-        description: "Identidad verificada en la red Pontus-X."
-      });
-    } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "No se pudo conectar a la billetera.";
-      console.error(error);
-      toast.error("Error de Conexión", {
-        description: message
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDisconnect = () => {
-    pontusXService.disconnect();
-    setWallet(initialWalletState);
-    toast.info("Desconectado", {
-      description: "Has cerrado la sesión de tu wallet."
-    });
-  };
+  const { wallet, isConnecting, hasWeb3, connect, disconnect } = useWeb3Wallet();
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -103,11 +59,11 @@ export const WalletButton = () => {
       <Button 
         variant="outline" 
         size="sm" 
-        onClick={handleConnect}
-        disabled={loading}
+        onClick={connect}
+        disabled={isConnecting}
         className="gap-2"
       >
-        {loading ? (
+        {isConnecting ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
             Connecting...
@@ -198,7 +154,7 @@ export const WalletButton = () => {
         </DropdownMenuItem>
         
         <DropdownMenuItem 
-          onClick={handleDisconnect}
+          onClick={disconnect}
           className="text-destructive focus:text-destructive cursor-pointer"
         >
           <LogOut className="h-4 w-4 mr-2" />
