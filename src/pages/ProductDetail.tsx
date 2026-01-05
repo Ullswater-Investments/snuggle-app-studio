@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 import { 
   ArrowLeft, 
   ShieldCheck, 
@@ -12,7 +14,8 @@ import {
   Activity, 
   Lock,
   Globe,
-  Eye
+  Eye,
+  Wallet
 } from "lucide-react";
 
 // UI Components
@@ -48,6 +51,7 @@ interface MarketplaceListing {
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isWeb3Connected, connectWallet, user } = useAuth();
 
   // --- Fetch Data (Marketplace View) ---
   const { data: product, isLoading } = useQuery<MarketplaceListing>({
@@ -122,8 +126,41 @@ export default function ProductDetail() {
 
   const sampleData = (product as any).sample_data || MOCK_SAMPLE;
 
-  const handleAction = () => {
-    // Redirigir al wizard con el asset preseleccionado
+  const handleAction = async () => {
+    // Check if user is authenticated
+    if (!user) {
+      toast.error("Inicia sesión para continuar", {
+        description: "Necesitas una cuenta para adquirir datasets",
+        action: {
+          label: "Ir a Login",
+          onClick: () => navigate("/auth")
+        }
+      });
+      return;
+    }
+
+    // For paid products, verify wallet is connected
+    if (isPaid && !isWeb3Connected) {
+      toast.error("Conecta tu wallet para comprar", {
+        description: "Los productos de pago requieren una wallet Web3 para completar la transacción con EUROe",
+        action: {
+          label: "Conectar Wallet",
+          onClick: async () => {
+            try {
+              await connectWallet();
+              toast.success("Wallet conectada", {
+                description: "Ahora puedes continuar con la compra"
+              });
+            } catch (error) {
+              toast.error("Error al conectar wallet");
+            }
+          }
+        }
+      });
+      return;
+    }
+
+    // Proceed to request wizard with preselected asset
     navigate("/requests/new", { state: { preselectedAssetId: product.asset_id } });
   };
 
@@ -136,7 +173,7 @@ export default function ProductDetail() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* --- COLUMNA IZQUIERDA: CONTENIDO --- */}
+        {/* --- LEFT COLUMN: CONTENT --- */}
         <div className="lg:col-span-2 space-y-6">
           
           {/* Header */}
@@ -186,7 +223,7 @@ export default function ProductDetail() {
             </CardContent>
           </Card>
 
-          {/* Tabs de Información */}
+          {/* Info Tabs */}
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="overview">Descripción</TabsTrigger>
@@ -301,7 +338,7 @@ export default function ProductDetail() {
           </Tabs>
         </div>
 
-        {/* --- COLUMNA DERECHA: BUY BOX (STICKY) --- */}
+        {/* --- RIGHT COLUMN: BUY BOX (STICKY) --- */}
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-4">
             <Card className="border-t-4 border-t-primary shadow-lg">
@@ -341,6 +378,23 @@ export default function ProductDetail() {
                 </div>
                 
                 <Separator />
+
+                {/* Wallet Status Indicator for paid products */}
+                {isPaid && (
+                  <div className={`p-3 rounded text-xs flex items-center gap-2 ${
+                    isWeb3Connected 
+                      ? "bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-900"
+                      : "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900"
+                  }`}>
+                    <Wallet className="h-4 w-4 shrink-0" />
+                    <span>
+                      {isWeb3Connected 
+                        ? "Wallet conectada - Listo para pagar con EUROe"
+                        : "Conecta tu wallet para pagar con EUROe"
+                      }
+                    </span>
+                  </div>
+                )}
                 
                 <div className="bg-muted/50 p-3 rounded text-xs text-muted-foreground flex gap-2">
                   <Lock className="h-4 w-4 shrink-0" />
