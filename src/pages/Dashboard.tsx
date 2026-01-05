@@ -2,6 +2,7 @@ import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ActivityFeed } from "@/components/ActivityFeed";
 import { DashboardStats } from "@/components/DashboardStats";
+import { Web3StatusWidget } from "@/components/Web3StatusWidget";
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
 import { DollarSign, ShoppingCart, Package, TrendingUp, ArrowUpRight, CreditCard } from "lucide-react";
@@ -111,6 +112,9 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Web3 Wallet Status */}
+          <Web3StatusWidget />
 
           <Card>
             <CardHeader className="pb-2">
