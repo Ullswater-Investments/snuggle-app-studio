@@ -2001,6 +2001,112 @@ procuredata/
 
 ---
 
+## 11. Catálogo de Casos de Uso Detallado
+
+Esta sección documenta los 10 casos de uso industriales principales que demuestran el valor práctico de PROCUREDATA en la cadena de suministro.
+
+### 11.1 Onboarding KYB (Know Your Business)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Proveedor Nuevo |
+| **El Problema** | Las empresas pierden meses verificando la identidad de nuevos proveedores mediante procesos manuales, con riesgo de fraude por suplantación de identidad corporativa. |
+| **La Solución PROCUREDATA** | El proveedor conecta su wallet MetaMask, genera automáticamente un DID (`did:ethr:0x7ecc:...`) y la plataforma valida su credencial corporativa contra el registro de Pontus-X. |
+| **Flujo Técnico** | `Wallet Connect → DID Generation → Pontus-X Registry Lookup → Credential Verification → Profile Created` |
+| **Valor** | Elimina el fraude de suplantación de identidad, reduce el onboarding de semanas a minutos. |
+
+### 11.2 Intercambio de Huella de Carbono (Scope 3)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Manufacturera (Consumer) y Proveedores (Providers) |
+| **El Problema** | Las empresas no pueden cumplir con reportes CSRD/ESG porque dependen de datos de emisiones de sus proveedores que son difíciles de verificar, abriendo la puerta al "Greenwashing". |
+| **La Solución PROCUREDATA** | La manufacturera solicita datos de emisiones. Los proveedores suben su reporte ESG, se genera un hash en blockchain y se comparte el acceso con políticas ODRL. |
+| **Flujo Técnico** | `Consumer Request → Subject Approval → ESG Data Upload → Hash Notarization on Pontus-X → Controlled Data Access` |
+| **Valor** | Auditoría inmutable para reportes CSRD/ESG, eliminando el Greenwashing. |
+
+### 11.3 Compraventa de Datos con EUROe (Marketplace)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Data Broker |
+| **El Problema** | Los pagos transfronterizos por datos tienen fricción bancaria, tiempos de liquidación de días, y altas comisiones. |
+| **La Solución PROCUREDATA** | El broker publica un dataset de "Tendencias de Mercado" en el catálogo. Un comprador paga con stablecoin EUROe. El Smart Contract libera el acceso automáticamente al confirmar el pago. |
+| **Flujo Técnico** | `Asset Published → EUROe Payment → Smart Contract Verification → Access Token Release → Data Download` |
+| **Valor** | Liquidación instantánea, sin fricción bancaria internacional, comisiones mínimas. |
+
+### 11.4 Revocación de Emergencia (Kill-Switch)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Director de Seguridad |
+| **El Problema** | Cuando se detecta una brecha en un socio comercial, los datos ya compartidos siguen siendo accesibles durante días mientras se tramita la revocación manual. |
+| **La Solución PROCUREDATA** | El Director usa el componente `RevokeAccessButton` para ejecutar una revocación instantánea. El contrato inteligente bloquea la desencriptación de los datos en tiempo real. |
+| **Flujo Técnico** | `Breach Detection → RevokeAccessButton Click → Smart Contract Kill-Switch → Access Token Invalidation → Audit Log Entry` |
+| **Valor** | Soberanía real sobre los datos, mitigación de daños inmediata ante brechas de seguridad. |
+
+### 11.5 Pasaporte Digital de Producto (DPP)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Marca de Ropa |
+| **El Problema** | La normativa UE exige trazabilidad completa de productos, pero agregar datos de múltiples proveedores (tela, tinte, confección) es complejo y propenso a errores. |
+| **La Solución PROCUREDATA** | La marca crea un activo digital agregando datos de 5 proveedores en un solo "Pasaporte Digital". Cada contribución queda registrada con su DID y timestamp. |
+| **Flujo Técnico** | `Create DPP Asset → Invite Suppliers → Each Supplier Signs Data → Aggregate to Single Asset → Publish DPP → Consumer QR Scan` |
+| **Valor** | Cumplimiento con normativa UE, transparencia total para el consumidor final. |
+
+### 11.6 Entrenamiento de IA Privado (Compute-to-Data)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Startup de IA y Hospital/Farmacéutica |
+| **El Problema** | Los hospitales no pueden monetizar sus datos porque compartir datos de pacientes viola GDPR y regulaciones de privacidad médica. |
+| **La Solución PROCUREDATA** | La IA "viaja" a los datos del hospital mediante Compute-to-Data. El modelo se entrena en un sandbox aislado sin que los datos salgan nunca de la infraestructura del hospital. |
+| **Flujo Técnico** | `AI Model Upload → Sandbox Provisioning → Secure Execution Environment → Training on Local Data → Model Results Export (no raw data)` |
+| **Valor** | Monetización de datos sensibles sin perder privacidad, cumplimiento GDPR. |
+
+### 11.7 Gestión de Recalls (Retirada de Productos)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Fabricante de Automóviles |
+| **El Problema** | Identificar qué lotes de piezas defectuosas se instalaron en qué vehículos puede tomar semanas con sistemas tradicionales, poniendo vidas en riesgo. |
+| **La Solución PROCUREDATA** | El fabricante usa el componente `DataLineage` para rastrear en segundos la procedencia del lote defectuoso y en qué coches se instaló cada pieza. |
+| **Flujo Técnico** | `Defect Detection → DataLineage Query → Blockchain Trace → Supplier Lot Identification → Affected Vehicle List → Recall Initiation` |
+| **Valor** | Respuesta rápida ante crisis de calidad, salvando vidas y reduciendo costos de recall. |
+
+### 11.8 Financiación de Cadena de Suministro (DeFi)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Pequeño Agricultor |
+| **El Problema** | Los pequeños productores no pueden acceder a crédito porque los bancos solo evalúan balances financieros, no el historial de cumplimiento de entregas. |
+| **La Solución PROCUREDATA** | El agricultor comparte su historial de entregas exitosas (verificado en Blockchain) con un banco o protocolo DeFi para obtener un crédito con mejor tasa basado en su reputación verificable. |
+| **Flujo Técnico** | `Request Credit → Share Verifiable Delivery History → Bank/DeFi Protocol Verification → Reputation Score Calculation → Credit Approval with Better Rate` |
+| **Valor** | Acceso a capital basado en reputación verificable, no solo en balance financiero. |
+
+### 11.9 Auditoría de Cadena de Frío (IoT)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Logística de Alimentos |
+| **El Problema** | Las disputas sobre quién rompió la cadena de frío en un envío de alimentos son imposibles de resolver sin registros inmutables. |
+| **La Solución PROCUREDATA** | Sensores IoT suben lecturas de temperatura cada hora a través de Edge Functions. Si se rompe la cadena de frío, el evento queda registrado inmutablemente con timestamp y ubicación GPS. |
+| **Flujo Técnico** | `IoT Sensor Reading → Edge Function Processing → Threshold Check → Blockchain Notarization → Alert if Breach → Immutable Audit Trail` |
+| **Valor** | Resolución indiscutible de disputas sobre responsabilidad en la cadena de frío. |
+
+### 11.10 Negociación Dinámica de Licencias (ODRL)
+
+| Aspecto | Detalle |
+|---------|---------|
+| **Actor** | Centro de Investigación |
+| **El Problema** | Las licencias de datos tradicionales son "todo o nada" - no permiten restricciones temporales, geográficas o de uso específico sin contratos complejos. |
+| **La Solución PROCUREDATA** | El investigador usa el componente `NegotiationChat` para negociar un contrato específico: "Acceso solo por 30 días, solo para uso académico, solo en UE". La política ODRL se genera automáticamente. |
+| **Flujo Técnico** | `Open NegotiationChat → Define Constraints → ODRL Policy Generation → Counter-offer Loop → Agreement → Smart Contract Deployment → Time-Limited Access` |
+| **Valor** | Flexibilidad contractual automatizada que va más allá del modelo "comprar para siempre". |
+
+---
+
 ## 17. Historial de Versiones
 
 | Versión | Fecha | Cambios Principales |

@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import SuccessStoriesSection from "@/components/SuccessStoriesSection";
+import UseCasesCarousel from "@/components/UseCasesCarousel";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -86,7 +87,7 @@ export default function Landing() {
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <a href="#features" className="hover:text-primary">Funcionalidades</a>
             <Link to="/models" className="hover:text-primary">Modelos de Negocio</Link>
-            <a href="#cases" className="hover:text-primary">Casos de Uso</a>
+            <a href="#use-cases" className="hover:text-primary">Casos de Uso</a>
             <Link to="/architecture" className="hover:text-primary">Arquitectura Técnica</Link>
             <Link 
               to="/whitepaper" 
@@ -248,6 +249,25 @@ export default function Landing() {
                 Ver Documento Técnico Completo <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* CASOS DE USO INDUSTRIALES */}
+        <section id="use-cases" className="py-24 bg-slate-50 dark:bg-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                Versatilidad Industrial
+              </Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Soluciones Reales para la Cadena de Suministro
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Desde la verificación de identidad hasta la financiación DeFi. 
+                Descubre cómo PROCUREDATA transforma cada eslabón.
+              </p>
+            </div>
+            <UseCasesCarousel />
           </div>
         </section>
       </main>
