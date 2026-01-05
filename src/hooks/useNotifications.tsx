@@ -17,7 +17,6 @@ export const useNotifications = () => {
         return { success: false, error };
       }
 
-      console.log("Notification sent:", data);
       return { success: true, data };
     } catch (error) {
       console.error("Failed to send notification:", error);

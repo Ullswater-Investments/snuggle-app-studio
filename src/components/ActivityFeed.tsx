@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +18,7 @@ const ACTION_LABELS: Record<string, { label: string; icon: any; color: string }>
 
 export const ActivityFeed = () => {
   const { activeOrg, isDemo } = useOrganizationContext();
+  const queryClient = useQueryClient();
 
   const { data: activities, isLoading } = useQuery({
     queryKey: ["activity-feed", activeOrg?.id, isDemo],
@@ -63,6 +65,32 @@ export const ActivityFeed = () => {
     },
     enabled: !!activeOrg,
   });
+
+  // Realtime subscription for new activities
+  useEffect(() => {
+    if (!activeOrg) return;
+
+    const channel = supabase
+      .channel('activity-feed-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'approval_history'
+        },
+        () => {
+          queryClient.invalidateQueries({ 
+            queryKey: ["activity-feed", activeOrg.id, isDemo] 
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [activeOrg, isDemo, queryClient]);
 
   if (isLoading) {
     return (

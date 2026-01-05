@@ -46,7 +46,6 @@ export function NotificationsBell() {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'notifications', filter: `user_id=eq.${user.id}` },
         (payload) => {
-          console.log('Nueva notificación:', payload);
           const newNotification = payload.new as Notification;
           toast(newNotification.title, { description: newNotification.message || undefined });
           queryClient.invalidateQueries({ queryKey: ["notifications"] });

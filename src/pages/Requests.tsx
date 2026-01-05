@@ -15,7 +15,7 @@ import { NegotiationChat } from "@/components/NegotiationChat";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar } from "lucide-react";
+import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { FadeIn } from "@/components/AnimatedSection";
@@ -45,6 +45,7 @@ const Requests = () => {
   const [priorityFilter, setPriorityFilter] = useState<string>("all");
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
   const [viewMode, setViewMode] = useState<"list" | "kanban">("list");
+  const [processingId, setProcessingId] = useState<string | null>(null);
 
   // Obtener organización del usuario
   const { data: userProfile } = useQuery({
@@ -146,20 +147,24 @@ const Requests = () => {
       }
     },
     onSuccess: () => {
+      setProcessingId(null);
       toast.success("Acción realizada exitosamente");
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (error: any) => {
+      setProcessingId(null);
       toast.error(error.message || "Error al realizar la acción");
     },
   });
 
   const handleApprove = (transactionId: string, isSubject: boolean) => {
+    setProcessingId(transactionId);
     const action = isSubject ? "pre_approve" : "approve";
     approveMutation.mutate({ transactionId, action });
   };
 
   const handleDeny = (transactionId: string) => {
+    setProcessingId(transactionId);
     approveMutation.mutate({ transactionId, action: "deny", notes: "Solicitud denegada" });
   };
 
@@ -510,17 +515,25 @@ const Requests = () => {
                       <div className="flex gap-2">
                         <Button
                           onClick={() => handleApprove(transaction.id, isSubject)}
-                          disabled={approveMutation.isPending}
+                          disabled={processingId !== null}
                         >
-                          <CheckCircle className="mr-2 h-4 w-4" />
+                          {processingId === transaction.id ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          ) : (
+                            <CheckCircle className="mr-2 h-4 w-4" />
+                          )}
                           {isSubject ? "Pre-aprobar" : "Aprobar y Compartir"}
                         </Button>
                         <Button
                           variant="destructive"
                           onClick={() => handleDeny(transaction.id)}
-                          disabled={approveMutation.isPending}
+                          disabled={processingId !== null}
                         >
-                          <XCircle className="mr-2 h-4 w-4" />
+                          {processingId === transaction.id ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          ) : (
+                            <XCircle className="mr-2 h-4 w-4" />
+                          )}
                           Denegar
                         </Button>
                         <Sheet>

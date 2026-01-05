@@ -36,11 +36,11 @@
 
 ### Botones sin Confirmación o Loading
 
-- [ ] **src/pages/Requests.tsx (líneas 157-163)**: Los handlers `handleApprove` y `handleDeny` ejecutan mutaciones sin estado de loading visual en los botones específicos.  
-  **Pendiente**: Añadir `isPending` por transacción o usar estado local.
+- [x] **src/pages/Requests.tsx (líneas 157-163)**: ~~Los handlers `handleApprove` y `handleDeny` ejecutan mutaciones sin estado de loading visual en los botones específicos.~~  
+  ✅ **COMPLETADO (Bloque UX)**: Añadido estado `processingId` para rastrear qué transacción se está procesando. Spinner `Loader2` individual por botón. Limpieza de estado en onSuccess/onError.
 
-- [ ] **src/pages/Opportunities.tsx (línea 301)**: El botón "Proponer mis Datos" ejecuta `handleProposal` que solo muestra un toast sin ninguna acción real.  
-  **Pendiente**: Implementar AlertDialog de confirmación y lógica real de envío.
+- [x] **src/pages/Opportunities.tsx (línea 301)**: ~~El botón "Proponer mis Datos" ejecuta `handleProposal` que solo muestra un toast sin ninguna acción real.~~  
+  ✅ **COMPLETADO (Bloque UX)**: Envuelto en AlertDialog con confirmación explícita. Mensaje claro sobre implicaciones de compartir datos según contrato inteligente.
 
 - [ ] **src/components/TeamManagement.tsx**: Revisar si las acciones de "Revocar" y "Cambiar Rol" tienen confirmación.  
   **Pendiente**: Los botones críticos de gestión de equipo deben tener doble confirmación.
@@ -67,9 +67,11 @@
 
 ### Console.logs en Producción
 
-- [ ] **src/hooks/useNotifications.tsx (línea 20)**: `console.log("Notification sent:", data);` - Eliminar o reemplazar por logging estructurado.
+- [x] **src/hooks/useNotifications.tsx (línea 20)**: ~~`console.log("Notification sent:", data);`~~  
+  ✅ **COMPLETADO (Bloque Cleanup)**: Eliminado console.log de producción.
 
-- [ ] **src/components/NotificationsBell.tsx (línea 49)**: `console.log('Nueva notificación:', payload);` - Eliminar en producción.
+- [x] **src/components/NotificationsBell.tsx (línea 49)**: ~~`console.log('Nueva notificación:', payload);`~~  
+  ✅ **COMPLETADO (Bloque Cleanup)**: Eliminado console.log de producción.
 
 - [ ] **src/components/CodeIntegrationModal.tsx (línea 42)**: Código de ejemplo incluye `console.log(data);` - Mantener solo en ejemplos de documentación.
 
@@ -88,8 +90,8 @@
 
 - [ ] **src/pages/InnovationLab.tsx**: Usa `setInterval` para simular carga de AI. Aceptable para simulación UI pero documentar que no es polling de datos.
 
-- [ ] **src/components/ActivityFeed.tsx**: Usa React Query pero NO tiene suscripción Realtime.  
-  **Pendiente**: Añadir suscripción Supabase Realtime como en NotificationsBell.
+- [x] **src/components/ActivityFeed.tsx**: ~~Usa React Query pero NO tiene suscripción Realtime.~~  
+  ✅ **COMPLETADO (Bloque Realtime)**: Añadida suscripción Supabase Realtime a tabla `approval_history`. Invalidación automática de query con `queryClient.invalidateQueries` en INSERT.
 
 ### Estilos y Consistencia
 
@@ -122,9 +124,15 @@
          ↓
 ✅ 7. ProductDetail Wallet Check (Lote 4)
          ↓
-⏳ 8. Remaining High Priority Items
+✅ 8. Requests.tsx Loading States (Bloque UX)
          ↓
-⏳ 9. Console.log Cleanup & Improvements
+✅ 9. Opportunities.tsx AlertDialog (Bloque UX)
+         ↓
+✅ 10. Console.log Cleanup (Bloque Cleanup)
+         ↓
+✅ 11. ActivityFeed Realtime (Bloque Realtime)
+         ↓
+⏳ 12. Remaining Items (TeamManagement, Dashboard Web3 widget)
 ```
 
 ---
@@ -134,9 +142,9 @@
 | Categoría | Total | Completados | Pendientes |
 |-----------|-------|-------------|------------|
 | 🔴 Crítico | 6 | **6** | 0 |
-| 🟡 Alto | 6 | **1** | 5 |
-| 🔵 Mejoras | 10 | **1** | 9 |
-| **Total** | **22** | **8** | **14** |
+| 🟡 Alto | 6 | **3** | 3 |
+| 🔵 Mejoras | 10 | **4** | 6 |
+| **Total** | **22** | **13** | **9** |
 
 ---
 
@@ -157,6 +165,17 @@
 - `src/components/PaymentGateway.tsx` - Integración pontusXService + wallet real
 - `src/pages/ProductDetail.tsx` - Verificación de wallet antes de compra
 
+### Bloque UX: Feedback y Seguridad
+- `src/pages/Requests.tsx` - Loading state individual por transacción con Loader2
+- `src/pages/Opportunities.tsx` - AlertDialog de confirmación antes de proponer
+
+### Bloque Cleanup: Producción
+- `src/hooks/useNotifications.tsx` - Eliminado console.log
+- `src/components/NotificationsBell.tsx` - Eliminado console.log
+
+### Bloque Realtime: Capacidades Web3
+- `src/components/ActivityFeed.tsx` - Suscripción Supabase Realtime a approval_history
+
 ---
 
-*Última actualización: 2026-01-05 - Post Lote 4*
+*Última actualización: 2026-01-05 - Post Bloque UX + Cleanup + Realtime*
