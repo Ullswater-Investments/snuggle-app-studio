@@ -8,13 +8,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { Plus, Leaf, TrendingUp, History } from "lucide-react";
+import { Plus, Leaf, TrendingUp, History, Factory, Truck, Award, Zap } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 // --- Schema de Validación (Zod) ---
 const esgFormSchema = z.object({
@@ -26,12 +28,15 @@ const esgFormSchema = z.object({
 
 type ESGFormValues = z.infer<typeof esgFormSchema>;
 
+// Factor de ponderación para Scope 3
+const SCOPE3_WEIGHT_FACTOR = 0.1;
+
 export default function Sustainability() {
   const { activeOrg } = useOrganizationContext();
   const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // --- 1. Fetch de Datos ---
+  // --- 1. Fetch de Datos Propios ---
   const { data: reports, isLoading } = useQuery({
     queryKey: ["esg-reports", activeOrg?.id],
     queryFn: async () => {
@@ -40,7 +45,7 @@ export default function Sustainability() {
         .from("esg_reports")
         .select("*")
         .eq("organization_id", activeOrg.id)
-        .order("report_year", { ascending: false }); // El más reciente primero
+        .order("report_year", { ascending: false });
 
       if (error) throw error;
       return data || [];
@@ -48,7 +53,66 @@ export default function Sustainability() {
     enabled: !!activeOrg,
   });
 
-  // --- 2. Mutación (Crear Reporte) ---
+  // --- 2. Fetch de Scope 3 (Cadena de Suministro) ---
+  const { data: scope3Data, isLoading: loadingScope3 } = useQuery({
+    queryKey: ["scope3-emissions", activeOrg?.id],
+    queryFn: async () => {
+      if (!activeOrg) return null;
+
+      // 1. Obtener transacciones completadas donde somos consumers
+      const { data: transactions, error: txError } = await supabase
+        .from("data_transactions")
+        .select("subject_org_id")
+        .eq("consumer_org_id", activeOrg.id)
+        .eq("status", "completed");
+
+      if (txError) throw txError;
+      if (!transactions || transactions.length === 0) {
+        return { totalScope3: 0, supplierCount: 0, supplierReports: [] };
+      }
+
+      // 2. Obtener IDs únicos de proveedores
+      const supplierIds = [...new Set(transactions.map(t => t.subject_org_id))];
+
+      // 3. Consultar ESG reports de esos proveedores
+      const { data: supplierReports, error: esgError } = await supabase
+        .from("esg_reports")
+        .select(`
+          *,
+          organization:organizations(name)
+        `)
+        .in("organization_id", supplierIds)
+        .order("report_year", { ascending: false });
+
+      if (esgError) throw esgError;
+
+      // 4. Tomar solo el reporte más reciente por proveedor
+      const latestBySupplier = supplierReports?.reduce((acc, report) => {
+        if (!acc[report.organization_id] || acc[report.organization_id].report_year < report.report_year) {
+          acc[report.organization_id] = report;
+        }
+        return acc;
+      }, {} as Record<string, any>) || {};
+
+      const latestReports = Object.values(latestBySupplier);
+
+      // 5. Calcular Scope 3 (emisiones de proveedores * factor)
+      const supplierEmissions = latestReports.reduce((sum, report: any) => {
+        return sum + (Number(report.scope1_total_tons) + Number(report.scope2_total_tons));
+      }, 0);
+
+      const totalScope3 = supplierEmissions * SCOPE3_WEIGHT_FACTOR;
+
+      return {
+        totalScope3,
+        supplierCount: latestReports.length,
+        supplierReports: latestReports,
+      };
+    },
+    enabled: !!activeOrg,
+  });
+
+  // --- 3. Mutación (Crear Reporte) ---
   const createReportMutation = useMutation({
     mutationFn: async (values: ESGFormValues) => {
       if (!activeOrg) throw new Error("No hay organización activa");
@@ -59,7 +123,7 @@ export default function Sustainability() {
         scope1_total_tons: values.scope1_total_tons,
         scope2_total_tons: values.scope2_total_tons,
         energy_renewable_percent: values.energy_renewable_percent,
-        certifications: ["Auto-Declarado"], // Default para este ejemplo
+        certifications: ["Auto-Declarado"],
       });
 
       if (error) throw error;
@@ -71,7 +135,6 @@ export default function Sustainability() {
       form.reset();
     },
     onError: (error: any) => {
-      // Manejo simple de error de duplicados
       if (error.code === '23505') {
         toast.error(`Ya existe un reporte para el año seleccionado.`);
       } else {
@@ -80,7 +143,7 @@ export default function Sustainability() {
     },
   });
 
-  // --- 3. Configuración del Formulario ---
+  // --- 4. Configuración del Formulario ---
   const form = useForm<ESGFormValues>({
     resolver: zodResolver(esgFormSchema),
     defaultValues: {
@@ -95,21 +158,33 @@ export default function Sustainability() {
     createReportMutation.mutate(values);
   };
 
-  // --- 4. Preparación de Datos para Gráfico ---
-  // Recharts necesita los datos ordenados cronológicamente (ascendente)
+  // --- 5. Preparación de Datos para Gráfico ---
   const chartData = reports 
     ? [...reports].sort((a, b) => a.report_year - b.report_year).map(r => ({
         year: r.report_year,
-        total: Number(r.scope1_total_tons) + Number(r.scope2_total_tons),
+        scope1: Number(r.scope1_total_tons),
+        scope2: Number(r.scope2_total_tons),
+        scope3: scope3Data?.totalScope3 || 0,
+        total: Number(r.scope1_total_tons) + Number(r.scope2_total_tons) + (scope3Data?.totalScope3 || 0),
         renewable: Number(r.energy_renewable_percent)
       }))
     : [];
 
   const latestReport = reports && reports.length > 0 ? reports[0] : null;
+  const totalEmissions = latestReport 
+    ? Number(latestReport.scope1_total_tons) + Number(latestReport.scope2_total_tons) + (scope3Data?.totalScope3 || 0)
+    : 0;
 
   // --- Renderizado ---
   if (isLoading) {
-    return <div className="p-8 text-center text-muted-foreground">Cargando datos de sostenibilidad...</div>;
+    return (
+      <div className="container py-8 space-y-8">
+        <Skeleton className="h-20 w-full" />
+        <div className="grid gap-4 md:grid-cols-4">
+          {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-32" />)}
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -211,36 +286,203 @@ export default function Sustainability() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Visión General</TabsTrigger>
+            <TabsTrigger value="scope3">Scope 3 (Cadena)</TabsTrigger>
             <TabsTrigger value="trends">Tendencias</TabsTrigger>
             <TabsTrigger value="history">Historial</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-4">
-            {/* Adaptador para usar el componente existente ESGDataView */}
+            {/* KPIs con Scope 3 */}
+            <div className="grid gap-4 md:grid-cols-4">
+              {/* Scope 1 */}
+              <Card className="border-green-200 dark:border-green-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <Leaf className="h-4 w-4 text-green-600" />
+                    Alcance 1 (Directas)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-green-600">
+                    {latestReport?.scope1_total_tons?.toLocaleString() || "0"} t
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">CO₂e - Combustibles propios</p>
+                </CardContent>
+              </Card>
+
+              {/* Scope 2 */}
+              <Card className="border-blue-200 dark:border-blue-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4 text-blue-600" />
+                    Alcance 2 (Indirectas)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-blue-600">
+                    {latestReport?.scope2_total_tons?.toLocaleString() || "0"} t
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">CO₂e - Electricidad comprada</p>
+                </CardContent>
+              </Card>
+
+              {/* Scope 3 - NUEVO */}
+              <Card className="border-purple-200 dark:border-purple-800">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <Truck className="h-4 w-4 text-purple-600" />
+                    Alcance 3 (Cadena)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {loadingScope3 ? (
+                    <Skeleton className="h-8 w-20" />
+                  ) : (
+                    <div className="text-2xl font-bold text-purple-600">
+                      {(scope3Data?.totalScope3 || 0).toFixed(1)} t
+                    </div>
+                  )}
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {scope3Data?.supplierCount || 0} proveedores
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Total */}
+              <Card className="border-primary bg-primary/5">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <Factory className="h-4 w-4" />
+                    Total Emisiones
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">
+                    {totalEmissions.toFixed(1)} t
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">CO₂e total {latestReport?.report_year}</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* ESG Data View existente */}
             {latestReport && (
-              <div className="space-y-6">
-                <Card className="border-l-4 border-l-green-600">
-                  <CardHeader>
-                    <CardTitle>Reporte Actual ({latestReport.report_year})</CardTitle>
-                    <CardDescription>Resumen ejecutivo de impacto ambiental</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ESGDataView 
-                      data={{
-                        report_year: latestReport.report_year,
-                        scope1_total_tons: Number(latestReport.scope1_total_tons),
-                        scope2_total_tons: Number(latestReport.scope2_total_tons),
-                        energy_mix: {
-                          renewable: Number(latestReport.energy_renewable_percent),
-                          fossil: 100 - Number(latestReport.energy_renewable_percent)
-                        },
-                        certifications: latestReport.certifications as string[] || [],
-                      }} 
-                    />
-                  </CardContent>
-                </Card>
-              </div>
+              <Card className="border-l-4 border-l-green-600">
+                <CardHeader>
+                  <CardTitle>Reporte Actual ({latestReport.report_year})</CardTitle>
+                  <CardDescription>Resumen ejecutivo de impacto ambiental</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ESGDataView 
+                    data={{
+                      report_year: latestReport.report_year,
+                      scope1_total_tons: Number(latestReport.scope1_total_tons),
+                      scope2_total_tons: Number(latestReport.scope2_total_tons),
+                      scope3_total_tons: scope3Data?.totalScope3,
+                      energy_mix: {
+                        renewable: Number(latestReport.energy_renewable_percent),
+                        fossil: 100 - Number(latestReport.energy_renewable_percent)
+                      },
+                      certifications: latestReport.certifications as string[] || [],
+                    }} 
+                  />
+                </CardContent>
+              </Card>
             )}
+          </TabsContent>
+
+          {/* NUEVO TAB: Scope 3 */}
+          <TabsContent value="scope3" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Truck className="h-5 w-5 text-purple-600" />
+                  Emisiones Scope 3 - Cadena de Suministro
+                </CardTitle>
+                <CardDescription>
+                  Emisiones indirectas de tus proveedores de datos
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {loadingScope3 ? (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map(i => <Skeleton key={i} className="h-16 w-full" />)}
+                  </div>
+                ) : scope3Data && scope3Data.supplierReports.length > 0 ? (
+                  <div className="space-y-4">
+                    <div className="p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                      <p className="text-sm text-muted-foreground mb-2">
+                        Metodología: Se aplica un factor de {(SCOPE3_WEIGHT_FACTOR * 100).toFixed(0)}% sobre las emisiones 
+                        totales (Scope 1+2) de tus proveedores, ponderado por transacciones completadas.
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <div>
+                          <p className="text-2xl font-bold text-purple-600">
+                            {scope3Data.totalScope3.toFixed(2)} tCO₂e
+                          </p>
+                          <p className="text-xs text-muted-foreground">Scope 3 estimado</p>
+                        </div>
+                        <div className="h-12 w-px bg-border" />
+                        <div>
+                          <p className="text-2xl font-bold">{scope3Data.supplierCount}</p>
+                          <p className="text-xs text-muted-foreground">Proveedores analizados</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <h4 className="font-semibold mt-6">Desglose por Proveedor</h4>
+                    <div className="space-y-3">
+                      {scope3Data.supplierReports.map((report: any) => (
+                        <div 
+                          key={report.id} 
+                          className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-muted rounded-lg">
+                              <Factory className="h-4 w-4" />
+                            </div>
+                            <div>
+                              <p className="font-medium">{report.organization?.name || "Proveedor"}</p>
+                              <p className="text-xs text-muted-foreground">
+                                Reporte {report.report_year}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <p className="font-semibold">
+                              {(Number(report.scope1_total_tons) + Number(report.scope2_total_tons)).toFixed(1)} t
+                            </p>
+                            <div className="flex gap-1 mt-1">
+                              {Number(report.energy_renewable_percent) > 80 && (
+                                <Badge className="bg-green-100 text-green-700 text-xs gap-1">
+                                  <Zap className="h-3 w-3" />
+                                  Renovable
+                                </Badge>
+                              )}
+                              {report.certifications?.includes("ISO 14001") && (
+                                <Badge className="bg-blue-100 text-blue-700 text-xs gap-1">
+                                  <Award className="h-3 w-3" />
+                                  ISO
+                                </Badge>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <Truck className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <h3 className="text-lg font-semibold mb-2">Sin datos de proveedores</h3>
+                    <p className="text-muted-foreground max-w-md mx-auto">
+                      Completa transacciones con proveedores que tengan reportes ESG 
+                      para calcular tu Scope 3.
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="trends">
@@ -249,15 +491,23 @@ export default function Sustainability() {
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5" /> Evolución de Emisiones
                 </CardTitle>
-                <CardDescription>Histórico de toneladas CO2 equivalente</CardDescription>
+                <CardDescription>Histórico de toneladas CO2 equivalente por alcance</CardDescription>
               </CardHeader>
               <CardContent className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={chartData}>
                     <defs>
-                      <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                      <linearGradient id="colorScope1" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="5%" stopColor="#16a34a" stopOpacity={0.8}/>
                         <stop offset="95%" stopColor="#16a34a" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorScope2" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
+                      </linearGradient>
+                      <linearGradient id="colorScope3" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#9333ea" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#9333ea" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -267,13 +517,33 @@ export default function Sustainability() {
                       contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))' }}
                       itemStyle={{ color: 'hsl(var(--foreground))' }}
                     />
+                    <Legend />
                     <Area 
                       type="monotone" 
-                      dataKey="total" 
+                      dataKey="scope1" 
                       stroke="#16a34a" 
                       fillOpacity={1} 
-                      fill="url(#colorTotal)" 
-                      name="Total Emisiones"
+                      fill="url(#colorScope1)" 
+                      name="Scope 1"
+                      stackId="1"
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="scope2" 
+                      stroke="#2563eb" 
+                      fillOpacity={1} 
+                      fill="url(#colorScope2)" 
+                      name="Scope 2"
+                      stackId="1"
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="scope3" 
+                      stroke="#9333ea" 
+                      fillOpacity={1} 
+                      fill="url(#colorScope3)" 
+                      name="Scope 3"
+                      stackId="1"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -295,12 +565,12 @@ export default function Sustainability() {
                       <div>
                         <p className="font-bold text-lg">{report.report_year}</p>
                         <p className="text-sm text-muted-foreground">
-                          Creado el {new Date(report.created_at).toLocaleDateString()}
+                          Creado el {new Date(report.created_at || '').toLocaleDateString()}
                         </p>
                       </div>
                       <div className="text-right">
                         <p className="font-medium text-green-700">
-                          {(Number(report.scope1_total_tons) + Number(report.scope2_total_tons)).toFixed(2)} tCO2e
+                          {(Number(report.scope1_total_tons) + Number(report.scope2_total_tons)).toFixed(2)} tCO₂e
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {report.energy_renewable_percent}% Renovable

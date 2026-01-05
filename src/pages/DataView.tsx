@@ -10,7 +10,8 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Download, Send, FileText, Building2, Info, Activity, TrendingUp, ShieldCheck } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ArrowLeft, Download, Send, FileText, Building2, Info, Activity, TrendingUp, ShieldCheck, Leaf, Award, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { ESGDataView } from "@/components/ESGDataView";
 import { IoTDataView } from "@/components/IoTDataView";
@@ -23,6 +24,110 @@ import { RevokeAccessButton } from "@/components/RevokeAccessButton";
 import { Progress } from "@/components/ui/progress";
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { generateLicensePDF } from "@/utils/pdfGenerator";
+
+// Environmental Impact Card Component
+const EnvironmentalImpactCard = ({ subjectOrgId }: { subjectOrgId: string }) => {
+  const { data: esgReport, isLoading } = useQuery({
+    queryKey: ["provider-esg", subjectOrgId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("esg_reports")
+        .select("*")
+        .eq("organization_id", subjectOrgId)
+        .order("report_year", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!subjectOrgId,
+  });
+
+  if (isLoading) {
+    return (
+      <Card className="border-green-200 bg-green-50/50 dark:bg-green-950/20">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base flex items-center gap-2">
+            <Leaf className="h-4 w-4 text-green-600" />
+            Impacto Ambiental
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Skeleton className="h-8 w-24" />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (!esgReport) {
+    return (
+      <Card className="border-muted">
+        <CardHeader className="pb-3">
+          <CardTitle className="text-base flex items-center gap-2">
+            <Leaf className="h-4 w-4 text-muted-foreground" />
+            Impacto Ambiental
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">Sin datos ESG disponibles</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const totalEmissions = Number(esgReport.scope1_total_tons) + Number(esgReport.scope2_total_tons);
+  const renewablePercent = Number(esgReport.energy_renewable_percent);
+  
+  // Calculate impact level (example: based on emissions per transaction)
+  const impactLevel = totalEmissions < 500 ? "low" : totalEmissions < 2000 ? "medium" : "high";
+  const impactConfig = {
+    low: { label: "Bajo Impacto", color: "bg-green-100 text-green-800", bgColor: "border-green-200 bg-green-50/50 dark:bg-green-950/20" },
+    medium: { label: "Impacto Medio", color: "bg-yellow-100 text-yellow-800", bgColor: "border-yellow-200 bg-yellow-50/50 dark:bg-yellow-950/20" },
+    high: { label: "Alto Impacto", color: "bg-red-100 text-red-800", bgColor: "border-red-200 bg-red-50/50 dark:bg-red-950/20" },
+  };
+
+  const config = impactConfig[impactLevel];
+
+  return (
+    <Card className={config.bgColor}>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-base flex items-center gap-2">
+          <Leaf className={`h-4 w-4 ${impactLevel === 'low' ? 'text-green-600' : impactLevel === 'medium' ? 'text-yellow-600' : 'text-red-600'}`} />
+          Impacto Ambiental
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">Nivel</span>
+          <Badge className={config.color}>{config.label}</Badge>
+        </div>
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">Emisiones</span>
+          <span className="font-semibold">{totalEmissions.toFixed(1)} tCO₂e</span>
+        </div>
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">Renovable</span>
+          <span className="font-semibold">{renewablePercent}%</span>
+        </div>
+        <div className="flex flex-wrap gap-1 pt-2">
+          {renewablePercent > 80 && (
+            <Badge className="bg-green-100 text-green-700 text-xs gap-1">
+              <Zap className="h-3 w-3" />
+              Verde
+            </Badge>
+          )}
+          {esgReport.certifications?.includes("ISO 14001") && (
+            <Badge className="bg-blue-100 text-blue-700 text-xs gap-1">
+              <Award className="h-3 w-3" />
+              ISO
+            </Badge>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const DataView = () => {
   const { id } = useParams<{ id: string }>();
@@ -325,6 +430,9 @@ const DataView = () => {
 
             {canViewData && (
               <>
+                {/* Environmental Impact Card - NEW */}
+                <EnvironmentalImpactCard subjectOrgId={transaction.subject_org_id} />
+
                 {/* Monitor de Uso (Mock) */}
                 <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
                   <CardHeader className="pb-3">

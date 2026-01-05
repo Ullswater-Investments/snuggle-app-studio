@@ -14,7 +14,9 @@ import {
   ArrowRight,
   Heart,
   BarChart3,
-  Wallet
+  Wallet,
+  Zap,
+  Award
 } from "lucide-react";
 
 // UI Components
@@ -49,6 +51,8 @@ interface MarketplaceListing {
   has_green_badge: boolean;
   reputation_score: number;
   review_count: number;
+  // ESG fields from view
+  energy_renewable_percent?: number | null;
 }
 
 // --- Componente de Estrellas de Reputación ---
@@ -565,12 +569,18 @@ function ProductCard({
           </Badge>
           
           {/* Insignias Superiores */}
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             {/* Badge Web3 */}
             {isWeb3Asset && (
               <Badge className="bg-purple-100 text-purple-800 hover:bg-purple-200 border-purple-200 px-1.5" title="Requiere Wallet Web3">
                 <Wallet className="h-3 w-3 mr-1" />
                 {item.currency}
+              </Badge>
+            )}
+            {/* ESG Badge - Highly Renewable */}
+            {(item.energy_renewable_percent || 0) > 80 && (
+              <Badge className="bg-green-100 text-green-800 hover:bg-green-200 border-green-200 px-1.5" title="80%+ Energía Renovable">
+                <Zap className="h-3 w-3" />
               </Badge>
             )}
             {item.has_green_badge && (
