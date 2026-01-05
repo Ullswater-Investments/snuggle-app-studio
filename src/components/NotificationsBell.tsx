@@ -21,11 +21,14 @@ export function NotificationsBell() {
   const { data: notifications } = useQuery({
     queryKey: ["notifications", user?.id],
     queryFn: async () => {
-      // @ts-expect-error - notifications table exists but not in generated types yet
-      const { data, error } = await supabase.from("notifications").select("*").eq("user_id", user?.id).order("created_at", { ascending: false }).limit(20);
+      const { data, error } = await supabase
+        .from("notifications")
+        .select("*")
+        .eq("user_id", user?.id ?? "")
+        .order("created_at", { ascending: false })
+        .limit(20);
       
       if (error) throw error;
-      // @ts-expect-error - casting to Notification type
       return (data || []) as Notification[];
     },
     enabled: !!user
@@ -56,7 +59,6 @@ export function NotificationsBell() {
 
   // 3. Mark as Read Handler
   const handleRead = async (id: string, link?: string | null) => {
-    // @ts-expect-error - notifications table exists but not in generated types yet
     await supabase.from("notifications").update({ is_read: true }).eq("id", id);
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
     if (link) {
@@ -68,7 +70,6 @@ export function NotificationsBell() {
   // 4. Mark All as Read
   const handleMarkAllRead = async () => {
     if (!user) return;
-    // @ts-expect-error - notifications table exists but not in generated types yet  
     await supabase.from("notifications").update({ is_read: true }).eq("user_id", user.id).eq("is_read", false);
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
     toast.success("Todas las notificaciones marcadas como leídas");
