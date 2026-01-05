@@ -1,65 +1,118 @@
-# DOCUMENTO TÉCNICO - PROCUREDATA v3.0
+# DOCUMENTO TÉCNICO - PROCUREDATA v3.1
 
 ## Plataforma de Soberanía de Datos para Cadenas de Suministro
 
-**Versión:** 3.0  
-**Fecha de Actualización:** Enero 2026  
+**Versión:** 3.1 (Web3 Enabled + UX Improvements)  
+**Fecha de Actualización:** 05 Enero 2026  
 **Clasificación:** Documentación Técnica Interna  
+**Estado:** Production-Ready ✅ | Web3 Enabled ✅
 
 ---
 
 ## Índice
 
-1. [Visión General del Sistema](#1-visión-general-del-sistema)
-2. [Arquitectura de la Plataforma](#2-arquitectura-de-la-plataforma)
-3. [Componentes del Espacio de Datos (Gaia-X)](#3-componentes-del-espacio-de-datos-gaia-x)
-4. [Catálogo de Componentes Técnicos](#4-catálogo-de-componentes-técnicos)
-5. [Interfaces y Páginas Principales](#5-interfaces-y-páginas-principales)
-6. [Personas de Usuario (Roles Técnicos)](#6-personas-de-usuario-roles-técnicos)
-7. [Modelo de Gobernanza Técnica](#7-modelo-de-gobernanza-técnica)
-8. [Seguridad y Auditoría](#8-seguridad-y-auditoría)
-9. [Casos de Uso Principales](#9-casos-de-uso-principales)
-10. [Anexos](#10-anexos)
+1. [Changelog desde v3.0](#1-changelog-desde-v30)
+2. [Visión General del Sistema](#2-visión-general-del-sistema)
+3. [Arquitectura de la Plataforma](#3-arquitectura-de-la-plataforma)
+4. [Componentes del Espacio de Datos (Gaia-X)](#4-componentes-del-espacio-de-datos-gaia-x)
+5. [Catálogo de Componentes Técnicos](#5-catálogo-de-componentes-técnicos)
+6. [Hooks Personalizados](#6-hooks-personalizados)
+7. [Interfaces y Páginas Principales](#7-interfaces-y-páginas-principales)
+8. [Personas de Usuario (Roles Técnicos)](#8-personas-de-usuario-roles-técnicos)
+9. [Modelo de Gobernanza Técnica](#9-modelo-de-gobernanza-técnica)
+10. [Seguridad y Auditoría](#10-seguridad-y-auditoría)
+11. [Casos de Uso Principales](#11-casos-de-uso-principales)
+12. [Mejoras de UX v3.1](#12-mejoras-de-ux-v31)
+13. [Edge Functions](#13-edge-functions)
+14. [Guía de Desarrollo](#14-guía-de-desarrollo)
+15. [Estado de Auditoría](#15-estado-de-auditoría)
+16. [Anexos](#16-anexos)
+17. [Historial de Versiones](#17-historial-de-versiones)
 
 ---
 
-## 1. Visión General del Sistema
+## 1. Changelog desde v3.0
 
-### 1.1 Propósito
+### v3.1 - 05 Enero 2026
 
-PROCUREDATA es una **plataforma de soberanía de datos** diseñada para facilitar el intercambio seguro y trazable de información empresarial entre organizaciones de la cadena de suministro. La plataforma implementa los principios del ecosistema **Gaia-X** y el estándar **IDSA (International Data Spaces Association)** para garantizar:
+#### 🔗 Integración Web3 Completa
+- **Web3StatusWidget**: Nuevo widget en Dashboard mostrando:
+  - Balance EUROe (token ERC-20)
+  - Balance GX (gas nativo Pontus-X)
+  - DID verificado (`did:ethr:0x7ecc:...`)
+  - Link al Block Explorer
+- **AuthContext híbrido**: Fusión de autenticación Supabase + Web3 wallet
+- **Hook useWeb3Wallet**: Gestión dedicada de conexión/desconexión wallet con auto-reconnect
+- **Servicio pontusXService**: Singleton para todas las operaciones blockchain
+
+#### 📊 Capacidades Realtime
+- **ActivityFeed**: Suscripción a `approval_history` via Supabase Realtime
+- Invalidación automática de queries con `queryClient.invalidateQueries`
+- Cleanup correcto con `supabase.removeChannel()`
+
+#### 🎨 Mejoras de UX
+- **Requests.tsx**: Estados de carga individuales por botón (`processingId`)
+- **Opportunities.tsx**: AlertDialog de confirmación antes de propuestas
+- **Auth.tsx**: Validación Zod para email y contraseña
+- **SettingsPreferences.tsx**: Skeleton de carga durante fetch de preferencias
+- **EmptyState component**: Estados vacíos consistentes con iconos y acciones
+
+#### 🔒 Seguridad y Privacidad
+- **usePrivacyPreferences hook**: Persistencia de preferencias de privacidad
+- Updates optimistas con rollback en error
+- Campos: `profile_visible`, `show_access_history`, `access_alerts`, `anonymous_research`
+
+#### 📖 Documentación Interactiva
+- **Página `/architecture`**: 4 tabs interactivos con diagramas Mermaid renderizados
+- **Componente MermaidDiagram.tsx**: Renderizado de diagramas con soporte dark mode
+- **Dependencia mermaid@11.12.2**: Visualización de flujos y arquitectura
+
+#### 🛠 Infraestructura
+- Limpieza de logs de desarrollo en producción
+- Tipos Web3 en `src/types/web3.types.ts`
+- Extensión global de `Window.ethereum`
+
+---
+
+## 2. Visión General del Sistema
+
+### 2.1 Propósito
+
+PROCUREDATA es una **plataforma de soberanía de datos** diseñada para facilitar el intercambio seguro y trazable de información empresarial entre organizaciones de la cadena de suministro. No almacena datos; gestiona **acuerdos soberanos** entre quienes tienen los datos y quienes los necesitan.
+
+La plataforma implementa los principios del ecosistema **Gaia-X** y el estándar **IDSA (International Data Spaces Association)** para garantizar:
 
 - **Soberanía de Datos**: Los propietarios de los datos mantienen control total sobre quién accede a su información y bajo qué condiciones.
 - **Trazabilidad Inmutable**: Cada acceso y transacción queda registrado en blockchain, creando un historial auditable.
 - **Interoperabilidad**: Compatibilidad con sistemas ERP existentes (SAP, Oracle, Salesforce) mediante conectores estandarizados.
 - **Cumplimiento Normativo**: Diseñado para satisfacer requisitos GDPR, CSRD, y regulaciones sectoriales.
 
-### 1.2 Modelo Tripartito de Roles
+### 2.2 Modelo Tripartito de Roles
 
 PROCUREDATA implementa un modelo de tres roles fundamentales basado en el estándar IDSA:
 
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│  DATA CONSUMER  │────▶│  DATA SUBJECT   │────▶│  DATA HOLDER    │
-│   (Solicitante) │     │   (Propietario) │     │   (Custodio)    │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-        │                       │                       │
-        │  Solicita acceso      │  Otorga consentimiento│  Libera datos
-        │  a datos              │  o lo deniega         │  tras aprobación
-        └───────────────────────┴───────────────────────┘
+```mermaid
+graph TD
+    C[Consumer/Comprador] -->|1. Solicita dato| P[Provider/Proveedor]
+    P -->|2. Autoriza uso legal| H[Data Holder/Custodio]
+    H -->|3. Libera acceso técnico| C
+    
+    style C fill:#3b82f6,color:#fff
+    style P fill:#22c55e,color:#fff
+    style H fill:#f59e0b,color:#fff
 ```
 
 | Rol | Responsabilidad | Ejemplo en Cadena de Suministro |
 |-----|-----------------|--------------------------------|
 | **Data Consumer** | Solicita acceso a datos para un propósito específico | Empresa compradora que necesita validar proveedores |
-| **Data Subject** | Propietario original de los datos, decide sobre su uso | Proveedor cuyos datos fiscales se solicitan |
+| **Data Subject (Provider)** | Propietario original de los datos, decide sobre su uso | Proveedor cuyos datos fiscales se solicitan |
 | **Data Holder** | Custodio técnico que almacena y entrega los datos | Agencia tributaria, cámara de comercio, certificadora |
 
-### 1.3 Arquitectura Híbrida Web2 + Web3
+### 2.3 Arquitectura Híbrida Web2 + Web3
 
 PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 
-- **Capa Web2 (Supabase/PostgreSQL)**: Almacenamiento de metadatos, gestión de usuarios, lógica de negocio, y APIs RESTful.
+- **Capa Web2 (Lovable Cloud/Supabase)**: Almacenamiento de metadatos, gestión de usuarios, lógica de negocio, y APIs RESTful.
 - **Capa Web3 (Pontus-X Blockchain)**: Registro inmutable de transacciones, verificación de identidad (DID), y pagos con tokens EUROe.
 
 ```
@@ -81,7 +134,7 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
               ▼                               ▼
 ┌─────────────────────────┐     ┌─────────────────────────┐
 │     BACKEND WEB2        │     │      LAYER WEB3         │
-│      (Supabase)         │     │     (Pontus-X)          │
+│   (Lovable Cloud)       │     │     (Pontus-X)          │
 │  ┌─────────────────┐    │     │  ┌─────────────────┐    │
 │  │   PostgreSQL    │    │     │  │   Ethers.js     │    │
 │  │   (28 tablas)   │    │     │  │   v6.16.0       │    │
@@ -98,11 +151,21 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 └─────────────────────────┘     └─────────────────────────┘
 ```
 
+### 2.4 Estado Actual
+
+| Característica | Estado |
+|----------------|--------|
+| Production-Ready | ✅ |
+| Web3 Enabled | ✅ |
+| Auditoría de seguridad | Completada |
+| Modo Demo funcional | ✅ (datos sintéticos) |
+| Tour guiado interactivo | 6 pasos |
+
 ---
 
-## 2. Arquitectura de la Plataforma
+## 3. Arquitectura de la Plataforma
 
-### 2.1 Stack Tecnológico Completo
+### 3.1 Stack Tecnológico Completo
 
 #### Frontend
 
@@ -112,10 +175,11 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 | **Vite** | Latest | Bundler y dev server con HMR instantáneo |
 | **TypeScript** | 5.x | Tipado estático para seguridad en desarrollo |
 | **Tailwind CSS** | 3.x | Utilidades CSS con sistema de diseño tokenizado |
-| **Shadcn/ui** | Latest | Componentes accesibles basados en Radix UI |
+| **Shadcn/ui** | Latest | 49 componentes accesibles basados en Radix UI |
 | **Framer Motion** | 12.23.24 | Animaciones declarativas y transiciones |
 | **Lucide React** | 0.462.0 | Iconografía SVG consistente |
 | **Recharts** | 2.15.4 | Visualización de datos y gráficos |
+| **Mermaid** | 11.12.2 | Diagramas y visualizaciones (NUEVO v3.1) |
 
 #### Estado y Data Fetching
 
@@ -126,22 +190,22 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 | **React Hook Form** | 7.61.1 | Gestión de formularios performante |
 | **Zod** | 3.25.76 | Validación de esquemas en runtime |
 
-#### Backend (Lovable Cloud / Supabase)
+#### Backend (Lovable Cloud)
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
-| **PostgreSQL** | 15.x | Base de datos relacional con RLS |
+| **PostgreSQL** | 15.x | Base de datos relacional con RLS (28 tablas) |
 | **Supabase Auth** | Latest | Autenticación JWT con múltiples providers |
 | **Edge Functions** | Deno | Serverless functions para lógica backend |
 | **Realtime** | WebSockets | Suscripciones a cambios en tiempo real |
-| **Storage** | S3-compatible | Almacenamiento de archivos (pendiente) |
+| **Storage** | S3-compatible | Almacenamiento de archivos |
 
 #### Layer Web3 (Trust Layer)
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
 | **Ethers.js** | 6.16.0 | Interacción con blockchain EVM |
-| **Pontus-X Testnet** | Chain 0x7ECC | Red blockchain del ecosistema Gaia-X |
+| **Pontus-X Testnet** | Chain 0x7ECC (32460) | Red blockchain del ecosistema Gaia-X |
 | **MetaMask/Rabby** | Latest | Wallets compatibles Web3 |
 | **EUROe Token** | ERC-20 | Stablecoin para pagos en plataforma |
 | **DID (did:ethr)** | W3C Standard | Identificadores descentralizados |
@@ -155,7 +219,7 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 | **React Joyride** | 2.9.3 | Tours guiados de onboarding |
 | **Sonner** | 1.7.4 | Sistema de notificaciones toast |
 
-### 2.2 Diagrama de Arquitectura de Alto Nivel
+### 3.2 Diagrama de Arquitectura de Alto Nivel
 
 ```mermaid
 graph TB
@@ -202,48 +266,48 @@ graph TB
     Pontus --> Explorer
 ```
 
-### 2.3 Flujo de Datos Principal
+### 3.3 Flujo de Datos Principal
 
 ```mermaid
 sequenceDiagram
-    participant User as Usuario
-    participant FE as Frontend
-    participant Auth as Supabase Auth
-    participant DB as PostgreSQL
-    participant W3 as Pontus-X
-    
-    User->>FE: Accede a /catalog
-    FE->>Auth: Verificar sesión JWT
-    Auth-->>FE: Session válida
-    
-    FE->>DB: SELECT * FROM marketplace_listings
-    DB-->>FE: Lista de productos
-    
-    User->>FE: Selecciona producto
-    FE->>DB: SELECT * FROM data_assets WHERE id=?
-    DB-->>FE: Detalle del producto
-    
-    User->>FE: Inicia solicitud de datos
-    FE->>W3: Verificar wallet conectada
-    W3-->>FE: DID + Balance EUROe
-    
-    FE->>DB: INSERT INTO data_transactions
-    DB-->>FE: transaction_id
-    
-    FE->>W3: Registrar hash de transacción
-    W3-->>FE: tx_hash confirmado
-    
-    FE->>DB: UPDATE data_transactions SET metadata
-    DB-->>FE: OK
-    
-    FE-->>User: Solicitud creada exitosamente
+    participant C as Consumer
+    participant S as Subject (Provider)
+    participant H as Holder
+    participant DB as Database
+    participant BC as Blockchain
+
+    C->>DB: Crea transacción (initiated)
+    DB->>S: Notifica solicitud
+    S->>DB: Aprueba (pending_holder)
+    DB->>H: Notifica para liberación
+    H->>DB: Libera datos (completed)
+    H->>BC: Notariza hash de acceso
+    DB->>C: Datos disponibles
+    BC->>C: Prueba verificable
+```
+
+### 3.4 Máquina de Estados de Transacciones
+
+```mermaid
+stateDiagram-v2
+    [*] --> initiated
+    initiated --> pending_subject: Consumer envía
+    pending_subject --> pending_holder: Subject aprueba
+    pending_subject --> denied_subject: Subject rechaza
+    pending_holder --> completed: Holder aprueba
+    pending_holder --> denied_holder: Holder rechaza
+    initiated --> cancelled: Consumer cancela
+    completed --> [*]
+    denied_subject --> [*]
+    denied_holder --> [*]
+    cancelled --> [*]
 ```
 
 ---
 
-## 3. Componentes del Espacio de Datos (Gaia-X)
+## 4. Componentes del Espacio de Datos (Gaia-X)
 
-### 3.1 Identidad Soberana (Self-Sovereign Identity - SSI)
+### 4.1 Identidad Soberana (Self-Sovereign Identity - SSI)
 
 PROCUREDATA implementa **Identificadores Descentralizados (DIDs)** siguiendo el estándar W3C DID Core 1.0, específicamente el método `did:ethr` para redes Ethereum-compatibles.
 
@@ -254,12 +318,12 @@ El servicio `pontusXService` genera DIDs automáticamente al conectar una wallet
 ```typescript
 // src/services/pontusX.ts
 generateDID(address: string): string {
-  const chainIdHex = PONTUSX_NETWORK_CONFIG.chainId; // 0x7ECC (32460)
-  return `did:ethr:${chainIdHex}:${address}`;
+  // Formato estándar: did:ethr:<chainId>:<ethereumAddress>
+  return `did:ethr:${PONTUSX_NETWORK_CONFIG.chainId}:${address.toLowerCase()}`;
 }
 
 // Resultado ejemplo:
-// did:ethr:0x7ecc:0x742d35Cc6634C0532925a3b844Bc9e7595f8fE00
+// did:ethr:0x7ecc:0x742d35cc6634c0532925a3b844bc9e7595f8fe00
 ```
 
 #### Estructura del DID
@@ -268,94 +332,121 @@ generateDID(address: string): string {
 |------------|-------|-------------|
 | Scheme | `did` | Prefijo estándar W3C |
 | Method | `ethr` | Método Ethereum DID |
-| Network | `0x7ecc` | Chain ID Pontus-X Testnet |
+| Network | `0x7ecc` | Chain ID Pontus-X Testnet (32460 decimal) |
 | Identifier | `0x742d...` | Dirección Ethereum de la wallet |
 
-#### Visualización en UI
-
-El componente `WalletButton.tsx` muestra el DID del usuario conectado:
+#### Tipos TypeScript para SSI
 
 ```typescript
-// src/components/WalletButton.tsx
-<div className="px-2 py-2">
-  <p className="text-xs text-muted-foreground mb-1">DID (Decentralized ID)</p>
-  <div className="flex items-center gap-2">
-    <code className="text-xs bg-muted px-2 py-1 rounded flex-1 truncate">
-      {wallet.did}  {/* did:ethr:0x7ecc:0x... */}
-    </code>
-    <Button variant="ghost" size="icon" onClick={() => copyToClipboard(wallet.did)}>
-      <Copy className="h-3 w-3" />
-    </Button>
-  </div>
-</div>
+// src/types/web3.types.ts
+export interface DecentralizedIdentifier {
+  did: string;           // Formato: did:ethr:0x7ecc:0x...
+  address: string;       // Dirección Ethereum 0x...
+  chainId: string;       // Chain ID en Hex (ej: 0x7ecc)
+  verified: boolean;     // Estado de verificación local
+}
+
+export interface VerifiableCredential {
+  id: string;
+  type: string[];
+  issuer: string;
+  issuanceDate: string;
+  expirationDate?: string;
+  credentialSubject: {
+    id: string;
+    [key: string]: unknown;
+  };
+  proof?: {
+    type: string;
+    created: string;
+    verificationMethod: string;
+    proofPurpose: string;
+    proofValue: string;
+  };
+}
 ```
 
-### 3.2 Conector de Datos (Data Connector)
+### 4.2 Conector de Datos (Data Connector)
 
 El servicio `PontusXService` actúa como el **conector de datos** que facilita la comunicación entre la aplicación y la red blockchain.
 
-#### Clase PontusXService
+#### Clase PontusXService Completa
 
 ```typescript
 // src/services/pontusX.ts
-class PontusXService {
-  private provider: ethers.BrowserProvider | null = null;
-  private signer: ethers.Signer | null = null;
-  private euroeContract: ethers.Contract | null = null;
+import { ethers } from 'ethers';
+import type { WalletState } from '@/types/web3.types';
 
-  // Métodos principales
-  async connectWallet(): Promise<WalletState>     // Conexión + switch de red
-  disconnect(): void                               // Limpia estado
-  async switchNetwork(): Promise<void>            // Fuerza Pontus-X
-  async getEUROeBalance(address: string): Promise<string>  // Balance ERC-20
-  generateDID(address: string): string            // Genera did:ethr
-  async signMessage(message: string): Promise<string>      // Firma SIWE
-  async revokeAccess(did: string, resourceId: string): Promise<string>  // Revocación
-}
-
-export const pontusXService = new PontusXService();  // Singleton
-```
-
-#### Configuración de Red Pontus-X
-
-```typescript
-// src/services/pontusX.ts
 export const PONTUSX_NETWORK_CONFIG = {
-  chainId: '0x7ECC',           // 32460 en decimal
+  chainId: '0x7ecc',           // 32460 en decimal
   chainName: 'Pontus-X Testnet',
   nativeCurrency: {
-    name: 'GX Token',
+    name: 'Pontus-X Token',
     symbol: 'GX',
     decimals: 18,
   },
-  rpcUrls: ['https://rpc.test.pontus-x.eu'],
+  rpcUrls: ['https://rpc.dev.pontus-x.eu'],
   blockExplorerUrls: ['https://explorer.pontus-x.eu/'],
 };
-```
 
-#### Token EUROe (ERC-20)
+const EUROE_CONTRACT_ADDRESS = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
 
-```typescript
-// Dirección del contrato (placeholder - actualizar con dirección real)
-const EUROE_CONTRACT_ADDRESS = '0x...';
-
-// ABI mínimo para interacción
 const ERC20_ABI = [
-  'function balanceOf(address owner) view returns (uint256)',
-  'function decimals() view returns (uint8)',
-  'function symbol() view returns (string)',
-  'function transfer(address to, uint256 amount) returns (bool)',
+  "function balanceOf(address owner) view returns (uint256)",
+  "function decimals() view returns (uint8)",
+  "function symbol() view returns (string)",
+  "function transfer(address to, uint amount) returns (bool)"
 ];
+
+class PontusXService {
+  private provider: ethers.BrowserProvider | null = null;
+  private signer: ethers.JsonRpcSigner | null = null;
+  private euroeContract: ethers.Contract | null = null;
+
+  constructor() {
+    if (typeof window !== 'undefined' && window.ethereum) {
+      this.provider = new ethers.BrowserProvider(window.ethereum);
+    }
+  }
+
+  // Métodos principales
+  isWeb3Available(): boolean
+  async connectWallet(): Promise<WalletState>
+  disconnect(): WalletState
+  async switchNetwork(): Promise<void>
+  async getEUROeBalance(address: string): Promise<string>
+  generateDID(address: string): string
+  async signMessage(message: string): Promise<string>
+  async revokeAccess(did: string, resourceId: string): Promise<string>
+  onAccountsChanged(callback: (accounts: string[]) => void): void
+  onChainChanged(callback: (chainId: string) => void): void
+  removeListeners(): void
+}
+
+// Exportar una instancia Singleton
+export const pontusXService = new PontusXService();
 ```
 
-### 3.3 Catálogo Federado
+#### Métodos del Servicio
+
+| Método | Descripción | Retorno |
+|--------|-------------|---------|
+| `isWeb3Available()` | Detecta wallet instalada | `boolean` |
+| `connectWallet()` | Conecta + switch red + balances | `WalletState` |
+| `disconnect()` | Limpia estado de wallet | `WalletState` |
+| `switchNetwork()` | Fuerza cambio a Pontus-X | `void` |
+| `getEUROeBalance(address)` | Lee balance del token ERC-20 | `string` |
+| `generateDID(address)` | Genera `did:ethr:chainId:address` | `string` |
+| `signMessage(message)` | Firma SIWE para verificación | `string` |
+| `revokeAccess(did, resourceId)` | Ejecuta revocación on-chain | `string` (txHash) |
+
+### 4.3 Catálogo Federado
 
 El catálogo de PROCUREDATA implementa la especificación **DCAT (Data Catalog Vocabulary)** adaptada para espacios de datos industriales.
 
 #### Vista Materializada: marketplace_listings
 
 ```sql
--- Vista que combina data_assets, data_products, organizations, y esg_reports
 CREATE VIEW marketplace_listings AS
 SELECT 
   da.id AS asset_id,
@@ -385,9 +476,7 @@ LEFT JOIN esg_reports esg ON o.id = esg.organization_id
 WHERE da.is_public_marketplace = true AND da.status = 'active';
 ```
 
-#### Componente Catalog.tsx
-
-El catálogo soporta múltiples vistas y filtros:
+#### Funcionalidades del Catálogo
 
 | Funcionalidad | Implementación |
 |---------------|----------------|
@@ -399,7 +488,7 @@ El catálogo soporta múltiples vistas y filtros:
 | Comparación | Checkbox multi-selección |
 | Wishlist | Tabla `user_wishlist` |
 
-### 3.4 Contratos de Uso (Usage Policies)
+### 4.4 Contratos de Uso (Usage Policies - ODRL)
 
 PROCUREDATA genera políticas de uso siguiendo el estándar **ODRL (Open Digital Rights Language)** almacenadas en la tabla `data_policies`.
 
@@ -449,17 +538,27 @@ CREATE TABLE data_policies (
 
 ---
 
-## 4. Catálogo de Componentes Técnicos
+## 5. Catálogo de Componentes Técnicos
 
-### 4.1 Componentes Core/Web3
+### 5.1 Componentes Core/Web3
 
-| Componente | Archivo | Responsabilidad Técnica |
-|------------|---------|-------------------------|
-| **WalletButton** | `src/components/WalletButton.tsx` | Gestión completa de sesión Web3: conexión, visualización de perfil (DID, balances GX/EUROe), dropdown con acciones (copiar DID, abrir explorer, desconectar). Usa `useWeb3Wallet` hook. |
-| **Web3StatusWidget** | `src/components/Web3StatusWidget.tsx` | Widget de dashboard que muestra estado de wallet, balances, y DID verificado. Tres estados: sin wallet detectada, no conectada, conectada. |
-| **RevokeAccessButton** | `src/components/RevokeAccessButton.tsx` | Kill-switch para revocación de acceso a recursos. AlertDialog de confirmación con advertencia de irreversibilidad. Llama a `pontusXService.revokeAccess()`. |
+| Componente | Archivo | Responsabilidad Técnica | Versión |
+|------------|---------|-------------------------|---------|
+| **WalletButton** | `src/components/WalletButton.tsx` | Gestión completa de sesión Web3: conexión, visualización de perfil (DID, balances GX/EUROe), dropdown con acciones. Usa `useWeb3Wallet` hook. | v3.0 |
+| **Web3StatusWidget** | `src/components/Web3StatusWidget.tsx` | Widget de dashboard que muestra estado de wallet, balances, y DID verificado. Tres estados: sin wallet detectada, no conectada, conectada. | **v3.1** |
+| **RevokeAccessButton** | `src/components/RevokeAccessButton.tsx` | Kill-switch para revocación de acceso a recursos. AlertDialog de confirmación con advertencia de irreversibilidad. Llama a `pontusXService.revokeAccess()`. | v3.0 |
 
-### 4.2 Componentes Feature/Audit
+#### Estados del Web3StatusWidget
+
+1. **Sin Web3**: Muestra botón para instalar MetaMask
+2. **No conectado**: Muestra botón "Conectar Wallet"
+3. **Conectado**: Muestra:
+   - Balance EUROe
+   - Balance GX (gas)
+   - DID truncado con botón copiar
+   - Link al Block Explorer
+
+### 5.2 Componentes Feature/Audit
 
 | Componente | Archivo | Responsabilidad Técnica |
 |------------|---------|-------------------------|
@@ -467,24 +566,25 @@ CREATE TABLE data_policies (
 | **DataLineage** | `src/components/DataLineage.tsx` | Visualización de lineage de datos desde Supabase. Complementa DataLineageBlockchain con datos on-chain. |
 | **SmartContractViewer** | `src/components/SmartContractViewer.tsx` | Visor de código y estado de smart contracts. Permite inspeccionar funciones y eventos. |
 
-### 4.3 Componentes Feature/Commerce
+### 5.3 Componentes Feature/Commerce
 
 | Componente | Archivo | Responsabilidad Técnica |
 |------------|---------|-------------------------|
-| **PaymentGateway** | `src/components/PaymentGateway.tsx` | Pasarela de pagos híbrida con 3 tabs: Tarjeta (Stripe), Wallet (EUROe), Transferencia. Integración con `pontusXService` para pagos crypto. Estado de procesamiento y confirmación. |
+| **PaymentGateway** | `src/components/PaymentGateway.tsx` | Pasarela de pagos híbrida con 3 tabs: Tarjeta (Stripe), Wallet (EUROe), Transferencia. Integración con `pontusXService` para pagos crypto. |
 | **OrderSummary** | `src/components/OrderSummary.tsx` | Resumen de pedido con desglose de precios, impuestos, y total. Soporta múltiples monedas. |
 
-### 4.4 Componentes Core/UX
+### 5.4 Componentes Core/UX
 
-| Componente | Archivo | Responsabilidad Técnica |
-|------------|---------|-------------------------|
-| **NotificationsBell** | `src/components/NotificationsBell.tsx` | Consumidor de Supabase Realtime WebSockets. Muestra contador de no leídas, dropdown con lista, mark as read. |
-| **ActivityFeed** | `src/components/ActivityFeed.tsx` | Feed de actividad con suscripción Realtime a `approval_history`. Invalidación automática de queries. Cleanup correcto con `removeChannel()`. |
-| **DemoBanner** | `src/components/DemoBanner.tsx` | Banner informativo para modo demo. Detecta usuario demo y muestra instrucciones. |
-| **DemoTour** | `src/components/DemoTour.tsx` | Tour guiado con React Joyride. Steps configurables por página. |
-| **CommandMenu** | `src/components/CommandMenu.tsx` | Paleta de comandos estilo Spotlight/Alfred. Navegación rápida y acciones. |
+| Componente | Archivo | Responsabilidad Técnica | Versión |
+|------------|---------|-------------------------|---------|
+| **NotificationsBell** | `src/components/NotificationsBell.tsx` | Consumidor de Supabase Realtime WebSockets. Muestra contador de no leídas, dropdown con lista, mark as read. | v3.0 |
+| **ActivityFeed** | `src/components/ActivityFeed.tsx` | Feed de actividad con suscripción Realtime a `approval_history`. Invalidación automática de queries. Cleanup correcto con `removeChannel()`. | **v3.1** |
+| **EmptyState** | `src/components/EmptyState.tsx` | Estados vacíos consistentes con iconos y acciones. Reutilizable en múltiples páginas. | **v3.1** |
+| **DemoBanner** | `src/components/DemoBanner.tsx` | Banner informativo para modo demo. Detecta usuario demo y muestra instrucciones. | v3.0 |
+| **DemoTour** | `src/components/DemoTour.tsx` | Tour guiado con React Joyride. Steps configurables por página. | v3.0 |
+| **CommandMenu** | `src/components/CommandMenu.tsx` | Paleta de comandos estilo Spotlight/Alfred. Navegación rápida y acciones. | v3.0 |
 
-### 4.5 Componentes UI/Layout
+### 5.5 Componentes UI/Layout
 
 | Componente | Archivo | Responsabilidad Técnica |
 |------------|---------|-------------------------|
@@ -493,8 +593,9 @@ CREATE TABLE data_policies (
 | **DynamicBreadcrumbs** | `src/components/DynamicBreadcrumbs.tsx` | Migas de pan generadas dinámicamente desde la ruta actual. |
 | **ThemeToggle** | `src/components/ThemeToggle.tsx` | Switch de tema claro/oscuro con persistencia en localStorage. |
 | **ProtectedRoute** | `src/components/ProtectedRoute.tsx` | HOC que verifica autenticación y redirige a /auth si no hay sesión. |
+| **MermaidDiagram** | `src/components/MermaidDiagram.tsx` | Renderizado de diagramas Mermaid con soporte dark mode. **NUEVO v3.1** |
 
-### 4.6 Componentes Feature/Data
+### 5.6 Componentes Feature/Data
 
 | Componente | Archivo | Responsabilidad Técnica |
 |------------|---------|-------------------------|
@@ -503,7 +604,7 @@ CREATE TABLE data_policies (
 | **ArrayDataView** | `src/components/ArrayDataView.tsx` | Vista genérica para arrays de datos. Tabla paginada con sorting. |
 | **GenericJSONView** | `src/components/GenericJSONView.tsx` | Visor de JSON con syntax highlighting y collapse/expand. |
 
-### 4.7 Componentes Feature/Collaboration
+### 5.7 Componentes Feature/Collaboration
 
 | Componente | Archivo | Responsabilidad Técnica |
 |------------|---------|-------------------------|
@@ -511,42 +612,372 @@ CREATE TABLE data_policies (
 | **TeamManagement** | `src/components/TeamManagement.tsx` | Gestión de miembros del equipo y roles. CRUD sobre `user_roles`. |
 | **AIConcierge** | `src/components/AIConcierge.tsx` | Asistente virtual con IA para guiar usuarios. Integración con Lovable AI Gateway. |
 
+### 5.8 Componentes Shadcn/UI (49 componentes)
+
+Directorio: `src/components/ui/`
+
+| Componente | Propósito |
+|------------|-----------|
+| accordion, alert, alert-dialog | Contenedores de información expandibles |
+| avatar, badge, button | Elementos de identidad e interacción |
+| calendar, card, carousel | Visualización de datos |
+| checkbox, collapsible, command | Controles de formulario |
+| context-menu, dialog, drawer | Menús y modales |
+| dropdown-menu, form, hover-card | Interacciones complejas |
+| input, input-otp, label | Campos de entrada |
+| menubar, navigation-menu | Navegación |
+| pagination, popover, progress | Navegación y feedback |
+| radio-group, resizable, scroll-area | Controles avanzados |
+| select, separator, sheet | Selección y layout |
+| sidebar, skeleton, slider | Layout y estados de carga |
+| sonner, switch, table | Notificaciones, toggles, tablas |
+| tabs, textarea, toast, toaster | Organización y notificaciones |
+| toggle, toggle-group, tooltip | Interacciones menores |
+
 ---
 
-## 5. Interfaces y Páginas Principales
+## 6. Hooks Personalizados
 
-### 5.1 Mapa de Rutas Completo
+### 6.1 useAuth - Autenticación Híbrida
 
-| Ruta | Componente | Tipo | Descripción Funcional |
-|------|------------|------|----------------------|
-| `/` | `Landing.tsx` | Pública | Página de marketing con hero, features, success stories, y CTAs |
-| `/auth` | `Auth.tsx` | Pública | Login/Registro con validación Zod. Tabs para alternar modo. |
-| `/dashboard` | `Dashboard.tsx` | Protegida | Centro de mando con KPIs, Web3StatusWidget, ActivityFeed, y accesos rápidos |
-| `/catalog` | `Catalog.tsx` | Protegida | Marketplace de productos de datos con filtros y comparación |
-| `/catalog/:id` | `ProductDetail.tsx` | Protegida | Detalle de producto con muestra de datos y botón de solicitud |
-| `/requests` | `Requests.tsx` | Protegida | Lista de transacciones con estados y acciones de aprobación |
-| `/requests/new` | `RequestWizard.tsx` | Protegida | Wizard de 5 pasos para crear solicitud de datos |
-| `/data` | `Data.tsx` | Protegida | Lista de activos de datos adquiridos |
-| `/data/:id` | `DataView.tsx` | Protegida | Vista de consumo con DataLineage y exportación |
-| `/opportunities` | `Opportunities.tsx` | Protegida | Oportunidades de mercado para proveedores |
-| `/services` | `Services.tsx` | Protegida | Catálogo de servicios de valor añadido |
-| `/reports` | `Reports.tsx` | Protegida | Generación y descarga de informes |
-| `/sustainability` | `Sustainability.tsx` | Protegida | Dashboard ESG con métricas ambientales |
-| `/innovation-lab` | `InnovationLab.tsx` | Protegida | Conceptos de innovación y análisis predictivo |
-| `/analytics` | `SellerAnalytics.tsx` | Protegida | Analytics para vendedores de datos |
-| `/notifications` | `Notifications.tsx` | Protegida | Centro de notificaciones con historial |
-| `/settings` | `Settings.tsx` | Protegida | Hub de configuración con subpáginas |
-| `/settings/organization` | `SettingsOrganization.tsx` | Protegida | Configuración de organización |
-| `/settings/privacy` | `SettingsPreferences.tsx` | Protegida | Preferencias de privacidad con persistencia optimista |
-| `/settings/webhooks` | `WebhookSettings.tsx` | Protegida | Configuración de webhooks y callbacks |
-| `/settings/erp` | `ERPConfig.tsx` | Protegida | Integración con sistemas ERP |
-| `/audit-logs` | `AuditLogs.tsx` | Protegida | Logs de auditoría con filtros |
-| `/architecture` | `Architecture.tsx` | Pública | Documentación de arquitectura técnica |
-| `/guide` | `Guide.tsx` | Pública | Guía de usuario y FAQ |
-| `/whitepaper` | `InteractiveWhitepaper.tsx` | Pública | Whitepaper interactivo de la plataforma |
-| `*` | `NotFound.tsx` | Pública | Página 404 con navegación |
+```typescript
+// src/hooks/useAuth.tsx
+interface AuthContextType {
+  // Supabase Auth
+  user: User | null;
+  session: Session | null;
+  loading: boolean;
+  signUp: (email: string, password: string) => Promise<AuthResponse>;
+  signIn: (email: string, password: string) => Promise<AuthResponse>;
+  signOut: () => Promise<void>;
+  
+  // Web3 Identity (NUEVO v3.1)
+  walletAddress: string | null;
+  did: string | null;
+  isWeb3Connected: boolean;
+  connectWallet: (silent?: boolean) => Promise<void>;
+  disconnectWallet: () => void;
+}
+```
 
-### 5.2 Páginas Clave Detalladas
+#### Flujo de Autenticación
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant A as Auth Page
+    participant S as Supabase
+    participant W as Web3 Wallet
+
+    U->>A: Introduce email/password
+    A->>S: signIn(email, password)
+    S-->>A: Session token
+    A-->>U: Redirect a Dashboard
+    
+    opt Conexión Web3
+        U->>W: Click "Conectar Wallet"
+        W->>W: MetaMask popup
+        W-->>A: address, chainId
+        A->>A: Genera DID
+        A-->>U: Wallet conectada
+    end
+```
+
+### 6.2 useWeb3Wallet - Gestión de Wallet (NUEVO v3.1)
+
+```typescript
+// src/hooks/useWeb3Wallet.tsx
+import { useState, useEffect, useCallback } from 'react';
+import { pontusXService } from '@/services/pontusX';
+import type { WalletState } from '@/types/web3.types';
+import { toast } from 'sonner';
+
+const INITIAL_STATE: WalletState = {
+  address: null,
+  chainId: null,
+  balance: null,
+  euroeBalance: null,
+  did: null,
+  isConnected: false
+};
+
+export const useWeb3Wallet = () => {
+  const [wallet, setWallet] = useState<WalletState>(INITIAL_STATE);
+  const [isConnecting, setIsConnecting] = useState(true);
+  const [hasWeb3, setHasWeb3] = useState(false);
+
+  // Check Web3 availability on mount
+  useEffect(() => {
+    setHasWeb3(pontusXService.isWeb3Available());
+  }, []);
+
+  const connect = useCallback(async (silent = false) => {
+    if (!silent) setIsConnecting(true);
+    try {
+      const state = await pontusXService.connectWallet();
+      setWallet(state);
+      if (!silent) {
+        toast.success("Billetera Conectada", {
+          description: `Cuenta: ${state.address?.slice(0, 6)}...${state.address?.slice(-4)}`
+        });
+      }
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Error desconocido";
+      console.error("Connection failed:", error);
+      if (!silent) {
+        toast.error("Error al conectar", { description: message });
+      }
+    } finally {
+      setIsConnecting(false);
+    }
+  }, []);
+
+  const disconnect = useCallback(() => {
+    pontusXService.disconnect();
+    setWallet(INITIAL_STATE);
+    toast.info("Desconectado", {
+      description: "Has cerrado la sesión de tu wallet."
+    });
+  }, []);
+
+  // Auto-connection and event listeners
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ 
+            method: 'eth_accounts' 
+          }) as string[];
+          if (accounts.length > 0) {
+            await connect(true); // Silently reconnect
+          }
+        } catch (err) {
+          console.error("Error checking accounts:", err);
+        }
+      }
+      setIsConnecting(false);
+    };
+
+    checkConnection();
+
+    // Setup MetaMask event listeners
+    if (window.ethereum) {
+      const handleAccountsChanged = (accounts: unknown) => {
+        const accountList = accounts as string[];
+        if (accountList.length > 0) {
+          connect(true);
+        } else {
+          setWallet(INITIAL_STATE);
+          toast.info("Desconexión detectada en MetaMask");
+        }
+      };
+
+      const handleChainChanged = () => {
+        window.location.reload();
+      };
+
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('chainChanged', handleChainChanged);
+
+      return () => {
+        window.ethereum?.removeListener('accountsChanged', handleAccountsChanged);
+        window.ethereum?.removeListener('chainChanged', handleChainChanged);
+      };
+    }
+  }, [connect]);
+
+  return { 
+    wallet, 
+    isConnecting, 
+    hasWeb3, 
+    connect: () => connect(false), 
+    disconnect 
+  };
+};
+```
+
+#### Retorno del Hook
+
+| Propiedad | Tipo | Descripción |
+|-----------|------|-------------|
+| `wallet` | `WalletState` | Estado completo de la wallet |
+| `isConnecting` | `boolean` | Indicador de conexión en progreso |
+| `hasWeb3` | `boolean` | Si hay wallet Web3 disponible |
+| `connect` | `() => Promise<void>` | Función para conectar wallet |
+| `disconnect` | `() => void` | Función para desconectar |
+
+### 6.3 usePrivacyPreferences - Persistencia Optimista (NUEVO v3.1)
+
+```typescript
+// src/hooks/usePrivacyPreferences.tsx
+interface UserPreferences {
+  profile_visible: boolean;
+  show_access_history: boolean;
+  access_alerts: boolean;
+  anonymous_research: boolean;
+}
+
+const DEFAULT_PREFERENCES: UserPreferences = {
+  profile_visible: true,
+  show_access_history: true,
+  access_alerts: true,
+  anonymous_research: false,
+};
+
+export function usePrivacyPreferences() {
+  const { user } = useAuth();
+  const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
+  const [loading, setLoading] = useState(true);
+
+  // Load preferences
+  useEffect(() => {
+    if (!user?.id) return;
+    
+    const loadPreferences = async () => {
+      const { data } = await supabase
+        .from('privacy_preferences')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+      
+      if (data) setPreferences(data);
+      setLoading(false);
+    };
+
+    loadPreferences();
+  }, [user?.id]);
+
+  // Update with optimistic rollback
+  const updatePreference = useCallback(async (
+    key: keyof UserPreferences, 
+    value: boolean
+  ) => {
+    const previousValue = preferences[key];
+    
+    // Optimistic update
+    setPreferences(prev => ({ ...prev, [key]: value }));
+
+    try {
+      const { error } = await supabase
+        .from('privacy_preferences')
+        .update({ [key]: value, updated_at: new Date().toISOString() })
+        .eq('user_id', user?.id);
+
+      if (error) throw error;
+      toast.success('Preferencia actualizada');
+    } catch (error) {
+      // Rollback on error
+      setPreferences(prev => ({ ...prev, [key]: previousValue }));
+      toast.error('Error al actualizar preferencia');
+    }
+  }, [user?.id, preferences]);
+
+  return { preferences, loading, updatePreference };
+}
+```
+
+#### Campos de Preferencias
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `profile_visible` | boolean | Perfil visible en marketplace |
+| `show_access_history` | boolean | Mostrar historial de accesos |
+| `access_alerts` | boolean | Notificaciones de acceso a datos |
+| `anonymous_research` | boolean | Permitir uso anónimo para investigación |
+
+### 6.4 useOrganizationContext - Multi-tenant
+
+```typescript
+// src/hooks/useOrganizationContext.tsx
+interface OrganizationContextType {
+  currentOrg: Organization | null;
+  organizations: Organization[];
+  switchOrganization: (orgId: string) => void;
+  isLoading: boolean;
+}
+```
+
+### 6.5 useNotifications - Sistema de Notificaciones
+
+```typescript
+// src/hooks/useNotifications.tsx
+interface UseNotificationsReturn {
+  notifications: Notification[];
+  unreadCount: number;
+  markAsRead: (id: string) => Promise<void>;
+  markAllAsRead: () => Promise<void>;
+  isLoading: boolean;
+}
+```
+
+### 6.6 useOrgSector - Sector de Organización
+
+```typescript
+// src/hooks/useOrgSector.tsx
+// Determina el sector de la organización actual para renderizar iconos y UI contextual
+```
+
+---
+
+## 7. Interfaces y Páginas Principales
+
+### 7.1 Mapa de Rutas Completo (27 rutas)
+
+#### Rutas Públicas
+
+| Ruta | Componente | Descripción |
+|------|------------|-------------|
+| `/` | `Landing.tsx` | Página de marketing con hero, features, success stories |
+| `/auth` | `Auth.tsx` | Login/Registro con validación Zod |
+| `/guide` | `Guide.tsx` | Guía del ecosistema |
+| `/architecture` | `Architecture.tsx` | **Documentación técnica interactiva con 4 tabs y Mermaid (v3.1)** |
+| `/whitepaper` | `InteractiveWhitepaper.tsx` | Tech Whitepaper interactivo |
+
+#### Rutas Protegidas (AppLayout)
+
+| Ruta | Componente | Descripción |
+|------|------------|-------------|
+| `/dashboard` | `Dashboard.tsx` | Centro de mando + Web3Widget + ActivityFeed |
+| `/catalog` | `Catalog.tsx` | Marketplace federado |
+| `/catalog/product/:id` | `ProductDetail.tsx` | Detalle de producto con muestra y solicitud |
+| `/requests` | `Requests.tsx` | Lista de transacciones con estados y loading states |
+| `/requests/new` | `RequestWizard.tsx` | Wizard de 5 pasos para crear solicitud |
+| `/data` | `Data.tsx` | Lista de activos de datos adquiridos |
+| `/data/view/:id` | `DataView.tsx` | Vista de consumo con DataLineage y exportación |
+| `/opportunities` | `Opportunities.tsx` | Oportunidades de mercado con AlertDialog |
+| `/services` | `Services.tsx` | Catálogo de servicios de valor añadido |
+| `/reports` | `Reports.tsx` | Generación y descarga de informes |
+| `/sustainability` | `Sustainability.tsx` | Dashboard ESG con métricas ambientales |
+| `/innovation` | `InnovationLab.tsx` | Conceptos de innovación y análisis predictivo |
+| `/analytics` | `SellerAnalytics.tsx` | Analytics para vendedores de datos |
+| `/notifications` | `Notifications.tsx` | Centro de notificaciones con historial |
+| `/settings` | `Settings.tsx` | Hub de configuración |
+| `/settings/organization` | `SettingsOrganization.tsx` | Configuración de organización + Team |
+| `/settings/preferences` | `SettingsPreferences.tsx` | **Preferencias de privacidad con hook optimista (v3.1)** |
+| `/settings/webhooks` | `WebhookSettings.tsx` | Configuración de webhooks |
+| `/settings/erp-config` | `ERPConfig.tsx` | Integración con sistemas ERP |
+| `/settings/audit` | `AuditLogs.tsx` | Logs de auditoría con filtros |
+| `*` | `NotFound.tsx` | Página 404 con navegación |
+
+### 7.2 Páginas Clave Detalladas
+
+#### Dashboard (/dashboard)
+
+**Propósito**: Centro de mando principal con KPIs y accesos rápidos.
+
+**Componentes v3.1**:
+- `Web3StatusWidget` - Estado de wallet y balances
+- `ActivityFeed` - Feed con Realtime subscriptions
+- `DashboardStats` - Tarjetas de estadísticas
+
+#### Architecture (/architecture) - NUEVO v3.1
+
+**Propósito**: Documentación técnica interactiva.
+
+**Estructura**:
+- 4 tabs: Base de Datos, Seguridad & RLS, Tech Stack, Flujos de Datos
+- Diagramas Mermaid renderizados con soporte dark mode
+- Cards explicativas con código de ejemplo
 
 #### DataView (/data/:id)
 
@@ -586,42 +1017,27 @@ const handleDownloadCSV = () => {
 
 **Persistencia**: Auto-guardado en localStorage para recuperar sesión.
 
-#### SettingsPreferences (/settings/privacy)
+#### SettingsPreferences (/settings/preferences)
 
 **Propósito**: Panel de control de privacidad del usuario.
 
-**Hook utilizado**: `usePrivacyPreferences`
+**Hook utilizado**: `usePrivacyPreferences` (v3.1)
 
 ```typescript
-// src/hooks/usePrivacyPreferences.tsx
-const { preferences, updatePreference, isLoading } = usePrivacyPreferences();
+const { preferences, updatePreference, loading } = usePrivacyPreferences();
 
-// Campos gestionados:
-// - profile_visible: boolean
-// - show_access_history: boolean
-// - access_alerts: boolean
-// - anonymous_research: boolean
-
-// Actualización optimista con rollback en error
-const handleToggle = async (field: string, value: boolean) => {
-  const previousValue = preferences[field];
-  setLocalState({ ...localState, [field]: value }); // Optimistic
-  
-  try {
-    await updatePreference(field, value);
-    toast.success('Preferencia actualizada');
-  } catch (error) {
-    setLocalState({ ...localState, [field]: previousValue }); // Rollback
-    toast.error('Error al actualizar');
-  }
-};
+// Toggle con persistencia optimista
+<Switch
+  checked={preferences.profile_visible}
+  onCheckedChange={(checked) => updatePreference('profile_visible', checked)}
+/>
 ```
 
 ---
 
-## 6. Personas de Usuario (Roles Técnicos)
+## 8. Personas de Usuario (Roles Técnicos)
 
-### 6.1 Sistema de Roles
+### 8.1 Sistema de Roles
 
 PROCUREDATA implementa un sistema de roles basado en la tabla `user_roles` con Row Level Security (RLS).
 
@@ -666,7 +1082,7 @@ AS $$
 $$;
 ```
 
-### 6.2 Roles por Tipo de Organización
+### 8.2 Roles por Tipo de Organización
 
 | Tipo de Org | Rol Típico | Permisos Principales |
 |-------------|------------|---------------------|
@@ -674,7 +1090,7 @@ $$;
 | **Provider (Subject)** | admin, approver | Gestionar activos, aprobar/rechazar solicitudes |
 | **Data Holder** | admin, api_configurator | Custodia de datos, configurar ERPs, segunda aprobación |
 
-### 6.3 Flujos por Rol
+### 8.3 Flujos por Rol
 
 #### Data Consumer
 
@@ -709,9 +1125,9 @@ graph LR
 
 ---
 
-## 7. Modelo de Gobernanza Técnica
+## 9. Modelo de Gobernanza Técnica
 
-### 7.1 Políticas de Acceso
+### 9.1 Políticas de Acceso
 
 #### Flujo de Aprobación Multi-Etapa
 
@@ -760,56 +1176,11 @@ CREATE TABLE public.approval_history (
 );
 ```
 
-### 7.2 Mecanismo de Consentimiento
+### 9.2 Mecanismo de Consentimiento
 
-#### Hook usePrivacyPreferences
+El hook `usePrivacyPreferences` gestiona las preferencias de privacidad con persistencia optimista. Ver [Sección 6.3](#63-useprivacypreferences---persistencia-optimista-nuevo-v31).
 
-```typescript
-// src/hooks/usePrivacyPreferences.tsx
-export function usePrivacyPreferences() {
-  const { user } = useAuth();
-  const queryClient = useQueryClient();
-
-  const { data: preferences, isLoading } = useQuery({
-    queryKey: ['privacy-preferences', user?.id],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from('privacy_preferences')
-        .select('*')
-        .eq('user_id', user?.id)
-        .single();
-      return data;
-    },
-    enabled: !!user?.id,
-  });
-
-  const updatePreference = useMutation({
-    mutationFn: async ({ field, value }: { field: string; value: boolean }) => {
-      const { error } = await supabase
-        .from('privacy_preferences')
-        .update({ [field]: value, updated_at: new Date().toISOString() })
-        .eq('user_id', user?.id);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['privacy-preferences'] });
-    },
-  });
-
-  return { preferences, updatePreference: updatePreference.mutate, isLoading };
-}
-```
-
-#### Campos de Preferencias
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| `profile_visible` | boolean | Perfil visible en marketplace |
-| `show_access_history` | boolean | Mostrar historial de accesos |
-| `access_alerts` | boolean | Notificaciones de acceso a datos |
-| `anonymous_research` | boolean | Permitir uso anónimo para investigación |
-
-### 7.3 Revocación de Acceso
+### 9.3 Revocación de Acceso
 
 #### Componente RevokeAccessButton
 
@@ -848,9 +1219,9 @@ const handleRevoke = async () => {
 
 ---
 
-## 8. Seguridad y Auditoría
+## 10. Seguridad y Auditoría
 
-### 8.1 Autenticación Dual
+### 10.1 Autenticación Dual
 
 PROCUREDATA implementa un modelo de **autenticación dual** que combina:
 
@@ -892,7 +1263,24 @@ async signMessage(message: string): Promise<string> {
 }
 ```
 
-### 8.2 Row Level Security (RLS)
+#### Validación Zod (Auth.tsx) - NUEVO v3.1
+
+```typescript
+const authSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "El email es obligatorio")
+    .email("Introduce un email válido")
+    .max(255, "Email demasiado largo"),
+  password: z
+    .string()
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .max(72, "Contraseña demasiado larga"),
+});
+```
+
+### 10.2 Row Level Security (RLS)
 
 #### Políticas Implementadas
 
@@ -919,7 +1307,6 @@ USING (
 #### Funciones Security Definer
 
 ```sql
--- Función que ejecuta con privilegios elevados
 CREATE FUNCTION public.get_user_organization(_user_id UUID)
 RETURNS UUID
 LANGUAGE SQL STABLE SECURITY DEFINER
@@ -932,7 +1319,7 @@ AS $$
 $$;
 ```
 
-### 8.3 Trazabilidad End-to-End
+### 10.3 Trazabilidad End-to-End
 
 ```mermaid
 sequenceDiagram
@@ -958,7 +1345,7 @@ sequenceDiagram
     Exp-->>User: Detalles inmutables
 ```
 
-### 8.4 Audit Logs
+### 10.4 Audit Logs
 
 ```sql
 CREATE TABLE public.audit_logs (
@@ -983,9 +1370,9 @@ USING (public.has_role(auth.uid(), organization_id, 'admin'));
 
 ---
 
-## 9. Casos de Uso Principales
+## 11. Casos de Uso Principales
 
-### 9.1 Caso 1: Onboarding Web3
+### 11.1 Caso 1: Onboarding Web3
 
 **Objetivo**: Usuario conecta su wallet y obtiene identidad verificable.
 
@@ -1030,42 +1417,7 @@ sequenceDiagram
     WB-->>U: UI actualizada con perfil
 ```
 
-**Código clave**:
-
-```typescript
-// src/services/pontusX.ts
-async connectWallet(): Promise<WalletState> {
-  if (!window.ethereum) {
-    return { ...INITIAL_STATE, error: 'No Web3 wallet detected' };
-  }
-
-  try {
-    this.provider = new ethers.BrowserProvider(window.ethereum);
-    const accounts = await this.provider.send('eth_requestAccounts', []);
-    const address = accounts[0];
-
-    await this.switchNetwork();
-    this.signer = await this.provider.getSigner();
-
-    const balance = await this.provider.getBalance(address);
-    const euroeBalance = await this.getEUROeBalance(address);
-    const did = this.generateDID(address);
-
-    return {
-      isConnected: true,
-      address,
-      balance: ethers.formatEther(balance),
-      euroeBalance,
-      did,
-      chainId: PONTUSX_NETWORK_CONFIG.chainId,
-    };
-  } catch (error) {
-    return { ...INITIAL_STATE, error: error.message };
-  }
-}
-```
-
-### 9.2 Caso 2: Intercambio de Datos con EUROe
+### 11.2 Caso 2: Intercambio de Datos con EUROe
 
 **Objetivo**: Consumer adquiere acceso a datos pagando con token EUROe.
 
@@ -1114,7 +1466,7 @@ sequenceDiagram
     PG-->>C: Confirmación + Redirect a /requests
 ```
 
-### 9.3 Caso 3: Auditoría Forense
+### 11.3 Caso 3: Auditoría Forense
 
 **Objetivo**: Verificar la integridad de un acceso a datos mediante blockchain.
 
@@ -1173,43 +1525,387 @@ const verifyIntegrity = (event: LineageEvent) => {
 
 ---
 
-## 10. Anexos
+## 12. Mejoras de UX v3.1
 
-### 10.1 Esquema de Base de Datos Completo
+### 12.1 Loading States Individuales (Requests.tsx)
 
-#### Tablas Principales (28)
+```typescript
+const [processingId, setProcessingId] = useState<string | null>(null);
 
-| Tabla | Propósito | Relaciones Clave |
-|-------|-----------|------------------|
-| `organizations` | Entidades (Consumer/Provider/Holder) | Base para user_profiles, data_assets |
-| `user_profiles` | Perfil de usuario por organización | → organizations, auth.users |
-| `user_roles` | Roles y permisos | → organizations, auth.users |
-| `data_products` | Catálogo de tipos de producto | → data_assets |
-| `data_assets` | Instancias de datos publicados | → data_products, organizations |
-| `data_transactions` | Solicitudes de intercambio | → data_assets, organizations |
-| `approval_history` | Log de aprobaciones | → data_transactions |
-| `data_policies` | Políticas ODRL | → data_transactions |
-| `data_payloads` | Contenido de datos | → data_transactions |
-| `supplier_data` | Datos de proveedor | → data_transactions |
-| `audit_logs` | Logs de auditoría | → organizations |
-| `notifications` | Notificaciones de usuario | → auth.users |
-| `privacy_preferences` | Preferencias de privacidad | → auth.users |
-| `esg_reports` | Reportes ESG | → organizations |
-| `erp_configurations` | Configuraciones ERP | → organizations |
-| `export_logs` | Logs de exportación | → data_transactions, erp_configurations |
-| `catalog_metadata` | Metadatos de catálogo | → data_assets |
-| `marketplace_opportunities` | Oportunidades de mercado | → organizations |
-| `organization_reviews` | Reseñas entre orgs | → organizations, data_transactions |
-| `transaction_messages` | Chat de negociación | → data_transactions |
-| `user_wishlist` | Lista de deseos | → data_assets, auth.users |
-| `value_services` | Servicios de valor añadido | → organizations |
-| `wallets` | Wallets de organización | → organizations |
-| `wallet_transactions` | Transacciones de wallet | → wallets |
-| `innovation_lab_concepts` | Conceptos de innovación | Standalone |
-| `success_stories` | Casos de éxito | Standalone |
-| `login_attempts` | Intentos de login | Standalone |
+const handleApprove = async (transactionId: string) => {
+  setProcessingId(transactionId);
+  try {
+    await supabase.from('data_transactions').update({ ... });
+    toast.success('Transacción aprobada');
+  } finally {
+    setProcessingId(null);
+  }
+};
 
-### 10.2 Enums del Sistema
+// En el botón:
+<Button
+  onClick={() => handleApprove(transaction.id)}
+  disabled={processingId !== null}
+>
+  {processingId === transaction.id ? (
+    <Loader2 className="h-4 w-4 animate-spin" />
+  ) : (
+    <CheckCircle className="h-4 w-4" />
+  )}
+</Button>
+```
+
+### 12.2 Confirmación con AlertDialog (Opportunities.tsx)
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button>Proponer mis Datos</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Confirmar Propuesta</AlertDialogTitle>
+      <AlertDialogDescription>
+        ¿Estás seguro? Los datos serán compartidos según el contrato.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancelar</AlertDialogCancel>
+      <AlertDialogAction onClick={() => handleProposal(opp.id)}>
+        Confirmar
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+### 12.3 Skeleton Loaders (SettingsPreferences.tsx)
+
+```tsx
+{loading ? (
+  <div className="space-y-4">
+    <Skeleton className="h-12 w-full" />
+    <Skeleton className="h-12 w-full" />
+    <Skeleton className="h-12 w-full" />
+  </div>
+) : (
+  <div className="space-y-4">
+    {/* Contenido real */}
+  </div>
+)}
+```
+
+### 12.4 Validación Zod (Auth.tsx)
+
+```typescript
+const authSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "El email es obligatorio")
+    .email("Introduce un email válido")
+    .max(255, "Email demasiado largo"),
+  password: z
+    .string()
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .max(72, "Contraseña demasiado larga"),
+});
+
+// Uso con React Hook Form
+const form = useForm({
+  resolver: zodResolver(authSchema),
+});
+```
+
+### 12.5 Estados Vacíos Consistentes (EmptyState)
+
+```tsx
+// src/components/EmptyState.tsx
+interface EmptyStateProps {
+  icon?: LucideIcon;
+  title: string;
+  description?: string;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+}
+
+<EmptyState
+  icon={FileText}
+  title="No hay transacciones"
+  description="Cuando realices solicitudes de datos, aparecerán aquí."
+  action={{
+    label: "Explorar Catálogo",
+    onClick: () => navigate('/catalog')
+  }}
+/>
+```
+
+---
+
+## 13. Edge Functions
+
+### 13.1 erp-api-tester
+
+**Propósito**: Test de conectividad a APIs ERP externas
+
+**Ruta**: `POST /functions/v1/erp-api-tester`
+
+```typescript
+// Request
+{
+  apiUrl: string;
+  apiKey: string;
+  method: 'GET' | 'POST';
+}
+
+// Response
+{
+  success: boolean;
+  responseTime: number;
+  statusCode: number;
+}
+```
+
+### 13.2 erp-data-uploader
+
+**Propósito**: Envío de datos estructurados a sistemas ERP
+
+**Ruta**: `POST /functions/v1/erp-data-uploader`
+
+```typescript
+// Request
+{
+  configId: string;
+  transactionId: string;
+  data: object;
+}
+
+// Response
+{
+  success: boolean;
+  externalId: string;
+}
+```
+
+### 13.3 notification-handler
+
+**Propósito**: Emails transaccionales via Resend
+
+**Ruta**: `POST /functions/v1/notification-handler`
+
+```typescript
+// Request
+{
+  type: 'pre_approved' | 'approved' | 'denied' | 'completed';
+  transactionId: string;
+  recipientEmail: string;
+}
+
+// Response
+{
+  success: boolean;
+  messageId: string;
+}
+```
+
+---
+
+## 14. Guía de Desarrollo
+
+### 14.1 Tokens de Diseño (index.css)
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --destructive: 0 84.2% 60.2%;
+  --border: 214.3 31.8% 91.4%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  /* ... */
+}
+```
+
+### 14.2 Uso Correcto de Colores
+
+```tsx
+// ✅ CORRECTO: Usar tokens semánticos
+<div className="bg-background text-foreground" />
+<Button className="bg-primary text-primary-foreground" />
+<Badge variant="destructive" />
+<Card className="border-border" />
+
+// ❌ INCORRECTO: Colores hardcoded
+<div className="bg-white text-black" />
+<Button className="bg-blue-600" />
+<div style={{ color: '#333' }} />
+```
+
+### 14.3 Archivos NO Editables
+
+Los siguientes archivos son autogenerados y **NO deben modificarse manualmente**:
+
+| Archivo | Razón |
+|---------|-------|
+| `src/integrations/supabase/client.ts` | Cliente Supabase autogenerado |
+| `src/integrations/supabase/types.ts` | Tipos de base de datos autogenerados |
+| `supabase/config.toml` | Configuración de Supabase |
+| `supabase/migrations/*` | Historial de migraciones |
+| `.env` | Variables de entorno (no commitear) |
+
+### 14.4 Convenciones de Código
+
+| Aspecto | Convención |
+|---------|------------|
+| Componentes | PascalCase (`UserProfile.tsx`) |
+| Hooks | camelCase con prefijo `use` (`useAuth.tsx`) |
+| Servicios | camelCase (`pontusX.ts`) |
+| Tipos | PascalCase (`WalletState`) |
+| Archivos CSS | kebab-case si necesario |
+| Imports | Absolute paths con `@/` |
+
+### 14.5 Estructura de Imports
+
+```typescript
+// 1. React y librerías externas
+import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+// 2. Componentes UI
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+
+// 3. Componentes custom
+import { WalletButton } from '@/components/WalletButton';
+
+// 4. Hooks
+import { useAuth } from '@/hooks/useAuth';
+
+// 5. Servicios y utilidades
+import { supabase } from '@/integrations/supabase/client';
+import { pontusXService } from '@/services/pontusX';
+
+// 6. Tipos
+import type { WalletState } from '@/types/web3.types';
+```
+
+---
+
+## 15. Estado de Auditoría
+
+### 15.1 Resumen de Tareas
+
+| Prioridad | Completadas | Total | % |
+|-----------|-------------|-------|---|
+| 🔴 Crítica | 6 | 6 | 100% |
+| 🟠 Alta | 3 | 6 | 50% |
+| 🟢 Mejora | 4 | 10 | 40% |
+
+### 15.2 Críticos Completados ✅
+
+- [x] Limpieza de logs de desarrollo en producción
+- [x] Loading states en acciones destructivas (`processingId`)
+- [x] Validación Zod en formularios críticos (Auth.tsx)
+- [x] Confirmación AlertDialog antes de acciones irreversibles
+- [x] Skeleton loaders para estados de carga
+- [x] Integración Web3 en contexto de autenticación híbrida
+
+### 15.3 Alta Prioridad Completados ✅
+
+- [x] Hook `usePrivacyPreferences` con persistencia optimista
+- [x] Componente `Web3StatusWidget` en Dashboard
+- [x] Componente `EmptyState` reutilizable
+
+### 15.4 Pendientes Alta Prioridad
+
+- [ ] Integración EDC (Eclipse Dataspace Connector)
+- [ ] SSI Wallet completa (requiere infraestructura Gaia-X)
+- [ ] Indicadores visuales de EUROe en tarjetas de Catálogo
+
+### 15.5 Mejoras Completadas ✅
+
+- [x] Página `/architecture` con tabs interactivos
+- [x] Componente `MermaidDiagram.tsx` con dark mode
+- [x] ActivityFeed con Realtime subscriptions
+- [x] Cleanup correcto de channels WebSocket
+
+---
+
+## 16. Anexos
+
+### 16.1 Esquema de Base de Datos Completo (28 tablas)
+
+#### Organizaciones y Usuarios
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `organizations` | id, name, type, sector, kyb_verified, did, wallet_address | Entidades del sistema |
+| `user_profiles` | user_id, organization_id, full_name, position | Perfiles de usuario |
+| `user_roles` | user_id, organization_id, role | Roles por organización |
+| `privacy_preferences` | user_id, profile_visible, access_alerts | Preferencias de privacidad |
+
+#### Catálogo de Datos
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `data_products` | id, name, category, schema_definition, version | Plantillas de productos |
+| `data_assets` | id, product_id, holder_org_id, subject_org_id, price | Activos disponibles |
+| `catalog_metadata` | asset_id, tags, categories, visibility | Metadatos de catálogo |
+
+#### Transacciones
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `data_transactions` | id, asset_id, consumer_org_id, subject_org_id, holder_org_id, status | Transacciones |
+| `approval_history` | transaction_id, actor_org_id, action, notes | Historial de aprobaciones (Realtime) |
+| `data_policies` | transaction_id, odrl_policy_json | Smart Contracts ODRL |
+| `data_payloads` | transaction_id, schema_type, data_content | Contenido de datos |
+| `transaction_messages` | transaction_id, sender_org_id, content | Chat de negociación |
+
+#### Finanzas
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `wallets` | organization_id, balance, currency, address | Billeteras |
+| `wallet_transactions` | from_wallet_id, to_wallet_id, amount, type | Movimientos |
+
+#### Sistema y Seguridad
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `notifications` | user_id, type, title, message, is_read | Sistema Realtime |
+| `login_attempts` | email, ip_address, success, attempted_at | Rate Limiting |
+| `audit_logs` | actor_id, action, resource, details | Trazabilidad |
+| `export_logs` | transaction_id, format, exported_by | Auditoría exportaciones |
+
+#### Otros
+
+| Tabla | Descripción |
+|-------|-------------|
+| `esg_reports` | Reportes de sostenibilidad |
+| `marketplace_opportunities` | Demandas de datos |
+| `erp_configurations` | Integraciones ERP |
+| `supplier_data` | Datos estructurados de proveedores |
+| `value_services` | Servicios adicionales |
+| `organization_reviews` | Reseñas entre organizaciones |
+| `success_stories` | Casos de éxito |
+| `innovation_lab_concepts` | Conceptos del Innovation Lab |
+| `user_wishlist` | Lista de deseos de usuarios |
+
+### 16.2 Enums del Sistema
 
 ```sql
 -- Tipos de organización
@@ -1235,15 +1931,7 @@ CREATE TYPE erp_config_type AS ENUM ('download', 'upload');
 CREATE TYPE auth_method AS ENUM ('bearer', 'api_key', 'oauth', 'basic');
 ```
 
-### 10.3 Edge Functions
-
-| Función | Ruta | Propósito |
-|---------|------|-----------|
-| `erp-api-tester` | `/erp-api-tester` | Prueba conectividad con endpoints ERP |
-| `erp-data-uploader` | `/erp-data-uploader` | Envía datos a sistemas ERP configurados |
-| `notification-handler` | `/notification-handler` | Envía emails transaccionales vía Resend |
-
-### 10.4 Variables de Entorno
+### 16.3 Variables de Entorno
 
 | Variable | Ámbito | Descripción |
 |----------|--------|-------------|
@@ -1255,18 +1943,87 @@ CREATE TYPE auth_method AS ENUM ('bearer', 'api_key', 'oauth', 'basic');
 | `SUPABASE_SERVICE_ROLE_KEY` | Edge Functions | Service role (privilegiado) |
 | `RESEND_API_KEY` | Edge Functions | API key para emails |
 
+### 16.4 Estructura del Proyecto
+
+```
+procuredata/
+├── docs/                          # Documentación técnica
+│   └── DOCUMENTO_TECNICO.md       # Este archivo (v3.1)
+│
+├── src/
+│   ├── components/                # 40+ componentes custom
+│   │   ├── ui/                    # 49 componentes Shadcn/UI
+│   │   ├── AppLayout.tsx
+│   │   ├── AppSidebar.tsx
+│   │   ├── Web3StatusWidget.tsx   # NUEVO v3.1
+│   │   ├── WalletButton.tsx
+│   │   ├── ActivityFeed.tsx       # MEJORADO v3.1
+│   │   ├── EmptyState.tsx         # NUEVO v3.1
+│   │   ├── MermaidDiagram.tsx     # NUEVO v3.1
+│   │   └── ...
+│   │
+│   ├── pages/                     # 27 páginas
+│   │   ├── Landing.tsx
+│   │   ├── Auth.tsx               # Validación Zod v3.1
+│   │   ├── Dashboard.tsx          # + Web3Widget v3.1
+│   │   ├── Architecture.tsx       # Tabs interactivos v3.1
+│   │   └── ...
+│   │
+│   ├── hooks/                     # 8 hooks personalizados
+│   │   ├── useAuth.tsx
+│   │   ├── useWeb3Wallet.tsx      # NUEVO v3.1
+│   │   ├── usePrivacyPreferences.tsx  # NUEVO v3.1
+│   │   └── ...
+│   │
+│   ├── services/
+│   │   └── pontusX.ts             # Servicio Web3
+│   │
+│   ├── types/
+│   │   ├── database.extensions.ts
+│   │   └── web3.types.ts
+│   │
+│   └── integrations/
+│       └── supabase/
+│           ├── client.ts          # NO EDITAR
+│           └── types.ts           # NO EDITAR
+│
+├── supabase/
+│   ├── functions/                 # 3 Edge Functions
+│   │   ├── erp-api-tester/
+│   │   ├── erp-data-uploader/
+│   │   └── notification-handler/
+│   │
+│   ├── migrations/                # NO EDITAR
+│   └── config.toml                # NO EDITAR
+│
+└── public/                        # Assets estáticos
+```
+
 ---
 
-## Historial de Versiones
+## 17. Historial de Versiones
 
 | Versión | Fecha | Cambios Principales |
 |---------|-------|---------------------|
-| 3.0 | Enero 2026 | Integración Web3 completa, SSI con DIDs, Pagos EUROe |
-| 2.5 | Dic 2025 | Realtime ActivityFeed, mejoras UX |
-| 2.0 | Nov 2025 | Modelo tripartito, políticas ODRL |
-| 1.0 | Oct 2025 | MVP inicial con catálogo básico |
+| **3.1** | **05 Enero 2026** | Web3StatusWidget, useWeb3Wallet, usePrivacyPreferences, ActivityFeed Realtime, EmptyState, MermaidDiagram, página Architecture interactiva, validación Zod, loading states individuales, AlertDialog confirmaciones |
+| 3.0 | Diciembre 2025 | Integración Web3 completa, SSI con DIDs, Pagos EUROe, WalletButton |
+| 2.5 | Diciembre 2025 | Realtime notifications, mejoras UX básicas |
+| 2.0 | Noviembre 2025 | Modelo tripartito Consumer/Subject/Holder, políticas ODRL, Innovation Lab |
+| 1.0 | Octubre 2025 | MVP inicial con catálogo básico y autenticación |
 
 ---
 
-**Documento generado automáticamente por PROCUREDATA Technical Documentation System**  
-**Última actualización**: Enero 2026
+## Referencias
+
+- [W3C DID Core 1.0](https://www.w3.org/TR/did-core/)
+- [ODRL Information Model 2.2](https://www.w3.org/TR/odrl-model/)
+- [Gaia-X Trust Framework](https://gaia-x.eu/)
+- [IDSA Reference Architecture Model](https://internationaldataspaces.org/)
+- [Pontus-X Documentation](https://pontus-x.eu/docs)
+- [EUROe Stablecoin](https://euroe.com/)
+
+---
+
+**Documento generado por PROCUREDATA Technical Documentation System**  
+**Última actualización**: 05 Enero 2026  
+**Versión**: 3.1 (Web3 Enabled + UX Improvements)
