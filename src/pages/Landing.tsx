@@ -78,7 +78,7 @@ export default function Landing() {
                 <Link to="/auth">Probar Demo Interactiva</Link>
               </Button>
               <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                <Link to="/architecture">Ver Documentación Técnica</Link>
+                <Link to="/docs/tecnico">Ver Documentación Técnica</Link>
               </Button>
             </div>
           </div>
@@ -188,8 +188,8 @@ export default function Landing() {
               ))}
             </div>
             <div className="mt-12">
-              <Link to="/architecture" className="text-primary hover:underline underline-offset-4 flex items-center justify-center gap-2">
-                Ver Diagrama de Arquitectura Completo <ArrowRight className="h-4 w-4" />
+              <Link to="/docs/tecnico" className="text-primary hover:underline underline-offset-4 flex items-center justify-center gap-2">
+                Ver Documento Técnico Completo <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -205,7 +205,7 @@ export default function Landing() {
           <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
             <Link to="/auth" className="hover:text-foreground">Acceso Demo</Link>
             <Link to="/guide" className="hover:text-foreground">Guía del Ecosistema</Link>
-            <Link to="/architecture" className="hover:text-foreground">Documentación</Link>
+            <Link to="/docs/tecnico" className="hover:text-foreground">Documentación Técnica</Link>
             <Link 
               to="/whitepaper" 
               className="hover:text-foreground flex items-center gap-1.5 text-primary font-medium"
