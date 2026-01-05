@@ -2,10 +2,46 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { User, Bell, Eye, Palette } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { User, Bell, Eye, Palette, Shield } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
+import { usePrivacyPreferences } from "@/hooks/usePrivacyPreferences";
 
 const SettingsPreferences = () => {
+  const { preferences, loading, updatePreference } = usePrivacyPreferences();
+
+  if (loading) {
+    return (
+      <div className="container mx-auto p-6 space-y-8">
+        <div className="rounded-lg border p-8">
+          <Skeleton className="h-6 w-32 mb-4" />
+          <Skeleton className="h-10 w-64 mb-3" />
+          <Skeleton className="h-5 w-96" />
+        </div>
+        <div className="grid gap-6">
+          {[1, 2, 3].map((i) => (
+            <Card key={i}>
+              <CardHeader>
+                <Skeleton className="h-6 w-40" />
+                <Skeleton className="h-4 w-64" />
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between">
+                  <Skeleton className="h-10 w-48" />
+                  <Skeleton className="h-6 w-12" />
+                </div>
+                <div className="flex justify-between">
+                  <Skeleton className="h-10 w-48" />
+                  <Skeleton className="h-6 w-12" />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6 space-y-8">
       <FadeIn>
@@ -27,6 +63,73 @@ const SettingsPreferences = () => {
 
       <FadeIn delay={0.1}>
         <div className="grid gap-6">
+          {/* Privacy & Security Card - Connected to usePrivacyPreferences */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                <CardTitle>Privacidad y Seguridad</CardTitle>
+              </div>
+              <CardDescription>
+                Controla quién puede ver tu información y cómo se usa
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="profile-visible">Perfil Visible</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Permite que otras organizaciones vean tu perfil público
+                  </p>
+                </div>
+                <Switch
+                  id="profile-visible"
+                  checked={preferences.profile_visible}
+                  onCheckedChange={(value) => updatePreference("profile_visible", value)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="show-access-history">Historial de Acceso</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Mostrar historial de quién ha accedido a tus datos
+                  </p>
+                </div>
+                <Switch
+                  id="show-access-history"
+                  checked={preferences.show_access_history}
+                  onCheckedChange={(value) => updatePreference("show_access_history", value)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="access-alerts">Alertas de Acceso</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Recibe notificaciones cuando accedan a tus datos
+                  </p>
+                </div>
+                <Switch
+                  id="access-alerts"
+                  checked={preferences.access_alerts}
+                  onCheckedChange={(value) => updatePreference("access_alerts", value)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="anonymous-research">Investigación Anónima</Label>
+                  <p className="text-sm text-muted-foreground">
+                    Permitir uso anónimo de datos para investigación
+                  </p>
+                </div>
+                <Switch
+                  id="anonymous-research"
+                  checked={preferences.anonymous_research}
+                  onCheckedChange={(value) => updatePreference("anonymous_research", value)}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
