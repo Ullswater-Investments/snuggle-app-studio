@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
   Coins, Shield, FileCheck, Activity, Cpu, Network, 
-  ArrowLeft, ArrowRight, Calculator, Sparkles, TrendingUp
+  ArrowLeft, ArrowRight, Calculator, Sparkles, TrendingUp, GitBranch
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 const MODELS = [
   {
@@ -219,6 +220,92 @@ export default function BusinessModels() {
             );
           })}
         </motion.div>
+
+        {/* Diagrama de Flujo - Marketplace Fee */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-20"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-yellow-500/10 rounded-lg">
+              <GitBranch className="h-5 w-5 text-yellow-600" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">Flujo de Valor: Marketplace Fee</h2>
+              <p className="text-muted-foreground text-sm">
+                Visualización del flujo de pagos atómicos vía Smart Contract
+              </p>
+            </div>
+          </div>
+          
+          <MermaidDiagram
+            chart={`
+sequenceDiagram
+    participant C as 🏢 Consumer<br/>(Comprador de Datos)
+    participant P as ⚡ PROCUREDATA<br/>(Smart Contract)
+    participant B as 🔗 Pontus-X<br/>(Blockchain)
+    participant S as 🏭 Provider<br/>(Proveedor de Datos)
+    
+    Note over C,S: Transacción de 1,000 EUROe por Dataset ESG
+    
+    C->>P: 1. Solicita acceso al dataset
+    P->>C: 2. Genera contrato ODRL + precio
+    C->>P: 3. Paga 1,000 EUROe
+    
+    rect rgb(255, 245, 200)
+        Note over P: Split automático (3% fee)
+        P->>P: Retiene 30 EUROe (Platform Fee)
+        P->>B: 4. Registra transacción on-chain
+        B-->>P: 5. Confirma hash inmutable
+    end
+    
+    P->>S: 6. Transfiere 970 EUROe
+    P->>C: 7. Libera acceso al dataset
+    
+    Note over C,S: ✅ Pago y acceso atómicos - Sin facturas pendientes
+            `}
+            className="border-2 border-yellow-500/20 bg-gradient-to-br from-yellow-50/50 to-orange-50/30 dark:from-yellow-950/20 dark:to-orange-950/10"
+          />
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <Card className="bg-yellow-500/5 border-yellow-500/20">
+              <CardContent className="pt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Coins className="h-4 w-4 text-yellow-600" />
+                  <span className="font-semibold text-sm">Fee Automático</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  2-5% retenido por Smart Contract antes de la transferencia. Sin intervención manual.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-green-500/5 border-green-500/20">
+              <CardContent className="pt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <FileCheck className="h-4 w-4 text-green-600" />
+                  <span className="font-semibold text-sm">Trazabilidad Total</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Cada transacción queda registrada en Pontus-X con hash inmutable y timestamp.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="bg-blue-500/5 border-blue-500/20">
+              <CardContent className="pt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Shield className="h-4 w-4 text-blue-600" />
+                  <span className="font-semibold text-sm">Pago Atómico</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Liberación de acceso simultánea al pago. Imposible cobrar sin entregar.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </motion.section>
 
         {/* Simulador ROI Gamificado */}
         <motion.section
