@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
   ShieldCheck, 
@@ -15,7 +15,19 @@ import {
   ArrowRight,
   ArrowUp,
   ArrowLeft,
-  LucideIcon
+  LucideIcon,
+  Car,
+  Zap,
+  Pill,
+  ShoppingBag,
+  HardHat,
+  TrendingUp,
+  Truck,
+  Wheat,
+  Rocket,
+  Monitor,
+  Filter,
+  X
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -32,6 +44,26 @@ interface Testimonial {
   company: string;
 }
 
+interface Industry {
+  id: string;
+  name: string;
+  icon: LucideIcon;
+}
+
+const INDUSTRIES: Industry[] = [
+  { id: "all", name: "Todas", icon: Filter },
+  { id: "Automotive", name: "Automoción", icon: Car },
+  { id: "Energy", name: "Energía", icon: Zap },
+  { id: "Pharma", name: "Farmacéutica", icon: Pill },
+  { id: "Retail", name: "Retail", icon: ShoppingBag },
+  { id: "Construction", name: "Construcción", icon: HardHat },
+  { id: "Finance", name: "Finanzas", icon: TrendingUp },
+  { id: "Logistics", name: "Logística", icon: Truck },
+  { id: "AgriFood", name: "Agroalimentario", icon: Wheat },
+  { id: "Aerospace", name: "Aeroespacial", icon: Rocket },
+  { id: "Tech", name: "Tecnología", icon: Monitor }
+];
+
 interface UseCase {
   id: string;
   title: string;
@@ -46,6 +78,7 @@ interface UseCase {
   solution: string;
   mermaidChart: string;
   testimonial: Testimonial;
+  industries: string[];
 }
 
 const USE_CASES: UseCase[] = [
@@ -78,7 +111,8 @@ const USE_CASES: UseCase[] = [
       author: "María García",
       role: "Directora de Compras",
       company: "Inditex Supply"
-    }
+    },
+    industries: ["Automotive", "Energy", "Pharma", "Retail", "Construction", "Finance", "Logistics", "AgriFood", "Aerospace", "Tech"]
   },
   {
     id: "huella-carbono",
@@ -105,7 +139,8 @@ const USE_CASES: UseCase[] = [
       author: "Hans Müller",
       role: "Chief Sustainability Officer",
       company: "BMW Group"
-    }
+    },
+    industries: ["Automotive", "Energy", "Pharma", "Construction", "Logistics", "AgriFood", "Aerospace"]
   },
   {
     id: "marketplace-euroe",
@@ -136,7 +171,8 @@ const USE_CASES: UseCase[] = [
       author: "Sophie Chen",
       role: "CEO",
       company: "DataBroker AG"
-    }
+    },
+    industries: ["Automotive", "Energy", "Pharma", "Retail", "Construction", "Finance", "Logistics", "AgriFood", "Aerospace", "Tech"]
   },
   {
     id: "kill-switch",
@@ -162,7 +198,8 @@ const USE_CASES: UseCase[] = [
       author: "Carlos Ruiz",
       role: "CISO",
       company: "Telefónica"
-    }
+    },
+    industries: ["Pharma", "Finance", "Tech", "Aerospace"]
   },
   {
     id: "pasaporte-digital",
@@ -197,7 +234,8 @@ const USE_CASES: UseCase[] = [
       author: "Elena Rossi",
       role: "Directora de Sostenibilidad",
       company: "Gucci"
-    }
+    },
+    industries: ["Automotive", "Pharma", "Retail", "AgriFood", "Aerospace"]
   },
   {
     id: "compute-to-data",
@@ -228,7 +266,8 @@ const USE_CASES: UseCase[] = [
       author: "Dr. James Wilson",
       role: "CTO",
       company: "Roche Pharma"
-    }
+    },
+    industries: ["Pharma", "Finance", "Tech", "Aerospace"]
   },
   {
     id: "gestion-recalls",
@@ -254,7 +293,8 @@ const USE_CASES: UseCase[] = [
       author: "Akiko Tanaka",
       role: "VP Quality",
       company: "Toyota"
-    }
+    },
+    industries: ["Automotive", "Pharma", "AgriFood", "Aerospace"]
   },
   {
     id: "financiacion-defi",
@@ -279,7 +319,8 @@ const USE_CASES: UseCase[] = [
       author: "Pedro Álvarez",
       role: "Propietario",
       company: "Finca La Esperanza"
-    }
+    },
+    industries: ["Retail", "Construction", "Finance", "AgriFood"]
   },
   {
     id: "cadena-frio",
@@ -314,7 +355,8 @@ const USE_CASES: UseCase[] = [
       author: "Lars Johansson",
       role: "Director de Logística",
       company: "Maersk Cold"
-    }
+    },
+    industries: ["Pharma", "AgriFood", "Logistics"]
   },
   {
     id: "licencias-odrl",
@@ -342,12 +384,14 @@ const USE_CASES: UseCase[] = [
       author: "Dr. Priya Sharma",
       role: "Directora de Investigación",
       company: "Oxford University"
-    }
+    },
+    industries: ["Pharma", "Finance", "Tech", "Aerospace"]
   }
 ];
 
 export default function UseCases() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -363,6 +407,14 @@ export default function UseCases() {
 
   const getInitials = (name: string) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  };
+
+  const filteredUseCases = selectedIndustry === "all"
+    ? USE_CASES
+    : USE_CASES.filter(uc => uc.industries.includes(selectedIndustry));
+
+  const getIndustryName = (id: string) => {
+    return INDUSTRIES.find(ind => ind.id === id)?.name || id;
   };
 
   return (
@@ -404,59 +456,142 @@ export default function UseCases() {
         </div>
       </section>
 
+      {/* Industry Filter */}
+      <section className="py-6 bg-muted/30 border-b">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-4">
+            <h3 className="text-sm font-medium text-muted-foreground flex items-center justify-center gap-2">
+              <Filter className="h-4 w-4" />
+              Filtrar por Industria
+            </h3>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            {INDUSTRIES.map((industry) => (
+              <Button
+                key={industry.id}
+                variant={selectedIndustry === industry.id ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedIndustry(industry.id)}
+                className="gap-2"
+              >
+                <industry.icon className="h-4 w-4" />
+                <span className="hidden sm:inline">{industry.name}</span>
+                <span className="sm:hidden">{industry.name.slice(0, 3)}</span>
+              </Button>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Mostrando {filteredUseCases.length} de {USE_CASES.length} casos de uso
+            {selectedIndustry !== "all" && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedIndustry("all")}
+                className="ml-2 h-6 px-2 text-xs"
+              >
+                <X className="h-3 w-3 mr-1" />
+                Limpiar filtro
+              </Button>
+            )}
+          </p>
+        </div>
+      </section>
+
       {/* Quick Navigation */}
       <section className="py-6 sticky top-[65px] z-40 bg-background/95 backdrop-blur-md border-b">
         <div className="container mx-auto px-4">
           <div className="flex justify-center gap-2 md:gap-4 overflow-x-auto pb-2 scrollbar-hide">
-            {USE_CASES.map((useCase) => (
-              <a
-                key={useCase.id}
-                href={`#${useCase.id}`}
-                className={`flex flex-col items-center gap-1 p-2 md:p-3 rounded-lg hover:bg-muted/50 transition-colors min-w-[60px] md:min-w-[80px] group`}
-                title={useCase.title}
-              >
-                <div className={`p-2 rounded-lg ${useCase.bgColor} group-hover:scale-110 transition-transform`}>
-                  <useCase.icon className={`h-4 w-4 md:h-5 md:w-5 ${useCase.color}`} />
-                </div>
-                <span className="text-[10px] md:text-xs text-muted-foreground text-center line-clamp-1">
-                  {useCase.title.split(' ')[0]}
-                </span>
-              </a>
-            ))}
+            <AnimatePresence mode="popLayout">
+              {filteredUseCases.map((useCase) => (
+                <motion.a
+                  key={useCase.id}
+                  href={`#${useCase.id}`}
+                  className={`flex flex-col items-center gap-1 p-2 md:p-3 rounded-lg hover:bg-muted/50 transition-colors min-w-[60px] md:min-w-[80px] group`}
+                  title={useCase.title}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  layout
+                >
+                  <div className={`p-2 rounded-lg ${useCase.bgColor} group-hover:scale-110 transition-transform`}>
+                    <useCase.icon className={`h-4 w-4 md:h-5 md:w-5 ${useCase.color}`} />
+                  </div>
+                  <span className="text-[10px] md:text-xs text-muted-foreground text-center line-clamp-1">
+                    {useCase.title.split(' ')[0]}
+                  </span>
+                </motion.a>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       </section>
 
       {/* Use Cases Sections */}
       <div className="py-8 md:py-16">
-        {USE_CASES.map((useCase, index) => (
-          <motion.section
-            key={useCase.id}
-            id={useCase.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5 }}
-            className={`py-12 md:py-20 ${index % 2 === 0 ? 'bg-background' : 'bg-muted/30'}`}
-          >
-            <div className="container max-w-5xl mx-auto px-4">
-              {/* Header */}
-              <div className="flex items-start gap-4 mb-6">
-                <div className={`p-4 rounded-xl ${useCase.bgColor} shrink-0`}>
-                  <useCase.icon className={`h-8 w-8 ${useCase.color}`} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="outline" className={useCase.color}>
-                      {useCase.badge}
-                    </Badge>
-                    <span className="text-sm text-muted-foreground">
-                      Actor: {useCase.actor}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl md:text-3xl font-bold">{useCase.title}</h2>
-                </div>
-              </div>
+        <AnimatePresence mode="wait">
+          {filteredUseCases.length === 0 ? (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-center py-20"
+            >
+              <p className="text-muted-foreground mb-4">
+                No hay casos de uso para esta industria.
+              </p>
+              <Button onClick={() => setSelectedIndustry("all")}>
+                Ver Todos los Casos
+              </Button>
+            </motion.div>
+          ) : (
+            <motion.div key="list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              {filteredUseCases.map((useCase, index) => (
+                <motion.section
+                  key={useCase.id}
+                  id={useCase.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.5 }}
+                  className={`py-12 md:py-20 ${index % 2 === 0 ? 'bg-background' : 'bg-muted/30'}`}
+                >
+                  <div className="container max-w-5xl mx-auto px-4">
+                    {/* Header */}
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className={`p-4 rounded-xl ${useCase.bgColor} shrink-0`}>
+                        <useCase.icon className={`h-8 w-8 ${useCase.color}`} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <Badge variant="outline" className={useCase.color}>
+                            {useCase.badge}
+                          </Badge>
+                          <span className="text-sm text-muted-foreground">
+                            Actor: {useCase.actor}
+                          </span>
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-bold">{useCase.title}</h2>
+                        {/* Industry Badges */}
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          {useCase.industries.slice(0, 4).map((ind) => (
+                            <Badge 
+                              key={ind} 
+                              variant="secondary" 
+                              className="text-xs cursor-pointer hover:bg-primary/20 transition-colors"
+                              onClick={() => setSelectedIndustry(ind)}
+                            >
+                              {getIndustryName(ind)}
+                            </Badge>
+                          ))}
+                          {useCase.industries.length > 4 && (
+                            <Badge variant="secondary" className="text-xs">
+                              +{useCase.industries.length - 4} más
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    </div>
 
               {/* Full Description */}
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
@@ -518,10 +653,13 @@ export default function UseCases() {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            </div>
-          </motion.section>
-        ))}
+                  </Card>
+                </div>
+              </motion.section>
+            ))}
+          </motion.div>
+        )}
+        </AnimatePresence>
       </div>
 
       {/* CTA Final */}
