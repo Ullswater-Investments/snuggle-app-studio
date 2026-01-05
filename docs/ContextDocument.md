@@ -1,6 +1,6 @@
 # PROCUREDATA - Documento de Contexto Maestro
 
-> **Versión**: 2.5  
+> **Versión**: 3.0 (Web3 Enabled)  
 > **Última actualización**: 2026-01-05  
 > **Propósito**: Fuente de verdad para agentes de IA y desarrolladores
 
@@ -48,6 +48,7 @@ graph TD
 - **Production-Ready** ✅
 - Auditoría de seguridad completada: 2025-11-30
 - Modo Demo funcional con datos sintéticos
+- **Web3 Enabled**: Integración con Pontus-X Blockchain
 
 ---
 
@@ -62,6 +63,7 @@ graph TD
 | TypeScript | - | Tipado estático |
 | Tailwind CSS | - | Estilos utility-first |
 | Framer Motion | 12.23.24 | Animaciones |
+| ethers.js | 6.x | Interacción Blockchain |
 
 ### Componentes UI
 
@@ -89,6 +91,15 @@ graph TD
 | Edge Functions | Lógica serverless |
 | RLS (Row Level Security) | Seguridad multi-tenant |
 
+### Blockchain & Identity
+
+| Tecnología | Propósito |
+|------------|-----------|
+| Pontus-X Testnet | Red Gaia-X Ecosystem (chainId: 0x7ecc) |
+| EUROe (ERC-20) | Stablecoin para pagos |
+| DID (did:ethr) | Identidad Descentralizada SSI |
+| MetaMask / Web3 Wallets | Conexión de billeteras |
+
 ### Utilidades
 
 | Librería | Propósito |
@@ -113,10 +124,11 @@ procuredata/
 │   │   ├── AppLayout.tsx     # Layout principal con Sidebar
 │   │   ├── AppSidebar.tsx    # Navegación lateral
 │   │   ├── AIConcierge.tsx   # Asistente IA flotante
-│   │   ├── WalletButton.tsx  # Gestión de billetera
+│   │   ├── WalletButton.tsx  # Gestión Web3 + DID
 │   │   ├── OrganizationSwitcher.tsx  # Multi-tenancy
 │   │   ├── ProtectedRoute.tsx # Guard de autenticación
 │   │   ├── DataLineage.tsx   # Visualización de linaje
+│   │   ├── DataLineageBlockchain.tsx # Trazabilidad on-chain
 │   │   ├── NegotiationChat.tsx # Chat en tiempo real
 │   │   ├── PaymentGateway.tsx # Modal de pago
 │   │   ├── SmartContractViewer.tsx # Visor ODRL
@@ -146,7 +158,7 @@ procuredata/
 │   │   ├── Notifications.tsx # Centro notificaciones
 │   │   ├── Settings.tsx      # Configuración general
 │   │   ├── SettingsOrganization.tsx # Config org
-│   │   ├── SettingsPreferences.tsx # Preferencias
+│   │   ├── SettingsPreferences.tsx # Preferencias privacidad
 │   │   ├── ERPConfig.tsx     # Integraciones ERP
 │   │   ├── WebhookSettings.tsx # Webhooks
 │   │   ├── AuditLogs.tsx     # Logs de auditoría
@@ -154,13 +166,17 @@ procuredata/
 │   │   ├── Architecture.tsx  # Info técnica
 │   │   └── NotFound.tsx      # 404
 │   │
-│   ├── hooks/                # 6 hooks personalizados
+│   ├── hooks/                # 7 hooks personalizados
 │   │   ├── useAuth.tsx       # Autenticación Supabase
 │   │   ├── useOrganizationContext.tsx # Contexto multi-tenant
 │   │   ├── useNotifications.tsx # Sistema notificaciones
+│   │   ├── usePrivacyPreferences.tsx # Preferencias de privacidad
 │   │   ├── useOrgSector.tsx  # Sector de organización
 │   │   ├── use-mobile.tsx    # Detección mobile
 │   │   └── use-toast.ts      # Hook para toasts
+│   │
+│   ├── services/
+│   │   └── pontusX.ts        # Servicio Web3 (Blockchain)
 │   │
 │   ├── integrations/
 │   │   └── supabase/
@@ -168,7 +184,8 @@ procuredata/
 │   │       └── types.ts      # Tipos auto-generados (NO EDITAR)
 │   │
 │   ├── types/
-│   │   └── database.extensions.ts # Extensiones TypeScript
+│   │   ├── database.extensions.ts # Extensiones TypeScript
+│   │   └── web3.types.ts     # Tipos Web3 (DID, WalletState)
 │   │
 │   ├── utils/
 │   │   └── pdfGenerator.ts   # Generación PDFs
@@ -206,13 +223,16 @@ sequenceDiagram
     participant S as Subject (Provider)
     participant H as Holder
     participant DB as Database
+    participant BC as Blockchain
 
     C->>DB: Crea transacción (initiated)
     DB->>S: Notifica solicitud
     S->>DB: Aprueba (pending_holder)
     DB->>H: Notifica para liberación
     H->>DB: Libera datos (completed)
+    H->>BC: Notariza hash de acceso
     DB->>C: Datos disponibles
+    BC->>C: Prueba verificable
 ```
 
 ### 4.2 Máquina de Estados de Transacciones
@@ -272,6 +292,22 @@ get_user_organization(_user_id) → uuid
   <AppLayout />  {/* Solo usuarios autenticados */}
 </ProtectedRoute>
 ```
+
+### 4.5 Modelo de Confianza Híbrido
+
+La aplicación utiliza un modelo híbrido donde:
+
+| Capa | Tecnología | Responsabilidad |
+|------|------------|-----------------|
+| **Metadatos y Estado** | Supabase (PostgreSQL) | Gestión de relaciones, perfiles, transacciones y configuración |
+| **Verificación Inmutable** | Pontus-X Blockchain | Notarización de accesos, soberanía de identidad (DID) y trazabilidad |
+| **Identidad** | did:ethr (ERC-1056) | DIDs derivados de wallets Ethereum, verificables on-chain |
+| **Pagos** | EUROe (ERC-20) | Stablecoin respaldado 1:1 con Euro para transacciones marketplace |
+
+**Flujo de Verificación:**
+1. Usuario conecta wallet MetaMask → Se genera DID automáticamente
+2. Cada acceso a datos se registra en Supabase + se notariza el hash en Pontus-X
+3. El componente `DataLineageBlockchain` muestra la trazabilidad con links al Explorer
 
 ---
 
@@ -334,17 +370,26 @@ erDiagram
 | `wallets` | organization_id, balance, currency, address | Billeteras |
 | `wallet_transactions` | from_wallet_id, to_wallet_id, amount, type | Movimientos |
 
+#### Sistema y Seguridad
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `notifications` | user_id, type, title, message, is_read | Sistema Realtime (WebSockets) |
+| `privacy_preferences` | user_id, profile_visible, access_alerts | Configuración de privacidad por usuario |
+| `login_attempts` | email, ip_address, success, attempted_at | Seguridad y Rate Limiting |
+| `audit_logs` | actor_id, action, resource, details | Trazabilidad de acciones |
+
 #### Otros
 
 | Tabla | Descripción |
 |-------|-------------|
-| `audit_logs` | Trazabilidad de acciones |
 | `esg_reports` | Reportes de sostenibilidad |
 | `marketplace_opportunities` | Demandas de datos |
 | `erp_configurations` | Integraciones ERP |
 | `supplier_data` | Datos estructurados de proveedores |
 | `value_services` | Servicios adicionales |
 | `organization_reviews` | Reseñas entre organizaciones |
+| `success_stories` | Casos de éxito para la landing page |
 
 ### 5.3 Enums
 
@@ -390,10 +435,11 @@ type approval_action = 'pre_approve' | 'approve' | 'deny' | 'cancel';
 | Componente | Propósito |
 |------------|-----------|
 | `OrganizationSwitcher` | Selector de organización activa |
-| `WalletButton` | Muestra balance y transacciones |
+| `WalletButton` | Gestión Web3: conexión MetaMask, DIDs, balance EUROe |
 | `NotificationsBell` | Campana de notificaciones |
 | `AIConcierge` | Chat flotante con asistente IA |
-| `DataLineage` | Visualización de flujo de datos |
+| `DataLineage` | Visualización de flujo de datos (diagrama horizontal) |
+| `DataLineageBlockchain` | Timeline de trazabilidad con hashes de transacción verificados on-chain |
 | `NegotiationChat` | Chat en sala de negociación |
 | `PaymentGateway` | Modal de procesamiento de pagos |
 | `SmartContractViewer` | Visualizador de políticas ODRL |
@@ -492,7 +538,7 @@ className="bg-blue-500"
 | `/notifications` | `Notifications` | Centro de notificaciones |
 | `/settings` | `Settings` | Configuración general |
 | `/settings/organization` | `SettingsOrganization` | Configuración de organización |
-| `/settings/preferences` | `SettingsPreferences` | Preferencias de usuario |
+| `/settings/preferences` | `SettingsPreferences` | Preferencias de privacidad |
 | `/settings/erp-config` | `ERPConfig` | Integraciones ERP |
 | `/settings/webhooks` | `WebhookSettings` | Configuración webhooks |
 | `/settings/audit` | `AuditLogs` | Logs de auditoría |
@@ -687,15 +733,47 @@ Antes de implementar cualquier feature nueva:
 - [ ] ¿Usa colores? → Tokens semánticos de CSS
 - [ ] ¿Maneja errores? → Try-catch + toast.error
 - [ ] ¿Tiene null safety? → Operadores `?.` y `||`
+- [ ] ¿Interactúa con Web3? → Usar `pontusXService`
 
 ---
 
-## 12. Contacto y Recursos
+## 12. Servicios Core
+
+### `src/services/pontusX.ts`
+
+Singleton que gestiona toda la interacción con la blockchain Pontus-X:
+
+| Método | Descripción |
+|--------|-------------|
+| `connectWallet()` | Conecta MetaMask, cambia a red Pontus-X automáticamente |
+| `switchNetwork()` | Fuerza cambio de red, agrega si no existe |
+| `getEUROeBalance(address)` | Lee balance del token ERC-20 EUROe |
+| `generateDID(address)` | Genera DID en formato `did:ethr:chainId:address` |
+| `signMessage(message)` | Firma SIWE para verificación de propiedad |
+| `onAccountsChanged(callback)` | Listener para cambios de cuenta en wallet |
+| `isWeb3Available()` | Verifica si hay wallet Web3 disponible |
+| `disconnect()` | Desconecta wallet y limpia estado |
+
+**Configuración de Red:**
+```typescript
+export const PONTUSX_NETWORK_CONFIG = {
+  chainId: '0x7ecc', // 32460 en Decimal
+  chainName: 'Pontus-X Testnet',
+  nativeCurrency: { name: 'Pontus-X Token', symbol: 'GX', decimals: 18 },
+  rpcUrls: ['https://rpc.dev.pontus-x.eu'],
+  blockExplorerUrls: ['https://explorer.pontus-x.eu/'],
+};
+```
+
+---
+
+## 13. Contacto y Recursos
 
 - **Documentación en app**: `/guide`
 - **Arquitectura técnica**: `/architecture`
 - **Repositorio**: Lovable Project
 - **Base de datos**: Lovable Cloud (Supabase)
+- **Blockchain Explorer**: https://explorer.pontus-x.eu/
 
 ---
 
