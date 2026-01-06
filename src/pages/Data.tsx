@@ -10,12 +10,59 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CodeIntegrationModal } from "@/components/CodeIntegrationModal";
+import { DataPreviewDialog } from "@/components/DataPreviewDialog";
 import DataLineageBlockchain from "@/components/DataLineageBlockchain";
-import { Database, Download, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, CheckCircle2, ShieldCheck, Link2 } from "lucide-react";
+import { 
+  Database, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, 
+  CheckCircle2, ShieldCheck, Link2, FileJson, FileSpreadsheet, Map, Clock, 
+  AlertTriangle, RefreshCcw
+} from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { EmptyState } from "@/components/EmptyState";
+
+// Format mapping by category
+const FORMAT_MAP: Record<string, { format: string; icon: typeof FileJson }> = {
+  "Logística": { format: "JSON", icon: FileJson },
+  "IoT": { format: "JSON-LD", icon: FileJson },
+  "ESG": { format: "CSV", icon: FileSpreadsheet },
+  "Financiero": { format: "CSV", icon: FileSpreadsheet },
+  "Medio Ambiente": { format: "GeoJSON", icon: Map },
+  "Retail": { format: "JSON", icon: FileJson },
+  "Energía": { format: "JSON-LD", icon: FileJson },
+  "Agricultura": { format: "GeoJSON", icon: Map },
+};
+
+// Update frequency by category  
+const UPDATE_FREQ_MAP: Record<string, string> = {
+  "Logística": "Tiempo Real (15min)",
+  "IoT": "Tiempo Real",
+  "ESG": "Mensual",
+  "Financiero": "Semanal",
+  "Medio Ambiente": "Mensual",
+  "Retail": "Diario",
+  "Energía": "Tiempo Real (15min)",
+  "Agricultura": "Semanal",
+};
+
+// Get expiration status based on created_at (simulating 90-day license)
+const getExpirationStatus = (createdAt: string) => {
+  const created = new Date(createdAt);
+  const expiresAt = new Date(created);
+  expiresAt.setDate(expiresAt.getDate() + 90);
+  
+  const now = new Date();
+  const daysRemaining = Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  
+  if (daysRemaining < 0) {
+    return { status: "expired", label: "Expirado", daysRemaining: 0, className: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400" };
+  } else if (daysRemaining <= 14) {
+    return { status: "expiring", label: `Expira en ${daysRemaining}d`, daysRemaining, className: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" };
+  }
+  return { status: "active", label: "Activo", daysRemaining, className: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400" };
+};
 
 const Data = () => {
   const navigate = useNavigate();
@@ -25,6 +72,7 @@ const Data = () => {
   const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const [showAPIDialog, setShowAPIDialog] = useState(false);
   const [lineageTransactionId, setLineageTransactionId] = useState<string | null>(null);
+  const [previewTransaction, setPreviewTransaction] = useState<any>(null);
 
   const { data: transactions, isLoading } = useQuery({
     queryKey: ["completed-transactions", activeOrg?.id, isDemo],
@@ -264,29 +312,72 @@ const Data = () => {
               const dataTypeBadge = getDataTypeBadge(transaction);
               const BadgeIcon = dataTypeBadge.icon;
               const isBlockchainVerified = hasBlockchainVerification(transaction);
-              // Simulate API usage percentage
-              const apiUsage = Math.floor(Math.random() * 40) + 30;
+              const expirationStatus = getExpirationStatus(transaction.created_at);
+              const category = transaction.asset.product.category || "Datos";
+              const formatInfo = FORMAT_MAP[category] || { format: "JSON", icon: FileJson };
+              const FormatIcon = formatInfo.icon;
+              const updateFreq = UPDATE_FREQ_MAP[category] || "Mensual";
+              // Simulate API usage percentage (disabled for expired)
+              const apiUsage = expirationStatus.status === "expired" ? 0 : Math.floor(Math.random() * 40) + 30;
               
               return (
-                <Card key={transaction.id} className="group hover:shadow-lg transition-all duration-300 hover:border-purple-400">
+                <Card key={transaction.id} className={`group hover:shadow-lg transition-all duration-300 ${expirationStatus.status === "expired" ? "opacity-75" : "hover:border-purple-400"}`}>
                   <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1">
-                        <CardTitle className="text-lg mb-1 group-hover:text-purple-600 transition-colors">
+                    <div className="flex items-start gap-3 mb-2">
+                      {/* Provider Avatar */}
+                      <Avatar className="h-10 w-10 shrink-0">
+                        <AvatarImage 
+                          src={`https://logo.clearbit.com/${transaction.subject_org.name.toLowerCase().replace(/\s+/g, '')}.com`} 
+                          alt={transaction.subject_org.name}
+                        />
+                        <AvatarFallback className="bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 text-xs font-semibold">
+                          {transaction.subject_org.name.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                      
+                      <div className="flex-1 min-w-0">
+                        <CardTitle className="text-base mb-0.5 group-hover:text-purple-600 transition-colors truncate">
                           {transaction.asset.product.name}
                         </CardTitle>
-                        <CardDescription className="text-sm">
+                        <CardDescription className="text-sm truncate">
                           {transaction.subject_org.name}
                         </CardDescription>
+                        <p className="text-xs text-muted-foreground font-mono mt-0.5">
+                          ID: {transaction.asset_id.slice(0, 12)}...
+                        </p>
                       </div>
-                      <Badge variant="default" className="bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400 flex items-center gap-1">
-                        <CheckCircle2 className="h-3 w-3" />
-                        Activa
+                      
+                      {/* Status Badge */}
+                      <Badge 
+                        variant="secondary" 
+                        className={`shrink-0 flex items-center gap-1 ${expirationStatus.className}`}
+                      >
+                        {expirationStatus.status === "expired" ? (
+                          <AlertTriangle className="h-3 w-3" />
+                        ) : expirationStatus.status === "expiring" ? (
+                          <Clock className="h-3 w-3" />
+                        ) : (
+                          <CheckCircle2 className="h-3 w-3" />
+                        )}
+                        {expirationStatus.label}
                       </Badge>
                     </div>
+                    
+                    {/* Format & Update Frequency */}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground mb-2">
+                      <span className="flex items-center gap-1">
+                        <FormatIcon className="h-3.5 w-3.5" />
+                        {formatInfo.format}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-3.5 w-3.5" />
+                        {updateFreq}
+                      </span>
+                    </div>
+                    
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary">
-                        {transaction.asset.product.category}
+                        {category}
                       </Badge>
                       <Badge variant={dataTypeBadge.color} className="flex items-center gap-1">
                         <BadgeIcon className="h-3 w-3" />
@@ -304,7 +395,7 @@ const Data = () => {
                                 onClick={() => setLineageTransactionId(transaction.id)}
                               >
                                 <ShieldCheck className="h-3 w-3 mr-1" />
-                                Verificado
+                                Pontus-X
                               </Badge>
                             </TooltipTrigger>
                             <TooltipContent>
@@ -336,42 +427,96 @@ const Data = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
+                    {/* API Usage */}
                     <div>
                       <div className="flex justify-between text-xs mb-1.5">
                         <span className="text-muted-foreground">Uso de API este mes</span>
-                        <span className="font-medium">{apiUsage}%</span>
+                        <span className="font-medium">
+                          {expirationStatus.status === "expired" ? "--" : `${apiUsage}%`}
+                        </span>
                       </div>
-                      <Progress value={apiUsage} className="h-2" />
+                      <Progress 
+                        value={apiUsage} 
+                        className={`h-2 ${expirationStatus.status === "expired" ? "opacity-50" : ""}`} 
+                      />
                     </div>
                     
+                    {/* Action Buttons */}
                     <div className="flex gap-2">
-                      <Button
-                        variant="default"
-                        size="sm"
-                        className="flex-1"
-                        onClick={() => navigate(`/data/view/${transaction.id}`)}
-                      >
-                        <Eye className="mr-2 h-4 w-4" />
-                        Ver Datos
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setSelectedAsset(transaction);
-                          setShowAPIDialog(true);
-                        }}
-                      >
-                        <Code2 className="h-4 w-4" />
-                      </Button>
-                      {isBlockchainVerified && (
+                      {expirationStatus.status === "expired" ? (
                         <Button
-                          variant="outline"
+                          variant="default"
                           size="sm"
-                          onClick={() => setLineageTransactionId(transaction.id)}
+                          className="flex-1"
+                          onClick={() => navigate("/catalog")}
                         >
-                          <Link2 className="h-4 w-4" />
+                          <RefreshCcw className="mr-2 h-4 w-4" />
+                          Renovar
                         </Button>
+                      ) : (
+                        <Button
+                          variant="default"
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => navigate(`/data/view/${transaction.id}`)}
+                        >
+                          <Eye className="mr-2 h-4 w-4" />
+                          Ver Datos
+                        </Button>
+                      )}
+                      
+                      {/* Preview Button */}
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setPreviewTransaction(transaction)}
+                              disabled={expirationStatus.status === "expired"}
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>Ver Muestra</TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      
+                      {/* Integration Button */}
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                setSelectedAsset(transaction);
+                                setShowAPIDialog(true);
+                              }}
+                            >
+                              <Code2 className="h-4 w-4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>Integrar API</TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      
+                      {/* Blockchain Link */}
+                      {isBlockchainVerified && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => setLineageTransactionId(transaction.id)}
+                              >
+                                <Link2 className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Ver Blockchain</TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       )}
                     </div>
                     
@@ -393,6 +538,17 @@ const Data = () => {
           onOpenChange={setShowAPIDialog}
           assetId={selectedAsset.asset_id}
           productName={selectedAsset.asset.product.name}
+        />
+      )}
+
+      {/* Data Preview Dialog */}
+      {previewTransaction && (
+        <DataPreviewDialog
+          open={!!previewTransaction}
+          onOpenChange={(open) => !open && setPreviewTransaction(null)}
+          transactionId={previewTransaction.id}
+          productName={previewTransaction.asset.product.name}
+          schemaType={previewTransaction.data_payloads?.[0]?.schema_type}
         />
       )}
 
