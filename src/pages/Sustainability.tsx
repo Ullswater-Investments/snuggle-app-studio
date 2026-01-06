@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { ESGDataView } from "@/components/ESGDataView";
+import { EcoGauge } from "@/components/sustainability/EcoGauge";
+import { SectorRanking } from "@/components/sustainability/SectorRanking";
+import { GrowthTree } from "@/components/sustainability/GrowthTree";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -175,6 +178,69 @@ export default function Sustainability() {
     ? Number(latestReport.scope1_total_tons) + Number(latestReport.scope2_total_tons) + (scope3Data?.totalScope3 || 0)
     : 0;
 
+  // Calculate gamification data
+  const { ecoLevel, ecoProgress, ecoPoints, earnedBadges, sectorPosition, esgScore } = useMemo(() => {
+    if (!latestReport) return { 
+      ecoLevel: 1 as const, 
+      ecoProgress: 0, 
+      ecoPoints: 0, 
+      earnedBadges: [] as string[], 
+      sectorPosition: 15, 
+      esgScore: 50 
+    };
+    
+    let points = 0;
+    const badges: string[] = [];
+    
+    // Points for renewable energy
+    const renewable = Number(latestReport.energy_renewable_percent) || 0;
+    points += renewable;
+    if (renewable >= 80) badges.push("🌿 Líder Renovable");
+    if (renewable >= 50) badges.push("⚡ Transición Energética");
+    
+    // Points for certifications
+    const certs = latestReport.certifications?.length || 0;
+    points += certs * 20;
+    if (certs >= 3) badges.push("🏅 Multi-Certificado");
+    if (latestReport.certifications?.some(c => c.includes("ISO 14001"))) {
+      badges.push("🌍 ISO 14001");
+    }
+    
+    // Points for low Scope 3
+    const s3 = scope3Data?.totalScope3 || 0;
+    const s3Points = Math.max(0, 100 - Math.min(s3, 100));
+    points += s3Points;
+    if (s3 < 10) badges.push("🌱 Cadena Limpia");
+    
+    // Calculate level (1-5)
+    let level: 1 | 2 | 3 | 4 | 5 = 1;
+    const thresholds = [0, 50, 100, 200, 300];
+    for (let i = 4; i >= 0; i--) {
+      if (points >= thresholds[i]) {
+        level = (i + 1) as 1 | 2 | 3 | 4 | 5;
+        break;
+      }
+    }
+    
+    // Progress to next level
+    const currentThreshold = thresholds[level - 1];
+    const nextThreshold = thresholds[level] || 400;
+    const progress = Math.round(((points - currentThreshold) / (nextThreshold - currentThreshold)) * 100);
+    
+    // Simulate sector position (based on points)
+    const position = Math.max(1, Math.round(28 - (points / 15)));
+    const score = Math.min(100, Math.round(points / 3));
+    
+    return { 
+      ecoLevel: level, 
+      ecoProgress: Math.min(progress, 100), 
+      ecoPoints: points, 
+      earnedBadges: badges,
+      sectorPosition: position,
+      esgScore: score
+    };
+  }, [latestReport, scope3Data]);
+
   // --- Renderizado ---
   if (isLoading) {
     return (
@@ -291,78 +357,66 @@ export default function Sustainability() {
             <TabsTrigger value="history">Historial</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-4">
-            {/* KPIs con Scope 3 */}
-            <div className="grid gap-4 md:grid-cols-4">
-              {/* Scope 1 */}
-              <Card className="border-green-200 dark:border-green-800">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium flex items-center gap-2">
-                    <Leaf className="h-4 w-4 text-green-600" />
-                    Alcance 1 (Directas)
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-green-600">
-                    {latestReport?.scope1_total_tons?.toLocaleString() || "0"} t
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">CO₂e - Combustibles propios</p>
-                </CardContent>
-              </Card>
+          <TabsContent value="overview" className="space-y-6">
+            {/* KPIs with EcoGauge */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <EcoGauge
+                value={Number(latestReport?.scope1_total_tons) || 0}
+                maxValue={5000}
+                label="Alcance 1"
+                description="Emisiones directas"
+                icon={Leaf}
+                color="green"
+                targetValue={1000}
+                delay={0}
+              />
+              <EcoGauge
+                value={Number(latestReport?.scope2_total_tons) || 0}
+                maxValue={5000}
+                label="Alcance 2"
+                description="Electricidad comprada"
+                icon={TrendingUp}
+                color="blue"
+                targetValue={800}
+                delay={0.1}
+              />
+              <EcoGauge
+                value={scope3Data?.totalScope3 || 0}
+                maxValue={1000}
+                label="Alcance 3"
+                description={`${scope3Data?.supplierCount || 0} proveedores`}
+                icon={Truck}
+                color="purple"
+                delay={0.2}
+              />
+              <EcoGauge
+                value={totalEmissions}
+                maxValue={10000}
+                label="Total"
+                description={`Año ${latestReport?.report_year}`}
+                icon={Factory}
+                color="primary"
+                delay={0.3}
+              />
+            </div>
 
-              {/* Scope 2 */}
-              <Card className="border-blue-200 dark:border-blue-800">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium flex items-center gap-2">
-                    <TrendingUp className="h-4 w-4 text-blue-600" />
-                    Alcance 2 (Indirectas)
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-blue-600">
-                    {latestReport?.scope2_total_tons?.toLocaleString() || "0"} t
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">CO₂e - Electricidad comprada</p>
-                </CardContent>
-              </Card>
-
-              {/* Scope 3 - NUEVO */}
-              <Card className="border-purple-200 dark:border-purple-800">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium flex items-center gap-2">
-                    <Truck className="h-4 w-4 text-purple-600" />
-                    Alcance 3 (Cadena)
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {loadingScope3 ? (
-                    <Skeleton className="h-8 w-20" />
-                  ) : (
-                    <div className="text-2xl font-bold text-purple-600">
-                      {(scope3Data?.totalScope3 || 0).toFixed(1)} t
-                    </div>
-                  )}
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {scope3Data?.supplierCount || 0} proveedores
-                  </p>
-                </CardContent>
-              </Card>
-
-              {/* Total */}
-              <Card className="border-primary bg-primary/5">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium flex items-center gap-2">
-                    <Factory className="h-4 w-4" />
-                    Total Emisiones
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">
-                    {totalEmissions.toFixed(1)} t
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">CO₂e total {latestReport?.report_year}</p>
-                </CardContent>
-              </Card>
+            {/* Gamification Section: GrowthTree + SectorRanking */}
+            <div className="grid gap-6 md:grid-cols-2">
+              <GrowthTree
+                level={ecoLevel}
+                progress={ecoProgress}
+                totalPoints={ecoPoints}
+                badges={earnedBadges}
+              />
+              <SectorRanking
+                position={sectorPosition}
+                totalCompanies={28}
+                yourScore={esgScore}
+                sectorAverage={65}
+                sectorName={activeOrg?.sector || "Industrial"}
+                trend="up"
+                trendDelta={2}
+              />
             </div>
 
             {/* ESG Data View existente */}
