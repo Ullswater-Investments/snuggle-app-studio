@@ -775,5 +775,68 @@ const ICON_MAP = {
 
 ---
 
+## 6. Notas de Compatibilidad del Esquema
+
+### 6.1 Diferencias con Scripts Externos
+
+Los scripts SQL generados externamente pueden tener incompatibilidades con el esquema real de Supabase. Esta tabla documenta las correcciones necesarias:
+
+| Error Común | Valor Incorrecto | Valor Correcto |
+|-------------|------------------|----------------|
+| `organizations.type` | `'service_provider'` | `'data_holder'` (para bancos, ERPs, etc.) |
+| `wallets` columna | `wallet_address` | `address` |
+| `data_transactions` columna | `price` | N/A (precio está en `data_assets.price`) |
+| `data_transactions` columna | `completed_at` | N/A (no existe, usar `updated_at`) |
+| `esg_reports` columna | `scope3_total_tons` | N/A (solo `scope1_total_tons`, `scope2_total_tons`) |
+| `data_transactions.status` | `'pending_payment'` | `'pending_holder'` |
+| `value_services` columna | `price_model` | `price_model` (verificar que exista) |
+
+### 6.2 Campos Obligatorios en `data_transactions`
+
+```sql
+-- Estos campos son NOT NULL y DEBEN incluirse:
+INSERT INTO data_transactions (
+  asset_id,           -- UUID del activo
+  consumer_org_id,    -- UUID de quien solicita
+  subject_org_id,     -- UUID del proveedor (dueño de datos)
+  holder_org_id,      -- UUID de quien custodia los datos
+  purpose,            -- VARCHAR: Propósito de la solicitud
+  justification,      -- TEXT: Justificación detallada
+  access_duration_days, -- INT: Días de acceso solicitados
+  requested_by,       -- UUID: auth.users.id del solicitante
+  status              -- ENUM: usar valor válido
+) VALUES (...);
+```
+
+### 6.3 Scripts de Semilla Corregidos
+
+Ubicación: `scripts/seeds/`
+
+| Archivo | Contenido | Orden de Ejecución |
+|---------|-----------|-------------------|
+| `01_extend_orgs.sql` | Organizaciones adicionales de la Memoria Técnica | 1º |
+| `02_extend_wallets.sql` | Wallets con columna `address` correcta | 2º |
+| `03_products_assets.sql` | Productos y activos del catálogo | 3º |
+| `04_transactions.sql` | Transacciones con todos los campos obligatorios | 4º |
+| `05_esg_services.sql` | ESG, servicios de valor, oportunidades e innovación | 5º |
+
+### 6.4 Instrucciones de Ejecución
+
+```bash
+# Opción 1: Ejecución manual en SQL Editor de Lovable Cloud
+# Copiar y pegar cada archivo en orden
+
+# Opción 2: Usando psql (si tienes acceso CLI)
+psql $DATABASE_URL -f scripts/seeds/01_extend_orgs.sql
+psql $DATABASE_URL -f scripts/seeds/02_extend_wallets.sql
+psql $DATABASE_URL -f scripts/seeds/03_products_assets.sql
+psql $DATABASE_URL -f scripts/seeds/04_transactions.sql
+psql $DATABASE_URL -f scripts/seeds/05_esg_services.sql
+```
+
+> **IMPORTANTE**: Ejecutar siempre en orden numérico para respetar las dependencias de foreign keys.
+
+---
+
 *Documento generado automáticamente por análisis de código fuente.*
 *Última actualización: 2026-01-06*
