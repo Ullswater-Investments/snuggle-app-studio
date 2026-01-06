@@ -15,7 +15,8 @@ import { NegotiationChat } from "@/components/NegotiationChat";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download } from "lucide-react";
+import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download, BarChart3 } from "lucide-react";
+import { RequestsAnalyticsDashboard } from "@/components/RequestsAnalyticsDashboard";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { FadeIn } from "@/components/AnimatedSection";
@@ -46,6 +47,7 @@ const Requests = () => {
   const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
   const [viewMode, setViewMode] = useState<"list" | "kanban">("list");
   const [processingId, setProcessingId] = useState<string | null>(null);
+  const [showAnalytics, setShowAnalytics] = useState(true);
 
   // Obtener organización del usuario
   const { data: userProfile } = useQuery({
@@ -280,6 +282,13 @@ const Requests = () => {
               </p>
             </div>
             <div className="flex gap-2">
+              <Button
+                variant={showAnalytics ? "secondary" : "outline"}
+                onClick={() => setShowAnalytics(!showAnalytics)}
+              >
+                <BarChart3 className="mr-2 h-4 w-4" />
+                {showAnalytics ? "Ocultar" : "Mostrar"} Analytics
+              </Button>
               <Button 
                 variant="outline"
                 onClick={handleExportCSV}
@@ -300,7 +309,16 @@ const Requests = () => {
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.1}>
+      {showAnalytics && allTransactions.length > 0 && (
+        <FadeIn delay={0.1}>
+          <RequestsAnalyticsDashboard 
+            transactions={allTransactions} 
+            activeOrgId={activeOrg?.id}
+          />
+        </FadeIn>
+      )}
+
+      <FadeIn delay={0.15}>
         <div className="grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
