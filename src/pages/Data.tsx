@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
@@ -12,8 +12,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CodeIntegrationModal } from "@/components/CodeIntegrationModal";
 import { DataPreviewDialog } from "@/components/DataPreviewDialog";
+import { LicenseRenewalDialog } from "@/components/LicenseRenewalDialog";
 import DataLineageBlockchain from "@/components/DataLineageBlockchain";
 import { 
   Database, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, 
@@ -47,13 +49,21 @@ const UPDATE_FREQ_MAP: Record<string, string> = {
   "Agricultura": "Semanal",
 };
 
-// Get expiration status based on created_at (simulating 90-day license)
-const getExpirationStatus = (createdAt: string) => {
-  const created = new Date(createdAt);
-  const expiresAt = new Date(created);
-  expiresAt.setDate(expiresAt.getDate() + 90);
-  
+// Get expiration status - prioritizes subscription_expires_at if available
+const getExpirationStatus = (transaction: any) => {
   const now = new Date();
+  let expiresAt: Date;
+  
+  // If subscription_expires_at exists, use it (from renewal)
+  if (transaction.subscription_expires_at) {
+    expiresAt = new Date(transaction.subscription_expires_at);
+  } else {
+    // Fallback: calculate from created_at + access_duration_days
+    const created = new Date(transaction.created_at);
+    expiresAt = new Date(created);
+    expiresAt.setDate(expiresAt.getDate() + (transaction.access_duration_days || 90));
+  }
+  
   const daysRemaining = Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
   
   if (daysRemaining < 0) {
@@ -66,6 +76,7 @@ const getExpirationStatus = (createdAt: string) => {
 
 const Data = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { activeOrg, isDemo } = useOrganizationContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [sectorFilter, setSectorFilter] = useState<string>("all");
@@ -73,7 +84,7 @@ const Data = () => {
   const [showAPIDialog, setShowAPIDialog] = useState(false);
   const [lineageTransactionId, setLineageTransactionId] = useState<string | null>(null);
   const [previewTransaction, setPreviewTransaction] = useState<any>(null);
-
+  const [renewalTransaction, setRenewalTransaction] = useState<any>(null);
   const { data: transactions, isLoading } = useQuery({
     queryKey: ["completed-transactions", activeOrg?.id, isDemo],
     queryFn: async () => {
@@ -312,7 +323,7 @@ const Data = () => {
               const dataTypeBadge = getDataTypeBadge(transaction);
               const BadgeIcon = dataTypeBadge.icon;
               const isBlockchainVerified = hasBlockchainVerification(transaction);
-              const expirationStatus = getExpirationStatus(transaction.created_at);
+              const expirationStatus = getExpirationStatus(transaction);
               const category = transaction.asset.product.category || "Datos";
               const formatInfo = FORMAT_MAP[category] || { format: "JSON", icon: FileJson };
               const FormatIcon = formatInfo.icon;
@@ -427,6 +438,22 @@ const Data = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
+                    {/* Expiring Soon Alert */}
+                    {expirationStatus.status === "expiring" && (
+                      <Alert className="border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800 py-2">
+                        <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                        <AlertDescription className="text-amber-700 dark:text-amber-300 text-xs">
+                          Tu licencia expira en {expirationStatus.daysRemaining} días.{" "}
+                          <button 
+                            className="underline font-medium hover:text-amber-800 dark:hover:text-amber-200"
+                            onClick={() => setRenewalTransaction(transaction)}
+                          >
+                            Renovar ahora
+                          </button>
+                        </AlertDescription>
+                      </Alert>
+                    )}
+                    
                     {/* API Usage */}
                     <div>
                       <div className="flex justify-between text-xs mb-1.5">
@@ -448,7 +475,7 @@ const Data = () => {
                           variant="default"
                           size="sm"
                           className="flex-1"
-                          onClick={() => navigate("/catalog")}
+                          onClick={() => setRenewalTransaction(transaction)}
                         >
                           <RefreshCcw className="mr-2 h-4 w-4" />
                           Renovar
@@ -549,6 +576,19 @@ const Data = () => {
           transactionId={previewTransaction.id}
           productName={previewTransaction.asset.product.name}
           schemaType={previewTransaction.data_payloads?.[0]?.schema_type}
+        />
+      )}
+
+      {/* License Renewal Dialog */}
+      {renewalTransaction && (
+        <LicenseRenewalDialog
+          open={!!renewalTransaction}
+          onOpenChange={(open) => !open && setRenewalTransaction(null)}
+          transaction={renewalTransaction}
+          onRenewalComplete={() => {
+            setRenewalTransaction(null);
+            queryClient.invalidateQueries({ queryKey: ["completed-transactions"] });
+          }}
         />
       )}
 
