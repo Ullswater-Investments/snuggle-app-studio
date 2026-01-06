@@ -12,6 +12,7 @@ import { DollarSign, ShoppingCart, Package, TrendingUp, ArrowUpRight, ArrowDownR
 import { Link } from "react-router-dom";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 import { es } from "date-fns/locale";
+import { CHART_COLORS, CHART_GRADIENTS, CHART_TOOLTIP_STYLE, CHART_GRID_STYLE } from "@/lib/chartTheme";
 
 interface WalletData {
   id: string;
@@ -356,36 +357,38 @@ export default function Dashboard() {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData}>
                   <defs>
-                    <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="hsl(32, 94%, 54%)" stopOpacity={0.8}/>
-                      <stop offset="95%" stopColor="hsl(32, 94%, 54%)" stopOpacity={0}/>
+                    <linearGradient id={CHART_GRADIENTS.primary.id} x1="0" y1="0" x2="0" y2="1">
+                      {CHART_GRADIENTS.primary.stops.map((stop, i) => (
+                        <stop key={i} offset={stop.offset} stopColor={CHART_GRADIENTS.primary.color} stopOpacity={stop.opacity}/>
+                      ))}
                     </linearGradient>
-                    <linearGradient id="colorSpend" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="hsl(0, 0%, 40%)" stopOpacity={0.6}/>
-                      <stop offset="95%" stopColor="hsl(0, 0%, 40%)" stopOpacity={0}/>
+                    <linearGradient id={CHART_GRADIENTS.secondary.id} x1="0" y1="0" x2="0" y2="1">
+                      {CHART_GRADIENTS.secondary.stops.map((stop, i) => (
+                        <stop key={i} offset={stop.offset} stopColor={CHART_GRADIENTS.secondary.color} stopOpacity={stop.opacity}/>
+                      ))}
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" />
-                  <YAxis />
+                  <CartesianGrid {...CHART_GRID_STYLE} />
+                  <XAxis dataKey="name" className="text-xs" />
+                  <YAxis className="text-xs" />
                   <Tooltip 
                     formatter={(value: number) => formatCurrency(value)}
-                    labelStyle={{ color: "#333" }}
+                    {...CHART_TOOLTIP_STYLE}
                   />
                   <Legend />
                   <Area 
                     type="monotone" 
                     dataKey="revenue" 
                     name="Ingresos"
-                    stroke="hsl(32, 94%, 54%)" 
-                    fill="url(#colorRevenue)" 
+                    stroke={CHART_COLORS.primary} 
+                    fill={`url(#${CHART_GRADIENTS.primary.id})`} 
                   />
                   <Area 
                     type="monotone" 
                     dataKey="spend" 
                     name="Gastos"
-                    stroke="hsl(0, 0%, 40%)" 
-                    fill="url(#colorSpend)" 
+                    stroke={CHART_COLORS.secondary} 
+                    fill={`url(#${CHART_GRADIENTS.secondary.id})`} 
                   />
                 </AreaChart>
               </ResponsiveContainer>

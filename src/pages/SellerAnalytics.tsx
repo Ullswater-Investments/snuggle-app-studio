@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useMemo } from "react";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 import { es } from "date-fns/locale";
+import { CHART_COLORS, CHART_TOOLTIP_STYLE, CHART_GRID_STYLE } from "@/lib/chartTheme";
 
 interface TransactionWithDetails {
   id: string;
@@ -320,7 +321,7 @@ export default function SellerAnalytics() {
             ) : analytics.monthlyData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={analytics.monthlyData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} className="stroke-muted" />
+                  <CartesianGrid {...CHART_GRID_STYLE} />
                   <XAxis dataKey="month" className="text-xs" />
                   <YAxis yAxisId="left" className="text-xs" />
                   <YAxis yAxisId="right" orientation="right" className="text-xs" />
@@ -329,26 +330,26 @@ export default function SellerAnalytics() {
                       name === 'revenue' ? formatCurrency(value) : value,
                       name === 'revenue' ? 'Ingresos' : 'Ventas'
                     ]}
-                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                    {...CHART_TOOLTIP_STYLE}
                   />
                   <Legend />
                   <Line 
                     yAxisId="left" 
                     type="monotone" 
                     dataKey="revenue" 
-                    stroke="hsl(var(--primary))" 
+                    stroke={CHART_COLORS.primary} 
                     strokeWidth={2} 
                     name="Ingresos (€)" 
-                    dot={{ fill: 'hsl(var(--primary))' }}
+                    dot={{ fill: CHART_COLORS.primary }}
                   />
                   <Line 
                     yAxisId="right" 
                     type="monotone" 
                     dataKey="sales" 
-                    stroke="hsl(var(--chart-2))" 
+                    stroke={CHART_COLORS.secondary} 
                     strokeWidth={2} 
                     name="Ventas" 
-                    dot={{ fill: 'hsl(var(--chart-2))' }}
+                    dot={{ fill: CHART_COLORS.secondary }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -377,12 +378,12 @@ export default function SellerAnalytics() {
                   <YAxis dataKey="name" type="category" width={120} className="text-xs" />
                   <Tooltip 
                     formatter={(value: number) => [formatCurrency(value), 'Ingresos']}
-                    contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))' }}
+                    {...CHART_TOOLTIP_STYLE}
                     cursor={{ fill: 'hsl(var(--muted))' }}
                   />
                   <Bar 
                     dataKey="revenue" 
-                    fill="hsl(var(--primary))" 
+                    fill={CHART_COLORS.primary} 
                     radius={[0, 4, 4, 0]} 
                     barSize={30}
                     name="Ingresos"
