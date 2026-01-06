@@ -42,12 +42,17 @@ import {
   DatabaseZap,
   Blocks,
   CheckCircle,
-  FileText
+  FileText,
+  Award,
+  Activity,
+  ArrowRightLeft,
+  Plug,
+  Check
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import { ServiceFlowDiagram } from "@/components/services/ServiceFlowDiagram";
+import { ServiceInteractiveWidget } from "@/components/services/ServiceInteractiveWidget";
 import { ServiceMetrics } from "@/components/services/ServiceMetrics";
 import { ServicePopularityBadge } from "@/components/services/ServicePopularityBadge";
 
@@ -83,7 +88,12 @@ const iconMap: Record<string, any> = {
   Fuel,
   Scale,
   DatabaseZap,
-  Blocks
+  Blocks,
+  Award,
+  Activity,
+  ArrowRightLeft,
+  Plug,
+  VenetianMask: Lock, // Fallback since VenetianMask doesn't exist
 };
 const Services = () => {
   const { activeOrg } = useOrganizationContext();
@@ -281,8 +291,8 @@ const Services = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {/* Flow Diagram */}
-                  <ServiceFlowDiagram 
+                  {/* Interactive Widget */}
+                  <ServiceInteractiveWidget 
                     category={service.category || "default"} 
                     serviceName={service.name}
                   />
@@ -290,6 +300,18 @@ const Services = () => {
                   <p className="text-sm text-muted-foreground line-clamp-2">
                     {service.description}
                   </p>
+
+                  {/* Features List */}
+                  {service.features && Array.isArray(service.features) && (
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
+                      {(service.features as string[]).slice(0, 3).map((feature, idx) => (
+                        <span key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Check className="h-3 w-3 text-green-500" />
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   
                   {/* Metrics Row */}
                   <ServiceMetrics serviceName={service.name} />
