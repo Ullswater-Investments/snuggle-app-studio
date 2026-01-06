@@ -20,6 +20,7 @@ import DataLineageBlockchain from "@/components/DataLineageBlockchain";
 import { HeartbeatIndicator, type UpdateFrequency } from "@/components/data/HeartbeatIndicator";
 import { DataQualityScore } from "@/components/data/DataQualityScore";
 import { FreshnessBar } from "@/components/data/FreshnessBar";
+import { DataQualityDashboard } from "@/components/data/DataQualityDashboard";
 import { 
   Database, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, 
   CheckCircle2, ShieldCheck, Link2, FileJson, FileSpreadsheet, Map, Clock, 
@@ -280,6 +281,19 @@ const Data = () => {
           </Card>
         </div>
       </FadeIn>
+
+      {/* Data Quality Dashboard */}
+      {filteredTransactions && filteredTransactions.length > 0 && (
+        <FadeIn delay={0.15}>
+          <DataQualityDashboard 
+            transactions={filteredTransactions}
+            onAlertClick={(datasetId) => {
+              const element = document.getElementById(`dataset-${datasetId}`);
+              element?.scrollIntoView({ behavior: "smooth", block: "center" });
+            }}
+          />
+        </FadeIn>
+      )}
 
       <FadeIn delay={0.2}>
         {/* Filters */}
