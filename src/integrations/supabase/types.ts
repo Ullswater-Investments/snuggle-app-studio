@@ -1129,43 +1129,58 @@ export type Database = {
       }
       value_services: {
         Row: {
+          api_endpoint: string | null
           category: string | null
+          code_examples: Json | null
           created_at: string | null
           currency: string | null
           description: string | null
+          documentation_md: string | null
           features: Json | null
           icon_name: string | null
           id: string
+          integrations: Json | null
           name: string
           price: number | null
           price_model: string | null
           provider_org_id: string | null
+          version: string | null
         }
         Insert: {
+          api_endpoint?: string | null
           category?: string | null
+          code_examples?: Json | null
           created_at?: string | null
           currency?: string | null
           description?: string | null
+          documentation_md?: string | null
           features?: Json | null
           icon_name?: string | null
           id?: string
+          integrations?: Json | null
           name: string
           price?: number | null
           price_model?: string | null
           provider_org_id?: string | null
+          version?: string | null
         }
         Update: {
+          api_endpoint?: string | null
           category?: string | null
+          code_examples?: Json | null
           created_at?: string | null
           currency?: string | null
           description?: string | null
+          documentation_md?: string | null
           features?: Json | null
           icon_name?: string | null
           id?: string
+          integrations?: Json | null
           name?: string
           price?: number | null
           price_model?: string | null
           provider_org_id?: string | null
+          version?: string | null
         }
         Relationships: [
           {
