@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { OFFICIAL_SECTORS } from "@/lib/constants";
+
 import { 
   Search, 
   Filter, 
@@ -34,12 +34,11 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "sonner";
 
-// --- Tipos alineados con la vista SQL 'marketplace_listings' (campos opcionales) ---
+// --- Tipos alineados con la vista SQL 'marketplace_listings' ---
 interface MarketplaceListing {
   asset_id: string;
-  asset_name: string | null;
-  asset_description: string | null;
   product_name: string | null;
+  product_description: string | null;
   category: string | null;
   provider_id: string;
   provider_name: string | null;
@@ -52,8 +51,10 @@ interface MarketplaceListing {
   has_green_badge: boolean;
   reputation_score: number;
   review_count: number;
-  // ESG fields from view
   energy_renewable_percent?: number | null;
+  product_id?: string | null;
+  version?: string | null;
+  created_at?: string | null;
 }
 
 // --- Componente de Estrellas de Reputación ---
@@ -176,9 +177,8 @@ export default function Catalog() {
         // Mapeo manual para simular la estructura del marketplace
         const fallbackData: MarketplaceListing[] = rawAssets?.map(a => ({
           asset_id: a.id,
-          asset_name: a.product?.name || "Producto Sin Nombre",
-          asset_description: a.product?.description || "Sin descripción",
           product_name: a.product?.name || "Producto Sin Nombre",
+          product_description: a.product?.description || "Sin descripción",
           category: a.product?.category || "General",
           provider_name: a.org?.name || "Proveedor Desconocido",
           provider_id: a.subject_org_id,
@@ -187,9 +187,9 @@ export default function Catalog() {
           price: a.price || 0,
           currency: a.currency || 'EUR',
           billing_period: undefined,
-          reputation_score: 4.5, // Simulado
-          review_count: 12, // Simulado
-          has_green_badge: Math.random() > 0.5, // Simulado
+          reputation_score: 4.5,
+          review_count: 12,
+          has_green_badge: Math.random() > 0.5,
           kyb_verified: true
         })) || [];
         
@@ -200,11 +200,12 @@ export default function Catalog() {
     }
   });
 
-  // --- Lógica de Filtrado en Cliente (con Programación Defensiva) ---
+  // --- Lógica de Filtrado en Cliente ---
   const filteredListings = listings?.filter(item => {
-    const matchesSearch = (item.asset_name || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          (item.provider_name || "").toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeTab === 'all' || (item.category || "") === activeTab || activeTab === (item.category || "");
+    const matchesSearch = (item.product_name || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (item.provider_name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          (item.product_description || "").toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeTab === 'all' || item.category === activeTab;
     const matchesGreen = !filters.onlyGreen || item.has_green_badge;
     const matchesVerified = !filters.onlyVerified || item.kyb_verified;
     const matchesPrice = filters.priceType === 'all' 
@@ -214,17 +215,18 @@ export default function Catalog() {
     return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
   });
 
-  // Categorías oficiales según Memoria Técnica + categorías dinámicas de los datos
-  const officialCategories = OFFICIAL_SECTORS.map(s => ({ id: s.label, label: s.label, targetShare: s.targetShare }));
-  const dynamicCategories = new Set(listings?.map(l => l.category || "General") || []);
+  // Categorías dinámicas extraídas de los datos reales
+  const dynamicCategories = Array.from(
+    new Set(listings?.map(l => l.category).filter(Boolean) || [])
+  ).sort();
   
-  // Combinar: primero oficiales, luego las dinámicas que no estén en oficiales
   const allCategories = [
     { id: "all", label: "Todos", targetShare: null },
-    ...officialCategories,
-    ...Array.from(dynamicCategories)
-      .filter(cat => !officialCategories.some(oc => oc.label === cat))
-      .map(cat => ({ id: cat, label: cat, targetShare: null }))
+    ...dynamicCategories.map(cat => ({
+      id: cat!,
+      label: cat!,
+      targetShare: null
+    }))
   ];
 
   // Funciones para comparador
@@ -448,7 +450,7 @@ export default function Catalog() {
                 <TableRow>
                   <TableHead className="w-[150px]">Característica</TableHead>
                   {compareProducts.map(p => (
-                    <TableHead key={p.asset_id}>{p.asset_name}</TableHead>
+                    <TableHead key={p.asset_id}>{p.product_name}</TableHead>
                   ))}
                 </TableRow>
               </TableHeader>
@@ -614,7 +616,7 @@ function ProductCard({
         </div>
         
         <CardTitle className="text-xl line-clamp-1 group-hover:text-blue-600 transition-colors">
-          {item.asset_name}
+          {item.product_name}
         </CardTitle>
         <CardDescription className="flex items-center gap-1 text-xs">
           por <span className="font-medium text-foreground">{item.provider_name}</span>
@@ -623,7 +625,7 @@ function ProductCard({
 
       <CardContent className="flex-1 pb-4">
         <p className="text-sm text-muted-foreground line-clamp-3 mb-4 min-h-[60px]">
-          {item.asset_description || "Sin descripción disponible para este activo de datos."}
+          {item.product_description || "Sin descripción disponible para este activo de datos."}
         </p>
         
         <div className="flex items-center justify-between">
