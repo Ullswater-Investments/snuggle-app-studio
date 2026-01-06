@@ -17,6 +17,9 @@ import { CodeIntegrationModal } from "@/components/CodeIntegrationModal";
 import { DataPreviewDialog } from "@/components/DataPreviewDialog";
 import { LicenseRenewalDialog } from "@/components/LicenseRenewalDialog";
 import DataLineageBlockchain from "@/components/DataLineageBlockchain";
+import { HeartbeatIndicator, type UpdateFrequency } from "@/components/data/HeartbeatIndicator";
+import { DataQualityScore } from "@/components/data/DataQualityScore";
+import { FreshnessBar } from "@/components/data/FreshnessBar";
 import { 
   Database, Eye, FileText, Info, Activity, DollarSign, Zap, Leaf, Code2, 
   CheckCircle2, ShieldCheck, Link2, FileJson, FileSpreadsheet, Map, Clock, 
@@ -38,15 +41,34 @@ const FORMAT_MAP: Record<string, { format: string; icon: typeof FileJson }> = {
 };
 
 // Update frequency by category  
-const UPDATE_FREQ_MAP: Record<string, string> = {
-  "Logística": "Tiempo Real (15min)",
-  "IoT": "Tiempo Real",
-  "ESG": "Mensual",
-  "Financiero": "Semanal",
-  "Medio Ambiente": "Mensual",
-  "Retail": "Diario",
-  "Energía": "Tiempo Real (15min)",
-  "Agricultura": "Semanal",
+const UPDATE_FREQ_MAP: Record<string, { label: string; frequency: UpdateFrequency }> = {
+  "Logística": { label: "Tiempo Real (15min)", frequency: "hourly" },
+  "IoT": { label: "Tiempo Real", frequency: "realtime" },
+  "ESG": { label: "Mensual", frequency: "monthly" },
+  "Financiero": { label: "Semanal", frequency: "weekly" },
+  "Medio Ambiente": { label: "Mensual", frequency: "monthly" },
+  "Retail": { label: "Diario", frequency: "daily" },
+  "Energía": { label: "Tiempo Real (15min)", frequency: "realtime" },
+  "Agricultura": { label: "Semanal", frequency: "weekly" },
+};
+
+// Get update frequency for a transaction
+const getUpdateFrequency = (transaction: any): UpdateFrequency => {
+  const category = transaction.asset?.product?.category;
+  return UPDATE_FREQ_MAP[category]?.frequency || "monthly";
+};
+
+// Calculate data quality metrics
+const getDataQualityMetrics = (transaction: any) => {
+  const isVerified = transaction.subject_org?.pontus_verified || false;
+  const baseCompleteness = isVerified ? 92 : 75;
+  const daysOld = Math.floor((Date.now() - new Date(transaction.updated_at || transaction.created_at).getTime()) / (1000 * 60 * 60 * 24));
+  
+  return {
+    completeness: Math.min(100, baseCompleteness + Math.floor(Math.random() * 8)),
+    accuracy: isVerified ? 88 + Math.floor(Math.random() * 10) : 70 + Math.floor(Math.random() * 15),
+    timeliness: Math.max(30, 100 - daysOld * 2)
+  };
 };
 
 // Get expiration status - prioritizes subscription_expires_at if available
@@ -327,7 +349,9 @@ const Data = () => {
               const category = transaction.asset.product.category || "Datos";
               const formatInfo = FORMAT_MAP[category] || { format: "JSON", icon: FileJson };
               const FormatIcon = formatInfo.icon;
-              const updateFreq = UPDATE_FREQ_MAP[category] || "Mensual";
+              const updateFreqInfo = UPDATE_FREQ_MAP[category] || { label: "Mensual", frequency: "monthly" as UpdateFrequency };
+              const updateFrequency = getUpdateFrequency(transaction);
+              const qualityMetrics = getDataQualityMetrics(transaction);
               // Simulate API usage percentage (disabled for expired)
               const apiUsage = expirationStatus.status === "expired" ? 0 : Math.floor(Math.random() * 40) + 30;
               
@@ -382,7 +406,7 @@ const Data = () => {
                       </span>
                       <span className="flex items-center gap-1">
                         <Clock className="h-3.5 w-3.5" />
-                        {updateFreq}
+                        {updateFreqInfo.label}
                       </span>
                     </div>
                     
@@ -453,6 +477,36 @@ const Data = () => {
                         </AlertDescription>
                       </Alert>
                     )}
+                    
+                    {/* Data Quality Metrics Grid */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Heartbeat Indicator */}
+                      <div className="bg-muted/30 rounded-lg p-2.5 flex flex-col items-center justify-center">
+                        <HeartbeatIndicator 
+                          frequency={updateFrequency}
+                          showLabel
+                          lastUpdated={new Date(transaction.updated_at || transaction.created_at)}
+                        />
+                      </div>
+                      
+                      {/* Data Quality Score */}
+                      <div className="bg-muted/30 rounded-lg p-2.5 flex flex-col items-center justify-center">
+                        <DataQualityScore 
+                          completeness={qualityMetrics.completeness}
+                          accuracy={qualityMetrics.accuracy}
+                          timeliness={qualityMetrics.timeliness}
+                          size="sm"
+                          showBreakdown
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Freshness Bar */}
+                    <FreshnessBar 
+                      lastUpdated={new Date(transaction.updated_at || transaction.created_at)}
+                      expectedUpdateFrequency={updateFrequency === 'static' ? 'monthly' : updateFrequency}
+                      showTimestamp
+                    />
                     
                     {/* API Usage */}
                     <div>
