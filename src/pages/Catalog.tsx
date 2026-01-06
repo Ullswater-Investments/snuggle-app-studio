@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { OFFICIAL_SECTORS } from "@/lib/constants";
 import { 
   Search, 
   Filter, 
@@ -203,7 +204,7 @@ export default function Catalog() {
   const filteredListings = listings?.filter(item => {
     const matchesSearch = (item.asset_name || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
                           (item.provider_name || "").toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeTab === 'all' || (item.category || "") === activeTab;
+    const matchesCategory = activeTab === 'all' || (item.category || "") === activeTab || activeTab === (item.category || "");
     const matchesGreen = !filters.onlyGreen || item.has_green_badge;
     const matchesVerified = !filters.onlyVerified || item.kyb_verified;
     const matchesPrice = filters.priceType === 'all' 
@@ -213,7 +214,18 @@ export default function Catalog() {
     return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
   });
 
-  const categories = ["all", ...new Set(listings?.map(l => l.category || "General") || [])];
+  // Categorías oficiales según Memoria Técnica + categorías dinámicas de los datos
+  const officialCategories = OFFICIAL_SECTORS.map(s => ({ id: s.label, label: s.label, targetShare: s.targetShare }));
+  const dynamicCategories = new Set(listings?.map(l => l.category || "General") || []);
+  
+  // Combinar: primero oficiales, luego las dinámicas que no estén en oficiales
+  const allCategories = [
+    { id: "all", label: "Todos", targetShare: null },
+    ...officialCategories,
+    ...Array.from(dynamicCategories)
+      .filter(cat => !officialCategories.some(oc => oc.label === cat))
+      .map(cat => ({ id: cat, label: cat, targetShare: null }))
+  ];
 
   // Funciones para comparador
   const toggleCompare = (assetId: string) => {
@@ -342,16 +354,21 @@ export default function Catalog() {
         {/* GRID DE PRODUCTOS */}
         <div className="lg:col-span-3 space-y-6">
           
-          {/* Tabs de Categoría */}
+          {/* Tabs de Categoría - Orden oficial según Memoria Técnica */}
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="w-full justify-start overflow-x-auto h-auto p-1 bg-transparent gap-2">
-              {categories.map(cat => (
+              {allCategories.map(cat => (
                 <TabsTrigger 
-                  key={cat} 
-                  value={cat}
-                  className="data-[state=active]:bg-primary data-[state=active]:text-white border bg-white capitalize px-4 py-2 rounded-full"
+                  key={cat.id} 
+                  value={cat.id}
+                  className="data-[state=active]:bg-primary data-[state=active]:text-white border bg-white capitalize px-4 py-2 rounded-full flex items-center gap-1"
                 >
-                  {cat === 'all' ? 'Todos' : cat}
+                  {cat.label}
+                  {cat.targetShare && (
+                    <Badge variant="outline" className="ml-1 text-[10px] px-1.5 py-0">
+                      {cat.targetShare}%
+                    </Badge>
+                  )}
                 </TabsTrigger>
               ))}
             </TabsList>

@@ -3,6 +3,7 @@ import {
   ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle, Sparkles,
   Wallet, ShieldCheck, Coins, Radio, Bell, Users, FileText, Plug, HelpCircle, BookOpen, Triangle
 } from "lucide-react";
+import { FundingFooter } from "@/components/FundingFooter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -332,25 +333,6 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Créditos de financiación - Obligatorio según Memoria Técnica */}
-          <div className="border-t border-gray-800 pt-8 mb-8">
-            <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
-              <div className="text-xs text-gray-300 border border-gray-700 px-3 py-1.5 rounded-md flex items-center gap-2">
-                <span className="text-base">🇪🇺</span>
-                <span>NextGenerationEU</span>
-              </div>
-              <div className="text-xs text-gray-300 border border-gray-700 px-3 py-1.5 rounded-md">
-                Plan de Recuperación
-              </div>
-              <div className="text-xs text-gray-300 border border-gray-700 px-3 py-1.5 rounded-md">
-                Ministerio TDF
-              </div>
-            </div>
-            <p className="text-center text-xs text-gray-500 max-w-2xl mx-auto">
-              Financiado por la Unión Europea - NextGenerationEU. Plan de Recuperación, Transformación y Resiliencia. 
-              Ministerio para la Transformación Digital y de la Función Pública.
-            </p>
-          </div>
 
           {/* Bottom bar */}
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -365,6 +347,9 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      {/* FundingFooter - Créditos oficiales según Memoria Técnica */}
+      <FundingFooter variant="dark" showTransparency={false} />
     </div>
   );
 }
