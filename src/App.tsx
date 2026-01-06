@@ -28,6 +28,7 @@ import SettingsPreferences from "./pages/SettingsPreferences";
 import WebhookSettings from "./pages/WebhookSettings";
 import AuditLogs from "./pages/AuditLogs";
 import Services from "./pages/Services";
+import ServiceDetail from "./pages/ServiceDetail";
 import Sustainability from "./pages/Sustainability";
 import InnovationLab from "./pages/InnovationLab";
 import Opportunities from "./pages/Opportunities";
@@ -73,6 +74,7 @@ const App = () => (
                 <Route path="/data/view/:id" element={<DataView />} />
                 <Route path="/sustainability" element={<Sustainability />} />
                 <Route path="/services" element={<Services />} />
+                <Route path="/services/:id" element={<ServiceDetail />} />
                 <Route path="/innovation" element={<InnovationLab />} />
                 <Route path="/opportunities" element={<Opportunities />} />
                 <Route path="/reports" element={<Reports />} />

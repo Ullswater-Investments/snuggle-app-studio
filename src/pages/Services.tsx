@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,7 +41,8 @@ import {
   Scale,
   DatabaseZap,
   Blocks,
-  CheckCircle
+  CheckCircle,
+  FileText
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
@@ -81,6 +83,7 @@ const iconMap: Record<string, any> = {
 };
 const Services = () => {
   const { activeOrg } = useOrganizationContext();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -236,7 +239,8 @@ const Services = () => {
           return (
             <Card 
               key={service.id} 
-              className={`hover:shadow-lg transition-all ${isSameSector ? 'ring-2 ring-primary/20' : ''}`}
+              className={`hover:shadow-lg transition-all cursor-pointer ${isSameSector ? 'ring-2 ring-primary/20' : ''}`}
+              onClick={() => navigate(`/services/${service.id}`)}
             >
               <CardHeader>
                 <div className="flex items-start justify-between mb-2">
@@ -291,13 +295,31 @@ const Services = () => {
                       Activo
                     </Badge>
                   ) : (
-                    <Button
-                      onClick={() => handleSubscribe(service.id, service.name, service.price)}
-                      className="gap-2"
-                    >
-                      <Zap className="h-4 w-4" />
-                      {service.price === 0 ? "Activar Gratis" : "Suscribir"}
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/services/${service.id}`);
+                        }}
+                        className="gap-1"
+                      >
+                        <FileText className="h-4 w-4" />
+                        <span className="hidden sm:inline">Docs</span>
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSubscribe(service.id, service.name, service.price);
+                        }}
+                        className="gap-1"
+                      >
+                        <Zap className="h-4 w-4" />
+                        {service.price === 0 ? "Gratis" : "Suscribir"}
+                      </Button>
+                    </div>
                   )}
                 </div>
               </CardContent>
