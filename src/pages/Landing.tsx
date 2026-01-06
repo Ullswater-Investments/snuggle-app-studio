@@ -112,25 +112,25 @@ export default function Landing() {
       </header>
 
       <main className="flex-1">
-        {/* HERO SECTION */}
+        {/* HERO SECTION - Textos oficiales según Memoria Técnica */}
         <section className="py-20 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:bg-grid-slate-900/25 dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.5))]" />
           <div className="container relative mx-auto px-4 text-center max-w-4xl">
             <Badge className="mb-4" variant="secondary">v3.1 Web3 Enabled</Badge>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              El Espacio de Datos <br />
-              <span className="procuredata-gradient">Federado y Seguro</span>
+              PROCUREDATA <br />
+              <span className="procuredata-gradient">Espacio de Datos para la Función de Compras</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Plataforma transversal para la monetización, gobernanza y compartición de datos industriales. 
-              Desde ESG y IoT hasta Finanzas y Legal.
+              Solución al problema 'nxm' en el alta de proveedores mediante identidades compartidas.
+              Alta automática en tu ERP a partir de datos ya validados por otros clientes.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="h-12 px-8 text-lg" asChild>
                 <Link to="/auth">Probar Demo Interactiva</Link>
               </Button>
               <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                <Link to="/docs/tecnico">Ver Documentación Técnica</Link>
+                <Link to="/docs/tecnico">Ver Memoria Técnica</Link>
               </Button>
             </div>
           </div>
@@ -274,14 +274,14 @@ export default function Landing() {
 
       <footer className="bg-slate-950 text-white py-16">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 font-bold text-xl mb-4">
                 <span className="procuredata-gradient">PROCUREDATA</span>
               </div>
               <p className="text-sm text-gray-400 mb-4">
-                Plataforma de soberanía de datos industriales con tecnología Web3.
+                Espacio de Datos para la Función de Compras con tecnología Web3.
               </p>
               <Badge variant="outline" className="text-xs border-gray-700">v3.1 Web3 Enabled</Badge>
             </div>
@@ -310,6 +310,17 @@ export default function Landing() {
               </ul>
             </div>
 
+            {/* Transparencia - NUEVO según Memoria Técnica */}
+            <div>
+              <h4 className="font-semibold mb-4 text-white">Transparencia</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">Memoria Técnica</Link></li>
+                <li><Link to="/architecture" className="hover:text-white transition-colors">Modelo de Gobernanza</Link></li>
+                <li><Link to="/whitepaper" className="hover:text-white transition-colors">Especificaciones Técnicas</Link></li>
+                <li><Link to="/models" className="hover:text-white transition-colors">Plan de Negocio</Link></li>
+              </ul>
+            </div>
+
             {/* Acceso */}
             <div>
               <h4 className="font-semibold mb-4 text-white">Acceso</h4>
@@ -319,6 +330,26 @@ export default function Landing() {
                 <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
               </ul>
             </div>
+          </div>
+
+          {/* Créditos de financiación - Obligatorio según Memoria Técnica */}
+          <div className="border-t border-gray-800 pt-8 mb-8">
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+              <div className="text-xs text-gray-300 border border-gray-700 px-3 py-1.5 rounded-md flex items-center gap-2">
+                <span className="text-base">🇪🇺</span>
+                <span>NextGenerationEU</span>
+              </div>
+              <div className="text-xs text-gray-300 border border-gray-700 px-3 py-1.5 rounded-md">
+                Plan de Recuperación
+              </div>
+              <div className="text-xs text-gray-300 border border-gray-700 px-3 py-1.5 rounded-md">
+                Ministerio TDF
+              </div>
+            </div>
+            <p className="text-center text-xs text-gray-500 max-w-2xl mx-auto">
+              Financiado por la Unión Europea - NextGenerationEU. Plan de Recuperación, Transformación y Resiliencia. 
+              Ministerio para la Transformación Digital y de la Función Pública.
+            </p>
           </div>
 
           {/* Bottom bar */}

@@ -97,6 +97,9 @@ const cardVariants = {
   },
 };
 
+// Precios alineados con Memoria Técnica oficial
+// - Alta de Proveedor: ~1.00 EUROe/transacción
+// - Membresía Base: ~100 EUROe/año
 const PRICING_TIERS = [
   {
     id: "free",
@@ -107,6 +110,7 @@ const PRICING_TIERS = [
     description: "Para proveedores que comienzan",
     cta: "Empezar Gratis",
     ctaVariant: "outline" as const,
+    transactionFee: "1.00 EUROe/alta", // Precio oficial
     features: [
       { name: "Recepción de solicitudes", included: true },
       { name: "Perfil DID básico", included: true },
@@ -124,14 +128,15 @@ const PRICING_TIERS = [
   {
     id: "pro",
     name: "Pro",
-    price: 99,
-    annualPrice: 79,
+    price: 100, // Cambiado de 99 a 100 según Memoria Técnica
+    annualPrice: 100, // Membresía base anual oficial
     icon: Crown,
     color: "blue",
-    description: "Para providers en crecimiento",
+    description: "Membresía base al Data Space",
     cta: "Probar Pro 14 días",
     ctaVariant: "default" as const,
     featured: true,
+    transactionFee: "0.50 EUROe/alta", // Descuento por membresía
     features: [
       { name: "Recepción de solicitudes", included: true },
       { name: "Perfil DID verificado", included: true },
@@ -155,6 +160,7 @@ const PRICING_TIERS = [
     description: "Para data holders y corporaciones",
     cta: "Contactar Ventas",
     ctaVariant: "secondary" as const,
+    transactionFee: "Negociable", // Volumen personalizado
     features: [
       { name: "Recepción de solicitudes", included: true },
       { name: "Perfil DID premium", included: true },

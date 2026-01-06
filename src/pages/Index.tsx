@@ -490,28 +490,28 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer con créditos de financiación - Memoria Técnica */}
       <footer className="border-t bg-muted/30 py-12">
         <div className="container mx-auto px-4">
-          <StaggerContainer className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+          <StaggerContainer className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
             <StaggerItem>
               <div className="space-y-4">
                 <h3 className="font-bold text-foreground text-lg">
                   <span className="procuredata-gradient">PROCUREDATA</span>
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Sistema de Gobernanza de Datos Multi-Tenant para gestión de transacciones entre organizaciones.
+                  Espacio de Datos para la Función de Compras. Solución al problema 'nxm' en el alta de proveedores.
                 </p>
               </div>
             </StaggerItem>
 
             <StaggerItem>
               <div className="space-y-4">
-                <h4 className="font-semibold text-foreground">Enlaces Rápidos</h4>
+                <h4 className="font-semibold text-foreground">Plataforma</h4>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>
-                    <a href="#" className="hover:text-primary transition-colors">
-                      Documentación
+                    <a href="/catalog" className="hover:text-primary transition-colors">
+                      Catálogo de Datos
                     </a>
                   </li>
                   <li>
@@ -520,8 +520,31 @@ const Index = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-primary transition-colors">
+                    <a href="/architecture" className="hover:text-primary transition-colors">
                       Arquitectura
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="space-y-4">
+                <h4 className="font-semibold text-foreground">Transparencia</h4>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>
+                    <a href="/docs/tecnico" className="hover:text-primary transition-colors">
+                      Memoria Técnica
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/architecture" className="hover:text-primary transition-colors">
+                      Modelo de Gobernanza
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/whitepaper" className="hover:text-primary transition-colors">
+                      Especificaciones Técnicas
                     </a>
                   </li>
                 </ul>
@@ -539,11 +562,32 @@ const Index = () => {
             </StaggerItem>
           </StaggerContainer>
 
+          {/* Créditos de financiación - Obligatorio según Memoria Técnica */}
+          <FadeIn delay={0.2}>
+            <div className="mt-8 pt-8 border-t">
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+                <div className="text-xs text-muted-foreground border border-border px-3 py-1.5 rounded-md flex items-center gap-2">
+                  <span className="text-base">🇪🇺</span>
+                  <span>NextGenerationEU</span>
+                </div>
+                <div className="text-xs text-muted-foreground border border-border px-3 py-1.5 rounded-md">
+                  Plan de Recuperación
+                </div>
+                <div className="text-xs text-muted-foreground border border-border px-3 py-1.5 rounded-md">
+                  Ministerio TDF
+                </div>
+              </div>
+              <p className="text-center text-xs text-muted-foreground max-w-2xl mx-auto">
+                Financiado por la Unión Europea - NextGenerationEU. Plan de Recuperación, Transformación y Resiliencia. 
+                Ministerio para la Transformación Digital y de la Función Pública.
+              </p>
+            </div>
+          </FadeIn>
+
           <FadeIn delay={0.3}>
             <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
               <p>
-                &copy; {new Date().getFullYear()} <span className="procuredata-gradient">PROCUREDATA</span>. Sistema de
-                Gobernanza de Datos.
+                &copy; {new Date().getFullYear()} <span className="procuredata-gradient">PROCUREDATA</span>. Espacio de Datos para la Función de Compras.
               </p>
             </div>
           </FadeIn>

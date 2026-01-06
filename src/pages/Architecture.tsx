@@ -415,6 +415,78 @@ export default function Architecture() {
                   </CardContent>
                 </Card>
 
+                {/* Componentes del Data Space Europeo - Memoria Técnica */}
+                <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Globe className="h-5 w-5 text-primary" />
+                      Componentes del Data Space Europeo
+                    </CardTitle>
+                    <CardDescription>
+                      Estándares y conectores activos según la Memoria Técnica oficial
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <motion.div 
+                        variants={fadeInUp}
+                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
+                      >
+                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Link2 className="h-5 w-5 text-green-500" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-sm">Eclipse Dataspace Connector (EDC)</p>
+                          <p className="text-xs text-muted-foreground">Conector oficial del Data Space europeo</p>
+                        </div>
+                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
+                      </motion.div>
+
+                      <motion.div 
+                        variants={fadeInUp}
+                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
+                      >
+                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Shield className="h-5 w-5 text-green-500" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-sm">IDS Dataspace Protocol</p>
+                          <p className="text-xs text-muted-foreground">Protocolo de interoperabilidad IDSA</p>
+                        </div>
+                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
+                      </motion.div>
+
+                      <motion.div 
+                        variants={fadeInUp}
+                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
+                      >
+                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Lock className="h-5 w-5 text-green-500" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-sm">Keycloak (Federated Identity)</p>
+                          <p className="text-xs text-muted-foreground">Gestión de identidades federadas</p>
+                        </div>
+                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
+                      </motion.div>
+
+                      <motion.div 
+                        variants={fadeInUp}
+                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
+                      >
+                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <CheckCircle2 className="h-5 w-5 text-green-500" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-sm">Gaia-X Trust Framework</p>
+                          <p className="text-xs text-muted-foreground">Marco de confianza europeo</p>
+                        </div>
+                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
+                      </motion.div>
+                    </div>
+                  </CardContent>
+                </Card>
+
                 <div className="grid md:grid-cols-3 gap-4">
                   <motion.div variants={fadeInUp}>
                     <Card className="h-full hover:shadow-lg transition-shadow">
