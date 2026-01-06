@@ -46,6 +46,10 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
+import { ServiceFlowDiagram } from "@/components/services/ServiceFlowDiagram";
+import { ServiceMetrics } from "@/components/services/ServiceMetrics";
+import { ServicePopularityBadge } from "@/components/services/ServicePopularityBadge";
 
 const iconMap: Record<string, any> = {
   BrainCircuit,
@@ -232,98 +236,111 @@ const Services = () => {
 
     return (
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filtered.map((service) => {
+        {filtered.map((service, index) => {
           const IconComponent = iconMap[service.icon_name] || Sparkles;
           const isSameSector = service.provider?.sector === activeOrg?.sector;
           
           return (
-            <Card 
-              key={service.id} 
-              className={`hover:shadow-lg transition-all cursor-pointer ${isSameSector ? 'ring-2 ring-primary/20' : ''}`}
-              onClick={() => navigate(`/services/${service.id}`)}
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
+              whileHover={{ scale: 1.02, y: -4 }}
             >
-              <CardHeader>
-                <div className="flex items-start justify-between mb-2">
-                  <div className="p-3 rounded-lg bg-primary/10">
-                    <IconComponent className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex flex-col gap-1 items-end">
-                    <Badge className={getCategoryColor(service.category)}>
-                      {service.category}
-                    </Badge>
-                    {isSameSector && (
-                      <Badge variant="outline" className="text-xs">
-                        Recomendado
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-                <CardTitle className="text-xl">{service.name}</CardTitle>
-                <CardDescription>
-                  {service.provider?.name}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-sm text-muted-foreground">
-                  {service.description}
-                </p>
-                
-                {(service as any).features && Array.isArray((service as any).features) && (service as any).features.length > 0 && (
-                  <div className="flex flex-wrap gap-1">
-                    {(service as any).features.slice(0, 3).map((feature: string, idx: number) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-                )}
-                
-                <div className="flex items-center justify-between pt-4 border-t">
-                  <div>
-                    <p className="text-lg font-bold">
-                      {formatPrice(service.price, service.currency || 'EUR', service.price_model)}
-                    </p>
-                    {service.price === 0 && (
-                      <Badge variant="secondary" className="text-xs mt-1">
-                        Core Service
-                      </Badge>
-                    )}
-                  </div>
-                  {subscribedServices.includes(service.id) ? (
-                    <Badge className="bg-green-500/20 text-green-600 border-green-500/30 py-2 px-4">
-                      <CheckCircle className="h-4 w-4 mr-2" />
-                      Activo
-                    </Badge>
-                  ) : (
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/services/${service.id}`);
-                        }}
-                        className="gap-1"
-                      >
-                        <FileText className="h-4 w-4" />
-                        <span className="hidden sm:inline">Docs</span>
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleSubscribe(service.id, service.name, service.price);
-                        }}
-                        className="gap-1"
-                      >
-                        <Zap className="h-4 w-4" />
-                        {service.price === 0 ? "Gratis" : "Suscribir"}
-                      </Button>
+              <Card 
+                className={`h-full hover:shadow-xl transition-all cursor-pointer ${isSameSector ? 'ring-2 ring-primary/20' : ''}`}
+                onClick={() => navigate(`/services/${service.id}`)}
+              >
+                <CardHeader className="pb-2">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <IconComponent className="h-6 w-6 text-primary" />
                     </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+                    <div className="flex flex-col gap-1 items-end">
+                      <div className="flex gap-1">
+                        <Badge className={getCategoryColor(service.category)}>
+                          {service.category}
+                        </Badge>
+                        <ServicePopularityBadge 
+                          serviceName={service.name}
+                          price={service.price}
+                          createdAt={service.created_at}
+                        />
+                      </div>
+                      {isSameSector && (
+                        <Badge variant="outline" className="text-xs">
+                          Recomendado
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  <CardTitle className="text-xl">{service.name}</CardTitle>
+                  <CardDescription>
+                    {service.provider?.name}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {/* Flow Diagram */}
+                  <ServiceFlowDiagram 
+                    category={service.category || "default"} 
+                    serviceName={service.name}
+                  />
+
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {service.description}
+                  </p>
+                  
+                  {/* Metrics Row */}
+                  <ServiceMetrics serviceName={service.name} />
+                  
+                  <div className="flex items-center justify-between pt-3 border-t">
+                    <div>
+                      <p className="text-lg font-bold">
+                        {formatPrice(service.price, service.currency || 'EUR', service.price_model)}
+                      </p>
+                      {service.price === 0 && (
+                        <Badge variant="secondary" className="text-xs mt-1">
+                          Core Service
+                        </Badge>
+                      )}
+                    </div>
+                    {subscribedServices.includes(service.id) ? (
+                      <Badge className="bg-green-500/20 text-green-600 border-green-500/30 py-2 px-4">
+                        <CheckCircle className="h-4 w-4 mr-2" />
+                        Activo
+                      </Badge>
+                    ) : (
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/services/${service.id}`);
+                          }}
+                          className="gap-1"
+                        >
+                          <FileText className="h-4 w-4" />
+                          <span className="hidden sm:inline">Docs</span>
+                        </Button>
+                        <Button
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSubscribe(service.id, service.name, service.price);
+                          }}
+                          className="gap-1"
+                        >
+                          <Zap className="h-4 w-4" />
+                          {service.price === 0 ? "Gratis" : "Suscribir"}
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           );
         })}
       </div>
