@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useAuth } from "@/hooks/useAuth";
-import { Megaphone, Plus, Calendar, DollarSign, Tag, Loader2 } from "lucide-react";
+import { Megaphone, Plus, Calendar, DollarSign, Tag, Loader2, Search, BadgeCheck, AlertCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import type { MarketplaceOpportunity } from "@/types/database.extensions";
 import { EmptyState } from "@/components/EmptyState";
+import { differenceInDays } from "date-fns";
 
 // UI Components
 import { Button } from "@/components/ui/button";
@@ -44,7 +45,7 @@ type OpportunityFormData = z.infer<typeof opportunitySchema>;
 
 const CATEGORIES = [
   "Automotive", "Energy", "Pharma", "Retail", "Construction", 
-  "Finance", "Logistics", "AgriFood", "Aerospace", "Tech"
+  "Finance", "Logistics", "AgriFood", "Aerospace", "Tech", "ESG", "AI"
 ];
 
 export default function Opportunities() {
@@ -53,6 +54,8 @@ export default function Opportunities() {
   const queryClient = useQueryClient();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [submittingProposalId, setSubmittingProposalId] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
   // Fetch opportunities
   const { data: opportunities = [], isLoading } = useQuery({
@@ -181,6 +184,26 @@ export default function Opportunities() {
     createMutation.mutate(values);
   };
 
+  // Filtrar oportunidades
+  const filteredOpportunities = useMemo(() => {
+    return opportunities.filter((opp) => {
+      const matchesSearch = searchTerm === "" || 
+        opp.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        opp.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        opp.consumer?.name?.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesCategory = categoryFilter === "all" || opp.category === categoryFilter;
+      
+      return matchesSearch && matchesCategory;
+    });
+  }, [opportunities, searchTerm, categoryFilter]);
+
+  // Verificar urgencia del deadline
+  const isUrgent = (expiresAt: string) => {
+    const daysLeft = differenceInDays(new Date(expiresAt), new Date());
+    return daysLeft <= 7;
+  };
+
   return (
     <div className="container py-8 space-y-6 fade-in">
       {/* Header */}
@@ -188,10 +211,10 @@ export default function Opportunities() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
             <Megaphone className="h-8 w-8 text-primary" />
-            Demandas de Datos
+            Oportunidades de Mercado
           </h1>
           <p className="text-muted-foreground mt-2">
-            Encuentra compradores activos buscando datos que tú posees.
+            Encuentra compradores activos o publica tu propia necesidad de datos.
           </p>
         </div>
 
@@ -298,6 +321,30 @@ export default function Opportunities() {
         </Dialog>
       </div>
 
+      {/* Barra de Filtros */}
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="relative flex-1 md:max-w-sm">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input 
+            placeholder="Buscar oportunidades..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+        <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+          <SelectTrigger className="md:w-48">
+            <SelectValue placeholder="Todas las categorías" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todas las categorías</SelectItem>
+            {CATEGORIES.map((cat) => (
+              <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
       {/* Lista de Oportunidades */}
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -317,25 +364,28 @@ export default function Opportunities() {
             </Card>
           ))}
         </div>
-      ) : opportunities.length === 0 ? (
+      ) : filteredOpportunities.length === 0 ? (
         <Card className="border-dashed">
           <CardContent>
             <EmptyState
               icon={Megaphone}
-              title="No hay oportunidades publicadas"
-              description="Sé el primero en publicar una necesidad de datos. Los proveedores te contactarán con propuestas personalizadas."
-              action={
+              title={opportunities.length === 0 ? "No hay oportunidades publicadas" : "Sin resultados"}
+              description={opportunities.length === 0 
+                ? "Sé el primero en publicar una necesidad de datos. Los proveedores te contactarán con propuestas personalizadas."
+                : "No se encontraron oportunidades con los filtros aplicados. Intenta con otros términos."
+              }
+              action={opportunities.length === 0 && (
                 <Button onClick={() => setDialogOpen(true)} className="gap-2">
                   <Plus className="h-4 w-4" />
                   Publicar Necesidad
                 </Button>
-              }
+              )}
             />
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {opportunities.map((opp) => (
+          {filteredOpportunities.map((opp) => (
             <Card key={opp.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-start justify-between mb-2">
@@ -343,14 +393,30 @@ export default function Opportunities() {
                     <Tag className="h-3 w-3" />
                     {opp.category}
                   </Badge>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Calendar className="h-3 w-3" />
-                    {new Date(opp.expires_at).toLocaleDateString("es-ES")}
+                  <div className="flex items-center gap-1">
+                    {isUrgent(opp.expires_at) && (
+                      <Badge variant="destructive" className="gap-1 text-xs">
+                        <AlertCircle className="h-3 w-3" />
+                        Urgente
+                      </Badge>
+                    )}
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Calendar className="h-3 w-3" />
+                      {new Date(opp.expires_at).toLocaleDateString("es-ES")}
+                    </div>
                   </div>
                 </div>
                 <CardTitle className="text-lg line-clamp-2">{opp.title}</CardTitle>
-                <CardDescription className="text-xs flex items-center gap-1">
-                  Por: <span className="font-medium">{opp.consumer?.name || "Organización"}</span>
+                <CardDescription className="text-xs flex items-center gap-2 mt-1">
+                  <span className="flex items-center gap-1">
+                    Por: <span className="font-medium">{opp.consumer?.name || "Organización"}</span>
+                  </span>
+                  {opp.consumer?.kyb_verified && (
+                    <Badge variant="outline" className="gap-1 text-xs text-green-600 border-green-600">
+                      <BadgeCheck className="h-3 w-3" />
+                      Verificado
+                    </Badge>
+                  )}
                 </CardDescription>
               </CardHeader>
               <CardContent>
