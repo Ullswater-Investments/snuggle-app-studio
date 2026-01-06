@@ -20,6 +20,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { FadeIn, SlideUp, ScaleIn, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
+import { FundingFooter } from "@/components/FundingFooter";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -562,29 +563,7 @@ const Index = () => {
             </StaggerItem>
           </StaggerContainer>
 
-          {/* Créditos de financiación - Obligatorio según Memoria Técnica */}
           <FadeIn delay={0.2}>
-            <div className="mt-8 pt-8 border-t">
-              <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
-                <div className="text-xs text-muted-foreground border border-border px-3 py-1.5 rounded-md flex items-center gap-2">
-                  <span className="text-base">🇪🇺</span>
-                  <span>NextGenerationEU</span>
-                </div>
-                <div className="text-xs text-muted-foreground border border-border px-3 py-1.5 rounded-md">
-                  Plan de Recuperación
-                </div>
-                <div className="text-xs text-muted-foreground border border-border px-3 py-1.5 rounded-md">
-                  Ministerio TDF
-                </div>
-              </div>
-              <p className="text-center text-xs text-muted-foreground max-w-2xl mx-auto">
-                Financiado por la Unión Europea - NextGenerationEU. Plan de Recuperación, Transformación y Resiliencia. 
-                Ministerio para la Transformación Digital y de la Función Pública.
-              </p>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
             <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
               <p>
                 &copy; {new Date().getFullYear()} <span className="procuredata-gradient">PROCUREDATA</span>. Espacio de Datos para la Función de Compras.
@@ -593,6 +572,9 @@ const Index = () => {
           </FadeIn>
         </div>
       </footer>
+
+      {/* FundingFooter - Créditos oficiales según Memoria Técnica */}
+      <FundingFooter variant="light" />
     </div>
   );
 };
