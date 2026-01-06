@@ -36,7 +36,11 @@ import {
   Ruler,
   Shield,
   Plane,
-  Fuel
+  Fuel,
+  Scale,
+  DatabaseZap,
+  Blocks,
+  CheckCircle
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
@@ -70,9 +74,11 @@ const iconMap: Record<string, any> = {
   Ruler,
   Shield,
   Plane,
-  Fuel
+  Fuel,
+  Scale,
+  DatabaseZap,
+  Blocks
 };
-
 const Services = () => {
   const { activeOrg } = useOrganizationContext();
   const [searchQuery, setSearchQuery] = useState("");
@@ -102,6 +108,14 @@ const Services = () => {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
+      // Nuevas categorías PROCUREDATA
+      "Sostenibilidad": "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+      "Privacidad": "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200",
+      "IA & Analytics": "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+      "Compliance": "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200",
+      "Data Ops": "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
+      "Blockchain": "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+      // Categorías existentes
       "Mantenimiento": "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
       "Logística": "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
       "Certificación": "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
@@ -114,9 +128,8 @@ const Services = () => {
       "Marketing": "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
       "Seguridad": "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-200",
       "Riesgo": "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
-      "Compliance": "bg-lime-100 text-lime-800 dark:bg-lime-900 dark:text-lime-200",
-      "Financiación": "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
       "Legal": "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200",
+      "Financiación": "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
       "IoT": "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
       "Ingeniería": "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-200",
       "IT": "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200",
@@ -125,15 +138,35 @@ const Services = () => {
     return colors[category] || "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
   };
 
-  const formatPrice = (price: number, currency: string, priceModel: string) => {
-    const formatted = new Intl.NumberFormat('es-ES', { 
-      style: 'currency', 
-      currency: currency 
-    }).format(price);
+  const formatPrice = (price: number | null, currency: string, priceModel: string | null) => {
+    if (price === null || price === 0) {
+      return "Gratis";
+    }
+    
+    // Use EUROe format for consistency with PROCUREDATA
+    const formatted = `${price} EUROe`;
     
     return priceModel === "subscription" 
-      ? `${formatted} / mes` 
-      : `${formatted} / uso`;
+      ? `${formatted}/mes` 
+      : `${formatted}/uso`;
+  };
+
+  // Simulated subscription state
+  const [subscribedServices, setSubscribedServices] = useState<string[]>([]);
+
+  const handleSubscribe = (serviceId: string, serviceName: string, price: number | null) => {
+    if (subscribedServices.includes(serviceId)) return;
+
+    const priceText = price && price > 0 ? `${price} EUROe` : "gratuito";
+    toast.loading(`Procesando pago de ${priceText}...`, { id: "payment" });
+    
+    setTimeout(() => {
+      setSubscribedServices(prev => [...prev, serviceId]);
+      toast.success(`Servicio "${serviceName}" activado correctamente`, {
+        id: "payment",
+        description: "Ya puedes usarlo desde tu Dashboard.",
+      });
+    }, 1500);
   };
 
   // Filter and sort services
@@ -244,16 +277,28 @@ const Services = () => {
                 <div className="flex items-center justify-between pt-4 border-t">
                   <div>
                     <p className="text-lg font-bold">
-                      {formatPrice((service as any).price || 0, (service as any).currency || 'EUR', service.price_model)}
+                      {formatPrice(service.price, service.currency || 'EUR', service.price_model)}
                     </p>
+                    {service.price === 0 && (
+                      <Badge variant="secondary" className="text-xs mt-1">
+                        Core Service
+                      </Badge>
+                    )}
                   </div>
-                  <Button
-                    onClick={() => handleActivateService(service.name)}
-                    className="gap-2"
-                  >
-                    <Zap className="h-4 w-4" />
-                    Suscribirse
-                  </Button>
+                  {subscribedServices.includes(service.id) ? (
+                    <Badge className="bg-green-500/20 text-green-600 border-green-500/30 py-2 px-4">
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      Activo
+                    </Badge>
+                  ) : (
+                    <Button
+                      onClick={() => handleSubscribe(service.id, service.name, service.price)}
+                      className="gap-2"
+                    >
+                      <Zap className="h-4 w-4" />
+                      {service.price === 0 ? "Activar Gratis" : "Suscribir"}
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
