@@ -24,7 +24,15 @@ import {
   Mountain,
   Shirt,
   Receipt,
-  Cpu
+  Cpu,
+  Recycle,
+  CircleDot,
+  Scale,
+  Battery,
+  Gem,
+  Trash2,
+  FileCheck2,
+  Package
 } from "lucide-react";
 import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 import { SuccessStoriesFilter } from "@/components/success-stories/SuccessStoriesFilter";
@@ -438,6 +446,157 @@ const successCases = [
     bgColor: "bg-lime-50 dark:bg-lime-950/30",
     textColor: "text-lime-600 dark:text-lime-400",
     blockchainProof: "0x6t7u...evcharge"
+  },
+  // ===== 10 NEW CIRCULAR ECONOMY CASES =====
+  {
+    id: "fiber-loop",
+    title: "Trazabilidad de Fibra Post-Consumo",
+    company: "Fiber-Loop",
+    sector: "Reciclaje Textil",
+    sectorCategory: "circular",
+    sectorIcon: Recycle,
+    metric: "100%",
+    metricLabel: "Cumplimiento RAP",
+    description: "Notarización blockchain del peso y calidad de fibra en cada transformación para evitar multas de greenwashing.",
+    color: "from-emerald-600 to-teal-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-600 dark:text-emerald-400",
+    blockchainProof: "0xf1b3...fiber"
+  },
+  {
+    id: "rare-earth-recover",
+    title: "Minería Urbana de Tierras Raras",
+    company: "Rare-Earth Recover",
+    sector: "RAEE / E-Waste",
+    sectorCategory: "circular",
+    sectorIcon: Cpu,
+    metric: "+45%",
+    metricLabel: "Margen Venta",
+    description: "Datasets de composición química con IA para vender a fundiciones especializadas vs gestores genéricos.",
+    color: "from-violet-600 to-purple-500",
+    bgColor: "bg-violet-50 dark:bg-violet-950/30",
+    textColor: "text-violet-600 dark:text-violet-400",
+    blockchainProof: "0xe8d7...raee"
+  },
+  {
+    id: "alu-cycle",
+    title: "Ahorro Energético del Aluminio Infinito",
+    company: "Alu-Cycle",
+    sector: "Aluminio Secundario",
+    sectorCategory: "circular",
+    sectorIcon: CircleDot,
+    metric: "-95%",
+    metricLabel: "Energía vs Virgen",
+    description: "Smart Contract calcula CO2 ahorrado para emitir Certificados de Ahorro Energético (CAEs).",
+    color: "from-slate-500 to-cyan-500",
+    bgColor: "bg-slate-50 dark:bg-slate-950/30",
+    textColor: "text-slate-600 dark:text-slate-400",
+    blockchainProof: "0xa5c9...alu"
+  },
+  {
+    id: "producer-trust",
+    title: "Auditoría RAP Automática",
+    company: "Producer-Trust",
+    sector: "Certificación RAP",
+    sectorCategory: "circular",
+    sectorIcon: FileCheck2,
+    metric: "1h",
+    metricLabel: "Auditoría Anual",
+    description: "Dashboard de cumplimiento RAP que agrega datos de múltiples Data Holders con firmas DID inmutables.",
+    color: "from-indigo-600 to-blue-500",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+    textColor: "text-indigo-600 dark:text-indigo-400",
+    blockchainProof: "0xb2d4...rap"
+  },
+  {
+    id: "eco-orchestrator",
+    title: "Coordinación de SCRAPS",
+    company: "Eco-Orchestrator",
+    sector: "Gestión SCRAPS",
+    sectorCategory: "circular",
+    sectorIcon: Scale,
+    metric: "-15%",
+    metricLabel: "Ecotasa",
+    description: "Multi-Tenant RLS asegura que cada socio solo ve su cuota mientras el SCRAP ve el agregado.",
+    color: "from-amber-600 to-orange-500",
+    bgColor: "bg-amber-50 dark:bg-amber-950/30",
+    textColor: "text-amber-600 dark:text-amber-400",
+    blockchainProof: "0xc3e5...scrap"
+  },
+  {
+    id: "raw-market",
+    title: "Marketplace de Materias Primas Secundarias",
+    company: "Raw-Market",
+    sector: "Revalorización",
+    sectorCategory: "circular",
+    sectorIcon: Package,
+    metric: "+30%",
+    metricLabel: "Ingresos vs Gestión",
+    description: "Políticas ODRL aseguran que el comprador usa el residuo para reciclaje y no para vertedero.",
+    color: "from-green-600 to-emerald-500",
+    bgColor: "bg-green-50 dark:bg-green-950/30",
+    textColor: "text-green-600 dark:text-green-400",
+    blockchainProof: "0xd4f6...raw"
+  },
+  {
+    id: "battery-life",
+    title: "Segunda Vida de Baterías EV",
+    company: "Battery-Life",
+    sector: "Baterías Litio",
+    sectorCategory: "circular",
+    sectorIcon: Battery,
+    metric: "+5 años",
+    metricLabel: "Vida Útil Extra",
+    description: "Audit Logs inmutables certifican historial de uso para decidir reciclaje vs almacenamiento estacionario.",
+    color: "from-cyan-600 to-blue-500",
+    bgColor: "bg-cyan-50 dark:bg-cyan-950/30",
+    textColor: "text-cyan-600 dark:text-cyan-400",
+    blockchainProof: "0xe5g7...battery"
+  },
+  {
+    id: "urban-mining",
+    title: "Certificación de Oro Ético Reciclado",
+    company: "Urban Mining",
+    sector: "Metales Preciosos",
+    sectorCategory: "circular",
+    sectorIcon: Gem,
+    metric: "+10%",
+    metricLabel: "Sobreprecio Ético",
+    description: "Prueba de integridad blockchain que vincula lote de entrada (basura) con salida (lingote).",
+    color: "from-yellow-500 to-amber-400",
+    bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
+    textColor: "text-yellow-600 dark:text-yellow-400",
+    blockchainProof: "0xf6h8...gold"
+  },
+  {
+    id: "waste-to-value",
+    title: "Auditoría de Vertido Cero",
+    company: "Waste-to-Value",
+    sector: "Zero Waste",
+    sectorCategory: "circular",
+    sectorIcon: Trash2,
+    metric: "99.9%",
+    metricLabel: "Desviación Vertedero",
+    description: "Conciliación automática entre el dato de salida de fábrica y entrada del reciclador via Webhooks.",
+    color: "from-teal-600 to-green-500",
+    bgColor: "bg-teal-50 dark:bg-teal-950/30",
+    textColor: "text-teal-600 dark:text-teal-400",
+    blockchainProof: "0xg7i9...zero"
+  },
+  {
+    id: "green-gov-circular",
+    title: "Licitación Pública de Plástico Local",
+    company: "Green-Gov Circular",
+    sector: "Compra Pública Verde",
+    sectorCategory: "circular",
+    sectorIcon: Building2,
+    metric: "1:2.4",
+    metricLabel: "SROI Local",
+    description: "Validador DID Web3 confirma que el plástico proviene de la planta de reciclaje local.",
+    color: "from-emerald-700 to-green-600",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-700 dark:text-emerald-400",
+    blockchainProof: "0xh8j0...gov"
   }
 ];
 
@@ -470,7 +629,7 @@ const SuccessStories = () => {
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Award className="w-4 h-4" />
-              27 Casos de Éxito Verificados
+              37 Casos de Éxito Verificados
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
               Transformación Digital en{" "}

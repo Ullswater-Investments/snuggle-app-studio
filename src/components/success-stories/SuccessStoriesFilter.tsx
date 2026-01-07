@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Factory, ShoppingBag, Wheat, Truck, 
   HeartPulse, Users, Zap, LayoutGrid, 
-  Plane, Receipt, Mountain, Wine, Cpu
+  Plane, Receipt, Mountain, Wine, Cpu, Recycle
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,6 +18,7 @@ const sectors = [
   { id: 'energia', label: 'Energía', icon: Zap, color: 'text-yellow-500', bg: 'bg-yellow-500/10', activeBg: 'bg-yellow-500' },
   { id: 'finanzas', label: 'Finanzas', icon: Receipt, color: 'text-green-500', bg: 'bg-green-500/10', activeBg: 'bg-green-500' },
   { id: 'tecnologia', label: 'Tech', icon: Cpu, color: 'text-purple-500', bg: 'bg-purple-500/10', activeBg: 'bg-purple-500' },
+  { id: 'circular', label: 'Circular', icon: Recycle, color: 'text-emerald-600', bg: 'bg-emerald-600/10', activeBg: 'bg-emerald-600' },
 ];
 
 interface SuccessStoriesFilterProps {

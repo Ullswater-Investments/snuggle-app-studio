@@ -34,7 +34,14 @@ import {
   Battery,
   TreePine,
   Gauge,
-  Car
+  Car,
+  Recycle,
+  CircleDot,
+  Scale,
+  Gem,
+  Trash2,
+  FileCheck2,
+  Package
 } from "lucide-react";
 import { ROISimulator } from "@/components/ROISimulator";
 import { AgroROISimulator } from "@/components/AgroROISimulator";
@@ -63,7 +70,7 @@ const casesData: Record<string, {
   solution: string;
   services: string[];
   ariaQuote: string;
-  simulator: "industrial" | "agro" | "social" | "mobility" | "health" | "retail" | "energy" | "aero" | "wine" | "pharma" | "customs" | "gov" | "mining" | "fashion" | "finance" | "grid" | "ai" | "solar" | "wind" | "hydrogen" | "community" | "smartgrid" | "storage" | "biomass" | "scope3" | "hydro" | "evcharge";
+  simulator: "industrial" | "agro" | "social" | "mobility" | "health" | "retail" | "energy" | "aero" | "wine" | "pharma" | "customs" | "gov" | "mining" | "fashion" | "finance" | "grid" | "ai" | "solar" | "wind" | "hydrogen" | "community" | "smartgrid" | "storage" | "biomass" | "scope3" | "hydro" | "evcharge" | "fiber" | "ewaste" | "aluminum" | "rap" | "scrap" | "rawmarket" | "batterylife" | "urbanmining" | "zerowaste" | "govgreen";
 }> = {
   "gigafactory-north": {
     id: "gigafactory-north",
@@ -578,6 +585,197 @@ const casesData: Record<string, {
     services: ["API Nodo Notario", "Pasaporte Digital de Energía", "Widget Mobile", "Certificación CO2"],
     ariaQuote: "El usuario final ahora puede ver en su móvil el hash de blockchain que certifica que su coche corre con sol o viento.",
     simulator: "evcharge"
+  },
+  // ===== 10 CIRCULAR ECONOMY CASES =====
+  "fiber-loop": {
+    id: "fiber-loop",
+    title: "Trazabilidad de Fibra Post-Consumo",
+    company: "Fiber-Loop",
+    sector: "Reciclaje Textil",
+    sectorIcon: Recycle,
+    metric: "100%",
+    metricLabel: "Cumplimiento RAP",
+    color: "from-emerald-600 to-teal-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-600 dark:text-emerald-400",
+    blockchainProof: "0xf1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5",
+    blockNumber: "#18,934,567",
+    challenge: "Una marca de moda debía certificar que su nueva colección contenía un 40% de poliéster reciclado real para evitar multas de la Ley de Residuos y acusaciones de greenwashing.",
+    solution: "Trazabilidad desde el recolector de ropa usada hasta la hilatura mediante Pasaporte Digital de Producto. Notarización blockchain del peso y calidad de la fibra en cada transformación.",
+    services: ["Pasaporte Digital de Producto", "Pontus-X Notary Node", "Certificación RAP", "Anti-Greenwashing Validator"],
+    ariaQuote: "He validado la trazabilidad desde el recolector social hasta tu hilatura. Tu certificación de 40% fibra reciclada es ahora un activo líquido para tu reporte CSRD.",
+    simulator: "fiber"
+  },
+  "rare-earth-recover": {
+    id: "rare-earth-recover",
+    title: "Minería Urbana de Tierras Raras",
+    company: "Rare-Earth Recover",
+    sector: "RAEE / E-Waste",
+    sectorIcon: Cpu,
+    metric: "+45%",
+    metricLabel: "Margen Venta",
+    color: "from-violet-600 to-purple-500",
+    bgColor: "bg-violet-50 dark:bg-violet-950/30",
+    textColor: "text-violet-600 dark:text-violet-400",
+    blockchainProof: "0xe8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6",
+    blockNumber: "#18,967,890",
+    challenge: "Planta de reciclaje de electrónica no lograba dar salida a sus placas de circuito debido a la falta de datos sobre la concentración de Tierras Raras (Neodimio, Disprosio).",
+    solution: "Publicación de Datasets de Composición Química analizados por IA en el Marketplace. Edge Functions integran datos de espectrometría de masas directamente al activo de datos.",
+    services: ["Edge Functions IoT", "Marketplace de Datos", "IA Analytics", "Pasaporte Digital de Residuo"],
+    ariaQuote: "La IA ha detectado una concentración de Neodimio superior a la media. He publicado la oferta en el Marketplace con un 25% de margen extra.",
+    simulator: "ewaste"
+  },
+  "alu-cycle": {
+    id: "alu-cycle",
+    title: "Ahorro Energético del Aluminio Infinito",
+    company: "Alu-Cycle",
+    sector: "Aluminio Secundario",
+    sectorIcon: CircleDot,
+    metric: "-95%",
+    metricLabel: "Energía vs Virgen",
+    color: "from-slate-500 to-cyan-500",
+    bgColor: "bg-slate-50 dark:bg-slate-950/30",
+    textColor: "text-slate-600 dark:text-slate-400",
+    blockchainProof: "0xa5c9d3e7f1b5c9d3e7f1a5c9d3e7f1b5c9d3e7f1a5c9d3e7f1b5c9d3e7f1a5c9d3",
+    blockNumber: "#19,001,234",
+    challenge: "Un fabricante de latas de aluminio necesitaba demostrar el ahorro del 95% de energía (aluminio secundario vs primario) para obtener bonos de carbono.",
+    solution: "Intercambio de certificados de origen de chatarra pre-consumo vía Conectores ERP. Smart Contract calcula automáticamente el ahorro de CO2 basándose en el peso del material reciclado.",
+    services: ["Conectores ERP", "Smart Contracts", "Carbon Tracker ISO 14064", "Certificados CAE"],
+    ariaQuote: "Al usar un 90% de material reciclado, tu factura energética ha bajado drásticamente. He notarizado el ahorro para que puedas emitir Certificados de Ahorro Energético.",
+    simulator: "aluminum"
+  },
+  "producer-trust": {
+    id: "producer-trust",
+    title: "Auditoría RAP Automática",
+    company: "Producer-Trust",
+    sector: "Certificación RAP",
+    sectorIcon: FileCheck2,
+    metric: "1h",
+    metricLabel: "Auditoría Anual",
+    color: "from-indigo-600 to-blue-500",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+    textColor: "text-indigo-600 dark:text-indigo-400",
+    blockchainProof: "0xb2d4f6a8c0e2d4f6a8b0c2d4f6a8e0b2d4f6a8c0e2d4f6a8b0c2d4f6a8e0b2d4f6",
+    blockNumber: "#19,034,567",
+    challenge: "Productores sujetos a la Responsabilidad Ampliada del Productor perdían meses recopilando certificados de gestores de residuos dispersos para la auditoría anual.",
+    solution: "Dashboard de cumplimiento RAP automático que agrega datos de múltiples Data Holders (gestores). Identidad SSI (DID) para que cada gestor firme la Hoja de Seguimiento de forma inmutable.",
+    services: ["Dashboard RAP", "Identidad SSI", "Webhooks IDS", "Auditoría Digital Automática"],
+    ariaQuote: "Tu reporte anual de puesta en mercado está listo. He conciliado los datos de tus 12 gestores mediante Webhooks. El sello de Cumplimiento RAP ya está anclado.",
+    simulator: "rap"
+  },
+  "eco-orchestrator": {
+    id: "eco-orchestrator",
+    title: "Coordinación de SCRAPS - Eficiencia Colectiva",
+    company: "Eco-Orchestrator",
+    sector: "Gestión SCRAPS",
+    sectorIcon: Scale,
+    metric: "-15%",
+    metricLabel: "Ecotasa",
+    color: "from-amber-600 to-orange-500",
+    bgColor: "bg-amber-50 dark:bg-amber-950/30",
+    textColor: "text-amber-600 dark:text-amber-400",
+    blockchainProof: "0xc3e5g7i9k1m3o5q7s9u1w3y5a7c9e1g3i5k7m9o1q3s5u7w9y1a3c5e7g9i1k3m5o7",
+    blockNumber: "#19,067,890",
+    challenge: "Un SCRAP con 500 empresas asociadas tenía dificultades para repartir costes y beneficios de forma justa sin revelar secretos comerciales entre competidores.",
+    solution: "Modelo IDSA para compartir datos de puesta en mercado y reciclaje final. Multi-Tenant RLS asegura que cada socio solo ve su cuota mientras el SCRAP ve el agregado.",
+    services: ["Gobernanza ODRL", "Multi-Tenant RLS", "Dashboard Ecomodulación", "API SCRAP"],
+    ariaQuote: "Gracias a tu diseño circular con monomateriales, el SCRAP te ha aplicado una bonificación del 15% en la ecotasa de este trimestre.",
+    simulator: "scrap"
+  },
+  "raw-market": {
+    id: "raw-market",
+    title: "Marketplace de Materias Primas Secundarias",
+    company: "Raw-Market",
+    sector: "Revalorización",
+    sectorIcon: Package,
+    metric: "+30%",
+    metricLabel: "Ingresos vs Gestión",
+    color: "from-green-600 to-emerald-500",
+    bgColor: "bg-green-50 dark:bg-green-950/30",
+    textColor: "text-green-600 dark:text-green-400",
+    blockchainProof: "0xd4f6h8j0l2n4p6r8t0v2x4z6b8d0f2h4j6l8n0p2r4t6v8x0z2b4d6f8h0j2l4n6p8",
+    blockNumber: "#19,101,234",
+    challenge: "Empresas con excedentes industriales (mermas de aluminio, plástico) no encontraban compradores que pagaran el valor real del material.",
+    solution: "Marketplace de Oportunidades de Revalorización con especificaciones técnicas certificadas. Gobernanza ODRL asegura que el comprador usa el residuo para reciclaje.",
+    services: ["Marketplace Circular", "Gobernanza ODRL", "Certificación Pureza", "Wallet EUROe"],
+    ariaQuote: "No lo llames residuo, llámalo recurso. Al certificar la pureza de tu merma al 99% con ProcureData, encontraste comprador que paga el doble.",
+    simulator: "rawmarket"
+  },
+  "battery-life": {
+    id: "battery-life",
+    title: "Segunda Vida de Baterías EV",
+    company: "Battery-Life",
+    sector: "Baterías Litio",
+    sectorIcon: Battery,
+    metric: "+5 años",
+    metricLabel: "Vida Útil Extra",
+    color: "from-cyan-600 to-blue-500",
+    bgColor: "bg-cyan-50 dark:bg-cyan-950/30",
+    textColor: "text-cyan-600 dark:text-cyan-400",
+    blockchainProof: "0xe5g7i9k1m3o5q7s9u1w3y5a7c9e1g3i5k7m9o1q3s5u7w9y1a3c5e7g9i1k3m5o7q9",
+    blockNumber: "#19,134,567",
+    challenge: "Determinar el estado de salud (SoH) de baterías usadas para decidir si van a reciclaje de materiales o a una segunda vida en almacenamiento estacionario.",
+    solution: "Compartición soberana de los logs de carga/descarga desde el fabricante del coche al reciclador. Audit Logs Inmutables en Pontus-X certifican el historial de uso.",
+    services: ["Audit Logs Inmutables", "Pasaporte Digital de Batería", "API SoH", "Marketplace Segunda Vida"],
+    ariaQuote: "Tu batería tiene un SoH del 82%. Según el mercado de Segunda Vida, es apta para almacenamiento solar doméstico. He generado el Pasaporte Digital.",
+    simulator: "batterylife"
+  },
+  "urban-mining": {
+    id: "urban-mining",
+    title: "Certificación de Oro Ético Reciclado",
+    company: "Urban Mining",
+    sector: "Metales Preciosos",
+    sectorIcon: Gem,
+    metric: "+10%",
+    metricLabel: "Sobreprecio Ético",
+    color: "from-yellow-500 to-amber-400",
+    bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
+    textColor: "text-yellow-600 dark:text-yellow-400",
+    blockchainProof: "0xf6h8j0l2n4p6r8t0v2x4z6b8d0f2h4j6l8n0p2r4t6v8x0z2b4d6f8h0j2l4n6p8r0",
+    blockNumber: "#19,167,890",
+    challenge: "Joyerías y empresas de tecnología necesitaban certificar que su oro/plata era 100% Reciclado para cumplir con estándares éticos y la normativa OCDE.",
+    solution: "Notarización del proceso de refino desde el residuo electrónico hasta el lingote secundario. Prueba de integridad blockchain vincula lote de entrada con salida.",
+    services: ["Pontus-X Notary Node", "Certificación Oro Ético", "Trazabilidad Refino", "Sello OCDE"],
+    ariaQuote: "Certificación de Oro Ético completada. Hemos vinculado cada gramo de este lote a una transacción de reciclaje nacional cumpliendo estándares OCDE.",
+    simulator: "urbanmining"
+  },
+  "waste-to-value": {
+    id: "waste-to-value",
+    title: "Auditoría de Vertido Cero",
+    company: "Waste-to-Value",
+    sector: "Zero Waste",
+    sectorIcon: Trash2,
+    metric: "99.9%",
+    metricLabel: "Desviación Vertedero",
+    color: "from-teal-600 to-green-500",
+    bgColor: "bg-teal-50 dark:bg-teal-950/30",
+    textColor: "text-teal-600 dark:text-teal-400",
+    blockchainProof: "0xg7i9k1m3o5q7s9u1w3y5a7c9e1g3i5k7m9o1q3s5u7w9y1a3c5e7g9i1k3m5o7q9s1",
+    blockNumber: "#19,201,234",
+    challenge: "Corporaciones con objetivos de Vertido Cero no podían demostrar fehacientemente qué pasaba con sus residuos una vez salían de la fábrica.",
+    solution: "Rastreo del flujo de residuos mediante Webhooks conectados a las básculas de los gestores finales. Conciliación automática entre dato de salida y entrada.",
+    services: ["Webhooks IDS", "Conectores ERP", "Dashboard Vertido Cero", "Certificación ISO 14001"],
+    ariaQuote: "99.8% de Vertido Cero alcanzado. He verificado que el rechazo de tu planta se usa como combustible derivado de residuos. Tu auditoría ISO 14001 será impecable.",
+    simulator: "zerowaste"
+  },
+  "green-gov-circular": {
+    id: "green-gov-circular",
+    title: "Licitación Pública de Plástico Local",
+    company: "Green-Gov Circular",
+    sector: "Compra Pública Verde",
+    sectorIcon: Building2,
+    metric: "1:2.4",
+    metricLabel: "SROI Local",
+    color: "from-emerald-700 to-green-600",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-700 dark:text-emerald-400",
+    blockchainProof: "0xh8j0l2n4p6r8t0v2x4z6b8d0f2h4j6l8n0p2r4t6v8x0z2b4d6f8h0j2l4n6p8r0t2",
+    blockNumber: "#19,234,567",
+    challenge: "Un ayuntamiento quería comprar mobiliario urbano hecho con plástico reciclado local, pero no sabía cómo validar el origen del plástico.",
+    solution: "Exigencia de Pasaporte de Materia Prima Secundaria de ProcureData en los pliegos. Validador DID Web3 confirma que el plástico proviene de la planta de reciclaje local.",
+    services: ["Validador DID Web3", "Pasaporte Materia Prima", "Dashboard SROI", "Certificación Local"],
+    ariaQuote: "El ayuntamiento ha verificado el origen del plástico mediante el Validador DID. Estás comprando circularidad real, no promesas. El SROI es de 1:2.4.",
+    simulator: "govgreen"
   }
 };
 
@@ -746,7 +944,7 @@ const SuccessStoryDetail = () => {
         </Card>
 
         {/* Sector-Specific Visualization for new cases */}
-        {["aero", "wine", "pharma", "customs", "gov", "mining", "fashion", "finance", "grid", "ai", "solar", "wind", "hydrogen", "community", "smartgrid", "storage", "biomass", "scope3", "hydro", "evcharge"].includes(caseData.simulator) && (
+        {["aero", "wine", "pharma", "customs", "gov", "mining", "fashion", "finance", "grid", "ai", "solar", "wind", "hydrogen", "community", "smartgrid", "storage", "biomass", "scope3", "hydro", "evcharge", "fiber", "ewaste", "aluminum", "rap", "scrap", "rawmarket", "batterylife", "urbanmining", "zerowaste", "govgreen"].includes(caseData.simulator) && (
           <div>
             <div className="flex items-center gap-2 mb-6">
               <BarChart2 className="w-5 h-5 text-primary" />
