@@ -41,7 +41,16 @@ import {
   Gem,
   Trash2,
   FileCheck2,
-  Package
+  Package,
+  Sprout,
+  Apple,
+  Grape,
+  Citrus,
+  Droplet,
+  Satellite,
+  Leaf,
+  Flower,
+  Box
 } from "lucide-react";
 import { ROISimulator } from "@/components/ROISimulator";
 import { AgroROISimulator } from "@/components/AgroROISimulator";
@@ -70,7 +79,7 @@ const casesData: Record<string, {
   solution: string;
   services: string[];
   ariaQuote: string;
-  simulator: "industrial" | "agro" | "social" | "mobility" | "health" | "retail" | "energy" | "aero" | "wine" | "pharma" | "customs" | "gov" | "mining" | "fashion" | "finance" | "grid" | "ai" | "solar" | "wind" | "hydrogen" | "community" | "smartgrid" | "storage" | "biomass" | "scope3" | "hydro" | "evcharge" | "fiber" | "ewaste" | "aluminum" | "rap" | "scrap" | "rawmarket" | "batterylife" | "urbanmining" | "zerowaste" | "govgreen";
+  simulator: "industrial" | "agro" | "social" | "mobility" | "health" | "retail" | "energy" | "aero" | "wine" | "pharma" | "customs" | "gov" | "mining" | "fashion" | "finance" | "grid" | "ai" | "solar" | "wind" | "hydrogen" | "community" | "smartgrid" | "storage" | "biomass" | "scope3" | "hydro" | "evcharge" | "fiber" | "ewaste" | "aluminum" | "rap" | "scrap" | "rawmarket" | "batterylife" | "urbanmining" | "zerowaste" | "govgreen" | "avocado" | "olive" | "zerochem" | "citrus" | "berry" | "rice" | "biocotton" | "greenhouse" | "tropical" | "urbanhydro";
 }> = {
   "gigafactory-north": {
     id: "gigafactory-north",
@@ -776,6 +785,197 @@ const casesData: Record<string, {
     services: ["Validador DID Web3", "Pasaporte Materia Prima", "Dashboard SROI", "Certificación Local"],
     ariaQuote: "El ayuntamiento ha verificado el origen del plástico mediante el Validador DID. Estás comprando circularidad real, no promesas. El SROI es de 1:2.4.",
     simulator: "govgreen"
+  },
+  // ===== 10 AGRI-TECH CASES =====
+  "avocado-trust": {
+    id: "avocado-trust",
+    title: "Exportación Fitosanitaria USA",
+    company: "Avocado-Trust",
+    sector: "Exportación Fitosanitaria",
+    sectorIcon: Apple,
+    metric: "0.01%",
+    metricLabel: "Rechazo Aduana",
+    color: "from-lime-600 to-green-500",
+    bgColor: "bg-lime-50 dark:bg-lime-950/30",
+    textColor: "text-lime-600 dark:text-lime-400",
+    blockchainProof: "0xa1v0c4d0t5r8u2s7t0p9e3s4t5f6r7e8e9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5",
+    blockNumber: "#19,278,901",
+    challenge: "Superación de barreras fitosanitarias USDA/Aphis. Riesgo de rechazo en aduana por detección de plagas sin evidencia verificable de monitorización.",
+    solution: "Sensores de trampas digitales IoT conectados a ProcureData. Pre-certificado fitosanitario generado automáticamente con logs inmutables de 'Pest-Free' verificables por inspectores en destino.",
+    services: ["Edge Functions IoT", "Pasaporte Fitosanitario Digital", "Pontus-X Notary Node", "API USDA-Aphis"],
+    ariaQuote: "Tu densidad de sensores es óptima. El riesgo de Ceratitis capitata es inferior al 0.01%. He emitido el Dossier Fitosanitario Digital, ahorrando 1.200€ en inspecciones de urgencia.",
+    simulator: "avocado"
+  },
+  "olive-origin": {
+    id: "olive-origin",
+    title: "Soberanía de Marca D.O. Jaén",
+    company: "Olive-Origin",
+    sector: "Aceite D.O.",
+    sectorIcon: Leaf,
+    metric: "+15%",
+    metricLabel: "Precio Premium",
+    color: "from-emerald-700 to-lime-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-700 dark:text-emerald-400",
+    blockchainProof: "0xo1l1v3o5r7i9g1i3n5a7l9e1u3r5o7p9e1a3n5d7a9t1a3s5p7a9c1e3e5u7r9o1p3e5",
+    blockNumber: "#19,301,234",
+    challenge: "Fraude en AOVE. Mezcla con aceites de importación que diluye el valor de marca y la Denominación de Origen protegida.",
+    solution: "Pasaporte Digital de Producto vinculando lote de almazara con coordenadas GPS exactas de recolección. DID del Catastro imposibilita mezclas con aceites no locales.",
+    services: ["Pasaporte Digital de Producto", "Validador DID Web3", "GPS-Linked Traceability", "Gobernanza ODRL"],
+    ariaQuote: "He bloqueado un intento de vincular un lote sin coordenadas GPS válidas. Tu aceite mantiene el sello 'Origen Protegido' con un valor de mercado 15% superior.",
+    simulator: "olive"
+  },
+  "zero-chem-wine": {
+    id: "zero-chem-wine",
+    title: "Certificación Zero Residue Vinos",
+    company: "Zero-Chem Wine",
+    sector: "Vinos Orgánicos",
+    sectorIcon: Grape,
+    metric: "100%",
+    metricLabel: "Zero Residue",
+    color: "from-purple-600 to-pink-500",
+    bgColor: "bg-purple-50 dark:bg-purple-950/30",
+    textColor: "text-purple-600 dark:text-purple-400",
+    blockchainProof: "0xz3r0c4h3m1w2i3n4e5o6r7g8a9n0i1c2c3e4r5t6i7f8i9e0d1p2a3s4s5p6o7r8t9",
+    blockNumber: "#19,334,567",
+    challenge: "Probar ausencia de productos químicos para acceso al exigente mercado escandinavo de vinos orgánicos premium.",
+    solution: "Conciliación de datos de sensores de nitratos en suelo con análisis de laboratorio (espectrometría). Certificación 'Zero Residue' automática tras 36 meses sin rastro de síntesis química.",
+    services: ["Sensores IoT Suelo", "API Laboratorio", "Certificación Orgánica", "Pasaporte Digital de Vino"],
+    ariaQuote: "He conciliado los datos de tu sensor de nitratos. No hay rastro de síntesis química en 36 meses. Tu pasaporte digital es ahora 100% orgánico.",
+    simulator: "zerochem"
+  },
+  "citrus-check": {
+    id: "citrus-check",
+    title: "Validación LMR Multi-País",
+    company: "Citrus-Check",
+    sector: "Cítricos LMR",
+    sectorIcon: Citrus,
+    metric: "12",
+    metricLabel: "Países Aptos",
+    color: "from-orange-500 to-yellow-400",
+    bgColor: "bg-orange-50 dark:bg-orange-950/30",
+    textColor: "text-orange-600 dark:text-orange-400",
+    blockchainProof: "0xc1t4r5u6s7c8h9e0c1k2l3m4r5v6a7l8i9d0a1t2i3o4n5m6u7l8t9i0c1o2u3n4t5r6y7",
+    blockNumber: "#19,367,890",
+    challenge: "Cumplimiento de LMR (Límites Máximos de Residuos) para 150 países. Riesgo de rechazo en supermercados exigentes (Lidl, Aldi).",
+    solution: "Cruce automático del histórico de aplicaciones fitosanitarias con normativas internacionales. Validación de tiempos de carencia y certificación multi-país instantánea.",
+    services: ["API Laboratorio LMR", "Calculadora de Carencia", "Certificación Multi-País", "Marketplace Alimentario"],
+    ariaQuote: "Tu nivel de acetamiprid es 0.001 mg/kg, muy por debajo del límite UE. He actualizado tu Pasaporte para Baby Food, que ofrece +30% margen.",
+    simulator: "citrus"
+  },
+  "berry-water": {
+    id: "berry-water",
+    title: "Certificación Huella Hídrica",
+    company: "Berry-Water",
+    sector: "Eficiencia Hídrica",
+    sectorIcon: Droplet,
+    metric: "94%",
+    metricLabel: "Eficiencia Riego",
+    color: "from-blue-500 to-cyan-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+    textColor: "text-blue-600 dark:text-blue-400",
+    blockchainProof: "0xb3r4r5y6w7a8t9e0r1h2u3e4l5l6a7h8i9d0r1i2c3a4c5e6r7t8i9f0i1c2a3t4i5o6n7",
+    blockNumber: "#19,401,234",
+    challenge: "Certificación de uso eficiente de agua en zona de estrés hídrico (Doñana/Huelva). Requerimiento de supermercados UK/DE.",
+    solution: "Integración de sondas de humedad capacitivas y caudalímetros. Notarización del ahorro real en Pontus-X para certificación GlobalG.A.P. sin auditoría presencial.",
+    services: ["Sensores de Humedad IoT", "Caudalímetro Digital", "Certificación GlobalG.A.P.", "Pontus-X Notary"],
+    ariaQuote: "Tu eficiencia de riego es del 98%. He notarizado el ahorro de 500m³. GlobalG.A.P. ha eliminado la auditoría presencial para el módulo de agua.",
+    simulator: "berry"
+  },
+  "rice-satellite": {
+    id: "rice-satellite",
+    title: "Validación Satelital de D.O.",
+    company: "Rice-Satellite",
+    sector: "Validación Remota",
+    sectorIcon: Satellite,
+    metric: "99%",
+    metricLabel: "Confianza D.O.",
+    color: "from-indigo-600 to-blue-500",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+    textColor: "text-indigo-600 dark:text-indigo-400",
+    blockchainProof: "0xr1c3s4a5t6e7l8l9i0t1e2n3d4v5i6v7a8l9i0d1a2t3i4o5n6s7p8a9i0n1d2o3r4i5g6i7n8",
+    blockNumber: "#19,434,567",
+    challenge: "Certificar que el arroz es 100% de zona protegida D.O. usando evidencia remota irrefutable.",
+    solution: "Superposición de imágenes satelitales (NDVI) sobre mapa de parcelas. Firma espectral confirma variedad y bloquea mezclas con grano de importación.",
+    services: ["API Satelital NDVI", "Blockchain Hash Lote", "Verificador D.O.", "Anti-Fraude Origen"],
+    ariaQuote: "La firma espectral confirma arroz bomba de la zona X. He bloqueado cualquier intento de mezcla con grano de importación mediante hash del lote.",
+    simulator: "rice"
+  },
+  "bio-cotton-trace": {
+    id: "bio-cotton-trace",
+    title: "Trazabilidad Algodón GOTS",
+    company: "Bio-Cotton Trace",
+    sector: "Algodón Orgánico",
+    sectorIcon: Flower,
+    metric: "100",
+    metricLabel: "Transparencia",
+    color: "from-pink-500 to-rose-400",
+    bgColor: "bg-pink-50 dark:bg-pink-950/30",
+    textColor: "text-pink-600 dark:text-pink-400",
+    blockchainProof: "0xb1o2c3o4t5t6o7n8t9r0a1c2e3g4o5t6s7c8e9r0t1i2f3i4e5d6o7r8g9a0n1i2c3t4e5x6",
+    blockNumber: "#19,467,890",
+    challenge: "Trazabilidad completa desde semilla orgánica certificada hasta bala de algodón para cumplir GOTS/GRS.",
+    solution: "Cadena de custodia digital: Semilla → Campo → Desmotadora → Bala. Cada bala tiene ID único vinculado a factura de semilla certificada.",
+    services: ["Pasaporte Digital de Producto", "Certificación GOTS", "Cadena de Custodia", "Auditoría One-Click"],
+    ariaQuote: "Cada bala de algodón tiene ID único vinculado a la factura de semilla certificada. La marca de moda puede auditarte en un clic.",
+    simulator: "biocotton"
+  },
+  "greenhouse-ai": {
+    id: "greenhouse-ai",
+    title: "Invernaderos IoT Anti-Mildiu",
+    company: "Greenhouse-AI",
+    sector: "Control Fitosanitario",
+    sectorIcon: Sprout,
+    metric: "-80%",
+    metricLabel: "Químicos",
+    color: "from-green-600 to-emerald-500",
+    bgColor: "bg-green-50 dark:bg-green-950/30",
+    textColor: "text-green-600 dark:text-green-400",
+    blockchainProof: "0xg1r2e3e4n5h6o7u8s9e0a1i2c3o4n5t6r7o8l9p0h1y2t3o4s5a6n7i8t9a0r1y2s3c4o5r6e7",
+    blockNumber: "#19,501,234",
+    challenge: "Prevención de hongos (mildiu) sin uso de fungicidas sistémicos. Control de microclima inteligente.",
+    solution: "IA gestiona ventilación, temperatura y humedad en tiempo real. Alertas predictivas de riesgo de brote basadas en modelos fitosanitarios.",
+    services: ["Edge Functions IoT", "IA Predictiva Clima", "Control Biológico", "Score Fitosanitario"],
+    ariaQuote: "La IA ha gestionado el microclima. Has evitado el brote de hongo sin usar fungicidas sistémicos. Tu score fitosanitario ha subido a AA.",
+    simulator: "greenhouse"
+  },
+  "tropical-flash": {
+    id: "tropical-flash",
+    title: "Aduana Express Perecederos",
+    company: "Tropical-Flash",
+    sector: "Logística Tropical",
+    sectorIcon: Box,
+    metric: "+3 días",
+    metricLabel: "Frescura Ganada",
+    color: "from-amber-500 to-orange-400",
+    bgColor: "bg-amber-50 dark:bg-amber-950/30",
+    textColor: "text-amber-600 dark:text-amber-400",
+    blockchainProof: "0xt1r2o3p4i5c6a7l8f9l0a1s2h3p4e5r6i7s8h9a0b1l2e3s4c5u6s7t8o9m0s1c2l3e4a5r6",
+    blockNumber: "#19,534,567",
+    challenge: "Cada hora en aduana reduce la vida útil de frutas tropicales. Inspecciones físicas causan 20% de merma.",
+    solution: "Pre-validación digital de dossier fitosanitario 48h antes de llegada del barco. Interoperabilidad IDS con sistemas portuarios.",
+    services: ["Conector ERP Universal", "Pre-Validación Aduanera", "Webhooks IDS", "Certificación Fitosanitaria"],
+    ariaQuote: "La aduana de Róterdam ha validado tus certificados 48h antes de llegada. Has ganado 3 días de frescura comercial, +8% margen por lote.",
+    simulator: "tropical"
+  },
+  "urban-hydro": {
+    id: "urban-hydro",
+    title: "Granja Vertical Km 0",
+    company: "Urban-Hydro",
+    sector: "Agricultura Urbana",
+    sectorIcon: Sprout,
+    metric: "0",
+    metricLabel: "Huella Logística",
+    color: "from-teal-600 to-green-500",
+    bgColor: "bg-teal-50 dark:bg-teal-950/30",
+    textColor: "text-teal-600 dark:text-teal-400",
+    blockchainProof: "0xu1r2b3a4n5h6y7d8r9o0k1m2z3e4r5o6l7o8g9i0s1t2i3c4f5o6o7t8p9r0i1n2t3z4e5r6o7",
+    blockNumber: "#19,567,890",
+    challenge: "Certificación orgánica para granjas verticales hidropónicas urbanas con huella logística cero.",
+    solution: "Monitorización de nutrientes hidropónicos y consumo energético LED. Vinculación con origen renovable en el Pasaporte Digital.",
+    services: ["Sensores Hidropónicos", "Certificación Km 0", "Energía Verde Verificada", "Pasaporte Digital Local"],
+    ariaQuote: "Tu producción urbana es 100% transparente. He vinculado el consumo de energía LED con el origen renovable en tu Pasaporte Digital.",
+    simulator: "urbanhydro"
   }
 };
 
@@ -944,7 +1144,7 @@ const SuccessStoryDetail = () => {
         </Card>
 
         {/* Sector-Specific Visualization for new cases */}
-        {["aero", "wine", "pharma", "customs", "gov", "mining", "fashion", "finance", "grid", "ai", "solar", "wind", "hydrogen", "community", "smartgrid", "storage", "biomass", "scope3", "hydro", "evcharge", "fiber", "ewaste", "aluminum", "rap", "scrap", "rawmarket", "batterylife", "urbanmining", "zerowaste", "govgreen"].includes(caseData.simulator) && (
+        {["aero", "wine", "pharma", "customs", "gov", "mining", "fashion", "finance", "grid", "ai", "solar", "wind", "hydrogen", "community", "smartgrid", "storage", "biomass", "scope3", "hydro", "evcharge", "fiber", "ewaste", "aluminum", "rap", "scrap", "rawmarket", "batterylife", "urbanmining", "zerowaste", "govgreen", "avocado", "olive", "zerochem", "citrus", "berry", "rice", "biocotton", "greenhouse", "tropical", "urbanhydro"].includes(caseData.simulator) && (
           <div>
             <div className="flex items-center gap-2 mb-6">
               <BarChart2 className="w-5 h-5 text-primary" />

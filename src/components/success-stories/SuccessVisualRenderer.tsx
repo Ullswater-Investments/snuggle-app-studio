@@ -846,6 +846,62 @@ export function SuccessVisualRenderer({ caseId }: Props) {
         </Card>
       );
 
+    // ===== AGRI-TECH CASES =====
+    case 'avocado-trust':
+    case 'olive-origin':
+    case 'zero-chem-wine':
+    case 'citrus-check':
+    case 'berry-water':
+    case 'rice-satellite':
+    case 'bio-cotton-trace':
+    case 'greenhouse-ai':
+    case 'tropical-flash':
+    case 'urban-hydro':
+      return (
+        <Card className="bg-gradient-to-br from-lime-950/30 to-green-950/30 border-lime-500/20">
+          <CardHeader>
+            <CardTitle className="text-lime-400 flex items-center gap-2 text-sm">
+              <Leaf className="w-4 h-4" />
+              AGRI-TECH DASHBOARD - Fitosanidad & Trazabilidad
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <AreaChart data={[
+                  { mes: 'Ene', calidad: 92, cumplimiento: 88 },
+                  { mes: 'Feb', calidad: 94, cumplimiento: 91 },
+                  { mes: 'Mar', calidad: 96, cumplimiento: 95 },
+                  { mes: 'Abr', calidad: 98, cumplimiento: 97 },
+                  { mes: 'May', calidad: 99, cumplimiento: 99 },
+                  { mes: 'Jun', calidad: 100, cumplimiento: 100 },
+                ]}>
+                  <defs>
+                    <linearGradient id="colorAgri" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#84cc16" stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor="#84cc16" stopOpacity={0.1}/>
+                    </linearGradient>
+                    <linearGradient id="colorCompliance" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#065f46" stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor="#065f46" stopOpacity={0.1}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="mes" tick={{fill: '#84cc16', fontSize: 10}} />
+                  <YAxis domain={[80, 100]} tick={{fill: '#94a3b8', fontSize: 10}} />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="calidad" stroke="#84cc16" fill="url(#colorAgri)" name="Calidad" />
+                  <Area type="monotone" dataKey="cumplimiento" stroke="#065f46" fill="url(#colorCompliance)" name="Cumplimiento" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-lime-500/20 text-lime-400">100% Trazabilidad</Badge>
+              <Badge className="bg-green-500/20 text-green-400">Certificación Digital</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
     default:
       return (
         <Card className="p-8 text-center">
