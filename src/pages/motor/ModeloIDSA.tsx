@@ -56,7 +56,7 @@ export default function ModeloIDSA() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Modelo IDSA</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Arquitectura Basada en el Estándar de la International Data Spaces Association
           </p>
         </motion.div>
@@ -70,9 +70,9 @@ export default function ModeloIDSA() {
             className="space-y-6"
           >
             {/* Data Space Network */}
-            <Card className="bg-gradient-to-br from-slate-900 to-blue-900/20 border-blue-500/30 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-slate-900 dark:to-blue-900/20 border-border dark:border-blue-500/30 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <Globe className="h-5 w-5 text-blue-400" />
                   Red de Data Spaces Europea
                 </CardTitle>
@@ -101,10 +101,10 @@ export default function ModeloIDSA() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.5 + ds.delay }}
-                      className="absolute w-14 h-14 bg-white/10 rounded-full flex items-center justify-center border border-white/20"
+                      className="absolute w-14 h-14 bg-muted dark:bg-white/10 rounded-full flex items-center justify-center border border-border dark:border-white/20"
                       style={{ left: ds.x, top: ds.y }}
                     >
-                      <span className="text-[10px] font-medium text-white text-center">{ds.name}</span>
+                      <span className="text-[10px] font-medium text-foreground dark:text-white text-center">{ds.name}</span>
                     </motion.div>
                   ))}
 
@@ -133,7 +133,7 @@ export default function ModeloIDSA() {
                   </svg>
                 </div>
 
-                <p className="text-sm text-gray-400 text-center mt-4">
+                <p className="text-sm text-muted-foreground text-center mt-4">
                   ProcureData como nodo certificado en la red europea de Data Spaces
                 </p>
               </CardContent>
@@ -151,8 +151,8 @@ export default function ModeloIDSA() {
                   <Card className={`bg-gradient-to-br ${role.color} h-full`}>
                     <CardContent className="p-4 text-center">
                       <role.icon className={`h-8 w-8 mx-auto mb-2 ${role.color.split(' ').pop()}`} />
-                      <p className="font-bold text-white text-sm">{role.name}</p>
-                      <p className="text-xs text-gray-300 mt-1">{role.desc}</p>
+                      <p className="font-bold text-foreground text-sm">{role.name}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{role.desc}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -170,12 +170,12 @@ export default function ModeloIDSA() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Estándar de Intercambio Soberano</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 ProcureData no es una isla tecnológica. Nuestra arquitectura sigue fielmente el modelo 
-                de referencia de la <strong className="text-white">IDSA</strong>, el estándar de facto 
+                de referencia de la <strong className="text-foreground">IDSA</strong>, el estándar de facto 
                 para el intercambio de datos en Europa.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
+              <p className="text-muted-foreground leading-relaxed mt-4">
                 Este modelo define roles claros para garantizar la confianza: el <strong className="text-blue-400">Consumer</strong> (quien 
                 solicita), el <strong className="text-purple-400">Subject</strong> (propietario del dato) y 
                 el <strong className="text-green-400">Data Holder</strong> (custodio técnico).
@@ -183,9 +183,9 @@ export default function ModeloIDSA() {
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-blue-900/20 to-slate-900 border-blue-500/20">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-blue-900/20 dark:to-slate-900 border-border dark:border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-blue-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -199,8 +199,8 @@ export default function ModeloIDSA() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -215,8 +215,8 @@ export default function ModeloIDSA() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Interoperabilidad Futura</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Interoperabilidad Futura</h3>
+                    <p className="text-muted-foreground">
                       No quede atrapado en una solución propietaria. Al elegir ProcureData, su infraestructura 
                       es <strong className="text-orange-400">compatible por diseño</strong> con el ecosistema 
                       de datos europeo del futuro.
@@ -228,7 +228,7 @@ export default function ModeloIDSA() {
 
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
