@@ -133,6 +133,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
   }
 }
 

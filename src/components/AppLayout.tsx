@@ -57,8 +57,8 @@ export const AppLayout = () => {
                   <OrganizationSwitcher />
                 </div>
                 <NotificationsBell />
-                <WalletButton />
                 <ThemeToggle />
+                <WalletButton />
                 <DemoHelpButton />
                 <span className="text-sm text-muted-foreground hidden sm:inline">
                   {user?.email}
