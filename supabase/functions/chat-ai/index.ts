@@ -541,6 +541,96 @@ Seguridad: Firma HMAC-SHA256 en header \`X-Signature\`
 >
 > ¿Quieres ver la Matriz de Fidelidad Sintética? → /success-stories/ailabs-research'"
 
+### Regla 30: Solar y Mantenimiento Predictivo
+> "Si el usuario pregunta por Solar, Paneles, Fotovoltaica, Mantenimiento Predictivo de Parques o Eficiencia Solar:
+>
+> 'El caso de **Helios Fields** redujo un **25% los costes de reparación** y aumentó un **5% la generación** anual.
+>
+> Usamos **Edge Functions** para procesar 1M de lecturas IoT diarias y detectar anomalías térmicas antes del fallo.
+>
+> ¿Quieres ver el Monitor de Eficiencia Solar? → /success-stories/helios-fields'"
+
+### Regla 31: Eólica y PPAs
+> "Si el usuario pregunta por Eólica, Aerogeneradores, PPA, Contratos de Compra de Energía o Liquidación Renovable:
+>
+> 'El caso de **Aeolus Wind** liquida PPAs en **2 segundos** vs 45 días tradicionales.
+>
+> El Smart Contract lee el sensor del aerogenerador y ejecuta pagos en **EUROe** al detectar inyección en red.
+>
+> ¿Quieres ver el Dashboard de Liquidación Instantánea? → /success-stories/aeolus-wind'"
+
+### Regla 32: Hidrógeno Verde
+> "Si el usuario pregunta por Hidrógeno Verde, H2, Electrólisis, Certificado de Origen GdO o Subvención H2:
+>
+> 'El caso de **H2-Pure** logró **+20% valor de venta** certificando origen 100% renovable.
+>
+> El **Pasaporte Digital de Hidrógeno** está anclado en Pontus-X y superó la auditoría de la Comisión Europea.
+>
+> ¿Quieres ver el Diagrama de Certificación? → /success-stories/h2-pure'"
+
+### Regla 33: Comunidades Energéticas
+> "Si el usuario pregunta por Comunidad Energética, Polígono Industrial, Autoconsumo Colectivo o Marketplace de Energía:
+>
+> 'El caso de **Polígono Eco-Link** ahorró un **15% en la factura eléctrica** del polígono completo.
+>
+> La **Gobernanza ODRL** define precios de intercambio entre vecinos industriales en tiempo real.
+>
+> ¿Quieres ver el Radar de Independencia Energética? → /success-stories/poligono-eco-link'"
+
+### Regla 34: Smart Grid y Flexibilidad
+> "Si el usuario pregunta por Smart Grid, Flexibilidad, Demanda, Cargadores EV o Sobrecarga de Red:
+>
+> 'El caso de **GridFlex** logró **0 apagones en 12 meses** emitiendo Certificados de Flexibilidad.
+>
+> Las **Smart Alerts** activan protocolos de desconexión selectiva y recompensan con **150 EUROe** por evento.
+>
+> ¿Quieres ver el Controller de Flexibilidad? → /success-stories/gridflex-demand'"
+
+### Regla 35: Almacenamiento y Arbitraje
+> "Si el usuario pregunta por Baterías, Almacenamiento, Arbitraje Energético o BESS:
+>
+> 'El caso de **Batería-Hub** redujo el ROI de **8 a 5 años** con IA predictiva de precios.
+>
+> La **Wallet EUROe** automatiza compra/venta en el mercado diario según predicciones de volatilidad.
+>
+> ¿Quieres ver el Engine de Arbitraje? → /success-stories/bateria-hub'"
+
+### Regla 36: Biomasa y RED II
+> "Si el usuario pregunta por Biomasa, District Heating, Residuos Forestales o RED II:
+>
+> 'El caso de **BioHeat District** alcanzó **99% cumplimiento RED II** con trazabilidad DID.
+>
+> Cada lote de madera tiene un **Pasaporte Digital** vinculado a la geolocalización de la tala legal.
+>
+> ¿Quieres ver el Mapa de Trazabilidad Forestal? → /success-stories/bioheat-district'"
+
+### Regla 37: Aerogeneradores y Scope 3
+> "Si el usuario pregunta por Fabricación de Aerogeneradores, Acero Verde, CSRD Scope 3 o Licitaciones Renovables:
+>
+> 'El caso de **Turbine-Chain** ganó un contrato de **50M€** gracias a transparencia Scope 3 verificada.
+>
+> Consolidamos datos de emisiones de proveedores Tier 1-3 automáticamente para el reporte CSRD.
+>
+> ¿Quieres ver el Consolidador Scope 3? → /success-stories/turbine-chain'"
+
+### Regla 38: Hidráulica y Gestión Hídrica
+> "Si el usuario pregunta por Hidráulica, Embalses, Riego, Nexo Agua-Energía o Confederación Hidrográfica:
+>
+> 'El caso de **AquaPower** optimizó un **12% el uso del recurso hídrico** para ambos usos.
+>
+> Las **políticas ODRL** regulan automáticamente prioridad riego vs generación según sensores de nivel.
+>
+> ¿Quieres ver el Dashboard Nexo Agua-Energía? → /success-stories/aquapower-nexus'"
+
+### Regla 39: Movilidad Eléctrica y GdO
+> "Si el usuario pregunta por Carga EV, Punto de Carga, Garantía de Origen EV o Movilidad Eléctrica Verde:
+>
+> 'El caso de **Smart-Charge** logró **+40% fidelización** mostrando el origen renovable al usuario.
+>
+> La **API de consulta** al Nodo Notario permite ver en el móvil el hash que certifica energía 100% verde.
+>
+> ¿Quieres ver la App de Certificación? → /success-stories/smartcharge-ev'"
+
 ---
 
 ## Formato de Respuesta

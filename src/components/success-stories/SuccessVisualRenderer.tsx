@@ -460,6 +460,392 @@ export function SuccessVisualRenderer({ caseId }: Props) {
         </Card>
       );
 
+    // ========== 10 NEW ENERGY CASES ==========
+
+    case 'helios-fields':
+      return (
+        <Card className="bg-gradient-to-br from-yellow-950/30 to-orange-950/30 border-yellow-500/20">
+          <CardHeader>
+            <CardTitle className="text-yellow-400 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              SOLAR EFFICIENCY MONITOR - Mantenimiento Predictivo
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <BarChart data={[
+                  { panel: 'A1', efficiency: 98 },
+                  { panel: 'A2', efficiency: 95 },
+                  { panel: 'A3', efficiency: 72 },
+                  { panel: 'B1', efficiency: 99 },
+                  { panel: 'B2', efficiency: 88 },
+                  { panel: 'B3', efficiency: 96 },
+                ]}>
+                  <XAxis dataKey="panel" tick={{fill: '#facc15', fontSize: 10}} />
+                  <YAxis domain={[60, 100]} tick={{fill: '#94a3b8', fontSize: 10}} />
+                  <Tooltip />
+                  <Bar dataKey="efficiency" radius={[4, 4, 0, 0]}>
+                    {[98, 95, 72, 99, 88, 96].map((val, i) => (
+                      <Cell key={i} fill={val < 80 ? '#ef4444' : val < 90 ? '#facc15' : '#22c55e'} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-yellow-500/20 text-yellow-400">+5% Generación Anual</Badge>
+              <Badge className="bg-green-500/20 text-green-400">-25% Costes Reparación</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'aeolus-wind':
+      return (
+        <Card className="bg-gradient-to-br from-cyan-950/30 to-blue-950/30 border-cyan-500/20">
+          <CardHeader>
+            <CardTitle className="text-cyan-400 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              PPA INSTANT SETTLEMENT - Viento → Liquidez
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <AreaChart data={[
+                  { hora: '06:00', mwh: 12, euros: 480 },
+                  { hora: '09:00', mwh: 45, euros: 1800 },
+                  { hora: '12:00', mwh: 78, euros: 3120 },
+                  { hora: '15:00', mwh: 65, euros: 2600 },
+                  { hora: '18:00', mwh: 32, euros: 1280 },
+                  { hora: '21:00', mwh: 18, euros: 720 },
+                ]}>
+                  <defs>
+                    <linearGradient id="colorWind" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#22d3ee" stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor="#22d3ee" stopOpacity={0.1}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="hora" tick={{fill: '#22d3ee', fontSize: 10}} />
+                  <YAxis yAxisId="left" tick={{fill: '#22d3ee', fontSize: 10}} />
+                  <YAxis yAxisId="right" orientation="right" tick={{fill: '#22c55e', fontSize: 10}} />
+                  <Tooltip />
+                  <Area yAxisId="left" type="monotone" dataKey="mwh" stroke="#22d3ee" fill="url(#colorWind)" name="MWh" />
+                  <Line yAxisId="right" type="monotone" dataKey="euros" stroke="#22c55e" strokeWidth={2} name="EUROe" dot={false} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-cyan-500/20 text-cyan-400">Conciliación: 2 segundos</Badge>
+              <Badge className="bg-green-500/20 text-green-400">4.200 EUROe Hoy</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'h2-pure':
+      return (
+        <Card className="bg-gradient-to-br from-emerald-950/30 to-teal-950/30 border-emerald-500/20">
+          <CardHeader>
+            <CardTitle className="text-emerald-400 flex items-center gap-2 text-sm">
+              <Leaf className="w-4 h-4" />
+              H2 GREEN CERTIFICATION - Origen 100% Renovable
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64 flex items-center justify-center">
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={[
+                      { name: 'Eólico', value: 65, color: '#22d3ee' },
+                      { name: 'Solar', value: 30, color: '#facc15' },
+                      { name: 'Otros', value: 5, color: '#10b981' },
+                    ]}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={50}
+                    outerRadius={80}
+                    paddingAngle={2}
+                    dataKey="value"
+                    label={({ name, value }) => `${name}: ${value}%`}
+                  >
+                    <Cell fill="#22d3ee" />
+                    <Cell fill="#facc15" />
+                    <Cell fill="#10b981" />
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-emerald-500/20 text-emerald-400">+20% Valor Venta</Badge>
+              <Badge className="bg-green-500/20 text-green-400">Subvención UE: Elegible</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'poligono-eco-link':
+      return (
+        <Card className="bg-gradient-to-br from-blue-950/30 to-indigo-950/30 border-blue-500/20">
+          <CardHeader>
+            <CardTitle className="text-blue-400 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              COMMUNITY ENERGY NETWORK - Polígono Industrial
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <RadarChart data={[
+                  { metric: 'Independencia', value: 78 },
+                  { metric: 'Ahorro', value: 85 },
+                  { metric: 'Cobertura', value: 92 },
+                  { metric: 'Eficiencia', value: 88 },
+                  { metric: 'Participación', value: 95 },
+                ]}>
+                  <PolarGrid stroke="#1e3a8a" />
+                  <PolarAngleAxis dataKey="metric" tick={{fill: '#3b82f6', fontSize: 10}} />
+                  <Radar dataKey="value" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.5} />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-blue-500/20 text-blue-400">-15% Factura Eléctrica</Badge>
+              <Badge className="bg-green-500/20 text-green-400">12 Empresas Conectadas</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'gridflex-demand':
+      return (
+        <Card className="bg-gradient-to-br from-purple-950/30 to-fuchsia-950/30 border-purple-500/20">
+          <CardHeader>
+            <CardTitle className="text-purple-400 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              DEMAND FLEXIBILITY CONTROLLER - Smart Grid
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <AreaChart data={[
+                  { hora: '08:00', carga: 450, flexibilidad: 50 },
+                  { hora: '10:00', carga: 680, flexibilidad: 120 },
+                  { hora: '12:00', carga: 890, flexibilidad: 200 },
+                  { hora: '14:00', carga: 720, flexibilidad: 150 },
+                  { hora: '16:00', carga: 850, flexibilidad: 180 },
+                  { hora: '18:00', carga: 950, flexibilidad: 220 },
+                ]}>
+                  <XAxis dataKey="hora" tick={{fill: '#a855f7', fontSize: 10}} />
+                  <YAxis tick={{fill: '#94a3b8', fontSize: 10}} />
+                  <Tooltip />
+                  <ReferenceLine y={800} stroke="#ef4444" strokeDasharray="3 3" label={{ value: 'Límite Red', fill: '#ef4444', fontSize: 10 }} />
+                  <Area type="monotone" dataKey="carga" stroke="#a855f7" fill="#a855f7" fillOpacity={0.3} name="Carga kW" />
+                  <Area type="monotone" dataKey="flexibilidad" stroke="#22c55e" fill="#22c55e" fillOpacity={0.5} name="Flex kW" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-purple-500/20 text-purple-400">0 Apagones/12 meses</Badge>
+              <Badge className="bg-green-500/20 text-green-400">150 EUROe Incentivos</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'bateria-hub':
+      return (
+        <Card className="bg-gradient-to-br from-indigo-950/30 to-violet-950/30 border-indigo-500/20">
+          <CardHeader>
+            <CardTitle className="text-indigo-400 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              BATTERY ARBITRAGE ENGINE - Compra/Venta Automática
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <BarChart data={[
+                  { dia: 'Lun', margen: 340 },
+                  { dia: 'Mar', margen: 520 },
+                  { dia: 'Mié', margen: 280 },
+                  { dia: 'Jue', margen: 610 },
+                  { dia: 'Vie', margen: 450 },
+                  { dia: 'Sáb', margen: 380 },
+                  { dia: 'Dom', margen: 290 },
+                ]}>
+                  <XAxis dataKey="dia" tick={{fill: '#818cf8', fontSize: 10}} />
+                  <YAxis tick={{fill: '#94a3b8', fontSize: 10}} />
+                  <Tooltip />
+                  <Bar dataKey="margen" fill="#818cf8" radius={[4, 4, 0, 0]} name="Margen €" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-indigo-500/20 text-indigo-400">ROI: 5 años (vs 8)</Badge>
+              <Badge className="bg-green-500/20 text-green-400">2.870€ Margen Semanal</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'bioheat-district':
+      return (
+        <Card className="bg-gradient-to-br from-amber-950/30 to-stone-950/30 border-amber-700/20">
+          <CardHeader>
+            <CardTitle className="text-amber-600 flex items-center gap-2 text-sm">
+              <Leaf className="w-4 h-4" />
+              BIOMASS TRACEABILITY - Forest to Boiler
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <ScatterChart>
+                  <XAxis type="number" dataKey="km" name="Km Transporte" domain={[0, 100]} tick={{fill: '#b45309', fontSize: 10}} />
+                  <YAxis type="number" dataKey="score" name="Score Sostenibilidad" domain={[0, 100]} tick={{fill: '#94a3b8', fontSize: 10}} />
+                  <Tooltip />
+                  <Scatter name="Lotes Biomasa" data={[
+                    { km: 15, score: 98, tons: 12 },
+                    { km: 28, score: 95, tons: 18 },
+                    { km: 42, score: 88, tons: 15 },
+                    { km: 55, score: 82, tons: 20 },
+                    { km: 35, score: 92, tons: 22 },
+                  ]} fill="#b45309" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-amber-600/20 text-amber-600">99% Cumplimiento RED II</Badge>
+              <Badge className="bg-green-500/20 text-green-400">Huella Neta: 0.0</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'turbine-chain':
+      return (
+        <Card className="bg-gradient-to-br from-orange-950/30 to-red-950/30 border-orange-500/20">
+          <CardHeader>
+            <CardTitle className="text-orange-400 flex items-center gap-2 text-sm">
+              <TrendingUp className="w-4 h-4" />
+              SCOPE 3 CONSOLIDATOR - Aerogeneradores
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <AreaChart data={[
+                  { tier: 'Tier 1', emisiones: 1200 },
+                  { tier: 'Tier 2', emisiones: 3400 },
+                  { tier: 'Tier 3', emisiones: 5800 },
+                  { tier: 'Total', emisiones: 10400 },
+                ]}>
+                  <defs>
+                    <linearGradient id="colorScope3" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#f97316" stopOpacity={0.8}/>
+                      <stop offset="95%" stopColor="#f97316" stopOpacity={0.1}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="tier" tick={{fill: '#f97316', fontSize: 10}} />
+                  <YAxis tick={{fill: '#94a3b8', fontSize: 10}} />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="emisiones" stroke="#f97316" fill="url(#colorScope3)" name="tCO2e" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-orange-500/20 text-orange-400">50M€ Contrato Ganado</Badge>
+              <Badge className="bg-green-500/20 text-green-400">99% Precisión CSRD</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'aquapower-nexus':
+      return (
+        <Card className="bg-gradient-to-br from-blue-950/50 to-indigo-950/50 border-blue-600/20">
+          <CardHeader>
+            <CardTitle className="text-blue-500 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              WATER-ENERGY NEXUS - Gestión Hídrica
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer>
+                <LineChart data={[
+                  { hora: '06:00', agua: 45, energia: 120 },
+                  { hora: '09:00', agua: 78, energia: 85 },
+                  { hora: '12:00', agua: 92, energia: 45 },
+                  { hora: '15:00', agua: 65, energia: 95 },
+                  { hora: '18:00', agua: 38, energia: 140 },
+                  { hora: '21:00', agua: 25, energia: 110 },
+                ]}>
+                  <XAxis dataKey="hora" tick={{fill: '#3b82f6', fontSize: 10}} />
+                  <YAxis yAxisId="left" tick={{fill: '#3b82f6', fontSize: 10}} />
+                  <YAxis yAxisId="right" orientation="right" tick={{fill: '#facc15', fontSize: 10}} />
+                  <Tooltip />
+                  <Line yAxisId="left" type="monotone" dataKey="agua" stroke="#3b82f6" strokeWidth={2} name="Riego m³" dot />
+                  <Line yAxisId="right" type="monotone" dataKey="energia" stroke="#facc15" strokeWidth={2} name="Gen MWh" dot />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-blue-500/20 text-blue-400">+12% Eficiencia Hídrica</Badge>
+              <Badge className="bg-green-500/20 text-green-400">Conflictos Resueltos: 100%</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
+    case 'smartcharge-ev':
+      return (
+        <Card className="bg-gradient-to-br from-lime-950/30 to-green-950/30 border-lime-500/20">
+          <CardHeader>
+            <CardTitle className="text-lime-400 flex items-center gap-2 text-sm">
+              <Zap className="w-4 h-4" />
+              EV GREEN GUARANTEE - Origen Certificado
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64 flex items-center justify-center">
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={[
+                      { name: 'Solar', value: 55, color: '#facc15' },
+                      { name: 'Eólica', value: 35, color: '#22d3ee' },
+                      { name: 'Hidráulica', value: 10, color: '#3b82f6' },
+                    ]}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={50}
+                    outerRadius={80}
+                    paddingAngle={3}
+                    dataKey="value"
+                    label={({ name, value }) => `${value}%`}
+                  >
+                    <Cell fill="#facc15" />
+                    <Cell fill="#22d3ee" />
+                    <Cell fill="#3b82f6" />
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-between mt-4">
+              <Badge className="bg-lime-500/20 text-lime-400">100% Renovable Certificado</Badge>
+              <Badge className="bg-green-500/20 text-green-400">+40% Fidelización</Badge>
+            </div>
+          </CardContent>
+        </Card>
+      );
+
     default:
       return (
         <Card className="p-8 text-center">

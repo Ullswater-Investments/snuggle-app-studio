@@ -217,6 +217,116 @@ function detectWidgets(content: string): WidgetAction[] {
     });
   }
 
+  // ===== 10 NEW ENERGY SECTORS =====
+
+  // Solar/Fotovoltaica
+  if (lowerContent.includes("solar") || lowerContent.includes("fotovoltaica") || 
+      lowerContent.includes("paneles") || lowerContent.includes("helios") ||
+      lowerContent.includes("parque solar") || lowerContent.includes("inversores")) {
+    widgets.push({ 
+      label: "Ver Helios Fields", 
+      path: "/success-stories/helios-fields", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Eólica/PPA
+  if (lowerContent.includes("eólica") || lowerContent.includes("aerogenerador") || 
+      lowerContent.includes("ppa") || lowerContent.includes("aeolus") ||
+      lowerContent.includes("parque eólico") || lowerContent.includes("viento")) {
+    widgets.push({ 
+      label: "Ver Aeolus Wind", 
+      path: "/success-stories/aeolus-wind", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Hidrógeno Verde
+  if (lowerContent.includes("hidrógeno") || lowerContent.includes("h2 verde") || 
+      lowerContent.includes("electrólisis") || lowerContent.includes("h2-pure") ||
+      lowerContent.includes("subvención h2")) {
+    widgets.push({ 
+      label: "Ver H2-Pure", 
+      path: "/success-stories/h2-pure", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Comunidades Energéticas
+  if (lowerContent.includes("polígono eco") || lowerContent.includes("autoconsumo colectivo") || 
+      lowerContent.includes("marketplace energía") || lowerContent.includes("vecinos industriales")) {
+    widgets.push({ 
+      label: "Ver Polígono Eco-Link", 
+      path: "/success-stories/poligono-eco-link", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Smart Grid/Flexibilidad
+  if (lowerContent.includes("smart grid") || lowerContent.includes("flexibilidad") || 
+      lowerContent.includes("gridflex") || lowerContent.includes("sobrecarga red") ||
+      lowerContent.includes("certificado flexibilidad")) {
+    widgets.push({ 
+      label: "Ver GridFlex Demand", 
+      path: "/success-stories/gridflex-demand", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Baterías/Almacenamiento
+  if (lowerContent.includes("batería") || lowerContent.includes("almacenamiento") || 
+      lowerContent.includes("arbitraje") || lowerContent.includes("bess") ||
+      lowerContent.includes("bateria-hub")) {
+    widgets.push({ 
+      label: "Ver Batería-Hub", 
+      path: "/success-stories/bateria-hub", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Biomasa
+  if (lowerContent.includes("biomasa") || lowerContent.includes("district heating") || 
+      lowerContent.includes("bioheat") || lowerContent.includes("red ii") ||
+      lowerContent.includes("residuos forestales")) {
+    widgets.push({ 
+      label: "Ver BioHeat District", 
+      path: "/success-stories/bioheat-district", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Aerogeneradores/Scope 3
+  if (lowerContent.includes("turbine-chain") || lowerContent.includes("acero verde") || 
+      lowerContent.includes("fabricación aerogenerador") || lowerContent.includes("scope 3 csrd")) {
+    widgets.push({ 
+      label: "Ver Turbine-Chain", 
+      path: "/success-stories/turbine-chain", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // Hidráulica
+  if (lowerContent.includes("hidráulica") || lowerContent.includes("embalse") || 
+      lowerContent.includes("aquapower") || lowerContent.includes("nexo agua") ||
+      lowerContent.includes("confederación hidrográfica")) {
+    widgets.push({ 
+      label: "Ver AquaPower Nexus", 
+      path: "/success-stories/aquapower-nexus", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
+  // EV Charging
+  if (lowerContent.includes("carga ev") || lowerContent.includes("punto de carga") || 
+      lowerContent.includes("smartcharge") || lowerContent.includes("movilidad eléctrica verde") ||
+      lowerContent.includes("garantía origen ev")) {
+    widgets.push({ 
+      label: "Ver Smart-Charge EV", 
+      path: "/success-stories/smartcharge-ev", 
+      icon: <Zap className="h-3 w-3" /> 
+    });
+  }
+
   return widgets;
 }
 
