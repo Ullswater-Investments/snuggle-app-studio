@@ -39,7 +39,10 @@ export default function UserGuide() {
               7: '/documento-explicativo-7',
               8: '/documento-explicativo-8',
               9: '/documento-explicativo-9',
-              10: '/documento-explicativo-10'
+              10: '/documento-explicativo-10',
+              11: '/documento-explicativo-11',
+              12: '/documento-explicativo-12',
+              13: '/documento-explicativo-13'
             };
             
             const cardContent = (
