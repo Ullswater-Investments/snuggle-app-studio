@@ -92,11 +92,11 @@ export default function Landing() {
             <a href="#use-cases" className="hover:text-primary">Casos de Uso</a>
             <Link to="/architecture" className="hover:text-primary">Arquitectura Técnica</Link>
             <Link 
-              to="/whitepaper" 
+              to="/success-stories" 
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
             >
               <Sparkles className="h-4 w-4" />
-              <span>Tech Whitepaper</span>
+              <span>CASOS DE ÉXITO</span>
             </Link>
           </nav>
           <div className="flex items-center gap-4">
