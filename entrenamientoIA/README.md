@@ -2,22 +2,39 @@
 
 Este directorio contiene todos los documentos necesarios para entrenar el asistente virtual ARIA de ProcureData.
 
-> **Última actualización**: 2026-01-06  
-> **Versión**: 1.0
+> **Última actualización**: 2026-01-07  
+> **Versión**: 2.0
 
 ---
 
-## 📋 Índice de Documentos
+## 📋 Índice de Documentos (17 archivos)
 
-| Archivo | Descripción | Uso Principal |
-|---------|-------------|---------------|
-| `01_SYSTEM_INSTRUCTIONS.md` | Instrucciones completas para el System Prompt | Google AI Studio, Claude, GPT |
-| `02_KNOWLEDGE_BASE.md` | Base de conocimiento consolidada del negocio | Contexto adicional |
-| `03_SERVICES_CATALOG.md` | Catálogo completo de 21+ servicios | Referencia de precios y funcionalidades |
-| `04_DATA_ARCHITECTURE.md` | Esquema de datos y contratos | Entender estructura de la app |
-| `05_INTERACTIVE_WIDGETS.md` | Documentación de widgets gamificados | Guiar usuarios a simuladores |
-| `06_RESPONSE_RULES.md` | Reglas de respuesta y frases sugeridas | Comportamiento de ARIA |
-| `07_CONSTANTS_REFERENCE.md` | Constantes oficiales (sectores, precios) | Datos invariantes |
+### Base de Conocimiento Original (Docs 1-5)
+
+| Archivo | Descripción | Documento Base |
+|---------|-------------|----------------|
+| `01_SYSTEM_INSTRUCTIONS.md` | Instrucciones completas para el System Prompt | Core |
+| `02_KNOWLEDGE_BASE.md` | Base de conocimiento consolidada del negocio | Core |
+| `03_SERVICES_CATALOG.md` | Catálogo completo de 21+ servicios | Core |
+| `04_DATA_ARCHITECTURE.md` | Esquema de datos y contratos | Core |
+| `05_INTERACTIVE_WIDGETS.md` | Documentación de widgets gamificados | Core |
+| `06_RESPONSE_RULES.md` | Reglas de respuesta y frases sugeridas | Core |
+| `07_CONSTANTS_REFERENCE.md` | Constantes oficiales (sectores, precios) | Core |
+
+### Conocimiento Expandido (Docs Explicativos 6-15)
+
+| Archivo | Descripción | Documento Base |
+|---------|-------------|----------------|
+| `08_USER_INTERFACE_SUPPORT.md` | Navegación UI, roles RBAC, errores comunes, soporte | Doc. Explicativo 6 |
+| `09_DATA_GOVERNANCE_ODRL.md` | ODRL 2.0, Data Holder, contratos automáticos | Doc. Explicativo 7 |
+| `10_ANALYTICS_BI_SYNTHETIC.md` | BI dashboards, KPIs, datos sintéticos, DataOps | Doc. Explicativo 8 |
+| `11_TECHNICAL_INTEGRATION.md` | API REST, Webhooks, SDKs, seguridad DevSecOps | Doc. Explicativo 9 |
+| `12_RESILIENCE_GOVERNANCE.md` | Casos extremos, M&A, insolvencia, gobernanza | Doc. Explicativo 10 |
+| `13_SECTOR_DEEP_DIVE.md` | 6 sectores en profundidad con casos de uso | Doc. Explicativo 11 |
+| `14_DEVELOPER_ARCHITECTURE.md` | Stack tecnológico, PostgreSQL, Edge Functions | Doc. Explicativo 12 |
+| `15_NLU_DIALOG_TRAINING.md` | Identidad ARIA, empatía, Intent Mapping | Doc. Explicativo 13 |
+| `16_USER_STORIES_LIBRARY.md` | Historias de usuario por perfil profesional | Doc. Explicativo 14 |
+| `17_GLOSSARY_DICTIONARY.md` | Diccionario completo de términos técnicos | Doc. Explicativo 15 |
 
 ---
 
@@ -28,9 +45,9 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 1. Crea un nuevo chat o prompt
 2. Copia el contenido completo de `01_SYSTEM_INSTRUCTIONS.md`
 3. Pégalo en el campo "System Instructions"
-4. Opcionalmente, añade `02_KNOWLEDGE_BASE.md` como contexto adicional
+4. Opcionalmente, añade documentos adicionales como contexto
 
-### Para Lovable AI (ya implementado)
+### Para Lovable AI (implementado en Edge Function)
 
 Los contenidos están compilados en la Edge Function:
 ```
@@ -38,6 +55,16 @@ supabase/functions/chat-ai/index.ts
 ```
 
 Esta función usa `LOVABLE_API_KEY` (auto-provisionada) para llamar a `google/gemini-2.5-flash`.
+
+**Conocimiento integrado en SYSTEM_INSTRUCTIONS:**
+- Identidad y tono de ARIA
+- Catálogo de 21 servicios con precios
+- Sectores prioritarios y casos de uso
+- Widgets interactivos y simuladores
+- Reglas de respuesta (15+ reglas)
+- Gobernanza ODRL y Data Holders
+- Integración técnica (API, Webhooks)
+- Glosario de términos clave
 
 ### Para Claude o ChatGPT
 
@@ -50,14 +77,28 @@ Esta función usa `LOVABLE_API_KEY` (auto-provisionada) para llamar a `google/ge
 
 ```
 entrenamientoIA/
-├── README.md                      ← Este archivo (índice)
+├── README.md                      ← Este archivo (índice v2.0)
+│
+├── 📚 BASE ORIGINAL
 ├── 01_SYSTEM_INSTRUCTIONS.md      ← System Prompt completo para ARIA
-├── 02_KNOWLEDGE_BASE.md           ← Contexto de negocio (problema nxm, modelo tripartito)
-├── 03_SERVICES_CATALOG.md         ← 21 servicios con precios y descripciones
+├── 02_KNOWLEDGE_BASE.md           ← Contexto de negocio (problema nxm)
+├── 03_SERVICES_CATALOG.md         ← 21 servicios con precios
 ├── 04_DATA_ARCHITECTURE.md        ← Esquema de tablas Supabase
 ├── 05_INTERACTIVE_WIDGETS.md      ← Widgets gamificados y simuladores
-├── 06_RESPONSE_RULES.md           ← 10 reglas de comportamiento de ARIA
-└── 07_CONSTANTS_REFERENCE.md      ← Sectores, precios, stack europeo
+├── 06_RESPONSE_RULES.md           ← 10 reglas de comportamiento
+├── 07_CONSTANTS_REFERENCE.md      ← Sectores, precios, stack europeo
+│
+├── 📖 CONOCIMIENTO EXPANDIDO (Docs Explicativos 6-15)
+├── 08_USER_INTERFACE_SUPPORT.md   ← UI, roles, errores, soporte
+├── 09_DATA_GOVERNANCE_ODRL.md     ← ODRL, Data Holder, contratos
+├── 10_ANALYTICS_BI_SYNTHETIC.md   ← BI, KPIs, datos sintéticos
+├── 11_TECHNICAL_INTEGRATION.md    ← APIs, Webhooks, SDKs
+├── 12_RESILIENCE_GOVERNANCE.md    ← Casos extremos, gobernanza
+├── 13_SECTOR_DEEP_DIVE.md         ← 6 sectores en profundidad
+├── 14_DEVELOPER_ARCHITECTURE.md   ← Stack técnico, PostgreSQL
+├── 15_NLU_DIALOG_TRAINING.md      ← Entrenamiento NLU de ARIA
+├── 16_USER_STORIES_LIBRARY.md     ← Historias de usuario
+└── 17_GLOSSARY_DICTIONARY.md      ← Glosario completo
 ```
 
 ---
@@ -72,6 +113,26 @@ Cuando se añadan nuevas funcionalidades a la aplicación:
 
 ---
 
+## 📊 Cobertura de Conocimiento
+
+| Área | Archivos | Cobertura |
+|------|----------|-----------|
+| Negocio y Producto | 01, 02, 03 | ✅ Completo |
+| Arquitectura Técnica | 04, 14 | ✅ Completo |
+| Interactividad | 05 | ✅ Completo |
+| Respuestas y Comportamiento | 06, 15 | ✅ Completo |
+| Constantes | 07 | ✅ Completo |
+| Interfaz de Usuario | 08 | ✅ Completo |
+| Gobernanza de Datos | 09 | ✅ Completo |
+| Analítica y BI | 10 | ✅ Completo |
+| Integración Técnica | 11 | ✅ Completo |
+| Resiliencia | 12 | ✅ Completo |
+| Sectores | 13 | ✅ Completo |
+| Historias de Usuario | 16 | ✅ Completo |
+| Glosario | 17 | ✅ Completo |
+
+---
+
 ## 📌 Fuentes Originales
 
 Estos documentos se extraen y consolidan de:
@@ -81,9 +142,10 @@ Estos documentos se extraen y consolidan de:
 - `docs/ContextDocument.md` - Documento de contexto maestro
 - `docs/DOCUMENTO_TECNICO.md` - Especificación técnica v3.1
 - `src/lib/constants.ts` - Constantes oficiales del código
+- `src/pages/DocumentoExplicativo1-15.tsx` - Documentos explicativos de la app
 
 ---
 
 ## 🏷️ Etiquetas para Búsqueda
 
-`ARIA` `chatbot` `IA` `training` `ProcureData` `Gaia-X` `IDSA` `proveedores` `sostenibilidad` `blockchain`
+`ARIA` `chatbot` `IA` `training` `ProcureData` `Gaia-X` `IDSA` `proveedores` `sostenibilidad` `blockchain` `ODRL` `EDC` `Pontus-X` `EUROe` `CSRD` `ESG` `API` `Webhooks`
