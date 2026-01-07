@@ -10,10 +10,11 @@ import {
   Truck,
   Heart,
   Stethoscope,
+  ShoppingBag,
+  Zap,
   ShieldCheck,
   Clock,
   Target,
-  Zap,
   ExternalLink,
   Quote,
   TrendingUp
@@ -22,6 +23,10 @@ import { ROISimulator } from "@/components/ROISimulator";
 import { AgroROISimulator } from "@/components/AgroROISimulator";
 import { SocialImpactDashboard } from "@/components/SocialImpactDashboard";
 import { MobilityScope3Report } from "@/components/success-stories/MobilityScope3Report";
+import { HealthMaintenanceSimulator } from "@/components/success-stories/HealthMaintenanceSimulator";
+import { RetailEthicsAudit } from "@/components/success-stories/RetailEthicsAudit";
+import { EnergySmartContract } from "@/components/success-stories/EnergySmartContract";
+import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 
 const casesData: Record<string, {
   id: string;
@@ -40,7 +45,7 @@ const casesData: Record<string, {
   solution: string;
   services: string[];
   ariaQuote: string;
-  simulator: "industrial" | "agro" | "social" | "mobility" | "health";
+  simulator: "industrial" | "agro" | "social" | "mobility" | "health" | "retail" | "energy";
 }> = {
   "gigafactory-north": {
     id: "gigafactory-north",
@@ -112,43 +117,68 @@ const casesData: Record<string, {
     textColor: "text-violet-600 dark:text-violet-400",
     blockchainProof: "0x7e2fa3c81d9b5f7a3e1c9d5b7f3a1e9c7d5b3a1f9e7c5d3b1a9f7e5c3d1b9a7f5",
     blockNumber: "#18,156,321",
-    challenge: `Alianza Social Hub agrupa a 15 centros especiales de empleo y empresas de inserción laboral.
-
-**El problema principal**: Las grandes corporaciones con cuotas de reserva (Ley General de Discapacidad) necesitaban demostrar el impacto real de cada euro invertido en proveedores éticos. Los departamentos de RSC solo podían reportar gastos, no valor social generado.
-
-**Riesgos adicionales**:
-• Social Washing: Dificultad para verificar la autenticidad de los centros de inserción
-• Auditorías manuales: Cientos de horas recopilando certificados para memorias de sostenibilidad
-• Falta de métricas estandarizadas para comparar proveedores éticos`,
-    solution: `Implementación del Dashboard de Métricas SROI con tres pilares técnicos:
-
-**1. Monetización del Impacto**: Cruce automático del gasto con el ahorro en subsidios públicos (0.45€ por cada 1€ invertido) y cálculo de empleos inclusivos creados (60% en CEE, 40% en empresas de inserción).
-
-**2. Garantía Anti-Social-Washing**: Cada centro especial tiene un Identificador DID verificado en Pontus-X (did:web:alianza-social.procuredata.eu), eliminando el riesgo reputacional.
-
-**3. Reporte CSRD Automático**: Generación de PDF verificado que sirve como anexo legal para la Memoria de Sostenibilidad corporativa, ahorrando cientos de horas de recopilación manual.`,
+    challenge: `Alianza Social Hub agrupa a 15 centros especiales de empleo. El problema principal: Las grandes corporaciones con cuotas de reserva (LGD) necesitaban demostrar el impacto real de cada euro invertido en proveedores éticos. Los departamentos de RSC solo podían reportar gastos, no valor social generado.`,
+    solution: `Implementación del Dashboard de Métricas SROI con tres pilares: 1) Monetización del Impacto con cálculo de ahorro en subsidios públicos. 2) Garantía Anti-Social-Washing con DID verificado en Pontus-X. 3) Reporte CSRD Automático para Memorias de Sostenibilidad.`,
     services: ["Dashboard SROI", "Auditoría Social Digital", "Pasaporte de Proveedor Ético", "Memoria de Sostenibilidad Automática", "Verificación DID Anti-Social-Washing"],
-    ariaQuote: "Hemos verificado mediante auditoría digital que el 100% de los proveedores de este lote cumplen con la Ley General de Discapacidad. Por cada euro invertido, se generan 3.8€ de valor social medible. El 78% de la inversión se reinvierte en la economía local de proximidad.",
+    ariaQuote: "Hemos verificado que el 100% de los proveedores cumplen con la LGD. Por cada euro invertido, se generan 3.8€ de valor social. El 78% de la inversión se reinvierte en economía local.",
     simulator: "social"
   },
   "biomed-hospital": {
     id: "biomed-hospital",
-    title: "Continuidad Asistencial Garantizada",
+    title: "Disponibilidad Crítica de Equipos RM",
     company: "BioMed Hospital",
     sector: "Salud",
     sectorIcon: Stethoscope,
-    metric: "100%",
-    metricLabel: "Uptime Equipos",
+    metric: "-30%",
+    metricLabel: "Fallos Críticos",
     color: "from-rose-500 to-pink-500",
     bgColor: "bg-rose-50 dark:bg-rose-950/30",
     textColor: "text-rose-600 dark:text-rose-400",
     blockchainProof: "0x9b4dc1e73a5f9b7d1e3c5a7f9b1d3e5c7a9f1b3d5e7c9a1f3b5d7e9c1a3f5b7d9",
     blockNumber: "#18,178,654",
-    challenge: "BioMed Hospital experimentaba paradas imprevistas en sus equipos de Resonancia Magnética, afectando a la programación de pacientes. Los contratos de mantenimiento tradicionales no garantizaban tiempos de respuesta adecuados.",
-    solution: "Acceso a datasets de logs de mantenimiento de equipos RM verificados, permitiendo entrenar modelos de IA predictiva. Integración con proveedores de repuestos homologados para respuesta inmediata.",
-    services: ["Datasets Sintéticos Verificados", "API de Mantenimiento Predictivo", "Homologación de Proveedores MRO", "Alertas Inteligentes"],
-    ariaQuote: "El modelo predictivo entrenado con datos verificados de ProcureData detecta fallos potenciales con 72 horas de antelación, permitiendo programar mantenimientos sin afectar a los pacientes.",
+    challenge: `El hospital sufría paradas imprevistas en sus equipos de Resonancia Magnética (RM), costando 15.000€ por día de inactividad y retrasando cirugías críticas. Sin visibilidad del estado real de los equipos ni posibilidad de compartir logs sin exponer datos de pacientes (GDPR).`,
+    solution: `Implementación de Edge Functions para anonimizar datos de pacientes mientras se envían logs de error del imán en tiempo real al proveedor EcoTech Industrial. Modelo predictivo ML detecta fallos 72h antes. Alertas automáticas al proveedor de repuestos homologado.`,
+    services: ["Conector IDS Seguro", "Anonimizador GDPR", "API Mantenimiento Predictivo", "Alertas Inteligentes", "Homologación Proveedores MRO"],
+    ariaQuote: "Gracias al conector IDS, el hospital compartió los logs técnicos sin exponer ningún dato personal de pacientes. El modelo predictivo detecta fallos 72h antes, evitando paradas imprevistas.",
     simulator: "health"
+  },
+  "globalretail-prime": {
+    id: "globalretail-prime",
+    title: "Auditoría Ética de Cadena de Suministro",
+    company: "GlobalRetail Prime",
+    sector: "Comercio",
+    sectorIcon: ShoppingBag,
+    metric: "0",
+    metricLabel: "Incidencias Éticas",
+    color: "from-blue-500 to-sky-500",
+    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+    textColor: "text-blue-600 dark:text-blue-400",
+    blockchainProof: "0x4a2c8e7f3b1d9a5c7e3f1b9d7a5c3e1f9b7d5a3c1e9f7b5d3a1c9e7f5b3d1a9c7",
+    blockNumber: "#18,267,891",
+    challenge: `Una multinacional de retail necesitaba asegurar que sus 200 proveedores textiles en Asia cumplían con la normativa SA8000 para evitar riesgos reputacionales. Auditorías presenciales costosas, documentos falsificables y ninguna garantía de continuidad entre inspecciones.`,
+    solution: `Implementación del Pasaporte Digital de Proveedor con auditorías firmadas digitalmente por certificadoras externas. Políticas ODRL permiten que solo el comité de ética acceda a detalles sensibles. Trazabilidad blockchain garantiza integridad de certificados.`,
+    services: ["Pasaporte Digital de Proveedor", "Auditoría Digital ISO", "ODRL License Validator", "Validador DID Web3", "Monitor Riesgo Proveedor"],
+    ariaQuote: "La trazabilidad blockchain en Pontus-X garantiza que el certificado SA8000 no ha sido manipulado desde su emisión en origen. Cero incidencias éticas en la auditoría anual y +25% confianza del consumidor.",
+    simulator: "retail"
+  },
+  "ecovolt-manufacturing": {
+    id: "ecovolt-manufacturing",
+    title: "Compra de Energía Renovable Automatizada",
+    company: "EcoVolt Manufacturing",
+    sector: "Energía Industrial",
+    sectorIcon: Zap,
+    metric: "100%",
+    metricLabel: "Energía Renovable",
+    color: "from-yellow-500 to-amber-500",
+    bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
+    textColor: "text-yellow-600 dark:text-yellow-400",
+    blockchainProof: "0x6b3d9a1c5e7f3b1d9a5c7e3f1b9d7a5c3e1f9b7d5a3c1e9f7b5d3a1c9e7f5b3d1",
+    blockNumber: "#18,289,456",
+    challenge: `Una planta de aluminio necesitaba certificar que el 100% de su consumo era renovable para obtener beneficios fiscales. La conciliación de facturas y certificados de Garantía de Origen (GdO) tardaba meses, perdiendo incentivos fiscales.`,
+    solution: `Automatización mediante Smart Contracts y EUROe. Contador IoT reporta consumo en tiempo real. Smart Contract compra automáticamente certificados GdO y paga en el mismo bloque. Conciliación contable instantánea y sello Carbon Neutral automático.`,
+    services: ["Wallet Web3 Empresarial", "Pontus-X Notary Node", "Conector Universal ERP", "Carbon Tracker ISO 14064", "Certificación Green Partner"],
+    ariaQuote: "El pago en EUROe permite que la transferencia de valor y el certificado de energía ocurran en el mismo bloque de blockchain. Conciliación contable instantánea, de meses a 12 segundos.",
+    simulator: "energy"
   }
 };
 
@@ -180,10 +210,15 @@ const SuccessStoryDetail = () => {
       <div className={`relative overflow-hidden bg-gradient-to-br ${caseData.bgColor} border-b`}>
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="container mx-auto px-4 py-8 md:py-16 relative">
-          <Link to="/success-stories" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors">
+          <Link to="/success-stories" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Volver a Casos de Éxito
           </Link>
+          
+          {/* Navigator */}
+          <div className="mb-8">
+            <SuccessStoryNavigator compact />
+          </div>
 
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
@@ -322,15 +357,9 @@ const SuccessStoryDetail = () => {
           {caseData.simulator === "agro" && <AgroROISimulator />}
           {caseData.simulator === "social" && <SocialImpactDashboard spend={150000} />}
           {caseData.simulator === "mobility" && <MobilityScope3Report fleetSize={45} electricPercentage={35} />}
-          {caseData.simulator === "health" && (
-            <Card className="p-8 text-center">
-              <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-2">Simulador en Desarrollo</h3>
-              <p className="text-muted-foreground">
-                El simulador específico para el sector {caseData.sector} estará disponible próximamente.
-              </p>
-            </Card>
-          )}
+          {caseData.simulator === "health" && <HealthMaintenanceSimulator />}
+          {caseData.simulator === "retail" && <RetailEthicsAudit />}
+          {caseData.simulator === "energy" && <EnergySmartContract />}
         </div>
 
         {/* CTA */}

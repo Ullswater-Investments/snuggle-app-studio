@@ -10,11 +10,14 @@ import {
   Truck, 
   Heart, 
   Stethoscope,
+  ShoppingBag,
+  Zap,
   ShieldCheck,
   ArrowRight,
   Search,
   TrendingUp
 } from "lucide-react";
+import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 
 const successCases = [
   {
@@ -79,13 +82,41 @@ const successCases = [
     company: "BioMed Hospital",
     sector: "Salud",
     sectorIcon: Stethoscope,
-    metric: "100%",
-    metricLabel: "Uptime Equipos",
-    description: "Mantenimiento predictivo de equipos de diagnóstico con datasets verificados.",
+    metric: "-30%",
+    metricLabel: "Fallos Críticos",
+    description: "Mantenimiento predictivo de equipos RM con telemetría anonimizada GDPR-compliant.",
     color: "from-rose-500 to-pink-500",
     bgColor: "bg-rose-50 dark:bg-rose-950/30",
     textColor: "text-rose-600 dark:text-rose-400",
     blockchainProof: "0x9b4d...c1e7"
+  },
+  {
+    id: "globalretail-prime",
+    title: "Auditoría Ética de Cadena de Suministro",
+    company: "GlobalRetail Prime",
+    sector: "Comercio",
+    sectorIcon: ShoppingBag,
+    metric: "0",
+    metricLabel: "Incidencias Éticas",
+    description: "Verificación de cumplimiento SA8000 en 200 proveedores textiles asiáticos.",
+    color: "from-blue-500 to-sky-500",
+    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+    textColor: "text-blue-600 dark:text-blue-400",
+    blockchainProof: "0x4a2c...d8f3"
+  },
+  {
+    id: "ecovolt-manufacturing",
+    title: "Compra de Energía Renovable Automatizada",
+    company: "EcoVolt Manufacturing",
+    sector: "Energía Industrial",
+    sectorIcon: Zap,
+    metric: "100%",
+    metricLabel: "Energía Renovable",
+    description: "Liquidación instantánea de certificados GdO mediante Smart Contracts y EUROe.",
+    color: "from-yellow-500 to-amber-500",
+    bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
+    textColor: "text-yellow-600 dark:text-yellow-400",
+    blockchainProof: "0x6b3d...e9a1"
   }
 ];
 
@@ -159,6 +190,11 @@ const SuccessStories = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Navigator */}
+      <div className="container mx-auto px-4 pb-8">
+        <SuccessStoryNavigator />
       </div>
 
       {/* Cases Grid */}

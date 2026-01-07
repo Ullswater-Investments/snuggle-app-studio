@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Bot, X, Send, Sparkles, ThumbsUp, ThumbsDown, ExternalLink, Calculator, Gauge, Activity, FileCheck, Minimize2, Maximize2, GripVertical, Heart } from "lucide-react";
+import { Bot, X, Send, Sparkles, ThumbsUp, ThumbsDown, ExternalLink, Calculator, Gauge, Activity, FileCheck, Minimize2, Maximize2, GripVertical, Heart, HeartPulse, ShoppingBag, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -70,6 +70,39 @@ function detectWidgets(content: string): WidgetAction[] {
       label: "Ver Dashboard Impacto Social", 
       path: "/success-stories/alianza-social-hub", 
       icon: <Heart className="h-3 w-3" /> 
+    });
+  }
+
+  // Health/Hospital detection
+  if (lowerContent.includes("hospital") || lowerContent.includes("equipo médico") || 
+      lowerContent.includes("resonancia") || lowerContent.includes("mantenimiento predictivo") ||
+      lowerContent.includes("salud") || lowerContent.includes("gdpr")) {
+    widgets.push({ 
+      label: "Ver Caso BioMed Hospital", 
+      path: "/success-stories/biomed-hospital", 
+      icon: <HeartPulse className="h-3 w-3" /> 
+    });
+  }
+
+  // Retail/Ethics detection
+  if (lowerContent.includes("retail") || lowerContent.includes("textil") || 
+      lowerContent.includes("sa8000") || lowerContent.includes("trabajo justo") ||
+      lowerContent.includes("ética") || lowerContent.includes("csddd")) {
+    widgets.push({ 
+      label: "Ver Caso GlobalRetail Prime", 
+      path: "/success-stories/globalretail-prime", 
+      icon: <ShoppingBag className="h-3 w-3" /> 
+    });
+  }
+
+  // Energy/Renewable detection
+  if (lowerContent.includes("energía renovable") || lowerContent.includes("gdo") || 
+      lowerContent.includes("certificado de origen") || lowerContent.includes("carbon neutral") ||
+      lowerContent.includes("smart contract") || lowerContent.includes("euroe")) {
+    widgets.push({ 
+      label: "Ver Caso EcoVolt Manufacturing", 
+      path: "/success-stories/ecovolt-manufacturing", 
+      icon: <Zap className="h-3 w-3" /> 
     });
   }
 
