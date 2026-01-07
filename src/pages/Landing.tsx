@@ -244,9 +244,12 @@ export default function Landing() {
               ))}
             </Tabs>
             
-            <div className="mt-12 text-center">
+            <div className="mt-12 text-center space-y-3">
               <Link to="/docs/tecnico" className="text-primary hover:underline underline-offset-4 flex items-center justify-center gap-2">
                 Ver Documento Técnico Completo <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link to="/capacidades-enterprise" className="text-orange-500 hover:text-orange-400 font-semibold flex items-center justify-center gap-2 transition-colors">
+                Documento Capacidades Enterprise → <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>

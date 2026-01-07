@@ -56,6 +56,20 @@ import DocumentoExplicativo12 from "./pages/DocumentoExplicativo12";
 import DocumentoExplicativo13 from "./pages/DocumentoExplicativo13";
 import DocumentoExplicativo14 from "./pages/DocumentoExplicativo14";
 import DocumentoExplicativo15 from "./pages/DocumentoExplicativo15";
+import CapacidadesEnterprise from "./pages/CapacidadesEnterprise";
+import WalletWeb3 from "./pages/motor/WalletWeb3";
+import IdentidadSSI from "./pages/motor/IdentidadSSI";
+import PagosEUROe from "./pages/motor/PagosEUROe";
+import MotorActivityFeed from "./pages/motor/ActivityFeed";
+import SmartAlerts from "./pages/motor/SmartAlerts";
+import GobernanzaODRL from "./pages/motor/GobernanzaODRL";
+import MultiTenantRLS from "./pages/motor/MultiTenantRLS";
+import MotorAuditLogs from "./pages/motor/AuditLogs";
+import ModeloIDSA from "./pages/motor/ModeloIDSA";
+import ConectoresERP from "./pages/motor/ConectoresERP";
+import EdgeFunctions from "./pages/motor/EdgeFunctions";
+import TourGuiado from "./pages/motor/TourGuiado";
+import DocsInteractivos from "./pages/motor/DocsInteractivos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -95,6 +109,22 @@ const App = () => (
             <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
             <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
             <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
+            <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
+            
+            {/* Motor de ProcureData - Technical Deep Dives */}
+            <Route path="/motor/wallet-web3" element={<WalletWeb3 />} />
+            <Route path="/motor/identidad-ssi" element={<IdentidadSSI />} />
+            <Route path="/motor/pagos-euroe" element={<PagosEUROe />} />
+            <Route path="/motor/activity-feed" element={<MotorActivityFeed />} />
+            <Route path="/motor/smart-alerts" element={<SmartAlerts />} />
+            <Route path="/motor/gobernanza-odrl" element={<GobernanzaODRL />} />
+            <Route path="/motor/multi-tenant-rls" element={<MultiTenantRLS />} />
+            <Route path="/motor/audit-logs" element={<MotorAuditLogs />} />
+            <Route path="/motor/modelo-idsa" element={<ModeloIDSA />} />
+            <Route path="/motor/conectores-erp" element={<ConectoresERP />} />
+            <Route path="/motor/edge-functions" element={<EdgeFunctions />} />
+            <Route path="/motor/tour-guiado" element={<TourGuiado />} />
+            <Route path="/motor/docs-interactivos" element={<DocsInteractivos />} />
 
             {/* Public Demo Routes - Accessible without authentication */}
             <Route element={<PublicDemoLayout />}>
