@@ -45,27 +45,27 @@ export default function Landing() {
 
   const FEATURES_DATA = {
     web3: [
-      { title: "Wallet Web3", desc: "Conexión nativa con MetaMask y visualización de balances.", icon: Wallet, color: "text-purple-400" },
-      { title: "Identidad SSI", desc: "DIDs (did:ethr) generados automáticamente.", icon: ShieldCheck, color: "text-purple-400" },
-      { title: "Pagos EUROe", desc: "Transacciones con stablecoin regulada en Pontus-X.", icon: Coins, color: "text-purple-400" }
+      { title: "Wallet Web3", desc: "Conexión nativa con MetaMask y visualización de balances.", icon: Wallet, color: "text-purple-400", path: "/motor/wallet-web3" },
+      { title: "Identidad SSI", desc: "DIDs (did:ethr) generados automáticamente.", icon: ShieldCheck, color: "text-purple-400", path: "/motor/identidad-ssi" },
+      { title: "Pagos EUROe", desc: "Transacciones con stablecoin regulada en Pontus-X.", icon: Coins, color: "text-purple-400", path: "/motor/pagos-euroe" }
     ],
     realtime: [
-      { title: "Activity Feed", desc: "Suscripción a eventos de contrato en vivo.", icon: Radio, color: "text-blue-400" },
-      { title: "Smart Alerts", desc: "Notificaciones push críticas instantáneas.", icon: Bell, color: "text-blue-400" }
+      { title: "Activity Feed", desc: "Suscripción a eventos de contrato en vivo.", icon: Radio, color: "text-blue-400", path: "/motor/activity-feed" },
+      { title: "Smart Alerts", desc: "Notificaciones push críticas instantáneas.", icon: Bell, color: "text-blue-400", path: "/motor/smart-alerts" }
     ],
     security: [
-      { title: "Gobernanza ODRL", desc: "Políticas de acceso estandarizadas.", icon: Shield, color: "text-green-400" },
-      { title: "Multi-Tenant RLS", desc: "Aislamiento total de datos a nivel de fila.", icon: Users, color: "text-green-400" },
-      { title: "Audit Logs", desc: "Trazabilidad inmutable on-chain.", icon: FileText, color: "text-green-400" },
-      { title: "Modelo IDSA", desc: "Consumer, Subject y Holder diferenciados.", icon: Triangle, color: "text-green-400" }
+      { title: "Gobernanza ODRL", desc: "Políticas de acceso estandarizadas.", icon: Shield, color: "text-green-400", path: "/motor/gobernanza-odrl" },
+      { title: "Multi-Tenant RLS", desc: "Aislamiento total de datos a nivel de fila.", icon: Users, color: "text-green-400", path: "/motor/multi-tenant-rls" },
+      { title: "Audit Logs", desc: "Trazabilidad inmutable on-chain.", icon: FileText, color: "text-green-400", path: "/motor/audit-logs" },
+      { title: "Modelo IDSA", desc: "Consumer, Subject y Holder diferenciados.", icon: Triangle, color: "text-green-400", path: "/motor/modelo-idsa" }
     ],
     integrations: [
-      { title: "Conectores ERP", desc: "SAP, Oracle y Dynamics listos.", icon: Plug, color: "text-orange-400" },
-      { title: "Edge Functions", desc: "Lógica serverless escalable globalmente.", icon: Zap, color: "text-orange-400" }
+      { title: "Conectores ERP", desc: "SAP, Oracle y Dynamics listos.", icon: Plug, color: "text-orange-400", path: "/motor/conectores-erp" },
+      { title: "Edge Functions", desc: "Lógica serverless escalable globalmente.", icon: Zap, color: "text-orange-400", path: "/motor/edge-functions" }
     ],
     ux: [
-      { title: "Tour Guiado", desc: "Onboarding interactivo paso a paso.", icon: HelpCircle, color: "text-teal-400" },
-      { title: "Docs Interactivos", desc: "Diagramas de arquitectura en vivo.", icon: BookOpen, color: "text-teal-400" }
+      { title: "Tour Guiado", desc: "Onboarding interactivo paso a paso.", icon: HelpCircle, color: "text-teal-400", path: "/motor/tour-guiado" },
+      { title: "Docs Interactivos", desc: "Diagramas de arquitectura en vivo.", icon: BookOpen, color: "text-teal-400", path: "/motor/docs-interactivos" }
     ]
   };
 
@@ -224,19 +224,24 @@ export default function Landing() {
                   >
                     {items.map((feature, i) => (
                       <motion.div key={i} variants={cardVariants}>
-                        <Card className="h-full bg-white/5 border-white/10 hover:bg-white/10 transition-all hover:shadow-lg hover:-translate-y-1">
-                          <CardHeader>
-                            <div className="flex items-center gap-3">
-                              <div className="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center">
-                                <feature.icon className={`h-5 w-5 ${feature.color}`} />
+                        <Link to={feature.path}>
+                          <Card className="h-full bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer group">
+                            <CardHeader>
+                              <div className="flex items-center gap-3">
+                                <div className="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                                  <feature.icon className={`h-5 w-5 ${feature.color}`} />
+                                </div>
+                                <CardTitle className="text-lg text-white">{feature.title}</CardTitle>
                               </div>
-                              <CardTitle className="text-lg text-white">{feature.title}</CardTitle>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <p className="text-sm text-gray-400">{feature.desc}</p>
-                          </CardContent>
-                        </Card>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="text-sm text-gray-400 mb-3">{feature.desc}</p>
+                              <span className="text-xs text-primary font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Ver detalle <ArrowRight className="h-3 w-3" />
+                              </span>
+                            </CardContent>
+                          </Card>
+                        </Link>
                       </motion.div>
                     ))}
                   </motion.div>
