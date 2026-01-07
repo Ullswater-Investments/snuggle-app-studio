@@ -4,6 +4,7 @@ import {
   Wallet, ShieldCheck, Coins, Radio, Bell, Users, FileText, Plug, HelpCircle, BookOpen, Triangle
 } from "lucide-react";
 import { FundingFooter } from "@/components/FundingFooter";
+import { AIConcierge } from "@/components/AIConcierge";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -350,6 +351,9 @@ export default function Landing() {
 
       {/* FundingFooter - Créditos oficiales según Memoria Técnica */}
       <FundingFooter variant="dark" showTransparency={false} />
+
+      {/* Chatbot ARIA flotante */}
+      <AIConcierge />
     </div>
   );
 }
