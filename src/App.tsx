@@ -53,6 +53,8 @@ import DocumentoExplicativo10 from "./pages/DocumentoExplicativo10";
 import DocumentoExplicativo11 from "./pages/DocumentoExplicativo11";
 import DocumentoExplicativo12 from "./pages/DocumentoExplicativo12";
 import DocumentoExplicativo13 from "./pages/DocumentoExplicativo13";
+import DocumentoExplicativo14 from "./pages/DocumentoExplicativo14";
+import DocumentoExplicativo15 from "./pages/DocumentoExplicativo15";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -90,6 +92,8 @@ const App = () => (
             <Route path="/documento-explicativo-11" element={<DocumentoExplicativo11 />} />
             <Route path="/documento-explicativo-12" element={<DocumentoExplicativo12 />} />
             <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
+            <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
+            <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
               
               {/* Protected routes with AppLayout */}
               <Route element={

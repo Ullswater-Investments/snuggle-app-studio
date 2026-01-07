@@ -42,7 +42,9 @@ export default function UserGuide() {
               10: '/documento-explicativo-10',
               11: '/documento-explicativo-11',
               12: '/documento-explicativo-12',
-              13: '/documento-explicativo-13'
+              13: '/documento-explicativo-13',
+              14: '/documento-explicativo-14',
+              15: '/documento-explicativo-15'
             };
             
             const cardContent = (
