@@ -7,6 +7,7 @@ import { OrganizationProvider } from "@/hooks/useOrganizationContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
+import { PublicDemoLayout } from "@/components/PublicDemoLayout";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
@@ -94,7 +95,15 @@ const App = () => (
             <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
             <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
             <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
-              
+
+            {/* Public Demo Routes - Accessible without authentication */}
+            <Route element={<PublicDemoLayout />}>
+              <Route path="/catalog" element={<Catalog />} />
+              <Route path="/sustainability" element={<Sustainability />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/:id" element={<ServiceDetail />} />
+              <Route path="/innovation" element={<InnovationLab />} />
+            </Route>
               {/* Protected routes with AppLayout */}
               <Route element={
                 <ProtectedRoute>
@@ -102,16 +111,15 @@ const App = () => (
                 </ProtectedRoute>
               }>
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/catalog" element={<Catalog />} />
                 <Route path="/catalog/product/:id" element={<ProductDetail />} />
                 <Route path="/requests" element={<Requests />} />
                 <Route path="/requests/new" element={<RequestWizard />} />
                 <Route path="/data" element={<Data />} />
                 <Route path="/data/view/:id" element={<DataView />} />
-                <Route path="/sustainability" element={<Sustainability />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/:id" element={<ServiceDetail />} />
-                <Route path="/innovation" element={<InnovationLab />} />
+                <Route path="/opportunities" element={<Opportunities />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/analytics" element={<SellerAnalytics />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="/opportunities" element={<Opportunities />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/analytics" element={<SellerAnalytics />} />
