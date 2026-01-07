@@ -29,27 +29,26 @@ export default function UserGuide() {
         {/* Grid de 15 documentos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {documents.map((doc) => {
+            const routes: Record<number, string> = {
+              1: '/documento-explicativo-1',
+              2: '/documento-explicativo-2',
+              3: '/documento-explicativo-3',
+              4: '/documento-explicativo-4',
+              5: '/documento-explicativo-5'
+            };
+            
             const cardContent = (
-              <Card 
-                className="cursor-pointer hover:shadow-lg hover:border-primary/50 transition-all duration-200 h-[150px]"
-              >
+              <Card className="cursor-pointer hover:shadow-lg hover:border-primary/50 transition-all duration-200 h-[150px]">
                 <CardContent className="h-full flex flex-col items-center justify-center gap-3 p-4">
                   <FileText className="h-8 w-8 text-primary/60" />
-                  <span className="text-sm font-medium text-center">
-                    {doc.title}
-                  </span>
+                  <span className="text-sm font-medium text-center">{doc.title}</span>
                 </CardContent>
               </Card>
             );
             
-            if (doc.id === 1) {
-              return (
-                <Link key={doc.id} to="/documento-explicativo-1">
-                  {cardContent}
-                </Link>
-              );
+            if (routes[doc.id]) {
+              return <Link key={doc.id} to={routes[doc.id]}>{cardContent}</Link>;
             }
-            
             return <div key={doc.id}>{cardContent}</div>;
           })}
         </div>

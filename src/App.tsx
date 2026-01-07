@@ -41,6 +41,10 @@ import UseCases from "./pages/UseCases";
 import AdminFeedback from "./pages/AdminFeedback";
 import UserGuide from "./pages/UserGuide";
 import DocumentoExplicativo1 from "./pages/DocumentoExplicativo1";
+import DocumentoExplicativo2 from "./pages/DocumentoExplicativo2";
+import DocumentoExplicativo3 from "./pages/DocumentoExplicativo3";
+import DocumentoExplicativo4 from "./pages/DocumentoExplicativo4";
+import DocumentoExplicativo5 from "./pages/DocumentoExplicativo5";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +70,10 @@ const App = () => (
             <Route path="/use-cases" element={<UseCases />} />
             <Route path="/user-guide" element={<UserGuide />} />
             <Route path="/documento-explicativo-1" element={<DocumentoExplicativo1 />} />
+            <Route path="/documento-explicativo-2" element={<DocumentoExplicativo2 />} />
+            <Route path="/documento-explicativo-3" element={<DocumentoExplicativo3 />} />
+            <Route path="/documento-explicativo-4" element={<DocumentoExplicativo4 />} />
+            <Route path="/documento-explicativo-5" element={<DocumentoExplicativo5 />} />
               
               {/* Protected routes with AppLayout */}
               <Route element={
