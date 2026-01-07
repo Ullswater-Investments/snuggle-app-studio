@@ -196,7 +196,7 @@ export default function Landing() {
         <section id="features" className="py-20 bg-slate-950 text-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Potencia Industrial bajo el Capó</h2>
+              <h2 className="text-3xl font-bold mb-4">El Motor de ProcureData</h2>
               <p className="text-gray-400">12 capacidades enterprise listas para producción</p>
             </div>
             
