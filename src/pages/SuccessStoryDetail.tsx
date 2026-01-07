@@ -61,6 +61,10 @@ import { RetailEthicsAudit } from "@/components/success-stories/RetailEthicsAudi
 import { EnergySmartContract } from "@/components/success-stories/EnergySmartContract";
 import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 import { SuccessVisualRenderer } from "@/components/success-stories/SuccessVisualRenderer";
+import { BlockchainProofCard } from "@/components/success-stories/BlockchainProofCard";
+import { SectorSelector } from "@/components/success-stories/SectorSelector";
+import { NarrativeBlock } from "@/components/success-stories/NarrativeBlock";
+import { AriaQuoteCard } from "@/components/success-stories/AriaQuoteCard";
 
 const casesData: Record<string, {
   id: string;
@@ -1001,31 +1005,49 @@ const SuccessStoryDetail = () => {
 
   const SectorIcon = caseData.sectorIcon;
 
+  // Extract color from gradient for components
+  const getSectorColor = () => {
+    if (caseData.color.includes('orange')) return 'orange';
+    if (caseData.color.includes('emerald') || caseData.color.includes('green')) return 'emerald';
+    if (caseData.color.includes('teal') || caseData.color.includes('cyan')) return 'teal';
+    if (caseData.color.includes('violet') || caseData.color.includes('purple')) return 'violet';
+    if (caseData.color.includes('rose') || caseData.color.includes('pink')) return 'rose';
+    if (caseData.color.includes('blue')) return 'blue';
+    if (caseData.color.includes('yellow') || caseData.color.includes('amber')) return 'yellow';
+    if (caseData.color.includes('lime')) return 'lime';
+    return 'orange';
+  };
+
+  const sectorColor = getSectorColor();
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+      {/* ZONA 1: Hero Section - Identidad y Confianza */}
       <div className={`relative overflow-hidden bg-gradient-to-br ${caseData.bgColor} border-b`}>
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="container mx-auto px-4 py-8 md:py-16 relative">
+        <div className="container mx-auto px-4 py-8 md:py-12 relative">
+          {/* Back link */}
           <Link to="/success-stories" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Volver a Casos de Éxito
           </Link>
           
-          {/* Navigator */}
-          <div className="mb-8">
-            <SuccessStoryNavigator compact />
+          {/* Sector Selector */}
+          <div className="mb-6">
+            <SectorSelector currentSector={caseData.sector} compact />
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="space-y-6">
+          {/* Main Hero Grid */}
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            {/* Left Column - Title and Metrics */}
+            <div className="lg:col-span-2 space-y-6">
               <div className="flex flex-wrap items-center gap-3">
                 <Badge className={`${caseData.bgColor} ${caseData.textColor} border-0`}>
                   <SectorIcon className="w-3 h-3 mr-1" />
                   {caseData.sector}
                 </Badge>
-                <Badge variant="outline" className="font-mono text-xs">
-                  <ShieldCheck className="w-3 h-3 mr-1 text-green-500" />
+                <Badge variant="outline" className="font-mono text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
+                  <ShieldCheck className="w-3 h-3 mr-1" />
                   Verificado en Pontus-X
                 </Badge>
               </div>
@@ -1054,95 +1076,39 @@ const SuccessStoryDetail = () => {
               </div>
             </div>
 
-            <Card className="p-6 bg-background/80 backdrop-blur">
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${caseData.color} flex items-center justify-center`}>
-                  <Award className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="font-bold">Prueba Blockchain</p>
-                  <p className="text-xs text-muted-foreground">Transacción inmutable</p>
-                </div>
-              </div>
-              <div className="p-3 bg-muted rounded-lg font-mono text-xs break-all">
-                {caseData.blockchainProof}
-              </div>
-              <Button variant="outline" size="sm" className="mt-4 w-full">
-                <ExternalLink className="w-3 h-3 mr-2" />
-                Ver en Pontus-X Explorer
-              </Button>
-            </Card>
+            {/* Right Column - Blockchain Proof Card */}
+            <div className="flex justify-end">
+              <BlockchainProofCard 
+                hash={caseData.blockchainProof}
+                blockNumber={caseData.blockNumber}
+              />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 py-12 space-y-12">
-        {/* Challenge & Solution */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Target className="w-5 h-5 text-red-500" />
-                El Reto
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground leading-relaxed">{caseData.challenge}</p>
-            </CardContent>
-          </Card>
+        {/* ZONA 2: Narrativa de Negocio (Reto/Solución) */}
+        <NarrativeBlock
+          challenge={caseData.challenge}
+          solution={caseData.solution}
+          services={caseData.services}
+          sectorColor={sectorColor}
+        />
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-green-500" />
-                La Solución
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground leading-relaxed">{caseData.solution}</p>
-            </CardContent>
-          </Card>
+        {/* ZONA 3: ARIA Quote - Consultoría Humana */}
+        <AriaQuoteCard 
+          quote={caseData.ariaQuote}
+          sectorColor={sectorColor}
+        />
+
+        {/* Navigator for browsing cases */}
+        <div className="py-4">
+          <SuccessStoryNavigator />
         </div>
 
-        {/* Services Used */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-primary" />
-              Servicios ProcureData Utilizados
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              {caseData.services.map((service, idx) => (
-                <Badge key={idx} variant="secondary" className="text-sm py-1.5 px-3">
-                  {service}
-                </Badge>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* ARIA Quote */}
-        <Card className={`${caseData.bgColor} border-0`}>
-          <CardContent className="p-8">
-            <div className="flex gap-4">
-              <Quote className={`w-8 h-8 ${caseData.textColor} shrink-0`} />
-              <div>
-                <p className="text-lg italic leading-relaxed mb-4">"{caseData.ariaQuote}"</p>
-                <div className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${caseData.color}`} />
-                  <div>
-                    <p className="font-bold text-sm">ARIA</p>
-                    <p className="text-xs text-muted-foreground">Asistente de ProcureData</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
+        {/* ZONA 4: Simulación Interactiva / Gemelo Digital */}
         {/* Sector-Specific Visualization for new cases */}
         {["aero", "wine", "pharma", "customs", "gov", "mining", "fashion", "finance", "grid", "ai", "solar", "wind", "hydrogen", "community", "smartgrid", "storage", "biomass", "scope3", "hydro", "evcharge", "fiber", "ewaste", "aluminum", "rap", "scrap", "rawmarket", "batterylife", "urbanmining", "zerowaste", "govgreen", "avocado", "olive", "zerochem", "citrus", "berry", "rice", "biocotton", "greenhouse", "tropical", "urbanhydro"].includes(caseData.simulator) && (
           <div>
