@@ -369,9 +369,9 @@ export default function CapacidadesEnterprise() {
 
                         {/* Right: Impact + Link */}
                         <div className="lg:w-80 space-y-4">
-                          <div className={`p-5 rounded-xl bg-gradient-to-br ${cap.seccionColor} border border-slate-200`}>
-                            <p className="text-xs uppercase tracking-wider text-white/90 mb-2">💡 Impacto de Negocio</p>
-                            <p className="text-white font-medium">{cap.impacto}</p>
+                          <div className="p-5 rounded-xl bg-orange-50 border border-orange-200">
+                            <p className="text-xs uppercase tracking-wider text-primary font-bold mb-2">💡 Impacto de Negocio</p>
+                            <p className="text-slate-700">{cap.impacto}</p>
                           </div>
                           
                           <Link to={cap.ruta}>
