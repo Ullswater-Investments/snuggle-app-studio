@@ -11,3 +11,6 @@ verify_jwt = true
 
 [functions.notification-handler]
 verify_jwt = false
+
+[functions.sync-to-github]
+verify_jwt = false

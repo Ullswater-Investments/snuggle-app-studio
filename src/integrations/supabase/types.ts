@@ -21,6 +21,7 @@ export type Database = {
           current_page: string | null
           id: string
           is_positive: boolean
+          status: string | null
           user_correction: string | null
           user_id: string | null
           user_question: string
@@ -32,6 +33,7 @@ export type Database = {
           current_page?: string | null
           id?: string
           is_positive: boolean
+          status?: string | null
           user_correction?: string | null
           user_id?: string | null
           user_question: string
@@ -43,6 +45,7 @@ export type Database = {
           current_page?: string | null
           id?: string
           is_positive?: boolean
+          status?: string | null
           user_correction?: string | null
           user_id?: string | null
           user_question?: string
