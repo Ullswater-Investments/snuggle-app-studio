@@ -69,7 +69,7 @@ export default function ActivityFeed() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Activity Feed</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Trazabilidad de Eventos Críticos en milisegundos
           </p>
         </motion.div>
@@ -81,10 +81,10 @@ export default function ActivityFeed() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted/50 dark:bg-white/5">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-foreground flex items-center gap-2">
                     <Radio className="h-5 w-5 text-blue-400" />
                     Flujo de Actividad en Vivo
                   </CardTitle>
@@ -99,21 +99,21 @@ export default function ActivityFeed() {
                 </div>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="divide-y divide-white/5">
+                <div className="divide-y divide-border dark:divide-white/5">
                   {events.map((event, i) => (
                     <motion.div
                       key={`${event.message}-${i}`}
                       initial={i === 0 ? { opacity: 0, x: -20 } : {}}
                       animate={{ opacity: 1, x: 0 }}
-                      className="p-4 hover:bg-white/5 transition-colors"
+                      className="p-4 hover:bg-accent dark:hover:bg-white/5 transition-colors"
                     >
                       <div className="flex items-start gap-3">
                         <div className={`p-2 rounded-full ${getEventColor(event.type)}`}>
                           <Circle className="h-3 w-3 fill-current" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-white leading-relaxed">{event.message}</p>
-                          <p className="text-xs text-gray-500 mt-1">{event.time}</p>
+                          <p className="text-sm text-foreground leading-relaxed">{event.message}</p>
+                          <p className="text-xs text-muted-foreground/70 mt-1">{event.time}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -133,22 +133,22 @@ export default function ActivityFeed() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">El Pulso de tu Cadena de Suministro</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 El Activity Feed es el pulso vivo de su ecosistema de compras. Gracias a una arquitectura 
                 basada en WebSockets, cada evento crítico —desde la actualización de un certificado de 
                 calidad hasta el cierre de un contrato ODRL— se notifica instantáneamente a todos los 
                 actores autorizados.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
+              <p className="text-muted-foreground leading-relaxed mt-4">
                 Este feed no es solo una lista de logs; es una herramienta de auditoría visual que permite 
                 a los Directores de Compras (CPOs) supervisar la salud de su red de proveedores en tiempo vivo.
               </p>
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-blue-900/20 to-slate-900 border-blue-500/20">
+            <Card className="bg-gradient-to-br from-blue-900/20 to-muted dark:to-slate-900 border-blue-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-blue-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -162,8 +162,8 @@ export default function ActivityFeed() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -178,8 +178,8 @@ export default function ActivityFeed() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Visibilidad 360°</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Visibilidad 360°</h3>
+                    <p className="text-muted-foreground">
                       Elimine los puntos ciegos en la cadena de suministro. 
                       <strong className="text-orange-400"> Reaccione instantáneamente</strong> ante cambios de 
                       estado de proveedores críticos antes de que afecten a la producción.

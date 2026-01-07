@@ -49,7 +49,7 @@ export default function ConectoresERP() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Conectores ERP</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Integración Plug & Play con Sistemas Core mediante API REST y Webhooks
           </p>
         </motion.div>
@@ -63,9 +63,9 @@ export default function ConectoresERP() {
             className="space-y-6"
           >
             {/* Connector Cards */}
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted/50 dark:bg-white/5">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <Plug className="h-5 w-5 text-orange-400" />
                   Marketplace de Conectores
                 </CardTitle>
@@ -78,12 +78,12 @@ export default function ConectoresERP() {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.3 + i * 0.1 }}
-                      className="p-4 bg-white/5 rounded-xl border border-white/10 hover:border-orange-500/50 hover:bg-white/10 transition-all cursor-pointer"
+                      className="p-4 bg-muted dark:bg-white/5 rounded-xl border border-border dark:border-white/10 hover:border-orange-500/50 hover:bg-accent dark:hover:bg-white/10 transition-all cursor-pointer"
                     >
                       <div className={`w-12 h-12 ${conn.color} rounded-lg flex items-center justify-center mb-3`}>
                         <span className="text-white font-bold text-sm">{conn.logo}</span>
                       </div>
-                      <p className="font-medium text-white">{conn.name}</p>
+                      <p className="font-medium text-foreground">{conn.name}</p>
                       <Badge 
                         className={`mt-2 text-xs ${conn.status === 'Certificado' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'}`}
                       >
@@ -96,9 +96,9 @@ export default function ConectoresERP() {
             </Card>
 
             {/* Field Mapping */}
-            <Card className="bg-gradient-to-br from-slate-900 to-orange-900/20 border-orange-500/30">
-              <CardHeader className="border-b border-white/10">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-gradient-to-br from-muted dark:from-slate-900 to-orange-900/20 border-orange-500/30">
+              <CardHeader className="border-b border-border dark:border-white/10">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <ArrowRightLeft className="h-5 w-5 text-orange-400" />
                   Mapeo de Campos
                 </CardTitle>
@@ -110,12 +110,12 @@ export default function ConectoresERP() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5 + i * 0.1 }}
-                    className="flex items-center gap-3 p-3 bg-white/5 rounded-lg"
+                    className="flex items-center gap-3 p-3 bg-muted dark:bg-white/5 rounded-lg"
                   >
                     <div className="flex-1">
                       <p className="text-sm text-orange-400 font-mono">{field.source}</p>
                     </div>
-                    <ArrowRightLeft className="h-4 w-4 text-gray-500" />
+                    <ArrowRightLeft className="h-4 w-4 text-muted-foreground/70" />
                     <div className="flex-1">
                       <p className="text-sm text-blue-400 font-mono">{field.target}</p>
                     </div>
@@ -140,13 +140,13 @@ export default function ConectoresERP() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Interoperabilidad sin Fricción</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 El motor de ProcureData está diseñado para no ser intrusivo. Entendemos que las empresas 
                 ya tienen sistemas de gestión maduros. Nuestra capa de integración actúa como un 
-                <strong className="text-white"> "traductor inteligente"</strong> que conecta sistemas 
+                <strong className="text-foreground"> "traductor inteligente"</strong> que conecta sistemas 
                 Legacy y modernos con el Espacio de Datos Europeo.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
+              <p className="text-muted-foreground leading-relaxed mt-4">
                 A través de conectores certificados, la plataforma sincroniza automáticamente las 
                 homologaciones de proveedores, las facturas y los certificados ISO directamente en 
                 la base de datos de su ERP.
@@ -154,9 +154,9 @@ export default function ConectoresERP() {
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-orange-900/20 to-slate-900 border-orange-500/20">
+            <Card className="bg-gradient-to-br from-orange-900/20 to-muted dark:to-slate-900 border-orange-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-orange-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -170,8 +170,8 @@ export default function ConectoresERP() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -186,8 +186,8 @@ export default function ConectoresERP() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Eficiencia Operativa</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Eficiencia Operativa</h3>
+                    <p className="text-muted-foreground">
                       Modernice su infraestructura actual sin sustituirla. El tiempo de integración 
                       promedio se reduce de meses a <strong className="text-orange-400">menos de 48 horas</strong> de 
                       configuración técnica.

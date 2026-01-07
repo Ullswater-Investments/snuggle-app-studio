@@ -44,7 +44,7 @@ export default function AuditLogs() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Audit Logs</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Registros de Auditoría Inmutables mediante notarización en blockchain
           </p>
         </motion.div>
@@ -57,10 +57,10 @@ export default function AuditLogs() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted/50 dark:bg-white/5">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-foreground flex items-center gap-2">
                     <History className="h-5 w-5 text-green-400" />
                     Registro de Auditoría
                   </CardTitle>
@@ -73,11 +73,11 @@ export default function AuditLogs() {
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-white/10 hover:bg-transparent">
-                        <TableHead className="text-gray-400">Timestamp</TableHead>
-                        <TableHead className="text-gray-400">Acción</TableHead>
-                        <TableHead className="text-gray-400">Actor (DID)</TableHead>
-                        <TableHead className="text-gray-400 text-right">Blockchain</TableHead>
+                      <TableRow className="border-border dark:border-white/10 hover:bg-transparent">
+                        <TableHead className="text-muted-foreground">Timestamp</TableHead>
+                        <TableHead className="text-muted-foreground">Acción</TableHead>
+                        <TableHead className="text-muted-foreground">Actor (DID)</TableHead>
+                        <TableHead className="text-muted-foreground text-right">Blockchain</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -87,10 +87,10 @@ export default function AuditLogs() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.3 + i * 0.1 }}
-                          className="border-white/5 hover:bg-white/5"
+                          className="border-border dark:border-white/5 hover:bg-accent dark:hover:bg-white/5"
                         >
-                          <TableCell className="font-mono text-xs text-gray-400">{log.timestamp}</TableCell>
-                          <TableCell className="text-white">{log.action}</TableCell>
+                          <TableCell className="font-mono text-xs text-muted-foreground">{log.timestamp}</TableCell>
+                          <TableCell className="text-foreground">{log.action}</TableCell>
                           <TableCell className="font-mono text-xs text-purple-400">{log.actor}</TableCell>
                           <TableCell className="text-right">
                             <Button 
@@ -125,11 +125,11 @@ export default function AuditLogs() {
                       <CheckCircle className="h-6 w-6 text-green-400" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-white mb-2">Verificación Blockchain</h3>
-                      <p className="text-sm text-gray-400 mb-3">
+                      <h3 className="font-bold text-foreground mb-2">Verificación Blockchain</h3>
+                      <p className="text-sm text-muted-foreground mb-3">
                         Cada registro genera una huella criptográfica (hash) anclada en Pontus-X
                       </p>
-                      <div className="p-3 bg-black/40 rounded-lg">
+                      <div className="p-3 bg-muted dark:bg-black/40 rounded-lg">
                         <p className="font-mono text-xs text-green-400">
                           Block #42901 | Tx: 0x9f2a...b3c1 | ✓ Verified
                         </p>
@@ -151,17 +151,17 @@ export default function AuditLogs() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Transparencia Inmutable</h2>
-              <p className="text-gray-400 leading-relaxed text-sm">
-                El sistema genera un registro pormenorizado de cada acción crítica. Lo que nos diferencia 
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                El sistema genera un registro pormenorizado de cada acción crítica. Lo que nos diferencia
                 es la integridad: cada entrada del log genera una huella criptográfica que se ancla 
                 automáticamente en la red Pontus-X.
               </p>
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-green-900/20 to-slate-900 border-green-500/20">
+            <Card className="bg-gradient-to-br from-green-900/20 to-muted dark:to-slate-900 border-green-500/20">
               <CardHeader className="pb-3">
-                <CardTitle className="text-white text-base flex items-center gap-2">
+                <CardTitle className="text-foreground text-base flex items-center gap-2">
                   <Shield className="h-4 w-4 text-green-400" />
                   Especificaciones
                 </CardTitle>
@@ -175,8 +175,8 @@ export default function AuditLogs() {
                   <div key={i} className="flex items-start gap-2">
                     <CheckCircle className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white text-sm">{spec.label}</p>
-                      <p className="text-xs text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground text-sm">{spec.label}</p>
+                      <p className="text-xs text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -191,8 +191,8 @@ export default function AuditLogs() {
                     <Zap className="h-5 w-5 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white text-sm mb-1">Evidencia Legal</h3>
-                    <p className="text-xs text-gray-300">
+                    <h3 className="font-bold text-foreground text-sm mb-1">Evidencia Legal</h3>
+                    <p className="text-xs text-muted-foreground">
                       Reduzca el coste de auditorías con <strong className="text-orange-400">prueba fehaciente</strong> ante 
                       disputas legales (ISO/GDPR/CSRD).
                     </p>
