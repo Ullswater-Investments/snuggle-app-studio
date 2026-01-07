@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
-
+import { ThemeToggle } from "@/components/ThemeToggle";
 import UseCasesCarousel from "@/components/UseCasesCarousel";
 
 const containerVariants = {
@@ -99,7 +99,8 @@ export default function Landing() {
               <span>Tech Whitepaper</span>
             </Link>
           </nav>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
             {user ? (
               <Button asChild>
                 <Link to="/dashboard">Ir al Dashboard <ArrowRight className="ml-2 h-4 w-4" /></Link>
