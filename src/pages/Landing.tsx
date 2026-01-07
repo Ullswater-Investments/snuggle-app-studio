@@ -316,7 +316,7 @@ export default function Landing() {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">Memoria Técnica</Link></li>
                 <li><Link to="/architecture" className="hover:text-white transition-colors">Modelo de Gobernanza</Link></li>
-                <li><Link to="/whitepaper" className="hover:text-white transition-colors">Especificaciones Técnicas</Link></li>
+                <li><Link to="/user-guide" className="hover:text-white transition-colors">Guía de Usuario</Link></li>
                 <li><Link to="/models" className="hover:text-white transition-colors">Plan de Negocio</Link></li>
               </ul>
             </div>
