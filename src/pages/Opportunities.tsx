@@ -47,8 +47,12 @@ const opportunitySchema = z.object({
 type OpportunityFormData = z.infer<typeof opportunitySchema>;
 
 const CATEGORIES = [
-  "Automotive", "Energy", "Pharma", "Retail", "Construction", 
-  "Finance", "Logistics", "AgriFood", "Aerospace", "Tech", "ESG", "AI"
+  // Sectores estratégicos ProcureData
+  "Industrial", "AgriFood", "Logistics", "Pharma", "Retail",
+  // Tecnologías transversales
+  "ESG", "AI", "IoT", "Blockchain", "Fintech",
+  // Especializaciones
+  "Aerospace", "Energy", "Automotive", "Construction", "Finance", "Tech"
 ];
 
 export default function Opportunities() {

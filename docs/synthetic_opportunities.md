@@ -705,5 +705,109 @@ Mejora la descripción de la oportunidad "[TÍTULO]" añadiendo:
 
 ---
 
+## 13. OPORTUNIDADES DE ALTA FIDELIDAD (ADICIÓN)
+
+### 5 Oportunidades Premium Generadas
+
+| # | Categoría | Título | Empresa | Presupuesto | Propósito |
+|---|-----------|--------|---------|-------------|-----------|
+| 31 | AgriFood | Huella Hídrica Aceite de Oliva - Jaén | OliveTrust Coop | 4,500 - 7,500 EUROe | Trazabilidad ESG para exportación UE |
+| 32 | Logistics | Emisiones Scope 3 Flota Logística BCN | UrbanDeliver S.L. | 2,800 - 5,200 EUROe | Reporte cumplimiento CSRD |
+| 33 | Pharma | Logs Mantenimiento Resonancias Magnéticas | BioMed Hospital Group | 8,000 - 12,000 EUROe | Mantenimiento predictivo hospitalario |
+| 34 | Industrial | Histórico Fallos Brazos Robóticos CNC | GigaFactory North | 6,500 - 9,000 EUROe | Optimización paradas de línea |
+| 35 | ESG | Diversidad e Impacto Proveedores Locales | Alianza Social Hub | 1,800 - 3,500 EUROe | Compra Pública Ética y SROI |
+
+---
+
+## 14. ESPECIFICACIÓN TÉCNICA DATASET: INC-ROB-CNC-2025-V4
+
+### Metadatos del Dataset
+
+| Campo | Valor |
+|-------|-------|
+| **Título** | Telemetría y Registro de Fallos - Brazos Robóticos Serie-X |
+| **Formato** | JSON-LD (Estandarizado IDSA) / CSV (Exportable) |
+| **Frecuencia** | 10 Hz (Datos procesados por Edge Functions) |
+| **Volumen** | ~500,000 registros (6 meses) |
+| **Oportunidad** | Histórico Fallos Brazos Robóticos CNC |
+
+### Esquema de Columnas
+
+| Columna | Tipo | Descripción | Ejemplo |
+|---------|------|-------------|---------|
+| `timestamp_utc` | DateTime (ISO) | Fecha y hora exacta del registro | 2025-11-24T14:20:01Z |
+| `asset_did` | String (DID) | Identificador soberano del brazo robótico | did:ethr:0x7e...robot01 |
+| `joint_temp_c` | Float | Temperatura del motor en eje crítico (°C) | 64.2 |
+| `vibration_rms` | Float | Valor RMS de vibración eje Z (m/s²) | 0.15 |
+| `torque_nm` | Float | Par motor detectado en ciclo actual | 125.4 |
+| `cycle_count` | Integer | Ciclos desde último mantenimiento | 450230 |
+| `operational_mode` | Enum | Estado: Auto, Manual, Calibration, Alarm | Auto |
+| `error_code` | String | Código de error si estado es Alarm | E-402 (Overload) |
+| `failure_label` | Boolean | Indica si resultó en parada de línea | 1 (True) |
+| `notary_hash` | Hash (hex) | Prueba de integridad en blockchain | 0x8f3c...b2e1 |
+
+### Muestra de Datos CSV
+
+```csv
+timestamp_utc,asset_did,joint_temp_c,vibration_rms,torque_nm,cycle_count,operational_mode,error_code,failure_label,notary_hash
+2025-11-24T14:20:01Z,did:ethr:0x7e1a2b3c4d5e6f7robot01,58.4,0.12,120.1,450001,Auto,null,0,0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
+2025-11-24T14:25:10Z,did:ethr:0x7e1a2b3c4d5e6f7robot01,62.1,0.18,135.5,450120,Auto,null,0,0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e
+2025-11-24T14:30:45Z,did:ethr:0x7e1a2b3c4d5e6f7robot01,78.9,0.45,158.2,450230,Alarm,E-402,1,0x8f3c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c
+2025-11-24T14:35:20Z,did:ethr:0x7e1a2b3c4d5e6f7robot01,65.3,0.14,122.8,450231,Manual,null,0,0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c
+2025-11-24T14:40:55Z,did:ethr:0x7e1a2b3c4d5e6f7robot02,55.2,0.11,118.3,320150,Auto,null,0,0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f
+2025-11-24T14:45:30Z,did:ethr:0x7e1a2b3c4d5e6f7robot02,57.8,0.13,125.7,320280,Auto,null,0,0x7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b
+2025-11-24T14:50:05Z,did:ethr:0x7e1a2b3c4d5e6f7robot02,82.4,0.52,165.9,320410,Alarm,E-501,1,0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d
+```
+
+### Gobernanza del Dataset (Motor ProcureData)
+
+| Capacidad | Aplicación |
+|-----------|------------|
+| **Soberanía (ODRL)** | Uso exclusivo para entrenamiento de modelos IA. Prohibida redistribución a competidores sector automotriz |
+| **Identidad (SSI)** | GigaFactory North firma veracidad con DID Corporativo. Check "KYB Verificado" visible |
+| **Privacidad (GDPR)** | Edge Functions anonimizan `operator_id` antes de descarga |
+| **Integridad (Blockchain)** | Merkle Root por lote de 1,000 filas anclado en Pontus-X |
+
+### Umbrales de Alerta (para Health Score)
+
+| Métrica | Normal | Warning | Critical |
+|---------|--------|---------|----------|
+| `joint_temp_c` | < 65°C | 65-80°C | > 80°C |
+| `vibration_rms` | < 0.20 m/s² | 0.20-0.40 m/s² | > 0.40 m/s² |
+| `torque_nm` | < 140 Nm | 140-160 Nm | > 160 Nm |
+
+### Validación Automática del Dataset
+
+```typescript
+interface RoboticArmTelemetry {
+  timestamp_utc: string; // ISO 8601
+  asset_did: string; // did:ethr:0x...
+  joint_temp_c: number; // 20-120 range
+  vibration_rms: number; // 0-2 range
+  torque_nm: number; // 0-250 range
+  cycle_count: number; // positive integer
+  operational_mode: 'Auto' | 'Manual' | 'Calibration' | 'Alarm';
+  error_code: string | null;
+  failure_label: 0 | 1;
+  notary_hash: string; // 0x + 64 hex chars
+}
+
+// Validation rules for Health Score calculation
+const VALIDATION_RULES = {
+  completeness: ['timestamp_utc', 'asset_did', 'joint_temp_c', 'vibration_rms'],
+  ranges: {
+    joint_temp_c: { min: 20, max: 120 },
+    vibration_rms: { min: 0, max: 2 },
+    torque_nm: { min: 0, max: 250 }
+  },
+  consistency: {
+    failure_label_requires_alarm: true,
+    error_code_requires_alarm: true
+  }
+};
+```
+
+---
+
 *Documento generado para transferencia de contexto a Google AI Studio*
 *ProcureData © 2026*
