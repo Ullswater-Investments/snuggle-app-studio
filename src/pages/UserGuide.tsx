@@ -4,10 +4,23 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, FileText } from "lucide-react";
 
 export default function UserGuide() {
-  const documents = Array.from({ length: 15 }, (_, i) => ({
-    id: i + 1,
-    title: `Documento Explicativo ${i + 1}`
-  }));
+  const documents = [
+    { id: 1, title: "Documento Explicativo 1", subtitle: "Fundamentos, Visión y el Modelo 'nxm'" },
+    { id: 2, title: "Documento Explicativo 2", subtitle: "Catálogo de Servicios y Funcionamiento Operativo" },
+    { id: 3, title: "Documento Explicativo 3", subtitle: "Sostenibilidad, Normativa Europea y Casos de Uso" },
+    { id: 4, title: "Documento Explicativo 4", subtitle: "Finanzas, Ciberseguridad e Integración ERP" },
+    { id: 5, title: "Documento Explicativo 5", subtitle: "Ventas, Marketing y Estrategias de Crecimiento" },
+    { id: 6, title: "Documento Explicativo 6", subtitle: "Guía de Usuario, Interfaz y Soporte" },
+    { id: 7, title: "Documento Explicativo 7", subtitle: "Gobernanza de Datos, ODRL y Data Holders" },
+    { id: 8, title: "Documento Explicativo 8", subtitle: "Analítica Avanzada, BI y Datos Sintéticos" },
+    { id: 9, title: "Documento Explicativo 9", subtitle: "Integración Técnica y Seguridad" },
+    { id: 10, title: "Documento Explicativo 10", subtitle: "Resiliencia, Gobernanza y Escenarios Extremos" },
+    { id: 11, title: "Documento Explicativo 11", subtitle: "Profundización por Sectores Estratégicos" },
+    { id: 12, title: "Documento Explicativo 12", subtitle: "Manual del Desarrollador y Arquitectura" },
+    { id: 13, title: "Documento Explicativo 13", subtitle: "Diálogos y Entrenamiento NLU" },
+    { id: 14, title: "Documento Explicativo 14", subtitle: "Biblioteca de Casos de Uso Reales" },
+    { id: 15, title: "Documento Explicativo 15", subtitle: "Gran Diccionario y Glosario de Términos" }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -48,10 +61,11 @@ export default function UserGuide() {
             };
             
             const cardContent = (
-              <Card className="cursor-pointer hover:shadow-lg hover:border-primary/50 transition-all duration-200 h-[150px]">
-                <CardContent className="h-full flex flex-col items-center justify-center gap-3 p-4">
+              <Card className="cursor-pointer hover:shadow-lg hover:border-primary/50 transition-all duration-200 h-[200px]">
+                <CardContent className="h-full flex flex-col items-center justify-center gap-2 p-4">
                   <FileText className="h-8 w-8 text-primary/60" />
-                  <span className="text-sm font-medium text-center">{doc.title}</span>
+                  <span className="text-sm font-bold text-center">{doc.title}</span>
+                  <span className="text-xs text-muted-foreground text-center leading-tight">{doc.subtitle}</span>
                 </CardContent>
               </Card>
             );
