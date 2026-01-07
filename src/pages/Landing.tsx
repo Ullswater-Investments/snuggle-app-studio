@@ -254,7 +254,7 @@ export default function Landing() {
               <Link to="/docs/tecnico" className="text-primary hover:underline underline-offset-4 flex items-center justify-center gap-2">
                 Ver Documento Técnico Completo <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/capacidades-enterprise" className="text-orange-500 hover:text-orange-400 font-semibold flex items-center justify-center gap-2 transition-colors">
+              <Link to="/capacidades-enterprise" className="text-primary hover:text-primary/80 font-semibold flex items-center justify-center gap-2 transition-colors underline-offset-4 hover:underline">
                 Documento Capacidades Enterprise → <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
