@@ -42,7 +42,7 @@ export default function TourGuiado() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Tour Guiado</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Onboarding Interactivo que elimina la curva de aprendizaje
           </p>
         </motion.div>
@@ -56,29 +56,29 @@ export default function TourGuiado() {
             className="space-y-6"
           >
             {/* Dashboard Preview with Spotlight */}
-            <Card className="bg-gradient-to-br from-slate-900 to-teal-900/20 border-teal-500/30 overflow-hidden relative">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-slate-900 dark:to-teal-900/20 border-border dark:border-teal-500/30 overflow-hidden relative">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <Compass className="h-5 w-5 text-teal-400" />
                   Vista de Dashboard (Simulación)
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 relative">
                 {/* Simulated Dashboard */}
-                <div className="bg-slate-800/50 rounded-xl p-4 space-y-4">
+                <div className="bg-muted dark:bg-slate-800/50 rounded-xl p-4 space-y-4">
                   {/* Header simulation */}
-                  <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-background dark:bg-white/5 rounded-lg">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 bg-primary/20 rounded-lg" />
-                      <span className="text-sm text-gray-400">Dashboard</span>
+                      <span className="text-sm text-muted-foreground">Dashboard</span>
                     </div>
-                    <div className="w-20 h-6 bg-white/10 rounded" />
+                    <div className="w-20 h-6 bg-muted-foreground/10 dark:bg-white/10 rounded" />
                   </div>
 
                   {/* Content simulation */}
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="p-3 bg-white/5 rounded-lg h-16" />
-                    <div className="p-3 bg-white/5 rounded-lg h-16" />
+                    <div className="p-3 bg-background dark:bg-white/5 rounded-lg h-16" />
+                    <div className="p-3 bg-background dark:bg-white/5 rounded-lg h-16" />
                   </div>
 
                   {/* Highlighted button with spotlight effect */}
@@ -115,9 +115,9 @@ export default function TourGuiado() {
             </Card>
 
             {/* Progress Steps */}
-            <Card className="bg-white/5 border-white/10">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white text-sm">Progreso del Onboarding</CardTitle>
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground text-sm">Progreso del Onboarding</CardTitle>
               </CardHeader>
               <CardContent className="p-4">
                 <div className="space-y-3">
@@ -127,18 +127,18 @@ export default function TourGuiado() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 + i * 0.1 }}
-                      className={`flex items-center gap-3 p-3 rounded-lg ${step.completed ? 'bg-teal-500/10 border border-teal-500/30' : 'bg-white/5'}`}
+                      className={`flex items-center gap-3 p-3 rounded-lg ${step.completed ? 'bg-teal-500/10 border border-teal-500/30' : 'bg-muted dark:bg-white/5'}`}
                     >
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step.completed ? 'bg-teal-500' : 'bg-white/10'}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step.completed ? 'bg-teal-500' : 'bg-muted-foreground/20 dark:bg-white/10'}`}>
                         {step.completed ? (
                           <CheckCircle className="h-4 w-4 text-white" />
                         ) : (
-                          <span className="text-sm text-gray-400">{step.step}</span>
+                          <span className="text-sm text-muted-foreground">{step.step}</span>
                         )}
                       </div>
                       <div>
-                        <p className={`text-sm font-medium ${step.completed ? 'text-white' : 'text-gray-400'}`}>{step.title}</p>
-                        <p className="text-xs text-gray-500">{step.desc}</p>
+                        <p className={`text-sm font-medium ${step.completed ? 'text-foreground' : 'text-muted-foreground'}`}>{step.title}</p>
+                        <p className="text-xs text-muted-foreground/70">{step.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -157,22 +157,22 @@ export default function TourGuiado() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Eliminando la Curva de Aprendizaje</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 Sabemos que la transición hacia la Economía del Dato y la tecnología Web3 puede parecer 
                 compleja. Por ello, el motor de ProcureData incorpora un sistema de Tour Guiado que 
                 acompaña al usuario desde su primer inicio de sesión.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
-                No se trata de manuales estáticos; es una <strong className="text-white">capa de interfaz 
+              <p className="text-muted-foreground leading-relaxed mt-4">
+                No se trata de manuales estáticos; es una <strong className="text-foreground">capa de interfaz 
                 inteligente</strong> que detecta el rol del usuario (Comprador o Proveedor) y resalta 
                 las acciones críticas. Acompañado por ARIA, nuestra asistente virtual.
               </p>
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-teal-900/20 to-slate-900 border-teal-500/20">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-teal-900/20 dark:to-slate-900 border-border dark:border-teal-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-teal-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -186,8 +186,8 @@ export default function TourGuiado() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-teal-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -202,8 +202,8 @@ export default function TourGuiado() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Adopción Acelerada</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Adopción Acelerada</h3>
+                    <p className="text-muted-foreground">
                       Reduzca los costes de formación de su equipo. Transforme a un comprador tradicional 
                       en un experto en gestión de espacios de datos en 
                       <strong className="text-orange-400"> cuestión de horas, no semanas</strong>.
@@ -215,7 +215,7 @@ export default function TourGuiado() {
 
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">

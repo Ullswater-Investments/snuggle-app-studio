@@ -69,7 +69,7 @@ export default function GobernanzaODRL() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Gobernanza ODRL</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Contratos digitales autoejecutables para la soberanía del dato
           </p>
         </motion.div>
@@ -83,9 +83,9 @@ export default function GobernanzaODRL() {
             className="space-y-6"
           >
             {/* Policy Builder */}
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <ToggleRight className="h-5 w-5 text-green-400" />
                   Constructor de Políticas
                 </CardTitle>
@@ -98,10 +98,10 @@ export default function GobernanzaODRL() {
                   { key: 'redistribute', label: 'Redistribución', desc: 'Compartir con terceros' },
                   { key: 'expiry30', label: 'Validez 30 días', desc: 'Expiración automática del acceso' }
                 ].map((item) => (
-                  <div key={item.key} className="flex items-center justify-between p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                  <div key={item.key} className="flex items-center justify-between p-4 bg-muted dark:bg-white/5 rounded-lg hover:bg-accent dark:hover:bg-white/10 transition-colors">
                     <div>
-                      <p className="font-medium text-white">{item.label}</p>
-                      <p className="text-xs text-gray-400">{item.desc}</p>
+                      <p className="font-medium text-foreground">{item.label}</p>
+                      <p className="text-xs text-muted-foreground">{item.desc}</p>
                     </div>
                     <Switch 
                       checked={permissions[item.key as keyof typeof permissions]}
@@ -113,10 +113,10 @@ export default function GobernanzaODRL() {
             </Card>
 
             {/* Generated ODRL Code */}
-            <Card className="bg-black/60 border-green-500/30 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-green-500/10">
+            <Card className="bg-muted dark:bg-black/60 border-border dark:border-green-500/30 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-green-500/10">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-white text-sm font-mono">Política ODRL Generada</CardTitle>
+                  <CardTitle className="text-foreground text-sm font-mono">Política ODRL Generada</CardTitle>
                   <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">JSON-LD</Badge>
                 </div>
               </CardHeader>
@@ -138,13 +138,13 @@ export default function GobernanzaODRL() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Contratos Inteligentes de Uso de Datos</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 En ProcureData, el intercambio de información no se basa en una simple transferencia de 
-                archivos, sino en un <strong className="text-white">acuerdo soberano</strong>. Utilizamos 
+                archivos, sino en un <strong className="text-foreground">acuerdo soberano</strong>. Utilizamos 
                 el estándar internacional ODRL (Open Digital Rights Language) para codificar reglas de 
                 uso directamente en los datos.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
+              <p className="text-muted-foreground leading-relaxed mt-4">
                 Cada vez que un "Consumer" solicita acceso, el motor de gobernanza evalúa la política 
                 definida por el "Provider". El conector EDC actúa como un guardián incansable: si la 
                 política dice que el dato solo puede leerse pero no descargarse, el sistema bloquea 
@@ -153,9 +153,9 @@ export default function GobernanzaODRL() {
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-green-900/20 to-slate-900 border-green-500/20">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-green-900/20 dark:to-slate-900 border-border dark:border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-green-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -169,8 +169,8 @@ export default function GobernanzaODRL() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -185,8 +185,8 @@ export default function GobernanzaODRL() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Blindaje Jurídico-Técnico</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Blindaje Jurídico-Técnico</h3>
+                    <p className="text-muted-foreground">
                       Elimine la incertidumbre legal. Asegure que su propiedad intelectual se utilice 
                       <strong className="text-orange-400"> únicamente para el fin pactado</strong>, con 
                       la capacidad de revocar el acceso de forma instantánea y global.
@@ -198,7 +198,7 @@ export default function GobernanzaODRL() {
 
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">

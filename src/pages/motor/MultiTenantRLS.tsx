@@ -35,7 +35,7 @@ export default function MultiTenantRLS() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Multi-Tenant RLS</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Aislamiento de Datos Nivel Enterprise mediante Row Level Security
           </p>
         </motion.div>
@@ -47,9 +47,9 @@ export default function MultiTenantRLS() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="bg-gradient-to-br from-slate-900 to-green-900/20 border-green-500/30 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-slate-900 dark:to-green-900/20 border-border dark:border-green-500/30 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <Lock className="h-5 w-5 text-green-400" />
                   Cámara Acorazada Digital
                 </CardTitle>
@@ -70,9 +70,9 @@ export default function MultiTenantRLS() {
                       transition={{ delay: 0.4 + i * 0.1 }}
                       className={`p-4 rounded-xl bg-gradient-to-br ${vault.color} border relative`}
                     >
-                      <Lock className="h-8 w-8 text-white/60 mx-auto mb-2" />
-                      <p className="text-sm font-medium text-white text-center">{vault.name}</p>
-                      <p className="text-xs text-gray-400 text-center">{vault.rows}</p>
+                      <Lock className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+                      <p className="text-sm font-medium text-foreground text-center">{vault.name}</p>
+                      <p className="text-xs text-muted-foreground text-center">{vault.rows}</p>
                       <div className="absolute top-2 right-2">
                         <Key className="h-4 w-4 text-yellow-400" />
                       </div>
@@ -81,8 +81,8 @@ export default function MultiTenantRLS() {
                 </div>
 
                 {/* Access Attempt Simulation */}
-                <div className="bg-black/40 rounded-xl p-4 space-y-3">
-                  <p className="text-xs text-gray-400 font-mono">// Intento de acceso</p>
+                <div className="bg-muted dark:bg-black/40 rounded-xl p-4 space-y-3">
+                  <p className="text-xs text-muted-foreground font-mono">// Intento de acceso</p>
                   <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
                     <p className="text-sm text-red-400 font-mono">
                       ❌ Empresa A no puede ver la fila 502 de Empresa B
@@ -96,8 +96,8 @@ export default function MultiTenantRLS() {
                 </div>
 
                 {/* JWT Token Display */}
-                <div className="mt-4 p-4 bg-white/5 rounded-lg">
-                  <p className="text-xs text-gray-400 mb-2">Token JWT de Empresa A</p>
+                <div className="mt-4 p-4 bg-muted dark:bg-white/5 rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-2">Token JWT de Empresa A</p>
                   <p className="font-mono text-xs text-green-400 break-all">
                     eyJhbGciOiJIUzI1NiIs...org_id:"empresa_a"
                   </p>
@@ -116,22 +116,22 @@ export default function MultiTenantRLS() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Seguridad por Diseño</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 ProcureData utiliza una arquitectura de base de datos multitenencia protegida por 
-                <strong className="text-white"> Row Level Security (RLS)</strong>. Esto significa que, 
+                <strong className="text-foreground"> Row Level Security (RLS)</strong>. Esto significa que, 
                 aunque miles de empresas utilicen el mismo motor, las políticas de seguridad están 
                 incrustadas en la propia capa de datos de PostgreSQL.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
-                Es el equivalente digital a que cada empresa tenga su propia <strong className="text-white">caja fuerte física</strong> dentro 
+              <p className="text-muted-foreground leading-relaxed mt-4">
+                Es el equivalente digital a que cada empresa tenga su propia <strong className="text-foreground">caja fuerte física</strong> dentro 
                 de una cámara acorazada común, donde solo su identidad digital (JWT) tiene la llave única de apertura.
               </p>
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-green-900/20 to-slate-900 border-green-500/20">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-green-900/20 dark:to-slate-900 border-border dark:border-green-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-green-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -145,8 +145,8 @@ export default function MultiTenantRLS() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -154,9 +154,9 @@ export default function MultiTenantRLS() {
             </Card>
 
             {/* SQL Example */}
-            <Card className="bg-black/60 border-green-500/30">
-              <CardHeader className="border-b border-white/10 bg-green-500/10">
-                <CardTitle className="text-white text-sm font-mono">Política RLS Ejemplo</CardTitle>
+            <Card className="bg-muted dark:bg-black/60 border-border dark:border-green-500/30">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-green-500/10">
+                <CardTitle className="text-foreground text-sm font-mono">Política RLS Ejemplo</CardTitle>
               </CardHeader>
               <CardContent className="p-4">
                 <pre className="text-xs text-green-400 font-mono overflow-x-auto">
@@ -180,8 +180,8 @@ USING (
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Confianza Total</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Confianza Total</h3>
+                    <p className="text-muted-foreground">
                       Colabore en un espacio compartido con la <strong className="text-orange-400">absoluta certeza</strong> de 
                       que sus secretos comerciales y datos de precios están blindados frente a cualquier 
                       competidor o tercero no autorizado.
@@ -193,7 +193,7 @@ USING (
 
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">

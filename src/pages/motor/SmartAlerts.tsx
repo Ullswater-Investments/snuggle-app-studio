@@ -73,7 +73,7 @@ export default function SmartAlerts() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Smart Alerts</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Inteligencia Proactiva de Riesgos mediante motores de reglas
           </p>
         </motion.div>
@@ -87,9 +87,9 @@ export default function SmartAlerts() {
             className="space-y-6"
           >
             {/* Risk Gauges */}
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white">Panel de Riesgo de Proveedores</CardTitle>
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground">Panel de Riesgo de Proveedores</CardTitle>
               </CardHeader>
               <CardContent className="p-6 grid grid-cols-3 gap-4">
                 {[
@@ -115,17 +115,17 @@ export default function SmartAlerts() {
                       </svg>
                       <span className="absolute inset-0 flex items-center justify-center text-lg font-bold">{gauge.value}%</span>
                     </div>
-                    <p className="text-xs text-gray-400">{gauge.label}</p>
+                    <p className="text-xs text-muted-foreground">{gauge.label}</p>
                   </div>
                 ))}
               </CardContent>
             </Card>
 
             {/* Active Alerts */}
-            <Card className="bg-white/5 border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
+            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-white flex items-center gap-2">
+                  <CardTitle className="text-foreground flex items-center gap-2">
                     <Bell className="h-5 w-5 text-orange-400" />
                     Alertas Activas
                   </CardTitle>
@@ -146,8 +146,8 @@ export default function SmartAlerts() {
                         <alert.icon className="h-4 w-4" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-white">{alert.title}</p>
-                        <p className="text-xs text-gray-400 mt-1">{alert.desc}</p>
+                        <p className="text-sm font-medium text-foreground">{alert.title}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{alert.desc}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -166,12 +166,12 @@ export default function SmartAlerts() {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Monitorización Proactiva 24/7</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 El motor de alertas de ProcureData transforma los datos pasivos en acciones preventivas. 
                 El sistema monitoriza constantemente las fechas de caducidad de certificados ISO, las 
                 pólizas de Responsabilidad Civil y los scores de riesgo financiero de sus proveedores.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
+              <p className="text-muted-foreground leading-relaxed mt-4">
                 En lugar de realizar revisiones manuales trimestrales, las Smart Alerts notifican a los 
                 responsables de compras en el momento exacto en que un proveedor deja de cumplir con los 
                 requisitos mínimos de contratación.
@@ -179,9 +179,9 @@ export default function SmartAlerts() {
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-orange-900/20 to-slate-900 border-orange-500/20">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-orange-900/20 dark:to-slate-900 border-border dark:border-orange-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-orange-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -195,8 +195,8 @@ export default function SmartAlerts() {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -211,8 +211,8 @@ export default function SmartAlerts() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Mitigación de Riesgos</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Mitigación de Riesgos</h3>
+                    <p className="text-muted-foreground">
                       Reduzca a <strong className="text-orange-400">cero el riesgo</strong> de trabajar con 
                       proveedores con documentación caducada. Proteja la continuidad de su negocio mediante 
                       una vigilancia automática y permanente.
@@ -224,7 +224,7 @@ export default function SmartAlerts() {
 
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">

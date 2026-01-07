@@ -42,7 +42,7 @@ export default function EdgeFunctions() {
             </motion.div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Edge Functions</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Lógica de Negocio Escalable mediante procesamiento serverless distribuido
           </p>
         </motion.div>
@@ -56,9 +56,9 @@ export default function EdgeFunctions() {
             className="space-y-6"
           >
             {/* Network Diagram */}
-            <Card className="bg-gradient-to-br from-slate-900 to-orange-900/20 border-orange-500/30 overflow-hidden">
-              <CardHeader className="border-b border-white/10 bg-white/5">
-                <CardTitle className="text-white flex items-center gap-2">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-slate-900 dark:to-orange-900/20 border-border dark:border-orange-500/30 overflow-hidden">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
+                <CardTitle className="text-foreground flex items-center gap-2">
                   <Globe className="h-5 w-5 text-orange-400" />
                   Red de Nodos Edge
                 </CardTitle>
@@ -72,7 +72,7 @@ export default function EdgeFunctions() {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-full flex items-center justify-center border-2 border-white/30 z-10"
                   >
-                    <span className="text-xs font-bold">Usuario</span>
+                    <span className="text-xs font-bold text-white">Usuario</span>
                   </motion.div>
 
                   {/* Edge Nodes */}
@@ -92,7 +92,7 @@ export default function EdgeFunctions() {
                         style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%, -50%)' }}
                       >
                         <Cpu className="h-4 w-4 text-orange-400 mb-1" />
-                        <span className="text-[8px] text-white">{node.location}</span>
+                        <span className="text-[8px] text-foreground dark:text-white">{node.location}</span>
                       </motion.div>
                     );
                   })}
@@ -101,10 +101,10 @@ export default function EdgeFunctions() {
                 {/* Latency Table */}
                 <div className="space-y-2">
                   {nodes.map((node, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                    <div key={i} className="flex items-center justify-between p-3 bg-muted dark:bg-white/5 rounded-lg">
                       <div className="flex items-center gap-3">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        <span className="text-sm text-white">{node.location}</span>
+                        <span className="text-sm text-foreground">{node.location}</span>
                       </div>
                       <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
                         {node.latency}
@@ -116,10 +116,10 @@ export default function EdgeFunctions() {
             </Card>
 
             {/* Code Example */}
-            <Card className="bg-black/60 border-orange-500/30">
-              <CardHeader className="border-b border-white/10 bg-orange-500/10">
+            <Card className="bg-muted dark:bg-black/60 border-border dark:border-orange-500/30">
+              <CardHeader className="border-b border-border dark:border-white/10 bg-orange-500/10">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-white text-sm font-mono">Edge Function: Anonimización</CardTitle>
+                  <CardTitle className="text-foreground text-sm font-mono">Edge Function: Anonimización</CardTitle>
                   <Badge className="bg-orange-500/20 text-orange-400 border-orange-500/30 text-xs">Deno</Badge>
                 </div>
               </CardHeader>
@@ -156,13 +156,13 @@ export async function handler(req) {
             {/* Description */}
             <div>
               <h2 className="text-2xl font-bold mb-4">Inteligencia Distribuida</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 El cerebro operativo de ProcureData reside en las Edge Functions. En lugar de depender 
                 de un servidor centralizado lento, la lógica de negocio —incluyendo la IA de ARIA y el 
-                procesamiento de datos— se ejecuta en <strong className="text-white">nodos distribuidos 
+                procesamiento de datos— se ejecuta en <strong className="text-foreground">nodos distribuidos 
                 geográficamente</strong> cerca del usuario.
               </p>
-              <p className="text-gray-400 leading-relaxed mt-4">
+              <p className="text-muted-foreground leading-relaxed mt-4">
                 Esto permite realizar tareas complejas, como la anonimización de datos en tiempo real 
                 o la validación de firmas digitales, en milisegundos. Los datos sensibles se filtran 
                 y protegen antes de llegar a cualquier base de datos.
@@ -170,9 +170,9 @@ export async function handler(req) {
             </div>
 
             {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-orange-900/20 to-slate-900 border-orange-500/20">
+            <Card className="bg-card dark:bg-gradient-to-br dark:from-orange-900/20 dark:to-slate-900 border-border dark:border-orange-500/20">
               <CardHeader>
-                <CardTitle className="text-white text-lg flex items-center gap-2">
+                <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-orange-400" />
                   Especificaciones Técnicas
                 </CardTitle>
@@ -186,8 +186,8 @@ export async function handler(req) {
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-orange-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium text-white">{spec.label}</p>
-                      <p className="text-sm text-gray-400">{spec.value}</p>
+                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
@@ -202,8 +202,8 @@ export async function handler(req) {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-white mb-2">Rendimiento Global</h3>
-                    <p className="text-gray-300">
+                    <h3 className="font-bold text-foreground mb-2">Rendimiento Global</h3>
+                    <p className="text-muted-foreground">
                       Garantice una experiencia fluida para sus equipos de compras 
                       <strong className="text-orange-400"> en cualquier lugar del mundo</strong>, con la 
                       seguridad de que el procesamiento cumple con las normativas locales.
@@ -215,7 +215,7 @@ export async function handler(req) {
 
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
