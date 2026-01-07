@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,16 +15,29 @@ import {
   ShieldCheck,
   ArrowRight,
   Search,
-  TrendingUp
+  TrendingUp,
+  Plane,
+  Wine,
+  Thermometer,
+  Ship,
+  Building2,
+  Mountain,
+  Shirt,
+  Receipt,
+  Cpu
 } from "lucide-react";
 import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
+import { SuccessStoriesFilter } from "@/components/success-stories/SuccessStoriesFilter";
+import { motion, AnimatePresence } from "framer-motion";
 
 const successCases = [
+  // Original 7 cases
   {
     id: "gigafactory-north",
     title: "Automatización de Homologación Industrial",
     company: "GigaFactory North",
     sector: "Industrial",
+    sectorCategory: "industrial",
     sectorIcon: Factory,
     metric: "-85%",
     metricLabel: "Tiempo de Alta",
@@ -39,6 +52,7 @@ const successCases = [
     title: "Trazabilidad ESG para Exportación",
     company: "OliveTrust Coop",
     sector: "Agroalimentario",
+    sectorCategory: "agroalimentario",
     sectorIcon: Wheat,
     metric: "+12%",
     metricLabel: "Valor Exportación",
@@ -53,6 +67,7 @@ const successCases = [
     title: "Reporting Scope 3 Instantáneo",
     company: "UrbanDeliver BCN",
     sector: "Movilidad Sostenible",
+    sectorCategory: "movilidad",
     sectorIcon: Truck,
     metric: "1h",
     metricLabel: "Auditoría CSRD",
@@ -67,6 +82,7 @@ const successCases = [
     title: "Medición de Impacto Social",
     company: "Alianza Social Hub",
     sector: "Economía Social",
+    sectorCategory: "social",
     sectorIcon: Heart,
     metric: "1:3.8",
     metricLabel: "Ratio SROI",
@@ -81,6 +97,7 @@ const successCases = [
     title: "Continuidad Asistencial Garantizada",
     company: "BioMed Hospital",
     sector: "Salud",
+    sectorCategory: "salud",
     sectorIcon: Stethoscope,
     metric: "-30%",
     metricLabel: "Fallos Críticos",
@@ -95,6 +112,7 @@ const successCases = [
     title: "Auditoría Ética de Cadena de Suministro",
     company: "GlobalRetail Prime",
     sector: "Comercio",
+    sectorCategory: "comercio",
     sectorIcon: ShoppingBag,
     metric: "0",
     metricLabel: "Incidencias Éticas",
@@ -109,6 +127,7 @@ const successCases = [
     title: "Compra de Energía Renovable Automatizada",
     company: "EcoVolt Manufacturing",
     sector: "Energía Industrial",
+    sectorCategory: "energia",
     sectorIcon: Zap,
     metric: "100%",
     metricLabel: "Energía Renovable",
@@ -117,19 +136,177 @@ const successCases = [
     bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
     textColor: "text-yellow-600 dark:text-yellow-400",
     blockchainProof: "0x6b3d...e9a1"
+  },
+  // NEW 10 cases
+  {
+    id: "sky-aero-systems",
+    title: "Certificación Aeronáutica EN9100",
+    company: "SkyAero Systems",
+    sector: "Industrial Aeroespacial",
+    sectorCategory: "industrial",
+    sectorIcon: Plane,
+    metric: "-90%",
+    metricLabel: "Tiempo Verificación",
+    description: "Validación automática de certificados EN9100 de 120 proveedores globales de piezas críticas.",
+    color: "from-blue-600 to-indigo-500",
+    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+    textColor: "text-blue-600 dark:text-blue-400",
+    blockchainProof: "0x4d5e...1a2b"
+  },
+  {
+    id: "vinosdoe-elite",
+    title: "Fraude Cero en Exportación D.O.",
+    company: "VinosD.O. Elite",
+    sector: "Agroalimentario",
+    sectorCategory: "agroalimentario",
+    sectorIcon: Wine,
+    metric: "+35%",
+    metricLabel: "Confianza Consumidor",
+    description: "Notarización de lotes y D.O. con QR dinámico vinculado a DID de geolocalización.",
+    color: "from-rose-800 to-amber-600",
+    bgColor: "bg-rose-50 dark:bg-rose-950/30",
+    textColor: "text-rose-700 dark:text-rose-400",
+    blockchainProof: "0x7a8b...3c9d"
+  },
+  {
+    id: "pharmacold-logistix",
+    title: "Integridad de Cadena de Frío",
+    company: "PharmaCold Logistix",
+    sector: "Salud",
+    sectorCategory: "salud",
+    sectorIcon: Thermometer,
+    metric: "0%",
+    metricLabel: "Pérdida Térmica",
+    description: "Smart Contracts bloquean pago si sensores detectan temperatura >8°C durante +10min.",
+    color: "from-red-500 to-rose-400",
+    bgColor: "bg-red-50 dark:bg-red-950/30",
+    textColor: "text-red-600 dark:text-red-400",
+    blockchainProof: "0x1b2c...8e9f"
+  },
+  {
+    id: "portbcn-smart-trade",
+    title: "Aduana Digital Instantánea",
+    company: "PortBCN Smart-Trade",
+    sector: "Movilidad",
+    sectorCategory: "movilidad",
+    sectorIcon: Ship,
+    metric: "450€",
+    metricLabel: "Ahorro/Container",
+    description: "Conexión Webhooks con sistemas portuarios para validación KYB instantánea.",
+    color: "from-cyan-600 to-blue-500",
+    bgColor: "bg-cyan-50 dark:bg-cyan-950/30",
+    textColor: "text-cyan-600 dark:text-cyan-400",
+    blockchainProof: "0x9d8e...7f6a"
+  },
+  {
+    id: "ayuntamiento-etico",
+    title: "Licitación Pública Transparente",
+    company: "Ayuntamiento Ético",
+    sector: "Economía Social",
+    sectorCategory: "social",
+    sectorIcon: Building2,
+    metric: "99%",
+    metricLabel: "Transparencia Ética",
+    description: "Dashboard SROI para verificar cuota de discapacidad de licitadores en tiempo real.",
+    color: "from-violet-600 to-purple-500",
+    bgColor: "bg-violet-50 dark:bg-violet-950/30",
+    textColor: "text-violet-600 dark:text-violet-400",
+    blockchainProof: "0x5f4e...2d1c"
+  },
+  {
+    id: "purelithium-sourcing",
+    title: "Minerales Sin Conflicto CSRD",
+    company: "PureLithium Sourcing",
+    sector: "Industrial Minería",
+    sectorCategory: "industrial",
+    sectorIcon: Mountain,
+    metric: "B-Corp",
+    metricLabel: "Certificación",
+    description: "Trazabilidad Tier 3 de litio con firma ODRL de políticas de uso ético.",
+    color: "from-stone-600 to-emerald-500",
+    bgColor: "bg-stone-50 dark:bg-stone-950/30",
+    textColor: "text-stone-600 dark:text-stone-400",
+    blockchainProof: "0x2a3b...9c8d"
+  },
+  {
+    id: "fastfashion-trace",
+    title: "Moda Circular Sin Greenwashing",
+    company: "FastFashion Trace",
+    sector: "Comercio",
+    sectorCategory: "comercio",
+    sectorIcon: Shirt,
+    metric: "100%",
+    metricLabel: "Etiquetado Preciso",
+    description: "Sincronización PLM con certificados de composición textil para 1M de prendas.",
+    color: "from-pink-500 to-green-500",
+    bgColor: "bg-pink-50 dark:bg-pink-950/30",
+    textColor: "text-pink-600 dark:text-pink-400",
+    blockchainProof: "0x8c7b...4a5e"
+  },
+  {
+    id: "invoicetrust-b2b",
+    title: "Factoring con Score Blockchain",
+    company: "InvoiceTrust",
+    sector: "Finanzas B2B",
+    sectorCategory: "finanzas",
+    sectorIcon: Receipt,
+    metric: "2M€",
+    metricLabel: "Liquidez Pymes",
+    description: "Score de solvencia inmutable basado en cumplimiento histórico de contratos ODRL.",
+    color: "from-emerald-600 to-teal-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-600 dark:text-emerald-400",
+    blockchainProof: "0x3d2e...1f0a"
+  },
+  {
+    id: "gridflow-energy",
+    title: "Gestión de Excedentes Energéticos",
+    company: "GridFlow",
+    sector: "Energía",
+    sectorCategory: "energia",
+    sectorIcon: Zap,
+    metric: "50",
+    metricLabel: "Naves Conectadas",
+    description: "Liquidación diaria de micro-pagos de energía entre comunidades industriales.",
+    color: "from-yellow-500 to-orange-500",
+    bgColor: "bg-yellow-50 dark:bg-yellow-950/30",
+    textColor: "text-yellow-600 dark:text-yellow-400",
+    blockchainProof: "0x6a5f...4d3c"
+  },
+  {
+    id: "ailabs-research",
+    title: "Entrenamiento IA con Datos Sintéticos",
+    company: "AI-Labs Research",
+    sector: "Tecnología",
+    sectorCategory: "tecnologia",
+    sectorIcon: Cpu,
+    metric: "-40%",
+    metricLabel: "Tiempo Training",
+    description: "Datasets sintéticos con alta fidelidad estadística sin fugas de datos reales.",
+    color: "from-purple-600 to-orange-500",
+    bgColor: "bg-purple-50 dark:bg-purple-950/30",
+    textColor: "text-purple-600 dark:text-purple-400",
+    blockchainProof: "0x0e1f...9a8b"
   }
 ];
 
 const SuccessStories = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedSector, setSelectedSector] = useState<string | null>(null);
+  const [activeSector, setActiveSector] = useState("all");
 
-  const sectors = [...new Set(successCases.map(c => c.sector))];
+  // Calculate sector counts
+  const sectorCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    successCases.forEach(c => {
+      counts[c.sectorCategory] = (counts[c.sectorCategory] || 0) + 1;
+    });
+    return counts;
+  }, []);
 
   const filteredCases = successCases.filter(c => {
     const matchesSearch = c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          c.company.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSector = !selectedSector || c.sector === selectedSector;
+    const matchesSector = activeSector === "all" || c.sectorCategory === activeSector;
     return matchesSearch && matchesSector;
   });
 
@@ -142,7 +319,7 @@ const SuccessStories = () => {
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Award className="w-4 h-4" />
-              Casos de Éxito Verificados
+              17 Casos de Éxito Verificados
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
               Transformación Digital en{" "}
@@ -158,38 +335,26 @@ const SuccessStories = () => {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input
-              placeholder="Buscar por empresa o título..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Badge
-              variant={selectedSector === null ? "default" : "outline"}
-              className="cursor-pointer"
-              onClick={() => setSelectedSector(null)}
-            >
-              Todos
-            </Badge>
-            {sectors.map(sector => (
-              <Badge
-                key={sector}
-                variant={selectedSector === sector ? "default" : "outline"}
-                className="cursor-pointer"
-                onClick={() => setSelectedSector(sector)}
-              >
-                {sector}
-              </Badge>
-            ))}
-          </div>
+      {/* Search */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="relative w-full md:w-80 mx-auto md:mx-0">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <Input
+            placeholder="Buscar por empresa o título..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
+          />
         </div>
+      </div>
+
+      {/* Sector Filter */}
+      <div className="container mx-auto px-4">
+        <SuccessStoriesFilter 
+          activeSector={activeSector}
+          onSectorChange={setActiveSector}
+          sectorCounts={sectorCounts}
+        />
       </div>
 
       {/* Navigator */}
@@ -199,65 +364,85 @@ const SuccessStories = () => {
 
       {/* Cases Grid */}
       <div className="container mx-auto px-4 pb-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCases.map((caseItem) => (
-            <Link key={caseItem.id} to={`/success-stories/${caseItem.id}`}>
-              <Card className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/30">
-                {/* Header with gradient */}
-                <div className={`h-2 bg-gradient-to-r ${caseItem.color}`} />
-                
-                <CardContent className="p-6 space-y-4">
-                  {/* Sector Badge */}
-                  <div className="flex items-center justify-between">
-                    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${caseItem.bgColor} ${caseItem.textColor}`}>
-                      <caseItem.sectorIcon className="w-3 h-3" />
-                      {caseItem.sector}
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-mono">
-                      <ShieldCheck className="w-3 h-3 text-green-500" />
-                      {caseItem.blockchainProof}
-                    </div>
-                  </div>
+        <AnimatePresence mode="popLayout">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            layout
+          >
+            {filteredCases.map((caseItem, index) => (
+              <motion.div
+                key={caseItem.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+              >
+                <Link to={`/success-stories/${caseItem.id}`}>
+                  <Card className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/30">
+                    {/* Header with gradient */}
+                    <div className={`h-2 bg-gradient-to-r ${caseItem.color}`} />
+                    
+                    <CardContent className="p-6 space-y-4">
+                      {/* Sector Badge */}
+                      <div className="flex items-center justify-between">
+                        <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${caseItem.bgColor} ${caseItem.textColor}`}>
+                          <caseItem.sectorIcon className="w-3 h-3" />
+                          {caseItem.sector}
+                        </div>
+                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-mono">
+                          <ShieldCheck className="w-3 h-3 text-green-500" />
+                          {caseItem.blockchainProof}
+                        </div>
+                      </div>
 
-                  {/* Company & Title */}
-                  <div>
-                    <p className="text-sm text-muted-foreground font-medium">{caseItem.company}</p>
-                    <h3 className="text-lg font-bold mt-1 group-hover:text-primary transition-colors line-clamp-2">
-                      {caseItem.title}
-                    </h3>
-                  </div>
+                      {/* Company & Title */}
+                      <div>
+                        <p className="text-sm text-muted-foreground font-medium">{caseItem.company}</p>
+                        <h3 className="text-lg font-bold mt-1 group-hover:text-primary transition-colors line-clamp-2">
+                          {caseItem.title}
+                        </h3>
+                      </div>
 
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground line-clamp-2">
-                    {caseItem.description}
-                  </p>
-
-                  {/* Metric Highlight */}
-                  <div className="pt-4 border-t flex items-center justify-between">
-                    <div>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
-                        {caseItem.metricLabel}
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {caseItem.description}
                       </p>
-                      <p className={`text-2xl font-bold bg-gradient-to-r ${caseItem.color} bg-clip-text text-transparent`}>
-                        {caseItem.metric}
-                      </p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+
+                      {/* Metric Highlight */}
+                      <div className="pt-4 border-t flex items-center justify-between">
+                        <div>
+                          <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
+                            {caseItem.metricLabel}
+                          </p>
+                          <p className={`text-2xl font-bold bg-gradient-to-r ${caseItem.color} bg-clip-text text-transparent`}>
+                            {caseItem.metric}
+                          </p>
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                          <ArrowRight className="w-5 h-5" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {filteredCases.length === 0 && (
-          <div className="text-center py-16">
-            <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold">No se encontraron casos</h3>
-            <p className="text-muted-foreground">Prueba con otros términos de búsqueda</p>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <TrendingUp className="w-8 h-8 text-primary" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Todavía estamos escribiendo historias aquí</h3>
+            <p className="text-muted-foreground">¿Quieres ser el primero en tu sector?</p>
+          </motion.div>
         )}
       </div>
     </div>
