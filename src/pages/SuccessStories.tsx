@@ -32,7 +32,16 @@ import {
   Gem,
   Trash2,
   FileCheck2,
-  Package
+  Package,
+  Sprout,
+  Apple,
+  Grape,
+  Citrus,
+  Droplet,
+  Satellite,
+  Leaf,
+  Flower,
+  Box
 } from "lucide-react";
 import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 import { SuccessStoriesFilter } from "@/components/success-stories/SuccessStoriesFilter";
@@ -597,6 +606,157 @@ const successCases = [
     bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
     textColor: "text-emerald-700 dark:text-emerald-400",
     blockchainProof: "0xh8j0...gov"
+  },
+  // ===== 10 NEW AGRI-TECH CASES =====
+  {
+    id: "avocado-trust",
+    title: "Exportación Fitosanitaria USA",
+    company: "Avocado-Trust",
+    sector: "Exportación Fitosanitaria",
+    sectorCategory: "agritech",
+    sectorIcon: Apple,
+    metric: "0.01%",
+    metricLabel: "Rechazo Aduana",
+    description: "Sensores IoT de trampas generan pre-certificado fitosanitario USDA con evidencia blockchain.",
+    color: "from-lime-600 to-green-500",
+    bgColor: "bg-lime-50 dark:bg-lime-950/30",
+    textColor: "text-lime-600 dark:text-lime-400",
+    blockchainProof: "0xa1v0...avocado"
+  },
+  {
+    id: "olive-origin",
+    title: "Soberanía de Marca D.O. Jaén",
+    company: "Olive-Origin",
+    sector: "Aceite D.O.",
+    sectorCategory: "agritech",
+    sectorIcon: Leaf,
+    metric: "+15%",
+    metricLabel: "Precio Premium",
+    description: "Pasaporte Digital vincula lote de almazara con coordenadas GPS de recolección via DID.",
+    color: "from-emerald-700 to-lime-500",
+    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    textColor: "text-emerald-700 dark:text-emerald-400",
+    blockchainProof: "0xo1l1...olive"
+  },
+  {
+    id: "zero-chem-wine",
+    title: "Certificación Zero Residue Vinos",
+    company: "Zero-Chem Wine",
+    sector: "Vinos Orgánicos",
+    sectorCategory: "agritech",
+    sectorIcon: Grape,
+    metric: "100%",
+    metricLabel: "Zero Residue",
+    description: "36 meses sin síntesis química certificados con sensores de nitratos y pasaporte digital.",
+    color: "from-purple-600 to-pink-500",
+    bgColor: "bg-purple-50 dark:bg-purple-950/30",
+    textColor: "text-purple-600 dark:text-purple-400",
+    blockchainProof: "0xz3r0...wine"
+  },
+  {
+    id: "citrus-check",
+    title: "Validación LMR Multi-País",
+    company: "Citrus-Check",
+    sector: "Cítricos LMR",
+    sectorCategory: "agritech",
+    sectorIcon: Citrus,
+    metric: "12",
+    metricLabel: "Países Aptos",
+    description: "Cruce automático de aplicaciones fitosanitarias con normativas de 150 países.",
+    color: "from-orange-500 to-yellow-400",
+    bgColor: "bg-orange-50 dark:bg-orange-950/30",
+    textColor: "text-orange-600 dark:text-orange-400",
+    blockchainProof: "0xc1tr...lmr"
+  },
+  {
+    id: "berry-water",
+    title: "Certificación Huella Hídrica",
+    company: "Berry-Water",
+    sector: "Eficiencia Hídrica",
+    sectorCategory: "agritech",
+    sectorIcon: Droplet,
+    metric: "94%",
+    metricLabel: "Eficiencia Riego",
+    description: "Sondas de humedad y caudalímetros notarizan ahorro para certificación GlobalG.A.P.",
+    color: "from-blue-500 to-cyan-400",
+    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+    textColor: "text-blue-600 dark:text-blue-400",
+    blockchainProof: "0xb3rr...water"
+  },
+  {
+    id: "rice-satellite",
+    title: "Validación Satelital de D.O.",
+    company: "Rice-Satellite",
+    sector: "Validación Remota",
+    sectorCategory: "agritech",
+    sectorIcon: Satellite,
+    metric: "99%",
+    metricLabel: "Confianza D.O.",
+    description: "Firma espectral NDVI confirma variedad y bloquea mezclas con grano de importación.",
+    color: "from-indigo-600 to-blue-500",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+    textColor: "text-indigo-600 dark:text-indigo-400",
+    blockchainProof: "0xr1c3...ndvi"
+  },
+  {
+    id: "bio-cotton-trace",
+    title: "Trazabilidad Algodón GOTS",
+    company: "Bio-Cotton Trace",
+    sector: "Algodón Orgánico",
+    sectorCategory: "agritech",
+    sectorIcon: Flower,
+    metric: "100",
+    metricLabel: "Transparencia",
+    description: "Cadena de custodia: Semilla → Campo → Desmotadora → Bala con ID único.",
+    color: "from-pink-500 to-rose-400",
+    bgColor: "bg-pink-50 dark:bg-pink-950/30",
+    textColor: "text-pink-600 dark:text-pink-400",
+    blockchainProof: "0xc0tt...gots"
+  },
+  {
+    id: "greenhouse-ai",
+    title: "Invernaderos IoT Anti-Mildiu",
+    company: "Greenhouse-AI",
+    sector: "Control Fitosanitario",
+    sectorCategory: "agritech",
+    sectorIcon: Sprout,
+    metric: "-80%",
+    metricLabel: "Químicos",
+    description: "IA gestiona microclima para prevenir hongos sin fungicidas sistémicos.",
+    color: "from-green-600 to-emerald-500",
+    bgColor: "bg-green-50 dark:bg-green-950/30",
+    textColor: "text-green-600 dark:text-green-400",
+    blockchainProof: "0xgr33...ai"
+  },
+  {
+    id: "tropical-flash",
+    title: "Aduana Express Perecederos",
+    company: "Tropical-Flash",
+    sector: "Logística Tropical",
+    sectorCategory: "agritech",
+    sectorIcon: Box,
+    metric: "+3 días",
+    metricLabel: "Frescura Ganada",
+    description: "Pre-validación digital 48h antes reduce merma y extiende vida útil en lineal.",
+    color: "from-amber-500 to-orange-400",
+    bgColor: "bg-amber-50 dark:bg-amber-950/30",
+    textColor: "text-amber-600 dark:text-amber-400",
+    blockchainProof: "0xtr0p...flash"
+  },
+  {
+    id: "urban-hydro",
+    title: "Granja Vertical Km 0",
+    company: "Urban-Hydro",
+    sector: "Agricultura Urbana",
+    sectorCategory: "agritech",
+    sectorIcon: Sprout,
+    metric: "0",
+    metricLabel: "Huella Logística",
+    description: "Producción hidropónica urbana con energía LED renovable certificada.",
+    color: "from-teal-600 to-green-500",
+    bgColor: "bg-teal-50 dark:bg-teal-950/30",
+    textColor: "text-teal-600 dark:text-teal-400",
+    blockchainProof: "0xurb4...hydro"
   }
 ];
 
@@ -629,7 +789,7 @@ const SuccessStories = () => {
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Award className="w-4 h-4" />
-              37 Casos de Éxito Verificados
+              47 Casos de Éxito Verificados
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
               Transformación Digital en{" "}
