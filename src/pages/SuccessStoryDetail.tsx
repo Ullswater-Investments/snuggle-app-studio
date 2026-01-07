@@ -112,10 +112,23 @@ const casesData: Record<string, {
     textColor: "text-violet-600 dark:text-violet-400",
     blockchainProof: "0x7e2fa3c81d9b5f7a3e1c9d5b7f3a1e9c7d5b3a1f9e7c5d3b1a9f7e5c3d1b9a7f5",
     blockNumber: "#18,156,321",
-    challenge: "Alianza Social Hub agrupa a 15 centros especiales de empleo. Necesitaban demostrar a sus clientes corporativos (grandes empresas con cuotas de reserva) el impacto real de cada euro invertido, más allá del simple cumplimiento legal.",
-    solution: "Implementación del Dashboard de Métricas SROI que calcula automáticamente el retorno social: empleos inclusivos creados, ahorro para la administración pública y reinversión en la economía local.",
-    services: ["Dashboard SROI", "Auditoría Social Digital", "Pasaporte de Proveedor Ético", "Memoria de Sostenibilidad Automática"],
-    ariaQuote: "Hemos verificado mediante auditoría digital que el 100% de los proveedores de este lote cumplen con la Ley General de Discapacidad. Por cada euro invertido, se generan 3.8€ de valor social medible.",
+    challenge: `Alianza Social Hub agrupa a 15 centros especiales de empleo y empresas de inserción laboral.
+
+**El problema principal**: Las grandes corporaciones con cuotas de reserva (Ley General de Discapacidad) necesitaban demostrar el impacto real de cada euro invertido en proveedores éticos. Los departamentos de RSC solo podían reportar gastos, no valor social generado.
+
+**Riesgos adicionales**:
+• Social Washing: Dificultad para verificar la autenticidad de los centros de inserción
+• Auditorías manuales: Cientos de horas recopilando certificados para memorias de sostenibilidad
+• Falta de métricas estandarizadas para comparar proveedores éticos`,
+    solution: `Implementación del Dashboard de Métricas SROI con tres pilares técnicos:
+
+**1. Monetización del Impacto**: Cruce automático del gasto con el ahorro en subsidios públicos (0.45€ por cada 1€ invertido) y cálculo de empleos inclusivos creados (60% en CEE, 40% en empresas de inserción).
+
+**2. Garantía Anti-Social-Washing**: Cada centro especial tiene un Identificador DID verificado en Pontus-X (did:web:alianza-social.procuredata.eu), eliminando el riesgo reputacional.
+
+**3. Reporte CSRD Automático**: Generación de PDF verificado que sirve como anexo legal para la Memoria de Sostenibilidad corporativa, ahorrando cientos de horas de recopilación manual.`,
+    services: ["Dashboard SROI", "Auditoría Social Digital", "Pasaporte de Proveedor Ético", "Memoria de Sostenibilidad Automática", "Verificación DID Anti-Social-Washing"],
+    ariaQuote: "Hemos verificado mediante auditoría digital que el 100% de los proveedores de este lote cumplen con la Ley General de Discapacidad. Por cada euro invertido, se generan 3.8€ de valor social medible. El 78% de la inversión se reinvierte en la economía local de proximidad.",
     simulator: "social"
   },
   "biomed-hospital": {

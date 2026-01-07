@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Bot, X, Send, Sparkles, ThumbsUp, ThumbsDown, ExternalLink, Calculator, Gauge, Activity, FileCheck, Minimize2, Maximize2, GripVertical } from "lucide-react";
+import { Bot, X, Send, Sparkles, ThumbsUp, ThumbsDown, ExternalLink, Calculator, Gauge, Activity, FileCheck, Minimize2, Maximize2, GripVertical, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -59,6 +59,18 @@ function detectWidgets(content: string): WidgetAction[] {
   }
   if (lowerContent.includes("/sustainability") || lowerContent.includes("/sostenibilidad")) {
     widgets.push({ label: "Ver Sostenibilidad", path: "/sustainability", icon: <Gauge className="h-3 w-3" /> });
+  }
+  
+  // Social Economy detection
+  if (lowerContent.includes("social") || lowerContent.includes("sroi") || 
+      lowerContent.includes("inclusión") || lowerContent.includes("lgd") ||
+      lowerContent.includes("ético") || lowerContent.includes("inserción") ||
+      lowerContent.includes("discapacidad") || lowerContent.includes("economía social")) {
+    widgets.push({ 
+      label: "Ver Dashboard Impacto Social", 
+      path: "/success-stories/alianza-social-hub", 
+      icon: <Heart className="h-3 w-3" /> 
+    });
   }
 
   return widgets;
