@@ -31,8 +31,8 @@ export const ArchitectureSection = () => {
               <FileCode className="h-4 w-4" />
               <span className="text-sm font-medium itbid-font">Arquitectura Técnica</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              El Gateway <span className="itbid-gradient">itbid</span>
+            <h2 className="text-4xl md:text-5xl font-light mb-4 itbid-gradient-gray">
+              El Gateway itbid
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Un conector IDS/Gaia-X integrado en la infraestructura de ITBID
