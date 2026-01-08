@@ -255,126 +255,6 @@ const PricingComparisonBlock = () => {
 };
 
 
-// Bloque 4: Timeline Sin Burocracia
-const SimplifiedTimelineBlock = () => {
-  const steps = [
-    {
-      number: 1,
-      title: "",
-      description: "Firmas la carta de interés",
-      icon: FileSignature,
-      color: "cyan"
-    },
-    {
-      number: 2,
-      title: "Tramitación Integral",
-      description: "ProcureData gestiona toda la burocracia con Red.es por ti",
-      icon: Settings,
-      color: "lime",
-      highlighted: true
-    },
-    {
-      number: 3,
-      title: "Implementación",
-      description: "Desplegamos la tecnología y empezamos",
-      icon: Rocket,
-      color: "purple"
-    }
-  ];
-
-  return (
-    <motion.div variants={itemVariants} className="space-y-8">
-      <div className="text-center">
-        <Badge className="mb-4 bg-lime-100 text-lime-700 border-lime-200">
-          Proceso Simplificado
-        </Badge>
-        <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-          Tu Camino <span className="text-lime-600">Sin Burocracia</span>
-        </h3>
-      </div>
-
-      {/* Timeline */}
-      <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-        {steps.map((step, i) => (
-          <motion.div
-            key={step.number}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2 }}
-            viewport={{ once: true }}
-            className={`relative p-6 rounded-2xl border transition-all shadow-lg ${
-              step.highlighted
-                ? "bg-gradient-to-br from-lime-50 to-emerald-50 border-lime-300 ring-2 ring-lime-200 scale-105"
-                : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-xl"
-            }`}
-          >
-            {/* Connector lines */}
-            {i < steps.length - 1 && (
-              <div className="hidden md:block absolute top-1/2 -right-3 md:-right-6 w-6 md:w-12 h-0.5 bg-gradient-to-r from-slate-300 to-transparent" />
-            )}
-
-            <div className="flex flex-col items-center text-center">
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 ${
-                step.highlighted
-                  ? "bg-lime-200"
-                  : step.color === "cyan" ? "bg-cyan-100" : "bg-purple-100"
-              }`}>
-                <step.icon className={`h-8 w-8 ${
-                  step.highlighted
-                    ? "text-lime-700"
-                    : step.color === "cyan" ? "text-cyan-600" : "text-purple-600"
-                }`} />
-              </div>
-              
-              <Badge variant="outline" className={`mb-2 ${
-                step.highlighted
-                  ? "border-lime-400 text-lime-700 bg-lime-50"
-                  : "border-slate-300 text-slate-600"
-              }`}>
-                Paso {step.number}
-              </Badge>
-              
-              <h4 className={`text-lg font-bold mb-2 ${
-                step.highlighted ? "text-lime-700" : "text-slate-900"
-              }`}>
-                {step.title}
-              </h4>
-              
-              <p className="text-sm text-slate-600">{step.description}</p>
-
-              {step.highlighted && (
-                <Badge className="mt-3 bg-lime-100 text-lime-700 border-lime-200">
-                  <Users className="h-3 w-3 mr-1" />
-                  Nosotros lo hacemos
-                </Badge>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Urgency CTA */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
-        className="flex flex-col sm:flex-row items-center justify-center gap-4 p-6 rounded-2xl bg-gradient-to-r from-amber-50 via-orange-50 to-red-50 border border-amber-200 shadow-lg"
-      >
-        <div className="flex items-center gap-2 text-amber-700">
-          <AlertTriangle className="h-5 w-5 animate-pulse" />
-          <span className="font-semibold">Convocatoria Limitada</span>
-        </div>
-        <p className="text-slate-700 text-center sm:text-left">
-          Plazas restringidas por convocatoria. ¡Reserva la tuya ahora!
-        </p>
-        <Button className="bg-amber-500 hover:bg-amber-600 text-white font-semibold shadow-lg">
-          <Rocket className="h-4 w-4 mr-2" />
-          Reservar Plaza
-        </Button>
-      </motion.div>
-    </motion.div>
-  );
-};
 
 export const DataSpaceKitSection = () => {
   return (
@@ -395,8 +275,6 @@ export const DataSpaceKitSection = () => {
           <PricingComparisonBlock />
 
 
-          {/* Bloque 4: Timeline */}
-          <SimplifiedTimelineBlock />
         </motion.div>
       </div>
     </section>
