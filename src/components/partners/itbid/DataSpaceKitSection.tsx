@@ -24,6 +24,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import kitEspaciosDatosLogo from "@/assets/kit-espacios-datos-logo.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -489,12 +490,11 @@ export const DataSpaceKitSection = () => {
               <Globe className="h-4 w-4 mr-2" />
               🇪🇺 Fondos Europeos para la Innovación
             </Badge>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
-              Tu Kit de Acceso a la{" "}
-              <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Economía del Dato
-              </span>
-            </h2>
+            <img 
+              src={kitEspaciosDatosLogo} 
+              alt="Kit Espacios de Datos" 
+              className="h-32 md:h-40 mx-auto mb-6 object-contain"
+            />
             <p className="text-lg text-slate-600">
               La Unión Europea financia tu entrada a la nueva era de datos fiables, 
               gobernanza transparente e inteligencia artificial de calidad
