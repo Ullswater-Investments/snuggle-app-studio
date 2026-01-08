@@ -254,103 +254,6 @@ const PricingComparisonBlock = () => {
   );
 };
 
-// Bloque 3: El Efecto Red - Economía del Dato
-const NetworkEffectBlock = () => {
-  const companies = [
-    Building, Factory, Warehouse, Building, Factory,
-    Warehouse, Building, Factory, Warehouse, Building,
-    Factory, Warehouse, Building, Factory, Warehouse
-  ];
-
-  return (
-    <motion.div variants={itemVariants} className="space-y-6">
-      <div className="text-center mb-8">
-        <Badge className="mb-4 bg-emerald-100 text-emerald-700 border-emerald-200">
-          Efecto Multiplicador
-        </Badge>
-        <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
-          El <span className="text-emerald-600">Efecto Red</span> de la Economía del Dato
-        </h3>
-        <p className="text-slate-600 mt-2 max-w-2xl mx-auto">
-          Cada subvención individual contribuye a un ecosistema de <strong>datos compartidos e IA federada</strong> que beneficia a todos
-        </p>
-      </div>
-
-      <div className="grid lg:grid-cols-[1fr,auto,1fr] gap-6 items-center">
-        {/* Empresas */}
-        <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 shadow-lg">
-          <p className="text-sm text-slate-600 text-center mb-4 font-medium">15-20 empresas participantes</p>
-          <div className="grid grid-cols-5 gap-3">
-            {companies.map((Icon, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.05 }}
-                viewport={{ once: true }}
-                className="p-2 rounded-lg bg-white border border-slate-200 flex items-center justify-center shadow-sm"
-              >
-                <Icon className="h-5 w-5 text-cyan-600" />
-              </motion.div>
-            ))}
-          </div>
-          <p className="text-xs text-slate-500 text-center mt-3">Subvención Kit Digital individual</p>
-        </div>
-
-        {/* Flechas */}
-        <div className="flex lg:flex-col items-center gap-2 py-4">
-          <motion.div
-            animate={{ x: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            className="hidden lg:flex items-center"
-          >
-            <ArrowRight className="h-8 w-8 text-emerald-500" />
-          </motion.div>
-          <div className="lg:hidden flex items-center rotate-90">
-            <ArrowRight className="h-8 w-8 text-emerald-500" />
-          </div>
-        </div>
-
-        {/* Fondo Común */}
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 shadow-lg">
-          <div className="text-center">
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 mb-4"
-            >
-              <Euro className="h-10 w-10 text-emerald-600" />
-            </motion.div>
-            <h4 className="text-xl font-bold text-slate-900 mb-2">Fondo Común de Desarrollo</h4>
-            <p className="text-3xl font-bold text-emerald-600">150K€ - 300K€</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Resultados - Economía del Dato */}
-      <div className="grid md:grid-cols-2 gap-4 mt-6">
-        <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-lg flex items-center gap-4">
-          <div className="p-3 rounded-lg bg-cyan-100">
-            <Database className="h-6 w-6 text-cyan-600" />
-          </div>
-          <div>
-            <h5 className="font-semibold text-slate-900">Fuentes de Datos Fiables</h5>
-            <p className="text-sm text-slate-600">Datos certificados, trazables y de alta calidad</p>
-          </div>
-        </div>
-        <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-lg flex items-center gap-4">
-          <div className="p-3 rounded-lg bg-purple-100">
-            <Brain className="h-6 w-6 text-purple-600" />
-          </div>
-          <div>
-            <h5 className="font-semibold text-slate-900">IA Federada de Calidad</h5>
-            <p className="text-sm text-slate-600">Modelos entrenados con datos soberanos y verificados</p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
 
 // Bloque 4: Timeline Sin Burocracia
 const SimplifiedTimelineBlock = () => {
@@ -491,8 +394,6 @@ export const DataSpaceKitSection = () => {
           {/* Bloque 2: Las Dos Vías */}
           <PricingComparisonBlock />
 
-          {/* Bloque 3: Efecto Red */}
-          <NetworkEffectBlock />
 
           {/* Bloque 4: Timeline */}
           <SimplifiedTimelineBlock />
