@@ -164,7 +164,7 @@ export default function Landing() {
                   { label: 'RETAIL', icon: ShoppingBag, color: 'text-blue-500', bgColor: 'bg-blue-50 dark:bg-blue-950/30', caseId: 'globalretail-prime' },
                   { label: 'ENERGÍA', icon: Zap, color: 'text-yellow-500', bgColor: 'bg-yellow-50 dark:bg-yellow-950/30', caseId: 'helios-fields' },
                   { label: 'AERO', icon: Send, color: 'text-cyan-500', bgColor: 'bg-cyan-50 dark:bg-cyan-950/30', caseId: 'turbine-chain' },
-                  { label: 'VINOS', icon: Wine, color: 'text-purple-600', bgColor: 'bg-purple-50 dark:bg-purple-950/30', caseId: 'vinos-do' },
+                  { label: 'VINOS', icon: Wine, color: 'text-purple-600', bgColor: 'bg-purple-50 dark:bg-purple-950/30', caseId: 'vinosdoe-elite' },
                   { label: 'PHARMA', icon: Pill, color: 'text-pink-400', bgColor: 'bg-pink-50 dark:bg-pink-950/30', caseId: 'pharmacold-logistix' },
                   // Segunda fila - 7 iconos adicionales
                   { label: 'PUERTO', icon: Ship, color: 'text-sky-500', bgColor: 'bg-sky-50 dark:bg-sky-950/30', caseId: 'portbcn-smart-trade' },
@@ -172,7 +172,7 @@ export default function Landing() {
                   { label: 'MINERÍA', icon: Mountain, color: 'text-slate-500', bgColor: 'bg-slate-100 dark:bg-slate-950/30', caseId: 'purelithium-sourcing' },
                   { label: 'MODA', icon: Shirt, color: 'text-orange-500', bgColor: 'bg-orange-50 dark:bg-orange-950/30', caseId: 'fastfashion-trace' },
                   { label: 'FINANZAS', icon: DollarSign, color: 'text-green-500', bgColor: 'bg-green-50 dark:bg-green-950/30', caseId: 'greenfinance-esg' },
-                  { label: 'GRID', icon: LayoutGrid, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'gridflex-power' },
+                  { label: 'GRID', icon: LayoutGrid, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'gridflex-demand' },
                 ].map((sector) => (
                   <motion.div
                     key={sector.label}
