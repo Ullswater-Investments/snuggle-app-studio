@@ -31,7 +31,9 @@ const actions = [
   {
     icon: Phone,
     title: "Contactar Partner Manager",
-    description: "Conversación directa con nuestro equipo",
+    description: "Eduardo Ranz",
+    email: "eduardo@agileprocurement.es",
+    phone: "+34 680820492",
     primary: false,
     link: null,
   },
@@ -104,6 +106,24 @@ export const CTASection = () => {
                     </div>
                     <h3 className="font-semibold text-lg mb-2">{action.title}</h3>
                     <p className="text-sm text-muted-foreground">{action.description}</p>
+                    {action.email && (
+                      <div className="mt-2 space-y-1">
+                        <a 
+                          href={`mailto:${action.email}`} 
+                          className="text-sm text-primary hover:underline block"
+                        >
+                          {action.email}
+                        </a>
+                        {action.phone && (
+                          <a 
+                            href={`tel:${action.phone.replace(/\s/g, '')}`} 
+                            className="text-sm text-muted-foreground hover:text-primary block"
+                          >
+                            Tel. {action.phone}
+                          </a>
+                        )}
+                      </div>
+                    )}
                     {action.primary && (
                       <Button className="mt-4 w-full gap-2" onClick={handlePrimaryClick}>
                         {clicked ? (
