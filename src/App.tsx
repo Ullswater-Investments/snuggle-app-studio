@@ -77,6 +77,7 @@ import Partners from "./pages/Partners";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
+import ItbidWhitepaper from "./pages/partners/ItbidWhitepaper";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -150,6 +151,7 @@ const App = () => (
             <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
             <Route path="/partners/itbid/proyecto" element={<ItbidProyecto />} />
             <Route path="/partners/itbid/casos-exito" element={<ItbidCasosExito />} />
+            <Route path="/partners/itbid/whitepaper" element={<ItbidWhitepaper />} />
               {/* Protected routes with AppLayout */}
               <Route element={
                 <ProtectedRoute>
