@@ -153,7 +153,7 @@ const PricingComparisonBlock = () => {
   };
 
   const optionB = {
-    title: "Opción B: Early Adopter",
+    title: "Adhesión + Caso de uso",
     value: "30.000€",
     color: "purple",
     featured: true,
