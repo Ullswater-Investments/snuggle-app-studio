@@ -244,7 +244,7 @@ const PricingComparisonBlock = () => {
             <div className="pt-4 border-t border-slate-200">
               <div className="text-center p-4 rounded-xl bg-gradient-to-r from-purple-50 to-fuchsia-100 border border-purple-200">
                 <p className="text-sm text-slate-500 mb-1">Coste final para ti</p>
-                <p className="text-4xl font-bold text-purple-600">0 €</p>
+                <p className="text-4xl font-bold text-purple-600">5.000€</p>
               </div>
             </div>
           </CardContent>
