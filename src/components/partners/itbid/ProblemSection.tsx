@@ -41,7 +41,7 @@ export const ProblemSection = () => {
               <AlertTriangle className="h-4 w-4" />
               <span className="text-sm font-medium itbid-font">El Problema Actual</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 itbid-font">Los Silos de Datos</h2>
+            <h2 className="text-4xl md:text-5xl font-light mb-4 itbid-gradient-gray">Los Silos de Datos</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               La gestión de proveedores se basa en modelos centralizados donde el cliente exige al proveedor 
               que suba sus datos a la nube del cliente.
