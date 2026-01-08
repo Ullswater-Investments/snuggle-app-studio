@@ -210,7 +210,7 @@ const PricingComparisonBlock = () => {
             </ul>
             <div className="pt-4 border-t border-slate-200">
               <div className="text-center p-4 rounded-xl bg-gradient-to-r from-cyan-50 to-cyan-100 border border-cyan-200">
-                <p className="text-sm text-slate-500 mb-1">Coste final para ti</p>
+                <p className="text-sm text-slate-500 mb-1">Coste inicial Solicitud Kit Espacio de Datos</p>
                 <p className="text-4xl font-bold text-cyan-600">2.000€</p>
               </div>
             </div>
