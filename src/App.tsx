@@ -76,6 +76,7 @@ import DocsInteractivos from "./pages/motor/DocsInteractivos";
 import Partners from "./pages/Partners";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
+import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -148,6 +149,7 @@ const App = () => (
             {/* Partner Pages */}
             <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
             <Route path="/partners/itbid/proyecto" element={<ItbidProyecto />} />
+            <Route path="/partners/itbid/casos-exito" element={<ItbidCasosExito />} />
               {/* Protected routes with AppLayout */}
               <Route element={
                 <ProtectedRoute>
