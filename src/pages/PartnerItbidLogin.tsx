@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, Lock, Mail } from "lucide-react";
+import { ArrowLeft, Lock, User } from "lucide-react";
 import { toast } from "sonner";
 import itbidLogo from "@/assets/itbid-logo.png";
 
 const PartnerItbidLogin = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,13 +19,21 @@ const PartnerItbidLogin = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulación de login - se implementará autenticación real posteriormente
+    // Validar credenciales
     setTimeout(() => {
+      if (username.toUpperCase() === "ITBID" && password === "itbid") {
+        sessionStorage.setItem("itbid_authenticated", "true");
+        toast.success("Acceso concedido", {
+          description: "Bienvenido al área de proyectos ITBID",
+        });
+        navigate("/partners/itbid/proyecto");
+      } else {
+        toast.error("Credenciales incorrectas", {
+          description: "Usuario o contraseña incorrectos",
+        });
+      }
       setIsLoading(false);
-      toast.info("Acceso a proyectos ITBID en desarrollo", {
-        description: "Esta funcionalidad estará disponible próximamente.",
-      });
-    }, 1500);
+    }, 500);
   };
 
   return (
@@ -74,16 +82,16 @@ const PartnerItbidLogin = () => {
           <CardContent className="pt-4">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-muted-foreground" />
-                  Email
+                <Label htmlFor="username" className="flex items-center gap-2">
+                  <User className="h-4 w-4 text-muted-foreground" />
+                  Usuario
                 </Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="tu@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="username"
+                  type="text"
+                  placeholder="Introduce tu usuario"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                   className="h-11"
                 />
