@@ -50,7 +50,8 @@ import {
   Satellite,
   Leaf,
   Flower,
-  Box
+  Box,
+  DollarSign
 } from "lucide-react";
 import { ROISimulator } from "@/components/ROISimulator";
 import { AgroROISimulator } from "@/components/AgroROISimulator";
@@ -981,6 +982,25 @@ const casesData: Record<string, {
     services: ["Sensores Hidropónicos", "Certificación Km 0", "Energía Verde Verificada", "Pasaporte Digital Local"],
     ariaQuote: "Tu producción urbana es 100% transparente. He vinculado el consumo de energía LED con el origen renovable en tu Pasaporte Digital.",
     simulator: "urbanhydro"
+  },
+  "greenfinance-esg": {
+    id: "greenfinance-esg",
+    title: "Due Diligence Financiera Verde con Datos ESG Verificados",
+    company: "GreenFinance ESG",
+    sector: "Finanzas Sostenibles",
+    sectorIcon: DollarSign,
+    metric: "-35%",
+    metricLabel: "Spread Reducido",
+    color: "from-green-500 to-emerald-600",
+    bgColor: "bg-green-50 dark:bg-green-950/30",
+    textColor: "text-green-600 dark:text-green-400",
+    blockchainProof: "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3",
+    blockNumber: "#18,623,445",
+    challenge: "Entidades financieras sin capacidad de verificar en tiempo real los datos ESG de empresas solicitantes de préstamos verdes, generando spreads elevados por riesgo percibido.",
+    solution: "Integración de datos ESG verificados en blockchain que permiten due diligence instantánea. La frescura de datos reduce el spread del préstamo hasta un 35%.",
+    services: ["ESG Data Verification", "Green Bond Eligibility", "Trade Finance Scoring", "Blockchain Proof"],
+    ariaQuote: "La transparencia ESG verificada en blockchain es el nuevo colateral. Cuanto más frescos tus datos, menor tu coste de financiación.",
+    simulator: "finance"
   }
 };
 
