@@ -84,10 +84,9 @@ export const StakeholderBenefits = () => {
                 <CardHeader className="text-center pb-2">
                   <div className="flex justify-center mb-4">
                     <ScoreRing 
-                      value={stakeholder.score} 
+                      score={stakeholder.score} 
                       size={100} 
                       strokeWidth={8}
-                      color={stakeholder.color}
                     />
                   </div>
                   <div className="p-3 rounded-xl bg-muted/50 w-fit mx-auto mb-2">
