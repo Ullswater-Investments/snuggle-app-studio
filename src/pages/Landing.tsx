@@ -141,8 +141,8 @@ export default function Landing() {
             </div>
 
             {/* CASOS DE ÉXITO - Menú de iconos por sector */}
-            <div className="mt-16">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8">CASOS DE ÉXITO</h2>
+            <div className="mt-10">
+              <h2 className="text-2xl md:text-3xl font-bold mb-5">CASOS DE ÉXITO</h2>
               
               <motion.div 
                 className="flex flex-wrap justify-center gap-3 md:gap-4"
@@ -173,7 +173,6 @@ export default function Landing() {
                   { label: 'MODA', icon: Shirt, color: 'text-orange-500', bgColor: 'bg-orange-50 dark:bg-orange-950/30', caseId: 'fastfashion-trace' },
                   { label: 'FINANZAS', icon: DollarSign, color: 'text-green-500', bgColor: 'bg-green-50 dark:bg-green-950/30', caseId: 'greenfinance-esg' },
                   { label: 'GRID', icon: LayoutGrid, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'gridflex-power' },
-                  { label: 'IA', icon: Brain, color: 'text-violet-600', bgColor: 'bg-violet-50 dark:bg-violet-950/30', caseId: 'uni-synth' },
                 ].map((sector) => (
                   <motion.div
                     key={sector.label}
@@ -207,7 +206,7 @@ export default function Landing() {
         </section>
 
         {/* DEMO HUB - ACCESO DIRECTO */}
-        <section id="cases" className="py-20 bg-muted/30">
+        <section id="cases" className="py-10 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Explora el Ecosistema</h2>
