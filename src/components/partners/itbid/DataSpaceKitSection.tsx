@@ -357,7 +357,7 @@ const SimplifiedTimelineBlock = () => {
   const steps = [
     {
       number: 1,
-      title: "Adhesión + Caso de uso",
+      title: "",
       description: "Firmas la carta de interés",
       icon: FileSignature,
       color: "cyan"
