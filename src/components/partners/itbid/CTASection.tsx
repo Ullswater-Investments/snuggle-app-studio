@@ -58,7 +58,7 @@ export const CTASection = () => {
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              ¿Listo para liderar la <span className="procuredata-gradient">Data Economy</span>?
+              ¿Listo para liderar la <span className="procuredata-gradient">ECONOMÍA del DATO</span>?
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-2">
               ITBID-X es la apuesta estratégica para liderar la transición hacia 
