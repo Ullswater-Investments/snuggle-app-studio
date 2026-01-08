@@ -23,7 +23,8 @@ import {
   Heart,
   HandHeart,
   Sparkles,
-  Trophy
+  Trophy,
+  ArrowLeft
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
