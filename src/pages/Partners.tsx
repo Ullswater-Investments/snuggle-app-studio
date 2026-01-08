@@ -74,13 +74,7 @@ const Partners = () => {
                   </CardDescription>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <span className="font-medium text-foreground">{partner.projects}</span> proyectos activos
-                  </span>
-                </div>
-              </CardContent>
+              <CardContent />
               <CardFooter>
                 <Button asChild className="w-full group-hover:bg-primary/90">
                   <Link to={partner.link} className="flex items-center gap-2">
