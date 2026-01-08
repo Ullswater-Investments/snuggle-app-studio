@@ -120,22 +120,6 @@ export const CTASection = () => {
           </div>
         </FadeIn>
 
-        {/* Final Message */}
-        <FadeIn delay={0.4}>
-          <Card className="max-w-3xl mx-auto bg-card/50 backdrop-blur-sm">
-            <CardContent className="py-8 text-center">
-              <Sparkles className="h-8 w-8 text-primary mx-auto mb-4" />
-              <p className="text-lg font-medium mb-2">
-                "Las plataformas cerradas quedarán obsoletas frente a los ecosistemas interoperables"
-              </p>
-              <p className="text-muted-foreground">
-                ITBID-X ofrece a nuestros clientes no solo una herramienta de compras, 
-                sino una <span className="font-semibold text-foreground">llave maestra</span> para 
-                el futuro industrial de Europa.
-              </p>
-            </CardContent>
-          </Card>
-        </FadeIn>
       </div>
     </section>
   );
