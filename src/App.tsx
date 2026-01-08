@@ -73,6 +73,8 @@ import ConectoresERP from "./pages/motor/ConectoresERP";
 import EdgeFunctions from "./pages/motor/EdgeFunctions";
 import TourGuiado from "./pages/motor/TourGuiado";
 import DocsInteractivos from "./pages/motor/DocsInteractivos";
+import Partners from "./pages/Partners";
+import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -139,7 +141,11 @@ const App = () => (
               <Route path="/innovation" element={<InnovationLab />} />
               <Route path="/success-stories" element={<SuccessStories />} />
               <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
+              <Route path="/partners" element={<Partners />} />
             </Route>
+
+            {/* Partner Login Pages */}
+            <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
               {/* Protected routes with AppLayout */}
               <Route element={
                 <ProtectedRoute>

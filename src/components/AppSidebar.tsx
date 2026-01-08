@@ -15,6 +15,7 @@ import {
   Megaphone,
   TrendingUp,
   Award,
+  Handshake,
 } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import {
@@ -127,6 +128,28 @@ export function AppSidebar() {
                   >
                     <Plus className="h-5 w-5 shrink-0" />
                     {open && <span>Nueva Solicitud</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
+            Partners
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink
+                    to="/partners"
+                    className="flex items-center gap-3 hover:bg-muted/50 transition-colors"
+                    activeClassName="bg-muted text-primary font-medium"
+                  >
+                    <Handshake className="h-5 w-5 shrink-0" />
+                    {open && <span>Directorio</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
