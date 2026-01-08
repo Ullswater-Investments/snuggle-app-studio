@@ -273,10 +273,10 @@ const ItbidCasosExito = () => {
               <Trophy className="h-3 w-3 mr-1" />
               Casos de Uso y Éxito
             </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold itbid-font mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light itbid-gradient-gray mb-6">
               Más allá de la plataforma:
               <br />
-              <span className="itbid-gradient">El valor de la Inteligencia Federada</span>
+              El valor de la Inteligencia Federada
             </h1>
             <p className="text-xl text-muted-foreground">
               La plataforma ITBID optimiza tu gestión interna. <span className="itbid-gradient font-semibold">itbid-x</span> conecta 
