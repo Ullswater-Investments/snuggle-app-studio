@@ -127,7 +127,7 @@ export const UseCasesSection = () => {
   const currentCase = useCases[activeCase];
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-12 pb-8 bg-background">
       <div className="container mx-auto px-4">
         <FadeIn>
           <div className="text-center mb-16">
