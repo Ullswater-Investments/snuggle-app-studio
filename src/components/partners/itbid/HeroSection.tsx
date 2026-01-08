@@ -63,30 +63,6 @@ export const HeroSection = () => {
           </p>
         </motion.div>
 
-        {/* Metrics Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
-        >
-          {metrics.map((metric, index) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
-            >
-              <Card className="bg-card/50 backdrop-blur-sm border-[hsl(var(--itbid-purple)/0.2)] hover:border-[hsl(var(--itbid-cyan)/0.5)] transition-all duration-300 hover:shadow-lg hover:shadow-[hsl(var(--itbid-cyan)/0.1)]">
-                <CardContent className="pt-6 text-center">
-                  <metric.icon className={`h-8 w-8 mx-auto mb-3 ${metric.color}`} />
-                  <p className={`text-4xl font-bold mb-1 itbid-font ${metric.color}`}>{metric.value}</p>
-                  <p className="text-sm text-muted-foreground">{metric.label}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div
