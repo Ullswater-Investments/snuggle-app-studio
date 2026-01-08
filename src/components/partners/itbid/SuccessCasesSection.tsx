@@ -27,21 +27,6 @@ import {
 // Original operational cases
 const operationalCases = [
   {
-    id: "eco-battery",
-    icon: Battery,
-    title: "ECO-BATTERY TRACK",
-    sector: "Automoción",
-    color: "hsl(var(--itbid-lime))",
-    bgColor: "hsl(var(--itbid-lime) / 0.1)",
-    challenge: "Cumplir con el Pasaporte Digital de Baterías de la UE sin que el proveedor revele su cadena de suministro.",
-    solution: "Túnel de datos federado con Token de Cumplimiento validado criptográficamente.",
-    metrics: [
-      { label: "Cumplimiento UE", value: "100%" },
-      { label: "Reducción auditoría", value: "-40%" },
-      { label: "Fugas de datos", value: "0" }
-    ]
-  },
-  {
     id: "sme-liquidity",
     icon: Banknote,
     title: "SME LIQUIDITY FLOW",
