@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import confetti from "canvas-confetti";
 import itbidLogo from "@/assets/itbid-logo.png";
+import { generateWhitepaperPDF } from "@/utils/generateWhitepaperPDF";
 
 const actions = [
   {
@@ -21,10 +22,11 @@ const actions = [
   },
   {
     icon: FileText,
-    title: "Descargar Whitepaper",
-    description: "Documento técnico completo en PDF",
+    title: "Descargar Whitepaper PDF",
+    description: "Documento técnico completo para imprimir",
     primary: false,
-    link: "/partners/itbid/whitepaper",
+    link: null,
+    isPdf: true,
   },
   {
     icon: Phone,
@@ -117,11 +119,17 @@ export const CTASection = () => {
                         )}
                       </Button>
                     )}
+                    {action.isPdf && (
+                      <Button variant="outline" className="mt-4 w-full gap-2" onClick={() => generateWhitepaperPDF()}>
+                        <Download className="h-4 w-4" />
+                        Descargar PDF
+                      </Button>
+                    )}
                     {action.link && (
                       <Button asChild variant="outline" className="mt-4 w-full gap-2">
                         <Link to={action.link}>
                           <Download className="h-4 w-4" />
-                          Acceder al Whitepaper
+                          Ver Online
                         </Link>
                       </Button>
                     )}
