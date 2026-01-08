@@ -160,7 +160,7 @@ export const SuccessCasesSection = () => {
   const [hoveredCase, setHoveredCase] = useState<string | null>(null);
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-12 pb-6 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-[hsl(var(--itbid-navy)/0.02)] to-background" />
       
