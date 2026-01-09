@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function AuditLogs() {
   const logs = [
@@ -54,9 +55,10 @@ export default function AuditLogs() {
             <History className="h-10 w-10 text-green-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Audit Logs</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Registros de Auditoría Inmutables mediante notarización en blockchain
           </p>
+          <MotorNavigation currentPath="/motor/audit-logs" />
           
           {/* KPIs */}
           <div className="flex justify-center gap-6 flex-wrap">

@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function ConectoresERP() {
   const connectors = [
@@ -66,9 +67,10 @@ export default function ConectoresERP() {
             <Plug className="h-10 w-10 text-indigo-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Conectores ERP</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Integración Plug & Play con Sistemas Core mediante API REST y Webhooks
           </p>
+          <MotorNavigation currentPath="/motor/conectores-erp" />
           
           {/* KPIs */}
           <div className="flex justify-center gap-6 flex-wrap">

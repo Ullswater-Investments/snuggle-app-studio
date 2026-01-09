@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function GobernanzaODRL() {
   const [permissions, setPermissions] = useState({
@@ -78,9 +79,10 @@ export default function GobernanzaODRL() {
             <FileCode className="h-10 w-10 text-blue-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Gobernanza ODRL</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Contratos digitales autoejecutables para la soberanía del dato
           </p>
+          <MotorNavigation currentPath="/motor/gobernanza-odrl" />
           
           {/* KPIs */}
           <div className="flex justify-center gap-6 flex-wrap">

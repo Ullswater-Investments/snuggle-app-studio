@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function EdgeFunctions() {
   const nodes = [
@@ -53,9 +54,10 @@ export default function EdgeFunctions() {
             <Cpu className="h-10 w-10 text-purple-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Edge Functions</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Lógica de Negocio Escalable mediante procesamiento serverless distribuido
           </p>
+          <MotorNavigation currentPath="/motor/edge-functions" />
           
           {/* KPIs */}
           <div className="flex justify-center gap-6 flex-wrap">
