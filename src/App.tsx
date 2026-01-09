@@ -94,107 +94,105 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
-          <AuthProvider>
-            <OrganizationProvider>
-            <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Landing />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/guide" element={<Guide />} />
-            <Route path="/architecture" element={<Architecture />} />
-            <Route path="/whitepaper" element={<InteractiveWhitepaper />} />
-            <Route path="/docs/tecnico" element={<TechnicalDocs />} />
-            <Route path="/models" element={<BusinessModels />} />
-            <Route path="/use-cases" element={<UseCases />} />
-            <Route path="/user-guide" element={<UserGuide />} />
-            <Route path="/documento-explicativo-1" element={<DocumentoExplicativo1 />} />
-            <Route path="/documento-explicativo-2" element={<DocumentoExplicativo2 />} />
-            <Route path="/documento-explicativo-3" element={<DocumentoExplicativo3 />} />
-            <Route path="/documento-explicativo-4" element={<DocumentoExplicativo4 />} />
-            <Route path="/documento-explicativo-5" element={<DocumentoExplicativo5 />} />
-            <Route path="/documento-explicativo-6" element={<DocumentoExplicativo6 />} />
-            <Route path="/documento-explicativo-7" element={<DocumentoExplicativo7 />} />
-            <Route path="/documento-explicativo-8" element={<DocumentoExplicativo8 />} />
-            <Route path="/documento-explicativo-9" element={<DocumentoExplicativo9 />} />
-            <Route path="/documento-explicativo-10" element={<DocumentoExplicativo10 />} />
-            <Route path="/documento-explicativo-11" element={<DocumentoExplicativo11 />} />
-            <Route path="/documento-explicativo-12" element={<DocumentoExplicativo12 />} />
-            <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
-            <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
-            <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
-            <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
-            
-            {/* Motor de ProcureData - Technical Deep Dives */}
-            <Route path="/motor/wallet-web3" element={<WalletWeb3 />} />
-            <Route path="/motor/identidad-ssi" element={<IdentidadSSI />} />
-            <Route path="/motor/pagos-euroe" element={<PagosEUROe />} />
-            <Route path="/motor/activity-feed" element={<MotorActivityFeed />} />
-            <Route path="/motor/smart-alerts" element={<SmartAlerts />} />
-            <Route path="/motor/gobernanza-odrl" element={<GobernanzaODRL />} />
-            <Route path="/motor/multi-tenant-rls" element={<MultiTenantRLS />} />
-            <Route path="/motor/audit-logs" element={<MotorAuditLogs />} />
-            <Route path="/motor/modelo-idsa" element={<ModeloIDSA />} />
-            <Route path="/motor/conectores-erp" element={<ConectoresERP />} />
-            <Route path="/motor/edge-functions" element={<EdgeFunctions />} />
-            <Route path="/motor/tour-guiado" element={<TourGuiado />} />
-            <Route path="/motor/docs-interactivos" element={<DocsInteractivos />} />
+            <AuthProvider>
+              <OrganizationProvider>
+                <Routes>
+                  {/* Public routes */}
+                  <Route path="/" element={<Landing />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/guide" element={<Guide />} />
+                  <Route path="/architecture" element={<Architecture />} />
+                  <Route path="/whitepaper" element={<InteractiveWhitepaper />} />
+                  <Route path="/docs/tecnico" element={<TechnicalDocs />} />
+                  <Route path="/models" element={<BusinessModels />} />
+                  <Route path="/use-cases" element={<UseCases />} />
+                  <Route path="/user-guide" element={<UserGuide />} />
+                  <Route path="/documento-explicativo-1" element={<DocumentoExplicativo1 />} />
+                  <Route path="/documento-explicativo-2" element={<DocumentoExplicativo2 />} />
+                  <Route path="/documento-explicativo-3" element={<DocumentoExplicativo3 />} />
+                  <Route path="/documento-explicativo-4" element={<DocumentoExplicativo4 />} />
+                  <Route path="/documento-explicativo-5" element={<DocumentoExplicativo5 />} />
+                  <Route path="/documento-explicativo-6" element={<DocumentoExplicativo6 />} />
+                  <Route path="/documento-explicativo-7" element={<DocumentoExplicativo7 />} />
+                  <Route path="/documento-explicativo-8" element={<DocumentoExplicativo8 />} />
+                  <Route path="/documento-explicativo-9" element={<DocumentoExplicativo9 />} />
+                  <Route path="/documento-explicativo-10" element={<DocumentoExplicativo10 />} />
+                  <Route path="/documento-explicativo-11" element={<DocumentoExplicativo11 />} />
+                  <Route path="/documento-explicativo-12" element={<DocumentoExplicativo12 />} />
+                  <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
+                  <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
+                  <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
+                  <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
+                  
+                  {/* Motor de ProcureData - Technical Deep Dives */}
+                  <Route path="/motor" element={<Navigate to="/models" replace />} />
+                  <Route path="/motor/wallet-web3" element={<WalletWeb3 />} />
+                  <Route path="/motor/identidad-ssi" element={<IdentidadSSI />} />
+                  <Route path="/motor/pagos-euroe" element={<PagosEUROe />} />
+                  <Route path="/motor/activity-feed" element={<MotorActivityFeed />} />
+                  <Route path="/motor/smart-alerts" element={<SmartAlerts />} />
+                  <Route path="/motor/gobernanza-odrl" element={<GobernanzaODRL />} />
+                  <Route path="/motor/multi-tenant-rls" element={<MultiTenantRLS />} />
+                  <Route path="/motor/audit-logs" element={<MotorAuditLogs />} />
+                  <Route path="/motor/modelo-idsa" element={<ModeloIDSA />} />
+                  <Route path="/motor/conectores-erp" element={<ConectoresERP />} />
+                  <Route path="/motor/edge-functions" element={<EdgeFunctions />} />
+                  <Route path="/motor/tour-guiado" element={<TourGuiado />} />
+                  <Route path="/motor/docs-interactivos" element={<DocsInteractivos />} />
 
-            {/* Public Demo Routes - Accessible without authentication */}
-            <Route element={<PublicDemoLayout />}>
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/sustainability" element={<Sustainability />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/services/:id" element={<ServiceDetail />} />
-              <Route path="/innovation" element={<InnovationLab />} />
-              <Route path="/success-stories" element={<SuccessStories />} />
-              <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
-              <Route path="/partners" element={<Partners />} />
-            </Route>
+                  {/* Public Demo Routes - Accessible without authentication */}
+                  <Route element={<PublicDemoLayout />}>
+                    <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/sustainability" element={<Sustainability />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/services/:id" element={<ServiceDetail />} />
+                    <Route path="/innovation" element={<InnovationLab />} />
+                    <Route path="/success-stories" element={<SuccessStories />} />
+                    <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
+                    <Route path="/partners" element={<Partners />} />
+                  </Route>
 
-            {/* Partner Pages */}
-            <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
-            <Route path="/partners/itbid/proyecto" element={<ItbidProtectedRoute><ItbidProyecto /></ItbidProtectedRoute>} />
-            <Route path="/partners/itbid/casos-exito" element={<ItbidProtectedRoute><ItbidCasosExito /></ItbidProtectedRoute>} />
-            <Route path="/partners/itbid/whitepaper" element={<ItbidProtectedRoute><ItbidWhitepaper /></ItbidProtectedRoute>} />
-            <Route path="/partners/itbid/doc-tecnico" element={<ItbidProtectedRoute><ItbidDocTecnico /></ItbidProtectedRoute>} />
-              {/* Protected routes with AppLayout */}
-              <Route element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/catalog/product/:id" element={<ProductDetail />} />
-                <Route path="/requests" element={<Requests />} />
-                <Route path="/requests/new" element={<RequestWizard />} />
-                <Route path="/data" element={<Data />} />
-                <Route path="/data/view/:id" element={<DataView />} />
-                <Route path="/opportunities" element={<Opportunities />} />
-                <Route path="/reports" element={<Reports />} />
-                <Route path="/analytics" element={<SellerAnalytics />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/opportunities" element={<Opportunities />} />
-                <Route path="/reports" element={<Reports />} />
-                <Route path="/analytics" element={<SellerAnalytics />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/settings/erp-config" element={<ERPConfig />} />
-                <Route path="/settings/organization" element={<SettingsOrganization />} />
-                <Route path="/settings/preferences" element={<SettingsPreferences />} />
-                <Route path="/settings/notifications" element={<SettingsNotifications />} />
-                <Route path="/settings/webhooks" element={<WebhookSettings />} />
-                <Route path="/settings/audit" element={<AuditLogs />} />
-                <Route path="/admin/feedback" element={<AdminFeedback />} />
-              </Route>
-              
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </OrganizationProvider>
-        </AuthProvider>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </TooltipProvider>
+                  {/* Partner Pages */}
+                  <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
+                  <Route path="/partners/itbid/proyecto" element={<ItbidProtectedRoute><ItbidProyecto /></ItbidProtectedRoute>} />
+                  <Route path="/partners/itbid/casos-exito" element={<ItbidProtectedRoute><ItbidCasosExito /></ItbidProtectedRoute>} />
+                  <Route path="/partners/itbid/whitepaper" element={<ItbidProtectedRoute><ItbidWhitepaper /></ItbidProtectedRoute>} />
+                  <Route path="/partners/itbid/doc-tecnico" element={<ItbidProtectedRoute><ItbidDocTecnico /></ItbidProtectedRoute>} />
+
+                  {/* Protected routes with AppLayout */}
+                  <Route element={
+                    <ProtectedRoute>
+                      <AppLayout />
+                    </ProtectedRoute>
+                  }>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/catalog/product/:id" element={<ProductDetail />} />
+                    <Route path="/requests" element={<Requests />} />
+                    <Route path="/requests/new" element={<RequestWizard />} />
+                    <Route path="/data" element={<Data />} />
+                    <Route path="/data/view/:id" element={<DataView />} />
+                    <Route path="/opportunities" element={<Opportunities />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/analytics" element={<SellerAnalytics />} />
+                    <Route path="/notifications" element={<Notifications />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/settings/erp-config" element={<ERPConfig />} />
+                    <Route path="/settings/organization" element={<SettingsOrganization />} />
+                    <Route path="/settings/preferences" element={<SettingsPreferences />} />
+                    <Route path="/settings/notifications" element={<SettingsNotifications />} />
+                    <Route path="/settings/webhooks" element={<WebhookSettings />} />
+                    <Route path="/settings/audit" element={<AuditLogs />} />
+                    <Route path="/admin/feedback" element={<AdminFeedback />} />
+                  </Route>
+                  
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </OrganizationProvider>
+            </AuthProvider>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </TooltipProvider>
     </ThemeProvider>
   </ErrorBoundary>
 );
