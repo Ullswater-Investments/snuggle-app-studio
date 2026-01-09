@@ -81,8 +81,8 @@ export const DocPropiedadDatos = () => {
               </p>
             </CardHeader>
             <CardContent>
-              <div className="flex justify-center mb-6">
-                <MermaidDiagram chart={triangleDiagram} />
+              <div className="flex justify-center mb-6 w-full overflow-x-auto min-h-[400px]">
+                <MermaidDiagram chart={triangleDiagram} scale={1.6} className="w-full min-w-[600px]" />
               </div>
               <div className="grid md:grid-cols-3 gap-4 text-center">
                 <div className="p-4 rounded-lg bg-[hsl(var(--itbid-cyan)/0.1)]">
