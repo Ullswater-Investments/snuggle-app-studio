@@ -13,6 +13,7 @@ import {
   DocResponsabilidadLegal,
   DocModeloNegocio,
   DocRequisitosTecnicos,
+  DocHojaDeRuta,
   DocTiposInformacion,
   DocDiferenciacion,
   DocCTA,
@@ -28,8 +29,9 @@ const sections = [
   { id: "legal", label: "6. Responsabilidad Legal" },
   { id: "negocio", label: "7. Modelo de Negocio" },
   { id: "tecnico", label: "8. Requisitos Técnicos" },
-  { id: "informacion", label: "9. Tipos de Información" },
-  { id: "diferenciacion", label: "10. Diferenciación" },
+  { id: "hojaderuta", label: "9. Hoja de Ruta" },
+  { id: "informacion", label: "10. Tipos de Información" },
+  { id: "diferenciacion", label: "11. Diferenciación" },
   { id: "cta", label: "Próximos Pasos" },
 ];
 
@@ -203,6 +205,9 @@ const ItbidDocTecnico = () => {
           </div>
           <div id="tecnico">
             <DocRequisitosTecnicos />
+          </div>
+          <div id="hojaderuta">
+            <DocHojaDeRuta />
           </div>
           <div id="informacion">
             <DocTiposInformacion />

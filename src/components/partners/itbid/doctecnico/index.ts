@@ -7,6 +7,7 @@ export { DocParticipantes } from './DocParticipantes';
 export { DocResponsabilidadLegal } from './DocResponsabilidadLegal';
 export { DocModeloNegocio } from './DocModeloNegocio';
 export { DocRequisitosTecnicos } from './DocRequisitosTecnicos';
+export { DocHojaDeRuta } from './DocHojaDeRuta';
 export { DocTiposInformacion } from './DocTiposInformacion';
 export { DocDiferenciacion } from './DocDiferenciacion';
 export { DocCTA } from './DocCTA';

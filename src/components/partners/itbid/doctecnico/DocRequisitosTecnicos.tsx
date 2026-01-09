@@ -208,36 +208,6 @@ export const DocRequisitosTecnicos = () => {
           </FadeIn>
         </div>
 
-        {/* Effort Summary */}
-        <FadeIn delay={0.3}>
-          <Card className="mt-8 bg-gradient-to-r from-[hsl(var(--itbid-lime)/0.1)] to-[hsl(var(--itbid-cyan)/0.1)] border-[hsl(var(--itbid-lime)/0.3)]">
-            <CardContent className="py-8">
-              <div className="flex items-start gap-4 max-w-3xl mx-auto">
-                <Cpu className="h-10 w-10 text-[hsl(var(--itbid-lime))] shrink-0" />
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Esfuerzo de Integración Estimado</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Con el Kit Espacio de Datos proporcionado por PROCUREDATA, la integración técnica se reduce a:
-                  </p>
-                  <div className="grid md:grid-cols-3 gap-4 text-center">
-                    <div className="p-3 rounded-lg bg-card border">
-                      <p className="text-2xl font-bold text-[hsl(var(--itbid-cyan))]">2-4</p>
-                      <p className="text-sm text-muted-foreground">Semanas despliegue inicial</p>
-                    </div>
-                    <div className="p-3 rounded-lg bg-card border">
-                      <p className="text-2xl font-bold text-[hsl(var(--itbid-magenta))]">1</p>
-                      <p className="text-sm text-muted-foreground">Desarrollador senior</p>
-                    </div>
-                    <div className="p-3 rounded-lg bg-card border">
-                      <p className="text-2xl font-bold text-[hsl(var(--itbid-lime))]">0</p>
-                      <p className="text-sm text-muted-foreground">Cambios en frontend</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </FadeIn>
       </div>
     </section>
   );
