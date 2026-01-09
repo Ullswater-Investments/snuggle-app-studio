@@ -336,6 +336,7 @@ export default function BusinessModels() {
           </div>
           
           <MermaidDiagram
+            scale={1.12}
             chart={`
 sequenceDiagram
     participant C as 🏢 Consumer<br/>(Comprador de Datos)
