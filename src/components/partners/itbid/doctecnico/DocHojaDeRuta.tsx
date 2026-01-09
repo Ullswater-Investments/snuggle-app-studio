@@ -53,7 +53,7 @@ const phases = [
   {
     phase: 2,
     title: "Despliegue de Infraestructura",
-    period: "Meses 3-6",
+    period: "Mes 2",
     icon: Settings,
     color: "itbid-magenta",
     objective: "Construir los cimientos con el dinero captado.",
