@@ -116,7 +116,7 @@ export const DocRequisitosTecnicos = () => {
             </CardHeader>
             <CardContent>
               <div className="flex justify-center overflow-x-auto">
-                <MermaidDiagram chart={architectureDiagram} />
+                <MermaidDiagram chart={architectureDiagram} scale={1.12} />
               </div>
               <p className="text-center text-sm text-muted-foreground mt-4">
                 El Kit Espacio de Datos se despliega junto a la infraestructura existente de ITBID
