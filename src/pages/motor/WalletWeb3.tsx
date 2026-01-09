@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function WalletWeb3() {
   return (
@@ -41,6 +42,7 @@ export default function WalletWeb3() {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Gestión de Activos Soberanos mediante firma digital corporativa
           </p>
+          <MotorNavigation currentPath="/motor/wallet-web3" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">

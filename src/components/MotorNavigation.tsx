@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Coins, Shield, FileCheck, Activity, Cpu, Network } from "lucide-react";
+import { ChevronLeft, ChevronRight, Coins, Shield, FileCheck, Activity, Cpu, Network, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -10,6 +10,7 @@ const MOTOR_PAGES = [
   { path: "/motor/edge-functions", title: "IoT Data Streams", icon: Activity },
   { path: "/motor/modelo-idsa", title: "Compute-to-Data", icon: Cpu },
   { path: "/motor/conectores-erp", title: "Network Builder", icon: Network },
+  { path: "/motor/wallet-web3", title: "Wallet Web3", icon: Wallet },
 ];
 
 interface MotorNavigationProps {
