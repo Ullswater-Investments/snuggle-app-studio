@@ -223,22 +223,6 @@ export const DocDiferenciacion = () => {
           </Card>
         </FadeIn>
 
-        {/* Final Message */}
-        <FadeIn delay={0.3}>
-          <Card className="mt-12 border-2 border-[hsl(var(--itbid-cyan)/0.5)] bg-gradient-to-r from-[hsl(var(--itbid-cyan)/0.1)] to-[hsl(var(--itbid-magenta)/0.1)]">
-            <CardContent className="py-10 text-center">
-              <Network className="h-14 w-14 mx-auto mb-6 text-[hsl(var(--itbid-cyan))]" />
-              <h3 className="text-2xl font-bold mb-4">Mensaje Final para la Dirección de ITBID</h3>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-6">
-                "No competimos acumulando datos. <strong>Competimos conectando datos.</strong>"
-              </p>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                La propuesta es que ITBID lidere este cambio de paradigma en lugar de esperar 
-                a que plataformas americanas impongan sus estándares en el mercado europeo.
-              </p>
-            </CardContent>
-          </Card>
-        </FadeIn>
       </div>
     </section>
   );
