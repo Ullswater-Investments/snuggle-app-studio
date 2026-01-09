@@ -423,6 +423,7 @@ sequenceDiagram
           </div>
           
           <MermaidDiagram
+            scale={1.12}
             chart={`
 sequenceDiagram
     participant Corp as 🏛️ Corporation<br/>(Sponsor)
