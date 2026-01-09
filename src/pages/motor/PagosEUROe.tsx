@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function PagosEUROe() {
   const kpis = [
@@ -46,9 +47,10 @@ export default function PagosEUROe() {
             <Coins className="h-10 w-10 text-yellow-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Pagos EUROe</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Liquidación Instantánea en moneda regulada bajo normativa MiCA
           </p>
+          <MotorNavigation currentPath="/motor/pagos-euroe" />
           
           {/* KPIs */}
           <div className="flex justify-center gap-6 flex-wrap">

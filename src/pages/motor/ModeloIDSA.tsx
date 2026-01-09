@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { MotorNavigation } from "@/components/MotorNavigation";
 
 export default function ModeloIDSA() {
   const roles = [
@@ -77,9 +78,10 @@ export default function ModeloIDSA() {
             <Network className="h-10 w-10 text-red-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Modelo IDSA</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Arquitectura Basada en el Estándar de la International Data Spaces Association
           </p>
+          <MotorNavigation currentPath="/motor/modelo-idsa" />
           
           {/* KPIs */}
           <div className="flex justify-center gap-6 flex-wrap">
