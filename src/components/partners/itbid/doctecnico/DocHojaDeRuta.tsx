@@ -10,11 +10,17 @@ import {
   Wallet, 
   CheckCircle2,
   Zap,
-  Building2,
   Brain,
   Link2,
   Banknote,
-  ArrowRight
+  ArrowRight,
+  Euro,
+  Database,
+  Shield,
+  Globe,
+  BadgeCheck,
+  Sparkles,
+  Network
 } from "lucide-react";
 import {
   Table,
@@ -24,6 +30,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import kitLogo from "@/assets/kit-espacios-datos-logo.png";
 
 const phases = [
   {
@@ -145,40 +152,140 @@ export const DocHojaDeRuta = () => {
           </div>
         </FadeIn>
 
-        {/* Crowdfunding Model Intro */}
+        {/* Kit Espacio de Datos Hero */}
         <FadeIn delay={0.1}>
-          <Card className="mb-12 bg-gradient-to-r from-[hsl(var(--itbid-cyan)/0.1)] via-[hsl(var(--itbid-magenta)/0.05)] to-[hsl(var(--itbid-lime)/0.1)] border-[hsl(var(--itbid-cyan)/0.3)]">
+          <Card className="mb-8 bg-gradient-to-r from-[hsl(var(--itbid-cyan)/0.1)] via-[hsl(var(--itbid-magenta)/0.05)] to-[hsl(var(--itbid-lime)/0.1)] border-[hsl(var(--itbid-cyan)/0.3)] overflow-hidden">
             <CardContent className="py-8">
-              <div className="flex flex-col md:flex-row items-center gap-6">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[hsl(var(--itbid-cyan))] to-[hsl(var(--itbid-magenta))] flex items-center justify-center shrink-0">
-                  <Building2 className="h-10 w-10 text-white" />
+              <div className="flex flex-col lg:flex-row items-center gap-8">
+                <div className="shrink-0">
+                  <img 
+                    src={kitLogo} 
+                    alt="Kit Espacio de Datos" 
+                    className="h-24 w-auto object-contain"
+                  />
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-2">Modelo "Crowdfunding Institucional"</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Financiar la innovación tecnológica de ITBID utilizando los <strong>fondos públicos asignados a sus propios clientes</strong>.
+                <div className="flex-1 text-center lg:text-left">
+                  <Badge className="mb-4 bg-[hsl(var(--itbid-lime)/0.2)] text-[hsl(var(--itbid-lime))] border-[hsl(var(--itbid-lime)/0.3)]">
+                    <Euro className="h-3 w-3 mr-1" />
+                    SUBVENCIÓN KIT ESPACIO DE DATOS
+                  </Badge>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                    Subvención de hasta <span className="text-[hsl(var(--itbid-lime))]">30.000€</span> para adherirse a Espacios de Datos Federados
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Fondos europeos a través de <strong>Red.es</strong> para impulsar la soberanía digital y la economía del dato en España
                   </p>
-                  <div className="flex flex-wrap gap-3">
-                    <Badge variant="outline" className="bg-[hsl(var(--itbid-cyan)/0.1)] border-[hsl(var(--itbid-cyan)/0.3)]">
-                      <CheckCircle2 className="h-3 w-3 mr-1" />
-                      Elimina el riesgo financiero (Capex) para ITBID
-                    </Badge>
-                    <Badge variant="outline" className="bg-[hsl(var(--itbid-magenta)/0.1)] border-[hsl(var(--itbid-magenta)/0.3)]">
-                      <Zap className="h-3 w-3 mr-1" />
-                      Venta tecnológica = Campaña de adhesión subvencionada
-                    </Badge>
-                  </div>
                 </div>
               </div>
-              <div className="mt-6 p-4 rounded-xl bg-card border text-center">
-                <p className="text-xl font-semibold">
-                  <span className="text-[hsl(var(--itbid-lime))]">Más clientes adheridos</span>
-                  <ArrowRight className="inline h-5 w-5 mx-2 text-muted-foreground" />
-                  <span className="text-[hsl(var(--itbid-cyan))]">Mayor presupuesto de I+D para la plataforma</span>
-                </p>
+
+              {/* 4 Pillars */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                {[
+                  { icon: Database, label: "Datos Fiables", color: "itbid-cyan" },
+                  { icon: Brain, label: "IA de Calidad", color: "itbid-magenta" },
+                  { icon: Shield, label: "Confianza", color: "itbid-lime" },
+                  { icon: Zap, label: "Velocidad", color: "itbid-cyan" }
+                ].map((pillar) => (
+                  <div 
+                    key={pillar.label}
+                    className={`flex flex-col items-center p-4 rounded-xl bg-[hsl(var(--${pillar.color})/0.1)] border border-[hsl(var(--${pillar.color})/0.3)]`}
+                  >
+                    <pillar.icon className={`h-8 w-8 text-[hsl(var(--${pillar.color}))] mb-2`} />
+                    <span className="font-semibold text-sm text-center">{pillar.label}</span>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
+        </FadeIn>
+
+        {/* Pricing Options */}
+        <FadeIn delay={0.15}>
+          <div className="mb-12">
+            <div className="text-center mb-6">
+              <Badge variant="outline" className="bg-[hsl(var(--itbid-lime)/0.1)] border-[hsl(var(--itbid-lime)/0.3)] text-[hsl(var(--itbid-lime))]">
+                <Globe className="h-3 w-3 mr-1" />
+                Fondos Públicos Red.es — 100% a fondo perdido
+              </Badge>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Option A - 15.000€ */}
+              <Card className="border-[hsl(var(--itbid-cyan)/0.3)] relative">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className="bg-[hsl(var(--itbid-cyan)/0.2)] text-[hsl(var(--itbid-cyan))] border-[hsl(var(--itbid-cyan)/0.3)]">
+                      Opción A
+                    </Badge>
+                    <span className="text-3xl font-bold text-[hsl(var(--itbid-cyan))]">15.000€</span>
+                  </div>
+                  <CardTitle className="text-xl">Adhesión Espacio de datos PROCUREDATA</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {[
+                      { icon: Network, text: "Conector IDS/Gaia-X certificado" },
+                      { icon: Shield, text: "Wallet de Identidad Soberana" },
+                      { icon: Users, text: "Asociación y Formación especializada" }
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-[hsl(var(--itbid-cyan)/0.1)] flex items-center justify-center shrink-0">
+                          <item.icon className="h-4 w-4 text-[hsl(var(--itbid-cyan))]" />
+                        </div>
+                        <span className="text-sm">{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="p-4 rounded-lg bg-muted/50 text-center">
+                    <p className="text-sm text-muted-foreground">Coste inicial cliente</p>
+                    <p className="text-2xl font-bold">2.000€</p>
+                    <p className="text-xs text-muted-foreground">(recuperables con la subvención)</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Option B - 30.000€ */}
+              <Card className="border-2 border-[hsl(var(--itbid-lime)/0.5)] relative bg-gradient-to-b from-[hsl(var(--itbid-lime)/0.05)] to-transparent">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge className="bg-[hsl(var(--itbid-lime))] text-white">
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    RECOMENDADO
+                  </Badge>
+                </div>
+                <CardHeader className="pt-8">
+                  <div className="flex items-center justify-between mb-2">
+                    <Badge className="bg-[hsl(var(--itbid-lime)/0.2)] text-[hsl(var(--itbid-lime))] border-[hsl(var(--itbid-lime)/0.3)]">
+                      Opción B
+                    </Badge>
+                    <span className="text-3xl font-bold text-[hsl(var(--itbid-lime))]">30.000€</span>
+                  </div>
+                  <CardTitle className="text-xl">Adhesión + Caso de uso</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {[
+                      { icon: CheckCircle2, text: "Todo incluido de la Opción A", highlight: true },
+                      { icon: BadgeCheck, text: "Consultoría personalizada de Caso de Uso" },
+                      { icon: Settings, text: "Desarrollo a Medida (API/IoT)" },
+                      { icon: TrendingUp, text: "Visibilidad como Pionero del ecosistema" }
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-lg ${item.highlight ? 'bg-[hsl(var(--itbid-cyan)/0.1)]' : 'bg-[hsl(var(--itbid-lime)/0.1)]'} flex items-center justify-center shrink-0`}>
+                          <item.icon className={`h-4 w-4 ${item.highlight ? 'text-[hsl(var(--itbid-cyan))]' : 'text-[hsl(var(--itbid-lime))]'}`} />
+                        </div>
+                        <span className={`text-sm ${item.highlight ? 'text-muted-foreground' : ''}`}>{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="p-4 rounded-lg bg-[hsl(var(--itbid-lime)/0.1)] border border-[hsl(var(--itbid-lime)/0.3)] text-center">
+                    <p className="text-sm text-muted-foreground">Coste inicial cliente</p>
+                    <p className="text-2xl font-bold text-[hsl(var(--itbid-lime))]">5.000€</p>
+                    <p className="text-xs text-muted-foreground">(recuperables con la subvención)</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </FadeIn>
 
         {/* 3 Phases Timeline */}
