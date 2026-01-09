@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { 
   Coins, Shield, FileCheck, Activity, Cpu, Network, 
   Home, ArrowRight, Calculator, Sparkles, TrendingUp, GitBranch, Lock,
-  Check, X, Zap, Crown, Building2, HelpCircle, CreditCard, Plug, Users
+  Check, X, Zap, Crown, Building2, HelpCircle, CreditCard, Plug, Users,
+  CheckCircle, History
 } from "lucide-react";
 import { 
   Accordion, 
@@ -21,63 +22,99 @@ import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 const MODELS = [
   {
-    id: "fee",
+    id: "marketplace",
     title: "Marketplace Fee",
-    desc: "Monetización transaccional automática.",
-    detail: "Comisión del 2-5% vía Smart Contract en cada pago EUROe. Cobro atómico garantizado sin perseguir facturas.",
+    description: "Comisión automática vía contrato inteligente en cada transacción. Cobro garantizado sin perseguir facturas ni gestionar impagos.",
     icon: Coins,
-    color: "bg-yellow-500/10 text-yellow-600 border-yellow-500/30",
-    gradient: "from-yellow-500/20 to-orange-500/10",
+    iconBg: "bg-yellow-500/15",
+    iconColor: "text-yellow-600",
+    borderColor: "border-yellow-500/30",
+    badges: ["Smart Contract", "EUROe", "2-5% Fee"],
+    metrics: [
+      { icon: Zap, label: "Liquidación 2s" },
+      { icon: Shield, label: "0% impagos" },
+      { icon: CheckCircle, label: "Cobro atómico" },
+    ],
     path: "/motor/pagos-euroe",
   },
   {
     id: "saas",
     title: "Soberanía SaaS",
-    desc: "Suscripción por herramientas de privacidad.",
-    detail: "Tiers Free/Pro/Enterprise con Kill-Switch, conectores ERP ilimitados y trazabilidad blockchain completa.",
+    description: "Suscripción por herramientas de control de privacidad y acceso a datos con políticas granulares. Modelo recurrente mensual.",
     icon: Shield,
-    color: "bg-blue-500/10 text-blue-600 border-blue-500/30",
-    gradient: "from-blue-500/20 to-cyan-500/10",
+    iconBg: "bg-blue-500/15",
+    iconColor: "text-blue-600",
+    borderColor: "border-blue-500/30",
+    badges: ["Kill-Switch", "ODRL", "Enterprise"],
+    metrics: [
+      { icon: Lock, label: "Control 100%" },
+      { icon: Zap, label: "Revocación instantánea" },
+      { icon: Users, label: "Multi-tenant" },
+    ],
     path: "/motor/gobernanza-odrl",
   },
   {
     id: "audit",
     title: "Auditoría Blockchain",
-    desc: "Verificación de certificados inmutables.",
-    detail: "Cobro por emisión de credenciales on-chain y por acceso a API de validación histórica para terceros.",
+    description: "Cobro por certificaciones on-chain y acceso API para validación histórica. Trazabilidad inmutable verificable por terceros.",
     icon: FileCheck,
-    color: "bg-green-500/10 text-green-600 border-green-500/30",
-    gradient: "from-green-500/20 to-emerald-500/10",
+    iconBg: "bg-green-500/15",
+    iconColor: "text-green-600",
+    borderColor: "border-green-500/30",
+    badges: ["Inmutable", "Pontus-X", "DID"],
+    metrics: [
+      { icon: History, label: "Trazabilidad total" },
+      { icon: CheckCircle, label: "Verificable" },
+      { icon: Shield, label: "Sin manipulación" },
+    ],
     path: "/motor/audit-logs",
   },
   {
     id: "iot",
     title: "IoT Data Streams",
-    desc: "Pay-as-you-go por volumen de datos.",
-    detail: "€0.01 por cada 1,000 lecturas de sensores notarizadas en Pontus-X. Optimización de gas incluida.",
+    description: "Monetización por volumen de datos IoT notarizados en blockchain. €0.01 por cada 1,000 lecturas de sensores.",
     icon: Activity,
-    color: "bg-purple-500/10 text-purple-600 border-purple-500/30",
-    gradient: "from-purple-500/20 to-pink-500/10",
+    iconBg: "bg-purple-500/15",
+    iconColor: "text-purple-600",
+    borderColor: "border-purple-500/30",
+    badges: ["Pay-as-you-go", "Sensores", "Edge"],
+    metrics: [
+      { icon: Coins, label: "€0.01/1K lecturas" },
+      { icon: Zap, label: "Gas optimizado" },
+      { icon: Activity, label: "Real-time" },
+    ],
     path: "/motor/edge-functions",
   },
   {
     id: "compute",
     title: "Compute-to-Data",
-    desc: "Sandboxing seguro para IA.",
-    detail: "Alquiler de entornos donde algoritmos aprenden sin ver datos crudos. Soberanía matemáticamente garantizada.",
+    description: "Alquiler de entornos donde algoritmos aprenden sin acceder a datos crudos. Soberanía matemáticamente garantizada.",
     icon: Cpu,
-    color: "bg-red-500/10 text-red-600 border-red-500/30",
-    gradient: "from-red-500/20 to-rose-500/10",
+    iconBg: "bg-red-500/15",
+    iconColor: "text-red-600",
+    borderColor: "border-red-500/30",
+    badges: ["IA Segura", "Sandbox", "Privacy-first"],
+    metrics: [
+      { icon: Lock, label: "Datos nunca salen" },
+      { icon: Cpu, label: "ML federado" },
+      { icon: Shield, label: "Zero-trust" },
+    ],
     path: "/motor/modelo-idsa",
   },
   {
     id: "network",
     title: "Network Builder",
-    desc: "Digitalización masiva de proveedores.",
-    detail: "Tarifa corporativa (ej. 50k€/año) para subsidiar acceso Pro a 5,000 proveedores de tu cadena.",
+    description: "Tarifa empresarial para subsidiar acceso de toda tu cadena de suministro. Digitalización masiva de proveedores.",
     icon: Network,
-    color: "bg-indigo-500/10 text-indigo-600 border-indigo-500/30",
-    gradient: "from-indigo-500/20 to-violet-500/10",
+    iconBg: "bg-indigo-500/15",
+    iconColor: "text-indigo-600",
+    borderColor: "border-indigo-500/30",
+    badges: ["Corporativo", "5K+ proveedores", "Onboarding"],
+    metrics: [
+      { icon: Coins, label: "50K€/año" },
+      { icon: Crown, label: "Acceso Pro" },
+      { icon: Users, label: "Digitalización masiva" },
+    ],
     path: "/motor/conectores-erp",
   },
 ];
@@ -186,7 +223,6 @@ const PRICING_TIERS = [
 export default function BusinessModels() {
   const [volume, setVolume] = useState([50000]);
   const [suppliers, setSuppliers] = useState([100]);
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isAnnual, setIsAnnual] = useState(false);
 
   // Cálculos gamificados
@@ -228,7 +264,7 @@ export default function BusinessModels() {
           </p>
         </motion.div>
 
-        {/* Grid Interactivo de Modelos */}
+        {/* Grid de Modelos de Negocio - Diseño Estático */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -237,79 +273,60 @@ export default function BusinessModels() {
         >
           {MODELS.map((model) => {
             const Icon = model.icon;
-            const isHovered = hoveredCard === model.id;
             
             return (
               <motion.div
                 key={model.id}
                 variants={cardVariants}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02,
-                  transition: { duration: 0.2 }
-                }}
-                onHoverStart={() => setHoveredCard(model.id)}
-                onHoverEnd={() => setHoveredCard(null)}
                 className="relative"
               >
-                <Card className={`h-full border-2 transition-all duration-300 overflow-hidden ${
-                  isHovered ? 'shadow-2xl' : 'shadow-md'
-                } ${model.color}`}>
-                  {/* Gradient overlay on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${model.gradient} opacity-0 transition-opacity duration-300 ${
-                    isHovered ? 'opacity-100' : ''
-                  }`} />
-                  
-                  <CardHeader className="relative z-10">
-                    <div className="flex items-start justify-between">
-                      <div className={`p-3 rounded-xl ${model.color}`}>
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: isHovered ? 1 : 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
+                <Link to={model.path} className="block h-full">
+                  <Card className={`h-full border-2 ${model.borderColor} bg-card shadow-sm`}>
+                    <CardHeader className="pb-3">
+                      {/* Icono y título */}
+                      <div className="flex items-start justify-between mb-3">
+                        <div className={`p-3 rounded-xl ${model.iconBg}`}>
+                          <Icon className={`h-7 w-7 ${model.iconColor}`} />
+                        </div>
                         <ArrowRight className="h-5 w-5 text-muted-foreground" />
-                      </motion.div>
-                    </div>
-                    <CardTitle className="text-xl mt-4">{model.title}</CardTitle>
-                  </CardHeader>
-                  
-                  <CardContent className="relative z-10">
-                    <motion.div
-                      initial={false}
-                      animate={{ 
-                        height: isHovered ? 'auto' : '2.5rem',
-                        opacity: 1
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <p className={`text-sm transition-colors duration-300 ${
-                        isHovered ? 'text-foreground' : 'text-muted-foreground'
-                      }`}>
-                        {isHovered ? model.detail : model.desc}
-                      </p>
-                    </motion.div>
+                      </div>
+                      <CardTitle className="text-xl">{model.title}</CardTitle>
+                      
+                      {/* Badges */}
+                      <div className="flex flex-wrap gap-1.5 mt-2">
+                        {model.badges.map((badge, i) => (
+                          <Badge 
+                            key={i} 
+                            variant="secondary" 
+                            className="text-xs font-medium"
+                          >
+                            {badge}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardHeader>
                     
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ 
-                        opacity: isHovered ? 1 : 0,
-                        y: isHovered ? 0 : 10
-                      }}
-                      transition={{ duration: 0.2, delay: 0.1 }}
-                      className="mt-4"
-                    >
-                      <Button variant="outline" size="sm" className="w-full" asChild>
-                        <Link to={model.path}>
-                          Ver flujo técnico <ArrowRight className="ml-2 h-3 w-3" />
-                        </Link>
-                      </Button>
-                    </motion.div>
-                  </CardContent>
-                </Card>
+                    <CardContent className="pt-0">
+                      {/* Descripción */}
+                      <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                        {model.description}
+                      </p>
+                      
+                      {/* Métricas */}
+                      <div className="flex flex-wrap gap-3 pt-3 border-t border-border">
+                        {model.metrics.map((metric, i) => {
+                          const MetricIcon = metric.icon;
+                          return (
+                            <div key={i} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                              <MetricIcon className="h-3.5 w-3.5 text-primary" />
+                              <span>{metric.label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             );
           })}

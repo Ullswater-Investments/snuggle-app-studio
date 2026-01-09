@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Coins, Shield, Zap, CheckCircle, Clock, ArrowRightLeft } from "lucide-react";
+import { Coins, Shield, Zap, CheckCircle, Clock, ArrowRightLeft, TrendingUp, BadgeCheck, FileText, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,19 @@ import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 
 export default function PagosEUROe() {
+  const kpis = [
+    { icon: Clock, value: "2s", label: "Liquidación", color: "text-green-500" },
+    { icon: TrendingUp, value: "0%", label: "Impagos", color: "text-blue-500" },
+    { icon: BadgeCheck, value: "MiCA", label: "Regulado", color: "text-purple-500" },
+  ];
+
+  const steps = [
+    { step: "1", title: "Solicitud", desc: "El comprador solicita acceso al dataset" },
+    { step: "2", title: "Contrato", desc: "Se genera automáticamente contrato ODRL + precio" },
+    { step: "3", title: "Escrow", desc: "El pago se bloquea en Smart Contract" },
+    { step: "4", title: "Liberación", desc: "Al verificar recepción, el pago se libera al proveedor" },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -18,194 +31,195 @@ export default function PagosEUROe() {
               <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
             </Link>
           </div>
-          <Badge variant="outline" className="border-purple-500 text-purple-400">Web3 & Blockchain</Badge>
+          <Badge variant="outline" className="border-yellow-500 text-yellow-600">Marketplace Fee</Badge>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-16">
-        {/* Hero */}
+      <main className="container mx-auto px-4 py-12">
+        {/* Hero con KPIs */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-orange-600/20 border border-yellow-500/30 mb-6">
-            <motion.div
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Coins className="h-12 w-12 text-yellow-400" />
-            </motion.div>
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-yellow-500/15 border border-yellow-500/30 mb-6">
+            <Coins className="h-10 w-10 text-yellow-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Pagos EUROe</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Liquidación Instantánea en moneda regulada bajo normativa MiCA
           </p>
+          
+          {/* KPIs */}
+          <div className="flex justify-center gap-6 flex-wrap">
+            {kpis.map((kpi, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                className="flex items-center gap-3 px-5 py-3 bg-card border border-border rounded-xl"
+              >
+                <kpi.icon className={`h-5 w-5 ${kpi.color}`} />
+                <div className="text-left">
+                  <p className="text-2xl font-bold">{kpi.value}</p>
+                  <p className="text-xs text-muted-foreground">{kpi.label}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Interface Simulation - Payment Comparison */}
+        {/* Sección: Por qué importa */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-12"
+        >
+          <Card className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-yellow-500/20 rounded-lg shrink-0">
+                  <Zap className="h-6 w-6 text-yellow-500" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold mb-2">¿Por qué importa?</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Las transferencias bancarias tradicionales tardan de <strong className="text-foreground">24 a 72 horas</strong> y 
+                    generan fricción administrativa. Con EUROe, cada transacción se liquida en segundos vía Smart Contract, 
+                    eliminando impagos y la necesidad de perseguir facturas. El modelo de <strong className="text-yellow-500">Escrow (Garantía)</strong> protege 
+                    a ambas partes: el pago se libera automáticamente al verificar la recepción de datos.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.section>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Cómo funciona - Pasos */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-6"
+            transition={{ delay: 0.4 }}
           >
-            {/* Comparison Chart */}
-            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-border dark:border-white/10 bg-muted/50 dark:bg-white/5">
-                <CardTitle className="text-foreground">Comparativa de Tiempos</CardTitle>
-              </CardHeader>
-              <CardContent className="p-6 space-y-6">
-                {/* Traditional */}
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-muted-foreground">Transferencia Tradicional</span>
-                    <span className="text-red-400">3-5 días</span>
-                  </div>
-                  <div className="h-4 bg-muted dark:bg-white/10 rounded-full overflow-hidden">
-                    <motion.div 
-                      className="h-full bg-gradient-to-r from-red-500 to-red-600"
-                      initial={{ width: 0 }}
-                      animate={{ width: "100%" }}
-                      transition={{ duration: 1, delay: 0.5 }}
-                    />
-                  </div>
-                </div>
-
-                {/* EUROe */}
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-muted-foreground">Pago EUROe</span>
-                    <span className="text-green-400">2 segundos</span>
-                  </div>
-                  <div className="h-4 bg-muted dark:bg-white/10 rounded-full overflow-hidden">
-                    <motion.div 
-                      className="h-full bg-gradient-to-r from-green-500 to-green-600"
-                      initial={{ width: 0 }}
-                      animate={{ width: "2%" }}
-                      transition={{ duration: 0.3, delay: 0.8 }}
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Payment Modal Simulation */}
-            <Card className="bg-gradient-to-br from-muted dark:from-slate-900 to-yellow-900/20 border-yellow-500/30">
-              <CardHeader className="border-b border-border dark:border-white/10">
-                <CardTitle className="text-foreground flex items-center gap-2">
-                  <ArrowRightLeft className="h-5 w-5 text-yellow-400" />
-                  Confirmación de Pago
+            <Card className="bg-card border-border">
+              <CardHeader className="border-b border-border bg-muted/50">
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-yellow-500" />
+                  Cómo Funciona
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-6 space-y-4">
-                <div className="text-center p-6 bg-muted dark:bg-black/30 rounded-xl">
-                  <p className="text-sm text-muted-foreground mb-2">Importe a Pagar</p>
-                  <p className="text-5xl font-bold text-foreground">100.00 <span className="text-yellow-400">EUROe</span></p>
-                  <p className="text-sm text-muted-foreground/70 mt-2">Servicio: Homologación Flash</p>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  {steps.map((step, i) => (
+                    <div key={i} className="flex gap-4 items-start">
+                      <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center shrink-0">
+                        <span className="text-sm font-bold text-yellow-600">{step.step}</span>
+                      </div>
+                      <div className="flex-1 pt-0.5">
+                        <p className="font-medium">{step.title}</p>
+                        <p className="text-sm text-muted-foreground">{step.desc}</p>
+                      </div>
+                      {i < steps.length - 1 && (
+                        <ArrowRight className="h-4 w-4 text-muted-foreground/50 mt-2" />
+                      )}
+                    </div>
+                  ))}
                 </div>
-
-                <div className="space-y-3">
-                  <div className="flex justify-between p-3 bg-muted dark:bg-white/5 rounded-lg">
-                    <span className="text-muted-foreground">Red</span>
-                    <span className="text-foreground">Pontus-X</span>
-                  </div>
-                  <div className="flex justify-between p-3 bg-muted dark:bg-white/5 rounded-lg">
-                    <span className="text-muted-foreground">Tipo</span>
-                    <span className="text-foreground">Escrow (Garantía)</span>
-                  </div>
-                  <div className="flex justify-between p-3 bg-muted dark:bg-white/5 rounded-lg">
-                    <span className="text-muted-foreground">Hash Tx</span>
-                    <span className="font-mono text-yellow-400 text-sm">0x9ab2...f123</span>
-                  </div>
-                </div>
-
-                <Button className="w-full bg-yellow-600 hover:bg-yellow-700 text-black font-semibold">
-                  <Coins className="h-4 w-4 mr-2" />
-                  Confirmar Pago
-                </Button>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Content */}
+          {/* Panel de Comparativa y Especificaciones */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="space-y-8"
+            transition={{ delay: 0.4 }}
+            className="space-y-6"
           >
-            {/* Description */}
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Dinero Electrónico Tokenizado</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                ProcureData elimina la fricción financiera de las transferencias bancarias tradicionales 
-                (que tardan de 24 a 72 horas) mediante el uso de EUROe. El EUROe es dinero electrónico 
-                tokenizado con paridad 1:1 con el euro físico, respaldado por depósitos bancarios auditados.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mt-4">
-                Gracias a los <strong className="text-foreground">Smart Contracts</strong>, la plataforma permite 
-                el modelo de Escrow (Garantía): el pago se bloquea en la blockchain y solo se libera al 
-                proveedor una vez que el comprador ha recibido los datos verificados.
-              </p>
-            </div>
+            {/* Comparativa */}
+            <Card className="bg-card border-border">
+              <CardHeader className="border-b border-border bg-muted/50">
+                <CardTitle className="flex items-center gap-2">
+                  <ArrowRightLeft className="h-5 w-5 text-primary" />
+                  Comparativa de Tiempos
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6 space-y-4">
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-muted-foreground">Transferencia Tradicional</span>
+                    <span className="text-destructive font-medium">3-5 días</span>
+                  </div>
+                  <div className="h-3 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full w-full bg-destructive/60 rounded-full" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-muted-foreground">Pago EUROe</span>
+                    <span className="text-green-500 font-medium">2 segundos</span>
+                  </div>
+                  <div className="h-3 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full w-[2%] bg-green-500 rounded-full" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-            {/* Technical Specs */}
-            <Card className="bg-gradient-to-br from-yellow-900/20 to-muted dark:to-slate-900 border-yellow-500/20">
+            {/* Especificaciones */}
+            <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-foreground text-lg flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-yellow-400" />
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-yellow-500" />
                   Especificaciones Técnicas
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 {[
                   { label: "Tipo de Activo", value: "Token ERC-20 regulado por MiCA" },
                   { label: "Red", value: "Pontus-X (Ecosistema Gaia-X)" },
                   { label: "Tarifa Base", value: "1.00 EUROe por transacción (Tier Gratuito)" }
                 ].map((spec, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+                  <div key={i} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="font-medium">{spec.label}</p>
                       <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
               </CardContent>
             </Card>
-
-            {/* Business Benefit */}
-            <Card className="bg-gradient-to-r from-orange-500/10 to-yellow-500/10 border-orange-500/30">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-orange-500/20 rounded-lg">
-                    <Zap className="h-6 w-6 text-orange-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground mb-2">Optimización del Circulante</h3>
-                    <p className="text-muted-foreground">
-                      Liquidación en tiempo real y <strong className="text-orange-400">conciliación contable automática</strong>. 
-                      La trazabilidad "On-Chain" permite auditorías financieras instantáneas y elimina 
-                      los errores de facturación manual.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* CTA */}
-            <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1">
-                <Link to="/auth">Probar Demo</Link>
-              </Button>
-              <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
-                <Link to="/architecture">Ver Arquitectura</Link>
-              </Button>
-            </div>
           </motion.div>
         </div>
+
+        {/* CTA Final */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 text-center"
+        >
+          <Card className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-500/30 inline-block">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-3">¿Listo para eliminar la fricción financiera?</h3>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                Prueba el sistema de pagos EUROe y experimenta la liquidación instantánea.
+              </p>
+              <div className="flex gap-4 justify-center">
+                <Button asChild variant="outline">
+                  <Link to="/auth">Probar Demo</Link>
+                </Button>
+                <Button asChild className="bg-yellow-600 hover:bg-yellow-700 text-black">
+                  <Link to="/architecture">Ver Arquitectura</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </main>
     </div>
   );

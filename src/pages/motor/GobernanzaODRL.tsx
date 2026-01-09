@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FileCode, Shield, Zap, CheckCircle, ToggleRight } from "lucide-react";
+import { FileCode, Shield, Zap, CheckCircle, ToggleRight, Lock, Users, Building } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,17 @@ export default function GobernanzaODRL() {
     redistribute: false,
     expiry30: true
   });
+
+  const kpis = [
+    { icon: Lock, value: "100%", label: "Control", color: "text-green-500" },
+    { icon: Zap, value: "<1s", label: "Revocación", color: "text-blue-500" },
+    { icon: Shield, value: "W3C", label: "Estándar", color: "text-purple-500" },
+  ];
+
+  const benefits = [
+    { role: "Proveedor (Subject)", icon: Building, items: ["Control total sobre uso de datos", "Revocación instantánea global", "Auditoría completa de accesos"] },
+    { role: "Comprador (Consumer)", icon: Users, items: ["Claridad en derechos de uso", "Cumplimiento normativo automático", "Contratos legalmente válidos"] },
+  ];
 
   const generateODRL = () => {
     const perms = [];
@@ -52,48 +63,87 @@ export default function GobernanzaODRL() {
               <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
             </Link>
           </div>
-          <Badge variant="outline" className="border-green-500 text-green-400">Seguridad</Badge>
+          <Badge variant="outline" className="border-blue-500 text-blue-600">Soberanía SaaS</Badge>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-16">
-        {/* Hero */}
+      <main className="container mx-auto px-4 py-12">
+        {/* Hero con KPIs */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 mb-6">
-            <motion.div
-              animate={{ rotateY: [0, 180, 360] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            >
-              <FileCode className="h-12 w-12 text-green-400" />
-            </motion.div>
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-500/15 border border-blue-500/30 mb-6">
+            <FileCode className="h-10 w-10 text-blue-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Gobernanza ODRL</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Contratos digitales autoejecutables para la soberanía del dato
           </p>
+          
+          {/* KPIs */}
+          <div className="flex justify-center gap-6 flex-wrap">
+            {kpis.map((kpi, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                className="flex items-center gap-3 px-5 py-3 bg-card border border-border rounded-xl"
+              >
+                <kpi.icon className={`h-5 w-5 ${kpi.color}`} />
+                <div className="text-left">
+                  <p className="text-2xl font-bold">{kpi.value}</p>
+                  <p className="text-xs text-muted-foreground">{kpi.label}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Interactive Policy Builder */}
+        {/* Sección: Por qué importa */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-12"
+        >
+          <Card className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-blue-500/20 rounded-lg shrink-0">
+                  <Shield className="h-6 w-6 text-blue-500" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold mb-2">¿Por qué importa?</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    El intercambio de información no es una simple transferencia de archivos, sino un <strong className="text-foreground">acuerdo soberano</strong>. 
+                    Utilizamos el estándar internacional ODRL (Open Digital Rights Language) para codificar reglas de uso directamente en los datos. 
+                    Si la política dice que el dato solo puede leerse pero no descargarse, el sistema <strong className="text-blue-500">bloquea técnicamente</strong> la función de guardado.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.section>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Constructor de Políticas */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.4 }}
             className="space-y-6"
           >
-            {/* Policy Builder */}
-            <Card className="bg-card dark:bg-white/5 border-border dark:border-white/10 overflow-hidden">
-              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
-                <CardTitle className="text-foreground flex items-center gap-2">
-                  <ToggleRight className="h-5 w-5 text-green-400" />
+            <Card className="bg-card border-border">
+              <CardHeader className="border-b border-border bg-muted/50">
+                <CardTitle className="flex items-center gap-2">
+                  <ToggleRight className="h-5 w-5 text-blue-500" />
                   Constructor de Políticas
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="p-6 space-y-3">
                 {[
                   { key: 'read', label: 'Permiso de Lectura', desc: 'El consumidor puede visualizar los datos' },
                   { key: 'analyze', label: 'Análisis con IA', desc: 'Permite procesamiento algorítmico' },
@@ -101,9 +151,9 @@ export default function GobernanzaODRL() {
                   { key: 'redistribute', label: 'Redistribución', desc: 'Compartir con terceros' },
                   { key: 'expiry30', label: 'Validez 30 días', desc: 'Expiración automática del acceso' }
                 ].map((item) => (
-                  <div key={item.key} className="flex items-center justify-between p-4 bg-muted dark:bg-white/5 rounded-lg hover:bg-accent dark:hover:bg-white/10 transition-colors">
+                  <div key={item.key} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                     <div>
-                      <p className="font-medium text-foreground">{item.label}</p>
+                      <p className="font-medium">{item.label}</p>
                       <p className="text-xs text-muted-foreground">{item.desc}</p>
                     </div>
                     <Switch 
@@ -115,101 +165,105 @@ export default function GobernanzaODRL() {
               </CardContent>
             </Card>
 
-            {/* Generated ODRL Code */}
-            <Card className="bg-muted dark:bg-black/60 border-border dark:border-green-500/30 overflow-hidden">
-              <CardHeader className="border-b border-border dark:border-white/10 bg-green-500/10">
+            {/* Código ODRL Generado */}
+            <Card className="bg-muted border-blue-500/30">
+              <CardHeader className="border-b border-border bg-blue-500/10">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-foreground text-sm font-mono">Política ODRL Generada</CardTitle>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">JSON-LD</Badge>
+                  <CardTitle className="text-sm font-mono">Política ODRL Generada</CardTitle>
+                  <Badge className="bg-blue-500/20 text-blue-500 border-blue-500/30 text-xs">JSON-LD</Badge>
                 </div>
               </CardHeader>
               <CardContent className="p-4">
-                <pre className="text-xs text-green-400 font-mono overflow-x-auto whitespace-pre">
+                <pre className="text-xs text-blue-500 font-mono overflow-x-auto whitespace-pre">
                   {generateODRL()}
                 </pre>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Content */}
+          {/* Beneficios y Especificaciones */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="space-y-8"
+            transition={{ delay: 0.4 }}
+            className="space-y-6"
           >
-            {/* Description */}
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Contratos Inteligentes de Uso de Datos</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                En ProcureData, el intercambio de información no se basa en una simple transferencia de 
-                archivos, sino en un <strong className="text-foreground">acuerdo soberano</strong>. Utilizamos 
-                el estándar internacional ODRL (Open Digital Rights Language) para codificar reglas de 
-                uso directamente en los datos.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mt-4">
-                Cada vez que un "Consumer" solicita acceso, el motor de gobernanza evalúa la política 
-                definida por el "Provider". El conector EDC actúa como un guardián incansable: si la 
-                política dice que el dato solo puede leerse pero no descargarse, el sistema bloquea 
-                técnicamente la función de guardado.
-              </p>
-            </div>
-
-            {/* Technical Specs */}
-            <Card className="bg-card dark:bg-gradient-to-br dark:from-green-900/20 dark:to-slate-900 border-border dark:border-green-500/20">
+            {/* Beneficios por Rol */}
+            <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-foreground text-lg flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-green-400" />
+                <CardTitle className="text-lg">Beneficios por Rol</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {benefits.map((benefit, i) => (
+                  <div key={i} className="p-4 bg-muted rounded-lg">
+                    <div className="flex items-center gap-2 mb-3">
+                      <benefit.icon className="h-5 w-5 text-primary" />
+                      <p className="font-medium">{benefit.role}</p>
+                    </div>
+                    <ul className="space-y-2">
+                      {benefit.items.map((item, j) => (
+                        <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <CheckCircle className="h-4 w-4 text-green-500 shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Especificaciones */}
+            <Card className="bg-card border-border">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-blue-500" />
                   Especificaciones Técnicas
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 {[
                   { label: "Gramática", value: "Estándar W3C ODRL 2.2 (Ontología de Derechos Digitales)" },
                   { label: "Componentes", value: "Permissions, Prohibitions y Duties definibles" },
                   { label: "Contexto", value: "Integración nativa con JSON-LD para interoperabilidad EU" }
                 ].map((spec, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
+                  <div key={i} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="font-medium">{spec.label}</p>
                       <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
                 ))}
               </CardContent>
             </Card>
-
-            {/* Business Benefit */}
-            <Card className="bg-gradient-to-r from-orange-500/10 to-yellow-500/10 border-orange-500/30">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-orange-500/20 rounded-lg">
-                    <Zap className="h-6 w-6 text-orange-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground mb-2">Blindaje Jurídico-Técnico</h3>
-                    <p className="text-muted-foreground">
-                      Elimine la incertidumbre legal. Asegure que su propiedad intelectual se utilice 
-                      <strong className="text-orange-400"> únicamente para el fin pactado</strong>, con 
-                      la capacidad de revocar el acceso de forma instantánea y global.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* CTA */}
-            <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
-                <Link to="/auth">Probar Demo</Link>
-              </Button>
-              <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
-                <Link to="/architecture">Ver Arquitectura</Link>
-              </Button>
-            </div>
           </motion.div>
         </div>
+
+        {/* CTA Final */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 text-center"
+        >
+          <Card className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/30 inline-block">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-3">¿Listo para tomar el control de tus datos?</h3>
+              <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                Experimenta el constructor de políticas ODRL y define tus propias reglas de acceso.
+              </p>
+              <div className="flex gap-4 justify-center">
+                <Button asChild variant="outline">
+                  <Link to="/auth">Probar Demo</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/architecture">Ver Arquitectura</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </main>
     </div>
   );

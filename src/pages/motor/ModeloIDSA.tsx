@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Network, Shield, Zap, CheckCircle, Globe, Users, Building } from "lucide-react";
+import { Network, Shield, Zap, CheckCircle, Globe, Users, Building, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,20 +12,43 @@ export default function ModeloIDSA() {
       name: "Consumer", 
       desc: "Quien solicita acceso a los datos", 
       icon: Users, 
-      color: "from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-400" 
+      color: "bg-blue-500/15 border-blue-500/30",
+      textColor: "text-blue-500"
     },
     { 
       name: "Subject", 
       desc: "Propietario legal del dato", 
       icon: Building, 
-      color: "from-purple-500/20 to-purple-600/20 border-purple-500/30 text-purple-400" 
+      color: "bg-purple-500/15 border-purple-500/30",
+      textColor: "text-purple-500"
     },
     { 
       name: "Data Holder", 
       desc: "Custodio técnico neutral", 
       icon: Shield, 
-      color: "from-green-500/20 to-green-600/20 border-green-500/30 text-green-400" 
+      color: "bg-green-500/15 border-green-500/30",
+      textColor: "text-green-500"
     }
+  ];
+
+  const kpis = [
+    { icon: Globe, value: "Gaia-X", label: "Certificado", color: "text-blue-500" },
+    { icon: Network, value: "IDSA", label: "Estándar", color: "text-purple-500" },
+    { icon: Shield, value: "100%", label: "Interoperable", color: "text-green-500" },
+  ];
+
+  const dataSpaces = [
+    { name: "Catena-X", desc: "Automoción" },
+    { name: "GAIA-X", desc: "Infraestructura EU" },
+    { name: "DSBA", desc: "Data Spaces Business Alliance" },
+    { name: "Mobility DS", desc: "Movilidad" },
+  ];
+
+  const flowSteps = [
+    { from: "Consumer", action: "Solicita datos", to: "Data Holder" },
+    { from: "Data Holder", action: "Pide consentimiento", to: "Subject" },
+    { from: "Subject", action: "Aprueba/Rechaza", to: "Data Holder" },
+    { from: "Data Holder", action: "Libera datos (si aprobado)", to: "Consumer" },
   ];
 
   return (
@@ -39,170 +62,173 @@ export default function ModeloIDSA() {
               <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
             </Link>
           </div>
-          <Badge variant="outline" className="border-green-500 text-green-400">Seguridad</Badge>
+          <Badge variant="outline" className="border-red-500 text-red-600">Compute-to-Data</Badge>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-16">
-        {/* Hero */}
+      <main className="container mx-auto px-4 py-12">
+        {/* Hero con KPIs */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-blue-500/20 to-green-600/20 border border-blue-500/30 mb-6">
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            >
-              <Network className="h-12 w-12 text-blue-400" />
-            </motion.div>
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-red-500/15 border border-red-500/30 mb-6">
+            <Network className="h-10 w-10 text-red-500" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Modelo IDSA</h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
             Arquitectura Basada en el Estándar de la International Data Spaces Association
           </p>
+          
+          {/* KPIs */}
+          <div className="flex justify-center gap-6 flex-wrap">
+            {kpis.map((kpi, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.1 }}
+                className="flex items-center gap-3 px-5 py-3 bg-card border border-border rounded-xl"
+              >
+                <kpi.icon className={`h-5 w-5 ${kpi.color}`} />
+                <div className="text-left">
+                  <p className="text-2xl font-bold">{kpi.value}</p>
+                  <p className="text-xs text-muted-foreground">{kpi.label}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Europe Map Visualization */}
+        {/* Sección: Por qué importa */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-12"
+        >
+          <Card className="bg-gradient-to-r from-red-500/10 to-rose-500/10 border-red-500/30">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-red-500/20 rounded-lg shrink-0">
+                  <Globe className="h-6 w-6 text-red-500" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold mb-2">¿Por qué importa?</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    ProcureData no es una isla tecnológica. Nuestra arquitectura sigue fielmente el modelo de referencia de la 
+                    <strong className="text-foreground"> IDSA</strong>, el estándar de facto para el intercambio de datos en Europa. 
+                    Esto garantiza <strong className="text-red-500">interoperabilidad futura</strong> con el ecosistema de datos europeo 
+                    (Gaia-X, Catena-X, Mobility Data Space) sin quedarse atrapado en soluciones propietarias.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.section>
+
+        {/* Roles Tripartitos */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="mb-12"
+        >
+          <h3 className="text-lg font-bold mb-4 text-center">Modelo Tripartito de Roles</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {roles.map((role, i) => (
+              <Card key={i} className={`${role.color} border`}>
+                <CardContent className="p-6 text-center">
+                  <role.icon className={`h-10 w-10 mx-auto mb-3 ${role.textColor}`} />
+                  <p className="font-bold text-lg">{role.name}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{role.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </motion.section>
+
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Flujo de datos */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="space-y-6"
+            transition={{ delay: 0.4 }}
           >
-            {/* Data Space Network */}
-            <Card className="bg-card dark:bg-gradient-to-br dark:from-slate-900 dark:to-blue-900/20 border-border dark:border-blue-500/30 overflow-hidden">
-              <CardHeader className="border-b border-border dark:border-white/10 bg-muted dark:bg-white/5">
-                <CardTitle className="text-foreground flex items-center gap-2">
-                  <Globe className="h-5 w-5 text-blue-400" />
-                  Red de Data Spaces Europea
+            <Card className="bg-card border-border">
+              <CardHeader className="border-b border-border bg-muted/50">
+                <CardTitle className="flex items-center gap-2">
+                  <ArrowRight className="h-5 w-5 text-primary" />
+                  Flujo de Datos IDSA
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                {/* Simplified network visualization */}
-                <div className="relative h-64 bg-gradient-to-br from-blue-900/30 to-green-900/20 rounded-xl border border-white/10 overflow-hidden">
-                  {/* Central ProcureData Node */}
-                  <motion.div
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-primary to-primary/60 rounded-full flex items-center justify-center border-4 border-white/30 z-10"
-                  >
-                    <span className="text-xs font-bold text-white text-center">PROCURE<br/>DATA</span>
-                  </motion.div>
-
-                  {/* Connected Data Spaces */}
-                  {[
-                    { name: "Catena-X", x: "20%", y: "30%", delay: 0 },
-                    { name: "GAIA-X", x: "75%", y: "25%", delay: 0.2 },
-                    { name: "DSBA", x: "15%", y: "70%", delay: 0.4 },
-                    { name: "Mobility DS", x: "80%", y: "65%", delay: 0.6 }
-                  ].map((ds, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.5 + ds.delay }}
-                      className="absolute w-14 h-14 bg-muted dark:bg-white/10 rounded-full flex items-center justify-center border border-border dark:border-white/20"
-                      style={{ left: ds.x, top: ds.y }}
-                    >
-                      <span className="text-[10px] font-medium text-foreground dark:text-white text-center">{ds.name}</span>
-                    </motion.div>
+                <div className="space-y-4">
+                  {flowSteps.map((step, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                        <span className="text-xs font-bold">{i + 1}</span>
+                      </div>
+                      <div className="flex-1 p-3 bg-muted rounded-lg">
+                        <div className="flex items-center gap-2 text-sm">
+                          <Badge variant="outline" className="text-xs">{step.from}</Badge>
+                          <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                          <span className="text-muted-foreground">{step.action}</span>
+                          <ArrowRight className="h-3 w-3 text-muted-foreground" />
+                          <Badge variant="outline" className="text-xs">{step.to}</Badge>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-
-                  {/* Connection lines */}
-                  <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
-                    {[
-                      { x1: "50%", y1: "50%", x2: "27%", y2: "37%" },
-                      { x1: "50%", y1: "50%", x2: "82%", y2: "32%" },
-                      { x1: "50%", y1: "50%", x2: "22%", y2: "77%" },
-                      { x1: "50%", y1: "50%", x2: "87%", y2: "72%" }
-                    ].map((line, i) => (
-                      <motion.line
-                        key={i}
-                        x1={line.x1}
-                        y1={line.y1}
-                        x2={line.x2}
-                        y2={line.y2}
-                        stroke="rgba(59, 130, 246, 0.3)"
-                        strokeWidth="2"
-                        strokeDasharray="5,5"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1, delay: 0.5 + i * 0.2 }}
-                      />
-                    ))}
-                  </svg>
                 </div>
-
-                <p className="text-sm text-muted-foreground text-center mt-4">
-                  ProcureData como nodo certificado en la red europea de Data Spaces
-                </p>
               </CardContent>
             </Card>
-
-            {/* Roles Diagram */}
-            <div className="grid grid-cols-3 gap-4">
-              {roles.map((role, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + i * 0.1 }}
-                >
-                  <Card className={`bg-gradient-to-br ${role.color} h-full`}>
-                    <CardContent className="p-4 text-center">
-                      <role.icon className={`h-8 w-8 mx-auto mb-2 ${role.color.split(' ').pop()}`} />
-                      <p className="font-bold text-foreground text-sm">{role.name}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{role.desc}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
-          {/* Content */}
+          {/* Data Spaces conectados y especificaciones */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="space-y-8"
+            transition={{ delay: 0.4 }}
+            className="space-y-6"
           >
-            {/* Description */}
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Estándar de Intercambio Soberano</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                ProcureData no es una isla tecnológica. Nuestra arquitectura sigue fielmente el modelo 
-                de referencia de la <strong className="text-foreground">IDSA</strong>, el estándar de facto 
-                para el intercambio de datos en Europa.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mt-4">
-                Este modelo define roles claros para garantizar la confianza: el <strong className="text-blue-400">Consumer</strong> (quien 
-                solicita), el <strong className="text-purple-400">Subject</strong> (propietario del dato) y 
-                el <strong className="text-green-400">Data Holder</strong> (custodio técnico).
-              </p>
-            </div>
-
-            {/* Technical Specs */}
-            <Card className="bg-card dark:bg-gradient-to-br dark:from-blue-900/20 dark:to-slate-900 border-border dark:border-blue-500/20">
+            {/* Data Spaces */}
+            <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-foreground text-lg flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-blue-400" />
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Network className="h-5 w-5 text-blue-500" />
+                  Data Spaces Conectados
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="grid grid-cols-2 gap-3">
+                {dataSpaces.map((ds, i) => (
+                  <div key={i} className="p-3 bg-muted rounded-lg text-center">
+                    <p className="font-medium text-sm">{ds.name}</p>
+                    <p className="text-xs text-muted-foreground">{ds.desc}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Especificaciones */}
+            <Card className="bg-card border-border">
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Shield className="h-5 w-5 text-red-500" />
                   Especificaciones Técnicas
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 {[
                   { label: "Arquitectura", value: "Basada en IDS Reference Architecture Model (IDS-RAM)" },
                   { label: "Roles", value: "Separación clara de responsabilidades técnicas y legales" },
                   { label: "Certificación", value: "Alineado con esquemas de confianza de Gaia-X" }
                 ].map((spec, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                  <div key={i} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
+                    <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-foreground">{spec.label}</p>
+                      <p className="font-medium">{spec.label}</p>
                       <p className="text-sm text-muted-foreground">{spec.value}</p>
                     </div>
                   </div>
@@ -210,31 +236,12 @@ export default function ModeloIDSA() {
               </CardContent>
             </Card>
 
-            {/* Business Benefit */}
-            <Card className="bg-gradient-to-r from-orange-500/10 to-yellow-500/10 border-orange-500/30">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-orange-500/20 rounded-lg">
-                    <Zap className="h-6 w-6 text-orange-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground mb-2">Interoperabilidad Futura</h3>
-                    <p className="text-muted-foreground">
-                      No quede atrapado en una solución propietaria. Al elegir ProcureData, su infraestructura 
-                      es <strong className="text-orange-400">compatible por diseño</strong> con el ecosistema 
-                      de datos europeo del futuro.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* CTA */}
             <div className="flex gap-4">
-              <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
+              <Button asChild variant="outline" className="flex-1">
                 <Link to="/auth">Probar Demo</Link>
               </Button>
-              <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
+              <Button asChild className="flex-1">
                 <Link to="/architecture">Ver Arquitectura</Link>
               </Button>
             </div>
