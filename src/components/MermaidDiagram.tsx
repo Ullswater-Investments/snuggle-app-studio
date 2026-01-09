@@ -55,7 +55,7 @@ export function MermaidDiagram({ chart, className = '' }: MermaidDiagramProps) {
     <Card className={`overflow-x-auto p-4 bg-card ${className}`}>
       <div 
         ref={containerRef}
-        className="mermaid-container flex justify-center"
+        className="mermaid-container flex justify-center [&_svg]:scale-[1.4] [&_svg]:origin-center [&_svg]:my-8"
         dangerouslySetInnerHTML={{ __html: svg }}
       />
     </Card>
