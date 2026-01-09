@@ -166,7 +166,7 @@ export const DocGobernanza = () => {
             </CardHeader>
             <CardContent>
               <div className="w-full overflow-x-auto">
-                <MermaidDiagram chart={governanceFlowDiagram} className="w-full min-w-full [&_svg]:w-full [&_svg]:max-w-full [&_svg]:min-h-[400px]" />
+                <MermaidDiagram chart={governanceFlowDiagram} scale={1.12} className="w-full min-w-full [&_svg]:w-full [&_svg]:max-w-full [&_svg]:min-h-[400px]" />
               </div>
             </CardContent>
           </Card>
