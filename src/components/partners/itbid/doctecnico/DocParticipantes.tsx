@@ -107,7 +107,7 @@ export const DocParticipantes = () => {
             </CardHeader>
             <CardContent>
               <div className="flex justify-center">
-                <MermaidDiagram chart={networkDiagram} />
+                <MermaidDiagram chart={networkDiagram} scale={1.12} />
               </div>
             </CardContent>
           </Card>

@@ -6,12 +6,13 @@ import { Card } from '@/components/ui/card';
 interface MermaidDiagramProps {
   chart: string;
   className?: string;
+  scale?: number;
 }
 
 let idCounter = 0;
 const generateId = () => `mermaid-${Date.now()}-${idCounter++}`;
 
-export function MermaidDiagram({ chart, className = '' }: MermaidDiagramProps) {
+export function MermaidDiagram({ chart, className = '', scale = 1.4 }: MermaidDiagramProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [svg, setSvg] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
@@ -55,9 +56,15 @@ export function MermaidDiagram({ chart, className = '' }: MermaidDiagramProps) {
     <Card className={`overflow-x-auto p-4 bg-card ${className}`}>
       <div 
         ref={containerRef}
-        className="mermaid-container flex justify-center [&_svg]:scale-[1.4] [&_svg]:origin-center [&_svg]:my-8"
+        className="mermaid-container flex justify-center [&_svg]:origin-center [&_svg]:my-8"
+        style={{ '--diagram-scale': scale } as React.CSSProperties}
         dangerouslySetInnerHTML={{ __html: svg }}
       />
+      <style>{`
+        .mermaid-container svg {
+          transform: scale(var(--diagram-scale, 1.4));
+        }
+      `}</style>
     </Card>
   );
 }
