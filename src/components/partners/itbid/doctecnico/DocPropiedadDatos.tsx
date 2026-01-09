@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/AnimatedSection";
-import { Lock, KeyRound, Eye, RefreshCcw, Shield, Database } from "lucide-react";
+import { Lock, KeyRound, Eye, RefreshCcw, Database } from "lucide-react";
 
 const sovereigntyPrinciples = [
   {
@@ -75,19 +75,6 @@ export const DocPropiedadDatos = () => {
           </div>
         </FadeIn>
 
-        {/* Key Message */}
-        <FadeIn delay={0.3}>
-          <Card className="mt-12 bg-gradient-to-r from-[hsl(var(--itbid-cyan)/0.1)] to-[hsl(var(--itbid-magenta)/0.1)] border-[hsl(var(--itbid-cyan)/0.3)]">
-            <CardContent className="py-8 text-center">
-              <Lock className="h-12 w-12 mx-auto mb-4 text-[hsl(var(--itbid-cyan))]" />
-              <h3 className="text-xl font-bold mb-2">Mensaje Clave para la Dirección</h3>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                "ITBID no almacena datos de proveedores. ITBID <strong>orquesta el acceso</strong> a datos 
-                que permanecen bajo el control exclusivo de sus propietarios."
-              </p>
-            </CardContent>
-          </Card>
-        </FadeIn>
       </div>
     </section>
   );
