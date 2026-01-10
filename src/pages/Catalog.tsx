@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,9 @@ import {
   BarChart3,
   Wallet,
   Zap,
-  Award
+  Award,
+  Globe,
+  Users
 } from "lucide-react";
 
 // UI Components
@@ -34,6 +36,9 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "sonner";
+
+// Partner Products Component
+import { PartnerProductCard, PartnerProduct } from "@/components/catalog/PartnerProductCard";
 
 // --- Tipos alineados con la vista SQL 'marketplace_listings' ---
 interface MarketplaceListing {
@@ -78,8 +83,10 @@ export default function Catalog() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const { t } = useTranslation('catalog');
+  const { t: tPartners } = useTranslation('partnerProducts');
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
+  const [viewMode, setViewMode] = useState<'all' | 'partners'>('all');
   const [filters, setFilters] = useState({
     onlyGreen: false,
     onlyVerified: false,
@@ -89,6 +96,41 @@ export default function Catalog() {
   // Estado para comparación
   const [compareList, setCompareList] = useState<Set<string>>(new Set());
   const [compareDialogOpen, setCompareDialogOpen] = useState(false);
+
+  // --- Load Partner Products from translations ---
+  const partnerProducts = useMemo(() => {
+    const partnersData = tPartners('partners', { returnObjects: true });
+    if (!partnersData || typeof partnersData !== 'object') return [];
+    
+    const products: PartnerProduct[] = [];
+    Object.entries(partnersData as Record<string, any>).forEach(([partnerId, partner]) => {
+      if (partner.products && typeof partner.products === 'object') {
+        Object.entries(partner.products as Record<string, any>).forEach(([productKey, product]) => {
+          products.push({
+            id: product.id || `${partnerId}-${productKey}`,
+            name: product.name,
+            description: product.description,
+            category: product.category,
+            price: product.price || 0,
+            pricingModel: product.pricingModel || 'subscription',
+            tags: product.tags || [],
+            hasGreenBadge: product.hasGreenBadge || false,
+            kybVerified: product.kybVerified || false,
+            reputationScore: product.reputationScore || 4.5,
+            reviewCount: product.reviewCount || 0,
+            dataPoints: product.dataPoints,
+            updateFrequency: product.updateFrequency,
+            partnerId,
+            partnerName: partner.name,
+            partnerCountry: partner.country,
+            partnerFlag: partner.flag,
+            sector: partner.sector
+          });
+        });
+      }
+    });
+    return products;
+  }, [tPartners]);
 
   // --- Fetch Wishlist from Supabase ---
   const { data: wishlistData } = useQuery({
@@ -266,9 +308,28 @@ export default function Catalog() {
     return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
   });
 
-  // Categorías dinámicas extraídas de los datos reales
+  // --- Filtrado de Partner Products ---
+  const filteredPartnerProducts = partnerProducts.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          (item.partnerName || "").toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeTab === 'all' || item.category === activeTab;
+    const matchesGreen = !filters.onlyGreen || item.hasGreenBadge;
+    const matchesVerified = !filters.onlyVerified || item.kybVerified;
+    const matchesPrice = filters.priceType === 'all' 
+      ? true 
+      : filters.priceType === 'free' ? item.price === 0 : item.price > 0;
+
+    return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
+  });
+
+  // Categorías dinámicas extraídas de los datos reales + partner products
+  const partnerCategories = Array.from(new Set(partnerProducts.map(p => p.category).filter(Boolean)));
   const dynamicCategories = Array.from(
-    new Set(listings?.map(l => l.category).filter(Boolean) || [])
+    new Set([
+      ...(listings?.map(l => l.category).filter(Boolean) || []),
+      ...partnerCategories
+    ])
   ).sort();
   
   const allCategories = [
@@ -407,6 +468,31 @@ export default function Catalog() {
         {/* GRID DE PRODUCTOS */}
         <div className="lg:col-span-3 space-y-6">
           
+          {/* Toggle entre Marketplace y Partner Products */}
+          <div className="flex items-center gap-4 mb-4">
+            <Button
+              variant={viewMode === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setViewMode('all')}
+              className="flex items-center gap-2"
+            >
+              <Database className="h-4 w-4" />
+              {t('hero.badge')}
+            </Button>
+            <Button
+              variant={viewMode === 'partners' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setViewMode('partners')}
+              className="flex items-center gap-2"
+            >
+              <Users className="h-4 w-4" />
+              {tPartners('meta.title')}
+              <Badge variant="secondary" className="ml-1 text-[10px]">
+                {partnerProducts.length}
+              </Badge>
+            </Button>
+          </div>
+
           {/* Tabs de Categoría - Orden oficial según Memoria Técnica */}
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="w-full justify-start overflow-x-auto h-auto p-1 bg-transparent gap-2">
@@ -431,7 +517,30 @@ export default function Catalog() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} className="h-[350px] rounded-xl" />)}
             </div>
+          ) : viewMode === 'partners' ? (
+            // Partner Products Grid
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredPartnerProducts.map((product) => (
+                <PartnerProductCard key={product.id} product={product} />
+              ))}
+              
+              {filteredPartnerProducts.length === 0 && (
+                <div className="col-span-full text-center py-20 bg-white rounded-xl border border-dashed">
+                  <div className="mx-auto h-12 w-12 text-muted-foreground mb-4">
+                    <Globe className="h-full w-full" />
+                  </div>
+                  <h3 className="text-lg font-medium">{t('emptyState.title')}</h3>
+                  <p className="text-muted-foreground">{tPartners('meta.description')}</p>
+                  <Button variant="link" onClick={() => {
+                    setSearchTerm("");
+                    setFilters({onlyGreen: false, onlyVerified: false, priceType: 'all'});
+                    setActiveTab("all");
+                  }}>{t('emptyState.clearFilters')}</Button>
+                </div>
+              )}
+            </div>
           ) : (
+            // Original Marketplace Grid
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredListings?.map((item) => (
                 <ProductCard 

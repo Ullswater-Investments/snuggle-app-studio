@@ -32,6 +32,7 @@ import frOpportunities from './locales/fr/opportunities.json';
 import frModels from './locales/fr/models.json';
 import frMotor from './locales/fr/motor.json';
 import frSyntheticData from './locales/fr/syntheticData.json';
+import frPartnerProducts from './locales/fr/partnerProducts.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -47,6 +48,7 @@ import ptOpportunities from './locales/pt/opportunities.json';
 import ptModels from './locales/pt/models.json';
 import ptMotor from './locales/pt/motor.json';
 import ptSyntheticData from './locales/pt/syntheticData.json';
+import ptPartnerProducts from './locales/pt/partnerProducts.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -62,6 +64,7 @@ import deOpportunities from './locales/de/opportunities.json';
 import deModels from './locales/de/models.json';
 import deMotor from './locales/de/motor.json';
 import deSyntheticData from './locales/de/syntheticData.json';
+import dePartnerProducts from './locales/de/partnerProducts.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -77,6 +80,7 @@ import itOpportunities from './locales/it/opportunities.json';
 import itModels from './locales/it/models.json';
 import itMotor from './locales/it/motor.json';
 import itSyntheticData from './locales/it/syntheticData.json';
+import itPartnerProducts from './locales/it/partnerProducts.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -92,6 +96,10 @@ import nlOpportunities from './locales/nl/opportunities.json';
 import nlModels from './locales/nl/models.json';
 import nlMotor from './locales/nl/motor.json';
 import nlSyntheticData from './locales/nl/syntheticData.json';
+import nlPartnerProducts from './locales/nl/partnerProducts.json';
+
+// English
+import enPartnerProducts from './locales/en/partnerProducts.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -123,6 +131,10 @@ i18n
         models: esModels,
         motor: esMotor,
         syntheticData: esSyntheticData,
+        partnerProducts: esPartnerProducts,
+      },
+      en: {
+        partnerProducts: enPartnerProducts,
       },
       fr: {
         common: frCommon,
@@ -138,6 +150,7 @@ i18n
         models: frModels,
         motor: frMotor,
         syntheticData: frSyntheticData,
+        partnerProducts: frPartnerProducts,
       },
       pt: {
         common: ptCommon,
@@ -153,6 +166,7 @@ i18n
         models: ptModels,
         motor: ptMotor,
         syntheticData: ptSyntheticData,
+        partnerProducts: ptPartnerProducts,
       },
       de: {
         common: deCommon,
@@ -168,6 +182,7 @@ i18n
         models: deModels,
         motor: deMotor,
         syntheticData: deSyntheticData,
+        partnerProducts: dePartnerProducts,
       },
       it: {
         common: itCommon,
@@ -183,6 +198,7 @@ i18n
         models: itModels,
         motor: itMotor,
         syntheticData: itSyntheticData,
+        partnerProducts: itPartnerProducts,
       },
       nl: {
         common: nlCommon,
@@ -198,11 +214,12 @@ i18n
         models: nlModels,
         motor: nlMotor,
         syntheticData: nlSyntheticData,
+        partnerProducts: nlPartnerProducts,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts'],
     interpolation: {
       escapeValue: false,
     },
