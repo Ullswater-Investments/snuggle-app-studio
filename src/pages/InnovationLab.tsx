@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -81,14 +82,6 @@ interface InnovationConcept {
   created_at: string | null;
 }
 
-const CATEGORIES = [
-  { id: 'all', label: 'Todos', icon: Lightbulb },
-  { id: 'AI', label: 'IA', icon: Bot },
-  { id: 'Blockchain', label: 'Blockchain', icon: Link2 },
-  { id: 'IoT', label: 'IoT', icon: Cpu },
-  { id: 'Sustainability', label: 'Sostenibilidad', icon: Leaf },
-];
-
 const CATEGORY_COLORS: Record<string, string> = {
   'AI': 'bg-purple-500/10 text-purple-600 border-purple-500/20',
   'Blockchain': 'bg-blue-500/10 text-blue-600 border-blue-500/20',
@@ -129,67 +122,6 @@ const getInnovationLevel = (score: number) => {
   return { label: "Visionario", icon: Sparkles, color: "text-amber-500" };
 };
 
-// --- WIDGET 3: Smart Contract Steps ---
-const CONTRACT_STEPS = [
-  {
-    id: 1,
-    icon: FileSignature,
-    title: "Firma de Acuerdo",
-    description: "Contrato de suministro firmado digitalmente",
-    detail: "DUA-2025-0842 | Titan Manufacturas ↔ Global Retail",
-    timestamp: "T+0ms",
-  },
-  {
-    id: 2,
-    icon: Cloud,
-    title: "Validación Oráculo",
-    description: "Verificación de condiciones externas",
-    detail: "Oráculo climático: Temperatura = 22°C (Umbral: 25°C)",
-    timestamp: "T+2.3s",
-  },
-  {
-    id: 3,
-    icon: Zap,
-    title: "Trigger Activado",
-    description: "Cláusula de penalización evaluada",
-    detail: "Retraso detectado: 48h > Límite 24h → Penalización 5%",
-    timestamp: "T+3.1s",
-  },
-  {
-    id: 4,
-    icon: Coins,
-    title: "Liquidación de Pagos",
-    description: "Transferencia ejecutada automáticamente",
-    detail: "Importe final: 47,500 EUR (descuento 2,500 EUR)",
-    timestamp: "T+4.5s",
-  }
-];
-
-// --- WIDGET 4: Contract Sentinel Alerts ---
-const DETECTED_ALERTS = [
-  {
-    id: 1,
-    severity: "critical" as const,
-    title: "Cláusula de Penalización Abusiva",
-    description: "Penalización del 15% por retraso > 24h supera el umbral estándar del 5%",
-    location: "Sección 4.2, Párrafo 3"
-  },
-  {
-    id: 2,
-    severity: "warning" as const,
-    title: "Ambigüedad en Términos de Pago",
-    description: "Fecha de pago no especifica días hábiles vs naturales",
-    location: "Sección 6.1"
-  },
-  {
-    id: 3,
-    severity: "info" as const,
-    title: "Cláusula de Fuerza Mayor Estándar",
-    description: "Detectada cláusula INCOTERMS 2020 compatible",
-    location: "Sección 8"
-  }
-];
-
 // Custom Tooltip for ScatterChart
 const CustomScatterTooltip = ({ active, payload }: { active?: boolean; payload?: Array<{ payload: { name: string; category: string; x: number; y: number } }> }) => {
   if (active && payload?.length) {
@@ -210,6 +142,7 @@ const CustomScatterTooltip = ({ active, payload }: { active?: boolean; payload?:
 
 export default function InnovationLab() {
   const { activeOrg } = useOrganizationContext();
+  const { t } = useTranslation('innovation');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [qualityScore, setQualityScore] = useState(72);
   
@@ -231,6 +164,76 @@ export default function InnovationLab() {
   const [scanPhase, setScanPhase] = useState<"idle" | "uploading" | "analyzing" | "complete">("idle");
   const [scanProgress, setScanProgress] = useState(0);
   const [riskScore, setRiskScore] = useState(0);
+
+  // Categories with translations (inside component to react to language changes)
+  const CATEGORIES = [
+    { id: 'all', label: t('categories.all'), icon: Lightbulb },
+    { id: 'AI', label: t('categories.ai'), icon: Bot },
+    { id: 'Blockchain', label: t('categories.blockchain'), icon: Link2 },
+    { id: 'IoT', label: t('categories.iot'), icon: Cpu },
+    { id: 'Sustainability', label: t('categories.sustainability'), icon: Leaf },
+  ];
+
+  // Contract steps with translations (inside component to react to language changes)
+  const CONTRACT_STEPS = [
+    {
+      id: 1,
+      icon: FileSignature,
+      title: t('contractSteps.step1Title'),
+      description: t('contractSteps.step1Desc'),
+      detail: "DUA-2025-0842 | Titan Manufacturas ↔ Global Retail",
+      timestamp: "T+0ms",
+    },
+    {
+      id: 2,
+      icon: Cloud,
+      title: t('contractSteps.step2Title'),
+      description: t('contractSteps.step2Desc'),
+      detail: "Oráculo climático: Temperatura = 22°C (Umbral: 25°C)",
+      timestamp: "T+2.3s",
+    },
+    {
+      id: 3,
+      icon: Zap,
+      title: t('contractSteps.step3Title'),
+      description: t('contractSteps.step3Desc'),
+      detail: "Retraso detectado: 48h > Límite 24h → Penalización 5%",
+      timestamp: "T+3.1s",
+    },
+    {
+      id: 4,
+      icon: Coins,
+      title: t('contractSteps.step4Title'),
+      description: t('contractSteps.step4Desc'),
+      detail: "Importe final: 47,500 EUR (descuento 2,500 EUR)",
+      timestamp: "T+4.5s",
+    }
+  ];
+
+  // Contract Sentinel Alerts with translations
+  const DETECTED_ALERTS = [
+    {
+      id: 1,
+      severity: "critical" as const,
+      title: t('sentinel.criticalClause'),
+      description: "Penalización del 15% por retraso > 24h supera el umbral estándar del 5%",
+      location: "Sección 4.2, Párrafo 3"
+    },
+    {
+      id: 2,
+      severity: "warning" as const,
+      title: t('sentinel.ambiguousTerms'),
+      description: "Fecha de pago no especifica días hábiles vs naturales",
+      location: "Sección 6.1"
+    },
+    {
+      id: 3,
+      severity: "info" as const,
+      title: t('sentinel.standardClause'),
+      description: "Detectada cláusula INCOTERMS 2020 compatible",
+      location: "Sección 8"
+    }
+  ];
 
   // --- Fetch concepts from database ---
   const { data: concepts, isLoading: loadingConcepts } = useQuery({
@@ -316,7 +319,7 @@ export default function InnovationLab() {
         clearInterval(interval);
         setIsAnalyzing(false);
         setQualityScore(Math.floor(Math.random() * 15) + 80);
-        toast.success("Análisis de Inteligencia Artificial completado");
+        toast.success(t('toast.aiAnalysisComplete'));
       } else {
         setQualityScore(Math.min(Math.round(progress), 99));
       }
@@ -334,8 +337,8 @@ export default function InnovationLab() {
     }
     
     setIsSimulating(false);
-    toast.success("Contrato ejecutado exitosamente", {
-      description: "Todos los pasos del Smart Contract han sido validados."
+    toast.success(t('toast.contractExecuted'), {
+      description: t('toast.allStepsValidated')
     });
   };
 
@@ -355,7 +358,7 @@ export default function InnovationLab() {
     
     setScanPhase("complete");
     setRiskScore(68);
-    toast.info("Análisis completado: 3 alertas detectadas");
+    toast.info(t('toast.scanComplete', { count: 3 }));
   };
 
   const renderConceptChart = (concept: InnovationConcept) => {
@@ -429,20 +432,20 @@ export default function InnovationLab() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight flex items-center gap-2">
             <Microscope className="h-8 w-8 text-purple-600" />
-            Innovation Lab <Badge variant="secondary" className="ml-2 text-xs">BETA</Badge>
+            {t('pageTitle')} <Badge variant="secondary" className="ml-2 text-xs">{t('pageBadge')}</Badge>
           </h2>
           <p className="text-muted-foreground mt-1">
-            Entorno experimental para simulación de escenarios y auditoría de datos mediante IA.
+            {t('pageDescription')}
           </p>
         </div>
       </div>
 
       <Tabs defaultValue="concepts" className="space-y-4">
         <TabsList className="grid w-full grid-cols-4 lg:w-[500px]">
-          <TabsTrigger value="concepts">Conceptos I+D</TabsTrigger>
-          <TabsTrigger value="simulator">Simulador</TabsTrigger>
-          <TabsTrigger value="quality">AI Auditor</TabsTrigger>
-          <TabsTrigger value="insights">Insights</TabsTrigger>
+          <TabsTrigger value="concepts">{t('tabs.concepts')}</TabsTrigger>
+          <TabsTrigger value="simulator">{t('tabs.simulator')}</TabsTrigger>
+          <TabsTrigger value="quality">{t('tabs.aiAuditor')}</TabsTrigger>
+          <TabsTrigger value="insights">{t('tabs.insights')}</TabsTrigger>
         </TabsList>
 
         {/* --- TAB 0: CONCEPTS --- */}
@@ -452,7 +455,7 @@ export default function InnovationLab() {
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Buscar conceptos..."
+                placeholder={t('searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -496,11 +499,11 @@ export default function InnovationLab() {
           ) : filteredConcepts.length === 0 ? (
             <div className="py-16 text-center">
               <Lightbulb className="h-12 w-12 mx-auto text-muted-foreground opacity-50 mb-4" />
-              <h3 className="text-lg font-medium">No se encontraron conceptos</h3>
+              <h3 className="text-lg font-medium">{t('emptyState.title')}</h3>
               <p className="text-muted-foreground">
                 {searchQuery || selectedCategory !== 'all' 
-                  ? "Intenta con otros filtros de búsqueda" 
-                  : "Aún no hay conceptos de innovación registrados"}
+                  ? t('emptyState.description')
+                  : t('emptyState.description')}
               </p>
             </div>
           ) : (
@@ -552,7 +555,7 @@ export default function InnovationLab() {
                           {concept.maturity_level && (
                             <div className="space-y-1">
                               <div className="flex justify-between text-xs">
-                                <span className="text-muted-foreground">Madurez</span>
+                                <span className="text-muted-foreground">{t('concept.maturity')}</span>
                                 <span className="font-medium">Nivel {concept.maturity_level}/5</span>
                               </div>
                               <Progress 
@@ -582,9 +585,9 @@ export default function InnovationLab() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Target className="h-5 w-5 text-primary" />
-                  Matriz de Priorización
+                  {t('prioritization.title')}
                 </CardTitle>
-                <CardDescription>Posiciona los proyectos según impacto y esfuerzo de implementación</CardDescription>
+                <CardDescription>{t('prioritization.description')}</CardDescription>
               </CardHeader>
               <CardContent className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -595,7 +598,7 @@ export default function InnovationLab() {
                       dataKey="x" 
                       name="Esfuerzo" 
                       domain={[0, 100]} 
-                      label={{ value: 'Esfuerzo de Implementación →', position: 'bottom', offset: 20 }}
+                      label={{ value: `${t('prioritization.effort')} →`, position: 'bottom', offset: 20 }}
                       tick={{ fontSize: 11 }}
                     />
                     <YAxis 
@@ -603,7 +606,7 @@ export default function InnovationLab() {
                       dataKey="y" 
                       name="Impacto" 
                       domain={[0, 100]} 
-                      label={{ value: '← Impacto en Negocio', angle: -90, position: 'left', offset: 10 }}
+                      label={{ value: `← ${t('prioritization.impact')}`, angle: -90, position: 'left', offset: 10 }}
                       tick={{ fontSize: 11 }}
                     />
                     <ZAxis type="number" dataKey="z" range={[100, 400]} />
@@ -619,8 +622,8 @@ export default function InnovationLab() {
                 </ResponsiveContainer>
                 {/* Quadrant Labels */}
                 <div className="grid grid-cols-2 gap-2 mt-2 text-xs text-muted-foreground">
-                  <div className="text-left">⬆️ <span className="text-green-600 font-medium">Quick Wins</span> (Alto impacto, bajo esfuerzo)</div>
-                  <div className="text-right">⬆️ <span className="text-blue-600 font-medium">Proyectos Estratégicos</span></div>
+                  <div className="text-left">⬆️ <span className="text-green-600 font-medium">{t('prioritization.quickWins')}</span></div>
+                  <div className="text-right">⬆️ <span className="text-blue-600 font-medium">{t('prioritization.strategic')}</span></div>
                   <div className="text-left">⬇️ Fill-Ins</div>
                   <div className="text-right">⬇️ <span className="text-red-600 font-medium">Evitar</span></div>
                 </div>
@@ -658,12 +661,12 @@ export default function InnovationLab() {
             <Card className="lg:col-span-1 h-fit">
               <CardHeader>
                 <CardTitle className="text-lg">Variables</CardTitle>
-                <CardDescription>Ajusta los parámetros para recalcular la proyección.</CardDescription>
+                <CardDescription>{t('simulator.description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="font-medium">Demanda de Mercado</span>
+                    <span className="font-medium">{t('simulator.demandFactor')}</span>
                     <span className="text-muted-foreground">{demandFactor}%</span>
                   </div>
                   <Slider value={demandFactor} onValueChange={setDemandFactor} max={100} step={1} className="[&>span]:bg-blue-600" />
@@ -671,7 +674,7 @@ export default function InnovationLab() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="font-medium">Volatilidad Suministro</span>
+                    <span className="font-medium">{t('simulator.supplyVolatility')}</span>
                     <span className="text-muted-foreground">{supplyVolatility}%</span>
                   </div>
                   <Slider value={supplyVolatility} onValueChange={setSupplyVolatility} max={100} step={1} className="[&>span]:bg-orange-600" />
@@ -679,7 +682,7 @@ export default function InnovationLab() {
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="font-medium">Inversión I+D</span>
+                    <span className="font-medium">{t('simulator.innovationImpact')}</span>
                     <span className="text-muted-foreground">{innovationImpact}%</span>
                   </div>
                   <Slider value={innovationImpact} onValueChange={setInnovationImpact} max={100} step={1} className="[&>span]:bg-purple-600" />
@@ -696,419 +699,307 @@ export default function InnovationLab() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-blue-600" />
-                  Proyección de Suministro (12 Meses)
+                  {t('simulator.projection')} (12 Meses)
                 </CardTitle>
-                <CardDescription>Simulación en tiempo real basada en las variables configuradas.</CardDescription>
               </CardHeader>
               <CardContent className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={simulationData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <AreaChart data={simulationData}>
                     <defs>
-                      <linearGradient id="colorProy" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8}/>
-                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
+                      <linearGradient id="colorProyeccion" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <Tooltip 
                       contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))' }}
+                      itemStyle={{ color: 'hsl(var(--foreground))' }}
                     />
                     <Legend />
-                    <Area 
-                      type="monotone" 
-                      dataKey="proyeccion" 
-                      stroke="#2563eb" 
-                      fillOpacity={1} 
-                      fill="url(#colorProy)" 
-                      name="Proyección Volumétrica"
-                      animationDuration={500}
-                    />
-                    <Area 
-                      type="monotone" 
-                      dataKey="capacidad_max" 
-                      stroke="#16a34a" 
-                      strokeDasharray="5 5"
-                      fill="transparent" 
-                      name="Capacidad Máxima Teórica"
-                    />
+                    <Area type="monotone" dataKey="proyeccion" stroke="#3b82f6" fillOpacity={1} fill="url(#colorProyeccion)" name={t('simulator.projection')} />
+                    <Area type="monotone" dataKey="limite_seguridad" stroke="#f97316" fill="none" strokeDasharray="5 5" name={t('simulator.safetyLimit')} />
+                    <Area type="monotone" dataKey="capacidad_max" stroke="#22c55e" fill="none" strokeDasharray="3 3" name={t('simulator.maxCapacity')} />
                   </AreaChart>
                 </ResponsiveContainer>
               </CardContent>
             </Card>
           </div>
 
-          {/* WIDGET 3: Smart Contract Flow */}
+          {/* Smart Contract Simulator */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Link2 className="h-5 w-5 text-emerald-600" />
-                Flujo de Ejecución Smart Contract
-                <Badge variant="outline" className="ml-2 font-mono text-xs">Pontus-X</Badge>
+                <FileSignature className="h-5 w-5 text-purple-600" />
+                {t('smartContract.title')}
               </CardTitle>
-              <CardDescription>Visualiza la ejecución paso a paso del contrato EDC (Eclipse Dataspace Connector)</CardDescription>
+              <CardDescription>{t('smartContract.description')}</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-col gap-4">
-                {CONTRACT_STEPS.map((step, index) => {
-                  const StepIcon = step.icon;
-                  const isCompleted = index < currentStep;
-                  const isActive = index === currentStep && isSimulating;
-                  
-                  return (
-                    <motion.div
-                      key={step.id}
-                      initial={{ opacity: 0.5 }}
-                      animate={{ 
-                        opacity: isCompleted || isActive ? 1 : 0.5,
-                        scale: isActive ? 1.02 : 1
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className={cn(
-                        "flex items-start gap-4 p-4 rounded-lg border transition-colors",
-                        isCompleted && "bg-green-500/10 border-green-500/30",
-                        isActive && "bg-blue-500/10 border-blue-500/30 animate-pulse",
-                        !isCompleted && !isActive && "bg-muted/30"
-                      )}
-                    >
-                      <div className={cn(
-                        "p-2 rounded-full shrink-0",
-                        isCompleted && "bg-green-500 text-white",
-                        isActive && "bg-blue-500 text-white",
-                        !isCompleted && !isActive && "bg-muted"
-                      )}>
-                        {isCompleted ? <Check className="h-5 w-5" /> : <StepIcon className="h-5 w-5" />}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <h4 className="font-semibold">{step.title}</h4>
-                          <code className="text-xs font-mono text-muted-foreground shrink-0">{step.timestamp}</code>
+              <div className="space-y-6">
+                {/* Steps */}
+                <div className="grid md:grid-cols-4 gap-4">
+                  {CONTRACT_STEPS.map((step, index) => {
+                    const StepIcon = step.icon;
+                    const isCompleted = currentStep > index;
+                    const isActive = currentStep === index && isSimulating;
+                    
+                    return (
+                      <div 
+                        key={step.id}
+                        className={cn(
+                          "p-4 rounded-lg border transition-all",
+                          isCompleted && "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800",
+                          isActive && "bg-blue-50 dark:bg-blue-950/20 border-blue-300 dark:border-blue-700 ring-2 ring-blue-400/50",
+                          !isCompleted && !isActive && "bg-muted/30"
+                        )}
+                      >
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className={cn(
+                            "p-2 rounded-full",
+                            isCompleted && "bg-green-500 text-white",
+                            isActive && "bg-blue-500 text-white animate-pulse",
+                            !isCompleted && !isActive && "bg-muted"
+                          )}>
+                            {isCompleted ? <Check className="h-4 w-4" /> : <StepIcon className="h-4 w-4" />}
+                          </div>
+                          <div>
+                            <p className="font-medium text-sm">{step.title}</p>
+                            <p className="text-xs text-muted-foreground">{step.timestamp}</p>
+                          </div>
                         </div>
-                        <p className="text-sm text-muted-foreground">{step.description}</p>
-                        <p className="text-xs font-mono mt-1 text-primary/80 truncate">{step.detail}</p>
+                        <p className="text-xs text-muted-foreground">{step.description}</p>
+                        {(isCompleted || isActive) && (
+                          <p className="text-xs mt-2 p-2 bg-background rounded border font-mono">
+                            {step.detail}
+                          </p>
+                        )}
                       </div>
-                      {isCompleted && (
-                        <ShieldCheck className="h-5 w-5 text-green-500 shrink-0" />
-                      )}
-                    </motion.div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+
+                {/* Controls */}
+                <div className="flex justify-center">
+                  <Button
+                    onClick={runContractSimulation}
+                    disabled={isSimulating}
+                    size="lg"
+                    className="gap-2"
+                  >
+                    <Play className="h-4 w-4" />
+                    {isSimulating ? t('smartContract.simulating') : t('smartContract.startSimulation')}
+                  </Button>
+                </div>
               </div>
-              
-              <Button 
-                className="w-full mt-6 gap-2" 
-                size="lg"
-                onClick={runContractSimulation}
-                disabled={isSimulating}
-              >
-                {isSimulating ? (
-                  <RefreshCw className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Play className="h-4 w-4" />
+            </CardContent>
+          </Card>
+
+          {/* Contract Sentinel */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ShieldAlert className="h-5 w-5 text-amber-600" />
+                {t('sentinel.title')}
+              </CardTitle>
+              <CardDescription>{t('sentinel.description')}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Upload & Scan */}
+                <div className="space-y-4">
+                  <Button
+                    onClick={runContractScan}
+                    disabled={scanPhase !== "idle" && scanPhase !== "complete"}
+                    className="w-full gap-2"
+                    variant={scanPhase === "complete" ? "outline" : "default"}
+                  >
+                    {scanPhase === "idle" && <><FileUp className="h-4 w-4" /> {t('sentinel.uploadContract')}</>}
+                    {scanPhase === "uploading" && <><RefreshCw className="h-4 w-4 animate-spin" /> Cargando...</>}
+                    {scanPhase === "analyzing" && <><ScanLine className="h-4 w-4 animate-pulse" /> {t('sentinel.analyzing')}</>}
+                    {scanPhase === "complete" && <><Check className="h-4 w-4" /> {t('sentinel.scanComplete')}</>}
+                  </Button>
+
+                  {scanPhase !== "idle" && (
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Progreso</span>
+                        <span>{scanProgress}%</span>
+                      </div>
+                      <Progress value={scanProgress} className="h-2" />
+                    </div>
+                  )}
+
+                  {scanPhase === "complete" && (
+                    <div className="p-4 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                      <div className="flex items-center gap-3">
+                        <div className="text-3xl font-bold text-amber-600">{riskScore}</div>
+                        <div>
+                          <p className="font-medium">{t('sentinel.riskScore')}</p>
+                          <p className="text-xs text-muted-foreground">Riesgo moderado</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Alerts */}
+                {scanPhase === "complete" && (
+                  <div className="space-y-3">
+                    {DETECTED_ALERTS.map((alert) => (
+                      <div 
+                        key={alert.id}
+                        className={cn(
+                          "p-3 rounded-lg border",
+                          alert.severity === "critical" && "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800",
+                          alert.severity === "warning" && "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800",
+                          alert.severity === "info" && "bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800"
+                        )}
+                      >
+                        <div className="flex items-start gap-2">
+                          <AlertTriangle className={cn(
+                            "h-4 w-4 mt-0.5",
+                            alert.severity === "critical" && "text-red-600",
+                            alert.severity === "warning" && "text-amber-600",
+                            alert.severity === "info" && "text-blue-600"
+                          )} />
+                          <div>
+                            <p className="font-medium text-sm">{alert.title}</p>
+                            <p className="text-xs text-muted-foreground mt-1">{alert.description}</p>
+                            <Badge variant="outline" className="mt-2 text-xs">{alert.location}</Badge>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
-                {isSimulating ? "Ejecutando contrato..." : "Ejecutar Simulación"}
-              </Button>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
         {/* --- TAB 2: AI AUDITOR --- */}
-        <TabsContent value="quality">
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Existing Data Quality Audit */}
-            <Card className="md:col-span-1">
-              <CardHeader>
-                <CardTitle>Auditoría de Calidad de Datos</CardTitle>
-                <CardDescription>Análisis heurístico de metadatos mediante IA.</CardDescription>
-              </CardHeader>
-              <CardContent className="flex flex-col items-center justify-center py-8 space-y-6">
-                <div className="relative flex items-center justify-center w-48 h-48">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle
-                      cx="96"
-                      cy="96"
-                      r="88"
-                      stroke="currentColor"
-                      strokeWidth="12"
-                      fill="transparent"
-                      className="text-muted/20"
-                    />
-                    <circle
-                      cx="96"
-                      cy="96"
-                      r="88"
-                      stroke="currentColor"
-                      strokeWidth="12"
-                      fill="transparent"
-                      strokeDasharray={552}
-                      strokeDashoffset={552 - (552 * qualityScore) / 100}
-                      className={`transition-all duration-1000 ease-out ${
-                        isAnalyzing ? "text-blue-500 animate-pulse" : 
-                        qualityScore > 80 ? "text-green-500" : 
-                        qualityScore > 50 ? "text-yellow-500" : "text-red-500"
-                      }`}
-                    />
-                  </svg>
-                  <div className="absolute flex flex-col items-center">
-                    <span className="text-4xl font-bold">{qualityScore}</span>
-                    <span className="text-sm text-muted-foreground">/ 100</span>
-                  </div>
-                </div>
-
-                <div className="w-full space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>Integridad Estructural</span>
-                    <span className="font-medium">{isAnalyzing ? "..." : "92%"}</span>
-                  </div>
-                  <Progress value={isAnalyzing ? 50 : 92} className="h-2" />
-                  
-                  <div className="flex justify-between text-sm pt-2">
-                    <span>Completitud de Metadatos</span>
-                    <span className="font-medium">{isAnalyzing ? "..." : "78%"}</span>
-                  </div>
-                  <Progress value={isAnalyzing ? 30 : 78} className="h-2" />
-                </div>
-
-                <Button 
-                  size="lg" 
-                  className="w-full gap-2" 
-                  onClick={runAiAudit} 
-                  disabled={isAnalyzing}
-                >
-                  {isAnalyzing ? (
-                    <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <Bot className="mr-2 h-4 w-4" />
-                  )}
-                  {isAnalyzing ? "Analizando..." : "Ejecutar Auditoría IA"}
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* WIDGET 4: AI Contract Sentinel */}
-            <Card className="md:col-span-1">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <ShieldAlert className="h-5 w-5 text-amber-600" />
-                  AI Contract Sentinel
-                  <Badge variant="secondary" className="ml-auto text-xs">BETA</Badge>
-                </CardTitle>
-                <CardDescription>Escaneo inteligente de contratos para detección de riesgos</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {scanPhase === "idle" && (
-                  <div className="border-2 border-dashed rounded-lg p-8 text-center">
-                    <FileUp className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground mb-4">
-                      Arrastra un contrato PDF o haz clic para simular
-                    </p>
-                    <Button onClick={runContractScan} className="gap-2">
-                      <ScanLine className="h-4 w-4" />
-                      Simular Escaneo
-                    </Button>
-                  </div>
-                )}
-                
-                {(scanPhase === "uploading" || scanPhase === "analyzing") && (
-                  <div className="space-y-4 py-8">
-                    <div className="flex items-center justify-center gap-3">
-                      <RefreshCw className="h-6 w-6 animate-spin text-primary" />
-                      <span className="font-medium">
-                        {scanPhase === "uploading" ? "Procesando documento..." : "Analizando cláusulas..."}
-                      </span>
-                    </div>
-                    <Progress value={scanProgress} className="h-3" />
-                    <p className="text-center text-sm text-muted-foreground">
-                      {scanProgress}% completado
-                    </p>
-                  </div>
-                )}
-                
-                {scanPhase === "complete" && (
-                  <div className="space-y-6">
-                    {/* Risk Score Gauge */}
-                    <div className="flex items-center justify-center">
-                      <div className="relative w-32 h-32">
-                        <svg className="w-full h-full transform -rotate-90">
-                          <circle cx="64" cy="64" r="56" stroke="currentColor" strokeWidth="8" 
-                                  fill="transparent" className="text-muted/20" />
-                          <circle cx="64" cy="64" r="56" stroke="currentColor" strokeWidth="8" 
-                                  fill="transparent" strokeDasharray={352} 
-                                  strokeDashoffset={352 - (352 * riskScore) / 100}
-                                  className={riskScore > 70 ? "text-red-500" : riskScore > 40 ? "text-amber-500" : "text-green-500"} />
-                        </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <span className="text-2xl font-bold">{riskScore}</span>
-                          <span className="text-xs text-muted-foreground">Riesgo</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Alerts List */}
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-sm">Alertas Detectadas</h4>
-                      {DETECTED_ALERTS.map(alert => (
-                        <div key={alert.id} className={cn(
-                          "p-3 rounded-lg border-l-4 flex items-start gap-3",
-                          alert.severity === "critical" && "bg-red-500/10 border-red-500",
-                          alert.severity === "warning" && "bg-amber-500/10 border-amber-500",
-                          alert.severity === "info" && "bg-blue-500/10 border-blue-500"
-                        )}>
-                          <AlertTriangle className={cn(
-                            "h-5 w-5 shrink-0 mt-0.5",
-                            alert.severity === "critical" && "text-red-500",
-                            alert.severity === "warning" && "text-amber-500",
-                            alert.severity === "info" && "text-blue-500"
-                          )} />
-                          <div className="min-w-0">
-                            <p className="font-medium text-sm">{alert.title}</p>
-                            <p className="text-xs text-muted-foreground">{alert.description}</p>
-                            <code className="text-xs font-mono text-primary/70 mt-1 block">{alert.location}</code>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <Button variant="outline" className="w-full" onClick={() => setScanPhase("idle")}>
-                      Nuevo Escaneo
-                    </Button>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Existing cards */}
-            <div className="space-y-4 md:col-span-2">
-              <div className="grid md:grid-cols-2 gap-4">
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-base flex items-center gap-2">
-                      <ShieldCheck className="h-4 w-4 text-green-600" /> Puntos Fuertes
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-sm space-y-2">
-                    <p>✅ Esquemas JSON validados correctamente.</p>
-                    <p>✅ Políticas ODRL 2.0 bien formadas en el 95% de los activos.</p>
-                    <p>✅ Tiempos de respuesta de API dentro del umbral (200ms).</p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-base flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-yellow-600" /> Áreas de Mejora
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-sm space-y-2">
-                    <p>⚠️ 3 productos carecen de descripción detallada en inglés.</p>
-                    <p>⚠️ La frecuencia de actualización de "Inventario" es irregular.</p>
-                  </CardContent>
-                </Card>
-              </div>
-              
-              <Card className="bg-primary/5 border-primary/20">
-                <CardContent className="p-4 flex gap-4 items-start">
-                  <BrainCircuit className="h-6 w-6 text-primary shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold text-sm">Recomendación de la IA</h4>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Se recomienda activar la validación automática en el endpoint de ingesta para reducir la tasa de error en un 15%.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </TabsContent>
-
-        {/* --- TAB 3: INSIGHTS --- */}
-        <TabsContent value="insights" className="space-y-6">
-          {/* WIDGET 1: Radar de Madurez Tecnológica */}
+        <TabsContent value="quality" className="space-y-6">
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-purple-600" />
-                    Posicionamiento Tecnológico
-                  </CardTitle>
-                  <CardDescription>Comparativa de madurez en 5 dimensiones clave vs. líderes del sector</CardDescription>
-                </div>
-                <Badge variant="outline" className={cn("gap-1", innovationLevel.color)}>
-                  <InnovationIcon className="h-3 w-3" />
-                  {innovationLevel.label}
-                </Badge>
-              </div>
+              <CardTitle className="flex items-center gap-2">
+                <BrainCircuit className="h-5 w-5 text-purple-600" />
+                {t('auditor.title')}
+              </CardTitle>
+              <CardDescription>{t('auditor.description')}</CardDescription>
             </CardHeader>
-            <CardContent className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={TECH_RADAR_DATA}>
-                  <PolarGrid strokeDasharray="3 3" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11 }} />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 10 }} />
-                  <Radar 
-                    name="Tu Organización" 
-                    dataKey="company" 
-                    stroke="hsl(var(--primary))" 
-                    fill="hsl(var(--primary))" 
-                    fillOpacity={0.6} 
-                  />
-                  <Radar 
-                    name="Líder Sector" 
-                    dataKey="leader" 
-                    stroke="hsl(var(--muted-foreground))" 
-                    fill="hsl(var(--muted-foreground))" 
-                    fillOpacity={0.2} 
-                  />
-                  <Legend />
-                  <Tooltip 
-                    contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))' }}
-                  />
-                </RadarChart>
-              </ResponsiveContainer>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <Button 
+                    onClick={runAiAudit} 
+                    disabled={isAnalyzing}
+                    className="w-full gap-2"
+                  >
+                    <RefreshCw className={cn("h-4 w-4", isAnalyzing && "animate-spin")} />
+                    {isAnalyzing ? t('auditor.analyzing') : t('auditor.startAudit')}
+                  </Button>
+
+                  <div className="p-6 bg-muted/30 rounded-lg text-center">
+                    <div className="text-6xl font-bold text-primary mb-2">{qualityScore}</div>
+                    <p className="text-sm text-muted-foreground">{t('auditor.qualityScore')}</p>
+                    <Progress value={qualityScore} className="mt-4 h-2" />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-800">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-green-600" />
+                      <span className="text-sm font-medium">{t('auditor.dataIntegrity')}</span>
+                    </div>
+                    <Badge className="bg-green-500">98%</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-blue-600" />
+                      <span className="text-sm font-medium">{t('auditor.gdprCompliance')}</span>
+                    </div>
+                    <Badge className="bg-blue-500">95%</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-purple-600" />
+                      <span className="text-sm font-medium">{t('auditor.schemaValidation')}</span>
+                    </div>
+                    <Badge className="bg-purple-500">100%</Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="h-4 w-4 text-amber-600" />
+                      <span className="text-sm font-medium">{t('auditor.freshness')}</span>
+                    </div>
+                    <Badge className="bg-amber-500">72%</Badge>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
+        </TabsContent>
 
-          {/* Existing Bar Chart */}
+        {/* --- TAB 3: INSIGHTS (Radar) --- */}
+        <TabsContent value="insights" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Comparativa de Mercado</CardTitle>
-              <CardDescription>Rendimiento de {activeOrg?.name} vs Promedio del Sector</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <Target className="h-5 w-5 text-primary" />
+                {t('radar.title')}
+              </CardTitle>
+              <CardDescription>{t('radar.description')}</CardDescription>
             </CardHeader>
-            <CardContent className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={[
-                    { name: 'Time-to-Market', empresa: 85, sector: 60 },
-                    { name: 'Calidad Datos', empresa: qualityScore, sector: 65 },
-                    { name: 'Eficiencia API', empresa: 90, sector: 75 },
-                    { name: 'Adopción', empresa: 45, sector: 55 },
-                    { name: 'Compliance', empresa: 98, sector: 80 },
-                  ]}
-                  layout="vertical"
-                  margin={{ top: 20, right: 30, left: 40, bottom: 5 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-                  <XAxis type="number" domain={[0, 100]} />
-                  <YAxis dataKey="name" type="category" width={100} />
-                  <Tooltip cursor={{fill: 'transparent'}} contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))' }} />
+            <CardContent className="h-[500px]">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-primary" />
+                  <span className="text-sm">{t('radar.yourCompany')}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                  <span className="text-sm">{t('radar.sectorLeader')}</span>
+                </div>
+              </div>
+              <ResponsiveContainer width="100%" height="85%">
+                <RadarChart data={TECH_RADAR_DATA}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11 }} />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} />
+                  <Radar name="Tu Empresa" dataKey="company" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.4} />
+                  <Radar name="Líder Sector" dataKey="leader" stroke="#10b981" fill="#10b981" fillOpacity={0.2} />
                   <Legend />
-                  <Bar dataKey="empresa" name="Tu Organización" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
-                  <Bar dataKey="sector" name="Promedio Sector" fill="hsl(var(--muted-foreground))" opacity={0.3} radius={[0, 4, 4, 0]} />
-                </BarChart>
+                  <Tooltip />
+                </RadarChart>
               </ResponsiveContainer>
+              <div className="flex justify-center mt-4">
+                <div className="flex items-center gap-2 p-3 bg-muted/50 rounded-lg">
+                  <InnovationIcon className={cn("h-5 w-5", innovationLevel.color)} />
+                  <span className="font-medium">{t('radar.innovationLevel')}:</span>
+                  <Badge variant="secondary">{innovationLevel.label}</Badge>
+                  <span className="text-sm text-muted-foreground">({Math.round(avgCompanyScore)}%)</span>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
 
       {/* Concept Detail Modal */}
-      <ConceptDetailModal
-        isOpen={!!selectedConcept}
-        onClose={() => setSelectedConcept(null)}
-        concept={selectedConcept}
-      />
+      {selectedConcept && (
+        <ConceptDetailModal
+          concept={selectedConcept}
+          open={!!selectedConcept}
+          onOpenChange={(open) => !open && setSelectedConcept(null)}
+        />
+      )}
     </div>
   );
 }

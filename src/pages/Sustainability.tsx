@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useTranslation } from "react-i18next";
 import { ESGDataView } from "@/components/ESGDataView";
 import { EcoGauge } from "@/components/sustainability/EcoGauge";
 import { SectorRanking } from "@/components/sustainability/SectorRanking";
@@ -36,6 +37,7 @@ const SCOPE3_WEIGHT_FACTOR = 0.1;
 
 export default function Sustainability() {
   const { activeOrg } = useOrganizationContext();
+  const { t } = useTranslation('sustainability');
   const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -132,16 +134,16 @@ export default function Sustainability() {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Reporte ESG guardado correctamente");
+      toast.success(t('toast.reportSaved'));
       queryClient.invalidateQueries({ queryKey: ["esg-reports"] });
       setIsDialogOpen(false);
       form.reset();
     },
     onError: (error: any) => {
       if (error.code === '23505') {
-        toast.error(`Ya existe un reporte para el año seleccionado.`);
+        toast.error(t('toast.duplicateYear'));
       } else {
-        toast.error("Error al guardar el reporte: " + error.message);
+        toast.error(t('toast.error', { message: error.message }));
       }
     },
   });
@@ -195,22 +197,22 @@ export default function Sustainability() {
     // Points for renewable energy
     const renewable = Number(latestReport.energy_renewable_percent) || 0;
     points += renewable;
-    if (renewable >= 80) badges.push("🌿 Líder Renovable");
-    if (renewable >= 50) badges.push("⚡ Transición Energética");
+    if (renewable >= 80) badges.push(`🌿 ${t('badges.renewableLeader')}`);
+    if (renewable >= 50) badges.push(`⚡ ${t('badges.energyTransition')}`);
     
     // Points for certifications
     const certs = latestReport.certifications?.length || 0;
     points += certs * 20;
-    if (certs >= 3) badges.push("🏅 Multi-Certificado");
+    if (certs >= 3) badges.push(`🏅 ${t('badges.multiCertified')}`);
     if (latestReport.certifications?.some(c => c.includes("ISO 14001"))) {
-      badges.push("🌍 ISO 14001");
+      badges.push(`🌍 ${t('badges.iso14001')}`);
     }
     
     // Points for low Scope 3
     const s3 = scope3Data?.totalScope3 || 0;
     const s3Points = Math.max(0, 100 - Math.min(s3, 100));
     points += s3Points;
-    if (s3 < 10) badges.push("🌱 Cadena Limpia");
+    if (s3 < 10) badges.push(`🌱 ${t('badges.cleanChain')}`);
     
     // Calculate level (1-5)
     let level: 1 | 2 | 3 | 4 | 5 = 1;
@@ -239,7 +241,7 @@ export default function Sustainability() {
       sectorPosition: position,
       esgScore: score
     };
-  }, [latestReport, scope3Data]);
+  }, [latestReport, scope3Data, t]);
 
   // --- Renderizado ---
   if (isLoading) {
@@ -260,24 +262,24 @@ export default function Sustainability() {
         <div>
           <h2 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-2">
             <Leaf className="h-8 w-8 text-green-600" />
-            Sostenibilidad Corporativa
+            {t('pageTitle')}
           </h2>
           <p className="text-muted-foreground mt-1">
-            Gestión de huella de carbono y métricas ESG para {activeOrg?.name}
+            {t('pageDescription', { orgName: activeOrg?.name })}
           </p>
         </div>
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-green-700 hover:bg-green-800">
-              <Plus className="mr-2 h-4 w-4" /> Nuevo Reporte Anual
+              <Plus className="mr-2 h-4 w-4" /> {t('newReport')}
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Registrar Métricas ESG</DialogTitle>
+              <DialogTitle>{t('dialog.title')}</DialogTitle>
               <DialogDescription>
-                Ingresa los datos de emisiones y energía correspondientes al año fiscal.
+                {t('dialog.description')}
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
@@ -287,7 +289,7 @@ export default function Sustainability() {
                   name="report_year"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Año del Reporte</FormLabel>
+                      <FormLabel>{t('dialog.reportYear')}</FormLabel>
                       <FormControl>
                         <Input type="number" {...field} />
                       </FormControl>
@@ -301,7 +303,7 @@ export default function Sustainability() {
                     name="scope1_total_tons"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Alcance 1 (tCO2e)</FormLabel>
+                        <FormLabel>{t('dialog.scope1')}</FormLabel>
                         <FormControl>
                           <Input type="number" step="0.01" {...field} />
                         </FormControl>
@@ -314,7 +316,7 @@ export default function Sustainability() {
                     name="scope2_total_tons"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Alcance 2 (tCO2e)</FormLabel>
+                        <FormLabel>{t('dialog.scope2')}</FormLabel>
                         <FormControl>
                           <Input type="number" step="0.01" {...field} />
                         </FormControl>
@@ -328,7 +330,7 @@ export default function Sustainability() {
                   name="energy_renewable_percent"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>% Energía Renovable</FormLabel>
+                      <FormLabel>{t('dialog.renewablePercent')}</FormLabel>
                       <FormControl>
                         <Input type="number" step="0.1" max={100} {...field} />
                       </FormControl>
@@ -338,7 +340,7 @@ export default function Sustainability() {
                 />
                 <div className="flex justify-end pt-4">
                   <Button type="submit" disabled={createReportMutation.isPending}>
-                    {createReportMutation.isPending ? "Guardando..." : "Guardar Reporte"}
+                    {createReportMutation.isPending ? t('dialog.saving') : t('dialog.save')}
                   </Button>
                 </div>
               </form>
@@ -351,10 +353,10 @@ export default function Sustainability() {
       {reports && reports.length > 0 ? (
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="overview">Visión General</TabsTrigger>
-            <TabsTrigger value="scope3">Scope 3 (Cadena)</TabsTrigger>
-            <TabsTrigger value="trends">Tendencias</TabsTrigger>
-            <TabsTrigger value="history">Historial</TabsTrigger>
+            <TabsTrigger value="overview">{t('tabs.overview')}</TabsTrigger>
+            <TabsTrigger value="scope3">{t('tabs.scope3')}</TabsTrigger>
+            <TabsTrigger value="trends">{t('tabs.trends')}</TabsTrigger>
+            <TabsTrigger value="history">{t('tabs.history')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
@@ -363,8 +365,8 @@ export default function Sustainability() {
               <EcoGauge
                 value={Number(latestReport?.scope1_total_tons) || 0}
                 maxValue={5000}
-                label="Alcance 1"
-                description="Emisiones directas"
+                label={t('kpis.scope1')}
+                description={t('kpis.scope1Desc')}
                 icon={Leaf}
                 color="green"
                 targetValue={1000}
@@ -373,8 +375,8 @@ export default function Sustainability() {
               <EcoGauge
                 value={Number(latestReport?.scope2_total_tons) || 0}
                 maxValue={5000}
-                label="Alcance 2"
-                description="Electricidad comprada"
+                label={t('kpis.scope2')}
+                description={t('kpis.scope2Desc')}
                 icon={TrendingUp}
                 color="blue"
                 targetValue={800}
@@ -383,8 +385,8 @@ export default function Sustainability() {
               <EcoGauge
                 value={scope3Data?.totalScope3 || 0}
                 maxValue={1000}
-                label="Alcance 3"
-                description={`${scope3Data?.supplierCount || 0} proveedores`}
+                label={t('kpis.scope3')}
+                description={t('kpis.scope3Desc', { count: scope3Data?.supplierCount || 0 })}
                 icon={Truck}
                 color="purple"
                 delay={0.2}
@@ -392,8 +394,8 @@ export default function Sustainability() {
               <EcoGauge
                 value={totalEmissions}
                 maxValue={10000}
-                label="Total"
-                description={`Año ${latestReport?.report_year}`}
+                label={t('kpis.total')}
+                description={t('kpis.year', { year: latestReport?.report_year })}
                 icon={Factory}
                 color="primary"
                 delay={0.3}
@@ -423,8 +425,8 @@ export default function Sustainability() {
             {latestReport && (
               <Card className="border-l-4 border-l-green-600">
                 <CardHeader>
-                  <CardTitle>Reporte Actual ({latestReport.report_year})</CardTitle>
-                  <CardDescription>Resumen ejecutivo de impacto ambiental</CardDescription>
+                  <CardTitle>{t('currentReport.title', { year: latestReport.report_year })}</CardTitle>
+                  <CardDescription>{t('currentReport.description')}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ESGDataView 
@@ -451,10 +453,10 @@ export default function Sustainability() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Truck className="h-5 w-5 text-purple-600" />
-                  Emisiones Scope 3 - Cadena de Suministro
+                  {t('scope3Section.title')}
                 </CardTitle>
                 <CardDescription>
-                  Emisiones indirectas de tus proveedores de datos
+                  {t('scope3Section.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -474,17 +476,17 @@ export default function Sustainability() {
                           <p className="text-2xl font-bold text-purple-600">
                             {scope3Data.totalScope3.toFixed(2)} tCO₂e
                           </p>
-                          <p className="text-xs text-muted-foreground">Scope 3 estimado</p>
+                          <p className="text-xs text-muted-foreground">{t('scope3Section.yourContribution')}</p>
                         </div>
                         <div className="h-12 w-px bg-border" />
                         <div>
                           <p className="text-2xl font-bold">{scope3Data.supplierCount}</p>
-                          <p className="text-xs text-muted-foreground">Proveedores analizados</p>
+                          <p className="text-xs text-muted-foreground">{t('scope3Section.supplier')}</p>
                         </div>
                       </div>
                     </div>
 
-                    <h4 className="font-semibold mt-6">Desglose por Proveedor</h4>
+                    <h4 className="font-semibold mt-6">{t('scope3Section.supplier')}</h4>
                     <div className="space-y-3">
                       {scope3Data.supplierReports.map((report: any) => (
                         <div 
@@ -496,9 +498,9 @@ export default function Sustainability() {
                               <Factory className="h-4 w-4" />
                             </div>
                             <div>
-                              <p className="font-medium">{report.organization?.name || "Proveedor"}</p>
+                              <p className="font-medium">{report.organization?.name || t('scope3Section.supplier')}</p>
                               <p className="text-xs text-muted-foreground">
-                                Reporte {report.report_year}
+                                {t('history.year')} {report.report_year}
                               </p>
                             </div>
                           </div>
@@ -510,7 +512,7 @@ export default function Sustainability() {
                               {Number(report.energy_renewable_percent) > 80 && (
                                 <Badge className="bg-green-100 text-green-700 text-xs gap-1">
                                   <Zap className="h-3 w-3" />
-                                  Renovable
+                                  {t('scope3Section.renewable')}
                                 </Badge>
                               )}
                               {report.certifications?.includes("ISO 14001") && (
@@ -528,10 +530,9 @@ export default function Sustainability() {
                 ) : (
                   <div className="text-center py-12">
                     <Truck className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">Sin datos de proveedores</h3>
+                    <h3 className="text-lg font-semibold mb-2">{t('scope3Section.noSuppliers')}</h3>
                     <p className="text-muted-foreground max-w-md mx-auto">
-                      Completa transacciones con proveedores que tengan reportes ESG 
-                      para calcular tu Scope 3.
+                      {t('scope3Section.noSuppliersDesc')}
                     </p>
                   </div>
                 )}
@@ -543,9 +544,9 @@ export default function Sustainability() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5" /> Evolución de Emisiones
+                  <TrendingUp className="h-5 w-5" /> {t('trends.title')}
                 </CardTitle>
-                <CardDescription>Histórico de toneladas CO2 equivalente por alcance</CardDescription>
+                <CardDescription>{t('trends.description')}</CardDescription>
               </CardHeader>
               <CardContent className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -609,8 +610,9 @@ export default function Sustainability() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <History className="h-5 w-5" /> Registro Histórico
+                  <History className="h-5 w-5" /> {t('history.title')}
                 </CardTitle>
+                <CardDescription>{t('history.description')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -619,7 +621,7 @@ export default function Sustainability() {
                       <div>
                         <p className="font-bold text-lg">{report.report_year}</p>
                         <p className="text-sm text-muted-foreground">
-                          Creado el {new Date(report.created_at || '').toLocaleDateString()}
+                          {new Date(report.created_at || '').toLocaleDateString()}
                         </p>
                       </div>
                       <div className="text-right">
@@ -627,7 +629,7 @@ export default function Sustainability() {
                           {(Number(report.scope1_total_tons) + Number(report.scope2_total_tons)).toFixed(2)} tCO₂e
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {report.energy_renewable_percent}% Renovable
+                          {report.energy_renewable_percent}% {t('scope3Section.renewable')}
                         </p>
                       </div>
                     </div>
@@ -644,12 +646,12 @@ export default function Sustainability() {
             <div className="rounded-full bg-green-100 dark:bg-green-900/30 p-4 mb-4">
               <Leaf className="h-10 w-10 text-green-600" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">No hay datos de sostenibilidad</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('emptyState.title')}</h3>
             <p className="text-muted-foreground max-w-md mb-6">
-              Comienza a realizar el seguimiento de tu huella de carbono agregando tu primer reporte anual.
+              {t('emptyState.description')}
             </p>
             <Button onClick={() => setIsDialogOpen(true)} variant="outline" className="border-green-600 text-green-600 hover:bg-green-50">
-              <Plus className="mr-2 h-4 w-4" /> Crear Primer Reporte
+              <Plus className="mr-2 h-4 w-4" /> {t('emptyState.cta')}
             </Button>
           </CardContent>
         </Card>

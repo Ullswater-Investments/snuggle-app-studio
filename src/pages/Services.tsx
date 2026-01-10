@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -95,9 +96,11 @@ const iconMap: Record<string, any> = {
   Plug,
   VenetianMask: Lock, // Fallback since VenetianMask doesn't exist
 };
+
 const Services = () => {
   const { activeOrg } = useOrganizationContext();
   const navigate = useNavigate();
+  const { t } = useTranslation('services');
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -118,8 +121,8 @@ const Services = () => {
   });
 
   const handleActivateService = (serviceName: string) => {
-    toast.success(`Servicio "${serviceName}" activado correctamente`, {
-      description: "Los resultados aparecerán en tu Dashboard en 24h.",
+    toast.success(t('toast.serviceActivated', { name: serviceName }), {
+      description: t('toast.availableInDashboard'),
     });
   };
 
@@ -157,15 +160,15 @@ const Services = () => {
 
   const formatPrice = (price: number | null, currency: string, priceModel: string | null) => {
     if (price === null || price === 0) {
-      return "Gratis";
+      return t('pricing.free');
     }
     
     // Use EUROe format for consistency with PROCUREDATA
     const formatted = `${price} EUROe`;
     
     return priceModel === "subscription" 
-      ? `${formatted}/mes` 
-      : `${formatted}/uso`;
+      ? `${formatted}${t('pricing.perMonth')}` 
+      : `${formatted}${t('pricing.perUse')}`;
   };
 
   // Simulated subscription state
@@ -174,14 +177,14 @@ const Services = () => {
   const handleSubscribe = (serviceId: string, serviceName: string, price: number | null) => {
     if (subscribedServices.includes(serviceId)) return;
 
-    const priceText = price && price > 0 ? `${price} EUROe` : "gratuito";
-    toast.loading(`Procesando pago de ${priceText}...`, { id: "payment" });
+    const priceText = price && price > 0 ? `${price} EUROe` : t('pricing.free');
+    toast.loading(t('toast.processingPayment', { price: priceText }), { id: "payment" });
     
     setTimeout(() => {
       setSubscribedServices(prev => [...prev, serviceId]);
-      toast.success(`Servicio "${serviceName}" activado correctamente`, {
+      toast.success(t('toast.serviceActivated', { name: serviceName }), {
         id: "payment",
-        description: "Ya puedes usarlo desde tu Dashboard.",
+        description: t('toast.availableInDashboard'),
       });
     }, 1500);
   };
@@ -239,9 +242,9 @@ const Services = () => {
         <Card>
           <CardContent className="py-12 text-center">
             <Sparkles className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No se encontraron servicios</h3>
+            <h3 className="text-lg font-semibold mb-2">{t('emptyState.title')}</h3>
             <p className="text-sm text-muted-foreground">
-              Intenta ajustar los filtros de búsqueda.
+              {t('emptyState.description')}
             </p>
           </CardContent>
         </Card>
@@ -284,7 +287,7 @@ const Services = () => {
                       </div>
                       {isSameSector && (
                         <Badge variant="outline" className="text-xs">
-                          Recomendado
+                          {t('card.recommended')}
                         </Badge>
                       )}
                     </div>
@@ -327,14 +330,14 @@ const Services = () => {
                       </p>
                       {service.price === 0 && (
                         <Badge variant="secondary" className="text-xs mt-1">
-                          Core Service
+                          {t('card.coreService')}
                         </Badge>
                       )}
                     </div>
                     {subscribedServices.includes(service.id) ? (
                       <Badge className="bg-green-500/20 text-green-600 border-green-500/30 py-2 px-4">
                         <CheckCircle className="h-4 w-4 mr-2" />
-                        Activo
+                        {t('card.active')}
                       </Badge>
                     ) : (
                       <div className="flex gap-2">
@@ -348,7 +351,7 @@ const Services = () => {
                           className="gap-1"
                         >
                           <FileText className="h-4 w-4" />
-                          <span className="hidden sm:inline">Docs</span>
+                          <span className="hidden sm:inline">{t('card.docs')}</span>
                         </Button>
                         <Button
                           size="sm"
@@ -359,7 +362,7 @@ const Services = () => {
                           className="gap-1"
                         >
                           <Zap className="h-4 w-4" />
-                          {service.price === 0 ? "Gratis" : "Suscribir"}
+                          {service.price === 0 ? t('card.free') : t('card.subscribe')}
                         </Button>
                       </div>
                     )}
@@ -378,9 +381,9 @@ const Services = () => {
       <div className="container mx-auto p-6 space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold mb-2">Marketplace de Servicios</h1>
+          <h1 className="text-3xl font-bold mb-2">{t('pageTitle')}</h1>
           <p className="text-muted-foreground">
-            Algoritmos y servicios de valor añadido para procesar tus datos
+            {t('pageDescription')}
           </p>
         </div>
 
@@ -389,7 +392,7 @@ const Services = () => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Buscar servicios..."
+              placeholder={t('searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -401,7 +404,7 @@ const Services = () => {
               size="sm"
               onClick={() => setSelectedCategory("all")}
             >
-              Todos
+              {t('all')}
             </Button>
             {categories.slice(0, 5).map((cat) => (
               <Button
@@ -434,9 +437,9 @@ const Services = () => {
         ) : isProvider ? (
           <Tabs defaultValue="marketplace" className="w-full">
             <TabsList>
-              <TabsTrigger value="marketplace">Mercado Global</TabsTrigger>
+              <TabsTrigger value="marketplace">{t('tabs.globalMarket')}</TabsTrigger>
               <TabsTrigger value="my-services">
-                Mis Servicios ({myServices.length})
+                {t('tabs.myServices')} ({myServices.length})
               </TabsTrigger>
             </TabsList>
             <TabsContent value="marketplace" className="mt-6">

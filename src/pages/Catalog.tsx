@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
 import { 
   Search, 
@@ -76,6 +77,7 @@ export default function Catalog() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('catalog');
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [filters, setFilters] = useState({
@@ -132,19 +134,19 @@ export default function Catalog() {
     onSuccess: (result) => {
       queryClient.invalidateQueries({ queryKey: ["user-wishlist"] });
       if (result.action === "added") {
-        toast("Añadido a favoritos", { icon: "❤️" });
+        toast(t('toast.addedToFavorites'), { icon: "❤️" });
       } else {
-        toast("Eliminado de favoritos", { icon: "💔" });
+        toast(t('toast.removedFromFavorites'), { icon: "💔" });
       }
     },
     onError: () => {
-      toast.error("Error al actualizar favoritos");
+      toast.error(t('toast.errorFavorites'));
     },
   });
 
   const toggleWishlist = (assetId: string) => {
     if (!user) {
-      toast.error("Inicia sesión para guardar favoritos");
+      toast.error(t('toast.loginRequired'));
       return;
     }
     toggleWishlistMutation.mutate(assetId);
@@ -221,7 +223,7 @@ export default function Catalog() {
   ).sort();
   
   const allCategories = [
-    { id: "all", label: "Todos", targetShare: null },
+    { id: "all", label: t('filters.all'), targetShare: null },
     ...dynamicCategories.map(cat => ({
       id: cat!,
       label: cat!,
@@ -237,7 +239,7 @@ export default function Catalog() {
         newSet.delete(assetId);
       } else {
         if (newSet.size >= 4) {
-          toast.error("Máximo 4 productos para comparar");
+          toast.error(t('toast.maxCompare'));
           return prev;
         }
         newSet.add(assetId);
@@ -258,17 +260,17 @@ export default function Catalog() {
         </div>
         <div className="relative z-10 max-w-2xl">
           <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4 border-none">
-            Marketplace Oficial v2.0
+            {t('hero.badge')}
           </Badge>
-          <h1 className="text-4xl font-bold mb-4">Descubre, Compra e Integra Datos de Confianza</h1>
+          <h1 className="text-4xl font-bold mb-4">{t('hero.title')}</h1>
           <p className="text-blue-100 text-lg mb-8">
-            Accede a miles de activos de datos verificados, con gobernanza integrada y cumplimiento ODRL automatizado.
+            {t('hero.description')}
           </p>
           
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
             <Input 
-              placeholder="Buscar datos financieros, IoT, clima..." 
+              placeholder={t('hero.searchPlaceholder')} 
               className="pl-10 h-12 bg-white text-gray-900 border-none shadow-lg focus-visible:ring-0"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -284,14 +286,14 @@ export default function Catalog() {
         <div className="hidden lg:block space-y-6">
           <div className="sticky top-24">
             <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <Filter className="h-4 w-4" /> Filtros
+              <Filter className="h-4 w-4" /> {t('filters.title')}
             </h3>
             
             <Card>
               <CardContent className="p-4 space-y-6">
                 {/* Filtro Precio */}
                 <div className="space-y-3">
-                  <Label>Modelo de Precio</Label>
+                  <Label>{t('filters.priceModel')}</Label>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <Checkbox 
@@ -299,7 +301,7 @@ export default function Catalog() {
                         checked={filters.priceType === 'all'} 
                         onCheckedChange={() => setFilters(f => ({...f, priceType: 'all'}))}
                       />
-                      <label htmlFor="price-all" className="text-sm font-medium">Todos</label>
+                      <label htmlFor="price-all" className="text-sm font-medium">{t('filters.all')}</label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox 
@@ -307,7 +309,7 @@ export default function Catalog() {
                         checked={filters.priceType === 'free'}
                         onCheckedChange={() => setFilters(f => ({...f, priceType: filters.priceType === 'free' ? 'all' : 'free'}))}
                       />
-                      <label htmlFor="price-free" className="text-sm">Gratuitos (Open Data)</label>
+                      <label htmlFor="price-free" className="text-sm">{t('filters.freeOpenData')}</label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox 
@@ -315,7 +317,7 @@ export default function Catalog() {
                         checked={filters.priceType === 'paid'}
                         onCheckedChange={() => setFilters(f => ({...f, priceType: filters.priceType === 'paid' ? 'all' : 'paid'}))}
                       />
-                      <label htmlFor="price-paid" className="text-sm">Premium / Pago</label>
+                      <label htmlFor="price-paid" className="text-sm">{t('filters.premiumPaid')}</label>
                     </div>
                   </div>
                 </div>
@@ -324,7 +326,7 @@ export default function Catalog() {
 
                 {/* Filtro Calidad/Confianza */}
                 <div className="space-y-3">
-                  <Label>Garantía y Confianza</Label>
+                  <Label>{t('filters.trustGuarantee')}</Label>
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <Checkbox 
@@ -333,7 +335,7 @@ export default function Catalog() {
                         onCheckedChange={(c) => setFilters(f => ({...f, onlyGreen: !!c}))}
                       />
                       <label htmlFor="check-green" className="text-sm flex items-center gap-1">
-                        <Leaf className="h-3 w-3 text-green-600" /> Sostenible (ESG)
+                        <Leaf className="h-3 w-3 text-green-600" /> {t('filters.sustainableESG')}
                       </label>
                     </div>
                     <div className="flex items-center space-x-2">
@@ -343,7 +345,7 @@ export default function Catalog() {
                         onCheckedChange={(c) => setFilters(f => ({...f, onlyVerified: !!c}))}
                       />
                       <label htmlFor="check-kyb" className="text-sm flex items-center gap-1">
-                        <ShieldCheck className="h-3 w-3 text-blue-600" /> Verificado (KYB)
+                        <ShieldCheck className="h-3 w-3 text-blue-600" /> {t('filters.verifiedKYB')}
                       </label>
                     </div>
                   </div>
@@ -391,6 +393,7 @@ export default function Catalog() {
                   isInWishlist={wishlist.has(item.asset_id)}
                   onCompareToggle={() => toggleCompare(item.asset_id)}
                   isInCompare={compareList.has(item.asset_id)}
+                  t={t}
                 />
               ))}
               
@@ -399,13 +402,13 @@ export default function Catalog() {
                   <div className="mx-auto h-12 w-12 text-muted-foreground mb-4">
                     <Search className="h-full w-full" />
                   </div>
-                  <h3 className="text-lg font-medium">No se encontraron resultados</h3>
-                  <p className="text-muted-foreground">Prueba a ajustar los filtros o la búsqueda.</p>
+                  <h3 className="text-lg font-medium">{t('emptyState.title')}</h3>
+                  <p className="text-muted-foreground">{t('emptyState.description')}</p>
                   <Button variant="link" onClick={() => {
                     setSearchTerm("");
                     setFilters({onlyGreen: false, onlyVerified: false, priceType: 'all'});
                     setActiveTab("all");
-                  }}>Limpiar filtros</Button>
+                  }}>{t('emptyState.clearFilters')}</Button>
                 </div>
               )}
             </div>
@@ -420,14 +423,14 @@ export default function Catalog() {
             <CardContent className="flex items-center gap-4 p-4">
               <BarChart3 className="h-5 w-5 text-primary" />
               <div>
-                <p className="font-semibold">Comparando {compareList.size} productos</p>
-                <p className="text-xs text-muted-foreground">Selecciona hasta 4 para comparar</p>
+                <p className="font-semibold">{t('compare.comparing', { count: compareList.size })}</p>
+                <p className="text-xs text-muted-foreground">{t('compare.selectUpTo')}</p>
               </div>
               <Button onClick={() => setCompareDialogOpen(true)} size="sm">
-                Ver Tabla Comparativa
+                {t('compare.viewTable')}
               </Button>
               <Button variant="ghost" size="sm" onClick={() => setCompareList(new Set())}>
-                Limpiar
+                {t('compare.clear')}
               </Button>
             </CardContent>
           </Card>
@@ -438,9 +441,9 @@ export default function Catalog() {
       <Dialog open={compareDialogOpen} onOpenChange={setCompareDialogOpen}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-auto">
           <DialogHeader>
-            <DialogTitle>Comparación de Productos</DialogTitle>
+            <DialogTitle>{t('compare.dialogTitle')}</DialogTitle>
             <DialogDescription>
-              Compara las características de los {compareProducts.length} productos seleccionados
+              {t('compare.dialogDescription', { count: compareProducts.length })}
             </DialogDescription>
           </DialogHeader>
           
@@ -448,7 +451,7 @@ export default function Catalog() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[150px]">Característica</TableHead>
+                  <TableHead className="w-[150px]">{t('compareTable.feature')}</TableHead>
                   {compareProducts.map(p => (
                     <TableHead key={p.asset_id}>{p.product_name}</TableHead>
                   ))}
@@ -456,17 +459,17 @@ export default function Catalog() {
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium">Proveedor</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.provider')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>{p.provider_name}</TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Precio</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.price')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.price === 0 ? (
-                        <Badge variant="outline" className="text-green-600">GRATIS</Badge>
+                        <Badge variant="outline" className="text-green-600">{t('card.free')}</Badge>
                       ) : (
                         <div className="flex items-center gap-1">
                           {`${p.price} ${p.currency}`}
@@ -479,7 +482,7 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Modelo</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.model')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id} className="capitalize">
                       {p.pricing_model}
@@ -487,13 +490,13 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Categoría</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.category')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>{p.category}</TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Reputación</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.reputation')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       <StarRating rating={p.reputation_score} count={p.review_count} />
@@ -501,29 +504,29 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Verificado</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.verified')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.kyb_verified ? (
                         <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700">
-                          <ShieldCheck className="h-3 w-3 mr-1" /> Sí
+                          <ShieldCheck className="h-3 w-3 mr-1" /> {t('common.yes')}
                         </Badge>
                       ) : (
-                        "No"
+                        t('common.no')
                       )}
                     </TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Sostenible</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.sustainable')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.has_green_badge ? (
                         <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700">
-                          <Leaf className="h-3 w-3 mr-1" /> Sí
+                          <Leaf className="h-3 w-3 mr-1" /> {t('common.yes')}
                         </Badge>
                       ) : (
-                        "No"
+                        t('common.no')
                       )}
                     </TableCell>
                   ))}
@@ -534,7 +537,7 @@ export default function Catalog() {
 
           <div className="flex justify-end gap-2 mt-4">
             <Button variant="outline" onClick={() => setCompareDialogOpen(false)}>
-              Cerrar
+              {t('compare.close')}
             </Button>
           </div>
         </DialogContent>
@@ -550,7 +553,8 @@ function ProductCard({
   onWishlistToggle,
   isInWishlist,
   onCompareToggle,
-  isInCompare
+  isInCompare,
+  t
 }: { 
   item: MarketplaceListing;
   onAction: () => void;
@@ -558,6 +562,7 @@ function ProductCard({
   isInWishlist?: boolean;
   onCompareToggle?: () => void;
   isInCompare?: boolean;
+  t: (key: string) => string;
 }) {
   const isPaid = (item.price || 0) > 0;
   const isWeb3Asset = item.currency === 'EUROe' || item.currency === 'GX';
@@ -619,13 +624,13 @@ function ProductCard({
           {item.product_name}
         </CardTitle>
         <CardDescription className="flex items-center gap-1 text-xs">
-          por <span className="font-medium text-foreground">{item.provider_name}</span>
+          {t('card.by')} <span className="font-medium text-foreground">{item.provider_name}</span>
         </CardDescription>
       </CardHeader>
 
       <CardContent className="flex-1 pb-4">
         <p className="text-sm text-muted-foreground line-clamp-3 mb-4 min-h-[60px]">
-          {item.product_description || "Sin descripción disponible para este activo de datos."}
+          {item.product_description || t('card.noDescription')}
         </p>
         
         <div className="flex items-center justify-between">
@@ -647,12 +652,12 @@ function ProductCard({
                 </div>
                 {item.pricing_model === 'subscription' && (
                   <span className="text-[10px] text-muted-foreground uppercase font-medium">
-                    / {item.billing_period === 'monthly' ? 'mes' : 'año'}
+                    / {item.billing_period === 'monthly' ? t('card.month') : t('card.year')}
                   </span>
                 )}
               </div>
             ) : (
-              <span className="text-lg font-bold text-green-600">Gratis</span>
+              <span className="text-lg font-bold text-green-600">{t('card.free')}</span>
             )}
           </div>
         </div>
@@ -670,7 +675,7 @@ function ProductCard({
               onCheckedChange={onCompareToggle}
             />
             <label htmlFor={`compare-${item.asset_id}`} className="cursor-pointer text-muted-foreground">
-              Comparar este producto
+              {t('card.compareThis')}
             </label>
           </div>
         )}
@@ -687,15 +692,15 @@ function ProductCard({
         >
           {isWeb3Asset ? (
             <>
-              <Wallet className="mr-2 h-4 w-4" /> Comprar con Wallet
+              <Wallet className="mr-2 h-4 w-4" /> {t('card.buyWithWallet')}
             </>
           ) : isPaid ? (
             <>
-              <ShoppingCart className="mr-2 h-4 w-4" /> Comprar Datos
+              <ShoppingCart className="mr-2 h-4 w-4" /> {t('card.buyData')}
             </>
           ) : (
             <>
-              Solicitar Acceso <ArrowRight className="ml-2 h-4 w-4" />
+              {t('card.requestAccess')} <ArrowRight className="ml-2 h-4 w-4" />
             </>
           )}
         </Button>
