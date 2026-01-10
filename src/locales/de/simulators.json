@@ -9,7 +9,7 @@
     "ppaPrice": "Vereinbarter PPA-Preis",
     "cashFlowBoost": "Cashflow-Verbesserung",
     "financialCost": "-12% Finanzierungskosten",
-    "downloadCert": "PPA-Zertifikat herunterladen",
+    "downloadCert": "PPA-Zertifikat Herunterladen",
     "units": {
       "mwh": "MWh",
       "ms": "m/s",
@@ -25,15 +25,164 @@
       "name": "ARIA",
       "role": "Windenergie-Beraterin",
       "instantTitle": "Sofortabrechnung",
-      "instantDesc": "Bei Wind mit <strong>{{windSpeed}} m/s</strong> und einem PPA-Preis von <strong>{{price}}€/MWh</strong> erzeugt Ihre Sofortabrechnung <strong>{{payout}} EUROe</strong> im aktuellen Block.",
-      "waitTitle": "Wartezeit-Eliminierung",
-      "waitDesc": "Die traditionelle Zahlung dauert <span>{{traditional}} Tage</span>. Mit Smart Contract erhalten Sie die Zahlung in <strong>{{blockchain}} Sekunden</strong> und setzen Kapital sofort frei.",
-      "projectionTitle": "Jahresprojektion",
-      "projectionDesc": "Geschätzte Erzeugung: <strong>{{generation}} GWh/Jahr</strong> mit Einnahmen von <strong>{{revenue}} Mio. €</strong>.",
+      "instantDesc": "Bei Wind mit <strong>{{windSpeed}} m/s</strong> und einem PPA-Preis von <strong>{{price}}€/MWh</strong> generiert Ihre Sofortabrechnung <strong>{{payout}} EUROe</strong> im aktuellen Block.",
+      "waitTitle": "Eliminierung der Wartezeit",
+      "waitDesc": "Die traditionelle Zahlung dauert <span>{{traditional}} Tage</span>. Mit Smart Contract erhalten Sie die Zahlung in <strong>{{blockchain}} Sekunden</strong>, wodurch Kapital sofort freigesetzt wird.",
+      "projectionTitle": "Jährliche Projektion",
+      "projectionDesc": "Geschätzte Erzeugung: <strong>{{generation}} GWh/Jahr</strong> mit Einnahmen von <strong>{{revenue}} M€</strong>.",
       "optimalWind": "Optimaler Wind",
-      "optimalWindDesc": "Die aktuelle Geschwindigkeit liegt im optimalen Bereich der Leistungskurve. Der Kapazitätsfaktor übersteigt 35% und maximiert die PPA-Rentabilität.",
+      "optimalWindDesc": "Die aktuelle Geschwindigkeit liegt im optimalen Bereich der Leistungskurve. Der Kapazitätsfaktor überschreitet 35%, was die PPA-Rentabilität maximiert.",
       "ppaPremium": "PPA Premium",
       "ppaPremiumDesc": "Ihr PPA-Preis von {{price}}€/MWh liegt über dem Markt. Die Blockchain-Zertifizierung garantiert die Rückverfolgbarkeit des erneuerbaren Ursprungs und rechtfertigt den Aufpreis."
+    }
+  },
+  "h2pure": {
+    "title": "GRÜNER H2 - CERTIFHY",
+    "passportIssued": "Reisepass AUSGESTELLT",
+    "passportPending": "Reisepass AUSSTEHEND",
+    "purityTitle": "Reinheit des Erneuerbaren Ursprungs",
+    "renewable": "Erneuerbar",
+    "nonRenewable": "Nicht Erneuerbar",
+    "annualProduction": "Jährliche Produktion (Tonnen)",
+    "renewableMix": "Erneuerbarer Mix",
+    "subsidyUnlocked": "EU-Subvention Freigeschaltet",
+    "downloadPassport": "H2-Reisepass Herunterladen",
+    "units": {
+      "tons": "t",
+      "percent": "%",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Grüner Wasserstoff-Beraterin",
+      "certifHyTitle": "CertifHy-Zertifizierung",
+      "certifHyIssued": "Bei Überschreitung von 95% erneuerbarem Mix habe ich den <strong>Digitalen Wasserstoff-Reisepass</strong> ausgestellt und <strong>{{amount}}€</strong> an EU-Mitteln freigeschaltet.",
+      "certifHyPending": "Erhöhen Sie den erneuerbaren Mix auf <strong>95%</strong>, um die vollständige CertifHy-Zertifizierung zu erhalten.",
+      "climateTitle": "Klimaauswirkung",
+      "climateDesc": "Ihre Produktion von grünem H2 vermeidet <span>{{tons}} tonCO2</span> jährlich.",
+      "greenCertified": "Grüner H2 Zertifiziert",
+      "eligibleProjects": "Berechtigt für IPCEI-Projekte und NextGenerationEU-Mittel."
+    }
+  },
+  "helios": {
+    "title": "SOLARFELD-OPTIMIERER",
+    "cleaningUrgent": "Reinigung Dringend",
+    "iotActive": "IoT Aktiv",
+    "dirtLevel": "Verschmutzung",
+    "urgent": "Dringend",
+    "days": "Tage",
+    "realtimeGeneration": "Echtzeit-Erzeugung",
+    "numPanels": "Anzahl der Panels",
+    "daysWithoutCleaning": "Tage ohne Reinigung",
+    "revenueOptimized": "Einnahmen durch Optimierte Erzeugung",
+    "efficiency": "+5% Effizienz",
+    "downloadReport": "IoT-Bericht Herunterladen",
+    "units": {
+      "panels": "Panels",
+      "mwh": "MWh",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Solar-Wartungsberaterin",
+      "recoveryTitle": "Energierückgewinnung",
+      "recoveryDesc": "Durch Reduzierung der Verschmutzung auf <span>{{days}} Tage</span> gewinnen Sie <span>{{mwh}} MWh</span> täglich zurück und generieren <span>{{revenue}}€</span> zusätzlich.",
+      "annualTitle": "Geschätzte Jahresproduktion",
+      "annualDesc": "Mit <strong>{{panels}} optimierten Panels</strong> erreicht Ihre Jahresproduktion <span>{{mwh}} MWh</span>, ausreichend für <strong>{{homes}} Haushalte</strong>.",
+      "alertTitle": "Wartungsalarm",
+      "alertDesc": "Die angesammelte Verschmutzung verursacht einen Effizienzverlust von <strong>{{loss}}%</strong>. Ich empfehle, eine sofortige Reinigung zu planen.",
+      "optimalTitle": "Optimale Leistung",
+      "optimalDesc": "Ihr Solarfeld arbeitet unter optimalen Bedingungen. Das prädiktive IoT erhält die maximale Effizienz."
+    }
+  },
+  "gridflex": {
+    "title": "NETZFLEXIBILITÄT MONETARISIEREN",
+    "stability": "Stabilität",
+    "loadStatus": "Industrieller Netzlaststatus",
+    "baseLoad": "Grundlast",
+    "activeReduction": "Aktive Reduzierung",
+    "kwReduction": "kW Reduzierung",
+    "incentivePrice": "€/MWh Anreiz",
+    "eventsMonth": "Ereignisse/Monat",
+    "reductionCapacity": "Reduzierungskapazität",
+    "priceIncentive": "Anreizpreis",
+    "monthlyIncentives": "Anreize für Flexibilität (Monatlich)",
+    "downloadCert": "Flexibilitätszertifikat Herunterladen",
+    "units": {
+      "kw": "kW",
+      "eurMwh": "€/MWh",
+      "events": "Ereignisse"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Nachfragemanagement-Beraterin",
+      "monetizationTitle": "Flexibilitätsmonetarisierung",
+      "monetizationDesc": "Durch die Notarisierung Ihrer Reduzierung von <span>{{kw}} kW</span> auf Pontus-X haben Sie diesen Monat <span>{{earnings}} EUROe</span> an Flexibilitätsanreizen verdient.",
+      "impactTitle": "Umweltauswirkung",
+      "impactDesc": "Ihre Lastreduzierung vermeidet <span>{{co2}} tonCO2</span> monatlich, entspricht dem Pflanzen von <span>{{trees}}</span> Bäumen.",
+      "projectionTitle": "Jährliche Projektion",
+      "projectionDesc": "Bei Beibehaltung dieser Flexibilitätskapazität generieren Sie jährlich <span>{{annual}} EUROe</span> an Anreizen.",
+      "premiumTitle": "Premium-Aggregator",
+      "premiumDesc": "Ihr Zuverlässigkeitsniveau von <strong>{{reliability}}%</strong> qualifiziert Sie als Premium-Aggregator.",
+      "largeConsumerTitle": "Großer Flexibler Verbraucher",
+      "largeConsumerDesc": "Mit <strong>{{mw}} MW</strong> Kapazität können Sie direkt am Regelenergiemarkt teilnehmen."
+    }
+  },
+  "bioheat": {
+    "title": "BIOMASSE - RED II KONFORM",
+    "carbonNeutral": "Carbon Neutral",
+    "verifyOrigin": "Herkunft Prüfen",
+    "tonsYear": "Tonnen/Jahr",
+    "premium": "Premium",
+    "distance": "km Entfernung",
+    "annualProduction": "Jährliche Produktion (Tonnen)",
+    "transportDistance": "Transportentfernung (km)",
+    "annualRevenue": "Jährliche Einnahmen",
+    "downloadCert": "RED II-Zertifikat Herunterladen",
+    "units": {
+      "tons": "t",
+      "km": "km",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Biomasse-Beraterin",
+      "traceabilityTitle": "RED II Rückverfolgbarkeit",
+      "traceabilityNeutral": "Die Herkunft ist 100% legal. Die Blockchain-Rückverfolgbarkeit hat Ihre Biomasse als <strong>Carbon Neutral</strong> zertifiziert und Ihren Verkaufspreis um 12% erhöht.",
+      "traceabilityPending": "Reduzieren Sie die Transportentfernung auf unter <strong>100km</strong>, um die Carbon Neutral-Zertifizierung zu erhalten.",
+      "climateTitle": "Klimaauswirkung",
+      "climateDesc": "Ihre Biomasse vermeidet <span>{{tons}} tonCO2</span> jährlich im Vergleich zu fossilen Brennstoffen.",
+      "verifiedTitle": "Verifizierte Herkunft",
+      "verifiedDesc": "Geolokalisierte Einschlagspunkte, die gegen offizielle Forstregister verifiziert wurden."
+    }
+  },
+  "turbine": {
+    "title": "SCOPE 3 - GRÜNER STAHL",
+    "csrd": "CSRD",
+    "emissionsTier": "Emissionsakkumulation nach Tier",
+    "tier1": "Tier 1 (Stahl)",
+    "tier2": "Tier 2 (Komponenten)",
+    "tier3": "Tier 3 (Rohstoffe)",
+    "baseEmissions": "Basisemissionen",
+    "finalEmissions": "Endemissionen",
+    "turbinesToBuild": "Zu Bauende Turbinen",
+    "recycledRatio": "Recycelter Stahlanteil",
+    "scope3Reduction": "Scope 3 Emissionsreduzierung",
+    "downloadReport": "Scope 3-Bericht Herunterladen",
+    "units": {
+      "turbines": "Turbinen",
+      "percent": "%",
+      "tonCo2": "tonCO2"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Dekarbonisierungs-Beraterin",
+      "auditTitle": "Lieferantenaudit",
+      "auditDesc": "Ich habe Ihre <span>{{suppliers}}</span> Stahllieferanten auditiert. Ihr CSRD Scope 3-Bericht hat eine Präzision von <span>{{precision}}%</span>.",
+      "circularTitle": "Kreislauf-Stahl",
+      "circularDesc": "Mit <strong>{{ratio}}%</strong> recyceltem Stahl reduzieren Sie die Emissionen um <span>{{reduction}} tonCO2</span>.",
+      "csrdReadyTitle": "CSRD Bereit",
+      "csrdReadyDesc": "Ihr Bericht ist gültig für internationale Ausschreibungen und erfüllt die Anforderungen der europäischen CSRD-Richtlinie."
     }
   }
 }

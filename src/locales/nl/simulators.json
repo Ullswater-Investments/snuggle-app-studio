@@ -35,5 +35,154 @@
       "ppaPremium": "PPA Premium",
       "ppaPremiumDesc": "Je PPA-prijs van {{price}}€/MWh ligt boven de markt. De blockchain-certificering garandeert de traceerbaarheid van hernieuwbare oorsprong, wat de premie rechtvaardigt."
     }
+  },
+  "h2pure": {
+    "title": "GROENE H2 - CERTIFHY",
+    "passportIssued": "Paspoort UITGEGEVEN",
+    "passportPending": "Paspoort IN AFWACHTING",
+    "purityTitle": "Zuiverheid van Hernieuwbare Oorsprong",
+    "renewable": "Hernieuwbaar",
+    "nonRenewable": "Niet Hernieuwbaar",
+    "annualProduction": "Jaarlijkse Productie (tonnen)",
+    "renewableMix": "Hernieuwbare Mix",
+    "subsidyUnlocked": "EU-Subsidie Vrijgegeven",
+    "downloadPassport": "Download H2 Paspoort",
+    "units": {
+      "tons": "t",
+      "percent": "%",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Groene Waterstof Adviseur",
+      "certifHyTitle": "CertifHy Certificering",
+      "certifHyIssued": "Door 95% hernieuwbare mix te overschrijden, heb ik het <strong>Digitale Waterstof Paspoort</strong> uitgegeven, waardoor <strong>{{amount}}€</strong> aan EU-fondsen is vrijgegeven.",
+      "certifHyPending": "Verhoog de hernieuwbare mix naar <strong>95%</strong> om de volledige CertifHy-certificering te verkrijgen.",
+      "climateTitle": "Klimaatimpact",
+      "climateDesc": "Je groene H2-productie vermijdt <span>{{tons}} tonCO2</span> per jaar.",
+      "greenCertified": "Groene H2 Gecertificeerd",
+      "eligibleProjects": "In aanmerking komend voor IPCEI-projecten en NextGenerationEU-fondsen."
+    }
+  },
+  "helios": {
+    "title": "ZONNEVELD OPTIMIZER",
+    "cleaningUrgent": "Schoonmaak Dringend",
+    "iotActive": "IoT Actief",
+    "dirtLevel": "Vervuiling",
+    "urgent": "Dringend",
+    "days": "dagen",
+    "realtimeGeneration": "Realtime Opwekking",
+    "numPanels": "Aantal Panelen",
+    "daysWithoutCleaning": "Dagen zonder Schoonmaak",
+    "revenueOptimized": "Inkomsten door Geoptimaliseerde Opwekking",
+    "efficiency": "+5% Efficiëntie",
+    "downloadReport": "Download IoT Rapport",
+    "units": {
+      "panels": "panelen",
+      "mwh": "MWh",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Solar Onderhoud Adviseur",
+      "recoveryTitle": "Energie Herstel",
+      "recoveryDesc": "Door vervuiling te verminderen naar <span>{{days}} dagen</span>, herstel je <span>{{mwh}} MWh</span> dagelijks, wat <span>{{revenue}}€</span> extra genereert.",
+      "annualTitle": "Geschatte Jaarproductie",
+      "annualDesc": "Met <strong>{{panels}} geoptimaliseerde panelen</strong> bereikt je jaarproductie <span>{{mwh}} MWh</span>, voldoende voor <strong>{{homes}} huishoudens</strong>.",
+      "alertTitle": "Onderhoudswaarschuwing",
+      "alertDesc": "De opgehoopte vervuiling veroorzaakt een efficiëntieverlies van <strong>{{loss}}%</strong>. Ik raad aan om onmiddellijke schoonmaak te plannen.",
+      "optimalTitle": "Optimale Prestaties",
+      "optimalDesc": "Je zonneveld werkt onder optimale omstandigheden. De voorspellende IoT handhaaft maximale efficiëntie."
+    }
+  },
+  "gridflex": {
+    "title": "NET FLEXIBILITEIT MONETIZER",
+    "stability": "Stabiliteit",
+    "loadStatus": "Industriële Netbelastingsstatus",
+    "baseLoad": "Basislast",
+    "activeReduction": "Actieve Reductie",
+    "kwReduction": "kW Reductie",
+    "incentivePrice": "€/MWh Stimulans",
+    "eventsMonth": "Gebeurtenissen/Maand",
+    "reductionCapacity": "Reductiecapaciteit",
+    "priceIncentive": "Stimulansprijs",
+    "monthlyIncentives": "Stimulansen voor Flexibiliteit (Maandelijks)",
+    "downloadCert": "Download Flexibiliteit Certificaat",
+    "units": {
+      "kw": "kW",
+      "eurMwh": "€/MWh",
+      "events": "gebeurtenissen"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Vraagbeheer Adviseur",
+      "monetizationTitle": "Flexibiliteitsmonetisatie",
+      "monetizationDesc": "Door je reductie van <span>{{kw}} kW</span> op Pontus-X te notariseren, heb je deze maand <span>{{earnings}} EUROe</span> aan flexibiliteitsstimulansen verdiend.",
+      "impactTitle": "Milieuimpact",
+      "impactDesc": "Je lastreductie vermijdt <span>{{co2}} tonCO2</span> maandelijks, gelijk aan het planten van <span>{{trees}}</span> bomen.",
+      "projectionTitle": "Jaarlijkse Projectie",
+      "projectionDesc": "Door deze flexibiliteitscapaciteit te behouden, genereer je jaarlijks <span>{{annual}} EUROe</span> aan stimulansen.",
+      "premiumTitle": "Premium Aggregator",
+      "premiumDesc": "Je betrouwbaarheidsniveau van <strong>{{reliability}}%</strong> kwalificeert je als premium aggregator.",
+      "largeConsumerTitle": "Grote Flexibele Verbruiker",
+      "largeConsumerDesc": "Met <strong>{{mw}} MW</strong> capaciteit kun je direct deelnemen aan de balanceringsmarkt."
+    }
+  },
+  "bioheat": {
+    "title": "BIOMASSA - RED II CONFORM",
+    "carbonNeutral": "Carbon Neutral",
+    "verifyOrigin": "Oorsprong Verifiëren",
+    "tonsYear": "Tonnen/jaar",
+    "premium": "Premium",
+    "distance": "km afstand",
+    "annualProduction": "Jaarlijkse Productie (tonnen)",
+    "transportDistance": "Transportafstand (km)",
+    "annualRevenue": "Jaarlijkse Inkomsten",
+    "downloadCert": "Download RED II Certificaat",
+    "units": {
+      "tons": "t",
+      "km": "km",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Biomassa Adviseur",
+      "traceabilityTitle": "RED II Traceerbaarheid",
+      "traceabilityNeutral": "De oorsprong is 100% legaal. De blockchain-traceerbaarheid heeft je biomassa gecertificeerd als <strong>Carbon Neutral</strong>, waardoor je verkoopprijs met 12% is verhoogd.",
+      "traceabilityPending": "Verminder de transportafstand tot minder dan <strong>100km</strong> om de Carbon Neutral-certificering te verkrijgen.",
+      "climateTitle": "Klimaatimpact",
+      "climateDesc": "Je biomassa vermijdt <span>{{tons}} tonCO2</span> per jaar vs fossiele brandstoffen.",
+      "verifiedTitle": "Geverifieerde Oorsprong",
+      "verifiedDesc": "Geogelokaliseerde kaplocaties geverifieerd tegen officiële bosregisters."
+    }
+  },
+  "turbine": {
+    "title": "SCOPE 3 - GROEN STAAL",
+    "csrd": "CSRD",
+    "emissionsTier": "Emissieaccumulatie per Tier",
+    "tier1": "Tier 1 (Staal)",
+    "tier2": "Tier 2 (Componenten)",
+    "tier3": "Tier 3 (Grondstoffen)",
+    "baseEmissions": "Basisemissies",
+    "finalEmissions": "Eindemissies",
+    "turbinesToBuild": "Te Bouwen Turbines",
+    "recycledRatio": "Gerecycled Staalratio",
+    "scope3Reduction": "Scope 3 Emissiereductie",
+    "downloadReport": "Download Scope 3 Rapport",
+    "units": {
+      "turbines": "turbines",
+      "percent": "%",
+      "tonCo2": "tonCO2"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Decarbonisatie Adviseur",
+      "auditTitle": "Leveranciersaudit",
+      "auditDesc": "Ik heb je <span>{{suppliers}}</span> staalleveranciers geauditeerd. Je CSRD Scope 3-rapport heeft een precisie van <span>{{precision}}%</span>.",
+      "circularTitle": "Circulair Staal",
+      "circularDesc": "Met <strong>{{ratio}}%</strong> gerecycled staal verminder je de emissies met <span>{{reduction}} tonCO2</span>.",
+      "csrdReadyTitle": "CSRD Gereed",
+      "csrdReadyDesc": "Je rapport is geldig voor internationale aanbestedingen en voldoet aan de vereisten van de Europese CSRD-richtlijn."
+    }
   }
 }

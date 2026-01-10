@@ -5,12 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 interface H2PureSimulatorProps {
   onValuesChange?: (values: { tonsProduced: number; renewableMix: number; subsidyAmount: number }) => void;
 }
 
 export const H2PureSimulator = ({ onValuesChange }: H2PureSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [tonsProduced, setTonsProduced] = useState(150);
   const [renewableMix, setRenewableMix] = useState(92);
 
@@ -23,9 +25,9 @@ export const H2PureSimulator = ({ onValuesChange }: H2PureSimulatorProps) => {
   }, [tonsProduced, renewableMix]);
 
   const pieData = useMemo(() => [
-    { name: 'Renovable', value: renewableMix, color: '#10b981' },
-    { name: 'No Renovable', value: 100 - renewableMix, color: '#64748b' },
-  ], [renewableMix]);
+    { name: t('h2pure.renewable'), value: renewableMix, color: '#10b981' },
+    { name: t('h2pure.nonRenewable'), value: 100 - renewableMix, color: '#64748b' },
+  ], [renewableMix, t]);
 
   const pontusHash = useMemo(() => {
     const base = (tonsProduced * 10 + renewableMix).toString(16);
@@ -44,17 +46,17 @@ export const H2PureSimulator = ({ onValuesChange }: H2PureSimulatorProps) => {
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-emerald-500/20"><Leaf className="w-6 h-6 text-emerald-400" /></div>
               <div>
-                <h3 className="text-emerald-400 font-bold text-sm">H2 VERDE - CERTIFHY</h3>
+                <h3 className="text-emerald-400 font-bold text-sm">{t('h2pure.title')}</h3>
                 <p className="text-[10px] text-slate-400 font-mono">{pontusHash}</p>
               </div>
             </div>
             <Badge className={calculations.certifHyStatus === 'EMITIDO' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}>
-              Pasaporte {calculations.certifHyStatus}
+              {calculations.certifHyStatus === 'EMITIDO' ? t('h2pure.passportIssued') : t('h2pure.passportPending')}
             </Badge>
           </div>
 
           <div className="bg-slate-900/80 rounded-2xl p-4 border border-emerald-900/30 mb-6">
-            <p className="text-xs text-slate-400 uppercase font-bold mb-3 text-center">Pureza de Origen Renovable</p>
+            <p className="text-xs text-slate-400 uppercase font-bold mb-3 text-center">{t('h2pure.purityTitle')}</p>
             <div className="h-40">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -69,17 +71,17 @@ export const H2PureSimulator = ({ onValuesChange }: H2PureSimulatorProps) => {
 
           <div className="space-y-5 bg-slate-900/40 p-4 rounded-xl border border-emerald-900/20 mb-6">
             <div className="space-y-2">
-              <div className="flex justify-between text-sm"><span className="text-slate-300">Producción Anual (toneladas)</span><span className="font-bold text-emerald-400">{tonsProduced}</span></div>
+              <div className="flex justify-between text-sm"><span className="text-slate-300">{t('h2pure.annualProduction')}</span><span className="font-bold text-emerald-400">{tonsProduced}</span></div>
               <Slider value={[tonsProduced]} onValueChange={(v) => setTonsProduced(v[0])} min={10} max={1000} step={10} className="[&>span]:bg-emerald-600" />
             </div>
             <div className="space-y-2">
-              <div className="flex justify-between text-sm"><span className="text-slate-300">Mix Renovable</span><span className={`font-bold ${renewableMix >= 95 ? 'text-emerald-400' : 'text-yellow-400'}`}>{renewableMix}%</span></div>
+              <div className="flex justify-between text-sm"><span className="text-slate-300">{t('h2pure.renewableMix')}</span><span className={`font-bold ${renewableMix >= 95 ? 'text-emerald-400' : 'text-yellow-400'}`}>{renewableMix}%</span></div>
               <Slider value={[renewableMix]} onValueChange={(v) => setRenewableMix(v[0])} min={0} max={100} step={1} className="[&>span]:bg-teal-600" />
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-emerald-900/50 to-teal-900/50 p-5 rounded-2xl border border-emerald-500/30">
-            <p className="text-[10px] uppercase font-black text-emerald-300 mb-2">Subvención UE Desbloqueada</p>
+            <p className="text-[10px] uppercase font-black text-emerald-300 mb-2">{t('h2pure.subsidyUnlocked')}</p>
             <p className="text-4xl font-black text-white">{calculations.subsidyAmount.toLocaleString()} <span className="text-lg text-emerald-400">EUROe</span></p>
           </div>
         </Card>
@@ -89,33 +91,33 @@ export const H2PureSimulator = ({ onValuesChange }: H2PureSimulatorProps) => {
         <Card className="bg-[#020617] border-emerald-500/20 shadow-2xl h-full p-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-black text-lg">A</div>
-            <div><h4 className="text-white font-bold">ARIA</h4><p className="text-[10px] text-slate-400">Asesora de Hidrógeno Verde</p></div>
+            <div><h4 className="text-white font-bold">{t('h2pure.aria.name')}</h4><p className="text-[10px] text-slate-400">{t('h2pure.aria.role')}</p></div>
           </div>
 
           <div className="space-y-4">
             <div className="bg-slate-900/60 rounded-xl p-4 border border-emerald-900/30">
               <div className="flex items-start gap-3"><Sparkles className="w-5 h-5 text-emerald-400 mt-0.5" />
-                <div><p className="text-sm text-white font-medium mb-1">Certificación CertifHy</p>
-                  <p className="text-xs text-slate-400">{renewableMix >= 95 ? `Al superar el 95% de mix renovable, he emitido el Pasaporte Digital de Hidrógeno, desbloqueando ${calculations.subsidyAmount.toLocaleString()} € en fondos europeos.` : 'Aumenta el mix renovable al 95% para obtener la certificación CertifHy completa.'}</p>
+                <div><p className="text-sm text-white font-medium mb-1">{t('h2pure.aria.certifHyTitle')}</p>
+                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: renewableMix >= 95 ? t('h2pure.aria.certifHyIssued', { amount: calculations.subsidyAmount.toLocaleString() }) : t('h2pure.aria.certifHyPending') }} />
                 </div>
               </div>
             </div>
             <div className="bg-slate-900/60 rounded-xl p-4 border border-teal-900/30">
               <div className="flex items-start gap-3"><Zap className="w-5 h-5 text-teal-400 mt-0.5" />
-                <div><p className="text-sm text-white font-medium mb-1">Impacto Climático</p>
-                  <p className="text-xs text-slate-400">Tu producción de H2 verde evita <span className="text-teal-400 font-bold">{calculations.co2Avoided.toFixed(0)} tonCO2</span> anuales.</p>
+                <div><p className="text-sm text-white font-medium mb-1">{t('h2pure.aria.climateTitle')}</p>
+                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: t('h2pure.aria.climateDesc', { tons: calculations.co2Avoided.toFixed(0) }) }} />
                 </div>
               </div>
             </div>
             {renewableMix >= 95 && (
               <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 rounded-xl p-4 border border-emerald-500/30">
-                <div className="flex items-center gap-2 mb-2"><Award className="w-5 h-5 text-emerald-400" /><span className="text-sm font-bold text-emerald-300">H2 Verde Certificado</span></div>
-                <p className="text-xs text-slate-300">Elegible para proyectos IPCEI y fondos NextGenerationEU.</p>
+                <div className="flex items-center gap-2 mb-2"><Award className="w-5 h-5 text-emerald-400" /><span className="text-sm font-bold text-emerald-300">{t('h2pure.aria.greenCertified')}</span></div>
+                <p className="text-xs text-slate-300">{t('h2pure.aria.eligibleProjects')}</p>
               </div>
             )}
           </div>
           <div className="mt-6 pt-4 border-t border-slate-800">
-            <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600"><FileText className="w-4 h-4 mr-2" />Descargar Pasaporte H2</Button>
+            <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600"><FileText className="w-4 h-4 mr-2" />{t('h2pure.downloadPassport')}</Button>
           </div>
         </Card>
       </div>

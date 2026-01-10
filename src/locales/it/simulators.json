@@ -4,7 +4,7 @@
     "badgeActive": "Smart Contract Attivo",
     "instantSettlement": "Liquidazione Istantanea",
     "generation": "Generazione",
-    "blockPayment": "Pagamento nel Blocco",
+    "blockPayment": "Pagamento in Blocco",
     "windSpeed": "Velocità del Vento",
     "ppaPrice": "Prezzo PPA Concordato",
     "cashFlowBoost": "Miglioramento Flusso di Cassa",
@@ -31,9 +31,158 @@
       "projectionTitle": "Proiezione Annuale",
       "projectionDesc": "Generazione stimata: <strong>{{generation}} GWh/anno</strong> con ricavi di <strong>{{revenue}} M€</strong>.",
       "optimalWind": "Vento Ottimale",
-      "optimalWindDesc": "La velocità attuale è nell'intervallo ottimale della curva di potenza. Il fattore di capacità supera il 35%, massimizzando la redditività del PPA.",
+      "optimalWindDesc": "La velocità attuale è nella fascia ottimale della curva di potenza. Il fattore di capacità supera il 35%, massimizzando la redditività del PPA.",
       "ppaPremium": "PPA Premium",
       "ppaPremiumDesc": "Il tuo prezzo PPA di {{price}}€/MWh è sopra il mercato. La certificazione blockchain garantisce la tracciabilità dell'origine rinnovabile, giustificando il premium."
+    }
+  },
+  "h2pure": {
+    "title": "H2 VERDE - CERTIFHY",
+    "passportIssued": "Passaporto EMESSO",
+    "passportPending": "Passaporto IN ATTESA",
+    "purityTitle": "Purezza di Origine Rinnovabile",
+    "renewable": "Rinnovabile",
+    "nonRenewable": "Non Rinnovabile",
+    "annualProduction": "Produzione Annuale (tonnellate)",
+    "renewableMix": "Mix Rinnovabile",
+    "subsidyUnlocked": "Sovvenzione UE Sbloccata",
+    "downloadPassport": "Scarica Passaporto H2",
+    "units": {
+      "tons": "t",
+      "percent": "%",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Consulente di Idrogeno Verde",
+      "certifHyTitle": "Certificazione CertifHy",
+      "certifHyIssued": "Superando il 95% di mix rinnovabile, ho emesso il <strong>Passaporto Digitale dell'Idrogeno</strong>, sbloccando <strong>{{amount}}€</strong> di fondi europei.",
+      "certifHyPending": "Aumenta il mix rinnovabile al <strong>95%</strong> per ottenere la certificazione CertifHy completa.",
+      "climateTitle": "Impatto Climatico",
+      "climateDesc": "La tua produzione di H2 verde evita <span>{{tons}} tonCO2</span> all'anno.",
+      "greenCertified": "H2 Verde Certificato",
+      "eligibleProjects": "Idoneo per progetti IPCEI e fondi NextGenerationEU."
+    }
+  },
+  "helios": {
+    "title": "OTTIMIZZATORE CAMPO SOLARE",
+    "cleaningUrgent": "Pulizia Urgente",
+    "iotActive": "IoT Attivo",
+    "dirtLevel": "Sporcizia",
+    "urgent": "Urgente",
+    "days": "giorni",
+    "realtimeGeneration": "Generazione in Tempo Reale",
+    "numPanels": "Numero di Pannelli",
+    "daysWithoutCleaning": "Giorni senza Pulizia",
+    "revenueOptimized": "Ricavi da Generazione Ottimizzata",
+    "efficiency": "+5% Efficienza",
+    "downloadReport": "Scarica Report IoT",
+    "units": {
+      "panels": "pannelli",
+      "mwh": "MWh",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Consulente di Manutenzione Solare",
+      "recoveryTitle": "Recupero Energia",
+      "recoveryDesc": "Riducendo la sporcizia a <span>{{days}} giorni</span>, recuperi <span>{{mwh}} MWh</span> giornalieri, generando <span>{{revenue}}€</span> aggiuntivi.",
+      "annualTitle": "Produzione Annuale Stimata",
+      "annualDesc": "Con <strong>{{panels}} pannelli</strong> ottimizzati, la tua produzione annuale raggiunge <span>{{mwh}} MWh</span>, sufficiente per alimentare <strong>{{homes}} abitazioni</strong>.",
+      "alertTitle": "Avviso di Manutenzione",
+      "alertDesc": "La sporcizia accumulata sta causando una perdita del <strong>{{loss}}%</strong> di efficienza. Raccomando di programmare una pulizia immediata.",
+      "optimalTitle": "Prestazioni Ottimali",
+      "optimalDesc": "Il tuo campo solare opera in condizioni ottimali. L'IoT predittivo mantiene l'efficienza massima."
+    }
+  },
+  "gridflex": {
+    "title": "MONETIZZATORE FLESSIBILITÀ RETE",
+    "stability": "Stabilità",
+    "loadStatus": "Stato di Carico Rete Industriale",
+    "baseLoad": "Carico Base",
+    "activeReduction": "Riduzione Attiva",
+    "kwReduction": "kW Riduzione",
+    "incentivePrice": "€/MWh Incentivo",
+    "eventsMonth": "Eventi/Mese",
+    "reductionCapacity": "Capacità di Riduzione",
+    "priceIncentive": "Prezzo Incentivo",
+    "monthlyIncentives": "Incentivi per Flessibilità (Mensile)",
+    "downloadCert": "Scarica Certificato Flessibilità",
+    "units": {
+      "kw": "kW",
+      "eurMwh": "€/MWh",
+      "events": "eventi"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Consulente di Gestione della Domanda",
+      "monetizationTitle": "Monetizzazione della Flessibilità",
+      "monetizationDesc": "Notarizzando la tua riduzione di <span>{{kw}} kW</span> su Pontus-X, hai guadagnato <span>{{earnings}} EUROe</span> in incentivi di flessibilità questo mese.",
+      "impactTitle": "Impatto Ambientale",
+      "impactDesc": "La tua riduzione di carico evita <span>{{co2}} tonCO2</span> mensili, equivalente a piantare <span>{{trees}}</span> alberi.",
+      "projectionTitle": "Proiezione Annuale",
+      "projectionDesc": "Mantenendo questa capacità di flessibilità, genererai <span>{{annual}} EUROe</span> annuali in incentivi.",
+      "premiumTitle": "Aggregatore Premium",
+      "premiumDesc": "Il tuo livello di affidabilità del <strong>{{reliability}}%</strong> ti qualifica come aggregatore premium.",
+      "largeConsumerTitle": "Grande Consumatore Flessibile",
+      "largeConsumerDesc": "Con <strong>{{mw}} MW</strong> di capacità, puoi partecipare direttamente al mercato di bilanciamento."
+    }
+  },
+  "bioheat": {
+    "title": "BIOMASSA - CONFORME RED II",
+    "carbonNeutral": "Carbon Neutral",
+    "verifyOrigin": "Verificare Origine",
+    "tonsYear": "Tonnellate/anno",
+    "premium": "Premium",
+    "distance": "km distanza",
+    "annualProduction": "Produzione Annuale (tonnellate)",
+    "transportDistance": "Distanza di Trasporto (km)",
+    "annualRevenue": "Ricavi Annuali",
+    "downloadCert": "Scarica Certificato RED II",
+    "units": {
+      "tons": "t",
+      "km": "km",
+      "eur": "€"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Consulente di Biomassa",
+      "traceabilityTitle": "Tracciabilità RED II",
+      "traceabilityNeutral": "L'origine è 100% legale. La tracciabilità blockchain ha certificato la tua biomassa come <strong>Carbon Neutral</strong>, aumentando il tuo prezzo di vendita del 12%.",
+      "traceabilityPending": "Riduci la distanza di trasporto a meno di <strong>100km</strong> per ottenere la certificazione Carbon Neutral.",
+      "climateTitle": "Impatto Climatico",
+      "climateDesc": "La tua biomassa evita <span>{{tons}} tonCO2</span> all'anno vs combustibili fossili.",
+      "verifiedTitle": "Origine Verificata",
+      "verifiedDesc": "Punti di taglio geolocalizzati e verificati contro i registri forestali ufficiali."
+    }
+  },
+  "turbine": {
+    "title": "SCOPE 3 - ACCIAIO VERDE",
+    "csrd": "CSRD",
+    "emissionsTier": "Accumulo di Emissioni per Tier",
+    "tier1": "Tier 1 (Acciaio)",
+    "tier2": "Tier 2 (Componenti)",
+    "tier3": "Tier 3 (Materie)",
+    "baseEmissions": "Emissioni Base",
+    "finalEmissions": "Emissioni Finali",
+    "turbinesToBuild": "Turbine da Costruire",
+    "recycledRatio": "Rapporto Acciaio Riciclato",
+    "scope3Reduction": "Riduzione Emissioni Scope 3",
+    "downloadReport": "Scarica Report Scope 3",
+    "units": {
+      "turbines": "turbine",
+      "percent": "%",
+      "tonCo2": "tonCO2"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Consulente di Decarbonizzazione",
+      "auditTitle": "Audit dei Fornitori",
+      "auditDesc": "Ho auditato i tuoi <span>{{suppliers}}</span> fornitori di acciaio. Il tuo report CSRD di Scope 3 ha una precisione del <span>{{precision}}%</span>.",
+      "circularTitle": "Acciaio Circolare",
+      "circularDesc": "Con <strong>{{ratio}}%</strong> di acciaio riciclato, riduci le emissioni di <span>{{reduction}} tonCO2</span>.",
+      "csrdReadyTitle": "CSRD Ready",
+      "csrdReadyDesc": "Il tuo report è valido per gare internazionali e rispetta i requisiti della direttiva CSRD europea."
     }
   }
 }
