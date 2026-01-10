@@ -996,8 +996,8 @@ export default function InnovationLab() {
       {selectedConcept && (
         <ConceptDetailModal
           concept={selectedConcept}
-          open={!!selectedConcept}
-          onOpenChange={(open) => !open && setSelectedConcept(null)}
+          isOpen={!!selectedConcept}
+          onClose={() => setSelectedConcept(null)}
         />
       )}
     </div>
