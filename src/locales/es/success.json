@@ -24,48 +24,76 @@
     "circular": "Circular",
     "agritech": "Agri-Tech"
   },
-  "cases": {
+"cases": {
     "gigafactory-north": {
       "title": "Automatización de Homologación Industrial",
       "sector": "Industrial",
       "metricLabel": "Tiempo de Alta",
-      "description": "De 22 días a 48 horas en el proceso de homologación de proveedores Tier 2."
+      "description": "De 22 días a 48 horas en el proceso de homologación de proveedores Tier 2.",
+      "challenge": "El proceso de alta de proveedores metalúrgicos Tier 2 tardaba 22 días de media. Cada nuevo proveedor requería validaciones manuales de ISO 9001, IATF 16949 y certificaciones de seguridad laboral. El equipo de compras dedicaba más del 40% de su tiempo a tareas administrativas repetitivas.",
+      "solution": "Implementación del servicio 'Homologación Flash 24h' combinado con Pasaportes Digitales verificados en la red Pontus-X. Los proveedores suben sus certificaciones una sola vez y GigaFactory accede al Pasaporte Verificado en tiempo real, eliminando las validaciones duplicadas.",
+      "ariaQuote": "La automatización mediante políticas ODRL permitió que los contratos se firmaran automáticamente al cumplir los requisitos de seguridad. El equipo de compras ahora dedica su tiempo a negociación estratégica, no a perseguir documentos.",
+      "services": ["Homologación Flash 24h", "Wallet Web3 Empresarial", "Firma ODRL Automática", "Conector ERP Universal"]
     },
     "olivetrust-coop": {
       "title": "Trazabilidad ESG para Exportación",
       "sector": "Agroalimentario",
       "metricLabel": "Valor Exportación",
-      "description": "Certificación de huella hídrica para acceder al mercado alemán con precio premium."
+      "description": "Certificación de huella hídrica para acceder al mercado alemán con precio premium.",
+      "challenge": "OliveTrust necesitaba demostrar la huella hídrica real de sus explotaciones en Jaén para cumplir con el pliego de condiciones del distribuidor alemán Edeka. Cada certificación tradicional costaba 3.500€ y tardaba 45 días en obtenerse.",
+      "solution": "Captura automatizada de datos IoT de riego desde los sensores de campo y notarización de certificados de origen en blockchain. El Pasaporte Digital del Aceite incluye trazabilidad desde la finca hasta el punto de venta.",
+      "ariaQuote": "El Pasaporte Digital de Proveedor eliminó la necesidad de 5 auditorías físicas redundantes. Ahora cada comprador europeo accede a los mismos datos verificados sin coste adicional para la cooperativa.",
+      "services": ["Certificación ESG Instantánea", "Notarización Blockchain", "Pasaporte Digital de Producto", "API de Trazabilidad"]
     },
     "urbandeliver-bcn": {
       "title": "Reporting Scope 3 Instantáneo",
       "sector": "Movilidad Sostenible",
       "metricLabel": "Auditoría CSRD",
-      "description": "Generación de informe de emisiones Scope 3 para acceso a crédito verde bancario."
+      "description": "Generación de informe de emisiones Scope 3 para acceso a crédito verde bancario.",
+      "challenge": "UrbanDeliver necesitaba auditar las emisiones reales de su flota logística para acceder a un crédito verde de 2M€ del Green Finance Bank. Los informes manuales tardaban semanas y no eran aceptados por la entidad financiera.",
+      "solution": "Integración del Conector ERP Universal para extraer telemetría de consumo real de la flota (OBD-II) y generación automática de informe CSRD con emisiones Scope 1, 2 y 3 certificadas.",
+      "ariaQuote": "Gracias a la telemetría directa integrada con ProcureData, el Green Finance Bank aprobó el crédito verde en tiempo récord. La transparencia de datos eliminó las 12 semanas habituales de due diligence.",
+      "services": ["Conector ERP Universal", "Calculadora Scope 3", "Informe CSRD Automático", "Certificación Verde"]
     },
     "alianza-social-hub": {
       "title": "Medición de Impacto Social",
       "sector": "Economía Social",
       "metricLabel": "Ratio SROI",
-      "description": "Demostración verificada del retorno social de inversión en proveedores éticos."
+      "description": "Demostración verificada del retorno social de inversión en proveedores éticos.",
+      "challenge": "Alianza Social Hub agrupa a 15 centros especiales de empleo. El problema principal: Las grandes corporaciones con cuotas de reserva (LGD) necesitaban demostrar el impacto real de cada euro invertido en proveedores éticos. Los departamentos de RSC solo podían reportar gastos, no valor social generado.",
+      "solution": "Implementación del Dashboard de Métricas SROI con tres pilares: 1) Monetización del Impacto con cálculo de ahorro en subsidios públicos. 2) Garantía Anti-Social-Washing con DID verificado en Pontus-X. 3) Reporte CSRD Automático para Memorias de Sostenibilidad.",
+      "ariaQuote": "Hemos verificado que el 100% de los proveedores cumplen con la LGD. Por cada euro invertido, se generan 3.8€ de valor social. El 78% de la inversión se reinvierte en economía local.",
+      "services": ["Dashboard SROI", "Auditoría Social Digital", "Pasaporte de Proveedor Ético", "Memoria de Sostenibilidad Automática", "Verificación DID Anti-Social-Washing"]
     },
     "biomed-hospital": {
       "title": "Continuidad Asistencial Garantizada",
       "sector": "Salud",
       "metricLabel": "Fallos Críticos",
-      "description": "Mantenimiento predictivo de equipos RM con telemetría anonimizada GDPR-compliant."
+      "description": "Mantenimiento predictivo de equipos RM con telemetría anonimizada GDPR-compliant.",
+      "challenge": "El hospital sufría paradas imprevistas en sus equipos de Resonancia Magnética (RM), costando 15.000€ por día de inactividad y retrasando cirugías críticas. Sin visibilidad del estado real de los equipos ni posibilidad de compartir logs sin exponer datos de pacientes (GDPR).",
+      "solution": "Implementación de Edge Functions para anonimizar datos de pacientes mientras se envían logs de error del imán en tiempo real al proveedor EcoTech Industrial. Modelo predictivo ML detecta fallos 72h antes. Alertas automáticas al proveedor de repuestos homologado.",
+      "ariaQuote": "Gracias al conector IDS, el hospital compartió los logs técnicos sin exponer ningún dato personal de pacientes. El modelo predictivo detecta fallos 72h antes, evitando paradas imprevistas.",
+      "services": ["Conector IDS Seguro", "Anonimizador GDPR", "API Mantenimiento Predictivo", "Alertas Inteligentes", "Homologación Proveedores MRO"]
     },
     "globalretail-prime": {
       "title": "Auditoría Ética de Cadena de Suministro",
       "sector": "Comercio",
       "metricLabel": "Incidencias Éticas",
-      "description": "Verificación de cumplimiento SA8000 en 200 proveedores textiles asiáticos."
+      "description": "Verificación de cumplimiento SA8000 en 200 proveedores textiles asiáticos.",
+      "challenge": "Una multinacional de retail necesitaba asegurar que sus 200 proveedores textiles en Asia cumplían con la normativa SA8000 para evitar riesgos reputacionales. Auditorías presenciales costosas, documentos falsificables y ninguna garantía de continuidad entre inspecciones.",
+      "solution": "Implementación del Pasaporte Digital de Proveedor con auditorías firmadas digitalmente por certificadoras externas. Políticas ODRL permiten que solo el comité de ética acceda a detalles sensibles. Trazabilidad blockchain garantiza integridad de certificados.",
+      "ariaQuote": "La trazabilidad blockchain en Pontus-X garantiza que el certificado SA8000 no ha sido manipulado desde su emisión en origen. Cero incidencias éticas en la auditoría anual y +25% confianza del consumidor.",
+      "services": ["Pasaporte Digital de Proveedor", "Auditoría Digital ISO", "ODRL License Validator", "Validador DID Web3", "Monitor Riesgo Proveedor"]
     },
     "ecovolt-manufacturing": {
       "title": "Compra de Energía Renovable Automatizada",
       "sector": "Energía Industrial",
       "metricLabel": "Energía Renovable",
-      "description": "Liquidación instantánea de certificados GdO mediante Smart Contracts y EUROe."
+      "description": "Liquidación instantánea de certificados GdO mediante Smart Contracts y EUROe.",
+      "challenge": "Una planta de aluminio necesitaba certificar que el 100% de su consumo era renovable para obtener beneficios fiscales. La conciliación de facturas y certificados de Garantía de Origen (GdO) tardaba meses, perdiendo incentivos fiscales.",
+      "solution": "Automatización mediante Smart Contracts y EUROe. Contador IoT reporta consumo en tiempo real. Smart Contract compra automáticamente certificados GdO y paga en el mismo bloque. Conciliación contable instantánea y sello Carbon Neutral automático.",
+      "ariaQuote": "El pago en EUROe permite que la transferencia de valor y el certificado de energía ocurran en el mismo bloque de blockchain. Conciliación contable instantánea, de meses a 12 segundos.",
+      "services": ["Wallet Web3 Empresarial", "Pontus-X Notary Node", "Conector Universal ERP", "Carbon Tracker ISO 14064", "Certificación Green Partner"]
     },
     "sky-aero-systems": {
       "title": "Certificación Aeronáutica EN9100",
