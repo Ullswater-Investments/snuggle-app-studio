@@ -15,7 +15,7 @@ import { NegotiationChat } from "@/components/NegotiationChat";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download, BarChart3 } from "lucide-react";
+import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download, BarChart3, Unlock } from "lucide-react";
 import { RequestsAnalyticsDashboard } from "@/components/RequestsAnalyticsDashboard";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -26,14 +26,14 @@ import { es } from "date-fns/locale";
 import { EmptyState } from "@/components/EmptyState";
 
 const STATUS_CONFIG: Record<string, { label: string; icon: any; color: string; tooltip: string }> = {
-  initiated: { label: "Iniciada", icon: Clock, color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400", tooltip: "Solicitud creada, esperando validación" },
-  pending_subject: { label: "Pendiente Proveedor", icon: Clock, color: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400", tooltip: "Esperando aprobación del proveedor de datos" },
-  pending_holder: { label: "Pendiente Custodio", icon: Lock, color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400", tooltip: "Esperando que el custodio técnico libere el acceso" },
-  approved: { label: "Aprobada", icon: CheckCircle, color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400", tooltip: "Solicitud aprobada, lista para completar" },
-  denied_subject: { label: "Denegada por Proveedor", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "El proveedor ha rechazado la solicitud" },
-  denied_holder: { label: "Denegada por Custodio", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "El custodio ha rechazado la solicitud" },
-  completed: { label: "Completada", icon: Rocket, color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400", tooltip: "Datos compartidos exitosamente" },
-  cancelled: { label: "Cancelada", icon: XCircle, color: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400", tooltip: "Solicitud cancelada" },
+  initiated: { label: "Iniciada", icon: Clock, color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400", tooltip: "Transacción iniciada en blockchain" },
+  pending_subject: { label: "Confirmando Bloque", icon: Clock, color: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400", tooltip: "Esperando confirmación de bloque en blockchain" },
+  pending_holder: { label: "Validando Acceso", icon: Lock, color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400", tooltip: "Ocean Provider validando datatoken" },
+  approved: { label: "Aprobada", icon: CheckCircle, color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400", tooltip: "Transacción confirmada, lista para acceder" },
+  denied_subject: { label: "Rechazada", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "Transacción rechazada por el proveedor" },
+  denied_holder: { label: "Acceso Denegado", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "El Provider ha denegado el acceso" },
+  completed: { label: "Acceso Activo", icon: Unlock, color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400", tooltip: "Puedes descargar el dataset vía Ocean Provider" },
+  cancelled: { label: "Cancelada", icon: XCircle, color: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400", tooltip: "Transacción cancelada" },
 };
 
 const Requests = () => {

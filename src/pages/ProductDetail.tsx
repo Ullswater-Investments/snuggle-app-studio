@@ -15,7 +15,8 @@ import {
   Lock,
   Globe,
   Eye,
-  Wallet
+  Wallet,
+  Scale
 } from "lucide-react";
 
 // UI Components
@@ -28,6 +29,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrayDataView } from "@/components/ArrayDataView";
+import { GovernancePanel } from "@/components/GovernancePanel";
 
 interface MarketplaceListing {
   asset_id: string;
@@ -225,12 +227,16 @@ export default function ProductDetail() {
 
           {/* Info Tabs */}
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="overview">Descripción</TabsTrigger>
               <TabsTrigger value="specs">Especificaciones</TabsTrigger>
               <TabsTrigger value="preview" className="gap-1">
                 <Eye className="h-3 w-3" />
                 Vista Previa
+              </TabsTrigger>
+              <TabsTrigger value="governance" className="gap-1">
+                <Scale className="h-3 w-3" />
+                Gobernanza
               </TabsTrigger>
               <TabsTrigger value="reviews">Reseñas</TabsTrigger>
             </TabsList>
@@ -270,7 +276,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="space-y-1">
                       <span className="text-xs text-muted-foreground uppercase font-bold">Protocolo</span>
-                      <p className="font-medium">HTTPS / EDC (DSP)</p>
+                      <p className="font-medium">HTTPS / Ocean Provider</p>
                     </div>
                     <div className="space-y-1">
                       <span className="text-xs text-muted-foreground uppercase font-bold">Cobertura</span>
@@ -304,6 +310,15 @@ export default function ProductDetail() {
                   <ArrayDataView data={sampleData} schemaType="sample_data" />
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="governance" className="mt-6">
+              <GovernancePanel 
+                did={`did:op:${product.asset_id}`}
+                nftAddress={`0x${product.asset_id?.slice(0, 40) || '1234567890abcdef1234567890abcdef12345678'}`}
+                datatokenAddress={`0x${product.provider_id?.slice(0, 40) || 'abcdef1234567890abcdef1234567890abcdef12'}`}
+                complianceLevel="Level 1"
+              />
             </TabsContent>
 
             <TabsContent value="reviews" className="mt-6">

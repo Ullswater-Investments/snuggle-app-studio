@@ -8,19 +8,57 @@ import {
   DropdownMenuTrigger,
   DropdownMenuGroup,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
 import { 
   Wallet, 
   Loader2, 
   Copy, 
   ExternalLink, 
-  ShieldCheck, 
   LogOut, 
   CreditCard, 
-  ChevronDown 
+  ChevronDown,
+  AlertTriangle,
+  RefreshCw
 } from 'lucide-react';
-import { PONTUSX_NETWORK_CONFIG } from '@/services/pontusX';
+import { PONTUSX_NETWORK_CONFIG, pontusXService } from '@/services/pontusX';
 import { useWeb3Wallet } from '@/hooks/useWeb3Wallet';
+import { GaiaXBadge } from './GaiaXBadge';
 import { toast } from 'sonner';
+
+// Función para cambiar de red
+const switchNetwork = async () => {
+  try {
+    const chainIdHex = `0x${Number(PONTUSX_NETWORK_CONFIG.chainId).toString(16)}`;
+    
+    await window.ethereum?.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: chainIdHex }]
+    });
+    
+    toast.success('Red cambiada', { description: 'Ahora estás en PONTUS-X' });
+  } catch (error: any) {
+    // Si la red no está añadida, intentar añadirla
+    if (error.code === 4902) {
+      try {
+        await window.ethereum?.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: `0x${Number(PONTUSX_NETWORK_CONFIG.chainId).toString(16)}`,
+            chainName: PONTUSX_NETWORK_CONFIG.chainName,
+            nativeCurrency: PONTUSX_NETWORK_CONFIG.nativeCurrency,
+            rpcUrls: PONTUSX_NETWORK_CONFIG.rpcUrls,
+            blockExplorerUrls: PONTUSX_NETWORK_CONFIG.blockExplorerUrls
+          }]
+        });
+        toast.success('Red añadida', { description: 'PONTUS-X configurada correctamente' });
+      } catch (addError) {
+        toast.error('Error al añadir red');
+      }
+    } else {
+      toast.error('Error al cambiar de red');
+    }
+  }
+};
 
 export const WalletButton = () => {
   const { wallet, isConnecting, hasWeb3, connect, disconnect } = useWeb3Wallet();
@@ -42,6 +80,10 @@ export const WalletButton = () => {
       window.open(`${PONTUSX_NETWORK_CONFIG.blockExplorerUrls[0]}address/${wallet.address}`, '_blank');
     }
   };
+
+  // Verificar si está en la red correcta
+  const expectedChainId = `0x${Number(PONTUSX_NETWORK_CONFIG.chainId).toString(16)}`;
+  const isWrongNetwork = wallet.isConnected && wallet.chainId !== expectedChainId;
 
   // No Web3 available - show disabled state
   if (!hasWeb3) {
@@ -82,10 +124,10 @@ export const WalletButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
+        <Button variant="outline" size="sm" className={`gap-2 ${isWrongNetwork ? 'border-destructive' : ''}`}>
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${isWrongNetwork ? 'bg-red-400' : 'bg-green-400'} opacity-75`} />
+            <span className={`relative inline-flex h-2 w-2 rounded-full ${isWrongNetwork ? 'bg-red-500' : 'bg-green-500'}`} />
           </span>
           {truncate(wallet.address)}
           <ChevronDown className="h-3 w-3 opacity-50" />
@@ -93,15 +135,31 @@ export const WalletButton = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-72 bg-popover border-border">
+        {/* Warning si red incorrecta */}
+        {isWrongNetwork && (
+          <>
+            <div className="p-3 bg-destructive/10 border-b border-destructive/20">
+              <div className="flex items-center gap-2 text-destructive mb-2">
+                <AlertTriangle className="h-4 w-4" />
+                <span className="text-sm font-medium">Red Incorrecta</span>
+              </div>
+              <Button 
+                size="sm" 
+                variant="destructive" 
+                className="w-full gap-2"
+                onClick={switchNetwork}
+              >
+                <RefreshCw className="h-3 w-3" />
+                Cambiar a PONTUS-X
+              </Button>
+            </div>
+          </>
+        )}
+        
         {/* Header */}
         <DropdownMenuLabel className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-green-500" />
-            <span>Pontus-X Identity</span>
-          </div>
-          <span className="text-xs bg-green-500/20 text-green-500 px-2 py-0.5 rounded-full">
-            Verificado
-          </span>
+          <span className="text-sm">Pontus-X Identity</span>
+          <GaiaXBadge isVerified={!isWrongNetwork} showTooltip={false} />
         </DropdownMenuLabel>
         
         <DropdownMenuSeparator />
