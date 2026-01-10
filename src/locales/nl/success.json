@@ -24,48 +24,76 @@
     "circular": "Circulair",
     "agritech": "Agri-Tech"
   },
-  "cases": {
+"cases": {
     "gigafactory-north": {
       "title": "Automatisering van Industriële Homologatie",
       "sector": "Industrieel",
       "metricLabel": "Onboardingtijd",
-      "description": "Van 22 dagen naar 48 uur in het homologatieproces voor Tier 2-leveranciers."
+      "description": "Van 22 dagen naar 48 uur in het homologatieproces voor Tier 2-leveranciers.",
+      "challenge": "Het onboardingproces voor metallurgische Tier 2-leveranciers duurde gemiddeld 22 dagen. Elke nieuwe leverancier vereiste handmatige validaties van ISO 9001, IATF 16949 en arbeidsveiligheidscertificeringen. Het inkoopteam besteedde meer dan 40% van hun tijd aan repetitieve administratieve taken.",
+      "solution": "Implementatie van de 'Flash Homologatie 24u'-service gecombineerd met Digitale Paspoorten geverifieerd op het Pontus-X-netwerk. Leveranciers uploaden hun certificeringen eenmalig en GigaFactory heeft realtime toegang tot het Geverifieerde Paspoort, waardoor dubbele validaties worden geëlimineerd.",
+      "ariaQuote": "De automatisering via ODRL-beleid maakte automatische contractondertekening mogelijk bij het voldoen aan veiligheidseisen. Het inkoopteam besteedt nu zijn tijd aan strategische onderhandelingen, niet aan het najagen van documenten.",
+      "services": ["Flash Homologatie 24u", "Enterprise Web3 Wallet", "Automatische ODRL-Ondertekening", "Universele ERP-Connector"]
     },
     "olivetrust-coop": {
       "title": "ESG-Traceerbaarheid voor Export",
       "sector": "Agrovoeding",
       "metricLabel": "Exportwaarde",
-      "description": "Certificering van watervoetafdruk voor toegang tot de Duitse markt met premiumprijzen."
+      "description": "Certificering van watervoetafdruk voor toegang tot de Duitse markt met premiumprijzen.",
+      "challenge": "OliveTrust moest de werkelijke watervoetafdruk van zijn bedrijven in Jaén aantonen om te voldoen aan de eisen van de Duitse distributeur Edeka. Elke traditionele certificering kostte €3.500 en duurde 45 dagen.",
+      "solution": "Geautomatiseerde vastlegging van IoT-irrigatiedata van veldsensoren en notarisatie van herkomstcertificaten op blockchain. Het Digitale Olijfoliepaspoort omvat traceerbaarheid van boerderij tot verkooppunt.",
+      "ariaQuote": "Het Digitale Leverancierspaspoort elimineerde de noodzaak van 5 redundante fysieke audits. Nu heeft elke Europese koper toegang tot dezelfde geverifieerde gegevens zonder extra kosten voor de coöperatie.",
+      "services": ["Directe ESG-Certificering", "Blockchain-Notarisatie", "Digitaal Productpaspoort", "Traceerbaarheids-API"]
     },
     "urbandeliver-bcn": {
       "title": "Directe Scope 3-Rapportage",
       "sector": "Duurzame Mobiliteit",
       "metricLabel": "CSRD-Audit",
-      "description": "Generatie van Scope 3-emissierapport voor toegang tot groen bankkrediet."
+      "description": "Generatie van Scope 3-emissierapport voor toegang tot groen bankkrediet.",
+      "challenge": "UrbanDeliver moest de werkelijke emissies van zijn logistieke vloot auditen om toegang te krijgen tot een groen krediet van €2M van de Green Finance Bank. Handmatige rapporten duurden weken en werden niet geaccepteerd door de financiële instelling.",
+      "solution": "Integratie van de Universele ERP-Connector om realtime vlootverbruikstelemetrie (OBD-II) te extraheren en automatische generatie van CSRD-rapport met gecertificeerde Scope 1, 2 en 3 emissies.",
+      "ariaQuote": "Dankzij de directe telemetrie geïntegreerd met ProcureData keurde de Green Finance Bank het groene krediet in recordtijd goed. De datatransparantie elimineerde de gebruikelijke 12 weken due diligence.",
+      "services": ["Universele ERP-Connector", "Scope 3-Calculator", "Automatisch CSRD-Rapport", "Groene Certificering"]
     },
     "alianza-social-hub": {
       "title": "Meting van Sociale Impact",
       "sector": "Sociale Economie",
       "metricLabel": "SROI-Ratio",
-      "description": "Geverifieerde demonstratie van sociaal rendement op investering bij ethische leveranciers."
+      "description": "Geverifieerde demonstratie van sociaal rendement op investering bij ethische leveranciers.",
+      "challenge": "Alianza Social Hub groepeert 15 sociale werkplaatsen. Het hoofdprobleem: Grote bedrijven met quotaverplichtingen moesten de werkelijke impact aantonen van elke euro geïnvesteerd in ethische leveranciers. MVO-afdelingen konden alleen uitgaven rapporteren, niet de gegenereerde sociale waarde.",
+      "solution": "Implementatie van het SROI-Metriekendashboard met drie pijlers: 1) Impact-monetisering met berekening van besparingen op overheidssubsidies. 2) Anti-Social-Washing-Garantie met geverifieerde DID op Pontus-X. 3) Automatische CSRD-Rapportage voor Duurzaamheidsrapporten.",
+      "ariaQuote": "We hebben geverifieerd dat 100% van de leveranciers voldoet aan de werkgelegenheidsquota. Voor elke geïnvesteerde euro wordt €3,8 sociale waarde gegenereerd. 78% van de investering wordt geherinvesteerd in de lokale economie.",
+      "services": ["SROI-Dashboard", "Digitale Sociale Audit", "Ethisch Leverancierspaspoort", "Automatisch Duurzaamheidsrapport", "Anti-Social-Washing DID-Verificatie"]
     },
     "biomed-hospital": {
       "title": "Gegarandeerde Zorgcontinuïteit",
       "sector": "Gezondheid",
       "metricLabel": "Kritieke Storingen",
-      "description": "Voorspellend onderhoud van MRI-apparatuur met geanonimiseerde AVG-conforme telemetrie."
+      "description": "Voorspellend onderhoud van MRI-apparatuur met geanonimiseerde AVG-conforme telemetrie.",
+      "challenge": "Het ziekenhuis leed onder ongeplande stilstanden van zijn MRI-apparatuur, wat €15.000 per dag stilstand kostte en kritieke operaties vertraagde. Geen zicht op de werkelijke staat van de apparatuur en geen mogelijkheid om logs te delen zonder patiëntgegevens bloot te stellen (AVG).",
+      "solution": "Implementatie van Edge Functions om patiëntgegevens te anonimiseren terwijl foutenlogboeken van de magneet in realtime naar leverancier EcoTech Industrial worden gestuurd. ML-voorspellend model detecteert storingen 72u van tevoren. Automatische waarschuwingen naar de gehomologeerde onderdelenleverancier.",
+      "ariaQuote": "Dankzij de IDS-connector deelde het ziekenhuis technische logs zonder persoonlijke patiëntgegevens bloot te stellen. Het voorspellende model detecteert storingen 72u van tevoren en voorkomt ongeplande stilstanden.",
+      "services": ["Beveiligde IDS-Connector", "AVG-Anonimiseerder", "Voorspellend Onderhoud-API", "Slimme Waarschuwingen", "MRO-Leveranciershomologatie"]
     },
     "globalretail-prime": {
       "title": "Ethische Supply Chain Audit",
       "sector": "Handel",
       "metricLabel": "Ethische Incidenten",
-      "description": "SA8000-nalevingsverificatie bij 200 Aziatische textielleveranciers."
+      "description": "SA8000-nalevingsverificatie bij 200 Aziatische textielleveranciers.",
+      "challenge": "Een retail-multinational moest ervoor zorgen dat zijn 200 textielleveranciers in Azië voldeden aan de SA8000-norm om reputatierisico's te vermijden. Dure audits ter plaatse, vervalbare documenten en geen continuïteitsgarantie tussen inspecties.",
+      "solution": "Implementatie van het Digitale Leverancierspaspoort met audits digitaal ondertekend door externe certificeerders. ODRL-beleid staat alleen het ethiekcomité toe toegang te krijgen tot gevoelige details. Blockchain-traceerbaarheid garandeert certificaatintegriteit.",
+      "ariaQuote": "De blockchain-traceerbaarheid op Pontus-X garandeert dat het SA8000-certificaat niet is gemanipuleerd sinds de uitgifte aan de bron. Nul ethische incidenten in de jaarlijkse audit en +25% consumentenvertrouwen.",
+      "services": ["Digitaal Leverancierspaspoort", "Digitale ISO-Audit", "ODRL License Validator", "DID Web3 Validator", "Leveranciersrisicomonitor"]
     },
     "ecovolt-manufacturing": {
       "title": "Geautomatiseerde Inkoop Hernieuwbare Energie",
       "sector": "Industriële Energie",
       "metricLabel": "Hernieuwbare Energie",
-      "description": "Directe afwikkeling van GO-certificaten via Smart Contracts en EUROe."
+      "description": "Directe afwikkeling van GO-certificaten via Smart Contracts en EUROe.",
+      "challenge": "Een aluminiumfabriek moest certificeren dat 100% van zijn verbruik hernieuwbaar was om belastingvoordelen te verkrijgen. De afstemming van facturen en Garanties van Oorsprong (GO) duurde maanden, waardoor fiscale prikkels verloren gingen.",
+      "solution": "Automatisering via Smart Contracts en EUROe. IoT-meter rapporteert verbruik in realtime. Smart Contract koopt automatisch GO-certificaten en betaalt in hetzelfde blok. Directe boekhoudkundige afstemming en automatisch Carbon Neutral-keurmerk.",
+      "ariaQuote": "De betaling in EUROe maakt het mogelijk dat de waardeoverdracht en het energiecertificaat in hetzelfde blockchain-blok plaatsvinden. Directe boekhoudkundige afstemming, van maanden naar 12 seconden.",
+      "services": ["Enterprise Web3 Wallet", "Pontus-X Notary Node", "Universele ERP-Connector", "Carbon Tracker ISO 14064", "Green Partner Certificering"]
     },
     "sky-aero-systems": {
       "title": "Luchtvaartcertificering EN9100",

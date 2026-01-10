@@ -1117,15 +1117,15 @@ const SuccessStoryDetail = () => {
       <div className="container mx-auto px-4 py-12 space-y-12">
         {/* ZONA 2: Narrativa de Negocio (Reto/Solución) */}
         <NarrativeBlock
-          challenge={caseData.challenge}
-          solution={caseData.solution}
-          services={caseData.services}
+          challenge={t(`cases.${id}.challenge`, { defaultValue: caseData.challenge })}
+          solution={t(`cases.${id}.solution`, { defaultValue: caseData.solution })}
+          services={t(`cases.${id}.services`, { returnObjects: true, defaultValue: caseData.services }) as string[]}
           sectorColor={sectorColor}
         />
 
         {/* ZONA 3: ARIA Quote - Consultoría Humana */}
         <AriaQuoteCard 
-          quote={caseData.ariaQuote}
+          quote={t(`cases.${id}.ariaQuote`, { defaultValue: caseData.ariaQuote })}
           sectorColor={sectorColor}
         />
 
