@@ -1,4 +1,146 @@
 {
+  "common": {
+    "impactSimulator": "Impact Simulator",
+    "economicImpact": "Economische Impact Simulator",
+    "adjustParams": "Pas de parameters aan om je potentiële besparingen te zien.",
+    "annualSavings": "Geschatte Jaarlijkse Besparingen",
+    "operationalEfficiency": "Operationele Efficiëntie",
+    "costComparison": "Kostenvergelijking",
+    "manual": "Handmatig",
+    "automated": "ProcureData",
+    "downloadReport": "Download PDF Rapport",
+    "downloadPassport": "Download Digitaal Paspoort",
+    "downloadCertificate": "Download Certificaat",
+    "pontusX": "Pontus-X",
+    "ariaAnalysis": "ARIA Analyse",
+    "realTimeConsulting": "Realtime advies",
+    "fteEquivalent": "FTE Equivalent",
+    "fteDescription": "Deze besparingen komen overeen met het jaarsalaris van {{count}} FTE-medewerker(s) die uitsluitend administratieve taken uitvoeren die ProcureData automatiseert.",
+    "hash": "Hash"
+  },
+  "aria": {
+    "name": "ARIA",
+    "strategicReport": "Gepersonaliseerd Strategisch Rapport",
+    "insight": "ARIA Insight"
+  },
+  "retailEthics": {
+    "title": "SA8000 Ethische Audit Dashboard",
+    "badge": "Audit Trail Blockchain",
+    "kpis": {
+      "suppliersAudited": "Geauditeerde Leveranciers",
+      "sa8000Compliance": "SA8000 Naleving",
+      "ethicalIncidents": "Ethische Incidenten",
+      "consumerTrust": "Consumentenvertrouwen"
+    },
+    "regions": {
+      "title": "Regionale Verdeling van Leveranciers",
+      "asiaPacific": "Azië-Pacific",
+      "europe": "Europa",
+      "latinAmerica": "Latijns-Amerika",
+      "africa": "Afrika",
+      "suppliers": "leveranciers"
+    },
+    "certifications": {
+      "valid": "Geldige Certificeringen",
+      "auditsCompleted": "Voltooide Audits",
+      "pendingRenewal": "In Afwachting van Vernieuwing"
+    },
+    "ariaInsight": "De blockchain-traceerbaarheid op Pontus-X garandeert dat elk SA8000-certificaat niet is gewijzigd sinds de uitgifte aan de bron. ODRL-beleid staat alleen het ethisch comité toe om gedetailleerde rapporten te bekijken, waardoor de concurrentiële privacy van de leverancier wordt beschermd terwijl volledige naleving wordt gegarandeerd.",
+    "compliance": {
+      "csddd": "CSDDD Naleving",
+      "csdddDesc": "Richtlijn inzake Passende Zorgvuldigheid in de Toeleveringsketen",
+      "reputationalRisk": "Reputatierisico: 0",
+      "reputationalRiskDesc": "Continue verificatie elimineert verrassingen tijdens audits"
+    }
+  },
+  "gigaFactory": {
+    "title": "Industriële Onboarding Simulator",
+    "subtitle": "GigaFactory North - Versnelde Homologatie",
+    "badge": "Industrie",
+    "sliders": {
+      "suppliers": "Te homologeren leveranciers",
+      "hourlyRate": "Administratief uurtarief"
+    },
+    "kpis": {
+      "timeSaved": "Bespaarde Tijd",
+      "hoursYear": "uren/jaar",
+      "ftesLiberated": "Vrijgekomen FTE's",
+      "strategicTasks": "Voor strategische taken"
+    },
+    "aria": {
+      "operationalImpact": "Operationele Impact",
+      "operationalDesc": "Met {{suppliers}} leveranciers gehomologeerd via ProcureData, bespaart je team {{savings}} EUROe per jaar aan directe administratieve kosten.",
+      "liberatedCapacity": "Vrijgekomen Capaciteit",
+      "liberatedDesc": "Komt overeen met {{ftes}} fulltime medewerkers die zich kunnen richten op strategische onderhandelingen en Tier-1 leveranciersontwikkeling.",
+      "competitiveAdvantage": "Concurrentievoordeel",
+      "competitiveDesc": "Het verkorten van onboarding van 22 dagen naar 24 uur positioneert je als voorkeurskant bij leveranciers van kritieke componenten.",
+      "flashHomologation": "Flash Homologatie",
+      "premiumNetwork": "Met meer dan 5 vrijgekomen FTE's kom je in aanmerking voor het Premium Supplier Network met prioritaire toegang tot nieuwe geverifieerde leveranciers."
+    }
+  },
+  "oliveTrust": {
+    "title": "Green Premium Simulator",
+    "subtitle": "OliveTrust Coop - B.O.B. Jaén Geverifieerd",
+    "badge": "Agrifood",
+    "sliders": {
+      "annualProduction": "Jaarlijkse productie",
+      "liters": "liter",
+      "collectionRadius": "Verzamelradius",
+      "km": "km"
+    },
+    "kpis": {
+      "premiumObtained": "Verkregen Premium",
+      "pricePerLiter": "€/liter",
+      "purityIndex": "Zuiverheidsindex",
+      "origin100": "100% Jaén Oorsprong"
+    },
+    "chart": {
+      "geographicPurity": "Geografische Zuiverheid"
+    },
+    "aria": {
+      "brandValue": "Merkwaarde",
+      "brandValueDesc": "Met een zuiverheidsindex van {{purity}}%, krijgt je olie een toeslag van +{{premium}}%, wat {{equity}}€ extra jaarlijkse merkwaarde genereert.",
+      "antiFraud": "Anti-Fraude Bescherming",
+      "antiFraudDesc": "De GPS-registratie van elke olijf op blockchain biedt {{level}} bescherming tegen fraude door vermenging met oliën van mindere kwaliteit.",
+      "premiumMarket": "Premium Markt",
+      "premiumMarketDesc": "Een verzamelradius van {{radius}} km positioneert je in het {{segment}}-segment van de extra vierge olijfoliemarkt.",
+      "ultraPremium": "ultra-premium",
+      "premium": "premium",
+      "standard": "standaard",
+      "protectionMaximum": "Maximaal",
+      "protectionHigh": "Hoog",
+      "protectionModerate": "Matig",
+      "doCertified": "B.O.B. Jaén Gecertificeerd",
+      "doCertifiedDesc": "Je coöperatie voldoet aan de vereisten voor het Blockchain Beschermde Oorsprong-zegel, met toegang tot internationale gourmet-distributeurs.",
+      "digitalPassport": "Digitaal B.O.B. Paspoort"
+    }
+  },
+  "poligonoEcoLink": {
+    "title": "P2P ENERGIEGEMEENSCHAP",
+    "independence": "Onafhankelijkheid",
+    "radarTitle": "Energie-Onafhankelijkheidsradar",
+    "radarLabels": {
+      "selfConsumption": "Zelfverbruik",
+      "p2pTrading": "P2P Handel",
+      "storage": "Opslag",
+      "aiManagement": "AI Beheer",
+      "resilience": "Veerkracht"
+    },
+    "sliders": {
+      "solarSurplus": "Zonne-overschot (kW)",
+      "numCompanies": "Bedrijven in Gemeenschap"
+    },
+    "collectiveSavings": "Maandelijkse Collectieve Besparingen",
+    "aria": {
+      "role": "Energiegemeenschap Adviseur",
+      "gridIndependence": "Netonafhankelijkheid",
+      "gridIndependenceDesc": "Je hebt de netafhankelijkheid met {{independence}}% verminderd. Je gemiddelde rekening is met {{savings}}€ per bedrijf gedaald dankzij de P2P-marktplaats.",
+      "activeCommunity": "Actieve Gemeenschap",
+      "activeCommunityDesc": "{{companies}} bedrijven nemen deel aan P2P-energieuitwisseling, wat een veerkrachtig lokaal ecosysteem creëert.",
+      "energyIsland": "Energie-Eiland",
+      "energyIslandDesc": "Je gemeenschap kan autonoom opereren tijdens netuitval."
+    }
+  },
   "aeolus": {
     "title": "PPA DIRECTE AFREKENING",
     "badgeActive": "Smart Contract Actief",

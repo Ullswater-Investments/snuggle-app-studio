@@ -1,4 +1,146 @@
 {
+  "common": {
+    "impactSimulator": "Simulatore di Impatto",
+    "economicImpact": "Simulatore di Impatto Economico",
+    "adjustParams": "Regola i parametri per vedere il tuo risparmio potenziale.",
+    "annualSavings": "Risparmio Annuale Stimato",
+    "operationalEfficiency": "Efficienza Operativa",
+    "costComparison": "Confronto dei Costi",
+    "manual": "Manuale",
+    "automated": "ProcureData",
+    "downloadReport": "Scarica Report PDF",
+    "downloadPassport": "Scarica Passaporto Digitale",
+    "downloadCertificate": "Scarica Certificato",
+    "pontusX": "Pontus-X",
+    "ariaAnalysis": "Analisi ARIA",
+    "realTimeConsulting": "Consulenza in tempo reale",
+    "fteEquivalent": "Equivalenza FTE",
+    "fteDescription": "Questo risparmio equivale allo stipendio annuale di {{count}} dipendente/i FTE dedicato/i esclusivamente a compiti amministrativi che ProcureData automatizza.",
+    "hash": "Hash"
+  },
+  "aria": {
+    "name": "ARIA",
+    "strategicReport": "Report Strategico Personalizzato",
+    "insight": "ARIA Insight"
+  },
+  "retailEthics": {
+    "title": "Dashboard Audit Etico SA8000",
+    "badge": "Audit Trail Blockchain",
+    "kpis": {
+      "suppliersAudited": "Fornitori Auditati",
+      "sa8000Compliance": "Conformità SA8000",
+      "ethicalIncidents": "Incidenti Etici",
+      "consumerTrust": "Fiducia del Consumatore"
+    },
+    "regions": {
+      "title": "Distribuzione Regionale dei Fornitori",
+      "asiaPacific": "Asia-Pacifico",
+      "europe": "Europa",
+      "latinAmerica": "America Latina",
+      "africa": "Africa",
+      "suppliers": "fornitori"
+    },
+    "certifications": {
+      "valid": "Certificazioni Valide",
+      "auditsCompleted": "Audit Completati",
+      "pendingRenewal": "In Attesa di Rinnovo"
+    },
+    "ariaInsight": "La tracciabilità blockchain su Pontus-X garantisce che ogni certificato SA8000 non sia stato alterato dalla sua emissione all'origine. Le politiche ODRL consentono solo al comitato etico di accedere ai report dettagliati, proteggendo la riservatezza competitiva del fornitore garantendo al contempo la piena conformità.",
+    "compliance": {
+      "csddd": "Conformità CSDDD",
+      "csdddDesc": "Direttiva sul Dovere di Diligenza nella Catena di Approvvigionamento",
+      "reputationalRisk": "Rischio Reputazionale: 0",
+      "reputationalRiskDesc": "La verifica continua elimina le sorprese durante gli audit"
+    }
+  },
+  "gigaFactory": {
+    "title": "Simulatore di Onboarding Industriale",
+    "subtitle": "GigaFactory North - Omologazione Accelerata",
+    "badge": "Industriale",
+    "sliders": {
+      "suppliers": "Fornitori da omologare",
+      "hourlyRate": "Costo orario amministrativo"
+    },
+    "kpis": {
+      "timeSaved": "Tempo Risparmiato",
+      "hoursYear": "ore/anno",
+      "ftesLiberated": "FTE Liberati",
+      "strategicTasks": "Per compiti strategici"
+    },
+    "aria": {
+      "operationalImpact": "Impatto Operativo",
+      "operationalDesc": "Con {{suppliers}} fornitori omologati tramite ProcureData, il tuo team risparmia {{savings}} EUROe annuali in costi amministrativi diretti.",
+      "liberatedCapacity": "Capacità Liberata",
+      "liberatedDesc": "Equivale a {{ftes}} dipendenti a tempo pieno che possono dedicarsi alla negoziazione strategica e allo sviluppo dei fornitori Tier-1.",
+      "competitiveAdvantage": "Vantaggio Competitivo",
+      "competitiveDesc": "Ridurre l'onboarding da 22 giorni a 24 ore ti posiziona come cliente privilegiato presso i fornitori di componenti critici.",
+      "flashHomologation": "Omologazione Flash",
+      "premiumNetwork": "Con più di 5 FTE liberati, sei idoneo al programma Premium Supplier Network con accesso prioritario a nuovi fornitori verificati."
+    }
+  },
+  "oliveTrust": {
+    "title": "Simulatore Green Premium",
+    "subtitle": "OliveTrust Coop - D.O.P. Jaén Verificata",
+    "badge": "Agroalimentare",
+    "sliders": {
+      "annualProduction": "Produzione annuale",
+      "liters": "litri",
+      "collectionRadius": "Raggio di raccolta",
+      "km": "km"
+    },
+    "kpis": {
+      "premiumObtained": "Premium Ottenuto",
+      "pricePerLiter": "€/litro",
+      "purityIndex": "Indice di Purezza",
+      "origin100": "Origine 100% Jaén"
+    },
+    "chart": {
+      "geographicPurity": "Purezza Geografica"
+    },
+    "aria": {
+      "brandValue": "Valore del Marchio",
+      "brandValueDesc": "Con un indice di purezza del {{purity}}%, il tuo olio ottiene un sovrapprezzo del +{{premium}}%, generando {{equity}}€ aggiuntivi in valore del marchio annuale.",
+      "antiFraud": "Protezione Anti-Frode",
+      "antiFraudDesc": "La registrazione GPS di ogni oliva su blockchain fornisce protezione {{level}} contro la frode di miscelazione con oli di qualità inferiore.",
+      "premiumMarket": "Mercato Premium",
+      "premiumMarketDesc": "Un raggio di raccolta di {{radius}} km ti posiziona nel segmento {{segment}} del mercato degli oli d'oliva extra vergine.",
+      "ultraPremium": "ultra-premium",
+      "premium": "premium",
+      "standard": "standard",
+      "protectionMaximum": "Massima",
+      "protectionHigh": "Alta",
+      "protectionModerate": "Moderata",
+      "doCertified": "D.O.P. Jaén Certificata",
+      "doCertifiedDesc": "La tua cooperativa soddisfa i requisiti per il sigillo Origine Protetta Blockchain, accedendo a distributori gourmet internazionali.",
+      "digitalPassport": "Passaporto Digitale D.O.P."
+    }
+  },
+  "poligonoEcoLink": {
+    "title": "COMUNITÀ ENERGETICA P2P",
+    "independence": "Indipendenza",
+    "radarTitle": "Radar di Indipendenza Energetica",
+    "radarLabels": {
+      "selfConsumption": "Autoconsumo",
+      "p2pTrading": "Trading P2P",
+      "storage": "Stoccaggio",
+      "aiManagement": "Gestione IA",
+      "resilience": "Resilienza"
+    },
+    "sliders": {
+      "solarSurplus": "Eccedenze Solari (kW)",
+      "numCompanies": "Aziende nella Comunità"
+    },
+    "collectiveSavings": "Risparmio Collettivo Mensile",
+    "aria": {
+      "role": "Consulente Comunità Energetiche",
+      "gridIndependence": "Indipendenza dalla Rete",
+      "gridIndependenceDesc": "Hai ridotto la dipendenza dalla rete del {{independence}}%. La tua bolletta media è scesa di {{savings}}€ per azienda grazie al marketplace P2P.",
+      "activeCommunity": "Comunità Attiva",
+      "activeCommunityDesc": "{{companies}} aziende partecipano allo scambio P2P di energia, creando un ecosistema locale resiliente.",
+      "energyIsland": "Isola Energetica",
+      "energyIslandDesc": "La tua comunità può operare in modo autonomo durante le interruzioni di rete."
+    }
+  },
   "aeolus": {
     "title": "LIQUIDAZIONE ISTANTANEA PPA",
     "badgeActive": "Smart Contract Attivo",

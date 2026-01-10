@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Clock, Landmark, TrendingDown, Leaf, ShieldCheck, Zap } from 'lucide-react';
+import { TrendingUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { AriaDynamicReport, InsightItem } from './AriaDynamicReport';
 import { cn } from "@/lib/utils";
@@ -39,14 +40,24 @@ interface ImpactSimulatorProps {
 
 export const ImpactSimulator = ({
   caseId,
-  title = "Simulador de Impacto Económico",
-  description = "Ajusta los parámetros para ver tu ahorro potencial.",
+  title,
+  description,
   sliders,
   calculateResults,
   generateInsights,
   sectorColor = "orange",
-  comparisonLabels = { manual: "Manual", automated: "ProcureData" }
+  comparisonLabels
 }: ImpactSimulatorProps) => {
+  const { t } = useTranslation('simulators');
+  
+  // Use translated defaults if not provided
+  const displayTitle = title || t('common.economicImpact');
+  const displayDescription = description || t('common.adjustParams');
+  const displayLabels = comparisonLabels || { 
+    manual: t('common.manual'), 
+    automated: t('common.automated') 
+  };
+
   // Initialize slider values
   const [values, setValues] = useState<Record<string, number[]>>(() => {
     const initial: Record<string, number[]> = {};
@@ -73,8 +84,8 @@ export const ImpactSimulator = ({
 
   // Comparison chart data
   const comparisonData = [
-    { name: comparisonLabels.manual, value: results.manualCost, color: '#6b7280' },
-    { name: comparisonLabels.automated, value: results.pdCost, color: '#22c55e' },
+    { name: displayLabels.manual, value: results.manualCost, color: '#6b7280' },
+    { name: displayLabels.automated, value: results.pdCost, color: '#22c55e' },
   ];
 
   // Color mapping
@@ -101,10 +112,10 @@ export const ImpactSimulator = ({
             <div className={cn("p-2 rounded-xl bg-gradient-to-br", colors.gradient)}>
               <TrendingUp className="h-5 w-5 text-white" />
             </div>
-            {title}
+            {displayTitle}
           </CardTitle>
           <p className="text-muted-foreground text-sm">
-            {description}
+            {displayDescription}
           </p>
         </CardHeader>
 
@@ -143,7 +154,7 @@ export const ImpactSimulator = ({
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-5 text-center">
               <p className="text-xs uppercase tracking-widest text-green-600 dark:text-green-400 font-bold mb-2">
-                Ahorro Anual Estimado
+                {t('common.annualSavings')}
               </p>
               <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                 {results.savings.toLocaleString('es-ES')} <span className="text-sm">EUROe</span>
@@ -151,7 +162,7 @@ export const ImpactSimulator = ({
             </div>
             <div className={cn("border rounded-2xl p-5 text-center", `bg-${sectorColor}-500/10 border-${sectorColor}-500/20`)}>
               <p className={cn("text-xs uppercase tracking-widest font-bold mb-2", colors.primary)}>
-                Eficiencia Operativa
+                {t('common.operationalEfficiency')}
               </p>
               <p className={cn("text-2xl font-bold", colors.primary)}>
                 +{results.efficiency.toFixed(0)}%
@@ -162,7 +173,7 @@ export const ImpactSimulator = ({
           {/* Comparison Chart */}
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-              Comparativa de Costes
+              {t('common.costComparison')}
             </h4>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
