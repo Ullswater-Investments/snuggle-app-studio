@@ -1,4 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoBanner } from "@/components/DemoBanner";
@@ -12,12 +13,14 @@ import { NotificationsBell } from "@/components/NotificationsBell";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Search } from "lucide-react";
 import { useState } from "react";
 
 export const AppLayout = () => {
+  const { t } = useTranslation('common');
   const { user, signOut } = useAuth();
   const [commandOpen, setCommandOpen] = useState(false);
 
@@ -49,7 +52,7 @@ export const AppLayout = () => {
                   }}
                 >
                   <Search className="h-4 w-4" />
-                  <span className="text-xs">Buscar...</span>
+                  <span className="text-xs">{t('searchPlaceholder')}</span>
                   <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                     <span className="text-xs">⌘</span>K
                   </kbd>
@@ -59,6 +62,7 @@ export const AppLayout = () => {
                   <OrganizationSwitcher />
                 </div>
                 <NotificationsBell />
+                <LanguageSwitcher />
                 <ThemeToggle />
                 <WalletButton />
                 <DemoHelpButton />
@@ -66,7 +70,7 @@ export const AppLayout = () => {
                   {user?.email}
                 </span>
                 <Button variant="outline" size="sm" onClick={signOut}>
-                  Cerrar Sesión
+                  {t('logout')}
                 </Button>
               </div>
             </div>

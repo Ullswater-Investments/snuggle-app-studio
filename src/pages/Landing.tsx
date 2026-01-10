@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { 
   ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle, Sparkles,
   Wallet, ShieldCheck, Coins, Radio, Bell, Users, FileText, Plug, HelpCircle, BookOpen, Triangle,
@@ -14,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import UseCasesCarousel from "@/components/UseCasesCarousel";
 import { cn } from "@/lib/utils";
 
@@ -37,6 +39,7 @@ const cardVariants = {
 };
 
 export default function Landing() {
+  const { t } = useTranslation('common');
   const { user } = useAuth();
 
   const demoLinks = [
@@ -105,14 +108,15 @@ export default function Landing() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
+            <LanguageSwitcher />
             <ThemeToggle />
             {user ? (
               <Button asChild>
-                <Link to="/dashboard">Ir al Dashboard <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/dashboard">{t('goToDashboard')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
             ) : (
               <Button asChild variant="hero">
-                <Link to="/auth">Acceso Demo <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/auth">{t('demoAccess')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
             )}
           </div>

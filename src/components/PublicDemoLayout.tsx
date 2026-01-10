@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { PublicDemoBanner } from "@/components/PublicDemoBanner";
 import { AppSidebar } from "@/components/AppSidebar";
 import { AIConcierge } from "@/components/AIConcierge";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { LogIn } from "lucide-react";
@@ -14,6 +16,8 @@ interface PublicDemoLayoutProps {
 }
 
 export const PublicDemoLayout = ({ children }: PublicDemoLayoutProps) => {
+  const { t } = useTranslation('common');
+  
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -29,11 +33,12 @@ export const PublicDemoLayout = ({ children }: PublicDemoLayoutProps) => {
               </Link>
               
               <div className="ml-auto flex items-center gap-2">
+                <LanguageSwitcher />
                 <ThemeToggle />
                 <Link to="/auth">
                   <Button variant="outline" size="sm" className="gap-2">
                     <LogIn className="h-4 w-4" />
-                    Iniciar Sesión
+                    {t('login')}
                   </Button>
                 </Link>
               </div>
