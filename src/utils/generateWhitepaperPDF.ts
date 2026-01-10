@@ -613,13 +613,13 @@ export const generateWhitepaperPDF = () => {
   const glossary = [
     { term: "DID", full: "Decentralized Identifier", desc: "Identificador único descentralizado" },
     { term: "ODRL", full: "Open Digital Rights Language", desc: "Lenguaje estándar W3C para políticas de datos" },
-    { term: "EDC", full: "Eclipse Dataspace Connector", desc: "Conector IDS para transferencia segura" },
+    { term: "Ocean Provider", full: "PONTUS-X Data Service", desc: "Nodo para acceso descentralizado a datos" },
     { term: "Gaia-X", full: "European Data Infrastructure", desc: "Infraestructura federada europea" },
     { term: "SSI", full: "Self-Sovereign Identity", desc: "Identidad digital auto-soberana" },
     { term: "RLS", full: "Row Level Security", desc: "Seguridad a nivel de fila en BD" },
     { term: "EUROe", full: "Euro Stablecoin", desc: "Token ERC-20 anclado 1:1 al Euro" },
-    { term: "IDSA", full: "International Data Spaces Association", desc: "Estándares para espacios de datos" },
-    { term: "CSRD", full: "Corporate Sustainability Reporting", desc: "Directiva de reporting ESG" },
+    { term: "Datatoken", full: "ERC-20 Access Token", desc: "Token que representa derecho de acceso" },
+    { term: "DDO", full: "Decentralized Data Object", desc: "Metadatos del activo en blockchain" },
     { term: "Pontus-X", full: "Gaia-X Blockchain Network", desc: "Red blockchain del ecosistema Gaia-X" },
   ];
 

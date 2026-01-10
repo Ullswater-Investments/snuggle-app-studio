@@ -46,6 +46,79 @@ export interface LineageEvent {
   status: 'verified' | 'warning' | 'pending';
 }
 
+// === Interfaces DDO (Ocean Protocol / PONTUS-X) ===
+
+export interface DDO {
+  "@context": string[];
+  id: string;                    // did:op:0x...
+  version: string;
+  chainId: number;
+  nftAddress: string;
+  metadata: DDOMetadata;
+  services: DDOService[];
+  credentials?: DDOCredentials;
+}
+
+export interface DDOMetadata {
+  created: string;
+  updated: string;
+  type: 'dataset' | 'algorithm' | 'compute';
+  name: string;
+  description: string;
+  author: string;
+  license: string;
+  tags: string[];
+  additionalInformation?: {
+    gaiaXCompliance?: GaiaXCompliance;
+    [key: string]: unknown;
+  };
+}
+
+export interface GaiaXCompliance {
+  serviceOfferingSD: string;
+  participantSD: string;
+  complianceLevel: 'Level 1' | 'Level 2' | 'Level 3';
+  dataSovereignty: string;
+}
+
+export interface DDOService {
+  id: string;
+  type: 'access' | 'compute';
+  name: string;
+  files: string;                 // URL cifrada
+  datatokenAddress: string;
+  serviceEndpoint: string;
+  timeout: number;
+}
+
+export interface DDOCredentials {
+  allow?: { type: string; values: string[]; }[];
+  deny?: { type: string; values: string[]; }[];
+}
+
+// === Estados de Transacción Web3 ===
+
+export interface OrderState {
+  status: 'idle' | 'approving' | 'ordering' | 'consuming' | 'completed' | 'error';
+  txHash: string | null;
+  downloadUrl: string | null;
+  errorMessage: string | null;
+}
+
+export interface PurchaseResult {
+  success: boolean;
+  orderTxId: string;
+  datatokenTxId: string;
+  blockNumber: number;
+  explorerUrl: string;
+}
+
+export interface ConsumeResult {
+  success: boolean;
+  downloadUrl: string;
+  expiresAt: Date;
+}
+
 // Extensión del objeto Window para inyección de wallets (MetaMask, Rabby, etc.)
 declare global {
   interface Window {

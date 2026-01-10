@@ -18,29 +18,29 @@ export const OFFICIAL_PRICING = {
   currency: "EUROe",
 } as const;
 
-// Componentes del Data Space Europeo - Parte 2: Solución Técnica
+// Componentes del Data Space Europeo (PONTUS-X / Web3 Stack)
 export const EUROPEAN_STACK = [
   {
-    name: "Eclipse Dataspace Connector (EDC)",
-    description: "Conector oficial del Data Space europeo",
+    name: "Ocean Provider (PONTUS-X)",
+    description: "Nodo descentralizado para acceso a datos vía smart contracts",
     status: "activo",
-    category: "connector"
+    category: "provider"
   },
   {
-    name: "IDS Dataspace Protocol",
-    description: "Protocolo de interoperabilidad IDSA",
+    name: "Aquarius Metadata Cache",
+    description: "Indexador descentralizado de activos de datos (DDO)",
     status: "activo",
-    category: "protocol"
+    category: "indexer"
   },
   {
-    name: "Keycloak (Federated Identity)",
-    description: "Gestión de identidades federadas",
+    name: "DIDs + Verifiable Credentials",
+    description: "Identidad auto-soberana basada en blockchain",
     status: "activo",
     category: "identity"
   },
   {
     name: "Gaia-X Trust Framework",
-    description: "Marco de confianza europeo",
+    description: "Marco de confianza europeo con smart contracts",
     status: "activo",
     category: "trust"
   },

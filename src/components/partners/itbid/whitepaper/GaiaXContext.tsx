@@ -13,17 +13,17 @@ const pillars = [
   },
   {
     icon: Link2,
-    title: "Conectores de Datos (EDC)",
-    description: "Eclipse Dataspace Connector para comunicación segura entre participantes del espacio de datos.",
+    title: "Ocean Provider (PONTUS-X)",
+    description: "Nodo descentralizado para servir datos con control de acceso on-chain mediante smart contracts.",
     color: "itbid-lime",
-    features: ["Protocolo IDS/AAS", "Negociación automatizada", "Transfer push/pull"]
+    features: ["Datatokens ERC-20", "Service Agreements", "Compute-to-Data"]
   },
   {
     icon: FolderOpen,
-    title: "Catálogos Federados",
-    description: "Metadatos publicados siguiendo vocabulario DCAT que permiten descubrimiento de activos de datos.",
+    title: "Catálogos Federados (Aquarius)",
+    description: "Indexador descentralizado de metadatos DDO que permite descubrimiento de activos de datos.",
     color: "itbid-purple",
-    features: ["Vocabulario DCAT-AP", "Búsqueda federada", "Clasificación semántica"]
+    features: ["Indexación DDO", "Búsqueda GraphQL", "Clasificación semántica"]
   }
 ];
 

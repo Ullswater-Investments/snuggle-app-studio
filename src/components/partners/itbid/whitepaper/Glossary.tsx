@@ -19,10 +19,34 @@ const glossaryTerms = [
     definition: "Lenguaje estándar W3C para expresar políticas de uso de datos de forma que las máquinas puedan interpretarlas y ejecutarlas automáticamente."
   },
   {
-    term: "EDC",
-    fullName: "Eclipse Dataspace Connector",
+    term: "Ocean Provider",
+    fullName: "PONTUS-X Data Service Node",
     category: "Infraestructura",
-    definition: "Conector de código abierto que implementa el protocolo IDS para la transferencia segura de datos entre participantes de un espacio de datos."
+    definition: "Nodo descentralizado que valida Datatokens y sirve datos bajo políticas on-chain, actuando como proxy de acceso seguro."
+  },
+  {
+    term: "Datatoken",
+    fullName: "Data Access Token (ERC-20)",
+    category: "Web3",
+    definition: "Token ERC-20 que representa el derecho de acceso a un activo de datos específico. Se compra para obtener acceso."
+  },
+  {
+    term: "DDO",
+    fullName: "Decentralized Data Object",
+    category: "Web3",
+    definition: "Estructura de metadatos que describe un activo de datos, incluyendo servicios disponibles, precios y condiciones de acceso."
+  },
+  {
+    term: "Service Agreement",
+    fullName: "On-chain Access Contract",
+    category: "Web3",
+    definition: "Smart contract que define y ejecuta automáticamente los términos de uso entre Provider y Consumer."
+  },
+  {
+    term: "Aquarius",
+    fullName: "Metadata Cache / Indexer",
+    category: "Infraestructura",
+    definition: "Servicio que indexa y cachea los metadatos DDO de la blockchain, permitiendo búsquedas rápidas vía GraphQL."
   },
   {
     term: "Gaia-X",
@@ -47,12 +71,6 @@ const glossaryTerms = [
     fullName: "Euro Stablecoin",
     category: "Pagos",
     definition: "Token ERC-20 anclado 1:1 al Euro, utilizado para pagos verificables y transparentes dentro del ecosistema itbid-x."
-  },
-  {
-    term: "IDSA",
-    fullName: "International Data Spaces Association",
-    category: "Estándares",
-    definition: "Asociación que define los estándares de arquitectura para espacios de datos soberanos, incluyendo el modelo tripartito de roles."
   },
   {
     term: "Data Subject",
@@ -89,6 +107,12 @@ const glossaryTerms = [
     fullName: "Gaia-X Participant Credential",
     category: "Trust",
     definition: "Documento firmado digitalmente que certifica las características, capacidades y cumplimiento normativo de un participante en Gaia-X."
+  },
+  {
+    term: "Compute-to-Data",
+    fullName: "Privacy-Preserving Computation",
+    category: "Web3",
+    definition: "Paradigma donde los algoritmos se ejecutan sobre los datos sin que estos salgan de su ubicación original, preservando la privacidad."
   }
 ];
 
