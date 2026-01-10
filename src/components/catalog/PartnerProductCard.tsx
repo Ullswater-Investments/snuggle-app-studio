@@ -116,11 +116,11 @@ export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
           {product.name}
         </CardTitle>
         {product.partnerName && (
-          <CardDescription className="flex items-center gap-1 text-xs">
-            <Globe className="h-3 w-3" />
-            <span className="font-medium">{product.partnerName}</span>
-            {product.sector && <span className="text-muted-foreground">• {product.sector}</span>}
-          </CardDescription>
+          <Badge variant="outline" className="mt-2 text-xs px-2 py-1 border-primary/40 bg-primary/5 w-fit">
+            <Globe className="h-3 w-3 mr-1.5" />
+            <span className="font-medium">{t('badges.publishedBy') || 'Por'}: {product.partnerName}</span>
+            {product.sector && <span className="text-muted-foreground ml-1">• {product.sector}</span>}
+          </Badge>
         )}
       </CardHeader>
 
