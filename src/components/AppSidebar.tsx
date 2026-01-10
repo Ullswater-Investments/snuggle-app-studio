@@ -1,5 +1,6 @@
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   Package,
@@ -29,49 +30,48 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Badge } from "@/components/ui/badge";
-
-const menuItems = [
-  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Catálogo", url: "/catalog", icon: Package },
-  { title: "Solicitudes", url: "/requests", icon: ClipboardList },
-  { title: "Datos", url: "/data", icon: Database },
-  { title: "Sostenibilidad", url: "/sustainability", icon: Leaf },
-  { title: "Servicios", url: "/services", icon: Sparkles },
-  { title: "Innovation Lab", url: "/innovation", icon: Lightbulb },
-  { title: "Casos de Éxito", url: "/success-stories", icon: Award },
-  { title: "Oportunidades", url: "/opportunities", icon: Megaphone },
-  { title: "Reportes", url: "/reports", icon: BarChart3 },
-  { title: "Notificaciones", url: "/notifications", icon: Bell },
-  { title: "Configuración", url: "/settings", icon: Settings },
-];
-
-const providerMenuItems = [
-  { title: "Analytics", url: "/analytics", icon: TrendingUp },
-];
 
 export function AppSidebar() {
   const { open } = useSidebar();
   const location = useLocation();
+  const { t } = useTranslation('nav');
   const { activeOrg } = useOrganizationContext();
   
   const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
 
+  const menuItems = [
+    { title: t('dashboard'), url: "/dashboard", icon: LayoutDashboard },
+    { title: t('catalog'), url: "/catalog", icon: Package },
+    { title: t('requests'), url: "/requests", icon: ClipboardList },
+    { title: t('data'), url: "/data", icon: Database },
+    { title: t('sustainability'), url: "/sustainability", icon: Leaf },
+    { title: t('services'), url: "/services", icon: Sparkles },
+    { title: t('innovationLab'), url: "/innovation", icon: Lightbulb },
+    { title: t('successStories'), url: "/success-stories", icon: Award },
+    { title: t('opportunities'), url: "/opportunities", icon: Megaphone },
+    { title: t('reports'), url: "/reports", icon: BarChart3 },
+    { title: t('notifications'), url: "/notifications", icon: Bell },
+    { title: t('settings'), url: "/settings", icon: Settings },
+  ];
+
+  const providerMenuItems = [
+    { title: "Analytics", url: "/analytics", icon: TrendingUp },
+  ];
+
   const isActive = (path: string) => location.pathname === path;
-  const hasActiveChild = menuItems.some((i) => isActive(i.url));
 
   return (
     <Sidebar collapsible="icon" className="border-r" data-sidebar="nav">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            Navegación Principal
+            {t('mainNav')}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem 
-                  key={item.title} 
+                  key={item.url} 
                   data-tour={
                     item.url === "/requests" ? "requests-link" : 
                     item.url === "/catalog" ? "catalog-link" : 
@@ -95,7 +95,7 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
               {isProvider && providerMenuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild>
                     <NavLink
                       to={item.url}
@@ -115,7 +115,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            Acciones Rápidas
+            {t('quickActions')}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -127,7 +127,7 @@ export function AppSidebar() {
                     activeClassName="bg-muted text-primary font-medium"
                   >
                     <Plus className="h-5 w-5 shrink-0" />
-                    {open && <span>Nueva Solicitud</span>}
+                    {open && <span>{t('newRequest')}</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -137,7 +137,7 @@ export function AppSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            Partners
+            {t('partners')}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -149,7 +149,7 @@ export function AppSidebar() {
                     activeClassName="bg-muted text-primary font-medium"
                   >
                     <Handshake className="h-5 w-5 shrink-0" />
-                    {open && <span>Directorio</span>}
+                    {open && <span>{t('directory')}</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>

@@ -10,22 +10,27 @@ import esLanding from './locales/es/landing.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
+import frLanding from './locales/fr/landing.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
 import ptNav from './locales/pt/nav.json';
+import ptLanding from './locales/pt/landing.json';
 
 // German
 import deCommon from './locales/de/common.json';
 import deNav from './locales/de/nav.json';
+import deLanding from './locales/de/landing.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
 import itNav from './locales/it/nav.json';
+import itLanding from './locales/it/landing.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
 import nlNav from './locales/nl/nav.json';
+import nlLanding from './locales/nl/landing.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -51,22 +56,27 @@ i18n
       fr: {
         common: frCommon,
         nav: frNav,
+        landing: frLanding,
       },
       pt: {
         common: ptCommon,
         nav: ptNav,
+        landing: ptLanding,
       },
       de: {
         common: deCommon,
         nav: deNav,
+        landing: deLanding,
       },
       it: {
         common: itCommon,
         nav: itNav,
+        landing: itLanding,
       },
       nl: {
         common: nlCommon,
         nav: nlNav,
+        landing: nlLanding,
       },
     },
     fallbackLng: 'es',
