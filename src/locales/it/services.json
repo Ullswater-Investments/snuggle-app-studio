@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Marketplace dei Servizi",
+  "pageDescription": "Algoritmi e servizi a valore aggiunto per elaborare i tuoi dati",
+  "searchPlaceholder": "Cerca servizi...",
+  "all": "Tutti",
+  "emptyState": {
+    "title": "Nessun servizio trovato",
+    "description": "Prova a modificare i filtri di ricerca."
+  },
+  "tabs": {
+    "globalMarket": "Mercato Globale",
+    "myServices": "I Miei Servizi"
+  },
+  "card": {
+    "recommended": "Consigliato",
+    "active": "Attivo",
+    "coreService": "Servizio Core",
+    "docs": "Docs",
+    "free": "Gratuito",
+    "subscribe": "Iscriviti"
+  },
+  "pricing": {
+    "free": "Gratuito",
+    "perMonth": "/mese",
+    "perUse": "/utilizzo"
+  },
+  "toast": {
+    "processingPayment": "Elaborazione pagamento di {{price}}...",
+    "serviceActivated": "Servizio \"{{name}}\" attivato con successo",
+    "availableInDashboard": "Ora puoi usarlo dalla tua Dashboard."
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "pageTitle": "Durabilité Corporative",
+  "pageDescription": "Gestion de l'empreinte carbone et métriques ESG pour {{orgName}}",
+  "newReport": "Nouveau Rapport Annuel",
+  "dialog": {
+    "title": "Enregistrer les Métriques ESG",
+    "description": "Entrez les données d'émissions et d'énergie correspondant à l'année fiscale.",
+    "reportYear": "Année du Rapport",
+    "scope1": "Scope 1 (tCO2e)",
+    "scope2": "Scope 2 (tCO2e)",
+    "renewablePercent": "% Énergie Renouvelable",
+    "saving": "Enregistrement...",
+    "save": "Enregistrer le Rapport"
+  },
+  "tabs": {
+    "overview": "Vue d'Ensemble",
+    "scope3": "Scope 3 (Chaîne)",
+    "trends": "Tendances",
+    "history": "Historique"
+  },
+  "kpis": {
+    "scope1": "Scope 1",
+    "scope1Desc": "Émissions directes",
+    "scope2": "Scope 2",
+    "scope2Desc": "Électricité achetée",
+    "scope3": "Scope 3",
+    "scope3Desc": "{{count}} fournisseurs",
+    "total": "Total",
+    "year": "Année {{year}}"
+  },
+  "scope3Section": {
+    "title": "Émissions Scope 3 - Chaîne d'Approvisionnement",
+    "description": "Émissions indirectes de vos fournisseurs de données",
+    "noSuppliers": "Pas de données fournisseurs",
+    "noSuppliersDesc": "Vous n'avez pas encore de transactions complétées avec des fournisseurs reportant des données ESG.",
+    "supplier": "Fournisseur",
+    "emissions": "Émissions (tCO2e)",
+    "renewable": "% Renouvelable",
+    "yourContribution": "Votre Contribution au Scope 3"
+  },
+  "trends": {
+    "title": "Évolution des Émissions",
+    "description": "Tendance historique de l'empreinte carbone",
+    "totalLabel": "Total (tCO2e)",
+    "renewableLabel": "% Renouvelable"
+  },
+  "history": {
+    "title": "Rapports Historiques",
+    "description": "Tous les rapports ESG de votre organisation",
+    "year": "Année",
+    "certifications": "Certifications"
+  },
+  "emptyState": {
+    "title": "Pas de données de durabilité",
+    "description": "Commencez à suivre votre empreinte carbone en ajoutant votre premier rapport annuel.",
+    "cta": "Créer le Premier Rapport"
+  },
+  "toast": {
+    "reportSaved": "Rapport ESG enregistré avec succès",
+    "duplicateYear": "Un rapport existe déjà pour l'année sélectionnée.",
+    "error": "Erreur lors de l'enregistrement du rapport : {{message}}"
+  },
+  "badges": {
+    "renewableLeader": "Leader Renouvelable",
+    "energyTransition": "Transition Énergétique",
+    "multiCertified": "Multi-Certifié",
+    "cleanChain": "Chaîne Propre",
+    "iso14001": "ISO 14001"
+  },
+  "currentReport": {
+    "title": "Rapport Actuel ({{year}})",
+    "description": "Résumé exécutif de l'impact environnemental"
+  }
+}

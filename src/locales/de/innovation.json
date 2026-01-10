@@ -1,0 +1,100 @@
+{
+  "pageTitle": "Innovationslabor",
+  "pageBadge": "BETA",
+  "pageDescription": "Experimentelle Umgebung für Szenariosimulation und KI-Datenaudit.",
+  "tabs": {
+    "concepts": "F&E-Konzepte",
+    "simulator": "Simulator",
+    "aiAuditor": "KI-Auditor",
+    "insights": "Insights"
+  },
+  "searchPlaceholder": "Konzepte suchen...",
+  "categories": {
+    "all": "Alle",
+    "ai": "KI",
+    "blockchain": "Blockchain",
+    "iot": "IoT",
+    "sustainability": "Nachhaltigkeit"
+  },
+  "emptyState": {
+    "title": "Keine Konzepte gefunden",
+    "description": "Es sind noch keine Innovationskonzepte registriert"
+  },
+  "simulator": {
+    "title": "Szenario-Simulator",
+    "description": "Passen Sie die Parameter an, um Prognosen zu sehen",
+    "demandFactor": "Nachfragefaktor",
+    "supplyVolatility": "Liefervolatilität",
+    "innovationImpact": "Innovationsauswirkung",
+    "projection": "Prognose",
+    "safetyLimit": "Sicherheitsgrenze",
+    "maxCapacity": "Max. Kapazität"
+  },
+  "contractSteps": {
+    "step1Title": "Vertragsunterzeichnung",
+    "step1Desc": "Digital signierter Liefervertrag",
+    "step2Title": "Orakel-Validierung",
+    "step2Desc": "Überprüfung externer Bedingungen",
+    "step3Title": "Trigger aktiviert",
+    "step3Desc": "Strafklausel bewertet",
+    "step4Title": "Zahlungsabwicklung",
+    "step4Desc": "Automatisch ausgeführte Überweisung"
+  },
+  "smartContract": {
+    "title": "Smart Contract Executor",
+    "description": "Visualisieren Sie den Ausführungsfluss von Smart Contracts",
+    "startSimulation": "Simulation starten",
+    "simulating": "Simuliert..."
+  },
+  "sentinel": {
+    "title": "Contract Sentinel",
+    "description": "KI-Risikoanalyse in Verträgen",
+    "uploadContract": "Vertrag hochladen",
+    "analyzing": "Analysiert...",
+    "scanComplete": "Analyse abgeschlossen",
+    "riskScore": "Risiko-Score",
+    "criticalClause": "Missbräuchliche Strafklausel",
+    "ambiguousTerms": "Unklarheit bei Zahlungsbedingungen",
+    "standardClause": "Standard-Force-Majeure-Klausel",
+    "critical": "Kritisch",
+    "warning": "Warnung",
+    "info": "Info"
+  },
+  "auditor": {
+    "title": "Qualitätsaudit",
+    "description": "KI-Datenintegritätsanalyse",
+    "startAudit": "KI-Audit starten",
+    "analyzing": "Analysiert...",
+    "qualityScore": "Qualitätsscore",
+    "dataIntegrity": "Datenintegrität",
+    "gdprCompliance": "DSGVO-Konformität",
+    "schemaValidation": "Schema-Validierung",
+    "freshness": "Datenaktualität"
+  },
+  "radar": {
+    "title": "Technologie-Radar",
+    "description": "Vergleich mit Branchenführern",
+    "yourCompany": "Ihr Unternehmen",
+    "sectorLeader": "Branchenführer",
+    "innovationLevel": "Innovationsstufe"
+  },
+  "prioritization": {
+    "title": "Priorisierungsmatrix",
+    "description": "Aufwand vs. Auswirkung von Initiativen",
+    "effort": "Aufwand",
+    "impact": "Auswirkung",
+    "quickWins": "Quick Wins",
+    "strategic": "Strategisch"
+  },
+  "toast": {
+    "aiAnalysisComplete": "Analyse der Künstlichen Intelligenz abgeschlossen",
+    "contractExecuted": "Vertrag erfolgreich ausgeführt",
+    "allStepsValidated": "Alle Schritte des Smart Contracts wurden validiert.",
+    "scanComplete": "Analyse abgeschlossen: {{count}} Warnungen erkannt"
+  },
+  "concept": {
+    "maturity": "Reife",
+    "viewDetails": "Details anzeigen",
+    "businessImpact": "Geschäftsauswirkung"
+  }
+}

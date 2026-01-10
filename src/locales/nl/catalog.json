@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "badge": "Officiële Marktplaats v2.0",
+    "title": "Ontdek, Koop en Integreer Betrouwbare Data",
+    "description": "Krijg toegang tot duizenden geverifieerde data-assets, met geïntegreerde governance en geautomatiseerde ODRL-compliance.",
+    "searchPlaceholder": "Zoek financiële data, IoT, klimaat..."
+  },
+  "filters": {
+    "title": "Filters",
+    "priceModel": "Prijsmodel",
+    "all": "Alle",
+    "freeOpenData": "Gratis (Open Data)",
+    "premiumPaid": "Premium / Betaald",
+    "trustGuarantee": "Garantie en Vertrouwen",
+    "sustainableESG": "Duurzaam (ESG)",
+    "verifiedKYB": "Geverifieerd (KYB)"
+  },
+  "emptyState": {
+    "title": "Geen resultaten gevonden",
+    "description": "Probeer de filters of zoekopdracht aan te passen.",
+    "clearFilters": "Filters wissen"
+  },
+  "compare": {
+    "comparing": "{{count}} producten vergelijken",
+    "selectUpTo": "Selecteer tot 4 om te vergelijken",
+    "viewTable": "Vergelijkingstabel bekijken",
+    "clear": "Wissen",
+    "dialogTitle": "Productvergelijking",
+    "dialogDescription": "Vergelijk de kenmerken van de {{count}} geselecteerde producten"
+  },
+  "table": {
+    "product": "Product",
+    "provider": "Aanbieder",
+    "price": "Prijs",
+    "badges": "Badges",
+    "rating": "Beoordeling"
+  },
+  "toast": {
+    "addedToFavorites": "Toegevoegd aan favorieten",
+    "removedFromFavorites": "Verwijderd uit favorieten",
+    "errorFavorites": "Fout bij bijwerken favorieten",
+    "loginRequired": "Log in om favorieten op te slaan",
+    "maxCompare": "Maximaal 4 producten om te vergelijken"
+  },
+  "card": {
+    "viewDetails": "Details bekijken",
+    "addToCart": "Toevoegen",
+    "freeAccess": "Gratis Toegang",
+    "verifiedProvider": "Geverifieerde aanbieder",
+    "reviews": "beoordelingen"
+  },
+  "pricing": {
+    "free": "Gratis",
+    "oneTime": "Eenmalig",
+    "subscription": "/maand",
+    "usage": "/gebruik"
+  }
+}

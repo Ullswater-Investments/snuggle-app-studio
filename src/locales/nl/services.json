@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Diensten Marktplaats",
+  "pageDescription": "Algoritmen en meerwaardediensten om uw data te verwerken",
+  "searchPlaceholder": "Diensten zoeken...",
+  "all": "Alle",
+  "emptyState": {
+    "title": "Geen diensten gevonden",
+    "description": "Probeer de zoekfilters aan te passen."
+  },
+  "tabs": {
+    "globalMarket": "Globale Markt",
+    "myServices": "Mijn Diensten"
+  },
+  "card": {
+    "recommended": "Aanbevolen",
+    "active": "Actief",
+    "coreService": "Kerndienst",
+    "docs": "Docs",
+    "free": "Gratis",
+    "subscribe": "Abonneren"
+  },
+  "pricing": {
+    "free": "Gratis",
+    "perMonth": "/maand",
+    "perUse": "/gebruik"
+  },
+  "toast": {
+    "processingPayment": "Betaling van {{price}} wordt verwerkt...",
+    "serviceActivated": "Dienst \"{{name}}\" succesvol geactiveerd",
+    "availableInDashboard": "U kunt het nu gebruiken vanuit uw Dashboard."
+  }
+}

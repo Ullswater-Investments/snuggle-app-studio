@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "badge": "Marketplace Ufficiale v2.0",
+    "title": "Scopri, Acquista e Integra Dati Affidabili",
+    "description": "Accedi a migliaia di asset di dati verificati, con governance integrata e conformità ODRL automatizzata.",
+    "searchPlaceholder": "Cerca dati finanziari, IoT, clima..."
+  },
+  "filters": {
+    "title": "Filtri",
+    "priceModel": "Modello di Prezzo",
+    "all": "Tutti",
+    "freeOpenData": "Gratuiti (Open Data)",
+    "premiumPaid": "Premium / A pagamento",
+    "trustGuarantee": "Garanzia e Fiducia",
+    "sustainableESG": "Sostenibile (ESG)",
+    "verifiedKYB": "Verificato (KYB)"
+  },
+  "emptyState": {
+    "title": "Nessun risultato trovato",
+    "description": "Prova a modificare i filtri o la ricerca.",
+    "clearFilters": "Cancella filtri"
+  },
+  "compare": {
+    "comparing": "Confronto di {{count}} prodotti",
+    "selectUpTo": "Seleziona fino a 4 da confrontare",
+    "viewTable": "Visualizza Tabella Comparativa",
+    "clear": "Cancella",
+    "dialogTitle": "Confronto Prodotti",
+    "dialogDescription": "Confronta le caratteristiche dei {{count}} prodotti selezionati"
+  },
+  "table": {
+    "product": "Prodotto",
+    "provider": "Fornitore",
+    "price": "Prezzo",
+    "badges": "Badge",
+    "rating": "Valutazione"
+  },
+  "toast": {
+    "addedToFavorites": "Aggiunto ai preferiti",
+    "removedFromFavorites": "Rimosso dai preferiti",
+    "errorFavorites": "Errore nell'aggiornamento dei preferiti",
+    "loginRequired": "Accedi per salvare i preferiti",
+    "maxCompare": "Massimo 4 prodotti da confrontare"
+  },
+  "card": {
+    "viewDetails": "Visualizza dettagli",
+    "addToCart": "Aggiungi",
+    "freeAccess": "Accesso Gratuito",
+    "verifiedProvider": "Fornitore verificato",
+    "reviews": "recensioni"
+  },
+  "pricing": {
+    "free": "Gratuito",
+    "oneTime": "Una tantum",
+    "subscription": "/mese",
+    "usage": "/utilizzo"
+  }
+}

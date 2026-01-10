@@ -1,0 +1,58 @@
+{
+  "hero": {
+    "badge": "Marketplace Oficial v2.0",
+    "title": "Descubre, Compra e Integra Datos de Confianza",
+    "description": "Accede a miles de activos de datos verificados, con gobernanza integrada y cumplimiento ODRL automatizado.",
+    "searchPlaceholder": "Buscar datos financieros, IoT, clima..."
+  },
+  "filters": {
+    "title": "Filtros",
+    "priceModel": "Modelo de Precio",
+    "all": "Todos",
+    "freeOpenData": "Gratuitos (Open Data)",
+    "premiumPaid": "Premium / Pago",
+    "trustGuarantee": "Garantía y Confianza",
+    "sustainableESG": "Sostenible (ESG)",
+    "verifiedKYB": "Verificado (KYB)"
+  },
+  "emptyState": {
+    "title": "No se encontraron resultados",
+    "description": "Prueba a ajustar los filtros o la búsqueda.",
+    "clearFilters": "Limpiar filtros"
+  },
+  "compare": {
+    "comparing": "Comparando {{count}} productos",
+    "selectUpTo": "Selecciona hasta 4 para comparar",
+    "viewTable": "Ver Tabla Comparativa",
+    "clear": "Limpiar",
+    "dialogTitle": "Comparación de Productos",
+    "dialogDescription": "Compara las características de los {{count}} productos seleccionados"
+  },
+  "table": {
+    "product": "Producto",
+    "provider": "Proveedor",
+    "price": "Precio",
+    "badges": "Badges",
+    "rating": "Valoración"
+  },
+  "toast": {
+    "addedToFavorites": "Añadido a favoritos",
+    "removedFromFavorites": "Eliminado de favoritos",
+    "errorFavorites": "Error al actualizar favoritos",
+    "loginRequired": "Inicia sesión para guardar favoritos",
+    "maxCompare": "Máximo 4 productos para comparar"
+  },
+  "card": {
+    "viewDetails": "Ver detalle",
+    "addToCart": "Añadir",
+    "freeAccess": "Acceso Gratuito",
+    "verifiedProvider": "Proveedor verificado",
+    "reviews": "reseñas"
+  },
+  "pricing": {
+    "free": "Gratis",
+    "oneTime": "Único",
+    "subscription": "/mes",
+    "usage": "/uso"
+  }
+}

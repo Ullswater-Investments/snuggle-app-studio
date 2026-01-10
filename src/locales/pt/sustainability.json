@@ -1,0 +1,74 @@
+{
+  "pageTitle": "Sustentabilidade Corporativa",
+  "pageDescription": "Gestão de pegada de carbono e métricas ESG para {{orgName}}",
+  "newReport": "Novo Relatório Anual",
+  "dialog": {
+    "title": "Registrar Métricas ESG",
+    "description": "Insira os dados de emissões e energia correspondentes ao ano fiscal.",
+    "reportYear": "Ano do Relatório",
+    "scope1": "Escopo 1 (tCO2e)",
+    "scope2": "Escopo 2 (tCO2e)",
+    "renewablePercent": "% Energia Renovável",
+    "saving": "Salvando...",
+    "save": "Salvar Relatório"
+  },
+  "tabs": {
+    "overview": "Visão Geral",
+    "scope3": "Escopo 3 (Cadeia)",
+    "trends": "Tendências",
+    "history": "Histórico"
+  },
+  "kpis": {
+    "scope1": "Escopo 1",
+    "scope1Desc": "Emissões diretas",
+    "scope2": "Escopo 2",
+    "scope2Desc": "Eletricidade comprada",
+    "scope3": "Escopo 3",
+    "scope3Desc": "{{count}} fornecedores",
+    "total": "Total",
+    "year": "Ano {{year}}"
+  },
+  "scope3Section": {
+    "title": "Emissões Escopo 3 - Cadeia de Suprimentos",
+    "description": "Emissões indiretas dos seus fornecedores de dados",
+    "noSuppliers": "Sem dados de fornecedores",
+    "noSuppliersDesc": "Você ainda não tem transações concluídas com fornecedores que reportam dados ESG.",
+    "supplier": "Fornecedor",
+    "emissions": "Emissões (tCO2e)",
+    "renewable": "% Renovável",
+    "yourContribution": "Sua Contribuição ao Escopo 3"
+  },
+  "trends": {
+    "title": "Evolução das Emissões",
+    "description": "Tendência histórica de pegada de carbono",
+    "totalLabel": "Total (tCO2e)",
+    "renewableLabel": "% Renovável"
+  },
+  "history": {
+    "title": "Relatórios Históricos",
+    "description": "Todos os relatórios ESG da sua organização",
+    "year": "Ano",
+    "certifications": "Certificações"
+  },
+  "emptyState": {
+    "title": "Não há dados de sustentabilidade",
+    "description": "Comece a acompanhar sua pegada de carbono adicionando seu primeiro relatório anual.",
+    "cta": "Criar Primeiro Relatório"
+  },
+  "toast": {
+    "reportSaved": "Relatório ESG salvo com sucesso",
+    "duplicateYear": "Já existe um relatório para o ano selecionado.",
+    "error": "Erro ao salvar o relatório: {{message}}"
+  },
+  "badges": {
+    "renewableLeader": "Líder Renovável",
+    "energyTransition": "Transição Energética",
+    "multiCertified": "Multi-Certificado",
+    "cleanChain": "Cadeia Limpa",
+    "iso14001": "ISO 14001"
+  },
+  "currentReport": {
+    "title": "Relatório Atual ({{year}})",
+    "description": "Resumo executivo do impacto ambiental"
+  }
+}

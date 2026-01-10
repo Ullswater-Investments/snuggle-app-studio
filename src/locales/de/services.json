@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Service-Marktplatz",
+  "pageDescription": "Algorithmen und Mehrwertdienste zur Verarbeitung Ihrer Daten",
+  "searchPlaceholder": "Dienste suchen...",
+  "all": "Alle",
+  "emptyState": {
+    "title": "Keine Dienste gefunden",
+    "description": "Versuchen Sie, die Suchfilter anzupassen."
+  },
+  "tabs": {
+    "globalMarket": "Globaler Markt",
+    "myServices": "Meine Dienste"
+  },
+  "card": {
+    "recommended": "Empfohlen",
+    "active": "Aktiv",
+    "coreService": "Kerndienst",
+    "docs": "Doku",
+    "free": "Kostenlos",
+    "subscribe": "Abonnieren"
+  },
+  "pricing": {
+    "free": "Kostenlos",
+    "perMonth": "/Monat",
+    "perUse": "/Nutzung"
+  },
+  "toast": {
+    "processingPayment": "Zahlung von {{price}} wird verarbeitet...",
+    "serviceActivated": "Dienst \"{{name}}\" erfolgreich aktiviert",
+    "availableInDashboard": "Sie können ihn jetzt über Ihr Dashboard nutzen."
+  }
+}
