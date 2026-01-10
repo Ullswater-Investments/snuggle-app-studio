@@ -7,8 +7,23 @@ import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { useTranslation } from "react-i18next";
 
 export default function WalletWeb3() {
+  const { t } = useTranslation('motor');
+
+  const specs = [
+    { label: t('wallet.specs.protocol.label'), value: t('wallet.specs.protocol.value') },
+    { label: t('wallet.specs.compatibility.label'), value: t('wallet.specs.compatibility.value') },
+    { label: t('wallet.specs.network.label'), value: t('wallet.specs.network.value') }
+  ];
+
+  const transactions = [
+    { type: t('wallet.transactions.payment'), amount: "-500.00", hash: "0x7ecc...a4b2" },
+    { type: t('wallet.transactions.dataReception'), amount: "+1,200.00", hash: "0x3df1...c8e9" },
+    { type: t('wallet.transactions.homologation'), amount: "-150.00", hash: "0x9ab2...f123" }
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -20,7 +35,7 @@ export default function WalletWeb3() {
               <ProcuredataLogo size="md" />
             </Link>
           </div>
-          <Badge variant="outline" className="border-purple-500 text-purple-400">Web3 & Blockchain</Badge>
+          <Badge variant="outline" className="border-purple-500 text-purple-400">{t('wallet.badge')}</Badge>
         </div>
       </header>
 
@@ -39,9 +54,9 @@ export default function WalletWeb3() {
               <Wallet className="h-12 w-12 text-purple-400" />
             </motion.div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Wallet Web3</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('wallet.title')}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Gestión de Activos Soberanos mediante firma digital corporativa
+            {t('wallet.subtitle')}
           </p>
           <MotorNavigation currentPath="/motor/wallet-web3" />
         </motion.div>
@@ -60,13 +75,13 @@ export default function WalletWeb3() {
                     <Wallet className="h-5 w-5 text-purple-400" />
                     ProcureData Wallet
                   </CardTitle>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">Conectada</Badge>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">{t('wallet.connected')}</Badge>
                 </div>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 {/* Balance Display */}
                 <div className="bg-gradient-to-br from-purple-900/40 to-muted dark:to-slate-900 rounded-xl p-6 border border-purple-500/20">
-                  <p className="text-sm text-muted-foreground mb-1">Balance Total</p>
+                  <p className="text-sm text-muted-foreground mb-1">{t('wallet.totalBalance')}</p>
                   <p className="text-4xl font-bold text-foreground">12,500.00 <span className="text-purple-400">EUROe</span></p>
                   <p className="text-sm text-muted-foreground/70 mt-2">≈ 12,500.00 EUR</p>
                 </div>
@@ -74,7 +89,7 @@ export default function WalletWeb3() {
                 {/* Network Info */}
                 <div className="flex items-center justify-between p-4 bg-muted dark:bg-white/5 rounded-lg">
                   <div>
-                    <p className="text-sm text-muted-foreground">Red</p>
+                    <p className="text-sm text-muted-foreground">{t('wallet.network')}</p>
                     <p className="font-medium text-foreground">Pontus-X (Gaia-X)</p>
                   </div>
                   <div className="text-right">
@@ -85,13 +100,9 @@ export default function WalletWeb3() {
 
                 {/* Recent Transactions */}
                 <div>
-                  <p className="text-sm text-muted-foreground mb-3">Transacciones Recientes</p>
+                  <p className="text-sm text-muted-foreground mb-3">{t('wallet.recentTransactions')}</p>
                   <div className="space-y-2">
-                    {[
-                      { type: "Pago Servicio", amount: "-500.00", hash: "0x7ecc...a4b2" },
-                      { type: "Recepción Datos", amount: "+1,200.00", hash: "0x3df1...c8e9" },
-                      { type: "Homologación", amount: "-150.00", hash: "0x9ab2...f123" }
-                    ].map((tx, i) => (
+                    {transactions.map((tx, i) => (
                       <div key={i} className="flex items-center justify-between p-3 bg-muted dark:bg-white/5 rounded-lg hover:bg-accent dark:hover:bg-white/10 transition-colors cursor-pointer">
                         <div>
                           <p className="text-sm text-foreground">{tx.type}</p>
@@ -107,7 +118,7 @@ export default function WalletWeb3() {
 
                 <Button className="w-full bg-purple-600 hover:bg-purple-700">
                   <ExternalLink className="h-4 w-4 mr-2" />
-                  Ver en Explorador de Bloques
+                  {t('wallet.viewExplorer')}
                 </Button>
               </CardContent>
             </Card>
@@ -122,15 +133,12 @@ export default function WalletWeb3() {
           >
             {/* Description */}
             <div>
-              <h2 className="text-2xl font-bold mb-4">Tu Puerta de Acceso Soberana</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('wallet.accessTitle')}</h2>
               <p className="text-muted-foreground leading-relaxed">
-                El motor de ProcureData está diseñado para no ser intrusivo. La Wallet Web3 permite a las empresas 
-                firmar transacciones con su llave privada, garantizando que nadie más pueda mover sus fondos o 
-                autorizar datos. No hay usuario/contraseña tradicional.
+                {t('wallet.description1')}
               </p>
               <p className="text-muted-foreground leading-relaxed mt-4">
-                A través de la firma EIP-712, las empresas pueden firmar contratos legales digitales con la certeza 
-                criptográfica de que su identidad es verificable y no repudiable.
+                {t('wallet.description2')}
               </p>
             </div>
 
@@ -139,15 +147,11 @@ export default function WalletWeb3() {
               <CardHeader>
                 <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-purple-400" />
-                  Especificaciones Técnicas
+                  {t('common.technicalSpecs')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {[
-                  { label: "Protocolo", value: "Firma EIP-712 para contratos legales digitales" },
-                  { label: "Compatibilidad", value: "MetaMask, WalletConnect, Custodia Institucional" },
-                  { label: "Red", value: "Pontus-X (Ecosistema Gaia-X)" }
-                ].map((spec, i) => (
+                {specs.map((spec, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
                     <div>
@@ -167,11 +171,8 @@ export default function WalletWeb3() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-foreground mb-2">Beneficio de Negocio</h3>
-                    <p className="text-muted-foreground">
-                      <strong className="text-orange-400">Elimina la dependencia de intermediarios bancarios</strong> para 
-                      la validación de transacciones internacionales. Liquidación instantánea sin comisiones SWIFT.
-                    </p>
+                    <h3 className="font-bold text-foreground mb-2">{t('wallet.businessBenefit.title')}</h3>
+                    <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: t('wallet.businessBenefit.description') }} />
                   </div>
                 </div>
               </CardContent>
@@ -180,10 +181,10 @@ export default function WalletWeb3() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{t('common.tryDemo')}</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
-                <Link to="/architecture">Ver Arquitectura</Link>
+                <Link to="/architecture">{t('common.viewArchitecture')}</Link>
               </Button>
             </div>
           </motion.div>

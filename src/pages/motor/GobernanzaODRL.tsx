@@ -9,8 +9,10 @@ import { useState } from "react";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { useTranslation } from "react-i18next";
 
 export default function GobernanzaODRL() {
+  const { t } = useTranslation('motor');
   const [permissions, setPermissions] = useState({
     read: true,
     analyze: true,
@@ -20,14 +22,44 @@ export default function GobernanzaODRL() {
   });
 
   const kpis = [
-    { icon: Lock, value: "100%", label: "Control", color: "text-green-500" },
-    { icon: Zap, value: "<1s", label: "Revocación", color: "text-blue-500" },
-    { icon: Shield, value: "W3C", label: "Estándar", color: "text-purple-500" },
+    { icon: Lock, value: "100%", label: t('odrl.kpis.control'), color: "text-green-500" },
+    { icon: Zap, value: "<1s", label: t('odrl.kpis.revocation'), color: "text-blue-500" },
+    { icon: Shield, value: "W3C", label: t('odrl.kpis.standard'), color: "text-purple-500" },
   ];
 
   const benefits = [
-    { role: "Proveedor (Subject)", icon: Building, items: ["Control total sobre uso de datos", "Revocación instantánea global", "Auditoría completa de accesos"] },
-    { role: "Comprador (Consumer)", icon: Users, items: ["Claridad en derechos de uso", "Cumplimiento normativo automático", "Contratos legalmente válidos"] },
+    { 
+      role: t('odrl.benefits.provider.role'), 
+      icon: Building, 
+      items: [
+        t('odrl.benefits.provider.items.control'),
+        t('odrl.benefits.provider.items.revocation'),
+        t('odrl.benefits.provider.items.audit')
+      ] 
+    },
+    { 
+      role: t('odrl.benefits.consumer.role'), 
+      icon: Users, 
+      items: [
+        t('odrl.benefits.consumer.items.clarity'),
+        t('odrl.benefits.consumer.items.compliance'),
+        t('odrl.benefits.consumer.items.contracts')
+      ] 
+    },
+  ];
+
+  const policyOptions = [
+    { key: 'read', label: t('odrl.policies.read.label'), desc: t('odrl.policies.read.desc') },
+    { key: 'analyze', label: t('odrl.policies.analyze.label'), desc: t('odrl.policies.analyze.desc') },
+    { key: 'download', label: t('odrl.policies.download.label'), desc: t('odrl.policies.download.desc') },
+    { key: 'redistribute', label: t('odrl.policies.redistribute.label'), desc: t('odrl.policies.redistribute.desc') },
+    { key: 'expiry30', label: t('odrl.policies.expiry.label'), desc: t('odrl.policies.expiry.desc') }
+  ];
+
+  const specs = [
+    { label: t('odrl.specs.grammar.label'), value: t('odrl.specs.grammar.value') },
+    { label: t('odrl.specs.components.label'), value: t('odrl.specs.components.value') },
+    { label: t('odrl.specs.context.label'), value: t('odrl.specs.context.value') }
   ];
 
   const generateODRL = () => {
@@ -65,7 +97,7 @@ export default function GobernanzaODRL() {
               <ProcuredataLogo size="md" />
             </Link>
           </div>
-          <Badge variant="outline" className="border-blue-500 text-blue-600">Soberanía SaaS</Badge>
+          <Badge variant="outline" className="border-blue-500 text-blue-600">{t('odrl.badge')}</Badge>
         </div>
       </header>
 
@@ -79,9 +111,9 @@ export default function GobernanzaODRL() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-500/15 border border-blue-500/30 mb-6">
             <FileCode className="h-10 w-10 text-blue-500" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Gobernanza ODRL</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('odrl.title')}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Contratos digitales autoejecutables para la soberanía del dato
+            {t('odrl.subtitle')}
           </p>
           <MotorNavigation currentPath="/motor/gobernanza-odrl" />
           
@@ -119,12 +151,8 @@ export default function GobernanzaODRL() {
                   <Shield className="h-6 w-6 text-blue-500" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold mb-2">¿Por qué importa?</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    El intercambio de información no es una simple transferencia de archivos, sino un <strong className="text-foreground">acuerdo soberano</strong>. 
-                    Utilizamos el estándar internacional ODRL (Open Digital Rights Language) para codificar reglas de uso directamente en los datos. 
-                    Si la política dice que el dato solo puede leerse pero no descargarse, el sistema <strong className="text-blue-500">bloquea técnicamente</strong> la función de guardado.
-                  </p>
+                  <h2 className="text-xl font-bold mb-2">{t('common.whyItMatters')}</h2>
+                  <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t('odrl.whyDescription') }} />
                 </div>
               </div>
             </CardContent>
@@ -143,17 +171,11 @@ export default function GobernanzaODRL() {
               <CardHeader className="border-b border-border bg-muted/50">
                 <CardTitle className="flex items-center gap-2">
                   <ToggleRight className="h-5 w-5 text-blue-500" />
-                  Constructor de Políticas
+                  {t('odrl.policyBuilder')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-3">
-                {[
-                  { key: 'read', label: 'Permiso de Lectura', desc: 'El consumidor puede visualizar los datos' },
-                  { key: 'analyze', label: 'Análisis con IA', desc: 'Permite procesamiento algorítmico' },
-                  { key: 'download', label: 'Exportación PDF', desc: 'Descarga de informes en local' },
-                  { key: 'redistribute', label: 'Redistribución', desc: 'Compartir con terceros' },
-                  { key: 'expiry30', label: 'Validez 30 días', desc: 'Expiración automática del acceso' }
-                ].map((item) => (
+                {policyOptions.map((item) => (
                   <div key={item.key} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                     <div>
                       <p className="font-medium">{item.label}</p>
@@ -172,7 +194,7 @@ export default function GobernanzaODRL() {
             <Card className="bg-muted border-blue-500/30">
               <CardHeader className="border-b border-border bg-blue-500/10">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-mono">Política ODRL Generada</CardTitle>
+                  <CardTitle className="text-sm font-mono">{t('odrl.generatedPolicy')}</CardTitle>
                   <Badge className="bg-blue-500/20 text-blue-500 border-blue-500/30 text-xs">JSON-LD</Badge>
                 </div>
               </CardHeader>
@@ -194,7 +216,7 @@ export default function GobernanzaODRL() {
             {/* Beneficios por Rol */}
             <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-lg">Beneficios por Rol</CardTitle>
+                <CardTitle className="text-lg">{t('odrl.benefitsByRole')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {benefits.map((benefit, i) => (
@@ -221,15 +243,11 @@ export default function GobernanzaODRL() {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-blue-500" />
-                  Especificaciones Técnicas
+                  {t('common.technicalSpecs')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {[
-                  { label: "Gramática", value: "Estándar W3C ODRL 2.2 (Ontología de Derechos Digitales)" },
-                  { label: "Componentes", value: "Permissions, Prohibitions y Duties definibles" },
-                  { label: "Contexto", value: "Integración nativa con JSON-LD para interoperabilidad EU" }
-                ].map((spec, i) => (
+                {specs.map((spec, i) => (
                   <div key={i} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                     <div>
@@ -252,16 +270,16 @@ export default function GobernanzaODRL() {
         >
           <Card className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/30 inline-block">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-3">¿Listo para tomar el control de tus datos?</h3>
+              <h3 className="text-2xl font-bold mb-3">{t('odrl.cta.title')}</h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Experimenta el constructor de políticas ODRL y define tus propias reglas de acceso.
+                {t('odrl.cta.description')}
               </p>
               <div className="flex gap-4 justify-center">
                 <Button asChild variant="outline">
-                  <Link to="/auth">Probar Demo</Link>
+                  <Link to="/auth">{t('common.tryDemo')}</Link>
                 </Button>
                 <Button asChild>
-                  <Link to="/architecture">Ver Arquitectura</Link>
+                  <Link to="/architecture">{t('common.viewArchitecture')}</Link>
                 </Button>
               </div>
             </CardContent>

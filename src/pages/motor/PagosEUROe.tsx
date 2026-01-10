@@ -7,19 +7,28 @@ import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { useTranslation } from "react-i18next";
 
 export default function PagosEUROe() {
+  const { t } = useTranslation('motor');
+
   const kpis = [
-    { icon: Clock, value: "2s", label: "Liquidación", color: "text-green-500" },
-    { icon: TrendingUp, value: "0%", label: "Impagos", color: "text-blue-500" },
-    { icon: BadgeCheck, value: "MiCA", label: "Regulado", color: "text-purple-500" },
+    { icon: Clock, value: "2s", label: t('euroe.kpis.settlement'), color: "text-green-500" },
+    { icon: TrendingUp, value: "0%", label: t('euroe.kpis.defaults'), color: "text-blue-500" },
+    { icon: BadgeCheck, value: "MiCA", label: t('euroe.kpis.regulated'), color: "text-purple-500" },
   ];
 
   const steps = [
-    { step: "1", title: "Solicitud", desc: "El comprador solicita acceso al dataset" },
-    { step: "2", title: "Contrato", desc: "Se genera automáticamente contrato ODRL + precio" },
-    { step: "3", title: "Escrow", desc: "El pago se bloquea en Smart Contract" },
-    { step: "4", title: "Liberación", desc: "Al verificar recepción, el pago se libera al proveedor" },
+    { step: "1", title: t('euroe.steps.request.title'), desc: t('euroe.steps.request.desc') },
+    { step: "2", title: t('euroe.steps.contract.title'), desc: t('euroe.steps.contract.desc') },
+    { step: "3", title: t('euroe.steps.escrow.title'), desc: t('euroe.steps.escrow.desc') },
+    { step: "4", title: t('euroe.steps.release.title'), desc: t('euroe.steps.release.desc') },
+  ];
+
+  const specs = [
+    { label: t('euroe.specs.assetType.label'), value: t('euroe.specs.assetType.value') },
+    { label: t('euroe.specs.network.label'), value: t('euroe.specs.network.value') },
+    { label: t('euroe.specs.baseFee.label'), value: t('euroe.specs.baseFee.value') }
   ];
 
   return (
@@ -33,7 +42,7 @@ export default function PagosEUROe() {
               <ProcuredataLogo size="md" />
             </Link>
           </div>
-          <Badge variant="outline" className="border-yellow-500 text-yellow-600">Marketplace Fee</Badge>
+          <Badge variant="outline" className="border-yellow-500 text-yellow-600">{t('euroe.badge')}</Badge>
         </div>
       </header>
 
@@ -47,9 +56,9 @@ export default function PagosEUROe() {
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-yellow-500/15 border border-yellow-500/30 mb-6">
             <Coins className="h-10 w-10 text-yellow-500" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Pagos EUROe</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('euroe.title')}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Liquidación Instantánea en moneda regulada bajo normativa MiCA
+            {t('euroe.subtitle')}
           </p>
           <MotorNavigation currentPath="/motor/pagos-euroe" />
           
@@ -87,13 +96,8 @@ export default function PagosEUROe() {
                   <Zap className="h-6 w-6 text-yellow-500" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold mb-2">¿Por qué importa?</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Las transferencias bancarias tradicionales tardan de <strong className="text-foreground">24 a 72 horas</strong> y 
-                    generan fricción administrativa. Con EUROe, cada transacción se liquida en segundos vía Smart Contract, 
-                    eliminando impagos y la necesidad de perseguir facturas. El modelo de <strong className="text-yellow-500">Escrow (Garantía)</strong> protege 
-                    a ambas partes: el pago se libera automáticamente al verificar la recepción de datos.
-                  </p>
+                  <h2 className="text-xl font-bold mb-2">{t('common.whyItMatters')}</h2>
+                  <p className="text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t('euroe.whyDescription') }} />
                 </div>
               </div>
             </CardContent>
@@ -111,7 +115,7 @@ export default function PagosEUROe() {
               <CardHeader className="border-b border-border bg-muted/50">
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5 text-yellow-500" />
-                  Cómo Funciona
+                  {t('common.howItWorks')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
@@ -147,14 +151,14 @@ export default function PagosEUROe() {
               <CardHeader className="border-b border-border bg-muted/50">
                 <CardTitle className="flex items-center gap-2">
                   <ArrowRightLeft className="h-5 w-5 text-primary" />
-                  Comparativa de Tiempos
+                  {t('euroe.comparison.title')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-muted-foreground">Transferencia Tradicional</span>
-                    <span className="text-destructive font-medium">3-5 días</span>
+                    <span className="text-muted-foreground">{t('euroe.comparison.traditional')}</span>
+                    <span className="text-destructive font-medium">{t('euroe.comparison.days')}</span>
                   </div>
                   <div className="h-3 bg-muted rounded-full overflow-hidden">
                     <div className="h-full w-full bg-destructive/60 rounded-full" />
@@ -162,8 +166,8 @@ export default function PagosEUROe() {
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-muted-foreground">Pago EUROe</span>
-                    <span className="text-green-500 font-medium">2 segundos</span>
+                    <span className="text-muted-foreground">{t('euroe.comparison.euroe')}</span>
+                    <span className="text-green-500 font-medium">{t('euroe.comparison.seconds')}</span>
                   </div>
                   <div className="h-3 bg-muted rounded-full overflow-hidden">
                     <div className="h-full w-[2%] bg-green-500 rounded-full" />
@@ -177,15 +181,11 @@ export default function PagosEUROe() {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-yellow-500" />
-                  Especificaciones Técnicas
+                  {t('common.technicalSpecs')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                {[
-                  { label: "Tipo de Activo", value: "Token ERC-20 regulado por MiCA" },
-                  { label: "Red", value: "Pontus-X (Ecosistema Gaia-X)" },
-                  { label: "Tarifa Base", value: "1.00 EUROe por transacción (Tier Gratuito)" }
-                ].map((spec, i) => (
+                {specs.map((spec, i) => (
                   <div key={i} className="flex items-start gap-3 p-3 bg-muted rounded-lg">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
                     <div>
@@ -208,16 +208,16 @@ export default function PagosEUROe() {
         >
           <Card className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border-yellow-500/30 inline-block">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold mb-3">¿Listo para eliminar la fricción financiera?</h3>
+              <h3 className="text-2xl font-bold mb-3">{t('euroe.cta.title')}</h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                Prueba el sistema de pagos EUROe y experimenta la liquidación instantánea.
+                {t('euroe.cta.description')}
               </p>
               <div className="flex gap-4 justify-center">
                 <Button asChild variant="outline">
-                  <Link to="/auth">Probar Demo</Link>
+                  <Link to="/auth">{t('common.tryDemo')}</Link>
                 </Button>
                 <Button asChild className="bg-yellow-600 hover:bg-yellow-700 text-black">
-                  <Link to="/architecture">Ver Arquitectura</Link>
+                  <Link to="/architecture">{t('common.viewArchitecture')}</Link>
                 </Button>
               </div>
             </CardContent>

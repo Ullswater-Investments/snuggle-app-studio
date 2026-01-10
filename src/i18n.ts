@@ -13,6 +13,8 @@ import esServices from './locales/es/services.json';
 import esInnovation from './locales/es/innovation.json';
 import esSustainability from './locales/es/sustainability.json';
 import esOpportunities from './locales/es/opportunities.json';
+import esModels from './locales/es/models.json';
+import esMotor from './locales/es/motor.json';
 
 // French
 import frCommon from './locales/fr/common.json';
@@ -25,6 +27,8 @@ import frServices from './locales/fr/services.json';
 import frInnovation from './locales/fr/innovation.json';
 import frSustainability from './locales/fr/sustainability.json';
 import frOpportunities from './locales/fr/opportunities.json';
+import frModels from './locales/fr/models.json';
+import frMotor from './locales/fr/motor.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -37,6 +41,8 @@ import ptServices from './locales/pt/services.json';
 import ptInnovation from './locales/pt/innovation.json';
 import ptSustainability from './locales/pt/sustainability.json';
 import ptOpportunities from './locales/pt/opportunities.json';
+import ptModels from './locales/pt/models.json';
+import ptMotor from './locales/pt/motor.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -49,6 +55,8 @@ import deServices from './locales/de/services.json';
 import deInnovation from './locales/de/innovation.json';
 import deSustainability from './locales/de/sustainability.json';
 import deOpportunities from './locales/de/opportunities.json';
+import deModels from './locales/de/models.json';
+import deMotor from './locales/de/motor.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -61,6 +69,8 @@ import itServices from './locales/it/services.json';
 import itInnovation from './locales/it/innovation.json';
 import itSustainability from './locales/it/sustainability.json';
 import itOpportunities from './locales/it/opportunities.json';
+import itModels from './locales/it/models.json';
+import itMotor from './locales/it/motor.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -73,6 +83,8 @@ import nlServices from './locales/nl/services.json';
 import nlInnovation from './locales/nl/innovation.json';
 import nlSustainability from './locales/nl/sustainability.json';
 import nlOpportunities from './locales/nl/opportunities.json';
+import nlModels from './locales/nl/models.json';
+import nlMotor from './locales/nl/motor.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -101,6 +113,8 @@ i18n
         innovation: esInnovation,
         sustainability: esSustainability,
         opportunities: esOpportunities,
+        models: esModels,
+        motor: esMotor,
       },
       fr: {
         common: frCommon,
@@ -113,6 +127,8 @@ i18n
         innovation: frInnovation,
         sustainability: frSustainability,
         opportunities: frOpportunities,
+        models: frModels,
+        motor: frMotor,
       },
       pt: {
         common: ptCommon,
@@ -125,6 +141,8 @@ i18n
         innovation: ptInnovation,
         sustainability: ptSustainability,
         opportunities: ptOpportunities,
+        models: ptModels,
+        motor: ptMotor,
       },
       de: {
         common: deCommon,
@@ -137,6 +155,8 @@ i18n
         innovation: deInnovation,
         sustainability: deSustainability,
         opportunities: deOpportunities,
+        models: deModels,
+        motor: deMotor,
       },
       it: {
         common: itCommon,
@@ -149,6 +169,8 @@ i18n
         innovation: itInnovation,
         sustainability: itSustainability,
         opportunities: itOpportunities,
+        models: itModels,
+        motor: itMotor,
       },
       nl: {
         common: nlCommon,
@@ -161,11 +183,13 @@ i18n
         innovation: nlInnovation,
         sustainability: nlSustainability,
         opportunities: nlOpportunities,
+        models: nlModels,
+        motor: nlMotor,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor'],
     interpolation: {
       escapeValue: false,
     },

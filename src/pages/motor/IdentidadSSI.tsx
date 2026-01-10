@@ -6,8 +6,24 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { useTranslation } from "react-i18next";
 
 export default function IdentidadSSI() {
+  const { t } = useTranslation('motor');
+
+  const verifiedAttributes = [
+    { label: t('ssi.attributes.cif'), issuer: t('ssi.issuers.taxAgency'), date: "2025-01-15" },
+    { label: t('ssi.attributes.iso9001'), issuer: "AENOR", date: "2024-08-20" },
+    { label: t('ssi.attributes.iso14001'), issuer: "Bureau Veritas", date: "2024-11-01" },
+    { label: t('ssi.attributes.ptic'), issuer: t('ssi.issuers.cluster'), date: "2025-01-01" }
+  ];
+
+  const specs = [
+    { label: t('ssi.specs.protocol.label'), value: t('ssi.specs.protocol.value') },
+    { label: t('ssi.specs.standard.label'), value: t('ssi.specs.standard.value') },
+    { label: t('ssi.specs.persistence.label'), value: t('ssi.specs.persistence.value') }
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -19,7 +35,7 @@ export default function IdentidadSSI() {
               <ProcuredataLogo size="md" />
             </Link>
           </div>
-          <Badge variant="outline" className="border-purple-500 text-purple-400">Web3 & Blockchain</Badge>
+          <Badge variant="outline" className="border-purple-500 text-purple-400">{t('ssi.badge')}</Badge>
         </div>
       </header>
 
@@ -38,9 +54,9 @@ export default function IdentidadSSI() {
               <Fingerprint className="h-12 w-12 text-purple-400" />
             </motion.div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Identidad SSI</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('ssi.title')}</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Identidad Corporativa Descentralizada bajo el Trust Framework de Gaia-X
+            {t('ssi.subtitle')}
           </p>
         </motion.div>
 
@@ -56,14 +72,14 @@ export default function IdentidadSSI() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-foreground flex items-center gap-2">
                     <Globe className="h-5 w-5 text-purple-400" />
-                    Pasaporte Digital Corporativo
+                    {t('ssi.passport')}
                   </CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 {/* DID Display */}
                 <div className="bg-muted dark:bg-black/40 rounded-xl p-6 border border-purple-500/20">
-                  <p className="text-xs text-muted-foreground mb-2">Identificador Descentralizado (DID)</p>
+                  <p className="text-xs text-muted-foreground mb-2">{t('ssi.did')}</p>
                   <p className="font-mono text-purple-400 text-sm break-all">
                     did:ethr:0x7ecc4a3b9f2d1e8c...4b2a
                   </p>
@@ -71,24 +87,19 @@ export default function IdentidadSSI() {
 
                 {/* Verified Attributes */}
                 <div>
-                  <p className="text-sm text-muted-foreground mb-4">Atributos Verificados</p>
+                  <p className="text-sm text-muted-foreground mb-4">{t('ssi.verifiedAttributes')}</p>
                   <div className="space-y-3">
-                    {[
-                      { label: "CIF Validado", issuer: "Agencia Tributaria", date: "2025-01-15" },
-                      { label: "ISO 9001:2015", issuer: "AENOR", date: "2024-08-20" },
-                      { label: "ISO 14001", issuer: "Bureau Veritas", date: "2024-11-01" },
-                      { label: "Miembro PTIC", issuer: "Clúster PTIC", date: "2025-01-01" }
-                    ].map((attr, i) => (
+                    {verifiedAttributes.map((attr, i) => (
                       <div key={i} className="flex items-center justify-between p-3 bg-muted dark:bg-white/5 rounded-lg border border-green-500/20">
                         <div className="flex items-center gap-3">
                           <BadgeCheck className="h-5 w-5 text-green-400" />
                           <div>
                             <p className="text-sm text-foreground font-medium">{attr.label}</p>
-                            <p className="text-xs text-muted-foreground">por {attr.issuer}</p>
+                            <p className="text-xs text-muted-foreground">{t('ssi.issuedBy')} {attr.issuer}</p>
                           </div>
                         </div>
                         <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
-                          Válido
+                          {t('ssi.valid')}
                         </Badge>
                       </div>
                     ))}
@@ -99,15 +110,15 @@ export default function IdentidadSSI() {
                 <div className="flex gap-3">
                   <div className="flex-1 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20 text-center">
                     <Globe className="h-6 w-6 text-blue-400 mx-auto mb-2" />
-                    <p className="text-xs text-blue-400">Gaia-X Verified</p>
+                    <p className="text-xs text-blue-400">{t('ssi.gaiaXVerified')}</p>
                   </div>
                   <div className="flex-1 p-4 bg-green-500/10 rounded-lg border border-green-500/20 text-center">
                     <Shield className="h-6 w-6 text-green-400 mx-auto mb-2" />
-                    <p className="text-xs text-green-400">KYB Superado</p>
+                    <p className="text-xs text-green-400">{t('ssi.kybPassed')}</p>
                   </div>
                   <div className="flex-1 p-4 bg-purple-500/10 rounded-lg border border-purple-500/20 text-center">
                     <Fingerprint className="h-6 w-6 text-purple-400 mx-auto mb-2" />
-                    <p className="text-xs text-purple-400">SSI Activo</p>
+                    <p className="text-xs text-purple-400">{t('ssi.ssiActive')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -123,18 +134,11 @@ export default function IdentidadSSI() {
           >
             {/* Description */}
             <div>
-              <h2 className="text-2xl font-bold mb-4">Identidad Descentralizada (DID)</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('ssi.didTitle')}</h2>
               <p className="text-muted-foreground leading-relaxed">
-                ProcureData implementa el estándar de Identificadores Descentralizados (DID) para garantizar que 
-                cada organización sea la única dueña de su identidad y reputación. A diferencia de los modelos 
-                centralizados, nuestra infraestructura genera automáticamente una identidad compatible con la 
-                red Pontus-X.
+                {t('ssi.description1')}
               </p>
-              <p className="text-muted-foreground leading-relaxed mt-4">
-                Esta identidad permite el intercambio de <strong className="text-foreground">Credenciales Verificables (VC)</strong>, 
-                lo que significa que una vez que un proveedor es validado, ese atributo queda vinculado a su 
-                identidad digital de forma inmutable.
-              </p>
+              <p className="text-muted-foreground leading-relaxed mt-4" dangerouslySetInnerHTML={{ __html: t('ssi.description2') }} />
             </div>
 
             {/* Technical Specs */}
@@ -142,15 +146,11 @@ export default function IdentidadSSI() {
               <CardHeader>
                 <CardTitle className="text-foreground text-lg flex items-center gap-2">
                   <Shield className="h-5 w-5 text-purple-400" />
-                  Especificaciones Técnicas
+                  {t('common.technicalSpecs')}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {[
-                  { label: "Protocolo", value: "Compatible con Trust Framework de Gaia-X" },
-                  { label: "Estándar", value: "Identificadores Descentralizados (DID) de la W3C" },
-                  { label: "Persistencia", value: "Anclaje inmutable en red blockchain Pontus-X" }
-                ].map((spec, i) => (
+                {specs.map((spec, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
                     <div>
@@ -170,12 +170,8 @@ export default function IdentidadSSI() {
                     <Zap className="h-6 w-6 text-orange-400" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-foreground mb-2">Solución al Problema nxm</h3>
-                    <p className="text-muted-foreground">
-                      El proveedor se valida <strong className="text-orange-400">UNA sola vez</strong> en el ecosistema. 
-                      Su "Pasaporte Digital" es aceptado instantáneamente por cualquier nuevo cliente, 
-                      reduciendo el tiempo de alta de <strong className="text-orange-400">3 semanas a milisegundos</strong>.
-                    </p>
+                    <h3 className="font-bold text-foreground mb-2">{t('ssi.businessBenefit.title')}</h3>
+                    <p className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: t('ssi.businessBenefit.description') }} />
                   </div>
                 </div>
               </CardContent>
@@ -184,10 +180,10 @@ export default function IdentidadSSI() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{t('common.tryDemo')}</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
-                <Link to="/architecture">Ver Arquitectura</Link>
+                <Link to="/architecture">{t('common.viewArchitecture')}</Link>
               </Button>
             </div>
           </motion.div>
