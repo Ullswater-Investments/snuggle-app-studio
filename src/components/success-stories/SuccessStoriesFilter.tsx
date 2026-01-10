@@ -5,22 +5,8 @@ import {
   Plane, Receipt, Mountain, Wine, Cpu, Recycle, Sprout
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
-
-const sectors = [
-  { id: 'all', label: 'Todos', icon: LayoutGrid, color: 'text-slate-500', bg: 'bg-slate-500/10', activeBg: 'bg-primary' },
-  { id: 'industrial', label: 'Industrial', icon: Factory, color: 'text-orange-500', bg: 'bg-orange-500/10', activeBg: 'bg-orange-500' },
-  { id: 'comercio', label: 'Comercio', icon: ShoppingBag, color: 'text-blue-500', bg: 'bg-blue-500/10', activeBg: 'bg-blue-500' },
-  { id: 'agroalimentario', label: 'Agro', icon: Wheat, color: 'text-emerald-500', bg: 'bg-emerald-500/10', activeBg: 'bg-emerald-500' },
-  { id: 'movilidad', label: 'Movilidad', icon: Truck, color: 'text-teal-500', bg: 'bg-teal-500/10', activeBg: 'bg-teal-500' },
-  { id: 'salud', label: 'Salud', icon: HeartPulse, color: 'text-rose-500', bg: 'bg-rose-500/10', activeBg: 'bg-rose-500' },
-  { id: 'social', label: 'Social', icon: Users, color: 'text-violet-500', bg: 'bg-violet-500/10', activeBg: 'bg-violet-500' },
-  { id: 'energia', label: 'Energía', icon: Zap, color: 'text-yellow-500', bg: 'bg-yellow-500/10', activeBg: 'bg-yellow-500' },
-  { id: 'finanzas', label: 'Finanzas', icon: Receipt, color: 'text-green-500', bg: 'bg-green-500/10', activeBg: 'bg-green-500' },
-  { id: 'tecnologia', label: 'Tech', icon: Cpu, color: 'text-purple-500', bg: 'bg-purple-500/10', activeBg: 'bg-purple-500' },
-  { id: 'circular', label: 'Circular', icon: Recycle, color: 'text-emerald-600', bg: 'bg-emerald-600/10', activeBg: 'bg-emerald-600' },
-  { id: 'agritech', label: 'Agri-Tech', icon: Sprout, color: 'text-lime-600', bg: 'bg-lime-600/10', activeBg: 'bg-lime-600' },
-];
+import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 
 interface SuccessStoriesFilterProps {
   activeSector: string;
@@ -29,6 +15,23 @@ interface SuccessStoriesFilterProps {
 }
 
 export function SuccessStoriesFilter({ activeSector, onSectorChange, sectorCounts }: SuccessStoriesFilterProps) {
+  const { t } = useTranslation('success');
+  
+  const sectors = [
+    { id: 'all', label: t('sectors.all'), icon: LayoutGrid, color: 'text-slate-500', bg: 'bg-slate-500/10', activeBg: 'bg-primary' },
+    { id: 'industrial', label: t('sectors.industrial'), icon: Factory, color: 'text-orange-500', bg: 'bg-orange-500/10', activeBg: 'bg-orange-500' },
+    { id: 'comercio', label: t('sectors.comercio'), icon: ShoppingBag, color: 'text-blue-500', bg: 'bg-blue-500/10', activeBg: 'bg-blue-500' },
+    { id: 'agroalimentario', label: t('sectors.agroalimentario'), icon: Wheat, color: 'text-emerald-500', bg: 'bg-emerald-500/10', activeBg: 'bg-emerald-500' },
+    { id: 'movilidad', label: t('sectors.movilidad'), icon: Truck, color: 'text-teal-500', bg: 'bg-teal-500/10', activeBg: 'bg-teal-500' },
+    { id: 'salud', label: t('sectors.salud'), icon: HeartPulse, color: 'text-rose-500', bg: 'bg-rose-500/10', activeBg: 'bg-rose-500' },
+    { id: 'social', label: t('sectors.social'), icon: Users, color: 'text-violet-500', bg: 'bg-violet-500/10', activeBg: 'bg-violet-500' },
+    { id: 'energia', label: t('sectors.energia'), icon: Zap, color: 'text-yellow-500', bg: 'bg-yellow-500/10', activeBg: 'bg-yellow-500' },
+    { id: 'finanzas', label: t('sectors.finanzas'), icon: Receipt, color: 'text-green-500', bg: 'bg-green-500/10', activeBg: 'bg-green-500' },
+    { id: 'tecnologia', label: t('sectors.tecnologia'), icon: Cpu, color: 'text-purple-500', bg: 'bg-purple-500/10', activeBg: 'bg-purple-500' },
+    { id: 'circular', label: t('sectors.circular'), icon: Recycle, color: 'text-emerald-600', bg: 'bg-emerald-600/10', activeBg: 'bg-emerald-600' },
+    { id: 'agritech', label: t('sectors.agritech'), icon: Sprout, color: 'text-lime-600', bg: 'bg-lime-600/10', activeBg: 'bg-lime-600' },
+  ];
+
   return (
     <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b py-4 mb-8">
       <div className="overflow-x-auto scrollbar-hide">

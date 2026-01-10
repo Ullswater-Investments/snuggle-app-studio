@@ -1,0 +1,311 @@
+{
+  "pageTitle": "Casos de Sucesso Verificados",
+  "casesCount": "47 Casos de Sucesso Verificados",
+  "heroTitle": "Transformação Digital em",
+  "heroTitleHighlight": "Compras Empresariais",
+  "heroDescription": "Descubra como empresas líderes reduziram custos, aceleraram processos e demonstraram seu impacto ESG com a plataforma ProcureData.",
+  "searchPlaceholder": "Pesquisar por empresa ou título...",
+  "emptyState": {
+    "title": "Ainda estamos escrevendo histórias neste setor",
+    "description": "Quer ser a primeira empresa a transformar sua indústria com a ProcureData?",
+    "cta": "Comece sua história"
+  },
+  "sectors": {
+    "all": "Todos",
+    "industrial": "Industrial",
+    "comercio": "Comércio",
+    "agroalimentario": "Agro",
+    "movilidad": "Mobilidade",
+    "salud": "Saúde",
+    "social": "Social",
+    "energia": "Energia",
+    "finanzas": "Finanças",
+    "tecnologia": "Tech",
+    "circular": "Circular",
+    "agritech": "Agri-Tech"
+  },
+  "cases": {
+    "gigafactory-north": {
+      "title": "Automatização de Homologação Industrial",
+      "sector": "Industrial",
+      "metricLabel": "Tempo de Integração",
+      "description": "De 22 dias para 48 horas no processo de homologação de fornecedores Tier 2."
+    },
+    "olivetrust-coop": {
+      "title": "Rastreabilidade ESG para Exportação",
+      "sector": "Agroalimentar",
+      "metricLabel": "Valor Exportação",
+      "description": "Certificação de pegada hídrica para acesso ao mercado alemão com preço premium."
+    },
+    "urbandeliver-bcn": {
+      "title": "Relatório Scope 3 Instantâneo",
+      "sector": "Mobilidade Sustentável",
+      "metricLabel": "Auditoria CSRD",
+      "description": "Geração de relatório de emissões Scope 3 para acesso a crédito verde bancário."
+    },
+    "alianza-social-hub": {
+      "title": "Medição de Impacto Social",
+      "sector": "Economia Social",
+      "metricLabel": "Rácio SROI",
+      "description": "Demonstração verificada do retorno social do investimento em fornecedores éticos."
+    },
+    "biomed-hospital": {
+      "title": "Continuidade Assistencial Garantida",
+      "sector": "Saúde",
+      "metricLabel": "Falhas Críticas",
+      "description": "Manutenção preditiva de equipamentos RM com telemetria anonimizada compatível com RGPD."
+    },
+    "globalretail-prime": {
+      "title": "Auditoria Ética da Cadeia de Abastecimento",
+      "sector": "Comércio",
+      "metricLabel": "Incidentes Éticos",
+      "description": "Verificação de conformidade SA8000 em 200 fornecedores têxteis asiáticos."
+    },
+    "ecovolt-manufacturing": {
+      "title": "Compra de Energia Renovável Automatizada",
+      "sector": "Energia Industrial",
+      "metricLabel": "Energia Renovável",
+      "description": "Liquidação instantânea de certificados de origem através de Smart Contracts e EUROe."
+    },
+    "sky-aero-systems": {
+      "title": "Certificação Aeronáutica EN9100",
+      "sector": "Aeroespacial Industrial",
+      "metricLabel": "Tempo de Verificação",
+      "description": "Validação automática de certificados EN9100 de 120 fornecedores globais de peças críticas."
+    },
+    "vinosdoe-elite": {
+      "title": "Zero Fraude na Exportação D.O.",
+      "sector": "Agroalimentar",
+      "metricLabel": "Confiança do Consumidor",
+      "description": "Notarização de lotes e D.O. com QR dinâmico vinculado a DID de geolocalização."
+    },
+    "pharmacold-logistix": {
+      "title": "Integridade da Cadeia de Frio",
+      "sector": "Saúde",
+      "metricLabel": "Perda Térmica",
+      "description": "Smart Contracts bloqueiam pagamento se sensores detectam temperatura >8°C durante +10min."
+    },
+    "portbcn-smart-trade": {
+      "title": "Alfândega Digital Instantânea",
+      "sector": "Mobilidade",
+      "metricLabel": "Poupança/Container",
+      "description": "Conexão Webhooks com sistemas portuários para validação KYB instantânea."
+    },
+    "ayuntamiento-etico": {
+      "title": "Licitação Pública Transparente",
+      "sector": "Economia Social",
+      "metricLabel": "Transparência Ética",
+      "description": "Dashboard SROI para verificar quota de deficiência dos licitadores em tempo real."
+    },
+    "purelithium-sourcing": {
+      "title": "Minerais Sem Conflito CSRD",
+      "sector": "Indústria Mineira",
+      "metricLabel": "Certificação",
+      "description": "Rastreabilidade Tier 3 de lítio com assinatura ODRL de políticas de uso ético."
+    },
+    "fastfashion-trace": {
+      "title": "Moda Circular Sem Greenwashing",
+      "sector": "Comércio",
+      "metricLabel": "Rotulagem Precisa",
+      "description": "Sincronização PLM com certificados de composição têxtil para 1M de peças."
+    },
+    "invoicetrust-b2b": {
+      "title": "Factoring com Score Blockchain",
+      "sector": "Finanças B2B",
+      "metricLabel": "Liquidez PMEs",
+      "description": "Score de solvência imutável baseado em histórico de cumprimento de contratos ODRL."
+    },
+    "gridflow-energy": {
+      "title": "Gestão de Excedentes Energéticos",
+      "sector": "Energia",
+      "metricLabel": "Naves Conectadas",
+      "description": "Liquidação diária de micropagamentos de energia entre comunidades industriais."
+    },
+    "ailabs-research": {
+      "title": "Treino IA com Dados Sintéticos",
+      "sector": "Tecnologia",
+      "metricLabel": "Tempo de Treino",
+      "description": "Datasets sintéticos com alta fidelidade estatística sem fugas de dados reais."
+    },
+    "helios-fields": {
+      "title": "Manutenção Preditiva Solar",
+      "sector": "Energia Solar",
+      "metricLabel": "Custos de Reparação",
+      "description": "Telemetria IoT de 1M de leituras diárias para detetar anomalias térmicas em inversores."
+    },
+    "aeolus-wind": {
+      "title": "PPAs Programáveis com Smart Contracts",
+      "sector": "Energia Eólica",
+      "metricLabel": "Conciliação PPA",
+      "description": "Liquidação instantânea de contratos PPA através de Smart Contracts e EUROe."
+    },
+    "h2-pure": {
+      "title": "Certificação de Hidrogénio Verde",
+      "sector": "Hidrogénio Verde",
+      "metricLabel": "Valor de Venda",
+      "description": "Garantia de origem digital imutável que certifica a ligação parque eólico-eletrolisador."
+    },
+    "poligono-ecolink": {
+      "title": "Marketplace de Comunidade Energética",
+      "sector": "Autoconsumo Industrial",
+      "metricLabel": "Fatura Elétrica",
+      "description": "Governança ODRL para troca de excedentes solares em tempo real entre naves."
+    },
+    "gridflex-demand": {
+      "title": "Certificados de Flexibilidade Smart Grid",
+      "sector": "Smart Grid",
+      "metricLabel": "Apagões/Ano",
+      "description": "Smart Alerts que ativam protocolos de desconexão seletiva por incentivos em EUROe."
+    },
+    "bateria-hub": {
+      "title": "Arbitragem Energética com IA",
+      "sector": "Armazenamento",
+      "metricLabel": "ROI Bateria",
+      "description": "Algoritmos de IA preveem preços do pool para automatizar compra/venda de energia."
+    },
+    "bioheat-district": {
+      "title": "Rastreabilidade de Biomassa RED III",
+      "sector": "Biomassa",
+      "metricLabel": "Conformidade RED",
+      "description": "DID por lote com geolocalização de corte para certificar limpeza florestal sustentável."
+    },
+    "turbine-chain": {
+      "title": "Aço Verde para Aerogeradores",
+      "sector": "Cadeia de Abastecimento",
+      "metricLabel": "Contrato Ganho",
+      "description": "Consolidação de emissões Scope 3 de 15 fornecedores de aço para relatório CSRD."
+    },
+    "aquapower-nexus": {
+      "title": "Gestão do Nexo Água-Energia",
+      "sector": "Hidráulica",
+      "metricLabel": "Eficiência Hídrica",
+      "description": "Políticas ODRL regulam o uso de água entre irrigação e geração elétrica em tempo real."
+    },
+    "smartcharge-ev": {
+      "title": "Garantia de Origem para Utilizadores VE",
+      "sector": "Mobilidade Elétrica",
+      "metricLabel": "Fidelização VE",
+      "description": "API consulta o Nó Notário para mostrar origem solar/eólica na App de carregamento."
+    },
+    "fiber-loop": {
+      "title": "Rastreabilidade de Fibra Pós-Consumo",
+      "sector": "Reciclagem Têxtil",
+      "metricLabel": "Conformidade RAP",
+      "description": "Notarização blockchain do peso e qualidade de fibra em cada transformação para evitar multas de greenwashing."
+    },
+    "rare-earth-recover": {
+      "title": "Mineração Urbana de Terras Raras",
+      "sector": "REEE / E-Waste",
+      "metricLabel": "Margem de Venda",
+      "description": "Datasets de composição química com IA para venda a fundições especializadas vs gestores genéricos."
+    },
+    "alu-cycle": {
+      "title": "Poupança Energética do Alumínio Infinito",
+      "sector": "Alumínio Secundário",
+      "metricLabel": "Energia vs Virgem",
+      "description": "Smart Contract calcula CO2 poupado para emitir Certificados de Poupança Energética (CPE)."
+    },
+    "producer-trust": {
+      "title": "Auditoria RAP Automática",
+      "sector": "Certificação RAP",
+      "metricLabel": "Auditoria Anual",
+      "description": "Dashboard de conformidade RAP que agrega dados de múltiplos Data Holders com assinaturas DID imutáveis."
+    },
+    "eco-orchestrator": {
+      "title": "Coordenação de SCRAPS",
+      "sector": "Gestão SCRAPS",
+      "metricLabel": "Ecotaxa",
+      "description": "Multi-Tenant RLS garante que cada parceiro vê apenas sua quota enquanto o SCRAP vê o agregado."
+    },
+    "raw-market": {
+      "title": "Marketplace de Matérias-Primas Secundárias",
+      "sector": "Revalorização",
+      "metricLabel": "Receitas vs Gestão",
+      "description": "Políticas ODRL garantem que o comprador usa o resíduo para reciclagem e não para aterro."
+    },
+    "battery-life": {
+      "title": "Segunda Vida de Baterias VE",
+      "sector": "Baterias Lítio",
+      "metricLabel": "Vida Útil Extra",
+      "description": "Audit Logs imutáveis certificam histórico de uso para decidir reciclagem vs armazenamento estacionário."
+    },
+    "urban-mining": {
+      "title": "Certificação de Ouro Ético Reciclado",
+      "sector": "Metais Preciosos",
+      "metricLabel": "Sobrepreço Ético",
+      "description": "Prova de integridade blockchain que vincula lote de entrada (lixo) com saída (lingote)."
+    },
+    "waste-to-value": {
+      "title": "Auditoria de Aterro Zero",
+      "sector": "Zero Waste",
+      "metricLabel": "Desvio de Aterro",
+      "description": "Conciliação automática entre o dado de saída de fábrica e entrada do reciclador via Webhooks."
+    },
+    "green-gov-circular": {
+      "title": "Licitação Pública de Plástico Local",
+      "sector": "Compra Pública Verde",
+      "metricLabel": "SROI Local",
+      "description": "Validador DID Web3 confirma que o plástico provém da planta de reciclagem local."
+    },
+    "avocado-trust": {
+      "title": "Exportação Fitossanitária EUA",
+      "sector": "Exportação Fitossanitária",
+      "metricLabel": "Rejeição Alfândega",
+      "description": "Sensores IoT de armadilhas geram pré-certificado fitossanitário USDA com evidência blockchain."
+    },
+    "olive-origin": {
+      "title": "Soberania de Marca D.O. Jaén",
+      "sector": "Azeite D.O.",
+      "metricLabel": "Preço Premium",
+      "description": "Passaporte Digital vincula lote de lagar com coordenadas GPS de colheita via DID."
+    },
+    "zero-chem-wine": {
+      "title": "Certificação Zero Resíduos Vinhos",
+      "sector": "Vinhos Orgânicos",
+      "metricLabel": "Zero Resíduos",
+      "description": "36 meses sem síntese química certificados com sensores de nitratos e passaporte digital."
+    },
+    "citrus-check": {
+      "title": "Validação LMR Multi-País",
+      "sector": "Citrinos LMR",
+      "metricLabel": "Países Aptos",
+      "description": "Cruzamento automático de aplicações fitossanitárias com normativas de 150 países."
+    },
+    "berry-water": {
+      "title": "Certificação Pegada Hídrica",
+      "sector": "Eficiência Hídrica",
+      "metricLabel": "Eficiência Rega",
+      "description": "Sondas de humidade e caudalímetros notarizam poupança para certificação GlobalG.A.P."
+    },
+    "rice-satellite": {
+      "title": "Validação Satelital de D.O.",
+      "sector": "Validação Remota",
+      "metricLabel": "Confiança D.O.",
+      "description": "Assinatura espetral NDVI confirma variedade e bloqueia misturas com grão de importação."
+    },
+    "bio-cotton-trace": {
+      "title": "Rastreabilidade Algodão GOTS",
+      "sector": "Algodão Orgânico",
+      "metricLabel": "Transparência",
+      "description": "Cadeia de custódia: Semente → Campo → Descaroçamento → Fardo com ID único."
+    },
+    "greenhouse-ai": {
+      "title": "Estufas IoT Anti-Míldio",
+      "sector": "Controlo Fitossanitário",
+      "metricLabel": "Químicos",
+      "description": "IA gere microclima para prevenir fungos sem fungicidas sistémicos."
+    },
+    "tropical-flash": {
+      "title": "Alfândega Express Perecíveis",
+      "sector": "Logística Tropical",
+      "metricLabel": "Frescura Ganha",
+      "description": "Pré-validação digital 48h antes reduz desperdício e estende vida útil na prateleira."
+    },
+    "urban-hydro": {
+      "title": "Quinta Vertical Km 0",
+      "sector": "Agricultura Urbana",
+      "metricLabel": "Pegada Logística",
+      "description": "Produção hidropónica urbana com energia LED renovável certificada."
+    }
+  }
+}

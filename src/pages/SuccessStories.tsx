@@ -46,6 +46,7 @@ import {
 import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 import { SuccessStoriesFilter } from "@/components/success-stories/SuccessStoriesFilter";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from 'react-i18next';
 
 const successCases = [
   // Original 7 cases
@@ -761,19 +762,29 @@ const successCases = [
 ];
 
 const SuccessStories = () => {
+  const { t } = useTranslation('success');
   const [searchTerm, setSearchTerm] = useState("");
   const [activeSector, setActiveSector] = useState("all");
+
+  // Build translated success cases
+  const successCasesData = useMemo(() => successCases.map(c => ({
+    ...c,
+    title: t(`cases.${c.id}.title`),
+    sector: t(`cases.${c.id}.sector`),
+    metricLabel: t(`cases.${c.id}.metricLabel`),
+    description: t(`cases.${c.id}.description`),
+  })), [t]);
 
   // Calculate sector counts
   const sectorCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    successCases.forEach(c => {
+    successCasesData.forEach(c => {
       counts[c.sectorCategory] = (counts[c.sectorCategory] || 0) + 1;
     });
     return counts;
-  }, []);
+  }, [successCasesData]);
 
-  const filteredCases = successCases.filter(c => {
+  const filteredCases = successCasesData.filter(c => {
     const matchesSearch = c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          c.company.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSector = activeSector === "all" || c.sectorCategory === activeSector;
@@ -789,17 +800,16 @@ const SuccessStories = () => {
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Award className="w-4 h-4" />
-              47 Casos de Éxito Verificados
+              {t('casesCount')}
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-              Transformación Digital en{" "}
+              {t('heroTitle')}{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Compras Empresariales
+                {t('heroTitleHighlight')}
               </span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Descubre cómo empresas líderes han reducido costes, acelerado procesos y 
-              demostrado su impacto ESG con la plataforma ProcureData.
+              {t('heroDescription')}
             </p>
           </div>
         </div>
@@ -810,7 +820,7 @@ const SuccessStories = () => {
         <div className="relative w-full md:w-80 mx-auto md:mx-0">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
-            placeholder="Buscar por empresa o título..."
+            placeholder={t('searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -921,16 +931,16 @@ const SuccessStories = () => {
             </div>
             
             <h3 className="text-xl font-bold mb-2">
-              Todavía estamos escribiendo historias en este sector
+              {t('emptyState.title')}
             </h3>
             <p className="text-muted-foreground mb-6">
-              ¿Quieres ser la primera empresa en transformar tu industria con ProcureData?
+              {t('emptyState.description')}
             </p>
             <Link 
               to="/servicios" 
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
             >
-              Empieza tu historia
+              {t('emptyState.cta')}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
