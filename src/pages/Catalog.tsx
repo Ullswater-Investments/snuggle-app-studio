@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -152,8 +152,26 @@ export default function Catalog() {
     toggleWishlistMutation.mutate(assetId);
   };
 
+  // --- Synthetic Assets from translations (for demo when DB is empty) ---
+  interface SyntheticAsset {
+    id: string;
+    name: string;
+    description: string;
+    category: string;
+    provider: string;
+    price: number;
+    pricingModel: string;
+    tags: string[];
+    hasGreenBadge: boolean;
+    kybVerified: boolean;
+    reputationScore: number;
+    reviewCount: number;
+  }
+
+  const syntheticAssets = t('syntheticAssets', { returnObjects: true }) as SyntheticAsset[];
+
   // --- Fetch de Datos (Conecta con la vista SQL) ---
-  const { data: listings, isLoading } = useQuery({
+  const { data: dbListings, isLoading } = useQuery({
     queryKey: ["marketplace-listings"],
     queryFn: async () => {
       // Intentamos leer de la vista nueva
@@ -201,6 +219,37 @@ export default function Catalog() {
       return ((data || []) as unknown) as MarketplaceListing[];
     }
   });
+
+  // --- Hybrid Logic: Use DB data if available, otherwise use translated synthetic data ---
+  const listings = useMemo(() => {
+    // If we have real data from the database, use it
+    if (dbListings && dbListings.length > 0) {
+      return dbListings;
+    }
+    
+    // Fallback to translated synthetic data for demo
+    if (Array.isArray(syntheticAssets) && syntheticAssets.length > 0) {
+      return syntheticAssets.map((asset): MarketplaceListing => ({
+        asset_id: asset.id,
+        product_name: asset.name,
+        product_description: asset.description,
+        category: asset.category,
+        provider_name: asset.provider,
+        provider_id: 'synthetic-provider',
+        seller_category: null,
+        pricing_model: asset.pricingModel as 'free' | 'one_time' | 'subscription' | 'usage',
+        price: asset.price,
+        currency: 'EUR',
+        billing_period: asset.pricingModel === 'subscription' ? 'monthly' : null,
+        has_green_badge: asset.hasGreenBadge,
+        kyb_verified: asset.kybVerified,
+        reputation_score: asset.reputationScore,
+        review_count: asset.reviewCount
+      }));
+    }
+    
+    return [];
+  }, [dbListings, syntheticAssets]);
 
   // --- Lógica de Filtrado en Cliente ---
   const filteredListings = listings?.filter(item => {
