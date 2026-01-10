@@ -86,7 +86,6 @@ export default function Catalog() {
   const { t: tPartners } = useTranslation('partnerProducts');
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
-  const [viewMode, setViewMode] = useState<'all' | 'partners'>('all');
   const [filters, setFilters] = useState({
     onlyGreen: false,
     onlyVerified: false,
@@ -468,29 +467,18 @@ export default function Catalog() {
         {/* GRID DE PRODUCTOS */}
         <div className="lg:col-span-3 space-y-6">
           
-          {/* Toggle entre Marketplace y Partner Products */}
-          <div className="flex items-center gap-4 mb-4">
-            <Button
-              variant={viewMode === 'all' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setViewMode('all')}
-              className="flex items-center gap-2"
-            >
-              <Database className="h-4 w-4" />
-              {t('hero.badge')}
-            </Button>
-            <Button
-              variant={viewMode === 'partners' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setViewMode('partners')}
-              className="flex items-center gap-2"
-            >
-              <Users className="h-4 w-4" />
-              {tPartners('meta.title')}
-              <Badge variant="secondary" className="ml-1 text-[10px]">
-                {partnerProducts.length}
+          {/* Stats del catálogo unificado */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Badge variant="outline" className="flex items-center gap-1.5 px-3 py-1">
+                <Database className="h-3.5 w-3.5" />
+                {(filteredListings?.length || 0) + filteredPartnerProducts.length} {t('hero.badge')}
               </Badge>
-            </Button>
+              <Badge variant="secondary" className="flex items-center gap-1.5 px-3 py-1">
+                <Users className="h-3.5 w-3.5" />
+                {partnerProducts.length} {tPartners('badges.aggregated')}
+              </Badge>
+            </div>
           </div>
 
           {/* Tabs de Categoría - Orden oficial según Memoria Técnica */}
@@ -517,31 +505,10 @@ export default function Catalog() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} className="h-[350px] rounded-xl" />)}
             </div>
-          ) : viewMode === 'partners' ? (
-            // Partner Products Grid
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {filteredPartnerProducts.map((product) => (
-                <PartnerProductCard key={product.id} product={product} />
-              ))}
-              
-              {filteredPartnerProducts.length === 0 && (
-                <div className="col-span-full text-center py-20 bg-white rounded-xl border border-dashed">
-                  <div className="mx-auto h-12 w-12 text-muted-foreground mb-4">
-                    <Globe className="h-full w-full" />
-                  </div>
-                  <h3 className="text-lg font-medium">{t('emptyState.title')}</h3>
-                  <p className="text-muted-foreground">{tPartners('meta.description')}</p>
-                  <Button variant="link" onClick={() => {
-                    setSearchTerm("");
-                    setFilters({onlyGreen: false, onlyVerified: false, priceType: 'all'});
-                    setActiveTab("all");
-                  }}>{t('emptyState.clearFilters')}</Button>
-                </div>
-              )}
-            </div>
           ) : (
-            // Original Marketplace Grid
+            // Unified Catalog Grid - All Products Together
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {/* Marketplace listings first */}
               {filteredListings?.map((item) => (
                 <ProductCard 
                   key={item.asset_id} 
@@ -555,7 +522,13 @@ export default function Catalog() {
                 />
               ))}
               
-              {filteredListings?.length === 0 && (
+              {/* Partner products after */}
+              {filteredPartnerProducts.map((product) => (
+                <PartnerProductCard key={product.id} product={product} />
+              ))}
+              
+              {/* Empty state when no products */}
+              {(filteredListings?.length === 0 && filteredPartnerProducts.length === 0) && (
                 <div className="col-span-full text-center py-20 bg-white rounded-xl border border-dashed">
                   <div className="mx-auto h-12 w-12 text-muted-foreground mb-4">
                     <Search className="h-full w-full" />
