@@ -26,5 +26,14 @@
   "demoAccess": "Acceso Demo",
   "tryInteractiveDemo": "Probar Demo Interactiva",
   "viewTechnicalDoc": "Ver Memoria Técnica",
-  "partners": "Partners"
+  "partners": "Partners",
+  "wallet": {
+    "connected": "Billetera Conectada",
+    "connectedDesc": "Cuenta activa: {{address}}",
+    "connectionError": "Error al conectar",
+    "unknownError": "Error desconocido",
+    "disconnected": "Desconectado",
+    "disconnectedDesc": "Has cerrado la sesión de tu wallet.",
+    "metamaskDisconnected": "Desconexión detectada en MetaMask"
+  }
 }

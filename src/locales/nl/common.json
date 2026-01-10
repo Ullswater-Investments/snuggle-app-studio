@@ -26,5 +26,14 @@
   "demoAccess": "Demo Toegang",
   "tryInteractiveDemo": "Probeer de Interactieve Demo",
   "viewTechnicalDoc": "Bekijk Technische Documentatie",
-  "partners": "Partners"
+  "partners": "Partners",
+  "wallet": {
+    "connected": "Portemonnee Verbonden",
+    "connectedDesc": "Actief account: {{address}}",
+    "connectionError": "Verbindingsfout",
+    "unknownError": "Onbekende fout",
+    "disconnected": "Losgekoppeld",
+    "disconnectedDesc": "Je hebt de sessie van je portemonnee gesloten.",
+    "metamaskDisconnected": "Loskoppeling gedetecteerd in MetaMask"
+  }
 }

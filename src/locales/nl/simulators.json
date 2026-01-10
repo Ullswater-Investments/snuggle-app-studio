@@ -1,0 +1,39 @@
+{
+  "aeolus": {
+    "title": "PPA DIRECTE AFREKENING",
+    "badgeActive": "Smart Contract Actief",
+    "instantSettlement": "Directe Afrekening",
+    "generation": "Opwekking",
+    "blockPayment": "Blok Betaling",
+    "windSpeed": "Windsnelheid",
+    "ppaPrice": "Overeengekomen PPA-Prijs",
+    "cashFlowBoost": "Cashflow Verbetering",
+    "financialCost": "-12% Financiële Kosten",
+    "downloadCert": "Download PPA Certificaat",
+    "units": {
+      "mwh": "MWh",
+      "ms": "m/s",
+      "eurMwh": "€/MWh",
+      "seconds": "seconden",
+      "days": "dagen"
+    },
+    "chart": {
+      "traditional": "Traditioneel",
+      "smartContract": "Smart Contract"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Windenergie Adviseur",
+      "instantTitle": "Directe Afrekening",
+      "instantDesc": "Met wind op <strong>{{windSpeed}} m/s</strong> en een PPA-prijs van <strong>{{price}}€/MWh</strong>, genereert je directe afrekening <strong>{{payout}} EUROe</strong> in het huidige blok.",
+      "waitTitle": "Eliminatie van Wachttijd",
+      "waitDesc": "De traditionele betaling duurt <span>{{traditional}} dagen</span>. Met Smart Contract ontvang je de betaling in <strong>{{blockchain}} seconden</strong>, waardoor kapitaal direct vrijkomt.",
+      "projectionTitle": "Jaarlijkse Projectie",
+      "projectionDesc": "Geschatte opwekking: <strong>{{generation}} GWh/jaar</strong> met inkomsten van <strong>{{revenue}} M€</strong>.",
+      "optimalWind": "Optimale Wind",
+      "optimalWindDesc": "De huidige snelheid ligt in het optimale bereik van de vermogenscurve. De capaciteitsfactor overschrijdt 35%, waardoor de PPA-rentabiliteit wordt gemaximaliseerd.",
+      "ppaPremium": "PPA Premium",
+      "ppaPremiumDesc": "Je PPA-prijs van {{price}}€/MWh ligt boven de markt. De blockchain-certificering garandeert de traceerbaarheid van hernieuwbare oorsprong, wat de premie rechtvaardigt."
+    }
+  }
+}

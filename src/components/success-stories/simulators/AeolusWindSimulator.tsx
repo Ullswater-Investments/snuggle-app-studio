@@ -1,16 +1,17 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Wind, Coins, ArrowRight, Zap, Clock, FileText, Sparkles, TrendingUp } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Cell } from 'recharts';
 
 interface AeolusWindSimulatorProps {
   onValuesChange?: (values: { windSpeed: number; fixedPrice: number; payout: number }) => void;
 }
 
 export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [windSpeed, setWindSpeed] = useState(14);
   const [fixedPrice, setFixedPrice] = useState(60);
 
@@ -26,9 +27,9 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
   }, [windSpeed, fixedPrice]);
 
   const settlementData = useMemo(() => [
-    { name: 'Tradicional', days: calculations.traditionalDays, fill: '#64748b' },
-    { name: 'Smart Contract', days: 0.00002, fill: '#22d3ee' },
-  ], [calculations]);
+    { name: t('aeolus.chart.traditional'), days: calculations.traditionalDays, fill: '#64748b' },
+    { name: t('aeolus.chart.smartContract'), days: 0.00002, fill: '#22d3ee' },
+  ], [calculations, t]);
 
   const pontusHash = useMemo(() => {
     const base = (windSpeed * 100 + fixedPrice).toString(16);
@@ -53,11 +54,11 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
                 <Wind className="w-6 h-6 text-cyan-400" />
               </div>
               <div>
-                <h3 className="text-cyan-400 font-bold text-sm">PPA INSTANT SETTLEMENT</h3>
+                <h3 className="text-cyan-400 font-bold text-sm">{t('aeolus.title')}</h3>
                 <p className="text-[10px] text-slate-400 font-mono">{pontusHash}</p>
               </div>
             </div>
-            <Badge className="bg-emerald-500/20 text-emerald-400">Smart Contract Activo</Badge>
+            <Badge className="bg-emerald-500/20 text-emerald-400">{t('aeolus.badgeActive')}</Badge>
           </div>
 
           {/* Turbine Visual */}
@@ -85,7 +86,7 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
                   style={{ animation: `spin ${rotationDuration}s linear infinite` }}
                 />
                 <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyan-900/80 px-3 py-1 rounded-full">
-                  <span className="text-lg font-black text-white">{windSpeed} <span className="text-xs text-cyan-300">m/s</span></span>
+                  <span className="text-lg font-black text-white">{windSpeed} <span className="text-xs text-cyan-300">{t('aeolus.units.ms')}</span></span>
                 </div>
               </div>
             </div>
@@ -95,19 +96,19 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
           <div className="bg-slate-900/80 rounded-xl p-5 border border-emerald-500/30 mb-6">
             <div className="flex items-center gap-3 mb-4">
               <Coins className="w-6 h-6 text-emerald-400" />
-              <span className="text-sm font-bold text-white uppercase">Liquidación Instantánea</span>
+              <span className="text-sm font-bold text-white uppercase">{t('aeolus.instantSettlement')}</span>
             </div>
             
             <div className="flex items-center justify-between bg-emerald-950/50 rounded-lg p-4">
               <div className="text-center">
                 <Zap className="w-6 h-6 text-cyan-400 mx-auto mb-1" />
-                <p className="text-xs text-slate-400">Generación</p>
-                <p className="text-lg font-bold text-white">{calculations.generation.toFixed(1)} MWh</p>
+                <p className="text-xs text-slate-400">{t('aeolus.generation')}</p>
+                <p className="text-lg font-bold text-white">{calculations.generation.toFixed(1)} {t('aeolus.units.mwh')}</p>
               </div>
               <ArrowRight className="w-6 h-6 text-emerald-400 animate-pulse" />
               <div className="text-center">
                 <Coins className="w-6 h-6 text-emerald-400 mx-auto mb-1" />
-                <p className="text-xs text-slate-400">Pago en Bloque</p>
+                <p className="text-xs text-slate-400">{t('aeolus.blockPayment')}</p>
                 <p className="text-lg font-bold text-emerald-400">{calculations.instantPayout.toFixed(0)} EUROe</p>
               </div>
             </div>
@@ -122,16 +123,16 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
           <div className="space-y-5 bg-slate-900/40 p-4 rounded-xl border border-cyan-900/20 mb-6">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-300">Velocidad del Viento</span>
-                <span className="font-bold text-cyan-400">{windSpeed} m/s</span>
+                <span className="text-slate-300">{t('aeolus.windSpeed')}</span>
+                <span className="font-bold text-cyan-400">{windSpeed} {t('aeolus.units.ms')}</span>
               </div>
               <Slider value={[windSpeed]} onValueChange={(v) => setWindSpeed(v[0])} min={3} max={25} step={1} className="[&>span]:bg-cyan-600" />
             </div>
             
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-300">Precio PPA Pactado</span>
-                <span className="font-bold text-emerald-400">{fixedPrice} €/MWh</span>
+                <span className="text-slate-300">{t('aeolus.ppaPrice')}</span>
+                <span className="font-bold text-emerald-400">{fixedPrice} {t('aeolus.units.eurMwh')}</span>
               </div>
               <Slider value={[fixedPrice]} onValueChange={(v) => setFixedPrice(v[0])} min={30} max={90} step={5} className="[&>span]:bg-emerald-600" />
             </div>
@@ -139,9 +140,9 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
 
           {/* Cash Flow Boost */}
           <div className="bg-gradient-to-r from-cyan-900/50 to-emerald-900/50 p-5 rounded-2xl border border-cyan-500/30">
-            <p className="text-[10px] uppercase font-black text-cyan-300 mb-2">Mejora Flujo de Caja</p>
+            <p className="text-[10px] uppercase font-black text-cyan-300 mb-2">{t('aeolus.cashFlowBoost')}</p>
             <p className="text-4xl font-black text-white">+{calculations.cashFlowBoost.toFixed(0)} <span className="text-lg text-cyan-400">EUROe</span></p>
-            <Badge className="mt-2 bg-emerald-500/20 text-emerald-300">-12% Coste Financiero</Badge>
+            <Badge className="mt-2 bg-emerald-500/20 text-emerald-300">{t('aeolus.financialCost')}</Badge>
           </div>
         </Card>
       </div>
@@ -153,8 +154,8 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-black text-lg">A</div>
             <div>
-              <h4 className="text-white font-bold">ARIA</h4>
-              <p className="text-[10px] text-slate-400">Asesora de Energía Eólica</p>
+              <h4 className="text-white font-bold">{t('aeolus.aria.name')}</h4>
+              <p className="text-[10px] text-slate-400">{t('aeolus.aria.role')}</p>
             </div>
           </div>
 
@@ -164,9 +165,9 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
               <div className="flex items-start gap-3">
                 <Sparkles className="w-5 h-5 text-cyan-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Liquidación Instantánea</p>
+                  <p className="text-sm text-white font-medium mb-1">{t('aeolus.aria.instantTitle')}</p>
                   <p className="text-xs text-slate-400">
-                    Con viento a <span className="text-cyan-400 font-bold">{windSpeed} m/s</span> y precio PPA de <span className="text-emerald-400 font-bold">{fixedPrice}€/MWh</span>, tu liquidación instantánea genera <span className="text-white font-bold">{calculations.instantPayout.toFixed(0)} EUROe</span> en el bloque actual.
+                    {t('aeolus.aria.instantDesc', { windSpeed, price: fixedPrice, payout: calculations.instantPayout.toFixed(0) }).replace(/<[^>]+>/g, '')}
                   </p>
                 </div>
               </div>
@@ -176,9 +177,9 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
               <div className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-emerald-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Eliminación de Espera</p>
+                  <p className="text-sm text-white font-medium mb-1">{t('aeolus.aria.waitTitle')}</p>
                   <p className="text-xs text-slate-400">
-                    El pago tradicional tarda <span className="text-slate-500">{calculations.traditionalDays} días</span>. Con Smart Contract, recibes el pago en <span className="text-emerald-400 font-bold">{calculations.blockchainSeconds} segundos</span>, liberando capital instantáneamente.
+                    {t('aeolus.aria.waitDesc', { traditional: calculations.traditionalDays, blockchain: calculations.blockchainSeconds }).replace(/<[^>]+>/g, '')}
                   </p>
                 </div>
               </div>
@@ -188,9 +189,9 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
               <div className="flex items-start gap-3">
                 <TrendingUp className="w-5 h-5 text-blue-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Proyección Anual</p>
+                  <p className="text-sm text-white font-medium mb-1">{t('aeolus.aria.projectionTitle')}</p>
                   <p className="text-xs text-slate-400">
-                    Generación estimada: <span className="text-blue-400 font-bold">{(calculations.annualGeneration / 1000).toFixed(1)} GWh/año</span> con ingresos de <span className="text-white font-bold">{(calculations.annualRevenue / 1000000).toFixed(2)} M€</span>.
+                    {t('aeolus.aria.projectionDesc', { generation: (calculations.annualGeneration / 1000).toFixed(1), revenue: (calculations.annualRevenue / 1000000).toFixed(2) }).replace(/<[^>]+>/g, '')}
                   </p>
                 </div>
               </div>
@@ -200,10 +201,10 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
               <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-xl p-4 border border-cyan-500/30">
                 <div className="flex items-center gap-2 mb-2">
                   <Wind className="w-5 h-5 text-cyan-400" />
-                  <span className="text-sm font-bold text-cyan-300">Viento Óptimo</span>
+                  <span className="text-sm font-bold text-cyan-300">{t('aeolus.aria.optimalWind')}</span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  La velocidad actual está en el rango óptimo de la curva de potencia. El factor de capacidad supera el 35%, maximizando la rentabilidad del PPA.
+                  {t('aeolus.aria.optimalWindDesc')}
                 </p>
               </div>
             )}
@@ -212,10 +213,10 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
               <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-center gap-2 mb-2">
                   <Coins className="w-5 h-5 text-emerald-400" />
-                  <span className="text-sm font-bold text-emerald-300">PPA Premium</span>
+                  <span className="text-sm font-bold text-emerald-300">{t('aeolus.aria.ppaPremium')}</span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  Tu precio PPA de {fixedPrice}€/MWh está por encima del mercado. La certificación blockchain garantiza la trazabilidad de origen renovable, justificando el premium.
+                  {t('aeolus.aria.ppaPremiumDesc', { price: fixedPrice })}
                 </p>
               </div>
             )}
@@ -226,7 +227,7 @@ export const AeolusWindSimulator = ({ onValuesChange }: AeolusWindSimulatorProps
             <p className="text-[10px] font-mono text-slate-500 mb-3">{pontusHash}</p>
             <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700">
               <FileText className="w-4 h-4 mr-2" />
-              Descargar Certificado PPA
+              {t('aeolus.downloadCert')}
             </Button>
           </div>
         </Card>

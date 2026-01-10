@@ -75,5 +75,43 @@
     "fashion": "MODA",
     "finance": "FINANZAS",
     "grid": "GRID"
+  },
+  "nav": {
+    "features": "Funcionalidades",
+    "businessModels": "Modelos de Negocio",
+    "useCases": "Casos de Uso",
+    "architecture": "Arquitectura Técnica"
+  },
+  "useCasesSection": {
+    "badge": "Versatilidad Industrial",
+    "title": "Soluciones Reales para la Cadena de Suministro",
+    "description": "Desde la verificación de identidad hasta la financiación DeFi. Descubre cómo PROCUREDATA transforma cada eslabón."
+  },
+  "footer": {
+    "tagline": "Espacio de Datos para la Función de Compras con tecnología Web3.",
+    "platform": "Plataforma",
+    "catalog": "Catálogo de Datos",
+    "innovationLab": "Innovation Lab",
+    "sustainabilityHub": "Hub Sostenibilidad",
+    "services": "Servicios",
+    "resources": "Recursos",
+    "technicalDocs": "Documentación Técnica",
+    "architecture": "Arquitectura",
+    "techWhitepaper": "Tech Whitepaper",
+    "ecosystemGuide": "Guía del Ecosistema",
+    "transparency": "Transparencia",
+    "technicalMemory": "Memoria Técnica",
+    "governanceModel": "Modelo de Gobernanza",
+    "userGuide": "Guía de Usuario",
+    "businessPlan": "Plan de Negocio",
+    "access": "Acceso",
+    "login": "Iniciar Sesión",
+    "register": "Registrarse",
+    "dashboard": "Dashboard",
+    "copyright": "© 2026 PROCUREDATA. Todos los derechos reservados.",
+    "poweredBy": "Powered by Pontus-X & Gaia-X",
+    "idsaCompliant": "IDSA Compliant",
+    "viewTechnicalDoc": "Ver Documento Técnico Completo",
+    "enterpriseCapabilities": "Documento Capacidades Enterprise"
   }
 }

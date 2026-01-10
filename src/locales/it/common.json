@@ -26,5 +26,14 @@
   "demoAccess": "Accesso Demo",
   "tryInteractiveDemo": "Prova la Demo Interattiva",
   "viewTechnicalDoc": "Vedi Documentazione Tecnica",
-  "partners": "Partner"
+  "partners": "Partner",
+  "wallet": {
+    "connected": "Portafoglio Connesso",
+    "connectedDesc": "Account attivo: {{address}}",
+    "connectionError": "Errore di connessione",
+    "unknownError": "Errore sconosciuto",
+    "disconnected": "Disconnesso",
+    "disconnectedDesc": "Hai chiuso la sessione del tuo wallet.",
+    "metamaskDisconnected": "Disconnessione rilevata in MetaMask"
+  }
 }

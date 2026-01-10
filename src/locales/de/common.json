@@ -26,5 +26,14 @@
   "demoAccess": "Demo-Zugang",
   "tryInteractiveDemo": "Interaktive Demo testen",
   "viewTechnicalDoc": "Technische Dokumentation anzeigen",
-  "partners": "Partner"
+  "partners": "Partner",
+  "wallet": {
+    "connected": "Wallet Verbunden",
+    "connectedDesc": "Aktives Konto: {{address}}",
+    "connectionError": "Verbindungsfehler",
+    "unknownError": "Unbekannter Fehler",
+    "disconnected": "Getrennt",
+    "disconnectedDesc": "Du hast die Sitzung deiner Wallet geschlossen.",
+    "metamaskDisconnected": "Trennung in MetaMask erkannt"
+  }
 }

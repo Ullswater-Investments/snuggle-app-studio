@@ -1,0 +1,39 @@
+{
+  "aeolus": {
+    "title": "PPA INSTANT SETTLEMENT",
+    "badgeActive": "Smart Contract Activo",
+    "instantSettlement": "Liquidación Instantánea",
+    "generation": "Generación",
+    "blockPayment": "Pago en Bloque",
+    "windSpeed": "Velocidad del Viento",
+    "ppaPrice": "Precio PPA Pactado",
+    "cashFlowBoost": "Mejora Flujo de Caja",
+    "financialCost": "-12% Coste Financiero",
+    "downloadCert": "Descargar Certificado PPA",
+    "units": {
+      "mwh": "MWh",
+      "ms": "m/s",
+      "eurMwh": "€/MWh",
+      "seconds": "segundos",
+      "days": "días"
+    },
+    "chart": {
+      "traditional": "Tradicional",
+      "smartContract": "Smart Contract"
+    },
+    "aria": {
+      "name": "ARIA",
+      "role": "Asesora de Energía Eólica",
+      "instantTitle": "Liquidación Instantánea",
+      "instantDesc": "Con viento a <strong>{{windSpeed}} m/s</strong> y precio PPA de <strong>{{price}}€/MWh</strong>, tu liquidación instantánea genera <strong>{{payout}} EUROe</strong> en el bloque actual.",
+      "waitTitle": "Eliminación de Espera",
+      "waitDesc": "El pago tradicional tarda <span>{{traditional}} días</span>. Con Smart Contract, recibes el pago en <strong>{{blockchain}} segundos</strong>, liberando capital instantáneamente.",
+      "projectionTitle": "Proyección Anual",
+      "projectionDesc": "Generación estimada: <strong>{{generation}} GWh/año</strong> con ingresos de <strong>{{revenue}} M€</strong>.",
+      "optimalWind": "Viento Óptimo",
+      "optimalWindDesc": "La velocidad actual está en el rango óptimo de la curva de potencia. El factor de capacidad supera el 35%, maximizando la rentabilidad del PPA.",
+      "ppaPremium": "PPA Premium",
+      "ppaPremiumDesc": "Tu precio PPA de {{price}}€/MWh está por encima del mercado. La certificación blockchain garantiza la trazabilidad de origen renovable, justificando el premium."
+    }
+  }
+}

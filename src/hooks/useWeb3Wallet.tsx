@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { pontusXService } from '@/services/pontusX';
 import type { WalletState } from '@/types/web3.types';
 import { toast } from 'sonner';
@@ -13,6 +14,7 @@ const INITIAL_STATE: WalletState = {
 };
 
 export const useWeb3Wallet = () => {
+  const { t } = useTranslation('common');
   const [wallet, setWallet] = useState<WalletState>(INITIAL_STATE);
   const [isConnecting, setIsConnecting] = useState(true);
   const [hasWeb3, setHasWeb3] = useState(false);
@@ -28,28 +30,30 @@ export const useWeb3Wallet = () => {
       const state = await pontusXService.connectWallet();
       setWallet(state);
       if (!silent) {
-        toast.success("Billetera Conectada", {
-          description: `Cuenta: ${state.address?.slice(0, 6)}...${state.address?.slice(-4)}`
+        toast.success(t('wallet.connected'), {
+          description: t('wallet.connectedDesc', { 
+            address: `${state.address?.slice(0, 6)}...${state.address?.slice(-4)}` 
+          })
         });
       }
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : "Error desconocido";
+      const message = error instanceof Error ? error.message : t('wallet.unknownError');
       console.error("Connection failed:", error);
       if (!silent) {
-        toast.error("Error al conectar", { description: message });
+        toast.error(t('wallet.connectionError'), { description: message });
       }
     } finally {
       setIsConnecting(false);
     }
-  }, []);
+  }, [t]);
 
   const disconnect = useCallback(() => {
     pontusXService.disconnect();
     setWallet(INITIAL_STATE);
-    toast.info("Desconectado", {
-      description: "Has cerrado la sesión de tu wallet."
+    toast.info(t('wallet.disconnected'), {
+      description: t('wallet.disconnectedDesc')
     });
-  }, []);
+  }, [t]);
 
   // Auto-connection and event listeners
   useEffect(() => {
@@ -83,7 +87,7 @@ export const useWeb3Wallet = () => {
         } else {
           // User disconnected from MetaMask
           setWallet(INITIAL_STATE);
-          toast.info("Desconexión detectada en MetaMask");
+          toast.info(t('wallet.metamaskDisconnected'));
         }
       };
 
@@ -101,7 +105,7 @@ export const useWeb3Wallet = () => {
         window.ethereum?.removeListener('chainChanged', handleChainChanged);
       };
     }
-  }, [connect]);
+  }, [connect, t]);
 
   return { 
     wallet, 
