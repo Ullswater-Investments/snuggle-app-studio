@@ -1,0 +1,140 @@
+{
+  "brand": "PROCUREDATA",
+  "tagline": "O Mercado Soberano de Dados Industriais",
+  "subtitle": "Plataforma B2B de compartilhamento e monetização de dados compatível com GAIA-X. Conecte, troque e crie valor com seus dados industriais.",
+  "partners": "Parceiros",
+  "nav": {
+    "features": "Funcionalidades",
+    "businessModels": "Modelos de Negócio",
+    "useCases": "Casos de Uso",
+    "architecture": "Arquitetura"
+  },
+  "cta": {
+    "accessDemo": "Acessar Demo",
+    "login": "Entrar",
+    "documentation": "Documentação",
+    "learnMore": "Saiba mais",
+    "seeAllUseCases": "Ver todos os casos de uso",
+    "seeBusinessModels": "Ver modelos de negócio",
+    "seeArchitecture": "Ver arquitetura",
+    "tryLiveDemo": "Experimentar demo ao vivo"
+  },
+  "demoLinks": {
+    "innovationLab": "Innovation Lab",
+    "innovationLabDesc": "Mais de 25 linhas de negócios futuras",
+    "dataCatalog": "Catálogo de Dados",
+    "dataCatalogDesc": "Marketplace federado 10x10",
+    "successStories": "Casos de Sucesso",
+    "successStoriesDesc": "47 histórias com simuladores",
+    "liveDemo": "Demo ao Vivo",
+    "liveDemoDesc": "Teste a plataforma completa"
+  },
+  "features": {
+    "title": "Plataforma Completa de Dados",
+    "subtitle": "Infraestrutura de nível empresarial para compartilhamento soberano de dados com conformidade GAIA-X integrada",
+    "items": {
+      "gaiaXCompliance": {
+        "title": "Conformidade GAIA-X",
+        "description": "Total conformidade com os padrões europeus de espaços de dados incluindo identidade auto-soberana e catálogos federados."
+      },
+      "sovereignExchange": {
+        "title": "Troca Soberana",
+        "description": "Mantenha controle total dos seus dados com o modelo tripartido: Titular, Sujeito e Consumidor claramente definidos."
+      },
+      "smartContracts": {
+        "title": "Contratos Inteligentes",
+        "description": "Acordos automatizados em PontusX com políticas ODRL para controle de acesso e monetização."
+      },
+      "aiInsights": {
+        "title": "Insights de IA",
+        "description": "ARIA, sua assistente de IA para navegar dados, gerar relatórios e otimizar decisões."
+      },
+      "realTimeAnalytics": {
+        "title": "Análise em Tempo Real",
+        "description": "Dashboards ao vivo com métricas ESG, rastreabilidade blockchain e alertas preditivos."
+      },
+      "erpIntegration": {
+        "title": "Integração ERP",
+        "description": "Conectores nativos para SAP, Oracle, Microsoft Dynamics e sistemas industriais."
+      }
+    }
+  },
+  "categories": {
+    "web3": "Web3 & Blockchain",
+    "realtime": "Tempo Real",
+    "ai": "Inteligência Artificial",
+    "compliance": "Conformidade",
+    "integration": "Integração",
+    "security": "Segurança"
+  },
+  "useCases": {
+    "title": "Casos de Uso por Setor",
+    "subtitle": "Descubra como o PROCUREDATA transforma o compartilhamento de dados em diferentes indústrias",
+    "agriculture": {
+      "title": "Agricultura & Alimentação",
+      "description": "Rastreabilidade do campo à mesa com certificação de origem e dados ESG."
+    },
+    "energy": {
+      "title": "Energia & Utilities",
+      "description": "PPAs inteligentes, certificados de energia renovável e contabilidade de carbono."
+    },
+    "manufacturing": {
+      "title": "Manufatura",
+      "description": "Passaportes digitais de produtos, economia circular e rastreabilidade de fornecedores."
+    },
+    "logistics": {
+      "title": "Logística & Transporte",
+      "description": "Rastreamento em tempo real, emissões Scope 3 e otimização de frota."
+    },
+    "finance": {
+      "title": "Finanças & Seguros",
+      "description": "Scoring ESG, verificação KYC/KYB e conformidade regulatória."
+    },
+    "publicSector": {
+      "title": "Setor Público",
+      "description": "Cidades inteligentes, dados abertos e interoperabilidade entre administrações."
+    }
+  },
+  "businessModels": {
+    "title": "Modelos de Negócio Flexíveis",
+    "subtitle": "Escolha como monetizar e compartilhar seus dados",
+    "subscription": {
+      "title": "Assinatura",
+      "description": "Acesso recorrente a dados com atualizações automáticas."
+    },
+    "payPerUse": {
+      "title": "Pagamento por Uso",
+      "description": "Pague apenas pelos dados que você consome."
+    },
+    "dataExchange": {
+      "title": "Troca de Dados",
+      "description": "Troca de dados entre organizações sem pagamento monetário."
+    },
+    "consortium": {
+      "title": "Consórcio",
+      "description": "Espaços de dados compartilhados entre múltiplos participantes."
+    }
+  },
+  "architecture": {
+    "title": "Arquitetura Técnica",
+    "subtitle": "Infraestrutura de nível empresarial construída sobre padrões abertos",
+    "layers": {
+      "presentation": "Camada de Apresentação",
+      "business": "Lógica de Negócio",
+      "data": "Camada de Dados",
+      "infrastructure": "Infraestrutura"
+    }
+  },
+  "stats": {
+    "organizations": "Organizações",
+    "dataProducts": "Produtos de Dados",
+    "transactions": "Transações",
+    "countries": "Países"
+  },
+  "footer": {
+    "copyright": "© 2024 PROCUREDATA. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso",
+    "contact": "Contato"
+  }
+}
