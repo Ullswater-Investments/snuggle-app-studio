@@ -1,0 +1,100 @@
+{
+  "pageTitle": "Innovatielab",
+  "pageBadge": "BETA",
+  "pageDescription": "Experimentele omgeving voor scenariosimulatie en data-audit met AI.",
+  "tabs": {
+    "concepts": "O&O Concepten",
+    "simulator": "Simulator",
+    "aiAuditor": "AI-Auditor",
+    "insights": "Insights"
+  },
+  "searchPlaceholder": "Concepten zoeken...",
+  "categories": {
+    "all": "Alle",
+    "ai": "AI",
+    "blockchain": "Blockchain",
+    "iot": "IoT",
+    "sustainability": "Duurzaamheid"
+  },
+  "emptyState": {
+    "title": "Geen concepten gevonden",
+    "description": "Er zijn nog geen innovatieconcepten geregistreerd"
+  },
+  "simulator": {
+    "title": "Scenario Simulator",
+    "description": "Pas de parameters aan om projecties te bekijken",
+    "demandFactor": "Vraagfactor",
+    "supplyVolatility": "Leveringsvolatiliteit",
+    "innovationImpact": "Innovatie-impact",
+    "projection": "Projectie",
+    "safetyLimit": "Veiligheidsgrens",
+    "maxCapacity": "Max Capaciteit"
+  },
+  "contractSteps": {
+    "step1Title": "Overeenkomst Ondertekening",
+    "step1Desc": "Digitaal ondertekend leveringscontract",
+    "step2Title": "Orakel Validatie",
+    "step2Desc": "Verificatie van externe voorwaarden",
+    "step3Title": "Trigger Geactiveerd",
+    "step3Desc": "Boeteclausule beoordeeld",
+    "step4Title": "Betalingsafwikkeling",
+    "step4Desc": "Automatisch uitgevoerde overboeking"
+  },
+  "smartContract": {
+    "title": "Smart Contract Executor",
+    "description": "Visualiseer de uitvoeringsstroom van slimme contracten",
+    "startSimulation": "Simulatie Starten",
+    "simulating": "Simuleren..."
+  },
+  "sentinel": {
+    "title": "Contract Sentinel",
+    "description": "AI-risicoanalyse in contracten",
+    "uploadContract": "Contract Uploaden",
+    "analyzing": "Analyseren...",
+    "scanComplete": "Analyse Voltooid",
+    "riskScore": "Risicoscore",
+    "criticalClause": "Misbruikelijke Boeteclausule",
+    "ambiguousTerms": "Onduidelijkheid in Betalingsvoorwaarden",
+    "standardClause": "Standaard Overmachtsclausule",
+    "critical": "Kritiek",
+    "warning": "Waarschuwing",
+    "info": "Info"
+  },
+  "auditor": {
+    "title": "Kwaliteitsaudit",
+    "description": "AI-data-integriteitsanalyse",
+    "startAudit": "AI-Audit Starten",
+    "analyzing": "Analyseren...",
+    "qualityScore": "Kwaliteitsscore",
+    "dataIntegrity": "Data-integriteit",
+    "gdprCompliance": "AVG-Naleving",
+    "schemaValidation": "Schema-validatie",
+    "freshness": "Data-actualiteit"
+  },
+  "radar": {
+    "title": "Technologieradar",
+    "description": "Vergelijking met sectorleiders",
+    "yourCompany": "Uw Bedrijf",
+    "sectorLeader": "Sectorleider",
+    "innovationLevel": "Innovatieniveau"
+  },
+  "prioritization": {
+    "title": "Prioriteringsmatrix",
+    "description": "Inspanning vs Impact van initiatieven",
+    "effort": "Inspanning",
+    "impact": "Impact",
+    "quickWins": "Quick Wins",
+    "strategic": "Strategisch"
+  },
+  "toast": {
+    "aiAnalysisComplete": "Kunstmatige Intelligentie-analyse voltooid",
+    "contractExecuted": "Contract succesvol uitgevoerd",
+    "allStepsValidated": "Alle stappen van het Smart Contract zijn gevalideerd.",
+    "scanComplete": "Analyse voltooid: {{count}} waarschuwingen gedetecteerd"
+  },
+  "concept": {
+    "maturity": "Rijpheid",
+    "viewDetails": "Details bekijken",
+    "businessImpact": "Zakelijke Impact"
+  }
+}

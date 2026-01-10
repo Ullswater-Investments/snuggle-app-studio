@@ -1,0 +1,74 @@
+{
+  "pageTitle": "Unternehmensnachhaltigkeit",
+  "pageDescription": "CO₂-Fußabdruck und ESG-Metriken für {{orgName}}",
+  "newReport": "Neuer Jahresbericht",
+  "dialog": {
+    "title": "ESG-Metriken Registrieren",
+    "description": "Geben Sie die Emissions- und Energiedaten für das Geschäftsjahr ein.",
+    "reportYear": "Berichtsjahr",
+    "scope1": "Scope 1 (tCO2e)",
+    "scope2": "Scope 2 (tCO2e)",
+    "renewablePercent": "% Erneuerbare Energie",
+    "saving": "Speichern...",
+    "save": "Bericht Speichern"
+  },
+  "tabs": {
+    "overview": "Übersicht",
+    "scope3": "Scope 3 (Lieferkette)",
+    "trends": "Trends",
+    "history": "Verlauf"
+  },
+  "kpis": {
+    "scope1": "Scope 1",
+    "scope1Desc": "Direkte Emissionen",
+    "scope2": "Scope 2",
+    "scope2Desc": "Eingekaufter Strom",
+    "scope3": "Scope 3",
+    "scope3Desc": "{{count}} Lieferanten",
+    "total": "Gesamt",
+    "year": "Jahr {{year}}"
+  },
+  "scope3Section": {
+    "title": "Scope 3 Emissionen - Lieferkette",
+    "description": "Indirekte Emissionen Ihrer Datenlieferanten",
+    "noSuppliers": "Keine Lieferantendaten",
+    "noSuppliersDesc": "Sie haben noch keine abgeschlossenen Transaktionen mit Lieferanten, die ESG-Daten melden.",
+    "supplier": "Lieferant",
+    "emissions": "Emissionen (tCO2e)",
+    "renewable": "% Erneuerbar",
+    "yourContribution": "Ihr Beitrag zu Scope 3"
+  },
+  "trends": {
+    "title": "Emissionsentwicklung",
+    "description": "Historischer Trend des CO₂-Fußabdrucks",
+    "totalLabel": "Gesamt (tCO2e)",
+    "renewableLabel": "% Erneuerbar"
+  },
+  "history": {
+    "title": "Historische Berichte",
+    "description": "Alle ESG-Berichte Ihrer Organisation",
+    "year": "Jahr",
+    "certifications": "Zertifizierungen"
+  },
+  "emptyState": {
+    "title": "Keine Nachhaltigkeitsdaten",
+    "description": "Beginnen Sie mit der Verfolgung Ihres CO₂-Fußabdrucks, indem Sie Ihren ersten Jahresbericht hinzufügen.",
+    "cta": "Ersten Bericht Erstellen"
+  },
+  "toast": {
+    "reportSaved": "ESG-Bericht erfolgreich gespeichert",
+    "duplicateYear": "Für das ausgewählte Jahr existiert bereits ein Bericht.",
+    "error": "Fehler beim Speichern des Berichts: {{message}}"
+  },
+  "badges": {
+    "renewableLeader": "Erneuerbare-Führer",
+    "energyTransition": "Energiewende",
+    "multiCertified": "Mehrfach Zertifiziert",
+    "cleanChain": "Saubere Lieferkette",
+    "iso14001": "ISO 14001"
+  },
+  "currentReport": {
+    "title": "Aktueller Bericht ({{year}})",
+    "description": "Executive Summary der Umweltauswirkungen"
+  }
+}

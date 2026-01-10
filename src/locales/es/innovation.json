@@ -1,0 +1,100 @@
+{
+  "pageTitle": "Innovation Lab",
+  "pageBadge": "BETA",
+  "pageDescription": "Entorno experimental para simulación de escenarios y auditoría de datos mediante IA.",
+  "tabs": {
+    "concepts": "Conceptos I+D",
+    "simulator": "Simulador",
+    "aiAuditor": "AI Auditor",
+    "insights": "Insights"
+  },
+  "searchPlaceholder": "Buscar conceptos...",
+  "categories": {
+    "all": "Todos",
+    "ai": "IA",
+    "blockchain": "Blockchain",
+    "iot": "IoT",
+    "sustainability": "Sostenibilidad"
+  },
+  "emptyState": {
+    "title": "No se encontraron conceptos",
+    "description": "Aún no hay conceptos de innovación registrados"
+  },
+  "simulator": {
+    "title": "Simulador de Escenarios",
+    "description": "Ajusta los parámetros para ver las proyecciones",
+    "demandFactor": "Factor de Demanda",
+    "supplyVolatility": "Volatilidad de Suministro",
+    "innovationImpact": "Impacto de Innovación",
+    "projection": "Proyección",
+    "safetyLimit": "Límite Seguridad",
+    "maxCapacity": "Capacidad Máx"
+  },
+  "contractSteps": {
+    "step1Title": "Firma de Acuerdo",
+    "step1Desc": "Contrato de suministro firmado digitalmente",
+    "step2Title": "Validación Oráculo",
+    "step2Desc": "Verificación de condiciones externas",
+    "step3Title": "Trigger Activado",
+    "step3Desc": "Cláusula de penalización evaluada",
+    "step4Title": "Liquidación de Pagos",
+    "step4Desc": "Transferencia ejecutada automáticamente"
+  },
+  "smartContract": {
+    "title": "Smart Contract Executor",
+    "description": "Visualiza el flujo de ejecución de contratos inteligentes",
+    "startSimulation": "Iniciar Simulación",
+    "simulating": "Simulando..."
+  },
+  "sentinel": {
+    "title": "Contract Sentinel",
+    "description": "Análisis de riesgos en contratos mediante IA",
+    "uploadContract": "Subir Contrato",
+    "analyzing": "Analizando...",
+    "scanComplete": "Análisis Completo",
+    "riskScore": "Puntuación de Riesgo",
+    "criticalClause": "Cláusula de Penalización Abusiva",
+    "ambiguousTerms": "Ambigüedad en Términos de Pago",
+    "standardClause": "Cláusula de Fuerza Mayor Estándar",
+    "critical": "Crítico",
+    "warning": "Advertencia",
+    "info": "Info"
+  },
+  "auditor": {
+    "title": "Auditoría de Calidad",
+    "description": "Análisis de integridad de datos con IA",
+    "startAudit": "Iniciar Auditoría AI",
+    "analyzing": "Analizando...",
+    "qualityScore": "Puntuación de Calidad",
+    "dataIntegrity": "Integridad de Datos",
+    "gdprCompliance": "Cumplimiento GDPR",
+    "schemaValidation": "Validación de Esquema",
+    "freshness": "Frescura de Datos"
+  },
+  "radar": {
+    "title": "Radar Tecnológico",
+    "description": "Comparación con líderes del sector",
+    "yourCompany": "Tu Empresa",
+    "sectorLeader": "Líder del Sector",
+    "innovationLevel": "Nivel de Innovación"
+  },
+  "prioritization": {
+    "title": "Matriz de Priorización",
+    "description": "Esfuerzo vs Impacto de iniciativas",
+    "effort": "Esfuerzo",
+    "impact": "Impacto",
+    "quickWins": "Quick Wins",
+    "strategic": "Estratégico"
+  },
+  "toast": {
+    "aiAnalysisComplete": "Análisis de Inteligencia Artificial completado",
+    "contractExecuted": "Contrato ejecutado exitosamente",
+    "allStepsValidated": "Todos los pasos del Smart Contract han sido validados.",
+    "scanComplete": "Análisis completado: {{count}} alertas detectadas"
+  },
+  "concept": {
+    "maturity": "Madurez",
+    "viewDetails": "Ver detalles",
+    "businessImpact": "Impacto de Negocio"
+  }
+}

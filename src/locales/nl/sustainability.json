@@ -1,0 +1,74 @@
+{
+  "pageTitle": "Bedrijfsduurzaamheid",
+  "pageDescription": "Beheer van CO₂-voetafdruk en ESG-statistieken voor {{orgName}}",
+  "newReport": "Nieuw Jaarrapport",
+  "dialog": {
+    "title": "ESG-Statistieken Registreren",
+    "description": "Voer de emissie- en energiegegevens in voor het fiscale jaar.",
+    "reportYear": "Rapportjaar",
+    "scope1": "Scope 1 (tCO2e)",
+    "scope2": "Scope 2 (tCO2e)",
+    "renewablePercent": "% Hernieuwbare Energie",
+    "saving": "Opslaan...",
+    "save": "Rapport Opslaan"
+  },
+  "tabs": {
+    "overview": "Overzicht",
+    "scope3": "Scope 3 (Keten)",
+    "trends": "Trends",
+    "history": "Geschiedenis"
+  },
+  "kpis": {
+    "scope1": "Scope 1",
+    "scope1Desc": "Directe emissies",
+    "scope2": "Scope 2",
+    "scope2Desc": "Ingekochte elektriciteit",
+    "scope3": "Scope 3",
+    "scope3Desc": "{{count}} leveranciers",
+    "total": "Totaal",
+    "year": "Jaar {{year}}"
+  },
+  "scope3Section": {
+    "title": "Scope 3 Emissies - Toeleveringsketen",
+    "description": "Indirecte emissies van uw dataleveranciers",
+    "noSuppliers": "Geen leveranciersgegevens",
+    "noSuppliersDesc": "U heeft nog geen voltooide transacties met leveranciers die ESG-gegevens rapporteren.",
+    "supplier": "Leverancier",
+    "emissions": "Emissies (tCO2e)",
+    "renewable": "% Hernieuwbaar",
+    "yourContribution": "Uw Bijdrage aan Scope 3"
+  },
+  "trends": {
+    "title": "Emissie-evolutie",
+    "description": "Historische trend van CO₂-voetafdruk",
+    "totalLabel": "Totaal (tCO2e)",
+    "renewableLabel": "% Hernieuwbaar"
+  },
+  "history": {
+    "title": "Historische Rapporten",
+    "description": "Alle ESG-rapporten van uw organisatie",
+    "year": "Jaar",
+    "certifications": "Certificeringen"
+  },
+  "emptyState": {
+    "title": "Geen duurzaamheidsgegevens",
+    "description": "Begin met het bijhouden van uw CO₂-voetafdruk door uw eerste jaarrapport toe te voegen.",
+    "cta": "Eerste Rapport Maken"
+  },
+  "toast": {
+    "reportSaved": "ESG-rapport succesvol opgeslagen",
+    "duplicateYear": "Er bestaat al een rapport voor het geselecteerde jaar.",
+    "error": "Fout bij het opslaan van het rapport: {{message}}"
+  },
+  "badges": {
+    "renewableLeader": "Hernieuwbare Leider",
+    "energyTransition": "Energietransitie",
+    "multiCertified": "Meervoudig Gecertificeerd",
+    "cleanChain": "Schone Keten",
+    "iso14001": "ISO 14001"
+  },
+  "currentReport": {
+    "title": "Huidig Rapport ({{year}})",
+    "description": "Uitvoerend overzicht van milieu-impact"
+  }
+}
