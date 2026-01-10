@@ -1,12 +1,14 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Download, FileText, Menu, X } from 'lucide-react';
+import { Home, Download, FileText, Menu, X, FileDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
+import { generateTechnicalDocPDF } from '@/utils/generateTechnicalDocPDF';
 import docContent from '../../docs/DOCUMENTO_TECNICO.md?raw';
 
 interface TocItem {
@@ -73,6 +75,14 @@ export default function TechnicalDocs() {
     URL.revokeObjectURL(url);
   };
 
+  const handleDownloadPDF = () => {
+    toast.info("Generando PDF optimizado para impresión...");
+    setTimeout(() => {
+      generateTechnicalDocPDF();
+      toast.success("PDF generado correctamente");
+    }, 100);
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -99,6 +109,10 @@ export default function TechnicalDocs() {
           </div>
           
           <div className="flex items-center gap-2">
+            <Button variant="default" size="sm" onClick={handleDownloadPDF} className="hidden sm:flex">
+              <FileDown className="h-4 w-4 mr-2" />
+              Descargar PDF
+            </Button>
             <Button variant="outline" size="sm" onClick={handleDownload} className="hidden sm:flex">
               <Download className="h-4 w-4 mr-2" />
               Descargar MD
