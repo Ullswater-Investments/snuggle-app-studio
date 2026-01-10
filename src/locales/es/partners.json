@@ -1,0 +1,16 @@
+{
+  "pageTitle": "Partners",
+  "subtitle": "Ecosistema de colaboración estratégica",
+  "description": "La sección <strong>Partners</strong> de PROCUREDATA está dirigida a proyectos desarrollados en colaboración con nuestros partners estratégicos. Cada partner dispone de un espacio dedicado con funcionalidades específicas, proyectos exclusivos y acceso a datos compartidos bajo estrictos protocolos de gobernanza.",
+  "directory": "Directorio de Partners",
+  "accessProjects": "Acceder a proyectos",
+  "technicalDoc": "Doc Técnico",
+  "comingSoon": "Próximamente más partners",
+  "expandingEcosystem": "Estamos ampliando nuestro ecosistema",
+  "status": {
+    "active": "activo"
+  },
+  "itbid": {
+    "description": "Plataforma líder de licitaciones y contratación pública. Colaboración estratégica para proyectos de datos en el sector público."
+  }
+}

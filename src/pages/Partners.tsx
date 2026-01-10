@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Handshake, ExternalLink, FileText } from "lucide-react";
 import itbidLogo from "@/assets/itbid-logo.png";
 
-const partners = [
-  {
-    id: "itbid",
-    name: "ITBID",
-    description: "Plataforma líder de licitaciones y contratación pública. Colaboración estratégica para proyectos de datos en el sector público.",
-    logo: itbidLogo,
-    link: "/partners/itbid/proyecto",
-    status: "activo",
-    projects: 3,
-  },
-];
-
 const Partners = () => {
+  const { t } = useTranslation('partners');
+
+  const partners = [
+    {
+      id: "itbid",
+      name: "ITBID",
+      description: t('itbid.description'),
+      logo: itbidLogo,
+      link: "/partners/itbid/proyecto",
+      status: t('status.active'),
+      projects: 3,
+    },
+  ];
+
   return (
     <div className="container mx-auto p-6 space-y-8">
       {/* Header */}
@@ -27,8 +30,8 @@ const Partners = () => {
             <Handshake className="h-8 w-8 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Partners</h1>
-            <p className="text-muted-foreground">Ecosistema de colaboración estratégica</p>
+            <h1 className="text-3xl font-bold">{t('pageTitle')}</h1>
+            <p className="text-muted-foreground">{t('subtitle')}</p>
           </div>
         </div>
       </div>
@@ -36,18 +39,16 @@ const Partners = () => {
       {/* Descripción */}
       <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
         <CardContent className="pt-6">
-          <p className="text-lg leading-relaxed">
-            La sección <span className="font-semibold text-primary">Partners</span> de PROCUREDATA está dirigida a 
-            proyectos desarrollados en colaboración con nuestros partners estratégicos. Cada partner dispone de un 
-            espacio dedicado con funcionalidades específicas, proyectos exclusivos y acceso a datos compartidos 
-            bajo estrictos protocolos de gobernanza.
-          </p>
+          <p 
+            className="text-lg leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: t('description') }}
+          />
         </CardContent>
       </Card>
 
       {/* Grid de Partners */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Directorio de Partners</h2>
+        <h2 className="text-xl font-semibold">{t('directory')}</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {partners.map((partner) => (
             <Card 
@@ -78,7 +79,7 @@ const Partners = () => {
               <CardFooter className="flex flex-col gap-2">
                 <Button asChild className="w-full group-hover:bg-primary/90">
                   <Link to={partner.link} className="flex items-center gap-2">
-                    Acceder a proyectos
+                    {t('accessProjects')}
                     <ExternalLink className="h-4 w-4" />
                   </Link>
                 </Button>
@@ -89,7 +90,7 @@ const Partners = () => {
                     className="w-full border-slate-300 text-slate-600 hover:bg-slate-100 hover:text-blue-600 hover:border-blue-400"
                   >
                     <Link to="/partners/itbid/doc-tecnico" className="flex items-center gap-2">
-                      Doc Técnico
+                      {t('technicalDoc')}
                       <FileText className="h-4 w-4" />
                     </Link>
                   </Button>
@@ -103,10 +104,10 @@ const Partners = () => {
             <CardContent className="flex flex-col items-center justify-center h-full min-h-[280px] text-center">
               <Handshake className="h-12 w-12 text-muted-foreground/50 mb-4" />
               <p className="text-muted-foreground">
-                Próximamente más partners
+                {t('comingSoon')}
               </p>
               <p className="text-sm text-muted-foreground/70 mt-1">
-                Estamos ampliando nuestro ecosistema
+                {t('expandingEcosystem')}
               </p>
             </CardContent>
           </Card>
