@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 export default function GobernanzaODRL() {
   const [permissions, setPermissions] = useState({
@@ -61,7 +62,7 @@ export default function GobernanzaODRL() {
           <div className="flex items-center gap-2">
             <GlobalNavigation />
             <Link to="/" className="hover:opacity-80 transition-opacity">
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
             </Link>
           </div>
           <Badge variant="outline" className="border-blue-500 text-blue-600">Soberanía SaaS</Badge>

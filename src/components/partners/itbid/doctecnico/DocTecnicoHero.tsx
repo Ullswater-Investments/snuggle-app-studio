@@ -4,6 +4,7 @@ import { FadeIn } from "@/components/AnimatedSection";
 import { Shield, Globe, FileText, Building2 } from "lucide-react";
 import itbidLogo from "@/assets/itbid-logo.png";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 const federationDiagram = `
 graph LR
@@ -84,7 +85,7 @@ export const DocTecnicoHero = () => {
           <div className="text-center mb-12">
             {/* Dual Branding */}
             <div className="flex items-center justify-center gap-6 mb-8">
-              <span className="text-2xl md:text-3xl font-bold procuredata-gradient">PROCUREDATA</span>
+              <ProcuredataLogo size="lg" />
               <span className="text-3xl text-muted-foreground">×</span>
               <img src={itbidLogo} alt="itbid" className="h-10 md:h-12 object-contain" />
             </div>

@@ -11,6 +11,7 @@ import { CommandMenu } from "@/components/CommandMenu";
 import { NotificationsBell } from "@/components/NotificationsBell";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Search } from "lucide-react";
@@ -33,7 +34,7 @@ export const AppLayout = () => {
               <SidebarTrigger />
               <GlobalNavigation />
               <Link to="/" className="hover:opacity-80 transition-opacity">
-                <span className="text-xl font-bold procuredata-gradient">PROCUREDATA</span>
+                <ProcuredataLogo size="md" />
               </Link>
               
               <div className="ml-auto flex items-center gap-2">

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import itbidLogo from "@/assets/itbid-logo.png";
 import { DemoSchedulerDialog } from "./DemoSchedulerDialog";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 const actions = [
   {
@@ -56,7 +57,7 @@ export const DocCTA = () => {
           <div className="text-center mb-12">
             {/* Dual Logos */}
             <div className="flex items-center justify-center gap-6 mb-8">
-              <span className="text-2xl font-bold procuredata-gradient">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
               <span className="text-3xl text-muted-foreground">×</span>
               <img src={itbidLogo} alt="itbid" className="h-10 object-contain" />
             </div>

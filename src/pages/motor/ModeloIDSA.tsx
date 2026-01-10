@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 export default function ModeloIDSA() {
   const roles = [
@@ -60,7 +61,7 @@ export default function ModeloIDSA() {
           <div className="flex items-center gap-2">
             <GlobalNavigation />
             <Link to="/" className="hover:opacity-80 transition-opacity">
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
             </Link>
           </div>
           <Badge variant="outline" className="border-red-500 text-red-600">Compute-to-Data</Badge>

@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { FadeIn, SlideUp, ScaleIn, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 import { FundingFooter } from "@/components/FundingFooter";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -117,8 +118,8 @@ const Index = () => {
             </FadeIn>
 
             <SlideUp delay={0.2}>
-              <motion.h1 style={{ y: yTitle }} className="text-4xl md:text-6xl font-bold text-foreground leading-tight">
-                <span className="procuredata-gradient">PROCUREDATA</span>
+              <motion.h1 style={{ y: yTitle }} className="text-4xl md:text-6xl font-bold text-foreground leading-tight flex justify-center">
+                <ProcuredataLogo size="xl" />
               </motion.h1>
             </SlideUp>
 
@@ -378,8 +379,8 @@ const Index = () => {
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
             <SlideUp>
               <div className="space-y-6">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                  Comience a Usar <span className="procuredata-gradient">PROCUREDATA</span>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground flex items-center gap-3 flex-wrap">
+                  Comience a Usar <ProcuredataLogo size="lg" showIcon={false} />
                 </h2>
                 <p className="text-lg text-muted-foreground">
                   Cree su cuenta o acceda al sistema para comenzar a gestionar transacciones de datos de forma segura y
@@ -498,7 +499,7 @@ const Index = () => {
             <StaggerItem>
               <div className="space-y-4">
                 <h3 className="font-bold text-foreground text-lg">
-                  <span className="procuredata-gradient">PROCUREDATA</span>
+                  <ProcuredataLogo size="sm" />
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   Espacio de Datos para la Función de Compras. Solución al problema 'nxm' en el alta de proveedores.
@@ -556,8 +557,7 @@ const Index = () => {
               <div className="space-y-4">
                 <h4 className="font-semibold text-foreground">Contacto</h4>
                 <p className="text-sm text-muted-foreground">
-                  Para más información sobre <span className="procuredata-gradient">PROCUREDATA</span> y sus
-                  capacidades.
+                  Para más información sobre Procuredata y sus capacidades.
                 </p>
               </div>
             </StaggerItem>
@@ -565,8 +565,8 @@ const Index = () => {
 
           <FadeIn delay={0.2}>
             <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-              <p>
-                &copy; {new Date().getFullYear()} <span className="procuredata-gradient">PROCUREDATA</span>. Espacio de Datos para la Función de Compras.
+              <p className="flex items-center justify-center gap-2">
+                &copy; {new Date().getFullYear()} <ProcuredataLogo size="sm" showIcon={false} />. Espacio de Datos para la Función de Compras.
               </p>
             </div>
           </FadeIn>

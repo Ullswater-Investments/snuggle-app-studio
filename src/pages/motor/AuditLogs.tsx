@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 export default function AuditLogs() {
   const logs = [
@@ -37,7 +38,7 @@ export default function AuditLogs() {
           <div className="flex items-center gap-2">
             <GlobalNavigation />
             <Link to="/" className="hover:opacity-80 transition-opacity">
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
             </Link>
           </div>
           <Badge variant="outline" className="border-green-500 text-green-600">Auditoría Blockchain</Badge>

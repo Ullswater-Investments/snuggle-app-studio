@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Zap, Shield, Clock } from "lucide-react";
 import itbidLogo from "@/assets/itbid-logo.png";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 const metrics = [
   { value: "-85%", label: "Fricción en intercambio", icon: Zap, color: "text-[hsl(var(--itbid-cyan))]" },
@@ -28,7 +29,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="flex items-center justify-center gap-6 mb-8"
         >
-          <span className="text-2xl font-bold procuredata-gradient">PROCUREDATA</span>
+          <ProcuredataLogo size="md" />
           <span className="text-3xl text-muted-foreground">×</span>
           <img src={itbidLogo} alt="itbid" className="h-10 object-contain" />
         </motion.div>

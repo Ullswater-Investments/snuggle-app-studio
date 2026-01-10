@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 const MOCK_EVENTS = [
   { type: "success", message: "Proveedor Agro-Z ha renovado Certificado GLOBALG.A.P.", time: "hace 2s" },
@@ -49,7 +50,7 @@ export default function ActivityFeed() {
           <div className="flex items-center gap-2">
             <GlobalNavigation />
             <Link to="/" className="hover:opacity-80 transition-opacity">
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
             </Link>
           </div>
           <Badge variant="outline" className="border-blue-500 text-blue-400">Tiempo Real</Badge>

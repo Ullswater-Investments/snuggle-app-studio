@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 export default function TourGuiado() {
   const tourSteps = [
@@ -22,7 +23,7 @@ export default function TourGuiado() {
           <div className="flex items-center gap-2">
             <GlobalNavigation />
             <Link to="/" className="hover:opacity-80 transition-opacity">
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
             </Link>
           </div>
           <Badge variant="outline" className="border-teal-500 text-teal-400">Experiencia UX</Badge>

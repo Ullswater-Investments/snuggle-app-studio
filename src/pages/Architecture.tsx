@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import DataLineageBlockchain from "@/components/DataLineageBlockchain";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 // Tab definitions
 const TABS = [
@@ -343,8 +344,7 @@ export default function Architecture() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <Home className="h-4 w-4 text-muted-foreground" />
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+              <ProcuredataLogo size="md" />
             </Link>
             <div className="flex items-center gap-3">
               <h1 className="font-bold text-xl hidden sm:inline">| Arquitectura Técnica</h1>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, FileText } from "lucide-react";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 export default function UserGuide() {
   const documents = [
@@ -28,8 +29,7 @@ export default function UserGuide() {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Home className="h-4 w-4 text-muted-foreground" />
-            <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
+            <ProcuredataLogo size="md" />
           </Link>
         </div>
         
