@@ -1,140 +1,117 @@
 {
   "brand": "PROCUREDATA",
-  "tagline": "Il Mercato Sovrano dei Dati Industriali",
-  "subtitle": "Piattaforma B2B per la condivisione e monetizzazione dei dati conforme a GAIA-X. Connetti, scambia e crea valore con i tuoi dati industriali.",
-  "partners": "Partner",
-  "nav": {
-    "features": "Funzionalità",
-    "businessModels": "Modelli di Business",
-    "useCases": "Casi d'Uso",
-    "architecture": "Architettura"
-  },
-  "cta": {
-    "accessDemo": "Accedi alla Demo",
-    "login": "Accedi",
-    "documentation": "Documentazione",
-    "learnMore": "Scopri di più",
-    "seeAllUseCases": "Vedi tutti i casi d'uso",
-    "seeBusinessModels": "Vedi modelli di business",
-    "seeArchitecture": "Vedi architettura",
-    "tryLiveDemo": "Prova la demo live"
-  },
+  "tagline": "Spazio Dati per la Funzione Acquisti",
+  "heroDescription": "Soluzione al problema 'nxm' nella registrazione fornitori attraverso identità condivise. Registrazione automatica nel tuo ERP da dati già validati da altri clienti.",
+  "version": "v3.1 Web3 Enabled",
+  "exploreEcosystem": "Esplora l'Ecosistema",
+  "exploreEcosystemDesc": "Accesso diretto ai moduli di dimostrazione con dati sintetici.",
+  "successCases": "CASI DI SUCCESSO",
+  "theEngine": "Il Motore di ProcureData",
+  "engineDesc": "12 capacità enterprise pronte per la produzione",
+  "web3Ecosystem": "Ecosistema di Valore Web3",
+  "web3EcosystemDesc": "Dalle commissioni per transazione al sandboxing IA. Scopri come PROCUREDATA abilita l'economia dei dati industriali.",
+  "monetizationModels": "6 Modelli di Monetizzazione",
+  "exploreModels": "Esplora Modelli",
+  "viewWhitepaper": "Vedi Whitepaper",
   "demoLinks": {
     "innovationLab": "Innovation Lab",
     "innovationLabDesc": "Oltre 25 linee di business future",
-    "dataCatalog": "Catalogo Dati",
-    "dataCatalogDesc": "Marketplace federato 10x10",
-    "successStories": "Casi di Successo",
-    "successStoriesDesc": "47 storie con simulatori",
-    "liveDemo": "Demo Live",
-    "liveDemoDesc": "Testa la piattaforma completa"
-  },
-  "features": {
-    "title": "Piattaforma Dati Completa",
-    "subtitle": "Infrastruttura enterprise per la condivisione sovrana dei dati con conformità GAIA-X integrata",
-    "items": {
-      "gaiaXCompliance": {
-        "title": "Conformità GAIA-X",
-        "description": "Piena conformità agli standard europei dei data space inclusa identità auto-sovrana e cataloghi federati."
-      },
-      "sovereignExchange": {
-        "title": "Scambio Sovrano",
-        "description": "Mantieni il controllo totale dei tuoi dati con il modello tripartito: Titolare, Soggetto e Consumatore chiaramente definiti."
-      },
-      "smartContracts": {
-        "title": "Smart Contract",
-        "description": "Accordi automatizzati su PontusX con policy ODRL per controllo accessi e monetizzazione."
-      },
-      "aiInsights": {
-        "title": "Insights IA",
-        "description": "ARIA, la tua assistente IA per navigare i dati, generare report e ottimizzare le decisioni."
-      },
-      "realTimeAnalytics": {
-        "title": "Analytics in Tempo Reale",
-        "description": "Dashboard live con metriche ESG, tracciabilità blockchain e alert predittivi."
-      },
-      "erpIntegration": {
-        "title": "Integrazione ERP",
-        "description": "Connettori nativi per SAP, Oracle, Microsoft Dynamics e sistemi industriali."
-      }
-    }
+    "catalog": "Catalogo Dati",
+    "catalogDesc": "Marketplace federato 10x10",
+    "sustainability": "Hub Sostenibilità",
+    "sustainabilityDesc": "Report ESG e Impronta di Carbonio",
+    "services": "Gestione Servizi",
+    "servicesDesc": "Algoritmi e Compute-to-Data"
   },
   "categories": {
     "web3": "Web3 & Blockchain",
     "realtime": "Tempo Reale",
-    "ai": "Intelligenza Artificiale",
-    "compliance": "Conformità",
-    "integration": "Integrazione",
-    "security": "Sicurezza"
+    "security": "Sicurezza",
+    "integrations": "Integrazioni",
+    "ux": "Esperienza UX"
   },
-  "useCases": {
-    "title": "Casi d'Uso per Settore",
-    "subtitle": "Scopri come PROCUREDATA trasforma la condivisione dati in diversi settori",
-    "agriculture": {
-      "title": "Agricoltura & Alimentare",
-      "description": "Tracciabilità dal campo alla tavola con certificazione di origine e dati ESG."
-    },
-    "energy": {
-      "title": "Energia & Utility",
-      "description": "PPA intelligenti, certificati di energia rinnovabile e contabilità carbonio."
-    },
-    "manufacturing": {
-      "title": "Manifattura",
-      "description": "Passaporti digitali di prodotto, economia circolare e tracciabilità fornitori."
-    },
-    "logistics": {
-      "title": "Logistica & Trasporti",
-      "description": "Tracciamento in tempo reale, emissioni Scope 3 e ottimizzazione flotta."
-    },
-    "finance": {
-      "title": "Finanza & Assicurazioni",
-      "description": "Scoring ESG, verifica KYC/KYB e conformità normativa."
-    },
-    "publicSector": {
-      "title": "Settore Pubblico",
-      "description": "Smart city, open data e interoperabilità tra amministrazioni."
-    }
+  "features": {
+    "walletWeb3": "Wallet Web3",
+    "walletWeb3Desc": "Connessione nativa con MetaMask e visualizzazione saldi.",
+    "identitySSI": "Identità SSI",
+    "identitySSIDesc": "DID (did:ethr) generati automaticamente.",
+    "paymentsEUROe": "Pagamenti EUROe",
+    "paymentsEUROeDesc": "Transazioni con stablecoin regolata su Pontus-X.",
+    "activityFeed": "Activity Feed",
+    "activityFeedDesc": "Sottoscrizione eventi contratto in tempo reale.",
+    "smartAlerts": "Smart Alerts",
+    "smartAlertsDesc": "Notifiche push critiche istantanee.",
+    "governanceODRL": "Governance ODRL",
+    "governanceODRLDesc": "Policy di accesso standardizzate.",
+    "multiTenantRLS": "Multi-Tenant RLS",
+    "multiTenantRLSDesc": "Isolamento totale dei dati a livello di riga.",
+    "auditLogs": "Audit Logs",
+    "auditLogsDesc": "Tracciabilità immutabile on-chain.",
+    "modelIDSA": "Modello IDSA",
+    "modelIDSADesc": "Consumer, Subject e Holder differenziati.",
+    "erpConnectors": "Connettori ERP",
+    "erpConnectorsDesc": "SAP, Oracle e Dynamics pronti.",
+    "edgeFunctions": "Edge Functions",
+    "edgeFunctionsDesc": "Logica serverless scalabile globalmente.",
+    "guidedTour": "Tour Guidato",
+    "guidedTourDesc": "Onboarding interattivo passo dopo passo.",
+    "interactiveDocs": "Docs Interattivi",
+    "interactiveDocsDesc": "Diagrammi di architettura in tempo reale."
   },
-  "businessModels": {
-    "title": "Modelli di Business Flessibili",
-    "subtitle": "Scegli come monetizzare e condividere i tuoi dati",
-    "subscription": {
-      "title": "Abbonamento",
-      "description": "Accesso ricorrente ai dati con aggiornamenti automatici."
-    },
-    "payPerUse": {
-      "title": "Pay-per-Use",
-      "description": "Paga solo per i dati che consumi."
-    },
-    "dataExchange": {
-      "title": "Scambio Dati",
-      "description": "Baratto di dati tra organizzazioni senza pagamento monetario."
-    },
-    "consortium": {
-      "title": "Consorzio",
-      "description": "Spazi dati condivisi tra più partecipanti."
-    }
+  "sectors": {
+    "industrial": "INDUSTRIALE",
+    "agro": "AGRO",
+    "mobility": "MOBILITÀ",
+    "social": "SOCIALE",
+    "health": "SALUTE",
+    "retail": "RETAIL",
+    "energy": "ENERGIA",
+    "aero": "AERO",
+    "wines": "VINI",
+    "pharma": "PHARMA",
+    "port": "PORTO",
+    "gov": "GOV",
+    "mining": "MINERARIO",
+    "fashion": "MODA",
+    "finance": "FINANZA",
+    "grid": "GRID"
   },
-  "architecture": {
-    "title": "Architettura Tecnica",
-    "subtitle": "Infrastruttura enterprise costruita su standard aperti",
-    "layers": {
-      "presentation": "Livello Presentazione",
-      "business": "Logica di Business",
-      "data": "Livello Dati",
-      "infrastructure": "Infrastruttura"
-    }
+  "nav": {
+    "features": "Funzionalità",
+    "businessModels": "Modelli di Business",
+    "useCases": "Casi d'Uso",
+    "architecture": "Architettura Tecnica"
   },
-  "stats": {
-    "organizations": "Organizzazioni",
-    "dataProducts": "Prodotti Dati",
-    "transactions": "Transazioni",
-    "countries": "Paesi"
+  "useCasesSection": {
+    "badge": "Versatilità Industriale",
+    "title": "Soluzioni Reali per la Supply Chain",
+    "description": "Dalla verifica dell'identità al finanziamento DeFi. Scopri come PROCUREDATA trasforma ogni anello."
   },
   "footer": {
-    "copyright": "© 2024 PROCUREDATA. Tutti i diritti riservati.",
-    "privacy": "Privacy Policy",
-    "terms": "Termini di Utilizzo",
-    "contact": "Contatti"
+    "tagline": "Spazio Dati per la Funzione Acquisti con tecnologia Web3.",
+    "platform": "Piattaforma",
+    "catalog": "Catalogo Dati",
+    "innovationLab": "Innovation Lab",
+    "sustainabilityHub": "Hub Sostenibilità",
+    "services": "Servizi",
+    "resources": "Risorse",
+    "technicalDocs": "Documentazione Tecnica",
+    "architecture": "Architettura",
+    "techWhitepaper": "Tech Whitepaper",
+    "ecosystemGuide": "Guida all'Ecosistema",
+    "transparency": "Trasparenza",
+    "technicalMemory": "Memoria Tecnica",
+    "governanceModel": "Modello di Governance",
+    "userGuide": "Guida Utente",
+    "businessPlan": "Piano di Business",
+    "access": "Accesso",
+    "login": "Accedi",
+    "register": "Registrati",
+    "dashboard": "Dashboard",
+    "copyright": "© 2026 PROCUREDATA. Tutti i diritti riservati.",
+    "poweredBy": "Powered by Pontus-X & Gaia-X",
+    "idsaCompliant": "IDSA Compliant",
+    "viewTechnicalDoc": "Vedi Documento Tecnico Completo",
+    "enterpriseCapabilities": "Documento Capacità Enterprise"
   }
 }

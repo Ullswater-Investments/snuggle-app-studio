@@ -39,49 +39,70 @@ const cardVariants = {
 };
 
 export default function Landing() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('landing');
+  const { t: tc } = useTranslation('common');
   const { user } = useAuth();
 
+  // Arrays DENTRO del componente para que se actualicen al cambiar idioma
   const demoLinks = [
-    { title: "Innovation Lab", icon: Zap, url: "/innovation", desc: "25+ Líneas de negocio futuras", color: "text-yellow-500" },
-    { title: "Catálogo de Datos", icon: Database, url: "/catalog", desc: "Marketplace federado 10x10", color: "text-blue-500" },
-    { title: "Hub Sostenibilidad", icon: Globe, url: "/sustainability", desc: "Reportes ESG y Huella de Carbono", color: "text-green-500" },
-    { title: "Gestión de Servicios", icon: Layers, url: "/services", desc: "Algoritmos y Compute-to-Data", color: "text-purple-500" },
+    { title: t('demoLinks.innovationLab'), icon: Zap, url: "/innovation", desc: t('demoLinks.innovationLabDesc'), color: "text-yellow-500" },
+    { title: t('demoLinks.catalog'), icon: Database, url: "/catalog", desc: t('demoLinks.catalogDesc'), color: "text-blue-500" },
+    { title: t('demoLinks.sustainability'), icon: Globe, url: "/sustainability", desc: t('demoLinks.sustainabilityDesc'), color: "text-green-500" },
+    { title: t('demoLinks.services'), icon: Layers, url: "/services", desc: t('demoLinks.servicesDesc'), color: "text-purple-500" },
   ];
 
   const FEATURES_DATA = {
     web3: [
-      { title: "Wallet Web3", desc: "Conexión nativa con MetaMask y visualización de balances.", icon: Wallet, color: "text-purple-400", path: "/motor/wallet-web3" },
-      { title: "Identidad SSI", desc: "DIDs (did:ethr) generados automáticamente.", icon: ShieldCheck, color: "text-purple-400", path: "/motor/identidad-ssi" },
-      { title: "Pagos EUROe", desc: "Transacciones con stablecoin regulada en Pontus-X.", icon: Coins, color: "text-purple-400", path: "/motor/pagos-euroe" }
+      { title: t('features.walletWeb3'), desc: t('features.walletWeb3Desc'), icon: Wallet, color: "text-purple-400", path: "/motor/wallet-web3" },
+      { title: t('features.identitySSI'), desc: t('features.identitySSIDesc'), icon: ShieldCheck, color: "text-purple-400", path: "/motor/identidad-ssi" },
+      { title: t('features.paymentsEUROe'), desc: t('features.paymentsEUROeDesc'), icon: Coins, color: "text-purple-400", path: "/motor/pagos-euroe" }
     ],
     realtime: [
-      { title: "Activity Feed", desc: "Suscripción a eventos de contrato en vivo.", icon: Radio, color: "text-blue-400", path: "/motor/activity-feed" },
-      { title: "Smart Alerts", desc: "Notificaciones push críticas instantáneas.", icon: Bell, color: "text-blue-400", path: "/motor/smart-alerts" }
+      { title: t('features.activityFeed'), desc: t('features.activityFeedDesc'), icon: Radio, color: "text-blue-400", path: "/motor/activity-feed" },
+      { title: t('features.smartAlerts'), desc: t('features.smartAlertsDesc'), icon: Bell, color: "text-blue-400", path: "/motor/smart-alerts" }
     ],
     security: [
-      { title: "Gobernanza ODRL", desc: "Políticas de acceso estandarizadas.", icon: Shield, color: "text-green-400", path: "/motor/gobernanza-odrl" },
-      { title: "Multi-Tenant RLS", desc: "Aislamiento total de datos a nivel de fila.", icon: Users, color: "text-green-400", path: "/motor/multi-tenant-rls" },
-      { title: "Audit Logs", desc: "Trazabilidad inmutable on-chain.", icon: FileText, color: "text-green-400", path: "/motor/audit-logs" },
-      { title: "Modelo IDSA", desc: "Consumer, Subject y Holder diferenciados.", icon: Triangle, color: "text-green-400", path: "/motor/modelo-idsa" }
+      { title: t('features.governanceODRL'), desc: t('features.governanceODRLDesc'), icon: Shield, color: "text-green-400", path: "/motor/gobernanza-odrl" },
+      { title: t('features.multiTenantRLS'), desc: t('features.multiTenantRLSDesc'), icon: Users, color: "text-green-400", path: "/motor/multi-tenant-rls" },
+      { title: t('features.auditLogs'), desc: t('features.auditLogsDesc'), icon: FileText, color: "text-green-400", path: "/motor/audit-logs" },
+      { title: t('features.modelIDSA'), desc: t('features.modelIDSADesc'), icon: Triangle, color: "text-green-400", path: "/motor/modelo-idsa" }
     ],
     integrations: [
-      { title: "Conectores ERP", desc: "SAP, Oracle y Dynamics listos.", icon: Plug, color: "text-orange-400", path: "/motor/conectores-erp" },
-      { title: "Edge Functions", desc: "Lógica serverless escalable globalmente.", icon: Zap, color: "text-orange-400", path: "/motor/edge-functions" }
+      { title: t('features.erpConnectors'), desc: t('features.erpConnectorsDesc'), icon: Plug, color: "text-orange-400", path: "/motor/conectores-erp" },
+      { title: t('features.edgeFunctions'), desc: t('features.edgeFunctionsDesc'), icon: Zap, color: "text-orange-400", path: "/motor/edge-functions" }
     ],
     ux: [
-      { title: "Tour Guiado", desc: "Onboarding interactivo paso a paso.", icon: HelpCircle, color: "text-teal-400", path: "/motor/tour-guiado" },
-      { title: "Docs Interactivos", desc: "Diagramas de arquitectura en vivo.", icon: BookOpen, color: "text-teal-400", path: "/motor/docs-interactivos" }
+      { title: t('features.guidedTour'), desc: t('features.guidedTourDesc'), icon: HelpCircle, color: "text-teal-400", path: "/motor/tour-guiado" },
+      { title: t('features.interactiveDocs'), desc: t('features.interactiveDocsDesc'), icon: BookOpen, color: "text-teal-400", path: "/motor/docs-interactivos" }
     ]
   };
 
   const CATEGORY_LABELS: Record<string, string> = {
-    web3: "Web3 & Blockchain",
-    realtime: "Tiempo Real",
-    security: "Seguridad",
-    integrations: "Integraciones",
-    ux: "Experiencia UX"
+    web3: t('categories.web3'),
+    realtime: t('categories.realtime'),
+    security: t('categories.security'),
+    integrations: t('categories.integrations'),
+    ux: t('categories.ux')
   };
+
+  const sectors = [
+    { label: t('sectors.industrial'), icon: BarChart3, color: 'text-rose-400', bgColor: 'bg-rose-50 dark:bg-rose-950/30', caseId: 'gigafactory-north' },
+    { label: t('sectors.agro'), icon: Wheat, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'olivetrust-coop' },
+    { label: t('sectors.mobility'), icon: Truck, color: 'text-teal-500', bgColor: 'bg-teal-50 dark:bg-teal-950/30', caseId: 'urbandeliver-bcn' },
+    { label: t('sectors.social'), icon: Heart, color: 'text-violet-500', bgColor: 'bg-violet-50 dark:bg-violet-950/30', caseId: 'alianza-social-hub' },
+    { label: t('sectors.health'), icon: HeartPulse, color: 'text-rose-500', bgColor: 'bg-rose-50 dark:bg-rose-950/30', caseId: 'biomed-hospital' },
+    { label: t('sectors.retail'), icon: ShoppingBag, color: 'text-blue-500', bgColor: 'bg-blue-50 dark:bg-blue-950/30', caseId: 'globalretail-prime' },
+    { label: t('sectors.energy'), icon: Zap, color: 'text-yellow-500', bgColor: 'bg-yellow-50 dark:bg-yellow-950/30', caseId: 'helios-fields' },
+    { label: t('sectors.aero'), icon: Send, color: 'text-cyan-500', bgColor: 'bg-cyan-50 dark:bg-cyan-950/30', caseId: 'turbine-chain' },
+    { label: t('sectors.wines'), icon: Wine, color: 'text-purple-600', bgColor: 'bg-purple-50 dark:bg-purple-950/30', caseId: 'vinosdoe-elite' },
+    { label: t('sectors.pharma'), icon: Pill, color: 'text-pink-400', bgColor: 'bg-pink-50 dark:bg-pink-950/30', caseId: 'pharmacold-logistix' },
+    { label: t('sectors.port'), icon: Ship, color: 'text-sky-500', bgColor: 'bg-sky-50 dark:bg-sky-950/30', caseId: 'portbcn-smart-trade' },
+    { label: t('sectors.gov'), icon: Landmark, color: 'text-amber-600', bgColor: 'bg-amber-50 dark:bg-amber-950/30', caseId: 'ayuntamiento-etico' },
+    { label: t('sectors.mining'), icon: Mountain, color: 'text-slate-500', bgColor: 'bg-slate-100 dark:bg-slate-950/30', caseId: 'purelithium-sourcing' },
+    { label: t('sectors.fashion'), icon: Shirt, color: 'text-orange-500', bgColor: 'bg-orange-50 dark:bg-orange-950/30', caseId: 'fastfashion-trace' },
+    { label: t('sectors.finance'), icon: DollarSign, color: 'text-green-500', bgColor: 'bg-green-50 dark:bg-green-950/30', caseId: 'greenfinance-esg' },
+    { label: t('sectors.grid'), icon: LayoutGrid, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'gridflex-demand' },
+  ];
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -89,22 +110,22 @@ export default function Landing() {
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl">
-            <span className="procuredata-gradient">PROCUREDATA</span>
+            <span className="procuredata-gradient">{t('brand')}</span>
             <Link to="/partners">
               <Badge variant="outline" className="text-xs hover:bg-primary/10 cursor-pointer transition-colors">Partners</Badge>
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <a href="#features" className="hover:text-primary">Funcionalidades</a>
-            <Link to="/models" className="hover:text-primary">Modelos de Negocio</Link>
-            <a href="#use-cases" className="hover:text-primary">Casos de Uso</a>
-            <Link to="/architecture" className="hover:text-primary">Arquitectura Técnica</Link>
+            <a href="#features" className="hover:text-primary">{t('nav.features')}</a>
+            <Link to="/models" className="hover:text-primary">{t('nav.businessModels')}</Link>
+            <a href="#use-cases" className="hover:text-primary">{t('nav.useCases')}</a>
+            <Link to="/architecture" className="hover:text-primary">{t('nav.architecture')}</Link>
             <Link 
               to="/success-stories" 
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
             >
               <Sparkles className="h-4 w-4" />
-              <span>CASOS DE ÉXITO</span>
+              <span>{t('successCases')}</span>
             </Link>
           </nav>
           <div className="flex items-center gap-4">
@@ -112,11 +133,11 @@ export default function Landing() {
             <ThemeToggle />
             {user ? (
               <Button asChild>
-                <Link to="/dashboard">{t('goToDashboard')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/dashboard">{tc('goToDashboard')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
             ) : (
               <Button asChild variant="hero">
-                <Link to="/auth">{t('demoAccess')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/auth">{tc('demoAccess')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
             )}
           </div>
@@ -128,27 +149,26 @@ export default function Landing() {
         <section className="py-20 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:bg-grid-slate-900/25 dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.5))]" />
           <div className="container relative mx-auto px-4 text-center max-w-4xl">
-            <Badge className="mb-4" variant="secondary">v3.1 Web3 Enabled</Badge>
+            <Badge className="mb-4" variant="secondary">{t('version')}</Badge>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              PROCUREDATA <br />
-              <span className="procuredata-gradient">Espacio de Datos para la Función de Compras</span>
+              {t('brand')} <br />
+              <span className="procuredata-gradient">{t('tagline')}</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Solución al problema 'nxm' en el alta de proveedores mediante identidades compartidas.
-              Alta automática en tu ERP a partir de datos ya validados por otros clientes.
+              {t('heroDescription')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" className="h-12 px-8 text-lg" asChild>
-                <Link to="/auth">Probar Demo Interactiva</Link>
+                <Link to="/auth">{tc('tryInteractiveDemo')}</Link>
               </Button>
               <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                <Link to="/docs/tecnico">Ver Memoria Técnica</Link>
+                <Link to="/docs/tecnico">{tc('viewTechnicalDoc')}</Link>
               </Button>
             </div>
 
             {/* CASOS DE ÉXITO - Menú de iconos por sector */}
             <div className="mt-10">
-              <h2 className="text-2xl md:text-3xl font-bold mb-5">CASOS DE ÉXITO</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-5">{t('successCases')}</h2>
               
               <motion.div 
                 className="flex flex-wrap justify-center gap-3 md:gap-4"
@@ -160,28 +180,9 @@ export default function Landing() {
                   visible: { transition: { staggerChildren: 0.05 } }
                 }}
               >
-                {[
-                  // Primera fila - 10 iconos
-                  { label: 'INDUSTRIAL', icon: BarChart3, color: 'text-rose-400', bgColor: 'bg-rose-50 dark:bg-rose-950/30', caseId: 'gigafactory-north' },
-                  { label: 'AGRO', icon: Wheat, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'olivetrust-coop' },
-                  { label: 'MOVILIDAD', icon: Truck, color: 'text-teal-500', bgColor: 'bg-teal-50 dark:bg-teal-950/30', caseId: 'urbandeliver-bcn' },
-                  { label: 'SOCIAL', icon: Heart, color: 'text-violet-500', bgColor: 'bg-violet-50 dark:bg-violet-950/30', caseId: 'alianza-social-hub' },
-                  { label: 'SALUD', icon: HeartPulse, color: 'text-rose-500', bgColor: 'bg-rose-50 dark:bg-rose-950/30', caseId: 'biomed-hospital' },
-                  { label: 'RETAIL', icon: ShoppingBag, color: 'text-blue-500', bgColor: 'bg-blue-50 dark:bg-blue-950/30', caseId: 'globalretail-prime' },
-                  { label: 'ENERGÍA', icon: Zap, color: 'text-yellow-500', bgColor: 'bg-yellow-50 dark:bg-yellow-950/30', caseId: 'helios-fields' },
-                  { label: 'AERO', icon: Send, color: 'text-cyan-500', bgColor: 'bg-cyan-50 dark:bg-cyan-950/30', caseId: 'turbine-chain' },
-                  { label: 'VINOS', icon: Wine, color: 'text-purple-600', bgColor: 'bg-purple-50 dark:bg-purple-950/30', caseId: 'vinosdoe-elite' },
-                  { label: 'PHARMA', icon: Pill, color: 'text-pink-400', bgColor: 'bg-pink-50 dark:bg-pink-950/30', caseId: 'pharmacold-logistix' },
-                  // Segunda fila - 7 iconos adicionales
-                  { label: 'PUERTO', icon: Ship, color: 'text-sky-500', bgColor: 'bg-sky-50 dark:bg-sky-950/30', caseId: 'portbcn-smart-trade' },
-                  { label: 'GOV', icon: Landmark, color: 'text-amber-600', bgColor: 'bg-amber-50 dark:bg-amber-950/30', caseId: 'ayuntamiento-etico' },
-                  { label: 'MINERÍA', icon: Mountain, color: 'text-slate-500', bgColor: 'bg-slate-100 dark:bg-slate-950/30', caseId: 'purelithium-sourcing' },
-                  { label: 'MODA', icon: Shirt, color: 'text-orange-500', bgColor: 'bg-orange-50 dark:bg-orange-950/30', caseId: 'fastfashion-trace' },
-                  { label: 'FINANZAS', icon: DollarSign, color: 'text-green-500', bgColor: 'bg-green-50 dark:bg-green-950/30', caseId: 'greenfinance-esg' },
-                  { label: 'GRID', icon: LayoutGrid, color: 'text-emerald-500', bgColor: 'bg-emerald-50 dark:bg-emerald-950/30', caseId: 'gridflex-demand' },
-                ].map((sector) => (
+                {sectors.map((sector) => (
                   <motion.div
-                    key={sector.label}
+                    key={sector.caseId}
                     variants={{
                       hidden: { opacity: 0, y: 20, scale: 0.9 },
                       visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 20 } }
@@ -215,8 +216,8 @@ export default function Landing() {
         <section id="cases" className="py-10 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Explora el Ecosistema</h2>
-              <p className="text-muted-foreground">Acceso directo a los módulos de demostración con datos sintéticos.</p>
+              <h2 className="text-3xl font-bold mb-4">{t('exploreEcosystem')}</h2>
+              <p className="text-muted-foreground">{t('exploreEcosystemDesc')}</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {demoLinks.map((link) => (
@@ -229,7 +230,7 @@ export default function Landing() {
                     </CardHeader>
                     <CardContent>
                       <div className="text-sm font-medium text-primary flex items-center">
-                        Explorar <ArrowRight className="ml-1 h-3 w-3" />
+                        {tc('explore')} <ArrowRight className="ml-1 h-3 w-3" />
                       </div>
                     </CardContent>
                   </Card>
@@ -244,21 +245,20 @@ export default function Landing() {
           <div className="container mx-auto px-4 text-center">
             <Badge className="mb-4" variant="secondary">
               <Sparkles className="h-3 w-3 mr-1" />
-              6 Modelos de Monetización
+              {t('monetizationModels')}
             </Badge>
-            <h2 className="text-3xl font-bold mb-4">Ecosistema de Valor Web3</h2>
+            <h2 className="text-3xl font-bold mb-4">{t('web3Ecosystem')}</h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Desde comisiones por transacción hasta sandboxing de IA. 
-              Descubre cómo PROCUREDATA habilita la economía del dato industrial.
+              {t('web3EcosystemDesc')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg">
                 <Link to="/models">
-                  Explorar Modelos <ArrowRight className="ml-2 h-4 w-4" />
+                  {t('exploreModels')} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/whitepaper">Ver Whitepaper</Link>
+                <Link to="/whitepaper">{t('viewWhitepaper')}</Link>
               </Button>
             </div>
           </div>
@@ -269,8 +269,8 @@ export default function Landing() {
         <section id="features" className="py-20 bg-muted dark:bg-slate-950">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4 text-foreground">El Motor de ProcureData</h2>
-              <p className="text-muted-foreground">12 capacidades enterprise listas para producción</p>
+              <h2 className="text-3xl font-bold mb-4 text-foreground">{t('theEngine')}</h2>
+              <p className="text-muted-foreground">{t('engineDesc')}</p>
             </div>
             
             <Tabs defaultValue="web3" className="w-full">
@@ -310,7 +310,7 @@ export default function Landing() {
                             <CardContent>
                               <p className="text-sm text-muted-foreground mb-3">{feature.desc}</p>
                               <span className="text-xs text-primary font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                Ver detalle <ArrowRight className="h-3 w-3" />
+                                {tc('viewDetails')} <ArrowRight className="h-3 w-3" />
                               </span>
                             </CardContent>
                           </Card>
@@ -324,10 +324,10 @@ export default function Landing() {
             
             <div className="mt-12 text-center space-y-3">
               <Link to="/docs/tecnico" className="text-primary hover:underline underline-offset-4 flex items-center justify-center gap-2">
-                Ver Documento Técnico Completo <ArrowRight className="h-4 w-4" />
+                {t('footer.viewTechnicalDoc')} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link to="/capacidades-enterprise" className="text-primary hover:text-primary/80 font-semibold flex items-center justify-center gap-2 transition-colors underline-offset-4 hover:underline">
-                Documento Capacidades Enterprise → <ArrowRight className="h-4 w-4" />
+                {t('footer.enterpriseCapabilities')} → <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -338,14 +338,13 @@ export default function Landing() {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <Badge variant="secondary" className="mb-4">
-                Versatilidad Industrial
+                {t('useCasesSection.badge')}
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Soluciones Reales para la Cadena de Suministro
+                {t('useCasesSection.title')}
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Desde la verificación de identidad hasta la financiación DeFi. 
-                Descubre cómo PROCUREDATA transforma cada eslabón.
+                {t('useCasesSection.description')}
               </p>
             </div>
             <UseCasesCarousel />
@@ -359,56 +358,56 @@ export default function Landing() {
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-2 font-bold text-xl mb-4">
-                <span className="procuredata-gradient">PROCUREDATA</span>
+                <span className="procuredata-gradient">{t('brand')}</span>
               </div>
               <p className="text-sm text-gray-400 mb-4">
-                Espacio de Datos para la Función de Compras con tecnología Web3.
+                {t('footer.tagline')}
               </p>
-              <Badge variant="outline" className="text-xs border-gray-700">v3.1 Web3 Enabled</Badge>
+              <Badge variant="outline" className="text-xs border-gray-700">{t('version')}</Badge>
             </div>
 
             {/* Plataforma */}
             <div>
-              <h4 className="font-semibold mb-4 text-white">Plataforma</h4>
+              <h4 className="font-semibold mb-4 text-white">{t('footer.platform')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link to="/catalog" className="hover:text-white transition-colors">Catálogo de Datos</Link></li>
-                <li><Link to="/innovation" className="hover:text-white transition-colors">Innovation Lab</Link></li>
-                <li><Link to="/sustainability" className="hover:text-white transition-colors">Hub Sostenibilidad</Link></li>
-                <li><Link to="/services" className="hover:text-white transition-colors">Servicios</Link></li>
+                <li><Link to="/catalog" className="hover:text-white transition-colors">{t('footer.catalog')}</Link></li>
+                <li><Link to="/innovation" className="hover:text-white transition-colors">{t('footer.innovationLab')}</Link></li>
+                <li><Link to="/sustainability" className="hover:text-white transition-colors">{t('footer.sustainabilityHub')}</Link></li>
+                <li><Link to="/services" className="hover:text-white transition-colors">{t('footer.services')}</Link></li>
               </ul>
             </div>
 
             {/* Recursos */}
             <div>
-              <h4 className="font-semibold mb-4 text-white">Recursos</h4>
+              <h4 className="font-semibold mb-4 text-white">{t('footer.resources')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">Documentación Técnica</Link></li>
-                <li><Link to="/architecture" className="hover:text-white transition-colors">Arquitectura</Link></li>
+                <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">{t('footer.technicalDocs')}</Link></li>
+                <li><Link to="/architecture" className="hover:text-white transition-colors">{t('footer.architecture')}</Link></li>
                 <li><Link to="/whitepaper" className="hover:text-white transition-colors flex items-center gap-1">
-                  <Sparkles className="h-3 w-3" /> Tech Whitepaper
+                  <Sparkles className="h-3 w-3" /> {t('footer.techWhitepaper')}
                 </Link></li>
-                <li><Link to="/guide" className="hover:text-white transition-colors">Guía del Ecosistema</Link></li>
+                <li><Link to="/guide" className="hover:text-white transition-colors">{t('footer.ecosystemGuide')}</Link></li>
               </ul>
             </div>
 
             {/* Transparencia - NUEVO según Memoria Técnica */}
             <div>
-              <h4 className="font-semibold mb-4 text-white">Transparencia</h4>
+              <h4 className="font-semibold mb-4 text-white">{t('footer.transparency')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">Memoria Técnica</Link></li>
-                <li><Link to="/architecture" className="hover:text-white transition-colors">Modelo de Gobernanza</Link></li>
-                <li><Link to="/user-guide" className="hover:text-white transition-colors">Guía de Usuario</Link></li>
-                <li><Link to="/models" className="hover:text-white transition-colors">Plan de Negocio</Link></li>
+                <li><Link to="/docs/tecnico" className="hover:text-white transition-colors">{t('footer.technicalMemory')}</Link></li>
+                <li><Link to="/architecture" className="hover:text-white transition-colors">{t('footer.governanceModel')}</Link></li>
+                <li><Link to="/user-guide" className="hover:text-white transition-colors">{t('footer.userGuide')}</Link></li>
+                <li><Link to="/models" className="hover:text-white transition-colors">{t('footer.businessPlan')}</Link></li>
               </ul>
             </div>
 
             {/* Acceso */}
             <div>
-              <h4 className="font-semibold mb-4 text-white">Acceso</h4>
+              <h4 className="font-semibold mb-4 text-white">{t('footer.access')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li><Link to="/auth" className="hover:text-white transition-colors">Iniciar Sesión</Link></li>
-                <li><Link to="/auth" className="hover:text-white transition-colors">Registrarse</Link></li>
-                <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
+                <li><Link to="/auth" className="hover:text-white transition-colors">{t('footer.login')}</Link></li>
+                <li><Link to="/auth" className="hover:text-white transition-colors">{t('footer.register')}</Link></li>
+                <li><Link to="/dashboard" className="hover:text-white transition-colors">{t('footer.dashboard')}</Link></li>
               </ul>
             </div>
           </div>
@@ -417,12 +416,12 @@ export default function Landing() {
           {/* Bottom bar */}
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-500">
-              © 2026 PROCUREDATA. Todos los derechos reservados.
+              {t('footer.copyright')}
             </p>
             <div className="flex items-center gap-6 text-sm text-gray-500">
-              <span>Powered by Pontus-X & Gaia-X</span>
+              <span>{t('footer.poweredBy')}</span>
               <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">IDSA Compliant</span>
+              <span className="hidden md:inline">{t('footer.idsaCompliant')}</span>
             </div>
           </div>
         </div>

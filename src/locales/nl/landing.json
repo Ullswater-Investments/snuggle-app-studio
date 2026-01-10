@@ -1,140 +1,117 @@
 {
   "brand": "PROCUREDATA",
-  "tagline": "De Soevereine Marktplaats voor Industriële Data",
-  "subtitle": "GAIA-X-conform B2B-platform voor het delen en monetariseren van data. Verbind, wissel en creëer waarde met uw industriële data.",
-  "partners": "Partners",
-  "nav": {
-    "features": "Functies",
-    "businessModels": "Businessmodellen",
-    "useCases": "Toepassingen",
-    "architecture": "Architectuur"
-  },
-  "cta": {
-    "accessDemo": "Demo Toegang",
-    "login": "Inloggen",
-    "documentation": "Documentatie",
-    "learnMore": "Meer informatie",
-    "seeAllUseCases": "Alle toepassingen",
-    "seeBusinessModels": "Businessmodellen",
-    "seeArchitecture": "Architectuur bekijken",
-    "tryLiveDemo": "Live demo proberen"
-  },
+  "tagline": "Dataruimte voor de Inkoopfunctie",
+  "heroDescription": "Oplossing voor het 'nxm' probleem bij leveranciersregistratie door gedeelde identiteiten. Automatische registratie in uw ERP vanuit reeds door andere klanten gevalideerde gegevens.",
+  "version": "v3.1 Web3 Enabled",
+  "exploreEcosystem": "Ontdek het Ecosysteem",
+  "exploreEcosystemDesc": "Directe toegang tot demonstratiemodules met synthetische gegevens.",
+  "successCases": "SUCCESVERHALEN",
+  "theEngine": "De Motor van ProcureData",
+  "engineDesc": "12 enterprise capaciteiten gereed voor productie",
+  "web3Ecosystem": "Web3-Waarde Ecosysteem",
+  "web3EcosystemDesc": "Van transactiekosten tot AI-sandboxing. Ontdek hoe PROCUREDATA de industriële data-economie mogelijk maakt.",
+  "monetizationModels": "6 Monetisatiemodellen",
+  "exploreModels": "Modellen Verkennen",
+  "viewWhitepaper": "Whitepaper Bekijken",
   "demoLinks": {
     "innovationLab": "Innovation Lab",
     "innovationLabDesc": "Meer dan 25 toekomstige businesslijnen",
-    "dataCatalog": "Datacatalogus",
-    "dataCatalogDesc": "Gefedereerde marktplaats 10x10",
-    "successStories": "Succesverhalen",
-    "successStoriesDesc": "47 verhalen met simulatoren",
-    "liveDemo": "Live Demo",
-    "liveDemoDesc": "Test het volledige platform"
-  },
-  "features": {
-    "title": "Volledig Dataplatform",
-    "subtitle": "Enterprise-infrastructuur voor soevereine datadeling met geïntegreerde GAIA-X-conformiteit",
-    "items": {
-      "gaiaXCompliance": {
-        "title": "GAIA-X Conformiteit",
-        "description": "Volledige conformiteit met Europese dataruimte-standaarden inclusief self-sovereign identity en gefedereerde catalogi."
-      },
-      "sovereignExchange": {
-        "title": "Soevereine Uitwisseling",
-        "description": "Behoud volledige controle over uw data met het driedelige model: Houder, Betrokkene en Consument duidelijk gedefinieerd."
-      },
-      "smartContracts": {
-        "title": "Smart Contracts",
-        "description": "Geautomatiseerde overeenkomsten op PontusX met ODRL-beleid voor toegangscontrole en monetisatie."
-      },
-      "aiInsights": {
-        "title": "AI-Inzichten",
-        "description": "ARIA, uw AI-assistent voor datanavigatie, rapportgeneratie en beslissingsoptimalisatie."
-      },
-      "realTimeAnalytics": {
-        "title": "Realtime Analytics",
-        "description": "Live dashboards met ESG-metrics, blockchain-traceerbaarheid en voorspellende waarschuwingen."
-      },
-      "erpIntegration": {
-        "title": "ERP-Integratie",
-        "description": "Native connectoren voor SAP, Oracle, Microsoft Dynamics en industriële systemen."
-      }
-    }
+    "catalog": "Datacatalogus",
+    "catalogDesc": "Gefedereerde marktplaats 10x10",
+    "sustainability": "Duurzaamheids-Hub",
+    "sustainabilityDesc": "ESG-rapporten en CO2-voetafdruk",
+    "services": "Servicebeheer",
+    "servicesDesc": "Algoritmen en Compute-to-Data"
   },
   "categories": {
     "web3": "Web3 & Blockchain",
     "realtime": "Realtime",
-    "ai": "Kunstmatige Intelligentie",
-    "compliance": "Compliance",
-    "integration": "Integratie",
-    "security": "Beveiliging"
+    "security": "Beveiliging",
+    "integrations": "Integraties",
+    "ux": "Gebruikerservaring"
   },
-  "useCases": {
-    "title": "Toepassingen per Sector",
-    "subtitle": "Ontdek hoe PROCUREDATA datadeling transformeert in verschillende industrieën",
-    "agriculture": {
-      "title": "Landbouw & Voeding",
-      "description": "Traceerbaarheid van boer tot bord met herkomstcertificering en ESG-data."
-    },
-    "energy": {
-      "title": "Energie & Nutsbedrijven",
-      "description": "Slimme PPA's, certificaten voor hernieuwbare energie en CO2-boekhouding."
-    },
-    "manufacturing": {
-      "title": "Productie",
-      "description": "Digitale productpaspoorten, circulaire economie en leveranciers-traceerbaarheid."
-    },
-    "logistics": {
-      "title": "Logistiek & Transport",
-      "description": "Realtime tracking, Scope 3-emissies en vlootoptimalisatie."
-    },
-    "finance": {
-      "title": "Financiën & Verzekeringen",
-      "description": "ESG-scoring, KYC/KYB-verificatie en regelgevende compliance."
-    },
-    "publicSector": {
-      "title": "Publieke Sector",
-      "description": "Smart cities, open data en interoperabiliteit tussen overheden."
-    }
+  "features": {
+    "walletWeb3": "Web3 Wallet",
+    "walletWeb3Desc": "Native verbinding met MetaMask en saldobewerking.",
+    "identitySSI": "SSI-Identiteit",
+    "identitySSIDesc": "Automatisch gegenereerde DID's (did:ethr).",
+    "paymentsEUROe": "EUROe-Betalingen",
+    "paymentsEUROeDesc": "Transacties met gereguleerde stablecoin op Pontus-X.",
+    "activityFeed": "Activity Feed",
+    "activityFeedDesc": "Live contractevenementen-abonnement.",
+    "smartAlerts": "Smart Alerts",
+    "smartAlertsDesc": "Directe kritieke pushmeldingen.",
+    "governanceODRL": "ODRL-Governance",
+    "governanceODRLDesc": "Gestandaardiseerde toegangsbeleid.",
+    "multiTenantRLS": "Multi-Tenant RLS",
+    "multiTenantRLSDesc": "Volledige data-isolatie op rijniveau.",
+    "auditLogs": "Audit Logs",
+    "auditLogsDesc": "Onveranderlijke traceerbaarheid on-chain.",
+    "modelIDSA": "IDSA-Model",
+    "modelIDSADesc": "Gedifferentieerde Consumer, Subject en Holder.",
+    "erpConnectors": "ERP-Connectoren",
+    "erpConnectorsDesc": "SAP, Oracle en Dynamics gereed.",
+    "edgeFunctions": "Edge Functions",
+    "edgeFunctionsDesc": "Wereldwijd schaalbare serverloze logica.",
+    "guidedTour": "Begeleide Tour",
+    "guidedTourDesc": "Interactieve stap-voor-stap onboarding.",
+    "interactiveDocs": "Interactieve Docs",
+    "interactiveDocsDesc": "Live architectuurdiagrammen."
   },
-  "businessModels": {
-    "title": "Flexibele Businessmodellen",
-    "subtitle": "Kies hoe u uw data wilt monetariseren en delen",
-    "subscription": {
-      "title": "Abonnement",
-      "description": "Terugkerende datatoegang met automatische updates."
-    },
-    "payPerUse": {
-      "title": "Pay-per-Use",
-      "description": "Betaal alleen voor de data die u gebruikt."
-    },
-    "dataExchange": {
-      "title": "Data-uitwisseling",
-      "description": "Dataruilhandel tussen organisaties zonder monetaire betaling."
-    },
-    "consortium": {
-      "title": "Consortium",
-      "description": "Gedeelde dataruimtes tussen meerdere deelnemers."
-    }
+  "sectors": {
+    "industrial": "INDUSTRIEEL",
+    "agro": "AGRO",
+    "mobility": "MOBILITEIT",
+    "social": "SOCIAAL",
+    "health": "GEZONDHEID",
+    "retail": "RETAIL",
+    "energy": "ENERGIE",
+    "aero": "LUCHT",
+    "wines": "WIJNEN",
+    "pharma": "PHARMA",
+    "port": "HAVEN",
+    "gov": "OVERHEID",
+    "mining": "MIJNBOUW",
+    "fashion": "MODE",
+    "finance": "FINANCIËN",
+    "grid": "GRID"
   },
-  "architecture": {
-    "title": "Technische Architectuur",
-    "subtitle": "Enterprise-infrastructuur gebouwd op open standaarden",
-    "layers": {
-      "presentation": "Presentatielaag",
-      "business": "Bedrijfslogica",
-      "data": "Datalaag",
-      "infrastructure": "Infrastructuur"
-    }
+  "nav": {
+    "features": "Functies",
+    "businessModels": "Businessmodellen",
+    "useCases": "Toepassingen",
+    "architecture": "Technische Architectuur"
   },
-  "stats": {
-    "organizations": "Organisaties",
-    "dataProducts": "Dataproducten",
-    "transactions": "Transacties",
-    "countries": "Landen"
+  "useCasesSection": {
+    "badge": "Industriële Veelzijdigheid",
+    "title": "Echte Oplossingen voor de Toeleveringsketen",
+    "description": "Van identiteitsverificatie tot DeFi-financiering. Ontdek hoe PROCUREDATA elke schakel transformeert."
   },
   "footer": {
-    "copyright": "© 2024 PROCUREDATA. Alle rechten voorbehouden.",
-    "privacy": "Privacybeleid",
-    "terms": "Gebruiksvoorwaarden",
-    "contact": "Contact"
+    "tagline": "Dataruimte voor de Inkoopfunctie met Web3-technologie.",
+    "platform": "Platform",
+    "catalog": "Datacatalogus",
+    "innovationLab": "Innovation Lab",
+    "sustainabilityHub": "Duurzaamheids-Hub",
+    "services": "Diensten",
+    "resources": "Bronnen",
+    "technicalDocs": "Technische Documentatie",
+    "architecture": "Architectuur",
+    "techWhitepaper": "Tech Whitepaper",
+    "ecosystemGuide": "Ecosysteem Gids",
+    "transparency": "Transparantie",
+    "technicalMemory": "Technisch Memorandum",
+    "governanceModel": "Governance Model",
+    "userGuide": "Gebruikershandleiding",
+    "businessPlan": "Businessplan",
+    "access": "Toegang",
+    "login": "Inloggen",
+    "register": "Registreren",
+    "dashboard": "Dashboard",
+    "copyright": "© 2026 PROCUREDATA. Alle rechten voorbehouden.",
+    "poweredBy": "Powered by Pontus-X & Gaia-X",
+    "idsaCompliant": "IDSA Compliant",
+    "viewTechnicalDoc": "Bekijk Volledig Technisch Document",
+    "enterpriseCapabilities": "Enterprise Mogelijkheden Document"
   }
 }
