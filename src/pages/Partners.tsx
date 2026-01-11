@@ -5,12 +5,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { 
   Handshake, 
   ExternalLink, 
   FileText, 
-  ChevronDown, 
   Building2, 
   Globe, 
   Users, 
@@ -84,7 +82,6 @@ const Partners = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>("all");
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
   const [selectedType, setSelectedType] = useState<string>("all");
-  const [openCountries, setOpenCountries] = useState<string[]>(["ES"]);
 
   // Calculate stats
   const stats = useMemo(() => {
@@ -119,14 +116,6 @@ const Partners = () => {
     setSelectedCountry("all");
     setSelectedStatus("all");
     setSelectedType("all");
-  };
-
-  const toggleCountry = (code: string) => {
-    setOpenCountries(prev => 
-      prev.includes(code) 
-        ? prev.filter(c => c !== code)
-        : [...prev, code]
-    );
   };
 
   const getStatusBadge = (status: Partner["status"]) => {
@@ -304,109 +293,96 @@ const Partners = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {filteredCountries.map(country => (
-              <Collapsible 
-                key={country.code} 
-                open={openCountries.includes(country.code)}
-                onOpenChange={() => toggleCountry(country.code)}
-              >
-                <Card>
-                  <CollapsibleTrigger asChild>
-                    <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{country.flag}</span>
-                          <CardTitle className="text-lg">
-                            {t(`countries.${country.code}`)}
-                          </CardTitle>
-                          <Badge variant="secondary">
-                            {country.partners.length}
-                          </Badge>
-                        </div>
-                        <ChevronDown className={`h-5 w-5 transition-transform ${openCountries.includes(country.code) ? "rotate-180" : ""}`} />
-                      </div>
-                    </CardHeader>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <CardContent className="pt-0">
-                      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        {country.partners.map(partner => {
-                          const logo = getPartnerLogo(partner);
-                          return (
-                            <Card 
-                              key={partner.id}
-                              className="group hover:shadow-md transition-all duration-300 hover:border-primary/50"
-                            >
-                              <CardHeader className="pb-2">
-                                <div className="flex items-start justify-between gap-2">
-                                  <div className="flex-1">
-                                    {logo ? (
-                                      <div className="h-10 mb-2">
-                                        <img src={logo} alt={partner.name} className="h-full w-auto object-contain" />
-                                      </div>
-                                    ) : (
-                                      <div className="flex items-center gap-2 mb-2">
-                                        <SectorIcon sector={partner.sector} />
-                                        <span className="text-xs text-muted-foreground">
-                                          {t(`sectors.${partner.sector}`)}
-                                        </span>
-                                      </div>
-                                    )}
-                                    <CardTitle className="text-base">{partner.name}</CardTitle>
-                                    {partner.fullName && (
-                                      <CardDescription className="text-xs mt-1 line-clamp-2">
-                                        {partner.fullName}
-                                      </CardDescription>
-                                    )}
+              <Card key={country.code}>
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{country.flag}</span>
+                    <CardTitle className="text-lg">
+                      {t(`countries.${country.code}`)}
+                    </CardTitle>
+                    <Badge variant="secondary">
+                      {country.partners.length}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {country.partners.map(partner => {
+                      const logo = getPartnerLogo(partner);
+                      return (
+                        <Card 
+                          key={partner.id}
+                          className="group hover:shadow-md transition-all duration-300 hover:border-primary/50"
+                        >
+                          <CardHeader className="pb-2">
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="flex-1">
+                                {logo ? (
+                                  <div className="h-10 mb-2">
+                                    <img src={logo} alt={partner.name} className="h-full w-auto object-contain" />
                                   </div>
-                                  <div className="flex flex-col gap-1 items-end">
-                                    {getStatusBadge(partner.status)}
-                                    {getPriorityBadge(partner.priority)}
-                                  </div>
-                                </div>
-                              </CardHeader>
-                              <CardContent className="pb-2">
-                                <p className="text-sm text-muted-foreground line-clamp-3">
-                                  {t(`partners.${partner.id}.description`)}
-                                </p>
-                                {partner.keyInitiative && (
-                                  <div className="mt-2 text-xs text-primary">
-                                    📌 {partner.keyInitiative}
+                                ) : (
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <SectorIcon sector={partner.sector} />
+                                    <span className="text-xs text-muted-foreground">
+                                      {t(`sectors.${partner.sector}`)}
+                                    </span>
                                   </div>
                                 )}
-                                <div className="flex items-center gap-2 mt-2">
-                                  <Badge variant="outline" className="text-xs">
-                                    {t(`type.${partner.type === "asociación" ? "association" : "cluster"}`)}
-                                  </Badge>
-                                </div>
-                              </CardContent>
-                              <CardFooter className="pt-2 flex flex-col gap-2">
-                                {partner.status === "activo" && (
-                                  <Button asChild size="sm" className="w-full">
-                                    <Link to={partner.link} className="flex items-center gap-2">
-                                      {t('accessProjects')}
-                                      <ExternalLink className="h-3 w-3" />
-                                    </Link>
-                                  </Button>
+                                <CardTitle className="text-base">{partner.name}</CardTitle>
+                                {partner.fullName && (
+                                  <CardDescription className="text-xs mt-1 line-clamp-2">
+                                    {partner.fullName}
+                                  </CardDescription>
                                 )}
-                                {partner.hasDocTecnico && (
-                                  <Button asChild variant="outline" size="sm" className="w-full">
-                                    <Link to="/partners/itbid/doc-tecnico" className="flex items-center gap-2">
-                                      {t('technicalDoc')}
-                                      <FileText className="h-3 w-3" />
-                                    </Link>
-                                  </Button>
-                                )}
-                              </CardFooter>
-                            </Card>
-                          );
-                        })}
-                      </div>
-                    </CardContent>
-                  </CollapsibleContent>
-                </Card>
-              </Collapsible>
+                              </div>
+                              <div className="flex flex-col gap-1 items-end">
+                                {getStatusBadge(partner.status)}
+                                {getPriorityBadge(partner.priority)}
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent className="pb-2">
+                            <p className="text-sm text-muted-foreground line-clamp-3">
+                              {t(`partners.${partner.id}.description`)}
+                            </p>
+                            {partner.keyInitiative && (
+                              <div className="mt-2 text-xs text-primary">
+                                📌 {partner.keyInitiative}
+                              </div>
+                            )}
+                            <div className="flex items-center gap-2 mt-2">
+                              <Badge variant="outline" className="text-xs">
+                                {t(`type.${partner.type === "asociación" ? "association" : "cluster"}`)}
+                              </Badge>
+                            </div>
+                          </CardContent>
+                          <CardFooter className="pt-2 flex flex-col gap-2">
+                            {partner.status === "activo" && (
+                              <Button asChild size="sm" className="w-full">
+                                <Link to={partner.link} className="flex items-center gap-2">
+                                  {t('accessProjects')}
+                                  <ExternalLink className="h-3 w-3" />
+                                </Link>
+                              </Button>
+                            )}
+                            {partner.hasDocTecnico && (
+                              <Button asChild variant="outline" size="sm" className="w-full">
+                                <Link to="/partners/itbid/doc-tecnico" className="flex items-center gap-2">
+                                  {t('technicalDoc')}
+                                  <FileText className="h-3 w-3" />
+                                </Link>
+                              </Button>
+                            )}
+                          </CardFooter>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         )}
