@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import { partnersByCountry, Partner } from "@/data/partnersData";
 import itbidLogo from "@/assets/itbid-logo.png";
+import { PremiumPartnersBanner } from "@/components/premium-partners/PremiumPartnersBanner";
 
 const sectorIcons: Record<string, React.ElementType> = {
   publicSector: Building2,
@@ -185,6 +186,9 @@ const Partners = () => {
           />
         </CardContent>
       </Card>
+
+      {/* Premium Partners Banner */}
+      <PremiumPartnersBanner />
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
