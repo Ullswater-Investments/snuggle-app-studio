@@ -903,6 +903,290 @@ export const antwerpChemical: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 3: POTENCIAS INDUSTRIALES
+// ============================================
+
+export const vda: PremiumPartner = {
+  id: "vda",
+  name: "VDA",
+  fullName: "Verband der Automobilindustrie",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Automoción y Movilidad",
+  
+  authorityContext: {
+    narrative: "La Verband der Automobilindustrie (VDA) es posiblemente la asociación industrial más poderosa de Europa. No solo representan a marcas como BMW o Mercedes-Benz; definen el 'lenguaje' de la calidad automotriz mundial. Sus estándares (VDA 6.3, TISAX) son obligatorios para cualquier proveedor que quiera vender una tuerca a un coche alemán. Para ProcureData, este nodo es la autoridad suprema en calidad y ciberseguridad automotriz.",
+    keyStats: [
+      { value: "€500B+", label: "Facturación Anual Sector" },
+      { value: "800K+", label: "Empleos Directos" },
+      { value: "#1", label: "Exportador Auto Mundial" }
+    ],
+    headquarters: "Berlín, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "Volkswagen Group", description: "OEM" },
+    { name: "Mercedes-Benz", description: "OEM" },
+    { name: "BMW Group", description: "OEM" },
+    { name: "Robert Bosch", description: "Mayor proveedor mundial" },
+    { name: "Continental", description: "Neumáticos y tecnología" },
+    { name: "ZF Friedrichshafen", description: "Transmisiones y chasis" },
+    { name: "Mahle", description: "Componentes de motor" },
+    { name: "Hella", description: "Iluminación y electrónica" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Dueños de los datos de auditoría de calidad, seguridad de la información (TISAX) y electrificación. Sus datos permiten filtrar proveedores 'aptos' de 'no aptos' con una precisión quirúrgica.",
+    capabilities: [
+      "Certificación TISAX",
+      "Capacidad baterías EV",
+      "Índice calidad PPM",
+      "Green Steel tracking"
+    ],
+    uniqueValue: "La única fuente que define quién puede y quién no puede vender a la industria automotriz alemana, la más exigente del mundo."
+  },
+  
+  useCases: [
+    { id: "tisax-status", title: "Estado de Certificación TISAX", description: "Base de datos de proveedores que cumplen con los estándares de seguridad de información (anti-espionaje industrial).", type: "directory" },
+    { id: "ev-battery-capacity", title: "Capacidad de Producción de Baterías EV", description: "Previsiones de GWh disponibles en la cadena de suministro alemana.", type: "capacity" },
+    { id: "ppm-quality", title: "Índice de Calidad de Proveedores (PPM)", description: "Datos agregados de partes defectuosas por millón en componentes electrónicos vs. mecánicos.", type: "benchmark" },
+    { id: "green-steel", title: "Huella de Carbono del Acero Automotriz", description: "Datos de emisiones de CO2 del acero utilizado en chasis (Green Steel).", type: "index" },
+    { id: "charging-infra", title: "Infraestructura de Carga", description: "Datos de despliegue de puntos de carga rápida en instalaciones industriales.", type: "capacity" },
+    { id: "autonomous-adoption", title: "Adopción de Conducción Autónoma", description: "Estadísticas de integración de sensores LiDAR en nuevos modelos.", type: "forecast" },
+    { id: "chip-shortage", title: "Escasez de Semiconductores Auto", description: "Monitor de plazos de entrega para microcontroladores específicos de automoción.", type: "risk" },
+    { id: "inbound-logistics", title: "Costes Logísticos Inbound", description: "Benchmarks de coste de transporte de componentes a línea de montaje.", type: "cost" },
+    { id: "elv-recycling", title: "Reciclabilidad de Vehículos", description: "Datos sobre tasas de recuperación de materiales al final de la vida útil (ELV).", type: "index" },
+    { id: "euro7-compliance", title: "Cumplimiento de Normativa Euro 7", description: "Datos de preparación tecnológica de proveedores de sistemas de escape.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const vci: PremiumPartner = {
+  id: "vci",
+  name: "VCI",
+  fullName: "Verband der Chemischen Industrie",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Industria Química y Farmacéutica",
+  
+  authorityContext: {
+    narrative: "La Verband der Chemischen Industrie (VCI) representa a la tercera industria química más grande del mundo. Con sede en Frankfurt, agrupa a gigantes que son la base de casi todas las demás cadenas de suministro (desde plásticos hasta medicamentos). Su enfoque actual es la transformación climática y la química circular (Chemistry 4.0).",
+    keyStats: [
+      { value: "€230B", label: "Facturación Anual" },
+      { value: "500K+", label: "Empleos en Química" },
+      { value: "#3", label: "Industria Química Mundial" }
+    ],
+    headquarters: "Frankfurt, Hesse"
+  },
+  
+  ecosystem: [
+    { name: "BASF", description: "La mayor empresa química del mundo" },
+    { name: "Bayer", description: "Ciencias de la vida" },
+    { name: "Henkel", description: "Adhesivos y consumo" },
+    { name: "Merck KGaA", description: "Ciencia y tecnología" },
+    { name: "Evonik", description: "Química especial" },
+    { name: "Covestro", description: "Polímeros de alto rendimiento" },
+    { name: "Lanxess", description: "Aditivos" },
+    { name: "Boehringer Ingelheim", description: "Farmacéutica" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos críticos sobre cumplimiento regulatorio (REACH), consumo energético intensivo y seguridad de procesos. Son el termómetro de la producción industrial europea: si la química baja, toda la industria baja.",
+    capabilities: [
+      "Compliance REACH",
+      "Precios químicos básicos",
+      "Consumo gas industrial",
+      "Reciclaje químico"
+    ],
+    uniqueValue: "El termómetro de la industria europea: cuando la química alemana se mueve, toda la economía siente el impacto."
+  },
+  
+  useCases: [
+    { id: "reach-compliance", title: "Compliance REACH", description: "Base de datos de sustancias registradas y autorizadas para uso en la UE.", type: "directory" },
+    { id: "basic-chemical-prices", title: "Índice de Precios de Químicos Básicos", description: "Costes de etileno, benceno y metanol en el mercado alemán.", type: "index" },
+    { id: "gas-consumption", title: "Consumo de Gas Natural Industrial", description: "Datos de demanda energética del sector (crítico para seguridad energética).", type: "index" },
+    { id: "bioplastics-supply", title: "Disponibilidad de Bioplásticos", description: "Oferta de polímeros derivados de biomasa vs. fósiles.", type: "capacity" },
+    { id: "chemical-recycling", title: "Capacidad de Reciclaje Químico", description: "Plantas activas capaces de descomponer plásticos en materias primas.", type: "capacity" },
+    { id: "rd-investment-chem", title: "Inversión en I+D Químico", description: "Gasto agregado en investigación de nuevos materiales.", type: "index" },
+    { id: "hazmat-logistics", title: "Logística de Mercancías Peligrosas", description: "Datos de seguridad en transporte ferroviario y fluvial de químicos.", type: "risk" },
+    { id: "ghg-scope1", title: "Emisiones de Gases de Efecto Invernadero (Scope 1)", description: "Datos de descarbonización de plantas de producción.", type: "index" },
+    { id: "hydrogen-prices", title: "Precios de Hidrógeno Gris vs. Verde", description: "Diferencial de costes para la transición energética.", type: "cost" },
+    { id: "plant-safety", title: "Seguridad Laboral en Plantas", description: "Estadísticas de accidentes industriales (Lost Time Injury Rate).", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const medicalValley: PremiumPartner = {
+  id: "medical-valley",
+  name: "Medical Valley EMN",
+  fullName: "Medical Valley Europäische Metropolregion Nürnberg",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Tecnología Médica y Salud Digital",
+  
+  authorityContext: {
+    narrative: "Ubicado en el área metropolitana de Núremberg/Erlangen, Medical Valley es un clúster de excelencia mundial. Es el hogar de Siemens Healthineers y un ecosistema denso de investigación universitaria y startups. Aquí se desarrollan los escáneres, resonancias y software de salud del futuro. Para ProcureData, aportan la validación clínica y estándares de datos médicos (GDPR sanitario).",
+    keyStats: [
+      { value: "500+", label: "Empresas MedTech" },
+      { value: "65K", label: "Empleos en Salud" },
+      { value: "#1", label: "Clúster MedTech Alemania" }
+    ],
+    headquarters: "Erlangen, Baviera"
+  },
+  
+  ecosystem: [
+    { name: "Siemens Healthineers", description: "Imagen médica y diagnóstico" },
+    { name: "Fraunhofer IIS", description: "Investigación, inventores del MP3 y sensores médicos" },
+    { name: "Adidas", description: "Wearables y salud deportiva" },
+    { name: "Ziehm Imaging", description: "Rayos X móviles" },
+    { name: "Corscience", description: "Desfibrilación y monitoreo" },
+    { name: "Universitätsklinikum Erlangen", description: "Hospital universitario líder" },
+    { name: "WaveLight", description: "Láser oftalmológico" },
+    { name: "Brainlab", description: "Software de cirugía" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Expertos en datos clínicos, aprobación regulatoria (MDR) y sensores de salud. Ofrecen un entorno seguro para compartir datos de pacientes anonimizados para entrenamiento de IA.",
+    capabilities: [
+      "Tiempos certificación MDR",
+      "Datasets médicos IA",
+      "Adopción DiGA",
+      "Interoperabilidad FHIR"
+    ],
+    uniqueValue: "El único clúster europeo con acceso a datos clínicos reales anonimizados para entrenamiento de IA médica en un marco regulatorio seguro."
+  },
+  
+  useCases: [
+    { id: "mdr-certification", title: "Tiempos de Certificación MDR", description: "Datos reales de duración del proceso de aprobación bajo la nueva regulación europea.", type: "benchmark" },
+    { id: "medical-images", title: "Banco de Imágenes Médicas (Anonimizado)", description: "Datasets de Rayos X y RM para entrenamiento de algoritmos de IA.", type: "directory" },
+    { id: "diga-usage", title: "Uso de Apps de Salud Digital (DiGA)", description: "Estadísticas de prescripción y reembolso de apps médicas en Alemania.", type: "index" },
+    { id: "fhir-adoption", title: "Interoperabilidad Hospitalaria (HL7/FHIR)", description: "Grado de adopción de estándares de datos en hospitales alemanes.", type: "index" },
+    { id: "medtech-prices", title: "Precios de Equipamiento Médico", description: "Benchmarks de coste de adquisición de TACs y resonancias.", type: "cost" },
+    { id: "clinical-trials", title: "Ensayos Clínicos Disponibles", description: "Mapa de estudios abiertos para reclutamiento de pacientes en la región.", type: "directory" },
+    { id: "wearable-data", title: "Datos de Sensores Wearable", description: "Métricas agregadas de actividad física y constantes vitales (población sana).", type: "index" },
+    { id: "iomt-security", title: "Ciberseguridad en Dispositivos Médicos", description: "Vulnerabilidades detectadas en equipos conectados (IoMT).", type: "risk" },
+    { id: "surgical-robotics", title: "Robótica Quirúrgica", description: "Datos de utilización y tiempos de quirófano con asistencia robótica.", type: "capacity" },
+    { id: "ehealth-startups", title: "Startups de eHealth", description: "Radar de innovación en telemedicina y diagnóstico remoto.", type: "directory" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const aerce: PremiumPartner = {
+  id: "aerce",
+  name: "AERCE",
+  fullName: "Asociación Española de Profesionales de Compras, Contratación y Aprovisionamientos",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Compras y Aprovisionamiento",
+  
+  authorityContext: {
+    narrative: "La Asociación Española de Profesionales de Compras (AERCE) es el referente en España. Con más de 30 años de historia, certifica a los compradores del IBEX 35 y conecta el mercado español con Latinoamérica. Su valor estratégico radica en su profunda conexión con sectores como la construcción, la energía y el turismo, motores de la economía española.",
+    keyStats: [
+      { value: "2.000+", label: "Profesionales Miembro" },
+      { value: "30+", label: "Años de Historia" },
+      { value: "#1", label: "Asociación Compras España" }
+    ],
+    headquarters: "Madrid, España"
+  },
+  
+  ecosystem: [
+    { name: "Repsol", description: "Energía" },
+    { name: "Telefónica", description: "Telecomunicaciones" },
+    { name: "Inditex", description: "Retail/Moda" },
+    { name: "Iberdrola", description: "Energía renovable" },
+    { name: "Mercadona", description: "Distribución" },
+    { name: "Ferrovial", description: "Infraestructuras" },
+    { name: "CaixaBank", description: "Servicios financieros" },
+    { name: "Cepsa", description: "Energía/Química" }
+  ],
+  
+  dataAnalysis: {
+    summary: "AERCE maneja datos clave sobre salarios en España, costes energéticos y riesgo de proveedores en el mercado hispano. Son fundamentales para entender la estructura de costes en el sur de Europa.",
+    capabilities: [
+      "Barómetro compras España",
+      "Salarios por CCAA",
+      "Plazos pago reales",
+      "Riesgo LATAM"
+    ],
+    uniqueValue: "El único termómetro fiable del coste de comprar en España y el puente de datos hacia el mercado latinoamericano."
+  },
+  
+  useCases: [
+    { id: "spain-barometer", title: "Barómetro de Compras España", description: "Encuesta mensual sobre intenciones de compra y niveles de stock (similar al PMI).", type: "index" },
+    { id: "ccaa-salaries", title: "Salarios de Compradores por CCAA", description: "Diferencias salariales entre Madrid, Cataluña y País Vasco.", type: "benchmark" },
+    { id: "payment-terms-es", title: "Plazos de Pago Reales (Ley Crea y Crece)", description: "Datos de cumplimiento de pagos a 60 días en empresas españolas.", type: "benchmark" },
+    { id: "fleet-costs", title: "Costes de Flota Corporativa", description: "Renting y gestión de vehículos de empresa en España.", type: "cost" },
+    { id: "electricity-prices", title: "Tarifas Eléctricas Industriales", description: "Impacto del 'tope al gas' y evolución del precio MWh para industria.", type: "cost" },
+    { id: "sme-digitalization", title: "Digitalización de Compras en PYMEs", description: "Nivel de adopción de ERPs y factura electrónica en empresas medianas.", type: "index" },
+    { id: "cleaning-security", title: "Precios de Servicios de Limpieza y Seguridad", description: "Convenios colectivos y repercusión en costes de servicios.", type: "cost" },
+    { id: "latam-risk", title: "Riesgo de Cadena de Suministro LATAM", description: "Datos de volatilidad en proveedores de América Latina conectados con España.", type: "risk" },
+    { id: "women-procurement", title: "Mujeres en Compras", description: "Estadísticas de diversidad y liderazgo femenino en departamentos de compras.", type: "index" },
+    { id: "construction-materials", title: "Índice de Precios de Materiales de Construcción", description: "Evolución de costes para obras civiles y edificación en España.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const gaiaCluster: PremiumPartner = {
+  id: "gaia-cluster",
+  name: "GAIA",
+  fullName: "Clúster de Industrias de Conocimiento y Tecnología del País Vasco",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Industria 4.0, Electrónica y TIC",
+  
+  authorityContext: {
+    narrative: "El Clúster GAIA (País Vasco) es el cerebro digital de la industria española. Representa la convergencia entre la electrónica, la informática y la maquinaria herramienta avanzada. En una región con una densidad industrial comparable a Alemania, GAIA lidera la transformación digital (TEIC) y la ciberseguridad industrial.",
+    keyStats: [
+      { value: "300+", label: "Empresas Miembro" },
+      { value: "€4B+", label: "Facturación Agregada" },
+      { value: "25K+", label: "Empleos TIC" }
+    ],
+    headquarters: "Bilbao, País Vasco"
+  },
+  
+  ecosystem: [
+    { name: "Ingeteam", description: "Electrónica de potencia" },
+    { name: "Sener", description: "Ingeniería y aeroespacial" },
+    { name: "CAF", description: "Ferrocarriles" },
+    { name: "Euskaltel (Grupo MásMóvil)", description: "Telecomunicaciones" },
+    { name: "Ibermática (Ayesa)", description: "Servicios IT" },
+    { name: "Versia", description: "Digitalización" },
+    { name: "LKS Next", description: "Consultoría tecnológica" },
+    { name: "Spyro", description: "Software ERP industrial" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Proveen datos sobre madurez digital industrial, ciberseguridad OT (Operational Technology) y talento tecnológico. Son el enlace para digitalizar la 'fábrica' real.",
+    capabilities: [
+      "Madurez Industria 4.0",
+      "Ciberseguridad OT",
+      "5G privado industrial",
+      "Visión artificial"
+    ],
+    uniqueValue: "El único clúster español con capacidad de medir la madurez digital real de la industria y conectarla con la ciberseguridad OT."
+  },
+  
+  useCases: [
+    { id: "digital-maturity-i40", title: "Índice de Madurez Digital (Industria 4.0)", description: "Autoevaluación agregada de plantas industriales vascas.", type: "index" },
+    { id: "basque-tic-salaries", title: "Salarios de Perfiles TIC en País Vasco", description: "Coste de desarrolladores y expertos en ciberseguridad en la región.", type: "benchmark" },
+    { id: "ot-incidents", title: "Incidentes de Ciberseguridad Industrial", description: "Estadísticas anónimas de ataques a redes OT/SCADA.", type: "risk" },
+    { id: "private-5g", title: "Adopción de 5G Privado", description: "Despliegue de redes móviles privadas en entornos fabriles.", type: "index" },
+    { id: "machine-vision", title: "Oferta de Soluciones de Visión Artificial", description: "Catálogo de integradores locales para control de calidad.", type: "directory" },
+    { id: "datacenter-pue", title: "Consumo Energético de Centros de Datos", description: "Eficiencia (PUE) de infraestructuras IT en el norte de España.", type: "benchmark" },
+    { id: "industrial-xr", title: "Gamificación en Industria", description: "Uso de RV/RA para formación de operarios y mantenimiento.", type: "index" },
+    { id: "cloud-spending", title: "Gasto en Cloud Computing", description: "Tendencias de migración a la nube en empresas industriales.", type: "index" },
+    { id: "blockchain-traceability", title: "Trazabilidad Blockchain", description: "Proyectos activos de certificación de origen mediante DLT.", type: "directory" },
+    { id: "smart-grids", title: "Smart Grids y Almacenamiento", description: "Datos de integración de renovables en redes eléctricas inteligentes locales.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -922,7 +1206,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   brainportEindhoven,
   portRotterdam,
   agoria,
-  antwerpChemical
+  antwerpChemical,
+  // Paquete 3: Potencias Industriales
+  vda,
+  vci,
+  medicalValley,
+  aerce,
+  gaiaCluster
 ];
 
 // Helper para obtener un partner por ID
