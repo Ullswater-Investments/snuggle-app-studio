@@ -5,12 +5,301 @@
   "directory": "Partnerverzeichnis",
   "accessProjects": "Zu Projekten",
   "technicalDoc": "Technische Dokumentation",
+  "viewDetails": "Details anzeigen",
   "comingSoon": "Weitere Partner demnächst",
   "expandingEcosystem": "Wir erweitern unser Ökosystem",
-  "status": {
-    "active": "aktiv"
+  "filterByCountry": "Nach Land filtern",
+  "filterByStatus": "Nach Status filtern",
+  "filterByType": "Nach Typ filtern",
+  "filterBySector": "Nach Sektor filtern",
+  "allCountries": "Alle Länder",
+  "allStatuses": "Alle Status",
+  "allTypes": "Alle Typen",
+  "allSectors": "Alle Sektoren",
+  "partnersCount": "{{count}} Partner",
+  "noPartnersFound": "Keine Partner mit den ausgewählten Filtern gefunden",
+  "clearFilters": "Filter löschen",
+  "stats": {
+    "total": "Partner Gesamt",
+    "countries": "Länder",
+    "associations": "Verbände",
+    "clusters": "Cluster",
+    "active": "Aktiv",
+    "inDevelopment": "In Entwicklung"
   },
-  "itbid": {
-    "description": "Führende Plattform für Ausschreibungen und öffentliche Beschaffung. Strategische Zusammenarbeit für Datenprojekte im öffentlichen Sektor."
+  "status": {
+    "active": "Aktiv",
+    "inDevelopment": "In Entwicklung",
+    "comingSoon": "Demnächst"
+  },
+  "priority": {
+    "immediate": "Sofort",
+    "criticalMass": "Kritische Masse",
+    "quickWin": "Quick Win"
+  },
+  "type": {
+    "association": "Verband",
+    "cluster": "Cluster"
+  },
+  "countries": {
+    "ES": "Spanien",
+    "DE": "Deutschland",
+    "IT": "Italien",
+    "FR": "Frankreich",
+    "NL": "Niederlande",
+    "PT": "Portugal",
+    "BE": "Belgien"
+  },
+  "sectors": {
+    "publicSector": "Öffentlicher Sektor",
+    "procurement": "Beschaffung",
+    "procurementLogistics": "Beschaffung & Logistik",
+    "procurementSupplyChain": "Beschaffung & Supply Chain",
+    "agriculture": "Landwirtschaft",
+    "chemistry": "Chemie",
+    "chemicalIndustry": "Chemische Industrie",
+    "chemistryMaterials": "Chemie & Materialien",
+    "chemistryLifeSciences": "Chemie & Life Sciences",
+    "technologyIndustry": "Technologie/Industrie",
+    "technology": "Technologie",
+    "smartCityIoT": "Smart City/IoT",
+    "aerospace": "Luft- und Raumfahrt",
+    "food": "Lebensmittel",
+    "electronicsEnergy": "Elektronik/Energie",
+    "electronics": "Elektronik",
+    "automotive": "Automobil",
+    "automotiveLuxury": "Luxus-Automobil",
+    "construction": "Bauwesen",
+    "sustainableConstruction": "Nachhaltiges Bauen",
+    "energyWater": "Energie & Wasser",
+    "energy": "Energie",
+    "metallurgy": "Metallurgie",
+    "microelectronics": "Mikroelektronik",
+    "semiconductors": "Halbleiter",
+    "industry40": "Industrie 4.0",
+    "industry": "Industrie",
+    "medicalTechnology": "Medizintechnik",
+    "lifeSciences": "Life Sciences",
+    "biotechnology": "Biotechnologie",
+    "health": "Gesundheit",
+    "machinery": "Maschinenbau",
+    "materialsCeramics": "Materialien/Keramik",
+    "textile": "Textil",
+    "deepTech": "Deep Tech",
+    "security": "Sicherheit",
+    "logistics": "Logistik",
+    "foreignTrade": "Außenhandel"
+  },
+  "partners": {
+    "itbid": {
+      "description": "Führende öffentliche Ausschreibungsplattform in Spanien. Verbindet Lieferanten mit Auftragsmöglichkeiten des öffentlichen Sektors."
+    },
+    "aerce": {
+      "description": "Wichtigster Berufsverband für Beschaffung in Spanien mit +3.000 Mitgliedern. Bietet CPO-Zertifizierung und organisiert das Einkaufsforum."
+    },
+    "bme-espana": {
+      "description": "Spanische Delegation des größten deutschen Beschaffungsverbands. Fördert europäische Beschaffungsstandards und organisiert das BME Symposium in Spanien."
+    },
+    "asaja": {
+      "description": "Spaniens größte Landwirtschaftsorganisation mit Präsenz in allen autonomen Gemeinschaften. Schlüssel für Digitalisierung des Primärsektors."
+    },
+    "feique": {
+      "description": "Vertritt 100% der spanischen Chemieindustrie (3.000 Unternehmen). Strategischer Sektor mit €71.000M Umsatz."
+    },
+    "gaia-cluster": {
+      "description": "Das Herz der Industrie 4.0 in Spanien (Baskenland). Verbindet Elektronik, IT und Telekommunikation. +300 Mitgliedsunternehmen."
+    },
+    "22-barcelona": {
+      "description": "Das Innovationsviertel par excellence in Katalonien. Mehr als 10.000 Unternehmen und 100.000 Arbeitnehmer."
+    },
+    "aeropolis": {
+      "description": "Europas einziger Wissenschafts- und Technologiepark, der ausschließlich der Luft- und Raumfahrtindustrie gewidmet ist (Andalusien)."
+    },
+    "food-i": {
+      "description": "Lebensmittelcluster des Ebro-Tals. Strategisch für den Agrar-Lebensmittel-Bereich, fokussiert auf Rückverfolgbarkeit und Lebensmittelsicherheit."
+    },
+    "secartys": {
+      "description": "Nationale Elektronik-, Solarenergie- und Hausautomationsindustrie. +300 Technologieunternehmen."
+    },
+    "bme": {
+      "description": "Deutschlands größter Beschaffungsverband mit +9.500 Mitgliedern. Organisiert das BME Symposium (Europas größte Beschaffungsveranstaltung)."
+    },
+    "vda": {
+      "description": "Verband der deutschen Automobilindustrie. Vertritt Hersteller wie Volkswagen, BMW, Mercedes-Benz. Definiert den VDA-Standard."
+    },
+    "vci": {
+      "description": "Vertritt die deutsche Chemieindustrie, drittgrößte der Welt. +1.700 Mitgliedsunternehmen inkl. BASF, Bayer, Henkel."
+    },
+    "zdb": {
+      "description": "Zentralverband des Deutschen Baugewerbes. Vertritt 35.000 Bauunternehmen. Fördert Digitalisierung (BIM) und Nachhaltigkeit."
+    },
+    "bdew": {
+      "description": "Bundesverband der Energie- und Wasserwirtschaft. Vertritt +1.900 Unternehmen. Schlüssel für die Energiewende."
+    },
+    "wsm": {
+      "description": "Wirtschaftsverband Stahl- und Metallverarbeitung. Fördert Industrie 4.0 in der Metallurgie."
+    },
+    "dbv": {
+      "description": "Deutscher Bauernverband. Vertritt +300.000 Landwirte. Fördert Präzisionslandwirtschaft und Digitalisierung."
+    },
+    "silicon-saxony": {
+      "description": "Europas größtes Mikroelektronik- und Software-Cluster (Dresden). Halbleitergiganten wie Infineon, Bosch, Globalfoundries. +500 Unternehmen."
+    },
+    "its-owl": {
+      "description": "Intelligent Technical Systems OstWestfalenLippe. Gilt als Heimat der Industrie 4.0. Automatisierungsführer wie Beckhoff, Harting, Phoenix Contact."
+    },
+    "medical-valley": {
+      "description": "Eines der weltweiten Medizintechnikzentren (Nürnberg). Vital für Gesundheitsbranche und Krankenhausbeschaffung. +500 MedTech-Unternehmen."
+    },
+    "hamburg-aviation": {
+      "description": "Eines der größten Zivilluftfahrt-Cluster der Welt (Airbus-Hauptsitz). Vollständige Wertschöpfungskette. +300 Unternehmen."
+    },
+    "biorn": {
+      "description": "Biotechnologie- und Life-Sciences-Cluster (Rhein-Neckar-Region). Verbindung zu Pharma- und Chemieindustrie. +150 Biotech-Unternehmen."
+    },
+    "adaci": {
+      "description": "Italienischer Beschaffungs- und Supply-Management-Verband. Referenz für professionelle Zertifizierung in Italien. +5.000 Beschaffungsexperten."
+    },
+    "anfia": {
+      "description": "Vertritt die gesamte italienische Automobilzulieferkette. Schlüssel für den Übergang zu Elektrofahrzeugen."
+    },
+    "federchimica": {
+      "description": "Italienischer Chemieindustrieverband. Vertritt +1.400 Unternehmen. Fördert nachhaltige Chemie und Kreislaufwirtschaft."
+    },
+    "ance": {
+      "description": "Nationaler Bauherrenverband. Vertritt +20.000 italienische Bauunternehmen. Schlüssel für PNRR und grünes Bauen."
+    },
+    "federmeccanica": {
+      "description": "Italienischer Metallverarbeitungsverband. Vertritt Italiens größten Fertigungssektor. Fördert digitale Transformation."
+    },
+    "motor-valley": {
+      "description": "Das berühmteste Luxus-Automobilcluster der Welt (Emilia-Romagna). Ferrari, Lamborghini, Maserati, Ducati, Pagani. +16.000 Unternehmen."
+    },
+    "packaging-valley": {
+      "description": "Weltmarktführer bei automatischen Verpackungsmaschinen (Bologna). Unternehmen wie IMA, Marchesini, Coesia. €8.000M Umsatz."
+    },
+    "distretto-ceramica": {
+      "description": "Produziert 80% der italienischen Keramik (Sassuolo). Pioniere bei Nachhaltigkeit und Materialrecycling. +300 Keramikunternehmen."
+    },
+    "distretto-tessile": {
+      "description": "Eines der größten Textilzentren Europas (Toskana). Massiver Fokus auf 'zirkuläre Mode' und Textilrecycling. +7.000 Unternehmen."
+    },
+    "aerospace-piedmont": {
+      "description": "Vereint wichtige Akteure der Luft- und Raumfahrt und Verteidigung in Norditalien (Leonardo, Thales Alenia Space). +350 Unternehmen."
+    },
+    "cdaf": {
+      "description": "Französischer Verband der Einkaufsleiter und Käufer. Wichtigster französischer Beschaffungsverband. Organisiert Nuit des Achats."
+    },
+    "pfa": {
+      "description": "Französische Automobilplattform. Koordiniert die französische Automobilindustrie. Fördert das Fahrzeug der Zukunft."
+    },
+    "uic": {
+      "description": "Union der französischen Chemieindustrie. Vertritt den französischen Chemiesektor. Fördert grüne und nachhaltige Chemie."
+    },
+    "ffb": {
+      "description": "Französischer Bauverband. Vertritt Bauunternehmen. Fördert RE2020 und BIM in Frankreich."
+    },
+    "fnsea": {
+      "description": "Frankreichs größter Agrarverband. Vertritt Landwirte und Viehzüchter. Fördert Präzisionslandwirtschaft."
+    },
+    "gifas": {
+      "description": "Französischer Luft- und Raumfahrtindustrieverband. Vertritt Airbus, Safran, Thales und deren Lieferkette."
+    },
+    "aimf": {
+      "description": "Verband der Maschinen- und Gießereiindustrie. Vertritt den französischen Industriemaschinensektor."
+    },
+    "aerospace-valley": {
+      "description": "Das wichtigste Luft- und Raumfahrtcluster der Welt neben Seattle (Toulouse/Bordeaux). +850 Mitglieder. Airbus, Safran, Thales."
+    },
+    "minalogic": {
+      "description": "Innovationszentrum für Digitaltechnologien: Mikro-Nanoelektronik, Photonik, Software (Grenoble). 'Französisches Silicon Valley'. +500 Unternehmen."
+    },
+    "systematic": {
+      "description": "Fokussiert auf Deep Tech (KI, Cybersicherheit, Digitale Zwillinge). Hub für digitale Standards französischer Großunternehmen. +900 Mitglieder."
+    },
+    "capenergies": {
+      "description": "Gewidmet der Energiewende und dekarbonisierten Energien (Nuklear, Solar, Wasserstoff) in Provence-Alpes-Côte d'Azur. +500 Mitglieder."
+    },
+    "biovalley-france": {
+      "description": "Trinationales Cluster (Deutschland und Schweiz) für Gesundheit und Biotechnologie im Elsass. +350 Unternehmen."
+    },
+    "nevi": {
+      "description": "Niederländischer Beschaffungsverband. Führend bei Zertifizierung und Beschaffungsausbildung. Organisiert NEVI Inkoopdag. +5.000 Mitglieder."
+    },
+    "rai": {
+      "description": "Niederländischer Automobilindustrieverband. Vertritt Importeure, Händler und Hersteller. Fördert nachhaltige Mobilität."
+    },
+    "vnci": {
+      "description": "Niederländischer Chemieindustrieverband. Vertritt +100 Unternehmen. Führt den Übergang zur zirkulären Chemie."
+    },
+    "bouwend": {
+      "description": "Niederländischer Bauverband. Vertritt +4.500 Unternehmen. Pionier bei zirkulärem und nachhaltigem Bauen."
+    },
+    "lto": {
+      "description": "Niederländische Landwirte- und Gärtnerorganisation. Vertritt Europas technifiziertesten Agrarsektor. Führend in AgriTech."
+    },
+    "brainport-eindhoven": {
+      "description": "Wahrscheinlich Europas intelligentester km² (ASML, Philips, NXP, DAF Hauptsitz). Halbleiter- und Hightech-Epizentrum. +1.500 Unternehmen."
+    },
+    "food-valley": {
+      "description": "Das Silicon Valley der Landwirtschaft und Lebensmittel (Wageningen). Globale Lebensmitteltechnologie- und alternative Proteinstandards."
+    },
+    "chemelot": {
+      "description": "Ultra-integrierter Chemie- und Materialindustriepark (Limburg). Unternehmen teilen Energie- und Datenflüsse. DSM, Sabic."
+    },
+    "hsd": {
+      "description": "Europas führendes Sicherheitscluster: Cybersicherheit, Forensik, nationale Sicherheit (Den Haag). +300 Sicherheitsunternehmen."
+    },
+    "port-rotterdam": {
+      "description": "Fungiert als massives Logistik- und Energiecluster. Führt globale maritime Lieferketten-Digitalisierung. Europas größter Hafen."
+    },
+    "apcadec": {
+      "description": "Portugiesischer Beschaffungs- und Versorgungsverband. Fördert Professionalisierung und Digitalisierung der Beschaffung in Portugal."
+    },
+    "aicep": {
+      "description": "Portugals Investitions- und Außenhandelsagentur. Erleichtert die Internationalisierung portugiesischer Unternehmen."
+    },
+    "aip": {
+      "description": "Portugiesischer Industrieverband. Vertritt die portugiesische Fertigungsindustrie. Organisiert FIL (Internationale Messe Lissabon)."
+    },
+    "aed-cluster-portugal": {
+      "description": "Luft- und Raumfahrt, Weltraum und Verteidigung. Wächst schnell als europäischer Tier-2-Lieferant. Unternehmen wie Embraer Portugal, OGMA. +130 Unternehmen."
+    },
+    "health-cluster-portugal": {
+      "description": "Vereint Pharma-, Biotech- und Medizingeräteindustrie. Fördert Portugal als Gesundheits-Hub. +200 Unternehmen."
+    },
+    "produtech": {
+      "description": "Produktionstechnologie-Cluster (Norden). Vereint Maschinen- und Technologiehersteller für die Fertigungsindustrie. +200 Unternehmen."
+    },
+    "tice-pt": {
+      "description": "IKT- und Elektronik-Kompetenzcluster. Digitaler Schirm für die portugiesische Transformation. +400 Unternehmen."
+    },
+    "habitat-sustentavel": {
+      "description": "Fokussiert auf nachhaltiges Bauen und Materialien (Stein, Keramik, Kork). Fördert Nachhaltigkeit in der gebauten Umwelt. +200 Unternehmen."
+    },
+    "agoria": {
+      "description": "Belgischer Technologieindustrieverband. Vertritt +2.000 Technologie-, Fertigungs- und Digitalunternehmen."
+    },
+    "essenscia": {
+      "description": "Belgischer Chemie- und Life-Sciences-Verband. Generiert €65.000M Exporte. Weltklasse-Pharmacluster."
+    },
+    "febiac": {
+      "description": "Belgischer und luxemburgischer Automobilverband. Vertritt Importeure und Händler. Fördert elektrifizierte Mobilität."
+    },
+    "biowin": {
+      "description": "Walloniens Gesundheitscluster. Europäische Referenz für Biopharma und Impfstoffe (GSK, UCB). +150 Biotech-Unternehmen."
+    },
+    "antwerp-chemical": {
+      "description": "Das zweitgrößte Chemiecluster der Welt nach Houston. BASF, Bayer, Total, ExxonMobil. +500 Chemieunternehmen."
+    },
+    "skywin": {
+      "description": "Wallonisches Luft- und Raumfahrtcluster. Fokussiert auf neue Materialien und eingebettete Systeme für die Luftfahrt. +130 Unternehmen."
+    },
+    "dsp-valley": {
+      "description": "Spezialisiert auf intelligente elektronische Systeme und Signalverarbeitung (Löwen). IMEC, NXP. +100 Unternehmen."
+    },
+    "flux50": {
+      "description": "Smart-Energy-Cluster: Smart Grids, Energieeffizienz (Flandern). +150 Unternehmen."
+    }
   }
 }
