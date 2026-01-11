@@ -76,6 +76,7 @@ import TourGuiado from "./pages/motor/TourGuiado";
 import DocsInteractivos from "./pages/motor/DocsInteractivos";
 import Partners from "./pages/Partners";
 import PremiumPartners from "./pages/PremiumPartners";
+import PremiumPartnerPage from "./pages/partners/PremiumPartnerPage";
 import TelemetriaFlotaDetail from "./pages/catalog/TelemetriaFlotaDetail";
 import ConsumoElectricoDetail from "./pages/catalog/ConsumoElectricoDetail";
 import HistoricoMeteorologicoDetail from "./pages/catalog/HistoricoMeteorologicoDetail";
@@ -227,6 +228,7 @@ const App = () => (
                   
                   {/* Premium Partners */}
                   <Route path="/partners/premium" element={<PremiumPartners />} />
+                  <Route path="/partners/premium/:partnerId" element={<PremiumPartnerPage />} />
 
                   {/* Partner Pages */}
                   <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
