@@ -367,7 +367,10 @@ const Partners = () => {
                               </Link>
                             </Button>
                             <Button asChild size="sm" className="w-full bg-white hover:bg-gray-50 text-black border border-gray-300">
-                              <Link to="/auth" className="flex items-center gap-2">
+                              <Link 
+                                to={partner.link && partner.link !== "/partners" ? partner.link : "/auth"} 
+                                className="flex items-center gap-2"
+                              >
                                 {t('generalAccess')}
                                 <ExternalLink className="h-3 w-3" />
                               </Link>
