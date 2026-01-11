@@ -3175,6 +3175,290 @@ export const bouwendNederland: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 11: LICITACIONES Y RESURGIR PORTUGUÉS
+// ============================================
+
+export const itbid: PremiumPartner = {
+  id: "itbid",
+  name: "ITBID",
+  fullName: "ITBID - Plataforma de Licitaciones Públicas",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Sector Público y Licitaciones",
+  
+  authorityContext: {
+    narrative: "ITBID ocupa un lugar único en el ecosistema: no es una asociación gremial, sino una plataforma tecnológica que actúa como nodo conector entre la Administración Pública y el mercado privado. Es líder en soluciones de e-sourcing y gestión de licitaciones. Para ProcureData, este partner es la llave maestra para acceder a datos de contratación pública, transparencia y volúmenes de compra gubernamental.",
+    keyStats: [
+      { value: "€50Bn+", label: "Licitaciones Procesadas" },
+      { value: "10.000+", label: "Entidades Públicas" },
+      { value: "#1", label: "e-Sourcing Público España" }
+    ],
+    headquarters: "Madrid, España"
+  },
+  
+  ecosystem: [
+    { name: "Navantia", description: "Construcción naval militar" },
+    { name: "Generalitat de Catalunya", description: "Administración regional" },
+    { name: "Metro de Madrid", description: "Transporte público" },
+    { name: "Acciona", description: "Infraestructuras" },
+    { name: "FCC", description: "Servicios ciudadanos" },
+    { name: "Correos", description: "Logística pública" },
+    { name: "Tragsa", description: "Medio ambiente y servicios rurales" },
+    { name: "Aena", description: "Gestión aeroportuaria" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos masivos y estructurados sobre licitaciones públicas, precios de adjudicación vs. presupuesto base y solvencia de proveedores del estado.",
+    capabilities: [
+      "Predicción de licitaciones",
+      "Desviación presupuestaria",
+      "Riesgo de proveedor público",
+      "Competencia en concursos"
+    ],
+    uniqueValue: "Acceso a la mayor base de datos de contratación pública española: licitaciones, adjudicaciones, precios de referencia y análisis de competencia."
+  },
+  
+  useCases: [
+    { id: "tender-prediction", title: "Predicción de Licitaciones", description: "Calendario estimado de renovación de grandes contratos públicos.", type: "forecast" },
+    { id: "budget-deviation", title: "Desviación Presupuestaria", description: "Diferencial medio entre precio licitado y adjudicado por sector.", type: "benchmark" },
+    { id: "public-supplier-risk", title: "Riesgo de Proveedor Público", description: "Historial de cumplimiento de plazos en obras públicas.", type: "risk" },
+    { id: "energy-reference-prices", title: "Precios de Referencia en Energía", description: "Costes de suministro eléctrico adjudicados por ayuntamientos.", type: "benchmark" },
+    { id: "time-to-contract", title: "Tiempos de Adjudicación", description: "Duración media de los procesos burocráticos.", type: "benchmark" },
+    { id: "tender-competition", title: "Competencia en Concursos", description: "Número medio de ofertas presentadas por tipo de licitación.", type: "index" },
+    { id: "public-tech-spending", title: "Gasto Público en Tecnología", description: "Inversión de la administración en hardware y licencias.", type: "index" },
+    { id: "abnormal-bids", title: "Bajas Temerarias", description: "Estadísticas de ofertas descartadas por precio anormalmente bajo.", type: "risk" },
+    { id: "sme-participation", title: "Participación de PYMEs", description: "Cuota de mercado de pequeñas empresas en contratación pública.", type: "index" },
+    { id: "transparency-index", title: "Índice de Transparencia", description: "Métricas de publicación de datos abiertos por entidad.", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const fim: PremiumPartner = {
+  id: "fim",
+  name: "FIM",
+  fullName: "Fédération des Industries Mécaniques",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Maquinaria y Equipamiento Mecánico",
+  
+  authorityContext: {
+    narrative: "La Fédération des Industries Mécaniques (FIM) representa a la 'fábrica de Francia'. Agrupa a más de 10.000 empresas que diseñan, producen e instalan equipos mecánicos. Desde válvulas industriales hasta robótica y calderería pesada. Son los que equipan a las demás industrias (energía, agro, transporte). Lideran la iniciativa 'Industrie du Futur' en Francia.",
+    keyStats: [
+      { value: "10.000+", label: "Empresas Miembro" },
+      { value: "€120Bn", label: "Facturación Sector" },
+      { value: "#1", label: "Maquinaria Francia" }
+    ],
+    headquarters: "París, Francia"
+  },
+  
+  ecosystem: [
+    { name: "Manitou Group", description: "Maquinaria de manipulación" },
+    { name: "Poclain Hydraulics", description: "Motores hidráulicos" },
+    { name: "Fives", description: "Ingeniería industrial global" },
+    { name: "Legrand", description: "Infraestructura eléctrica/mecánica" },
+    { name: "Alstom", description: "Componentes mecánicos ferroviarios" },
+    { name: "Kuhn", description: "Maquinaria agrícola" },
+    { name: "Haulotte", description: "Plataformas elevadoras" },
+    { name: "Cetim", description: "Centro Técnico de las Industrias Mecánicas" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de bienes de capital (Capex). Indicadores adelantados de inversión industrial: si la FIM vende máquinas hoy, la industria producirá mañana.",
+    capabilities: [
+      "Pedidos de maquinaria industrial",
+      "Exportación de bienes de equipo",
+      "Robótica colaborativa",
+      "Digitalización de productos"
+    ],
+    uniqueValue: "Acceso a datos adelantados de inversión industrial: pedidos de maquinaria, bienes de equipo y adopción de Industrie du Futur."
+  },
+  
+  useCases: [
+    { id: "machinery-orders", title: "Pedidos de Maquinaria Industrial", description: "Índice de entrada de nuevos pedidos (barómetro económico).", type: "index" },
+    { id: "steel-foundry-prices", title: "Precios de Acero y Fundición", description: "Coste de materias primas metálicas para manufactura.", type: "cost" },
+    { id: "capital-goods-exports", title: "Exportación de Bienes de Equipo", description: "Flujos de venta de tecnología francesa a China y Alemania.", type: "index" },
+    { id: "component-lead-times", title: "Plazos de Entrega de Componentes", description: "Tiempos de espera para rodamientos, válvulas y bombas.", type: "benchmark" },
+    { id: "additive-manufacturing", title: "Adopción de Fabricación Aditiva", description: "Uso de impresión 3D metálica en piezas finales.", type: "index" },
+    { id: "industrial-maintenance", title: "Mantenimiento Industrial", description: "Demanda de servicios de reparación y repuestos.", type: "index" },
+    { id: "motor-efficiency", title: "Eficiencia Energética de Motores", description: "Datos de transición a motores eléctricos IE4/IE5.", type: "benchmark" },
+    { id: "collaborative-robotics", title: "Robótica Colaborativa", description: "Ventas de cobots en PYMEs francesas.", type: "index" },
+    { id: "mechanics-employment", title: "Empleo en Mecánica", description: "Escasez de torneros, fresadores y soldadores cualificados.", type: "capacity" },
+    { id: "connected-machinery", title: "Digitalización de Productos", description: "Maquinaria conectada (IIoT) vendida.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const aicep: PremiumPartner = {
+  id: "aicep",
+  name: "AICEP",
+  fullName: "Agência para o Investimento e Comércio Externo de Portugal",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Comercio Exterior e Inversión",
+  
+  authorityContext: {
+    narrative: "La Agência para o Investimento e Comércio Externo de Portugal (AICEP) es el motor de la internacionalización lusa. Funciona como agencia gubernamental pero con mentalidad empresarial. Gestionan los parques industriales donde se instalan multinacionales (como la Autoeuropa de VW). Son la fuente oficial de datos sobre Inversión Extranjera Directa (IED) y capacidad exportadora de Portugal.",
+    keyStats: [
+      { value: "€10Bn+", label: "IED Anual Gestionada" },
+      { value: "VW/Bosch", label: "Multinacionales Instaladas" },
+      { value: "80+", label: "Mercados Cubiertos" }
+    ],
+    headquarters: "Lisboa, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Volkswagen Autoeuropa", description: "La mayor fábrica de coches de Portugal" },
+    { name: "The Navigator Company", description: "Papel y celulosa (líder europeo)" },
+    { name: "Galp", description: "Energía" },
+    { name: "EDP", description: "Energía renovable" },
+    { name: "Bosch Portugal", description: "Centros de I+D y producción" },
+    { name: "Continental Mabor", description: "Neumáticos" },
+    { name: "Ikea Industry", description: "Fábricas de muebles en Paços de Ferreira" },
+    { name: "Farfetch", description: "Unicornio tecnológico - operaciones" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos macroeconómicos de suelo industrial, incentivos fiscales y flujos comerciales. Vital para empresas que buscan deslocalizar producción a Portugal (nearshoring).",
+    capabilities: [
+      "Disponibilidad de suelo industrial",
+      "Incentivos fiscales Portugal 2030",
+      "Costes de implantación",
+      "Nearshoring desde Asia"
+    ],
+    uniqueValue: "Acceso a datos oficiales de inversión extranjera, suelo industrial y capacidad exportadora de Portugal como destino de nearshoring."
+  },
+  
+  useCases: [
+    { id: "industrial-land", title: "Disponibilidad de Suelo Industrial", description: "Metros cuadrados libres en zonas francas y parques empresariales.", type: "capacity" },
+    { id: "soft-landing-costs", title: "Costes de Implantación", description: "Benchmarks de gastos legales y administrativos para abrir filial.", type: "cost" },
+    { id: "fiscal-incentives", title: "Mapa de Incentivos Fiscales", description: "Datos sobre beneficios para I+D e inversión productiva (Portugal 2030).", type: "directory" },
+    { id: "sector-exports", title: "Exportaciones por Sector", description: "Volúmenes de venta de calzado, textil y metalmecánica.", type: "index" },
+    { id: "fdi-origin", title: "Inversión Extranjera Directa", description: "Origen de capitales que invierten en Portugal.", type: "index" },
+    { id: "port-logistics-costs", title: "Costes Logísticos Portuarios", description: "Tarifas de los puertos de Sines y Leixões.", type: "cost" },
+    { id: "multilingual-talent", title: "Talento Multilingüe", description: "Disponibilidad de personal para centros de servicios compartidos.", type: "capacity" },
+    { id: "nearshoring-trends", title: "Nearshoring", description: "Tendencias de relocalización de producción desde Asia.", type: "forecast" },
+    { id: "origin-certifications", title: "Certificaciones de Origen", description: "Datos de productos con sello 'Made in Portugal'.", type: "directory" },
+    { id: "rail-connectivity", title: "Conectividad Ferroviaria", description: "Capacidad de carga del Corredor Atlántico.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const ticePt: PremiumPartner = {
+  id: "tice-pt",
+  name: "TICE.PT",
+  fullName: "Pólo de Competitividade das TIC e Electrónica",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Tecnología (TIC) y Software",
+  
+  authorityContext: {
+    narrative: "TICE.PT es el polo de competitividad de las tecnologías de la información, comunicación y electrónica en Portugal. Portugal se ha convertido en el 'hub de codificación' de Europa, atrayendo centros tecnológicos de BMW, Mercedes o Google. TICE.PT coordina este ecosistema, conectando universidades, startups y corporaciones.",
+    keyStats: [
+      { value: "3", label: "Unicornios Tech (Feedzai, Talkdesk, OutSystems)" },
+      { value: "€5Bn+", label: "Exportación TIC Anual" },
+      { value: "BMW/Mercedes", label: "Tech Hubs Instalados" }
+    ],
+    headquarters: "Lisboa, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Critical TechWorks", description: "Joint venture BMW - desarrollo software coche" },
+    { name: "OutSystems", description: "Unicornio Low-code" },
+    { name: "Altice Portugal (MEO)", description: "Telecomunicaciones" },
+    { name: "NOS", description: "Telecomunicaciones" },
+    { name: "Feedzai", description: "IA para prevención de fraude (Unicornio)" },
+    { name: "Talkdesk", description: "Contact center cloud (Unicornio)" },
+    { name: "Siemens Portugal", description: "Tech hubs" },
+    { name: "Fraunhofer Portugal", description: "Investigación en agricultura digital y salud" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El nodo del talento digital. Datos sobre salarios de desarrolladores (muy competitivos en Europa), infraestructura 5G y startups.",
+    capabilities: [
+      "Salarios de desarrolladores",
+      "Exportación de servicios TIC",
+      "Ecosistema de startups",
+      "Centros de excelencia extranjeros"
+    ],
+    uniqueValue: "Acceso al ecosistema tecnológico portugués: salarios competitivos de desarrolladores, unicornios y tech hubs de multinacionales."
+  },
+  
+  useCases: [
+    { id: "developer-salaries", title: "Salarios de Desarrolladores", description: "Remuneración media de ingenieros en Lisboa vs. Oporto vs. Braga.", type: "benchmark" },
+    { id: "ict-exports", title: "Exportación de Servicios TIC", description: "Volumen de facturación de software portugués al extranjero.", type: "index" },
+    { id: "5g-fiber-coverage", title: "Cobertura 5G y Fibra", description: "Mapas de conectividad de alta velocidad.", type: "capacity" },
+    { id: "startup-ecosystem", title: "Ecosistema de Startups", description: "Censo de nuevas empresas tecnológicas por vertical.", type: "directory" },
+    { id: "stem-graduates", title: "Graduados STEM", description: "Número anual de ingenieros saliendo de las universidades.", type: "capacity" },
+    { id: "tech-office-costs", title: "Coste de Oficinas Tech", description: "Precios de alquiler en hubs digitales como Parque das Nações.", type: "cost" },
+    { id: "cloud-adoption", title: "Adopción de Cloud", description: "% de empresas portuguesas migradas a la nube.", type: "index" },
+    { id: "excellence-centers", title: "Centros de Excelencia", description: "Mapa de hubs de ingeniería extranjeros instalados en el país.", type: "directory" },
+    { id: "smart-city-projects", title: "Proyectos de Smart City", description: "Datos de sensorización en ciudades portuguesas.", type: "index" },
+    { id: "sme-digitalization", title: "Digitalización de PYMEs", description: "Índice de madurez digital del tejido empresarial tradicional.", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const aip: PremiumPartner = {
+  id: "aip",
+  name: "AIP",
+  fullName: "Associação Industrial Portuguesa",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Industria General y Ferias",
+  
+  authorityContext: {
+    narrative: "La Associação Industrial Portuguesa (AIP) es la decana de las asociaciones empresariales (fundada en 1837). Con sede en Lisboa, organiza las grandes ferias industriales (FIL). Representa al tejido empresarial transversal de Portugal, no solo a un sector. Es el termómetro de la confianza empresarial y la salud de las PYMEs portuguesas.",
+    keyStats: [
+      { value: "1837", label: "Fundación" },
+      { value: "FIL", label: "Ferias Lisboa" },
+      { value: "Transversal", label: "Todos los Sectores" }
+    ],
+    headquarters: "Lisboa, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Delta Cafés", description: "Alimentación y distribución" },
+    { name: "Sumol+Compal", description: "Bebidas" },
+    { name: "Sovena", description: "Aceite de oliva y agricultura" },
+    { name: "Grupo Barraqueiro", description: "Transporte" },
+    { name: "Teixeira Duarte", description: "Construcción" },
+    { name: "Grupo Visabeira", description: "Conglomerado industrial/servicios" },
+    { name: "Renova", description: "Papel tisú (marca global)" },
+    { name: "Vista Alegre", description: "Porcelana y cristal de lujo" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de sentimiento empresarial, insolvencias y ferias comerciales. Aportan la visión transversal de la economía lusa.",
+    capabilities: [
+      "Índice de confianza industrial",
+      "Asistencia a ferias B2B",
+      "Plazos de pago a proveedores",
+      "Relevo generacional"
+    ],
+    uniqueValue: "Acceso a datos transversales de la economía portuguesa: confianza empresarial, ferias industriales, crédito a empresas y sucesión familiar."
+  },
+  
+  useCases: [
+    { id: "industrial-confidence", title: "Índice de Confianza Industrial", description: "Encuesta mensual de clima económico en Portugal.", type: "index" },
+    { id: "fair-attendance", title: "Asistencia a Ferias", description: "Datos de visitantes profesionales en eventos B2B.", type: "index" },
+    { id: "payment-terms", title: "Plazos de Pago a Proveedores", description: "Comportamiento de pagos de empresas portuguesas.", type: "benchmark" },
+    { id: "company-creation", title: "Creación de Empresas", description: "Estadísticas de nuevas sociedades constituidas por región.", type: "index" },
+    { id: "sme-internationalization", title: "Internacionalización de PYMEs", description: "% de pequeñas empresas que inician actividad exportadora.", type: "index" },
+    { id: "industrial-energy", title: "Consumo de Energía Industrial", description: "Datos agregados de demanda eléctrica empresarial.", type: "benchmark" },
+    { id: "business-credit", title: "Crédito a Empresas", description: "Condiciones de acceso a financiación bancaria.", type: "benchmark" },
+    { id: "executive-training", title: "Formación Ejecutiva", description: "Demanda de cursos de gestión y liderazgo.", type: "index" },
+    { id: "labor-productivity", title: "Productividad Laboral", description: "Métricas de valor añadido bruto por empleado.", type: "benchmark" },
+    { id: "generational-handover", title: "Relevo Generacional", description: "Datos sobre sucesión en empresas familiares.", type: "forecast" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -3242,7 +3526,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   ltoNederland,
   wsm,
   ffb,
-  bouwendNederland
+  bouwendNederland,
+  // Paquete 11: Licitaciones y Resurgir Portugués
+  itbid,
+  fim,
+  aicep,
+  ticePt,
+  aip
 ];
 
 // Helper para obtener un partner por ID
