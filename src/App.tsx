@@ -88,6 +88,12 @@ import CapacidadProductivaDetail from "./pages/catalog/CapacidadProductivaDetail
 import BenchmarkingPreciosDetail from "./pages/catalog/BenchmarkingPreciosDetail";
 import TelemetriaIAAutomotrizDetail from "./pages/catalog/TelemetriaIAAutomotrizDetail";
 import CertificacionesAeronauticasDetail from "./pages/catalog/CertificacionesAeronauticasDetail";
+import CombustiblesSAFDetail from "./pages/catalog/CombustiblesSAFDetail";
+import DisponibilidadMRODetail from "./pages/catalog/DisponibilidadMRODetail";
+import PreciosAleacionesDetail from "./pages/catalog/PreciosAleacionesDetail";
+import ToleranciaTérmicaDetail from "./pages/catalog/ToleranciaTérmicaDetail";
+import ProveedoresPremiumDetail from "./pages/catalog/ProveedoresPremiumDetail";
+import EnergiaLimpiaMotorValleyDetail from "./pages/catalog/EnergiaLimpiaMotorValleyDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
@@ -168,6 +174,12 @@ const App = () => (
             <Route path="/catalog/benchmarking-precios-componentes" element={<BenchmarkingPreciosDetail />} />
             <Route path="/catalog/telemetria-ia-automotriz" element={<TelemetriaIAAutomotrizDetail />} />
             <Route path="/catalog/certificaciones-aeronauticas" element={<CertificacionesAeronauticasDetail />} />
+            <Route path="/catalog/combustibles-saf-aviacion" element={<CombustiblesSAFDetail />} />
+            <Route path="/catalog/disponibilidad-mro-aeronautico" element={<DisponibilidadMRODetail />} />
+            <Route path="/catalog/precios-aleaciones-aeronauticas" element={<PreciosAleacionesDetail />} />
+            <Route path="/catalog/tolerancia-termica-aleaciones" element={<ToleranciaTérmicaDetail />} />
+            <Route path="/catalog/proveedores-premium-automotrices" element={<ProveedoresPremiumDetail />} />
+            <Route path="/catalog/energia-limpia-motor-valley" element={<EnergiaLimpiaMotorValleyDetail />} />
                     <Route path="/sustainability" element={<Sustainability />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:id" element={<ServiceDetail />} />
