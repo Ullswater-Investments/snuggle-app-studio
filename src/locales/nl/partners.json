@@ -5,12 +5,301 @@
   "directory": "Partnerdirectory",
   "accessProjects": "Naar projecten",
   "technicalDoc": "Technische Doc",
+  "viewDetails": "Details bekijken",
   "comingSoon": "Binnenkort meer partners",
   "expandingEcosystem": "We breiden ons ecosysteem uit",
-  "status": {
-    "active": "actief"
+  "filterByCountry": "Filteren op land",
+  "filterByStatus": "Filteren op status",
+  "filterByType": "Filteren op type",
+  "filterBySector": "Filteren op sector",
+  "allCountries": "Alle landen",
+  "allStatuses": "Alle statussen",
+  "allTypes": "Alle types",
+  "allSectors": "Alle sectoren",
+  "partnersCount": "{{count}} partners",
+  "noPartnersFound": "Geen partners gevonden met de geselecteerde filters",
+  "clearFilters": "Filters wissen",
+  "stats": {
+    "total": "Totaal Partners",
+    "countries": "Landen",
+    "associations": "Verenigingen",
+    "clusters": "Clusters",
+    "active": "Actief",
+    "inDevelopment": "In Ontwikkeling"
   },
-  "itbid": {
-    "description": "Toonaangevend platform voor aanbestedingen en publieke inkoop. Strategische samenwerking voor dataprojecten in de publieke sector."
+  "status": {
+    "active": "Actief",
+    "inDevelopment": "In Ontwikkeling",
+    "comingSoon": "Binnenkort"
+  },
+  "priority": {
+    "immediate": "Onmiddellijk",
+    "criticalMass": "Kritieke Massa",
+    "quickWin": "Quick Win"
+  },
+  "type": {
+    "association": "Vereniging",
+    "cluster": "Cluster"
+  },
+  "countries": {
+    "ES": "Spanje",
+    "DE": "Duitsland",
+    "IT": "Italië",
+    "FR": "Frankrijk",
+    "NL": "Nederland",
+    "PT": "Portugal",
+    "BE": "België"
+  },
+  "sectors": {
+    "publicSector": "Publieke Sector",
+    "procurement": "Inkoop",
+    "procurementLogistics": "Inkoop en Logistiek",
+    "procurementSupplyChain": "Inkoop en Supply Chain",
+    "agriculture": "Landbouw",
+    "chemistry": "Chemie",
+    "chemicalIndustry": "Chemische Industrie",
+    "chemistryMaterials": "Chemie en Materialen",
+    "chemistryLifeSciences": "Chemie en Life Sciences",
+    "technologyIndustry": "Technologie/Industrie",
+    "technology": "Technologie",
+    "smartCityIoT": "Smart City/IoT",
+    "aerospace": "Luchtvaart",
+    "food": "Voeding",
+    "electronicsEnergy": "Elektronica/Energie",
+    "electronics": "Elektronica",
+    "automotive": "Automotive",
+    "automotiveLuxury": "Luxe Automotive",
+    "construction": "Bouw",
+    "sustainableConstruction": "Duurzame Bouw",
+    "energyWater": "Energie en Water",
+    "energy": "Energie",
+    "metallurgy": "Metallurgie",
+    "microelectronics": "Micro-elektronica",
+    "semiconductors": "Halfgeleiders",
+    "industry40": "Industrie 4.0",
+    "industry": "Industrie",
+    "medicalTechnology": "Medische Technologie",
+    "lifeSciences": "Life Sciences",
+    "biotechnology": "Biotechnologie",
+    "health": "Gezondheid",
+    "machinery": "Machines",
+    "materialsCeramics": "Materialen/Keramiek",
+    "textile": "Textiel",
+    "deepTech": "Deep Tech",
+    "security": "Beveiliging",
+    "logistics": "Logistiek",
+    "foreignTrade": "Buitenlandse Handel"
+  },
+  "partners": {
+    "itbid": {
+      "description": "Leidend platform voor openbare aanbestedingen in Spanje. Verbindt leveranciers met overheidsinkoopkansen en vergemakkelijkt de toegang tot overheidsaankoopgegevens."
+    },
+    "aerce": {
+      "description": "Belangrijkste professionele inkoopvereniging in Spanje met +3.000 leden. Biedt CPO-certificering (Chief Procurement Officer) en organiseert het Inkoop Forum, het referentie-evenement van de sector."
+    },
+    "bme-espana": {
+      "description": "Spaanse delegatie van de grootste Duitse inkoopvereniging. Bevordert Europese inkoopstandaarden en organiseert het BME Symposium in Spanje."
+    },
+    "asaja": {
+      "description": "De grootste landbouworganisatie van Spanje met aanwezigheid in alle autonome gemeenschappen. Essentieel voor de digitalisering van de primaire sector en de traceerbaarheid van de agri-foodketen."
+    },
+    "feique": {
+      "description": "Vertegenwoordigt 100% van de Spaanse chemische industrie (3.000 bedrijven). Strategische sector die €71.000 miljoen omzet genereert."
+    },
+    "gaia-cluster": {
+      "description": "Het hart van Industrie 4.0 in Spanje (Baskenland). Verbindt elektronica, informatica en telecommunicatie met Baskische gereedschapsmachines. +300 aangesloten bedrijven."
+    },
+    "22-barcelona": {
+      "description": "Het innovatiedistrict bij uitstek in Catalonië. Concentreert bedrijven in informatietechnologie, media en energie. Meer dan 10.000 bedrijven en 100.000 werknemers."
+    },
+    "aeropolis": {
+      "description": "Het enige wetenschaps- en technologiepark in Europa dat uitsluitend aan de luchtvaartindustrie is gewijd (Andalusië). Omvat Airbus-leveranciers."
+    },
+    "food-i": {
+      "description": "Voedingscluster van de Ebro-vallei (La Rioja, Navarra, Aragón). Strategisch voor agri-food verticaal, gericht op traceerbaarheid en voedselveiligheid."
+    },
+    "secartys": {
+      "description": "Nationale industrie voor elektronica, zonne-energie en domotica. +300 bedrijven in de technologiesector."
+    },
+    "bme": {
+      "description": "De grootste Duitse inkoopmanagementvereniging met +9.500 leden. Organiseert het BME Symposium (grootste Europese inkoopevenement)."
+    },
+    "vda": {
+      "description": "Duitse auto-industrievereniging. Vertegenwoordigt fabrikanten zoals Volkswagen, BMW, Mercedes-Benz en hun leveranciers. Definieert de VDA-standaard."
+    },
+    "vci": {
+      "description": "Vertegenwoordigt de Duitse chemische industrie, de derde ter wereld. +1.700 lidbedrijven waaronder BASF, Bayer, Henkel."
+    },
+    "zdb": {
+      "description": "Centrale federatie van de Duitse bouw. Vertegenwoordigt 35.000 bouwbedrijven. Stimuleert digitalisering (BIM) en duurzaamheid."
+    },
+    "bdew": {
+      "description": "Federale vereniging voor energie en water. Vertegenwoordigt +1.900 bedrijven in de Duitse energiesector. Essentieel voor de energietransitie (Energiewende)."
+    },
+    "wsm": {
+      "description": "Vereniging voor staal- en metaalverwerkende industrie. Stimuleert Industrie 4.0 in metallurgie."
+    },
+    "dbv": {
+      "description": "Duitse boerenbond. Vertegenwoordigt +300.000 boeren. Stimuleert precisie-landbouw en digitalisering van het Duitse platteland."
+    },
+    "silicon-saxony": {
+      "description": "Het grootste micro-elektronica- en softwarecluster van Europa (Dresden). Halfgeleidergiganten zoals Infineon, Bosch, Globalfoundries. +500 bedrijven."
+    },
+    "its-owl": {
+      "description": "Intelligent Technical Systems OstWestfalenLippe. Beschouwd als de thuisbasis van Industrie 4.0. Automatiseringsleiders zoals Beckhoff, Harting, Phoenix Contact."
+    },
+    "medical-valley": {
+      "description": "Een van de wereldwijde centra voor medische technologie (Neurenberg). Essentieel voor gezondheidsverticaal en ziekenhuisinkoop. +500 MedTech-bedrijven."
+    },
+    "hamburg-aviation": {
+      "description": "Een van de grootste civiele luchtvaartclusters ter wereld (Airbus-hoofdkantoor). Hele waardeketen: ontwerp, productie en onderhoud. +300 bedrijven."
+    },
+    "biorn": {
+      "description": "Biotechnologie- en life sciences-cluster (Rijn-Neckar-regio). Verbinding met farmaceutische en chemische industrie. +150 biotechbedrijven."
+    },
+    "adaci": {
+      "description": "Italiaanse vereniging voor inkoop en supply management. Referentie voor professionele certificering in Italië. +5.000 inkoopprofessionals."
+    },
+    "anfia": {
+      "description": "Vertegenwoordigt de volledige Italiaanse auto-industrie: fabrikanten, leveranciers, carrosseriebouwers. Essentieel voor de transitie naar elektrische voertuigen."
+    },
+    "federchimica": {
+      "description": "Federatie van de Italiaanse chemische industrie. Vertegenwoordigt +1.400 bedrijven in de sector. Stimuleert duurzame chemie en circulaire economie."
+    },
+    "ance": {
+      "description": "Nationale bouwvereniging. Vertegenwoordigt +20.000 Italiaanse bouwbedrijven. Essentieel voor PNRR en groene bouw."
+    },
+    "federmeccanica": {
+      "description": "Federatie van de Italiaanse metaalverwerkende industrie. Vertegenwoordigt de grootste productiesector van Italië. Stimuleert digitale transformatie."
+    },
+    "motor-valley": {
+      "description": "Het beroemdste luxe automotive-cluster ter wereld (Emilia-Romagna). Ferrari, Lamborghini, Maserati, Ducati, Pagani. +16.000 bedrijven."
+    },
+    "packaging-valley": {
+      "description": "Wereldleider in automatische verpakkingsmachines (Bologna). Bedrijven zoals IMA, Marchesini, Coesia. €8.000 miljoen omzet."
+    },
+    "distretto-ceramica": {
+      "description": "Produceert 80% van de Italiaanse keramiek (Sassuolo). Pioniers in duurzaamheid en materiaalrecycling. +300 keramiekbedrijven."
+    },
+    "distretto-tessile": {
+      "description": "Een van de grootste textielcentra van Europa (Toscane). Massale focus op 'circulaire mode' en textielrecycling. +7.000 bedrijven."
+    },
+    "aerospace-piedmont": {
+      "description": "Bundelt belangrijke spelers in de luchtvaart- en defensie-industrie in Noord-Italië (Leonardo, Thales Alenia Space). +350 bedrijven."
+    },
+    "cdaf": {
+      "description": "Gezelschap van Directeuren en Inkopers van Frankrijk. Belangrijkste vereniging van Franse inkoopprofessionals. Organiseert de Nuit des Achats."
+    },
+    "pfa": {
+      "description": "Frans autoplatform. Coördineert de Franse auto-industrie. Stimuleert het voertuig van de toekomst en elektrificatie."
+    },
+    "uic": {
+      "description": "Unie van Franse chemische industrieën. Vertegenwoordigt de Franse chemiesector. Stimuleert groene en duurzame chemie."
+    },
+    "ffb": {
+      "description": "Franse bouwfederatie. Vertegenwoordigt bouwbedrijven. Stimuleert RE2020 en BIM in Frankrijk."
+    },
+    "fnsea": {
+      "description": "Grootste landbouwvakbond van Frankrijk. Vertegenwoordigt boeren en veetelers. Stimuleert precisie-landbouw."
+    },
+    "gifas": {
+      "description": "Groepering van Franse luchtvaart- en ruimtevaartindustrieën. Vertegenwoordigt Airbus, Safran, Thales en hun toeleveringsketen."
+    },
+    "aimf": {
+      "description": "Vereniging van mechanische industrie en gieterij. Vertegenwoordigt de Franse industriële machinesector."
+    },
+    "aerospace-valley": {
+      "description": "Het belangrijkste luchtvaartcluster ter wereld samen met Seattle (Toulouse/Bordeaux). +850 leden. Airbus, Safran, Thales."
+    },
+    "minalogic": {
+      "description": "Innovatiepool in digitale technologieën: micro-nano-elektronica, fotonica, software (Grenoble). Het 'Franse Silicon Valley'. +500 bedrijven."
+    },
+    "systematic": {
+      "description": "Gericht op Deep Tech (AI, Cybersecurity, Digital Twins). De hub waar grote Franse bedrijven hun digitale standaarden ontwikkelen. +900 leden."
+    },
+    "capenergies": {
+      "description": "Gewijd aan energietransitie en koolstofvrije energie (nucleair, zonne-energie, waterstof) in Provence-Alpes-Côte d'Azur. +500 leden."
+    },
+    "biovalley-france": {
+      "description": "Trinationaal cluster (Duitsland en Zwitserland) voor gezondheid en biotechnologie in de Elzas. Uitstekend voor grensoverschrijdende farmaceutische data. +350 bedrijven."
+    },
+    "nevi": {
+      "description": "Nederlandse vereniging voor inkoopmanagement. Leider in certificering en training in inkoop. Organiseert NEVI Inkoopdag. +5.000 leden."
+    },
+    "rai": {
+      "description": "Nederlandse auto-industrievereniging. Vertegenwoordigt importeurs, distributeurs en fabrikanten. Stimuleert duurzame mobiliteit."
+    },
+    "vnci": {
+      "description": "Nederlandse chemische industrievereniging. Vertegenwoordigt +100 bedrijven in de sector. Leidt de transitie naar circulaire chemie."
+    },
+    "bouwend": {
+      "description": "Nederlandse bouwvereniging. Vertegenwoordigt +4.500 bedrijven. Pionier in circulaire en duurzame bouw."
+    },
+    "lto": {
+      "description": "Organisatie van Nederlandse boeren en tuinders. Vertegenwoordigt de meest geavanceerde landbouwsector van Europa. Leider in AgriTech."
+    },
+    "brainport-eindhoven": {
+      "description": "Waarschijnlijk de slimste km² van Europa (thuisbasis van ASML, Philips, NXP, DAF). Epicentrum van halfgeleiders en high-tech. +1.500 bedrijven."
+    },
+    "food-valley": {
+      "description": "Het Silicon Valley van landbouw en voeding (Wageningen). Wereldstandaarden voor voedseltechnologie en alternatieve eiwitten."
+    },
+    "chemelot": {
+      "description": "Ultra-geïntegreerd chemisch en materialen industriepark (Limburg). Bedrijven delen energie- en datastromen. DSM, Sabic."
+    },
+    "hsd": {
+      "description": "Het leidende beveiligingscluster van Europa: cybersecurity, forensisch, nationale veiligheid (Den Haag). +300 beveiligingsbedrijven."
+    },
+    "port-rotterdam": {
+      "description": "Functioneert als massief logistiek en energiecluster. Leidt de digitalisering van de mondiale maritieme toeleveringsketen. Grootste haven van Europa."
+    },
+    "apcadec": {
+      "description": "Portugese vereniging voor inkoop en bevoorrading. Bevordert professionalisering en digitalisering van inkoop in Portugal."
+    },
+    "aicep": {
+      "description": "Portugees agentschap voor investering en buitenlandse handel. Faciliteert de internationalisering van Portugese bedrijven."
+    },
+    "aip": {
+      "description": "Portugese industriële vereniging. Vertegenwoordigt de Portugese maakindustrie. Organiseert FIL (Internationale Beurs van Lissabon)."
+    },
+    "aed-cluster-portugal": {
+      "description": "Luchtvaart, Ruimtevaart en Defensie. Groeit snel als Europese Tier-2 leverancier. Bedrijven zoals Embraer Portugal, OGMA. +130 bedrijven."
+    },
+    "health-cluster-portugal": {
+      "description": "Bundelt de farmaceutische, biotechnologische en medische apparatenindustrie. Promoot Portugal als gezondheidshub. +200 bedrijven."
+    },
+    "produtech": {
+      "description": "Cluster voor productietechnologieën (Noorden). Bundelt fabrikanten van machines en technologie voor de maakindustrie. +200 bedrijven."
+    },
+    "tice-pt": {
+      "description": "Het cluster voor Informatietechnologie, Communicatie en Elektronica. Digitale paraplu voor de Portugese transformatie. +400 bedrijven."
+    },
+    "habitat-sustentavel": {
+      "description": "Gericht op duurzame bouw en materialen (steen, keramiek, kurk). Bevordert duurzaamheid in de gebouwde omgeving. +200 bedrijven."
+    },
+    "agoria": {
+      "description": "Federatie van de Belgische technologie-industrie. Vertegenwoordigt +2.000 bedrijven in technologie, productie en digitale diensten."
+    },
+    "essenscia": {
+      "description": "Federatie voor chemie en life sciences van België. Genereert €65.000 miljoen aan export. Farmaceutisch cluster van wereldklasse."
+    },
+    "febiac": {
+      "description": "Belgische en Luxemburgse automobielfederatie. Vertegenwoordigt importeurs en distributeurs. Stimuleert geëlektrificeerde mobiliteit."
+    },
+    "biowin": {
+      "description": "Het gezondheidscluster van Wallonië. Europese referentie in biofarmacie en vaccins (GSK, UCB). +150 biotechbedrijven."
+    },
+    "antwerp-chemical": {
+      "description": "Het op een na grootste chemische cluster ter wereld na Houston. BASF, Bayer, Total, ExxonMobil. +500 chemische bedrijven."
+    },
+    "skywin": {
+      "description": "Waals luchtvaartcluster. Gericht op nieuwe materialen en embedded systemen voor de luchtvaart. +130 bedrijven."
+    },
+    "dsp-valley": {
+      "description": "Gespecialiseerd in intelligente elektronische systemen en signaalverwerking (Leuven). IMEC, NXP. +100 bedrijven."
+    },
+    "flux50": {
+      "description": "Het cluster voor slimme energie: Smart Grids, energie-efficiëntie (Vlaanderen). +150 bedrijven."
+    }
   }
 }
