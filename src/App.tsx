@@ -106,6 +106,12 @@ import MadurezDigitalTICDetail from "./pages/catalog/MadurezDigitalTICDetail";
 import EconomiaCircularTICDetail from "./pages/catalog/EconomiaCircularTICDetail";
 import CapacidadDesarrolloSoftwareDetail from "./pages/catalog/CapacidadDesarrolloSoftwareDetail";
 import ScoringFinancieroDigitalDetail from "./pages/catalog/ScoringFinancieroDigitalDetail";
+import OperadoresRedEnergeticaDetail from "./pages/catalog/OperadoresRedEnergeticaDetail";
+import MixEnergeticoAlemaniaDetail from "./pages/catalog/MixEnergeticoAlemaniaDetail";
+import FlexibilidadEnergeticaDetail from "./pages/catalog/FlexibilidadEnergeticaDetail";
+import PreciosMayoristasEnergiaDetail from "./pages/catalog/PreciosMayoristasEnergiaDetail";
+import SmartGridContadoresDetail from "./pages/catalog/SmartGridContadoresDetail";
+import EmpresasTecnologicasBelgasDetail from "./pages/catalog/EmpresasTecnologicasBelgasDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
@@ -204,6 +210,12 @@ const App = () => (
             <Route path="/catalog/economia-circular-tic" element={<EconomiaCircularTICDetail />} />
             <Route path="/catalog/capacidad-desarrollo-software" element={<CapacidadDesarrolloSoftwareDetail />} />
             <Route path="/catalog/scoring-financiero-digital" element={<ScoringFinancieroDigitalDetail />} />
+            <Route path="/catalog/operadores-red-energetica" element={<OperadoresRedEnergeticaDetail />} />
+            <Route path="/catalog/mix-energetico-alemania" element={<MixEnergeticoAlemaniaDetail />} />
+            <Route path="/catalog/flexibilidad-energetica" element={<FlexibilidadEnergeticaDetail />} />
+            <Route path="/catalog/precios-mayoristas-energia" element={<PreciosMayoristasEnergiaDetail />} />
+            <Route path="/catalog/smart-grid-contadores" element={<SmartGridContadoresDetail />} />
+            <Route path="/catalog/empresas-tecnologicas-belgas" element={<EmpresasTecnologicasBelgasDetail />} />
                     <Route path="/sustainability" element={<Sustainability />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:id" element={<ServiceDetail />} />
