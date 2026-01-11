@@ -1,0 +1,208 @@
+{
+  "banner": {
+    "badge": "PROGRAMA EXCLUSIVO",
+    "title": "Conviértase en Nodo Fundador",
+    "subtitle": "Obtenga 30.000€ de financiación y lidere la soberanía digital de su sector",
+    "cta": "Descubrir Programa",
+    "stats": {
+      "funding": "30.000€ Financiación",
+      "partners": "70+ Partners",
+      "weeks": "12 Semanas Onboarding"
+    }
+  },
+  "hero": {
+    "badge": "Programa Exclusivo GAIA-X",
+    "title": "Conviértase en un",
+    "titleHighlight": "Nodo Fundador",
+    "titleEnd": "de la Economía del Dato Europea",
+    "subtitle": "Únase a la federación GAIA-X. Obtenga <span class=\"text-emerald-400 font-bold\">30.000€</span> de financiación inicial y genere ingresos recurrentes liderando la soberanía digital de su sector.",
+    "cta": "Simular mis Ingresos",
+    "docs": "Ver Documentación"
+  },
+  "comparison": {
+    "title": "El Cambio de",
+    "titleHighlight": "Paradigma",
+    "subtitle": "Desliza para ver la transformación de silos aislados a una federación soberana",
+    "efficiency": "Eficiencia",
+    "sliderOld": "Viejo Mundo",
+    "sliderNew": "Nuevo Mundo",
+    "sliderHint": "Desliza para comparar los modelos",
+    "oldWorld": {
+      "title": "Silos de Datos",
+      "point1": "Datos aislados y duplicados",
+      "point2": "Procesos manuales lentos",
+      "point3": "Sin trazabilidad ni auditoría",
+      "footer": "Costoso • Lento • Inseguro"
+    },
+    "newWorld": {
+      "title": "Federación Soberana",
+      "point1": "Intercambio instantáneo",
+      "point2": "Blockchain inmutable",
+      "point3": "Monetización automática",
+      "footer": "Monetizable • Seguro • Estándar Europeo"
+    }
+  },
+  "calculator": {
+    "badge": "Simulador Interactivo",
+    "title": "Calcule su",
+    "titleHighlight": "Impacto Económico",
+    "subtitle": "Demuestre que la adhesión es \"Cash Positive\" desde el día 1",
+    "configure": "Configure su Escenario",
+    "associates": "Número de Asociados",
+    "transactions": "Transacciones/mes por Asociado",
+    "avgValue": "Valor Medio Transacción",
+    "howCalculated": "¿Cómo se calculan los ingresos?",
+    "howCalculatedTooltip": "Revenue Share: ProcureData aplica un fee del 20% sobre transacciones. Este fee se reparte al 50% con el Business Partner (10% neto del volumen total para el Partner).",
+    "netBenefit": "Beneficio Neto Garantizado Año 1",
+    "netBenefitTooltip": "Kit Espacio de Datos: 30.000€ (subvención UE/Nacional) - Cuota adhesión: 5.000€ = 25.000€ netos garantizados.",
+    "cashPositive": "Cash positive desde el día 1",
+    "recurrentRevenue": "Ingresos Recurrentes Anuales",
+    "highRevenue": "High Revenue Partner",
+    "monthlyVolume": "Volumen mensual",
+    "projection": "Proyección a 3 Años",
+    "year": "Año",
+    "revenue": "Ingresos",
+    "result": "Su asociación generará {{amount}}€ el primer año solo por facilitar la infraestructura."
+  },
+  "governance": {
+    "title": "Gobernanza",
+    "titleHighlight": "Dual",
+    "subtitle": "Control total sobre su territorio + Interoperabilidad con la federación europea",
+    "intraTab": "Gobernanza INTRA-NODO",
+    "interTab": "Gobernanza INTER-NODOS",
+    "intra": {
+      "badge": "Su Territorio",
+      "control": "Control Absoluto",
+      "title": "Usted Controla su Nodo",
+      "feature1": {
+        "title": "Define Precios",
+        "desc": "Establezca sus propias tarifas de acceso a datos"
+      },
+      "feature2": {
+        "title": "Valida Miembros",
+        "desc": "Apruebe o rechace solicitudes de adhesión"
+      },
+      "feature3": {
+        "title": "Controla Accesos",
+        "desc": "Gestione permisos granulares por dataset"
+      }
+    },
+    "inter": {
+      "badge": "La Federación",
+      "tech": "Tecnología Compartida",
+      "title": "Conectado con Europa",
+      "feature1": {
+        "title": "Interoperabilidad GAIA-X",
+        "desc": "Conecte con cualquier nodo certificado en la UE"
+      },
+      "feature2": {
+        "title": "Smart Contracts Polygon",
+        "desc": "Transacciones inmutables en blockchain europea"
+      },
+      "feature3": {
+        "title": "Estándares Europeos",
+        "desc": "Cumplimiento GDPR, IDSA y regulación Data Act"
+      }
+    }
+  },
+  "techStack": {
+    "title": "Stack Tecnológico",
+    "titleHighlight": "Certificado",
+    "subtitle": "Infraestructura enterprise-grade basada en estándares europeos",
+    "gaiax": {
+      "subtitle": "Identidad Soberana",
+      "description": "SSI (Self-Sovereign Identity) y Credenciales Verificables para control total de identidad digital."
+    },
+    "idsa": {
+      "subtitle": "Conectores EDC",
+      "description": "Eclipse Data Connector para intercambio seguro de datos B2B."
+    },
+    "pontusx": {
+      "subtitle": "Blockchain Europea",
+      "description": "Notarización inmutable en Polygon con soporte EUROe."
+    },
+    "erp": {
+      "title": "Conectores ERP",
+      "subtitle": "Integración Nativa",
+      "description": "SAP, Oracle, Microsoft Dynamics - Sincronización bidireccional."
+    },
+    "info": {
+      "encryption": "Encriptación E2E",
+      "certification": "Certificación",
+      "hosting": "Hosting",
+      "compliance": "Compliance"
+    }
+  },
+  "timeline": {
+    "badge": "Roadmap de Onboarding",
+    "title": "De 0 a Ingresos en",
+    "titleHighlight": "12 Semanas",
+    "subtitle": "Proceso estructurado con acompañamiento técnico y comercial en cada fase",
+    "inProgress": "En progreso",
+    "step1": {
+      "week": "Semana 1",
+      "title": "Firma y Solicitud Ayuda 30k",
+      "description": "Firma del acuerdo de partnership y tramitación completa de la ayuda \"Kit Espacio de Datos\" gestionada por ProcureData.",
+      "highlight": "30.000€ garantizados"
+    },
+    "step2": {
+      "week": "Semana 4",
+      "title": "Despliegue de su Nodo",
+      "description": "Instalación y configuración de su nodo federado con marca blanca personalizada y dominio propio.",
+      "highlight": "Marca Blanca"
+    },
+    "step3": {
+      "week": "Semana 8",
+      "title": "Onboarding de Asociados",
+      "description": "Migración e incorporación de sus primeros 10 asociados con formación incluida.",
+      "highlight": "10 asociados iniciales"
+    },
+    "step4": {
+      "week": "Semana 12",
+      "title": "Primeras Transacciones",
+      "description": "Activación del marketplace y generación de las primeras comisiones recurrentes.",
+      "highlight": "Revenue activo"
+    }
+  },
+  "form": {
+    "badge": "Acceso Exclusivo",
+    "title": "Únase al",
+    "titleHighlight": "Programa Premium",
+    "subtitle": "Complete el formulario y nuestro equipo se pondrá en contacto en menos de 24h",
+    "organizationLabel": "Nombre de la Organización",
+    "organizationPlaceholder": "Ej: Asociación Nacional de...",
+    "emailLabel": "Email Corporativo",
+    "emailPlaceholder": "contacto@suorganizacion.eu",
+    "motivationLabel": "¿Por qué quiere unirse al programa?",
+    "motivationPlaceholder": "Cuéntenos brevemente sobre su organización y sus objetivos...",
+    "submitButton": "Solicitar Acceso Premium",
+    "submitting": "Enviando...",
+    "errorRequired": "Por favor, complete todos los campos requeridos",
+    "successMessage": "Solicitud enviada correctamente",
+    "successTitle": "¡Solicitud Recibida!",
+    "successDescription": "Gracias por su interés en el Programa Premium Partners. Nuestro equipo revisará su solicitud y le contactará en menos de 24 horas.",
+    "privacyNote": "Sus datos están protegidos bajo GDPR. No compartimos información con terceros.",
+    "trust1": "70+ Partners Activos",
+    "trust2": "7 Países UE",
+    "trust3": "30.000€ Subvención",
+    "trust4": "24h Respuesta"
+  },
+  "navbar": {
+    "back": "Volver a Partners",
+    "simulator": "Simulador",
+    "governance": "Gobernanza",
+    "techStack": "Tech Stack",
+    "roadmap": "Roadmap",
+    "downloadPDF": "Descargar PDF",
+    "generating": "Generando...",
+    "badge": "PREMIUM PARTNERS"
+  },
+  "footer": {
+    "subtitle": "Premium Partners Program",
+    "documentation": "Documentación",
+    "ecosystem": "Ecosistema",
+    "contact": "Contacto",
+    "partners": "70+ Partners Activos en la UE",
+    "rights": "Todos los derechos reservados. | Programa financiado por fondos europeos y nacionales."
+  }
+}

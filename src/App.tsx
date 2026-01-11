@@ -75,6 +75,7 @@ import EdgeFunctions from "./pages/motor/EdgeFunctions";
 import TourGuiado from "./pages/motor/TourGuiado";
 import DocsInteractivos from "./pages/motor/DocsInteractivos";
 import Partners from "./pages/Partners";
+import PremiumPartners from "./pages/PremiumPartners";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
@@ -151,6 +152,9 @@ const App = () => (
                     <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
                     <Route path="/partners" element={<Partners />} />
                   </Route>
+                  
+                  {/* Premium Partners */}
+                  <Route path="/partners/premium" element={<PremiumPartners />} />
 
                   {/* Partner Pages */}
                   <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
