@@ -360,22 +360,18 @@ const Partners = () => {
                             </div>
                           </CardContent>
                           <CardFooter className="pt-2 flex flex-col gap-2">
-                            {partner.status === "activo" && (
-                              <Button asChild size="sm" className="w-full">
-                                <Link to={partner.link} className="flex items-center gap-2">
-                                  {t('accessProjects')}
-                                  <ExternalLink className="h-3 w-3" />
-                                </Link>
-                              </Button>
-                            )}
-                            {partner.hasDocTecnico && (
-                              <Button asChild variant="outline" size="sm" className="w-full">
-                                <Link to="/partners/itbid/doc-tecnico" className="flex items-center gap-2">
-                                  {t('technicalDoc')}
-                                  <FileText className="h-3 w-3" />
-                                </Link>
-                              </Button>
-                            )}
+                            <Button asChild size="sm" className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+                              <Link to="/auth" className="flex items-center gap-2">
+                                {t('memberAccess')}
+                                <ExternalLink className="h-3 w-3" />
+                              </Link>
+                            </Button>
+                            <Button asChild size="sm" className="w-full bg-white hover:bg-gray-50 text-black border border-gray-300">
+                              <Link to="/auth" className="flex items-center gap-2">
+                                {t('generalAccess')}
+                                <ExternalLink className="h-3 w-3" />
+                              </Link>
+                            </Button>
                           </CardFooter>
                         </Card>
                       );
