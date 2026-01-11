@@ -2607,6 +2607,290 @@ export const dspValley: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 9: BIOTECNOLOGÍA, QUÍMICA Y NUEVO ESPACIO
+// ============================================
+
+export const biovalleyFrance: PremiumPartner = {
+  id: "biovalley-france",
+  name: "BioValley",
+  fullName: "Pôle de Compétitivité Santé et Biotechnologies",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Salud, Biotecnología y MedTech",
+  
+  authorityContext: {
+    narrative: "BioValley France (anteriormente Alsace BioValley) opera en una ubicación única: la región del Gran Este, fronteriza con Alemania y Suiza. Es un clúster trinacional de facto. Esta región tiene una de las mayores densidades de industria farmacéutica y tecnologías médicas de Europa. Es la puerta de entrada para ensayos clínicos transfronterizos y colaboraciones de I+D entre las potencias científicas europeas.",
+    keyStats: [
+      { value: "Trinacional", label: "FR-DE-CH" },
+      { value: "#1", label: "Cirugía Robótica (IRCAD)" },
+      { value: "300+", label: "Empresas MedTech" }
+    ],
+    headquarters: "Estrasburgo, Francia"
+  },
+  
+  ecosystem: [
+    { name: "Lilly France", description: "Producción farmacéutica" },
+    { name: "Novartis", description: "Biotech y farma (planta cercana en Basilea/Francia)" },
+    { name: "Merck (Millipore)", description: "Ciencias de la vida" },
+    { name: "Sanofi", description: "Plantas de producción en Estrasburgo" },
+    { name: "Bruker", description: "Instrumentación científica de alto nivel" },
+    { name: "IRCAD", description: "Instituto de investigación en cirugía digestiva (líder mundial)" },
+    { name: "Transgene", description: "Inmunoterapia" },
+    { name: "Alentis Therapeutics", description: "Biotech" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos estratégicos sobre instrumentación científica, cirugía robótica (gracias al IRCAD) y capacidad de producción farmacéutica en el corazón de Europa.",
+    capabilities: [
+      "Capacidad CDMO regional",
+      "Cirugía mínimamente invasiva",
+      "Talento transfronterizo",
+      "Instrumentación de laboratorio"
+    ],
+    uniqueValue: "Acceso al único hub trinacional de biotech de Europa, donde Francia, Alemania y Suiza colaboran en innovación farmacéutica y MedTech."
+  },
+  
+  useCases: [
+    { id: "cdmo-capacity", title: "Capacidad de CDMO en la Región", description: "Disponibilidad de líneas de producción para fármacos inyectables de terceros.", type: "capacity" },
+    { id: "minimally-invasive", title: "Datos de Cirugía Mínimamente Invasiva", description: "Estadísticas de entrenamiento y adopción de nuevas técnicas quirúrgicas (IRCAD).", type: "index" },
+    { id: "cross-border-talent", title: "Talento Transfronterizo", description: "Flujos de investigadores que trabajan entre Francia, Alemania y Suiza.", type: "benchmark" },
+    { id: "intl-clinical-trials", title: "Ensayos Clínicos Internacionales", description: "Datos de estudios multicéntricos coordinados desde Alsacia.", type: "index" },
+    { id: "lab-instrumentation", title: "Instrumentación de Laboratorio", description: "Tendencias de compra de espectrometría de masas y resonancia magnética.", type: "index" },
+    { id: "medtech-startups", title: "Startups de MedTech", description: "Radar de innovación en implantes y dispositivos quirúrgicos.", type: "directory" },
+    { id: "lab-space-costs", title: "Costes de Espacio de Laboratorio", description: "Precios de alquiler de laboratorios P2/P3 en bio-incubadoras.", type: "cost" },
+    { id: "digital-health-investment", title: "Inversión en Salud Digital", description: "Financiación de proyectos de e-Health en la región.", type: "index" },
+    { id: "monoclonal-production", title: "Producción de Anticuerpos Monoclonales", description: "Capacidad instalada para biológicos.", type: "capacity" },
+    { id: "life-sciences-patents", title: "Patentes en Ciencias de la Vida", description: "Actividad de propiedad intelectual en el valle del Rin.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const biorn: PremiumPartner = {
+  id: "biorn",
+  name: "BioRN",
+  fullName: "Clúster de Biotecnología Rin-Neckar",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Biología Molecular y Terapias Celulares",
+  
+  authorityContext: {
+    narrative: "BioRN es el clúster de ciencias de la vida de la región Rin-Neckar (Heidelberg). Es uno de los centros de investigación biomédica más fuertes de Europa, hogar del DKFZ (Centro Alemán de Investigación Oncológica) y el EMBL. Su proximidad a la sede de SAP también lo convierte en un hub para la bioinformática y la medicina de datos. Aquí es donde la ciencia básica se convierte en negocio biotecnológico.",
+    keyStats: [
+      { value: "DKFZ", label: "Centro Oncología Líder" },
+      { value: "EMBL", label: "Laboratorio de Biología Molecular" },
+      { value: "SAP", label: "Big Data en Salud" }
+    ],
+    headquarters: "Heidelberg, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "Roche Diagnostics", description: "Líder en diagnóstico (Mannheim)" },
+    { name: "AbbVie", description: "Inmunología y oncología (sede alemana)" },
+    { name: "Heidelberg Pharma", description: "Tecnología ADC para cáncer" },
+    { name: "Merck KGaA", description: "Innovación en salud" },
+    { name: "BioNTech", description: "Colaboraciones cercanas (Maguncia está cerca)" },
+    { name: "Evotec", description: "Descubrimiento de fármacos" },
+    { name: "SAP", description: "Plataformas de datos de salud" },
+    { name: "DKFZ", description: "Partner científico clave" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El nodo de la Oncología y el Diagnóstico. Datos valiosos sobre investigación del cáncer, biomarcadores y digitalización de laboratorios.",
+    capabilities: [
+      "Investigación oncológica",
+      "Validación de biomarcadores",
+      "Automatización de laboratorios",
+      "Bioinformática SAP/HANA"
+    ],
+    uniqueValue: "Acceso al epicentro europeo de investigación oncológica, donde DKFZ, EMBL y SAP definen el futuro de la medicina de precisión."
+  },
+  
+  useCases: [
+    { id: "tissue-bank", title: "Banco de Tejidos y Datos Oncológicos", description: "Acceso a metadatos anonimizados de investigación del cáncer.", type: "directory" },
+    { id: "biomarker-validation", title: "Validación de Biomarcadores", description: "Datos sobre nuevos marcadores para diagnóstico temprano.", type: "index" },
+    { id: "lab-automation", title: "Automatización de Laboratorios", description: "Tendencias en el uso de robótica para screening de alto rendimiento (HTS).", type: "index" },
+    { id: "tech-transfer", title: "Transferencia Tecnológica", description: "Estadísticas de spin-offs universitarias creadas en Heidelberg.", type: "index" },
+    { id: "public-rd-funding", title: "Financiación Pública de I+D", description: "Mapa de grants y subvenciones federales alemanas para biotech.", type: "directory" },
+    { id: "genomic-sequencing", title: "Secuenciación Genómica", description: "Capacidad de secuenciación NGS disponible en la región.", type: "capacity" },
+    { id: "oncology-trials", title: "Ensayos Clínicos en Oncología", description: "Reclutamiento para terapias avanzadas (CAR-T, etc.).", type: "index" },
+    { id: "bioinformatics", title: "Bioinformática", description: "Uso de plataformas SAP/HANA para análisis de Big Data biológico.", type: "benchmark" },
+    { id: "postdoc-salaries", title: "Salarios de Investigadores Post-Doc", description: "Benchmarks de remuneración para talento científico.", type: "benchmark" },
+    { id: "pharma-startup-deals", title: "Colaboración Pharma-Startup", description: "Número de acuerdos de licencia firmados en el clúster.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const feique: PremiumPartner = {
+  id: "feique",
+  name: "FEIQUE",
+  fullName: "Federación Empresarial de la Industria Química Española",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Industria Química y Refino",
+  
+  authorityContext: {
+    narrative: "La Federación Empresarial de la Industria Química Española (FEIQUE) representa un sector que genera el 5,8% del PIB español. España es una potencia química, especialmente en los polos de Tarragona (el mayor hub petroquímico del sur de Europa) y Huelva. FEIQUE gestiona los datos de un sector exportador masivo, clave para el hidrógeno verde y los fertilizantes.",
+    keyStats: [
+      { value: "5,8%", label: "PIB Español" },
+      { value: "#1", label: "Hub Petroquímico Sur Europa" },
+      { value: "3.000+", label: "Empresas Químicas" }
+    ],
+    headquarters: "Madrid, España"
+  },
+  
+  ecosystem: [
+    { name: "Repsol Química", description: "Petroquímica y plásticos" },
+    { name: "Cepsa", description: "Química y energía" },
+    { name: "Ercros", description: "Química básica y farmacia" },
+    { name: "Fertiberia", description: "Fertilizantes y amoniaco verde" },
+    { name: "BASF Española", description: "Gran centro de producción en Tarragona" },
+    { name: "Covestro", description: "Producción de cloro y poliuretanos" },
+    { name: "Dow Chemical Ibérica", description: "Plásticos de alto rendimiento" },
+    { name: "Ube Corporation Europe", description: "Química fina y poliamidas" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos críticos sobre precios de la energía (el gas es la materia prima), exportaciones portuarias y seguridad industrial. Esencial para entender el suministro de materias primas en el Mediterráneo.",
+    capabilities: [
+      "Producción de hidrógeno verde",
+      "Precios de fertilizantes",
+      "Consumo de gas industrial",
+      "Seguridad de procesos (Seveso)"
+    ],
+    uniqueValue: "Acceso a datos del mayor hub petroquímico del sur de Europa, clave para la transición al hidrógeno verde y la industria de fertilizantes."
+  },
+  
+  useCases: [
+    { id: "green-hydrogen", title: "Producción de Hidrógeno Verde", description: "Capacidad de electrólisis proyectada en los valles de hidrógeno españoles.", type: "capacity" },
+    { id: "fertilizer-prices", title: "Precios de Fertilizantes Agrícolas", description: "Evolución del coste de la urea y nitratos (crítico para el agro).", type: "index" },
+    { id: "industrial-gas", title: "Consumo de Gas Industrial", description: "Datos de demanda de gas natural en los polos químicos.", type: "index" },
+    { id: "plastics-exports", title: "Exportación de Plásticos", description: "Volúmenes de polietileno y polipropileno exportados desde puertos españoles.", type: "index" },
+    { id: "intermodal-transport", title: "Transporte Intermodal", description: "Uso del Corredor Mediterráneo para logística química.", type: "benchmark" },
+    { id: "seveso-compliance", title: "Seguridad de Procesos (Seveso)", description: "Datos agregados de cumplimiento de normativa de accidentes graves.", type: "benchmark" },
+    { id: "decarbonization-investment", title: "Inversión en Descarbonización", description: "CAPEX destinado a captura de carbono y eficiencia.", type: "index" },
+    { id: "chemical-wages", title: "Convenio Colectivo Químico", description: "Tablas salariales y condiciones laborales del sector (referente en España).", type: "benchmark" },
+    { id: "chemical-recycling", title: "Reciclaje Químico", description: "Proyectos piloto para convertir residuos plásticos en aceite de pirólisis.", type: "index" },
+    { id: "chlor-alkali-supply", title: "Suministro de Cloro-Sosa", description: "Disponibilidad de cloro para tratamiento de aguas y PVC.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const essenscia: PremiumPartner = {
+  id: "essenscia",
+  name: "Essenscia",
+  fullName: "Federatie van de Belgische Chemie en Life Sciences",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Química de Alto Valor y Ciencias de la Vida",
+  
+  authorityContext: {
+    narrative: "Bélgica es, per cápita, el campeón mundial de la química y los plásticos. Essenscia es la federación que agrupa este poderío. Con el Puerto de Amberes como pulmón, este ecosistema es vital para la economía belga. A diferencia de otros clústeres puramente industriales, Essenscia integra fuertemente la Biofarma (Janssen, Pfizer), creando un híbrido único entre química pesada y vacunas.",
+    keyStats: [
+      { value: "#2", label: "Hub Químico Mundial" },
+      { value: "Janssen+Pfizer", label: "Vacunas Globales" },
+      { value: "Amberes", label: "Puerto Químico Clave" }
+    ],
+    headquarters: "Bruselas, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "Janssen Pharmaceutica (J&J)", description: "Uno de los mayores campus de I+D del mundo" },
+    { name: "Solvay", description: "Historia viva de la química (ahora Syensqo y Solvay)" },
+    { name: "Pfizer", description: "Planta clave en Puurs (producción vacunas COVID)" },
+    { name: "Ineos", description: "Inversión masiva en craqueo de etano (Proyecto One)" },
+    { name: "Borealis", description: "Poliolefinas y fertilizantes" },
+    { name: "Umicore", description: "Tecnología de materiales y reciclaje" },
+    { name: "Agfa-Gevaert", description: "Imagen y soluciones IT" },
+    { name: "Kaneka", description: "Biopolímeros y química" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Líderes mundiales en datos de logística farmacéutica, I+D químico y patentes. Bélgica es un hub logístico, por lo que sus datos de exportación son un termómetro global.",
+    capabilities: [
+      "Gasto en I+D por empleado",
+      "Exportación de vacunas",
+      "Logística de cadena de frío",
+      "Reciclaje de baterías"
+    ],
+    uniqueValue: "Acceso al segundo hub químico mundial, donde química pesada y producción de vacunas conviven en un ecosistema único de innovación."
+  },
+  
+  useCases: [
+    { id: "rd-per-employee", title: "Gasto en I+D por Empleado", description: "Bélgica lidera la inversión privada en innovación química.", type: "benchmark" },
+    { id: "vaccine-exports", title: "Exportación de Vacunas", description: "Volúmenes y destinos de productos inmunológicos desde aeropuertos belgas.", type: "index" },
+    { id: "cold-chain", title: "Logística de Cadena de Frío", description: "Capacidad de almacenamiento a temperatura controlada en hubs logísticos.", type: "capacity" },
+    { id: "bio-based-patents", title: "Química Sostenible", description: "Patentes de nuevos materiales bio-basados.", type: "index" },
+    { id: "stem-talent", title: "Talento STEM", description: "Graduados en química e ingeniería disponibles en Flandes y Valonia.", type: "benchmark" },
+    { id: "battery-recycling", title: "Reciclaje de Baterías", description: "Capacidad de recuperación de metales valiosos (Umicore).", type: "capacity" },
+    { id: "industrial-co2", title: "Emisiones de CO2 Industriales", description: "Hoja de ruta de descarbonización del clúster químico.", type: "index" },
+    { id: "environmental-permits", title: "Permisos Ambientales", description: "Tiempos de tramitación para nuevas plantas industriales.", type: "benchmark" },
+    { id: "port-industry-integration", title: "Integración Puerto-Industria", description: "Flujos de materias primas entre terminales marítimas y plantas.", type: "index" },
+    { id: "lims-adoption", title: "Digitalización de Laboratorios", description: "Adopción de LIMS y automatización en I+D.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const aedClusterPortugal: PremiumPartner = {
+  id: "aed-cluster-portugal",
+  name: "AED Cluster",
+  fullName: "Cluster da Aeronáutica, Espaço e Defesa",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Aeronáutica, Espacio y Defensa",
+  
+  authorityContext: {
+    narrative: "Portugal ha emergido silenciosamente como un proveedor crítico en la cadena aeroespacial europea. AED Cluster Portugal (Aeronautics, Space and Defence) coordina este crecimiento. Con una fuerte base de ingeniería y costes competitivos, Portugal atrae inversión de Embraer y Airbus. Además, lideran en el nicho de drones y vigilancia marítima debido a su inmensa zona económica exclusiva (Atlántico).",
+    keyStats: [
+      { value: "Embraer+OGMA", label: "Hub MRO Europeo" },
+      { value: "#1", label: "Drones Marítimos UE" },
+      { value: "Atlántico", label: "Zona Económica Inmensa" }
+    ],
+    headquarters: "Lisboa, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Embraer Portugal", description: "Fábricas de aeroestructuras y compuestos en Évora" },
+    { name: "OGMA", description: "Mantenimiento MRO y fabricación (participada por Embraer)" },
+    { name: "Tekever", description: "Líder europeo en drones de vigilancia marítima" },
+    { name: "CEIIA", description: "Desarrollo de producto e ingeniería avanzada" },
+    { name: "GMV Portugal", description: "Sistemas espaciales y defensa" },
+    { name: "LusoSpace", description: "Tecnología espacial" },
+    { name: "Omnidea", description: "Sistemas espaciales y energía" },
+    { name: "Critical Software", description: "Software crítico para seguridad (proveedor NASA/ESA)" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos emergentes sobre operaciones de drones BVLOS (más allá de la línea de vista), ingeniería de software crítico y mantenimiento aeronáutico.",
+    capabilities: [
+      "Mantenimiento aeronáutico MRO",
+      "Vigilancia marítima con drones",
+      "Software crítico DO-178C",
+      "Fabricación de composites"
+    ],
+    uniqueValue: "Acceso al hub emergente de drones marítimos y aeroespacial de Europa, con costes competitivos y expertise en software crítico certificado."
+  },
+  
+  useCases: [
+    { id: "mro-slots", title: "Mantenimiento Aeronáutico (MRO)", description: "Disponibilidad de slots para revisión de aviones comerciales y militares en OGMA.", type: "capacity" },
+    { id: "maritime-surveillance", title: "Vigilancia Marítima con Drones", description: "Datos de misiones de control de pesca y fronteras en el Atlántico.", type: "index" },
+    { id: "aerospace-engineering-costs", title: "Costes de Ingeniería Aeroespacial", description: "Tarifas hora competitivas para desarrollo de sistemas embebidos.", type: "cost" },
+    { id: "cabin-interiors", title: "Fabricación de Interiores de Avión", description: "Capacidad de producción de paneles y componentes de cabina.", type: "capacity" },
+    { id: "new-space", title: "New Space", description: "Lanzamiento de microsatélites y datos de observación terrestre (Azores).", type: "index" },
+    { id: "critical-software", title: "Certificación de Software Crítico", description: "Validación de código DO-178C para aviónica.", type: "benchmark" },
+    { id: "aerospace-molds", title: "Moldes para Aeronáutica", description: "Capacidad de la industria de moldes portuguesa aplicada al sector aeroespacial.", type: "capacity" },
+    { id: "pilot-training", title: "Formación de Pilotos", description: "Estadísticas de escuelas de vuelo (clima favorable todo el año).", type: "index" },
+    { id: "naval-defense", title: "Defensa Naval", description: "Proyectos de integración de sistemas en patrulleras oceánicas.", type: "index" },
+    { id: "aerospace-composites", title: "Composites Aeronáuticos", description: "Producción automatizada de piezas estructurales en Évora.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -2662,7 +2946,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   distrettoCeramica,
   produtech,
   secartys,
-  dspValley
+  dspValley,
+  // Paquete 9: Biotecnología, Química y Nuevo Espacio
+  biovalleyFrance,
+  biorn,
+  feique,
+  essenscia,
+  aedClusterPortugal
 ];
 
 // Helper para obtener un partner por ID
