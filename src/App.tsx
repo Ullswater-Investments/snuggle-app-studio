@@ -76,6 +76,7 @@ import TourGuiado from "./pages/motor/TourGuiado";
 import DocsInteractivos from "./pages/motor/DocsInteractivos";
 import Partners from "./pages/Partners";
 import PremiumPartners from "./pages/PremiumPartners";
+import TelemetriaFlotaDetail from "./pages/catalog/TelemetriaFlotaDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
@@ -144,6 +145,7 @@ const App = () => (
                   {/* Public Demo Routes - Accessible without authentication */}
                   <Route element={<PublicDemoLayout />}>
                     <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/catalog/telemetria-flota" element={<TelemetriaFlotaDetail />} />
                     <Route path="/sustainability" element={<Sustainability />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:id" element={<ServiceDetail />} />

@@ -813,7 +813,12 @@ function ProductCard({
         )}
         
         <Button 
-          onClick={() => navigate('/auth')} 
+          onClick={() => {
+            // Para asset-005 (Telemetría Flota), ir a la página de detalle específica
+            const isTelemetriaFlota = item.product_name?.toLowerCase().includes('telemetr') && 
+                                       item.product_name?.toLowerCase().includes('flota');
+            navigate(isTelemetriaFlota ? '/catalog/telemetria-flota' : '/auth');
+          }} 
           className="w-full bg-orange-500 hover:bg-orange-600 text-white group-hover:translate-x-1 transition-all"
         >
           {t('card.viewDetails')} <ArrowRight className="ml-2 h-4 w-4" />
