@@ -82,6 +82,12 @@ import HistoricoMeteorologicoDetail from "./pages/catalog/HistoricoMeteorologico
 import TrazabilidadAceiteDetail from "./pages/catalog/TrazabilidadAceiteDetail";
 import ScoreCrediticioDetail from "./pages/catalog/ScoreCrediticioDetail";
 import HuellaHidricaDetail from "./pages/catalog/HuellaHidricaDetail";
+import ResilienciaSupplyChainDetail from "./pages/catalog/ResilienciaSupplyChainDetail";
+import HuellaCarbonAutomotrizDetail from "./pages/catalog/HuellaCarbonAutomotrizDetail";
+import CapacidadProductivaDetail from "./pages/catalog/CapacidadProductivaDetail";
+import BenchmarkingPreciosDetail from "./pages/catalog/BenchmarkingPreciosDetail";
+import TelemetriaIAAutomotrizDetail from "./pages/catalog/TelemetriaIAAutomotrizDetail";
+import CertificacionesAeronauticasDetail from "./pages/catalog/CertificacionesAeronauticasDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
@@ -156,6 +162,12 @@ const App = () => (
             <Route path="/catalog/trazabilidad-aceite-oliva" element={<TrazabilidadAceiteDetail />} />
             <Route path="/catalog/score-crediticio-b2b" element={<ScoreCrediticioDetail />} />
             <Route path="/catalog/huella-hidrica-agricola" element={<HuellaHidricaDetail />} />
+            <Route path="/catalog/resiliencia-supply-chain" element={<ResilienciaSupplyChainDetail />} />
+            <Route path="/catalog/huella-carbono-automotriz" element={<HuellaCarbonAutomotrizDetail />} />
+            <Route path="/catalog/capacidad-productiva-automotriz" element={<CapacidadProductivaDetail />} />
+            <Route path="/catalog/benchmarking-precios-componentes" element={<BenchmarkingPreciosDetail />} />
+            <Route path="/catalog/telemetria-ia-automotriz" element={<TelemetriaIAAutomotrizDetail />} />
+            <Route path="/catalog/certificaciones-aeronauticas" element={<CertificacionesAeronauticasDetail />} />
                     <Route path="/sustainability" element={<Sustainability />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:id" element={<ServiceDetail />} />

@@ -75,11 +75,24 @@ interface PartnerProductCardProps {
   product: PartnerProduct;
 }
 
+const getPartnerProductDetailUrl = (productId: string): string => {
+  const routes: Record<string, string> = {
+    "VDA-SUP-SC-01": "/catalog/resiliencia-supply-chain",
+    "VDA-ESG-ENER-02": "/catalog/huella-carbono-automotriz",
+    "VDA-OPS-CAP-03": "/catalog/capacidad-productiva-automotriz",
+    "VDA-MKT-BENCH-04": "/catalog/benchmarking-precios-componentes",
+    "VDA-RND-TEL-05": "/catalog/telemetria-ia-automotriz",
+    "AV-SUP-CERT-01": "/catalog/certificaciones-aeronauticas",
+  };
+  return routes[productId] || "/auth";
+};
+
 export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
   const { t } = useTranslation('partnerProducts');
   const navigate = useNavigate();
   const CategoryIcon = getCategoryIcon(product.category);
   const isPaid = product.price > 0;
+  const detailUrl = getPartnerProductDetailUrl(product.id);
 
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 border-muted/60 overflow-hidden flex flex-col h-full">
@@ -180,7 +193,7 @@ export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
 
       <CardFooter className="pt-4 bg-muted/30">
         <Button
-          onClick={() => navigate('/auth')}
+          onClick={() => navigate(detailUrl)}
           className="w-full bg-orange-500 hover:bg-orange-600 text-white"
         >
           {t('actions.viewDetails')}
