@@ -619,6 +619,290 @@ export const minalogic: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 2: EJE BENELUX
+// ============================================
+
+export const nevi: PremiumPartner = {
+  id: "nevi",
+  name: "NEVI",
+  fullName: "Nederlandse Vereniging voor Inkoopmanagement",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Gestión de Compras y Liderazgo",
+  
+  authorityContext: {
+    narrative: "La Nederlandse Vereniging voor Inkoopmanagement (NEVI) es una de las asociaciones de compras más grandes y sofisticadas del mundo. En los Países Bajos, el comercio está en el ADN, y NEVI es quien profesionaliza ese instinto. Es el estándar de oro en educación y certificación de compradores en el norte de Europa. Para ProcureData, este nodo aporta datos sobre las prácticas comerciales más avanzadas y éticas del continente.",
+    keyStats: [
+      { value: "6.000+", label: "Profesionales Miembro" },
+      { value: "#1", label: "Certificación Compras Benelux" },
+      { value: "40+", label: "Años de Historia" }
+    ],
+    headquarters: "Zoetermeer, Holanda Meridional"
+  },
+  
+  ecosystem: [
+    { name: "Shell", description: "Energía" },
+    { name: "Philips", description: "Tecnología de la salud" },
+    { name: "ASML", description: "Semiconductores" },
+    { name: "Heineken", description: "Gran consumo" },
+    { name: "Unilever", description: "Gran consumo" },
+    { name: "KLM", description: "Aerolínea" },
+    { name: "KPN", description: "Telecomunicaciones" },
+    { name: "AkzoNobel", description: "Pinturas y recubrimientos" }
+  ],
+  
+  dataAnalysis: {
+    summary: "NEVI maneja datos excepcionales sobre capital humano en compras, tarifas de contratación temporal (muy relevante en NL) y madurez digital. Sus datos ayudan a entender 'cuánto cuesta comprar' en un mercado maduro.",
+    capabilities: [
+      "Tarifas de freelance (ZZP)",
+      "Salarios Benelux",
+      "KPIs de SRM",
+      "Adopción e-invoicing"
+    ],
+    uniqueValue: "La fuente más completa sobre el coste real del talento de compras en uno de los mercados más maduros del mundo."
+  },
+  
+  useCases: [
+    { id: "zzp-rates", title: "Índice de Tarifas de Contratación Temporal (ZZP)", description: "Coste hora promedio de freelances expertos en compras y supply chain.", type: "cost" },
+    { id: "benelux-salaries", title: "Salarios de Procurement en Benelux", description: "Benchmarks salariales detallados por sector y años de experiencia.", type: "benchmark" },
+    { id: "srm-kpis", title: "KPIs de Desempeño de Proveedores (SRM)", description: "Métricas promedio de evaluación de proveedores en empresas holandesas.", type: "benchmark" },
+    { id: "training-costs", title: "Costes de Formación Corporativa", description: "Gasto medio por empleado en capacitación de habilidades comerciales.", type: "cost" },
+    { id: "e-invoicing", title: "Tasa de Adopción de Facturación Electrónica", description: "Porcentaje de facturas procesadas sin intervención humana (Touchless invoice).", type: "index" },
+    { id: "green-procurement", title: "Índice de Sostenibilidad en Compras Públicas", description: "Datos sobre el cumplimiento de criterios verdes en licitaciones holandesas.", type: "index" },
+    { id: "fm-prices", title: "Precios de Servicios de Facility Management", description: "Costes por m² de limpieza y seguridad en oficinas de Ámsterdam/Róterdam.", type: "cost" },
+    { id: "talent-scarcity", title: "Barómetro de Escasez de Talento", description: "Perfiles de compras más difíciles de cubrir en el mercado laboral actual.", type: "risk" },
+    { id: "sme-payment", title: "Plazos de Pago a PYMEs", description: "Datos reales de cumplimiento de la ley holandesa de pagos a 30 días.", type: "benchmark" },
+    { id: "erp-licensing", title: "Costes de Licenciamiento de Software ERP", description: "Gasto promedio en suites de compras (SAP Ariba, Coupa) por tamaño de empresa.", type: "cost" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const brainportEindhoven: PremiumPartner = {
+  id: "brainport-eindhoven",
+  name: "Brainport Eindhoven",
+  fullName: "Brainport Development - Europe's Smartest Square Kilometer",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Alta Tecnología y Semiconductores",
+  
+  authorityContext: {
+    narrative: "Conocido como 'el kilómetro cuadrado más inteligente de Europa'. Brainport Eindhoven es el ecosistema construido alrededor de gigantes como Philips y ASML. Es un modelo único de 'Innovación Abierta' donde las empresas comparten I+D pre-competitivo. Este nodo es vital para la soberanía tecnológica europea: aquí se fabrican las máquinas que fabrican los chips del mundo.",
+    keyStats: [
+      { value: "€120B", label: "Facturación Anual Región" },
+      { value: "#1", label: "Litografía EUV Mundial" },
+      { value: "45K+", label: "Ingenieros High-Tech" }
+    ],
+    headquarters: "Eindhoven, Brabante Septentrional"
+  },
+  
+  ecosystem: [
+    { name: "ASML", description: "Líder mundial en litografía" },
+    { name: "Philips", description: "HealthTech" },
+    { name: "NXP Semiconductors", description: "Chips automotrices" },
+    { name: "VDL Groep", description: "Manufactura industrial y autobuses" },
+    { name: "DAF Trucks", description: "Vehículos pesados" },
+    { name: "Thermo Fisher Scientific", description: "Microscopía electrónica" },
+    { name: "Signify", description: "Iluminación inteligente" },
+    { name: "Sioux Technologies", description: "Ingeniería de software/hardware" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Dueños de datos sobre Mecatrónica de alta precisión, fotónica y patentes. Si buscas proveedores capaces de trabajar a escala nanométrica, los datos están aquí.",
+    capabilities: [
+      "Mecanizado ultra-precisión",
+      "Patentes high-tech",
+      "Cleanrooms disponibles",
+      "Cadena litografía"
+    ],
+    uniqueValue: "El único ecosistema del mundo donde se diseñan y fabrican las máquinas EUV que hacen posible los chips más avanzados del planeta."
+  },
+  
+  useCases: [
+    { id: "ultra-precision", title: "Capacidad de Mecanizado de Ultra-Precisión", description: "Disponibilidad de talleres capaces de tolerancias sub-micrométricas.", type: "capacity" },
+    { id: "patent-activity", title: "Índice de Actividad de Patentes High-Tech", description: "Nuevos registros de propiedad intelectual en fotónica y materiales.", type: "index" },
+    { id: "cleanroom-availability", title: "Disponibilidad de Salas Limpias (Cleanrooms)", description: "Metros cuadrados libres clasificados por nivel ISO (1-9).", type: "capacity" },
+    { id: "embedded-sw-cost", title: "Coste de Ingeniería de Software Embebido", description: "Tarifas hora para desarrolladores de sistemas críticos (C/C++).", type: "cost" },
+    { id: "litho-supply-chain", title: "Cadena de Suministro de Litografía", description: "Datos de riesgo en proveedores Tier-2/Tier-3 de componentes para máquinas de chips.", type: "risk" },
+    { id: "advanced-optics", title: "Demanda de Óptica Avanzada", description: "Necesidades de lentes y espejos de alta gama para industria.", type: "forecast" },
+    { id: "deeptech-startups", title: "Startups de Deep Tech", description: "Radar de nuevas empresas en robótica y sensores cuánticos.", type: "directory" },
+    { id: "exotic-materials", title: "Residuos de Materiales Exóticos", description: "Disponibilidad de metales raros recuperados de procesos de manufactura.", type: "directory" },
+    { id: "datacenter-energy", title: "Consumo Energético de Data Centers Regionales", description: "Eficiencia y capacidad disponible en la región de Brabante.", type: "capacity" },
+    { id: "component-traceability", title: "Trazabilidad de Componentes Críticos", description: "Datos de origen para materiales sensibles en la cadena de suministro high-tech.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const portRotterdam: PremiumPartner = {
+  id: "port-rotterdam",
+  name: "Port of Rotterdam",
+  fullName: "Port of Rotterdam Authority - SmartPort Initiative",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Logística, Energía y Química",
+  
+  authorityContext: {
+    narrative: "El Puerto de Róterdam no es solo el puerto más grande de Europa; es una plataforma digital masiva. A través de su iniciativa SmartPort, están construyendo un 'Gemelo Digital' de toda la operación portuaria. Es la puerta de entrada de mercancías al continente y un hub energético crucial (petróleo, gas y ahora hidrógeno).",
+    keyStats: [
+      { value: "470M", label: "Toneladas/Año" },
+      { value: "#1", label: "Puerto de Europa" },
+      { value: "42km", label: "Extensión del Puerto" }
+    ],
+    headquarters: "Róterdam, Holanda Meridional"
+  },
+  
+  ecosystem: [
+    { name: "Maersk", description: "Naviera" },
+    { name: "ECT (Hutchison Ports)", description: "Operador de terminales" },
+    { name: "Shell", description: "Refinería y Energía" },
+    { name: "BP", description: "Refinería" },
+    { name: "Vopak", description: "Almacenamiento de tanques" },
+    { name: "Damen Shipyards", description: "Construcción naval" },
+    { name: "Stolt-Nielsen", description: "Transporte de químicos" },
+    { name: "Neste", description: "Combustibles renovables" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El 'oro' de este partner son los datos de flujos logísticos, tiempos de espera (dwell times) y transición energética (bunkering de nuevos combustibles).",
+    capabilities: [
+      "Tiempos de permanencia",
+      "Precios bunkering",
+      "Capacidad de tanques",
+      "Flujos de hidrógeno"
+    ],
+    uniqueValue: "El único puerto europeo con un gemelo digital completo y datos en tiempo real de toda la cadena logística continental."
+  },
+  
+  useCases: [
+    { id: "container-dwell", title: "Tiempos de Permanencia de Contenedores", description: "Promedio de días que un contenedor pasa en terminal antes de salir (indicador de congestión).", type: "index" },
+    { id: "bunker-prices", title: "Índice de Precios de Bunkering (Combustible)", description: "Coste real del fueloil, GNL y metanol en el puerto.", type: "index" },
+    { id: "tank-capacity", title: "Capacidad de Almacenamiento de Tanques", description: "% de ocupación de tanques para crudo y químicos en tiempo real.", type: "capacity" },
+    { id: "empty-containers", title: "Disponibilidad de Contenedores Vacíos", description: "Stock de equipos listos para exportación.", type: "capacity" },
+    { id: "hydrogen-imports", title: "Volúmenes de Importación de Hidrógeno", description: "Datos de flujo de vectores energéticos verdes.", type: "forecast" },
+    { id: "co2-per-teu", title: "Emisiones de CO2 por TEU", description: "Huella de carbono promedio del movimiento de contenedores en el puerto.", type: "index" },
+    { id: "truck-wait", title: "Tiempos de Espera de Camiones", description: "Datos de congestión en las puertas de las terminales.", type: "index" },
+    { id: "barge-rates", title: "Tarifas de Barcazas Fluviales", description: "Costes de transporte hacia el interior de Europa (Rhin-Ruhr).", type: "cost" },
+    { id: "vessel-eta", title: "Predicción de Llegadas de Buques (ETA)", description: "Datos de precisión de horarios de buques Deep Sea.", type: "forecast" },
+    { id: "port-security", title: "Seguridad Portuaria", description: "Estadísticas anonimizadas de incidentes y mercancías peligrosas.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const agoria: PremiumPartner = {
+  id: "agoria",
+  name: "Agoria",
+  fullName: "Agoria - Federatie van de Technologische Industrie",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Tecnología Industrial y Manufactura",
+  
+  authorityContext: {
+    narrative: "Agoria es la federación de la industria tecnológica en Bélgica. Representan el puente entre la manufactura tradicional y el mundo digital. Con un enfoque muy fuerte en la Industria 4.0 y la economía circular, Agoria agrupa a empresas que facturan más de 100.000 millones de euros. Son expertos en datos sobre el mercado laboral técnico y digitalización industrial.",
+    keyStats: [
+      { value: "2.000+", label: "Empresas Miembro" },
+      { value: "€100B+", label: "Facturación Agregada" },
+      { value: "320K", label: "Empleos Representados" }
+    ],
+    headquarters: "Bruselas, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "Umicore", description: "Materiales y reciclaje" },
+    { name: "Solvay", description: "Química avanzada" },
+    { name: "Barco", description: "Tecnología de visualización" },
+    { name: "Bekaert", description: "Transformación de alambre de acero" },
+    { name: "John Cockerill", description: "Ingeniería y defensa" },
+    { name: "Siemens Belgium", description: "Automatización" },
+    { name: "Sabca", description: "Aeroespacial" },
+    { name: "Sonaca", description: "Aeroespacial" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Sus datos más valiosos giran en torno a la escasez de talento digital, costes laborales industriales (Bélgica tiene costes altos, la productividad es clave) y reciclaje de materiales (liderazgo de Umicore).",
+    capabilities: [
+      "Coste laboral tecnológico",
+      "Ciberseguridad industrial",
+      "Materiales reciclados",
+      "Adopción IA manufactura"
+    ],
+    uniqueValue: "La única federación europea que combina datos de coste laboral premium con liderazgo en economía circular y urban mining."
+  },
+  
+  useCases: [
+    { id: "tech-labor-cost", title: "Índice de Coste Laboral Tecnológico", description: "Salario hora cargado (incl. impuestos) para ingenieros en Bélgica.", type: "cost" },
+    { id: "ot-cybersec", title: "Madurez de Ciberseguridad Industrial", description: "% de empresas manufactureras con protocolos OT seguros.", type: "index" },
+    { id: "recycled-materials", title: "Disponibilidad de Materiales Reciclados", description: "Oferta de metales preciosos recuperados (urban mining).", type: "directory" },
+    { id: "rd-investment", title: "Inversión en I+D por Sector", description: "Datos agregados de gasto privado en innovación tecnológica.", type: "index" },
+    { id: "ai-manufacturing", title: "Adopción de IA en Manufactura", description: "Casos de uso reales desplegados en plantas belgas.", type: "index" },
+    { id: "am-capacity", title: "Capacidad de Impresión 3D Industrial", description: "Disponibilidad de máquinas de Additive Manufacturing para servicios.", type: "capacity" },
+    { id: "fleet-electrification", title: "Datos de Movilidad Corporativa", description: "Electrificación de flotas de vehículos de empresa (muy relevante fiscalmente en BE).", type: "index" },
+    { id: "hightech-exports", title: "Exportaciones de Alta Tecnología", description: "Flujos comerciales de tecnología belga hacia fuera de la UE.", type: "index" },
+    { id: "digital-competitiveness", title: "Barómetro de Competitividad Digital", description: "Comparativa de productividad digital vs. países vecinos.", type: "benchmark" },
+    { id: "lca-experts", title: "Directorio de Expertos en Economía Circular", description: "Consultoras e ingenierías especializadas en Life Cycle Assessment (LCA).", type: "directory" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const antwerpChemical: PremiumPartner = {
+  id: "antwerp-chemical",
+  name: "Antwerp Chemical Cluster",
+  fullName: "Port of Antwerp - Europe's Largest Integrated Chemical Cluster",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Industria Química y Procesos",
+  
+  authorityContext: {
+    narrative: "El Clúster Químico de Amberes es el segundo más grande del mundo después de Houston (Texas). Lo que lo hace único para ProcureData es su nivel de integración extrema: las empresas están conectadas físicamente por tuberías (pipelines), compartiendo vapor, energía y materias primas. Es el laboratorio perfecto para datos de simbiosis industrial y eficiencia energética.",
+    keyStats: [
+      { value: "#2", label: "Clúster Químico Mundial" },
+      { value: "60+", label: "Plantas de Producción" },
+      { value: "€50B", label: "Inversión en Capacidad" }
+    ],
+    headquarters: "Amberes, Flandes"
+  },
+  
+  ecosystem: [
+    { name: "BASF Antwerpen", description: "El mayor sitio químico integrado de Europa" },
+    { name: "ExxonMobil Chemical", description: "Refino y química" },
+    { name: "TotalEnergies", description: "Refino y petroquímica" },
+    { name: "INEOS", description: "Química" },
+    { name: "Bayer", description: "Agricultura y salud" },
+    { name: "Evonik", description: "Química especial" },
+    { name: "Air Liquide", description: "Gases industriales" },
+    { name: "Covestro", description: "Polímeros" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos 'hardcore' de industria de procesos. Flujos de materias primas, consumo energético masivo y seguridad de procesos. Información crítica para entender la base de la pirámide de suministro industrial de Europa.",
+    capabilities: [
+      "Flujos de etileno/propileno",
+      "Redes de vapor industrial",
+      "Gestión residuos químicos",
+      "Calendario turnarounds"
+    ],
+    uniqueValue: "El único clúster químico europeo con datos de simbiosis industrial real: pipelines compartidos, vapor y energía entre plantas."
+  },
+  
+  useCases: [
+    { id: "ethylene-flows", title: "Flujos de Etileno y Propileno", description: "Datos de volumen transportado por la red de pipelines ARG.", type: "index" },
+    { id: "steam-availability", title: "Disponibilidad de Vapor Industrial", description: "Capacidad excedente de redes de vapor para nuevas plantas.", type: "capacity" },
+    { id: "chemical-waste", title: "Gestión de Residuos Químicos", description: "Volúmenes y tipos de residuos procesados para recuperación.", type: "index" },
+    { id: "plastic-prices", title: "Índice de Precios de Materias Primas Plásticas", description: "Costes spot de polímeros básicos en el hub de Amberes.", type: "index" },
+    { id: "liquid-storage", title: "Capacidad de Almacenamiento de Químicos Líquidos", description: "Disponibilidad en terminales especializadas (ADPO, LBC).", type: "capacity" },
+    { id: "water-usage", title: "Consumo de Agua Industrial", description: "Datos de eficiencia hídrica y uso de agua de proceso.", type: "benchmark" },
+    { id: "turnarounds", title: "Paradas de Mantenimiento (Turnarounds)", description: "Calendario agregado de paradas planificadas (afecta a suministro).", type: "forecast" },
+    { id: "hazmat-rail", title: "Capacidad de Transporte Ferroviario de Mercancías Peligrosas", description: "Disponibilidad de slots y vagones especializados.", type: "capacity" },
+    { id: "nox-sox-emissions", title: "Emisiones de NOx y SOx", description: "Datos agregados de calidad del aire industrial.", type: "index" },
+    { id: "process-safety", title: "Seguridad de Procesos", description: "Estadísticas anonimizadas de incidentes Tier 1 y Tier 2 (Process Safety).", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -632,7 +916,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   itsOwl,
   adaci,
   cdaf,
-  minalogic
+  minalogic,
+  // Paquete 2: Eje Benelux
+  nevi,
+  brainportEindhoven,
+  portRotterdam,
+  agoria,
+  antwerpChemical
 ];
 
 // Helper para obtener un partner por ID
