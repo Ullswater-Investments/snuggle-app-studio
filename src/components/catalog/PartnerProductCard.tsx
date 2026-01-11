@@ -106,6 +106,14 @@ const getPartnerProductDetailUrl = (productId: string): string => {
     "GAIA-ESG-CIRC-02": "/catalog/economia-circular-tic",
     "GAIA-OPS-DEV-03": "/catalog/capacidad-desarrollo-software",
     "GAIA-MKT-FIN-04": "/catalog/scoring-financiero-digital",
+    // BDEW (Germany - Energy)
+    "BDEW-COM-GRID-01": "/catalog/operadores-red-energetica",
+    "BDEW-ESG-MIX-02": "/catalog/mix-energetico-alemania",
+    "BDEW-OPS-FLEX-03": "/catalog/flexibilidad-energetica",
+    "BDEW-MKT-PRICE-04": "/catalog/precios-mayoristas-energia",
+    "BDEW-RND-SMART-05": "/catalog/smart-grid-contadores",
+    // Agoria (Belgium - Industrial Tech)
+    "AGORIA-COM-TECH-01": "/catalog/empresas-tecnologicas-belgas",
   };
   return routes[productId] || "/auth";
 };
