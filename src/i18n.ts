@@ -18,6 +18,7 @@ import esMotor from './locales/es/motor.json';
 import esSyntheticData from './locales/es/syntheticData.json';
 import esPartnerProducts from './locales/es/partnerProducts.json';
 import esPremiumPartners from './locales/es/premium-partners.json';
+import esPartners from './locales/es/partners.json';
 
 // French
 import frCommon from './locales/fr/common.json';
@@ -35,6 +36,7 @@ import frMotor from './locales/fr/motor.json';
 import frSyntheticData from './locales/fr/syntheticData.json';
 import frPartnerProducts from './locales/fr/partnerProducts.json';
 import frPremiumPartners from './locales/fr/premium-partners.json';
+import frPartners from './locales/fr/partners.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -52,6 +54,7 @@ import ptMotor from './locales/pt/motor.json';
 import ptSyntheticData from './locales/pt/syntheticData.json';
 import ptPartnerProducts from './locales/pt/partnerProducts.json';
 import ptPremiumPartners from './locales/pt/premium-partners.json';
+import ptPartners from './locales/pt/partners.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -69,6 +72,7 @@ import deMotor from './locales/de/motor.json';
 import deSyntheticData from './locales/de/syntheticData.json';
 import dePartnerProducts from './locales/de/partnerProducts.json';
 import dePremiumPartners from './locales/de/premium-partners.json';
+import dePartners from './locales/de/partners.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -86,6 +90,7 @@ import itMotor from './locales/it/motor.json';
 import itSyntheticData from './locales/it/syntheticData.json';
 import itPartnerProducts from './locales/it/partnerProducts.json';
 import itPremiumPartners from './locales/it/premium-partners.json';
+import itPartners from './locales/it/partners.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -103,10 +108,12 @@ import nlMotor from './locales/nl/motor.json';
 import nlSyntheticData from './locales/nl/syntheticData.json';
 import nlPartnerProducts from './locales/nl/partnerProducts.json';
 import nlPremiumPartners from './locales/nl/premium-partners.json';
+import nlPartners from './locales/nl/partners.json';
 
 // English
 import enPartnerProducts from './locales/en/partnerProducts.json';
 import enPremiumPartners from './locales/en/premium-partners.json';
+import enPartners from './locales/en/partners.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -140,10 +147,12 @@ i18n
         syntheticData: esSyntheticData,
         partnerProducts: esPartnerProducts,
         premiumPartners: esPremiumPartners,
+        partners: esPartners,
       },
       en: {
         partnerProducts: enPartnerProducts,
         premiumPartners: enPremiumPartners,
+        partners: enPartners,
       },
       fr: {
         common: frCommon,
@@ -161,6 +170,7 @@ i18n
         syntheticData: frSyntheticData,
         partnerProducts: frPartnerProducts,
         premiumPartners: frPremiumPartners,
+        partners: frPartners,
       },
       pt: {
         common: ptCommon,
@@ -178,6 +188,7 @@ i18n
         syntheticData: ptSyntheticData,
         partnerProducts: ptPartnerProducts,
         premiumPartners: ptPremiumPartners,
+        partners: ptPartners,
       },
       de: {
         common: deCommon,
@@ -195,6 +206,7 @@ i18n
         syntheticData: deSyntheticData,
         partnerProducts: dePartnerProducts,
         premiumPartners: dePremiumPartners,
+        partners: dePartners,
       },
       it: {
         common: itCommon,
@@ -212,6 +224,7 @@ i18n
         syntheticData: itSyntheticData,
         partnerProducts: itPartnerProducts,
         premiumPartners: itPremiumPartners,
+        partners: itPartners,
       },
       nl: {
         common: nlCommon,
@@ -229,11 +242,12 @@ i18n
         syntheticData: nlSyntheticData,
         partnerProducts: nlPartnerProducts,
         premiumPartners: nlPremiumPartners,
+        partners: nlPartners,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners'],
     interpolation: {
       escapeValue: false,
     },
