@@ -1,0 +1,192 @@
+{
+  "welcome": {
+    "title": "Welkom bij PROCUREDATA Demo!",
+    "description": "Deze tour leidt je door de belangrijkste functies van het systeem. Je hebt toegang tot <strong>10 organisaties</strong> in verschillende rollen om de volledige data governance flow te verkennen.",
+    "syntheticData": {
+      "title": "📊 Synthetische Gegevens voor Demonstratie",
+      "description": "Alle gegevens die je ziet zijn fictief en speciaal voor deze demo gemaakt.",
+      "items": {
+        "transactions": "<strong>15 transacties</strong> in 7 verschillende statussen",
+        "suppliers": "<strong>5 leveranciers</strong> met volledige fiscale gegevens",
+        "approvals": "<strong>14 goedkeuringen</strong> geregistreerd in de geschiedenis",
+        "organizations": "<strong>10 organisaties</strong> (Consumers, Holders, Providers)",
+        "flow": "<strong>Volledige stroom</strong> van multi-actor goedkeuring"
+      }
+    },
+    "productionNote": "In productie zie je alleen je echte gegevens en gerelateerde organisaties."
+  },
+  "demoBanner": {
+    "title": "Demo Modus Banner 🎭",
+    "description": "Deze gele banner herinnert je er constant aan dat je in <strong>demo modus</strong> bent.",
+    "note": "De gegevens die je ziet beïnvloeden geen productieomgeving en zijn volledig synthetisch."
+  },
+  "navigation": {
+    "title": "Hoofdnavigatie 🧭",
+    "description": "De zijbalk geeft je toegang tot alle systeemmodules:",
+    "items": {
+      "dashboard": "🏠 <strong>Dashboard</strong>: Algemeen overzicht met kernmetrieken",
+      "catalog": "📦 <strong>Catalogus</strong>: Verken beschikbare dataproducten",
+      "requests": "📋 <strong>Verzoeken</strong>: Beheer openstaande transacties",
+      "data": "📊 <strong>Gegevens</strong>: Bekijk voltooide transacties",
+      "reports": "📈 <strong>Rapporten</strong>: Analyses en systeemstatistieken",
+      "notifications": "🔔 <strong>Meldingen</strong>: Gebeurtenisgeschiedenis",
+      "settings": "⚙️ <strong>Instellingen</strong>: Instellingen en ERP-configuratie"
+    },
+    "collapseTip": "Je kunt de zijbalk inklappen voor meer werkruimte."
+  },
+  "orgSwitcher": {
+    "title": "Organisatiekiezer",
+    "description": "Hier kun je wisselen tussen de <strong>10 demo-organisaties</strong> om met verschillende rollen te experimenteren:",
+    "consumers": {
+      "title": "🏢 Consumers (vragen gegevens aan):",
+      "examples": "NovaTech Solutions, Fabricaciones Reunidas, Energías Renovables del Este"
+    },
+    "holders": {
+      "title": "🔒 Holders (keuren verzoeken goed):",
+      "examples": "ACME Industrial, Gestión Logística Global, FarmaGlobal"
+    },
+    "providers": {
+      "title": "📋 Providers (vooraf goedkeuren):",
+      "examples": "Tornillería TÉCNICA, Soluciones Químicas, Innovatec, Biocen"
+    },
+    "switchTip": "Wissel direct van organisatie zonder uit te loggen."
+  },
+  "dashboardStats": {
+    "title": "Dashboard Metrieken 📊",
+    "description": "De statistieken tonen realtime metrieken van het demosysteem:",
+    "items": {
+      "products": "📦 <strong>Producten in Catalogus</strong>: Totaal beschikbare producten",
+      "pending": "⏳ <strong>Openstaande Verzoeken</strong>: Vereisen jouw actie",
+      "completed": "✅ <strong>Deze Maand Voltooid</strong>: Afgeronde transacties",
+      "organizations": "🏢 <strong>Actieve Organisaties</strong>: Totaal in demosysteem"
+    },
+    "demoNote": "💡 In demo modus bevatten de cijfers alle synthetische organisaties."
+  },
+  "activityFeed": {
+    "title": "Activiteitenfeed 🔄",
+    "description": "Hier zie je de <strong>laatste 10 acties</strong> in het systeem:",
+    "items": {
+      "approvals": "✅ Voorgoedkeuringen en finale goedkeuringen",
+      "denials": "❌ Afwijzingen met redenen",
+      "notes": "📝 Notities van goedkeurders",
+      "timestamps": "⏰ Relatieve tijdstempels (X uur/dagen geleden)"
+    },
+    "demoNote": "In demo modus toont activiteit van alle synthetische organisaties."
+  },
+  "catalogLink": {
+    "title": "Datacatalogus 📦",
+    "description": "Verken de marktplaats van beschikbare dataproducten:",
+    "items": {
+      "search": "🔍 <strong>Zoeken en filteren</strong> op categorie en tags",
+      "products": "📊 <strong>Beschikbare producten</strong> met volledige beschrijvingen",
+      "holder": "🏢 <strong>Holder informatie</strong> en beschikbaarheid",
+      "request": "➕ <strong>Nieuw verzoek starten</strong> direct vanaf het product"
+    },
+    "demoNote": "💡 In demo zijn er 4+ synthetische producten: Leveranciersgegevens, Labgegevens, etc."
+  },
+  "requestsLink": {
+    "title": "Verzoekenbeheer 📋",
+    "description": "Beheer alle datatransacties volgens jouw rol:",
+    "pending": {
+      "title": "⏳ Wachtend op Mijn Actie",
+      "description": "Verzoeken die jouw goedkeuring/voorgoedkeuring vereisen"
+    },
+    "myRequests": {
+      "title": "📝 Mijn Verzoeken",
+      "description": "Transacties die jouw organisatie heeft geïnitieerd"
+    },
+    "allTransactions": {
+      "title": "📊 Alle Transacties",
+      "description": "Globaal overzicht van de 15 demotransacties in alle statussen"
+    },
+    "clickTip": "Klik hier om verzoeken te beheren."
+  },
+  "dataLink": {
+    "title": "Gegevensvisualisatie 📊",
+    "description": "Toegang tot leveranciersgegevens van <strong>voltooide transacties</strong>:",
+    "items": {
+      "completed": "✅ <strong>5 voltooide transacties</strong> met klare gegevens",
+      "suppliers": "🏢 <strong>5 leveranciers</strong> met volledige fiscale informatie",
+      "export": "📥 <strong>CSV-export</strong> met één klik",
+      "erp": "🔗 <strong>ERP-integratie</strong> geconfigureerd en klaar"
+    },
+    "demoNote": "💡 Demo-leveranciers: Biocen S.A., Tornillería TÉCNICA, Soluciones Químicas, Innovatec",
+    "switchTip": "Wissel naar verschillende Consumer-organisaties om hun voltooide gegevens te zien."
+  },
+  "reportsLink": {
+    "title": "Rapporten en Analyse 📈",
+    "description": "Bekijk statistieken en trends van het demosysteem:",
+    "items": {
+      "pie": "📊 <strong>Taartdiagram</strong>: Transactieverdeling per status",
+      "bar": "📉 <strong>Staafdiagram</strong>: Top 5 meest gevraagde producten",
+      "metrics": "📐 <strong>Kernmetrieken</strong>: Goedkeuringspercentage, gemiddelde tijd, naleving"
+    },
+    "demoNote": "💡 De gegevens tonen de 15 synthetische transacties van het demosysteem"
+  },
+  "notificationsLink": {
+    "title": "Notificatiecentrum 🔔",
+    "description": "Blijf op de hoogte van alle systeemacties:",
+    "items": {
+      "notifications": "🔔 <strong>14 meldingen</strong> van goedkeuringen en afwijzingen",
+      "notes": "📝 <strong>Gedetailleerde notities</strong> van elke actor in de stroom",
+      "timestamps": "⏰ <strong>Relatieve tijdstempels</strong> voor temporele context",
+      "filters": "🎯 <strong>Filters</strong> op status (alle/ongelezen)"
+    },
+    "demoNote": "💡 Gebaseerd op de goedkeuringsgeschiedenis (approval_history) van het systeem"
+  },
+  "finale": {
+    "title": "🎉 Klaar om PROCUREDATA te verkennen!",
+    "reminder": {
+      "title": "🎭 Onthoud: Alle gegevens zijn synthetisch",
+      "description": "De 15 transacties, 5 leveranciers en 10 organisaties zijn demonstratiegegevens. In productie zie je alleen je echte gegevens."
+    },
+    "scenarios": {
+      "title": "Aanbevolen Scenario's om te Proberen:",
+      "approval": {
+        "title": "📋 Scenario 1: Volledige Goedkeuringsstroom",
+        "steps": {
+          "1": "Wissel naar \"<strong>Tornillería TÉCNICA S.A.</strong>\" (Provider)",
+          "2": "Ga naar <strong>Verzoeken → Openstaand</strong> en vooraf goedkeuren",
+          "3": "Wissel naar \"<strong>ACME Industrial</strong>\" (Holder)",
+          "4": "Keur het finale verzoek goed in <strong>Verzoeken → Openstaand</strong>",
+          "5": "Ga naar <strong>Meldingen</strong> om de volledige geschiedenis te zien"
+        }
+      },
+      "data": {
+        "title": "📊 Scenario 2: Gegevens Bekijken en Exporteren",
+        "steps": {
+          "1": "Wissel naar \"<strong>NovaTech Solutions</strong>\" (Consumer)",
+          "2": "Ga naar <strong>Gegevens</strong> om voltooide transacties te zien",
+          "3": "Klik op <strong>\"Bekijken\"</strong> bij een transactie",
+          "4": "Verken de leveranciersgegevens en probeer <strong>CSV Exporteren</strong>"
+        }
+      },
+      "analytics": {
+        "title": "📈 Scenario 3: Systeemanalyse",
+        "steps": {
+          "1": "Ga naar <strong>Rapporten</strong> voor globale analyse",
+          "2": "Bekijk de verdeling van <strong>15 transacties</strong> per status",
+          "3": "Controleer de <strong>Top 5 producten</strong> meest gevraagd",
+          "4": "Analyseer kernmetrieken: goedkeuringspercentage, gemiddelde tijd, etc."
+        }
+      },
+      "roles": {
+        "title": "🔄 Scenario 4: Rolwisseling",
+        "steps": {
+          "1": "Gebruik de <strong>organisatiekiezer</strong> om van rol te wisselen",
+          "2": "Bekijk hoe <strong>openstaande verzoeken</strong> veranderen per rol",
+          "3": "Verken de <strong>10 beschikbare organisaties</strong>",
+          "4": "Vergelijk de Consumer, Holder en Provider weergaven"
+        }
+      }
+    },
+    "restartTip": "💡 Je kunt deze tour op elk moment herstarten via de helpknop (?)"
+  },
+  "buttons": {
+    "back": "Terug",
+    "close": "Sluiten",
+    "last": "Voltooien",
+    "next": "Volgende",
+    "skip": "Tour overslaan"
+  }
+}

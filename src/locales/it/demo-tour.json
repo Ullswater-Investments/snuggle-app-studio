@@ -1,0 +1,192 @@
+{
+  "welcome": {
+    "title": "Benvenuto su PROCUREDATA Demo!",
+    "description": "Questo tour ti guiderà attraverso le principali funzionalità del sistema. Hai accesso a <strong>10 organizzazioni</strong> in diversi ruoli per esplorare il flusso completo di governance dei dati.",
+    "syntheticData": {
+      "title": "📊 Dati Sintetici per la Dimostrazione",
+      "description": "Tutti i dati che vedrai sono fittizi e creati appositamente per questa demo.",
+      "items": {
+        "transactions": "<strong>15 transazioni</strong> in 7 stati diversi",
+        "suppliers": "<strong>5 fornitori</strong> con dati fiscali completi",
+        "approvals": "<strong>14 approvazioni</strong> registrate nella cronologia",
+        "organizations": "<strong>10 organizzazioni</strong> (Consumers, Holders, Providers)",
+        "flow": "<strong>Flusso completo</strong> di approvazione multi-attore"
+      }
+    },
+    "productionNote": "In produzione, vedrai solo i tuoi dati reali e le organizzazioni correlate."
+  },
+  "demoBanner": {
+    "title": "Banner Modalità Demo 🎭",
+    "description": "Questo banner giallo ti ricorderà costantemente che sei in <strong>modalità dimostrazione</strong>.",
+    "note": "I dati che vedi non influenzano alcun ambiente di produzione e sono completamente sintetici."
+  },
+  "navigation": {
+    "title": "Navigazione Principale 🧭",
+    "description": "La barra laterale ti permette di accedere a tutti i moduli del sistema:",
+    "items": {
+      "dashboard": "🏠 <strong>Dashboard</strong>: Vista generale con metriche chiave",
+      "catalog": "📦 <strong>Catalogo</strong>: Esplora i prodotti dati disponibili",
+      "requests": "📋 <strong>Richieste</strong>: Gestisci le transazioni in sospeso",
+      "data": "📊 <strong>Dati</strong>: Visualizza le transazioni completate",
+      "reports": "📈 <strong>Report</strong>: Analisi e statistiche del sistema",
+      "notifications": "🔔 <strong>Notifiche</strong>: Cronologia degli eventi",
+      "settings": "⚙️ <strong>Impostazioni</strong>: Impostazioni e configurazione ERP"
+    },
+    "collapseTip": "Puoi comprimere la barra laterale per più spazio di lavoro."
+  },
+  "orgSwitcher": {
+    "title": "Selettore Organizzazione",
+    "description": "Qui puoi passare tra le <strong>10 organizzazioni demo</strong> per sperimentare con diversi ruoli:",
+    "consumers": {
+      "title": "🏢 Consumers (richiedono dati):",
+      "examples": "NovaTech Solutions, Fabricaciones Reunidas, Energías Renovables del Este"
+    },
+    "holders": {
+      "title": "🔒 Holders (approvano le richieste):",
+      "examples": "ACME Industrial, Gestión Logística Global, FarmaGlobal"
+    },
+    "providers": {
+      "title": "📋 Providers (pre-approvano):",
+      "examples": "Tornillería TÉCNICA, Soluciones Químicas, Innovatec, Biocen"
+    },
+    "switchTip": "Cambia organizzazione istantaneamente senza disconnetterti."
+  },
+  "dashboardStats": {
+    "title": "Metriche Dashboard 📊",
+    "description": "Le statistiche mostrano metriche in tempo reale del sistema demo:",
+    "items": {
+      "products": "📦 <strong>Prodotti nel Catalogo</strong>: Totale prodotti disponibili",
+      "pending": "⏳ <strong>Richieste in Sospeso</strong>: Richiedono la tua azione",
+      "completed": "✅ <strong>Completate Questo Mese</strong>: Transazioni finalizzate",
+      "organizations": "🏢 <strong>Organizzazioni Attive</strong>: Totale nel sistema demo"
+    },
+    "demoNote": "💡 In modalità demo, i numeri includono tutte le organizzazioni sintetiche."
+  },
+  "activityFeed": {
+    "title": "Feed Attività 🔄",
+    "description": "Qui vedrai le <strong>ultime 10 azioni</strong> eseguite nel sistema:",
+    "items": {
+      "approvals": "✅ Pre-approvazioni e approvazioni finali",
+      "denials": "❌ Rifiuti con motivazioni",
+      "notes": "📝 Note degli approvatori",
+      "timestamps": "⏰ Timestamp relativi (X ore/giorni fa)"
+    },
+    "demoNote": "In modalità demo, mostra attività di tutte le organizzazioni sintetiche."
+  },
+  "catalogLink": {
+    "title": "Catalogo Dati 📦",
+    "description": "Esplora il marketplace dei prodotti dati disponibili:",
+    "items": {
+      "search": "🔍 <strong>Ricerca e filtri</strong> per categoria e tag",
+      "products": "📊 <strong>Prodotti disponibili</strong> con descrizioni complete",
+      "holder": "🏢 <strong>Informazioni holder</strong> e disponibilità",
+      "request": "➕ <strong>Avvia nuova richiesta</strong> direttamente dal prodotto"
+    },
+    "demoNote": "💡 In demo ci sono 4+ prodotti sintetici: Dati Fornitore, Dati Laboratorio, ecc."
+  },
+  "requestsLink": {
+    "title": "Gestione Richieste 📋",
+    "description": "Gestisci tutte le transazioni dati in base al tuo ruolo:",
+    "pending": {
+      "title": "⏳ In Attesa della Mia Azione",
+      "description": "Richieste che richiedono la tua approvazione/pre-approvazione"
+    },
+    "myRequests": {
+      "title": "📝 Le Mie Richieste",
+      "description": "Transazioni che la tua organizzazione ha avviato"
+    },
+    "allTransactions": {
+      "title": "📊 Tutte le Transazioni",
+      "description": "Vista globale delle 15 transazioni demo in tutti gli stati"
+    },
+    "clickTip": "Clicca qui per gestire le richieste."
+  },
+  "dataLink": {
+    "title": "Visualizzazione Dati 📊",
+    "description": "Accedi ai dati dei fornitori dalle <strong>transazioni completate</strong>:",
+    "items": {
+      "completed": "✅ <strong>5 transazioni completate</strong> con dati pronti",
+      "suppliers": "🏢 <strong>5 fornitori</strong> con informazioni fiscali complete",
+      "export": "📥 <strong>Esportazione CSV</strong> con un clic",
+      "erp": "🔗 <strong>Integrazione ERP</strong> configurata e pronta"
+    },
+    "demoNote": "💡 Fornitori demo: Biocen S.A., Tornillería TÉCNICA, Soluciones Químicas, Innovatec",
+    "switchTip": "Passa a diverse organizzazioni Consumer per vedere i loro dati completati."
+  },
+  "reportsLink": {
+    "title": "Report e Analisi 📈",
+    "description": "Visualizza statistiche e tendenze del sistema demo:",
+    "items": {
+      "pie": "📊 <strong>Grafico a torta</strong>: Distribuzione transazioni per stato",
+      "bar": "📉 <strong>Grafico a barre</strong>: Top 5 prodotti più richiesti",
+      "metrics": "📐 <strong>Metriche chiave</strong>: Tasso di approvazione, tempo medio, conformità"
+    },
+    "demoNote": "💡 I dati mostrano le 15 transazioni sintetiche del sistema demo"
+  },
+  "notificationsLink": {
+    "title": "Centro Notifiche 🔔",
+    "description": "Rimani aggiornato con tutte le azioni del sistema:",
+    "items": {
+      "notifications": "🔔 <strong>14 notifiche</strong> di approvazioni e rifiuti",
+      "notes": "📝 <strong>Note dettagliate</strong> di ogni attore nel flusso",
+      "timestamps": "⏰ <strong>Timestamp relativi</strong> per contesto temporale",
+      "filters": "🎯 <strong>Filtri</strong> per stato (tutte/non lette)"
+    },
+    "demoNote": "💡 Basato sulla cronologia delle approvazioni (approval_history) del sistema"
+  },
+  "finale": {
+    "title": "🎉 Pronto per esplorare PROCUREDATA!",
+    "reminder": {
+      "title": "🎭 Ricorda: Tutti i dati sono sintetici",
+      "description": "Le 15 transazioni, 5 fornitori e 10 organizzazioni sono dati dimostrativi. In produzione, vedrai solo i tuoi dati reali."
+    },
+    "scenarios": {
+      "title": "Scenari Consigliati da Provare:",
+      "approval": {
+        "title": "📋 Scenario 1: Flusso di Approvazione Completo",
+        "steps": {
+          "1": "Passa a \"<strong>Tornillería TÉCNICA S.A.</strong>\" (Provider)",
+          "2": "Vai a <strong>Richieste → In sospeso</strong> e pre-approva",
+          "3": "Passa a \"<strong>ACME Industrial</strong>\" (Holder)",
+          "4": "Approva la richiesta finale in <strong>Richieste → In sospeso</strong>",
+          "5": "Vai a <strong>Notifiche</strong> per vedere la cronologia completa"
+        }
+      },
+      "data": {
+        "title": "📊 Scenario 2: Visualizza ed Esporta Dati",
+        "steps": {
+          "1": "Passa a \"<strong>NovaTech Solutions</strong>\" (Consumer)",
+          "2": "Vai a <strong>Dati</strong> per vedere le transazioni completate",
+          "3": "Clicca su <strong>\"Visualizza\"</strong> su qualsiasi transazione",
+          "4": "Esplora i dati del fornitore e prova <strong>Esporta CSV</strong>"
+        }
+      },
+      "analytics": {
+        "title": "📈 Scenario 3: Analisi del Sistema",
+        "steps": {
+          "1": "Vai a <strong>Report</strong> per vedere l'analisi globale",
+          "2": "Osserva la distribuzione delle <strong>15 transazioni</strong> per stato",
+          "3": "Controlla il <strong>Top 5 prodotti</strong> più richiesti",
+          "4": "Analizza le metriche chiave: tasso di approvazione, tempo medio, ecc."
+        }
+      },
+      "roles": {
+        "title": "🔄 Scenario 4: Cambio di Ruoli",
+        "steps": {
+          "1": "Usa il <strong>selettore organizzazione</strong> per cambiare ruolo",
+          "2": "Osserva come le <strong>richieste in sospeso</strong> cambiano in base al ruolo",
+          "3": "Esplora le <strong>10 organizzazioni</strong> disponibili",
+          "4": "Confronta le viste Consumer, Holder e Provider"
+        }
+      }
+    },
+    "restartTip": "💡 Puoi riavviare questo tour in qualsiasi momento dal pulsante di aiuto (?)"
+  },
+  "buttons": {
+    "back": "Indietro",
+    "close": "Chiudi",
+    "last": "Fine",
+    "next": "Avanti",
+    "skip": "Salta tour"
+  }
+}
