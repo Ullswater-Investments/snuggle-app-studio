@@ -77,12 +77,21 @@ interface PartnerProductCardProps {
 
 const getPartnerProductDetailUrl = (productId: string): string => {
   const routes: Record<string, string> = {
+    // VDA (Germany)
     "VDA-SUP-SC-01": "/catalog/resiliencia-supply-chain",
     "VDA-ESG-ENER-02": "/catalog/huella-carbono-automotriz",
     "VDA-OPS-CAP-03": "/catalog/capacidad-productiva-automotriz",
     "VDA-MKT-BENCH-04": "/catalog/benchmarking-precios-componentes",
     "VDA-RND-TEL-05": "/catalog/telemetria-ia-automotriz",
+    // Aerospace Valley (France)
     "AV-SUP-CERT-01": "/catalog/certificaciones-aeronauticas",
+    "AV-ESG-SAF-02": "/catalog/combustibles-saf-aviacion",
+    "AV-OPS-MRO-03": "/catalog/disponibilidad-mro-aeronautico",
+    "AV-MKT-AERO-04": "/catalog/precios-aleaciones-aeronauticas",
+    "AV-RND-TERM-05": "/catalog/tolerancia-termica-aleaciones",
+    // Motor Valley (Italy)
+    "MV-SUP-LUX-01": "/catalog/proveedores-premium-automotrices",
+    "MV-ESG-ENER-02": "/catalog/energia-limpia-motor-valley",
   };
   return routes[productId] || "/auth";
 };
