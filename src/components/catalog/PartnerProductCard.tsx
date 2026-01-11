@@ -92,6 +92,13 @@ const getPartnerProductDetailUrl = (productId: string): string => {
     // Motor Valley (Italy)
     "MV-SUP-LUX-01": "/catalog/proveedores-premium-automotrices",
     "MV-ESG-ENER-02": "/catalog/energia-limpia-motor-valley",
+    "MV-OPS-ART-03": "/catalog/produccion-artesanal-automotriz",
+    "MV-MKT-SUPER-04": "/catalog/precios-componentes-superdeportivos",
+    "MV-RND-TEL-05": "/catalog/telemetria-alto-desempeno",
+    // Brainport Eindhoven (Netherlands)
+    "BP-COM-SEMI-01": "/catalog/certificaciones-semiconductores",
+    "BP-ESG-CHIP-02": "/catalog/impacto-ambiental-chips",
+    "BP-OPS-CLEAN-03": "/catalog/capacidad-sala-limpia",
   };
   return routes[productId] || "/auth";
 };

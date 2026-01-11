@@ -94,6 +94,12 @@ import PreciosAleacionesDetail from "./pages/catalog/PreciosAleacionesDetail";
 import ToleranciaTérmicaDetail from "./pages/catalog/ToleranciaTérmicaDetail";
 import ProveedoresPremiumDetail from "./pages/catalog/ProveedoresPremiumDetail";
 import EnergiaLimpiaMotorValleyDetail from "./pages/catalog/EnergiaLimpiaMotorValleyDetail";
+import ProduccionArtesanalDetail from "./pages/catalog/ProduccionArtesanalDetail";
+import PreciosComponentesSuperdeportivosDetail from "./pages/catalog/PreciosComponentesSuperdeportivosDetail";
+import TelemetriaAltoDesempenoDetail from "./pages/catalog/TelemetriaAltoDesempenoDetail";
+import CertificacionesSemiconductoresDetail from "./pages/catalog/CertificacionesSemiconductoresDetail";
+import ImpactoAmbientalChipsDetail from "./pages/catalog/ImpactoAmbientalChipsDetail";
+import CapacidadSalaLimpiaDetail from "./pages/catalog/CapacidadSalaLimpiaDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
@@ -180,6 +186,12 @@ const App = () => (
             <Route path="/catalog/tolerancia-termica-aleaciones" element={<ToleranciaTérmicaDetail />} />
             <Route path="/catalog/proveedores-premium-automotrices" element={<ProveedoresPremiumDetail />} />
             <Route path="/catalog/energia-limpia-motor-valley" element={<EnergiaLimpiaMotorValleyDetail />} />
+            <Route path="/catalog/produccion-artesanal-automotriz" element={<ProduccionArtesanalDetail />} />
+            <Route path="/catalog/precios-componentes-superdeportivos" element={<PreciosComponentesSuperdeportivosDetail />} />
+            <Route path="/catalog/telemetria-alto-desempeno" element={<TelemetriaAltoDesempenoDetail />} />
+            <Route path="/catalog/certificaciones-semiconductores" element={<CertificacionesSemiconductoresDetail />} />
+            <Route path="/catalog/impacto-ambiental-chips" element={<ImpactoAmbientalChipsDetail />} />
+            <Route path="/catalog/capacidad-sala-limpia" element={<CapacidadSalaLimpiaDetail />} />
                     <Route path="/sustainability" element={<Sustainability />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:id" element={<ServiceDetail />} />
