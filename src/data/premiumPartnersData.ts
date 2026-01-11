@@ -2891,6 +2891,290 @@ export const aedClusterPortugal: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 10: TIERRA, ACERO Y HORMIGÓN
+// ============================================
+
+export const dbv: PremiumPartner = {
+  id: "dbv",
+  name: "DBV",
+  fullName: "Deutscher Bauernverband",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Agricultura y Ganadería",
+  
+  authorityContext: {
+    narrative: "El Deutscher Bauernverband (DBV) es la voz de la agricultura alemana. Representa a más de 270.000 explotaciones. En la mayor economía de Europa, el DBV gestiona la intersección entre la producción masiva de alimentos y la estricta regulación ambiental. Son clave para datos sobre cultivos extensivos (cereales, colza), producción porcina y la bioenergía (biogás agrícola), donde Alemania es líder mundial.",
+    keyStats: [
+      { value: "270.000+", label: "Explotaciones Agrícolas" },
+      { value: "#1", label: "Biogás Agrícola UE" },
+      { value: "1,25T€", label: "PIB Agroalimentario" }
+    ],
+    headquarters: "Berlín, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "Südzucker", description: "Mayor productor de azúcar de Europa" },
+    { name: "DMK Group", description: "Deutsches Milchkontor - Lácteos" },
+    { name: "BayWa", description: "Comercio agrícola y energía" },
+    { name: "Westfleisch", description: "Cárnicas" },
+    { name: "AGRAVIS Raiffeisen", description: "Cooperativa de suministros" },
+    { name: "KWS Saat", description: "Semillas y genética vegetal" },
+    { name: "CLAAS", description: "Maquinaria agrícola (partner tecnológico)" },
+    { name: "Big Dutchman", description: "Equipamiento ganadero" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos masivos sobre rendimiento de cultivos por hectárea, costes de alimentación animal y producción de biometano. Fundamental para predecir precios en la bolsa de materias primas agrícolas.",
+    capabilities: [
+      "Índices de precios de cereales",
+      "Producción de biogás agrícola",
+      "Censo ganadero",
+      "Costes de arrendamiento de tierras"
+    ],
+    uniqueValue: "Acceso al dato agrícola más granular de Europa: rendimientos, precios y regulación ambiental de la potencia agroalimentaria alemana."
+  },
+  
+  useCases: [
+    { id: "grain-price-index", title: "Índice de Precios de Cereal Alemán", description: "Cotizaciones en origen de trigo, cebada y maíz en Baviera y Baja Sajonia.", type: "index" },
+    { id: "biogas-production", title: "Producción de Biogás Agrícola", description: "TWh generados por digestores de purines y maíz (base energética rural).", type: "index" },
+    { id: "pig-census", title: "Censo Porcino", description: "Datos de cabaña ganadera para previsión de oferta cárnica.", type: "index" },
+    { id: "land-lease-costs", title: "Costes de Arrendamiento de Tierras (Pachtpreise)", description: "Evolución del precio por hectárea en el este vs. oeste de Alemania.", type: "cost" },
+    { id: "fertilizer-usage", title: "Uso de Fertilizantes", description: "Estadísticas de aplicación de nitrógeno (cumplimiento de directiva de nitratos).", type: "benchmark" },
+    { id: "rapeseed-harvest", title: "Cosecha de Colza (Rapeseed)", description: "Volumen disponible para aceite alimentario y biodiésel.", type: "index" },
+    { id: "animal-health", title: "Salud Animal", description: "Datos agregados de uso de antibióticos en ganadería (reducción progresiva).", type: "benchmark" },
+    { id: "machinery-rings", title: "Maquinaria Compartida (Maschinenringe)", description: "Datos de utilización de cosechadoras y tractores en régimen cooperativo.", type: "benchmark" },
+    { id: "organic-farming", title: "Agricultura Orgánica", description: "Tasa de conversión de granjas convencionales a 'Bio'.", type: "index" },
+    { id: "climate-impact", title: "Impacto Climático en Cosechas", description: "Datos de sequía y rendimiento en tiempo real.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const ltoNederland: PremiumPartner = {
+  id: "lto-nederland",
+  name: "LTO Nederland",
+  fullName: "Land- en Tuinbouw Organisatie Nederland",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Horticultura y AgriTech",
+  
+  authorityContext: {
+    narrative: "LTO Nederland representa a los agricultores más tecnificados del planeta. Los Países Bajos son el segundo mayor exportador agrícola del mundo (después de EE.UU.) con una fracción del terreno. El secreto es la tecnología. LTO gestiona el ecosistema de invernaderos de cristal (Glasshouse horticulture), floricultura y lácteos de ultra-eficiencia. Sus datos son pura agronomía de precisión.",
+    keyStats: [
+      { value: "#2", label: "Exportador Agrícola Mundial" },
+      { value: "10.000+", label: "Hectáreas de Invernaderos" },
+      { value: "FloraHolland", label: "Mayor Subasta de Flores" }
+    ],
+    headquarters: "La Haya, Países Bajos"
+  },
+  
+  ecosystem: [
+    { name: "Royal FloraHolland", description: "La mayor subasta de flores del mundo" },
+    { name: "FrieslandCampina", description: "Lácteos - Cooperativa global" },
+    { name: "The Greenery", description: "Distribución de frutas y verduras" },
+    { name: "Koppert Cress", description: "Micro-vegetales gourmet" },
+    { name: "Lely", description: "Robótica de ordeño" },
+    { name: "Rijk Zwaan", description: "Semillas hortícolas" },
+    { name: "Vion Food Group", description: "Cárnicas" },
+    { name: "Priva", description: "Climatización de invernaderos" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Dueños del dato en agricultura de ambiente controlado, logística de flores y gestión del nitrógeno (un tema político crítico en NL).",
+    capabilities: [
+      "Clima en invernaderos",
+      "Precios de subasta de flores",
+      "Robótica agrícola",
+      "Gestión del nitrógeno"
+    ],
+    uniqueValue: "Acceso al laboratorio agrícola más avanzado del mundo: datos de precisión en horticultura, floricultura y producción láctea robotizada."
+  },
+  
+  useCases: [
+    { id: "greenhouse-climate", title: "Clima en Invernaderos", description: "Datos de consumo de gas y luz para cultivo de tomate y pimiento bajo cristal.", type: "benchmark" },
+    { id: "flower-auction-prices", title: "Precios de Subasta de Flores", description: "Cotizaciones diarias de rosas y tulipanes en Aalsmeer (referencia mundial).", type: "index" },
+    { id: "nitrogen-emissions", title: "Emisiones de Nitrógeno", description: "Datos precisos de deposición de nitrógeno por explotación (crítico para permisos).", type: "benchmark" },
+    { id: "robotic-milking", title: "Robótica en Granjas", description: "KPIs de rendimiento de robots de ordeño automático.", type: "benchmark" },
+    { id: "seed-exports", title: "Exportación de Semillas", description: "Flujos comerciales de genética vegetal de alto valor.", type: "index" },
+    { id: "hydroponic-water", title: "Uso de Agua en Hidroponía", description: "Benchmarks de litros/kg de producto en sistemas cerrados.", type: "benchmark" },
+    { id: "cold-chain-logistics", title: "Logística de Cadena de Frío", description: "Tiempos de tránsito de perecederos desde Rotterdam al resto de Europa.", type: "benchmark" },
+    { id: "geothermal-energy", title: "Energía Geotérmica", description: "Datos de pozos geotérmicos utilizados para calentar invernaderos.", type: "index" },
+    { id: "migrant-labor", title: "Mano de Obra Inmigrante", description: "Estadísticas de empleo temporal en campañas de recolección.", type: "index" },
+    { id: "milk-prices", title: "Precios de la Leche", description: "'Guaranteed price' pagado por las cooperativas a los granjeros.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const wsm: PremiumPartner = {
+  id: "wsm",
+  name: "WSM",
+  fullName: "Wirtschaftsverband Stahl- und Metallverarbeitung",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Procesamiento de Metal y Acero",
+  
+  authorityContext: {
+    narrative: "La Wirtschaftsverband Stahl- und Metallverarbeitung (WSM) representa a los 'héroes ocultos' de la industria alemana. No fabrican el coche final, pero fabrican los tornillos, los muelles, las piezas forjadas y estampadas sin las cuales nada funcionaría. Agrupan a 5.000 empresas, mayoritariamente PYMEs familiares (Mittelstand). Son el eslabón crítico de la cadena de suministro metalmecánica europea.",
+    keyStats: [
+      { value: "5.000+", label: "Empresas Afiliadas" },
+      { value: "Mittelstand", label: "PYMEs Familiares" },
+      { value: "Tier 2-3", label: "Cadena de Suministro" }
+    ],
+    headquarters: "Hagen, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "Mubea", description: "Componentes de automoción ligeros" },
+    { name: "Kirchhoff Automotive", description: "Estructuras de carrocería" },
+    { name: "EJOT", description: "Tecnología de fijación/tornillería" },
+    { name: "Witzenmann", description: "Elementos metálicos flexibles" },
+    { name: "Fuchs Schrauben", description: "Tornillería" },
+    { name: "Kern-Liebers", description: "Muelles y resortes de precisión" },
+    { name: "Böllhoff", description: "Técnicas de ensamblaje" },
+    { name: "Gestamp", description: "Presencia fuerte en Alemania (adquisiciones)" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos esenciales sobre precios de aleaciones, sobrecostes energéticos (típicos en procesos térmicos) y herramentales.",
+    capabilities: [
+      "Índice de sobrecoste de aleación",
+      "Costes energéticos en forja",
+      "Precios de alambrón",
+      "Plazos de herramentales"
+    ],
+    uniqueValue: "Acceso al dato del Mittelstand metalmecánico alemán: costes reales de transformación del acero que determinan los precios finales de la industria."
+  },
+  
+  useCases: [
+    { id: "alloy-surcharge", title: "Índice de Sobrecoste de Aleación (Alloy Surcharge)", description: "Recargos mensuales aplicados al acero inoxidable y especial.", type: "index" },
+    { id: "forging-energy-cost", title: "Coste de Energía en Forja", description: "Impacto del precio del gas/electricidad en piezas forjadas en caliente.", type: "cost" },
+    { id: "wire-rod-prices", title: "Precios de Alambrón (Wire Rod)", description: "Materia prima base para tornillos y muelles.", type: "index" },
+    { id: "heat-treatment-capacity", title: "Capacidad de Tratamiento Térmico", description: "Disponibilidad de hornos para endurecimiento de piezas.", type: "capacity" },
+    { id: "tooling-lead-times", title: "Plazos de Entrega de Herramentales", description: "Tiempos de espera para fabricación de troqueles y moldes progresivos.", type: "benchmark" },
+    { id: "scrap-surcharge", title: "Índice de Chatarra (Scrap Surcharge)", description: "Valor de recuperación de viruta metálica.", type: "index" },
+    { id: "fastener-production", title: "Producción de Piezas de Fijación", description: "Volúmenes de tornillería estándar vs. especial.", type: "index" },
+    { id: "ig-metall-wages", title: "Salarios en el Metal (Convenio IG Metall)", description: "Costes laborales en la industria transformadora.", type: "benchmark" },
+    { id: "cold-forming", title: "Adopción de Conformado en Frío", description: "Tendencias técnicas en estampación.", type: "index" },
+    { id: "component-exports", title: "Exportación de Componentes", description: "Flujo de piezas metálicas hacia plantas de ensamblaje extranjeras.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const ffb: PremiumPartner = {
+  id: "ffb",
+  name: "FFB",
+  fullName: "Fédération Française du Bâtiment",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Construcción y Edificación",
+  
+  authorityContext: {
+    narrative: "La Fédération Française du Bâtiment (FFB) es el gigante de la construcción gala. Representa a 50.000 empresas, desde artesanos locales hasta multinacionales globales. Francia tiene una política de vivienda y renovación urbana muy agresiva. La FFB es la fuente de datos para el mercado de la renovación energética (MaPrimeRénov'), la vivienda social y la construcción en madera, impulsada por la normativa RE2020.",
+    keyStats: [
+      { value: "50.000+", label: "Empresas Miembro" },
+      { value: "RE2020", label: "Normativa Sostenible" },
+      { value: "MaPrimeRénov'", label: "Renovación Energética" }
+    ],
+    headquarters: "París, Francia"
+  },
+  
+  ecosystem: [
+    { name: "Vinci Construction", description: "Uno de los mayores constructores del mundo" },
+    { name: "Bouygues Bâtiment", description: "Edificación y desarrollo" },
+    { name: "Eiffage Construction", description: "Infraestructuras y edificación" },
+    { name: "Spie Batignolles", description: "Construcción y energía" },
+    { name: "Demathieu Bard", description: "Construcción independiente" },
+    { name: "Fayat", description: "Construcción y estructura metálica" },
+    { name: "NGE", description: "Obras públicas y construcción" },
+    { name: "Sogea-Satom", description: "Obras hidráulicas y civiles" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos sobre volumen de obra residencial, empleo en construcción y costes de materiales en el mercado francés.",
+    capabilities: [
+      "Índice de coste de construcción",
+      "Renovación energética",
+      "Venta de vivienda nueva",
+      "Construcción en madera"
+    ],
+    uniqueValue: "Acceso al mercado de construcción francés: datos de obra nueva, renovación energética subvencionada y transición hacia materiales sostenibles."
+  },
+  
+  useCases: [
+    { id: "construction-cost-index", title: "Índice de Coste de Construcción (ICC)", description: "Índice oficial trimestral de precios de obra nueva.", type: "index" },
+    { id: "energy-renovation", title: "Solicitudes de Renovación Energética", description: "Datos de demanda de aislamiento y cambio de ventanas (subvencionadas).", type: "index" },
+    { id: "new-housing-sales", title: "Venta de Vivienda Nueva", description: "Reservas de apartamentos sobre plano en grandes urbes.", type: "index" },
+    { id: "apprenticeship", title: "Empleo y Aprendizaje", description: "Cifras de contratación de aprendices en oficios de albañilería.", type: "benchmark" },
+    { id: "payment-delays", title: "Impagos en el Sector", description: "Plazos medios de cobro y tasa de fallidos en empresas constructoras.", type: "risk" },
+    { id: "timber-construction", title: "Construcción en Madera y Biosourcés", description: "Metros cuadrados construidos con materiales orgánicos (cáñamo, paja).", type: "index" },
+    { id: "facility-management", title: "Mantenimiento de Edificios", description: "Mercado de contratos de facility management técnico.", type: "index" },
+    { id: "construction-waste", title: "Gestión de Residuos de Obra", description: "Tasa de valorización de escombros (economía circular obligatoria).", type: "benchmark" },
+    { id: "social-housing", title: "Licitaciones de Vivienda Social", description: "Proyectos lanzados por organismos HLM (Habitation à Loyer Modéré).", type: "index" },
+    { id: "site-safety", title: "Siniestralidad en Obra", description: "Estadísticas de seguridad y salud laboral.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const bouwendNederland: PremiumPartner = {
+  id: "bouwend-nederland",
+  name: "Bouwend Nederland",
+  fullName: "Bouwend Nederland",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Construcción e Infraestructura del Agua",
+  
+  authorityContext: {
+    narrative: "Bouwend Nederland ('Holanda Construye') agrupa a las empresas que literalmente mantienen el país a flote. En Holanda, construcción significa también gestión del agua (diques, pólders) e infraestructuras complejas en suelo blando. Son líderes mundiales en dragado y construcción circular, obligados por la falta de espacio y recursos.",
+    keyStats: [
+      { value: "#1", label: "Dragado Mundial" },
+      { value: "Delta", label: "Programa de Protección" },
+      { value: "Circular", label: "Construcción Sostenible" }
+    ],
+    headquarters: "Zoetermeer, Países Bajos"
+  },
+  
+  ecosystem: [
+    { name: "Royal BAM Group", description: "Construcción e ingeniería" },
+    { name: "VolkerWessels", description: "Infraestructuras y telecomunicaciones" },
+    { name: "Boskalis", description: "Dragado y marítimo (líder mundial)" },
+    { name: "Van Oord", description: "Dragado y eólica marina" },
+    { name: "Heijmans", description: "Construcción de viviendas y carreteras" },
+    { name: "TBI Holdings", description: "Tecnología y construcción" },
+    { name: "Dura Vermeer", description: "Infraestructura y edificación" },
+    { name: "Strukton", description: "Ferrocarriles y obras civiles" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos únicos sobre infraestructura hidráulica, construcción prefabricada (para reducir emisiones de nitrógeno en obra) y dragado.",
+    capabilities: [
+      "Emisiones de nitrógeno en obra",
+      "Protección contra inundaciones",
+      "Viviendas prefabricadas",
+      "Construcción circular"
+    ],
+    uniqueValue: "Acceso al ecosistema de construcción más innovador de Europa: datos de dragado, prefabricación, infraestructura hidráulica y urban mining."
+  },
+  
+  useCases: [
+    { id: "nitrogen-construction", title: "Emisiones de Nitrógeno en Obra", description: "Datos críticos para obtener permisos de construcción (crisis del nitrógeno en NL).", type: "benchmark" },
+    { id: "flood-protection", title: "Proyectos de Protección contra Inundaciones", description: "Inversión en refuerzo de diques (Programa Delta).", type: "index" },
+    { id: "prefab-housing", title: "Viviendas Prefabricadas", description: "Datos de producción de casas modulares en fábrica.", type: "capacity" },
+    { id: "road-maintenance", title: "Mantenimiento de Carreteras", description: "Estado y renovación del asfalto poroso (ZOAB) típico de Holanda.", type: "benchmark" },
+    { id: "cycling-infrastructure", title: "Infraestructura Ciclista", description: "Licitaciones para construcción de autopistas para bicicletas.", type: "index" },
+    { id: "dredging-volumes", title: "Dragado y Movimiento de Tierras", description: "Volúmenes de arena movidos para ganar terreno al mar.", type: "index" },
+    { id: "bim-standards", title: "Digitalización BIM", description: "Estándares abiertos de intercambio de datos de construcción.", type: "benchmark" },
+    { id: "circular-construction", title: "Construcción Circular", description: "Bancos de materiales recuperados de demoliciones ('Urban Mining').", type: "index" },
+    { id: "ev-charging-infra", title: "Infraestructura de Recarga EV", description: "Instalación de puntos de carga en obra nueva.", type: "index" },
+    { id: "foundation-costs", title: "Costes de Cimentación", description: "Precios de pilotaje profundo (necesario en suelo holandés).", type: "cost" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -2952,7 +3236,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   biorn,
   feique,
   essenscia,
-  aedClusterPortugal
+  aedClusterPortugal,
+  // Paquete 10: Tierra, Acero y Hormigón
+  dbv,
+  ltoNederland,
+  wsm,
+  ffb,
+  bouwendNederland
 ];
 
 // Helper para obtener un partner por ID
