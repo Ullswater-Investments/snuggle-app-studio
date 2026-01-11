@@ -1755,6 +1755,290 @@ export const foodI: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 6: CIELOS, SALUD Y ENERGÍA LIMPIA
+// ============================================
+
+export const hamburgAviation: PremiumPartner = {
+  id: "hamburg-aviation",
+  name: "Hamburg Aviation",
+  fullName: "Luftfahrtcluster Metropolregion Hamburg",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Aviación Civil e Interiores de Cabina",
+  
+  authorityContext: {
+    narrative: "Hamburg Aviation es uno de los clústeres aeronáuticos más grandes del mundo. Es la ciudad de Airbus (donde se ensamblan los A320 y se pintan los fuselajes) y la sede mundial de Lufthansa Technik (Mantenimiento, Reparación y Operaciones - MRO). Este nodo es la autoridad global en interiores de aviones (Cabin Interiors): desde los asientos hasta la iluminación y el entretenimiento a bordo. Si vuelas en un avión comercial, es muy probable que el interior se haya definido aquí.",
+    keyStats: [
+      { value: "40.000+", label: "Empleados Directos" },
+      { value: "#1", label: "Hub MRO de Europa" },
+      { value: "A320/A350", label: "Línea de Ensamblaje" }
+    ],
+    headquarters: "Hamburgo, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "Airbus Operations", description: "Ensamblaje final de aeronaves" },
+    { name: "Lufthansa Technik", description: "Líder mundial en mantenimiento MRO" },
+    { name: "Diehl Aviation", description: "Sistemas de cabina y aviónica" },
+    { name: "Safran Cabin", description: "Interiores de aeronaves" },
+    { name: "Hamburg Airport", description: "Operaciones aeroportuarias" },
+    { name: "ZAL", description: "Centro de Investigación Aeronáutica Aplicada" },
+    { name: "Recaro Aircraft Seating", description: "Asientos de avión" },
+    { name: "Aerodata", description: "Sistemas de vigilancia aérea" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El 'oro' de este nodo son los datos de MRO (Mantenimiento), la vida útil de las aeronaves y la experiencia del pasajero. También lideran datos sobre el uso de hidrógeno en aviación (proyecto 'Green Aviation').",
+    capabilities: [
+      "Benchmarks de costes MRO",
+      "Datos de materiales de cabina",
+      "Logística de repuestos AOG",
+      "Tendencias en aviación verde"
+    ],
+    uniqueValue: "Acceso a datos de toda la cadena de valor aeronáutica civil, desde ensamblaje hasta mantenimiento y reciclaje de aeronaves."
+  },
+  
+  useCases: [
+    { id: "mro-costs", title: "Costes de Mantenimiento por Hora de Vuelo", description: "Benchmarks reales de MRO para flotas de A320/A350.", type: "benchmark" },
+    { id: "cabin-materials", title: "Innovación en Materiales de Cabina", description: "Datos sobre inflamabilidad y peso de nuevos polímeros para interiores.", type: "index" },
+    { id: "paint-slots", title: "Disponibilidad de Slots de Pintura", description: "Capacidad en hangares para repintado de fuselajes.", type: "capacity" },
+    { id: "hydrogen-ground", title: "Consumo de Hidrógeno en Tierra", description: "Datos piloto de vehículos de servicio aeroportuario propulsados por H2.", type: "index" },
+    { id: "cabin-acoustics", title: "Acústica de Cabina", description: "Mapas de ruido interior en diferentes configuraciones de aeronave.", type: "benchmark" },
+    { id: "aircraft-recycling", title: "Reciclaje de Aviones (End-of-Life)", description: "Recuperación de materiales valiosos al desguazar aeronaves.", type: "index" },
+    { id: "ife-trends", title: "Sistemas de Entretenimiento (IFE)", description: "Tendencias de conectividad y consumo de datos en vuelo.", type: "index" },
+    { id: "p2f-conversion", title: "Conversión de Pasajero a Carguero (P2F)", description: "Demanda y capacidad de ingeniería para transformar aviones antiguos.", type: "capacity" },
+    { id: "aog-logistics", title: "Logística de Repuestos Aeronáuticos", description: "Tiempos de entrega de componentes críticos (AOG - Aircraft on Ground).", type: "cost" },
+    { id: "3d-cabin-parts", title: "Impresión 3D de Piezas de Cabina", description: "Catálogo de piezas de recambio no estructurales certificadas.", type: "directory" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const aeropolis: PremiumPartner = {
+  id: "aeropolis",
+  name: "Aerópolis",
+  fullName: "Parque Tecnológico Aeroespacial de Andalucía",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Aeroespacial y Defensa",
+  
+  authorityContext: {
+    narrative: "Situado en Sevilla (junto a la línea de ensamblaje final del A400M de Airbus), Aerópolis es el único parque científico y tecnológico de Europa dedicado exclusivamente a la industria aeroespacial. Representa el polo sur de la aviación europea. Su especialidad es la aeronáutica militar de transporte, los drones (UAVs) y las aeroestructuras de fibra de carbono. Es un ecosistema cerrado y altamente seguro.",
+    keyStats: [
+      { value: "A400M", label: "Línea de Ensamblaje Final" },
+      { value: "#1", label: "Hub Composites de España" },
+      { value: "100+", label: "Empresas Aeroespaciales" }
+    ],
+    headquarters: "Sevilla, España"
+  },
+  
+  ecosystem: [
+    { name: "Airbus Defence and Space", description: "Aviones militares de transporte" },
+    { name: "Alestis Aerospace", description: "Tier-1 Aeroestructuras" },
+    { name: "Aernnova", description: "Tier-1 Aeroestructuras" },
+    { name: "Aciturri", description: "Aeroestructuras y motor" },
+    { name: "CATEC", description: "Centro Avanzado de Tecnologías Aeroespaciales" },
+    { name: "Sofitec", description: "Composites avanzados" },
+    { name: "Indra", description: "Sistemas de defensa" },
+    { name: "Alter Technology", description: "Certificación de componentes espaciales" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos únicos sobre materiales compuestos (composites), procesos de curado en autoclave y ensayos de drones. Al ser un hub militar, manejan estándares de seguridad de datos muy altos.",
+    capabilities: [
+      "Certificación de composites",
+      "Telemetría de UAVs",
+      "Fabricación aditiva certificada",
+      "Datos de cadena A400M"
+    ],
+    uniqueValue: "Único ecosistema europeo 100% aeroespacial con capacidades de defensa, drones y manufactura avanzada de composites."
+  },
+  
+  useCases: [
+    { id: "autoclave-capacity", title: "Capacidad de Autoclaves", description: "Disponibilidad de horas en hornos industriales para curado de fibra de carbono.", type: "capacity" },
+    { id: "uav-testing", title: "Ensayos de Vuelo de UAVs", description: "Datos de telemetría y zonas de prueba para drones civiles y militares.", type: "index" },
+    { id: "composite-certification", title: "Certificación de Materiales Compuestos", description: "Base de datos de propiedades mecánicas de nuevas resinas aeronáuticas.", type: "directory" },
+    { id: "a400m-supply", title: "Cadena de Suministro del A400M", description: "Riesgo y capacidad de proveedores del avión de transporte militar.", type: "risk" },
+    { id: "metal-am", title: "Fabricación Aditiva en Metal", description: "Datos de certificación de piezas impresas en 3D para vuelo (CATEC es líder).", type: "directory" },
+    { id: "military-mro", title: "Mantenimiento de Aeronaves Militares", description: "Ciclos de revisión de flotas de transporte táctico.", type: "benchmark" },
+    { id: "composite-carbon", title: "Consumo Energético en Fabricación de Composites", description: "Huella de carbono de la producción de piezas ligeras.", type: "index" },
+    { id: "space-components", title: "Espacio y Satélites", description: "Datos de pruebas de componentes electrónicos para uso espacial.", type: "directory" },
+    { id: "aero-talent", title: "Talento en Montaje Aeronáutico", description: "Disponibilidad de operarios cualificados en ensamblaje estructural.", type: "capacity" },
+    { id: "large-logistics", title: "Logística de Grandes Componentes", description: "Rutas y costes para transporte de secciones de fuselaje (Beluga).", type: "cost" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const biowin: PremiumPartner = {
+  id: "biowin",
+  name: "BioWin",
+  fullName: "Pôle de Compétitivité Santé de Wallonie",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Biofarmacia y Vacunas",
+  
+  authorityContext: {
+    narrative: "Valonia (sur de Bélgica) es conocida como el 'valle de la biotecnología'. BioWin es el clúster que orquesta este ecosistema de clase mundial. Aquí se producen una gran parte de las vacunas del mundo. Es un nodo crítico para la soberanía sanitaria europea. Agrupan a big pharma, centros de investigación de radioisótopos (medicina nuclear) y terapias celulares avanzadas.",
+    keyStats: [
+      { value: "30%", label: "Vacunas Mundiales Producidas" },
+      { value: "150+", label: "Empresas Biotecnológicas" },
+      { value: "#1", label: "Hub de Radioisótopos" }
+    ],
+    headquarters: "Charleroi, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "GSK", description: "Centro mundial de vacunas" },
+    { name: "UCB", description: "Biofarmacia y neurología" },
+    { name: "IBA", description: "Líder mundial en protonterapia contra el cáncer" },
+    { name: "Kaneka Eurogentec", description: "Biomanufactura" },
+    { name: "Univercells", description: "Tecnología de bioprocesos" },
+    { name: "Takeda", description: "Producción de derivados del plasma" },
+    { name: "Catalent", description: "Terapia celular y génica" },
+    { name: "IRE", description: "Institut National des Radioéléments" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Poseen datos estratégicos sobre capacidad de bioproducción, cadena de frío farmacéutica y medicina nuclear.",
+    capabilities: [
+      "Capacidad de fermentación",
+      "Logística de cadena de frío",
+      "Suministro de radioisótopos",
+      "Ensayos clínicos fase temprana"
+    ],
+    uniqueValue: "Centro neurálgico de la producción de vacunas y radioisótopos médicos para toda Europa."
+  },
+  
+  useCases: [
+    { id: "fermentation-capacity", title: "Capacidad de Fermentación", description: "Litros disponibles en biorreactores para producción de proteínas recombinantes.", type: "capacity" },
+    { id: "cold-chain", title: "Logística de Vacunas (Cold Chain)", description: "Datos de fiabilidad y capacidad de transporte a -80°C en el hub de Lieja.", type: "capacity" },
+    { id: "radioisotopes", title: "Suministro de Radioisótopos", description: "Disponibilidad de Molibdeno-99 para diagnóstico de cáncer (crítico mundial).", type: "capacity" },
+    { id: "early-trials", title: "Ensayos Clínicos de Fase Temprana", description: "Mapa de hospitales belgas listos para pruebas Fase 1.", type: "directory" },
+    { id: "cell-therapy-cost", title: "Coste de Producción de Terapias Celulares", description: "Modelos de costes para tratamientos CAR-T autólogos.", type: "cost" },
+    { id: "bioprocess-talent", title: "Talento en Bioprocesos", description: "Escasez de operarios de sala blanca cualificados.", type: "capacity" },
+    { id: "pharma-exports", title: "Exportación Biofarmacéutica", description: "Flujos de exportación de vacunas desde Bélgica al resto del mundo.", type: "index" },
+    { id: "medtech-startups", title: "Startups de MedTech", description: "Radar de innovación en dispositivos médicos implantables.", type: "directory" },
+    { id: "pharma-water", title: "Calidad del Agua Farmacéutica", description: "Estándares y monitoreo de agua purificada (WFI) en parques industriales.", type: "benchmark" },
+    { id: "biotech-vc", title: "Inversión en Biotech", description: "Flujo de capital riesgo hacia ciencias de la vida en Valonia.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const healthClusterPortugal: PremiumPartner = {
+  id: "health-cluster-portugal",
+  name: "Health Cluster Portugal",
+  fullName: "Pólo de Competitividade da Saúde",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Salud, Farmacia y Turismo Médico",
+  
+  authorityContext: {
+    narrative: "Health Cluster Portugal posiciona al país como un hub emergente de innovación en salud y manufactura farmacéutica competitiva. Portugal se ha convertido en un destino clave para la CDMO (fabricación por contrato de fármacos) y el desarrollo de software médico, aprovechando su talento ingenieril de alta calidad y costes competitivos. También lideran la estrategia de turismo de salud y bienestar.",
+    keyStats: [
+      { value: "€4B+", label: "Exportaciones Farmacéuticas" },
+      { value: "#1", label: "CDMO Emergente en Europa" },
+      { value: "Rápido", label: "Reclutamiento Ensayos Clínicos" }
+    ],
+    headquarters: "Lisboa, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Bial", description: "Mayor farmacéutica portuguesa, innovadora en neurología" },
+    { name: "Hovione", description: "Líder mundial en CDMO y tecnología de inhaladores" },
+    { name: "Grupo Luz Saúde", description: "Red hospitalaria privada" },
+    { name: "CUF", description: "Grupo hospitalario" },
+    { name: "Bluepharma", description: "Genéricos y producción" },
+    { name: "Medtronic Portugal", description: "Dispositivos médicos" },
+    { name: "Siemens Healthineers Portugal", description: "Tecnología médica" },
+    { name: "Atral", description: "Antibióticos y fármacos" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos valiosos sobre capacidad de síntesis química, ensayos clínicos (Portugal es rápido reclutando pacientes) y datos hospitalarios del sector privado.",
+    capabilities: [
+      "Capacidad de atomización (spray drying)",
+      "Velocidad de reclutamiento clínico",
+      "Costes de desarrollo HealthTech",
+      "Datos de turismo médico"
+    ],
+    uniqueValue: "Hub emergente con costes competitivos, talento cualificado y rapidez en ensayos clínicos, puerta de entrada al mercado lusófono."
+  },
+  
+  useCases: [
+    { id: "spray-drying", title: "Capacidad de Atomización (Spray Drying)", description: "Disponibilidad de tecnología para mejorar la solubilidad de fármacos (especialidad de Hovione).", type: "capacity" },
+    { id: "patient-recruitment", title: "Reclutamiento de Pacientes", description: "Velocidad media para completar cohortes en ensayos clínicos en Portugal.", type: "benchmark" },
+    { id: "generics-export", title: "Exportación de Genéricos", description: "Volúmenes de producción de medicamentos fuera de patente.", type: "index" },
+    { id: "medical-tourism", title: "Turismo Médico y de Rehabilitación", description: "Flujos de pacientes extranjeros buscando tratamientos en Portugal.", type: "index" },
+    { id: "e-prescription", title: "Adopción de Receta Electrónica", description: "Estadísticas de uso de PEM (Prescrição Eletrónica Médica).", type: "index" },
+    { id: "healthtech-costs", title: "Costes de Desarrollo de Software Médico", description: "Tarifas competitivas de ingeniería para HealthTech en Lisboa/Oporto.", type: "cost" },
+    { id: "silver-economy", title: "Envejecimiento Activo", description: "Datos demográficos y soluciones de 'Silver Economy'.", type: "strategy" },
+    { id: "medical-cannabis", title: "Producción de Cannabis Medicinal", description: "Datos del creciente sector de cultivo autorizado en Portugal.", type: "capacity" },
+    { id: "health-interop", title: "Interoperabilidad de Datos de Salud", description: "Integración entre sistema público (SNS) y privado.", type: "index" },
+    { id: "antibiotic-patterns", title: "Consumo de Antibióticos", description: "Patrones de prescripción y resistencia antimicrobiana.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const capenergies: PremiumPartner = {
+  id: "capenergies",
+  name: "Capenergies",
+  fullName: "Pôle de Compétitivité Énergies Non Génératrices de Gaz à Effet de Serre",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Transición Energética y Nuclear",
+  
+  authorityContext: {
+    narrative: "Ubicado en la región Provenza-Alpes-Costa Azul (PACA), Córcega y Mónaco, Capenergies es el clúster de la energía descarbonizada. Esta región es única porque combina sol (fotovoltaica), viento (eólica flotante) y el proyecto científico más grande del mundo: ITER (fusión nuclear). Agrupan a toda la cadena de valor de la energía libre de CO2, con un fuerte enfoque en hidrógeno y Smart Grids.",
+    keyStats: [
+      { value: "ITER", label: "Proyecto de Fusión Nuclear" },
+      { value: "300+", label: "Días de Sol al Año" },
+      { value: "€50B+", label: "Inversión en Energía Limpia" }
+    ],
+    headquarters: "Marsella, Francia"
+  },
+  
+  ecosystem: [
+    { name: "EDF", description: "Gigante eléctrico y nuclear" },
+    { name: "CEA", description: "Comisión de Energía Atómica y Energías Alternativas" },
+    { name: "Engie", description: "Servicios energéticos y gas" },
+    { name: "CMA CGM", description: "Logística y descarbonización marítima" },
+    { name: "Schneider Electric", description: "Gestión de energía" },
+    { name: "TotalEnergies", description: "Transición a renovables" },
+    { name: "Enedis", description: "Distribución eléctrica" },
+    { name: "ITER Organization", description: "Reactor experimental de fusión" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de vanguardia sobre sistemas energéticos insulares (Córcega), cadena de suministro nuclear y eficiencia energética en clima mediterráneo.",
+    capabilities: [
+      "Rendimiento solar en clima cálido",
+      "Gestión de smart grids",
+      "Cadena de suministro ITER",
+      "Hidrógeno marítimo"
+    ],
+    uniqueValue: "Único clúster que combina todas las tecnologías de descarbonización: solar, eólica, nuclear (fisión y fusión) e hidrógeno."
+  },
+  
+  useCases: [
+    { id: "solar-hot-climate", title: "Eficiencia de Paneles Solares en Clima Cálido", description: "Datos de rendimiento real de PV con altas temperaturas (degradación térmica).", type: "benchmark" },
+    { id: "smart-grid", title: "Integración de Renovables en Red (Smart Grid)", description: "Datos de gestión de picos de demanda en redes inteligentes (proyecto FlexGrid).", type: "index" },
+    { id: "iter-supply", title: "Cadena de Suministro ITER", description: "Necesidades de materiales y componentes de ultra-alta tecnología para fusión nuclear.", type: "capacity" },
+    { id: "maritime-hydrogen", title: "Hidrógeno para Transporte Marítimo", description: "Proyectos de descarbonización del puerto de Marsella-Fos.", type: "strategy" },
+    { id: "tourism-energy", title: "Consumo Energético en Zonas Turísticas", description: "Patrones de estacionalidad extrema en la Costa Azul.", type: "index" },
+    { id: "floating-wind", title: "Eólica Marina Flotante", description: "Datos de pruebas piloto en el Mediterráneo.", type: "index" },
+    { id: "island-microgrids", title: "Micro-Redes en Islas", description: "Datos de autonomía energética en Córcega.", type: "benchmark" },
+    { id: "ev-charging-riviera", title: "Recarga de Vehículos Eléctricos", description: "Infraestructura en Mónaco y Niza (alta densidad de EVs).", type: "capacity" },
+    { id: "geothermal", title: "Geotermia", description: "Potencial y explotación de calor del subsuelo.", type: "capacity" },
+    { id: "industrial-decarb", title: "Descarbonización Industrial", description: "Datos de reducción de emisiones en la zona industrial de Fos-sur-Mer.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -1792,7 +2076,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   fnsea,
   ance,
   zdb,
-  foodI
+  foodI,
+  // Paquete 6: Cielos, Salud y Energía Limpia
+  hamburgAviation,
+  aeropolis,
+  biowin,
+  healthClusterPortugal,
+  capenergies
 ];
 
 // Helper para obtener un partner por ID
