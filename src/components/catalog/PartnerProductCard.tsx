@@ -92,28 +92,28 @@ const getPartnerProductDetailUrl = (productId: string): string => {
     // Motor Valley (Italy)
     "MV-SUP-LUX-01": "/catalog/proveedores-premium-automotrices",
     "MV-ESG-ENER-02": "/catalog/energia-limpia-motor-valley",
-    "MV-OPS-ART-03": "/catalog/produccion-artesanal-automotriz",
+    "MV-OPS-CRAFT-03": "/catalog/produccion-artesanal-automotriz",
     "MV-MKT-SUPER-04": "/catalog/precios-componentes-superdeportivos",
-    "MV-RND-TEL-05": "/catalog/telemetria-alto-desempeno",
+    "MV-RND-PERF-05": "/catalog/telemetria-alto-desempeno",
     // Brainport Eindhoven (Netherlands)
-    "BP-COM-SEMI-01": "/catalog/certificaciones-semiconductores",
-    "BP-ESG-CHIP-02": "/catalog/impacto-ambiental-chips",
-    "BP-OPS-CLEAN-03": "/catalog/capacidad-sala-limpia",
-    "BP-MKT-ELEC-04": "/catalog/precios-componentes-electronicos",
-    "BP-RND-NANO-05": "/catalog/caracterizacion-nanomateriales",
+    "BPE-SUP-SEMI-01": "/catalog/certificaciones-semiconductores",
+    "BPE-ESG-CLEAN-02": "/catalog/impacto-ambiental-chips",
+    "BPE-OPS-CAP-03": "/catalog/capacidad-sala-limpia",
+    "BPE-MKT-CHIP-04": "/catalog/precios-componentes-electronicos",
+    "BPE-RND-NANO-05": "/catalog/caracterizacion-nanomateriales",
     // GAIA Cluster (País Vasco, Spain)
-    "GAIA-COM-DIG-01": "/catalog/madurez-digital-tic",
+    "GAIA-SUP-DIG-01": "/catalog/madurez-digital-tic",
     "GAIA-ESG-CIRC-02": "/catalog/economia-circular-tic",
     "GAIA-OPS-DEV-03": "/catalog/capacidad-desarrollo-software",
     "GAIA-MKT-FIN-04": "/catalog/scoring-financiero-digital",
     // BDEW (Germany - Energy)
-    "BDEW-COM-GRID-01": "/catalog/operadores-red-energetica",
-    "BDEW-ESG-MIX-02": "/catalog/mix-energetico-alemania",
+    "BDEW-SUP-GRID-01": "/catalog/operadores-red-energetica",
+    "BDEW-ESG-RENEW-02": "/catalog/mix-energetico-alemania",
     "BDEW-OPS-FLEX-03": "/catalog/flexibilidad-energetica",
-    "BDEW-MKT-PRICE-04": "/catalog/precios-mayoristas-energia",
+    "BDEW-MKT-ENER-04": "/catalog/precios-mayoristas-energia",
     "BDEW-RND-SMART-05": "/catalog/smart-grid-contadores",
     // Agoria (Belgium - Industrial Tech)
-    "AGORIA-COM-TECH-01": "/catalog/empresas-tecnologicas-belgas",
+    "AGO-SUP-TECH-01": "/catalog/empresas-tecnologicas-belgas",
   };
   return routes[productId] || "/auth";
 };
