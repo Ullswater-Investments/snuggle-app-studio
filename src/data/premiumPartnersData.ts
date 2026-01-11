@@ -2323,6 +2323,290 @@ export const ufe: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 8: MODA CIRCULAR, CERÁMICA Y ELECTRÓNICA
+// ============================================
+
+export const distrettoTessile: PremiumPartner = {
+  id: "distretto-tessile",
+  name: "Distretto Tessile",
+  fullName: "Distretto Tessile di Prato",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Textil, Moda y Economía Circular",
+  
+  authorityContext: {
+    narrative: "El Distretto Tessile di Prato (Toscana) es el centro textil más grande de Europa. Pero su valor real hoy es la Economía Circular. Prato lleva 150 años reciclando lana (el famoso 'lana cardata'). Mientras el mundo apenas empieza a hablar de moda sostenible, Prato ya tiene la infraestructura industrial para procesar toneladas de ropa usada y convertirla en tejido de lujo. Es el nodo global para datos de reciclaje textil y tejidos de lana.",
+    keyStats: [
+      { value: "#1", label: "Centro Textil de Europa" },
+      { value: "150+", label: "Años Reciclando Lana" },
+      { value: "7.000+", label: "Empresas Textiles" }
+    ],
+    headquarters: "Prato, Toscana"
+  },
+  
+  ecosystem: [
+    { name: "Manteco", description: "Líder mundial en lana premium reciclada (proveedor de Zara/H&M/Gucci)" },
+    { name: "Lanificio dell'Olivo", description: "Hilos de fantasía" },
+    { name: "Pontetorto", description: "Tejidos deportivos y técnicos" },
+    { name: "Beste", description: "Acabados textiles y confección" },
+    { name: "Lineapiù Italia", description: "Hilados de alta gama" },
+    { name: "Pecci Filati", description: "Hilados de lujo" },
+    { name: "Rifò", description: "Marca nativa de moda circular" },
+    { name: "Marini Industrie", description: "Tejidos innovadores" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Dueños del dato sobre residuos textiles, consumo de agua en tintorería y certificaciones sostenibles (GRS, RWS). Esenciales para cualquier marca de moda que necesite medir su huella Scope 3.",
+    capabilities: [
+      "Reciclaje textil industrial",
+      "Certificaciones sostenibles",
+      "Consumo de agua en tintorería",
+      "Tendencias de color adelantadas"
+    ],
+    uniqueValue: "Acceso al único hub industrial del mundo con 150 años de experiencia en economía circular textil, referencia global para moda sostenible."
+  },
+  
+  useCases: [
+    { id: "recycled-wool-index", title: "Índice de Precios de Lana Reciclada", description: "Coste por kg de materia prima regenerada vs. virgen.", type: "index" },
+    { id: "recycling-capacity", title: "Capacidad de Reciclaje Textil", description: "Toneladas de ropa post-consumo que el distrito puede procesar mensualmente.", type: "capacity" },
+    { id: "water-dyeing", title: "Consumo de Agua en Teñido", description: "Benchmarks de eficiencia hídrica en tintorerías industriales.", type: "benchmark" },
+    { id: "grs-certification", title: "Certificación GRS", description: "Base de datos de proveedores certificados para trazabilidad.", type: "directory" },
+    { id: "yarn-inventory", title: "Inventario de Stock de Hilos", description: "Disponibilidad de hilados en almacén para 'Pronto Moda'.", type: "capacity" },
+    { id: "color-trends", title: "Tendencias de Color (Adelantadas)", description: "Datos de laboratorio sobre colores que se están tiñendo para próxima temporada.", type: "forecast" },
+    { id: "finishing-energy", title: "Costes Energéticos de Acabado", description: "Impacto del gas natural en secado y planchado industrial.", type: "cost" },
+    { id: "wastewater-sludge", title: "Gestión de Lodos de Depuradora", description: "Datos de tratamiento de aguas residuales industriales (sistema GIDA).", type: "benchmark" },
+    { id: "waste-composition", title: "Composición de Residuos Textiles", description: "Análisis de materiales entrantes (algodón vs sintéticos) para reciclaje.", type: "index" },
+    { id: "wool-exports", title: "Exportación de Tejidos de Lana", description: "Flujos comerciales hacia confeccionistas en Asia y Europa del Este.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const distrettoCeramica: PremiumPartner = {
+  id: "distretto-ceramica",
+  name: "Distretto della Ceramica",
+  fullName: "Distretto Ceramico di Sassuolo",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Materiales de Construcción y Diseño",
+  
+  authorityContext: {
+    narrative: "El Distretto della Ceramica en Sassuolo (Emilia-Romaña) produce el 80% de la cerámica italiana. Aquí se inventaron las baldosas de gran formato y ultra-finas. Es una industria intensiva en gas y arcilla, que combina diseño de alta costura con ingeniería pesada. Para ProcureData, este nodo ofrece datos sobre costes energéticos industriales, importación de arcillas y tendencias globales de diseño de interiores.",
+    keyStats: [
+      { value: "80%", label: "Producción Cerámica Italiana" },
+      { value: "20-30%", label: "Coste = Energía" },
+      { value: "#1", label: "Innovación Gran Formato" }
+    ],
+    headquarters: "Sassuolo, Emilia-Romaña"
+  },
+  
+  ecosystem: [
+    { name: "Marazzi Group", description: "Líder mundial (parte de Mohawk)" },
+    { name: "Florim", description: "Cerámica de diseño y B Corp" },
+    { name: "Iris Ceramica Group", description: "Innovación y sostenibilidad" },
+    { name: "Panaria Group", description: "Cerámica de lujo" },
+    { name: "Laminam", description: "Líder en tablas de gran formato" },
+    { name: "Atlas Concorde", description: "Cerámica internacional" },
+    { name: "Kerakoll", description: "Adhesivos y química verde para construcción" },
+    { name: "System Ceramics", description: "Maquinaria para cerámica (Coesia)" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos críticos sobre consumo de gas natural (el 20-30% del coste del azulejo es energía), logística de exportación y patentes de diseño.",
+    capabilities: [
+      "Impacto del precio del gas",
+      "Importación de arcillas",
+      "Tendencias de diseño digital",
+      "Huella de carbono por m²"
+    ],
+    uniqueValue: "Acceso a datos del mayor hub cerámico del mundo, donde el precio del gas TTF impacta directamente en el coste final del producto."
+  },
+  
+  useCases: [
+    { id: "gas-impact", title: "Impacto del Precio del Gas (TTF)", description: "Correlación directa entre coste energético y precio de salida de fábrica.", type: "cost" },
+    { id: "clay-imports", title: "Importación de Arcillas Blancas", description: "Datos de suministro desde Ucrania y Turquía (materias primas críticas).", type: "risk" },
+    { id: "large-format-capacity", title: "Capacidad de Gran Formato", description: "Metros cuadrados disponibles de placas XXL (>3 metros).", type: "capacity" },
+    { id: "design-trends", title: "Tendencias de Diseño (Inkjet Digital)", description: "Patrones más impresos (mármol, madera, cemento) por mercado.", type: "forecast" },
+    { id: "carbon-footprint", title: "Huella de Carbono por m²", description: "Datos EPD (Environmental Product Declaration) promedio del sector.", type: "benchmark" },
+    { id: "maritime-exports", title: "Logística de Exportación Marítima", description: "Volúmenes de contenedores hacia EE.UU. (principal mercado).", type: "index" },
+    { id: "grinding-water", title: "Consumo de Agua en Molienda", description: "Datos de recuperación de aguas de proceso (circuito cerrado).", type: "benchmark" },
+    { id: "packaging-costs", title: "Precios de Embalaje", description: "Costes logísticos auxiliares (palets y plástico).", type: "cost" },
+    { id: "antibacterial-surfaces", title: "Superficies Antibacterianas", description: "Ventas de cerámica con tratamiento de plata activo.", type: "index" },
+    { id: "finished-stock", title: "Stock de Producto Terminado", description: "Niveles de inventario en almacenes reguladores.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const produtech: PremiumPartner = {
+  id: "produtech",
+  name: "Produtech",
+  fullName: "Pólo das Tecnologias de Produção",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Tecnologías de Producción y Maquinaria",
+  
+  authorityContext: {
+    narrative: "Produtech es el clúster de las tecnologías de producción en Portugal. Agrupa a los fabricantes de la maquinaria que hace funcionar a la industria portuguesa tradicional (corcho, calzado, textil, moldes). Son expertos en automatización flexible y robótica adaptada a PYMEs. Su valor está en la eficiencia industrial y la ingeniería a medida.",
+    keyStats: [
+      { value: "#3", label: "Exportador Mundial de Moldes" },
+      { value: "85%", label: "Export. Maquinaria a UE" },
+      { value: "200+", label: "Empresas de Producción" }
+    ],
+    headquarters: "Oporto, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Colep Packaging", description: "Líder en envases metálicos y aerosoles" },
+    { name: "EFACEC", description: "Energía, ingeniería y movilidad" },
+    { name: "Amorim Cork Composites", description: "Tecnología de corcho" },
+    { name: "A. Silva Matos", description: "Tanques y estructuras metálicas" },
+    { name: "Silampos", description: "Menaje metálico y acero" },
+    { name: "Flow Technology", description: "Software industrial MES" },
+    { name: "Introsys", description: "Automatización y robótica para automoción" },
+    { name: "CEIIA", description: "Centro de Ingeniería y Desarrollo de Producto" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos sobre eficiencia OEE en industrias ligeras, consumo energético en manufactura y exportación de moldes (Portugal es potencia mundial en moldes de inyección).",
+    capabilities: [
+      "Exportación de moldes de inyección",
+      "Eficiencia OEE en PYMEs",
+      "Robotización de industria tradicional",
+      "Digitalización de planta"
+    ],
+    uniqueValue: "Acceso a datos del tercer exportador mundial de moldes de inyección, especializado en automatización para industrias tradicionales."
+  },
+  
+  useCases: [
+    { id: "mold-exports", title: "Exportación de Moldes de Inyección", description: "Datos de pedidos de moldes para industria automotriz alemana.", type: "index" },
+    { id: "sme-energy-efficiency", title: "Eficiencia Energética en PYMEs", description: "Benchmarks de consumo kWh en fábricas de tamaño medio.", type: "benchmark" },
+    { id: "traditional-robotics", title: "Robótica en Industria Tradicional", description: "Tasa de adopción de robots en fábricas de calzado y corcho.", type: "index" },
+    { id: "maintenance-cost", title: "Coste de Mantenimiento Industrial", description: "Gasto medio en reparaciones y repuestos.", type: "cost" },
+    { id: "shopfloor-digitalization", title: "Digitalización de Planta", description: "Datos de implementación de software MES/MOM.", type: "index" },
+    { id: "cnc-capacity", title: "Capacidad de Mecanizado CNC", description: "Horas disponibles en talleres de precisión portugueses.", type: "capacity" },
+    { id: "batch-traceability", title: "Trazabilidad de Materia Prima", description: "Datos de gestión de lotes en industria metalmecánica.", type: "benchmark" },
+    { id: "agv-logistics", title: "Logística Interna (AGVs)", description: "Uso de vehículos guiados automáticamente en almacenes.", type: "index" },
+    { id: "robotic-welding", title: "Soldadura Robotizada", description: "Capacidad instalada para estructuras metálicas.", type: "capacity" },
+    { id: "production-talent", title: "Talento en Ingeniería de Producción", description: "Salarios y disponibilidad de ingenieros industriales en Oporto/Aveiro.", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const secartys: PremiumPartner = {
+  id: "secartys",
+  name: "Secartys",
+  fullName: "Clúster de Electrónica, Energía y TIC",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Electrónica, Energía Solar y Domótica",
+  
+  authorityContext: {
+    narrative: "Secartys es un ecosistema empresarial español con sede en Barcelona que abarca cuatro sectores clave: electrónica, energía solar (Solartys), iluminación (Cicat) y domótica (Domotys). Representan la vanguardia de la tecnología aplicada en España. Son el puente para datos sobre autoconsumo fotovoltaico, ciudades inteligentes y la industria electrónica nacional.",
+    keyStats: [
+      { value: "4", label: "Sectores Integrados" },
+      { value: "500+", label: "Empresas Miembro" },
+      { value: "#1", label: "Clúster Electrónico España" }
+    ],
+    headquarters: "Barcelona, España"
+  },
+  
+  ecosystem: [
+    { name: "Simon", description: "Material eléctrico e iluminación (líder nacional)" },
+    { name: "Circutor", description: "Eficiencia energética y recarga VE" },
+    { name: "Salicru", description: "Sistemas de alimentación ininterrumpida (UPS)" },
+    { name: "Wallbox", description: "Cargadores de vehículos eléctricos" },
+    { name: "Ignialight", description: "Iluminación LED" },
+    { name: "Eurecat", description: "Centro tecnológico" },
+    { name: "Premium PSU", description: "Fuentes de alimentación y conversión de energía" },
+    { name: "Bender Iberia", description: "Seguridad eléctrica" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos valiosos sobre despliegue de energía solar, infraestructura de recarga y componentes electrónicos de nicho.",
+    capabilities: [
+      "Autoconsumo industrial",
+      "Infraestructura de recarga VE",
+      "Eficiencia iluminación pública",
+      "Domótica y Smart Home"
+    ],
+    uniqueValue: "Acceso al ecosistema integrado de electrónica, solar y domótica más grande de España, con datos únicos sobre autoconsumo y Smart City."
+  },
+  
+  useCases: [
+    { id: "industrial-solar", title: "Instalaciones de Autoconsumo Industrial", description: "Datos de MW fotovoltaicos instalados en cubiertas de naves.", type: "index" },
+    { id: "ev-charger-sales", title: "Venta de Cargadores de VE", description: "Tendencias de mercado residencial vs. público.", type: "index" },
+    { id: "led-efficiency", title: "Eficiencia de Iluminación Pública", description: "Datos de ahorro energético en renovaciones de alumbrado municipal.", type: "benchmark" },
+    { id: "battery-storage", title: "Almacenamiento en Baterías", description: "Adopción de baterías domésticas e industriales.", type: "index" },
+    { id: "smart-home", title: "Domótica y Smart Home", description: "Dispositivos conectados por hogar en España.", type: "index" },
+    { id: "electronics-exports", title: "Exportación de Componentes Electrónicos", description: "Flujos de venta de electrónica de potencia española.", type: "index" },
+    { id: "grid-quality", title: "Calidad de Red Eléctrica", description: "Datos de armónicos y perturbaciones en redes industriales.", type: "benchmark" },
+    { id: "solar-installers", title: "Escasez de Instaladores Fotovoltaicos", description: "Demanda de mano de obra cualificada para instalaciones.", type: "capacity" },
+    { id: "weee-recycling", title: "Reciclaje de Residuos Electrónicos", description: "Volúmenes gestionados de RAEE.", type: "index" },
+    { id: "smart-city-tenders", title: "Licitaciones de Smart City", description: "Datos de concursos públicos para sensorización urbana.", type: "directory" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const dspValley: PremiumPartner = {
+  id: "dsp-valley",
+  name: "DSP Valley",
+  fullName: "DSP Valley - Smart Electronic Systems",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Sistemas Electrónicos Inteligentes y Audio",
+  
+  authorityContext: {
+    narrative: "DSP Valley (ahora parte de Sirris/Agoria, pero mantiene identidad de marca) es el clúster de la excelencia en Procesamiento Digital de Señales. Ubicado en el corredor Lovaina-Eindhoven, es un nicho de altísimo valor. Aquí se diseñan los algoritmos de audio de tu audífono, los sensores de radar de tu coche y los chips de IoT. Es Deep Tech puro enfocado en hardware y sistemas embebidos.",
+    keyStats: [
+      { value: "#1", label: "DSP/Audio en Europa" },
+      { value: "IMEC", label: "Centro I+D Líder Mundial" },
+      { value: "Deep Tech", label: "Hardware Avanzado" }
+    ],
+    headquarters: "Lovaina, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "NXP Semiconductors Belgium", description: "RFID y seguridad" },
+    { name: "IMEC", description: "Centro de I+D en nanoelectrónica líder mundial" },
+    { name: "Melexis", description: "Sensores para automoción" },
+    { name: "Cochlear", description: "Implantes auditivos - I+D" },
+    { name: "Onsemi", description: "Semiconductores de imagen" },
+    { name: "Easics", description: "Diseño de chips ASIC/FPGA" },
+    { name: "Septentrio", description: "GPS/GNSS de alta precisión" },
+    { name: "Xenics", description: "Cámaras infrarrojas" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos sobre diseño de chips, tecnología de sensores y propiedad intelectual (IP) en microelectrónica.",
+    capabilities: [
+      "Diseño de FPGA/ASIC",
+      "Sensores de automoción",
+      "Tecnología de audio y voz",
+      "Visión infrarroja"
+    ],
+    uniqueValue: "Acceso al epicentro europeo del procesamiento digital de señales, donde IMEC y los líderes de sensores definen el futuro del hardware inteligente."
+  },
+  
+  useCases: [
+    { id: "fpga-talent", title: "Talento en Diseño de FPGA/ASIC", description: "Disponibilidad y coste de ingenieros de hardware de élite.", type: "benchmark" },
+    { id: "gnss-precision", title: "Precisión de Sensores GNSS", description: "Datos comparativos de tecnologías de posicionamiento por satélite.", type: "benchmark" },
+    { id: "automotive-sensors", title: "Innovación en Sensores de Automoción", description: "Nuevas aplicaciones de sensores Hall y presión en EVs.", type: "index" },
+    { id: "audio-voice-tech", title: "Tecnología de Audio y Voz", description: "Algoritmos de cancelación de ruido y procesamiento de voz.", type: "index" },
+    { id: "chip-prototyping", title: "Capacidad de Prototipado de Chips", description: "Acceso a líneas piloto de fabricación en IMEC.", type: "capacity" },
+    { id: "infrared-vision", title: "Visión Infrarroja (SWIR/LWIR)", description: "Aplicaciones industriales de cámaras térmicas.", type: "index" },
+    { id: "low-power-iot", title: "Conectividad IoT de Bajo Consumo", description: "Datos de rendimiento de chips LoRa/Sigfox/NB-IoT.", type: "benchmark" },
+    { id: "nanoelectronics-patents", title: "Patentes en Nanoelectrónica", description: "Actividad de propiedad intelectual en el clúster.", type: "index" },
+    { id: "hardware-startups", title: "Startups de Hardware", description: "Ecosistema de nuevas empresas desarrollando dispositivos físicos.", type: "directory" },
+    { id: "edge-ai-efficiency", title: "Consumo Energético de Chips IA", description: "Benchmarks de eficiencia en procesadores de Edge AI.", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -2372,7 +2656,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   federmeccanica,
   hagueSecurityDelta,
   habitatSustentavel,
-  ufe
+  ufe,
+  // Paquete 8: Moda Circular, Cerámica y Electrónica
+  distrettoTessile,
+  distrettoCeramica,
+  produtech,
+  secartys,
+  dspValley
 ];
 
 // Helper para obtener un partner por ID
