@@ -1471,6 +1471,290 @@ export const systematicParis: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 5: SECTOR PRIMARIO E INFRAESTRUCTURAS
+// ============================================
+
+export const asaja: PremiumPartner = {
+  id: "asaja",
+  name: "ASAJA",
+  fullName: "Asociación Agraria de Jóvenes Agricultores",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Agricultura y Ganadería",
+  
+  authorityContext: {
+    narrative: "ASAJA es la mayor organización profesional agraria de España. Con una capilaridad única en el territorio, representan al 'campo real'. Su importancia estratégica en ProcureData radica en la digitalización del sector primario: son la puerta de entrada para datos sobre cultivos, ganadería y la implementación del Kit Digital en el entorno rural. Manejan la interlocución clave para la Política Agraria Común (PAC).",
+    keyStats: [
+      { value: "200K+", label: "Agricultores Representados" },
+      { value: "#1", label: "Organización Agraria ES" },
+      { value: "17", label: "CCAA con Presencia" }
+    ],
+    headquarters: "Madrid, España"
+  },
+  
+  ecosystem: [
+    { name: "Dcoop", description: "Mayor productor oleícola mundial" },
+    { name: "Covap", description: "Cooperativa Ganadera del Valle de los Pedroches" },
+    { name: "Anecoop", description: "Exportación de cítricos y hortalizas" },
+    { name: "Central Lechera Asturiana", description: "Lácteos" },
+    { name: "Borges", description: "Frutos secos" },
+    { name: "Grupo AN", description: "Cereales y avicultura" },
+    { name: "BonÀrea", description: "Agroalimentario" },
+    { name: "Agroseguro", description: "Seguros agrarios - partner clave" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos sobre superficie cultivable, previsiones de cosecha y costes de insumos agrarios (fertilizantes, piensos). Son datos críticos para predecir la inflación alimentaria.",
+    capabilities: [
+      "Previsión cosechas",
+      "Costes de insumos",
+      "Agua de riego",
+      "PAC digital"
+    ],
+    uniqueValue: "La única fuente con datos reales del campo español: desde precios en origen hasta impacto climático en la producción."
+  },
+  
+  useCases: [
+    { id: "olive-harvest", title: "Previsión de Cosecha de Aceite de Oliva", description: "Estimaciones tempranas de producción basadas en floración y clima (afecta precio mundial).", type: "forecast" },
+    { id: "fertilizer-costs", title: "Costes de Fertilizantes Nitrogenados", description: "Evolución del precio de insumos clave para el agricultor.", type: "cost" },
+    { id: "irrigation-water", title: "Disponibilidad de Agua de Riego", description: "Datos de dotaciones hídricas por cuenca hidrográfica.", type: "capacity" },
+    { id: "pig-census", title: "Censo Ganadero Porcino", description: "Cabezas de ganado disponibles para la industria cárnica.", type: "index" },
+    { id: "drought-impact", title: "Impacto de la Sequía en Cereales", description: "% de pérdidas estimadas en trigo y cebada antes de la cosecha.", type: "risk" },
+    { id: "origin-prices", title: "Precios en Origen (La Lonja)", description: "Cotizaciones semanales reales pagadas al agricultor (vs. precio supermercado).", type: "index" },
+    { id: "digital-logbook", title: "Adopción de Cuaderno de Campo Digital", description: "% de explotaciones que digitalizan sus registros de tratamientos fitosanitarios.", type: "index" },
+    { id: "seasonal-labor", title: "Mano de Obra en Campaña", description: "Disponibilidad de trabajadores temporeros para recolección de fruta.", type: "capacity" },
+    { id: "rural-renewables", title: "Producción de Energías Renovables Rurales", description: "Datos de parques solares/biomasa en terrenos agrícolas.", type: "capacity" },
+    { id: "animal-welfare", title: "Trazabilidad de Bienestar Animal", description: "Certificaciones de granjas que cumplen estándares superiores a la norma.", type: "directory" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const fnsea: PremiumPartner = {
+  id: "fnsea",
+  name: "FNSEA",
+  fullName: "Fédération Nationale des Syndicats d'Exploitants Agricoles",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Agricultura y Soberanía Alimentaria",
+  
+  authorityContext: {
+    narrative: "La FNSEA es el sindicato agrícola mayoritario en Francia, representando a más de 200.000 agricultores. Francia es la potencia agrícola de la UE, y la FNSEA es su voz. Su enfoque actual es la 'Tercera Revolución Agrícola': robótica, genética y datos. Son fundamentales para validar el cumplimiento de la Ley EGALIM (equilibrio de precios comerciales) y la trazabilidad de la cadena alimentaria.",
+    keyStats: [
+      { value: "200K+", label: "Agricultores Miembros" },
+      { value: "#1", label: "Potencia Agrícola UE" },
+      { value: "100+", label: "Años de Historia" }
+    ],
+    headquarters: "París, Île-de-France"
+  },
+  
+  ecosystem: [
+    { name: "Tereos", description: "Azúcar y almidón" },
+    { name: "Sodaal", description: "Lácteos - Entremont/Candia" },
+    { name: "Agrial", description: "Cooperativa multirubro" },
+    { name: "InVivo", description: "Agricultura y jardinería" },
+    { name: "Vivescia", description: "Cereales y panadería" },
+    { name: "Lactalis", description: "Líder mundial lácteo - relación proveedor" },
+    { name: "Axereal", description: "Grano y malta" },
+    { name: "Eureden", description: "Agroalimentario bretón" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Poseen datos profundos sobre soberanía alimentaria, agricultura de carbono (créditos de carbono agrícolas) y normativas sanitarias.",
+    capabilities: [
+      "Ley Egalim - precios",
+      "Créditos carbono agrícolas",
+      "Fitosanitarios y bio",
+      "Robótica agrícola"
+    ],
+    uniqueValue: "El único nodo que puede certificar datos de soberanía alimentaria francesa y validar créditos de carbono agrícolas."
+  },
+  
+  useCases: [
+    { id: "milk-costs", title: "Costes de Producción de Leche", description: "Benchmark oficial para negociaciones de precios con la gran distribución (Ley Egalim).", type: "benchmark" },
+    { id: "carbon-credits-agri", title: "Créditos de Carbono Agrícolas", description: "Volumen de CO2 secuestrado en suelos agrícolas franceses disponible para compensación.", type: "index" },
+    { id: "pesticide-use", title: "Uso de Productos Fitosanitarios", description: "Datos de reducción de pesticidas y transición a bio-control.", type: "index" },
+    { id: "wheat-yield", title: "Rendimiento de Trigo Blando", description: "Datos de calidad (proteína) y volumen para exportación.", type: "index" },
+    { id: "cattle-health", title: "Salud de la Cabaña Bovina", description: "Estadísticas epidemiológicas y de vacunación.", type: "risk" },
+    { id: "organic-transition", title: "Transición a Agricultura Ecológica", description: "Tasa de conversión de hectáreas a Bio.", type: "index" },
+    { id: "frost-damage", title: "Impacto de Heladas en Viñedos", description: "Datos de daños en tiempo real para la industria del vino.", type: "risk" },
+    { id: "agri-diesel", title: "Consumo de Diésel Agrícola (GNR)", description: "Datos de demanda energética del sector primario.", type: "index" },
+    { id: "land-prices", title: "Precios de Tierras Agrícolas", description: "Evolución del coste por hectárea en diferentes regiones francesas.", type: "index" },
+    { id: "milking-robots", title: "Adopción de Robótica de Ordeño", description: "Nivel de automatización en granjas lecheras.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const ance: PremiumPartner = {
+  id: "ance",
+  name: "ANCE",
+  fullName: "Associazione Nazionale Costruttori Edili",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Construcción e Infraestructuras",
+  
+  authorityContext: {
+    narrative: "ANCE representa a la industria italiana de la construcción, con cerca de 20.000 empresas privadas. Son el motor detrás de la ejecución del PNRR (Plan Nacional de Recuperación). Su foco estratégico es la regeneración urbana y la sostenibilidad edilicia. Para ProcureData, son la fuente de la verdad sobre costes de obra, licitaciones públicas y el famoso 'Superbonus' de eficiencia energética.",
+    keyStats: [
+      { value: "20K", label: "Empresas Miembro" },
+      { value: "€200B", label: "PNRR Construcción" },
+      { value: "#2", label: "Sector Construcción EU" }
+    ],
+    headquarters: "Roma, Lacio"
+  },
+  
+  ecosystem: [
+    { name: "Webuild", description: "Grandes infraestructuras (antes Salini Impregilo)" },
+    { name: "Pizzarotti", description: "Construcción e ingeniería" },
+    { name: "Ghella", description: "Túneles y obras subterráneas" },
+    { name: "Rizzani de Eccher", description: "Construcción general" },
+    { name: "Itinera (Grupo Gavio)", description: "Infraestructuras viarias" },
+    { name: "CMB", description: "Cooperativa constructora" },
+    { name: "Vianini Lavori", description: "Obras civiles" },
+    { name: "Mapei", description: "Materiales - partner asociado" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de 'economía real': costes de materiales, licitaciones públicas y rehabilitación energética. Esenciales para bancos e inversores inmobiliarios.",
+    capabilities: [
+      "Precios materiales obra",
+      "Ejecución PNRR",
+      "Superbonus 110%",
+      "Licitaciones públicas"
+    ],
+    uniqueValue: "El único nodo con datos reales de ejecución del mayor plan de inversión pública de Italia en décadas."
+  },
+  
+  useCases: [
+    { id: "construction-materials", title: "Precios de Materiales de Construcción", description: "Índice mensual de fluctuación de acero corrugado, cemento y betún.", type: "index" },
+    { id: "pnrr-execution", title: "Ejecución de Fondos PNRR", description: "% de obras públicas adjudicadas e iniciadas financiadas por la UE.", type: "index" },
+    { id: "energy-retrofit", title: "Tasa de Rehabilitación Energética", description: "Metros cuadrados renovados bajo incentivos fiscales (Superbonus 110%).", type: "index" },
+    { id: "labor-costs-construction", title: "Costes Laborales en Obra", description: "Tablas salariales provinciales para oficiales y peones.", type: "benchmark" },
+    { id: "failed-tenders", title: "Licitaciones Desiertas", description: "Estadísticas de obras públicas sin ofertas (indicador de precios base irreales).", type: "risk" },
+    { id: "cement-consumption", title: "Consumo de Cemento", description: "Dato adelantado de actividad económica regional.", type: "index" },
+    { id: "construction-safety", title: "Seguridad en Obras", description: "Datos de siniestralidad laboral y cumplimiento normativo.", type: "risk" },
+    { id: "new-housing-sales", title: "Venta de Vivienda Nueva", description: "Transacciones de inmuebles residenciales de nueva planta.", type: "index" },
+    { id: "demolition-waste", title: "Gestión de Residuos de Demolición", description: "Volúmenes de escombros procesados para reciclaje (economía circular).", type: "capacity" },
+    { id: "builder-credit", title: "Crédito al Constructor", description: "Condiciones de acceso a financiación bancaria para promotores.", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const zdb: PremiumPartner = {
+  id: "zdb",
+  name: "ZDB",
+  fullName: "Zentralverband Deutsches Baugewerbe",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Construcción y Artesanía Industrial",
+  
+  authorityContext: {
+    narrative: "La ZDB es la federación líder de la construcción alemana, representando a 35.000 empresas, en su mayoría PYMEs familiares (Mittelstand). A diferencia de las grandes corporaciones, la ZDB representa el tejido que construye las casas, carreteras y puentes de Alemania. Lideran la adopción de BIM (Building Information Modeling) y la construcción sostenible en madera y materiales eficientes.",
+    keyStats: [
+      { value: "35K", label: "Empresas Miembro" },
+      { value: "€150B", label: "Sector Construcción DE" },
+      { value: "Mittelstand", label: "PYMEs Familiares" }
+    ],
+    headquarters: "Berlín, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "Goldbeck", description: "Construcción industrial y escolar" },
+    { name: "Max Bögl", description: "Construcción modular y eólica" },
+    { name: "Leonhard Weiss", description: "Ingeniería civil y vías" },
+    { name: "Wolff & Müller", description: "Construcción sostenible" },
+    { name: "Köster", description: "Edificación" },
+    { name: "Bauer AG", description: "Ingeniería de cimentación" },
+    { name: "Züblin (Strabag)", description: "Ingeniería estructural" },
+    { name: "Heidelberg Materials", description: "Proveedor clave asociado" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El nodo de la eficiencia constructiva. Datos sobre construcción modular, prefabricación y estándares de eficiencia energética (KfW).",
+    capabilities: [
+      "BIM en PYMEs",
+      "Construcción modular",
+      "Estándar KfW",
+      "Escasez artesanos"
+    ],
+    uniqueValue: "El único ecosistema que mide la salud del Mittelstand constructor alemán: desde permisos hasta insolvencias."
+  },
+  
+  useCases: [
+    { id: "building-permits", title: "Índice de Permisos de Construcción", description: "Nuevas licencias concedidas para vivienda residencial (indicador económico clave).", type: "index" },
+    { id: "bim-adoption-sme", title: "Adopción de BIM en PYMEs", description: "% de empresas medianas que utilizan modelado digital 3D.", type: "index" },
+    { id: "housing-costs-de", title: "Costes de Construcción de Vivienda", description: "Precio por m² de construcción residencial (Baupreisindex).", type: "benchmark" },
+    { id: "skilled-trades-shortage", title: "Escasez de Artesanos Calificados", description: "Vacantes abiertas para albañiles, carpinteros y electricistas.", type: "capacity" },
+    { id: "timber-construction", title: "Uso de Madera en Construcción", description: "Tendencia de cuota de mercado de edificios con estructura de madera.", type: "index" },
+    { id: "project-completion-times", title: "Tiempos de Finalización de Obras", description: "Duración media de proyectos desde inicio hasta entrega.", type: "benchmark" },
+    { id: "municipal-infrastructure", title: "Inversión en Infraestructura Municipal", description: "Gasto de ayuntamientos en mantenimiento de carreteras y escuelas.", type: "index" },
+    { id: "kfw-efficiency", title: "Eficiencia Energética (Estándar KfW)", description: "% de nuevos edificios que cumplen los estándares de consumo casi nulo.", type: "index" },
+    { id: "aggregates-supply", title: "Disponibilidad de Arena y Grava", description: "Datos de suministro local de áridos (recurso crítico).", type: "capacity" },
+    { id: "construction-insolvencies", title: "Índice de Insolvencias en Construcción", description: "Salud financiera del sector constructor alemán.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const foodI: PremiumPartner = {
+  id: "food-i",
+  name: "Food+i",
+  fullName: "Clúster Alimentario del Valle del Ebro",
+  country: { code: "ES", flag: "🇪🇸", name: "España" },
+  vertical: "Industria Alimentaria y Tecnología (FoodTech)",
+  
+  authorityContext: {
+    narrative: "El Clúster Alimentario del Valle del Ebro (Food+i) agrupa a empresas de La Rioja, Navarra, Aragón y País Vasco, una de las huertas más ricas de Europa. Su enfoque no es el campo, sino la transformación industrial: conserveras, congelados, platos preparados y tecnología de los alimentos. Es un partner clave para datos de seguridad alimentaria, packaging y FoodTech.",
+    keyStats: [
+      { value: "150+", label: "Empresas Miembro" },
+      { value: "€10B+", label: "Facturación Agregada" },
+      { value: "4", label: "CCAA del Ebro" }
+    ],
+    headquarters: "Logroño, La Rioja"
+  },
+  
+  ecosystem: [
+    { name: "Grupo Palacios", description: "Alimentación/Embutidos/Pizzas" },
+    { name: "Ebro Foods", description: "Arroz y Pasta" },
+    { name: "Grupo Riberebro", description: "Conservas vegetales/Champiñón" },
+    { name: "Florette", description: "Ensaladas IV Gama" },
+    { name: "Congelados de Navarra", description: "Verduras congeladas" },
+    { name: "General Mills", description: "Planta de San Adrián" },
+    { name: "Viscofan", description: "Envolturas cárnicas - líder mundial" },
+    { name: "CNTA", description: "Centro Nacional de Tecnología y Seguridad Alimentaria" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de procesamiento industrial. Aportan valor sobre trazabilidad industrial (del campo a la lata), consumo de agua en fábrica y tendencias de nuevos productos (proteína alternativa).",
+    capabilities: [
+      "Seguridad alimentaria",
+      "Eficiencia hídrica",
+      "Clean label",
+      "Proteína vegetal"
+    ],
+    uniqueValue: "El único hub donde puedes medir la transformación del alimento español: desde la huerta hasta la lata de conserva."
+  },
+  
+  useCases: [
+    { id: "veggie-processing", title: "Capacidad de Procesamiento de Vegetales", description: "Toneladas/hora disponibles en plantas de congelado durante campaña.", type: "capacity" },
+    { id: "food-safety-incidents", title: "Incidencias de Seguridad Alimentaria", description: "Datos anonimizados de alertas de calidad en fábrica (listeria/salmonela).", type: "risk" },
+    { id: "water-per-kg", title: "Consumo de Agua por Kg de Producto", description: "Benchmarks de eficiencia hídrica en conserveras.", type: "benchmark" },
+    { id: "clean-label-trends", title: "Tendencias en 'Clean Label'", description: "% de nuevos productos lanzados sin aditivos artificiales.", type: "forecast" },
+    { id: "shelf-life", title: "Vida Útil (Shelf Life) de Productos", description: "Datos técnicos sobre caducidades medias por categoría y envase.", type: "benchmark" },
+    { id: "packaging-costs", title: "Precios de Hojalata y Vidrio para Envases", description: "Impacto del coste del packaging en el producto final.", type: "cost" },
+    { id: "byproduct-valorization", title: "Valorización de Subproductos", description: "Oferta de destrío vegetal para alimentación animal o biogás.", type: "capacity" },
+    { id: "plant-protein-innovation", title: "Innovación en Proteína Vegetal", description: "Desarrollo de análogos cárnicos en el Valle del Ebro.", type: "forecast" },
+    { id: "canned-exports", title: "Exportación de Conservas", description: "Volúmenes de venta a mercados internacionales (Francia/UK).", type: "index" },
+    { id: "eol-automation", title: "Automatización de Final de Línea", description: "Nivel de robotización en empaquetado y paletizado.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -1502,7 +1786,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   pfa,
   federchimica,
   packagingValley,
-  systematicParis
+  systematicParis,
+  // Paquete 5: Sector Primario e Infraestructuras
+  asaja,
+  fnsea,
+  ance,
+  zdb,
+  foodI
 ];
 
 // Helper para obtener un partner por ID
