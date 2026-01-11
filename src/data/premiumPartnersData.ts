@@ -2039,6 +2039,290 @@ export const capenergies: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 7: ENERGÍA, SEGURIDAD Y MATERIALES
+// ============================================
+
+export const bdew: PremiumPartner = {
+  id: "bdew",
+  name: "BDEW",
+  fullName: "Bundesverband der Energie- und Wasserwirtschaft",
+  country: { code: "DE", flag: "🇩🇪", name: "Alemania" },
+  vertical: "Energía y Gestión del Agua",
+  
+  authorityContext: {
+    narrative: "La Bundesverband der Energie- und Wasserwirtschaft (BDEW) es la asociación federal que gestiona las arterias de Alemania: electricidad, gas, calefacción urbana y agua. Representa a más de 1.900 empresas, desde los grandes grupos energéticos hasta las 'Stadtwerke' (empresas municipales) locales. Son los arquitectos de la Energiewende (transición energética). Para ProcureData, son la fuente definitiva de datos sobre infraestructura de carga, redes inteligentes y seguridad de suministro hídrico.",
+    keyStats: [
+      { value: "1.900+", label: "Empresas Miembros" },
+      { value: "90%", label: "Suministro Energético Alemán" },
+      { value: "#1", label: "Arquitecto de Energiewende" }
+    ],
+    headquarters: "Berlín, Alemania"
+  },
+  
+  ecosystem: [
+    { name: "E.ON", description: "Redes y soluciones energéticas" },
+    { name: "RWE", description: "Generación, renovables y convencional" },
+    { name: "EnBW", description: "Energía integrada" },
+    { name: "Vattenfall Wärme Berlin", description: "Calefacción urbana" },
+    { name: "MVV Energie", description: "Energía municipal" },
+    { name: "Thyssengas", description: "Transporte de gas" },
+    { name: "Berliner Wasserbetriebe", description: "Gestión de agua en Berlín" },
+    { name: "Mainova", description: "Multi-utility de Frankfurt" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Poseen datos granulares sobre infraestructura de carga pública para EVs, calidad del agua potable y la transición del gas natural al hidrógeno verde.",
+    capabilities: [
+      "Mapas de puntos de carga EV",
+      "Calidad del agua por región",
+      "Mix energético en tiempo real",
+      "Proyectos de hidrógeno verde"
+    ],
+    uniqueValue: "Acceso directo a datos de toda la infraestructura energética e hídrica alemana, el sistema más complejo de Europa."
+  },
+  
+  useCases: [
+    { id: "charging-map", title: "Mapa de Puntos de Carga Pública", description: "Disponibilidad y potencia de cargadores en ciudades alemanas (Ladesäulenregister).", type: "directory" },
+    { id: "grid-fees", title: "Tarifas de Acceso a Red (Grid Fees)", description: "Evolución de los costes regulados de distribución eléctrica.", type: "cost" },
+    { id: "water-quality", title: "Calidad del Agua por Región", description: "Datos de dureza y composición mineral del agua potable (crítico para industria alimentaria).", type: "index" },
+    { id: "district-heating", title: "Inversión en Redes de Calor", description: "Expansión de kilómetros de tubería para calefacción urbana.", type: "capacity" },
+    { id: "energy-mix", title: "Mix Energético en Tiempo Real", description: "Porcentaje de eólica/solar vs carbón/gas en la red alemana.", type: "index" },
+    { id: "water-losses", title: "Pérdidas en Redes de Agua", description: "Estadísticas de eficiencia y fugas en la distribución hídrica.", type: "benchmark" },
+    { id: "smart-meters", title: "Despliegue de Smart Meters", description: "Tasa de instalación de contadores inteligentes en hogares y PYMEs.", type: "index" },
+    { id: "gas-storage", title: "Capacidad de Almacenamiento de Gas", description: "Niveles de llenado de los depósitos subterráneos alemanes.", type: "capacity" },
+    { id: "h2-projects", title: "Proyectos de Hidrógeno (H2)", description: "Base de datos de proyectos piloto de inyección de H2 en redes de gas.", type: "directory" },
+    { id: "utility-cyber", title: "Digitalización de Utilities", description: "Inversión del sector en ciberseguridad para infraestructuras críticas.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const federmeccanica: PremiumPartner = {
+  id: "federmeccanica",
+  name: "Federmeccanica",
+  fullName: "Federazione Sindacale dell'Industria Metalmeccanica Italiana",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Industria Metalmecánica y Manufactura",
+  
+  authorityContext: {
+    narrative: "Federmeccanica es la federación sindical de la industria metalmecánica italiana. Representa el sector manufacturero más grande de Italia (1,6 millones de empleados): desde la maquinaria de precisión hasta la siderurgia y la mecatrónica. Es el interlocutor que negocia el convenio colectivo nacional. Su valor radica en los datos sobre costes laborales industriales, productividad y la adopción real de tecnologías de fábrica.",
+    keyStats: [
+      { value: "1,6M", label: "Empleados en el Sector" },
+      { value: "#1", label: "Sector Manufacturero de Italia" },
+      { value: "€200B+", label: "Facturación Anual" }
+    ],
+    headquarters: "Roma, Italia"
+  },
+  
+  ecosystem: [
+    { name: "Leonardo", description: "Defensa y Aeroespacial" },
+    { name: "Fincantieri", description: "Construcción naval - cruceros y militar" },
+    { name: "Prysmian", description: "Cables de energía y telecomunicaciones" },
+    { name: "Danieli", description: "Plantas siderúrgicas" },
+    { name: "Brembo", description: "Sistemas de freno" },
+    { name: "Hitachi Rail Italia", description: "Transporte ferroviario" },
+    { name: "Ariston Group", description: "Confort térmico" },
+    { name: "Datalogic", description: "Automatización industrial" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos macroeconómicos del 'taller de Europa'. Producción industrial, exportaciones de maquinaria y barómetros de empleo cualificado.",
+    capabilities: [
+      "Índices de coste laboral",
+      "Producción industrial mensual",
+      "Exportación de maquinaria",
+      "Inversión en bienes de equipo"
+    ],
+    uniqueValue: "Fuente oficial de datos laborales y productivos del mayor sector industrial italiano, referencia para toda la manufactura mediterránea."
+  },
+  
+  useCases: [
+    { id: "labor-cost", title: "Índice de Coste Laboral Metalmecánico", description: "Salarios reales por categoría profesional (Obrero, Empleado, Cuadro).", type: "index" },
+    { id: "industrial-production", title: "Producción Industrial Metalmecánica", description: "Volúmenes de fabricación ajustados estacionalmente.", type: "index" },
+    { id: "machinery-export", title: "Exportación de Maquinaria Herramienta", description: "Flujos comerciales hacia Alemania, EE.UU. y China.", type: "index" },
+    { id: "capex-investment", title: "Inversión en Bienes de Equipo", description: "Datos de compra de nueva maquinaria (Capex).", type: "index" },
+    { id: "capacity-usage", title: "Uso de Capacidad Instalada", description: "Porcentaje de utilización de plantas fabriles.", type: "benchmark" },
+    { id: "workplace-safety", title: "Seguridad Laboral", description: "Tasas de incidencia de accidentes en el sector metal.", type: "index" },
+    { id: "vocational-training", title: "Formación Profesional", description: "Estadísticas de aprendices y formación dual en fábricas.", type: "index" },
+    { id: "corporate-welfare", title: "Welfare Empresarial", description: "Datos sobre beneficios sociales ofrecidos en convenios de empresa.", type: "benchmark" },
+    { id: "absenteeism", title: "Absentismo Laboral", description: "Tasas medias de ausencias por enfermedad en planta.", type: "benchmark" },
+    { id: "ppi-metal", title: "Precios de Producción Industrial", description: "Inflación a puerta de fábrica (PPI) del sector.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const hagueSecurityDelta: PremiumPartner = {
+  id: "hsd",
+  name: "The Hague Security Delta",
+  fullName: "HSD - Security Cluster",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Seguridad, Ciberseguridad y Forense",
+  
+  authorityContext: {
+    narrative: "HSD (Security Delta) es el clúster de seguridad líder en Europa. Ubicado en La Haya (ciudad de la paz y la justicia), agrupa a empresas, gobiernos e instituciones de conocimiento centradas en la ciberseguridad, la seguridad nacional y la forense digital. Es un nodo único para datos sobre amenazas digitales, protección de infraestructuras y tecnología de seguridad urbana.",
+    keyStats: [
+      { value: "300+", label: "Organizaciones Miembros" },
+      { value: "#1", label: "Hub de Ciberseguridad en EU" },
+      { value: "Europol", label: "Partner Institucional" }
+    ],
+    headquarters: "La Haya, Países Bajos"
+  },
+  
+  ecosystem: [
+    { name: "Thales Nederland", description: "Sistemas de defensa y seguridad" },
+    { name: "Fox-IT (NCC Group)", description: "Ciberseguridad de alto nivel" },
+    { name: "Siemens", description: "Seguridad de infraestructuras" },
+    { name: "KPN Security", description: "Seguridad de telecomunicaciones" },
+    { name: "TNO", description: "Organización de investigación aplicada" },
+    { name: "EclecticIQ", description: "Inteligencia de amenazas" },
+    { name: "Europol", description: "Partner institucional europeo" },
+    { name: "Deloitte Cyber Risk", description: "Consultoría de ciberriesgo" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Inteligencia sobre cibercrimen, tecnologías de encriptación y seguridad física inteligente. Datos vitales para departamentos de IT y Risk Management.",
+    capabilities: [
+      "Tendencias de phishing",
+      "Estadísticas de ransomware",
+      "Innovación en criptografía",
+      "Forense digital"
+    ],
+    uniqueValue: "Único ecosistema europeo que combina seguridad física, ciberseguridad y forense bajo el paraguas de las instituciones de justicia internacional."
+  },
+  
+  useCases: [
+    { id: "phishing-trends", title: "Tendencias de Phishing en Benelux", description: "Vectores de ataque más comunes detectados en empresas holandesas.", type: "index" },
+    { id: "ransomware-stats", title: "Ransomware en Infraestructuras", description: "Estadísticas anonimizadas de incidentes y rescates.", type: "risk" },
+    { id: "ciso-salaries", title: "Salarios de CISO y Analistas SOC", description: "Remuneración de expertos en seguridad en La Haya.", type: "benchmark" },
+    { id: "smart-cameras", title: "Adopción de Cámaras Inteligentes", description: "Datos de despliegue de videovigilancia con IA en espacios públicos.", type: "index" },
+    { id: "security-clearance", title: "Tiempos de Security Clearance", description: "Duración media de procesos de habilitación de seguridad para personal.", type: "benchmark" },
+    { id: "post-quantum", title: "Innovación en Criptografía Post-Cuántica", description: "Estado de proyectos piloto de encriptación resistente a cuántica.", type: "strategy" },
+    { id: "port-security", title: "Seguridad Portuaria (Róterdam)", description: "Datos de tecnologías de escaneo físico de contenedores.", type: "capacity" },
+    { id: "security-drones", title: "Drones de Seguridad", description: "Uso de UAVs para vigilancia perimetral automatizada.", type: "index" },
+    { id: "gdpr-stats", title: "Protección de Datos (GDPR)", description: "Estadísticas de multas y notificaciones de brechas de datos en NL.", type: "index" },
+    { id: "digital-forensics", title: "Forense Digital", description: "Demanda de servicios de recuperación de datos y análisis de evidencias.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const habitatSustentavel: PremiumPartner = {
+  id: "habitat-sustentavel",
+  name: "Cluster Habitat Sustentável",
+  fullName: "Cluster do Habitat Sustentável",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Construcción Sostenible y Materiales Naturales",
+  
+  authorityContext: {
+    narrative: "El Cluster Habitat Sustentável conecta la riqueza natural de Portugal (piedra, corcho, cerámica, madera) con la construcción del futuro. Enfocados en la sostenibilidad y la economía circular, promueven materiales que descarbonizan la edificación. Son el nodo para acceder a datos sobre Declaraciones Ambientales de Producto (DAP/EPD) y materiales de construcción ecológicos.",
+    keyStats: [
+      { value: "#1", label: "Exportador Mundial de Corcho" },
+      { value: "100+", label: "Empresas de Materiales" },
+      { value: "EPD", label: "Certificaciones Ambientales" }
+    ],
+    headquarters: "Porto, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "Corticeira Amorim", description: "Líder mundial en corcho - aislamiento" },
+    { name: "Secil", description: "Cemento y materiales de construcción" },
+    { name: "Revigrés", description: "Cerámica y porcelanato" },
+    { name: "Saint-Gobain Portugal", description: "Soluciones constructivas" },
+    { name: "CIN", description: "Pinturas y recubrimientos" },
+    { name: "Sonae Arauco", description: "Tableros de madera derivados" },
+    { name: "Filstone", description: "Piedra natural" },
+    { name: "Universidade de Aveiro", description: "I+D en materiales" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de huella de carbono de materiales, eficiencia térmica del corcho y reciclabilidad de residuos de construcción.",
+    capabilities: [
+      "Propiedades térmicas del corcho",
+      "Huella de carbono de cemento",
+      "Reciclaje de residuos cerámicos",
+      "Declaraciones ambientales EPD"
+    ],
+    uniqueValue: "Único clúster europeo especializado en materiales de construcción naturales y sostenibles con datos certificados de impacto ambiental."
+  },
+  
+  useCases: [
+    { id: "cork-insulation", title: "Aislamiento Térmico de Corcho", description: "Datos técnicos de conductividad y rendimiento del aglomerado de corcho expandido.", type: "benchmark" },
+    { id: "cement-carbon", title: "Huella de Carbono del Cemento", description: "Datos de emisiones de CO2 por tonelada de clinker producido.", type: "index" },
+    { id: "stone-durability", title: "Durabilidad de Piedra Natural", description: "Ensayos de resistencia para fachadas y pavimentos exteriores.", type: "benchmark" },
+    { id: "ceramic-recycling", title: "Reciclaje de Residuos Cerámicos", description: "Volúmenes de material recuperado reincorporado al proceso productivo.", type: "index" },
+    { id: "voc-emissions", title: "Calidad del Aire Interior (VOCs)", description: "Emisiones de compuestos orgánicos volátiles de pinturas y barnices.", type: "benchmark" },
+    { id: "water-efficiency", title: "Eficiencia Hídrica en Grifería", description: "Datos de consumo de nuevos dispositivos sanitarios fabricados en el clúster.", type: "benchmark" },
+    { id: "export-prices", title: "Precios de Exportación de Materiales", description: "Valor por tonelada de mármol y granito portugués.", type: "cost" },
+    { id: "modular-wood", title: "Construcción Modular en Madera", description: "Capacidad de producción de estructuras prefabricadas.", type: "capacity" },
+    { id: "epd-database", title: "Declaraciones Ambientales (EPD)", description: "Base de datos de productos con certificación ambiental verificada.", type: "directory" },
+    { id: "urban-rehab", title: "Rehabilitación Urbana", description: "Datos de materiales utilizados en la renovación de centros históricos (Lisboa/Oporto).", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const ufe: PremiumPartner = {
+  id: "ufe",
+  name: "UFE",
+  fullName: "Union Française de l'Électricité",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Electricidad y Transición Energética",
+  
+  authorityContext: {
+    narrative: "La Union Française de l'Électricité (UFE) representa a todo el sector eléctrico francés: productores, gestores de redes y comercializadores. Francia es el 'banco de energía' de Europa gracias a su parque nuclear, y la UFE gestiona los datos de este sistema masivo. Su foco es la descarbonización, la seguridad de suministro nuclear y la electrificación de usos (movilidad y calefacción).",
+    keyStats: [
+      { value: "56", label: "Reactores Nucleares" },
+      { value: "70%", label: "Electricidad Nuclear" },
+      { value: "#1", label: "Exportador Eléctrico EU" }
+    ],
+    headquarters: "París, Francia"
+  },
+  
+  ecosystem: [
+    { name: "EDF", description: "Electricité de France - Nuclear/Hidro" },
+    { name: "Engie", description: "Renovables y térmico" },
+    { name: "Enedis", description: "Distribución eléctrica - 95% del territorio" },
+    { name: "RTE", description: "Red de Transporte de Electricidad" },
+    { name: "TotalEnergies", description: "División electricidad y renovables" },
+    { name: "Dalkia", description: "Servicios energéticos" },
+    { name: "Vinci Energies", description: "Infraestructuras eléctricas" },
+    { name: "Eiffage Énergie", description: "Instalaciones eléctricas" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos críticos sobre disponibilidad nuclear, exportaciones de electricidad a vecinos europeos y el despliegue de bombas de calor.",
+    capabilities: [
+      "Disponibilidad nuclear",
+      "Flujos de interconexión",
+      "Precios spot/futuros",
+      "Electrificación de usos"
+    ],
+    uniqueValue: "Acceso a datos del mayor sistema eléctrico nuclear del mundo occidental, referencia para la seguridad energética europea."
+  },
+  
+  useCases: [
+    { id: "nuclear-availability", title: "Disponibilidad del Parque Nuclear", description: "Calendario de paradas y mantenimiento de reactores (afecta precio spot europeo).", type: "capacity" },
+    { id: "realtime-consumption", title: "Consumo Eléctrico en Tiempo Real", description: "Curvas de carga nacionales y regionales (Eco2mix).", type: "index" },
+    { id: "interconnections", title: "Interconexiones Fronterizas", description: "Flujos de exportación/importación con España, Alemania y UK.", type: "index" },
+    { id: "heat-pumps", title: "Instalación de Bombas de Calor", description: "Estadísticas de sustitución de calderas de gas/fuel por eléctricas.", type: "index" },
+    { id: "renewables-connection", title: "Conexión de Renovables a Red", description: "Tiempos de espera y capacidad de acogida para nuevos parques solares.", type: "capacity" },
+    { id: "wholesale-prices", title: "Precios Mayoristas (Spot/Futuros)", description: "Evolución del precio del MWh en el mercado francés.", type: "cost" },
+    { id: "ev-charging", title: "Electrificación de Flotas", description: "Datos de consumo de nuevos puntos de recarga de vehículos.", type: "index" },
+    { id: "pumped-hydro", title: "Almacenamiento Hidráulico (Bombeo)", description: "Niveles de reservas en presas para gestión de picos.", type: "capacity" },
+    { id: "self-consumption", title: "Autoconsumo Solar", description: "Crecimiento de instalaciones fotovoltaicas residenciales e industriales.", type: "index" },
+    { id: "energy-jobs", title: "Empleo en el Sector Eléctrico", description: "Necesidades de formación para soldadores nucleares y técnicos de red.", type: "capacity" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -2082,7 +2366,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   aeropolis,
   biowin,
   healthClusterPortugal,
-  capenergies
+  capenergies,
+  // Paquete 7: Energía, Seguridad y Materiales
+  bdew,
+  federmeccanica,
+  hagueSecurityDelta,
+  habitatSustentavel,
+  ufe
 ];
 
 // Helper para obtener un partner por ID
