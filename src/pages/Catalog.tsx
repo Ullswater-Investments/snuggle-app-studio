@@ -814,10 +814,43 @@ function ProductCard({
         
         <Button 
           onClick={() => {
-            // Para asset-005 (Telemetría Flota), ir a la página de detalle específica
-            const isTelemetriaFlota = item.product_name?.toLowerCase().includes('telemetr') && 
-                                       item.product_name?.toLowerCase().includes('flota');
-            navigate(isTelemetriaFlota ? '/catalog/telemetria-flota' : '/auth');
+            // Mapeo de assets sintéticos a sus páginas de detalle
+            const getAssetDetailUrl = (): string => {
+              const name = item.product_name?.toLowerCase() || "";
+              const id = item.asset_id?.toLowerCase() || "";
+              
+              // Mapeo por ID de asset
+              const idRoutes: Record<string, string> = {
+                "asset-001": "/catalog/consumo-electrico-industrial",
+                "asset-002": "/catalog/historico-meteorologico",
+                "asset-003": "/catalog/trazabilidad-aceite-oliva",
+                "asset-004": "/catalog/score-crediticio-b2b",
+                "asset-005": "/catalog/telemetria-flota",
+                "asset-006": "/catalog/huella-hidrica-agricola",
+              };
+              
+              if (item.asset_id && idRoutes[item.asset_id]) {
+                return idRoutes[item.asset_id];
+              }
+              
+              // Fallback por nombre (para datos de BD)
+              if (name.includes('consumo') && name.includes('eléctrico')) 
+                return '/catalog/consumo-electrico-industrial';
+              if (name.includes('meteorológico') || name.includes('aemet')) 
+                return '/catalog/historico-meteorologico';
+              if (name.includes('aceite') && name.includes('oliva')) 
+                return '/catalog/trazabilidad-aceite-oliva';
+              if (name.includes('crediticio') || name.includes('score')) 
+                return '/catalog/score-crediticio-b2b';
+              if (name.includes('telemetr') && name.includes('flota')) 
+                return '/catalog/telemetria-flota';
+              if (name.includes('hídrica') || name.includes('huella')) 
+                return '/catalog/huella-hidrica-agricola';
+              
+              return '/auth'; // fallback
+            };
+            
+            navigate(getAssetDetailUrl());
           }} 
           className="w-full bg-orange-500 hover:bg-orange-600 text-white group-hover:translate-x-1 transition-all"
         >
