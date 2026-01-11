@@ -1187,6 +1187,290 @@ export const gaiaCluster: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 4: AUTOMOCIÓN LATINA Y DEEP TECH
+// ============================================
+
+export const anfia: PremiumPartner = {
+  id: "anfia",
+  name: "ANFIA",
+  fullName: "Associazione Nazionale Filiera Industria Automobilistica",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Automoción y Diseño Industrial",
+  
+  authorityContext: {
+    narrative: "Con sede en Turín, ANFIA representa el alma del diseño y la manufactura automotriz italiana. A diferencia de la VDA alemana (centrada en volumen y proceso), ANFIA brilla en diseño, carrocería y componentes de alto rendimiento. Representa a toda la cadena de valor de marcas icónicas como Fiat, Alfa Romeo y Lancia (bajo el paraguas Stellantis) y a los carroceros legendarios.",
+    keyStats: [
+      { value: "270+", label: "Empresas Miembro" },
+      { value: "€60B", label: "Facturación Sector" },
+      { value: "Turín", label: "Capital del Diseño Auto" }
+    ],
+    headquarters: "Turín, Piamonte"
+  },
+  
+  ecosystem: [
+    { name: "Stellantis", description: "Fabricante OEM - Fiat/Alfa Romeo/Maserati" },
+    { name: "Brembo", description: "Sistemas de frenado de alto rendimiento" },
+    { name: "Pirelli", description: "Neumáticos" },
+    { name: "Magneti Marelli", description: "Componentes avanzados" },
+    { name: "Iveco Group", description: "Vehículos industriales y autobuses" },
+    { name: "Pininfarina", description: "Diseño y carrocería" },
+    { name: "Sogefi", description: "Componentes de suspensión/filtros" },
+    { name: "Landi Renzo", description: "Sistemas de gas y movilidad alternativa" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Poseen datos críticos sobre diseño industrial, homologación de vehículos y la transición a combustibles alternativos (Italia es líder en gas vehicular y ahora hidrógeno).",
+    capabilities: [
+      "Datos de matriculación granular",
+      "Homologación vehicular",
+      "Diseño industrial Turín",
+      "Combustibles alternativos GLP/GNC"
+    ],
+    uniqueValue: "El único ecosistema donde el diseño automotriz italiano de clase mundial se combina con expertise en movilidad alternativa."
+  },
+  
+  useCases: [
+    { id: "registration-volumes", title: "Volúmenes de Matriculación por Región", description: "Datos granulares de ventas de vehículos comerciales y pasajeros en Italia.", type: "index" },
+    { id: "brake-components", title: "Índice de Precios de Componentes de Freno", description: "Costes medios de discos y pastillas cerámicas de alto rendimiento.", type: "index" },
+    { id: "design-capacity", title: "Capacidad de Diseño (Carroceros)", description: "Disponibilidad de horas de ingeniería en estudios de diseño de Turín.", type: "capacity" },
+    { id: "alt-fuels-adoption", title: "Adopción de GLP/GNC/Hidrógeno", description: "Estadísticas de conversión y venta de vehículos de gas (especialidad italiana).", type: "index" },
+    { id: "auto-exports", title: "Exportación de Componentes Auto", description: "Flujos de piezas 'Made in Italy' hacia fábricas alemanas y francesas.", type: "index" },
+    { id: "homologation-data", title: "Datos de Homologación", description: "Tiempos y costes promedio para certificar nuevos modelos en Italia.", type: "benchmark" },
+    { id: "electric-buses", title: "Producción de Autobuses Eléctricos", description: "Capacidad de fabricación de transporte público cero emisiones.", type: "capacity" },
+    { id: "mech-engineering-talent", title: "Talento en Ingeniería Mecánica", description: "Disponibilidad de graduados del Politécnico de Turín.", type: "capacity" },
+    { id: "tire-recycling", title: "Reciclaje de Neumáticos (PFU)", description: "Datos de gestión y valorización de neumáticos fuera de uso.", type: "index" },
+    { id: "tier2-barometer", title: "Barómetro de la Cadena de Suministro", description: "Encuesta trimestral de sentimiento económico de los proveedores Tier-2.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const pfa: PremiumPartner = {
+  id: "pfa",
+  name: "PFA",
+  fullName: "Plateforme Automobile",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Automoción y Movilidad del Futuro",
+  
+  authorityContext: {
+    narrative: "La Plateforme Automobile (PFA) es la voz unificada de la industria francesa. Reúne a los fabricantes (Renault, Stellantis) y a los proveedores. Su enfoque actual es la soberanía industrial y la electrificación masiva. Gestionan la estrategia nacional del 'Vehículo del Futuro' y coordinan la transición de los históricos clústeres diésel hacia el hidrógeno y las baterías.",
+    keyStats: [
+      { value: "4.000+", label: "Empresas en la Filière" },
+      { value: "400K", label: "Empleos Directos" },
+      { value: "#2", label: "Industria Auto en Europa" }
+    ],
+    headquarters: "París, Île-de-France"
+  },
+  
+  ecosystem: [
+    { name: "Renault Group", description: "OEM" },
+    { name: "Stellantis", description: "OEM - Peugeot/Citroën/DS" },
+    { name: "Michelin", description: "Neumáticos y movilidad" },
+    { name: "Valeo", description: "Tecnología y electrificación" },
+    { name: "Forvia (Faurecia)", description: "Interiores y movilidad limpia" },
+    { name: "Plastic Omnium (OPmobility)", description: "Módulos y sistemas de hidrógeno" },
+    { name: "Toyota Motor Manufacturing France", description: "Fábrica Valenciennes" },
+    { name: "Hutchinson", description: "Materiales y aislamiento" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El valor diferencial de PFA son los datos sobre I+D en hidrógeno, gigafactorías de baterías (en el norte de Francia) y digitalización del cockpit.",
+    capabilities: [
+      "Corredores hidrógeno H2",
+      "Battery Valley francés",
+      "Cockpit del futuro",
+      "Reconversión laboral"
+    ],
+    uniqueValue: "El nodo que coordina la mayor transformación industrial de Francia: de motores térmicos a movilidad eléctrica e hidrógeno."
+  },
+  
+  useCases: [
+    { id: "h2-stations", title: "Despliegue de Estaciones de Hidrógeno", description: "Mapa de corredores de H2 para transporte pesado en Francia.", type: "directory" },
+    { id: "gigafactory-capacity", title: "Capacidad de Gigafactorías (ACC, Verkor)", description: "Previsión de GWh disponibles en el 'Battery Valley' francés.", type: "forecast" },
+    { id: "battery-materials", title: "Precios de Materias Primas para Baterías", description: "Índices de coste de Litio y Cobalto en el mercado francés.", type: "index" },
+    { id: "cockpit-trends", title: "Tendencias en 'Cockpit del Futuro'", description: "Datos sobre integración de pantallas y asistentes de voz en vehículos.", type: "forecast" },
+    { id: "ev-battery-recycling", title: "Reciclaje de Baterías EV", description: "Capacidad instalada para recuperar metales de baterías usadas.", type: "capacity" },
+    { id: "workforce-transition", title: "Empleo en la Transición Auto", description: "Datos de reconversión de trabajadores de motores térmicos a eléctricos.", type: "index" },
+    { id: "lightweight-materials", title: "Innovación en Materiales Ligeros", description: "Uso de plásticos y composites para reducir peso (clave para autonomía EV).", type: "index" },
+    { id: "electric-lcv", title: "Producción de Vehículos Comerciales Ligeros (Vans)", description: "Volúmenes de furgonetas eléctricas (Francia es líder).", type: "capacity" },
+    { id: "maas-startups", title: "Startups de Movilidad (MaaS)", description: "Ecosistema de empresas de carsharing y micromovilidad en París.", type: "directory" },
+    { id: "inbound-carbon", title: "Huella de Carbono de Logística Inbound", description: "Emisiones asociadas al transporte de piezas a fábricas francesas.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const federchimica: PremiumPartner = {
+  id: "federchimica",
+  name: "Federchimica",
+  fullName: "Federazione Nazionale dell'Industria Chimica",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Industria Química y Farmacéutica",
+  
+  authorityContext: {
+    narrative: "Federchimica representa a un sector sutil pero poderoso. Italia es líder europeo en química fina, ingredientes farmacéuticos activos (APIs) y cosmética. Mientras Alemania domina el volumen, Italia domina la especialización y el nicho de alta calidad. Federchimica agrupa a 1.400 empresas, muchas de ellas PYMEs familiares líderes mundiales en su segmento.",
+    keyStats: [
+      { value: "1.400+", label: "Empresas Miembro" },
+      { value: "€56B", label: "Facturación Sector" },
+      { value: "#3", label: "Química EU" }
+    ],
+    headquarters: "Milán, Lombardía"
+  },
+  
+  ecosystem: [
+    { name: "Mapei", description: "Adhesivos y productos para construcción" },
+    { name: "Versalis (Eni)", description: "Química básica y plásticos" },
+    { name: "Bracco", description: "Imagen diagnóstica y farmacia" },
+    { name: "Zambon", description: "Farmacéutica" },
+    { name: "RadiciGroup", description: "Polímeros y fibras sintéticas" },
+    { name: "Menarini", description: "Farmacéutica" },
+    { name: "Solvay Italia", description: "Química" },
+    { name: "Lamberti", description: "Especialidades químicas" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Son la fuente definitiva para datos de química para la construcción, ingredientes cosméticos y bioplásticos.",
+    capabilities: [
+      "APIs farmacéuticos",
+      "Ingredientes cosméticos",
+      "Bioplásticos pioneros",
+      "Química fina de nicho"
+    ],
+    uniqueValue: "El único hub químico europeo especializado en productos de alto valor: APIs, cosmética y bioplásticos Made in Italy."
+  },
+  
+  useCases: [
+    { id: "api-exports", title: "Exportación de APIs Farmacéuticos", description: "Volúmenes de principios activos exportados a EE.UU. y Alemania.", type: "index" },
+    { id: "cosmetic-ingredients", title: "Tendencias en Ingredientes Cosméticos", description: "Demanda de componentes naturales para la industria de la belleza (Milán es hub cosmético).", type: "forecast" },
+    { id: "adhesive-prices", title: "Índice de Precios de Adhesivos Industriales", description: "Costes de insumos clave para el sector construcción.", type: "index" },
+    { id: "bioplastics-capacity", title: "Producción de Bioplásticos", description: "Capacidad de fabricación de polímeros biodegradables (Italia es pionera).", type: "capacity" },
+    { id: "fine-chem-energy", title: "Consumo de Energía en Química Fina", description: "Datos de eficiencia energética en reactores discontinuos (batch).", type: "benchmark" },
+    { id: "chemical-transport", title: "Seguridad en Transporte de Químicos", description: "Estadísticas de logística segura por carretera en Italia.", type: "risk" },
+    { id: "textile-recycling", title: "Economía Circular Textil", description: "Datos de reciclaje químico de fibras sintéticas (nylon/poliéster).", type: "index" },
+    { id: "agrochemicals", title: "Innovación en Agroquímicos", description: "Nuevos fertilizantes y bioestimulantes registrados.", type: "directory" },
+    { id: "medical-gases", title: "Gases Medicinales", description: "Disponibilidad de oxígeno y gases hospitalarios.", type: "capacity" },
+    { id: "chemistry-employment", title: "Empleo en Química", description: "Perfiles técnicos y salarios en el sector químico italiano (alta cualificación).", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const packagingValley: PremiumPartner = {
+  id: "packaging-valley",
+  name: "Packaging Valley",
+  fullName: "Distretto del Packaging Automatico di Bologna",
+  country: { code: "IT", flag: "🇮🇹", name: "Italia" },
+  vertical: "Maquinaria Automática y Envasado",
+  
+  authorityContext: {
+    narrative: "Ubicado en Bolonia (Emilia-Romaña), el Packaging Valley es una anomalía industrial: la mayor concentración mundial de fabricantes de maquinaria de envasado automático. Facturan más de 8.000 millones de euros y exportan el 80%. Si compras una pastilla, un cigarrillo, una bolsita de té o una barra de chocolate en cualquier lugar del mundo, probablemente fue envasada por una máquina diseñada aquí.",
+    keyStats: [
+      { value: "€8B+", label: "Facturación Anual" },
+      { value: "80%", label: "Exportación" },
+      { value: "#1", label: "Packaging Automático Mundial" }
+    ],
+    headquarters: "Bolonia, Emilia-Romaña"
+  },
+  
+  ecosystem: [
+    { name: "IMA Group", description: "Líder mundial en envasado farmacéutico/té" },
+    { name: "Coesia", description: "Soluciones industriales y envasado" },
+    { name: "Marchesini Group", description: "Envasado cosmético y farmacéutico" },
+    { name: "Sacmi", description: "Maquinaria para cerámica y bebidas" },
+    { name: "GD (Coesia)", description: "Maquinaria para tabaco" },
+    { name: "Aetna Group (Robopac)", description: "Embalaje final de línea" },
+    { name: "Tetra Pak", description: "Centro de I+D en Módena" },
+    { name: "Datalogic", description: "Sensores y lectura de códigos de barras" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de bienes de equipo (Capex). Proveen inteligencia sobre tiempos de entrega de maquinaria compleja, tendencias en materiales de envasado sostenibles y servitización (maquinaria como servicio).",
+    capabilities: [
+      "Lead times maquinaria",
+      "Packaging sostenible",
+      "Servitización pay-per-pack",
+      "Serialización farmacéutica"
+    ],
+    uniqueValue: "El único ecosistema donde puedes medir la inversión industrial global: si Bologna vende más máquinas, el mundo está produciendo más."
+  },
+  
+  useCases: [
+    { id: "packaging-lead-times", title: "Lead Times de Maquinaria de Envasado", description: "Tiempos de espera actuales para líneas de blíster farmacéutico (indicador de inversión global).", type: "index" },
+    { id: "paper-vs-plastic", title: "Adopción de Papel vs. Plástico", description: "Estadísticas de máquinas vendidas adaptadas a nuevos materiales sostenibles.", type: "index" },
+    { id: "predictive-packaging", title: "Mantenimiento Predictivo en Packaging", description: "Datos agregados de fallos comunes en motores y servos.", type: "forecast" },
+    { id: "oee-speed", title: "Velocidad de Producción (OEE)", description: "Benchmarks de velocidad (piezas/minuto) por sector (farma vs. comida).", type: "benchmark" },
+    { id: "asia-exports", title: "Exportación de Maquinaria a Asia", description: "Flujos comerciales hacia China e India (indicador de industrialización ajena).", type: "index" },
+    { id: "spare-parts-prices", title: "Precios de Repuestos Críticos", description: "Coste y disponibilidad de piezas de desgaste.", type: "cost" },
+    { id: "vision-integration", title: "Integración de Visión Artificial", description: "% de líneas de envasado con control de calidad automatizado.", type: "index" },
+    { id: "energy-per-pack", title: "Consumo Energético de Líneas de Envasado", description: "Datos de eficiencia kWh/producto envasado.", type: "benchmark" },
+    { id: "servitization", title: "Servitización", description: "Tendencias en contratos de 'Pay-per-pack' vs. venta de maquinaria.", type: "forecast" },
+    { id: "serialization", title: "Trazabilidad Farmacéutica (Serialization)", description: "Datos sobre cumplimiento de normativas de serialización global.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const systematicParis: PremiumPartner = {
+  id: "systematic-paris",
+  name: "Systematic Paris-Region",
+  fullName: "Pôle de Compétitivité Systematic Paris-Region",
+  country: { code: "FR", flag: "🇫🇷", name: "Francia" },
+  vertical: "Deep Tech, IA y Ciberseguridad",
+  
+  authorityContext: {
+    narrative: "Systematic Paris-Region es el clúster europeo de Deep Tech. Con sede en la región de París, conecta el software, la óptica y la electrónica. Es donde las grandes corporaciones francesas y el estado definen los estándares de soberanía digital, ciberseguridad e Inteligencia Artificial. Es el contrapeso europeo a Silicon Valley en B2B.",
+    keyStats: [
+      { value: "1.000+", label: "Miembros" },
+      { value: "€3.5B", label: "I+D Anual" },
+      { value: "#1", label: "Deep Tech EU" }
+    ],
+    headquarters: "París, Île-de-France"
+  },
+  
+  ecosystem: [
+    { name: "Thales", description: "Defensa y Seguridad Digital" },
+    { name: "Dassault Systèmes", description: "Software 3D y Gemelos Digitales" },
+    { name: "Atos (Eviden)", description: "Supercomputación y Ciberseguridad" },
+    { name: "Orange", description: "Telecomunicaciones" },
+    { name: "Renault Group", description: "Vehículo autónomo" },
+    { name: "Capgemini", description: "Consultoría e Ingeniería" },
+    { name: "Nokia", description: "Redes e infraestructura - sede París" },
+    { name: "OVHcloud", description: "Nube soberana europea" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El nodo de la confianza digital. Datos sobre amenazas cibernéticas, capacidad de cómputo (HPC) y desarrollo de código abierto industrial.",
+    capabilities: [
+      "Ciberinteligencia industrial",
+      "HPC y computación cuántica",
+      "IA empresarial",
+      "Soberanía cloud"
+    ],
+    uniqueValue: "El único ecosistema europeo donde la defensa nacional, la IA y la nube soberana convergen para definir el futuro digital del continente."
+  },
+  
+  useCases: [
+    { id: "threat-radar", title: "Radar de Amenazas Cibernéticas", description: "Datos agregados de ataques repelidos en infraestructuras críticas francesas.", type: "risk" },
+    { id: "digital-twins-use", title: "Uso de Gemelos Digitales (Digital Twins)", description: "Casos de uso en urbanismo y manufactura en Île-de-France.", type: "index" },
+    { id: "hpc-capacity", title: "Capacidad de Supercomputación (HPC)", description: "Disponibilidad de horas de cálculo en superordenadores para investigación.", type: "capacity" },
+    { id: "opensource-index", title: "Ecosistema Open Source", description: "Índice de contribución a proyectos de código abierto industrial.", type: "index" },
+    { id: "ai-talent", title: "Talento en IA y Data Science", description: "Salarios y disponibilidad de doctores en IA en la región de París.", type: "benchmark" },
+    { id: "fiber-5g-coverage", title: "Despliegue de Fibra Óptica y 5G", description: "Mapas de cobertura de alta velocidad para empresas.", type: "directory" },
+    { id: "quantum-projects", title: "Proyectos de Computación Cuántica", description: "Estado del arte de startups cuánticas en el ecosistema.", type: "forecast" },
+    { id: "secnumcloud", title: "Soberanía de Datos en la Nube", description: "Adopción de soluciones cloud con certificación SecNumCloud (ANSSI).", type: "index" },
+    { id: "uam-drones", title: "Drones y Movilidad Aérea Urbana", description: "Datos de vuelos de prueba y regulación en la región parisina.", type: "forecast" },
+    { id: "deeptech-vc", title: "Inversión VC en Deep Tech", description: "Flujo de capital riesgo hacia startups de tecnología profunda.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -1212,7 +1496,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   vci,
   medicalValley,
   aerce,
-  gaiaCluster
+  gaiaCluster,
+  // Paquete 4: Automoción Latina y Deep Tech
+  anfia,
+  pfa,
+  federchimica,
+  packagingValley,
+  systematicParis
 ];
 
 // Helper para obtener un partner por ID
