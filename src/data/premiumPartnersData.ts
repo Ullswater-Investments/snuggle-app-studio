@@ -3459,6 +3459,290 @@ export const aip: PremiumPartner = {
   tier: "strategic"
 };
 
+// ============================================
+// PAQUETE 12: MOVILIDAD INTELIGENTE Y COMPRAS IBÉRICAS
+// ============================================
+
+export const raiVereniging: PremiumPartner = {
+  id: "rai",
+  name: "RAI Vereniging",
+  fullName: "RAI Vereniging - Movilidad y Automoción",
+  country: { code: "NL", flag: "🇳🇱", name: "Países Bajos" },
+  vertical: "Movilidad, Automoción y Bicicleta",
+  
+  authorityContext: {
+    narrative: "RAI Vereniging no es la típica asociación de fabricantes de coches. En los Países Bajos, la movilidad es un concepto holístico: coches, camiones, bicicletas eléctricas y scooters conviven. RAI representa a los importadores y fabricantes de remolques y carrocerías especiales. Son la referencia mundial en datos sobre electrificación de flotas, infraestructura de carga y la integración de la micromovilidad en la logística urbana.",
+    keyStats: [
+      { value: "#1", label: "Adopción EV Europa" },
+      { value: "e-Bikes", label: "Líder Mundial" },
+      { value: "MaaS", label: "Movilidad como Servicio" }
+    ],
+    headquarters: "Ámsterdam, Países Bajos"
+  },
+  
+  ecosystem: [
+    { name: "DAF Trucks", description: "Fabricante de camiones (PACCAR)" },
+    { name: "Pon Holdings", description: "Importador masivo y dueño de Gazelle/Cervélo" },
+    { name: "VDL Groep", description: "Autobuses y manufactura (VDL Nedcar)" },
+    { name: "TomTom", description: "Tecnología de mapas y tráfico" },
+    { name: "Fastned", description: "Red de carga rápida" },
+    { name: "Accell Group", description: "Bicicletas (Batavus, Sparta)" },
+    { name: "Louwman Group", description: "Distribución automotriz (Toyota NL)" },
+    { name: "Alfen", description: "Estaciones de carga y almacenamiento" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos únicos sobre movilidad ligera, logística de última milla y ventas de vehículos eléctricos (Holanda es líder en adopción).",
+    capabilities: [
+      "Venta de e-Bikes y cargo bikes",
+      "Densidad de cargadores públicos",
+      "Logística de última milla",
+      "Fiscalidad automotriz verde"
+    ],
+    uniqueValue: "Acceso al mercado de movilidad más avanzado de Europa: datos de electrificación, micromovilidad, infraestructura de carga y zonas de bajas emisiones."
+  },
+  
+  useCases: [
+    { id: "ebike-sales", title: "Venta de Bicicletas Eléctricas (e-Bikes)", description: "Estadísticas de ventas por categoría (cargo bikes vs. urbanas).", type: "index" },
+    { id: "charger-density", title: "Densidad de Cargadores Públicos", description: "Datos de disponibilidad de puntos de recarga por municipio.", type: "capacity" },
+    { id: "commercial-ev", title: "Matriculación de Vehículos Comerciales", description: "Ventas de furgonetas eléctricas para reparto urbano.", type: "index" },
+    { id: "trailer-logistics", title: "Logística de Remolques", description: "Datos de producción de tráilers y carrocerías especiales.", type: "capacity" },
+    { id: "low-emission-zones", title: "Zonas de Bajas Emisiones (Milieuzones)", description: "Base de datos de restricciones de acceso en ciudades holandesas.", type: "directory" },
+    { id: "ebike-battery-prices", title: "Precios de Baterías de Bicicleta", description: "Costes de reposición y reciclaje de baterías ligeras.", type: "cost" },
+    { id: "vehicle-imports", title: "Importación de Vehículos", description: "Flujos de entrada de coches asiáticos a través de puertos holandeses.", type: "index" },
+    { id: "maas-adoption", title: "Movilidad como Servicio (MaaS)", description: "Adopción de apps de transporte compartido.", type: "index" },
+    { id: "automotive-taxation", title: "Fiscalidad Automotriz (BPM)", description: "Datos sobre impuestos de matriculación basados en CO2.", type: "benchmark" },
+    { id: "cycling-safety", title: "Seguridad en Ciclovías", description: "Estadísticas de accidentes e infraestructura ciclista.", type: "risk" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const febiac: PremiumPartner = {
+  id: "febiac",
+  name: "FEBIAC",
+  fullName: "Fédération Belge et Luxembourgeoise de l'Automobile",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Automoción y Motocicletas",
+  
+  authorityContext: {
+    narrative: "La Fédération Belge et Luxembourgeoise de l'Automobile (FEBIAC) gestiona un mercado único: Bélgica tiene una densidad de 'coches de empresa' altísima debido a su fiscalidad. Además, es un hub de ensamblaje (Audi, Volvo) y logística. FEBIAC organiza el Salón del Automóvil de Bruselas. Sus datos son vitales para entender el mercado de flotas corporativas y la logística de importación europea.",
+    keyStats: [
+      { value: "#1", label: "Flotas de Empresa Europa" },
+      { value: "Zeebrugge", label: "Mayor Puerto Auto Mundial" },
+      { value: "Audi/Volvo", label: "Hubs de Producción" }
+    ],
+    headquarters: "Bruselas, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "Audi Brussels", description: "Fábrica clave para modelos e-tron" },
+    { name: "Volvo Car Gent", description: "Una de las mayores fábricas de Volvo fuera de Suecia" },
+    { name: "Toyota Motor Europe", description: "Sede central europea en Bruselas" },
+    { name: "D'Ieteren", description: "Distribuidor masivo de grupo VW y servicios de movilidad" },
+    { name: "Punch Powertrain", description: "Sistemas de transmisión" },
+    { name: "Van Hool", description: "Autobuses (histórico)" },
+    { name: "Honda Motor Europe Logistics", description: "Hub logístico en Gante" },
+    { name: "Umicore", description: "Materiales para baterías (socio clave)" }
+  ],
+  
+  dataAnalysis: {
+    summary: "El nodo de las flotas de empresa (salary cars). Datos sobre electrificación corporativa, logística portuaria de vehículos (Zeebrugge) y fiscalidad verde.",
+    capabilities: [
+      "Matriculaciones de flotas corporativas",
+      "Logística portuaria de vehículos",
+      "Fiscalidad de beneficio en especie",
+      "Electrificación de autobuses"
+    ],
+    uniqueValue: "Acceso al mercado de flotas corporativas más desarrollado de Europa: datos de 'salary cars', electrificación empresarial y logística portuaria."
+  },
+  
+  useCases: [
+    { id: "company-car-registrations", title: "Matriculaciones de Coches de Empresa", description: "Datos desagregados de flotas corporativas (mercado mayoritario en BE).", type: "index" },
+    { id: "fleet-fuel-mix", title: "Mix de Combustible en Flotas", description: "Velocidad de transición del diésel al eléctrico en empresas.", type: "index" },
+    { id: "zeebrugge-volumes", title: "Importación/Exportación de Vehículos (Zeebrugge)", description: "Volúmenes de coches movidos por el mayor puerto automotriz del mundo.", type: "index" },
+    { id: "benefit-in-kind", title: "Fiscalidad de Beneficio en Especie (ATN)", description: "Datos de impacto fiscal en la elección de vehículo.", type: "benchmark" },
+    { id: "motorcycle-sales", title: "Venta de Motocicletas y Scooters", description: "Tendencias de movilidad personal en ciudades congestionadas.", type: "index" },
+    { id: "vehicle-recycling", title: "Desguace y Reciclaje (Febelauto)", description: "Tasa de recuperación de vehículos al final de su vida útil.", type: "benchmark" },
+    { id: "bus-electrification", title: "Electrificación de Autobuses", description: "Compras de transporte público cero emisiones.", type: "index" },
+    { id: "leasing-prices", title: "Precios de Leasing", description: "Cuotas mensuales medias para modelos populares de empresa.", type: "benchmark" },
+    { id: "fleet-co2-emissions", title: "Emisiones Medias de CO2 (WLTP)", description: "Evolución de la huella de carbono del parque móvil nuevo.", type: "benchmark" },
+    { id: "spare-parts-logistics", title: "Logística de Repuestos", description: "Tiempos de distribución de piezas desde hubs centrales belgas.", type: "benchmark" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const skywin: PremiumPartner = {
+  id: "skywin",
+  name: "Skywin",
+  fullName: "Pôle de Compétitivité Aéronautique et Spatial de Wallonie",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Aeroespacial y Defensa",
+  
+  authorityContext: {
+    narrative: "Skywin es el clúster aeroespacial de Valonia. Complementa a la perfección a los otros nodos aeroespaciales (Toulouse, Hamburgo, Sevilla). Su especialidad es la propulsión (partes de motor), los sistemas de accionamiento y los materiales compuestos. Es un clúster muy enfocado en I+D militar y civil, con una fuerte conexión con el programa Ariane (Espacio).",
+    keyStats: [
+      { value: "Ariane", label: "Programa Espacial" },
+      { value: "Propulsión", label: "Especialidad Motor" },
+      { value: "Safran/Sonaca", label: "Líderes Mundiales" }
+    ],
+    headquarters: "Charleroi, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "Safran Aero Boosters", description: "Compresores de baja presión para motores de avión" },
+    { name: "Sonaca", description: "Líder mundial en bordes de ataque de alas (Slats)" },
+    { name: "Sabca", description: "Actuadores y estructuras para espacio/aviación" },
+    { name: "Thales Belgium", description: "Sistemas de defensa y cohetes" },
+    { name: "FN Herstal", description: "Defensa y armamento (materiales asociados)" },
+    { name: "Cenaero", description: "Simulación numérica y supercomputación" },
+    { name: "Amos", description: "Sistemas ópticos para espacio" },
+    { name: "GDTech", description: "Ingeniería y simulación" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de ingeniería de precisión, simulación aerodinámica y ensayos no destructivos.",
+    capabilities: [
+      "Mecanizado de titanio",
+      "Ensayos espaciales",
+      "Simulación CFD",
+      "Fabricación aditiva certificada"
+    ],
+    uniqueValue: "Acceso al ecosistema de propulsión aeroespacial de Valonia: datos de mecanizado de titanio, ensayos espaciales y materiales compuestos termoplásticos."
+  },
+  
+  useCases: [
+    { id: "titanium-machining", title: "Capacidad de Mecanizado de Titanio", description: "Disponibilidad de centros de mecanizado para piezas críticas de motor.", type: "capacity" },
+    { id: "space-component-testing", title: "Ensayos de Componentes Espaciales", description: "Datos de pruebas de vibración y vacío para satélites.", type: "capacity" },
+    { id: "cfd-simulation", title: "Simulación de Fluidos (CFD)", description: "Capacidad de cálculo para aerodinámica digital.", type: "capacity" },
+    { id: "actuator-production", title: "Producción de Actuadores", description: "Lead times para sistemas electromecánicos de control de vuelo.", type: "benchmark" },
+    { id: "thermoplastic-composites", title: "Materiales Compuestos Termoplásticos", description: "Datos de nuevas resinas reciclables para aviación.", type: "index" },
+    { id: "logistics-drones", title: "Drones para Logística", description: "Proyectos piloto de transporte autónomo aéreo.", type: "index" },
+    { id: "military-engine-mro", title: "Mantenimiento de Motores Militares", description: "Datos de revisión de motores de F-16/F-35.", type: "capacity" },
+    { id: "aero-engineering-cost", title: "Coste de Ingeniería Aeronáutica", description: "Tarifas hora de ingenieros de estrés y diseño en Bélgica.", type: "cost" },
+    { id: "space-optics", title: "Óptica Espacial", description: "Capacidad de fabricación de espejos para telescopios y satélites.", type: "capacity" },
+    { id: "metal-additive", title: "Fabricación Aditiva de Metal", description: "Certificación de piezas impresas en 3D para motores.", type: "index" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const flux50: PremiumPartner = {
+  id: "flux50",
+  name: "Flux50",
+  fullName: "Flux50 - Smart Energy Cluster",
+  country: { code: "BE", flag: "🇧🇪", name: "Bélgica" },
+  vertical: "Energía Inteligente y Smart Grids",
+  
+  authorityContext: {
+    narrative: "Flux50 es el clúster de innovación energética de Flandes. Bélgica es un nodo energético crucial debido a sus interconexiones y su costa del Mar del Norte (eólica marina). Flux50 se centra en hacer la red 'inteligente': micro-redes, barrios de energía positiva y la integración de renovables en la industria. Son el laboratorio de la descentralización energética.",
+    keyStats: [
+      { value: "Offshore", label: "Eólica Mar del Norte" },
+      { value: "Elia", label: "TSO Interconectado" },
+      { value: "EnergyVille", label: "Centro I+D Energía" }
+    ],
+    headquarters: "Gante, Bélgica"
+  },
+  
+  ecosystem: [
+    { name: "Fluvius", description: "Gestor de la red de distribución flamenca" },
+    { name: "DEME Group", description: "Instalación de eólica marina" },
+    { name: "Jan De Nul", description: "Infraestructura marítima y cables" },
+    { name: "Engie Electrabel", description: "Generación" },
+    { name: "Elia", description: "Operador del sistema de transmisión (TSO)" },
+    { name: "Vito", description: "Instituto de investigación tecnológica" },
+    { name: "EnergyVille", description: "Centro de investigación en ciudades sostenibles" },
+    { name: "Smappee", description: "Monitores de energía inteligente" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos punteros sobre eólica offshore, gestión de la demanda flexible y renovación energética de edificios.",
+    capabilities: [
+      "Producción eólica marina",
+      "Flexibilidad de red industrial",
+      "Micro-redes y comunidades energéticas",
+      "Contadores digitales"
+    ],
+    uniqueValue: "Acceso al laboratorio de descentralización energética de Flandes: datos de eólica offshore, flexibilidad industrial, micro-redes y comunidades energéticas."
+  },
+  
+  useCases: [
+    { id: "offshore-wind-production", title: "Producción Eólica Marina", description: "Datos de generación real en los parques del Mar del Norte belga.", type: "index" },
+    { id: "grid-flexibility", title: "Flexibilidad de la Red", description: "Potencial de desconexión de cargas industriales para equilibrar el sistema.", type: "capacity" },
+    { id: "deep-renovation", title: "Renovación Profunda de Edificios", description: "Costes y ahorros de proyectos de aislamiento integral (Energiesprong).", type: "cost" },
+    { id: "industrial-microgrids", title: "Micro-redes Industriales", description: "Datos de gestión autónoma de energía en polígonos empresariales.", type: "index" },
+    { id: "district-heating", title: "Calefacción Urbana (Heat Networks)", description: "Recuperación de calor residual industrial para redes de distrito.", type: "index" },
+    { id: "grid-scale-storage", title: "Almacenamiento a Gran Escala", description: "Capacidad instalada para regulación de frecuencia.", type: "capacity" },
+    { id: "smart-meters", title: "Datos de Contadores Digitales", description: "Despliegue y granularidad de datos de consumo en Flandes.", type: "index" },
+    { id: "energy-communities", title: "Comunidades Energéticas", description: "Estadísticas de barrios que comparten energía solar localmente.", type: "index" },
+    { id: "hydrogen-integration", title: "Integración de Hidrógeno", description: "Proyectos de 'Power-to-Gas' en puertos flamencos.", type: "index" },
+    { id: "pv-installation-prices", title: "Precios de Instalación Fotovoltaica", description: "Costes llave en mano para paneles solares residenciales.", type: "cost" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
+export const apcadec: PremiumPartner = {
+  id: "apcadec",
+  name: "APCADEC",
+  fullName: "Associação Portuguesa de Compras e Aprovisionamento",
+  country: { code: "PT", flag: "🇵🇹", name: "Portugal" },
+  vertical: "Compras y Aprovisionamiento",
+  
+  authorityContext: {
+    narrative: "La Associação Portuguesa de Compras e Aprovisionamento (APCADEC) completa el mapa ibérico de procurement. Es la asociación de referencia para los Directores de Compras en Portugal. En un mercado que actúa como puente entre Europa, Brasil y África, APCADEC aporta la visión de gestión de costes, digitalización y relación con proveedores en el mercado lusófono.",
+    keyStats: [
+      { value: "Lusófono", label: "Puente PT-BR-África" },
+      { value: "PSI-20", label: "Grandes Compradores" },
+      { value: "CPSM", label: "Certificación Profesional" }
+    ],
+    headquarters: "Lisboa, Portugal"
+  },
+  
+  ecosystem: [
+    { name: "EDP", description: "Energía (líder global en renovables)" },
+    { name: "Galp", description: "Energía y movilidad" },
+    { name: "TAP Air Portugal", description: "Aerolínea" },
+    { name: "Jerónimo Martins", description: "Distribución/Retail (Pingo Doce)" },
+    { name: "Sonae", description: "Conglomerado Retail/Telco/Inmobiliario" },
+    { name: "NOS", description: "Telecomunicaciones" },
+    { name: "The Navigator Company", description: "Papel" },
+    { name: "Brisa", description: "Infraestructuras y autopistas" }
+  ],
+  
+  dataAnalysis: {
+    summary: "Datos de salarios de compras en Portugal (más competitivos que en el norte), plazos de pago y riesgo de proveedores en el eje atlántico.",
+    capabilities: [
+      "Salarios de compradores PT",
+      "Riesgo de proveedores lusófonos",
+      "Digitalización P2P",
+      "Importaciones de Brasil/Angola"
+    ],
+    uniqueValue: "Acceso al ecosistema de compras portugués: datos de salarios competitivos, relaciones con mercados lusófonos y digitalización de procurement."
+  },
+  
+  useCases: [
+    { id: "buyer-salaries-pt", title: "Salarios de Compradores en Portugal", description: "Benchmarks de remuneración para roles de Category Manager en Lisboa/Oporto.", type: "benchmark" },
+    { id: "supplier-market-risk", title: "Riesgo de Proveedores (Market Risk)", description: "Datos de estabilidad financiera de PYMEs portuguesas.", type: "risk" },
+    { id: "p2p-digitalization", title: "Digitalización de Compras (P2P)", description: "Adopción de herramientas e-procurement en empresas del PSI-20.", type: "index" },
+    { id: "fleet-costs-pt", title: "Costes de Flota Corporativa", description: "Precios de renting y gestión de combustible en Portugal.", type: "cost" },
+    { id: "energy-prices-mibel", title: "Precios de Energía para Empresas", description: "Impacto del mercado eléctrico ibérico (MIBEL) en costes industriales.", type: "index" },
+    { id: "dpo-payment-terms", title: "Plazos Medios de Pago", description: "Datos reales de DPO (Days Payable Outstanding) por sector.", type: "benchmark" },
+    { id: "marketing-services", title: "Compras de Servicios de Marketing", description: "Tarifas de agencias y medios en el mercado luso.", type: "benchmark" },
+    { id: "esg-supply-chain", title: "Sostenibilidad en Cadena de Suministro", description: "Madurez de criterios ESG en selección de proveedores.", type: "benchmark" },
+    { id: "lusophone-imports", title: "Importaciones de Brasil/Angola", description: "Flujos de compras desde mercados lusófonos.", type: "index" },
+    { id: "corporate-travel", title: "Gasto en Viajes Corporativos", description: "Tendencias de costes en hoteles y vuelos para empresas portuguesas.", type: "cost" }
+  ],
+  
+  status: "active",
+  tier: "strategic"
+};
+
 // Colección de todos los Premium Partners
 export const premiumPartnersData: PremiumPartner[] = [
   // Paquete 14: Nodos Fundadores
@@ -3532,7 +3816,13 @@ export const premiumPartnersData: PremiumPartner[] = [
   fim,
   aicep,
   ticePt,
-  aip
+  aip,
+  // Paquete 12: Movilidad Inteligente y Compras Ibéricas
+  raiVereniging,
+  febiac,
+  skywin,
+  flux50,
+  apcadec
 ];
 
 // Helper para obtener un partner por ID
