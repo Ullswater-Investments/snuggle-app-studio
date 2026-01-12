@@ -62,7 +62,7 @@ export const PartnerRoiCalculator = () => {
   const isHighSaver = totalYear1 > 50000;
 
   return (
-    <section id="simulator" className="py-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <section id="simulator" className="py-24 bg-gradient-to-b from-background via-muted to-background dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -70,14 +70,14 @@ export const PartnerRoiCalculator = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4 bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+          <Badge className="mb-4 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
             <Sparkles className="w-4 h-4 mr-2" />
             {t('calculator.badge')}
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t('calculator.title')} <span className="text-emerald-400">{t('calculator.titleHighlight')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {t('calculator.title')} <span className="text-emerald-500 dark:text-emerald-400">{t('calculator.titleHighlight')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {t('calculator.subtitle')}
           </p>
         </motion.div>
@@ -89,18 +89,18 @@ export const PartnerRoiCalculator = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+            <Card className="bg-card/50 dark:bg-slate-800/50 border-border backdrop-blur-sm">
               <CardContent className="p-8 space-y-8">
-                <h3 className="text-xl font-semibold text-white mb-6">{t('calculator.configure')}</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-6">{t('calculator.configure')}</h3>
                 
                 {/* Slider 1: Asociados */}
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Users className="w-5 h-5 text-amber-400" />
-                      <span className="text-slate-300">{t('calculator.associates')}</span>
+                      <Users className="w-5 h-5 text-amber-500 dark:text-amber-400" />
+                      <span className="text-foreground/80">{t('calculator.associates')}</span>
                     </div>
-                    <span className="text-2xl font-bold text-white">{numAsociados.toLocaleString('es-ES')}</span>
+                    <span className="text-2xl font-bold text-foreground">{numAsociados.toLocaleString('es-ES')}</span>
                   </div>
                   <Slider
                     value={[numAsociados]}
@@ -110,7 +110,7 @@ export const PartnerRoiCalculator = () => {
                     step={10}
                     className="cursor-pointer"
                   />
-                  <div className="flex justify-between text-xs text-slate-500">
+                  <div className="flex justify-between text-xs text-muted-foreground">
                     <span>10</span>
                     <span>5.000</span>
                   </div>
@@ -120,10 +120,10 @@ export const PartnerRoiCalculator = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Activity className="w-5 h-5 text-orange-400" />
-                      <span className="text-slate-300">{t('calculator.transactions')}</span>
+                      <Activity className="w-5 h-5 text-orange-500 dark:text-orange-400" />
+                      <span className="text-foreground/80">{t('calculator.transactions')}</span>
                     </div>
-                    <span className="text-2xl font-bold text-white">{transaccionesMes}</span>
+                    <span className="text-2xl font-bold text-foreground">{transaccionesMes}</span>
                   </div>
                   <Slider
                     value={[transaccionesMes]}
@@ -133,7 +133,7 @@ export const PartnerRoiCalculator = () => {
                     step={1}
                     className="cursor-pointer"
                   />
-                  <div className="flex justify-between text-xs text-slate-500">
+                  <div className="flex justify-between text-xs text-muted-foreground">
                     <span>1</span>
                     <span>50</span>
                   </div>
@@ -143,10 +143,10 @@ export const PartnerRoiCalculator = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Euro className="w-5 h-5 text-emerald-400" />
-                      <span className="text-slate-300">{t('calculator.avgValue')}</span>
+                      <Euro className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
+                      <span className="text-foreground/80">{t('calculator.avgValue')}</span>
                     </div>
-                    <span className="text-2xl font-bold text-white">{valorMedio.toLocaleString('es-ES')}€</span>
+                    <span className="text-2xl font-bold text-foreground">{valorMedio.toLocaleString('es-ES')}€</span>
                   </div>
                   <Slider
                     value={[valorMedio]}
@@ -156,22 +156,22 @@ export const PartnerRoiCalculator = () => {
                     step={100}
                     className="cursor-pointer"
                   />
-                  <div className="flex justify-between text-xs text-slate-500">
+                  <div className="flex justify-between text-xs text-muted-foreground">
                     <span>100€</span>
                     <span>10.000€</span>
                   </div>
                 </div>
 
                 {/* Info tooltip */}
-                <div className="pt-4 border-t border-slate-700">
+                <div className="pt-4 border-t border-border">
                   <UITooltip>
                     <TooltipTrigger asChild>
-                      <div className="flex items-center gap-2 text-slate-400 cursor-help">
+                      <div className="flex items-center gap-2 text-muted-foreground cursor-help">
                         <Info className="w-4 h-4" />
                         <span className="text-sm">{t('calculator.howCalculated')}</span>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent className="max-w-sm bg-slate-800 border-slate-700">
+                    <TooltipContent className="max-w-sm bg-card border-border">
                       <p className="text-sm">{t('calculator.howCalculatedTooltip')}</p>
                     </TooltipContent>
                   </UITooltip>
@@ -188,16 +188,16 @@ export const PartnerRoiCalculator = () => {
             viewport={{ once: true }}
           >
             {/* Immediate Impact Card */}
-            <Card className="bg-gradient-to-br from-emerald-950/50 to-slate-900 border-emerald-500/30 overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-emerald-100 dark:from-emerald-950/50 to-background dark:to-slate-900 border-emerald-500/30 overflow-hidden relative">
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 to-transparent" />
               <CardContent className="p-8 relative">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-slate-400">{t('calculator.netBenefit')}</span>
+                  <span className="text-muted-foreground">{t('calculator.netBenefit')}</span>
                   <UITooltip>
                     <TooltipTrigger>
-                      <Info className="w-4 h-4 text-slate-500" />
+                      <Info className="w-4 h-4 text-muted-foreground" />
                     </TooltipTrigger>
-                    <TooltipContent className="max-w-sm bg-slate-800 border-slate-700">
+                    <TooltipContent className="max-w-sm bg-card border-border">
                       <p className="text-sm">{t('calculator.netBenefitTooltip')}</p>
                     </TooltipContent>
                   </UITooltip>
@@ -206,21 +206,21 @@ export const PartnerRoiCalculator = () => {
                   className="flex items-center gap-3"
                   key={displayNetCash}
                 >
-                  <CheckCircle2 className="w-8 h-8 text-emerald-400" />
-                  <span className="text-4xl md:text-5xl font-bold text-emerald-400">
+                  <CheckCircle2 className="w-8 h-8 text-emerald-500 dark:text-emerald-400" />
+                  <span className="text-4xl md:text-5xl font-bold text-emerald-500 dark:text-emerald-400">
                     +{displayNetCash.toLocaleString('es-ES')}€
                   </span>
                 </motion.div>
-                <p className="text-emerald-400/70 mt-2 text-sm">✓ {t('calculator.cashPositive')}</p>
+                <p className="text-emerald-600/70 dark:text-emerald-400/70 mt-2 text-sm">✓ {t('calculator.cashPositive')}</p>
               </CardContent>
             </Card>
 
             {/* Recurrent Revenue Card */}
-            <Card className="bg-gradient-to-br from-amber-950/30 to-slate-900 border-amber-500/30 overflow-hidden relative">
+            <Card className="bg-gradient-to-br from-amber-100 dark:from-amber-950/30 to-background dark:to-slate-900 border-amber-500/30 overflow-hidden relative">
               <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 to-transparent" />
               <CardContent className="p-8 relative">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-slate-400">{t('calculator.recurrentRevenue')}</span>
+                  <span className="text-muted-foreground">{t('calculator.recurrentRevenue')}</span>
                   <AnimatePresence>
                     {isHighSaver && (
                       <motion.div
@@ -228,7 +228,7 @@ export const PartnerRoiCalculator = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                       >
-                        <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30">
+                        <Badge className="bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30">
                           <TrendingUp className="w-3 h-3 mr-1" />
                           {t('calculator.highRevenue')}
                         </Badge>
@@ -240,21 +240,21 @@ export const PartnerRoiCalculator = () => {
                   className="flex items-center gap-3"
                   key={displayAnnualRevenue}
                 >
-                  <Euro className="w-8 h-8 text-amber-400" />
-                  <span className="text-4xl md:text-5xl font-bold text-amber-400">
+                  <Euro className="w-8 h-8 text-amber-500 dark:text-amber-400" />
+                  <span className="text-4xl md:text-5xl font-bold text-amber-500 dark:text-amber-400">
                     +{displayAnnualRevenue.toLocaleString('es-ES')}€
                   </span>
                 </motion.div>
-                <p className="text-amber-400/70 mt-2 text-sm">
+                <p className="text-amber-600/70 dark:text-amber-400/70 mt-2 text-sm">
                   {t('calculator.monthlyVolume')}: {monthlyVolume.toLocaleString('es-ES')}€ × 10%
                 </p>
               </CardContent>
             </Card>
 
             {/* 3-Year Projection Chart */}
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card className="bg-card/50 dark:bg-slate-800/50 border-border">
               <CardContent className="p-6">
-                <h4 className="text-lg font-semibold text-white mb-4">{t('calculator.projection')}</h4>
+                <h4 className="text-lg font-semibold text-foreground mb-4">{t('calculator.projection')}</h4>
                 <div className="h-48">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={projectionData} barSize={50}>
@@ -272,16 +272,16 @@ export const PartnerRoiCalculator = () => {
                           <stop offset="100%" stopColor="#ea580c" />
                         </linearGradient>
                       </defs>
-                      <XAxis dataKey="year" tick={{ fill: '#94a3b8', fontSize: 12 }} axisLine={false} tickLine={false} />
+                      <XAxis dataKey="year" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} axisLine={false} tickLine={false} />
                       <YAxis hide />
                       <Tooltip
                         formatter={(value: number) => [`${value.toLocaleString('es-ES')}€`, t('calculator.revenue')]}
                         contentStyle={{
-                          backgroundColor: 'hsl(222.2 47.4% 11.2%)',
-                          border: '1px solid hsl(217.2 32.6% 17.5%)',
+                          backgroundColor: 'hsl(var(--card))',
+                          border: '1px solid hsl(var(--border))',
                           borderRadius: '8px',
                         }}
-                        labelStyle={{ color: 'white' }}
+                        labelStyle={{ color: 'hsl(var(--foreground))' }}
                       />
                       <Bar dataKey="value" radius={[8, 8, 0, 0]}>
                         {projectionData.map((entry, index) => (
@@ -303,7 +303,7 @@ export const PartnerRoiCalculator = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <p className="text-xl text-slate-300">
+          <p className="text-xl text-foreground/80">
             {t('calculator.result', { amount: totalYear1.toLocaleString('es-ES') })}
           </p>
         </motion.div>
