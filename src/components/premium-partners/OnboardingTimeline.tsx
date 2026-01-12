@@ -43,7 +43,7 @@ export const OnboardingTimeline = () => {
   ];
 
   return (
-    <section className="py-24 bg-slate-900">
+    <section className="py-24 bg-muted dark:bg-slate-900">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -51,14 +51,14 @@ export const OnboardingTimeline = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4 bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+          <Badge className="mb-4 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
             <Clock className="w-4 h-4 mr-2" />
             {t('timeline.badge')}
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t('timeline.title')} <span className="text-emerald-400">{t('timeline.titleHighlight')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {t('timeline.title')} <span className="text-emerald-500 dark:text-emerald-400">{t('timeline.titleHighlight')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {t('timeline.subtitle')}
           </p>
         </motion.div>
@@ -67,7 +67,7 @@ export const OnboardingTimeline = () => {
           {/* Timeline */}
           <div className="relative">
             {/* Vertical line */}
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 via-amber-500 to-slate-700 transform md:-translate-x-1/2" />
+            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 via-amber-500 to-border transform md:-translate-x-1/2" />
 
             {timelineSteps.map((step, index) => {
               const Icon = step.icon;
@@ -92,7 +92,7 @@ export const OnboardingTimeline = () => {
                           ? 'bg-emerald-500 border-emerald-400'
                           : step.status === 'in-progress'
                           ? 'bg-amber-500 border-amber-400'
-                          : 'bg-slate-700 border-slate-600'
+                          : 'bg-secondary border-border'
                       }`}
                       whileHover={{ scale: 1.1 }}
                       animate={
@@ -105,14 +105,14 @@ export const OnboardingTimeline = () => {
                       {step.status === 'completed' ? (
                         <CheckCircle2 className="w-8 h-8 text-white" />
                       ) : (
-                        <Icon className="w-8 h-8 text-white" />
+                        <Icon className={`w-8 h-8 ${step.status === 'in-progress' ? 'text-white' : 'text-muted-foreground'}`} />
                       )}
                     </motion.div>
                   </div>
 
                   {/* Content */}
                   <div className={`w-full md:w-5/12 pl-28 md:pl-0 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16'}`}>
-                    <Card className={`bg-slate-800/50 border-slate-700 overflow-hidden ${
+                    <Card className={`bg-card/50 dark:bg-slate-800/50 border-border overflow-hidden ${
                       step.status === 'in-progress' ? 'ring-2 ring-amber-500/50' : ''
                     }`}>
                       <CardContent className="p-6">
@@ -120,38 +120,38 @@ export const OnboardingTimeline = () => {
                           <Badge 
                             className={`${
                               step.status === 'completed'
-                                ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                                ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
                                 : step.status === 'in-progress'
-                                ? 'bg-amber-500/20 text-amber-400 border-amber-500/30'
-                                : 'bg-slate-700/50 text-slate-400 border-slate-600'
+                                ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30'
+                                : 'bg-secondary text-muted-foreground border-border'
                             }`}
                           >
                             {step.week}
                           </Badge>
                           {step.status === 'in-progress' && (
-                            <span className="text-xs text-amber-400 animate-pulse">{t('timeline.inProgress')}</span>
+                            <span className="text-xs text-amber-600 dark:text-amber-400 animate-pulse">{t('timeline.inProgress')}</span>
                           )}
                         </div>
                         
-                        <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-                        <p className="text-slate-400 text-sm mb-4">{step.description}</p>
+                        <h3 className="text-xl font-bold text-foreground mb-2">{step.title}</h3>
+                        <p className="text-muted-foreground text-sm mb-4">{step.description}</p>
                         
                         <div className={`flex items-center gap-2 ${isLeft ? 'md:justify-end' : ''}`}>
                           <span className={`text-sm font-medium ${
                             step.status === 'completed'
-                              ? 'text-emerald-400'
+                              ? 'text-emerald-600 dark:text-emerald-400'
                               : step.status === 'in-progress'
-                              ? 'text-amber-400'
-                              : 'text-slate-500'
+                              ? 'text-amber-600 dark:text-amber-400'
+                              : 'text-muted-foreground'
                           }`}>
                             {step.highlight}
                           </span>
                           <ArrowRight className={`w-4 h-4 ${
                             step.status === 'completed'
-                              ? 'text-emerald-400'
+                              ? 'text-emerald-600 dark:text-emerald-400'
                               : step.status === 'in-progress'
-                              ? 'text-amber-400'
-                              : 'text-slate-500'
+                              ? 'text-amber-600 dark:text-amber-400'
+                              : 'text-muted-foreground'
                           }`} />
                         </div>
                       </CardContent>

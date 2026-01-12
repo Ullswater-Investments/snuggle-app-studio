@@ -39,7 +39,7 @@ export const AdhesionForm = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-background via-muted to-background dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-[100px]" />
@@ -53,14 +53,14 @@ export const AdhesionForm = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30">
+          <Badge className="mb-4 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30">
             <Sparkles className="w-4 h-4 mr-2" />
             {t('form.badge')}
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             {t('form.title')} <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent">{t('form.titleHighlight')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {t('form.subtitle')}
           </p>
         </motion.div>
@@ -72,21 +72,21 @@ export const AdhesionForm = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm overflow-hidden">
+          <Card className="bg-card/50 dark:bg-slate-800/50 border-border backdrop-blur-sm overflow-hidden">
             <div className="h-1 bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500" />
             <CardContent className="p-8">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Organization */}
                   <div className="space-y-2">
-                    <Label htmlFor="organization" className="text-slate-300 flex items-center gap-2">
-                      <Building2 className="w-4 h-4 text-amber-400" />
+                    <Label htmlFor="organization" className="text-foreground/80 flex items-center gap-2">
+                      <Building2 className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                       {t('form.organizationLabel')} *
                     </Label>
                     <Input
                       id="organization"
                       placeholder={t('form.organizationPlaceholder')}
-                      className="bg-slate-900/50 border-slate-700 text-white placeholder:text-slate-500 focus:border-amber-500 focus:ring-amber-500/20"
+                      className="bg-background/50 dark:bg-slate-900/50 border-border text-foreground placeholder:text-muted-foreground focus:border-amber-500 focus:ring-amber-500/20"
                       value={formData.organization}
                       onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                     />
@@ -94,15 +94,15 @@ export const AdhesionForm = () => {
 
                   {/* Email */}
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-slate-300 flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-amber-400" />
+                    <Label htmlFor="email" className="text-foreground/80 flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                       {t('form.emailLabel')} *
                     </Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder={t('form.emailPlaceholder')}
-                      className="bg-slate-900/50 border-slate-700 text-white placeholder:text-slate-500 focus:border-amber-500 focus:ring-amber-500/20"
+                      className="bg-background/50 dark:bg-slate-900/50 border-border text-foreground placeholder:text-muted-foreground focus:border-amber-500 focus:ring-amber-500/20"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     />
@@ -110,15 +110,15 @@ export const AdhesionForm = () => {
 
                   {/* Motivation */}
                   <div className="space-y-2">
-                    <Label htmlFor="motivation" className="text-slate-300 flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4 text-amber-400" />
+                    <Label htmlFor="motivation" className="text-foreground/80 flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-amber-500 dark:text-amber-400" />
                       {t('form.motivationLabel')}
                     </Label>
                     <Textarea
                       id="motivation"
                       placeholder={t('form.motivationPlaceholder')}
                       rows={4}
-                      className="bg-slate-900/50 border-slate-700 text-white placeholder:text-slate-500 focus:border-amber-500 focus:ring-amber-500/20 resize-none"
+                      className="bg-background/50 dark:bg-slate-900/50 border-border text-foreground placeholder:text-muted-foreground focus:border-amber-500 focus:ring-amber-500/20 resize-none"
                       value={formData.motivation}
                       onChange={(e) => setFormData({ ...formData, motivation: e.target.value })}
                     />
@@ -149,7 +149,7 @@ export const AdhesionForm = () => {
                   </Button>
 
                   {/* Privacy note */}
-                  <p className="text-xs text-slate-500 text-center flex items-center justify-center gap-1">
+                  <p className="text-xs text-muted-foreground text-center flex items-center justify-center gap-1">
                     <Shield className="w-3 h-3" />
                     {t('form.privacyNote')}
                   </p>
@@ -166,13 +166,13 @@ export const AdhesionForm = () => {
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', duration: 0.5 }}
                   >
-                    <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+                    <CheckCircle2 className="w-10 h-10 text-emerald-500 dark:text-emerald-400" />
                   </motion.div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{t('form.successTitle')}</h3>
-                  <p className="text-slate-400 mb-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{t('form.successTitle')}</h3>
+                  <p className="text-muted-foreground mb-6">
                     {t('form.successDescription')}
                   </p>
-                  <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+                  <Badge className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30">
                     Ref: PP-{Date.now().toString(36).toUpperCase()}
                   </Badge>
                 </motion.div>
@@ -195,7 +195,7 @@ export const AdhesionForm = () => {
             t('form.trust3'),
             t('form.trust4'),
           ].map((text, i) => (
-            <div key={i} className="flex items-center gap-2 text-slate-500">
+            <div key={i} className="flex items-center gap-2 text-muted-foreground">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
               <span className="text-sm">{text}</span>
             </div>

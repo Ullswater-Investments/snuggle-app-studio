@@ -13,7 +13,7 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-muted via-background to-muted dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {/* Animated background nodes */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Central glow */}
@@ -86,14 +86,14 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Badge className="mb-6 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30 px-4 py-2 text-sm">
+          <Badge className="mb-6 bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30 px-4 py-2 text-sm">
             <Sparkles className="w-4 h-4 mr-2 inline" />
             {t('hero.badge')}
           </Badge>
         </motion.div>
 
         <motion.h1
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
@@ -107,7 +107,7 @@ export const HeroSection = () => {
         </motion.h1>
 
         <motion.p
-          className="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto"
+          className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -132,7 +132,7 @@ export const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white text-lg px-8 py-6"
+              className="border-border text-muted-foreground hover:bg-muted hover:text-foreground text-lg px-8 py-6"
             >
               <FileText className="mr-2 h-5 w-5" />
               {t('hero.docs')}
@@ -146,7 +146,7 @@ export const HeroSection = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ArrowDown className="w-6 h-6 text-slate-500" />
+          <ArrowDown className="w-6 h-6 text-muted-foreground" />
         </motion.div>
       </div>
     </section>

@@ -62,7 +62,7 @@ export const TechStackBento = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-950">
+    <section className="py-24 bg-gradient-to-b from-muted to-background dark:from-slate-900 dark:to-slate-950">
       <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -70,14 +70,14 @@ export const TechStackBento = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Badge className="mb-4 bg-slate-700/50 text-slate-300 border-slate-600">
+          <Badge className="mb-4 bg-secondary text-secondary-foreground border-border">
             <Cpu className="w-4 h-4 mr-2" />
             Trust Framework
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            {t('techStack.title')} <span className="text-cyan-400">{t('techStack.titleHighlight')}</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            {t('techStack.title')} <span className="text-cyan-500 dark:text-cyan-400">{t('techStack.titleHighlight')}</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {t('techStack.subtitle')}
           </p>
         </motion.div>
@@ -97,7 +97,7 @@ export const TechStackBento = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="h-full bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300 group overflow-hidden">
+                <Card className="h-full bg-card/50 dark:bg-slate-800/50 border-border hover:border-primary/30 transition-all duration-300 group overflow-hidden">
                   <CardContent className="p-6 relative">
                     {/* Background glow */}
                     <div className={`absolute -top-20 -right-20 w-40 h-40 rounded-full ${card.bgGlow} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -109,13 +109,13 @@ export const TechStackBento = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl font-bold text-white mb-1">{card.title}</h3>
+                      <h3 className="text-xl font-bold text-foreground mb-1">{card.title}</h3>
                       <p className={`text-sm bg-gradient-to-r ${card.color} bg-clip-text text-transparent font-medium mb-3`}>
                         {card.subtitle}
                       </p>
 
                       {/* Description */}
-                      <p className="text-slate-400 text-sm mb-4">
+                      <p className="text-muted-foreground text-sm mb-4">
                         {card.description}
                       </p>
 
@@ -125,7 +125,7 @@ export const TechStackBento = () => {
                           <Badge 
                             key={feature}
                             variant="outline" 
-                            className="bg-slate-700/50 border-slate-600 text-slate-300 text-xs"
+                            className="bg-secondary/50 border-border text-muted-foreground text-xs"
                           >
                             {feature}
                           </Badge>
@@ -150,12 +150,12 @@ export const TechStackBento = () => {
           {infoItems.map((item, i) => (
             <div 
               key={i}
-              className="flex items-center gap-3 p-4 rounded-xl bg-slate-800/30 border border-slate-700/50"
+              className="flex items-center gap-3 p-4 rounded-xl bg-card/30 dark:bg-slate-800/30 border border-border/50"
             >
-              <item.icon className="w-5 h-5 text-slate-500" />
+              <item.icon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <p className="text-xs text-slate-500">{item.label}</p>
-                <p className="text-sm font-medium text-white">{item.value}</p>
+                <p className="text-xs text-muted-foreground">{item.label}</p>
+                <p className="text-sm font-medium text-foreground">{item.value}</p>
               </div>
             </div>
           ))}
