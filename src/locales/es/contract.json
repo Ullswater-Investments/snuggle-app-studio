@@ -172,6 +172,28 @@
     "signContract": "Firmar Contrato",
     "signing": "Firmando...",
     "signedAt": "Firmado el",
+    "qualifiedTitle": "Firma Electrónica Cualificada",
+    "tabSimple": "Simple",
+    "tabCertificate": "Certificado",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "Esta firma tiene valor indicativo. Para validez legal completa, use firma cualificada.",
+    "certificateInfo": "Suba su certificado digital FNMT o DNIe en formato .p12 o .pfx",
+    "certificateLabel": "Certificado (.p12/.pfx)",
+    "passwordLabel": "Contraseña del certificado",
+    "eidasInfo": "Firma cualificada con máxima validez legal según Reglamento eIDAS (UE) 910/2014",
+    "signSimple": "Firmar con firma simple",
+    "signWithCertificate": "Firmar con certificado",
+    "validatingCertificate": "Validando certificado...",
+    "processing": "Procesando...",
+    "connectingProvider": "Conectando con pasarela de firma...",
+    "levelSimple": "Simple",
+    "levelAdvanced": "Avanzada",
+    "levelQualified": "Cualificada",
+    "autofirmaDesc": "Cliente oficial de firma del Gobierno de España",
+    "claveDesc": "Sistema de identificación electrónica español",
+    "viafirmaDesc": "Proveedor de servicios de confianza cualificado",
+    "signedSuccessfully": "Documento firmado correctamente",
+    "qualifiedSignatureApplied": "Firma electrónica cualificada aplicada",
     "validation": {
       "nameRequired": "El nombre es obligatorio",
       "positionRequired": "El cargo es obligatorio",
@@ -186,5 +208,17 @@
       "description": "Su contrato de adhesión ha sido firmado correctamente. Recibirá una copia por email.",
       "downloadSigned": "Descargar Contrato Firmado"
     }
+  },
+  "preview": {
+    "title": "Vista previa del documento",
+    "documentTitle": "CARTA DE ADHESIÓN",
+    "documentSubtitle": "ESPACIO DE DATOS PROCUREDATA",
+    "promoterSection": "IDENTIFICACIÓN DEL PROMOTOR",
+    "participantSection": "IDENTIFICACIÓN DEL PARTICIPANTE",
+    "objectSection": "OBJETO DE LA CARTA",
+    "regulatorySection": "ACEPTACIÓN NORMATIVA",
+    "signatureDate": "Fecha",
+    "signaturePlace": "Lugar",
+    "signaturePlaceholder": "[Firma electrónica]"
   }
 }

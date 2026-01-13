@@ -1064,42 +1064,63 @@ export type Database = {
         Row: {
           accepted_gdpr: boolean
           accepted_terms: boolean
+          certificate_issuer: string | null
+          certificate_serial: string | null
           created_at: string
+          document_hash: string | null
+          eidas_level: string | null
           full_name: string
           id: string
           ip_address: string | null
           organization_name: string
           position: string
           signature_data_url: string
+          signature_provider: string | null
+          signature_type: string | null
           signed_at: string
+          signed_document_url: string | null
           tax_id: string
           user_agent: string | null
         }
         Insert: {
           accepted_gdpr?: boolean
           accepted_terms?: boolean
+          certificate_issuer?: string | null
+          certificate_serial?: string | null
           created_at?: string
+          document_hash?: string | null
+          eidas_level?: string | null
           full_name: string
           id?: string
           ip_address?: string | null
           organization_name: string
           position: string
           signature_data_url: string
+          signature_provider?: string | null
+          signature_type?: string | null
           signed_at?: string
+          signed_document_url?: string | null
           tax_id: string
           user_agent?: string | null
         }
         Update: {
           accepted_gdpr?: boolean
           accepted_terms?: boolean
+          certificate_issuer?: string | null
+          certificate_serial?: string | null
           created_at?: string
+          document_hash?: string | null
+          eidas_level?: string | null
           full_name?: string
           id?: string
           ip_address?: string | null
           organization_name?: string
           position?: string
           signature_data_url?: string
+          signature_provider?: string | null
+          signature_type?: string | null
           signed_at?: string
+          signed_document_url?: string | null
           tax_id?: string
           user_agent?: string | null
         }

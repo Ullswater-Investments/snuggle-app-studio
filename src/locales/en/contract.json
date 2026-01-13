@@ -172,6 +172,28 @@
     "signContract": "Sign Contract",
     "signing": "Signing...",
     "signedAt": "Signed on",
+    "qualifiedTitle": "Qualified Electronic Signature",
+    "tabSimple": "Simple",
+    "tabCertificate": "Certificate",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "This signature has indicative value only. For full legal validity, use qualified signature.",
+    "certificateInfo": "Upload your FNMT or eID digital certificate in .p12 or .pfx format",
+    "certificateLabel": "Certificate (.p12/.pfx)",
+    "passwordLabel": "Certificate password",
+    "eidasInfo": "Qualified signature with maximum legal validity according to eIDAS Regulation (EU) 910/2014",
+    "signSimple": "Sign with simple signature",
+    "signWithCertificate": "Sign with certificate",
+    "validatingCertificate": "Validating certificate...",
+    "processing": "Processing...",
+    "connectingProvider": "Connecting to signature gateway...",
+    "levelSimple": "Simple",
+    "levelAdvanced": "Advanced",
+    "levelQualified": "Qualified",
+    "autofirmaDesc": "Official signing client from the Spanish Government",
+    "claveDesc": "Spanish electronic identification system",
+    "viafirmaDesc": "Qualified trust service provider",
+    "signedSuccessfully": "Document signed successfully",
+    "qualifiedSignatureApplied": "Qualified electronic signature applied",
     "validation": {
       "nameRequired": "Name is required",
       "positionRequired": "Position is required",
@@ -186,5 +208,17 @@
       "description": "Your membership agreement has been successfully signed. You will receive a copy by email.",
       "downloadSigned": "Download Signed Contract"
     }
+  },
+  "preview": {
+    "title": "Document Preview",
+    "documentTitle": "MEMBERSHIP AGREEMENT",
+    "documentSubtitle": "PROCUREDATA DATA SPACE",
+    "promoterSection": "PROMOTER IDENTIFICATION",
+    "participantSection": "PARTICIPANT IDENTIFICATION",
+    "objectSection": "AGREEMENT OBJECT",
+    "regulatorySection": "REGULATORY ACCEPTANCE",
+    "signatureDate": "Date",
+    "signaturePlace": "Place",
+    "signaturePlaceholder": "[Electronic signature]"
   }
 }
