@@ -2,11 +2,49 @@
   "title": "Únete al Espacio de Datos ProcureData",
   "subtitle": "Proceso de adhesión paso a paso",
   "progress": {
+    "step0": "Rol",
     "step1": "Bienvenida",
     "step2": "Requisitos",
     "step3": "Obligaciones",
     "step4": "Datos",
     "step5": "Confirmación"
+  },
+  "roleSelection": {
+    "title": "¿Cómo quieres participar en ProcureData?",
+    "subtitle": "Selecciona tu rol principal en el ecosistema de datos.",
+    "helperText": "Podrás ajustar tu rol y permisos después del registro.",
+    "buyer": {
+      "title": "Soy Comprador",
+      "description": "Busco proveedores cualificados y gestiono riesgos de mi cadena de suministro",
+      "features": {
+        "search": "Buscar y filtrar proveedores verificados",
+        "monitor": "Monitorizar riesgos de cadena de suministro",
+        "integrate": "Integrar con tu ERP (SAP, Oracle, etc.)"
+      }
+    },
+    "supplier": {
+      "title": "Soy Proveedor",
+      "description": "Quiero certificarme y ser visible para grandes compradores",
+      "features": {
+        "visible": "Aparecer en el marketplace de proveedores",
+        "certify": "Certificar tus credenciales una sola vez",
+        "orders": "Recibir pedidos de grandes empresas"
+      }
+    }
+  },
+  "supplierObligations": {
+    "title": "Pasos para completar tu perfil",
+    "locked": "Pendiente",
+    "helperText": "Estos pasos se desbloquearán tras el registro",
+    "step1": { "title": "Subir Certificados ISO", "description": "ISO 9001, 14001, 27001" },
+    "step2": { "title": "Validación Fiscal", "description": "Hacienda y Seguridad Social" },
+    "step3": { "title": "Catálogo de Productos", "description": "Tus productos para el marketplace" }
+  },
+  "tooltips": {
+    "taxId": { "short": "Requisito legal para prevenir fraude", "title": "Verificación KYB", "full": "Validamos tu entidad contra el Registro Mercantil." }
+  },
+  "validation": {
+    "selectRole": "Debes seleccionar un rol para continuar"
   },
   "navigation": {
     "next": "Continuar",

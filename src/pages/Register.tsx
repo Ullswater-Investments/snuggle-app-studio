@@ -13,6 +13,7 @@ import {
   ConfirmationStep,
   type RegistrationFormData,
 } from '@/components/register';
+import { RoleSelectionStep } from '@/components/register/RoleSelectionStep';
 
 const STORAGE_KEY = 'procuredata_registration';
 
@@ -41,7 +42,8 @@ const initialFormData: RegistrationFormData = {
 export default function Register() {
   const { t } = useTranslation('register');
   const { toast } = useToast();
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [selectedRole, setSelectedRole] = useState<'buyer' | 'supplier' | null>(null);
   const [formData, setFormData] = useState<RegistrationFormData>(initialFormData);
   const [acceptances, setAcceptances] = useState({
     terms: false,
@@ -52,7 +54,7 @@ export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const totalSteps = 5;
+  const totalSteps = 6;
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -78,8 +80,11 @@ export default function Register() {
   const validateStep = (step: number): boolean => {
     const newErrors: Record<string, string> = {};
 
-    if (step === 4) {
-      // Validate organization
+    if (step === 0 && !selectedRole) {
+      newErrors['role'] = t('validation.selectRole');
+    }
+
+    if (step === 5) {
       if (!formData.organization.legalName.trim()) {
         newErrors['organization.legalName'] = t('validation.required');
       }
@@ -98,8 +103,6 @@ export default function Register() {
       if (!formData.organization.size) {
         newErrors['organization.size'] = t('validation.required');
       }
-
-      // Validate representative
       if (!formData.representative.fullName.trim()) {
         newErrors['representative.fullName'] = t('validation.required');
       }
@@ -108,14 +111,12 @@ export default function Register() {
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.representative.email)) {
         newErrors['representative.email'] = t('validation.invalidEmail');
       }
-
-      // Validate intention
       if (!formData.intention.role) {
         newErrors['intention.role'] = t('validation.required');
       }
     }
 
-    if (step === 5) {
+    if (step === 6) {
       if (!acceptances.terms || !acceptances.gdpr || !acceptances.conduct) {
         newErrors['acceptances'] = t('validation.acceptTerms');
       }
@@ -126,11 +127,17 @@ export default function Register() {
   };
 
   const handleNext = () => {
+    if (currentStep === 0 && !selectedRole) {
+      toast({
+        title: t('validation.selectRole'),
+        variant: 'destructive',
+      });
+      return;
+    }
     if (currentStep < totalSteps) {
-      if (currentStep === 4 && !validateStep(4)) {
+      if (currentStep === 5 && !validateStep(5)) {
         toast({
           title: t('validation.required'),
-          description: t('validation.required'),
           variant: 'destructive',
         });
         return;
@@ -140,7 +147,7 @@ export default function Register() {
   };
 
   const handleBack = () => {
-    if (currentStep > 1) {
+    if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1);
     }
   };
@@ -184,6 +191,8 @@ export default function Register() {
 
   const renderStep = () => {
     switch (currentStep) {
+      case 0:
+        return <RoleSelectionStep selectedRole={selectedRole} onRoleSelect={setSelectedRole} />;
       case 1:
         return <WelcomeStep />;
       case 2:
@@ -191,6 +200,8 @@ export default function Register() {
       case 3:
         return <ObligationsStep />;
       case 4:
+        return <ObligationsStep />;
+      case 5:
         return (
           <DataFormStep
             formData={formData}
@@ -198,7 +209,7 @@ export default function Register() {
             errors={errors}
           />
         );
-      case 5:
+      case 6:
         return (
           <ConfirmationStep
             formData={formData}
@@ -259,7 +270,7 @@ export default function Register() {
               <Button
                 variant="outline"
                 onClick={handleBack}
-                disabled={currentStep === 1}
+                disabled={currentStep === 0}
                 className="gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
