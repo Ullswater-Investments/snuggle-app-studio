@@ -508,7 +508,7 @@ export default function Landing() {
                 <li><Link to="/catalog" className="hover:text-white transition-colors">{t('footer.catalog')}</Link></li>
                 <li><Link to="/success-stories" className="hover:text-white transition-colors">{t('successCases')}</Link></li>
                 <li><Link to="/partners" className="hover:text-white transition-colors">PARTNERS</Link></li>
-                <li><Link to="/services" className="hover:text-white transition-colors">{t('footer.services')}</Link></li>
+                <li><Link to="/kit-espacio-datos" className="hover:text-white transition-colors">KIT ESPACIO DE DATOS</Link></li>
               </ul>
             </div>
 

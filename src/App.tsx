@@ -121,6 +121,7 @@ import ItbidWhitepaper from "./pages/partners/ItbidWhitepaper";
 import ItbidDocTecnico from "./pages/partners/ItbidDocTecnico";
 import ItbidProtectedRoute from "./components/ItbidProtectedRoute";
 import NotFound from "./pages/NotFound";
+import KitEspacioDatos from "./pages/KitEspacioDatos";
 
 const queryClient = new QueryClient();
 
@@ -163,6 +164,7 @@ const App = () => (
                   <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
                   <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
                   <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
+                  <Route path="/kit-espacio-datos" element={<KitEspacioDatos />} />
                   
                   {/* Motor de ProcureData - Technical Deep Dives */}
                   <Route path="/motor" element={<Navigate to="/models" replace />} />
