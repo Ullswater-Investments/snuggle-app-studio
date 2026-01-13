@@ -54,7 +54,7 @@ export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const totalSteps = 6;
+  const totalSteps = 5;
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -64,6 +64,7 @@ export default function Register() {
         const parsed = JSON.parse(saved);
         if (parsed.formData) setFormData(parsed.formData);
         if (parsed.currentStep) setCurrentStep(parsed.currentStep);
+        if (parsed.selectedRole) setSelectedRole(parsed.selectedRole);
       } catch (e) {
         console.error('Failed to parse saved registration data');
       }
@@ -73,9 +74,9 @@ export default function Register() {
   // Save to localStorage on changes
   useEffect(() => {
     if (!isSuccess) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ formData, currentStep }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ formData, currentStep, selectedRole }));
     }
-  }, [formData, currentStep, isSuccess]);
+  }, [formData, currentStep, selectedRole, isSuccess]);
 
   const validateStep = (step: number): boolean => {
     const newErrors: Record<string, string> = {};
@@ -84,7 +85,7 @@ export default function Register() {
       newErrors['role'] = t('validation.selectRole');
     }
 
-    if (step === 5) {
+    if (step === 4) {
       if (!formData.organization.legalName.trim()) {
         newErrors['organization.legalName'] = t('validation.required');
       }
@@ -111,12 +112,9 @@ export default function Register() {
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.representative.email)) {
         newErrors['representative.email'] = t('validation.invalidEmail');
       }
-      if (!formData.intention.role) {
-        newErrors['intention.role'] = t('validation.required');
-      }
     }
 
-    if (step === 6) {
+    if (step === 5) {
       if (!acceptances.terms || !acceptances.gdpr || !acceptances.conduct) {
         newErrors['acceptances'] = t('validation.acceptTerms');
       }
@@ -135,7 +133,7 @@ export default function Register() {
       return;
     }
     if (currentStep < totalSteps) {
-      if (currentStep === 5 && !validateStep(5)) {
+      if (currentStep === 4 && !validateStep(4)) {
         toast({
           title: t('validation.required'),
           variant: 'destructive',
@@ -200,16 +198,15 @@ export default function Register() {
       case 3:
         return <ObligationsStep />;
       case 4:
-        return <ObligationsStep />;
-      case 5:
         return (
           <DataFormStep
             formData={formData}
             onFormChange={setFormData}
             errors={errors}
+            selectedRole={selectedRole}
           />
         );
-      case 6:
+      case 5:
         return (
           <ConfirmationStep
             formData={formData}
