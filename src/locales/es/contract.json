@@ -1,0 +1,190 @@
+{
+  "title": "CARTA DE ADHESIÓN",
+  "subtitle": "Al Espacio de Datos PROCUREDATA",
+  "officialDocument": "Documento Oficial",
+  "downloadPdf": "Descargar Contrato PDF",
+  "downloadingPdf": "Generando...",
+  "startProcess": "Iniciar Proceso de Adhesión",
+  "readyToJoin": "¿Listo para adherirse al Espacio de Datos?",
+  "readyDescription": "Complete el proceso de registro para formalizar su adhesión al Espacio de Datos PROCUREDATA y comenzar a intercambiar datos de forma segura y conforme a la normativa europea.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "RGPD",
+    "lopdgdd": "LOPDGDD"
+  },
+  "promoter": {
+    "title": "1. Identificación del Promotor",
+    "description": "Datos del promotor del Espacio de Datos",
+    "legalName": "Razón Social",
+    "address": "Domicilio",
+    "email": "Email",
+    "website": "Sitio Web",
+    "legalFramework": "Marco Legal",
+    "ecosystem": "Ecosistema"
+  },
+  "object": {
+    "title": "2. Objeto del Contrato",
+    "description": "Formalización de la incorporación al Espacio de Datos",
+    "content": "La presente Carta de Adhesión tiene por objeto formalizar la incorporación del Participante al Espacio de Datos PROCUREDATA, estableciendo los términos y condiciones que regirán su participación.",
+    "commitments": [
+      "Acepta íntegramente el marco normativo y de gobernanza del Espacio de Datos",
+      "Se compromete a cumplir con las obligaciones técnicas, legales y éticas",
+      "Reconoce los derechos y responsabilidades asociados a su rol",
+      "Autoriza al Promotor a verificar el cumplimiento de requisitos"
+    ]
+  },
+  "normative": {
+    "title": "3. Aceptación de Normativa",
+    "description": "Marcos normativos y documentos rectores",
+    "sections": {
+      "terms": {
+        "title": "3.1 Términos y Condiciones Generales",
+        "items": [
+          "Definiciones y alcance del Espacio de Datos",
+          "Derechos y obligaciones de los participantes",
+          "Procedimientos de acceso y uso de datos",
+          "Mecanismos de resolución de conflictos",
+          "Condiciones de modificación y actualización"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Mecanismos de Gobernanza",
+        "items": [
+          "Comité de Gobernanza: Órgano rector con representación de todos los stakeholders",
+          "Comité Técnico: Responsable de estándares técnicos y interoperabilidad",
+          "Comité de Ética: Supervisión del uso ético de los datos",
+          "Comité de Seguridad: Gestión de riesgos y respuesta a incidentes",
+          "Procedimientos de votación y toma de decisiones"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 Políticas ODRL (Open Digital Rights Language)",
+        "items": [
+          "Definición de permisos, prohibiciones y obligaciones sobre los datos",
+          "Especificación de condiciones de uso (temporal, geográfico, propósito)",
+          "Mecanismos de herencia y composición de políticas",
+          "Integración con contratos inteligentes para enforcement automático",
+          "Compatibilidad con estándares IDS y GAIA-X"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Soberanía de datos: Control total sobre los propios datos",
+          "Interoperabilidad: Uso de estándares abiertos y APIs documentadas",
+          "Portabilidad: Capacidad de migrar datos entre proveedores",
+          "Transparencia: Trazabilidad completa de operaciones",
+          "Seguridad: Cumplimiento de estándares de ciberseguridad",
+          "Federación: Participación en ecosistemas distribuidos"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 Cumplimiento RGPD",
+        "items": [
+          "Base legal para el tratamiento de datos personales (Art. 6)",
+          "Derechos de los interesados (acceso, rectificación, supresión, portabilidad)",
+          "Obligaciones del responsable y encargado del tratamiento",
+          "Evaluaciones de impacto (DPIA) para tratamientos de alto riesgo",
+          "Notificación de brechas de seguridad en 72 horas"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Rol del Participante",
+    "description": "Seleccione su rol en el Espacio de Datos",
+    "provider": {
+      "title": "Proveedor de Datos",
+      "description": "Entidad que aporta conjuntos de datos al Espacio de Datos para su intercambio y monetización.",
+      "features": ["Publicar datasets", "Definir políticas de uso", "Monetizar activos"]
+    },
+    "consumer": {
+      "title": "Consumidor de Datos",
+      "description": "Entidad que accede y utiliza datos del Espacio de Datos para sus operaciones o análisis.",
+      "features": ["Acceder a catálogo", "Solicitar datos", "Usar bajo políticas"]
+    },
+    "service": {
+      "title": "Proveedor de Servicios",
+      "description": "Entidad que ofrece servicios de intermediación, transformación o valor añadido sobre datos.",
+      "features": ["Servicios de IA", "Transformación", "Análisis avanzado"]
+    },
+    "intermediary": {
+      "title": "Intermediario de Datos",
+      "description": "Entidad neutral que facilita el intercambio de datos entre proveedores y consumidores.",
+      "features": ["Neutral", "Facilitador", "Cumplimiento DGA"]
+    },
+    "altruism": {
+      "title": "Organización de Altruismo",
+      "description": "Entidad sin ánimo de lucro que gestiona datos cedidos voluntariamente para fines de interés general.",
+      "features": ["Sin ánimo de lucro", "Interés público", "Investigación"]
+    }
+  },
+  "validity": {
+    "title": "5. Vigencia y Extinción",
+    "description": "Duración y causas de terminación",
+    "duration": {
+      "title": "5.1 Vigencia",
+      "content": "La presente Carta de Adhesión entrará en vigor en la fecha de su firma y tendrá una duración indefinida, salvo denuncia expresa de cualquiera de las partes.",
+      "indefinite": "duración indefinida"
+    },
+    "causes": {
+      "title": "5.2 Causas de Extinción",
+      "items": [
+        "Denuncia voluntaria con preaviso de 30 días",
+        "Incumplimiento grave de obligaciones",
+        "Decisión del Comité de Gobernanza"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Efectos",
+      "items": [
+        "Cese del acceso a servicios",
+        "Mantenimiento de confidencialidad",
+        "Derecho a exportar datos propios"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Anexo: Recursos Oficiales",
+    "description": "Enlaces a documentación y normativa"
+  },
+  "signature": {
+    "title": "6. Firma del Contrato",
+    "description": "Complete los datos y firme electrónicamente",
+    "signerData": "Datos del Firmante",
+    "fullName": "Nombre Completo",
+    "fullNamePlaceholder": "Nombre y apellidos del representante legal",
+    "position": "Cargo",
+    "positionPlaceholder": "Ej: Director General, CEO",
+    "organizationName": "Nombre de la Organización",
+    "organizationNamePlaceholder": "Razón social de la empresa",
+    "taxId": "CIF/NIF",
+    "taxIdPlaceholder": "Identificación fiscal",
+    "signatureLabel": "Firma Electrónica",
+    "signatureInstructions": "Dibuje su firma en el recuadro",
+    "clearSignature": "Borrar",
+    "acceptTerms": "Acepto los términos y condiciones del contrato de adhesión",
+    "acceptTermsDescription": "He leído y comprendo todas las cláusulas del presente contrato",
+    "acceptGdpr": "Acepto el tratamiento de datos según RGPD",
+    "acceptGdprDescription": "Consiento el tratamiento de mis datos personales conforme a la normativa vigente",
+    "signContract": "Firmar Contrato",
+    "signing": "Firmando...",
+    "signedAt": "Firmado el",
+    "validation": {
+      "nameRequired": "El nombre es obligatorio",
+      "positionRequired": "El cargo es obligatorio",
+      "organizationRequired": "La organización es obligatoria",
+      "taxIdRequired": "El CIF/NIF es obligatorio",
+      "signatureRequired": "La firma es obligatoria",
+      "termsRequired": "Debe aceptar los términos y condiciones",
+      "gdprRequired": "Debe aceptar el tratamiento de datos"
+    },
+    "success": {
+      "title": "¡Contrato Firmado!",
+      "description": "Su contrato de adhesión ha sido firmado correctamente. Recibirá una copia por email.",
+      "downloadSigned": "Descargar Contrato Firmado"
+    }
+  }
+}
