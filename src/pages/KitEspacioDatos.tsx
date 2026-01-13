@@ -215,7 +215,7 @@ const KitEspacioDatos = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
-                  <span className="text-foreground">Desarrollo a Medida (API/HL7-FHIR)</span>
+                  <span className="text-foreground">Desarrollo a Medida</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
