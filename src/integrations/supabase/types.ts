@@ -959,6 +959,107 @@ export type Database = {
         }
         Relationships: []
       }
+      registration_requests: {
+        Row: {
+          accepted_conduct: boolean | null
+          accepted_gdpr: boolean | null
+          accepted_terms: boolean | null
+          address: string
+          country: string
+          created_at: string | null
+          created_organization_id: string | null
+          erp_type: string | null
+          id: string
+          intention_data_types: string[] | null
+          intention_has_erp: string | null
+          ip_address: string | null
+          legal_name: string
+          product_category: string | null
+          representative_email: string
+          representative_name: string
+          representative_phone: string | null
+          representative_position: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          reviewer_notes: string | null
+          role: string
+          sector: string
+          size: string
+          status: Database["public"]["Enums"]["registration_status"] | null
+          tax_id: string
+          updated_at: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          accepted_conduct?: boolean | null
+          accepted_gdpr?: boolean | null
+          accepted_terms?: boolean | null
+          address: string
+          country: string
+          created_at?: string | null
+          created_organization_id?: string | null
+          erp_type?: string | null
+          id?: string
+          intention_data_types?: string[] | null
+          intention_has_erp?: string | null
+          ip_address?: string | null
+          legal_name: string
+          product_category?: string | null
+          representative_email: string
+          representative_name: string
+          representative_phone?: string | null
+          representative_position?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          role: string
+          sector: string
+          size: string
+          status?: Database["public"]["Enums"]["registration_status"] | null
+          tax_id: string
+          updated_at?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          accepted_conduct?: boolean | null
+          accepted_gdpr?: boolean | null
+          accepted_terms?: boolean | null
+          address?: string
+          country?: string
+          created_at?: string | null
+          created_organization_id?: string | null
+          erp_type?: string | null
+          id?: string
+          intention_data_types?: string[] | null
+          intention_has_erp?: string | null
+          ip_address?: string | null
+          legal_name?: string
+          product_category?: string | null
+          representative_email?: string
+          representative_name?: string
+          representative_phone?: string | null
+          representative_position?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          role?: string
+          sector?: string
+          size?: string
+          status?: Database["public"]["Enums"]["registration_status"] | null
+          tax_id?: string
+          updated_at?: string | null
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registration_requests_created_organization_id_fkey"
+            columns: ["created_organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       success_stories: {
         Row: {
           author_role: string | null
@@ -1481,6 +1582,12 @@ export type Database = {
       auth_method: "bearer" | "api_key" | "oauth" | "basic"
       erp_config_type: "download" | "upload"
       organization_type: "consumer" | "provider" | "data_holder"
+      registration_status:
+        | "pending"
+        | "under_review"
+        | "approved"
+        | "rejected"
+        | "needs_info"
       transaction_status:
         | "initiated"
         | "pending_subject"
@@ -1622,6 +1729,13 @@ export const Constants = {
       auth_method: ["bearer", "api_key", "oauth", "basic"],
       erp_config_type: ["download", "upload"],
       organization_type: ["consumer", "provider", "data_holder"],
+      registration_status: [
+        "pending",
+        "under_review",
+        "approved",
+        "rejected",
+        "needs_info",
+      ],
       transaction_status: [
         "initiated",
         "pending_subject",

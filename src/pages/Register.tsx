@@ -14,6 +14,7 @@ import {
   type RegistrationFormData,
 } from '@/components/register';
 import { RoleSelectionStep } from '@/components/register/RoleSelectionStep';
+import { useRegistration } from '@/hooks/useRegistration';
 
 const STORAGE_KEY = 'procuredata_registration';
 
@@ -42,6 +43,7 @@ const initialFormData: RegistrationFormData = {
 export default function Register() {
   const { t } = useTranslation('register');
   const { toast } = useToast();
+  const { submitRegistration, isSubmitting, error: registrationError } = useRegistration();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedRole, setSelectedRole] = useState<'buyer' | 'supplier' | null>(null);
   const [formData, setFormData] = useState<RegistrationFormData>(initialFormData);
@@ -51,8 +53,8 @@ export default function Register() {
     conduct: false,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [requestId, setRequestId] = useState<string | null>(null);
 
   const totalSteps = 5;
 
@@ -151,7 +153,7 @@ export default function Register() {
   };
 
   const handleSubmit = async () => {
-    if (!validateStep(5)) {
+    if (!validateStep(5) || !selectedRole) {
       toast({
         title: t('validation.acceptTerms'),
         variant: 'destructive',
@@ -159,21 +161,51 @@ export default function Register() {
       return;
     }
 
-    setIsSubmitting(true);
+    try {
+      const result = await submitRegistration({
+        role: selectedRole,
+        organization: {
+          legalName: formData.organization.legalName,
+          taxId: formData.organization.taxId,
+          country: formData.organization.country,
+          address: formData.organization.address,
+          sector: formData.organization.sector,
+          size: formData.organization.size,
+          productCategory: formData.organization.productCategory,
+          erpType: formData.organization.erpType,
+        },
+        representative: {
+          fullName: formData.representative.fullName,
+          position: formData.representative.position,
+          email: formData.representative.email,
+          phone: formData.representative.phone,
+        },
+        intention: {
+          dataTypes: formData.intention.dataTypes,
+          hasErp: formData.intention.hasErp,
+        },
+        acceptances,
+      });
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Clear localStorage
+      localStorage.removeItem(STORAGE_KEY);
+      setRequestId(result.requestId);
+      setIsSuccess(true);
 
-    // Clear localStorage
-    localStorage.removeItem(STORAGE_KEY);
-
-    setIsSubmitting(false);
-    setIsSuccess(true);
-
-    toast({
-      title: t('confirmation.success.title'),
-      description: t('confirmation.success.description'),
-    });
+      toast({
+        title: t('confirmation.success.title'),
+        description: t('confirmation.success.description'),
+      });
+    } catch (err) {
+      const errorMessage = registrationError?.message || 
+        (err instanceof Error ? err.message : 'Failed to submit registration');
+      
+      toast({
+        title: t('confirmation.error.title', 'Error'),
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    }
   };
 
   const handleAcceptanceChange = (key: 'terms' | 'gdpr' | 'conduct', value: boolean) => {
