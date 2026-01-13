@@ -68,10 +68,10 @@ export default function Landing() {
     desc: t('demoLinks.sustainabilityDesc'),
     color: "text-green-500"
   }, {
-    title: t('demoLinks.services'),
+    title: "KIT ESPACIO DE DATOS",
     icon: Layers,
-    url: "/services",
-    desc: t('demoLinks.servicesDesc'),
+    url: "/kit-espacio-datos",
+    desc: "Componentes modulares para tu Data Space",
     color: "text-purple-500"
   }];
   const FEATURES_DATA = {
