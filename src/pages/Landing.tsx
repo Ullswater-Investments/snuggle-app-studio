@@ -313,7 +313,7 @@ export default function Landing() {
                 <Link to="/auth">{tc('tryInteractiveDemo')}</Link>
               </Button>
               <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                <Link to="/docs/tecnico">{tc('viewTechnicalDoc')}</Link>
+                <Link to="/whitepaper">WHITEPAPER</Link>
               </Button>
             </div>
 
