@@ -184,7 +184,7 @@ const KitEspacioDatos = () => {
               </ul>
               
               <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4">
-                <p className="text-sm text-muted-foreground mb-1">Coste inicial para el beneficiario:</p>
+                <p className="text-sm text-muted-foreground mb-1">Solicitar la subvención:</p>
                 <p className="text-4xl font-bold text-cyan-600 dark:text-cyan-400">2.000€</p>
                 <p className="text-sm text-muted-foreground">+ 13.000€ al recibir subvención</p>
               </div>
