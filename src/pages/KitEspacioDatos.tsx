@@ -142,7 +142,7 @@ const KitEspacioDatos = () => {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link to="/architecture">Ver Arquitectura</Link>
+                <a href="https://www.kitespaciodedatos.eu" target="_blank" rel="noopener noreferrer">www.kitespaciodedatos.eu</a>
               </Button>
             </div>
           </motion.div>
