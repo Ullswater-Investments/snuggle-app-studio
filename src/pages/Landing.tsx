@@ -506,7 +506,7 @@ export default function Landing() {
               <h4 className="font-semibold mb-4 text-white">{t('footer.platform')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><Link to="/catalog" className="hover:text-white transition-colors">{t('footer.catalog')}</Link></li>
-                <li><Link to="/innovation" className="hover:text-white transition-colors">{t('footer.innovationLab')}</Link></li>
+                <li><Link to="/success-stories" className="hover:text-white transition-colors">{t('successCases')}</Link></li>
                 <li><Link to="/sustainability" className="hover:text-white transition-colors">{t('footer.sustainabilityHub')}</Link></li>
                 <li><Link to="/services" className="hover:text-white transition-colors">{t('footer.services')}</Link></li>
               </ul>
