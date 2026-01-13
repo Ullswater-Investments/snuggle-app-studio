@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import {
   RegistrationProgress,
+  AuthSelectionStep,
   WelcomeStep,
   RequirementsStep,
   ObligationsStep,
@@ -57,7 +58,7 @@ export default function Register() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [requestId, setRequestId] = useState<string | null>(null);
 
-  const totalSteps = 5;
+  const totalSteps = 6;
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -84,11 +85,11 @@ export default function Register() {
   const validateStep = (step: number): boolean => {
     const newErrors: Record<string, string> = {};
 
-    if (step === 0 && !selectedRole) {
+    if (step === 1 && !selectedRole) {
       newErrors['role'] = t('validation.selectRole');
     }
 
-    if (step === 4) {
+    if (step === 5) {
       if (!formData.organization.legalName.trim()) {
         newErrors['organization.legalName'] = t('validation.required');
       }
@@ -117,7 +118,7 @@ export default function Register() {
       }
     }
 
-    if (step === 5) {
+    if (step === 6) {
       if (!acceptances.terms || !acceptances.gdpr || !acceptances.conduct) {
         newErrors['acceptances'] = t('validation.acceptTerms');
       }
@@ -128,7 +129,7 @@ export default function Register() {
   };
 
   const handleNext = () => {
-    if (currentStep === 0 && !selectedRole) {
+    if (currentStep === 1 && !selectedRole) {
       toast({
         title: t('validation.selectRole'),
         variant: 'destructive',
@@ -136,7 +137,7 @@ export default function Register() {
       return;
     }
     if (currentStep < totalSteps) {
-      if (currentStep === 4 && !validateStep(4)) {
+      if (currentStep === 5 && !validateStep(5)) {
         toast({
           title: t('validation.required'),
           variant: 'destructive',
@@ -154,7 +155,7 @@ export default function Register() {
   };
 
   const handleSubmit = async () => {
-    if (!validateStep(5) || !selectedRole) {
+    if (!validateStep(6) || !selectedRole) {
       toast({
         title: t('validation.acceptTerms'),
         variant: 'destructive',
@@ -223,14 +224,16 @@ export default function Register() {
   const renderStep = () => {
     switch (currentStep) {
       case 0:
-        return <RoleSelectionStep selectedRole={selectedRole} onRoleSelect={setSelectedRole} />;
+        return <AuthSelectionStep onStartRegistration={() => setCurrentStep(1)} />;
       case 1:
-        return <WelcomeStep />;
+        return <RoleSelectionStep selectedRole={selectedRole} onRoleSelect={setSelectedRole} />;
       case 2:
-        return <RequirementsStep />;
+        return <WelcomeStep />;
       case 3:
-        return <ObligationsStep />;
+        return <RequirementsStep />;
       case 4:
+        return <ObligationsStep />;
+      case 5:
         return (
           <DataFormStep
             formData={formData}
@@ -239,7 +242,7 @@ export default function Register() {
             selectedRole={selectedRole}
           />
         );
-      case 5:
+      case 6:
         return (
           <ConfirmationStep
             formData={formData}

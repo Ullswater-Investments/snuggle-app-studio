@@ -1,4 +1,5 @@
 export { RegistrationProgress } from './RegistrationProgress';
+export { AuthSelectionStep } from './AuthSelectionStep';
 export { WelcomeStep } from './WelcomeStep';
 export { RequirementsStep } from './RequirementsStep';
 export { ObligationsStep } from './ObligationsStep';

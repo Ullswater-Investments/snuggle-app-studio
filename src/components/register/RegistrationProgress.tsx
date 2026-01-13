@@ -18,6 +18,7 @@ export const RegistrationProgress = ({ currentStep, totalSteps }: RegistrationPr
     { key: 'step3', label: t('progress.step3') },
     { key: 'step4', label: t('progress.step4') },
     { key: 'step5', label: t('progress.step5') },
+    { key: 'step6', label: t('progress.step6') },
   ];
 
   return (

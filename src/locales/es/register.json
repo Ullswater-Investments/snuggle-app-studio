@@ -2,12 +2,37 @@
   "title": "Únete al Espacio de Datos ProcureData",
   "subtitle": "Proceso de adhesión paso a paso",
   "progress": {
-    "step0": "Rol",
-    "step1": "Bienvenida",
-    "step2": "Requisitos",
-    "step3": "Obligaciones",
-    "step4": "Datos",
-    "step5": "Confirmación"
+    "step0": "Acceso",
+    "step1": "Rol",
+    "step2": "Bienvenida",
+    "step3": "Requisitos",
+    "step4": "Obligaciones",
+    "step5": "Datos",
+    "step6": "Confirmación"
+  },
+  "authSelection": {
+    "title": "¿Ya tienes una cuenta?",
+    "subtitle": "Inicia sesión o comienza tu proceso de registro",
+    "login": {
+      "title": "Iniciar Sesión",
+      "description": "Accede con tu cuenta existente",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "button": "Entrar",
+      "loading": "Iniciando sesión...",
+      "error": "Credenciales incorrectas. Verifica tu email y contraseña.",
+      "success": "Sesión iniciada correctamente"
+    },
+    "register": {
+      "title": "Nuevo Registro",
+      "description": "Únete al Espacio de Datos Europeo",
+      "features": [
+        "Crear tu identidad digital soberana",
+        "Conectar tu empresa al marketplace",
+        "Acceder a proveedores homologados"
+      ],
+      "button": "Comenzar Registro"
+    }
   },
   "roleSelection": {
     "title": "¿Cómo quieres participar en ProcureData?",

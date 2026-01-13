@@ -2,12 +2,37 @@
   "title": "Join the ProcureData Data Space",
   "subtitle": "Step-by-step membership process",
   "progress": {
-    "step0": "Role",
-    "step1": "Welcome",
-    "step2": "Requirements",
-    "step3": "Obligations",
-    "step4": "Data",
-    "step5": "Confirmation"
+    "step0": "Access",
+    "step1": "Role",
+    "step2": "Welcome",
+    "step3": "Requirements",
+    "step4": "Obligations",
+    "step5": "Data",
+    "step6": "Confirmation"
+  },
+  "authSelection": {
+    "title": "Already have an account?",
+    "subtitle": "Sign in or start your registration process",
+    "login": {
+      "title": "Sign In",
+      "description": "Access with your existing account",
+      "email": "Email address",
+      "password": "Password",
+      "button": "Sign In",
+      "loading": "Signing in...",
+      "error": "Invalid credentials. Please check your email and password.",
+      "success": "Successfully signed in"
+    },
+    "register": {
+      "title": "New Registration",
+      "description": "Join the European Data Space",
+      "features": [
+        "Create your sovereign digital identity",
+        "Connect your company to the marketplace",
+        "Access verified suppliers"
+      ],
+      "button": "Start Registration"
+    }
   },
   "roleSelection": {
     "title": "How do you want to participate in ProcureData?",
