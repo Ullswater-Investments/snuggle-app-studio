@@ -2,11 +2,49 @@
   "title": "Join the ProcureData Data Space",
   "subtitle": "Step-by-step membership process",
   "progress": {
+    "step0": "Role",
     "step1": "Welcome",
     "step2": "Requirements",
     "step3": "Obligations",
     "step4": "Data",
     "step5": "Confirmation"
+  },
+  "roleSelection": {
+    "title": "How do you want to participate in ProcureData?",
+    "subtitle": "Select your main role in the data ecosystem.",
+    "helperText": "You can adjust your role and permissions after registration.",
+    "buyer": {
+      "title": "I'm a Buyer",
+      "description": "Looking for qualified suppliers and managing supply chain risks",
+      "features": {
+        "search": "Search and filter verified suppliers",
+        "monitor": "Monitor supply chain risks",
+        "integrate": "Integrate with your ERP (SAP, Oracle, etc.)"
+      }
+    },
+    "supplier": {
+      "title": "I'm a Supplier",
+      "description": "Want to get certified and be visible to large buyers",
+      "features": {
+        "visible": "Appear in the supplier marketplace",
+        "certify": "Certify your credentials once",
+        "orders": "Receive orders from large companies"
+      }
+    }
+  },
+  "supplierObligations": {
+    "title": "Steps to complete your profile",
+    "locked": "Pending",
+    "helperText": "These steps unlock after registration",
+    "step1": { "title": "Upload ISO Certificates", "description": "ISO 9001, 14001, 27001" },
+    "step2": { "title": "Tax Validation", "description": "Tax and Social Security" },
+    "step3": { "title": "Product Catalog", "description": "Your products for the marketplace" }
+  },
+  "tooltips": {
+    "taxId": { "short": "Legal requirement to prevent fraud", "title": "KYB Verification", "full": "We validate your entity against the Commercial Registry." }
+  },
+  "validation": {
+    "selectRole": "You must select a role to continue"
   },
   "navigation": {
     "next": "Continue",
