@@ -193,7 +193,7 @@ const KitEspacioDatos = () => {
             {/* Option B - Recommended */}
             <div className="relative rounded-2xl p-8 bg-gradient-to-br from-purple-50 to-amber-50 dark:from-purple-950/30 dark:to-amber-900/20 border border-purple-200 dark:border-purple-800">
               <div className="flex items-center justify-between mb-6">
-                <Badge className="bg-gradient-to-r from-purple-500 to-violet-500 text-white border-0 px-8 py-4 text-2xl font-bold">
+                <Badge className="bg-gradient-to-r from-purple-500 to-violet-500 text-white border-0 px-6 py-3 text-xl font-bold">
                   SUBVENCIÓN DE 30.000€
                 </Badge>
                 <Badge variant="outline" className="border-amber-500 text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20">
