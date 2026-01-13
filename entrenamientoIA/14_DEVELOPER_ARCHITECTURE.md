@@ -1,6 +1,8 @@
 # 14 - Manual del Desarrollador y Arquitectura
 
-> Basado en Documento Explicativo 12
+> **Versión**: 3.2  
+> **Última actualización**: 2026-01-13  
+> Basado en Documento Explicativo 12  
 > Stack técnico, esquema de base de datos, funciones serverless y flujo de despliegue.
 
 ---
@@ -27,7 +29,7 @@
 
 ## 2. Esquema de Base de Datos (PostgreSQL)
 
-**28 tablas** optimizadas para transacciones soberanas de datos.
+**31 tablas** optimizadas para transacciones soberanas de datos.
 
 ### Tablas Principales
 
@@ -40,6 +42,9 @@
 | `data_assets` | Activos de datos disponibles para intercambio |
 | `wallets` | Saldos EUROe por organización |
 | `wallet_transactions` | Historial inmutable de pagos |
+| `registration_requests` | Solicitudes de adhesión con estados y metadatos |
+| `ai_feedback` | Feedback de usuarios sobre respuestas de ARIA |
+| `privacy_preferences` | Preferencias de privacidad y notificaciones por usuario |
 
 ### Estados de Transacción
 ```
@@ -58,15 +63,19 @@ Funciones en TypeScript ejecutadas bajo runtime **Deno**.
 
 | Función | Propósito |
 |---------|-----------|
-| `chat-ai` | Cerebro de ARIA, conecta con Google Gemini y procesa base de conocimiento |
+| `chat-ai` | Cerebro de ARIA v3.2, conecta con Google Gemini 3 Flash y procesa base de conocimiento |
+| `submit-registration` | Procesa formularios de adhesión y crea registros en `registration_requests` |
+| `send-welcome-email` | Envía emails de bienvenida diferenciados por rol (Buyer/Supplier) vía Resend |
 | `sync-to-github` | Escribe correcciones validadas automáticamente al repositorio GitHub |
 | `notification-handler` | Gestiona envío de notificaciones a usuarios |
+| `erp-api-tester` | Prueba conectividad con APIs de ERPs configurados |
 | `erp-data-uploader` | Procesa datos subidos desde sistemas ERP |
 
 ### Seguridad de Edge Functions
 - API Keys nunca expuestas al cliente
-- Secrets cifrados en Supabase
+- Secrets cifrados en Supabase (RESEND_API_KEY, GITHUB_PAT, LOVABLE_API_KEY)
 - CORS configurado restrictivamente
+- Validación JWT en funciones protegidas
 
 ---
 
@@ -131,12 +140,14 @@ Desarrollo en Lovable → Commit automático a GitHub → Review/PR → Merge �
 
 ### Triggers de Arquitectura
 - "stack" / "tecnología" → Describir capas del sistema
-- "base de datos" / "PostgreSQL" → Explicar esquema
+- "base de datos" / "PostgreSQL" → Explicar esquema (31 tablas)
 - "edge function" → Describir funciones serverless
 - "RLS" / "seguridad" → Explicar políticas de acceso
 - "deploy" / "despliegue" → Describir flujo CI/CD
+- "registro" / "onboarding" → Explicar flujo de adhesión
 
 ### Frases Sugeridas
 - "ProcureData usa React con TypeScript en el frontend y Supabase como backend."
-- "La base de datos tiene 28 tablas con RLS activo en todas ellas."
+- "La base de datos tiene 31 tablas con RLS activo en todas ellas."
 - "El despliegue es automático: cada merge en main activa el pipeline."
+- "El proceso de registro diferencia entre Buyers y Suppliers con onboarding personalizado."

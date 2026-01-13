@@ -2,8 +2,10 @@
 
 Este directorio contiene todos los documentos necesarios para entrenar el asistente virtual ARIA de ProcureData.
 
-> **Última actualización**: 2026-01-07  
-> **Versión**: 2.0
+> **Última actualización**: 2026-01-13  
+> **Versión**: 3.2  
+> **Base de datos**: 31 tablas PostgreSQL con RLS  
+> **Modelo IA**: google/gemini-3-flash-preview
 
 ---
 
@@ -54,16 +56,18 @@ Los contenidos están compilados en la Edge Function:
 supabase/functions/chat-ai/index.ts
 ```
 
-Esta función usa `LOVABLE_API_KEY` (auto-provisionada) para llamar a `google/gemini-2.5-flash`.
+Esta función usa `LOVABLE_API_KEY` (auto-provisionada) para llamar a `google/gemini-3-flash-preview`.
 
-**Conocimiento integrado en SYSTEM_INSTRUCTIONS:**
+**Conocimiento integrado en SYSTEM_INSTRUCTIONS v3.2:**
 - Identidad y tono de ARIA
-- Catálogo de 21 servicios con precios
+- Catálogo de 22 servicios con precios
 - Sectores prioritarios y casos de uso
 - Widgets interactivos y simuladores
-- Reglas de respuesta (15+ reglas)
+- Reglas de respuesta (19+ reglas)
 - Gobernanza ODRL y Data Holders
 - Integración técnica (API, Webhooks)
+- Registro y onboarding diferenciado
+- Edge Functions documentadas
 - Glosario de términos clave
 
 ### Para Claude o ChatGPT
@@ -77,7 +81,7 @@ Esta función usa `LOVABLE_API_KEY` (auto-provisionada) para llamar a `google/ge
 
 ```
 entrenamientoIA/
-├── README.md                      ← Este archivo (índice v2.0)
+├── README.md                      ← Este archivo (índice v3.2)
 │
 ├── 📚 BASE ORIGINAL
 ├── 01_SYSTEM_INSTRUCTIONS.md      ← System Prompt completo para ARIA
@@ -140,7 +144,8 @@ Estos documentos se extraen y consolidan de:
 - `docs/ai_training_context.md` - Training context principal
 - `docs/synthetic_data.md` - Arquitectura de datos sintéticos
 - `docs/ContextDocument.md` - Documento de contexto maestro
-- `docs/DOCUMENTO_TECNICO.md` - Especificación técnica v3.1
+- `docs/DOCUMENTO_TECNICO.md` - Especificación técnica v3.2
+- `docs/WHITEPAPER_PROCUREDATA.md` - Whitepaper técnico-económico v1.0
 - `src/lib/constants.ts` - Constantes oficiales del código
 - `src/pages/DocumentoExplicativo1-15.tsx` - Documentos explicativos de la app
 
