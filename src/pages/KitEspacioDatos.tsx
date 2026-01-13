@@ -147,6 +147,92 @@ const KitEspacioDatos = () => {
         </div>
       </section>
 
+      {/* Subsidy Program Section */}
+      <section className="py-16 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-semibold text-center text-muted-foreground mb-12">
+            Programa de ayudas para la incorporación de empresas al ecosistema de Espacios de Datos Europeos GAIA-X
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Option A - Basic */}
+            <div className="relative rounded-2xl p-8 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-950/30 dark:to-cyan-900/20 border border-cyan-200 dark:border-cyan-800">
+              <Badge className="mb-6 bg-gradient-to-r from-cyan-500 to-teal-500 text-white border-0 px-4 py-1.5 text-sm font-semibold">
+                SUBVENCIÓN DE 15.000€
+              </Badge>
+              
+              <h3 className="text-2xl font-bold text-foreground mb-2">Adhesión Espacio de Datos GDC</h3>
+              <p className="text-muted-foreground mb-6">Membresía básica al ecosistema</p>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                  <span className="text-foreground">Conector IDS/GAIA-X certificado</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                  <span className="text-foreground">Wallet de Identidad Soberana (W3C-DID)</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                  <span className="text-foreground">Asociación y Formación especializada</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0" />
+                  <span className="text-foreground">Membresía 3 años al ecosistema</span>
+                </li>
+              </ul>
+              
+              <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4">
+                <p className="text-sm text-muted-foreground mb-1">Coste inicial para la clínica:</p>
+                <p className="text-4xl font-bold text-cyan-600 dark:text-cyan-400">2.000€</p>
+                <p className="text-sm text-muted-foreground">+ 13.000€ al recibir subvención</p>
+              </div>
+            </div>
+
+            {/* Option B - Recommended */}
+            <div className="relative rounded-2xl p-8 bg-gradient-to-br from-purple-50 to-amber-50 dark:from-purple-950/30 dark:to-amber-900/20 border border-purple-200 dark:border-purple-800">
+              <div className="flex items-center justify-between mb-6">
+                <Badge className="bg-gradient-to-r from-purple-500 to-violet-500 text-white border-0 px-4 py-1.5 text-sm font-semibold">
+                  SUBVENCIÓN DE 30.000€
+                </Badge>
+                <Badge variant="outline" className="border-amber-500 text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20">
+                  ⭐ RECOMENDADO
+                </Badge>
+              </div>
+              
+              <h3 className="text-2xl font-bold text-foreground mb-2">Adhesión + Caso de Uso</h3>
+              <p className="text-muted-foreground mb-6">Proyecto completo con desarrollo a medida</p>
+              
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                  <span className="text-foreground">Todo incluido de la Opción A</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                  <span className="text-foreground">Consultoría personalizada de Caso de Uso</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                  <span className="text-foreground">Desarrollo a Medida (API/HL7-FHIR)</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+                  <span className="text-foreground">Visibilidad como Pionero del ecosistema</span>
+                </li>
+              </ul>
+              
+              <div className="bg-white/60 dark:bg-white/10 rounded-xl p-4">
+                <p className="text-sm text-muted-foreground mb-1">Coste inicial para el hospital:</p>
+                <p className="text-4xl font-bold text-purple-600 dark:text-purple-400">5.000€</p>
+                <p className="text-sm text-muted-foreground">+ 25.000€ al recibir subvención</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Components Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4">
