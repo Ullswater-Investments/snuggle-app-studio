@@ -406,7 +406,7 @@ export default function Landing() {
               <h4 className="font-semibold mb-4 text-white">{t('footer.access')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><Link to="/auth" className="hover:text-white transition-colors">{t('footer.login')}</Link></li>
-                <li><Link to="/auth" className="hover:text-white transition-colors">{t('footer.register')}</Link></li>
+                <li><Link to="/register" className="hover:text-white transition-colors">{t('footer.register')}</Link></li>
                 <li><Link to="/dashboard" className="hover:text-white transition-colors">{t('footer.dashboard')}</Link></li>
               </ul>
             </div>
