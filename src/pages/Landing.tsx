@@ -133,7 +133,7 @@ export default function Landing() {
             <ThemeToggle />
             {user ? (
               <Button asChild>
-                <Link to="/dashboard">{tc('goToDashboard')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/register">{tc('startRegistration')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
             ) : (
               <Button asChild variant="hero">
