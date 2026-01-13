@@ -1,17 +1,17 @@
-# DOCUMENTO TÉCNICO - PROCUREDATA v3.1
+# DOCUMENTO TÉCNICO - PROCUREDATA v3.2
 
 ## Plataforma de Soberanía de Datos para Cadenas de Suministro
 
-**Versión:** 3.1 (Web3 Enabled + UX Improvements)  
-**Fecha de Actualización:** 05 Enero 2026  
+**Versión:** 3.2 (Registration + Onboarding System)  
+**Fecha de Actualización:** 13 Enero 2026  
 **Clasificación:** Documentación Técnica Interna  
-**Estado:** Production-Ready ✅ | Web3 Enabled ✅
+**Estado:** Production-Ready ✅ | Web3 Enabled ✅ | Onboarding ✅
 
 ---
 
 ## Índice
 
-1. [Changelog desde v3.0](#1-changelog-desde-v30)
+1. [Changelog desde v3.1](#1-changelog-desde-v31)
 2. [Visión General del Sistema](#2-visión-general-del-sistema)
 3. [Arquitectura de la Plataforma](#3-arquitectura-de-la-plataforma)
 4. [Componentes del Espacio de Datos (Gaia-X)](#4-componentes-del-espacio-de-datos-gaia-x)
@@ -24,14 +24,55 @@
 11. [Casos de Uso Principales](#11-casos-de-uso-principales)
 12. [Mejoras de UX v3.1](#12-mejoras-de-ux-v31)
 13. [Edge Functions](#13-edge-functions)
-14. [Guía de Desarrollo](#14-guía-de-desarrollo)
-15. [Estado de Auditoría](#15-estado-de-auditoría)
-16. [Anexos](#16-anexos)
-17. [Historial de Versiones](#17-historial-de-versiones)
+14. [Sistema de Registro y Onboarding (v3.2)](#14-sistema-de-registro-y-onboarding-v32)
+15. [Guía de Desarrollo](#15-guía-de-desarrollo)
+16. [Estado de Auditoría](#16-estado-de-auditoría)
+17. [Anexos](#17-anexos)
+18. [Historial de Versiones](#18-historial-de-versiones)
 
 ---
 
-## 1. Changelog desde v3.0
+## 1. Changelog desde v3.1
+
+### v3.2 - 13 Enero 2026
+
+#### 📝 Sistema de Registro y Onboarding
+- **Tabla `registration_requests`**: Nueva tabla para gestión de solicitudes de adhesión
+  - Estados: pending, under_review, approved, rejected, needs_info
+  - Validación de duplicados por `tax_id`
+  - Campos para datos fiscales, representante legal, intenciones de uso
+- **Edge Function `submit-registration`**: Procesamiento de solicitudes de registro con:
+  - Validación de payload con esquemas Zod
+  - Detección de duplicados por CIF/NIF
+  - Inserción en tabla `registration_requests`
+  - Trigger de email de bienvenida
+- **Edge Function `send-welcome-email`**: Emails diferenciados por rol (Buyer/Supplier)
+  - Plantilla Supplier: "Activa tu visibilidad" - enfoque en certificaciones
+  - Plantilla Buyer: "Verificación de Seguridad" - enfoque en KYB
+  - Soporte multiidioma: ES, EN, FR, PT, DE, IT, NL
+  - Integración con Resend API
+- **Hook `useRegistration`**: Gestión de estado de envío de formularios con persistencia localStorage
+- **Página `/register`**: Formulario multi-paso con validación Zod en tiempo real
+
+#### 🔐 Sistema de Acceso Diferenciado
+- **Modo Demo**: Usuarios no autenticados con datos sintéticos (PublicDemoLayout)
+- **Modo Pending Setup**: Usuarios registrados en proceso de onboarding
+- **Modo Active**: Usuarios con organización verificada y datos reales
+- **Hook `useUserAccessMode`**: Determina el modo de acceso del usuario actual
+
+#### 🌐 Internacionalización Completa
+- Nuevas traducciones en 7 idiomas (ES, EN, FR, PT, DE, IT, NL) para:
+  - Página de registro (`register.json`)
+  - Emails transaccionales
+  - Onboarding dashboard
+  - Mensajes de validación y errores
+
+#### 📊 Documentación Técnica v3.2
+- **Documento Técnico**: Actualizado a v3.2 con changelog, nuevas edge functions
+- **Capacidades Enterprise**: Añadidas 2 nuevas capacidades (Onboarding KYB, Control de Acceso)
+- **Documentos Explicativos**: Actualizado Doc 12 con flujo de registro
+
+---
 
 ### v3.1 - 05 Enero 2026
 
@@ -2107,11 +2148,523 @@ Esta sección documenta los 10 casos de uso industriales principales que demuest
 
 ---
 
-## 17. Historial de Versiones
+## 14. Sistema de Registro y Onboarding (v3.2)
+
+### 14.1 Flujo de Registro de Nuevos Usuarios
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant R as /register
+    participant EF as Edge Function
+    participant DB as Database
+    participant EM as Resend Email
+
+    U->>R: Completa formulario multi-paso
+    R->>R: Validación Zod en cliente
+    R->>EF: POST /submit-registration
+    EF->>EF: Validación payload
+    EF->>DB: Check duplicados (tax_id)
+    
+    alt Ya existe
+        DB-->>EF: Registro existente
+        EF-->>R: Error 409 Conflict
+        R-->>U: "CIF ya registrado"
+    else Nuevo registro
+        DB-->>EF: No existe
+        EF->>DB: INSERT registration_requests
+        DB-->>EF: request_id
+        EF->>EM: send-welcome-email
+        EM-->>EF: Email enviado
+        EF-->>R: Success 201
+        R-->>U: Pantalla de confirmación
+    end
+```
+
+### 14.2 Tabla registration_requests
+
+```sql
+CREATE TABLE public.registration_requests (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  legal_name TEXT NOT NULL,
+  tax_id TEXT NOT NULL,
+  sector TEXT NOT NULL,
+  size TEXT NOT NULL,
+  country TEXT NOT NULL,
+  address TEXT NOT NULL,
+  role TEXT NOT NULL,  -- 'buyer' | 'supplier'
+  
+  -- Representante legal
+  representative_name TEXT NOT NULL,
+  representative_email TEXT NOT NULL,
+  representative_phone TEXT,
+  representative_position TEXT,
+  
+  -- Intenciones de uso
+  intention_data_types TEXT[],
+  intention_has_erp TEXT,
+  erp_type TEXT,
+  product_category TEXT,
+  
+  -- Aceptación legal
+  accepted_terms BOOLEAN DEFAULT false,
+  accepted_gdpr BOOLEAN DEFAULT false,
+  accepted_conduct BOOLEAN DEFAULT false,
+  
+  -- Estado del registro
+  status registration_status DEFAULT 'pending',
+  created_organization_id UUID REFERENCES organizations(id),
+  reviewed_by TEXT,
+  reviewed_at TIMESTAMPTZ,
+  reviewer_notes TEXT,
+  
+  -- Auditoría
+  ip_address TEXT,
+  user_agent TEXT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- Enum de estados
+CREATE TYPE registration_status AS ENUM (
+  'pending',        -- Recién enviado
+  'under_review',   -- En revisión por admin
+  'approved',       -- Aprobado, organización creada
+  'rejected',       -- Rechazado
+  'needs_info'      -- Requiere información adicional
+);
+```
+
+### 14.3 Edge Function: submit-registration
+
+**Ruta**: `POST /functions/v1/submit-registration`
+
+```typescript
+// Payload esperado
+interface RegistrationPayload {
+  organization: {
+    legalName: string;
+    taxId: string;
+    sector: string;
+    size: string;
+    country: string;
+    address: string;
+  };
+  representative: {
+    fullName: string;
+    email: string;
+    phone?: string;
+    position?: string;
+  };
+  role: 'buyer' | 'supplier';
+  intention: {
+    dataTypes: string[];
+    hasErp: string;
+    erpType?: string;
+    productCategory?: string;
+  };
+  legal: {
+    acceptedTerms: boolean;
+    acceptedGdpr: boolean;
+    acceptedConduct: boolean;
+  };
+  metadata?: {
+    ipAddress?: string;
+    userAgent?: string;
+    locale?: string;
+  };
+}
+
+// Response
+{
+  success: true,
+  message: "Registration submitted successfully",
+  requestId: "uuid",
+  status: "pending"
+}
+```
+
+### 14.4 Edge Function: send-welcome-email
+
+**Ruta**: `POST /functions/v1/send-welcome-email`
+
+```typescript
+// Payload
+interface WelcomeEmailPayload {
+  role: 'buyer' | 'supplier';
+  recipientEmail: string;
+  recipientName: string;
+  companyName: string;
+  requestId: string;
+  locale?: string;  // 'es' | 'en' | 'fr' | 'pt' | 'de' | 'it' | 'nl'
+}
+
+// Lógica de selección de plantilla
+if (role === 'supplier') {
+  // Plantilla A: "Activa tu visibilidad"
+  // - Icono: Ámbar (alerta)
+  // - CTA: "Completar mi perfil ahora"
+  // - Enfoque: Subir certificaciones, ser visible
+} else {
+  // Plantilla B: "Verificación de Seguridad"
+  // - Icono: Azul (escudo)
+  // - CTA: "Iniciar verificación de entidad"
+  // - Enfoque: KYB, conectar ERP
+}
+```
+
+### 14.5 Sistema de Acceso Diferenciado
+
+```mermaid
+graph TD
+    A[Usuario accede a /catalog] --> B{¿Autenticado?}
+    B -->|No| C[PublicDemoLayout<br/>Datos Sintéticos<br/>Banner Demo]
+    B -->|Sí| D{¿Tiene organización<br/>is_demo=false?}
+    D -->|No| E[OnboardingDashboard<br/>Empty State<br/>Guía paso a paso]
+    D -->|Sí| F[AppLayout<br/>Datos REALES<br/>Funcionalidad completa]
+    
+    style C fill:#f59e0b,color:#fff
+    style E fill:#8b5cf6,color:#fff
+    style F fill:#22c55e,color:#fff
+```
+
+### 14.6 Hook useUserAccessMode
+
+```typescript
+// src/hooks/useUserAccessMode.ts
+export type AccessMode = 'demo' | 'pending_setup' | 'active';
+
+export function useUserAccessMode(): {
+  mode: AccessMode;
+  isLoading: boolean;
+} {
+  const { user } = useAuth();
+  const { currentOrganization, isLoading } = useOrganizationContext();
+  
+  if (!user) return { mode: 'demo', isLoading: false };
+  if (isLoading) return { mode: 'demo', isLoading: true };
+  if (!currentOrganization || currentOrganization.is_demo) {
+    return { mode: 'pending_setup', isLoading: false };
+  }
+  return { mode: 'active', isLoading: false };
+}
+```
+
+---
+
+## 15. Guía de Desarrollo
+
+### 15.1 Tokens de Diseño (index.css)
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --destructive: 0 84.2% 60.2%;
+  --border: 214.3 31.8% 91.4%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  /* ... */
+}
+```
+
+### 15.2 Uso Correcto de Colores
+
+```tsx
+// ✅ CORRECTO: Usar tokens semánticos
+<div className="bg-background text-foreground" />
+<Button className="bg-primary text-primary-foreground" />
+<Badge variant="destructive" />
+<Card className="border-border" />
+
+// ❌ INCORRECTO: Colores hardcoded
+<div className="bg-white text-black" />
+<Button className="bg-blue-600" />
+<div style={{ color: '#333' }} />
+```
+
+### 15.3 Archivos NO Editables
+
+Los siguientes archivos son autogenerados y **NO deben modificarse manualmente**:
+
+| Archivo | Razón |
+|---------|-------|
+| `src/integrations/supabase/client.ts` | Cliente Supabase autogenerado |
+| `src/integrations/supabase/types.ts` | Tipos de base de datos autogenerados |
+| `supabase/config.toml` | Configuración de Supabase |
+| `supabase/migrations/*` | Historial de migraciones |
+| `.env` | Variables de entorno (no commitear) |
+
+### 15.4 Convenciones de Código
+
+| Aspecto | Convención |
+|---------|------------|
+| Componentes | PascalCase (`UserProfile.tsx`) |
+| Hooks | camelCase con prefijo `use` (`useAuth.tsx`) |
+| Servicios | camelCase (`pontusX.ts`) |
+| Tipos | PascalCase (`WalletState`) |
+| Archivos CSS | kebab-case si necesario |
+| Imports | Absolute paths con `@/` |
+
+### 15.5 Estructura de Imports
+
+```typescript
+// 1. React y librerías externas
+import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
+// 2. Componentes UI
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+
+// 3. Componentes custom
+import { WalletButton } from '@/components/WalletButton';
+
+// 4. Hooks
+import { useAuth } from '@/hooks/useAuth';
+
+// 5. Servicios y utilidades
+import { supabase } from '@/integrations/supabase/client';
+import { pontusXService } from '@/services/pontusX';
+
+// 6. Tipos
+import type { WalletState } from '@/types/web3.types';
+```
+
+---
+
+## 16. Estado de Auditoría
+
+### 16.1 Resumen de Tareas
+
+| Prioridad | Completadas | Total | % |
+|-----------|-------------|-------|---|
+| 🔴 Crítica | 8 | 8 | 100% |
+| 🟠 Alta | 5 | 8 | 62.5% |
+| 🟢 Mejora | 6 | 12 | 50% |
+
+### 16.2 Críticos Completados ✅
+
+- [x] Limpieza de logs de desarrollo en producción
+- [x] Loading states en acciones destructivas (`processingId`)
+- [x] Validación Zod en formularios críticos (Auth.tsx, Register.tsx)
+- [x] Confirmación AlertDialog antes de acciones irreversibles
+- [x] Skeleton loaders para estados de carga
+- [x] Integración Web3 en contexto de autenticación híbrida
+- [x] Sistema de registro con validación de duplicados
+- [x] Emails de bienvenida diferenciados por rol
+
+### 16.3 Alta Prioridad Completados ✅
+
+- [x] Hook `usePrivacyPreferences` con persistencia optimista
+- [x] Componente `Web3StatusWidget` en Dashboard
+- [x] Componente `EmptyState` reutilizable
+- [x] Edge Function `submit-registration`
+- [x] Edge Function `send-welcome-email`
+
+### 16.4 Pendientes Alta Prioridad
+
+- [ ] Integración EDC (Eclipse Dataspace Connector)
+- [ ] SSI Wallet completa (requiere infraestructura Gaia-X)
+- [ ] Indicadores visuales de EUROe en tarjetas de Catálogo
+
+### 16.5 Mejoras Completadas ✅
+
+- [x] Página `/architecture` con tabs interactivos
+- [x] Componente `MermaidDiagram.tsx` con dark mode
+- [x] ActivityFeed con Realtime subscriptions
+- [x] Cleanup correcto de channels WebSocket
+- [x] Página `/register` con formulario multi-paso
+- [x] Traducciones de registro en 7 idiomas
+
+---
+
+## 17. Anexos
+
+### 17.1 Esquema de Base de Datos Completo (29 tablas)
+
+#### Organizaciones y Usuarios
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `organizations` | id, name, type, sector, kyb_verified, did, wallet_address | Entidades del sistema |
+| `user_profiles` | user_id, organization_id, full_name, position | Perfiles de usuario |
+| `user_roles` | user_id, organization_id, role | Roles por organización |
+| `privacy_preferences` | user_id, profile_visible, access_alerts | Preferencias de privacidad |
+| `registration_requests` | tax_id, status, role, representative_email | **NUEVO v3.2**: Solicitudes de registro |
+
+#### Catálogo de Datos
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `data_products` | id, name, category, schema_definition, version | Plantillas de productos |
+| `data_assets` | id, product_id, holder_org_id, subject_org_id, price | Activos disponibles |
+| `catalog_metadata` | asset_id, tags, categories, visibility | Metadatos de catálogo |
+
+#### Transacciones
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `data_transactions` | id, asset_id, consumer_org_id, subject_org_id, holder_org_id, status | Transacciones |
+| `approval_history` | transaction_id, actor_org_id, action, notes | Historial de aprobaciones (Realtime) |
+| `data_policies` | transaction_id, odrl_policy_json | Smart Contracts ODRL |
+| `data_payloads` | transaction_id, schema_type, data_content | Contenido de datos |
+| `transaction_messages` | transaction_id, sender_org_id, content | Chat de negociación |
+
+#### Finanzas
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `wallets` | organization_id, balance, currency, address | Billeteras |
+| `wallet_transactions` | from_wallet_id, to_wallet_id, amount, type | Movimientos |
+
+#### Sistema y Seguridad
+
+| Tabla | Columnas Clave | Descripción |
+|-------|----------------|-------------|
+| `notifications` | user_id, type, title, message, is_read | Sistema Realtime |
+| `login_attempts` | email, ip_address, success, attempted_at | Rate Limiting |
+| `audit_logs` | actor_id, action, resource, details | Trazabilidad |
+| `export_logs` | transaction_id, format, exported_by | Auditoría exportaciones |
+
+#### Otros
+
+| Tabla | Descripción |
+|-------|-------------|
+| `esg_reports` | Reportes de sostenibilidad |
+| `marketplace_opportunities` | Demandas de datos |
+| `erp_configurations` | Integraciones ERP |
+| `supplier_data` | Datos estructurados de proveedores |
+| `value_services` | Servicios adicionales |
+| `organization_reviews` | Reseñas entre organizaciones |
+| `success_stories` | Casos de éxito |
+| `innovation_lab_concepts` | Conceptos del Innovation Lab |
+| `user_wishlist` | Lista de deseos de usuarios |
+| `ai_feedback` | Feedback para entrenamiento de ARIA |
+
+### 17.2 Enums del Sistema
+
+```sql
+-- Tipos de organización
+CREATE TYPE organization_type AS ENUM ('consumer', 'provider', 'data_holder');
+
+-- Roles de usuario
+CREATE TYPE app_role AS ENUM ('admin', 'approver', 'viewer', 'api_configurator');
+
+-- Estados de transacción
+CREATE TYPE transaction_status AS ENUM (
+  'initiated', 'pending_subject', 'pending_holder',
+  'approved', 'denied_subject', 'denied_holder',
+  'completed', 'cancelled'
+);
+
+-- Acciones de aprobación
+CREATE TYPE approval_action AS ENUM ('pre_approve', 'approve', 'deny', 'cancel');
+
+-- Estados de registro (NUEVO v3.2)
+CREATE TYPE registration_status AS ENUM (
+  'pending', 'under_review', 'approved', 'rejected', 'needs_info'
+);
+
+-- Tipos de configuración ERP
+CREATE TYPE erp_config_type AS ENUM ('download', 'upload');
+
+-- Métodos de autenticación ERP
+CREATE TYPE auth_method AS ENUM ('bearer', 'api_key', 'oauth', 'basic');
+```
+
+### 17.3 Variables de Entorno
+
+| Variable | Ámbito | Descripción |
+|----------|--------|-------------|
+| `VITE_SUPABASE_URL` | Frontend | URL del proyecto Supabase |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Frontend | Anon key pública |
+| `VITE_SUPABASE_PROJECT_ID` | Frontend | ID del proyecto |
+| `SUPABASE_URL` | Edge Functions | URL interna |
+| `SUPABASE_ANON_KEY` | Edge Functions | Anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Edge Functions | Service role (privilegiado) |
+| `RESEND_API_KEY` | Edge Functions | API key para emails |
+
+### 17.4 Estructura del Proyecto
+
+```
+procuredata/
+├── docs/                          # Documentación técnica
+│   └── DOCUMENTO_TECNICO.md       # Este archivo (v3.2)
+│
+├── src/
+│   ├── components/                # 45+ componentes custom
+│   │   ├── ui/                    # 49 componentes Shadcn/UI
+│   │   ├── AppLayout.tsx
+│   │   ├── AppSidebar.tsx
+│   │   ├── Web3StatusWidget.tsx   # v3.1
+│   │   ├── WalletButton.tsx
+│   │   ├── ActivityFeed.tsx       # v3.1
+│   │   ├── EmptyState.tsx         # v3.1
+│   │   ├── MermaidDiagram.tsx     # v3.1
+│   │   └── ...
+│   │
+│   ├── pages/                     # 28 páginas
+│   │   ├── Landing.tsx
+│   │   ├── Auth.tsx               # Validación Zod v3.1
+│   │   ├── Register.tsx           # NUEVO v3.2
+│   │   ├── Dashboard.tsx          # + Web3Widget v3.1
+│   │   ├── Architecture.tsx       # Tabs interactivos v3.1
+│   │   └── ...
+│   │
+│   ├── hooks/                     # 10 hooks personalizados
+│   │   ├── useAuth.tsx
+│   │   ├── useWeb3Wallet.tsx      # v3.1
+│   │   ├── usePrivacyPreferences.tsx  # v3.1
+│   │   ├── useRegistration.tsx    # NUEVO v3.2
+│   │   ├── useUserAccessMode.tsx  # NUEVO v3.2
+│   │   └── ...
+│   │
+│   ├── services/
+│   │   └── pontusX.ts             # Servicio Web3
+│   │
+│   ├── types/
+│   │   ├── database.extensions.ts
+│   │   └── web3.types.ts
+│   │
+│   └── integrations/
+│       └── supabase/
+│           ├── client.ts          # NO EDITAR
+│           └── types.ts           # NO EDITAR
+│
+├── supabase/
+│   ├── functions/                 # 5 Edge Functions
+│   │   ├── erp-api-tester/
+│   │   ├── erp-data-uploader/
+│   │   ├── notification-handler/
+│   │   ├── submit-registration/   # NUEVO v3.2
+│   │   └── send-welcome-email/    # NUEVO v3.2
+│   │
+│   ├── migrations/                # NO EDITAR
+│   └── config.toml                # NO EDITAR
+│
+└── public/                        # Assets estáticos
+```
+
+---
+
+## 18. Historial de Versiones
 
 | Versión | Fecha | Cambios Principales |
 |---------|-------|---------------------|
-| **3.1** | **05 Enero 2026** | Web3StatusWidget, useWeb3Wallet, usePrivacyPreferences, ActivityFeed Realtime, EmptyState, MermaidDiagram, página Architecture interactiva, validación Zod, loading states individuales, AlertDialog confirmaciones |
+| **3.2** | **13 Enero 2026** | Sistema de registro multi-paso, emails de bienvenida diferenciados (Buyer/Supplier), sistema de acceso diferenciado (demo/pending/active), 2 nuevas Edge Functions, traducciones en 7 idiomas, documentación actualizada |
+| 3.1 | 05 Enero 2026 | Web3StatusWidget, useWeb3Wallet, usePrivacyPreferences, ActivityFeed Realtime, EmptyState, MermaidDiagram, página Architecture interactiva, validación Zod, loading states individuales, AlertDialog confirmaciones |
 | 3.0 | Diciembre 2025 | Integración Web3 completa, SSI con DIDs, Pagos EUROe, WalletButton |
 | 2.5 | Diciembre 2025 | Realtime notifications, mejoras UX básicas |
 | 2.0 | Noviembre 2025 | Modelo tripartito Consumer/Subject/Holder, políticas ODRL, Innovation Lab |
@@ -2127,9 +2680,10 @@ Esta sección documenta los 10 casos de uso industriales principales que demuest
 - [IDSA Reference Architecture Model](https://internationaldataspaces.org/)
 - [Pontus-X Documentation](https://pontus-x.eu/docs)
 - [EUROe Stablecoin](https://euroe.com/)
+- [Resend Email API](https://resend.com/docs)
 
 ---
 
 **Documento generado por PROCUREDATA Technical Documentation System**  
-**Última actualización**: 05 Enero 2026  
-**Versión**: 3.1 (Web3 Enabled + UX Improvements)
+**Última actualización**: 13 Enero 2026  
+**Versión**: 3.2 (Registration + Onboarding System)

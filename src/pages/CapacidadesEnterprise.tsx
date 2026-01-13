@@ -19,7 +19,9 @@ import {
   Shield,
   Zap,
   Globe,
-  Users
+  Users,
+  UserPlus,
+  ShieldCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -185,15 +187,39 @@ const capacidades = [
     specs: ["Basado en OpenAPI 3.0", "Sincronización automática con GitHub", "Tokens de prueba incluidos"],
     impacto: "Reducción de Costes de IT: Su equipo técnico puede implementar integraciones en tiempo récord.",
     ruta: "/motor/docs-interactivos"
+  },
+  {
+    id: "onboarding-kyb",
+    seccion: "Experiencia UX",
+    seccionColor: "from-purple-500 to-violet-600",
+    icon: UserPlus,
+    titulo: "Onboarding KYB: Registro Inteligente",
+    descripcion: "Proceso de registro diferenciado para compradores y proveedores con verificación KYB automatizada y emails de bienvenida personalizados por rol.",
+    interfaz: "Formulario multi-paso con validación en tiempo real. Indicadores de progreso y estados de verificación. Emails diferenciados por rol.",
+    specs: ["Validación de NIF/CIF en tiempo real", "Detección automática de duplicados", "Emails de bienvenida diferenciados (Buyer vs Supplier)", "Soporte multiidioma (7 idiomas)"],
+    impacto: "Reduce el tiempo de onboarding de semanas a horas con trazabilidad completa del proceso de adhesión.",
+    ruta: "/register"
+  },
+  {
+    id: "access-control",
+    seccion: "Seguridad",
+    seccionColor: "from-red-500 to-rose-600",
+    icon: ShieldCheck,
+    titulo: "Control de Acceso Diferenciado",
+    descripcion: "Sistema que diferencia automáticamente entre usuarios demo (datos sintéticos) y usuarios verificados (datos reales), protegiendo información sensible.",
+    interfaz: "Dashboard adaptativo que muestra diferentes estados según el modo de acceso del usuario. Banner informativo en modo demo.",
+    specs: ["Modo Demo con datos sintéticos", "Modo Pending Setup para nuevos usuarios", "Modo Active con datos reales", "Detección automática de estado"],
+    impacto: "Protección de datos sensibles mientras permite exploración sin compromiso. Zero Trust por diseño.",
+    ruta: "/dashboard"
   }
 ];
 
 const secciones = [
   { nombre: "Web3 & Blockchain", icon: Shield, color: "text-emerald-500", ids: ["wallet-web3", "identidad-ssi", "pagos-euroe"] },
   { nombre: "Tiempo Real", icon: Zap, color: "text-blue-500", ids: ["activity-feed", "smart-alerts"] },
-  { nombre: "Seguridad", icon: Database, color: "text-red-500", ids: ["gobernanza-odrl", "multi-tenant-rls", "audit-logs", "modelo-idsa"] },
+  { nombre: "Seguridad", icon: Database, color: "text-red-500", ids: ["gobernanza-odrl", "multi-tenant-rls", "audit-logs", "modelo-idsa", "access-control"] },
   { nombre: "Integraciones", icon: Globe, color: "text-orange-500", ids: ["conectores-erp", "edge-functions"] },
-  { nombre: "Experiencia UX", icon: Users, color: "text-purple-500", ids: ["tour-guiado", "docs-interactivos"] }
+  { nombre: "Experiencia UX", icon: Users, color: "text-purple-500", ids: ["tour-guiado", "docs-interactivos", "onboarding-kyb"] }
 ];
 
 export default function CapacidadesEnterprise() {
