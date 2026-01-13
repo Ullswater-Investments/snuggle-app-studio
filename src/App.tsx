@@ -39,7 +39,7 @@ import InnovationLab from "./pages/InnovationLab";
 import Opportunities from "./pages/Opportunities";
 import SuccessStories from "./pages/SuccessStories";
 import SuccessStoryDetail from "./pages/SuccessStoryDetail";
-import InteractiveWhitepaper from "./pages/InteractiveWhitepaper";
+import Whitepaper from "./pages/Whitepaper";
 import TechnicalDocs from "./pages/TechnicalDocs";
 import BusinessModels from "./pages/BusinessModels";
 import UseCases from "./pages/UseCases";
@@ -142,7 +142,7 @@ const App = () => (
                   <Route path="/register" element={<Register />} />
                   <Route path="/guide" element={<Guide />} />
                   <Route path="/architecture" element={<Architecture />} />
-                  <Route path="/whitepaper" element={<InteractiveWhitepaper />} />
+                  <Route path="/whitepaper" element={<Whitepaper />} />
                   <Route path="/docs/tecnico" element={<TechnicalDocs />} />
                   <Route path="/models" element={<BusinessModels />} />
                   <Route path="/use-cases" element={<UseCases />} />
