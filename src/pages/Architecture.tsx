@@ -2,7 +2,7 @@ import { useState } from "react";
 import { 
   Home, Database, Shield, Server, Lock, Code, Layers, Wallet, 
   GitBranch, ExternalLink, CheckCircle2, XCircle, Users, FileText,
-  CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen
+  CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen, UserPlus
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,7 +25,7 @@ const TABS = [
   { id: "stack", label: "Tech Stack", icon: Code }
 ];
 
-// Database table categories
+// Database table categories - Updated to 31 tables for v3.2
 const DB_CATEGORIES = [
   {
     name: "Organizaciones y Usuarios",
@@ -39,13 +39,24 @@ const DB_CATEGORIES = [
     ]
   },
   {
+    name: "Registro y Onboarding",
+    icon: UserPlus,
+    color: "text-teal-500",
+    tables: [
+      { name: "registration_requests", description: "Solicitudes de adhesión de organizaciones", fields: "id, legal_name, tax_id, role, status, representative_email" },
+      { name: "success_stories", description: "Casos de éxito para landing page", fields: "id, company_name, sector, metrics, is_featured" },
+      { name: "innovation_lab_concepts", description: "Conceptos de innovación del laboratorio", fields: "id, title, category, chart_type, maturity_level" }
+    ]
+  },
+  {
     name: "Catálogo de Datos",
     icon: Box,
     color: "text-green-500",
     tables: [
       { name: "data_products", description: "Definición de productos de datos", fields: "id, name, category, schema_definition, version" },
       { name: "data_assets", description: "Instancias concretas de productos", fields: "id, product_id, holder_org_id, subject_org_id, price, status" },
-      { name: "catalog_metadata", description: "Metadatos para búsqueda en marketplace", fields: "asset_id, tags, categories, visibility" }
+      { name: "catalog_metadata", description: "Metadatos para búsqueda en marketplace", fields: "asset_id, tags, categories, visibility" },
+      { name: "marketplace_opportunities", description: "Oportunidades publicadas por compradores", fields: "id, consumer_org_id, title, category, budget_range" }
     ]
   },
   {
@@ -57,7 +68,8 @@ const DB_CATEGORIES = [
       { name: "approval_history", description: "Historial de aprobaciones/rechazos", fields: "transaction_id, actor_org_id, action, notes" },
       { name: "data_payloads", description: "Datos entregados (ESG, IoT, supplier)", fields: "transaction_id, schema_type, data_content (JSONB)" },
       { name: "data_policies", description: "Políticas ODRL generadas", fields: "transaction_id, odrl_policy_json" },
-      { name: "transaction_messages", description: "Chat de negociación", fields: "transaction_id, sender_org_id, content" }
+      { name: "transaction_messages", description: "Chat de negociación", fields: "transaction_id, sender_org_id, content" },
+      { name: "supplier_data", description: "Datos de proveedores entregados", fields: "id, transaction_id, legal_name, tax_id, fiscal_address" }
     ]
   },
   {
@@ -70,6 +82,17 @@ const DB_CATEGORIES = [
     ]
   },
   {
+    name: "Servicios de Valor",
+    icon: Zap,
+    color: "text-orange-500",
+    tables: [
+      { name: "value_services", description: "Servicios adicionales del marketplace", fields: "id, name, category, price_model, api_endpoint" },
+      { name: "esg_reports", description: "Informes ESG por organización", fields: "id, organization_id, report_year, scope1_total_tons" },
+      { name: "organization_reviews", description: "Valoraciones entre organizaciones", fields: "id, transaction_id, rating, reviewer_org_id" },
+      { name: "user_wishlist", description: "Lista de deseos de usuarios", fields: "id, user_id, asset_id" }
+    ]
+  },
+  {
     name: "Sistema y Seguridad",
     icon: Settings,
     color: "text-red-500",
@@ -77,12 +100,15 @@ const DB_CATEGORIES = [
       { name: "audit_logs", description: "Registro de auditoría inmutable", fields: "organization_id, action, actor_id, details, ip_address" },
       { name: "login_attempts", description: "Intentos de login para rate limiting", fields: "email, ip_address, success, attempted_at" },
       { name: "erp_configurations", description: "Configuraciones de integración ERP", fields: "organization_id, endpoint_url, auth_method, field_mapping" },
-      { name: "notifications", description: "Sistema de notificaciones", fields: "user_id, title, type, is_read, link" }
+      { name: "export_logs", description: "Registro de exportaciones de datos", fields: "id, transaction_id, export_type, export_status" },
+      { name: "notifications", description: "Sistema de notificaciones", fields: "user_id, title, type, is_read, link" },
+      { name: "webhooks", description: "Configuración de webhooks", fields: "id, organization_id, url, events, is_active" },
+      { name: "ai_feedback", description: "Feedback de usuarios sobre IA", fields: "id, user_question, bot_response, is_positive" }
     ]
   }
 ];
 
-// Tech stack categories
+// Tech stack categories - Updated for v3.2
 const TECH_STACK = [
   {
     category: "Frontend",
@@ -114,10 +140,10 @@ const TECH_STACK = [
   {
     category: "Backend (Lovable Cloud)",
     items: [
-      { name: "PostgreSQL 15", description: "Base de datos principal", url: "https://www.postgresql.org" },
-      { name: "Edge Functions", description: "Lógica serverless Deno", url: "https://deno.land" },
+      { name: "PostgreSQL 15", description: "31 tablas con RLS", url: "https://www.postgresql.org" },
+      { name: "Edge Functions", description: "submit-registration, send-welcome-email", url: "https://deno.land" },
       { name: "Realtime", description: "WebSocket subscriptions", url: "#" },
-      { name: "Auth", description: "Autenticación integrada", url: "#" }
+      { name: "Auth + Email", description: "Autenticación + Resend", url: "#" }
     ]
   },
   {
@@ -132,7 +158,7 @@ const TECH_STACK = [
   {
     category: "Utilidades",
     items: [
-      { name: "date-fns", description: "Manipulación de fechas", url: "https://date-fns.org" },
+      { name: "i18next", description: "Internacionalización 7 idiomas", url: "https://www.i18next.com" },
       { name: "jsPDF", description: "Generación PDF", url: "https://github.com/parallax/jsPDF" },
       { name: "Mermaid", description: "Diagramas como código", url: "https://mermaid.js.org" },
       { name: "React Markdown", description: "Renderizado MD", url: "https://github.com/remarkjs/react-markdown" }
@@ -148,176 +174,170 @@ const RLS_POLICIES = [
   { role: "Admin", access: "Acceso completo a su organización", color: "bg-red-500" }
 ];
 
-// Mermaid diagrams
+// Mermaid diagrams - Optimized for better visibility
 const DIAGRAM_OVERVIEW = `graph TB
-    subgraph Frontend["🖥️ Frontend - React + Vite"]
-        UI[UI Components<br/>shadcn/ui + Tailwind]
-        State[TanStack Query<br/>+ Context API]
-        Router[React Router<br/>Protected Routes]
+    subgraph FE["Frontend React + Vite"]
+        UI[UI shadcn]
+        Query[TanStack Query]
+        Router[React Router]
     end
     
-    subgraph Backend["☁️ Backend - Lovable Cloud"]
-        Auth[Authentication<br/>JWT + Sessions]
-        DB[(PostgreSQL<br/>28 Tables + RLS)]
-        Edge[Edge Functions<br/>Deno Runtime]
-        RT[Realtime<br/>WebSocket]
+    subgraph BE["Backend Lovable Cloud"]
+        Auth[Auth JWT]
+        DB[(PostgreSQL<br/>31 Tables)]
+        Edge[Edge Functions]
     end
     
-    subgraph Blockchain["⛓️ Blockchain - Pontus-X"]
-        DID[DID Registry<br/>did:ethr]
-        Token[EUROe Token<br/>ERC-20]
-        Explorer[Block Explorer<br/>Auditoría]
+    subgraph BC["Blockchain Pontus-X"]
+        DID[DID Registry]
+        Token[EUROe]
     end
     
-    UI --> State
-    State --> Auth
+    UI --> Query
+    Query --> Auth
     Auth --> DB
     Edge --> DB
-    RT --> DB
     
     UI -.-> DID
     Edge -.-> Token
-    DB -.-> Explorer
     
-    style Frontend fill:#1e40af,color:#fff
-    style Backend fill:#059669,color:#fff
-    style Blockchain fill:#7c3aed,color:#fff`;
+    style FE fill:#1e40af,color:#fff
+    style BE fill:#059669,color:#fff
+    style BC fill:#7c3aed,color:#fff`;
 
 const DIAGRAM_ER = `erDiagram
-    organizations ||--o{ user_profiles : "tiene"
-    organizations ||--o{ user_roles : "asigna"
-    organizations ||--o{ data_assets : "posee"
-    organizations ||--o{ wallets : "tiene"
+    organizations ||--o{ user_profiles : tiene
+    organizations ||--o{ data_assets : posee
+    organizations ||--o{ wallets : tiene
+    organizations ||--o{ registration_requests : genera
     
-    data_products ||--o{ data_assets : "instancia"
-    data_assets ||--o{ catalog_metadata : "describe"
-    data_assets ||--o{ data_transactions : "transacciona"
+    data_products ||--o{ data_assets : instancia
+    data_assets ||--o{ data_transactions : transacciona
     
-    data_transactions ||--o{ approval_history : "registra"
-    data_transactions ||--o{ data_policies : "genera"
-    data_transactions ||--o{ data_payloads : "entrega"
-    data_transactions ||--o{ transaction_messages : "negocia"
+    data_transactions ||--o{ approval_history : registra
+    data_transactions ||--o{ data_policies : genera
+    data_transactions ||--o{ data_payloads : entrega
     
-    wallets ||--o{ wallet_transactions : "origen"
-    wallets ||--o{ wallet_transactions : "destino"
-    
+    wallets ||--o{ wallet_transactions : origen
+
     organizations {
         uuid id PK
         string name
         enum type
         string tax_id
         string did
-        string wallet_address
-        boolean kyb_verified
+    }
+    
+    registration_requests {
+        uuid id PK
+        string legal_name
+        string tax_id
+        enum status
+        string role
     }
     
     data_transactions {
         uuid id PK
-        uuid consumer_org_id FK
-        uuid subject_org_id FK
-        uuid holder_org_id FK
+        uuid consumer_org FK
+        uuid subject_org FK
         enum status
-        string purpose
-        string justification
     }`;
 
 const DIAGRAM_STATES = `stateDiagram-v2
-    [*] --> initiated: Consumer crea solicitud
+    [*] --> initiated: Consumer solicita
     
-    initiated --> pending_subject: Enviar a Provider
-    initiated --> cancelled: Consumer cancela
+    initiated --> pending_subject: Enviar
+    initiated --> cancelled: Cancelar
     
-    pending_subject --> pending_holder: Provider aprueba
-    pending_subject --> denied_subject: Provider rechaza
+    pending_subject --> pending_holder: Aprobar
+    pending_subject --> denied_subject: Rechazar
     
-    pending_holder --> approved: Holder aprueba
-    pending_holder --> denied_holder: Holder rechaza
+    pending_holder --> approved: Liberar
+    pending_holder --> denied_holder: Denegar
     
-    approved --> completed: Pago + Entrega
+    approved --> completed: Pago OK
     
     completed --> [*]
     denied_subject --> [*]
     denied_holder --> [*]
-    cancelled --> [*]
-    
-    note right of pending_subject: Esperando validación\\ndel dueño del dato
-    note right of pending_holder: Esperando liberación\\ndel custodio técnico
-    note right of completed: Datos entregados\\nPago procesado`;
+    cancelled --> [*]`;
 
 const DIAGRAM_SEQUENCE = `sequenceDiagram
-    participant C as 🛒 Consumer
-    participant S as 📊 Subject (Provider)
-    participant H as 🔐 Holder
-    participant DB as 💾 Database
-    participant BC as ⛓️ Blockchain
+    participant C as Consumer
+    participant S as Subject
+    participant H as Holder
+    participant DB as Database
+    participant BC as Blockchain
 
-    C->>DB: 1. Crear transacción
-    Note over DB: status: initiated
-    
-    DB->>S: 2. Notificar solicitud
-    S->>DB: 3. Aprobar propósito
-    Note over DB: status: pending_holder
-    
-    DB->>H: 4. Notificar para liberación
-    H->>DB: 5. Liberar datos
-    Note over DB: status: completed
-    
-    H->>BC: 6. Notarizar hash
-    BC-->>C: 7. Confirmar en blockchain
-    
-    DB->>C: 8. Entregar payload`;
+    C->>DB: 1. Crear TX
+    DB->>S: 2. Notificar
+    S->>DB: 3. Aprobar
+    DB->>H: 4. Solicitar
+    H->>DB: 5. Liberar
+    H->>BC: 6. Notarizar
+    DB->>C: 7. Entregar`;
 
-const DIAGRAM_RLS = `flowchart TD
-    A[📨 Query SQL] --> B{🛡️ RLS Policy Check}
+const DIAGRAM_RLS = `flowchart TB
+    A[Query SQL] --> B{RLS Check}
     
-    B -->|auth.uid| C[Obtener user_id]
-    C --> D[Obtener organization_id]
-    D --> E{Verificar rol}
+    B -->|auth.uid| C[user_id]
+    C --> D[org_id]
+    D --> E{Rol}
     
-    E -->|Consumer| F[WHERE consumer_org_id = org_id]
-    E -->|Subject| G[WHERE subject_org_id = org_id]
-    E -->|Holder| H[WHERE holder_org_id = org_id]
-    E -->|Admin| I[Acceso completo a org]
+    E -->|Consumer| F[consumer_org]
+    E -->|Subject| G[subject_org]
+    E -->|Holder| H[holder_org]
+    E -->|Admin| I[Full org]
     
-    F --> J[✅ Resultados filtrados]
+    F --> J[OK]
     G --> J
     H --> J
     I --> J
     
-    B -->|Sin auth| K[❌ Acceso denegado]
+    B -->|Sin auth| K[Denied]
     
     style B fill:#f59e0b,color:#000
     style J fill:#10b981,color:#fff
     style K fill:#ef4444,color:#fff`;
 
-const DIAGRAM_WEB3 = `flowchart LR
-    subgraph User["👤 Usuario"]
+const DIAGRAM_WEB3 = `flowchart TB
+    subgraph User["Usuario"]
         MM[MetaMask]
         DID[DID:ethr]
     end
     
-    subgraph App["🖥️ PROCUREDATA"]
+    subgraph App["PROCUREDATA"]
         Connect[useWeb3Wallet]
         Balance[Balance EUROe]
-        Sign[Firmar TX]
     end
     
-    subgraph PontusX["⛓️ Pontus-X Testnet"]
-        RPC[RPC Endpoint<br/>rpc.test.pontus-x.eu]
-        Explorer[Block Explorer<br/>explorer.pontus-x.eu]
-        Contract[Smart Contracts]
+    subgraph PontusX["Pontus-X"]
+        RPC[RPC Endpoint]
+        Contract[Contracts]
     end
     
     MM --> Connect
     Connect --> DID
     Connect --> Balance
-    Sign --> RPC
+    Balance --> RPC
     RPC --> Contract
-    Contract --> Explorer
     
     style User fill:#f97316,color:#fff
     style App fill:#3b82f6,color:#fff
     style PontusX fill:#8b5cf6,color:#fff`;
+
+const DIAGRAM_REGISTRATION = `sequenceDiagram
+    participant U as Usuario
+    participant FE as Frontend
+    participant EF as Edge Function
+    participant DB as Database
+    participant EM as Email
+
+    U->>FE: Completa formulario
+    FE->>EF: submit-registration
+    EF->>DB: INSERT request
+    EF->>EM: send-welcome-email
+    EM->>U: Email personalizado`;
 
 // Animation variants
 const fadeInUp = {
@@ -337,6 +357,9 @@ const stagger = {
 export default function Architecture() {
   const [activeTab, setActiveTab] = useState("overview");
 
+  // Count total tables
+  const totalTables = DB_CATEGORIES.reduce((acc, cat) => acc + cat.tables.length, 0);
+
   return (
     <div className="min-h-screen bg-muted/20">
       {/* Header */}
@@ -350,7 +373,7 @@ export default function Architecture() {
               <h1 className="font-bold text-xl hidden sm:inline">| Arquitectura Técnica</h1>
               <Badge variant="outline" className="hidden sm:flex gap-1">
                 <Zap className="h-3 w-3" />
-                v3.1 Web3
+                v3.2 Web3
               </Badge>
             </div>
           </div>
@@ -370,15 +393,16 @@ export default function Architecture() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h2 className="text-3xl font-bold mb-2">PROCUREDATA v3.1</h2>
+          <h2 className="text-3xl font-bold mb-2">PROCUREDATA v3.2</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Arquitectura híbrida Web2/Web3 para intercambio soberano de datos empresariales.
-            PostgreSQL + RLS + Pontus-X Blockchain.
+            PostgreSQL ({totalTables} tablas) + RLS + Pontus-X Blockchain.
           </p>
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center gap-2 mt-4 flex-wrap">
             <Link to="/use-cases"><Badge variant="secondary" className="cursor-pointer hover:bg-secondary/80">Ver Casos de Uso</Badge></Link>
             <Link to="/models"><Badge variant="secondary" className="cursor-pointer hover:bg-secondary/80">Modelos de Negocio</Badge></Link>
             <Link to="/whitepaper"><Badge variant="secondary" className="cursor-pointer hover:bg-secondary/80">Whitepaper</Badge></Link>
+            <Link to="/register"><Badge variant="default" className="cursor-pointer">Registro v3.2</Badge></Link>
           </div>
         </motion.div>
 
@@ -412,7 +436,7 @@ export default function Architecture() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={DIAGRAM_OVERVIEW} />
+                    <MermaidDiagram chart={DIAGRAM_OVERVIEW} scale={0.9} mobileScale={0.55} />
                   </CardContent>
                 </Card>
 
@@ -502,7 +526,7 @@ export default function Architecture() {
                           <li>• React 18 + TypeScript</li>
                           <li>• 49 componentes shadcn/ui</li>
                           <li>• Animaciones Framer Motion</li>
-                          <li>• PWA ready</li>
+                          <li>• i18n: 7 idiomas</li>
                         </ul>
                       </CardContent>
                     </Card>
@@ -519,9 +543,9 @@ export default function Architecture() {
                       <CardContent className="text-sm text-muted-foreground">
                         <ul className="space-y-1">
                           <li>• PostgreSQL 15 + RLS</li>
+                          <li>• {totalTables} tablas v3.2</li>
                           <li>• Edge Functions (Deno)</li>
-                          <li>• WebSocket Realtime</li>
-                          <li>• Auth integrada</li>
+                          <li>• Resend emails</li>
                         </ul>
                       </CardContent>
                     </Card>
@@ -559,11 +583,11 @@ export default function Architecture() {
                       Diagrama Entidad-Relación
                     </CardTitle>
                     <CardDescription>
-                      28 tablas PostgreSQL con relaciones y Row Level Security
+                      {totalTables} tablas PostgreSQL con relaciones y Row Level Security
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={DIAGRAM_ER} />
+                    <MermaidDiagram chart={DIAGRAM_ER} scale={0.85} mobileScale={0.5} />
                   </CardContent>
                 </Card>
 
@@ -621,7 +645,7 @@ export default function Architecture() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={DIAGRAM_RLS} />
+                    <MermaidDiagram chart={DIAGRAM_RLS} scale={0.9} mobileScale={0.55} />
                   </CardContent>
                 </Card>
 
@@ -698,7 +722,7 @@ USING (
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={DIAGRAM_WEB3} />
+                    <MermaidDiagram chart={DIAGRAM_WEB3} scale={0.9} mobileScale={0.55} />
                   </CardContent>
                 </Card>
 
@@ -796,7 +820,7 @@ USING (
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={DIAGRAM_STATES} />
+                    <MermaidDiagram chart={DIAGRAM_STATES} scale={0.85} mobileScale={0.5} />
                   </CardContent>
                 </Card>
 
@@ -811,7 +835,24 @@ USING (
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={DIAGRAM_SEQUENCE} />
+                    <MermaidDiagram chart={DIAGRAM_SEQUENCE} scale={0.9} mobileScale={0.55} />
+                  </CardContent>
+                </Card>
+
+                {/* New: Registration Flow */}
+                <Card className="border-2 border-teal-500/20 bg-gradient-to-br from-teal-500/5 to-transparent">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <UserPlus className="h-5 w-5 text-teal-500" />
+                      Flujo de Registro v3.2
+                      <Badge variant="outline" className="ml-2 text-teal-600 border-teal-300">Nuevo</Badge>
+                    </CardTitle>
+                    <CardDescription>
+                      Proceso de onboarding con emails diferenciados por rol
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <MermaidDiagram chart={DIAGRAM_REGISTRATION} scale={0.9} mobileScale={0.55} />
                   </CardContent>
                 </Card>
 

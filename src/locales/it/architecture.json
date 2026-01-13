@@ -1,10 +1,10 @@
 {
   "headerTitle": "Architettura Tecnica",
-  "version": "v3.1 Web3",
+  "version": "v3.2 Web3",
   "docs": "Docs",
   "tryDemo": "Prova Demo",
-  "heroTitle": "PROCUREDATA v3.1",
-  "heroDescription": "Architettura ibrida Web2/Web3 per lo scambio sovrano di dati aziendali. PostgreSQL + RLS + Blockchain Pontus-X.",
+  "heroTitle": "PROCUREDATA v3.2",
+  "heroDescription": "Architettura ibrida Web2/Web3 per lo scambio sovrano di dati aziendali. PostgreSQL (31 tabelle) + RLS + Blockchain Pontus-X.",
   "viewUseCases": "Vedi Casi d'Uso",
   "businessModels": "Modelli di Business",
   "whitepaper": "Whitepaper",
@@ -36,7 +36,7 @@
   },
   "database": {
     "erDiagram": "Diagramma Entità-Relazione",
-    "erDesc": "28 tabelle PostgreSQL con relazioni e Row Level Security",
+    "erDesc": "31 tabelle PostgreSQL con relazioni e Row Level Security",
     "tablesByCategory": "Tabelle per Categoria"
   },
   "dbCategories": {
