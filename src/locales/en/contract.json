@@ -1,0 +1,190 @@
+{
+  "title": "MEMBERSHIP AGREEMENT",
+  "subtitle": "To the PROCUREDATA Data Space",
+  "officialDocument": "Official Document",
+  "downloadPdf": "Download Contract PDF",
+  "downloadingPdf": "Generating...",
+  "startProcess": "Start Membership Process",
+  "readyToJoin": "Ready to join the Data Space?",
+  "readyDescription": "Complete the registration process to formalize your membership in the PROCUREDATA Data Space and start exchanging data securely and in compliance with European regulations.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "GDPR",
+    "lopdgdd": "LOPDGDD"
+  },
+  "promoter": {
+    "title": "1. Promoter Identification",
+    "description": "Data Space Promoter information",
+    "legalName": "Legal Name",
+    "address": "Address",
+    "email": "Email",
+    "website": "Website",
+    "legalFramework": "Legal Framework",
+    "ecosystem": "Ecosystem"
+  },
+  "object": {
+    "title": "2. Contract Object",
+    "description": "Formalization of membership in the Data Space",
+    "content": "This Membership Agreement aims to formalize the Participant's incorporation into the PROCUREDATA Data Space, establishing the terms and conditions that will govern their participation.",
+    "commitments": [
+      "Fully accepts the regulatory and governance framework of the Data Space",
+      "Commits to comply with technical, legal and ethical obligations",
+      "Recognizes the rights and responsibilities associated with their role",
+      "Authorizes the Promoter to verify compliance with requirements"
+    ]
+  },
+  "normative": {
+    "title": "3. Regulatory Acceptance",
+    "description": "Regulatory frameworks and governing documents",
+    "sections": {
+      "terms": {
+        "title": "3.1 General Terms and Conditions",
+        "items": [
+          "Definitions and scope of the Data Space",
+          "Rights and obligations of participants",
+          "Data access and usage procedures",
+          "Conflict resolution mechanisms",
+          "Modification and update conditions"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Governance Mechanisms",
+        "items": [
+          "Governance Committee: Governing body with representation from all stakeholders",
+          "Technical Committee: Responsible for technical standards and interoperability",
+          "Ethics Committee: Oversight of ethical data use",
+          "Security Committee: Risk management and incident response",
+          "Voting and decision-making procedures"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 ODRL Policies (Open Digital Rights Language)",
+        "items": [
+          "Definition of permissions, prohibitions and obligations on data",
+          "Specification of usage conditions (temporal, geographic, purpose)",
+          "Policy inheritance and composition mechanisms",
+          "Integration with smart contracts for automatic enforcement",
+          "Compatibility with IDS and GAIA-X standards"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Data sovereignty: Full control over your own data",
+          "Interoperability: Use of open standards and documented APIs",
+          "Portability: Ability to migrate data between providers",
+          "Transparency: Complete traceability of operations",
+          "Security: Compliance with cybersecurity standards",
+          "Federation: Participation in distributed ecosystems"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 GDPR Compliance",
+        "items": [
+          "Legal basis for personal data processing (Art. 6)",
+          "Data subject rights (access, rectification, erasure, portability)",
+          "Controller and processor obligations",
+          "Impact assessments (DPIA) for high-risk processing",
+          "Security breach notification within 72 hours"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Participant Role",
+    "description": "Select your role in the Data Space",
+    "provider": {
+      "title": "Data Provider",
+      "description": "Entity that contributes datasets to the Data Space for exchange and monetization.",
+      "features": ["Publish datasets", "Define usage policies", "Monetize assets"]
+    },
+    "consumer": {
+      "title": "Data Consumer",
+      "description": "Entity that accesses and uses data from the Data Space for operations or analysis.",
+      "features": ["Access catalog", "Request data", "Use under policies"]
+    },
+    "service": {
+      "title": "Service Provider",
+      "description": "Entity that offers intermediation, transformation or value-added services on data.",
+      "features": ["AI Services", "Transformation", "Advanced analytics"]
+    },
+    "intermediary": {
+      "title": "Data Intermediary",
+      "description": "Neutral entity that facilitates data exchange between providers and consumers.",
+      "features": ["Neutral", "Facilitator", "DGA Compliance"]
+    },
+    "altruism": {
+      "title": "Data Altruism Organization",
+      "description": "Non-profit entity managing voluntarily donated data for general interest purposes.",
+      "features": ["Non-profit", "Public interest", "Research"]
+    }
+  },
+  "validity": {
+    "title": "5. Validity and Termination",
+    "description": "Duration and termination causes",
+    "duration": {
+      "title": "5.1 Validity",
+      "content": "This Membership Agreement will enter into force on the date of signature and will have an indefinite duration, unless expressly terminated by either party.",
+      "indefinite": "indefinite duration"
+    },
+    "causes": {
+      "title": "5.2 Termination Causes",
+      "items": [
+        "Voluntary termination with 30 days notice",
+        "Serious breach of obligations",
+        "Decision of the Governance Committee"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Effects",
+      "items": [
+        "Immediate cessation of service access",
+        "Maintenance of confidentiality obligations",
+        "Right to export own data"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Annex: Official Resources",
+    "description": "Links to documentation and regulations"
+  },
+  "signature": {
+    "title": "6. Contract Signature",
+    "description": "Complete the details and sign electronically",
+    "signerData": "Signer Data",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Legal representative's full name",
+    "position": "Position",
+    "positionPlaceholder": "E.g: Managing Director, CEO",
+    "organizationName": "Organization Name",
+    "organizationNamePlaceholder": "Company legal name",
+    "taxId": "Tax ID",
+    "taxIdPlaceholder": "Tax identification number",
+    "signatureLabel": "Electronic Signature",
+    "signatureInstructions": "Draw your signature in the box",
+    "clearSignature": "Clear",
+    "acceptTerms": "I accept the terms and conditions of the membership agreement",
+    "acceptTermsDescription": "I have read and understand all clauses of this contract",
+    "acceptGdpr": "I accept data processing according to GDPR",
+    "acceptGdprDescription": "I consent to the processing of my personal data in accordance with current regulations",
+    "signContract": "Sign Contract",
+    "signing": "Signing...",
+    "signedAt": "Signed on",
+    "validation": {
+      "nameRequired": "Name is required",
+      "positionRequired": "Position is required",
+      "organizationRequired": "Organization is required",
+      "taxIdRequired": "Tax ID is required",
+      "signatureRequired": "Signature is required",
+      "termsRequired": "You must accept the terms and conditions",
+      "gdprRequired": "You must accept data processing"
+    },
+    "success": {
+      "title": "Contract Signed!",
+      "description": "Your membership agreement has been successfully signed. You will receive a copy by email.",
+      "downloadSigned": "Download Signed Contract"
+    }
+  }
+}
