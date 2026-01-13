@@ -13,11 +13,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 export const WelcomeStep = () => {
   const { t } = useTranslation('register');
 
-  const benefits = t('welcome.benefits.items', { returnObjects: true }) as Array<{
+  const benefitsRaw = t('welcome.benefits.items', { returnObjects: true });
+  const benefits = Array.isArray(benefitsRaw) ? benefitsRaw as Array<{
     icon: string;
     title: string;
     description: string;
-  }>;
+  }> : [];
 
   const containerVariants = {
     hidden: { opacity: 0 },
