@@ -308,12 +308,15 @@ export default function Landing() {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               {t('heroDescription')}
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
               <Button size="lg" className="h-12 px-8 text-lg" asChild>
                 <Link to="/auth">{tc('tryInteractiveDemo')}</Link>
               </Button>
               <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
                 <Link to="/whitepaper">WHITEPAPER</Link>
+              </Button>
+              <Button size="lg" className="h-12 px-8 text-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 border-0" asChild>
+                <Link to="/kit-espacio-datos">KIT ESPACIO DE DATOS</Link>
               </Button>
             </div>
 
