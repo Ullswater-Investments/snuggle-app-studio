@@ -157,7 +157,7 @@ const KitEspacioDatos = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Option A - Basic */}
             <div className="relative rounded-2xl p-8 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-950/30 dark:to-cyan-900/20 border border-cyan-200 dark:border-cyan-800">
-              <Badge className="mb-6 bg-gradient-to-r from-cyan-500 to-teal-500 text-white border-0 px-4 py-1.5 text-sm font-semibold">
+              <Badge className="mb-6 bg-gradient-to-r from-cyan-500 to-teal-500 text-white border-0 px-8 py-4 text-2xl font-bold">
                 SUBVENCIÓN DE 15.000€
               </Badge>
               
@@ -193,7 +193,7 @@ const KitEspacioDatos = () => {
             {/* Option B - Recommended */}
             <div className="relative rounded-2xl p-8 bg-gradient-to-br from-purple-50 to-amber-50 dark:from-purple-950/30 dark:to-amber-900/20 border border-purple-200 dark:border-purple-800">
               <div className="flex items-center justify-between mb-6">
-                <Badge className="bg-gradient-to-r from-purple-500 to-violet-500 text-white border-0 px-4 py-1.5 text-sm font-semibold">
+                <Badge className="bg-gradient-to-r from-purple-500 to-violet-500 text-white border-0 px-8 py-4 text-2xl font-bold">
                   SUBVENCIÓN DE 30.000€
                 </Badge>
                 <Badge variant="outline" className="border-amber-500 text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20">
