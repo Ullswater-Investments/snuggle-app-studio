@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
 
 export default function ConectoresERP() {
@@ -47,12 +47,7 @@ export default function ConectoresERP() {
       {/* Header */}
       <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <GlobalNavigation />
-            <Link to="/" className="hover:opacity-80 transition-opacity">
-              <span className="procuredata-gradient font-bold text-xl">PROCUREDATA</span>
-            </Link>
-          </div>
+          <ProcuredataLogo size="md" showNavigation={true} />
           <Badge variant="outline" className="border-indigo-500 text-indigo-600">Network Builder</Badge>
         </div>
       </header>

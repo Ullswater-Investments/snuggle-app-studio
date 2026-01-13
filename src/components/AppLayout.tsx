@@ -35,10 +35,7 @@ export const AppLayout = () => {
           <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-16 items-center gap-4 px-4">
               <SidebarTrigger />
-              <GlobalNavigation />
-              <Link to="/" className="hover:opacity-80 transition-opacity">
-                <ProcuredataLogo size="md" />
-              </Link>
+              <ProcuredataLogo size="md" showNavigation={true} />
               
               <div className="ml-auto flex items-center gap-2">
                 {/* Command Palette Trigger */}

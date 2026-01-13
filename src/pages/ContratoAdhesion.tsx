@@ -34,6 +34,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useCartaAdhesionPDF } from "@/hooks/useCartaAdhesionPDF";
 import { ContractSignatureSection } from "@/components/contract/ContractSignatureSection";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 const ContratoAdhesion = () => {
   const { t } = useTranslation('contract');
@@ -128,10 +129,7 @@ const ContratoAdhesion = () => {
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <Package className="h-8 w-8 text-primary" />
-            <span className="font-bold text-xl">PROCUREDATA</span>
-          </Link>
+          <ProcuredataLogo size="lg" showNavigation={true} />
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <ThemeToggle />

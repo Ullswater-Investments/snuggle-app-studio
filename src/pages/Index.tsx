@@ -380,7 +380,7 @@ const Index = () => {
             <SlideUp>
               <div className="space-y-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground flex items-center gap-3 flex-wrap">
-                  Comience a Usar <ProcuredataLogo size="lg" showIcon={false} />
+                  Comience a Usar <ProcuredataLogo size="lg" linkToHome={false} />
                 </h2>
                 <p className="text-lg text-muted-foreground">
                   Cree su cuenta o acceda al sistema para comenzar a gestionar transacciones de datos de forma segura y
@@ -566,7 +566,7 @@ const Index = () => {
           <FadeIn delay={0.2}>
             <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
               <p className="flex items-center justify-center gap-2">
-                &copy; {new Date().getFullYear()} <ProcuredataLogo size="sm" showIcon={false} />. Espacio de Datos para la Función de Compras.
+                &copy; {new Date().getFullYear()} <ProcuredataLogo size="sm" linkToHome={false} />. Espacio de Datos para la Función de Compras.
               </p>
             </div>
           </FadeIn>

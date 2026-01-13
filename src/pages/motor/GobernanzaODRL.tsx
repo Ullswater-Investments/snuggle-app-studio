@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
-import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { MotorNavigation } from "@/components/MotorNavigation";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
@@ -92,12 +91,7 @@ export default function GobernanzaODRL() {
       {/* Header */}
       <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <GlobalNavigation />
-            <Link to="/" className="hover:opacity-80 transition-opacity">
-              <ProcuredataLogo size="md" />
-            </Link>
-          </div>
+          <ProcuredataLogo size="md" showNavigation={true} />
           <Badge variant="outline" className="border-blue-500 text-blue-600">{t('odrl.badge')}</Badge>
         </div>
       </header>

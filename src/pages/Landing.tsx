@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import UseCasesCarousel from "@/components/UseCasesCarousel";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { cn } from "@/lib/utils";
 const containerVariants = {
   hidden: {
@@ -267,8 +268,8 @@ export default function Landing() {
       {/* Navbar Simplificado */}
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <span className="procuredata-gradient">{t('brand')}</span>
+          <div className="flex items-center gap-4">
+            <ProcuredataLogo size="lg" showNavigation={true} />
             <Link to="/partners">
               <Badge variant="outline" className="text-xs hover:bg-primary/10 cursor-pointer transition-colors">Partners</Badge>
             </Link>
