@@ -218,7 +218,7 @@ const ContratoAdhesion = () => {
                     </div>
                     <div className="flex justify-between py-2 border-b border-primary/10">
                       <span className="text-muted-foreground">{t('promoter.email')}</span>
-                      <span className="font-medium">info@procuredata.org</span>
+                      <span className="font-medium">eduardo@agileprocurement.es</span>
                     </div>
                   </div>
                   <div className="space-y-3">
