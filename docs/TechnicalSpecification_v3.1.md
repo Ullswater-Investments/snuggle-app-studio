@@ -110,7 +110,7 @@ graph TB
         Web3[Web3 Integration]
     end
     
-    subgraph Backend["Backend (Lovable Cloud)"]
+    subgraph Backend["Backend (Cloud AI)"]
         Auth[Supabase Auth]
         DB[(PostgreSQL + RLS)]
         Edge[Edge Functions]
@@ -200,7 +200,7 @@ stateDiagram-v2
 | React Hook Form | Formularios |
 | Zod | Validación de esquemas |
 
-### Backend (Lovable Cloud)
+### Backend (Cloud AI)
 
 | Servicio | Uso |
 |----------|-----|

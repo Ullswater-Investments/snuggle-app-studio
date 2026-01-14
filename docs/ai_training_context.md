@@ -347,8 +347,8 @@ Consulta los casos interactivos en `/casos-exito` con simuladores específicos p
 
 ```
 ┌─────────────────────┐     ┌─────────────────────────┐     ┌─────────────────────┐
-│      Frontend       │     │    Supabase Edge        │     │     Lovable AI      │
-│   AIConcierge.tsx   │────▶│    Function (chat-ai)   │────▶│      Gateway        │
+│      Frontend       │     │    Supabase Edge        │     │     Cloud AI        │
+│      Gateway        │────▶│    Function (chat-ai)   │────▶│      Gateway        │
 │                     │     │                         │     │  (Gemini 2.5 Flash) │
 └─────────────────────┘     └─────────────────────────┘     └─────────────────────┘
          │                           │                              │
@@ -367,7 +367,7 @@ Consulta los casos interactivos en `/casos-exito` con simuladores específicos p
 | **Edge Function** | API Key segura en backend, no expuesta en cliente |
 | **System Instructions server-side** | No manipulables por usuarios maliciosos |
 | **SSE Streaming** | Mejor UX, respuesta palabra por palabra |
-| **Lovable AI Gateway** | Sin configuración de API key, integrado con el proyecto |
+| **Cloud AI Gateway** | Sin configuración de API key, integrado con el proyecto |
 | **Gemini 2.5 Flash** | Balance óptimo entre velocidad, coste y calidad |
 
 ---
@@ -506,7 +506,7 @@ serve(async (req) => {
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${CLOUD_AI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -685,7 +685,7 @@ verify_jwt = false
 ## 2.6 Checklist de Implementación
 
 - [ ] Crear `docs/ai_training_context.md` (este documento)
-- [ ] Habilitar Lovable AI (LOVABLE_API_KEY auto-provisioned)
+- [ ] Habilitar Cloud AI (CLOUD_AI_API_KEY auto-provisioned)
 - [ ] Crear `supabase/functions/chat-ai/index.ts`
 - [ ] Actualizar `supabase/config.toml`
 - [ ] Refactorizar `src/components/AIConcierge.tsx`

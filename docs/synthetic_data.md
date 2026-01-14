@@ -954,7 +954,7 @@ Ubicación: `scripts/seeds/`
 ### 6.4 Instrucciones de Ejecución
 
 ```bash
-# Opción 1: Ejecución manual en SQL Editor de Lovable Cloud
+# Opción 1: Ejecución manual en SQL Editor de Cloud AI
 # Copiar y pegar cada archivo en orden
 
 # Opción 2: Usando psql (si tienes acceso CLI)

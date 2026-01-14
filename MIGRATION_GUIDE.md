@@ -704,7 +704,7 @@ cleanup_old_login_attempts() RETURNS void
 **Propósito**: Procesa conversaciones con la IA ARIA, usando RAG con documentos internos.
 
 **Secrets Requeridos**:
-- `GOOGLE_AI_API_KEY` o modelo interno de Lovable
+- `GOOGLE_AI_API_KEY` o modelo interno de la plataforma
 
 **Flujo**:
 ```
@@ -1254,7 +1254,7 @@ export default {
 ### 10.1 Variables Requeridas
 
 ```env
-# Supabase (AUTO-GENERADAS por Lovable Cloud)
+# Supabase (AUTO-GENERADAS por Cloud AI)
 VITE_SUPABASE_URL=https://[project-id].supabase.co
 VITE_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIs...
 VITE_SUPABASE_PROJECT_ID=[project-id]
@@ -1280,7 +1280,7 @@ VITE_NODE_URI=https://rpc.2040.pontus-x.eu
 | `GITHUB_PAT` | Sync a GitHub | ⚠️ Manual |
 | `GITHUB_REPO_OWNER` | Owner del repo | ⚠️ Manual |
 | `GITHUB_REPO_NAME` | Nombre del repo | ⚠️ Manual |
-| `LOVABLE_API_KEY` | API Lovable | ✅ Auto |
+| `CLOUD_AI_API_KEY` | API Cloud AI | ✅ Auto |
 
 ---
 
@@ -1380,7 +1380,12 @@ REGLAS CRÍTICAS:
    - `text-foreground` en lugar de `text-gray-900`
    - `border-border` en lugar de `border-gray-200`
 
-4. Consulta la documentación antes de modificar:
+4. Consideraciones de Integración con Cloud AI:
+   - Sincronización GitHub: Cada cambio en Cloud AI genera commit automático al repositorio.
+   - Control de Versiones: Pull Requests desde GitHub para lógica compleja o migraciones SQL.
+   - Despliegue Automático: Al fusionar en rama principal, Cloud AI y Supabase despliegan automáticamente.
+
+5. Consulta la documentación antes de modificar:
    - docs/casosexito_context.md → Lógica de simuladores
    - entrenamientoIA/*.md → Base de conocimiento ARIA
    - MIGRATION_GUIDE.md → Arquitectura general

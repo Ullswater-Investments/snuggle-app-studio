@@ -25,13 +25,13 @@ const glossaryTerms: GlossaryTerm[] = [
   { term: "Frontend", definition: "Interfaz visual construida en React con la que interactúan los directores de compras y proveedores.", category: "tech" },
   { term: "JSON-LD", definition: "Formato de datos enlazados que proporciona contexto semántico a la información intercambiada.", category: "tech" },
   { term: "JWT", definition: "JSON Web Token. Estándar de seguridad para transmitir identidades verificadas entre el cliente y el servidor.", category: "tech" },
-  { term: "Lovable", definition: "Ecosistema de desarrollo 'Full-Stack' donde se aloja la interfaz y lógica de PROCUREDATA.", category: "tech" },
+  { term: "Cloud AI Platform", definition: "Ecosistema de desarrollo 'Full-Stack' donde se aloja la interfaz y lógica de PROCUREDATA.", category: "tech" },
   { term: "PostgreSQL", definition: "Motor de base de datos relacional que custodia las 28 tablas del sistema.", category: "tech" },
   { term: "REST", definition: "Representational State Transfer. Estilo de arquitectura para el diseño de APIs ligeras y escalables.", category: "tech" },
   { term: "Supabase", definition: "Plataforma de servicios de backend que integra la base de datos, autenticación y funciones serverless.", category: "tech" },
   { term: "TypeScript", definition: "Lenguaje de programación que añade tipado estático a JavaScript para garantizar la robustez del código.", category: "tech" },
   { term: "UUID", definition: "Universally Unique Identifier. Código alfanumérico único asignado a cada organización y transacción.", category: "tech" },
-  
+
   // Blockchain, Web3 y Finanzas
   { term: "ABI", definition: "Application Binary Interface. Diccionario técnico para que el código de la app 'hable' con los Smart Contracts.", category: "blockchain" },
   { term: "Blockchain", definition: "Registro digital compartido e inmutable que actúa como el notario de todas las operaciones.", category: "blockchain" },
@@ -48,7 +48,7 @@ const glossaryTerms: GlossaryTerm[] = [
   { term: "Smart Contract", definition: "Contrato digital que se ejecuta solo cuando se cumplen las condiciones acordadas (ej: liberar pago tras entrega).", category: "blockchain" },
   { term: "Wallet", definition: "Billetera digital que almacena los EUROe y las llaves privadas para firmar transacciones.", category: "blockchain" },
   { term: "Zero-Knowledge Proof", definition: "ZKP. Método para probar que una información es cierta sin revelar el contenido del dato.", category: "blockchain" },
-  
+
   // Gobernanza de Datos e IDSA
   { term: "Asset", definition: "Activo. Cualquier conjunto de datos o servicio disponible para intercambio en el Marketplace.", category: "governance" },
   { term: "Clearing House", definition: "Servicio que facilita la liquidación de acuerdos y el registro de cumplimiento entre partes.", category: "governance" },
@@ -65,7 +65,7 @@ const glossaryTerms: GlossaryTerm[] = [
   { term: "Provider", definition: "Proveedor. Rol de la empresa que ofrece sus datos manteniendo el control sobre ellos.", category: "governance" },
   { term: "Soberanía del Dato", definition: "El derecho absoluto de una empresa a decidir cómo se usa su información compartida.", category: "governance" },
   { term: "Trust Framework", definition: "El conjunto de reglas técnicas y legales que garantizan la confianza entre participantes.", category: "governance" },
-  
+
   // Compras, Sostenibilidad e IA
   { term: "ARIA", definition: "El asistente inteligente de PROCUREDATA entrenado con 10,000 referencias de conocimiento.", category: "business" },
   { term: "Benchmarking", definition: "Comparativa del desempeño propio frente a los líderes del sector de forma anónima.", category: "business" },
@@ -143,7 +143,7 @@ export default function DocumentoExplicativo15() {
     return glossaryTerms
       .filter(term => {
         const matchesSearch = term.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                             term.definition.toLowerCase().includes(searchTerm.toLowerCase());
+          term.definition.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesCategory = activeCategory === "all" || term.category === activeCategory;
         return matchesSearch && matchesCategory;
       })
@@ -159,7 +159,7 @@ export default function DocumentoExplicativo15() {
   const handleQuizAnswer = (questionIndex: number, answerIndex: number) => {
     setQuizAnswers(prev => ({ ...prev, [questionIndex]: answerIndex }));
     setShowResults(prev => ({ ...prev, [questionIndex]: true }));
-    
+
     if (answerIndex === quizQuestions[questionIndex].correctIndex) {
       confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
     }
@@ -357,7 +357,7 @@ export default function DocumentoExplicativo15() {
             </div>
             <h3 className="text-xl font-bold mb-2">¡Felicidades!</h3>
             <p className="text-muted-foreground">
-              Has completado los 15 documentos explicativos de PROCUREDATA. 
+              Has completado los 15 documentos explicativos de PROCUREDATA.
               Ahora tienes el conocimiento completo para operar en el ecosistema.
             </p>
           </CardContent>

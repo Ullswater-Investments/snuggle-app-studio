@@ -208,7 +208,7 @@ const { data, error } = await supabase.functions.invoke("notification-handler", 
 ## 🔍 Debugging
 
 ### Ver Logs de Edge Functions
-En Lovable:
+En el panel de control:
 1. Ve a Cloud tab
 2. Selecciona "Functions"
 3. Busca logs de cada función

@@ -1,6 +1,6 @@
 # Arquitectura de Datos - ProcureData
 
-> **Base de datos**: PostgreSQL (Supabase/Lovable Cloud)  
+> **Base de datos**: PostgreSQL (Supabase/Cloud AI)  
 > **Tablas**: 28 tablas  
 > **Seguridad**: Row Level Security (RLS) habilitado
 

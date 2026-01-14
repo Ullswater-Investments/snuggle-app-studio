@@ -83,7 +83,7 @@ graph TD
 | React Hook Form | Formularios |
 | Zod | Validación de esquemas |
 
-### Backend (Supabase/Lovable Cloud)
+### Backend (Supabase/Cloud Platform)
 
 | Servicio | Uso |
 |----------|-----|
@@ -772,8 +772,8 @@ export const PONTUSX_NETWORK_CONFIG = {
 
 - **Documentación en app**: `/guide`
 - **Arquitectura técnica**: `/architecture`
-- **Repositorio**: Lovable Project
-- **Base de datos**: Lovable Cloud (Supabase)
+- **Repositorio**: Project
+- **Base de datos**: Cloud AI (Supabase)
 - **Blockchain Explorer**: https://explorer.pontus-x.eu/
 
 ---

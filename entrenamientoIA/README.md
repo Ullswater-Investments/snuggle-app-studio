@@ -5,7 +5,7 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 > **Última actualización**: 2026-01-13  
 > **Versión**: 3.2  
 > **Base de datos**: 31 tablas PostgreSQL con RLS  
-> **Modelo IA**: google/gemini-3-flash-preview
+> **Modelo de IA**: Google Gemini 3 Flash Preview (via Cloud AI Gateway)
 
 ---
 
@@ -49,14 +49,14 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 3. Pégalo en el campo "System Instructions"
 4. Opcionalmente, añade documentos adicionales como contexto
 
-### Para Lovable AI (implementado en Edge Function)
+### Para el Chat AI (implementado en Edge Function)
 
 Los contenidos están compilados en la Edge Function:
 ```
 supabase/functions/chat-ai/index.ts
 ```
 
-Esta función usa `LOVABLE_API_KEY` (auto-provisionada) para llamar a `google/gemini-3-flash-preview`.
+Esta función usa la API Key de la plataforma (auto-provisionada) para llamar a `google/gemini-3-flash-preview`.
 
 **Conocimiento integrado en SYSTEM_INSTRUCTIONS v3.2:**
 - Identidad y tono de ARIA

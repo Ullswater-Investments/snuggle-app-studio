@@ -110,7 +110,7 @@ const SYSTEM_INSTRUCTIONS = `# System Instructions para ARIA - ProcureData v3.2
 
 > **Versión del conocimiento**: 3.2
 > **Última actualización**: 2026-01-13
-> **Modelo de IA**: Google Gemini 3 Flash Preview (via Lovable AI Gateway)
+> **Modelo de IA**: Google Gemini 3 Flash Preview (via Cloud AI Gateway)
 > **Base de datos**: 31 tablas PostgreSQL con RLS activo
 
 ## 1. Identidad y Tono

@@ -153,7 +153,7 @@ graph TD
 
 PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 
-- **Capa Web2 (Lovable Cloud/Supabase)**: Almacenamiento de metadatos, gestión de usuarios, lógica de negocio, y APIs RESTful.
+- **Capa Web2 (Cloud AI/Supabase)**: Almacenamiento tradicional para datos de usuario.s, lógica de negocio, y APIs RESTful.
 - **Capa Web3 (Pontus-X Blockchain)**: Registro inmutable de transacciones, verificación de identidad (DID), y pagos con tokens EUROe.
 
 ```
@@ -175,7 +175,7 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
               ▼                               ▼
 ┌─────────────────────────┐     ┌─────────────────────────┐
 │     BACKEND WEB2        │     │      LAYER WEB3         │
-│   (Lovable Cloud)       │     │     (Pontus-X)          │
+│   (Cloud AI)            │     │     (Pontus-X)          │
 │  ┌─────────────────┐    │     │  ┌─────────────────┐    │
 │  │   PostgreSQL    │    │     │  │   Ethers.js     │    │
 │  │   (28 tablas)   │    │     │  │   v6.16.0       │    │
@@ -231,7 +231,7 @@ PROCUREDATA utiliza una **arquitectura híbrida** que combina:
 | **React Hook Form** | 7.61.1 | Gestión de formularios performante |
 | **Zod** | 3.25.76 | Validación de esquemas en runtime |
 
-#### Backend (Lovable Cloud)
+#### Backend (Cloud AI)
 
 | Tecnología | Versión | Propósito |
 |------------|---------|-----------|
@@ -276,7 +276,7 @@ graph TB
         QueryClient[React Query Client]
     end
     
-    subgraph "Backend Web2 - Lovable Cloud"
+    subgraph "Backend Web2 - Cloud AI"
         Auth[Supabase Auth]
         DB[(PostgreSQL 28 Tables)]
         Edge[Edge Functions]
@@ -651,7 +651,7 @@ CREATE TABLE data_policies (
 |------------|---------|-------------------------|
 | **NegotiationChat** | `src/components/NegotiationChat.tsx` | Chat embebido para negociación de contratos. Mensajes almacenados en `transaction_messages`. |
 | **TeamManagement** | `src/components/TeamManagement.tsx` | Gestión de miembros del equipo y roles. CRUD sobre `user_roles`. |
-| **AIConcierge** | `src/components/AIConcierge.tsx` | Asistente virtual con IA para guiar usuarios. Integración con Lovable AI Gateway. |
+| **AIConcierge** | `src/components/AIConcierge.tsx` | Asistente virtual con IA para guiar usuarios. Integración con Cloud AI Gateway. |
 
 ### 5.8 Componentes Shadcn/UI (49 componentes)
 

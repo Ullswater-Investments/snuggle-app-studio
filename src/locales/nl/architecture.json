@@ -18,7 +18,7 @@
   },
   "overview": {
     "highLevelArch": "High-Level Architectuur",
-    "highLevelDesc": "Hybride systeem met drie lagen: React Frontend, Lovable Cloud Backend en Pontus-X Blockchain",
+    "highLevelDesc": "Sistema híbrido con tres capas: Frontend React, Backend Cloud AI, y Blockchain Pontus-X",
     "dataSpaceComponents": "Europese Data Space Componenten",
     "dataSpaceDesc": "Actieve standaarden en connectoren volgens officiële technische specificatie",
     "active": "Actief",
@@ -31,7 +31,7 @@
     "gaiaX": "Gaia-X Trust Framework",
     "gaiaXDesc": "Europees vertrouwenskader",
     "frontendSpa": "Frontend SPA",
-    "backendCloud": "Backend Cloud",
+    "backendCloud": "Backend Cloud AI",
     "web3Layer": "Web3-Laag"
   },
   "database": {
@@ -186,7 +186,7 @@
     "frontend": "Frontend",
     "uiux": "UI/UX",
     "stateData": "State en Data",
-    "backend": "Backend (Lovable Cloud)",
+    "backend": "Backend (Cloud AI)",
     "web3": "Web3",
     "utilities": "Hulpprogramma's"
   },

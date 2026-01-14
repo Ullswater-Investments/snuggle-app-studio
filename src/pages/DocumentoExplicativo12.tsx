@@ -28,7 +28,7 @@ const sections: Section[] = [
       "Frontend: React 18+ con Vite y TypeScript para seguridad de tipos.",
       "Estilos: Tailwind CSS responsivo + shadcn/ui como librería de componentes base.",
       "Backend (BaaS): Supabase con autenticación, almacenamiento, base de datos y Edge Functions.",
-      "Infraestructura: Lovable Cloud orquesta despliegue y sincronización con código fuente."
+      "Infraestructura: Cloud AI orquesta despliegue y sincronización con código fuente."
     ],
     quiz: {
       question: "¿Qué tecnología se usa como empaquetador del frontend?",
@@ -91,9 +91,9 @@ const sections: Section[] = [
     title: "Flujo de Desarrollo e Integración Continua (CI/CD)",
     icon: <GitBranch className="h-6 w-6" />,
     content: [
-      "Sincronización GitHub: Cada cambio en Lovable genera commit automático al repositorio.",
+      "Sincronización GitHub: Cada cambio en Cloud AI genera commit automático al repositorio.",
       "Control de Versiones: Pull Requests desde GitHub para lógica compleja o migraciones SQL.",
-      "Despliegue Automático: Al fusionar en rama principal, Lovable Cloud y Supabase despliegan automáticamente."
+      "Despliegue Automático: Al fusionar en rama principal, Cloud AI y Supabase despliegan automáticamente."
     ],
     quiz: {
       question: "¿Qué ocurre al fusionar cambios en la rama principal?",
@@ -178,9 +178,9 @@ export default function DocumentoExplicativo12() {
 
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">📄 Documento Explicativo 12</h1>
-          <p className="text-xl text-muted-foreground mb-4">Manual del Desarrollador y Arquitectura Lovable</p>
+          <p className="text-xl text-muted-foreground mb-4">Manual del Desarrollador y Arquitectura Cloud AI</p>
           <p className="text-sm text-muted-foreground mb-6">Stack técnico, esquema de base de datos, funciones serverless y flujo de despliegue.</p>
-          
+
           <div className="flex items-center gap-4 mb-2">
             <Progress value={progress} className="flex-1" />
             <span className="text-sm font-medium">{Math.round(progress)}%</span>

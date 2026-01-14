@@ -16,7 +16,7 @@
 | **Frontend** | React 18+ con Vite y TypeScript | Seguridad de tipos y rendimiento optimizado |
 | **Estilos** | Tailwind CSS + shadcn/ui | Diseño responsivo con componentes base |
 | **Backend (BaaS)** | Supabase | Autenticación, almacenamiento, base de datos y Edge Functions |
-| **Infraestructura** | Lovable Cloud | Orquesta despliegue y sincronización con código fuente |
+| **Infraestructura** | Cloud AI | Orquesta despliegue y sincronización con código fuente |
 
 ### Librerías Principales
 - React Router (navegación)
@@ -73,7 +73,7 @@ Funciones en TypeScript ejecutadas bajo runtime **Deno**.
 
 ### Seguridad de Edge Functions
 - API Keys nunca expuestas al cliente
-- Secrets cifrados en Supabase (RESEND_API_KEY, GITHUB_PAT, LOVABLE_API_KEY)
+- Secrets cifrados en Supabase (RESEND_API_KEY, GITHUB_PAT, CLOUD_AI_API_KEY)
 - CORS configurado restrictivamente
 - Validación JWT en funciones protegidas
 
@@ -107,13 +107,13 @@ USING (consumer_org_id = get_user_organization(auth.uid()));
 
 | Etapa | Descripción |
 |-------|-------------|
-| **Sincronización GitHub** | Cada cambio en Lovable genera commit automático al repositorio |
+| **Sincronización GitHub** | Cada cambio en Cloud AI genera commit automático al repositorio |
 | **Control de Versiones** | Pull Requests desde GitHub para lógica compleja o migraciones SQL |
-| **Despliegue Automático** | Al fusionar en rama principal, Lovable Cloud y Supabase despliegan automáticamente |
+| **Despliegue Automático** | Al fusionar en rama principal, Cloud AI y Supabase despliegan automáticamente |
 
 ### Flujo de Trabajo
 ```
-Desarrollo en Lovable → Commit automático a GitHub → Review/PR → Merge → Deploy automático
+Desarrollo en Cloud AI → Commit automático a GitHub → Review/PR → Merge → Deploy automático
 ```
 
 ---

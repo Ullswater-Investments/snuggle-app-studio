@@ -377,7 +377,7 @@ export function generateTechnicalDocPDF() {
     'React Hook Form + Zod para formularios'
   ]);
   
-  drawBox('Backend (Lovable Cloud)', [
+  drawBox(    'Backend (Cloud AI)', [
     'PostgreSQL con Row Level Security (RLS)',
     'Supabase Auth (email, magic link)',
     'Edge Functions (Deno runtime)',
@@ -430,7 +430,6 @@ export function generateTechnicalDocPDF() {
     '├── services/       # Servicios externos (pontusX)',
     '├── types/          # TypeScript definitions',
     '├── lib/            # Utilidades (cn, constants)',
-    '└── integrations/   # Supabase client & types',
     '',
     'supabase/',
     '├── functions/      # Edge Functions (Deno)',
@@ -463,7 +462,6 @@ export function generateTechnicalDocPDF() {
     ['Método', 'Descripción'],
     [
       ['connectWallet()', 'Conecta MetaMask al usuario'],
-      ['getBalance()', 'Obtiene saldo en wei'],
       ['getEUROeBalance()', 'Obtiene saldo de stablecoin'],
       ['generateDID()', 'Genera DID desde wallet'],
       ['switchNetwork()', 'Cambia a red Pontus-X'],
@@ -993,7 +991,7 @@ export function generateTechnicalDocPDF() {
     ['Versión', 'Fecha', 'Cambios Principales'],
     [
       ['v3.1', 'Enero 2026', 'Web3 completo, Realtime, UX v3.1'],
-      ['v3.0', 'Diciembre 2025', 'Migración a Lovable Cloud'],
+      ['v3.0', 'Diciembre 2025', 'Migración a Cloud AI'],
       ['v2.5', 'Octubre 2025', 'Marketplace público'],
       ['v2.0', 'Agosto 2025', 'Modelo tripartito IDSA'],
       ['v1.0', 'Mayo 2025', 'MVP inicial'],

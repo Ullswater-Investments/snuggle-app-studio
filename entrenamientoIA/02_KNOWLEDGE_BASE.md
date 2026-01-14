@@ -108,7 +108,7 @@ El producto principal es un paquete de datos verificados que incluye:
 
 ProcureData utiliza un modelo híbrido que combina:
 
-### Capa Web2 (Lovable Cloud/Supabase)
+### Capa Web2 (Cloud AI/Supabase)
 - **PostgreSQL**: Base de datos relacional con 28 tablas
 - **Supabase Auth**: Autenticación JWT con múltiples providers
 - **Edge Functions**: Lógica serverless en Deno

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { 
-  Home, Database, Shield, Server, Lock, Code, Layers, Wallet, 
+import {
+  Home, Database, Shield, Server, Lock, Code, Layers, Wallet,
   GitBranch, ExternalLink, CheckCircle2, XCircle, Users, FileText,
   CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen, UserPlus
 } from "lucide-react";
@@ -139,7 +139,7 @@ const TECH_STACK = [
     ]
   },
   {
-    category: "Backend (Lovable Cloud)",
+    category: "Backend (Cloud AI)",
     items: [
       { name: "PostgreSQL 15", description: "31 tablas con RLS", url: "https://www.postgresql.org" },
       { name: "Edge Functions", description: "submit-registration, send-welcome-email", url: "https://deno.land" },
@@ -183,7 +183,7 @@ const DIAGRAM_OVERVIEW = `graph TB
         Router[React Router]
     end
     
-    subgraph BE["Backend Lovable Cloud"]
+    subgraph BE["Backend Cloud AI"]
         Auth[Auth JWT]
         DB[(PostgreSQL<br/>31 Tables)]
         Edge[Edge Functions]
@@ -389,7 +389,7 @@ export default function Architecture() {
 
       <main className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Hero */}
-        <motion.div 
+        <motion.div
           className="mb-8 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -411,8 +411,8 @@ export default function Architecture() {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto gap-1 bg-muted/50 p-1">
             {TABS.map((tab) => (
-              <TabsTrigger 
-                key={tab.id} 
+              <TabsTrigger
+                key={tab.id}
                 value={tab.id}
                 className="flex items-center gap-2 py-2.5 data-[state=active]:bg-background"
               >
@@ -433,7 +433,7 @@ export default function Architecture() {
                       Arquitectura de Alto Nivel
                     </CardTitle>
                     <CardDescription>
-                      Sistema híbrido con tres capas: Frontend React, Backend Lovable Cloud, y Blockchain Pontus-X
+                      Sistema híbrido con tres capas: Frontend React, Backend Cloud AI, y Blockchain Pontus-X
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -454,7 +454,7 @@ export default function Architecture() {
                   </CardHeader>
                   <CardContent>
                     <div className="grid md:grid-cols-2 gap-4">
-                      <motion.div 
+                      <motion.div
                         variants={fadeInUp}
                         className="flex items-center gap-3 p-4 bg-background rounded-lg border"
                       >
@@ -468,7 +468,7 @@ export default function Architecture() {
                         <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
                       </motion.div>
 
-                      <motion.div 
+                      <motion.div
                         variants={fadeInUp}
                         className="flex items-center gap-3 p-4 bg-background rounded-lg border"
                       >
@@ -482,7 +482,7 @@ export default function Architecture() {
                         <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
                       </motion.div>
 
-                      <motion.div 
+                      <motion.div
                         variants={fadeInUp}
                         className="flex items-center gap-3 p-4 bg-background rounded-lg border"
                       >
@@ -496,7 +496,7 @@ export default function Architecture() {
                         <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">Activo</Badge>
                       </motion.div>
 
-                      <motion.div 
+                      <motion.div
                         variants={fadeInUp}
                         className="flex items-center gap-3 p-4 bg-background rounded-lg border"
                       >
@@ -680,7 +680,7 @@ export default function Architecture() {
                     </CardHeader>
                     <CardContent>
                       <pre className="text-xs bg-muted p-4 rounded-lg overflow-x-auto">
-{`-- Política para data_transactions
+                        {`-- Política para data_transactions
 CREATE POLICY "Users view own org transactions"
 ON data_transactions FOR SELECT
 USING (

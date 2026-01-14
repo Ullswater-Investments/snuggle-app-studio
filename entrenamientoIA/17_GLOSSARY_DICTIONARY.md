@@ -17,7 +17,7 @@
 | **Frontend** | Interfaz visual construida en React con la que interactúan los usuarios |
 | **JSON-LD** | Formato de datos enlazados que proporciona contexto semántico a la información intercambiada |
 | **JWT** | JSON Web Token. Estándar de seguridad para transmitir identidades verificadas entre cliente y servidor |
-| **Lovable** | Ecosistema de desarrollo Full-Stack donde se aloja la interfaz y lógica de ProcureData |
+| **Cloud AI Platform** | Ecosistema de desarrollo No-Code/Low-Code utilizado para la interfaz. y lógica de ProcureData |
 | **PostgreSQL** | Motor de base de datos relacional que custodia las 28 tablas del sistema |
 | **REST** | Representational State Transfer. Estilo de arquitectura para el diseño de APIs ligeras y escalables |
 | **Supabase** | Plataforma de servicios de backend que integra base de datos, autenticación y funciones serverless |
