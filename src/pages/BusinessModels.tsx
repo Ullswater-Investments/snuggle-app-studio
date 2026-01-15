@@ -814,7 +814,7 @@ sequenceDiagram
                 onCheckedChange={setIsAnnual}
               />
               <span className={`text-sm font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-                Anual
+                Suscripción Anual Obligatoria (Pago fragmentado)
               </span>
               {isAnnual && (
                 <Badge variant="default" className="bg-green-500 text-white">
