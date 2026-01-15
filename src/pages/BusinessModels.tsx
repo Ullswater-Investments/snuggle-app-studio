@@ -146,15 +146,15 @@ const cardVariants = {
 // - Membresía Base: ~100 EUROe/año
 const PRICING_TIERS = [
   {
-    id: "free",
-    name: "Free",
+    id: "basico",
+    name: "PLAN BÁSICO",
     price: 99,
     icon: Zap,
     color: "slate",
-    description: "Para proveedores que comienzan",
-    cta: "Empezar Gratis",
+    description: "Plan de entrada para proveedores",
+    cta: "Empezar Ahora",
     ctaVariant: "outline" as const,
-    transactionFee: "1.00 EUROe/alta", // Precio oficial
+    transactionFee: "1.00 EUROe/alta",
     features: [
       { name: "Recepción de solicitudes", included: true },
       { name: "Perfil DID básico", included: true },
@@ -170,17 +170,17 @@ const PRICING_TIERS = [
     support: "Comunidad",
   },
   {
-    id: "pro",
-    name: "Pro",
-    price: 100, // Cambiado de 99 a 100 según Memoria Técnica
-    annualPrice: 100, // Membresía base anual oficial
+    id: "conector",
+    name: "CONECTOR",
+    price: 200,
+    annualPrice: 160,
     icon: Crown,
     color: "blue",
-    description: "Membresía base al Data Space",
-    cta: "Probar Pro 14 días",
+    description: "Membresía al conector del Espacio de Datos",
+    cta: "Conectar al Data Space",
     ctaVariant: "default" as const,
     featured: true,
-    transactionFee: "0.50 EUROe/alta", // Descuento por membresía
+    transactionFee: "0.50 EUROe/alta",
     features: [
       { name: "Recepción de solicitudes", included: true },
       { name: "Perfil DID verificado", included: true },
@@ -196,15 +196,16 @@ const PRICING_TIERS = [
     support: "Email 24h",
   },
   {
-    id: "enterprise",
-    name: "Enterprise",
-    price: null,
+    id: "nodo",
+    name: "PROPIETARIO NODO",
+    price: 500,
+    annualPrice: 400,
     icon: Building2,
     color: "violet",
-    description: "Para data holders y corporaciones",
-    cta: "Contactar Ventas",
+    description: "Propietario de nodo en el Data Space",
+    cta: "Solicitar Nodo",
     ctaVariant: "secondary" as const,
-    transactionFee: "Negociable", // Volumen personalizado
+    transactionFee: "Negociable",
     features: [
       { name: "Recepción de solicitudes", included: true },
       { name: "Perfil DID premium", included: true },
