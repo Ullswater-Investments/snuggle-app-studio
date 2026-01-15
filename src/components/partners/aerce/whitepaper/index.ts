@@ -1,0 +1,14 @@
+export { WhitepaperHero } from "./WhitepaperHero";
+export { ExecutiveSummary } from "./ExecutiveSummary";
+export { TransformacionDigital } from "./TransformacionDigital";
+export { ModeloCPO } from "./ModeloCPO";
+export { CertificacionUNE } from "./CertificacionUNE";
+export { FormacionExcelencia } from "./FormacionExcelencia";
+export { Sostenibilidad } from "./Sostenibilidad";
+export { GestionRiesgos } from "./GestionRiesgos";
+export { NetworkingCPO } from "./NetworkingCPO";
+export { CasosExito } from "./CasosExito";
+export { Benchmarking } from "./Benchmarking";
+export { TendenciasFuturo } from "./TendenciasFuturo";
+export { Glosario } from "./Glosario";
+export { WhitepaperCTA } from "./WhitepaperCTA";
