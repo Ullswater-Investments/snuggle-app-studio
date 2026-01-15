@@ -115,6 +115,7 @@ import PreciosMayoristasEnergiaDetail from "./pages/catalog/PreciosMayoristasEne
 import SmartGridContadoresDetail from "./pages/catalog/SmartGridContadoresDetail";
 import EmpresasTecnologicasBelgasDetail from "./pages/catalog/EmpresasTecnologicasBelgasDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
+import DynamicPartnerLogin from "./pages/DynamicPartnerLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
 import ItbidCasosExito from "./pages/partners/ItbidCasosExito";
 import ItbidWhitepaper from "./pages/partners/ItbidWhitepaper";
@@ -236,7 +237,10 @@ const App = () => (
                   <Route path="/partners/premium" element={<PremiumPartners />} />
                   <Route path="/partners/premium/:partnerId" element={<PremiumPartnerPage />} />
 
-                  {/* Partner Pages */}
+                  {/* Partner Pages - Dynamic route */}
+                  <Route path="/partners/:partnerSlug/login" element={<DynamicPartnerLogin />} />
+                  
+                  {/* Partner Pages - ITBID specific */}
                   <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
                   <Route path="/partners/itbid/proyecto" element={<ItbidProtectedRoute><ItbidProyecto /></ItbidProtectedRoute>} />
                   <Route path="/partners/itbid/casos-exito" element={<ItbidProtectedRoute><ItbidCasosExito /></ItbidProtectedRoute>} />
