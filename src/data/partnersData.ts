@@ -95,7 +95,7 @@ export const partnersByCountry: CountryData[] = [
         name: "TeleNatura EBT",
         fullName: "TeleNatura - Empresa de Base Tecnológica",
         logo: null,
-        link: "/partners/premium/telenatura-ebt",
+        link: "/partners/telenatura-ebt/proyecto",
         status: "activo",
         sector: "agriculture",
         hasDocTecnico: false,
