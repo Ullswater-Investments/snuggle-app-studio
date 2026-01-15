@@ -10,7 +10,7 @@ import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 const authSchema = z.object({
-  username: z.string().trim().min(1, "El usuario es obligatorio").max(50, "Usuario demasiado largo"),
+  email: z.string().trim().min(1, "El email es obligatorio").email("Introduce un email válido").max(255, "Email demasiado largo"),
   password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres").max(72, "Contraseña demasiado larga")
 });
 
@@ -24,7 +24,7 @@ const Auth = () => {
   const loginForm = useForm<AuthFormData>({
     resolver: zodResolver(authSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: ""
     }
   });
@@ -37,7 +37,7 @@ const Auth = () => {
 
   const handleSignIn = async (data: AuthFormData) => {
     setLoading(true);
-    await signIn(data.username, data.password);
+    await signIn(data.email, data.password);
     setLoading(false);
   };
 
@@ -69,19 +69,6 @@ const Auth = () => {
         <CardContent>
           <Form {...loginForm}>
             <form onSubmit={loginForm.handleSubmit(handleSignIn)} className="space-y-4">
-              <FormField
-                control={loginForm.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Usuario</FormLabel>
-                    <FormControl>
-                      <Input type="text" placeholder="Introduce tu usuario" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={loginForm.control}
                 name="password"
