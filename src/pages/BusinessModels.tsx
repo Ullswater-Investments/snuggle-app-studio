@@ -803,6 +803,25 @@ sequenceDiagram
               Desde proveedores que comienzan hasta corporaciones globales. 
               Paga solo por lo que necesitas.
             </p>
+            
+            {/* Toggle Mensual/Anual */}
+            <div className="flex items-center justify-center gap-3">
+              <span className={`text-sm font-medium transition-colors ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+                Pago Mensual
+              </span>
+              <Switch 
+                checked={isAnnual} 
+                onCheckedChange={setIsAnnual}
+              />
+              <span className={`text-sm font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+                Suscripción Anual Obligatoria (Pago Mensual)
+              </span>
+              {isAnnual && (
+                <Badge variant="default" className="bg-green-500 text-white">
+                  Ahorra 20%
+                </Badge>
+              )}
+            </div>
           </div>
           
           <motion.div 
