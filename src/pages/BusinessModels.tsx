@@ -148,7 +148,7 @@ const PRICING_TIERS = [
   {
     id: "free",
     name: "Free",
-    price: 0,
+    price: 99,
     icon: Zap,
     color: "slate",
     description: "Para proveedores que comienzan",
