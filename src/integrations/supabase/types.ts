@@ -887,6 +887,45 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_access: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          logo_url: string | null
+          partner_name: string
+          partner_slug: string
+          password_hash: string
+          redirect_path: string
+          updated_at: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string | null
+          partner_name: string
+          partner_slug: string
+          password_hash: string
+          redirect_path: string
+          updated_at?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string | null
+          partner_name?: string
+          partner_slug?: string
+          password_hash?: string
+          redirect_path?: string
+          updated_at?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
       privacy_preferences: {
         Row: {
           access_alerts: boolean | null

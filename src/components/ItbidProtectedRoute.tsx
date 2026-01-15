@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { PartnerProtectedRoute } from "@/components/partners/PartnerProtectedRoute";
 import { ReactNode } from "react";
 
 interface ItbidProtectedRouteProps {
@@ -6,13 +6,11 @@ interface ItbidProtectedRouteProps {
 }
 
 const ItbidProtectedRoute = ({ children }: ItbidProtectedRouteProps) => {
-  const isAuthenticated = sessionStorage.getItem("itbid_authenticated") === "true";
-
-  if (!isAuthenticated) {
-    return <Navigate to="/partners/itbid" replace />;
-  }
-
-  return <>{children}</>;
+  return (
+    <PartnerProtectedRoute partnerSlug="itbid">
+      {children}
+    </PartnerProtectedRoute>
+  );
 };
 
 export default ItbidProtectedRoute;
