@@ -390,7 +390,7 @@ export default function BusinessModels() {
       annualPrice: 399,
       icon: Building2,
       color: "violet",
-      description: "Propietario de nodo en el Data Space",
+      description: "Precio adqusición NODO PONTUS-X = 30.000 EUR (amortización Mensual)",
       cta: "Solicitar Nodo",
       ctaVariant: "secondary" as const,
       transactionFee: "Negociable",
