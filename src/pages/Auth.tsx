@@ -1,28 +1,26 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { FundingFooter } from "@/components/FundingFooter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
 const authSchema = z.object({
   email: z.string().trim().min(1, "El email es obligatorio").email("Introduce un email válido").max(255, "Email demasiado largo"),
   password: z.string().min(6, "La contraseña debe tener al menos 6 caracteres").max(72, "Contraseña demasiado larga")
 });
+
 type AuthFormData = z.infer<typeof authSchema>;
+
 const Auth = () => {
   const [loading, setLoading] = useState(false);
-  const {
-    signIn,
-    signUp,
-    user
-  } = useAuth();
+  const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
+
   const loginForm = useForm<AuthFormData>({
     resolver: zodResolver(authSchema),
     defaultValues: {
@@ -30,47 +28,35 @@ const Auth = () => {
       password: ""
     }
   });
-  const registerForm = useForm<AuthFormData>({
-    resolver: zodResolver(authSchema),
-    defaultValues: {
-      email: "",
-      password: ""
-    }
-  });
+
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
     }
   }, [user, navigate]);
+
   const handleSignIn = async (data: AuthFormData) => {
     setLoading(true);
     await signIn(data.email, data.password);
     setLoading(false);
   };
+
   const handleDemoAccess = async () => {
     setLoading(true);
     const demoEmail = "demo@procuredata.app";
     const demoPassword = "demo123456";
-    const {
-      error: loginError
-    } = await signIn(demoEmail, demoPassword);
+    const { error: loginError } = await signIn(demoEmail, demoPassword);
     if (loginError) {
-      const {
-        error: signupError
-      } = await signUp(demoEmail, demoPassword);
+      const { error: signupError } = await signUp(demoEmail, demoPassword);
       if (!signupError) {
         await signIn(demoEmail, demoPassword);
       }
     }
     setLoading(false);
   };
-  const handleSignUp = async (data: AuthFormData) => {
-    setLoading(true);
-    await signUp(data.email, data.password);
-    setLoading(false);
-    registerForm.reset();
-  };
-  return <div className="flex min-h-screen items-center justify-center bg-background p-4">
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>
@@ -81,75 +67,53 @@ const Auth = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Iniciar Sesión</TabsTrigger>
-              <TabsTrigger value="register">Registrarse</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="login">
-              <Form {...loginForm}>
-                <form onSubmit={loginForm.handleSubmit(handleSignIn)} className="space-y-4">
-                  <FormField control={loginForm.control} name="email" render={({
-                  field
-                }) => <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="tu@email.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>} />
-                  <FormField control={loginForm.control} name="password" render={({
-                  field
-                }) => <FormItem>
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl>
-                          <Input type="password" placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>} />
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Cargando..." : "Iniciar Sesión"}
-                  </Button>
-                  
-                  <Button type="button" variant="outline" className="w-full mt-2 border-amber-500 text-amber-700 hover:bg-amber-50" onClick={handleDemoAccess} disabled={loading}>
-                    🎭 Acceder a Versión Demo
-                  </Button>
-                </form>
-              </Form>
-            </TabsContent>
-
-            <TabsContent value="register">
-              <Form {...registerForm}>
-                <form onSubmit={registerForm.handleSubmit(handleSignUp)} className="space-y-4">
-                  <FormField control={registerForm.control} name="email" render={({
-                  field
-                }) => <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="tu@email.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>} />
-                  <FormField control={registerForm.control} name="password" render={({
-                  field
-                }) => <FormItem>
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl>
-                          <Input type="password" placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>} />
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? "Cargando..." : "Crear Cuenta"}
-                  </Button>
-                </form>
-              </Form>
-            </TabsContent>
-          </Tabs>
+          <Form {...loginForm}>
+            <form onSubmit={loginForm.handleSubmit(handleSignIn)} className="space-y-4">
+              <FormField
+                control={loginForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="tu@email.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={loginForm.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Contraseña</FormLabel>
+                    <FormControl>
+                      <Input type="password" placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Cargando..." : "Iniciar Sesión"}
+              </Button>
+              
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full mt-2 border-amber-500 text-amber-700 hover:bg-amber-50"
+                onClick={handleDemoAccess}
+                disabled={loading}
+              >
+                🎭 Acceder a Versión Demo
+              </Button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
-      
-    </div>;
+    </div>
+  );
 };
+
 export default Auth;
