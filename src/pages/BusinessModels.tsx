@@ -226,7 +226,7 @@ export default function BusinessModels() {
   const { t } = useTranslation('models');
   const [volume, setVolume] = useState([50000]);
   const [suppliers, setSuppliers] = useState([100]);
-  const [isAnnual, setIsAnnual] = useState(false);
+  
 
   // Cálculos gamificados
   const feeRevenue = volume[0] * 0.03; // 3% fee promedio
@@ -804,23 +804,11 @@ sequenceDiagram
               Paga solo por lo que necesitas.
             </p>
             
-            {/* Toggle Mensual/Anual */}
-            <div className="flex items-center justify-center gap-3">
-              <span className={`text-sm font-medium transition-colors ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-                Pago Mensual
-              </span>
-              <Switch 
-                checked={isAnnual} 
-                onCheckedChange={setIsAnnual}
-              />
-              <span className={`text-sm font-medium transition-colors ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+            {/* Nota explicativa */}
+            <div className="flex items-center justify-center">
+              <span className="text-sm font-medium text-muted-foreground">
                 Suscripción Anual Obligatoria (Pago Mensual)
               </span>
-              {isAnnual && (
-                <Badge variant="default" className="bg-green-500 text-white">
-                  Ahorra 20%
-                </Badge>
-              )}
             </div>
           </div>
           
@@ -835,9 +823,7 @@ sequenceDiagram
               const Icon = tier.icon;
               const displayPrice = tier.price === null 
                 ? null 
-                : isAnnual && tier.annualPrice 
-                  ? tier.annualPrice 
-                  : tier.price;
+                : tier.annualPrice || tier.price;
               
               return (
                 <motion.div
@@ -885,11 +871,6 @@ sequenceDiagram
                           <div className="text-2xl font-bold text-muted-foreground">
                             Personalizado
                           </div>
-                        )}
-                        {isAnnual && tier.annualPrice && (
-                          <p className="text-xs text-green-600 mt-1">
-                            Ahorras €{(tier.price! - tier.annualPrice) * 12}/año
-                          </p>
                         )}
                       </div>
                     </CardHeader>
