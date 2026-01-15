@@ -1,0 +1,11 @@
+export { DocHero } from "./DocHero";
+export { DocQuienesSomos } from "./DocQuienesSomos";
+export { DocHistoria } from "./DocHistoria";
+export { DocMisionValores } from "./DocMisionValores";
+export { DocGobernanza } from "./DocGobernanza";
+export { DocFormacion } from "./DocFormacion";
+export { DocCertificacion } from "./DocCertificacion";
+export { DocEventos } from "./DocEventos";
+export { DocInternacional } from "./DocInternacional";
+export { DocSocios } from "./DocSocios";
+export { DocCTA } from "./DocCTA";
