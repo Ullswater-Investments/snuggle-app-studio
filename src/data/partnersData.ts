@@ -90,6 +90,19 @@ export const partnersByCountry: CountryData[] = [
         priority: "quick_win",
         type: "asociación",
       },
+      {
+        id: "telenatura-ebt",
+        name: "TeleNatura EBT",
+        fullName: "TeleNatura - Empresa de Base Tecnológica",
+        logo: null,
+        link: "/partners/premium/telenatura-ebt",
+        status: "activo",
+        sector: "agriculture",
+        hasDocTecnico: false,
+        keyInitiative: "Automatización, IoT, Agricultura de Precisión",
+        priority: "quick_win",
+        type: "asociación",
+      },
       // Clústeres Empresariales (5)
       {
         id: "gaia-cluster",
