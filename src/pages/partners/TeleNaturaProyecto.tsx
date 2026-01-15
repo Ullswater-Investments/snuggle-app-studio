@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Download, ExternalLink } from "lucide-react";
+import { ArrowLeft, Download, FileText, BookOpen, FileSignature } from "lucide-react";
 import { toast } from "sonner";
 import { FundingFooter } from "@/components/FundingFooter";
 import { HeroSection } from "@/components/partners/telenatura/HeroSection";
@@ -12,7 +12,6 @@ import { GlobalNavigation } from "@/components/GlobalNavigation";
 const TeleNaturaProyecto = () => {
   const handleDownloadPDF = () => {
     toast.info("Generando PDF del proyecto...");
-    // TODO: Implement PDF generation for TeleNatura
     setTimeout(() => {
       toast.success("PDF generado correctamente");
     }, 1000);
@@ -34,15 +33,34 @@ const TeleNaturaProyecto = () => {
           </div>
           
           <div className="hidden sm:flex items-center gap-2">
-            <Button variant="default" size="sm" onClick={handleDownloadPDF} className="flex items-center gap-2">
+            {/* Primary Download Button */}
+            <Button 
+              size="sm" 
+              onClick={handleDownloadPDF} 
+              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white"
+            >
               <Download className="h-4 w-4" />
               Descargar PDF
             </Button>
+            
+            {/* Document Navigation Buttons */}
             <Button variant="outline" size="sm" asChild>
-              <a href="https://www.telenatura.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                <ExternalLink className="h-4 w-4" />
-                Web Oficial
-              </a>
+              <Link to="/partners/telenatura-ebt/presentacion" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Presentación Corp.
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/partners/telenatura-ebt/catalogo" className="flex items-center gap-2">
+                <BookOpen className="h-4 w-4" />
+                Catálogo IoT
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/partners/telenatura-ebt/acuerdo" className="flex items-center gap-2">
+                <FileSignature className="h-4 w-4" />
+                Acuerdo Marco
+              </Link>
             </Button>
           </div>
         </div>

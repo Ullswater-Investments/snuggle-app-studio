@@ -122,6 +122,9 @@ import ItbidWhitepaper from "./pages/partners/ItbidWhitepaper";
 import ItbidDocTecnico from "./pages/partners/ItbidDocTecnico";
 import ItbidProtectedRoute from "./components/ItbidProtectedRoute";
 import TeleNaturaProyecto from "./pages/partners/TeleNaturaProyecto";
+import TeleNaturaPresentacion from "./pages/partners/TeleNaturaPresentacion";
+import TeleNaturaCatalogo from "./pages/partners/TeleNaturaCatalogo";
+import TeleNaturaAcuerdo from "./pages/partners/TeleNaturaAcuerdo";
 import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRoute";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
@@ -253,6 +256,21 @@ const App = () => (
                   <Route path="/partners/telenatura-ebt/proyecto" element={
                     <PartnerProtectedRoute partnerSlug="telenatura-ebt">
                       <TeleNaturaProyecto />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/telenatura-ebt/presentacion" element={
+                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                      <TeleNaturaPresentacion />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/telenatura-ebt/catalogo" element={
+                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                      <TeleNaturaCatalogo />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/telenatura-ebt/acuerdo" element={
+                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                      <TeleNaturaAcuerdo />
                     </PartnerProtectedRoute>
                   } />
 
