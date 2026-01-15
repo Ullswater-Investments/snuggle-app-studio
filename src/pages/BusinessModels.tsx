@@ -148,7 +148,7 @@ const PRICING_TIERS = [
   {
     id: "basico",
     name: "PLAN BÁSICO",
-    price: 99,
+    price: 199,
     icon: Zap,
     color: "slate",
     description: "Plan de entrada para proveedores",
@@ -172,8 +172,8 @@ const PRICING_TIERS = [
   {
     id: "conector",
     name: "CONECTOR",
-    price: 200,
-    annualPrice: 160,
+    price: 299,
+    annualPrice: 239,
     icon: Crown,
     color: "blue",
     description: "Membresía al conector del Espacio de Datos",
@@ -198,8 +198,8 @@ const PRICING_TIERS = [
   {
     id: "nodo",
     name: "PROPIETARIO NODO",
-    price: 500,
-    annualPrice: 400,
+    price: 499,
+    annualPrice: 399,
     icon: Building2,
     color: "violet",
     description: "Propietario de nodo en el Data Space",
