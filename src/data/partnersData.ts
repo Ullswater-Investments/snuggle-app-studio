@@ -43,7 +43,7 @@ export const partnersByCountry: CountryData[] = [
         name: "AERCE",
         fullName: "Asociación Española de Profesionales de Compras, Contratación y Aprovisionamientos",
         logo: null,
-        link: "/partners/premium/aerce",
+        link: "/partners/aerce/proyecto",
         status: "activo",
         sector: "procurement",
         hasDocTecnico: false,
