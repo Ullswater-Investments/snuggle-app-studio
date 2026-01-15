@@ -126,6 +126,9 @@ import TeleNaturaPresentacion from "./pages/partners/TeleNaturaPresentacion";
 import TeleNaturaCatalogo from "./pages/partners/TeleNaturaCatalogo";
 import TeleNaturaAcuerdo from "./pages/partners/TeleNaturaAcuerdo";
 import AerceProyecto from "./pages/partners/AerceProyecto";
+import AerceMiembros from "./pages/partners/AerceMiembros";
+import AerceDocInstitucional from "./pages/partners/AerceDocInstitucional";
+import AerceWhitepaper from "./pages/partners/AerceWhitepaper";
 import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRoute";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
@@ -275,8 +278,23 @@ const App = () => (
                     </PartnerProtectedRoute>
                   } />
 
-                  {/* Partner Pages - AERCE public page */}
+                  {/* Partner Pages - AERCE */}
                   <Route path="/partners/aerce/proyecto" element={<AerceProyecto />} />
+                  <Route path="/partners/aerce/miembros" element={
+                    <PartnerProtectedRoute partnerSlug="aerce">
+                      <AerceMiembros />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/aerce/doc-institucional" element={
+                    <PartnerProtectedRoute partnerSlug="aerce">
+                      <AerceDocInstitucional />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/aerce/whitepaper" element={
+                    <PartnerProtectedRoute partnerSlug="aerce">
+                      <AerceWhitepaper />
+                    </PartnerProtectedRoute>
+                  } />
 
                   {/* Protected routes with AppLayout */}
                   <Route element={
