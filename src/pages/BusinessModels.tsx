@@ -385,7 +385,7 @@ export default function BusinessModels() {
     },
     {
       id: "nodo",
-      name: "PROPIETARIO NODO",
+      name: "NODO PROPIETARIO",
       price: 459,
       annualPrice: 459,
       icon: Building2,
