@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, BookOpen, Shield, Coins, Bot, Globe, Home } from "lucide-react";
-import { FundingFooter } from "@/components/FundingFooter";
+
 
 export default function Guide() {
   const scrollToSection = (id: string) => {
@@ -191,7 +191,6 @@ export default function Guide() {
 
         </div>
       </main>
-      <FundingFooter variant="light" showTransparency={false} />
     </div>
   );
 }
