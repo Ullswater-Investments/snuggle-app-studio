@@ -137,6 +137,7 @@ import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRou
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
+import SectoralNodesPage from "./pages/SectoralNodesPage";
 
 const queryClient = new QueryClient();
 
@@ -181,6 +182,7 @@ const App = () => (
                   <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
                   <Route path="/kit-espacio-datos" element={<KitEspacioDatos />} />
                   <Route path="/contrato-adhesion" element={<ContratoAdhesion />} />
+                  <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
                   
                   {/* Motor de ProcureData - Technical Deep Dives */}
                   <Route path="/motor" element={<Navigate to="/models" replace />} />

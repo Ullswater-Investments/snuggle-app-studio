@@ -513,6 +513,12 @@ export default function Landing() {
                 <li><Link to="/success-stories" className="hover:text-white transition-colors">{t('successCases')}</Link></li>
                 <li><Link to="/partners" className="hover:text-white transition-colors">PARTNERS</Link></li>
                 <li><Link to="/kit-espacio-datos" className="hover:text-white transition-colors">KIT ESPACIO DE DATOS</Link></li>
+                <li>
+                  <Link to="/nodos-sectoriales" className="hover:text-white transition-colors flex items-center gap-1.5">
+                    NODO Propietario
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-orange-500/20 text-orange-300 border-orange-500/30">Nuevo</Badge>
+                  </Link>
+                </li>
               </ul>
             </div>
 
