@@ -158,7 +158,6 @@ const CloserStillMiembros = () => {
                       <CardDescription>e-Show Innovation Gallery</CardDescription>
                     </div>
                   </div>
-                  <Badge className="w-fit bg-purple-100 text-purple-700 border-purple-300">NUEVO</Badge>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground text-sm mb-4">
@@ -167,6 +166,31 @@ const CloserStillMiembros = () => {
                   </p>
                   <div className="flex items-center text-purple-600 text-sm font-medium">
                     Ver galería <ArrowRight className="h-4 w-4 ml-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link to="/partners/closerstill/miembros/pioneer">
+              <Card className="hover:shadow-lg transition-all hover:border-violet-300 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-violet-600 to-amber-500">
+                      <Rocket className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">Programa Pioneer e-Show 2026</CardTitle>
+                      <CardDescription>20 Casos + 3 Pilotos + Roadmap</CardDescription>
+                    </div>
+                  </div>
+                  <Badge className="w-fit bg-amber-100 text-amber-700 border-amber-300">ESTRATÉGICO</Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Matriz estratégica de 20 casos de uso, 3 pilotos prioritarios y hoja de ruta de ejecución.
+                  </p>
+                  <div className="flex items-center text-violet-600 text-sm font-medium">
+                    Ver propuesta <ArrowRight className="h-4 w-4 ml-1" />
                   </div>
                 </CardContent>
               </Card>
