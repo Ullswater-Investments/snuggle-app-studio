@@ -138,6 +138,10 @@ import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
 import SectoralNodesPage from "./pages/SectoralNodesPage";
+import MarketplacePage from "./pages/nodos/MarketplacePage";
+import OdrlPage from "./pages/nodos/OdrlPage";
+import MonetizacionPage from "./pages/nodos/MonetizacionPage";
+import MarcaBlancaPage from "./pages/nodos/MarcaBlancaPage";
 
 const queryClient = new QueryClient();
 
@@ -183,6 +187,10 @@ const App = () => (
                   <Route path="/kit-espacio-datos" element={<KitEspacioDatos />} />
                   <Route path="/contrato-adhesion" element={<ContratoAdhesion />} />
                   <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
+                  <Route path="/nodos/marketplace" element={<MarketplacePage />} />
+                  <Route path="/nodos/odrl" element={<OdrlPage />} />
+                  <Route path="/nodos/monetizacion" element={<MonetizacionPage />} />
+                  <Route path="/nodos/marca-blanca" element={<MarcaBlancaPage />} />
                   
                   {/* Motor de ProcureData - Technical Deep Dives */}
                   <Route path="/motor" element={<Navigate to="/models" replace />} />

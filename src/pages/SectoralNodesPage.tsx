@@ -48,22 +48,26 @@ const SectoralNodesPage = () => {
     {
       icon: Layers,
       title: "Marketplace Propio",
-      description: "Decide qué datasets y servicios se publican en tu catálogo privado."
+      description: "Decide qué datasets y servicios se publican en tu catálogo privado.",
+      link: "/nodos/marketplace"
     },
     {
       icon: ShieldCheck,
       title: "Políticas ODRL",
-      description: "Define reglas de compartición específicas para tu industria."
+      description: "Define reglas de compartición específicas para tu industria.",
+      link: "/nodos/odrl"
     },
     {
       icon: Coins,
       title: "Monetización",
-      description: "Establece comisiones por transacción y vende servicios de valor añadido."
+      description: "Establece comisiones por transacción y vende servicios de valor añadido.",
+      link: "/nodos/monetizacion"
     },
     {
       icon: Sparkles,
       title: "Marca Blanca",
-      description: "Personalización con tu logo e identidad, powered by ProcureData."
+      description: "Personalización con tu logo e identidad, powered by ProcureData.",
+      link: "/nodos/marca-blanca"
     }
   ];
 
@@ -270,17 +274,22 @@ const SectoralNodesPage = () => {
           >
             {promoterBenefits.map((benefit, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-lg transition-shadow border-2 hover:border-orange-200 dark:hover:border-orange-800/50">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
-                      <benefit.icon className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-                    </div>
-                    <CardTitle className="text-lg">{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground text-sm">{benefit.description}</p>
-                  </CardContent>
-                </Card>
+                <Link to={benefit.link}>
+                  <Card className="h-full hover:shadow-lg transition-all border-2 hover:border-orange-200 dark:hover:border-orange-800/50 group cursor-pointer">
+                    <CardHeader>
+                      <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <benefit.icon className="h-6 w-6 text-orange-600 dark:text-orange-400" />
+                      </div>
+                      <CardTitle className="text-lg flex items-center gap-2">
+                        {benefit.title}
+                        <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-sm">{benefit.description}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
