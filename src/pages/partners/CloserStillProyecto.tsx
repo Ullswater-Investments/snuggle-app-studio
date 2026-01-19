@@ -305,8 +305,7 @@ const CloserStillProyecto = () => {
                   </Button>
                   <Button 
                     size="lg" 
-                    variant="outline" 
-                    className="border-white text-white hover:bg-white/10"
+                    className="bg-white text-blue-700 hover:bg-blue-50"
                     asChild
                   >
                     <Link to="/kit-espacio-datos">
