@@ -148,6 +148,7 @@ import PagosEUROePage from "./pages/nodos/PagosEUROePage";
 import ConectoresERPPage from "./pages/nodos/ConectoresERPPage";
 import GobernanzaIDSAPage from "./pages/nodos/GobernanzaIDSAPage";
 import MultiTenantRLSPage from "./pages/nodos/MultiTenantRLSPage";
+import NodeRequirementsPage from "./pages/nodos/NodeRequirementsPage";
 
 const queryClient = new QueryClient();
 
@@ -203,6 +204,7 @@ const App = () => (
                   <Route path="/nodos/conectores-erp" element={<ConectoresERPPage />} />
                   <Route path="/nodos/gobernanza-idsa" element={<GobernanzaIDSAPage />} />
                   <Route path="/nodos/multi-tenant-rls" element={<MultiTenantRLSPage />} />
+                  <Route path="/nodos/requisitos" element={<NodeRequirementsPage />} />
                   
                   {/* Motor de ProcureData - Technical Deep Dives */}
                   <Route path="/motor" element={<Navigate to="/models" replace />} />
