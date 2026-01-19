@@ -95,7 +95,7 @@ const CloserStillMiembros = () => {
             <FileText className="h-5 w-5 text-blue-600" />
             Documentos Disponibles
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <Link to="/partners/closerstill/miembros/365">
               <Card className="hover:shadow-lg transition-all hover:border-blue-300 cursor-pointer h-full">
                 <CardHeader>
@@ -115,6 +115,31 @@ const CloserStillMiembros = () => {
                     Beneficios para expositores y visitantes del nuevo Nodo de Datos Federado.
                   </p>
                   <div className="flex items-center text-blue-600 text-sm font-medium">
+                    Ver documento <ArrowRight className="h-4 w-4 ml-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link to="/partners/closerstill/miembros/casos-uso">
+              <Card className="hover:shadow-lg transition-all hover:border-emerald-300 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-500 to-blue-600">
+                      <Target className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">5 Casos de Uso de Alto Valor</CardTitle>
+                      <CardDescription>CloserStill Data Engine</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Motor de Ventas, Motor de Ingresos y Motor de Confianza: 
+                    Estrategia de monetización para cada feria del portfolio.
+                  </p>
+                  <div className="flex items-center text-emerald-600 text-sm font-medium">
                     Ver documento <ArrowRight className="h-4 w-4 ml-1" />
                   </div>
                 </CardContent>
