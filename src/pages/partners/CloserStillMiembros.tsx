@@ -171,6 +171,31 @@ const CloserStillMiembros = () => {
               </Card>
             </Link>
 
+            <Link to="/partners/closerstill/miembros/prismaticos">
+              <Card className="hover:shadow-lg transition-all hover:border-indigo-300 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-500">
+                      <Zap className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">10 Casos Prismáticos</CardTitle>
+                      <CardDescription>Sistema Operativo e-Show</CardDescription>
+                    </div>
+                  </div>
+                  <Badge className="w-fit bg-indigo-100 text-indigo-700 border-indigo-300">NUEVO</Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    10 casos orientados al negocio real: Aceleración, Experiencia VIP y Ecosistema 365.
+                  </p>
+                  <div className="flex items-center text-indigo-600 text-sm font-medium">
+                    Ver galería <ArrowRight className="h-4 w-4 ml-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+
             <Link to="/partners/closerstill/miembros/pioneer">
               <Card className="hover:shadow-lg transition-all hover:border-violet-300 cursor-pointer h-full">
                 <CardHeader>
