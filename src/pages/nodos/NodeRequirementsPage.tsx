@@ -452,7 +452,7 @@ export const NodeRequirementsPage = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium text-foreground">Concesión Ayuda</span>
-                        <span className="font-bold text-green-600">5.000 €</span>
+                        <span className="font-bold text-green-600">15.000 €</span>
                       </div>
                       <p className="text-xs text-muted-foreground">Firma Renovación Contrato 2 años</p>
                     </div>
