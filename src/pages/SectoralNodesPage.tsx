@@ -157,9 +157,11 @@ const SectoralNodesPage = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline">
-                <Download className="mr-2 h-4 w-4" />
-                Descargar Dossier SEDIA
+              <Button size="lg" variant="outline" asChild>
+                <Link to="/nodos/tecnologia">
+                  <Network className="mr-2 h-4 w-4" />
+                  Ver Arquitectura Técnica
+                </Link>
               </Button>
             </div>
           </motion.div>
