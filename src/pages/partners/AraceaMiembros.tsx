@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { FundingFooter } from "@/components/FundingFooter";
 import { motion } from "framer-motion";
+import { AraceaAdhesionForm } from "@/components/partners/aracea/AraceaAdhesionForm";
 import { 
   Factory, 
   ShieldCheck, 
@@ -105,6 +106,7 @@ const AraceaMiembros = () => {
               <Button 
                 size="lg" 
                 className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-6 rounded-xl font-bold text-lg shadow-lg shadow-orange-900/30 hover:scale-105 transition-all"
+                onClick={() => document.getElementById('adhesion-form')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Solicitar Adhesión al Nodo <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -431,6 +433,9 @@ const AraceaMiembros = () => {
         </div>
       </section>
 
+      {/* Formulario de Adhesión */}
+      <AraceaAdhesionForm />
+
       {/* CTA Final */}
       <section className="py-16 md:py-20 px-6 bg-gradient-to-r from-orange-600 to-orange-700">
         <div className="max-w-4xl mx-auto text-center">
@@ -450,6 +455,7 @@ const AraceaMiembros = () => {
               <Button 
                 size="lg" 
                 className="bg-white hover:bg-gray-100 text-orange-700 px-8 py-6 rounded-xl font-bold text-lg shadow-lg hover:scale-105 transition-all"
+                onClick={() => document.getElementById('adhesion-form')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Solicitar Adhesión <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
