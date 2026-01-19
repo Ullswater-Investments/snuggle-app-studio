@@ -372,7 +372,7 @@ export const NodeRequirementsPage = () => {
             Desglose transparente de costes y flujo de caja. Todos los importes son 100% subvencionables.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Tarjeta Promotor */}
             <Card className="border-2 border-orange-200 shadow-lg overflow-hidden">
               <CardHeader className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4">
@@ -381,41 +381,41 @@ export const NodeRequirementsPage = () => {
                   <span className="font-bold text-lg">PROMOTOR (Tú)</span>
                 </div>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="text-center mb-6">
-                  <p className="text-sm text-muted-foreground mb-1">COSTE desarrollo de un NODO PROPIETARIO</p>
+                <CardContent className="p-8">
+                  <div className="text-center mb-6">
+                    <p className="text-sm text-muted-foreground mb-1">COSTE desarrollo de un NODO PROPIETARIO</p>
                   <p className="text-4xl font-bold text-foreground">30.000 €</p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3 p-4 bg-orange-50 rounded-xl border border-orange-100">
+                  <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
                     <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium text-foreground">A la firma (Anticipo)</span>
-                        <span className="font-bold text-orange-600">5.000 €</span>
+                        <span className="font-bold text-orange-600 dark:text-orange-400">5.000 €</span>
                       </div>
                       <p className="text-xs text-muted-foreground">Generación de instancia y configuración inicial</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-4 bg-green-50 rounded-xl border border-green-100">
+                  <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-800/50">
                     <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium text-foreground">Concesión Ayuda</span>
-                        <span className="font-bold text-green-600">30.000 €</span>
+                        <span className="font-bold text-green-600 dark:text-green-400">30.000 €</span>
                       </div>
                       <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-4 bg-orange-50 rounded-xl border border-orange-100">
+                  <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
                     <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-foreground">El Promotor NO TIENE que pagar hasta que recibe la subvención</span>
-                        <span className="font-bold text-orange-600">25.000 €</span>
+                        <span className="font-medium text-foreground">Paga el principal cuando recibas la Subvención de RED.es</span>
+                        <span className="font-bold text-orange-600 dark:text-orange-400">25.000 €</span>
                       </div>
                     </div>
                   </div>
@@ -438,31 +438,31 @@ export const NodeRequirementsPage = () => {
                   <span className="font-bold text-lg">PARTICIPANTE (×5)</span>
                 </div>
               </CardHeader>
-              <CardContent className="p-6">
-                <div className="text-center mb-6">
-                  <p className="text-sm text-muted-foreground mb-1">COSTE de CONEXIÓN (Anualidad)</p>
+                <CardContent className="p-8">
+                  <div className="text-center mb-6">
+                    <p className="text-sm text-muted-foreground mb-1">COSTE de CONEXIÓN (Anualidad)</p>
                   <p className="text-4xl font-bold text-foreground">3.000 €</p>
                   <p className="text-xs text-muted-foreground mt-1">por cada empresa participante</p>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3 p-4 bg-orange-50 rounded-xl border border-orange-100">
+                  <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
                     <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium text-foreground">Firma Contrato 1 año</span>
-                        <span className="font-bold text-orange-600">250 € al mes</span>
+                        <span className="font-bold text-orange-600 dark:text-orange-400">250 € al mes</span>
                       </div>
                       <p className="text-xs text-muted-foreground">Alta de identidad y wallet Web3</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-4 bg-green-50 rounded-xl border border-green-100">
+                  <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-800/50">
                     <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium text-foreground">Concesión Ayuda</span>
-                        <span className="font-bold text-green-600">15.000 €</span>
+                        <span className="font-bold text-green-600 dark:text-green-400">15.000 €</span>
                       </div>
                       <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
                     </div>
