@@ -406,7 +406,7 @@ export const NodeRequirementsPage = () => {
                         <span className="font-medium text-foreground">Concesión Ayuda</span>
                         <span className="font-bold text-green-600">30.000 €</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">Pago diferido contra resolución favorable</p>
+                      <p className="text-xs text-muted-foreground">AYUDA KIT ESPACIO DE DATOS</p>
                     </div>
                   </div>
 
