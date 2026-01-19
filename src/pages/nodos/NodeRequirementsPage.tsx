@@ -472,7 +472,7 @@ export const NodeRequirementsPage = () => {
                     <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
-                        <span className="font-medium text-foreground">Renovación Contrato de Conexión 1 año contra resolución favorable</span>
+                        <span className="font-medium text-foreground">Renovación Contrato de Conexión + 1 año contra resolución favorable de la subvención</span>
                         <span className="font-bold text-orange-600">3.000 €</span>
                       </div>
                     </div>
