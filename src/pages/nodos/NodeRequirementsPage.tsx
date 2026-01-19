@@ -441,7 +441,7 @@ export const NodeRequirementsPage = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-1">
                         <span className="font-medium text-foreground">A la firma (Anticipo)</span>
-                        <span className="font-bold text-slate-700">2.000 €</span>
+                        <span className="font-bold text-slate-700">250 € al mes</span>
                       </div>
                       <p className="text-xs text-muted-foreground">Alta de identidad y wallet Web3</p>
                     </div>
