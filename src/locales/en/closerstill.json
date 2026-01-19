@@ -1,0 +1,491 @@
+{
+  "login": {
+    "title": "CloserStill Media",
+    "subtitle": "Private members area",
+    "username": "Username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "submit": "Access",
+    "loading": "Verifying...",
+    "backToDirectory": "Back to directory",
+    "accessGranted": "Access granted",
+    "invalidCredentials": "Invalid credentials",
+    "loginError": "Login error",
+    "loadingText": "Loading..."
+  },
+  "header": {
+    "membersArea": "Members Area",
+    "confidentialDocument": "Confidential Document",
+    "logout": "Logout",
+    "closerstill365Badge": "CloserStill 365",
+    "useCasesSubtitle": "5 High-Value Use Cases"
+  },
+  "miembros": {
+    "heroTitle": "Members Area",
+    "heroHighlight": "CloserStill Media",
+    "heroSubtitle": "Access exclusive documentation about the e-Show Data Node",
+    "confidentialBadge": "Confidential Documents - Partners Only",
+    "documentsAvailable": "Available Documents",
+    "documents": {
+      "doc365": {
+        "title": "CloserStill 365: The Infinite Data Ecosystem",
+        "description": "Corporate Vision and Value Proposition",
+        "summary": "The \"Closer Still\" philosophy evolves: From handshake to smart contract. Benefits for exhibitors and visitors of the new Federated Data Node."
+      },
+      "useCases": {
+        "title": "5 High-Value Use Cases",
+        "description": "CloserStill Data Engine",
+        "summary": "Sales Engine, Revenue Engine and Trust Engine: Monetization strategy for each portfolio trade show."
+      },
+      "eshow": {
+        "title": "Strategic Proposal e-Show Data Space Node",
+        "description": "From 2-Day Trade Show to 365 Ecosystem",
+        "summary": "Technical and business proposal for CloserStill Media's Proprietary Node. Includes revenue model and next steps."
+      }
+    },
+    "viewDocument": "View document",
+    "viewingNow": "Viewing now",
+    "proposal": {
+      "confidentialBadge": "Confidential Document - Partners Only",
+      "title": "STRATEGIC PROPOSAL",
+      "subtitle": "e-Show Data Space Node",
+      "description": "From 2-Day Trade Show to 365 Business Ecosystem"
+    },
+    "vision": {
+      "title": "1. The Vision: Liquid Ecosystem",
+      "problem": {
+        "title": "The Problem",
+        "text": "Today, e-Show connects supply and demand in-person. When the lights go off, bureaucratic friction (compliance, validation, paperwork) slows down deal closings."
+      },
+      "solution": {
+        "title": "The Solution",
+        "text": "Implement a Proprietary Node in ProcureData (based on Pontus-X / Gaia-X). We turn e-Show into the first organizer offering Sovereign Data Infrastructure."
+      },
+      "keyConcept": {
+        "title": "Key Concept",
+        "text": "\"Agustín, we're not just selling square meters; we're selling Secure Data Highways so your exhibitors close deals faster.\""
+      }
+    },
+    "opportunity": {
+      "title": "2. The Opportunity: Data Space Kit 🇪🇺",
+      "role": {
+        "title": "e-Show's Role",
+        "text": "Act as Promoting Entity of the \"Digital Commerce Data Space\"."
+      },
+      "incentive": {
+        "title": "The Incentive",
+        "text": "Help your exhibitors access <strong>€150,000 - €300,000</strong> in public funding."
+      },
+      "loyalty": {
+        "title": "Loyalty Building",
+        "text": "If you provide the technology and subsidy, the exhibitor \"marries\" the trade show."
+      }
+    },
+    "node": {
+      "title": "3. What Does a Proprietary Node Provide?",
+      "seller": {
+        "title": "The Seller",
+        "subtitle": "For the Exhibitor",
+        "objective": "Objective: Sell faster (Fast-Track)",
+        "features": {
+          "identity": "<strong>Sovereign Identity (DID):</strong> Their Badge becomes a Digital Wallet.",
+          "validation": "<strong>Instant Validation:</strong> Automatically transmits solvency and ISOs.",
+          "monetization": "<strong>Monetization:</strong> Sale of trend datasets in the Marketplace."
+        }
+      },
+      "buyer": {
+        "title": "The Buyer",
+        "subtitle": "For the Visitor",
+        "objective": "Objective: Reliable suppliers without risk",
+        "features": {
+          "trust": "<strong>Zero-Trust Confidence:</strong> Suppliers with automatic Blockchain KYB.",
+          "integration": "<strong>One-Click Integration:</strong> Direct export to ERP (SAP/Oracle).",
+          "scouting": "<strong>Smart Scouting:</strong> Advanced filters by certification and revenue."
+        }
+      },
+      "organizer": {
+        "title": "The Organizer",
+        "subtitle": "For e-Show",
+        "objective": "Objective: New Revenue and Leadership",
+        "features": {
+          "monetization": "<strong>Data Monetization:</strong> Fee per post-event data transactions.",
+          "intelligence": "<strong>Market Intelligence:</strong> Real supply and demand data.",
+          "leadership": "<strong>Leadership:</strong> First trade show organizer implementing Web3 / Gaia-X."
+        }
+      }
+    },
+    "journey": {
+      "title": "4. The Digital Customer Journey",
+      "steps": {
+        "encounter": {
+          "title": "The Encounter",
+          "desc": "Badge scanning at the booth"
+        },
+        "handshake": {
+          "title": "Digital Handshake",
+          "desc": "Node executes Smart Contract"
+        },
+        "validation": {
+          "title": "The Validation",
+          "desc": "Credential exchange (seconds)"
+        },
+        "result": {
+          "title": "The Result",
+          "desc": "Supplier Validated in ERP"
+        }
+      }
+    },
+    "revenue": {
+      "title": "5. Proposed Revenue Model",
+      "streams": {
+        "subscription": {
+          "name": "'Trust+' Subscription",
+          "desc": "Extra fee for year-round validated 'Digital Passport'."
+        },
+        "marketplace": {
+          "name": "Data Marketplace Fee",
+          "desc": "Commission on datasets sold between participants."
+        },
+        "grants": {
+          "name": "Grant Management",
+          "desc": "Fee for managing Data Space Kit access."
+        }
+      },
+      "potential": "Potential"
+    },
+    "nextSteps": {
+      "title": "6. Next Steps",
+      "steps": [
+        "Pilot at e-Show Madrid: Enable a 'Fast-Track Lane' for 50 VIP exhibitors.",
+        "Joint Webinar: 'How to finance your data transformation with the Data Space Kit'.",
+        "Node Implementation: Deploy a Gaia-X Node owned by CloserStill Media."
+      ]
+    }
+  },
+  "closerstill365": {
+    "badge": "The Infinite Data Ecosystem",
+    "hero": {
+      "physical": "Physical",
+      "smartContract": "Smart Contract",
+      "title": "From Handshake to",
+      "titleHighlight": "Smart Contract",
+      "subtitle": "Our philosophy is <strong>'Closer Still'</strong>. That's why we no longer just connect people in a venue; we connect your companies' systems permanently, securely, and sovereignly."
+    },
+    "vision": {
+      "badge": "The New Closeness",
+      "title": "The trade show lasts 48 hours.",
+      "titleHighlight": "Business runs 365 days.",
+      "subtitle": "From physical contact to permanent digital connection.",
+      "narrative": {
+        "p1": "For years, our mission has been to bring people together. Uniting supply and demand under one roof to spark <strong>business opportunities</strong>.",
+        "p2": "But we know that when the pavilion lights go off, the real obstacle course begins: bureaucracy, supplier validation, audits, and information silos.",
+        "p3": "Today, <span>CloserStill takes its most ambitious leap in history</span>. We no longer just organize events; <strong>we orchestrate ecosystems</strong>."
+      },
+      "pillars": {
+        "trust": {
+          "title": "Trust",
+          "description": "Share solvency data instantly, without intermediaries or delays."
+        },
+        "efficiency": {
+          "title": "Efficiency",
+          "description": "Integrate product and service catalogs with a single click."
+        },
+        "transparency": {
+          "title": "Transparency",
+          "description": "Validate ISO and ESG credentials without unnecessary bureaucracy."
+        }
+      },
+      "quote": "\"CloserStill Media launches its own <span>Federated Data Space Node</span> so that the connection born at the trade show, <strong>lives in the cloud</strong>.\""
+    },
+    "exhibitor": {
+      "badge": "For the Exhibitor",
+      "title": "Your Badge is now your",
+      "titleHighlight": "Solvency Passport",
+      "subtitle": "Activate the commercial \"Fast-Track\" and reduce your Time-to-Contract from months to minutes.",
+      "problem": "\"How many business cards grow cold in a drawer waiting for the client's Procurement department to validate you? Your biggest ROI enemy isn't the competition, <strong>it's administrative friction</strong>.\"",
+      "features": {
+        "solvency": "Your <strong>financial solvency</strong> (Scoring)",
+        "certifications": "Your <strong>ISO and ESG certifications</strong> updated",
+        "catalog": "Your <strong>service catalog</strong> in interoperable format"
+      },
+      "result": {
+        "label": "RESULT",
+        "text": "Convert your leads into signed contracts <strong>at lightning speed</strong>."
+      },
+      "funding": {
+        "label": "Access to Data Space Kit",
+        "amount": "€150,000 - €300,000"
+      }
+    },
+    "visitor": {
+      "badge": "For the Visitor",
+      "title": "Scouting with Guarantee",
+      "titleHighlight": "'CloserStill Verified'",
+      "subtitle": "Find, validate and integrate new partners without compliance risk.",
+      "problem": "\"How do you know if that supplier you met at e-Show is solvent? Or if they comply with ESG regulations? At CloserStill, <strong>we raise the standard</strong>.\"",
+      "features": {
+        "zeroTrust": {
+          "title": "Zero-Trust",
+          "description": "KYB registered on Blockchain"
+        },
+        "smartFiltering": {
+          "title": "Smart Filtering",
+          "description": "By carbon footprint or technical capability"
+        },
+        "oneClick": {
+          "title": "One-Click Integration",
+          "description": "Direct export to SAP, Oracle, Microsoft"
+        }
+      },
+      "guarantee": {
+        "label": "GUARANTEE",
+        "text": "Do business with the peace of mind knowing that <strong>CloserStill has already done the Due Diligence for you</strong>."
+      },
+      "trustSeal": {
+        "label": "Trust Seal",
+        "value": "Data Space Ready"
+      }
+    },
+    "liquidFair": {
+      "badge": "Welcome to the era of the",
+      "title": "Liquid Trade Show",
+      "subtitle": "The trade show no longer ends when the venue doors close. Business flows, data connects, trust remains."
+    },
+    "footer": {
+      "poweredBy": "Powered by",
+      "strategicNote": "Strategic note:",
+      "quote": "\"We're not selling 'blockchain' or 'complex technology'. We're selling <span>speed for the seller</span> and <span>security for the buyer</span>.\""
+    }
+  },
+  "useCases": {
+    "badge": "Monetization Strategy",
+    "title": "CloserStill",
+    "titleHighlight": "Data Engine",
+    "subtitle": "5 High-Value Use Cases to monetize your position as an \"industry connector\" using Federated Data Space technology",
+    "engines": {
+      "sales": {
+        "title": "Sales Engine",
+        "description": "Accelerate vendor qualification",
+        "cases": "Case 1"
+      },
+      "revenue": {
+        "title": "Revenue Engine",
+        "description": "Sell market intelligence",
+        "cases": "Case 2"
+      },
+      "trust": {
+        "title": "Trust Engine",
+        "description": "Verify sustainability and compliance",
+        "cases": "Cases 3, 4, 5"
+      }
+    },
+    "cases": {
+      "1": {
+        "name": "Express Business Passport",
+        "category": "Sales Acceleration",
+        "feria": "Madrid Tech Show / E-Show",
+        "problem": "An exhibitor gets 200 leads at the trade show. 80% go cold because, after the event, the tedious process of legal documentation exchange, NDAs, and supplier validation (Onboarding) begins, lasting weeks.",
+        "solution": [
+          "The visitor's and exhibitor's 'Badge' is not just a contact QR, it's an Identity Wallet (DID).",
+          "When there's a 'match', a smart contract (ODRL) is activated allowing the buyer temporary access to the seller's qualification folder.",
+          "Available data: ISO Certificates, Solvency, Tax Data, Compliance."
+        ],
+        "value": "Sell a 'Premium Exhibitor' package that includes this prior validation. The exhibitor leaves the trade show with suppliers already qualified in their potential clients' systems.",
+        "impact": "From weeks of onboarding to minutes of validation"
+      },
+      "2": {
+        "name": "Market Intelligence Marketplace",
+        "category": "Data Monetization",
+        "feria": "Technology for Marketing (TFM) / Big Data & AI World",
+        "problem": "Companies pay fortunes to consultancies (Gartner, Forrester) for trend reports that are usually survey data and opinions.",
+        "solution": [
+          "CloserStill has real behavioral data: Which booths do CPOs visit? What categories do CTOs search for?",
+          "An anonymized Data Product is created where exhibitors can contribute their own sales trend data (without revealing clients) in exchange for tokens or discounts.",
+          "Compute-to-Data technology is used: Analysis algorithms run on the data without it leaving each company's sovereignty."
+        ],
+        "value": "Sell 'Real-Time Market Intelligence' reports based on actual sector transactional data, not surveys.",
+        "impact": "New revenue stream based on data monetization"
+      },
+      "3": {
+        "name": "End-to-End Pharmaceutical Traceability",
+        "category": "Compliance",
+        "feria": "Infarma (Healthcare/Pharma Sector)",
+        "problem": "The pharmaceutical industry has critical regulations (like the anti-counterfeiting directive). Verifying a new packaging or raw material supplier's supply chain at the trade show is complex.",
+        "solution": [
+          "Create a secure channel in the Data Space for serialization and quality verification.",
+          "A laboratory can verify at a logistics supplier's booth if they comply with GDP (Good Distribution Practice) standards.",
+          "Real-time data node query, with immutable Blockchain traceability."
+        ],
+        "value": "Positions Infarma not just as a congress, but as a regulatory compliance hub.",
+        "impact": "Unique differentiation in the pharma sector"
+      },
+      "4": {
+        "name": "The Verified 'Green Badge'",
+        "category": "Sustainability / ESG",
+        "feria": "All events (Cross-cutting)",
+        "problem": "Large corporations (VIP visitors) have strict mandates to reduce Scope 3 emissions (supply chain). They need to contract sustainable suppliers but distrust 'Greenwashing'.",
+        "solution": [
+          "Exhibitors upload their Carbon Footprint data and energy certifications to their ProcureData node.",
+          "CloserStill offers visitors a 'Sustainable Scouting' app: Filter exhibitors with audited and digitally signed emissions data.",
+          "Verification based on real data, not declarations."
+        ],
+        "value": "Attracts large corporate buyers who need to justify green purchases to their shareholders.",
+        "impact": "Differential ESG positioning"
+      },
+      "5": {
+        "name": "'Blind' Private Matchmaking",
+        "category": "Privacy",
+        "feria": "eForums (One to One) / Dental Summit",
+        "problem": "In high-level meetings, companies sometimes don't want to reveal their strategic needs unless there's a perfect match. 'I'm looking for a cybersecurity solution for a 500k budget, but I don't want the market to know I have that vulnerability'.",
+        "solution": [
+          "Blind Matching: The buyer posts their need in the data space in encrypted form.",
+          "Suppliers post their capabilities without knowing the buyer.",
+          "ProcureData's algorithm matches supply and demand without revealing the buyer's identity until there's a 'match' of technical capabilities and budget."
+        ],
+        "value": "Elevates eForums quality, guaranteeing absolute confidentiality and high relevance in meetings.",
+        "impact": "High-value matchmaking with total privacy"
+      }
+    },
+    "labels": {
+      "case": "Case",
+      "problem": "The Problem",
+      "useCase": "The Use Case",
+      "valueFor": "Value for CloserStill",
+      "impact": "Impact"
+    },
+    "summary": {
+      "badge": "Executive Summary",
+      "title": "The CloserStill",
+      "titleHighlight": "Data Engine",
+      "subtitle": "Three value engines that transform CloserStill from event organizer to sovereign data platform",
+      "sales": {
+        "title": "SALES Engine",
+        "category": "Sales Acceleration",
+        "description": "Accelerates supplier qualification"
+      },
+      "revenue": {
+        "title": "REVENUE Engine",
+        "category": "Data Monetization",
+        "description": "Sells real market intelligence"
+      },
+      "trust": {
+        "title": "TRUST Engine",
+        "category": "Compliance, ESG & Privacy",
+        "description": "Verifies sustainability and regulatory compliance"
+      }
+    },
+    "footer": {
+      "quote": "\"We don't sell technology; we sell <span>commercial acceleration</span> for exhibitors and <span>contracting security</span> for visitors.\""
+    }
+  },
+  "proyecto": {
+    "backToPartners": "Back to Partners",
+    "badges": {
+      "strategicPartner": "Strategic Partner",
+      "kitReady": "Data Space Kit Ready",
+      "ecosystemBuilder": "Ecosystem Builder"
+    },
+    "hero": {
+      "title": "CloserStill Media",
+      "subtitle": "Global leader in professional trade shows and B2B events organization. Driving force behind the <strong>Digital Commerce Data Space</strong> in Spain.",
+      "stats": {
+        "countries": "Spain & UK",
+        "visitors": "+50,000 Visitors/year",
+        "exhibitors": "+1,500 Exhibitors"
+      }
+    },
+    "profile": {
+      "title": "Corporate Profile",
+      "p1": "CloserStill Media is the global leader in professional trade shows and B2B events organization. In Spain, it manages the most powerful networking ecosystem in the market, connecting supply and demand through \"umbrella event\" strategies that bring together C-Level executives from multiple verticals under one roof.",
+      "p2": "Its focus spans from critical technology infrastructure to digital retail and the pharmaceutical sector, acting as the main driver of in-person business in Madrid and Barcelona."
+    },
+    "ecosystems": {
+      "title": "Connected Ecosystems Portfolio",
+      "subtitle": "Through this alliance, ProcureData enables data interoperability at the following key events:",
+      "items": {
+        "madridTech": {
+          "name": "Madrid Tech Show",
+          "location": "IFEMA, Madrid",
+          "description": "Spain's largest technology convergence",
+          "subEvents": [
+            "E-Show Madrid",
+            "Big Data & AI World",
+            "Cyber Security World",
+            "Cloud & AI Infrastructure",
+            "Data Centre World",
+            "Connectivity World",
+            "Technology for Marketing (TFM)"
+          ]
+        },
+        "barcelona": {
+          "name": "Barcelona Digital Hub",
+          "location": "Barcelona",
+          "description": "Focus on digital business and retail transformation",
+          "subEvents": [
+            "E-Show Barcelona (Flagship Edition)",
+            "TFM Barcelona"
+          ]
+        },
+        "health": {
+          "name": "Health & Pharma Sector",
+          "location": "National",
+          "description": "Leading events in the pharmaceutical and dental sector",
+          "subEvents": [
+            "Infarma (Leading pharmaceutical congress)",
+            "Dental Summit"
+          ]
+        }
+      },
+      "eforums": {
+        "badge": "High-Value Format",
+        "title": "eForums (One to One)",
+        "description": "Private executive \"speed dating\" meetings powered by prior identity validation"
+      }
+    },
+    "valueProposition": {
+      "badge": "The Partnership",
+      "title": "Joint Value Proposition",
+      "subtitle": "The <strong>ProcureData x CloserStill</strong> alliance transforms trade shows into <span>Liquid Data Spaces</span>",
+      "items": {
+        "fastTrack": {
+          "title": "Commercial Fast-Track",
+          "description": "Exhibitors and visitors use their ProcureData Digital Passport to validate credentials (Solvency, ISOs, ESG) instantly when scanning their accreditation."
+        },
+        "dataSpace": {
+          "title": "Federated Data Space",
+          "description": "We enable CloserStill to act as orchestrator of the 'Digital Commerce Data Space', allowing exhibitors to access Data Space Kit grants."
+        },
+        "matchmaking": {
+          "title": "Verified Matchmaking",
+          "description": "At eForums, we ensure each 'One to One' meeting occurs between previously qualified parties, eliminating post-event compliance friction."
+        }
+      }
+    },
+    "services": {
+      "title": "Integrated Services",
+      "subtitle": "Functionalities enabled by ProcureData infrastructure",
+      "items": {
+        "onboarding": {
+          "title": "Exhibitor Onboarding",
+          "description": "Automatic KYB (Know Your Business) validation"
+        },
+        "leads": {
+          "title": "Sovereign Lead Exchange",
+          "description": "Use of EDC connectors to share contact data under ODRL contracts"
+        },
+        "certification": {
+          "title": "Attendance Certification",
+          "description": "Issuance of verifiable participation and training credentials on blockchain"
+        }
+      }
+    },
+    "cta": {
+      "title": "Are you an exhibitor at CloserStill events?",
+      "subtitle": "Access the benefits of the Data Space Kit and optimize your participation with instant business credential validation.",
+      "buttons": {
+        "opportunities": "View Ecosystem Opportunities",
+        "kit": "More about Data Space Kit"
+      }
+    }
+  }
+}

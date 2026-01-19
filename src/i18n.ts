@@ -23,6 +23,7 @@ import esDemoTour from './locales/es/demo-tour.json';
 import esSettings from './locales/es/settings.json';
 import esRegister from './locales/es/register.json';
 import esContract from './locales/es/contract.json';
+import esCloserstill from './locales/es/closerstill.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -131,6 +132,8 @@ import enDemoTour from './locales/en/demo-tour.json';
 import enSettings from './locales/en/settings.json';
 import enRegister from './locales/en/register.json';
 import enContract from './locales/en/contract.json';
+import enCloserstill from './locales/en/closerstill.json';
+
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
@@ -168,6 +171,7 @@ i18n
         settings: esSettings,
         register: esRegister,
         contract: esContract,
+        closerstill: esCloserstill,
       },
       en: {
         partnerProducts: enPartnerProducts,
@@ -177,6 +181,7 @@ i18n
         settings: enSettings,
         register: enRegister,
         contract: enContract,
+        closerstill: enCloserstill,
       },
       fr: {
         common: frCommon,
@@ -281,7 +286,7 @@ i18n
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill'],
     interpolation: {
       escapeValue: false,
     },
