@@ -390,7 +390,7 @@ const SectoralNodesPage = () => {
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-foreground">A la firma (Anticipo)</span>
-                          <span className="font-bold text-orange-600">5.000 €</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">5.000 €</span>
                         </div>
                         <p className="text-xs text-muted-foreground">Generación de instancia y configuración inicial</p>
                       </div>
@@ -401,7 +401,7 @@ const SectoralNodesPage = () => {
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-foreground">Concesión Ayuda</span>
-                          <span className="font-bold text-green-600">30.000 €</span>
+                          <span className="font-bold text-green-600 whitespace-nowrap shrink-0">30.000 €</span>
                         </div>
                         <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
                       </div>
@@ -412,7 +412,7 @@ const SectoralNodesPage = () => {
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-foreground">Paga el principal cuando recibas la Subvención de RED.es</span>
-                          <span className="font-bold text-orange-600">25.000 €</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">25.000 €</span>
                         </div>
                       </div>
                     </div>
@@ -450,7 +450,7 @@ const SectoralNodesPage = () => {
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-foreground">Firma Contrato 1 año</span>
-                          <span className="font-bold text-orange-600">250 € al mes</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">250 € al mes</span>
                         </div>
                         <p className="text-xs text-muted-foreground">Alta de identidad y wallet Web3</p>
                       </div>
@@ -461,7 +461,7 @@ const SectoralNodesPage = () => {
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-foreground">Concesión Ayuda</span>
-                          <span className="font-bold text-green-600">15.000 €</span>
+                          <span className="font-bold text-green-600 whitespace-nowrap shrink-0">15.000 €</span>
                         </div>
                         <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
                       </div>
@@ -472,7 +472,7 @@ const SectoralNodesPage = () => {
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-foreground">Renovación Contrato de Conexión + 1 año contra resolución favorable de la subvención</span>
-                          <span className="font-bold text-orange-600">3.000 €</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">3.000 €</span>
                         </div>
                       </div>
                     </div>
