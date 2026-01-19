@@ -411,7 +411,7 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">El Promotor NO TIENE que pagar hasta que recibe la subvención</span>
+                          <span className="font-medium text-foreground">No tienes que volver a pagar hasta que recibas la subvención</span>
                           <span className="font-bold text-orange-600">25.000 €</span>
                         </div>
                       </div>
