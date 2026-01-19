@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Shield, Truck, Users, Brain, Radar, UserCheck, 
-  Banknote, Recycle, Video, FileSignature, ArrowRight, Sparkles
+  Banknote, Recycle, Video, FileSignature, ArrowRight, Sparkles,
+  Plane, Bot, RefreshCw
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,12 +21,16 @@ import InstantCreditVisual from "./visualizers/InstantCreditVisual";
 import CircularEventsVisual from "./visualizers/CircularEventsVisual";
 import ContentHubVisual from "./visualizers/ContentHubVisual";
 import SmartContractingVisual from "./visualizers/SmartContractingVisual";
+// Future Vision visualizers
+import GlobalRoamingVisual from "./visualizers/GlobalRoamingVisual";
+import AgenticNegotiationVisual from "./visualizers/AgenticNegotiationVisual";
+import CircularMarketplaceVisual from "./visualizers/CircularMarketplaceVisual";
 
 interface UseCase {
   id: number;
   icon: React.ComponentType<{ className?: string }>;
   title: string;
-  category: "retail" | "tech" | "b2b";
+  category: "retail" | "tech" | "b2b" | "future";
   badges: string[];
   impact: string;
   description: string;
@@ -136,16 +141,48 @@ const useCases: UseCase[] = [
     description: "Plantillas de NDA/MOU que se autocompletan con la identidad del Badge digital.",
     VisualComponent: SmartContractingVisual,
   },
+  // FUTURE VISION - MOONSHOTS
+  {
+    id: 11,
+    icon: Plane,
+    title: "Global Business Roaming",
+    category: "future",
+    badges: ["International Scale", "Gaia-X Ready"],
+    impact: "Venta cruzada internacional sin fricción",
+    description: "Tu validación en Madrid sirve en Londres y Singapur. Paquetes internacionales con 'Fast-Track' automático.",
+    VisualComponent: GlobalRoamingVisual,
+  },
+  {
+    id: 12,
+    icon: Bot,
+    title: "AI Bot-to-Bot Negotiation",
+    category: "future",
+    badges: ["Agentic AI", "Next-Gen"],
+    impact: "Pre-acuerdos en milisegundos",
+    description: "Agentes IA negocian pre-acuerdos basados en parámetros técnicos antes de la reunión humana.",
+    VisualComponent: AgenticNegotiationVisual,
+  },
+  {
+    id: 13,
+    icon: RefreshCw,
+    title: "Circular Asset Marketplace",
+    category: "future",
+    badges: ["Zero Waste", "ESG Premium"],
+    impact: "Coste → PR y Sostenibilidad",
+    description: "Mercado secundario post-feria para mobiliario y electrónica. Trazabilidad Residuo Cero certificada.",
+    VisualComponent: CircularMarketplaceVisual,
+  },
 ];
 
 const categoryConfig = {
   retail: { label: "Retail & eCommerce", color: "from-rose-500 to-red-600", badgeClass: "bg-rose-500/20 text-rose-300 border-rose-500/30" },
   tech: { label: "Tech & AI", color: "from-blue-500 to-indigo-600", badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/30" },
   b2b: { label: "Business Innovation", color: "from-emerald-500 to-green-600", badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" },
+  future: { label: "Future Vision 🚀", color: "from-fuchsia-500 to-purple-600", badgeClass: "bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30" },
 };
 
 const EShowInnovationGallery = () => {
-  const [activeCategory, setActiveCategory] = useState<"all" | "retail" | "tech" | "b2b">("all");
+  const [activeCategory, setActiveCategory] = useState<"all" | "retail" | "tech" | "b2b" | "future">("all");
 
   const filteredCases = activeCategory === "all" 
     ? useCases 
@@ -155,7 +192,7 @@ const EShowInnovationGallery = () => {
     <div className="space-y-8">
       {/* Filters */}
       <Tabs value={activeCategory} onValueChange={(v) => setActiveCategory(v as typeof activeCategory)}>
-        <TabsList className="bg-slate-800/50 border border-slate-700">
+        <TabsList className="bg-slate-800/50 border border-slate-700 flex-wrap h-auto gap-1 p-1">
           <TabsTrigger value="all" className="data-[state=active]:bg-slate-700">
             Todos
           </TabsTrigger>
@@ -167,6 +204,9 @@ const EShowInnovationGallery = () => {
           </TabsTrigger>
           <TabsTrigger value="b2b" className="data-[state=active]:bg-emerald-600/30">
             🏭 B2B
+          </TabsTrigger>
+          <TabsTrigger value="future" className="data-[state=active]:bg-fuchsia-600/30">
+            🚀 Future Vision
           </TabsTrigger>
         </TabsList>
       </Tabs>
