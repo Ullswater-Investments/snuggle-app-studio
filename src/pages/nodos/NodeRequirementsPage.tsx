@@ -9,7 +9,8 @@ import {
   ArrowRight,
   ShieldCheck,
   Building2,
-  ArrowLeft
+  ArrowLeft,
+  Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -20,6 +21,7 @@ import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
 import { FundingFooter } from '@/components/FundingFooter';
 import { toast } from 'sonner';
+import { useNodeEligibility } from '@/hooks/useNodeEligibility';
 
 export const NodeRequirementsPage = () => {
   const [formData, setFormData] = useState({
@@ -29,10 +31,35 @@ export const NodeRequirementsPage = () => {
     email: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { submitEligibility, isSubmitting } = useNodeEligibility();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Solicitud enviada correctamente. Te contactaremos en breve.');
-    console.log('Form submitted:', formData);
+    
+    // Validar campos
+    if (!formData.entityName || !formData.entityType || !formData.ecosystemStatus || !formData.email) {
+      toast.error('Por favor, completa todos los campos obligatorios');
+      return;
+    }
+    
+    try {
+      const result = await submitEligibility(formData);
+      
+      toast.success(
+        '¡Solicitud enviada correctamente!',
+        { description: 'Recibirás el borrador del MOU en 24-48 horas.' }
+      );
+      
+      // Limpiar formulario
+      setFormData({ entityName: '', entityType: '', ecosystemStatus: '', email: '' });
+      
+      console.log('Eligibility request submitted:', result.requestId);
+    } catch (err) {
+      toast.error(
+        'Error al enviar la solicitud',
+        { description: 'Por favor, inténtalo de nuevo más tarde.' }
+      );
+    }
   };
 
   // DIAGRAMA IDIOGRÁFICO MEJORADO: ARCO JERÁRQUICO HUB & SPOKE
@@ -542,9 +569,23 @@ export const NodeRequirementsPage = () => {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full bg-orange-500 hover:bg-orange-600 text-white">
-                  Solicitar Borrador de MOU
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                  disabled={isSubmitting || !formData.entityName || !formData.entityType || !formData.ecosystemStatus || !formData.email}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Enviando solicitud...
+                    </>
+                  ) : (
+                    <>
+                      Solicitar Borrador de MOU
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
                 </Button>
 
                 <p className="text-center text-sm text-muted-foreground">

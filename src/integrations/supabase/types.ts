@@ -730,6 +730,54 @@ export type Database = {
           },
         ]
       }
+      node_eligibility_requests: {
+        Row: {
+          created_at: string | null
+          ecosystem_status: string
+          email: string
+          entity_name: string
+          entity_type: string
+          id: string
+          ip_address: string | null
+          notes: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string | null
+          updated_at: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          ecosystem_status: string
+          email: string
+          entity_name: string
+          entity_type: string
+          id?: string
+          ip_address?: string | null
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          ecosystem_status?: string
+          email?: string
+          entity_name?: string
+          entity_type?: string
+          id?: string
+          ip_address?: string | null
+          notes?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           created_at: string | null
