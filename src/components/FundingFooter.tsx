@@ -1,5 +1,5 @@
 import { OFFICIAL_COPY, TRANSPARENCY_LINKS } from "@/lib/constants";
-import { ExternalLink, FileText, Shield, BookOpen } from "lucide-react";
+import { ExternalLink, FileText, Shield, BookOpen, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface FundingFooterProps {
@@ -59,6 +59,17 @@ export const FundingFooter = ({ showTransparency = true, variant = "dark" }: Fun
             ))}
           </div>
         )}
+
+        {/* Link a área privada */}
+        <div className="flex items-center justify-center pt-4">
+          <Link
+            to="/agile-procurement"
+            className={`text-xs ${textClass} hover:text-primary transition-colors flex items-center gap-1`}
+          >
+            <Lock className="h-3 w-3" />
+            Agile Procurement Private Area
+          </Link>
+        </div>
       </div>
     </div>
   );

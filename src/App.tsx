@@ -150,6 +150,7 @@ import GobernanzaIDSAPage from "./pages/nodos/GobernanzaIDSAPage";
 import MultiTenantRLSPage from "./pages/nodos/MultiTenantRLSPage";
 import NodeRequirementsPage from "./pages/nodos/NodeRequirementsPage";
 import NodeTechPage from "./pages/nodos/NodeTechPage";
+import AgileProcurementPrivateArea from "./pages/AgileProcurementPrivateArea";
 
 const queryClient = new QueryClient();
 
@@ -207,6 +208,7 @@ const App = () => (
                   <Route path="/nodos/multi-tenant-rls" element={<MultiTenantRLSPage />} />
                   <Route path="/nodos/requisitos" element={<NodeRequirementsPage />} />
                   <Route path="/nodos/tecnologia" element={<NodeTechPage />} />
+                  <Route path="/agile-procurement" element={<AgileProcurementPrivateArea />} />
                   
                   {/* Motor de ProcureData - Technical Deep Dives */}
                   <Route path="/motor" element={<Navigate to="/models" replace />} />
