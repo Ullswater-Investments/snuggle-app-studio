@@ -607,7 +607,7 @@ const SectoralNodesPage = () => {
                 Contactar con Equipo de Nodos
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" variant="secondary" className="text-orange-600">
                 <FileText className="mr-2 h-4 w-4" />
                 Ver Memoria Técnica SEDIA
               </Button>
