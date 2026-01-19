@@ -140,6 +140,7 @@ import CloserStillLogin from "./pages/partners/CloserStillLogin";
 import CloserStillMiembros from "./pages/partners/CloserStillMiembros";
 import CloserStill365 from "./pages/partners/CloserStill365";
 import CloserStillCasosUso from "./pages/partners/CloserStillCasosUso";
+import CloserStillInnovation from "./pages/partners/CloserStillInnovation";
 import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRoute";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
@@ -384,6 +385,11 @@ const App = () => (
                   <Route path="/partners/closerstill/miembros/casos-uso" element={
                     <PartnerProtectedRoute partnerSlug="closerstill">
                       <CloserStillCasosUso />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/closerstill/miembros/innovacion" element={
+                    <PartnerProtectedRoute partnerSlug="closerstill">
+                      <CloserStillInnovation />
                     </PartnerProtectedRoute>
                   } />
 

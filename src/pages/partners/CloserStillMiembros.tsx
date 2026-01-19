@@ -145,6 +145,32 @@ const CloserStillMiembros = () => {
                 </CardContent>
               </Card>
             </Link>
+
+            <Link to="/partners/closerstill/miembros/innovacion">
+              <Card className="hover:shadow-lg transition-all hover:border-purple-300 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600">
+                      <Lightbulb className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">10 Casos de Uso Disruptivos</CardTitle>
+                      <CardDescription>e-Show Innovation Gallery</CardDescription>
+                    </div>
+                  </div>
+                  <Badge className="w-fit bg-purple-100 text-purple-700 border-purple-300">NUEVO</Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    Galería interactiva con micro-animaciones visuales para cada caso de uso.
+                    De evento puntual a infraestructura crítica.
+                  </p>
+                  <div className="flex items-center text-purple-600 text-sm font-medium">
+                    Ver galería <ArrowRight className="h-4 w-4 ml-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
             
             <Card className="border-blue-200 bg-blue-50/50 h-full">
               <CardHeader>
