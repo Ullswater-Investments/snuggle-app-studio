@@ -482,7 +482,7 @@ export const NodeRequirementsPage = () => {
                 <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200 flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                   <p className="text-sm text-blue-800">
-                    Los 7.000€ son <strong>100% subvencionables</strong>. Recuperan el anticipo al cobrar la ayuda.
+                    El participante dispondrá hasta <strong>9.000€</strong> para pagar los servicios del Cluster ó otros gastos relacionados con el Espacio de Datos
                   </p>
                 </div>
               </CardContent>
