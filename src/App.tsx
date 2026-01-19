@@ -149,6 +149,7 @@ import ConectoresERPPage from "./pages/nodos/ConectoresERPPage";
 import GobernanzaIDSAPage from "./pages/nodos/GobernanzaIDSAPage";
 import MultiTenantRLSPage from "./pages/nodos/MultiTenantRLSPage";
 import NodeRequirementsPage from "./pages/nodos/NodeRequirementsPage";
+import NodeTechPage from "./pages/nodos/NodeTechPage";
 
 const queryClient = new QueryClient();
 
@@ -205,6 +206,7 @@ const App = () => (
                   <Route path="/nodos/gobernanza-idsa" element={<GobernanzaIDSAPage />} />
                   <Route path="/nodos/multi-tenant-rls" element={<MultiTenantRLSPage />} />
                   <Route path="/nodos/requisitos" element={<NodeRequirementsPage />} />
+                  <Route path="/nodos/tecnologia" element={<NodeTechPage />} />
                   
                   {/* Motor de ProcureData - Technical Deep Dives */}
                   <Route path="/motor" element={<Navigate to="/models" replace />} />

@@ -12,6 +12,7 @@ interface NodeFeatureLayoutProps {
   icon: React.ReactNode;
   visualComponent: React.ReactNode;
   benefits: { title: string; desc: string }[];
+  children?: React.ReactNode;
 }
 
 export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
@@ -19,7 +20,8 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
   subtitle,
   icon,
   visualComponent,
-  benefits
+  benefits,
+  children
 }) => {
   return (
     <div className="min-h-screen bg-background">
@@ -94,6 +96,18 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
             </div>
           ))}
         </motion.div>
+
+        {/* Additional Content (children) */}
+        {children && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mb-20"
+          >
+            {children}
+          </motion.div>
+        )}
 
         {/* CTA Section */}
         <motion.div
