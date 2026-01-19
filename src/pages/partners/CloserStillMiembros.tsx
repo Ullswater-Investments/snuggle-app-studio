@@ -3,7 +3,7 @@ import {
   Rocket, Lightbulb, Building2, Handshake, Euro, Shield, 
   UserCheck, Zap, LayoutDashboard, 
   TrendingUp, Lock, CheckCircle2, Award, ArrowLeft, LogOut,
-  AlertCircle, FileText, Target
+  AlertCircle, FileText, Target, Sparkles, ArrowRight
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -74,16 +74,96 @@ const CloserStillMiembros = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-16">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-12">
+        <div className="container mx-auto px-6 text-center">
+          <Badge className="mb-4 bg-red-500/20 text-red-300 border-red-500/30">
+            Documentos Confidenciales - Solo Partners
+          </Badge>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            Área de Miembros <span className="text-blue-400">CloserStill Media</span>
+          </h1>
+          <p className="text-lg text-blue-200 max-w-2xl mx-auto">
+            Accede a la documentación exclusiva sobre el Nodo de Datos e-Show
+          </p>
+        </div>
+      </section>
+
+      {/* Document Navigation Cards */}
+      <section className="py-12 bg-slate-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <FileText className="h-5 w-5 text-blue-600" />
+            Documentos Disponibles
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link to="/partners/closerstill/miembros/365">
+              <Card className="hover:shadow-lg transition-all hover:border-blue-300 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-blue-500 to-amber-500">
+                      <Sparkles className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">CloserStill 365: El Ecosistema de Datos Infinito</CardTitle>
+                      <CardDescription>Visión Corporativa y Propuesta de Valor</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-4">
+                    La filosofía "Más Cerca Todavía" evoluciona: Del handshake al smart contract. 
+                    Beneficios para expositores y visitantes del nuevo Nodo de Datos Federado.
+                  </p>
+                  <div className="flex items-center text-blue-600 text-sm font-medium">
+                    Ver documento <ArrowRight className="h-4 w-4 ml-1" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            <Card className="border-blue-200 bg-blue-50/50 h-full">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-slate-700 to-blue-800">
+                    <Rocket className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg">Propuesta Estratégica e-Show Data Space Node</CardTitle>
+                    <CardDescription>De Feria de 2 Días a Ecosistema 365</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground text-sm mb-4">
+                  Propuesta técnica y de negocio para el Nodo Propietario de CloserStill Media. 
+                  Incluye modelo de ingresos y próximos pasos.
+                </p>
+                <Badge variant="outline" className="text-blue-600 border-blue-300">
+                  <CheckCircle2 className="h-3 w-3 mr-1" />
+                  Visualizando ahora
+                </Badge>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Separator */}
+      <div className="container mx-auto px-6">
+        <div className="border-t border-slate-200" />
+      </div>
+
+      {/* Original e-Show Proposal Content */}
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-16 mt-8">
         <div className="container mx-auto px-6 text-center">
           <Badge className="mb-4 bg-red-500/20 text-red-300 border-red-500/30">
             Documento Confidencial - Solo Partners
           </Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-blue-400">PROPUESTA ESTRATÉGICA</span>
             <br />
             e-Show Data Space Node
-          </h1>
+          </h2>
           <p className="text-xl text-blue-200 max-w-2xl mx-auto">
             De Feria de 2 Días a Ecosistema de Negocio 365
           </p>
