@@ -19,7 +19,9 @@ import {
   Sparkles,
   Target,
   Clock,
-  FileText
+  FileText,
+  AlertCircle,
+  Landmark
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -367,58 +369,121 @@ const SectoralNodesPage = () => {
             viewport={{ once: true }}
             variants={staggerChildren}
           >
-            {/* Promoter Card */}
+            {/* Tarjeta Promotor */}
             <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-orange-200 dark:border-orange-800/50 overflow-hidden">
-                <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-4 text-white text-center">
-                  <Building2 className="h-8 w-8 mx-auto mb-2" />
-                  <h3 className="text-xl font-bold">Entidad Promotora</h3>
-                  <p className="text-orange-100 text-sm">Para Clústers y Asociaciones</p>
-                </div>
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Coste de Creación</span>
-                    <span className="font-semibold">30.000 €</span>
+              <Card className="border-2 border-orange-200 dark:border-orange-800/50 shadow-lg overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4">
+                  <div className="flex items-center gap-3">
+                    <Landmark className="w-6 h-6" />
+                    <span className="font-bold text-lg">PROMOTOR (Tú)</span>
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Subvención SEDIA</span>
-                    <span className="font-semibold text-green-600">- 30.000 €</span>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="text-center mb-6">
+                    <p className="text-sm text-muted-foreground mb-1">COSTE desarrollo de un NODO PROPIETARIO</p>
+                    <p className="text-4xl font-bold text-foreground">30.000 €</p>
                   </div>
-                  <div className="flex justify-between items-center py-2 bg-green-50 dark:bg-green-900/20 rounded-lg px-3">
-                    <span className="font-bold">Coste Final</span>
-                    <span className="text-2xl font-bold text-green-600">0 €</span>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
+                      <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-foreground">A la firma (Anticipo)</span>
+                          <span className="font-bold text-orange-600">5.000 €</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Generación de instancia y configuración inicial</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-800/50">
+                      <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-foreground">Concesión Ayuda</span>
+                          <span className="font-bold text-green-600">30.000 €</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
+                      <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-foreground">El Promotor NO TIENE que pagar hasta que recibe la subvención</span>
+                          <span className="font-bold text-orange-600">25.000 €</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-muted-foreground italic">
-                    Condición: Pago anticipado de 5.000€ (recuperable al 100% con la ayuda).
-                  </p>
+
+                  <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/50 flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                    <p className="text-sm text-blue-800 dark:text-blue-200">
+                      Los 30.000€ son <strong>100% subvencionables</strong>. Recuperas el anticipo al cobrar la ayuda.
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
 
-            {/* Participant Card */}
+            {/* Tarjeta Participante */}
             <motion.div variants={fadeInUp}>
-              <Card className="h-full border-2 border-primary/20 overflow-hidden">
-                <div className="bg-gradient-to-r from-primary to-primary/80 p-4 text-primary-foreground text-center">
-                  <Users className="h-8 w-8 mx-auto mb-2" />
-                  <h3 className="text-xl font-bold">Empresas Adheridas</h3>
-                  <p className="text-primary-foreground/80 text-sm">Mínimo 5 empresas requeridas</p>
-                </div>
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Coste por Empresa</span>
-                    <span className="font-semibold">7.000 €</span>
+              <Card className="border-2 border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden">
+                <CardHeader className="bg-gradient-to-r from-slate-700 to-slate-800 text-white py-4">
+                  <div className="flex items-center gap-3">
+                    <Users className="w-6 h-6" />
+                    <span className="font-bold text-lg">PARTICIPANTE (×5)</span>
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-muted-foreground">Subvención SEDIA</span>
-                    <span className="font-semibold text-green-600">- 7.000 €</span>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <div className="text-center mb-6">
+                    <p className="text-sm text-muted-foreground mb-1">COSTE de CONEXIÓN (Anualidad)</p>
+                    <p className="text-4xl font-bold text-foreground">3.000 €</p>
+                    <p className="text-xs text-muted-foreground mt-1">por cada empresa participante</p>
                   </div>
-                  <div className="flex justify-between items-center py-2 bg-green-50 dark:bg-green-900/20 rounded-lg px-3">
-                    <span className="font-bold">Coste Final</span>
-                    <span className="text-2xl font-bold text-green-600">0 €</span>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
+                      <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-foreground">Firma Contrato 1 año</span>
+                          <span className="font-bold text-orange-600">250 € al mes</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Alta de identidad y wallet Web3</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-800/50">
+                      <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-foreground">Concesión Ayuda</span>
+                          <span className="font-bold text-green-600">15.000 €</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-xl border border-orange-100 dark:border-orange-800/50">
+                      <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-foreground">Renovación Contrato de Conexión + 1 año contra resolución favorable de la subvención</span>
+                          <span className="font-bold text-orange-600">3.000 €</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-muted-foreground italic">
-                    Condición: Pago anticipado de 2.000€ (recuperable al 100% con la ayuda).
-                  </p>
+
+                  <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/50 flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                    <p className="text-sm text-blue-800 dark:text-blue-200">
+                      El participante dispondrá hasta <strong>9.000€</strong> para pagar los servicios del Cluster ó otros gastos relacionados con el Espacio de Datos
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
