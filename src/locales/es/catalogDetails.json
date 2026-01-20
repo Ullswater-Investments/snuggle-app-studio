@@ -1,0 +1,600 @@
+{
+  "common": {
+    "backToCatalog": "Volver al catálogo",
+    "catalog": "Catálogo",
+    "tabs": {
+      "description": "Descripción",
+      "schema": "Estructura de Datos",
+      "format": "Formato y Entrega",
+      "rights": "Derechos (ODRL)",
+      "sample": "Muestra de Datos",
+      "quality": "Calidad"
+    },
+    "badges": {
+      "kybVerified": "KYB Verificado",
+      "kybTooltip": "Proveedor verificado mediante proceso Know Your Business",
+      "criticalInfrastructure": "Infraestructura Crítica",
+      "criticalTooltip": "Datos sensibles de infraestructura nacional - Uso restringido",
+      "sustainable": "Sostenible",
+      "esgCertified": "ESG Certified",
+      "blockchainVerified": "Blockchain Verified",
+      "blockchainTooltip": "Trazabilidad verificada en red blockchain",
+      "doCertified": "DO Certificado",
+      "doTooltip": "Denominación de Origen protegida",
+      "cnmvRegulated": "Regulado CNMV",
+      "cnmvTooltip": "Servicio supervisado por la Comisión Nacional del Mercado de Valores",
+      "openData": "Open Data",
+      "openDataTooltip": "Datos públicos bajo licencia Open Data del Gobierno de España",
+      "officialSource": "Fuente Oficial",
+      "lowCarbon": "Low Carbon"
+    },
+    "labels": {
+      "provider": "Proveedor",
+      "custody": "Custodia",
+      "reviews": "reseñas",
+      "update": "Actualización",
+      "records": "Registros",
+      "completeness": "Completitud",
+      "coverage": "Cobertura",
+      "postalCodes": "Códigos Postales",
+      "hourly": "Horaria",
+      "daily": "Diaria",
+      "weekly": "Semanal",
+      "eventBased": "Por Evento",
+      "static": "Estático",
+      "live": "LIVE",
+      "realTime": "Tiempo Real",
+      "precision": "Precisión",
+      "latency": "Latencia API",
+      "companies": "Empresas",
+      "vehicles": "Vehículos",
+      "batches": "Lotes trazados",
+      "mills": "Almazaras",
+      "denominations": "Denominaciones",
+      "parcels": "Parcelas",
+      "mlPrediction": "Predicción ML",
+      "regions": "CC.AA.",
+      "stations": "Estaciones",
+      "daysCovered": "Días cubiertos"
+    },
+    "sections": {
+      "datasetDescription": "Descripción del Dataset",
+      "useCases": "Casos de Uso Principales",
+      "dataSchema": "Esquema de Datos",
+      "schemaTable": {
+        "field": "Campo",
+        "type": "Tipo",
+        "description": "Descripción"
+      },
+      "formatDelivery": "Formato y Entrega",
+      "formats": {
+        "title": "Formatos Disponibles",
+        "json": "JSON Lines (principal)",
+        "parquet": "Apache Parquet",
+        "csv": "CSV (bajo petición)"
+      },
+      "delivery": {
+        "title": "Métodos de Entrega",
+        "api": "API REST (con paginación)",
+        "sftp": "SFTP programado",
+        "s3": "Push a bucket S3/Azure",
+        "streaming": "Streaming vía Kafka/MQTT",
+        "download": "Descarga directa"
+      },
+      "authentication": {
+        "title": "Autenticación",
+        "oauth": "OAuth 2.0 con tokens JWT",
+        "apiKey": "API Key",
+        "mTLS": "mTLS opcional para conexiones críticas"
+      },
+      "odrlRights": "Derechos ODRL",
+      "odrl": {
+        "permitted": "Permitido",
+        "prohibited": "Prohibido",
+        "obligations": "Obligaciones"
+      },
+      "dataSample": "Muestra de Datos",
+      "sampleNote": "Muestra de datos anonimizados representativos del dataset",
+      "qualityMetrics": "Métricas de Calidad"
+    },
+    "quality": {
+      "completeness": "Completitud de datos",
+      "freshness": "Frescura",
+      "accuracy": "Precisión",
+      "consistency": "Consistencia",
+      "availability": "Disponibilidad SLA"
+    },
+    "pricing": {
+      "title": "Precio",
+      "subscription": "Suscripción mensual",
+      "oneTime": "Pago único",
+      "perUse": "Por consulta",
+      "free": "Gratuito",
+      "accessFree": "Acceso Gratuito",
+      "requestAccess": "Solicitar Acceso",
+      "addToCart": "Añadir al carrito",
+      "contactSales": "Contactar ventas"
+    },
+    "cta": {
+      "viewSample": "Ver muestra completa",
+      "downloadSample": "Descargar muestra",
+      "requestDemo": "Solicitar demo"
+    },
+    "sectorTypes": {
+      "manufacturing": "Manufactura",
+      "logistics": "Logística",
+      "retail": "Retail",
+      "office": "Oficina"
+    },
+    "chargingStatus": {
+      "charging": "Cargando",
+      "discharging": "En uso",
+      "idle": "Inactivo"
+    },
+    "riskLevels": {
+      "veryLow": "Muy Bajo",
+      "low": "Bajo",
+      "medium": "Medio",
+      "high": "Alto",
+      "veryHigh": "Muy Alto"
+    },
+    "stressLevels": {
+      "low": "Bajo",
+      "medium": "Medio",
+      "high": "Alto",
+      "critical": "Crítico"
+    },
+    "tariffPeriods": {
+      "punta": "Punta",
+      "llano": "Llano",
+      "valle": "Valle"
+    }
+  },
+  "products": {
+    "consumo-electrico-industrial": {
+      "category": "Industrial",
+      "title": "Consumo Eléctrico Industrial",
+      "shortDescription": "Dataset agregado de consumo eléctrico del sector industrial español. Incluye métricas de demanda, calidad de suministro, factor de potencia y emisiones CO2 asociadas. Datos anonimizados por código postal y sector económico.",
+      "provider": "Iberdrola Distribución",
+      "custody": "AWS Data Exchange (Irlanda, EU)",
+      "rating": "4.8",
+      "reviewCount": "124",
+      "metrics": {
+        "update": "Horaria",
+        "records": "15M+",
+        "completeness": "99.5%",
+        "postalCodes": "8.500+"
+      },
+      "description": {
+        "paragraph1": "Este dataset proporciona información agregada sobre el consumo eléctrico del sector industrial en España, con granularidad horaria y segmentación por código postal y tipo de actividad económica.",
+        "paragraph2": "Los datos incluyen métricas de calidad de suministro, factor de potencia y cálculo de emisiones CO2 asociadas al mix energético de cada zona. Ideal para análisis de eficiencia energética, planificación de red y reporting de sostenibilidad corporativa."
+      },
+      "useCases": [
+        "Análisis de patrones de consumo industrial por zona geográfica",
+        "Optimización de contratos de suministro eléctrico",
+        "Cálculo de huella de carbono para reporting ESG",
+        "Planificación de infraestructura de red eléctrica",
+        "Detección de anomalías y fraude energético"
+      ],
+      "criticalWarning": "Este dataset contiene información sensible de infraestructura nacional. Su acceso requiere verificación KYB ampliada y aceptación de condiciones especiales de uso.",
+      "schema": [
+        { "field": "timestamp", "type": "ISO 8601 DateTime", "description": "Marca temporal UTC del registro (agregación horaria)" },
+        { "field": "postal_code", "type": "String", "description": "Código postal del punto de suministro" },
+        { "field": "sector_type", "type": "Enum", "description": "'manufacturing' | 'logistics' | 'retail' | 'office'" },
+        { "field": "consumption_kwh", "type": "Float", "description": "Consumo acumulado en la hora en kWh" },
+        { "field": "peak_demand_kw", "type": "Float", "description": "Demanda pico máxima en kW" },
+        { "field": "power_factor", "type": "Float (0-1)", "description": "Factor de potencia (cos φ)" },
+        { "field": "voltage_quality", "type": "Float (0-100)", "description": "Índice de calidad de tensión (%)" },
+        { "field": "grid_zone", "type": "String", "description": "Zona de red eléctrica" },
+        { "field": "tariff_period", "type": "Enum", "description": "'punta' | 'llano' | 'valle'" },
+        { "field": "co2_emissions_kg", "type": "Float", "description": "Emisiones CO2 asociadas al consumo" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Análisis agregado para fines internos",
+          "Integración con sistemas de gestión energética",
+          "Generación de informes para inversores y reguladores",
+          "Uso en modelos predictivos propios"
+        ],
+        "prohibited": [
+          "Desanonimización o intentos de identificar consumidores",
+          "Reventa o redistribución de datos",
+          "Uso para fijar precios discriminatorios",
+          "Compartir con terceros sin autorización"
+        ],
+        "obligations": [
+          "Mantener medidas de seguridad ISO 27001",
+          "Notificar cualquier brecha de seguridad en 24h",
+          "Auditoría anual de uso de datos",
+          "Retención máxima: 24 meses"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 99.5, "description": "Registros sin valores nulos" },
+        "freshness": { "value": 99.8, "description": "Datos actualizados en <1h" },
+        "accuracy": { "value": 98.2, "description": "Validado con contadores certificados" },
+        "consistency": { "value": 99.9, "description": "Sin duplicados ni inconsistencias" },
+        "availability": { "value": 99.95, "description": "SLA de disponibilidad" }
+      },
+      "pricing": {
+        "amount": "500€/mes",
+        "model": "subscription",
+        "description": "Suscripción mensual"
+      }
+    },
+    "trazabilidad-aceite-do": {
+      "category": "Agroalimentario",
+      "title": "Trazabilidad Aceite de Oliva DO",
+      "shortDescription": "Registro inmutable de trazabilidad completa desde la cosecha hasta el envasado para Aceite de Oliva Virgen Extra con Denominación de Origen. Verificación blockchain que certifica la autenticidad y origen de cada lote.",
+      "provider": "Consejo Regulador DO Aceites",
+      "custody": "Alastria Network (Nodo Andalucía)",
+      "rating": "4.9",
+      "reviewCount": "67",
+      "metrics": {
+        "update": "Por Evento",
+        "batches": "450K+",
+        "mills": "320+",
+        "denominations": "12"
+      },
+      "description": {
+        "paragraph1": "Sistema de trazabilidad integral basado en blockchain para Aceite de Oliva Virgen Extra con Denominación de Origen. Cada lote registra todo su ciclo de vida desde el olivar hasta el punto de venta.",
+        "paragraph2": "Los datos incluyen información verificable de origen, análisis químicos, certificaciones y cadena de custodia. Perfecto para verificación de autenticidad, cumplimiento normativo y marketing de procedencia."
+      },
+      "useCases": [
+        "Verificación de autenticidad para importadores/distribuidores",
+        "Trazabilidad inversa en caso de alertas alimentarias",
+        "Marketing de procedencia con QR verificable",
+        "Cumplimiento normativo de etiquetado UE",
+        "Análisis de calidad por variedad y zona"
+      ],
+      "schema": [
+        { "field": "batch_id", "type": "String", "description": "Identificador único del lote (formato: AOVE-AÑO-PROV-NUM)" },
+        { "field": "blockchain_hash", "type": "String", "description": "Hash de verificación en blockchain Alastria" },
+        { "field": "do_certificate", "type": "String", "description": "Número de certificado de Denominación de Origen" },
+        { "field": "harvest_date", "type": "Date", "description": "Fecha de cosecha de la aceituna" },
+        { "field": "olive_variety", "type": "Enum", "description": "'picual' | 'hojiblanca' | 'arbequina' | 'cornicabra'" },
+        { "field": "origin_farm", "type": "String", "description": "Nombre de la finca/explotación de origen" },
+        { "field": "origin_municipality", "type": "String", "description": "Municipio de origen" },
+        { "field": "origin_province", "type": "String", "description": "Provincia de origen" },
+        { "field": "mill_id", "type": "String", "description": "Identificador de la almazara" },
+        { "field": "mill_name", "type": "String", "description": "Nombre de la almazara" },
+        { "field": "pressing_date", "type": "Date", "description": "Fecha de prensado/extracción" },
+        { "field": "acidity_percent", "type": "Float", "description": "Grado de acidez (% ácido oleico)" },
+        { "field": "peroxide_index", "type": "Float", "description": "Índice de peróxidos (meq O2/kg)" },
+        { "field": "polyphenols_ppm", "type": "Integer", "description": "Contenido de polifenoles (ppm)" },
+        { "field": "bottle_date", "type": "Date", "description": "Fecha de envasado" },
+        { "field": "batch_liters", "type": "Integer", "description": "Volumen total del lote en litros" },
+        { "field": "organic_certified", "type": "Boolean", "description": "Certificación ecológica EU" },
+        { "field": "export_destination", "type": "String?", "description": "País destino si es exportación (null si nacional)" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Verificación de autenticidad de lotes",
+          "Integración en sistemas de trazabilidad propios",
+          "Generación de certificados para clientes finales",
+          "Uso en campañas de marketing de procedencia"
+        ],
+        "prohibited": [
+          "Modificación de registros blockchain",
+          "Creación de certificados falsos",
+          "Uso para competencia desleal",
+          "Extracción masiva sin autorización"
+        ],
+        "obligations": [
+          "Mantener integridad de datos verificables",
+          "Notificar discrepancias detectadas",
+          "Uso conforme a normativa DO",
+          "Citar fuente en materiales públicos"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 100, "description": "Todos los campos obligatorios presentes" },
+        "freshness": { "value": 99.9, "description": "Registro en blockchain en <10 min" },
+        "accuracy": { "value": 100, "description": "Inmutable por diseño blockchain" },
+        "consistency": { "value": 100, "description": "Hash único por lote" },
+        "availability": { "value": 99.99, "description": "Red distribuida Alastria" }
+      },
+      "pricing": {
+        "amount": "120€",
+        "model": "one_time",
+        "description": "Pago único"
+      }
+    },
+    "score-crediticio-b2b": {
+      "category": "Financiero",
+      "title": "Score Crediticio B2B",
+      "shortDescription": "Servicio de scoring crediticio empresarial en tiempo real. Evaluación de riesgo, probabilidad de impago y comportamiento de pago para más de 2.1 millones de empresas españolas y portuguesas.",
+      "provider": "Axesor Rating",
+      "custody": "Equinix Financial Hub (Madrid)",
+      "rating": "4.7",
+      "reviewCount": "189",
+      "metrics": {
+        "update": "Diaria",
+        "companies": "2.1M",
+        "precision": "94.2%",
+        "latency": "<200ms"
+      },
+      "description": {
+        "paragraph1": "Servicio de evaluación crediticia empresarial basado en múltiples fuentes de datos: registros mercantiles, comportamiento de pagos comerciales, información financiera pública e incidencias judiciales.",
+        "paragraph2": "El modelo predictivo proporciona probabilidades de impago a 30 y 90 días, tendencia de evolución y scoring de comportamiento de pago. Ideal para decisiones de crédito comercial, gestión de riesgo de cartera y due diligence."
+      },
+      "useCases": [
+        "Evaluación de riesgo en operaciones B2B",
+        "Automatización de decisiones de crédito comercial",
+        "Monitorización continua de cartera de clientes",
+        "Due diligence en fusiones y adquisiciones",
+        "Segmentación de clientes por perfil de riesgo"
+      ],
+      "schema": [
+        { "field": "query_timestamp", "type": "ISO 8601 DateTime", "description": "Marca temporal de la consulta" },
+        { "field": "company_nif", "type": "String (masked)", "description": "NIF de la empresa (parcialmente oculto)" },
+        { "field": "company_name", "type": "String", "description": "Razón social de la empresa" },
+        { "field": "sector_cnae", "type": "String", "description": "Código CNAE del sector de actividad" },
+        { "field": "province", "type": "String", "description": "Provincia de domicilio social" },
+        { "field": "employees_range", "type": "Enum", "description": "Rango de empleados" },
+        { "field": "revenue_range", "type": "String", "description": "Rango de facturación anual" },
+        { "field": "credit_score", "type": "Integer (0-1000)", "description": "Puntuación crediticia global" },
+        { "field": "risk_level", "type": "Enum", "description": "'muy_bajo' | 'bajo' | 'medio' | 'alto' | 'muy_alto'" },
+        { "field": "payment_behavior_score", "type": "Integer (0-100)", "description": "Puntuación de comportamiento de pago" },
+        { "field": "default_probability_30d", "type": "Float (%)", "description": "Probabilidad de impago a 30 días" },
+        { "field": "default_probability_90d", "type": "Float (%)", "description": "Probabilidad de impago a 90 días" },
+        { "field": "legal_incidents", "type": "Integer", "description": "Incidencias legales en últimos 2 años" },
+        { "field": "last_update", "type": "Date", "description": "Última actualización del score" },
+        { "field": "trend", "type": "Enum", "description": "'improving' | 'stable' | 'declining'" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Consulta para evaluación de riesgo propio",
+          "Integración en procesos de decisión crediticia",
+          "Uso en scoring interno de cartera",
+          "Reporting agregado a dirección"
+        ],
+        "prohibited": [
+          "Reventa o redistribución de scores",
+          "Uso para discriminación no objetiva",
+          "Almacenamiento masivo sin consulta activa",
+          "Compartir datos individuales con terceros"
+        ],
+        "obligations": [
+          "Cumplimiento RGPD en tratamiento de datos",
+          "Justificación de consultas ante auditoría",
+          "Notificación de uso a empresas consultadas (si aplica)",
+          "Límite de consultas según contrato"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 97.8, "description": "Cobertura de empresas activas" },
+        "freshness": { "value": 99.2, "description": "Actualización diaria de scores" },
+        "accuracy": { "value": 94.2, "description": "Precisión predictiva validada" },
+        "consistency": { "value": 99.7, "description": "Metodología estandarizada" },
+        "availability": { "value": 99.9, "description": "SLA de disponibilidad API" }
+      },
+      "pricing": {
+        "amount": "75€/consulta",
+        "model": "usage",
+        "description": "Por consulta"
+      }
+    },
+    "telemetria-flota-electrica": {
+      "category": "Movilidad",
+      "title": "Telemetría Flota Eléctrica",
+      "shortDescription": "Dataset completo en tiempo real con telemetría de vehículos eléctricos de flota comercial. Incluye datos de batería, consumo energético, geolocalización, rutas y estado operativo.",
+      "provider": "EcoFleet Analytics",
+      "custody": "T-Systems DataHub (Frankfurt, DE)",
+      "rating": "4.6",
+      "reviewCount": "78",
+      "metrics": {
+        "update": "Tiempo Real",
+        "records": "2.5M+",
+        "completeness": "98%",
+        "vehicles": "150+"
+      },
+      "description": {
+        "paragraph1": "Stream de datos en tiempo real procedente de sensores IoT instalados en flotas de vehículos eléctricos comerciales. Cubre información de estado de batería, consumo energético, geolocalización y rutas.",
+        "paragraph2": "Los datos permiten optimización de rutas, predicción de autonomía, gestión de carga y análisis de eficiencia. Incluye información de frenado regenerativo y estado de salud de batería para mantenimiento predictivo."
+      },
+      "useCases": [
+        "Optimización de rutas en tiempo real",
+        "Gestión inteligente de carga de flotas",
+        "Predicción de autonomía y planificación",
+        "Mantenimiento predictivo de baterías",
+        "Análisis de eficiencia energética por conductor"
+      ],
+      "schema": [
+        { "field": "timestamp", "type": "ISO 8601 DateTime", "description": "Marca temporal UTC del registro" },
+        { "field": "vehicle_id", "type": "String", "description": "Identificador único del vehículo (formato: EV-[CIUDAD]-[NUM])" },
+        { "field": "driver_id", "type": "String", "description": "ID del conductor asignado" },
+        { "field": "battery_level", "type": "Integer (0-100)", "description": "Nivel de carga de la batería en porcentaje" },
+        { "field": "battery_health", "type": "Integer (0-100)", "description": "Estado de salud de la batería (SoH)" },
+        { "field": "speed_kmh", "type": "Float", "description": "Velocidad instantánea en km/h" },
+        { "field": "latitude", "type": "Float", "description": "Coordenada de latitud (WGS84)" },
+        { "field": "longitude", "type": "Float", "description": "Coordenada de longitud (WGS84)" },
+        { "field": "charging_status", "type": "Enum", "description": "'charging' | 'discharging' | 'idle'" },
+        { "field": "range_km", "type": "Integer", "description": "Autonomía estimada restante en km" },
+        { "field": "energy_consumed_kwh", "type": "Float", "description": "Energía consumida acumulada en el trayecto" },
+        { "field": "regeneration_kwh", "type": "Float", "description": "Energía recuperada por frenado regenerativo" },
+        { "field": "ambient_temp_c", "type": "Float", "description": "Temperatura ambiente exterior en °C" },
+        { "field": "tire_pressure_psi", "type": "Array[4]", "description": "Presión de cada neumático [FL, FR, RL, RR]" },
+        { "field": "route_id", "type": "String", "description": "ID de la ruta asignada" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Análisis de eficiencia de flota propia",
+          "Integración con sistemas de gestión de flotas",
+          "Optimización de rutas y cargas",
+          "Reporting de sostenibilidad corporativa"
+        ],
+        "prohibited": [
+          "Seguimiento de conductores individuales sin consentimiento",
+          "Reventa de datos de localización",
+          "Uso para establecer sanciones laborales",
+          "Correlación con datos personales externos"
+        ],
+        "obligations": [
+          "Consentimiento de conductores para tracking",
+          "Anonimización en análisis agregados",
+          "Retención máxima: 12 meses",
+          "Cumplimiento RGPD para datos de localización"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 98.0, "description": "Cobertura de sensores activos" },
+        "freshness": { "value": 99.9, "description": "Latencia <5 segundos" },
+        "accuracy": { "value": 97.5, "description": "Precisión GPS ±3 metros" },
+        "consistency": { "value": 99.5, "description": "Sin gaps en transmisión" },
+        "availability": { "value": 99.8, "description": "Uptime del stream" }
+      },
+      "pricing": {
+        "amount": "200€/mes",
+        "model": "subscription",
+        "description": "Suscripción mensual"
+      }
+    },
+    "huella-hidrica-agricola": {
+      "category": "Sostenibilidad",
+      "title": "Huella Hídrica Agrícola",
+      "shortDescription": "Dataset semanal con monitorización de consumo hídrico, eficiencia de riego y predicciones de estrés hídrico para parcelas agrícolas. Incluye modelos ML de predicción y huella de carbono asociada.",
+      "provider": "AquaData Solutions",
+      "custody": "CESGA Green Cloud (Galicia)",
+      "rating": "4.5",
+      "reviewCount": "92",
+      "metrics": {
+        "update": "Semanal",
+        "parcels": "1.8M",
+        "mlPrediction": "7 días",
+        "regions": "17"
+      },
+      "description": {
+        "paragraph1": "Sistema de monitorización de huella hídrica para explotaciones agrícolas en España. Combina datos de teledetección satelital, sensores de suelo y modelos meteorológicos para calcular consumo y eficiencia.",
+        "paragraph2": "Incluye predicciones de estrés hídrico basadas en machine learning con horizonte de 7 días y cálculo de huella de carbono asociada al riego. Esencial para cumplimiento de normativa PAC y certificaciones de sostenibilidad."
+      },
+      "useCases": [
+        "Cumplimiento de condicionalidad hídrica PAC",
+        "Optimización de riego por parcela",
+        "Certificación de sostenibilidad agrícola",
+        "Alertas tempranas de estrés hídrico",
+        "Reporting ESG para agroindustria"
+      ],
+      "schema": [
+        { "field": "week_start", "type": "Date (YYYY-MM-DD)", "description": "Inicio de la semana de medición" },
+        { "field": "parcel_id", "type": "String", "description": "Identificador único de la parcela (formato: CCAA-PROV-NUM)" },
+        { "field": "region", "type": "String", "description": "Comunidad Autónoma" },
+        { "field": "municipality", "type": "String", "description": "Municipio donde se ubica la parcela" },
+        { "field": "crop_type", "type": "Enum", "description": "'olivo' | 'vid' | 'cereal' | 'hortalizas' | 'frutales' | 'almendro'" },
+        { "field": "parcel_hectares", "type": "Float", "description": "Superficie de la parcela en hectáreas" },
+        { "field": "water_consumed_m3", "type": "Float", "description": "Agua consumida en la semana (m³)" },
+        { "field": "water_per_hectare_m3", "type": "Float", "description": "Consumo por hectárea (m³/ha)" },
+        { "field": "irrigation_type", "type": "Enum", "description": "'riego' | 'secano' | 'goteo' | 'aspersion'" },
+        { "field": "precipitation_mm", "type": "Float", "description": "Precipitación semanal (mm)" },
+        { "field": "evapotranspiration_mm", "type": "Float", "description": "Evapotranspiración semanal (mm)" },
+        { "field": "soil_moisture_percent", "type": "Integer (0-100)", "description": "Humedad del suelo (%)" },
+        { "field": "stress_index", "type": "Integer (0-100)", "description": "Índice de estrés hídrico (0=sin estrés)" },
+        { "field": "stress_prediction_7d", "type": "Enum", "description": "Predicción ML a 7 días: 'low' | 'medium' | 'high' | 'critical'" },
+        { "field": "efficiency_score", "type": "Integer (0-100)", "description": "Puntuación de eficiencia hídrica" },
+        { "field": "carbon_footprint_kg", "type": "Float", "description": "Huella de carbono asociada (kg CO2)" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Análisis de sostenibilidad de explotaciones propias",
+          "Integración con sistemas de gestión agrícola",
+          "Generación de informes PAC",
+          "Uso en certificaciones de sostenibilidad"
+        ],
+        "prohibited": [
+          "Identificación de propietarios sin autorización",
+          "Uso para especulación de mercados agrícolas",
+          "Redistribución comercial de datos",
+          "Correlación con datos de subvenciones"
+        ],
+        "obligations": [
+          "Uso conforme a normativa SIGPAC",
+          "Anonimización en publicaciones",
+          "Notificación de anomalías detectadas",
+          "Cita de fuente en informes públicos"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 96.5, "description": "Cobertura de parcelas registradas" },
+        "freshness": { "value": 99.0, "description": "Datos actualizados cada lunes" },
+        "accuracy": { "value": 94.8, "description": "Validación con sensores de campo" },
+        "consistency": { "value": 98.7, "description": "Metodología ISO 14046" },
+        "availability": { "value": 99.5, "description": "SLA de disponibilidad" }
+      },
+      "pricing": {
+        "amount": "150€/mes",
+        "model": "subscription",
+        "description": "Suscripción mensual"
+      }
+    },
+    "historico-meteorologico": {
+      "category": "Clima",
+      "title": "Histórico Meteorológico 2023-2024",
+      "shortDescription": "Archivo histórico completo de datos meteorológicos de todas las estaciones de la red AEMET en España. Incluye temperatura, precipitación, viento, humedad y otras variables climáticas con resolución diaria.",
+      "provider": "AEMET Open Data",
+      "custody": "Centro Nacional de Supercomputación (Barcelona)",
+      "rating": "4.9",
+      "reviewCount": "256",
+      "metrics": {
+        "update": "Estático",
+        "records": "8.2M",
+        "stations": "890+",
+        "daysCovered": "730"
+      },
+      "description": {
+        "paragraph1": "Dataset histórico completo con datos meteorológicos diarios de la red de estaciones de AEMET para el periodo 2023-2024. Incluye todas las variables climáticas estándar con cobertura nacional.",
+        "paragraph2": "Los datos están validados y homogeneizados según protocolos OMM. Ideal para análisis climáticos, correlación con otros datasets y entrenamiento de modelos predictivos meteorológicos."
+      },
+      "useCases": [
+        "Análisis climáticos y estudios de tendencias",
+        "Correlación con datos de producción agrícola",
+        "Entrenamiento de modelos predictivos",
+        "Estudios de impacto climático en infraestructuras",
+        "Investigación académica sobre cambio climático"
+      ],
+      "schema": [
+        { "field": "date", "type": "Date (YYYY-MM-DD)", "description": "Fecha del registro meteorológico" },
+        { "field": "station_id", "type": "String", "description": "Código AEMET de la estación" },
+        { "field": "station_name", "type": "String", "description": "Nombre descriptivo de la estación" },
+        { "field": "province", "type": "String", "description": "Provincia donde se ubica la estación" },
+        { "field": "latitude", "type": "Float", "description": "Latitud de la estación (WGS84)" },
+        { "field": "longitude", "type": "Float", "description": "Longitud de la estación (WGS84)" },
+        { "field": "altitude_m", "type": "Integer", "description": "Altitud sobre el nivel del mar en metros" },
+        { "field": "temp_max_c", "type": "Float", "description": "Temperatura máxima del día en °C" },
+        { "field": "temp_min_c", "type": "Float", "description": "Temperatura mínima del día en °C" },
+        { "field": "temp_avg_c", "type": "Float", "description": "Temperatura media del día en °C" },
+        { "field": "precipitation_mm", "type": "Float", "description": "Precipitación acumulada en mm" },
+        { "field": "humidity_percent", "type": "Integer", "description": "Humedad relativa media (%)" },
+        { "field": "wind_speed_kmh", "type": "Float", "description": "Velocidad media del viento en km/h" },
+        { "field": "wind_direction", "type": "String", "description": "Dirección predominante del viento (N, NE, E, etc.)" },
+        { "field": "pressure_hpa", "type": "Float", "description": "Presión atmosférica en hPa" },
+        { "field": "sunshine_hours", "type": "Float", "description": "Horas de sol registradas" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Uso libre para cualquier finalidad",
+          "Redistribución con atribución",
+          "Uso comercial y no comercial",
+          "Integración en productos derivados"
+        ],
+        "prohibited": [],
+        "obligations": [
+          "Atribución: 'Fuente: AEMET'",
+          "No alterar datos originales en redistribución",
+          "Mantener metadatos de calidad"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 99.7, "description": "Cobertura de días y estaciones" },
+        "freshness": { "value": 100, "description": "Archivo estático completo" },
+        "accuracy": { "value": 99.5, "description": "Validación OMM" },
+        "consistency": { "value": 99.8, "description": "Homogeneización aplicada" },
+        "availability": { "value": 100, "description": "Archivo descargable" }
+      },
+      "pricing": {
+        "amount": "Gratuito",
+        "model": "free",
+        "description": "Open Data"
+      }
+    }
+  }
+}

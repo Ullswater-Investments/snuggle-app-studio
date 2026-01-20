@@ -1,0 +1,24 @@
+{
+  "common": {
+    "backToCatalog": "Terug naar catalogus",
+    "catalog": "Catalogus",
+    "tabs": { "description": "Beschrijving", "schema": "Datastructuur", "format": "Formaat & Levering", "rights": "Rechten (ODRL)", "sample": "Datavoorbeeld", "quality": "Kwaliteit" },
+    "badges": { "kybVerified": "KYB Geverifieerd", "kybTooltip": "Aanbieder geverifieerd via Know Your Business proces", "criticalInfrastructure": "Kritieke Infrastructuur", "sustainable": "Duurzaam", "esgCertified": "ESG Gecertificeerd", "blockchainVerified": "Blockchain Geverifieerd", "doCertified": "BOB Gecertificeerd", "openData": "Open Data", "officialSource": "Officiële Bron", "lowCarbon": "Koolstofarm" },
+    "labels": { "provider": "Aanbieder", "custody": "Bewaring", "reviews": "beoordelingen", "update": "Update", "records": "Records", "completeness": "Volledigheid", "coverage": "Dekking", "postalCodes": "Postcodes", "hourly": "Per uur", "daily": "Dagelijks", "weekly": "Wekelijks", "eventBased": "Per Gebeurtenis", "static": "Statisch", "live": "LIVE", "realTime": "Realtime", "precision": "Precisie", "latency": "API-Latentie", "companies": "Bedrijven", "vehicles": "Voertuigen", "batches": "Gevolgde batches", "mills": "Molens", "denominations": "Benamingen", "parcels": "Percelen", "mlPrediction": "ML-Voorspelling", "regions": "Regio's", "stations": "Stations", "daysCovered": "Gedekte dagen" },
+    "sections": { "datasetDescription": "Dataset Beschrijving", "useCases": "Belangrijkste Gebruiksscenario's", "dataSchema": "Dataschema", "schemaTable": { "field": "Veld", "type": "Type", "description": "Beschrijving" }, "formatDelivery": "Formaat & Levering", "odrlRights": "ODRL-Rechten", "odrl": { "permitted": "Toegestaan", "prohibited": "Verboden", "obligations": "Verplichtingen" }, "dataSample": "Datavoorbeeld", "qualityMetrics": "Kwaliteitsmetrieken" },
+    "quality": { "completeness": "Datavolledigheid", "freshness": "Versheid", "accuracy": "Nauwkeurigheid", "consistency": "Consistentie", "availability": "SLA-Beschikbaarheid" },
+    "pricing": { "title": "Prijs", "subscription": "Maandelijks abonnement", "oneTime": "Eenmalige betaling", "perUse": "Per query", "free": "Gratis", "accessFree": "Gratis Toegang", "requestAccess": "Toegang Aanvragen", "addToCart": "Toevoegen aan winkelwagen", "contactSales": "Contact verkoop" },
+    "sectorTypes": { "manufacturing": "Productie", "logistics": "Logistiek", "retail": "Detailhandel", "office": "Kantoor" },
+    "chargingStatus": { "charging": "Opladen", "discharging": "In gebruik", "idle": "Inactief" },
+    "riskLevels": { "veryLow": "Zeer Laag", "low": "Laag", "medium": "Gemiddeld", "high": "Hoog", "veryHigh": "Zeer Hoog" },
+    "stressLevels": { "low": "Laag", "medium": "Gemiddeld", "high": "Hoog", "critical": "Kritiek" }
+  },
+  "products": {
+    "consumo-electrico-industrial": { "category": "Industrieel", "title": "Industrieel Elektriciteitsverbruik", "shortDescription": "Geaggregeerde dataset van elektriciteitsverbruik van de Spaanse industriële sector.", "provider": "Iberdrola Distributie", "rating": "4.8" },
+    "trazabilidad-aceite-do": { "category": "Agri-food", "title": "BOB Olijfolie Traceerbaarheid", "shortDescription": "Onveranderlijk traceerbaarheidsregister voor Extra Vierge Olijfolie met Beschermde Oorsprongsbenaming.", "provider": "BOB Oliën Regelgevende Raad", "rating": "4.9" },
+    "score-crediticio-b2b": { "category": "Financieel", "title": "B2B Kredietscore", "shortDescription": "Realtime bedrijfskredietscoring-service voor meer dan 2,1 miljoen bedrijven.", "provider": "Axesor Rating", "rating": "4.7" },
+    "telemetria-flota-electrica": { "category": "Mobiliteit", "title": "Elektrische Vloot Telemetrie", "shortDescription": "Volledige realtime dataset met telemetrie van commerciële elektrische voertuigvloten.", "provider": "EcoFleet Analytics", "rating": "4.6" },
+    "huella-hidrica-agricola": { "category": "Duurzaamheid", "title": "Agrarische Watervoetafdruk", "shortDescription": "Wekelijkse dataset met waterverbruikmonitoring en waterstress-voorspellingen.", "provider": "AquaData Solutions", "rating": "4.5" },
+    "historico-meteorologico": { "category": "Klimaat", "title": "Meteorologisch Archief 2023-2024", "shortDescription": "Volledig historisch archief van meteorologische gegevens van alle AEMET-stations in Spanje.", "provider": "AEMET Open Data", "rating": "4.9" }
+  }
+}
