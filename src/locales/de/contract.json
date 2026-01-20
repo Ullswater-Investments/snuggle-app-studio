@@ -1,0 +1,224 @@
+{
+  "title": "BEITRITTSERKLÄRUNG",
+  "subtitle": "Zum Datenraum PROCUREDATA",
+  "officialDocument": "Offizielles Dokument",
+  "downloadPdf": "Vertrag als PDF herunterladen",
+  "downloadingPdf": "Wird generiert...",
+  "startProcess": "Beitrittsprozess starten",
+  "readyToJoin": "Bereit, dem Datenraum beizutreten?",
+  "readyDescription": "Schließen Sie den Registrierungsprozess ab, um Ihren Beitritt zum Datenraum PROCUREDATA zu formalisieren und mit dem sicheren und EU-konformen Datenaustausch zu beginnen.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "DSGVO",
+    "lopdgdd": "BDSG"
+  },
+  "promoter": {
+    "title": "1. Identifikation des Promotors",
+    "description": "Angaben zum Promotor des Datenraums",
+    "legalName": "Firmenname",
+    "address": "Adresse",
+    "email": "E-Mail",
+    "website": "Website",
+    "legalFramework": "Rechtsrahmen",
+    "ecosystem": "Ökosystem"
+  },
+  "object": {
+    "title": "2. Vertragsgegenstand",
+    "description": "Formalisierung der Integration in den Datenraum",
+    "content": "Diese Beitrittserklärung hat zum Ziel, die Integration des Teilnehmers in den Datenraum PROCUREDATA zu formalisieren und die Bedingungen festzulegen, die seine Teilnahme regeln.",
+    "commitments": [
+      "Akzeptiert vollständig den normativen und Governance-Rahmen des Datenraums",
+      "Verpflichtet sich zur Einhaltung der technischen, rechtlichen und ethischen Pflichten",
+      "Erkennt die mit seiner Rolle verbundenen Rechte und Pflichten an",
+      "Ermächtigt den Promotor, die Einhaltung der Anforderungen zu überprüfen"
+    ]
+  },
+  "normative": {
+    "title": "3. Annahme der Vorschriften",
+    "description": "Regulatorische Rahmenwerke und Leitdokumente",
+    "sections": {
+      "terms": {
+        "title": "3.1 Allgemeine Geschäftsbedingungen",
+        "items": [
+          "Definitionen und Umfang des Datenraums",
+          "Rechte und Pflichten der Teilnehmer",
+          "Verfahren für Datenzugang und -nutzung",
+          "Konfliktlösungsmechanismen",
+          "Änderungs- und Aktualisierungsbedingungen"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Governance-Mechanismen",
+        "items": [
+          "Governance-Ausschuss: Leitungsorgan mit Vertretung aller Stakeholder",
+          "Technischer Ausschuss: Verantwortlich für technische Standards und Interoperabilität",
+          "Ethik-Ausschuss: Überwachung der ethischen Datennutzung",
+          "Sicherheitsausschuss: Risikomanagement und Incident Response",
+          "Abstimmungs- und Entscheidungsverfahren"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 ODRL-Richtlinien (Open Digital Rights Language)",
+        "items": [
+          "Definition von Berechtigungen, Verboten und Pflichten für Daten",
+          "Spezifikation von Nutzungsbedingungen (zeitlich, geografisch, zweckgebunden)",
+          "Vererbungs- und Kompositionsmechanismen für Richtlinien",
+          "Integration mit Smart Contracts für automatische Durchsetzung",
+          "Kompatibilität mit IDS- und GAIA-X-Standards"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Datensouveränität: Vollständige Kontrolle über eigene Daten",
+          "Interoperabilität: Nutzung offener Standards und dokumentierter APIs",
+          "Portabilität: Fähigkeit, Daten zwischen Anbietern zu migrieren",
+          "Transparenz: Vollständige Nachverfolgbarkeit der Operationen",
+          "Sicherheit: Einhaltung von Cybersicherheitsstandards",
+          "Föderation: Teilnahme an verteilten Ökosystemen"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 DSGVO-Konformität",
+        "items": [
+          "Rechtsgrundlage für die Verarbeitung personenbezogener Daten (Art. 6)",
+          "Rechte der Betroffenen (Auskunft, Berichtigung, Löschung, Portabilität)",
+          "Pflichten des Verantwortlichen und des Auftragsverarbeiters",
+          "Datenschutz-Folgenabschätzung (DSFA) für Hochrisiko-Verarbeitungen",
+          "Meldung von Datenschutzverletzungen innerhalb von 72 Stunden"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Rolle des Teilnehmers",
+    "description": "Wählen Sie Ihre Rolle im Datenraum",
+    "provider": {
+      "title": "Datenanbieter",
+      "description": "Entität, die Datensätze für Austausch und Monetarisierung in den Datenraum einbringt.",
+      "features": ["Datasets veröffentlichen", "Nutzungsrichtlinien definieren", "Assets monetarisieren"]
+    },
+    "consumer": {
+      "title": "Datenkonsument",
+      "description": "Entität, die auf Daten des Datenraums für ihre Operationen oder Analysen zugreift.",
+      "features": ["Auf Katalog zugreifen", "Daten anfordern", "Gemäß Richtlinien nutzen"]
+    },
+    "service": {
+      "title": "Dienstleister",
+      "description": "Entität, die Vermittlungs-, Transformations- oder Mehrwertdienste für Daten anbietet.",
+      "features": ["KI-Services", "Transformation", "Erweiterte Analyse"]
+    },
+    "intermediary": {
+      "title": "Datenvermittler",
+      "description": "Neutrale Entität, die den Datenaustausch zwischen Anbietern und Konsumenten erleichtert.",
+      "features": ["Neutral", "Vermittler", "DGA-Konformität"]
+    },
+    "altruism": {
+      "title": "Datenaltruismus-Organisation",
+      "description": "Gemeinnützige Entität, die freiwillig überlassene Daten für das Gemeinwohl verwaltet.",
+      "features": ["Gemeinnützig", "Öffentliches Interesse", "Forschung"]
+    }
+  },
+  "validity": {
+    "title": "5. Gültigkeit und Beendigung",
+    "description": "Dauer und Beendigungsgründe",
+    "duration": {
+      "title": "5.1 Gültigkeit",
+      "content": "Diese Beitrittserklärung tritt mit Unterzeichnung in Kraft und gilt auf unbestimmte Zeit, sofern sie nicht von einer der Parteien ausdrücklich gekündigt wird.",
+      "indefinite": "unbefristete Gültigkeit"
+    },
+    "causes": {
+      "title": "5.2 Beendigungsgründe",
+      "items": [
+        "Freiwillige Kündigung mit 30 Tagen Vorankündigung",
+        "Schwerwiegender Pflichtverstoß",
+        "Beschluss des Governance-Ausschusses"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Auswirkungen",
+      "items": [
+        "Beendigung des Zugangs zu Diensten",
+        "Aufrechterhaltung der Vertraulichkeit",
+        "Recht auf Export eigener Daten"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Anhang: Offizielle Ressourcen",
+    "description": "Links zu Dokumentation und Vorschriften"
+  },
+  "signature": {
+    "title": "6. Vertragsunterzeichnung",
+    "description": "Vervollständigen Sie die Daten und unterschreiben Sie elektronisch",
+    "signerData": "Daten des Unterzeichners",
+    "fullName": "Vollständiger Name",
+    "fullNamePlaceholder": "Vor- und Nachname des gesetzlichen Vertreters",
+    "position": "Position",
+    "positionPlaceholder": "z.B.: Geschäftsführer, CEO",
+    "organizationName": "Name der Organisation",
+    "organizationNamePlaceholder": "Rechtlicher Name des Unternehmens",
+    "taxId": "USt-IdNr./Steuernummer",
+    "taxIdPlaceholder": "Steuerliche Identifikation",
+    "signatureLabel": "Elektronische Unterschrift",
+    "signatureInstructions": "Zeichnen Sie Ihre Unterschrift in das Feld",
+    "clearSignature": "Löschen",
+    "acceptTerms": "Ich akzeptiere die Bedingungen des Beitrittsvertrags",
+    "acceptTermsDescription": "Ich habe alle Klauseln dieses Vertrags gelesen und verstanden",
+    "acceptGdpr": "Ich akzeptiere die Datenverarbeitung gemäß DSGVO",
+    "acceptGdprDescription": "Ich stimme der Verarbeitung meiner personenbezogenen Daten gemäß geltendem Recht zu",
+    "signContract": "Vertrag unterschreiben",
+    "signing": "Wird unterschrieben...",
+    "signedAt": "Unterschrieben am",
+    "qualifiedTitle": "Qualifizierte elektronische Signatur",
+    "tabSimple": "Einfach",
+    "tabCertificate": "Zertifikat",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "Diese Unterschrift hat indikativen Wert. Für vollständige Rechtsgültigkeit verwenden Sie eine qualifizierte Signatur.",
+    "certificateInfo": "Laden Sie Ihr digitales Zertifikat im Format .p12 oder .pfx hoch",
+    "certificateLabel": "Zertifikat (.p12/.pfx)",
+    "passwordLabel": "Zertifikats-Passwort",
+    "eidasInfo": "Qualifizierte Signatur mit höchster Rechtsgültigkeit gemäß eIDAS-Verordnung (EU) 910/2014",
+    "signSimple": "Mit einfacher Signatur unterschreiben",
+    "signWithCertificate": "Mit Zertifikat unterschreiben",
+    "validatingCertificate": "Zertifikat wird validiert...",
+    "processing": "Wird verarbeitet...",
+    "connectingProvider": "Verbindung zum Signatur-Gateway...",
+    "levelSimple": "Einfach",
+    "levelAdvanced": "Fortgeschritten",
+    "levelQualified": "Qualifiziert",
+    "autofirmaDesc": "Offizieller Signatur-Client der spanischen Regierung",
+    "claveDesc": "Spanisches elektronisches Identifikationssystem",
+    "viafirmaDesc": "Qualifizierter Vertrauensdiensteanbieter",
+    "signedSuccessfully": "Dokument erfolgreich unterschrieben",
+    "qualifiedSignatureApplied": "Qualifizierte elektronische Signatur angewendet",
+    "validation": {
+      "nameRequired": "Der Name ist erforderlich",
+      "positionRequired": "Die Position ist erforderlich",
+      "organizationRequired": "Die Organisation ist erforderlich",
+      "taxIdRequired": "Die USt-IdNr. ist erforderlich",
+      "signatureRequired": "Die Unterschrift ist erforderlich",
+      "termsRequired": "Sie müssen die Geschäftsbedingungen akzeptieren",
+      "gdprRequired": "Sie müssen die Datenverarbeitung akzeptieren"
+    },
+    "success": {
+      "title": "Vertrag unterschrieben!",
+      "description": "Ihr Beitrittsvertrag wurde erfolgreich unterschrieben. Sie erhalten eine Kopie per E-Mail.",
+      "downloadSigned": "Unterschriebenen Vertrag herunterladen"
+    }
+  },
+  "preview": {
+    "title": "Dokumentvorschau",
+    "documentTitle": "BEITRITTSERKLÄRUNG",
+    "documentSubtitle": "DATENRAUM PROCUREDATA",
+    "promoterSection": "IDENTIFIKATION DES PROMOTORS",
+    "participantSection": "IDENTIFIKATION DES TEILNEHMERS",
+    "objectSection": "GEGENSTAND DER ERKLÄRUNG",
+    "regulatorySection": "ANNAHME DER VORSCHRIFTEN",
+    "signatureDate": "Datum",
+    "signaturePlace": "Ort",
+    "signaturePlaceholder": "[Elektronische Unterschrift]"
+  }
+}

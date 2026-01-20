@@ -1,0 +1,224 @@
+{
+  "title": "LETTERA DI ADESIONE",
+  "subtitle": "Allo Spazio Dati PROCUREDATA",
+  "officialDocument": "Documento Ufficiale",
+  "downloadPdf": "Scarica Contratto PDF",
+  "downloadingPdf": "Generazione in corso...",
+  "startProcess": "Avvia Processo di Adesione",
+  "readyToJoin": "Pronto ad aderire allo Spazio Dati?",
+  "readyDescription": "Completa il processo di registrazione per formalizzare la tua adesione allo Spazio Dati PROCUREDATA e iniziare a scambiare dati in modo sicuro e conforme alla normativa europea.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "GDPR",
+    "lopdgdd": "Codice Privacy"
+  },
+  "promoter": {
+    "title": "1. Identificazione del Promotore",
+    "description": "Dati del promotore dello Spazio Dati",
+    "legalName": "Ragione Sociale",
+    "address": "Indirizzo",
+    "email": "E-mail",
+    "website": "Sito Web",
+    "legalFramework": "Quadro Normativo",
+    "ecosystem": "Ecosistema"
+  },
+  "object": {
+    "title": "2. Oggetto del Contratto",
+    "description": "Formalizzazione dell'integrazione nello Spazio Dati",
+    "content": "La presente Lettera di Adesione ha per oggetto formalizzare l'integrazione del Partecipante nello Spazio Dati PROCUREDATA, stabilendo i termini e le condizioni che regoleranno la sua partecipazione.",
+    "commitments": [
+      "Accetta integralmente il quadro normativo e di governance dello Spazio Dati",
+      "Si impegna a rispettare gli obblighi tecnici, legali ed etici",
+      "Riconosce i diritti e le responsabilità associati al proprio ruolo",
+      "Autorizza il Promotore a verificare il rispetto dei requisiti"
+    ]
+  },
+  "normative": {
+    "title": "3. Accettazione della Normativa",
+    "description": "Quadri normativi e documenti di riferimento",
+    "sections": {
+      "terms": {
+        "title": "3.1 Termini e Condizioni Generali",
+        "items": [
+          "Definizioni e ambito dello Spazio Dati",
+          "Diritti e obblighi dei partecipanti",
+          "Procedure di accesso e utilizzo dei dati",
+          "Meccanismi di risoluzione delle controversie",
+          "Condizioni di modifica e aggiornamento"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Meccanismi di Governance",
+        "items": [
+          "Comitato di Governance: Organo direttivo con rappresentanza di tutti gli stakeholder",
+          "Comitato Tecnico: Responsabile degli standard tecnici e dell'interoperabilità",
+          "Comitato Etico: Supervisione dell'uso etico dei dati",
+          "Comitato di Sicurezza: Gestione dei rischi e risposta agli incidenti",
+          "Procedure di voto e processo decisionale"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 Policy ODRL (Open Digital Rights Language)",
+        "items": [
+          "Definizione di permessi, divieti e obblighi sui dati",
+          "Specifica delle condizioni d'uso (temporale, geografica, finalità)",
+          "Meccanismi di ereditarietà e composizione delle policy",
+          "Integrazione con smart contract per l'enforcement automatico",
+          "Compatibilità con standard IDS e GAIA-X"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Sovranità dei dati: Controllo totale sui propri dati",
+          "Interoperabilità: Utilizzo di standard aperti e API documentate",
+          "Portabilità: Capacità di migrare i dati tra fornitori",
+          "Trasparenza: Tracciabilità completa delle operazioni",
+          "Sicurezza: Conformità agli standard di cybersecurity",
+          "Federazione: Partecipazione a ecosistemi distribuiti"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 Conformità GDPR",
+        "items": [
+          "Base giuridica per il trattamento dei dati personali (Art. 6)",
+          "Diritti degli interessati (accesso, rettifica, cancellazione, portabilità)",
+          "Obblighi del titolare e del responsabile del trattamento",
+          "Valutazioni d'impatto (DPIA) per trattamenti ad alto rischio",
+          "Notifica delle violazioni dei dati entro 72 ore"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Ruolo del Partecipante",
+    "description": "Seleziona il tuo ruolo nello Spazio Dati",
+    "provider": {
+      "title": "Fornitore di Dati",
+      "description": "Entità che apporta dataset allo Spazio Dati per lo scambio e la monetizzazione.",
+      "features": ["Pubblicare dataset", "Definire policy d'uso", "Monetizzare asset"]
+    },
+    "consumer": {
+      "title": "Consumatore di Dati",
+      "description": "Entità che accede e utilizza i dati dello Spazio Dati per le proprie operazioni o analisi.",
+      "features": ["Accedere al catalogo", "Richiedere dati", "Usare secondo le policy"]
+    },
+    "service": {
+      "title": "Fornitore di Servizi",
+      "description": "Entità che offre servizi di intermediazione, trasformazione o valore aggiunto sui dati.",
+      "features": ["Servizi di IA", "Trasformazione", "Analisi avanzata"]
+    },
+    "intermediary": {
+      "title": "Intermediario di Dati",
+      "description": "Entità neutrale che facilita lo scambio di dati tra fornitori e consumatori.",
+      "features": ["Neutrale", "Facilitatore", "Conformità DGA"]
+    },
+    "altruism": {
+      "title": "Organizzazione di Altruismo",
+      "description": "Entità senza scopo di lucro che gestisce dati ceduti volontariamente per fini di interesse generale.",
+      "features": ["Senza scopo di lucro", "Interesse pubblico", "Ricerca"]
+    }
+  },
+  "validity": {
+    "title": "5. Validità e Cessazione",
+    "description": "Durata e cause di cessazione",
+    "duration": {
+      "title": "5.1 Validità",
+      "content": "La presente Lettera di Adesione entrerà in vigore alla data della sua firma e avrà durata indeterminata, salvo denuncia espressa di una delle parti.",
+      "indefinite": "durata indeterminata"
+    },
+    "causes": {
+      "title": "5.2 Cause di Cessazione",
+      "items": [
+        "Denuncia volontaria con preavviso di 30 giorni",
+        "Inadempimento grave degli obblighi",
+        "Decisione del Comitato di Governance"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Effetti",
+      "items": [
+        "Cessazione dell'accesso ai servizi",
+        "Mantenimento della riservatezza",
+        "Diritto di esportare i propri dati"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Allegato: Risorse Ufficiali",
+    "description": "Link a documentazione e normativa"
+  },
+  "signature": {
+    "title": "6. Firma del Contratto",
+    "description": "Completa i dati e firma elettronicamente",
+    "signerData": "Dati del Firmatario",
+    "fullName": "Nome Completo",
+    "fullNamePlaceholder": "Nome e cognome del rappresentante legale",
+    "position": "Ruolo",
+    "positionPlaceholder": "Es: Amministratore Delegato, CEO",
+    "organizationName": "Nome dell'Organizzazione",
+    "organizationNamePlaceholder": "Ragione sociale dell'azienda",
+    "taxId": "Partita IVA/Codice Fiscale",
+    "taxIdPlaceholder": "Identificazione fiscale",
+    "signatureLabel": "Firma Elettronica",
+    "signatureInstructions": "Disegna la tua firma nel riquadro",
+    "clearSignature": "Cancella",
+    "acceptTerms": "Accetto i termini e condizioni del contratto di adesione",
+    "acceptTermsDescription": "Ho letto e compreso tutte le clausole del presente contratto",
+    "acceptGdpr": "Accetto il trattamento dei dati secondo il GDPR",
+    "acceptGdprDescription": "Acconsento al trattamento dei miei dati personali secondo la normativa vigente",
+    "signContract": "Firma Contratto",
+    "signing": "Firma in corso...",
+    "signedAt": "Firmato il",
+    "qualifiedTitle": "Firma Elettronica Qualificata",
+    "tabSimple": "Semplice",
+    "tabCertificate": "Certificato",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "Questa firma ha valore indicativo. Per piena validità legale, usa la firma qualificata.",
+    "certificateInfo": "Carica il tuo certificato digitale in formato .p12 o .pfx",
+    "certificateLabel": "Certificato (.p12/.pfx)",
+    "passwordLabel": "Password del certificato",
+    "eidasInfo": "Firma qualificata con massima validità legale secondo il Regolamento eIDAS (UE) 910/2014",
+    "signSimple": "Firma con firma semplice",
+    "signWithCertificate": "Firma con certificato",
+    "validatingCertificate": "Validazione certificato...",
+    "processing": "Elaborazione in corso...",
+    "connectingProvider": "Connessione al gateway di firma...",
+    "levelSimple": "Semplice",
+    "levelAdvanced": "Avanzata",
+    "levelQualified": "Qualificata",
+    "autofirmaDesc": "Client ufficiale di firma del Governo spagnolo",
+    "claveDesc": "Sistema di identificazione elettronica spagnolo",
+    "viafirmaDesc": "Prestatore di servizi fiduciari qualificato",
+    "signedSuccessfully": "Documento firmato con successo",
+    "qualifiedSignatureApplied": "Firma elettronica qualificata applicata",
+    "validation": {
+      "nameRequired": "Il nome è obbligatorio",
+      "positionRequired": "Il ruolo è obbligatorio",
+      "organizationRequired": "L'organizzazione è obbligatoria",
+      "taxIdRequired": "La Partita IVA è obbligatoria",
+      "signatureRequired": "La firma è obbligatoria",
+      "termsRequired": "Devi accettare i termini e condizioni",
+      "gdprRequired": "Devi accettare il trattamento dei dati"
+    },
+    "success": {
+      "title": "Contratto Firmato!",
+      "description": "Il tuo contratto di adesione è stato firmato con successo. Riceverai una copia via e-mail.",
+      "downloadSigned": "Scarica Contratto Firmato"
+    }
+  },
+  "preview": {
+    "title": "Anteprima del documento",
+    "documentTitle": "LETTERA DI ADESIONE",
+    "documentSubtitle": "SPAZIO DATI PROCUREDATA",
+    "promoterSection": "IDENTIFICAZIONE DEL PROMOTORE",
+    "participantSection": "IDENTIFICAZIONE DEL PARTECIPANTE",
+    "objectSection": "OGGETTO DELLA LETTERA",
+    "regulatorySection": "ACCETTAZIONE NORMATIVA",
+    "signatureDate": "Data",
+    "signaturePlace": "Luogo",
+    "signaturePlaceholder": "[Firma elettronica]"
+  }
+}

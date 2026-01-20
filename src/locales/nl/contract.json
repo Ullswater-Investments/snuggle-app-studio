@@ -1,0 +1,224 @@
+{
+  "title": "TOETREDINGSVERKLARING",
+  "subtitle": "Tot de Dataruimte PROCUREDATA",
+  "officialDocument": "Officieel Document",
+  "downloadPdf": "Contract PDF downloaden",
+  "downloadingPdf": "Wordt gegenereerd...",
+  "startProcess": "Start Toetredingsproces",
+  "readyToJoin": "Klaar om toe te treden tot de Dataruimte?",
+  "readyDescription": "Voltooi het registratieproces om uw toetreding tot de Dataruimte PROCUREDATA te formaliseren en veilig en in overeenstemming met Europese regelgeving data uit te wisselen.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "AVG",
+    "lopdgdd": "UAVG"
+  },
+  "promoter": {
+    "title": "1. Identificatie van de Promotor",
+    "description": "Gegevens van de promotor van de Dataruimte",
+    "legalName": "Rechtsvorm",
+    "address": "Adres",
+    "email": "E-mail",
+    "website": "Website",
+    "legalFramework": "Juridisch Kader",
+    "ecosystem": "Ecosysteem"
+  },
+  "object": {
+    "title": "2. Onderwerp van het Contract",
+    "description": "Formalisering van de integratie in de Dataruimte",
+    "content": "Deze Toetredingsverklaring heeft tot doel de integratie van de Deelnemer in de Dataruimte PROCUREDATA te formaliseren, waarbij de voorwaarden worden vastgesteld die zijn deelname zullen regelen.",
+    "commitments": [
+      "Accepteert volledig het normatieve en governance-kader van de Dataruimte",
+      "Verplicht zich tot naleving van de technische, juridische en ethische verplichtingen",
+      "Erkent de rechten en verantwoordelijkheden die aan zijn rol verbonden zijn",
+      "Machtigt de Promotor om de naleving van de vereisten te verifiëren"
+    ]
+  },
+  "normative": {
+    "title": "3. Acceptatie van Regelgeving",
+    "description": "Regelgevende kaders en richtinggevende documenten",
+    "sections": {
+      "terms": {
+        "title": "3.1 Algemene Voorwaarden",
+        "items": [
+          "Definities en reikwijdte van de Dataruimte",
+          "Rechten en plichten van deelnemers",
+          "Procedures voor toegang tot en gebruik van data",
+          "Mechanismen voor geschillenbeslechting",
+          "Voorwaarden voor wijziging en actualisering"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Governance-mechanismen",
+        "items": [
+          "Governance Comité: Bestuursorgaan met vertegenwoordiging van alle stakeholders",
+          "Technisch Comité: Verantwoordelijk voor technische standaarden en interoperabiliteit",
+          "Ethisch Comité: Toezicht op ethisch datagebruik",
+          "Veiligheidscomité: Risicobeheer en incidentrespons",
+          "Stem- en besluitvormingsprocedures"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 ODRL-beleid (Open Digital Rights Language)",
+        "items": [
+          "Definitie van machtigingen, verboden en verplichtingen voor data",
+          "Specificatie van gebruiksvoorwaarden (temporeel, geografisch, doel)",
+          "Overerving- en samenstellingsmechanismen voor beleid",
+          "Integratie met smart contracts voor automatische handhaving",
+          "Compatibiliteit met IDS- en GAIA-X-standaarden"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Datasoevereiniteit: Volledige controle over eigen data",
+          "Interoperabiliteit: Gebruik van open standaarden en gedocumenteerde API's",
+          "Portabiliteit: Mogelijkheid om data tussen aanbieders te migreren",
+          "Transparantie: Volledige traceerbaarheid van operaties",
+          "Beveiliging: Naleving van cybersecurity-standaarden",
+          "Federatie: Deelname aan gedistribueerde ecosystemen"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 AVG-conformiteit",
+        "items": [
+          "Rechtsgrondslag voor verwerking van persoonsgegevens (Art. 6)",
+          "Rechten van betrokkenen (inzage, rectificatie, verwijdering, portabiliteit)",
+          "Verplichtingen van verwerkingsverantwoordelijke en verwerker",
+          "Gegevensbeschermingseffectbeoordelingen (DPIA) voor hoog-risico verwerkingen",
+          "Melding van datalekken binnen 72 uur"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Rol van de Deelnemer",
+    "description": "Selecteer uw rol in de Dataruimte",
+    "provider": {
+      "title": "Data Provider",
+      "description": "Entiteit die datasets aanbiedt aan de Dataruimte voor uitwisseling en monetisatie.",
+      "features": ["Datasets publiceren", "Gebruiksbeleid definiëren", "Assets monetiseren"]
+    },
+    "consumer": {
+      "title": "Data Consumer",
+      "description": "Entiteit die toegang heeft tot en gebruikmaakt van data uit de Dataruimte voor operaties of analyses.",
+      "features": ["Toegang tot catalogus", "Data aanvragen", "Gebruiken volgens beleid"]
+    },
+    "service": {
+      "title": "Dienstverlener",
+      "description": "Entiteit die bemiddelings-, transformatie- of waarde toevoegende diensten voor data aanbiedt.",
+      "features": ["AI-diensten", "Transformatie", "Geavanceerde analyse"]
+    },
+    "intermediary": {
+      "title": "Data-intermediair",
+      "description": "Neutrale entiteit die data-uitwisseling tussen aanbieders en consumenten faciliteert.",
+      "features": ["Neutraal", "Facilitator", "DGA-conformiteit"]
+    },
+    "altruism": {
+      "title": "Data-altruïsme Organisatie",
+      "description": "Non-profit entiteit die vrijwillig afgestane data beheert voor doeleinden van algemeen belang.",
+      "features": ["Non-profit", "Publiek belang", "Onderzoek"]
+    }
+  },
+  "validity": {
+    "title": "5. Geldigheid en Beëindiging",
+    "description": "Duur en beëindigingsgronden",
+    "duration": {
+      "title": "5.1 Geldigheid",
+      "content": "Deze Toetredingsverklaring treedt in werking op de datum van ondertekening en heeft een onbepaalde duur, tenzij uitdrukkelijk opgezegd door een van de partijen.",
+      "indefinite": "onbepaalde duur"
+    },
+    "causes": {
+      "title": "5.2 Beëindigingsgronden",
+      "items": [
+        "Vrijwillige opzegging met 30 dagen opzegtermijn",
+        "Ernstige schending van verplichtingen",
+        "Besluit van het Governance Comité"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Gevolgen",
+      "items": [
+        "Beëindiging van toegang tot diensten",
+        "Handhaving van vertrouwelijkheid",
+        "Recht om eigen data te exporteren"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Bijlage: Officiële Bronnen",
+    "description": "Links naar documentatie en regelgeving"
+  },
+  "signature": {
+    "title": "6. Ondertekening van het Contract",
+    "description": "Vul de gegevens in en onderteken elektronisch",
+    "signerData": "Gegevens van de Ondertekenaar",
+    "fullName": "Volledige Naam",
+    "fullNamePlaceholder": "Voor- en achternaam van de wettelijk vertegenwoordiger",
+    "position": "Functie",
+    "positionPlaceholder": "Bijv.: Directeur, CEO",
+    "organizationName": "Naam van de Organisatie",
+    "organizationNamePlaceholder": "Rechtsnaam van het bedrijf",
+    "taxId": "BTW-nummer/KvK-nummer",
+    "taxIdPlaceholder": "Fiscale identificatie",
+    "signatureLabel": "Elektronische Handtekening",
+    "signatureInstructions": "Teken uw handtekening in het vak",
+    "clearSignature": "Wissen",
+    "acceptTerms": "Ik accepteer de voorwaarden van het toetredingscontract",
+    "acceptTermsDescription": "Ik heb alle clausules van dit contract gelezen en begrepen",
+    "acceptGdpr": "Ik accepteer de gegevensverwerking volgens de AVG",
+    "acceptGdprDescription": "Ik stem in met de verwerking van mijn persoonsgegevens volgens de geldende regelgeving",
+    "signContract": "Contract Ondertekenen",
+    "signing": "Wordt ondertekend...",
+    "signedAt": "Ondertekend op",
+    "qualifiedTitle": "Gekwalificeerde Elektronische Handtekening",
+    "tabSimple": "Eenvoudig",
+    "tabCertificate": "Certificaat",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "Deze handtekening heeft indicatieve waarde. Voor volledige juridische geldigheid, gebruik een gekwalificeerde handtekening.",
+    "certificateInfo": "Upload uw digitale certificaat in .p12 of .pfx formaat",
+    "certificateLabel": "Certificaat (.p12/.pfx)",
+    "passwordLabel": "Certificaatwachtwoord",
+    "eidasInfo": "Gekwalificeerde handtekening met maximale juridische geldigheid volgens eIDAS-verordening (EU) 910/2014",
+    "signSimple": "Ondertekenen met eenvoudige handtekening",
+    "signWithCertificate": "Ondertekenen met certificaat",
+    "validatingCertificate": "Certificaat wordt gevalideerd...",
+    "processing": "Wordt verwerkt...",
+    "connectingProvider": "Verbinding maken met handtekeninggateway...",
+    "levelSimple": "Eenvoudig",
+    "levelAdvanced": "Geavanceerd",
+    "levelQualified": "Gekwalificeerd",
+    "autofirmaDesc": "Officiële handtekeningclient van de Spaanse overheid",
+    "claveDesc": "Spaans elektronisch identificatiesysteem",
+    "viafirmaDesc": "Gekwalificeerde vertrouwensdienstverlener",
+    "signedSuccessfully": "Document succesvol ondertekend",
+    "qualifiedSignatureApplied": "Gekwalificeerde elektronische handtekening toegepast",
+    "validation": {
+      "nameRequired": "De naam is verplicht",
+      "positionRequired": "De functie is verplicht",
+      "organizationRequired": "De organisatie is verplicht",
+      "taxIdRequired": "Het BTW-nummer is verplicht",
+      "signatureRequired": "De handtekening is verplicht",
+      "termsRequired": "U moet de voorwaarden accepteren",
+      "gdprRequired": "U moet de gegevensverwerking accepteren"
+    },
+    "success": {
+      "title": "Contract Ondertekend!",
+      "description": "Uw toetredingscontract is succesvol ondertekend. U ontvangt een kopie per e-mail.",
+      "downloadSigned": "Download Ondertekend Contract"
+    }
+  },
+  "preview": {
+    "title": "Documentvoorbeeld",
+    "documentTitle": "TOETREDINGSVERKLARING",
+    "documentSubtitle": "DATARUIMTE PROCUREDATA",
+    "promoterSection": "IDENTIFICATIE VAN DE PROMOTOR",
+    "participantSection": "IDENTIFICATIE VAN DE DEELNEMER",
+    "objectSection": "ONDERWERP VAN DE VERKLARING",
+    "regulatorySection": "ACCEPTATIE REGELGEVING",
+    "signatureDate": "Datum",
+    "signaturePlace": "Plaats",
+    "signaturePlaceholder": "[Elektronische handtekening]"
+  }
+}

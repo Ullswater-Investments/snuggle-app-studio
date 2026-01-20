@@ -1,0 +1,224 @@
+{
+  "title": "LETTRE D'ADHÉSION",
+  "subtitle": "À l'Espace de Données PROCUREDATA",
+  "officialDocument": "Document Officiel",
+  "downloadPdf": "Télécharger le Contrat PDF",
+  "downloadingPdf": "Génération en cours...",
+  "startProcess": "Démarrer le Processus d'Adhésion",
+  "readyToJoin": "Prêt à rejoindre l'Espace de Données ?",
+  "readyDescription": "Complétez le processus d'inscription pour formaliser votre adhésion à l'Espace de Données PROCUREDATA et commencer à échanger des données de manière sécurisée et conforme à la réglementation européenne.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "RGPD",
+    "lopdgdd": "Loi Informatique et Libertés"
+  },
+  "promoter": {
+    "title": "1. Identification du Promoteur",
+    "description": "Coordonnées du promoteur de l'Espace de Données",
+    "legalName": "Raison Sociale",
+    "address": "Adresse",
+    "email": "E-mail",
+    "website": "Site Web",
+    "legalFramework": "Cadre Juridique",
+    "ecosystem": "Écosystème"
+  },
+  "object": {
+    "title": "2. Objet du Contrat",
+    "description": "Formalisation de l'intégration à l'Espace de Données",
+    "content": "La présente Lettre d'Adhésion a pour objet de formaliser l'intégration du Participant à l'Espace de Données PROCUREDATA, en établissant les termes et conditions qui régiront sa participation.",
+    "commitments": [
+      "Accepte intégralement le cadre normatif et de gouvernance de l'Espace de Données",
+      "S'engage à respecter les obligations techniques, légales et éthiques",
+      "Reconnaît les droits et responsabilités associés à son rôle",
+      "Autorise le Promoteur à vérifier le respect des exigences"
+    ]
+  },
+  "normative": {
+    "title": "3. Acceptation de la Réglementation",
+    "description": "Cadres normatifs et documents de référence",
+    "sections": {
+      "terms": {
+        "title": "3.1 Conditions Générales d'Utilisation",
+        "items": [
+          "Définitions et périmètre de l'Espace de Données",
+          "Droits et obligations des participants",
+          "Procédures d'accès et d'utilisation des données",
+          "Mécanismes de résolution des conflits",
+          "Conditions de modification et de mise à jour"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Mécanismes de Gouvernance",
+        "items": [
+          "Comité de Gouvernance : Organe directeur avec représentation de toutes les parties prenantes",
+          "Comité Technique : Responsable des standards techniques et de l'interopérabilité",
+          "Comité d'Éthique : Supervision de l'utilisation éthique des données",
+          "Comité de Sécurité : Gestion des risques et réponse aux incidents",
+          "Procédures de vote et de prise de décision"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 Politiques ODRL (Open Digital Rights Language)",
+        "items": [
+          "Définition des permissions, interdictions et obligations sur les données",
+          "Spécification des conditions d'utilisation (temporelle, géographique, finalité)",
+          "Mécanismes d'héritage et de composition des politiques",
+          "Intégration avec les contrats intelligents pour l'exécution automatique",
+          "Compatibilité avec les standards IDS et GAIA-X"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Souveraineté des données : Contrôle total sur ses propres données",
+          "Interopérabilité : Utilisation de standards ouverts et d'APIs documentées",
+          "Portabilité : Capacité de migrer les données entre fournisseurs",
+          "Transparence : Traçabilité complète des opérations",
+          "Sécurité : Conformité aux standards de cybersécurité",
+          "Fédération : Participation à des écosystèmes distribués"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 Conformité RGPD",
+        "items": [
+          "Base légale pour le traitement des données personnelles (Art. 6)",
+          "Droits des personnes concernées (accès, rectification, effacement, portabilité)",
+          "Obligations du responsable et du sous-traitant",
+          "Analyses d'impact (AIPD) pour les traitements à haut risque",
+          "Notification des violations de données sous 72 heures"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Rôle du Participant",
+    "description": "Sélectionnez votre rôle dans l'Espace de Données",
+    "provider": {
+      "title": "Fournisseur de Données",
+      "description": "Entité qui apporte des jeux de données à l'Espace de Données pour l'échange et la monétisation.",
+      "features": ["Publier des datasets", "Définir des politiques d'utilisation", "Monétiser les actifs"]
+    },
+    "consumer": {
+      "title": "Consommateur de Données",
+      "description": "Entité qui accède et utilise les données de l'Espace de Données pour ses opérations ou analyses.",
+      "features": ["Accéder au catalogue", "Demander des données", "Utiliser selon les politiques"]
+    },
+    "service": {
+      "title": "Fournisseur de Services",
+      "description": "Entité qui offre des services d'intermédiation, de transformation ou à valeur ajoutée sur les données.",
+      "features": ["Services d'IA", "Transformation", "Analyse avancée"]
+    },
+    "intermediary": {
+      "title": "Intermédiaire de Données",
+      "description": "Entité neutre qui facilite l'échange de données entre fournisseurs et consommateurs.",
+      "features": ["Neutre", "Facilitateur", "Conformité DGA"]
+    },
+    "altruism": {
+      "title": "Organisation d'Altruisme",
+      "description": "Entité à but non lucratif qui gère les données cédées volontairement à des fins d'intérêt général.",
+      "features": ["But non lucratif", "Intérêt public", "Recherche"]
+    }
+  },
+  "validity": {
+    "title": "5. Durée et Résiliation",
+    "description": "Durée et causes de résiliation",
+    "duration": {
+      "title": "5.1 Durée",
+      "content": "La présente Lettre d'Adhésion entrera en vigueur à la date de sa signature et aura une durée indéterminée, sauf dénonciation expresse de l'une des parties.",
+      "indefinite": "durée indéterminée"
+    },
+    "causes": {
+      "title": "5.2 Causes de Résiliation",
+      "items": [
+        "Dénonciation volontaire avec préavis de 30 jours",
+        "Manquement grave aux obligations",
+        "Décision du Comité de Gouvernance"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Effets",
+      "items": [
+        "Cessation de l'accès aux services",
+        "Maintien de la confidentialité",
+        "Droit d'exporter ses propres données"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Annexe : Ressources Officielles",
+    "description": "Liens vers la documentation et la réglementation"
+  },
+  "signature": {
+    "title": "6. Signature du Contrat",
+    "description": "Complétez les informations et signez électroniquement",
+    "signerData": "Informations du Signataire",
+    "fullName": "Nom Complet",
+    "fullNamePlaceholder": "Prénom et nom du représentant légal",
+    "position": "Fonction",
+    "positionPlaceholder": "Ex : Directeur Général, PDG",
+    "organizationName": "Nom de l'Organisation",
+    "organizationNamePlaceholder": "Raison sociale de l'entreprise",
+    "taxId": "SIRET/SIREN",
+    "taxIdPlaceholder": "Identification fiscale",
+    "signatureLabel": "Signature Électronique",
+    "signatureInstructions": "Dessinez votre signature dans le cadre",
+    "clearSignature": "Effacer",
+    "acceptTerms": "J'accepte les termes et conditions du contrat d'adhésion",
+    "acceptTermsDescription": "J'ai lu et compris toutes les clauses du présent contrat",
+    "acceptGdpr": "J'accepte le traitement des données selon le RGPD",
+    "acceptGdprDescription": "Je consens au traitement de mes données personnelles conformément à la réglementation en vigueur",
+    "signContract": "Signer le Contrat",
+    "signing": "Signature en cours...",
+    "signedAt": "Signé le",
+    "qualifiedTitle": "Signature Électronique Qualifiée",
+    "tabSimple": "Simple",
+    "tabCertificate": "Certificat",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "Cette signature a une valeur indicative. Pour une validité juridique complète, utilisez une signature qualifiée.",
+    "certificateInfo": "Téléchargez votre certificat numérique au format .p12 ou .pfx",
+    "certificateLabel": "Certificat (.p12/.pfx)",
+    "passwordLabel": "Mot de passe du certificat",
+    "eidasInfo": "Signature qualifiée avec validité juridique maximale selon le Règlement eIDAS (UE) 910/2014",
+    "signSimple": "Signer avec signature simple",
+    "signWithCertificate": "Signer avec certificat",
+    "validatingCertificate": "Validation du certificat...",
+    "processing": "Traitement en cours...",
+    "connectingProvider": "Connexion à la passerelle de signature...",
+    "levelSimple": "Simple",
+    "levelAdvanced": "Avancée",
+    "levelQualified": "Qualifiée",
+    "autofirmaDesc": "Client officiel de signature du Gouvernement espagnol",
+    "claveDesc": "Système d'identification électronique espagnol",
+    "viafirmaDesc": "Prestataire de services de confiance qualifié",
+    "signedSuccessfully": "Document signé avec succès",
+    "qualifiedSignatureApplied": "Signature électronique qualifiée appliquée",
+    "validation": {
+      "nameRequired": "Le nom est obligatoire",
+      "positionRequired": "La fonction est obligatoire",
+      "organizationRequired": "L'organisation est obligatoire",
+      "taxIdRequired": "Le SIRET/SIREN est obligatoire",
+      "signatureRequired": "La signature est obligatoire",
+      "termsRequired": "Vous devez accepter les termes et conditions",
+      "gdprRequired": "Vous devez accepter le traitement des données"
+    },
+    "success": {
+      "title": "Contrat Signé !",
+      "description": "Votre contrat d'adhésion a été signé avec succès. Vous recevrez une copie par e-mail.",
+      "downloadSigned": "Télécharger le Contrat Signé"
+    }
+  },
+  "preview": {
+    "title": "Aperçu du document",
+    "documentTitle": "LETTRE D'ADHÉSION",
+    "documentSubtitle": "ESPACE DE DONNÉES PROCUREDATA",
+    "promoterSection": "IDENTIFICATION DU PROMOTEUR",
+    "participantSection": "IDENTIFICATION DU PARTICIPANT",
+    "objectSection": "OBJET DE LA LETTRE",
+    "regulatorySection": "ACCEPTATION RÉGLEMENTAIRE",
+    "signatureDate": "Date",
+    "signaturePlace": "Lieu",
+    "signaturePlaceholder": "[Signature électronique]"
+  }
+}
