@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   ArrowLeft,
   ShieldCheck,
@@ -177,22 +178,16 @@ const ENERGY_SAMPLE: IndustrialEnergyRecord[] = [
   }
 ];
 
-// Esquema de datos con descripciones
-const DATA_SCHEMA = [
-  { field: "timestamp", type: "ISO 8601 DateTime", description: "Marca temporal UTC del registro (agregación horaria)" },
-  { field: "postal_code", type: "String", description: "Código postal del punto de suministro" },
-  { field: "sector_type", type: "Enum", description: "'manufacturing' | 'logistics' | 'retail' | 'office'" },
-  { field: "consumption_kwh", type: "Float", description: "Consumo acumulado en la hora en kWh" },
-  { field: "peak_demand_kw", type: "Float", description: "Demanda pico máxima en kW" },
-  { field: "power_factor", type: "Float (0-1)", description: "Factor de potencia (cos φ)" },
-  { field: "voltage_quality", type: "Float (0-100)", description: "Índice de calidad de tensión (%)" },
-  { field: "grid_zone", type: "String", description: "Zona de red eléctrica" },
-  { field: "tariff_period", type: "Enum", description: "'punta' | 'llano' | 'valle'" },
-  { field: "co2_emissions_kg", type: "Float", description: "Emisiones CO2 asociadas al consumo" }
-];
-
 export default function ConsumoElectricoDetail() {
+  const { t } = useTranslation('catalogDetails');
   const [activeTab, setActiveTab] = useState("description");
+
+  const productKey = "consumo-electrico-industrial";
+  const product = t(`products.${productKey}`, { returnObjects: true }) as Record<string, unknown>;
+  const schema = t(`products.${productKey}.schema`, { returnObjects: true }) as Array<{ field: string; type: string; description: string }>;
+  const useCases = t(`products.${productKey}.useCases`, { returnObjects: true }) as string[];
+  const odrl = t(`products.${productKey}.odrl`, { returnObjects: true }) as { permitted: string[]; prohibited: string[]; obligations: string[] };
+  const quality = t(`products.${productKey}.quality`, { returnObjects: true }) as Record<string, { value: number; description: string }>;
 
   const getSectorIcon = (sector: string) => {
     switch (sector) {
@@ -204,12 +199,7 @@ export default function ConsumoElectricoDetail() {
   };
 
   const getSectorLabel = (sector: string) => {
-    switch (sector) {
-      case "manufacturing": return "Manufactura";
-      case "logistics": return "Logística";
-      case "retail": return "Retail";
-      default: return "Oficina";
-    }
+    return t(`common.sectorTypes.${sector}`);
   };
 
   const getTariffColor = (tariff: string) => {
@@ -229,14 +219,14 @@ export default function ConsumoElectricoDetail() {
             <Button variant="ghost" size="sm" asChild>
               <Link to="/catalog" className="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />
-                Volver al catálogo
+                {t('common.backToCatalog')}
               </Link>
             </Button>
             <Separator orientation="vertical" className="h-6" />
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link to="/catalog" className="hover:text-foreground transition-colors">Catálogo</Link>
+              <Link to="/catalog" className="hover:text-foreground transition-colors">{t('common.catalog')}</Link>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground font-medium">Consumo Eléctrico Industrial</span>
+              <span className="text-foreground font-medium">{t(`products.${productKey}.title`)}</span>
             </nav>
           </div>
         </div>
@@ -258,51 +248,49 @@ export default function ConsumoElectricoDetail() {
                 <CardHeader className="pb-4">
                   <div className="flex flex-wrap items-center gap-2 mb-3">
                     <Badge variant="secondary" className="uppercase text-xs tracking-wider">
-                      Industrial
+                      {t(`products.${productKey}.category`)}
                     </Badge>
                     <Tooltip>
                       <TooltipTrigger>
                         <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-200 border-blue-200">
                           <ShieldCheck className="h-3 w-3 mr-1" />
-                          KYB Verificado
+                          {t('common.badges.kybVerified')}
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Proveedor verificado mediante proceso Know Your Business</p>
+                        <p>{t('common.badges.kybTooltip')}</p>
                       </TooltipContent>
                     </Tooltip>
                     <Tooltip>
                       <TooltipTrigger>
                         <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 border-amber-200">
                           <Lock className="h-3 w-3 mr-1" />
-                          Infraestructura Crítica
+                          {t('common.badges.criticalInfrastructure')}
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p>Datos sensibles de infraestructura nacional - Uso restringido</p>
+                        <p>{t('common.badges.criticalTooltip')}</p>
                       </TooltipContent>
                     </Tooltip>
                   </div>
                   
                   <CardTitle className="text-3xl font-bold bg-gradient-to-r from-amber-900 to-orange-700 bg-clip-text text-transparent">
-                    Consumo Eléctrico Industrial
+                    {t(`products.${productKey}.title`)}
                   </CardTitle>
                   
                   <CardDescription className="text-base mt-2">
-                    Dataset agregado de consumo eléctrico del sector industrial español. 
-                    Incluye métricas de demanda, calidad de suministro, factor de potencia y emisiones CO2 asociadas.
-                    Datos anonimizados por código postal y sector económico.
+                    {t(`products.${productKey}.shortDescription`)}
                   </CardDescription>
 
                   <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1.5">
-                      <span className="font-medium text-foreground">Proveedor:</span>
-                      Iberdrola Distribución
+                      <span className="font-medium text-foreground">{t('common.labels.provider')}:</span>
+                      {t(`products.${productKey}.provider`)}
                     </div>
                     <Separator orientation="vertical" className="h-4" />
                     <div className="flex items-center gap-1.5">
-                      <span className="font-medium text-foreground">Custodia:</span>
-                      AWS Data Exchange (Irlanda, EU)
+                      <span className="font-medium text-foreground">{t('common.labels.custody')}:</span>
+                      {t(`products.${productKey}.custody`)}
                     </div>
                   </div>
 
@@ -314,8 +302,8 @@ export default function ConsumoElectricoDetail() {
                           className={`h-4 w-4 ${star <= 4 ? 'fill-amber-400 text-amber-400' : 'fill-amber-400/50 text-amber-400/50'}`} 
                         />
                       ))}
-                      <span className="ml-1 font-semibold">4.8</span>
-                      <span className="text-muted-foreground">(124 reseñas)</span>
+                      <span className="ml-1 font-semibold">{t(`products.${productKey}.rating`)}</span>
+                      <span className="text-muted-foreground">({t(`products.${productKey}.reviewCount`)} {t('common.labels.reviews')})</span>
                     </div>
                   </div>
                 </CardHeader>
@@ -334,29 +322,29 @@ export default function ConsumoElectricoDetail() {
                     {/* Hourly Update */}
                     <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                       <Clock className="h-8 w-8 mb-2 text-amber-300" />
-                      <span className="text-lg font-bold">Horaria</span>
-                      <span className="text-sm text-amber-200">Actualización</span>
+                      <span className="text-lg font-bold">{t(`products.${productKey}.metrics.update`)}</span>
+                      <span className="text-sm text-amber-200">{t('common.labels.update')}</span>
                     </div>
 
                     {/* Volumen */}
                     <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                       <Database className="h-8 w-8 mb-2 text-orange-300" />
-                      <span className="text-2xl font-bold">15M+</span>
-                      <span className="text-sm text-amber-200">Registros</span>
+                      <span className="text-2xl font-bold">{t(`products.${productKey}.metrics.records`)}</span>
+                      <span className="text-sm text-amber-200">{t('common.labels.records')}</span>
                     </div>
 
                     {/* Completitud */}
                     <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                       <BarChart3 className="h-8 w-8 mb-2 text-yellow-300" />
-                      <span className="text-2xl font-bold">99.5%</span>
-                      <span className="text-sm text-amber-200">Completitud</span>
+                      <span className="text-2xl font-bold">{t(`products.${productKey}.metrics.completeness`)}</span>
+                      <span className="text-sm text-amber-200">{t('common.labels.completeness')}</span>
                     </div>
 
                     {/* Cobertura */}
                     <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                       <Factory className="h-8 w-8 mb-2 text-red-300" />
-                      <span className="text-2xl font-bold">8.500+</span>
-                      <span className="text-sm text-amber-200">Códigos Postales</span>
+                      <span className="text-2xl font-bold">{t(`products.${productKey}.metrics.postalCodes`)}</span>
+                      <span className="text-sm text-amber-200">{t('common.labels.postalCodes')}</span>
                     </div>
                   </div>
                 </CardContent>
@@ -377,82 +365,63 @@ export default function ConsumoElectricoDetail() {
                         value="description" 
                         className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3"
                       >
-                        Descripción
+                        {t('common.tabs.description')}
                       </TabsTrigger>
                       <TabsTrigger 
                         value="schema" 
                         className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3"
                       >
-                        Estructura de Datos
+                        {t('common.tabs.schema')}
                       </TabsTrigger>
                       <TabsTrigger 
                         value="format" 
                         className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3"
                       >
-                        Formato y Entrega
+                        {t('common.tabs.format')}
                       </TabsTrigger>
                       <TabsTrigger 
                         value="rights" 
                         className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3"
                       >
-                        Derechos (ODRL)
+                        {t('common.tabs.rights')}
                       </TabsTrigger>
                       <TabsTrigger 
                         value="sample" 
                         className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3"
                       >
-                        Muestra de Datos
+                        {t('common.tabs.sample')}
                       </TabsTrigger>
                       <TabsTrigger 
                         value="quality" 
                         className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3"
                       >
-                        Calidad
+                        {t('common.tabs.quality')}
                       </TabsTrigger>
                     </TabsList>
 
                     {/* Tab: Descripción */}
                     <TabsContent value="description" className="p-6 space-y-6">
                       <div>
-                        <h3 className="font-semibold text-lg mb-3">Descripción del Dataset</h3>
+                        <h3 className="font-semibold text-lg mb-3">{t('common.sections.datasetDescription')}</h3>
                         <p className="text-muted-foreground leading-relaxed">
-                          Este dataset proporciona información agregada sobre el consumo eléctrico 
-                          del sector industrial en España, con granularidad horaria y segmentación 
-                          por código postal y tipo de actividad económica.
+                          {t(`products.${productKey}.description.paragraph1`)}
                         </p>
                         <p className="text-muted-foreground leading-relaxed mt-3">
-                          Los datos incluyen métricas de calidad de suministro, factor de potencia 
-                          y cálculo de emisiones CO2 asociadas al mix energético de cada zona. 
-                          Ideal para análisis de eficiencia energética, planificación de red y 
-                          reporting de sostenibilidad corporativa.
+                          {t(`products.${productKey}.description.paragraph2`)}
                         </p>
                       </div>
 
                       <Separator />
 
                       <div>
-                        <h3 className="font-semibold text-lg mb-3">Casos de Uso Principales</h3>
+                        <h3 className="font-semibold text-lg mb-3">{t('common.sections.useCases')}</h3>
                         <ul className="space-y-2">
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>Análisis de patrones de consumo industrial por zona geográfica</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>Optimización de contratos de suministro eléctrico</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>Cálculo de huella de carbono Scope 2 para reporting ESG</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>Planificación de infraestructura de red eléctrica</span>
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                            <span>Detección de anomalías y pérdidas técnicas</span>
-                          </li>
+                          {useCases.map((useCase, index) => (
+                            <li key={index} className="flex items-start gap-2">
+                              <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                              <span>{useCase}</span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
 
@@ -460,11 +429,9 @@ export default function ConsumoElectricoDetail() {
                         <div className="flex items-start gap-3">
                           <AlertTriangle className="h-5 w-5 text-amber-600 mt-0.5" />
                           <div>
-                            <h4 className="font-semibold text-amber-900">Datos de Infraestructura Crítica</h4>
+                            <h4 className="font-semibold text-amber-900">{t('common.badges.criticalInfrastructure')}</h4>
                             <p className="text-sm text-amber-700 mt-1">
-                              Este dataset contiene información sensible de infraestructura nacional. 
-                              Su uso está sujeto a verificación adicional y no está permitido 
-                              el entrenamiento de modelos IA ni la reventa.
+                              {t(`products.${productKey}.criticalWarning`)}
                             </p>
                           </div>
                         </div>
@@ -473,18 +440,18 @@ export default function ConsumoElectricoDetail() {
 
                     {/* Tab: Estructura de Datos */}
                     <TabsContent value="schema" className="p-6">
-                      <h3 className="font-semibold text-lg mb-4">Esquema del Dataset</h3>
+                      <h3 className="font-semibold text-lg mb-4">{t('common.sections.dataSchema')}</h3>
                       <div className="border rounded-lg overflow-hidden">
                         <Table>
                           <TableHeader>
                             <TableRow className="bg-muted/50">
-                              <TableHead className="font-semibold">Campo</TableHead>
-                              <TableHead className="font-semibold">Tipo</TableHead>
-                              <TableHead className="font-semibold">Descripción</TableHead>
+                              <TableHead className="font-semibold">{t('common.sections.schemaTable.field')}</TableHead>
+                              <TableHead className="font-semibold">{t('common.sections.schemaTable.type')}</TableHead>
+                              <TableHead className="font-semibold">{t('common.sections.schemaTable.description')}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {DATA_SCHEMA.map((field, index) => (
+                            {schema.map((field, index) => (
                               <TableRow key={index}>
                                 <TableCell className="font-mono text-sm text-orange-700">{field.field}</TableCell>
                                 <TableCell className="text-sm text-muted-foreground">{field.type}</TableCell>
@@ -503,7 +470,7 @@ export default function ConsumoElectricoDetail() {
                           <CardHeader className="pb-3">
                             <CardTitle className="text-base flex items-center gap-2">
                               <FileJson className="h-5 w-5 text-orange-600" />
-                              Formato de Datos
+                              {t('common.sections.formats.title')}
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
@@ -528,22 +495,22 @@ export default function ConsumoElectricoDetail() {
                           <CardHeader className="pb-3">
                             <CardTitle className="text-base flex items-center gap-2">
                               <Download className="h-5 w-5 text-orange-600" />
-                              Métodos de Entrega
+                              {t('common.sections.delivery.title')}
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
                             <ul className="space-y-2 text-sm">
                               <li className="flex items-center gap-2">
                                 <CheckCircle2 className="h-4 w-4 text-green-600" />
-                                AWS S3 Direct Access
+                                {t('common.sections.delivery.s3')}
                               </li>
                               <li className="flex items-center gap-2">
                                 <CheckCircle2 className="h-4 w-4 text-green-600" />
-                                SFTP Seguro
+                                {t('common.sections.delivery.sftp')}
                               </li>
                               <li className="flex items-center gap-2">
                                 <CheckCircle2 className="h-4 w-4 text-green-600" />
-                                API REST (consultas específicas)
+                                {t('common.sections.delivery.api')}
                               </li>
                             </ul>
                           </CardContent>
@@ -554,14 +521,14 @@ export default function ConsumoElectricoDetail() {
                         <CardHeader className="pb-3">
                           <CardTitle className="text-base flex items-center gap-2">
                             <Clock className="h-5 w-5 text-orange-600" />
-                            Frecuencia de Actualización
+                            {t('common.labels.update')}
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
                           <div className="flex items-center gap-4">
                             <div className="flex items-center gap-2">
                               <span className="font-medium">Periodicidad:</span>
-                              <Badge className="bg-amber-100 text-amber-800">Horaria</Badge>
+                              <Badge className="bg-amber-100 text-amber-800">{t('common.labels.hourly')}</Badge>
                             </div>
                             <Separator orientation="vertical" className="h-6" />
                             <div className="text-sm text-muted-foreground">
@@ -575,72 +542,71 @@ export default function ConsumoElectricoDetail() {
                     {/* Tab: Derechos (ODRL) */}
                     <TabsContent value="rights" className="p-6 space-y-6">
                       <div>
-                        <h3 className="font-semibold text-lg mb-4">Derechos de Uso (ODRL 2.2)</h3>
+                        <h3 className="font-semibold text-lg mb-4">{t('common.sections.odrlRights')} (ODRL 2.2)</h3>
                         <p className="text-muted-foreground mb-6">
                           Este dataset tiene restricciones especiales por tratarse de datos 
                           de infraestructura crítica nacional.
                         </p>
                       </div>
 
-                      <div className="grid md:grid-cols-3 gap-4">
-                        <Card className="border-red-200 bg-red-50">
-                          <CardContent className="pt-6">
-                            <div className="flex flex-col items-center text-center">
-                              <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center mb-3">
-                                <XCircle className="h-6 w-6 text-red-600" />
-                              </div>
-                              <h4 className="font-semibold text-red-900">AI Training</h4>
-                              <p className="text-sm text-red-700 mt-1">NO Permitido</p>
-                              <p className="text-xs text-red-600 mt-2">Datos sensibles de infraestructura</p>
-                            </div>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="border-red-200 bg-red-50">
-                          <CardContent className="pt-6">
-                            <div className="flex flex-col items-center text-center">
-                              <div className="h-12 w-12 rounded-full bg-red-100 flex items-center justify-center mb-3">
-                                <XCircle className="h-6 w-6 text-red-600" />
-                              </div>
-                              <h4 className="font-semibold text-red-900">Reventa</h4>
-                              <p className="text-sm text-red-700 mt-1">NO Permitido</p>
-                              <p className="text-xs text-red-600 mt-2">Licencia intransferible</p>
-                            </div>
-                          </CardContent>
-                        </Card>
-
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {/* Permitted */}
                         <Card className="border-green-200 bg-green-50">
-                          <CardContent className="pt-6">
-                            <div className="flex flex-col items-center text-center">
-                              <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center mb-3">
-                                <Globe className="h-6 w-6 text-green-600" />
-                              </div>
-                              <h4 className="font-semibold text-green-900">Geo-Restricción</h4>
-                              <p className="text-sm text-green-700 mt-1">EU + UK</p>
-                              <p className="text-xs text-green-600 mt-2">Procesamiento en Europa</p>
-                            </div>
+                          <CardHeader className="pb-2">
+                            <CardTitle className="text-base flex items-center gap-2 text-green-900">
+                              <CheckCircle2 className="h-5 w-5 text-green-600" />
+                              {t('common.sections.odrl.permitted')}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <ul className="space-y-2 text-sm text-green-800">
+                              {odrl.permitted.map((item, index) => (
+                                <li key={index} className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </CardContent>
+                        </Card>
+
+                        {/* Prohibited */}
+                        <Card className="border-red-200 bg-red-50">
+                          <CardHeader className="pb-2">
+                            <CardTitle className="text-base flex items-center gap-2 text-red-900">
+                              <XCircle className="h-5 w-5 text-red-600" />
+                              {t('common.sections.odrl.prohibited')}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <ul className="space-y-2 text-sm text-red-800">
+                              {odrl.prohibited.map((item, index) => (
+                                <li key={index} className="flex items-start gap-2">
+                                  <XCircle className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
                           </CardContent>
                         </Card>
                       </div>
 
+                      {/* Obligations */}
                       <Card className="border-amber-200">
                         <CardHeader className="pb-3">
-                          <CardTitle className="text-base">Restricciones Adicionales</CardTitle>
+                          <CardTitle className="text-base flex items-center gap-2">
+                            <Lock className="h-5 w-5 text-amber-600" />
+                            {t('common.sections.odrl.obligations')}
+                          </CardTitle>
                         </CardHeader>
                         <CardContent>
                           <ul className="space-y-2 text-sm">
-                            <li className="flex items-center gap-2">
-                              <Lock className="h-4 w-4 text-amber-600" />
-                              Requiere verificación de uso final antes de activación
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <Lock className="h-4 w-4 text-amber-600" />
-                              Auditoría trimestral de cumplimiento obligatoria
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <Lock className="h-4 w-4 text-amber-600" />
-                              Prohibido el uso en análisis de competencia comercial
-                            </li>
+                            {odrl.obligations.map((item, index) => (
+                              <li key={index} className="flex items-center gap-2">
+                                <Lock className="h-4 w-4 text-amber-600" />
+                                {item}
+                              </li>
+                            ))}
                           </ul>
                         </CardContent>
                       </Card>
@@ -649,9 +615,9 @@ export default function ConsumoElectricoDetail() {
                     {/* Tab: Muestra de Datos */}
                     <TabsContent value="sample" className="p-6">
                       <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-semibold text-lg">Vista Previa de Datos</h3>
+                        <h3 className="font-semibold text-lg">{t('common.sections.dataSample')}</h3>
                         <Badge variant="outline" className="text-muted-foreground">
-                          Mostrando 10 de 15M+ registros
+                          Mostrando 10 de {t(`products.${productKey}.metrics.records`)} registros
                         </Badge>
                       </div>
                       
@@ -695,7 +661,7 @@ export default function ConsumoElectricoDetail() {
                                 <TableCell className="text-sm">{record.grid_zone}</TableCell>
                                 <TableCell>
                                   <Badge className={`${getTariffColor(record.tariff_period)} text-xs`}>
-                                    {record.tariff_period}
+                                    {t(`common.tariffPeriods.${record.tariff_period}`)}
                                   </Badge>
                                 </TableCell>
                                 <TableCell className="text-right font-mono text-muted-foreground">
@@ -710,39 +676,39 @@ export default function ConsumoElectricoDetail() {
 
                     {/* Tab: Calidad */}
                     <TabsContent value="quality" className="p-6 space-y-6">
-                      <h3 className="font-semibold text-lg mb-4">Métricas de Calidad de Datos</h3>
+                      <h3 className="font-semibold text-lg mb-4">{t('common.sections.qualityMetrics')}</h3>
                       
                       <div className="space-y-4">
                         <div>
                           <div className="flex justify-between mb-2">
-                            <span className="text-sm font-medium">Completitud</span>
-                            <span className="text-sm text-muted-foreground">99.5%</span>
+                            <span className="text-sm font-medium">{t('common.quality.completeness')}</span>
+                            <span className="text-sm text-muted-foreground">{quality.completeness?.value}%</span>
                           </div>
-                          <Progress value={99.5} className="h-2" />
+                          <Progress value={quality.completeness?.value || 0} className="h-2" />
                         </div>
                         
                         <div>
                           <div className="flex justify-between mb-2">
-                            <span className="text-sm font-medium">Precisión</span>
-                            <span className="text-sm text-muted-foreground">99.8%</span>
+                            <span className="text-sm font-medium">{t('common.quality.accuracy')}</span>
+                            <span className="text-sm text-muted-foreground">{quality.accuracy?.value}%</span>
                           </div>
-                          <Progress value={99.8} className="h-2" />
+                          <Progress value={quality.accuracy?.value || 0} className="h-2" />
                         </div>
                         
                         <div>
                           <div className="flex justify-between mb-2">
-                            <span className="text-sm font-medium">Consistencia</span>
-                            <span className="text-sm text-muted-foreground">99.2%</span>
+                            <span className="text-sm font-medium">{t('common.quality.consistency')}</span>
+                            <span className="text-sm text-muted-foreground">{quality.consistency?.value}%</span>
                           </div>
-                          <Progress value={99.2} className="h-2" />
+                          <Progress value={quality.consistency?.value || 0} className="h-2" />
                         </div>
                         
                         <div>
                           <div className="flex justify-between mb-2">
-                            <span className="text-sm font-medium">Puntualidad (SLA)</span>
-                            <span className="text-sm text-muted-foreground">99.9%</span>
+                            <span className="text-sm font-medium">{t('common.quality.availability')}</span>
+                            <span className="text-sm text-muted-foreground">{quality.availability?.value}%</span>
                           </div>
-                          <Progress value={99.9} className="h-2" />
+                          <Progress value={quality.availability?.value || 0} className="h-2" />
                         </div>
                       </div>
 
@@ -804,10 +770,9 @@ export default function ConsumoElectricoDetail() {
                 <Card className="shadow-lg border-2">
                   <CardHeader className="pb-4">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-bold text-amber-600">500€</span>
-                      <span className="text-muted-foreground">/mes</span>
+                      <span className="text-4xl font-bold text-amber-600">{t(`products.${productKey}.pricing.amount`)}</span>
                     </div>
-                    <CardDescription>Suscripción mensual con acceso completo</CardDescription>
+                    <CardDescription>{t(`products.${productKey}.pricing.description`)}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <ul className="space-y-2 text-sm">
@@ -838,7 +803,7 @@ export default function ConsumoElectricoDetail() {
                     <Button className="w-full bg-amber-600 hover:bg-amber-700" size="lg" asChild>
                       <Link to="/auth">
                         <Zap className="h-4 w-4 mr-2" />
-                        Solicitar Acceso
+                        {t('common.pricing.requestAccess')}
                       </Link>
                     </Button>
 
@@ -866,7 +831,7 @@ export default function ConsumoElectricoDetail() {
                         <Zap className="h-6 w-6 text-amber-600" />
                       </div>
                       <div>
-                        <div className="font-semibold">Iberdrola Distribución</div>
+                        <div className="font-semibold">{t(`products.${productKey}.provider`)}</div>
                         <div className="text-sm text-muted-foreground">Utility Data Provider</div>
                       </div>
                     </div>
@@ -887,7 +852,7 @@ export default function ConsumoElectricoDetail() {
                       <div>
                         <div className="text-muted-foreground">Rating</div>
                         <div className="font-semibold flex items-center gap-1">
-                          4.8 <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+                          {t(`products.${productKey}.rating`)} <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
                         </div>
                       </div>
                     </div>
