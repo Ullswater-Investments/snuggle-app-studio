@@ -131,7 +131,37 @@ Utilizó las herramientas de **Medición del SROI** (Retorno Social de la Invers
 
 ---
 
-## 8. Reglas de Respuesta para ARIA
+## 8. Casos Green Procurement (Sector Privado Avanzado)
+
+> 10 historias de alta complejidad en industrias con barreras regulatorias extremas (Farma, Aeroespacial, Química, Automoción, Finanzas).
+> El hilo conductor es la **Intervención Estructural**: no comprar productos verdes, sino diseñar ecosistemas.
+
+### Tipos de Intervención
+
+| Tipo | Descripción | Casos Ejemplo |
+|------|-------------|---------------|
+| **Co-inversión** | Crear mercados inexistentes poniendo dinero antes de que exista el producto | Maersk, Apple/Elysis, Airbus, Google |
+| **Trazabilidad Forense** | Usar satélites, blockchain, química para ver lo invisible | BMW, Kering, Unilever |
+| **Educación Proveedores** | Transferir conocimiento técnico a la cadena | Novo Nordisk, BASF, Schneider Electric |
+
+### 10 Casos Green Procurement
+
+| # | Empresa | Sector | Tipo | Métrica Clave |
+|---|---------|--------|------|---------------|
+| 1 | Novo Nordisk | Farmacéutico | Educación | 1M+ plumas recuperadas |
+| 2 | Maersk | Logística Marítima | Co-inversión | 1º buque metanol global |
+| 3 | Apple + Alcoa + Rio Tinto | Tecnología/Metalurgia | Co-inversión | 0 CO₂ directo |
+| 4 | BMW Group | Automoción | Trazabilidad | -95% CO₂ en acero |
+| 5 | BASF | Química Industrial | Educación | 100% trazabilidad biomasa |
+| 6 | Kering (Gucci) | Lujo/Moda | Trazabilidad | EP&L coste natural € |
+| 7 | Airbus | Aeroespacial | Co-inversión | 100% SAF certificado |
+| 8 | Google | Data Centers | Co-inversión | 24/7 energía limpia |
+| 9 | Schneider Electric | Automatización | Educación | 1,000 proveedores formados |
+| 10 | Unilever | Gran Consumo | Trazabilidad | GPS satelital deforestación |
+
+---
+
+## 9. Reglas de Respuesta para ARIA
 
 ### Triggers de Casos de Uso
 - "ejemplo real" / "caso de éxito" → Citar historia relevante según sector
@@ -142,7 +172,27 @@ Utilizó las herramientas de **Medición del SROI** (Retorno Social de la Invers
 - "sanidad" / "MDR" → Usar caso del Hospital
 - "impacto social" / "SROI" → Referir Cooperativas del Sur
 
+### Triggers Green Procurement
+- "green procurement" / "compra verde avanzada" → Citar Novo Nordisk o BMW
+- "crear mercados" / "co-inversión" → Usar Maersk o Apple/Elysis
+- "satélite" / "monitoreo" / "EUDR" → Referir Unilever
+- "educar proveedores" / "alcance 3" → Citar Schneider Electric
+- "SAF" / "combustible sostenible" / "aviación verde" → Usar caso Airbus
+- "24/7 carbon free" / "energía limpia" → Referir Google
+- "aluminio verde" / "metalurgia" → Citar Apple/Elysis
+- "biomasa" / "química verde" → Usar BASF
+- "lujo sostenible" / "moda ética" → Referir Kering
+- "acero verde" / "hidrógeno" → Citar BMW
+
 ### Frases Sugeridas
 - "AutoParts España redujo el tiempo de alta de proveedores de 3 semanas a 48 horas."
 - "TransLogística Ibérica ahora ofrece un servicio premium con 15% más de margen gracias al Carbon Tracker."
 - "El Hospital Central eliminó el riesgo de contratar proveedores sin certificación MDR."
+
+### Frases Green Procurement
+- "Maersk no esperó al metanol verde: firmó contratos de compra antes de que las plantas existieran."
+- "Apple no compró aluminio verde, compró la I+D para crearlo con Elysis."
+- "Schneider Electric no solo exigió, educó a 1,000 proveedores en 3 continentes."
+- "Unilever usa satélites para detectar deforestación en tiempo real, cumpliendo EUDR antes de su entrada en vigor."
+- "Google pasó de compensación anual a matching horario 24/7 de energía limpia."
+- "BMW exige trazabilidad energética: el acero debe producirse con hidrógeno verde, no carbón."

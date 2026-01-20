@@ -45,8 +45,10 @@ import {
 } from "lucide-react";
 import { SuccessStoryNavigator } from "@/components/success-stories/SuccessStoryNavigator";
 import { SuccessStoriesFilter } from "@/components/success-stories/SuccessStoriesFilter";
+import { GreenProcurementSection } from "@/components/success-stories/GreenProcurementSection";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from 'react-i18next';
+import { greenProcurementCases } from "@/data/greenProcurementCases";
 
 const successCases = [
   // Original 7 cases
@@ -775,21 +777,31 @@ const SuccessStories = () => {
     description: t(`cases.${c.id}.description`),
   })), [t]);
 
+  // Combine with green procurement cases
+  const allCases = useMemo(() => {
+    const gpCases = greenProcurementCases.map(c => ({
+      ...c,
+      title: c.program,
+    }));
+    return [...successCasesData, ...gpCases];
+  }, [successCasesData]);
+
   // Calculate sector counts
   const sectorCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    successCasesData.forEach(c => {
+    allCases.forEach(c => {
       counts[c.sectorCategory] = (counts[c.sectorCategory] || 0) + 1;
     });
     return counts;
-  }, [successCasesData]);
+  }, [allCases]);
 
-  const filteredCases = successCasesData.filter(c => {
+  const filteredCases = allCases.filter(c => {
     const matchesSearch = c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          c.company.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesSector = activeSector === "all" || c.sectorCategory === activeSector;
     return matchesSearch && matchesSector;
   });
+
 
   return (
     <div className="min-h-screen bg-background">

@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Factory, ShoppingBag, Wheat, Truck, 
   HeartPulse, Users, Zap, LayoutGrid, 
-  Plane, Receipt, Mountain, Wine, Cpu, Recycle, Sprout
+  Plane, Receipt, Mountain, Wine, Cpu, Recycle, Sprout, Leaf
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -19,6 +19,7 @@ export function SuccessStoriesFilter({ activeSector, onSectorChange, sectorCount
   
   const sectors = [
     { id: 'all', label: t('sectors.all'), icon: LayoutGrid, color: 'text-slate-500', bg: 'bg-slate-500/10', activeBg: 'bg-primary' },
+    { id: 'green-procurement', label: t('sectors.greenProcurement'), icon: Leaf, color: 'text-emerald-600', bg: 'bg-emerald-600/10', activeBg: 'bg-emerald-600' },
     { id: 'industrial', label: t('sectors.industrial'), icon: Factory, color: 'text-orange-500', bg: 'bg-orange-500/10', activeBg: 'bg-orange-500' },
     { id: 'comercio', label: t('sectors.comercio'), icon: ShoppingBag, color: 'text-blue-500', bg: 'bg-blue-500/10', activeBg: 'bg-blue-500' },
     { id: 'agroalimentario', label: t('sectors.agroalimentario'), icon: Wheat, color: 'text-emerald-500', bg: 'bg-emerald-500/10', activeBg: 'bg-emerald-500' },
