@@ -1,0 +1,491 @@
+{
+  "login": {
+    "title": "CloserStill Media",
+    "subtitle": "Privé ledenzone",
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "passwordPlaceholder": "Voer wachtwoord in",
+    "submit": "Toegang",
+    "loading": "Verificatie...",
+    "backToDirectory": "Terug naar directory",
+    "accessGranted": "Toegang verleend",
+    "invalidCredentials": "Ongeldige inloggegevens",
+    "loginError": "Inlogfout",
+    "loadingText": "Laden..."
+  },
+  "header": {
+    "membersArea": "Ledenzone",
+    "confidentialDocument": "Vertrouwelijk Document",
+    "logout": "Uitloggen",
+    "closerstill365Badge": "CloserStill 365",
+    "useCasesSubtitle": "5 Hoogwaardige Use Cases"
+  },
+  "miembros": {
+    "heroTitle": "Ledenzone",
+    "heroHighlight": "CloserStill Media",
+    "heroSubtitle": "Toegang tot exclusieve documentatie over de e-Show Data Node",
+    "confidentialBadge": "Vertrouwelijke Documenten - Alleen Partners",
+    "documentsAvailable": "Beschikbare Documenten",
+    "documents": {
+      "doc365": {
+        "title": "CloserStill 365: Het Oneindige Data Ecosysteem",
+        "description": "Bedrijfsvisie en Waardepropositie",
+        "summary": "De filosofie \"Nog Dichterbij\" evolueert: Van handdruk naar smart contract. Voordelen voor exposanten en bezoekers van de nieuwe Gefedereerde Data Node."
+      },
+      "useCases": {
+        "title": "5 Hoogwaardige Use Cases",
+        "description": "CloserStill Data Engine",
+        "summary": "Verkoop Engine, Omzet Engine en Vertrouwen Engine: Monetisatiestrategie voor elke beurs in het portfolio."
+      },
+      "eshow": {
+        "title": "Strategisch Voorstel e-Show Data Space Node",
+        "description": "Van 2-Daagse Beurs naar 365 Ecosysteem",
+        "summary": "Technisch en zakelijk voorstel voor de Eigen Node van CloserStill Media. Inclusief omzetmodel en volgende stappen."
+      }
+    },
+    "viewDocument": "Document bekijken",
+    "viewingNow": "Nu bekijken",
+    "proposal": {
+      "confidentialBadge": "Vertrouwelijk Document - Alleen Partners",
+      "title": "STRATEGISCH VOORSTEL",
+      "subtitle": "e-Show Data Space Node",
+      "description": "Van 2-Daagse Beurs naar 365 Business Ecosysteem"
+    },
+    "vision": {
+      "title": "1. De Visie: Vloeibaar Ecosysteem",
+      "problem": {
+        "title": "Het Probleem",
+        "text": "Vandaag verbindt e-Show vraag en aanbod persoonlijk. Wanneer de lichten uitgaan, vertraagt bureaucratische frictie (compliance, validatie, papierwerk) het sluiten van deals."
+      },
+      "solution": {
+        "title": "De Oplossing",
+        "text": "Een Eigen Node implementeren in ProcureData (gebaseerd op Pontus-X / Gaia-X). We transformeren e-Show in de eerste organisator die Soevereine Data Infrastructuur aanbiedt."
+      },
+      "keyConcept": {
+        "title": "Kernbegrip",
+        "text": "\"Agustín, we verkopen niet alleen vierkante meters; we verkopen Veilige Data Snelwegen zodat uw exposanten sneller afsluiten.\""
+      }
+    },
+    "opportunity": {
+      "title": "2. De Kans: Data Space Kit 🇪🇺",
+      "role": {
+        "title": "Rol van e-Show",
+        "text": "Optreden als Bevorderende Entiteit van de \"Digitale Handel Data Space\"."
+      },
+      "incentive": {
+        "title": "De Stimulans",
+        "text": "Help uw exposanten toegang te krijgen tot <strong>€150.000 - €300.000</strong> aan publieke financiering."
+      },
+      "loyalty": {
+        "title": "De Loyaliteit",
+        "text": "Als u technologie en subsidie levert, \"trouwt\" de exposant met de beurs."
+      }
+    },
+    "node": {
+      "title": "3. Wat biedt een Eigen Node?",
+      "seller": {
+        "title": "De Verkoper",
+        "subtitle": "Voor de Exposant",
+        "objective": "Doel: Sneller verkopen (Fast-Track)",
+        "features": {
+          "identity": "<strong>Soevereine Identiteit (DID):</strong> De Badge wordt een Digitale Wallet.",
+          "validation": "<strong>Directe Validatie:</strong> Stuurt automatisch kredietwaardigheid en ISO's door.",
+          "monetization": "<strong>Monetisatie:</strong> Verkoop van trend-datasets op de Marketplace."
+        }
+      },
+      "buyer": {
+        "title": "De Koper",
+        "subtitle": "Voor de Bezoeker",
+        "objective": "Doel: Betrouwbare leveranciers zonder risico",
+        "features": {
+          "trust": "<strong>Zero-Trust Vertrouwen:</strong> Leveranciers met automatische Blockchain KYB.",
+          "integration": "<strong>One-Click Integratie:</strong> Directe export naar ERP (SAP/Oracle).",
+          "scouting": "<strong>Intelligente Scouting:</strong> Geavanceerde filters op certificering en omzet."
+        }
+      },
+      "organizer": {
+        "title": "De Organisator",
+        "subtitle": "Voor e-Show",
+        "objective": "Doel: Nieuwe Inkomsten en Leiderschap",
+        "features": {
+          "monetization": "<strong>Data Monetization:</strong> Fee per datatransactie na de beurs.",
+          "intelligence": "<strong>Market Intelligence:</strong> Echte vraag- en aanbodgegevens.",
+          "leadership": "<strong>Leiderschap:</strong> Eerste beursorganisator die Web3 / Gaia-X implementeert."
+        }
+      }
+    },
+    "journey": {
+      "title": "4. De Digitale Customer Journey",
+      "steps": {
+        "encounter": {
+          "title": "De Ontmoeting",
+          "desc": "Badge scannen bij de stand"
+        },
+        "handshake": {
+          "title": "Digitale Handdruk",
+          "desc": "Node voert Smart Contract uit"
+        },
+        "validation": {
+          "title": "De Validatie",
+          "desc": "Uitwisseling van credentials (seconden)"
+        },
+        "result": {
+          "title": "Het Resultaat",
+          "desc": "Leverancier Goedgekeurd in ERP"
+        }
+      }
+    },
+    "revenue": {
+      "title": "5. Voorgesteld Omzetmodel",
+      "streams": {
+        "subscription": {
+          "name": "'Trust+' Abonnement",
+          "desc": "Extra fee voor jaarrond gevalideerd 'Digitaal Paspoort'."
+        },
+        "marketplace": {
+          "name": "Data Marketplace Fee",
+          "desc": "Commissie op datasets verkocht tussen deelnemers."
+        },
+        "grants": {
+          "name": "Subsidie Beheer",
+          "desc": "Fee voor beheren van Data Space Kit toegang."
+        }
+      },
+      "potential": "Potentieel"
+    },
+    "nextSteps": {
+      "title": "6. Volgende Stappen",
+      "steps": [
+        "Pilot op e-Show Madrid: 'Fast-Track Lane' activeren voor 50 VIP exposanten.",
+        "Gezamenlijk Webinar: 'Hoe uw datatransformatie te financieren met de Data Space Kit'.",
+        "Node Implementatie: Deploy van een Gaia-X Node eigendom van CloserStill Media."
+      ]
+    }
+  },
+  "closerstill365": {
+    "badge": "Het Oneindige Data Ecosysteem",
+    "hero": {
+      "physical": "Fysiek",
+      "smartContract": "Smart Contract",
+      "title": "Van Handdruk naar",
+      "titleHighlight": "Smart Contract",
+      "subtitle": "Onze filosofie is <strong>'Nog Dichterbij'</strong>. Daarom verbinden we niet langer alleen mensen op een locatie; we verbinden de systemen van uw bedrijven permanent, veilig en soeverein."
+    },
+    "vision": {
+      "badge": "De Nieuwe Nabijheid",
+      "title": "De beurs duurt 48 uur.",
+      "titleHighlight": "Business gaat 365 dagen door.",
+      "subtitle": "Van fysiek contact naar permanente digitale verbinding.",
+      "narrative": {
+        "p1": "Jarenlang was onze missie mensen dichter bij elkaar te brengen. Vraag en aanbod onder één dak samen te brengen om <strong>de vonk van business</strong> te laten ontspringen.",
+        "p2": "Maar we weten dat wanneer de hallichten uitgaan, de echte hindernisbaan begint: bureaucratie, leveranciersvalidatie, audits en informatiesilos.",
+        "p3": "Vandaag maakt <span>CloserStill de meest ambitieuze sprong in haar geschiedenis</span>. We organiseren niet langer alleen evenementen; <strong>we orkestreren ecosystemen</strong>."
+      },
+      "pillars": {
+        "trust": {
+          "title": "Vertrouwen",
+          "description": "Deel kredietwaardigheidsgegevens direct, zonder tussenpersonen of wachttijden."
+        },
+        "efficiency": {
+          "title": "Efficiëntie",
+          "description": "Integreer product- en dienstencatalogi met één klik."
+        },
+        "transparency": {
+          "title": "Transparantie",
+          "description": "Valideer ISO- en ESG-credentials zonder onnodige bureaucratie."
+        }
+      },
+      "quote": "\"CloserStill Media lanceert zijn eigen <span>Gefedereerde Data Space Node</span> zodat de verbinding die op de beurs ontstaat, <strong>in de cloud leeft</strong>.\""
+    },
+    "exhibitor": {
+      "badge": "Voor de Exposant",
+      "title": "Uw Badge is nu uw",
+      "titleHighlight": "Kredietwaardigheid Paspoort",
+      "subtitle": "Activeer de commerciële \"Fast-Track\" en reduceer uw Time-to-Contract van maanden naar minuten.",
+      "problem": "\"Hoeveel visitekaartjes worden koud in een la terwijl ze wachten tot de Inkoopafdeling van de klant u goedkeurt? De grootste vijand van uw ROI is niet de concurrentie, <strong>het is administratieve frictie</strong>.\"",
+      "features": {
+        "solvency": "Uw <strong>financiële kredietwaardigheid</strong> (Scoring)",
+        "certifications": "Uw <strong>ISO- en ESG-certificeringen</strong> actueel",
+        "catalog": "Uw <strong>dienstencatalogus</strong> in interoperabel formaat"
+      },
+      "result": {
+        "label": "RESULTAAT",
+        "text": "Converteer uw leads naar getekende contracten <strong>met lichtsnelheid</strong>."
+      },
+      "funding": {
+        "label": "Toegang tot Data Space Kit",
+        "amount": "€150.000 - €300.000"
+      }
+    },
+    "visitor": {
+      "badge": "Voor de Bezoeker",
+      "title": "Scouting met Garantie",
+      "titleHighlight": "'CloserStill Verified'",
+      "subtitle": "Vind, valideer en integreer nieuwe partners zonder compliance risico.",
+      "problem": "\"Hoe weet u of die leverancier die u op e-Show ontmoette solvent is? Of ESG-regelgeving naleeft? Bij CloserStill <strong>verhogen we de standaard</strong>.\"",
+      "features": {
+        "zeroTrust": {
+          "title": "Zero-Trust",
+          "description": "KYB geregistreerd op Blockchain"
+        },
+        "smartFiltering": {
+          "title": "Intelligente Filtering",
+          "description": "Op CO2-voetafdruk of technische capaciteit"
+        },
+        "oneClick": {
+          "title": "One-Click Integratie",
+          "description": "Directe export naar SAP, Oracle, Microsoft"
+        }
+      },
+      "guarantee": {
+        "label": "GARANTIE",
+        "text": "Doe zaken met de geruststelling dat <strong>CloserStill de Due Diligence al voor u heeft gedaan</strong>."
+      },
+      "trustSeal": {
+        "label": "Vertrouwenszegel",
+        "value": "Data Space Ready"
+      }
+    },
+    "liquidFair": {
+      "badge": "Welkom in het tijdperk van de",
+      "title": "Vloeibare Beurs",
+      "subtitle": "De beurs eindigt niet meer wanneer de deuren sluiten. Business stroomt, data verbindt, vertrouwen blijft."
+    },
+    "footer": {
+      "poweredBy": "Powered by",
+      "strategicNote": "Strategische noot:",
+      "quote": "\"We verkopen geen 'blockchain' of 'complexe technologie'. We verkopen <span>snelheid voor de verkoper</span> en <span>zekerheid voor de koper</span>.\""
+    }
+  },
+  "useCases": {
+    "badge": "Monetisatiestrategie",
+    "title": "CloserStill",
+    "titleHighlight": "Data Engine",
+    "subtitle": "5 Hoogwaardige Use Cases om uw positie als \"industrie-connector\" te monetiseren met Gefedereerde Data Space technologie",
+    "engines": {
+      "sales": {
+        "title": "Verkoop Engine",
+        "description": "Versnel de goedkeuring",
+        "cases": "Case 1"
+      },
+      "revenue": {
+        "title": "Omzet Engine",
+        "description": "Verkoop marktintelligentie",
+        "cases": "Case 2"
+      },
+      "trust": {
+        "title": "Vertrouwen Engine",
+        "description": "Verifieer duurzaamheid en compliance",
+        "cases": "Cases 3, 4, 5"
+      }
+    },
+    "cases": {
+      "1": {
+        "name": "Express Business Paspoort",
+        "category": "Sales Acceleration",
+        "feria": "Madrid Tech Show / E-Show",
+        "problem": "Een exposant krijgt 200 leads op de beurs. 80% wordt koud omdat na het event het moeizame proces begint van juridische documentatie-uitwisseling, NDA's en leveranciersvalidatie (Onboarding) dat weken duurt.",
+        "solution": [
+          "De 'Badge' van bezoeker en exposant is niet zomaar een contact QR, het is een Identiteit Wallet (DID).",
+          "Bij een 'match' wordt een smart contract (ODRL) geactiveerd dat de koper tijdelijke toegang geeft tot de goedkeuringsmap van de verkoper.",
+          "Beschikbare data: ISO Certificaten, Kredietwaardigheid, Fiscale Gegevens, Compliance."
+        ],
+        "value": "Verkoop een 'Premium Exhibitor' pakket met deze voorvalidatie. De exposant verlaat de beurs met leveranciers die al zijn goedgekeurd in de systemen van potentiële klanten.",
+        "impact": "Van weken onboarding naar minuten validatie"
+      },
+      "2": {
+        "name": "Marktintelligentie Marketplace",
+        "category": "Data Monetization",
+        "feria": "Technology for Marketing (TFM) / Big Data & AI World",
+        "problem": "Bedrijven betalen fortuinen aan adviesbureaus (Gartner, Forrester) voor trendrapporten die meestal enquêtegegevens en meningen zijn.",
+        "solution": [
+          "CloserStill heeft echte gedragsgegevens: Welke stands bezoeken CPO's? Welke categorieën zoeken CTO's?",
+          "Een geanonimiseerd Data Product wordt gecreëerd waar exposanten hun eigen verkooptrendgegevens kunnen bijdragen (zonder klanten te onthullen) in ruil voor tokens of kortingen.",
+          "Compute-to-Data technologie wordt gebruikt: Analyse-algoritmen draaien op de data zonder dat deze de soevereiniteit van elk bedrijf verlaat."
+        ],
+        "value": "Verkoop 'Real-Time Marktintelligentie' rapporten gebaseerd op echte transactiegegevens uit de sector, niet op enquêtes.",
+        "impact": "Nieuwe omzetstroom gebaseerd op data monetisatie"
+      },
+      "3": {
+        "name": "End-to-End Farmaceutische Traceerbaarheid",
+        "category": "Compliance",
+        "feria": "Infarma (Gezondheids-/Farmasector)",
+        "problem": "De farmaceutische industrie heeft kritische regelgeving (zoals de anti-vervalsingsrichtlijn). Het verifiëren van de toeleveringsketen van een nieuwe verpakkings- of grondstoffenleverancier op de beurs is complex.",
+        "solution": [
+          "Een veilig kanaal creëren in de Data Space voor serialisatie- en kwaliteitsverificatie.",
+          "Een laboratorium kan bij de stand van een logistieke leverancier verifiëren of deze voldoet aan GDP-normen (Good Distribution Practice).",
+          "Real-time data node query, met onveranderlijke Blockchain traceerbaarheid."
+        ],
+        "value": "Positioneert Infarma niet alleen als congres, maar als hub voor regelgevende compliance.",
+        "impact": "Unieke differentiatie in de farmasector"
+      },
+      "4": {
+        "name": "De Geverifieerde 'Green Badge'",
+        "category": "Duurzaamheid / ESG",
+        "feria": "Alle evenementen (Doorsnijdend)",
+        "problem": "Grote corporaties (VIP bezoekers) hebben strikte mandaten om hun Scope 3-emissies (toeleveringsketen) te verminderen. Ze moeten duurzame leveranciers contracteren maar wantrouwen 'Greenwashing'.",
+        "solution": [
+          "Exposanten uploaden hun CO2-voetafdrukgegevens en energiecertificeringen naar hun ProcureData node.",
+          "CloserStill biedt bezoekers een 'Duurzame Scouting' app: Filter exposanten met gecontroleerde en digitaal ondertekende emissiegegevens.",
+          "Verificatie gebaseerd op echte data, niet op verklaringen."
+        ],
+        "value": "Trekt grote corporate kopers aan die groene aankopen moeten verantwoorden aan hun aandeelhouders.",
+        "impact": "Differentiële ESG positionering"
+      },
+      "5": {
+        "name": "'Blinde' Privé Matchmaking",
+        "category": "Privacy",
+        "feria": "eForums (One to One) / Dental Summit",
+        "problem": "Bij high-level meetings willen bedrijven soms hun strategische behoeften niet onthullen tenzij er een perfecte match is. 'Ik zoek een cybersecurity-oplossing voor een budget van 500k, maar ik wil niet dat de markt weet dat ik die kwetsbaarheid heb'.",
+        "solution": [
+          "Blinde Matching: De koper publiceert zijn behoefte versleuteld in de data space.",
+          "Leveranciers publiceren hun capaciteiten zonder de koper te kennen.",
+          "ProcureData's algoritme matcht vraag en aanbod zonder de identiteit van de koper te onthullen totdat technische capaciteiten en budget overeenkomen."
+        ],
+        "value": "Verhoogt de kwaliteit van eForums, garandeert absolute vertrouwelijkheid en hoge relevantie in meetings.",
+        "impact": "Hoogwaardige matchmaking met totale privacy"
+      }
+    },
+    "labels": {
+      "case": "Case",
+      "problem": "Het Probleem",
+      "useCase": "De Use Case",
+      "valueFor": "Waarde voor CloserStill",
+      "impact": "Impact"
+    },
+    "summary": {
+      "badge": "Executive Summary",
+      "title": "De CloserStill",
+      "titleHighlight": "Data Engine",
+      "subtitle": "Drie waarde-engines die CloserStill transformeren van evenementorganisator naar soeverein dataplatform",
+      "sales": {
+        "title": "VERKOOP Engine",
+        "category": "Sales Acceleration",
+        "description": "Versnelt leveranciersgoedkeuring"
+      },
+      "revenue": {
+        "title": "OMZET Engine",
+        "category": "Data Monetization",
+        "description": "Verkoopt echte marktintelligentie"
+      },
+      "trust": {
+        "title": "VERTROUWEN Engine",
+        "category": "Compliance, ESG & Privacy",
+        "description": "Verifieert duurzaamheid en regelgevende compliance"
+      }
+    },
+    "footer": {
+      "quote": "\"We verkopen geen technologie; we verkopen <span>commerciële versnelling</span> voor exposanten en <span>contractzekerheid</span> voor bezoekers.\""
+    }
+  },
+  "proyecto": {
+    "backToPartners": "Terug naar Partners",
+    "badges": {
+      "strategicPartner": "Strategic Partner",
+      "kitReady": "Data Space Kit Ready",
+      "ecosystemBuilder": "Ecosystem Builder"
+    },
+    "hero": {
+      "title": "CloserStill Media",
+      "subtitle": "Wereldleider in de organisatie van professionele beurzen en B2B evenementen. Aandrijver van de <strong>Digitale Handel Data Space</strong> in Spanje.",
+      "stats": {
+        "countries": "Spanje & UK",
+        "visitors": "+50.000 Bezoekers/jaar",
+        "exhibitors": "+1.500 Exposanten"
+      }
+    },
+    "profile": {
+      "title": "Bedrijfsprofiel",
+      "p1": "CloserStill Media is wereldleider in de organisatie van professionele beurzen en B2B evenementen. In Spanje beheert het het krachtigste networking ecosysteem van de markt, dat vraag en aanbod verbindt door \"paraplu-evenement\" strategieën die C-Level leidinggevenden uit meerdere sectoren onder één dak samenbrengen.",
+      "p2": "Hun aanpak omvat alles van kritische technologie-infrastructuur tot digitale retail en de farmaceutische sector, als belangrijkste aandrijver van face-to-face business in Madrid en Barcelona."
+    },
+    "ecosystems": {
+      "title": "Portfolio van Verbonden Ecosystemen",
+      "subtitle": "Door deze alliantie maakt ProcureData data-interoperabiliteit mogelijk bij de volgende belangrijke evenementen:",
+      "items": {
+        "madridTech": {
+          "name": "Madrid Tech Show",
+          "location": "IFEMA, Madrid",
+          "description": "De grootste technologische convergentie van Spanje",
+          "subEvents": [
+            "E-Show Madrid",
+            "Big Data & AI World",
+            "Cyber Security World",
+            "Cloud & AI Infrastructure",
+            "Data Centre World",
+            "Connectivity World",
+            "Technology for Marketing (TFM)"
+          ]
+        },
+        "barcelona": {
+          "name": "Hub Digital Barcelona",
+          "location": "Barcelona",
+          "description": "Focus op digitale business en retail transformatie",
+          "subEvents": [
+            "E-Show Barcelona (Decaan Editie)",
+            "TFM Barcelona"
+          ]
+        },
+        "health": {
+          "name": "Gezondheid & Farmasector",
+          "location": "Nationaal",
+          "description": "Toonaangevende evenementen in de farmaceutische en dentale sector",
+          "subEvents": [
+            "Infarma (Toonaangevend farmaceutisch congres)",
+            "Dental Summit"
+          ]
+        }
+      },
+      "eforums": {
+        "badge": "High-Value Formaat",
+        "title": "eForums (One to One)",
+        "description": "Privé executive meetings \"speed dating\" versterkt door voorafgaande identiteitsvalidatie"
+      }
+    },
+    "valueProposition": {
+      "badge": "The Partnership",
+      "title": "Gezamenlijke Waardepropositie",
+      "subtitle": "De alliantie <strong>ProcureData x CloserStill</strong> transformeert handelsbeurzen in <span>Vloeibare Data Spaces</span>",
+      "items": {
+        "fastTrack": {
+          "title": "Commerciële Fast-Track",
+          "description": "Exposanten en bezoekers gebruiken hun ProcureData Digital Passport om credentials (Kredietwaardigheid, ISO's, ESG) direct te valideren bij het scannen van hun accreditatie."
+        },
+        "dataSpace": {
+          "title": "Gefedereerde Data Space",
+          "description": "We faciliteren dat CloserStill optreedt als orchestrator van de 'Digitale Handel Data Space', waardoor exposanten toegang krijgen tot Data Space Kit subsidies."
+        },
+        "matchmaking": {
+          "title": "Geverifieerde Matchmaking",
+          "description": "Bij eForums garanderen we dat elke 'One to One' meeting plaatsvindt tussen vooraf goedgekeurde partijen, waardoor post-event compliance frictie wordt geëlimineerd."
+        }
+      }
+    },
+    "services": {
+      "title": "Geïntegreerde Diensten",
+      "subtitle": "Functionaliteiten mogelijk gemaakt door ProcureData infrastructuur",
+      "items": {
+        "onboarding": {
+          "title": "Exposant Onboarding",
+          "description": "Automatische KYB validatie (Know Your Business)"
+        },
+        "leads": {
+          "title": "Soevereine Lead Uitwisseling",
+          "description": "Gebruik van EDC connectors om contactgegevens te delen onder ODRL contracten"
+        },
+        "certification": {
+          "title": "Deelname Certificering",
+          "description": "Uitgifte van verifieerbare deelname- en training credentials op blockchain"
+        }
+      }
+    },
+    "cta": {
+      "title": "Bent u exposant bij CloserStill evenementen?",
+      "subtitle": "Krijg toegang tot de voordelen van de Data Space Kit en optimaliseer uw deelname met directe validatie van bedrijfscredentials.",
+      "buttons": {
+        "opportunities": "Bekijk Ecosysteem Kansen",
+        "kit": "Meer over Data Space Kit"
+      }
+    }
+  }
+}

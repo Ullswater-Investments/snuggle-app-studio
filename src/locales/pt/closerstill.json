@@ -1,0 +1,491 @@
+{
+  "login": {
+    "title": "CloserStill Media",
+    "subtitle": "Área privada de membros",
+    "username": "Utilizador",
+    "password": "Palavra-passe",
+    "passwordPlaceholder": "Introduza a palavra-passe",
+    "submit": "Aceder",
+    "loading": "A verificar...",
+    "backToDirectory": "Voltar ao diretório",
+    "accessGranted": "Acesso concedido",
+    "invalidCredentials": "Credenciais incorretas",
+    "loginError": "Erro de início de sessão",
+    "loadingText": "A carregar..."
+  },
+  "header": {
+    "membersArea": "Área de Membros",
+    "confidentialDocument": "Documento Confidencial",
+    "logout": "Sair",
+    "closerstill365Badge": "CloserStill 365",
+    "useCasesSubtitle": "5 Casos de Uso de Alto Valor"
+  },
+  "miembros": {
+    "heroTitle": "Área de Membros",
+    "heroHighlight": "CloserStill Media",
+    "heroSubtitle": "Aceda à documentação exclusiva sobre o Nó de Dados e-Show",
+    "confidentialBadge": "Documentos Confidenciais - Apenas Parceiros",
+    "documentsAvailable": "Documentos Disponíveis",
+    "documents": {
+      "doc365": {
+        "title": "CloserStill 365: O Ecossistema de Dados Infinito",
+        "description": "Visão Corporativa e Proposta de Valor",
+        "summary": "A filosofia \"Mais Perto Ainda\" evolui: Do aperto de mão ao smart contract. Benefícios para expositores e visitantes do novo Nó de Dados Federado."
+      },
+      "useCases": {
+        "title": "5 Casos de Uso de Alto Valor",
+        "description": "CloserStill Data Engine",
+        "summary": "Motor de Vendas, Motor de Receitas e Motor de Confiança: Estratégia de monetização para cada feira do portefólio."
+      },
+      "eshow": {
+        "title": "Proposta Estratégica e-Show Data Space Node",
+        "description": "De Feira de 2 Dias a Ecossistema 365",
+        "summary": "Proposta técnica e de negócio para o Nó Proprietário da CloserStill Media. Inclui modelo de receitas e próximos passos."
+      }
+    },
+    "viewDocument": "Ver documento",
+    "viewingNow": "A visualizar agora",
+    "proposal": {
+      "confidentialBadge": "Documento Confidencial - Apenas Parceiros",
+      "title": "PROPOSTA ESTRATÉGICA",
+      "subtitle": "e-Show Data Space Node",
+      "description": "De Feira de 2 Dias a Ecossistema de Negócio 365"
+    },
+    "vision": {
+      "title": "1. A Visão: Ecossistema Líquido",
+      "problem": {
+        "title": "O Problema",
+        "text": "Hoje, o e-Show conecta oferta e procura presencialmente. Quando as luzes se apagam, a fricção burocrática (compliance, validação, papelada) atrasa o fecho de acordos."
+      },
+      "solution": {
+        "title": "A Solução",
+        "text": "Implementar um Nó Proprietário no ProcureData (baseado em Pontus-X / Gaia-X). Transformamos o e-Show no primeiro organizador que oferece Infraestrutura de Dados Soberana."
+      },
+      "keyConcept": {
+        "title": "Conceito Chave",
+        "text": "\"Agustín, não vendemos apenas metros quadrados; vendemos Autoestradas de Dados Seguras para que os seus expositores fechem vendas mais rapidamente.\""
+      }
+    },
+    "opportunity": {
+      "title": "2. A Oportunidade: Kit Espaço de Dados 🇪🇺",
+      "role": {
+        "title": "Papel do e-Show",
+        "text": "Atuar como Entidade Promotora do \"Espaço de Dados do Comércio Digital\"."
+      },
+      "incentive": {
+        "title": "O Incentivo",
+        "text": "Ajudar os seus expositores a aceder a <strong>150.000€ - 300.000€</strong> de ajuda pública."
+      },
+      "loyalty": {
+        "title": "A Fidelização",
+        "text": "Se fornece a tecnologia e o subsídio, o expositor \"casa-se\" com a feira."
+      }
+    },
+    "node": {
+      "title": "3. O que aporta um Nó Proprietário?",
+      "seller": {
+        "title": "O Vendedor",
+        "subtitle": "Para o Expositor",
+        "objective": "Objetivo: Vender mais rápido (Fast-Track)",
+        "features": {
+          "identity": "<strong>Identidade Soberana (DID):</strong> O seu Badge torna-se uma Carteira Digital.",
+          "validation": "<strong>Validação Instantânea:</strong> Transmite solvência e ISOs automaticamente.",
+          "monetization": "<strong>Monetização:</strong> Venda de datasets de tendências no Marketplace."
+        }
+      },
+      "buyer": {
+        "title": "O Comprador",
+        "subtitle": "Para o Visitante",
+        "objective": "Objetivo: Fornecedores fiáveis sem risco",
+        "features": {
+          "trust": "<strong>Confiança Zero-Trust:</strong> Fornecedores com KYB automático em Blockchain.",
+          "integration": "<strong>Integração One-Click:</strong> Exportação direta para ERP (SAP/Oracle).",
+          "scouting": "<strong>Scouting Inteligente:</strong> Filtros avançados por certificação e faturação."
+        }
+      },
+      "organizer": {
+        "title": "O Organizador",
+        "subtitle": "Para o e-Show",
+        "objective": "Objetivo: Novas Receitas e Liderança",
+        "features": {
+          "monetization": "<strong>Data Monetization:</strong> Taxa por transações de dados pós-feira.",
+          "intelligence": "<strong>Market Intelligence:</strong> Dados reais de oferta e procura.",
+          "leadership": "<strong>Liderança:</strong> Primeiro organizador de feiras a implementar Web3 / Gaia-X."
+        }
+      }
+    },
+    "journey": {
+      "title": "4. O Customer Journey Digital",
+      "steps": {
+        "encounter": {
+          "title": "O Encontro",
+          "desc": "Scan de badges no stand"
+        },
+        "handshake": {
+          "title": "Handshake Digital",
+          "desc": "O Nó executa Smart Contract"
+        },
+        "validation": {
+          "title": "A Validação",
+          "desc": "Troca de credenciais (segundos)"
+        },
+        "result": {
+          "title": "O Resultado",
+          "desc": "Fornecedor Homologado no ERP"
+        }
+      }
+    },
+    "revenue": {
+      "title": "5. Modelo de Receitas Proposto",
+      "streams": {
+        "subscription": {
+          "name": "Subscrição 'Trust+'",
+          "desc": "Taxa extra para ter o 'Passaporte Digital' validado todo o ano."
+        },
+        "marketplace": {
+          "name": "Taxa Data Marketplace",
+          "desc": "Comissão por datasets vendidos entre participantes."
+        },
+        "grants": {
+          "name": "Gestão de Apoios",
+          "desc": "Taxa por gerir o acesso ao Kit Espaço de Dados."
+        }
+      },
+      "potential": "Potencial"
+    },
+    "nextSteps": {
+      "title": "6. Próximos Passos",
+      "steps": [
+        "Piloto no e-Show Madrid: Habilitar um 'Fast-Track Lane' para 50 expositores VIP.",
+        "Webinar Conjunto: 'Como financiar a sua transformação de dados com o Kit Espaço de Dados'.",
+        "Implementação do Nó: Deploy de um Nó Gaia-X propriedade da CloserStill Media."
+      ]
+    }
+  },
+  "closerstill365": {
+    "badge": "O Ecossistema de Dados Infinito",
+    "hero": {
+      "physical": "Físico",
+      "smartContract": "Smart Contract",
+      "title": "Do Aperto de Mão ao",
+      "titleHighlight": "Smart Contract",
+      "subtitle": "A nossa filosofia é <strong>'Mais Perto Ainda'</strong>. Por isso, já não conectamos apenas pessoas num recinto; conectamos os sistemas das vossas empresas de forma permanente, segura e soberana."
+    },
+    "vision": {
+      "badge": "A Nova Proximidade",
+      "title": "A feira dura 48 horas.",
+      "titleHighlight": "O negócio, 365 dias.",
+      "subtitle": "Do contacto físico à conexão digital permanente.",
+      "narrative": {
+        "p1": "Durante anos, a nossa missão foi aproximar as pessoas. Unir oferta e procura sob o mesmo teto para provocar <strong>a faísca do negócio</strong>.",
+        "p2": "Mas sabemos que, quando as luzes do pavilhão se apagam, começa a verdadeira corrida de obstáculos: burocracia, validação de fornecedores, auditorias e silos de informação.",
+        "p3": "Hoje, <span>a CloserStill dá o salto mais ambicioso da sua história</span>. Já não organizamos apenas eventos; <strong>orquestramos ecossistemas</strong>."
+      },
+      "pillars": {
+        "trust": {
+          "title": "Confiança",
+          "description": "Partilhar dados de solvência instantaneamente, sem intermediários nem esperas."
+        },
+        "efficiency": {
+          "title": "Eficiência",
+          "description": "Integrar catálogos de produtos e serviços com um só clique."
+        },
+        "transparency": {
+          "title": "Transparência",
+          "description": "Validar credenciais ISO e ESG sem burocracia desnecessária."
+        }
+      },
+      "quote": "\"A CloserStill Media lança o seu próprio <span>Nó de Espaço de Dados Federado</span> para que a conexão que nasce na feira, <strong>viva na nuvem</strong>.\""
+    },
+    "exhibitor": {
+      "badge": "Para o Expositor",
+      "title": "O seu Badge é agora o seu",
+      "titleHighlight": "Passaporte de Solvência",
+      "subtitle": "Ative o \"Fast-Track\" comercial e reduza o seu Time-to-Contract de meses a minutos.",
+      "problem": "\"Quantos cartões de visita arrefecem numa gaveta à espera que o departamento de Compras do cliente o homologue? O maior inimigo do seu ROI não é a concorrência, <strong>é a fricção administrativa</strong>.\"",
+      "features": {
+        "solvency": "A sua <strong>solvência financeira</strong> (Scoring)",
+        "certifications": "As suas <strong>certificações ISO e ESG</strong> atualizadas",
+        "catalog": "O seu <strong>catálogo de serviços</strong> em formato interoperável"
+      },
+      "result": {
+        "label": "RESULTADO",
+        "text": "Converta os seus leads em contratos assinados <strong>à velocidade da luz</strong>."
+      },
+      "funding": {
+        "label": "Acesso ao Kit Espaço de Dados",
+        "amount": "150.000€ - 300.000€"
+      }
+    },
+    "visitor": {
+      "badge": "Para o Visitante",
+      "title": "Scouting com Garantia",
+      "titleHighlight": "'CloserStill Verified'",
+      "subtitle": "Encontre, valide e integre novos parceiros sem risco de compliance.",
+      "problem": "\"Como sabe se esse fornecedor que conheceu no e-Show é solvente? Ou se cumpre com a normativa ESG? Na CloserStill, <strong>elevamos o padrão</strong>.\"",
+      "features": {
+        "zeroTrust": {
+          "title": "Zero-Trust",
+          "description": "KYB registado em Blockchain"
+        },
+        "smartFiltering": {
+          "title": "Filtragem Inteligente",
+          "description": "Por pegada de carbono ou capacidade técnica"
+        },
+        "oneClick": {
+          "title": "Integração One-Click",
+          "description": "Exportação direta para SAP, Oracle, Microsoft"
+        }
+      },
+      "guarantee": {
+        "label": "GARANTIA",
+        "text": "Faça negócios com a tranquilidade de saber que <strong>a CloserStill já fez a Due Diligence por si</strong>."
+      },
+      "trustSeal": {
+        "label": "Selo de Confiança",
+        "value": "Data Space Ready"
+      }
+    },
+    "liquidFair": {
+      "badge": "Bem-vindos à era da",
+      "title": "Feira Líquida",
+      "subtitle": "A feira já não termina quando as portas do recinto fecham. O negócio flui, os dados conectam, a confiança permanece."
+    },
+    "footer": {
+      "poweredBy": "Powered by",
+      "strategicNote": "Nota estratégica:",
+      "quote": "\"Não estamos a vender 'blockchain' nem 'tecnologia complexa'. Estamos a vender <span>velocidade para quem vende</span> e <span>segurança para quem compra</span>.\""
+    }
+  },
+  "useCases": {
+    "badge": "Estratégia de Monetização",
+    "title": "CloserStill",
+    "titleHighlight": "Data Engine",
+    "subtitle": "5 Casos de Uso de Alto Valor para monetizar a sua posição como \"conector de indústrias\" utilizando a tecnologia de Espaços de Dados Federados",
+    "engines": {
+      "sales": {
+        "title": "Motor de Vendas",
+        "description": "Acelere a homologação",
+        "cases": "Caso 1"
+      },
+      "revenue": {
+        "title": "Motor de Receitas",
+        "description": "Venda inteligência de mercado",
+        "cases": "Caso 2"
+      },
+      "trust": {
+        "title": "Motor de Confiança",
+        "description": "Verifique sustentabilidade e compliance",
+        "cases": "Casos 3, 4, 5"
+      }
+    },
+    "cases": {
+      "1": {
+        "name": "Passaporte de Negócio Expresso",
+        "category": "Sales Acceleration",
+        "feria": "Madrid Tech Show / E-Show",
+        "problem": "Um expositor consegue 200 leads na feira. 80% arrefecem porque, após o evento, começa o tedioso processo de troca de documentação legal, NDAs e validação de fornecedores (Onboarding) que dura semanas.",
+        "solution": [
+          "O 'Badge' do visitante e do expositor não é apenas um QR de contacto, é uma Wallet de Identidade (DID).",
+          "Ao fazer 'match', ativa-se um smart contract (ODRL) que permite ao comprador aceder temporariamente à pasta de homologação do vendedor.",
+          "Dados disponíveis: Certificados ISO, Solvência, Dados Fiscais, Compliance."
+        ],
+        "value": "Venda um pacote 'Premium Exhibitor' que inclui esta validação prévia. O expositor sai da feira com fornecedores já homologados nos sistemas dos seus clientes potenciais.",
+        "impact": "De semanas de onboarding a minutos de validação"
+      },
+      "2": {
+        "name": "Marketplace de Inteligência de Mercado",
+        "category": "Data Monetization",
+        "feria": "Technology for Marketing (TFM) / Big Data & AI World",
+        "problem": "As empresas pagam fortunas a consultoras (Gartner, Forrester) por relatórios de tendências que costumam ser dados de inquéritos e opiniões.",
+        "solution": [
+          "A CloserStill tem dados reais de comportamento: Que stands visitam os CPOs? Que categorias procuram os CTOs?",
+          "Cria-se um Data Product anonimizado onde os expositores podem contribuir com os seus próprios dados de tendências de vendas (sem revelar clientes) em troca de tokens ou descontos.",
+          "Utiliza-se tecnologia Compute-to-Data: Os algoritmos de análise executam-se sobre os dados sem que estes saiam da soberania de cada empresa."
+        ],
+        "value": "Vender relatórios de 'Inteligência de Mercado em Tempo Real' baseados em dados transacionais reais do setor, não em inquéritos.",
+        "impact": "Novo fluxo de receitas baseado em data monetization"
+      },
+      "3": {
+        "name": "Rastreabilidade Farmacêutica End-to-End",
+        "category": "Compliance",
+        "feria": "Infarma (Setor Saúde/Farma)",
+        "problem": "A indústria farmacêutica tem regulamentações críticas (como a diretiva contra medicamentos falsificados). Verificar a cadeia de fornecimento de um novo fornecedor de embalagem ou matéria-prima na feira é complexo.",
+        "solution": [
+          "Criar um canal seguro no Espaço de Dados para a verificação de serialização e qualidade.",
+          "Um laboratório pode verificar no stand de um fornecedor de logística se cumpre com as normas GDP (Good Distribution Practice).",
+          "Consulta do nó de dados em tempo real, com rastreabilidade imutável em Blockchain."
+        ],
+        "value": "Posiciona o Infarma não só como um congresso, mas como um hub de cumprimento normativo.",
+        "impact": "Diferenciação única no setor pharma"
+      },
+      "4": {
+        "name": "O 'Green Badge' Verificado",
+        "category": "Sustentabilidade / ESG",
+        "feria": "Todos os eventos (Transversal)",
+        "problem": "As grandes corporações (visitantes VIP) têm mandatos rigorosos para reduzir as suas emissões de Âmbito 3 (cadeia de fornecimento). Precisam de contratar fornecedores sustentáveis, mas desconfiam do 'Greenwashing'.",
+        "solution": [
+          "Os expositores carregam os seus dados de Pegada de Carbono e certificações energéticas no seu nó ProcureData.",
+          "A CloserStill oferece aos visitantes uma app de 'Scouting Sustentável': Filtre expositores que tenham dados de emissões auditados e assinados digitalmente.",
+          "Verificação baseada em dados reais, não em declarações."
+        ],
+        "value": "Atrai grandes compradores corporativos que precisam de justificar compras verdes perante os seus acionistas.",
+        "impact": "Posicionamento ESG diferencial"
+      },
+      "5": {
+        "name": "Matchmaking Privado 'Cego'",
+        "category": "Privacidade",
+        "feria": "eForums (One to One) / Dental Summit",
+        "problem": "Em reuniões de alto nível, por vezes as empresas não querem revelar as suas necessidades estratégicas a menos que haja uma coincidência perfeita. 'Procuro uma solução de cibersegurança para um orçamento de 500k, mas não quero que o mercado saiba que tenho essa vulnerabilidade'.",
+        "solution": [
+          "Matching Cego: O comprador publica a sua necessidade no espaço de dados de forma encriptada.",
+          "Os fornecedores publicam as suas capacidades sem conhecer o comprador.",
+          "O algoritmo do ProcureData cruza oferta e procura sem revelar a identidade do comprador até haver um 'match' de capacidades técnicas e orçamento."
+        ],
+        "value": "Eleva a qualidade dos eForums, garantindo confidencialidade absoluta e alta relevância nas reuniões.",
+        "impact": "Matchmaking de alto valor com privacidade total"
+      }
+    },
+    "labels": {
+      "case": "Caso",
+      "problem": "O Problema",
+      "useCase": "O Caso de Uso",
+      "valueFor": "Valor para a CloserStill",
+      "impact": "Impacto"
+    },
+    "summary": {
+      "badge": "Resumo Executivo",
+      "title": "O CloserStill",
+      "titleHighlight": "Data Engine",
+      "subtitle": "Três motores de valor que transformam a CloserStill de organizadora de eventos em plataforma de dados soberana",
+      "sales": {
+        "title": "Motor de VENDAS",
+        "category": "Sales Acceleration",
+        "description": "Acelera a homologação de fornecedores"
+      },
+      "revenue": {
+        "title": "Motor de RECEITAS",
+        "category": "Data Monetization",
+        "description": "Vende inteligência de mercado real"
+      },
+      "trust": {
+        "title": "Motor de CONFIANÇA",
+        "category": "Compliance, ESG & Privacy",
+        "description": "Verifica sustentabilidade e cumprimento normativo"
+      }
+    },
+    "footer": {
+      "quote": "\"Não vendemos tecnologia; vendemos <span>aceleração comercial</span> para expositores e <span>segurança na contratação</span> para visitantes.\""
+    }
+  },
+  "proyecto": {
+    "backToPartners": "Voltar a Partners",
+    "badges": {
+      "strategicPartner": "Strategic Partner",
+      "kitReady": "Kit Espaço de Dados Ready",
+      "ecosystemBuilder": "Ecosystem Builder"
+    },
+    "hero": {
+      "title": "CloserStill Media",
+      "subtitle": "Líder global na organização de feiras profissionais e eventos B2B. Dinamizador do <strong>Espaço de Dados de Comércio Digital</strong> em Espanha.",
+      "stats": {
+        "countries": "Espanha & UK",
+        "visitors": "+50.000 Visitantes/ano",
+        "exhibitors": "+1.500 Expositores"
+      }
+    },
+    "profile": {
+      "title": "Perfil Corporativo",
+      "p1": "A CloserStill Media é líder global na organização de feiras profissionais e eventos B2B. Em Espanha, gere o ecossistema de networking mais poderoso do mercado, conectando oferta e procura através de estratégias de \"eventos guarda-chuva\" que reúnem diretivos C-Level de múltiplas verticais no mesmo recinto.",
+      "p2": "A sua abordagem abrange desde a infraestrutura tecnológica crítica até ao retail digital e ao setor farmacêutico, atuando como o principal dinamizador de negócios presenciais em Madrid e Barcelona."
+    },
+    "ecosystems": {
+      "title": "Portfólio de Ecossistemas Conectados",
+      "subtitle": "Através desta aliança, a ProcureData habilita a interoperabilidade de dados nos seguintes eventos chave:",
+      "items": {
+        "madridTech": {
+          "name": "Madrid Tech Show",
+          "location": "IFEMA, Madrid",
+          "description": "A maior convergência tecnológica de Espanha",
+          "subEvents": [
+            "E-Show Madrid",
+            "Big Data & AI World",
+            "Cyber Security World",
+            "Cloud & AI Infrastructure",
+            "Data Centre World",
+            "Connectivity World",
+            "Technology for Marketing (TFM)"
+          ]
+        },
+        "barcelona": {
+          "name": "Hub Digital Barcelona",
+          "location": "Barcelona",
+          "description": "Foco em negócio digital e transformação do retail",
+          "subEvents": [
+            "E-Show Barcelona (Edição Decana)",
+            "TFM Barcelona"
+          ]
+        },
+        "health": {
+          "name": "Setor Saúde & Pharma",
+          "location": "Nacional",
+          "description": "Eventos líderes no setor farmacêutico e dentário",
+          "subEvents": [
+            "Infarma (Congresso farmacêutico líder)",
+            "Dental Summit"
+          ]
+        }
+      },
+      "eforums": {
+        "badge": "Formato High-Value",
+        "title": "eForums (One to One)",
+        "description": "Reuniões executivas privadas \"speed dating\" potenciadas por validação prévia de identidade"
+      }
+    },
+    "valueProposition": {
+      "badge": "The Partnership",
+      "title": "Proposta de Valor Conjunta",
+      "subtitle": "A aliança <strong>ProcureData x CloserStill</strong> transforma as feiras comerciais em <span>Espaços de Dados Líquidos</span>",
+      "items": {
+        "fastTrack": {
+          "title": "Fast-Track Comercial",
+          "description": "Os expositores e visitantes utilizam o seu Passaporte Digital ProcureData para validar credenciais (Solvência, ISOs, ESG) instantaneamente ao digitalizar a sua acreditação."
+        },
+        "dataSpace": {
+          "title": "Espaço de Dados Federado",
+          "description": "Facilitamos que a CloserStill atue como orquestrador do 'Espaço de Dados de Comércio Digital', permitindo aos seus expositores aceder aos apoios do Kit Espaço de Dados."
+        },
+        "matchmaking": {
+          "title": "Matchmaking Verificado",
+          "description": "Nos eForums, garantimos que cada reunião 'One to One' ocorra entre partes previamente homologadas, eliminando a fricção de compliance pós-evento."
+        }
+      }
+    },
+    "services": {
+      "title": "Serviços Integrados",
+      "subtitle": "Funcionalidades habilitadas pela infraestrutura ProcureData",
+      "items": {
+        "onboarding": {
+          "title": "Onboarding de Expositores",
+          "description": "Validação automática KYB (Know Your Business)"
+        },
+        "leads": {
+          "title": "Troca de Leads Soberana",
+          "description": "Uso de conectores EDC para partilhar dados de contacto sob contratos ODRL"
+        },
+        "certification": {
+          "title": "Certificação de Assistência",
+          "description": "Emissão de credenciais verificáveis de participação e formação em blockchain"
+        }
+      }
+    },
+    "cta": {
+      "title": "É expositor em eventos CloserStill?",
+      "subtitle": "Aceda às vantagens do Kit Espaço de Dados e otimize a sua participação com validação instantânea de credenciais empresariais.",
+      "buttons": {
+        "opportunities": "Ver Oportunidades do Ecossistema",
+        "kit": "Mais sobre Kit Espaço de Dados"
+      }
+    }
+  }
+}
