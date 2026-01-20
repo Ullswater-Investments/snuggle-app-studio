@@ -49,6 +49,7 @@ import { GreenProcurementSection } from "@/components/success-stories/GreenProcu
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from 'react-i18next';
 import { greenProcurementCases } from "@/data/greenProcurementCases";
+import { superCategories, getSuperCategoryFromSector, shouldHaveGreenTag } from "@/data/sectorSuperCategories";
 
 const successCases = [
   // Original 7 cases
@@ -766,31 +767,57 @@ const successCases = [
 const SuccessStories = () => {
   const { t } = useTranslation('success');
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeSector, setActiveSector] = useState("all");
+  const [activeSuperCategory, setActiveSuperCategory] = useState("all");
+  const [activeTag, setActiveTag] = useState<string | null>(null);
 
-  // Build translated success cases
-  const successCasesData = useMemo(() => successCases.map(c => ({
-    ...c,
-    title: t(`cases.${c.id}.title`),
-    sector: t(`cases.${c.id}.sector`),
-    metricLabel: t(`cases.${c.id}.metricLabel`),
-    description: t(`cases.${c.id}.description`),
-  })), [t]);
+
+
+
+  // Build translated success cases with tags
+  const successCasesData = useMemo(() => successCases.map(c => {
+    const hasGreenTag = shouldHaveGreenTag(c);
+    return {
+      ...c,
+      title: t(`cases.${c.id}.title`),
+      sector: t(`cases.${c.id}.sector`),
+      metricLabel: t(`cases.${c.id}.metricLabel`),
+      description: t(`cases.${c.id}.description`),
+      tags: hasGreenTag ? ['green-procurement'] : [],
+      superCategory: getSuperCategoryFromSector(c.sectorCategory),
+    };
+  }), [t]);
 
   // Combine with green procurement cases
   const allCases = useMemo(() => {
     const gpCases = greenProcurementCases.map(c => ({
       ...c,
       title: c.program,
+      tags: ['green-procurement'],
+      superCategory: 'all', // Green procurement is transversal
     }));
     return [...successCasesData, ...gpCases];
   }, [successCasesData]);
 
-  // Calculate sector counts
-  const sectorCounts = useMemo(() => {
+  // Calculate super-category counts
+  const superCategoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
     allCases.forEach(c => {
-      counts[c.sectorCategory] = (counts[c.sectorCategory] || 0) + 1;
+      const superCat = c.superCategory || getSuperCategoryFromSector(c.sectorCategory);
+      counts[superCat] = (counts[superCat] || 0) + 1;
+    });
+    return counts;
+  }, [allCases]);
+
+  // Calculate tag counts
+  const tagCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    allCases.forEach(c => {
+      if (c.tags?.includes('green-procurement')) {
+        counts['green-procurement'] = (counts['green-procurement'] || 0) + 1;
+      }
+      if (c.tags?.includes('circular')) {
+        counts['circular'] = (counts['circular'] || 0) + 1;
+      }
     });
     return counts;
   }, [allCases]);
@@ -798,8 +825,18 @@ const SuccessStories = () => {
   const filteredCases = allCases.filter(c => {
     const matchesSearch = c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          c.company.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSector = activeSector === "all" || c.sectorCategory === activeSector;
-    return matchesSearch && matchesSector;
+    
+    // Filter by super-category
+    const cSuperCategory = c.superCategory || getSuperCategoryFromSector(c.sectorCategory);
+    const superCat = superCategories.find((sc: any) => sc.id === activeSuperCategory);
+    const matchesSuperCategory = activeSuperCategory === "all" || 
+      (superCat?.sectors?.includes(c.sectorCategory)) ||
+      cSuperCategory === activeSuperCategory;
+    
+    // Filter by transversal tag
+    const matchesTag = !activeTag || c.tags?.includes(activeTag);
+    
+    return matchesSearch && matchesSuperCategory && matchesTag;
   });
 
 
@@ -840,12 +877,15 @@ const SuccessStories = () => {
         </div>
       </div>
 
-      {/* Sector Filter */}
+      {/* Super-Category Filter */}
       <div className="container mx-auto px-4">
         <SuccessStoriesFilter 
-          activeSector={activeSector}
-          onSectorChange={setActiveSector}
-          sectorCounts={sectorCounts}
+          activeSuperCategory={activeSuperCategory}
+          onSuperCategoryChange={setActiveSuperCategory}
+          activeTag={activeTag}
+          onTagChange={setActiveTag}
+          superCategoryCounts={superCategoryCounts}
+          tagCounts={tagCounts}
         />
       </div>
 
@@ -876,14 +916,20 @@ const SuccessStories = () => {
                     <div className={`h-2 bg-gradient-to-r ${caseItem.color}`} />
                     
                     <CardContent className="p-6 space-y-4">
-                      {/* Sector Badge */}
-                      <div className="flex items-center justify-between">
+                      {/* Sector Badge + Green Tag */}
+                      <div className="flex flex-wrap items-center gap-2">
                         <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium ${caseItem.bgColor} ${caseItem.textColor}`}>
                           <caseItem.sectorIcon className="w-3 h-3" />
                           {caseItem.sector}
                         </div>
-                        <div className="flex items-center gap-1 text-[10px] text-muted-foreground font-mono">
-                          <ShieldCheck className="w-3 h-3 text-green-500" />
+                        {caseItem.tags?.includes('green-procurement') && (
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                            <Leaf className="w-3 h-3" />
+                            Green
+                          </div>
+                        )}
+                        <div className="ml-auto flex items-center gap-1 text-[10px] text-muted-foreground font-mono">
+                          <ShieldCheck className="w-3 h-3 text-emerald-500" />
                           {caseItem.blockchainProof}
                         </div>
                       </div>

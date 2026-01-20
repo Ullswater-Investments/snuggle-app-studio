@@ -24,6 +24,19 @@
     "circular": "Circular",
     "agritech": "Agri-Tech"
   },
+  "superCategories": {
+    "all": "Todos",
+    "industriaInfraestructura": "Industria",
+    "saludPharma": "Salud y Pharma",
+    "retailConsumo": "Retail",
+    "movilidadEnergia": "Movilidad y Energía",
+    "sectorPublico": "Sector Público",
+    "agroalimentario": "Agroalimentario"
+  },
+  "transversalTags": {
+    "greenProcurement": "Green Procurement",
+    "circular": "Economía Circular"
+  },
 "cases": {
     "gigafactory-north": {
       "title": "Automatización de Homologación Industrial",
