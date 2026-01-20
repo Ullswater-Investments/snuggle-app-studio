@@ -1,0 +1,436 @@
+{
+  "title": "Junte-se ao Espaço de Dados ProcureData",
+  "subtitle": "Processo de adesão passo a passo",
+  "progress": {
+    "step0": "Acesso",
+    "step1": "Função",
+    "step2": "Boas-vindas",
+    "step3": "Requisitos",
+    "step4": "Obrigações",
+    "step5": "Dados",
+    "step6": "Confirmação"
+  },
+  "authSelection": {
+    "title": "Já tem uma conta?",
+    "subtitle": "Inicie sessão ou comece o seu processo de registo",
+    "login": {
+      "title": "Iniciar Sessão",
+      "description": "Aceda com a sua conta existente",
+      "email": "E-mail",
+      "password": "Palavra-passe",
+      "button": "Entrar",
+      "loading": "A iniciar sessão...",
+      "error": "Credenciais incorretas. Verifique o seu e-mail e palavra-passe.",
+      "success": "Sessão iniciada com sucesso"
+    },
+    "register": {
+      "title": "Novo Registo",
+      "description": "Junte-se ao Espaço de Dados Europeu",
+      "features": [
+        "Criar a sua identidade digital soberana",
+        "Conectar a sua empresa ao marketplace",
+        "Aceder a fornecedores homologados"
+      ],
+      "button": "Iniciar Registo"
+    }
+  },
+  "roleSelection": {
+    "title": "Como pretende participar no ProcureData?",
+    "subtitle": "Selecione a sua função principal no ecossistema de dados.",
+    "helperText": "Poderá ajustar a sua função e permissões após o registo.",
+    "buyer": {
+      "title": "Sou Comprador",
+      "description": "Procuro fornecedores qualificados e faço gestão de riscos da minha cadeia de abastecimento",
+      "features": {
+        "search": "Pesquisar e filtrar fornecedores verificados",
+        "monitor": "Monitorizar riscos da cadeia de abastecimento",
+        "integrate": "Integrar com o seu ERP (SAP, Oracle, etc.)"
+      }
+    },
+    "supplier": {
+      "title": "Sou Fornecedor",
+      "description": "Quero certificar-me e ser visível para grandes compradores",
+      "features": {
+        "visible": "Aparecer no marketplace de fornecedores",
+        "certify": "Certificar as suas credenciais uma única vez",
+        "orders": "Receber encomendas de grandes empresas"
+      }
+    }
+  },
+  "supplierObligations": {
+    "title": "Passos para completar o seu perfil",
+    "locked": "Pendente",
+    "helperText": "Estes passos serão desbloqueados após o registo",
+    "step1": { "title": "Carregar Certificados ISO", "description": "ISO 9001, 14001, 27001" },
+    "step2": { "title": "Validação Fiscal", "description": "Finanças e Segurança Social" },
+    "step3": { "title": "Catálogo de Produtos", "description": "Os seus produtos para o marketplace" }
+  },
+  "tooltips": {
+    "taxId": { "short": "Requisito legal para prevenir fraude", "title": "Verificação KYB", "full": "Validamos a sua entidade junto do Registo Comercial." }
+  },
+  "validation": {
+    "selectRole": "Deve selecionar uma função para continuar",
+    "required": "Este campo é obrigatório",
+    "invalidEmail": "E-mail inválido",
+    "invalidTaxId": "NIF/NIPC inválido",
+    "acceptTerms": "Deve aceitar os termos e condições",
+    "acceptGdpr": "Deve aceitar a política de privacidade",
+    "acceptConduct": "Deve aceitar o código de conduta"
+  },
+  "navigation": {
+    "next": "Continuar",
+    "back": "Voltar",
+    "submit": "Enviar Pedido",
+    "submitting": "A enviar..."
+  },
+  "welcome": {
+    "title": "Bem-vindo ao Ecossistema ProcureData",
+    "subtitle": "O primeiro marketplace de dados de fornecedores certificado Gaia-X na Europa",
+    "trustTriangle": {
+      "title": "O Modelo Trust Triangle",
+      "description": "O nosso ecossistema baseia-se em três funções fundamentais que garantem a rastreabilidade e confiança em cada transação de dados.",
+      "provider": {
+        "title": "Data Provider",
+        "description": "Empresas que publicam dados verificados sobre fornecedores"
+      },
+      "consumer": {
+        "title": "Data Consumer",
+        "description": "Organizações que acedem a dados segundo políticas ODRL"
+      },
+      "holder": {
+        "title": "Data Holder",
+        "description": "Proprietários dos dados que autorizam a sua utilização"
+      }
+    },
+    "benefits": {
+      "title": "Benefícios de ser membro",
+      "items": [
+        {
+          "icon": "Shield",
+          "title": "Verificação Única Reutilizável",
+          "description": "Elimine o problema n×m: verifique uma vez, reutilize sempre"
+        },
+        {
+          "icon": "BadgeCheck",
+          "title": "Passaporte Digital de Fornecedor",
+          "description": "Credenciais verificáveis W3C reconhecidas em toda a UE"
+        },
+        {
+          "icon": "Globe",
+          "title": "Ecossistema Gaia-X",
+          "description": "Acesso ao mercado europeu de dados com interoperabilidade garantida"
+        },
+        {
+          "icon": "Link",
+          "title": "Rastreabilidade Blockchain",
+          "description": "Todas as transações registadas no Pontus-X com DIDs verificáveis"
+        }
+      ]
+    }
+  },
+  "requirements": {
+    "title": "Requisitos para ser Membro",
+    "subtitle": "Antes de aderir, certifique-se de que cumpre estes requisitos técnicos e legais",
+    "technical": {
+      "title": "Requisitos Técnicos",
+      "description": "Infraestrutura necessária para participar no espaço de dados",
+      "items": [
+        {
+          "title": "Self-Description Gaia-X",
+          "description": "Documento JSON-LD assinado que certifica a conformidade com os princípios Gaia-X",
+          "status": "required",
+          "help": "Ajudamos a gerá-lo durante o onboarding"
+        },
+        {
+          "title": "DID (Identidade Descentralizada)",
+          "description": "Identificador único W3C para a sua organização, registado em blockchain",
+          "status": "required",
+          "help": "Geramos o seu DID automaticamente"
+        },
+        {
+          "title": "Wallet Empresarial",
+          "description": "Carteira digital para assinar transações e contratos ODRL",
+          "status": "required",
+          "help": "Conecte MetaMask ou use a nossa wallet integrada"
+        },
+        {
+          "title": "Conectividade EDC",
+          "description": "Eclipse Dataspace Connector para troca soberana de dados",
+          "status": "recommended",
+          "help": "Opcional para o Free Tier, necessário para Pro"
+        }
+      ]
+    },
+    "legal": {
+      "title": "Requisitos Legais",
+      "description": "Documentação oficial necessária para a verificação KYB",
+      "items": [
+        {
+          "title": "Registo Comercial Atualizado",
+          "description": "Documento oficial de constituição da empresa atualizado",
+          "status": "required"
+        },
+        {
+          "title": "NIF/NIPC Europeu Válido",
+          "description": "Identificação fiscal válida de qualquer país da UE",
+          "status": "required"
+        },
+        {
+          "title": "Representante Legal",
+          "description": "Pessoa autorizada a assinar contratos em nome da organização",
+          "status": "required"
+        },
+        {
+          "title": "Conformidade RGPD",
+          "description": "Política de proteção de dados ativa e DPO designado se aplicável",
+          "status": "required"
+        }
+      ]
+    },
+    "statusLabels": {
+      "required": "Obrigatório",
+      "recommended": "Recomendado"
+    }
+  },
+  "obligations": {
+    "title": "Obrigações do Participante",
+    "subtitle": "Compromissos que assume ao aderir ao espaço de dados",
+    "provider": {
+      "title": "Como Data Provider",
+      "subtitle": "Se publicar dados no marketplace",
+      "items": [
+        {
+          "title": "Definir políticas ODRL claras",
+          "description": "Especificar permissões, proibições e deveres para cada dataset"
+        },
+        {
+          "title": "Manter dados atualizados",
+          "description": "Garantir a veracidade e atualização da informação publicada"
+        },
+        {
+          "title": "Responder a pedidos em 48h",
+          "description": "Tempo máximo de resposta a pedidos de acesso a dados"
+        },
+        {
+          "title": "Gerar Self-Description válido",
+          "description": "Manter a sua certificação Gaia-X atualizada anualmente"
+        }
+      ]
+    },
+    "consumer": {
+      "title": "Como Data Consumer",
+      "subtitle": "Se consumir dados do marketplace",
+      "items": [
+        {
+          "title": "Respeitar restrições de utilização",
+          "description": "Cumprir as limitações temporais, geográficas e de finalidade"
+        },
+        {
+          "title": "Pagar tarifas acordadas",
+          "description": "Efetuar pagamentos em EUROe segundo as condições do contrato"
+        },
+        {
+          "title": "Não redistribuir sem autorização",
+          "description": "Os dados não podem ser partilhados com terceiros sem permissão explícita"
+        },
+        {
+          "title": "Gerar relatórios de utilização",
+          "description": "Fornecer relatórios quando o Provider o solicitar"
+        }
+      ]
+    },
+    "general": {
+      "title": "Compromissos Gerais",
+      "subtitle": "Aplicáveis a todos os membros",
+      "items": [
+        {
+          "icon": "CreditCard",
+          "title": "Manter subscrição ativa",
+          "description": "Free Tier gratuito ou plano Pro conforme necessidades"
+        },
+        {
+          "icon": "Bell",
+          "title": "Notificar alterações empresariais",
+          "description": "Informar alterações de dados fiscais, representante legal ou morada"
+        },
+        {
+          "icon": "Scale",
+          "title": "Cumprir código de conduta",
+          "description": "Aderir às normas éticas do ecossistema europeu"
+        }
+      ]
+    }
+  },
+  "dataForm": {
+    "title": "Dados de Registo",
+    "subtitle": "Complete a informação da sua organização",
+    "organization": {
+      "title": "Dados da Organização",
+      "fields": {
+        "legalName": {
+          "label": "Denominação Social",
+          "placeholder": "Ex: Acme Corporation Lda."
+        },
+        "taxId": {
+          "label": "NIF / NIPC",
+          "placeholder": "Ex: PT123456789"
+        },
+        "country": {
+          "label": "País",
+          "placeholder": "Selecione um país"
+        },
+        "address": {
+          "label": "Morada da Sede",
+          "placeholder": "Rua, número, código postal, cidade"
+        },
+        "sector": {
+          "label": "Setor de Atividade",
+          "placeholder": "Selecione um setor"
+        },
+        "size": {
+          "label": "Dimensão da Empresa",
+          "placeholder": "Selecione dimensão"
+        }
+      }
+    },
+    "representative": {
+      "title": "Dados do Representante Legal",
+      "fields": {
+        "fullName": {
+          "label": "Nome Completo",
+          "placeholder": "Nome e apelidos"
+        },
+        "position": {
+          "label": "Cargo",
+          "placeholder": "Ex: Diretor-Geral, CEO"
+        },
+        "email": {
+          "label": "E-mail Profissional",
+          "placeholder": "email@empresa.com"
+        },
+        "phone": {
+          "label": "Telefone",
+          "placeholder": "+351 900 000 000"
+        }
+      }
+    },
+    "intention": {
+      "title": "Intenção de Utilização",
+      "fields": {
+        "role": {
+          "label": "Função Principal",
+          "options": {
+            "provider": "Principalmente Provider (publicar dados)",
+            "consumer": "Principalmente Consumer (consumir dados)",
+            "both": "Ambos (publicar e consumir)"
+          }
+        },
+        "dataTypes": {
+          "label": "Tipos de Dados de Interesse",
+          "options": {
+            "financial": "Dados Financeiros",
+            "esg": "Dados ESG / Sustentabilidade",
+            "certifications": "Certificações",
+            "commercial": "Informação Comercial",
+            "logistics": "Dados Logísticos",
+            "quality": "Controlo de Qualidade"
+          }
+        },
+        "hasErp": {
+          "label": "Tem ERP para integrar?",
+          "options": {
+            "sap": "SAP",
+            "oracle": "Oracle",
+            "microsoft": "Microsoft Dynamics",
+            "sage": "Sage",
+            "other": "Outro ERP",
+            "none": "Não tenho ERP"
+          }
+        }
+      }
+    },
+    "sectors": {
+      "manufacturing": "Indústria",
+      "automotive": "Automóvel",
+      "aerospace": "Aeroespacial",
+      "energy": "Energia",
+      "pharma": "Farmacêutica",
+      "food": "Alimentar",
+      "logistics": "Logística",
+      "construction": "Construção",
+      "technology": "Tecnologia",
+      "retail": "Retalho",
+      "other": "Outro"
+    },
+    "sizes": {
+      "micro": "Microempresa (1-9 trabalhadores)",
+      "small": "Pequena (10-49 trabalhadores)",
+      "medium": "Média (50-249 trabalhadores)",
+      "large": "Grande Empresa (250+ trabalhadores)"
+    },
+    "countries": {
+      "ES": "Espanha",
+      "DE": "Alemanha",
+      "FR": "França",
+      "IT": "Itália",
+      "NL": "Países Baixos",
+      "PT": "Portugal",
+      "BE": "Bélgica",
+      "AT": "Áustria",
+      "PL": "Polónia",
+      "SE": "Suécia",
+      "OTHER": "Outro país UE"
+    }
+  },
+  "confirmation": {
+    "title": "Confirme o seu Pedido",
+    "subtitle": "Reveja a informação e aceite os termos",
+    "summary": {
+      "title": "Resumo do seu Pedido",
+      "organization": "Organização",
+      "representative": "Representante",
+      "intention": "Intenção de utilização"
+    },
+    "acceptances": {
+      "terms": {
+        "label": "Aceito os Termos e Condições",
+        "description": "Li e aceito os termos de utilização do espaço de dados ProcureData"
+      },
+      "gdpr": {
+        "label": "Aceito a Política de Privacidade",
+        "description": "Consinto o tratamento dos meus dados segundo o RGPD e a política de privacidade"
+      },
+      "conduct": {
+        "label": "Aceito o Código de Conduta",
+        "description": "Comprometo-me a cumprir as normas éticas do ecossistema europeu de dados"
+      }
+    },
+    "timeline": {
+      "title": "Processo de Onboarding",
+      "subtitle": "Próximos passos após enviar o seu pedido",
+      "weeks": {
+        "week1": {
+          "title": "Semana 1",
+          "description": "Verificação KYB + Geração de DID"
+        },
+        "week2": {
+          "title": "Semana 2",
+          "description": "Configuração de Wallet e Self-Description"
+        },
+        "week3": {
+          "title": "Semana 3",
+          "description": "Formação e primeira transação de teste"
+        },
+        "week4": {
+          "title": "Semana 4",
+          "description": "Acesso completo ao ecossistema"
+        }
+      }
+    },
+    "success": {
+      "title": "Pedido Enviado!",
+      "description": "Recebemos o seu pedido de adesão. A nossa equipa irá analisá-lo e contactá-lo nas próximas 24-48 horas.",
+      "button": "Voltar ao Início"
+    }
+  }
+}

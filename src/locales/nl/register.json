@@ -1,0 +1,436 @@
+{
+  "title": "Word lid van de ProcureData Dataruimte",
+  "subtitle": "Stapsgewijs toetredingsproces",
+  "progress": {
+    "step0": "Toegang",
+    "step1": "Rol",
+    "step2": "Welkom",
+    "step3": "Vereisten",
+    "step4": "Verplichtingen",
+    "step5": "Gegevens",
+    "step6": "Bevestiging"
+  },
+  "authSelection": {
+    "title": "Heeft u al een account?",
+    "subtitle": "Log in of start uw registratieproces",
+    "login": {
+      "title": "Inloggen",
+      "description": "Toegang met uw bestaande account",
+      "email": "E-mailadres",
+      "password": "Wachtwoord",
+      "button": "Inloggen",
+      "loading": "Bezig met inloggen...",
+      "error": "Onjuiste inloggegevens. Controleer uw e-mail en wachtwoord.",
+      "success": "Succesvol ingelogd"
+    },
+    "register": {
+      "title": "Nieuwe Registratie",
+      "description": "Word lid van de Europese Dataruimte",
+      "features": [
+        "Creëer uw soevereine digitale identiteit",
+        "Verbind uw bedrijf met de marktplaats",
+        "Toegang tot gekwalificeerde leveranciers"
+      ],
+      "button": "Start Registratie"
+    }
+  },
+  "roleSelection": {
+    "title": "Hoe wilt u deelnemen aan ProcureData?",
+    "subtitle": "Selecteer uw hoofdrol in het data-ecosysteem.",
+    "helperText": "U kunt uw rol en machtigingen na registratie aanpassen.",
+    "buyer": {
+      "title": "Ik ben Inkoper",
+      "description": "Ik zoek gekwalificeerde leveranciers en beheer risico's in mijn toeleveringsketen",
+      "features": {
+        "search": "Geverifieerde leveranciers zoeken en filteren",
+        "monitor": "Risico's in de toeleveringsketen monitoren",
+        "integrate": "Integreren met uw ERP (SAP, Oracle, etc.)"
+      }
+    },
+    "supplier": {
+      "title": "Ik ben Leverancier",
+      "description": "Ik wil me laten certificeren en zichtbaar zijn voor grote inkopers",
+      "features": {
+        "visible": "Verschijnen op de leveranciersmarktplaats",
+        "certify": "Uw referenties eenmalig certificeren",
+        "orders": "Bestellingen ontvangen van grote bedrijven"
+      }
+    }
+  },
+  "supplierObligations": {
+    "title": "Stappen om uw profiel te voltooien",
+    "locked": "In afwachting",
+    "helperText": "Deze stappen worden ontgrendeld na registratie",
+    "step1": { "title": "ISO-certificaten uploaden", "description": "ISO 9001, 14001, 27001" },
+    "step2": { "title": "Fiscale Validatie", "description": "Belastingdienst en Sociale Zekerheid" },
+    "step3": { "title": "Productcatalogus", "description": "Uw producten voor de marktplaats" }
+  },
+  "tooltips": {
+    "taxId": { "short": "Wettelijke vereiste ter voorkoming van fraude", "title": "KYB-verificatie", "full": "Wij valideren uw entiteit bij de Kamer van Koophandel." }
+  },
+  "validation": {
+    "selectRole": "U moet een rol selecteren om door te gaan",
+    "required": "Dit veld is verplicht",
+    "invalidEmail": "Ongeldig e-mailadres",
+    "invalidTaxId": "Ongeldig BTW-nummer",
+    "acceptTerms": "U moet de algemene voorwaarden accepteren",
+    "acceptGdpr": "U moet het privacybeleid accepteren",
+    "acceptConduct": "U moet de gedragscode accepteren"
+  },
+  "navigation": {
+    "next": "Doorgaan",
+    "back": "Terug",
+    "submit": "Aanvraag Indienen",
+    "submitting": "Bezig met verzenden..."
+  },
+  "welcome": {
+    "title": "Welkom in het ProcureData Ecosysteem",
+    "subtitle": "De eerste Gaia-X gecertificeerde leveranciersdata-marktplaats in Europa",
+    "trustTriangle": {
+      "title": "Het Trust Triangle Model",
+      "description": "Ons ecosysteem is gebaseerd op drie fundamentele rollen die traceerbaarheid en vertrouwen garanderen bij elke datatransactie.",
+      "provider": {
+        "title": "Data Provider",
+        "description": "Bedrijven die geverifieerde leveranciersgegevens publiceren"
+      },
+      "consumer": {
+        "title": "Data Consumer",
+        "description": "Organisaties die toegang krijgen tot data volgens ODRL-beleid"
+      },
+      "holder": {
+        "title": "Data Holder",
+        "description": "Eigenaren van de data die het gebruik ervan autoriseren"
+      }
+    },
+    "benefits": {
+      "title": "Voordelen van lidmaatschap",
+      "items": [
+        {
+          "icon": "Shield",
+          "title": "Eenmalige Herbruikbare Verificatie",
+          "description": "Elimineer het n×m-probleem: eenmaal verifiëren, altijd hergebruiken"
+        },
+        {
+          "icon": "BadgeCheck",
+          "title": "Digitaal Leverancierspaspoort",
+          "description": "W3C-verifieerbare credentials erkend in de hele EU"
+        },
+        {
+          "icon": "Globe",
+          "title": "Gaia-X Ecosysteem",
+          "description": "Toegang tot de Europese datamarkt met gegarandeerde interoperabiliteit"
+        },
+        {
+          "icon": "Link",
+          "title": "Blockchain Traceerbaarheid",
+          "description": "Alle transacties geregistreerd op Pontus-X met verifieerbare DID's"
+        }
+      ]
+    }
+  },
+  "requirements": {
+    "title": "Vereisten voor Lidmaatschap",
+    "subtitle": "Zorg ervoor dat u aan deze technische en juridische vereisten voldoet voordat u lid wordt",
+    "technical": {
+      "title": "Technische Vereisten",
+      "description": "Benodigde infrastructuur voor deelname aan de dataruimte",
+      "items": [
+        {
+          "title": "Gaia-X Self-Description",
+          "description": "Ondertekend JSON-LD document dat naleving van Gaia-X principes certificeert",
+          "status": "required",
+          "help": "Wij helpen u dit te genereren tijdens de onboarding"
+        },
+        {
+          "title": "DID (Gedecentraliseerde Identiteit)",
+          "description": "Unieke W3C-identifier voor uw organisatie, geregistreerd op blockchain",
+          "status": "required",
+          "help": "Wij genereren uw DID automatisch"
+        },
+        {
+          "title": "Bedrijfswallet",
+          "description": "Digitale wallet voor het ondertekenen van transacties en ODRL-contracten",
+          "status": "required",
+          "help": "Verbind MetaMask of gebruik onze geïntegreerde wallet"
+        },
+        {
+          "title": "EDC Connectiviteit",
+          "description": "Eclipse Dataspace Connector voor soevereine data-uitwisseling",
+          "status": "recommended",
+          "help": "Optioneel voor Free Tier, vereist voor Pro"
+        }
+      ]
+    },
+    "legal": {
+      "title": "Juridische Vereisten",
+      "description": "Officiële documentatie vereist voor KYB-verificatie",
+      "items": [
+        {
+          "title": "Actueel KvK-uittreksel",
+          "description": "Actueel officieel oprichtingsdocument van het bedrijf",
+          "status": "required"
+        },
+        {
+          "title": "Geldig EU BTW-nummer",
+          "description": "Geldige fiscale identificatie van elk EU-land",
+          "status": "required"
+        },
+        {
+          "title": "Wettelijk Vertegenwoordiger",
+          "description": "Persoon gemachtigd om contracten te tekenen namens de organisatie",
+          "status": "required"
+        },
+        {
+          "title": "AVG-naleving",
+          "description": "Actief privacybeleid en indien van toepassing aangestelde FG",
+          "status": "required"
+        }
+      ]
+    },
+    "statusLabels": {
+      "required": "Verplicht",
+      "recommended": "Aanbevolen"
+    }
+  },
+  "obligations": {
+    "title": "Verplichtingen van de Deelnemer",
+    "subtitle": "Verplichtingen die u aangaat bij toetreding tot de dataruimte",
+    "provider": {
+      "title": "Als Data Provider",
+      "subtitle": "Als u data publiceert op de marktplaats",
+      "items": [
+        {
+          "title": "Duidelijke ODRL-beleidsregels definiëren",
+          "description": "Machtigingen, verboden en verplichtingen specificeren voor elke dataset"
+        },
+        {
+          "title": "Data actueel houden",
+          "description": "Juistheid en actualiteit van gepubliceerde informatie garanderen"
+        },
+        {
+          "title": "Verzoeken binnen 48 uur beantwoorden",
+          "description": "Maximale reactietijd voor verzoeken om datatoegang"
+        },
+        {
+          "title": "Geldige Self-Description genereren",
+          "description": "Uw Gaia-X-certificering jaarlijks bijwerken"
+        }
+      ]
+    },
+    "consumer": {
+      "title": "Als Data Consumer",
+      "subtitle": "Als u data van de marktplaats consumeert",
+      "items": [
+        {
+          "title": "Gebruiksbeperkingen respecteren",
+          "description": "Voldoen aan temporele, geografische en doelbeperkingen"
+        },
+        {
+          "title": "Overeengekomen tarieven betalen",
+          "description": "Betalingen in EUROe uitvoeren volgens contractvoorwaarden"
+        },
+        {
+          "title": "Niet herverdelen zonder toestemming",
+          "description": "Data mag niet worden gedeeld met derden zonder expliciete toestemming"
+        },
+        {
+          "title": "Gebruiksrapporten genereren",
+          "description": "Rapporten verstrekken wanneer de Provider daarom vraagt"
+        }
+      ]
+    },
+    "general": {
+      "title": "Algemene Verplichtingen",
+      "subtitle": "Van toepassing op alle leden",
+      "items": [
+        {
+          "icon": "CreditCard",
+          "title": "Actief abonnement behouden",
+          "description": "Gratis Free Tier of Pro-plan naar behoefte"
+        },
+        {
+          "icon": "Bell",
+          "title": "Bedrijfswijzigingen melden",
+          "description": "Wijzigingen in fiscale gegevens, wettelijk vertegenwoordiger of adres doorgeven"
+        },
+        {
+          "icon": "Scale",
+          "title": "Gedragscode naleven",
+          "description": "Voldoen aan de ethische normen van het Europese ecosysteem"
+        }
+      ]
+    }
+  },
+  "dataForm": {
+    "title": "Registratiegegevens",
+    "subtitle": "Vul de informatie van uw organisatie in",
+    "organization": {
+      "title": "Organisatiegegevens",
+      "fields": {
+        "legalName": {
+          "label": "Juridische Bedrijfsnaam",
+          "placeholder": "Bijv.: Acme Corporation B.V."
+        },
+        "taxId": {
+          "label": "BTW-nummer / KvK-nummer",
+          "placeholder": "Bijv.: NL123456789B01"
+        },
+        "country": {
+          "label": "Land",
+          "placeholder": "Selecteer een land"
+        },
+        "address": {
+          "label": "Vestigingsadres",
+          "placeholder": "Straat, nummer, postcode, plaats"
+        },
+        "sector": {
+          "label": "Bedrijfssector",
+          "placeholder": "Selecteer een sector"
+        },
+        "size": {
+          "label": "Bedrijfsgrootte",
+          "placeholder": "Selecteer grootte"
+        }
+      }
+    },
+    "representative": {
+      "title": "Gegevens Wettelijk Vertegenwoordiger",
+      "fields": {
+        "fullName": {
+          "label": "Volledige Naam",
+          "placeholder": "Voor- en achternaam"
+        },
+        "position": {
+          "label": "Functie",
+          "placeholder": "Bijv.: Directeur, CEO"
+        },
+        "email": {
+          "label": "Zakelijk E-mailadres",
+          "placeholder": "email@bedrijf.nl"
+        },
+        "phone": {
+          "label": "Telefoon",
+          "placeholder": "+31 6 00000000"
+        }
+      }
+    },
+    "intention": {
+      "title": "Gebruiksintenties",
+      "fields": {
+        "role": {
+          "label": "Hoofdrol",
+          "options": {
+            "provider": "Voornamelijk Provider (data publiceren)",
+            "consumer": "Voornamelijk Consumer (data consumeren)",
+            "both": "Beide (publiceren en consumeren)"
+          }
+        },
+        "dataTypes": {
+          "label": "Interessante Datatypes",
+          "options": {
+            "financial": "Financiële Gegevens",
+            "esg": "ESG / Duurzaamheidsgegevens",
+            "certifications": "Certificeringen",
+            "commercial": "Commerciële Informatie",
+            "logistics": "Logistieke Gegevens",
+            "quality": "Kwaliteitscontrole"
+          }
+        },
+        "hasErp": {
+          "label": "Heeft u een ERP om te integreren?",
+          "options": {
+            "sap": "SAP",
+            "oracle": "Oracle",
+            "microsoft": "Microsoft Dynamics",
+            "sage": "Sage",
+            "other": "Ander ERP",
+            "none": "Ik heb geen ERP"
+          }
+        }
+      }
+    },
+    "sectors": {
+      "manufacturing": "Productie",
+      "automotive": "Automotive",
+      "aerospace": "Lucht- en Ruimtevaart",
+      "energy": "Energie",
+      "pharma": "Farmaceutisch",
+      "food": "Voeding",
+      "logistics": "Logistiek",
+      "construction": "Bouw",
+      "technology": "Technologie",
+      "retail": "Retail",
+      "other": "Overig"
+    },
+    "sizes": {
+      "micro": "Micro-onderneming (1-9 werknemers)",
+      "small": "Klein (10-49 werknemers)",
+      "medium": "Middelgroot (50-249 werknemers)",
+      "large": "Groot Bedrijf (250+ werknemers)"
+    },
+    "countries": {
+      "ES": "Spanje",
+      "DE": "Duitsland",
+      "FR": "Frankrijk",
+      "IT": "Italië",
+      "NL": "Nederland",
+      "PT": "Portugal",
+      "BE": "België",
+      "AT": "Oostenrijk",
+      "PL": "Polen",
+      "SE": "Zweden",
+      "OTHER": "Ander EU-land"
+    }
+  },
+  "confirmation": {
+    "title": "Bevestig uw Aanvraag",
+    "subtitle": "Controleer de informatie en accepteer de voorwaarden",
+    "summary": {
+      "title": "Samenvatting van uw Aanvraag",
+      "organization": "Organisatie",
+      "representative": "Vertegenwoordiger",
+      "intention": "Gebruiksintenties"
+    },
+    "acceptances": {
+      "terms": {
+        "label": "Ik accepteer de Algemene Voorwaarden",
+        "description": "Ik heb de gebruiksvoorwaarden van de ProcureData dataruimte gelezen en geaccepteerd"
+      },
+      "gdpr": {
+        "label": "Ik accepteer het Privacybeleid",
+        "description": "Ik stem in met de verwerking van mijn gegevens volgens de AVG en het privacybeleid"
+      },
+      "conduct": {
+        "label": "Ik accepteer de Gedragscode",
+        "description": "Ik verbind mij ertoe de ethische normen van het Europese data-ecosysteem na te leven"
+      }
+    },
+    "timeline": {
+      "title": "Onboarding Proces",
+      "subtitle": "Volgende stappen na het indienen van uw aanvraag",
+      "weeks": {
+        "week1": {
+          "title": "Week 1",
+          "description": "KYB-verificatie + DID-generatie"
+        },
+        "week2": {
+          "title": "Week 2",
+          "description": "Wallet- en Self-Description configuratie"
+        },
+        "week3": {
+          "title": "Week 3",
+          "description": "Training en eerste testtransactie"
+        },
+        "week4": {
+          "title": "Week 4",
+          "description": "Volledige toegang tot het ecosysteem"
+        }
+      }
+    },
+    "success": {
+      "title": "Aanvraag Verzonden!",
+      "description": "Wij hebben uw lidmaatschapsaanvraag ontvangen. Ons team zal deze beoordelen en binnen 24-48 uur contact met u opnemen.",
+      "button": "Terug naar Home"
+    }
+  }
+}

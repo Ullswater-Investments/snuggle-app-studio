@@ -43,6 +43,7 @@ import frPremiumPartners from './locales/fr/premium-partners.json';
 import frPartners from './locales/fr/partners.json';
 import frDemoTour from './locales/fr/demo-tour.json';
 import frSettings from './locales/fr/settings.json';
+import frRegister from './locales/fr/register.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -63,6 +64,7 @@ import ptPremiumPartners from './locales/pt/premium-partners.json';
 import ptPartners from './locales/pt/partners.json';
 import ptDemoTour from './locales/pt/demo-tour.json';
 import ptSettings from './locales/pt/settings.json';
+import ptRegister from './locales/pt/register.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -83,6 +85,7 @@ import dePremiumPartners from './locales/de/premium-partners.json';
 import dePartners from './locales/de/partners.json';
 import deDemoTour from './locales/de/demo-tour.json';
 import deSettings from './locales/de/settings.json';
+import deRegister from './locales/de/register.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -103,6 +106,7 @@ import itPremiumPartners from './locales/it/premium-partners.json';
 import itPartners from './locales/it/partners.json';
 import itDemoTour from './locales/it/demo-tour.json';
 import itSettings from './locales/it/settings.json';
+import itRegister from './locales/it/register.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -123,6 +127,7 @@ import nlPremiumPartners from './locales/nl/premium-partners.json';
 import nlPartners from './locales/nl/partners.json';
 import nlDemoTour from './locales/nl/demo-tour.json';
 import nlSettings from './locales/nl/settings.json';
+import nlRegister from './locales/nl/register.json';
 
 // English
 import enPartnerProducts from './locales/en/partnerProducts.json';
@@ -202,6 +207,7 @@ i18n
         partners: frPartners,
         'demo-tour': frDemoTour,
         settings: frSettings,
+        register: frRegister,
       },
       pt: {
         common: ptCommon,
@@ -222,6 +228,7 @@ i18n
         partners: ptPartners,
         'demo-tour': ptDemoTour,
         settings: ptSettings,
+        register: ptRegister,
       },
       de: {
         common: deCommon,
@@ -242,6 +249,7 @@ i18n
         partners: dePartners,
         'demo-tour': deDemoTour,
         settings: deSettings,
+        register: deRegister,
       },
       it: {
         common: itCommon,
@@ -262,6 +270,7 @@ i18n
         partners: itPartners,
         'demo-tour': itDemoTour,
         settings: itSettings,
+        register: itRegister,
       },
       nl: {
         common: nlCommon,
@@ -282,6 +291,7 @@ i18n
         partners: nlPartners,
         'demo-tour': nlDemoTour,
         settings: nlSettings,
+        register: nlRegister,
       },
     },
     fallbackLng: 'es',
