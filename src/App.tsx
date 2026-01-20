@@ -145,6 +145,7 @@ import CloserStillPioneer from "./pages/partners/CloserStillPioneer";
 import CloserStillPrismaticos from "./pages/partners/CloserStillPrismaticos";
 import CloserStillUseCaseDetail from "./pages/partners/CloserStillUseCaseDetail";
 import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRoute";
+import ValerdataMiembros from "./pages/partners/ValerdataMiembros";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -369,6 +370,13 @@ const App = () => (
                   <Route path="/partners/aracea/miembros" element={
                     <PartnerProtectedRoute partnerSlug="aracea">
                       <AraceaMiembros />
+                    </PartnerProtectedRoute>
+                  } />
+
+                  {/* Partner Pages - VALERDATA */}
+                  <Route path="/partners/valerdata/miembros" element={
+                    <PartnerProtectedRoute partnerSlug="valerdata">
+                      <ValerdataMiembros />
                     </PartnerProtectedRoute>
                   } />
 

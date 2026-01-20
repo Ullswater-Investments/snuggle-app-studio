@@ -133,6 +133,20 @@ export const partnersByCountry: CountryData[] = [
         priority: "inmediato",
         type: "ecosystemBuilder",
       },
+      {
+        id: "valerdata",
+        name: "VALERDATA",
+        fullName: "VALERDATA S.L. - Valoración y Monetización de Datos",
+        logo: null,
+        link: "/partners/valerdata/miembros",
+        loginPath: "/partners/valerdata/login",
+        status: "activo",
+        sector: "technology",
+        hasDocTecnico: true,
+        keyInitiative: "Data Valuation, AI Pricing, Kit Espacios de Datos",
+        priority: "inmediato",
+        type: "ecosystemBuilder",
+      },
       // Clústeres Empresariales (5)
       {
         id: "gaia-cluster",
