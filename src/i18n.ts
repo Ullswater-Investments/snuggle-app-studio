@@ -44,6 +44,7 @@ import frPartners from './locales/fr/partners.json';
 import frDemoTour from './locales/fr/demo-tour.json';
 import frSettings from './locales/fr/settings.json';
 import frRegister from './locales/fr/register.json';
+import frContract from './locales/fr/contract.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -65,6 +66,7 @@ import ptPartners from './locales/pt/partners.json';
 import ptDemoTour from './locales/pt/demo-tour.json';
 import ptSettings from './locales/pt/settings.json';
 import ptRegister from './locales/pt/register.json';
+import ptContract from './locales/pt/contract.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -86,6 +88,7 @@ import dePartners from './locales/de/partners.json';
 import deDemoTour from './locales/de/demo-tour.json';
 import deSettings from './locales/de/settings.json';
 import deRegister from './locales/de/register.json';
+import deContract from './locales/de/contract.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -107,6 +110,7 @@ import itPartners from './locales/it/partners.json';
 import itDemoTour from './locales/it/demo-tour.json';
 import itSettings from './locales/it/settings.json';
 import itRegister from './locales/it/register.json';
+import itContract from './locales/it/contract.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -128,6 +132,7 @@ import nlPartners from './locales/nl/partners.json';
 import nlDemoTour from './locales/nl/demo-tour.json';
 import nlSettings from './locales/nl/settings.json';
 import nlRegister from './locales/nl/register.json';
+import nlContract from './locales/nl/contract.json';
 
 // English
 import enPartnerProducts from './locales/en/partnerProducts.json';
@@ -208,6 +213,7 @@ i18n
         'demo-tour': frDemoTour,
         settings: frSettings,
         register: frRegister,
+        contract: frContract,
       },
       pt: {
         common: ptCommon,
@@ -229,6 +235,7 @@ i18n
         'demo-tour': ptDemoTour,
         settings: ptSettings,
         register: ptRegister,
+        contract: ptContract,
       },
       de: {
         common: deCommon,
@@ -250,6 +257,7 @@ i18n
         'demo-tour': deDemoTour,
         settings: deSettings,
         register: deRegister,
+        contract: deContract,
       },
       it: {
         common: itCommon,
@@ -271,6 +279,7 @@ i18n
         'demo-tour': itDemoTour,
         settings: itSettings,
         register: itRegister,
+        contract: itContract,
       },
       nl: {
         common: nlCommon,
@@ -292,6 +301,7 @@ i18n
         'demo-tour': nlDemoTour,
         settings: nlSettings,
         register: nlRegister,
+        contract: nlContract,
       },
     },
     fallbackLng: 'es',

@@ -1,0 +1,224 @@
+{
+  "title": "CARTA DE ADESÃO",
+  "subtitle": "Ao Espaço de Dados PROCUREDATA",
+  "officialDocument": "Documento Oficial",
+  "downloadPdf": "Descarregar Contrato PDF",
+  "downloadingPdf": "A gerar...",
+  "startProcess": "Iniciar Processo de Adesão",
+  "readyToJoin": "Pronto para aderir ao Espaço de Dados?",
+  "readyDescription": "Complete o processo de registo para formalizar a sua adesão ao Espaço de Dados PROCUREDATA e começar a trocar dados de forma segura e em conformidade com a regulamentação europeia.",
+  "regulations": {
+    "dga": "Data Governance Act",
+    "dataAct": "Data Act",
+    "ehds": "EHDS",
+    "rgpd": "RGPD",
+    "lopdgdd": "Lei de Proteção de Dados"
+  },
+  "promoter": {
+    "title": "1. Identificação do Promotor",
+    "description": "Dados do promotor do Espaço de Dados",
+    "legalName": "Denominação Social",
+    "address": "Morada",
+    "email": "E-mail",
+    "website": "Website",
+    "legalFramework": "Enquadramento Legal",
+    "ecosystem": "Ecossistema"
+  },
+  "object": {
+    "title": "2. Objeto do Contrato",
+    "description": "Formalização da integração no Espaço de Dados",
+    "content": "A presente Carta de Adesão tem por objeto formalizar a integração do Participante no Espaço de Dados PROCUREDATA, estabelecendo os termos e condições que regerão a sua participação.",
+    "commitments": [
+      "Aceita integralmente o quadro normativo e de governança do Espaço de Dados",
+      "Compromete-se a cumprir as obrigações técnicas, legais e éticas",
+      "Reconhece os direitos e responsabilidades associados ao seu papel",
+      "Autoriza o Promotor a verificar o cumprimento dos requisitos"
+    ]
+  },
+  "normative": {
+    "title": "3. Aceitação da Normativa",
+    "description": "Quadros normativos e documentos orientadores",
+    "sections": {
+      "terms": {
+        "title": "3.1 Termos e Condições Gerais",
+        "items": [
+          "Definições e âmbito do Espaço de Dados",
+          "Direitos e obrigações dos participantes",
+          "Procedimentos de acesso e utilização de dados",
+          "Mecanismos de resolução de conflitos",
+          "Condições de modificação e atualização"
+        ]
+      },
+      "governance": {
+        "title": "3.2 Mecanismos de Governança",
+        "items": [
+          "Comité de Governança: Órgão diretivo com representação de todas as partes interessadas",
+          "Comité Técnico: Responsável por normas técnicas e interoperabilidade",
+          "Comité de Ética: Supervisão do uso ético dos dados",
+          "Comité de Segurança: Gestão de riscos e resposta a incidentes",
+          "Procedimentos de votação e tomada de decisão"
+        ]
+      },
+      "odrl": {
+        "title": "3.3 Políticas ODRL (Open Digital Rights Language)",
+        "items": [
+          "Definição de permissões, proibições e obrigações sobre os dados",
+          "Especificação de condições de utilização (temporal, geográfica, finalidade)",
+          "Mecanismos de herança e composição de políticas",
+          "Integração com contratos inteligentes para execução automática",
+          "Compatibilidade com normas IDS e GAIA-X"
+        ]
+      },
+      "gaiax": {
+        "title": "3.4 GAIA-X Trust Framework",
+        "items": [
+          "Soberania de dados: Controlo total sobre os próprios dados",
+          "Interoperabilidade: Utilização de normas abertas e APIs documentadas",
+          "Portabilidade: Capacidade de migrar dados entre fornecedores",
+          "Transparência: Rastreabilidade completa das operações",
+          "Segurança: Conformidade com normas de cibersegurança",
+          "Federação: Participação em ecossistemas distribuídos"
+        ]
+      },
+      "rgpd": {
+        "title": "3.5 Conformidade RGPD",
+        "items": [
+          "Base legal para o tratamento de dados pessoais (Art. 6)",
+          "Direitos dos titulares (acesso, retificação, apagamento, portabilidade)",
+          "Obrigações do responsável e do subcontratante",
+          "Avaliações de impacto (AIPD) para tratamentos de alto risco",
+          "Notificação de violações de dados em 72 horas"
+        ]
+      }
+    }
+  },
+  "roles": {
+    "title": "4. Papel do Participante",
+    "description": "Selecione o seu papel no Espaço de Dados",
+    "provider": {
+      "title": "Fornecedor de Dados",
+      "description": "Entidade que disponibiliza conjuntos de dados ao Espaço de Dados para intercâmbio e monetização.",
+      "features": ["Publicar datasets", "Definir políticas de uso", "Monetizar ativos"]
+    },
+    "consumer": {
+      "title": "Consumidor de Dados",
+      "description": "Entidade que acede e utiliza dados do Espaço de Dados para as suas operações ou análises.",
+      "features": ["Aceder ao catálogo", "Solicitar dados", "Usar segundo políticas"]
+    },
+    "service": {
+      "title": "Fornecedor de Serviços",
+      "description": "Entidade que oferece serviços de intermediação, transformação ou valor acrescentado sobre dados.",
+      "features": ["Serviços de IA", "Transformação", "Análise avançada"]
+    },
+    "intermediary": {
+      "title": "Intermediário de Dados",
+      "description": "Entidade neutra que facilita o intercâmbio de dados entre fornecedores e consumidores.",
+      "features": ["Neutro", "Facilitador", "Conformidade DGA"]
+    },
+    "altruism": {
+      "title": "Organização de Altruísmo",
+      "description": "Entidade sem fins lucrativos que gere dados cedidos voluntariamente para fins de interesse geral.",
+      "features": ["Sem fins lucrativos", "Interesse público", "Investigação"]
+    }
+  },
+  "validity": {
+    "title": "5. Vigência e Extinção",
+    "description": "Duração e causas de cessação",
+    "duration": {
+      "title": "5.1 Vigência",
+      "content": "A presente Carta de Adesão entrará em vigor na data da sua assinatura e terá duração indefinida, salvo denúncia expressa de qualquer das partes.",
+      "indefinite": "duração indefinida"
+    },
+    "causes": {
+      "title": "5.2 Causas de Extinção",
+      "items": [
+        "Denúncia voluntária com pré-aviso de 30 dias",
+        "Incumprimento grave de obrigações",
+        "Decisão do Comité de Governança"
+      ]
+    },
+    "effects": {
+      "title": "5.3 Efeitos",
+      "items": [
+        "Cessação do acesso aos serviços",
+        "Manutenção da confidencialidade",
+        "Direito a exportar dados próprios"
+      ]
+    }
+  },
+  "resources": {
+    "title": "Anexo: Recursos Oficiais",
+    "description": "Links para documentação e regulamentação"
+  },
+  "signature": {
+    "title": "6. Assinatura do Contrato",
+    "description": "Complete os dados e assine eletronicamente",
+    "signerData": "Dados do Signatário",
+    "fullName": "Nome Completo",
+    "fullNamePlaceholder": "Nome e apelidos do representante legal",
+    "position": "Cargo",
+    "positionPlaceholder": "Ex: Diretor-Geral, CEO",
+    "organizationName": "Nome da Organização",
+    "organizationNamePlaceholder": "Denominação social da empresa",
+    "taxId": "NIF/NIPC",
+    "taxIdPlaceholder": "Identificação fiscal",
+    "signatureLabel": "Assinatura Eletrónica",
+    "signatureInstructions": "Desenhe a sua assinatura na caixa",
+    "clearSignature": "Limpar",
+    "acceptTerms": "Aceito os termos e condições do contrato de adesão",
+    "acceptTermsDescription": "Li e compreendi todas as cláusulas do presente contrato",
+    "acceptGdpr": "Aceito o tratamento de dados segundo o RGPD",
+    "acceptGdprDescription": "Consinto o tratamento dos meus dados pessoais conforme a regulamentação em vigor",
+    "signContract": "Assinar Contrato",
+    "signing": "A assinar...",
+    "signedAt": "Assinado em",
+    "qualifiedTitle": "Assinatura Eletrónica Qualificada",
+    "tabSimple": "Simples",
+    "tabCertificate": "Certificado",
+    "tabEidas": "eIDAS",
+    "simpleWarning": "Esta assinatura tem valor indicativo. Para validade legal completa, use assinatura qualificada.",
+    "certificateInfo": "Carregue o seu certificado digital em formato .p12 ou .pfx",
+    "certificateLabel": "Certificado (.p12/.pfx)",
+    "passwordLabel": "Palavra-passe do certificado",
+    "eidasInfo": "Assinatura qualificada com validade legal máxima segundo o Regulamento eIDAS (UE) 910/2014",
+    "signSimple": "Assinar com assinatura simples",
+    "signWithCertificate": "Assinar com certificado",
+    "validatingCertificate": "A validar certificado...",
+    "processing": "A processar...",
+    "connectingProvider": "A conectar com gateway de assinatura...",
+    "levelSimple": "Simples",
+    "levelAdvanced": "Avançada",
+    "levelQualified": "Qualificada",
+    "autofirmaDesc": "Cliente oficial de assinatura do Governo espanhol",
+    "claveDesc": "Sistema de identificação eletrónica espanhol",
+    "viafirmaDesc": "Prestador de serviços de confiança qualificado",
+    "signedSuccessfully": "Documento assinado com sucesso",
+    "qualifiedSignatureApplied": "Assinatura eletrónica qualificada aplicada",
+    "validation": {
+      "nameRequired": "O nome é obrigatório",
+      "positionRequired": "O cargo é obrigatório",
+      "organizationRequired": "A organização é obrigatória",
+      "taxIdRequired": "O NIF/NIPC é obrigatório",
+      "signatureRequired": "A assinatura é obrigatória",
+      "termsRequired": "Deve aceitar os termos e condições",
+      "gdprRequired": "Deve aceitar o tratamento de dados"
+    },
+    "success": {
+      "title": "Contrato Assinado!",
+      "description": "O seu contrato de adesão foi assinado com sucesso. Receberá uma cópia por e-mail.",
+      "downloadSigned": "Descarregar Contrato Assinado"
+    }
+  },
+  "preview": {
+    "title": "Pré-visualização do documento",
+    "documentTitle": "CARTA DE ADESÃO",
+    "documentSubtitle": "ESPAÇO DE DADOS PROCUREDATA",
+    "promoterSection": "IDENTIFICAÇÃO DO PROMOTOR",
+    "participantSection": "IDENTIFICAÇÃO DO PARTICIPANTE",
+    "objectSection": "OBJETO DA CARTA",
+    "regulatorySection": "ACEITAÇÃO NORMATIVA",
+    "signatureDate": "Data",
+    "signaturePlace": "Local",
+    "signaturePlaceholder": "[Assinatura eletrónica]"
+  }
+}
