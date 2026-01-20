@@ -1,0 +1,24 @@
+{
+  "common": {
+    "backToCatalog": "Torna al catalogo",
+    "catalog": "Catalogo",
+    "tabs": { "description": "Descrizione", "schema": "Struttura Dati", "format": "Formato e Consegna", "rights": "Diritti (ODRL)", "sample": "Campione Dati", "quality": "Qualità" },
+    "badges": { "kybVerified": "KYB Verificato", "kybTooltip": "Fornitore verificato tramite processo Know Your Business", "criticalInfrastructure": "Infrastruttura Critica", "sustainable": "Sostenibile", "esgCertified": "Certificato ESG", "blockchainVerified": "Verificato Blockchain", "doCertified": "DOP Certificato", "openData": "Open Data", "officialSource": "Fonte Ufficiale", "lowCarbon": "Basso Carbonio" },
+    "labels": { "provider": "Fornitore", "custody": "Custodia", "reviews": "recensioni", "update": "Aggiornamento", "records": "Record", "completeness": "Completezza", "coverage": "Copertura", "postalCodes": "Codici Postali", "hourly": "Oraria", "daily": "Giornaliero", "weekly": "Settimanale", "eventBased": "Per Evento", "static": "Statico", "live": "LIVE", "realTime": "Tempo Reale", "precision": "Precisione", "latency": "Latenza API", "companies": "Aziende", "vehicles": "Veicoli", "batches": "Lotti tracciati", "mills": "Frantoi", "denominations": "Denominazioni", "parcels": "Parcelle", "mlPrediction": "Previsione ML", "regions": "Regioni", "stations": "Stazioni", "daysCovered": "Giorni coperti" },
+    "sections": { "datasetDescription": "Descrizione del Dataset", "useCases": "Principali Casi d'Uso", "dataSchema": "Schema Dati", "schemaTable": { "field": "Campo", "type": "Tipo", "description": "Descrizione" }, "formatDelivery": "Formato e Consegna", "odrlRights": "Diritti ODRL", "odrl": { "permitted": "Consentito", "prohibited": "Vietato", "obligations": "Obblighi" }, "dataSample": "Campione Dati", "qualityMetrics": "Metriche di Qualità" },
+    "quality": { "completeness": "Completezza dati", "freshness": "Freschezza", "accuracy": "Precisione", "consistency": "Coerenza", "availability": "Disponibilità SLA" },
+    "pricing": { "title": "Prezzo", "subscription": "Abbonamento mensile", "oneTime": "Pagamento unico", "perUse": "Per query", "free": "Gratuito", "accessFree": "Accesso Gratuito", "requestAccess": "Richiedi Accesso", "addToCart": "Aggiungi al carrello", "contactSales": "Contatta vendite" },
+    "sectorTypes": { "manufacturing": "Manifattura", "logistics": "Logistica", "retail": "Vendita al dettaglio", "office": "Ufficio" },
+    "chargingStatus": { "charging": "In carica", "discharging": "In uso", "idle": "Inattivo" },
+    "riskLevels": { "veryLow": "Molto Basso", "low": "Basso", "medium": "Medio", "high": "Alto", "veryHigh": "Molto Alto" },
+    "stressLevels": { "low": "Basso", "medium": "Medio", "high": "Alto", "critical": "Critico" }
+  },
+  "products": {
+    "consumo-electrico-industrial": { "category": "Industriale", "title": "Consumo Elettrico Industriale", "shortDescription": "Dataset aggregato del consumo elettrico del settore industriale spagnolo.", "provider": "Iberdrola Distribuzione", "rating": "4.8" },
+    "trazabilidad-aceite-do": { "category": "Agroalimentare", "title": "Tracciabilità Olio d'Oliva DOP", "shortDescription": "Registro immutabile di tracciabilità completa per Olio Extra Vergine d'Oliva con Denominazione di Origine Protetta.", "provider": "Consiglio Regolatore DOP Oli", "rating": "4.9" },
+    "score-crediticio-b2b": { "category": "Finanziario", "title": "Score Creditizio B2B", "shortDescription": "Servizio di scoring creditizio aziendale in tempo reale per oltre 2,1 milioni di aziende.", "provider": "Axesor Rating", "rating": "4.7" },
+    "telemetria-flota-electrica": { "category": "Mobilità", "title": "Telemetria Flotta Elettrica", "shortDescription": "Dataset completo in tempo reale con telemetria di flotte di veicoli elettrici commerciali.", "provider": "EcoFleet Analytics", "rating": "4.6" },
+    "huella-hidrica-agricola": { "category": "Sostenibilità", "title": "Impronta Idrica Agricola", "shortDescription": "Dataset settimanale con monitoraggio del consumo idrico e previsioni di stress idrico.", "provider": "AquaData Solutions", "rating": "4.5" },
+    "historico-meteorologico": { "category": "Clima", "title": "Storico Meteorologico 2023-2024", "shortDescription": "Archivio storico completo dei dati meteorologici di tutte le stazioni AEMET in Spagna.", "provider": "AEMET Open Data", "rating": "4.9" }
+  }
+}
