@@ -24,6 +24,7 @@ import esSettings from './locales/es/settings.json';
 import esRegister from './locales/es/register.json';
 import esContract from './locales/es/contract.json';
 import esCloserstill from './locales/es/closerstill.json';
+import esCatalogDetails from './locales/es/catalogDetails.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -46,6 +47,7 @@ import frSettings from './locales/fr/settings.json';
 import frRegister from './locales/fr/register.json';
 import frContract from './locales/fr/contract.json';
 import frCloserstill from './locales/fr/closerstill.json';
+import frCatalogDetails from './locales/fr/catalogDetails.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -69,6 +71,7 @@ import ptSettings from './locales/pt/settings.json';
 import ptRegister from './locales/pt/register.json';
 import ptContract from './locales/pt/contract.json';
 import ptCloserstill from './locales/pt/closerstill.json';
+import ptCatalogDetails from './locales/pt/catalogDetails.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -92,6 +95,7 @@ import deSettings from './locales/de/settings.json';
 import deRegister from './locales/de/register.json';
 import deContract from './locales/de/contract.json';
 import deCloserstill from './locales/de/closerstill.json';
+import deCatalogDetails from './locales/de/catalogDetails.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -115,6 +119,7 @@ import itSettings from './locales/it/settings.json';
 import itRegister from './locales/it/register.json';
 import itContract from './locales/it/contract.json';
 import itCloserstill from './locales/it/closerstill.json';
+import itCatalogDetails from './locales/it/catalogDetails.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -138,6 +143,7 @@ import nlSettings from './locales/nl/settings.json';
 import nlRegister from './locales/nl/register.json';
 import nlContract from './locales/nl/contract.json';
 import nlCloserstill from './locales/nl/closerstill.json';
+import nlCatalogDetails from './locales/nl/catalogDetails.json';
 
 // English
 import enPartnerProducts from './locales/en/partnerProducts.json';
@@ -148,6 +154,7 @@ import enSettings from './locales/en/settings.json';
 import enRegister from './locales/en/register.json';
 import enContract from './locales/en/contract.json';
 import enCloserstill from './locales/en/closerstill.json';
+import enCatalogDetails from './locales/en/catalogDetails.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -187,6 +194,7 @@ i18n
         register: esRegister,
         contract: esContract,
         closerstill: esCloserstill,
+        catalogDetails: esCatalogDetails,
       },
       en: {
         partnerProducts: enPartnerProducts,
@@ -197,6 +205,7 @@ i18n
         register: enRegister,
         contract: enContract,
         closerstill: enCloserstill,
+        catalogDetails: enCatalogDetails,
       },
       fr: {
         common: frCommon,
@@ -220,6 +229,7 @@ i18n
         register: frRegister,
         contract: frContract,
         closerstill: frCloserstill,
+        catalogDetails: frCatalogDetails,
       },
       pt: {
         common: ptCommon,
@@ -243,6 +253,7 @@ i18n
         register: ptRegister,
         contract: ptContract,
         closerstill: ptCloserstill,
+        catalogDetails: ptCatalogDetails,
       },
       de: {
         common: deCommon,
@@ -266,6 +277,7 @@ i18n
         register: deRegister,
         contract: deContract,
         closerstill: deCloserstill,
+        catalogDetails: deCatalogDetails,
       },
       it: {
         common: itCommon,
@@ -289,6 +301,7 @@ i18n
         register: itRegister,
         contract: itContract,
         closerstill: itCloserstill,
+        catalogDetails: itCatalogDetails,
       },
       nl: {
         common: nlCommon,
@@ -312,11 +325,12 @@ i18n
         register: nlRegister,
         contract: nlContract,
         closerstill: nlCloserstill,
+        catalogDetails: nlCatalogDetails,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails'],
     interpolation: {
       escapeValue: false,
     },
