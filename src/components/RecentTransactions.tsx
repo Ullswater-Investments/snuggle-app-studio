@@ -12,7 +12,9 @@ import {
 import { ArrowRight, ArrowUpRight, ArrowDownRight, Clock, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
+import { formatCurrency as formatCurrencyI18n } from "@/lib/i18nFormatters";
 
 interface Transaction {
   id: string;
@@ -39,34 +41,40 @@ interface RecentTransactionsProps {
   isDemo?: boolean;
 }
 
-const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  initiated: { label: "Iniciada", variant: "outline" },
-  pending_subject: { label: "Pendiente", variant: "secondary" },
-  pending_holder: { label: "Pendiente", variant: "secondary" },
-  approved: { label: "Aprobada", variant: "default" },
-  completed: { label: "Completada", variant: "default" },
-  denied_subject: { label: "Rechazada", variant: "destructive" },
-  denied_holder: { label: "Rechazada", variant: "destructive" },
-  cancelled: { label: "Cancelada", variant: "outline" },
-};
+const localeMap: Record<string, Locale> = { es, en: enUS, de, fr, pt, it, nl };
 
 export function RecentTransactions({ transactions, activeOrgId, isLoading, isDemo }: RecentTransactionsProps) {
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLocale = localeMap[i18n.language] || es;
   const recentTransactions = transactions.slice(0, 6);
 
   const formatCurrency = (amount: number, currency: string = "EUR") => {
-    return new Intl.NumberFormat("es-ES", {
-      style: "currency",
-      currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
+    return formatCurrencyI18n(amount, i18n.language, currency);
+  };
+
+  const getStatusConfig = (status: string) => {
+    const statusMap: Record<string, { variant: "default" | "secondary" | "destructive" | "outline" }> = {
+      initiated: { variant: "outline" },
+      pending_subject: { variant: "secondary" },
+      pending_holder: { variant: "secondary" },
+      approved: { variant: "default" },
+      completed: { variant: "default" },
+      denied_subject: { variant: "destructive" },
+      denied_holder: { variant: "destructive" },
+      cancelled: { variant: "outline" },
+    };
+    
+    return {
+      label: t(`transactionStatus.${status}`, status),
+      variant: statusMap[status]?.variant || "outline" as const
+    };
   };
 
   if (isLoading) {
     return (
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Transacciones Recientes</CardTitle>
+          <CardTitle>{t('transactions.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
@@ -84,11 +92,11 @@ export function RecentTransactions({ transactions, activeOrgId, isLoading, isDem
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            Transacciones Recientes
+            {t('transactions.title')}
             {isDemo && (
               <Badge variant="outline" className="bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300">
                 <Info className="h-3 w-3 mr-1" />
-                Demo
+                {t('activity.demo')}
               </Badge>
             )}
           </CardTitle>
@@ -96,8 +104,8 @@ export function RecentTransactions({ transactions, activeOrgId, isLoading, isDem
         <CardContent>
           <div className="flex flex-col items-center justify-center py-8 text-muted-foreground">
             <Clock className="h-10 w-10 mb-3 opacity-50" />
-            <p className="font-medium">Sin transacciones recientes</p>
-            <p className="text-sm">Las operaciones aparecerán aquí</p>
+            <p className="font-medium">{t('transactions.noTransactions')}</p>
+            <p className="text-sm">{t('transactions.willAppear')}</p>
           </div>
         </CardContent>
       </Card>
@@ -108,17 +116,17 @@ export function RecentTransactions({ transactions, activeOrgId, isLoading, isDem
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="flex items-center gap-2">
-          Transacciones Recientes
+          {t('transactions.title')}
           {isDemo && (
             <Badge variant="outline" className="bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300">
               <Info className="h-3 w-3 mr-1" />
-              Demo
+              {t('activity.demo')}
             </Badge>
           )}
         </CardTitle>
         <Link to="/requests">
           <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
-            Ver Todas <ArrowRight className="h-4 w-4" />
+            {t('transactions.viewAll')} <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>
       </CardHeader>
@@ -126,12 +134,12 @@ export function RecentTransactions({ transactions, activeOrgId, isLoading, isDem
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Fecha</TableHead>
-              <TableHead>Producto</TableHead>
-              <TableHead>Contraparte</TableHead>
-              <TableHead>Tipo</TableHead>
-              <TableHead>Estado</TableHead>
-              <TableHead className="text-right">Importe</TableHead>
+              <TableHead>{t('transactions.date')}</TableHead>
+              <TableHead>{t('transactions.product')}</TableHead>
+              <TableHead>{t('transactions.counterparty')}</TableHead>
+              <TableHead>{t('transactions.type')}</TableHead>
+              <TableHead>{t('transactions.status')}</TableHead>
+              <TableHead className="text-right">{t('transactions.amount')}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -139,15 +147,15 @@ export function RecentTransactions({ transactions, activeOrgId, isLoading, isDem
               const isConsumer = tx.consumer_org_id === activeOrgId;
               const counterparty = isConsumer ? tx.subject_org?.name : tx.consumer_org?.name;
               const amount = tx.asset?.price || 0;
-              const status = statusConfig[tx.status] || { label: tx.status, variant: "outline" as const };
+              const status = getStatusConfig(tx.status);
               
               return (
                 <TableRow key={tx.id}>
                   <TableCell className="font-medium text-muted-foreground">
-                    {format(new Date(tx.created_at), "dd MMM", { locale: es })}
+                    {format(new Date(tx.created_at), "dd MMM", { locale: currentLocale })}
                   </TableCell>
                   <TableCell className="max-w-[200px] truncate">
-                    {tx.asset?.product?.name || "Producto"}
+                    {tx.asset?.product?.name || t('transactions.defaultProduct')}
                   </TableCell>
                   <TableCell className="text-muted-foreground">
                     {counterparty || "—"}
@@ -156,12 +164,12 @@ export function RecentTransactions({ transactions, activeOrgId, isLoading, isDem
                     {isConsumer ? (
                       <Badge variant="outline" className="gap-1 text-red-600 border-red-200 bg-red-50 dark:bg-red-950/30 dark:border-red-900">
                         <ArrowDownRight className="h-3 w-3" />
-                        Compra
+                        {t('transactions.buy')}
                       </Badge>
                     ) : (
                       <Badge variant="outline" className="gap-1 text-green-600 border-green-200 bg-green-50 dark:bg-green-950/30 dark:border-green-900">
                         <ArrowUpRight className="h-3 w-3" />
-                        Venta
+                        {t('transactions.sell')}
                       </Badge>
                     )}
                   </TableCell>

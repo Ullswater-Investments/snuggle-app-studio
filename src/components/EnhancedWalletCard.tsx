@@ -5,6 +5,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Wallet, ArrowUpRight, ArrowDownRight, CreditCard, ExternalLink, Coins } from "lucide-react";
 import { useWeb3Wallet } from "@/hooks/useWeb3Wallet";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { formatCurrency as formatCurrencyI18n } from "@/lib/i18nFormatters";
 
 interface CategorySpend {
   category: string;
@@ -39,14 +41,10 @@ export function EnhancedWalletCard({
   isProvider,
 }: EnhancedWalletCardProps) {
   const { wallet, hasWeb3, connect, isConnecting } = useWeb3Wallet();
+  const { t, i18n } = useTranslation('dashboard');
 
   const formatCurrency = (amount: number, curr: string = "EUR") => {
-    return new Intl.NumberFormat("es-ES", {
-      style: "currency",
-      currency: curr,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
+    return formatCurrencyI18n(amount, i18n.language, curr);
   };
 
   return (
@@ -60,13 +58,13 @@ export function EnhancedWalletCard({
               <Wallet className="h-5 w-5 text-amber-400" />
             </div>
             <span className="text-xs font-medium bg-white/10 px-3 py-1.5 rounded-full backdrop-blur-sm">
-              Este mes
+              {isProvider ? t('wallet.monthlyIncome') : t('wallet.monthlyExpense')}
             </span>
           </div>
           
           <div className="space-y-1 mb-6">
             <p className="text-sm text-slate-300">
-              {isProvider ? "Balance Total" : "Total Gastado"}
+              {t('wallet.title')}
             </p>
             {isLoading ? (
               <Skeleton className="h-10 w-32 bg-white/20" />
@@ -85,7 +83,7 @@ export function EnhancedWalletCard({
                     <ArrowUpRight className="h-4 w-4" />
                     <span>+{Math.abs(change).toFixed(1)}%</span>
                   </div>
-                  <span className="text-slate-400">vs mes anterior</span>
+                  <span className="text-slate-400">{t('cards.vsPrevMonth')}</span>
                 </>
               ) : (
                 <>
@@ -93,7 +91,7 @@ export function EnhancedWalletCard({
                     <ArrowDownRight className="h-4 w-4" />
                     <span>{change.toFixed(1)}%</span>
                   </div>
-                  <span className="text-slate-400">vs mes anterior</span>
+                  <span className="text-slate-400">{t('cards.vsPrevMonth')}</span>
                 </>
               )}
             </div>
@@ -103,13 +101,13 @@ export function EnhancedWalletCard({
           {wallet.isConnected && (
             <div className="mt-6 pt-4 border-t border-white/10 grid grid-cols-2 gap-3">
               <div className="bg-white/5 rounded-lg p-3">
-                <p className="text-xs text-slate-400 mb-1">EUROe</p>
+                <p className="text-xs text-slate-400 mb-1">{t('wallet.euroe')}</p>
                 <p className="font-semibold text-lg">
                   {wallet.euroeBalance ? parseFloat(wallet.euroeBalance).toFixed(2) : "0.00"}
                 </p>
               </div>
               <div className="bg-white/5 rounded-lg p-3">
-                <p className="text-xs text-slate-400 mb-1">Gas (ETH)</p>
+                <p className="text-xs text-slate-400 mb-1">{t('wallet.gas')} (ETH)</p>
                 <p className="font-semibold text-lg">
                   {wallet.balance ? parseFloat(wallet.balance).toFixed(4) : "0.00"}
                 </p>
@@ -124,7 +122,7 @@ export function EnhancedWalletCard({
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              {isProvider ? "Ingresos por Categoría" : "Gastos por Categoría"}
+              {t('wallet.breakdown')}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -154,7 +152,7 @@ export function EnhancedWalletCard({
               <Link to="/settings">
                 <Button variant="outline" size="sm" className="w-full gap-2">
                   <CreditCard className="h-4 w-4" />
-                  Recargar
+                  {t('wallet.reload')}
                 </Button>
               </Link>
               <Button 
@@ -164,7 +162,7 @@ export function EnhancedWalletCard({
                 onClick={() => window.open(`https://pontus-x.eu/explorer/address/${wallet.address}`, "_blank")}
               >
                 <ExternalLink className="h-4 w-4" />
-                Explorer
+                {t('wallet.explorer')}
               </Button>
             </div>
           ) : hasWeb3 ? (
@@ -175,7 +173,7 @@ export function EnhancedWalletCard({
               variant="outline"
             >
               <Wallet className="h-4 w-4" />
-              {isConnecting ? "Conectando..." : "Conectar Wallet"}
+              {isConnecting ? t('activity.loading') : t('wallet.connectWallet')}
             </Button>
           ) : (
             <Button 
@@ -184,7 +182,7 @@ export function EnhancedWalletCard({
               onClick={() => window.open("https://metamask.io/download/", "_blank")}
             >
               <Coins className="h-4 w-4" />
-              Instalar MetaMask
+              {t('wallet.installMetamask')}
             </Button>
           )}
         </CardContent>

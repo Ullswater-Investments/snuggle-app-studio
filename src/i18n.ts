@@ -28,6 +28,7 @@ import esCatalogDetails from './locales/es/catalogDetails.json';
 import esGreenProcurement from './locales/es/greenProcurement.json';
 import esUseCases from './locales/es/useCases.json';
 import esDiagrams from './locales/es/diagrams.json';
+import esDashboard from './locales/es/dashboard.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -53,6 +54,7 @@ import frCloserstill from './locales/fr/closerstill.json';
 import frCatalogDetails from './locales/fr/catalogDetails.json';
 import frUseCases from './locales/fr/useCases.json';
 import frDiagrams from './locales/fr/diagrams.json';
+import frDashboard from './locales/fr/dashboard.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -79,6 +81,7 @@ import ptCloserstill from './locales/pt/closerstill.json';
 import ptCatalogDetails from './locales/pt/catalogDetails.json';
 import ptUseCases from './locales/pt/useCases.json';
 import ptDiagrams from './locales/pt/diagrams.json';
+import ptDashboard from './locales/pt/dashboard.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -105,6 +108,7 @@ import deCloserstill from './locales/de/closerstill.json';
 import deCatalogDetails from './locales/de/catalogDetails.json';
 import deUseCases from './locales/de/useCases.json';
 import deDiagrams from './locales/de/diagrams.json';
+import deDashboard from './locales/de/dashboard.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -131,6 +135,7 @@ import itCloserstill from './locales/it/closerstill.json';
 import itCatalogDetails from './locales/it/catalogDetails.json';
 import itUseCases from './locales/it/useCases.json';
 import itDiagrams from './locales/it/diagrams.json';
+import itDashboard from './locales/it/dashboard.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -157,6 +162,7 @@ import nlCloserstill from './locales/nl/closerstill.json';
 import nlCatalogDetails from './locales/nl/catalogDetails.json';
 import nlUseCases from './locales/nl/useCases.json';
 import nlDiagrams from './locales/nl/diagrams.json';
+import nlDashboard from './locales/nl/dashboard.json';
 
 // English
 import enNav from './locales/en/nav.json';
@@ -172,6 +178,7 @@ import enCloserstill from './locales/en/closerstill.json';
 import enCatalogDetails from './locales/en/catalogDetails.json';
 import enUseCases from './locales/en/useCases.json';
 import enDiagrams from './locales/en/diagrams.json';
+import enDashboard from './locales/en/dashboard.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -215,6 +222,7 @@ i18n
         useCases: esUseCases,
         greenProcurement: esGreenProcurement,
         diagrams: esDiagrams,
+        dashboard: esDashboard,
       },
       en: {
         nav: enNav,
@@ -230,6 +238,7 @@ i18n
         catalogDetails: enCatalogDetails,
         useCases: enUseCases,
         diagrams: enDiagrams,
+        dashboard: enDashboard,
       },
       fr: {
         common: frCommon,
@@ -256,6 +265,7 @@ i18n
         catalogDetails: frCatalogDetails,
         useCases: frUseCases,
         diagrams: frDiagrams,
+        dashboard: frDashboard,
       },
       pt: {
         common: ptCommon,
@@ -282,6 +292,7 @@ i18n
         catalogDetails: ptCatalogDetails,
         useCases: ptUseCases,
         diagrams: ptDiagrams,
+        dashboard: ptDashboard,
       },
       de: {
         common: deCommon,
@@ -308,6 +319,7 @@ i18n
         catalogDetails: deCatalogDetails,
         useCases: deUseCases,
         diagrams: deDiagrams,
+        dashboard: deDashboard,
       },
       it: {
         common: itCommon,
@@ -334,6 +346,7 @@ i18n
         catalogDetails: itCatalogDetails,
         useCases: itUseCases,
         diagrams: itDiagrams,
+        dashboard: itDashboard,
       },
       nl: {
         common: nlCommon,
@@ -360,11 +373,12 @@ i18n
         catalogDetails: nlCatalogDetails,
         useCases: nlUseCases,
         diagrams: nlDiagrams,
+        dashboard: nlDashboard,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard'],
     interpolation: {
       escapeValue: false,
     },

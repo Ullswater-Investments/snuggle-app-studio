@@ -1,0 +1,99 @@
+{
+  "greeting": "Hallo,",
+  "summary": {
+    "provider": "Overzicht van commerciële prestaties en activa.",
+    "consumer": "Overzicht van dataverbruik en abonnementen."
+  },
+  "buttons": {
+    "viewAnalytics": "Analytics bekijken",
+    "goToMarket": "Naar de Markt"
+  },
+  "cards": {
+    "walletBalance": "Wallet Saldo",
+    "walletAvailable": "Beschikbaar voor transacties",
+    "walletNotConfigured": "Geen wallet geconfigureerd",
+    "revenueMonth": "Maandelijkse Inkomsten",
+    "spendMonth": "Maandelijkse Uitgaven",
+    "vsPrevMonth": "vs vorige maand",
+    "activeTransactions": "Actieve Transacties",
+    "pendingAction": "Actie vereist",
+    "completed6Months": "Voltooid (6 maanden)",
+    "totalClosed": "Totaal afgesloten operaties"
+  },
+  "chart": {
+    "title": "Financiële Evolutie",
+    "description": "Inkomsten en uitgaven van de laatste 6 maanden",
+    "demoData": "Demo Gegevens",
+    "revenue": "Inkomsten",
+    "expenses": "Uitgaven"
+  },
+  "activity": {
+    "title": "Recente Activiteit",
+    "loading": "Laden...",
+    "noActivity": "Geen recente activiteit",
+    "demo": "Demo"
+  },
+  "transactions": {
+    "title": "Recente Transacties",
+    "viewAll": "Alles Bekijken",
+    "noTransactions": "Geen recente transacties",
+    "willAppear": "Transacties verschijnen hier",
+    "date": "Datum",
+    "product": "Product",
+    "counterparty": "Tegenpartij",
+    "type": "Type",
+    "status": "Status",
+    "amount": "Bedrag",
+    "buy": "Aankoop",
+    "sell": "Verkoop",
+    "defaultProduct": "Product"
+  },
+  "transactionStatus": {
+    "initiated": "Gestart",
+    "pending_subject": "In afwachting",
+    "pending_holder": "In afwachting",
+    "approved": "Goedgekeurd",
+    "completed": "Voltooid",
+    "denied_subject": "Afgewezen",
+    "denied_holder": "Afgewezen",
+    "cancelled": "Geannuleerd"
+  },
+  "wallet": {
+    "title": "Totaal Saldo",
+    "monthlyIncome": "Maandelijkse inkomsten",
+    "monthlyExpense": "Maandelijkse uitgaven",
+    "web3Status": "Web3 Status",
+    "euroe": "EUROe",
+    "gas": "Gas",
+    "connected": "Verbonden",
+    "notConnected": "Niet verbonden",
+    "breakdown": "Categorieverdeling",
+    "quickActions": "Snelle Acties",
+    "reload": "Herladen",
+    "explorer": "Explorer",
+    "connectWallet": "Wallet Verbinden",
+    "installMetamask": "MetaMask Installeren",
+    "others": "Overige"
+  },
+  "stats": {
+    "walletBalance": "Wallet Saldo",
+    "monthlySpend": "Maandelijkse Uitgaven",
+    "ofBudget": "van budget",
+    "transactions": "Transacties",
+    "completed": "Voltooid",
+    "pending": "In afwachting",
+    "inProgress": "In Uitvoering",
+    "noData": "Geen gegevens",
+    "operationalExcellence": "Operationele Excellentie",
+    "dataQuality": "Datakwaliteit",
+    "sustainability": "Duurzaamheid",
+    "activity": "Activiteit"
+  },
+  "activityFeed": {
+    "preApproved": "Vooraf goedgekeurd",
+    "approved": "Goedgekeurd",
+    "denied": "Afgewezen",
+    "cancelled": "Geannuleerd",
+    "aRequest": "een verzoek"
+  }
+}
