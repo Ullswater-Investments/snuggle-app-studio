@@ -106,6 +106,7 @@ const getPartnerProductDetailUrl = (productId: string): string => {
     "GAIA-ESG-CIRC-02": "/catalog/economia-circular-tic",
     "GAIA-OPS-DEV-03": "/catalog/capacidad-desarrollo-software",
     "GAIA-MKT-FIN-04": "/catalog/scoring-financiero-digital",
+    "GAIA-RND-IOT-05": "/catalog/telemetria-industrial-iot",
     // BDEW (Germany - Energy)
     "BDEW-SUP-GRID-01": "/catalog/operadores-red-energetica",
     "BDEW-ESG-RENEW-02": "/catalog/mix-energetico-alemania",
@@ -114,6 +115,52 @@ const getPartnerProductDetailUrl = (productId: string): string => {
     "BDEW-RND-SMART-05": "/catalog/smart-grid-contadores",
     // Agoria (Belgium - Industrial Tech)
     "AGO-SUP-TECH-01": "/catalog/empresas-tecnologicas-belgas",
+    "AGO-ESG-IND-02": "/catalog/sostenibilidad-industria-belga",
+    "AGO-OPS-ROB-03": "/catalog/integracion-robotica",
+    "AGO-MKT-AUTO-04": "/catalog/precios-automatizacion",
+    "AGO-RND-COBOT-05": "/catalog/telemetria-cobots",
+    // FEIQUE (Spain - Chemical)
+    "FEI-SUP-REACH-01": "/catalog/cumplimiento-reach-clp",
+    "FEI-ESG-CHEM-02": "/catalog/huella-ambiental-quimica",
+    "FEI-OPS-PROD-03": "/catalog/capacidad-produccion-quimica",
+    "FEI-MKT-CHEM-04": "/catalog/precios-productos-quimicos",
+    "FEI-RND-LAB-05": "/catalog/analisis-laboratorio-quimico",
+    // ANFIA (Italy - Automotive)
+    "ANF-SUP-AUTO-01": "/catalog/proveedores-automotrices-italianos",
+    "ANF-ESG-EV-02": "/catalog/transicion-ev-italia",
+    "ANF-OPS-STAMP-03": "/catalog/estampacion-fundicion",
+    "ANF-MKT-PARTS-04": "/catalog/precios-recambios-automotrices",
+    "ANF-RND-CRASH-05": "/catalog/ensayos-seguridad-vehicular",
+    // FNSEA (France - Agriculture)
+    "FNS-SUP-AGRO-01": "/catalog/explotaciones-agricolas-francesas",
+    "FNS-ESG-FARM-02": "/catalog/sostenibilidad-agricola",
+    "FNS-OPS-HARV-03": "/catalog/capacidad-cosecha",
+    "FNS-MKT-COMM-04": "/catalog/precios-commodities-agricolas",
+    "FNS-RND-PRECIS-05": "/catalog/agricultura-precision",
+    // NEVI (Netherlands - Procurement)
+    "NEV-SUP-PROC-01": "/catalog/profesionales-compras",
+    "NEV-ESG-SUST-02": "/catalog/compras-sostenibles",
+    "NEV-OPS-VENDOR-03": "/catalog/proveedores-precualificados",
+    "NEV-MKT-SPEND-04": "/catalog/analisis-gasto-categoria",
+    "NEV-RND-SRISK-05": "/catalog/riesgo-supply-chain",
+    // AIP (Portugal - Industrial)
+    "AIP-SUP-IND-01": "/catalog/directorio-industrial-portugues",
+    "AIP-ESG-PORT-02": "/catalog/sostenibilidad-portugal",
+    "AIP-OPS-MFG-03": "/catalog/fabricacion-subcontratacion",
+    "AIP-MKT-COST-04": "/catalog/costes-industriales-portugal",
+    "AIP-RND-MOLD-05": "/catalog/fabricacion-moldes",
+    // Food Valley (Netherlands - Food)
+    "FV-SUP-FOOD-01": "/catalog/empresas-agroalimentarias",
+    "FV-ESG-NUTR-02": "/catalog/nutricion-sostenible",
+    "FV-OPS-PROC-03": "/catalog/procesamiento-alimentario",
+    "FV-MKT-INGR-04": "/catalog/precios-ingredientes",
+    "FV-RND-SENS-05": "/catalog/analisis-sensorial",
+    // BioWin (Belgium - Biotech)
+    "BWN-SUP-BIO-01": "/catalog/empresas-biotecnologicas",
+    "BWN-ESG-PHARM-02": "/catalog/sostenibilidad-farmaceutica",
+    "BWN-OPS-TRIAL-03": "/catalog/ensayos-clinicos",
+    "BWN-MKT-API-04": "/catalog/precios-apis-farmaceuticos",
+    "BWN-RND-GENO-05": "/catalog/genomica-biomarcadores",
   };
   return routes[productId] || "/auth";
 };
