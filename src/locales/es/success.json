@@ -37,7 +37,7 @@
     "greenProcurement": "Green Procurement",
     "circular": "Economía Circular"
   },
-"cases": {
+  "cases": {
     "gigafactory-north": {
       "title": "Automatización de Homologación Industrial",
       "sector": "Industrial",
@@ -112,241 +112,401 @@
       "title": "Certificación Aeronáutica EN9100",
       "sector": "Industrial Aeroespacial",
       "metricLabel": "Tiempo Verificación",
-      "description": "Validación automática de certificados EN9100 de 120 proveedores globales de piezas críticas."
+      "description": "Validación automática de certificados EN9100 de 120 proveedores globales de piezas críticas.",
+      "challenge": "Sky Aero Systems gestionaba manualmente los certificados EN9100 de 120 proveedores globales de piezas críticas para aviación. Cada auditoría de renovación requería 3 semanas de trabajo administrativo y el riesgo de volar con componentes de proveedores con certificación caducada era inaceptable para la autoridad aeronáutica.",
+      "solution": "Implementación del Pasaporte Digital de Proveedor con alertas automáticas 90 días antes del vencimiento de EN9100. Integración con bases de datos de EASA para verificación cruzada en tiempo real. Políticas ODRL bloquean automáticamente pedidos a proveedores con certificación expirada.",
+      "ariaQuote": "En el sector aeronáutico, un certificado caducado puede costar millones en multas y grounding de flota. La verificación automática de EN9100 redujo el tiempo de auditoría de semanas a minutos y eliminó el riesgo regulatorio.",
+      "services": ["Pasaporte Digital de Proveedor", "Alertas de Vencimiento", "Verificación EASA", "Políticas ODRL Bloqueantes", "Auditoría EN9100 Digital"]
     },
     "vinosdoe-elite": {
       "title": "Fraude Cero en Exportación D.O.",
       "sector": "Agroalimentario",
       "metricLabel": "Confianza Consumidor",
-      "description": "Notarización de lotes y D.O. con QR dinámico vinculado a DID de geolocalización."
+      "description": "Notarización de lotes y D.O. con QR dinámico vinculado a DID de geolocalización.",
+      "challenge": "Vinos DOE Elite enfrentaba fraudes de etiquetado en mercados asiáticos donde sus vinos premium eran adulterados. Los distribuidores no autorizados mezclaban vino de baja calidad con etiquetas falsificadas, dañando la reputación de la D.O. y reduciendo las ventas un 15% en China.",
+      "solution": "Cada botella recibe un QR dinámico vinculado a un DID único con coordenadas GPS de la bodega, fecha de embotellado y firma del enólogo. El consumidor final escanea y verifica la autenticidad en blockchain antes de comprar.",
+      "ariaQuote": "El QR dinámico con DID de geolocalización permite que el consumidor en Shanghai verifique que su Rioja Reserva realmente salió de nuestra bodega en Haro. Fraude cero y confianza del consumidor restaurada.",
+      "services": ["Pasaporte Digital de Producto", "QR Dinámico Anti-Fraude", "DID de Geolocalización", "Verificación Blockchain", "Integración con Minoristas"]
     },
     "pharmacold-logistix": {
       "title": "Integridad de Cadena de Frío",
       "sector": "Salud",
       "metricLabel": "Pérdida Térmica",
-      "description": "Smart Contracts bloquean pago si sensores detectan temperatura >8°C durante +10min."
+      "description": "Smart Contracts bloquean pago si sensores detectan temperatura >8°C durante +10min.",
+      "challenge": "PharmaCold Logistix transportaba vacunas y medicamentos sensibles que requerían cadena de frío estricta (2-8°C). Las reclamaciones por roturas de cadena de frío costaban 2M€ anuales y los seguros exigían evidencia irrefutable de cumplimiento térmico.",
+      "solution": "Sensores IoT de temperatura transmiten datos cada 30 segundos a smart contracts. Si se detecta una excursión térmica >8°C durante más de 10 minutos, el contrato bloquea automáticamente el pago y notifica al fabricante para decisión de destrucción o uso.",
+      "ariaQuote": "El smart contract actúa como árbitro imparcial entre transportista y farmacéutica. Si la temperatura excede los límites, el pago se bloquea automáticamente. Cero disputas y primas de seguro reducidas un 40%.",
+      "services": ["Sensores IoT Cadena de Frío", "Smart Contracts de Cumplimiento", "Alertas en Tiempo Real", "Auditoría GDP Automática", "Integración con Seguros"]
     },
     "portbcn-smart-trade": {
       "title": "Aduana Digital Instantánea",
       "sector": "Movilidad",
       "metricLabel": "Ahorro/Container",
-      "description": "Conexión Webhooks con sistemas portuarios para validación KYB instantánea."
+      "description": "Conexión Webhooks con sistemas portuarios para validación KYB instantánea.",
+      "challenge": "El Puerto de Barcelona procesaba 3 millones de TEUs anuales con demoras aduaneras de hasta 72 horas por contenedor. La verificación manual de documentos de importadores costaba 120€ por contenedor en tiempo de personal y tasas de demora.",
+      "solution": "Integración mediante Webhooks con sistemas portuarios (PCS) y validación KYB instantánea de importadores. El Pasaporte Digital de Proveedor pre-valida la documentación 48h antes de la llegada del buque, permitiendo despacho en menos de 2 horas.",
+      "ariaQuote": "La integración con Webhooks permite que la documentación se valide mientras el barco aún está en alta mar. Cuando el contenedor toca el muelle, el despacho está listo. Ahorro de 85€ por contenedor y 70 horas de demora eliminadas.",
+      "services": ["Integración Webhooks PCS", "Validación KYB Instantánea", "Pre-Despacho Digital", "Pasaporte Digital de Importador", "API Aduanera"]
     },
     "ayuntamiento-etico": {
       "title": "Licitación Pública Transparente",
       "sector": "Economía Social",
       "metricLabel": "Transparencia Ética",
-      "description": "Dashboard SROI para verificar cuota de discapacidad de licitadores en tiempo real."
+      "description": "Dashboard SROI para verificar cuota de discapacidad de licitadores en tiempo real.",
+      "challenge": "El Ayuntamiento debía cumplir con la Ley de Contratos del Sector Público que exige reservar el 7% de licitaciones a Centros Especiales de Empleo, pero no tenía forma de verificar en tiempo real si los licitadores cumplían con las cuotas de discapacidad.",
+      "solution": "Dashboard SROI conectado con la base de datos de la Seguridad Social para verificar automáticamente el cumplimiento de cuotas LGD. Los licitadores autorizan el acceso mediante firma ODRL y el sistema puntúa automáticamente los criterios sociales.",
+      "ariaQuote": "Antes verificábamos manualmente cada certificado de discapacidad. Ahora el Dashboard SROI conecta con la Seguridad Social en tiempo real y puntúa automáticamente. 100% transparencia y cero recursos por adjudicación incorrecta.",
+      "services": ["Dashboard SROI", "Verificación LGD Automática", "Integración Seguridad Social", "Firma ODRL de Autorización", "Scoring Social Automático"]
     },
     "purelithium-sourcing": {
       "title": "Minerales Sin Conflicto CSRD",
       "sector": "Industrial Minería",
       "metricLabel": "Certificación",
-      "description": "Trazabilidad Tier 3 de litio con firma ODRL de políticas de uso ético."
+      "description": "Trazabilidad Tier 3 de litio con firma ODRL de políticas de uso ético.",
+      "challenge": "PureLithium Sourcing suministraba litio a fabricantes de baterías europeos que exigían cumplimiento del Reglamento de Minerales de Conflicto. La trazabilidad hasta las minas de origen en Chile y Australia era manual, costosa y propensa a errores.",
+      "solution": "Implementación de trazabilidad Tier 3 con DID único por lote desde la mina hasta la gigafactory. Políticas ODRL certifican que el litio no proviene de zonas de conflicto y que las condiciones laborales cumplen con estándares ILO.",
+      "ariaQuote": "Cada kilo de litio tiene un pasaporte digital que certifica su origen ético. Las gigafactories europeas confían en nuestro litio porque pueden demostrar a sus auditores CSRD la trazabilidad completa hasta la mina.",
+      "services": ["Trazabilidad Tier 3", "DID por Lote", "Certificación ILO", "Políticas ODRL Éticas", "Auditoría de Minerales de Conflicto"]
     },
     "fastfashion-trace": {
       "title": "Moda Circular Sin Greenwashing",
       "sector": "Comercio",
       "metricLabel": "Etiquetado Preciso",
-      "description": "Sincronización PLM con certificados de composición textil para 1M de prendas."
+      "description": "Sincronización PLM con certificados de composición textil para 1M de prendas.",
+      "challenge": "FastFashion Trace gestionaba 1 millón de prendas anuales con etiquetas de composición que no siempre coincidían con los materiales reales. Las multas por greenwashing en la UE podían alcanzar el 4% de la facturación y los consumidores exigían transparencia.",
+      "solution": "Sincronización del sistema PLM con certificados de composición textil notarizados en blockchain. Cada prenda tiene un QR que muestra la composición real verificada, origen de las fibras y huella de carbono del transporte.",
+      "ariaQuote": "El consumidor escanea el QR y ve exactamente qué porcentaje de algodón orgánico, poliéster reciclado y elastano contiene su camiseta. Cero greenwashing y +35% de conversión en la línea eco.",
+      "services": ["Integración PLM", "Certificados de Composición", "QR de Trazabilidad", "Pasaporte Digital de Prenda", "Calculadora de Huella de Carbono"]
     },
     "invoicetrust-b2b": {
       "title": "Factoring con Score Blockchain",
       "sector": "Finanzas B2B",
       "metricLabel": "Liquidez Pymes",
-      "description": "Score de solvencia inmutable basado en cumplimiento histórico de contratos ODRL."
+      "description": "Score de solvencia inmutable basado en cumplimiento histórico de contratos ODRL.",
+      "challenge": "InvoiceTrust B2B ofrecía factoring a PYMEs pero el análisis de riesgo tradicional tardaba 2 semanas y rechazaba el 60% de las solicitudes por falta de historial crediticio. Las PYMEs necesitaban liquidez inmediata, no semanas de espera.",
+      "solution": "Score de solvencia blockchain basado en el historial de cumplimiento de contratos ODRL. Cada factura pagada a tiempo suma puntos al score inmutable. Las PYMEs con buen historial acceden a factoring instantáneo con tasas preferenciales.",
+      "ariaQuote": "El score blockchain demuestra que una PYME ha cumplido 50 contratos sin un solo retraso de pago. Eso vale más que un balance contable. Liquidez en 24h en lugar de 2 semanas y tasas un 30% mejores.",
+      "services": ["Score Blockchain de Solvencia", "Historial de Contratos ODRL", "Factoring Instantáneo", "API para Entidades Financieras", "Dashboard de Reputación"]
     },
     "gridflow-energy": {
       "title": "Gestión de Excedentes Energéticos",
       "sector": "Energía",
       "metricLabel": "Naves Conectadas",
-      "description": "Liquidación diaria de micro-pagos de energía entre comunidades industriales."
+      "description": "Liquidación diaria de micro-pagos de energía entre comunidades industriales.",
+      "challenge": "GridFlow Energy coordinaba un polígono industrial con 25 naves, algunas con excedentes solares y otras con déficit energético. La compensación de excedentes era mensual, perdiendo valor por la volatilidad del precio horario del pool.",
+      "solution": "Smart contracts liquidan micro-pagos de energía cada 15 minutos entre naves con excedente y déficit. Contadores inteligentes reportan producción y consumo en tiempo real. Pagos en EUROe con conciliación automática.",
+      "ariaQuote": "La nave 12 vende sus excedentes solares a la nave 7 a precio del pool en tiempo real. Al final del día, cada nave tiene su balance liquidado automáticamente. Ahorro colectivo del 28% en la factura eléctrica.",
+      "services": ["Smart Contracts de Energía", "Contadores Inteligentes IoT", "Pagos en EUROe", "Dashboard de Comunidad Energética", "Conciliación Automática"]
     },
     "ailabs-research": {
       "title": "Entrenamiento IA con Datos Sintéticos",
       "sector": "Tecnología",
       "metricLabel": "Tiempo Training",
-      "description": "Datasets sintéticos con alta fidelidad estadística sin fugas de datos reales."
+      "description": "Datasets sintéticos con alta fidelidad estadística sin fugas de datos reales.",
+      "challenge": "AI Labs Research necesitaba entrenar modelos de IA con datos de transacciones financieras reales, pero las regulaciones GDPR y secreto bancario impedían el acceso a datos de clientes. Los datasets sintéticos disponibles tenían baja fidelidad estadística.",
+      "solution": "Generación de datasets sintéticos con técnicas de privacidad diferencial que mantienen la distribución estadística de los datos reales sin contener ningún dato personal. Los Data Holders monetizan sus datos sin exponerlos.",
+      "ariaQuote": "Los bancos monetizan sus datos de transacciones sin violar el secreto bancario. Nuestros modelos de detección de fraude se entrenan con datos sintéticos que tienen la misma distribución que los reales. Win-win.",
+      "services": ["Generador de Datos Sintéticos", "Privacidad Diferencial", "API de Datasets", "Marketplace de Datos Sintéticos", "Validación de Fidelidad Estadística"]
     },
     "helios-fields": {
       "title": "Mantenimiento Predictivo Solar",
       "sector": "Energía Solar",
       "metricLabel": "Costes Reparación",
-      "description": "Telemetría IoT de 1M de lecturas diarias para detectar anomalías térmicas en inversores."
+      "description": "Telemetría IoT de 1M de lecturas diarias para detectar anomalías térmicas en inversores.",
+      "challenge": "Helios Fields operaba 50MW de parques solares con inversores que fallaban sin previo aviso, causando pérdidas de producción de 15.000€ por día de parada. El mantenimiento correctivo costaba 3x más que el preventivo.",
+      "solution": "Sensores IoT en cada inversor transmiten 1 millón de lecturas térmicas diarias a modelos de IA que detectan anomalías 72h antes del fallo. Alertas automáticas al equipo de mantenimiento con diagnóstico y piezas recomendadas.",
+      "ariaQuote": "El modelo predictivo detectó una anomalía térmica en el inversor 23 el martes. El miércoles llegó el técnico con la pieza de repuesto. El jueves el inversor habría fallado. Evitamos 45.000€ en pérdidas de producción.",
+      "services": ["Sensores IoT Solares", "IA Predictiva", "Alertas de Mantenimiento", "Gestión de Repuestos", "Dashboard de Producción"]
     },
     "aeolus-wind": {
       "title": "PPAs Programables con Smart Contracts",
       "sector": "Energía Eólica",
       "metricLabel": "Conciliación PPA",
-      "description": "Liquidación instantánea de contratos PPA mediante Smart Contracts y EUROe."
+      "description": "Liquidación instantánea de contratos PPA mediante Smart Contracts y EUROe.",
+      "challenge": "Aeolus Wind tenía PPAs (Power Purchase Agreements) con 15 offtakers corporativos, pero la conciliación mensual de energía entregada vs. contratada tardaba 3 semanas y generaba disputas constantes sobre la medición.",
+      "solution": "Smart contracts que liquidan automáticamente la diferencia entre energía contratada y entregada al precio del pool en tiempo real. Pagos en EUROe se ejecutan al cierre de cada día. Disputas cero gracias a datos de contador verificados.",
+      "ariaQuote": "Antes discutíamos cada mes con los offtakers sobre cuánta energía habíamos entregado. Ahora el smart contract liquida automáticamente basándose en datos de contadores certificados. Cero disputas y cash flow diario.",
+      "services": ["Smart Contracts PPA", "Contadores Certificados", "Liquidación en EUROe", "Dashboard de Offtakers", "Gestión de Excedentes"]
     },
     "h2-pure": {
       "title": "Certificación de Hidrógeno Verde",
       "sector": "Hidrógeno Verde",
       "metricLabel": "Valor de Venta",
-      "description": "GdO digital inmutable que certifica el vínculo parque eólico-electrolizador."
+      "description": "GdO digital inmutable que certifica el vínculo parque eólico-electrolizador.",
+      "challenge": "H2 Pure producía hidrógeno verde con energía eólica, pero no podía demostrar a compradores industriales que el hidrógeno realmente provenía de fuentes renovables. Sin certificación creíble, el precio de venta era igual al del hidrógeno gris.",
+      "solution": "Garantía de Origen digital inmutable que vincula cada kg de hidrógeno con los certificados de energía renovable consumida por el electrolizador. Trazabilidad desde el parque eólico hasta el punto de uso industrial.",
+      "ariaQuote": "Cada kg de hidrógeno tiene un GdO digital que demuestra que se produjo con energía eólica de nuestro parque en Teruel. Los compradores industriales pagan un 25% más porque pueden demostrar sus emisiones Scope 1 netas cero.",
+      "services": ["GdO Digital de Hidrógeno", "Trazabilidad Electrolizador", "Certificación de Origen Renovable", "API para Compradores Industriales", "Reporte CSRD Automático"]
     },
     "poligono-ecolink": {
       "title": "Marketplace de Comunidad Energética",
       "sector": "Autoconsumo Industrial",
       "metricLabel": "Factura Eléctrica",
-      "description": "Gobernanza ODRL para intercambio de excedentes solares en tiempo real entre naves."
+      "description": "Gobernanza ODRL para intercambio de excedentes solares en tiempo real entre naves.",
+      "challenge": "Polígono EcoLink tenía 40 naves con instalaciones solares individuales, pero sin mecanismo para intercambiar excedentes. Cada nave vendía al pool a 0.05€/kWh cuando la vecina compraba de la red a 0.18€/kWh.",
+      "solution": "Marketplace de energía con gobernanza ODRL que permite a cada nave definir sus reglas de venta (precio mínimo, compradores preferentes, horarios). Smart contracts ejecutan las transacciones y liquidan pagos en EUROe.",
+      "ariaQuote": "La nave 15 vende sus excedentes a 0.12€/kWh a la nave 22 en lugar de vender al pool a 0.05€. La nave 22 compra a 0.12€ en lugar de pagar 0.18€ a la comercializadora. Todos ganan con el marketplace interno.",
+      "services": ["Marketplace Energético", "Gobernanza ODRL", "Smart Contracts de Intercambio", "Contadores Inteligentes", "Dashboard de Comunidad"]
     },
     "gridflex-demand": {
       "title": "Certificados de Flexibilidad Smart Grid",
       "sector": "Smart Grid",
       "metricLabel": "Apagones/Año",
-      "description": "Smart Alerts que activan protocolos de desconexión selectiva por incentivos en EUROe."
+      "description": "Smart Alerts que activan protocolos de desconexión selectiva por incentivos en EUROe.",
+      "challenge": "GridFlex Demand gestionaba la demanda de un polígono industrial de 100MW. Cuando REE solicitaba reducción de carga, el proceso manual de contactar a cada industria tardaba 30 minutos y no siempre lograba la reducción necesaria.",
+      "solution": "Smart Alerts conectados con el sistema de REE activan automáticamente protocolos de desconexión selectiva. Las industrias que participan reciben pagos en EUROe por cada MWh de reducción. Certificados de flexibilidad inmutables en blockchain.",
+      "ariaQuote": "Cuando REE pide reducción de carga, nuestro sistema desconecta automáticamente las cargas no críticas de las industrias participantes. En 5 minutos reducimos 20MW y cada industria recibe su pago por flexibilidad. Cero apagones.",
+      "services": ["Smart Alerts de Red", "Protocolos de Desconexión", "Pagos de Flexibilidad en EUROe", "Certificados de Flexibilidad", "Integración con REE"]
     },
     "bateria-hub": {
       "title": "Arbitraje Energético con IA",
       "sector": "Almacenamiento",
       "metricLabel": "ROI Batería",
-      "description": "Algoritmos de IA predicen precios del pool para automatizar compra/venta de energía."
+      "description": "Algoritmos de IA predicen precios del pool para automatizar compra/venta de energía.",
+      "challenge": "Batería Hub operaba 50MWh de almacenamiento en baterías, pero la operación manual de arbitraje (cargar cuando el precio está bajo, descargar cuando está alto) no capturaba todo el valor. Los operadores humanos no podían reaccionar a cambios de precio en segundos.",
+      "solution": "Algoritmos de IA predicen precios del pool con 15 minutos de antelación y ejecutan órdenes de compra/venta automáticamente. Smart contracts liquidan transacciones en tiempo real con el operador del mercado.",
+      "ariaQuote": "La IA predijo que el precio del pool subiría de 50€ a 180€/MWh a las 20:00. A las 19:45 empezamos a descargar. Capturamos 130€/MWh de spread que un operador humano habría perdido. ROI de la batería en 4 años.",
+      "services": ["IA de Predicción de Precios", "Arbitraje Automático", "Smart Contracts de Mercado", "Optimización de Carga/Descarga", "Dashboard de Rentabilidad"]
     },
     "bioheat-district": {
       "title": "Trazabilidad de Biomasa RED III",
       "sector": "Biomasa",
       "metricLabel": "Cumplimiento RED",
-      "description": "DID por lote con geolocalización de tala para certificar limpieza forestal sostenible."
+      "description": "DID por lote con geolocalización de tala para certificar limpieza forestal sostenible.",
+      "challenge": "BioHeat District suministraba biomasa a redes de calor urbanas, pero la nueva directiva RED III exigía demostrar que la biomasa provenía de limpieza forestal sostenible, no de tala de bosques primarios. La trazabilidad manual era costosa y poco fiable.",
+      "solution": "Cada lote de biomasa recibe un DID con coordenadas GPS de la zona de tala, fotografías geolocalizadas del antes/después, y certificado del gestor forestal. Los auditores verifican en blockchain la cadena de custodia completa.",
+      "ariaQuote": "Cada camión de astillas tiene un pasaporte digital que demuestra que proviene de limpieza de cortafuegos en Soria, no de tala ilegal. Cumplimiento RED III garantizado y acceso a primas de cogeneración.",
+      "services": ["DID de Biomasa", "Geolocalización de Tala", "Certificados Forestales", "Trazabilidad de Cadena de Custodia", "Auditoría RED III"]
     },
     "turbine-chain": {
       "title": "Acero Verde para Aerogeneradores",
       "sector": "Cadena de Suministro",
       "metricLabel": "Contrato Ganado",
-      "description": "Consolidación de emisiones Scope 3 de 15 proveedores de acero para reporte CSRD."
+      "description": "Consolidación de emisiones Scope 3 de 15 proveedores de acero para reporte CSRD.",
+      "challenge": "Turbine Chain suministraba torres de aerogeneradores a grandes promotores eólicos que exigían acero verde con emisiones certificadas. Consolidar las emisiones Scope 3 de 15 proveedores de acero era un proceso manual que tardaba 2 meses.",
+      "solution": "Plataforma que consolida automáticamente las emisiones Scope 3 de todos los proveedores de acero. Cada proveedor sube su certificado de emisiones y el sistema calcula la huella de carbono total de cada torre de aerogenerador.",
+      "ariaQuote": "Ganamos el contrato de Iberdrola porque pudimos demostrar que nuestras torres tienen un 60% menos de emisiones que la competencia. La consolidación automática de Scope 3 nos dio una ventaja competitiva decisiva.",
+      "services": ["Consolidación de Scope 3", "Certificados de Acero Verde", "Calculadora de Huella de Carbono", "Reporte CSRD Automático", "Comparador de Proveedores"]
     },
     "aquapower-nexus": {
       "title": "Gestión del Nexo Agua-Energía",
       "sector": "Hidráulica",
       "metricLabel": "Eficiencia Hídrica",
-      "description": "Políticas ODRL regulan el uso de agua entre riego y generación eléctrica en tiempo real."
+      "description": "Políticas ODRL regulan el uso de agua entre riego y generación eléctrica en tiempo real.",
+      "challenge": "AquaPower Nexus gestionaba un embalse que servía para riego agrícola y generación hidroeléctrica. Los conflictos entre regantes y la empresa eléctrica eran constantes, especialmente en épocas de sequía.",
+      "solution": "Políticas ODRL programan automáticamente la distribución de agua entre riego y generación según el precio del pool, previsión meteorológica y derechos de los regantes. Smart contracts compensan a los afectados cuando se prioriza un uso sobre otro.",
+      "ariaQuote": "Cuando el precio del pool supera los 100€/MWh y hay previsión de lluvias, el sistema prioriza generación y compensa a los regantes. Cuando el pool está bajo y hay sequía, prioriza riego. Cero conflictos y máxima eficiencia.",
+      "services": ["Gestión ODRL del Nexo", "Smart Contracts de Compensación", "Integración con Previsión Meteorológica", "Dashboard de Derechos de Agua", "Optimización Multi-Uso"]
     },
     "smartcharge-ev": {
       "title": "Garantía de Origen para Usuarios EV",
       "sector": "Movilidad Eléctrica",
       "metricLabel": "Fidelización EV",
-      "description": "API consulta al Nodo Notario para mostrar origen solar/eólico en la App de carga."
+      "description": "API consulta al Nodo Notario para mostrar origen solar/eólico en la App de carga.",
+      "challenge": "SmartCharge EV operaba 500 puntos de carga pero no podía demostrar a los usuarios que su vehículo se cargaba con energía renovable. Los usuarios eco-conscientes preferían competidores que sí ofrecían esta garantía.",
+      "solution": "API que consulta al Nodo Notario en tiempo real para mostrar en la App el origen de la energía (solar, eólica, mix) mientras el usuario carga. Certificado de carga verde se envía al email del usuario.",
+      "ariaQuote": "El usuario ve en la App que su Tesla se está cargando con energía eólica de Navarra. Al terminar, recibe un certificado con el ahorro de CO2. La fidelización aumentó un 40% frente a competidores sin trazabilidad.",
+      "services": ["API de Origen de Energía", "Integración con App de Carga", "Certificados de Carga Verde", "Dashboard de Impacto Ambiental", "Gamificación de Sostenibilidad"]
     },
     "fiber-loop": {
       "title": "Trazabilidad de Fibra Post-Consumo",
       "sector": "Reciclaje Textil",
       "metricLabel": "Cumplimiento RAP",
-      "description": "Notarización blockchain del peso y calidad de fibra en cada transformación para evitar multas de greenwashing."
+      "description": "Notarización blockchain del peso y calidad de fibra en cada transformación para evitar multas de greenwashing.",
+      "challenge": "Fiber Loop reciclaba textiles post-consumo pero no podía demostrar a las marcas de moda que la fibra reciclada realmente provenía de ropa usada y no de recortes de fábrica. Las marcas exigían trazabilidad para evitar multas de greenwashing.",
+      "solution": "Notarización blockchain del peso y calidad de fibra en cada etapa de transformación: recogida, clasificación, triturado, hilado. Cada kg de fibra reciclada tiene un pasaporte digital con su origen verificado.",
+      "ariaQuote": "Zara puede demostrar a sus auditores que el algodón reciclado de su línea Join Life realmente proviene de ropa usada recogida en sus tiendas. Trazabilidad completa y cumplimiento RAP garantizado.",
+      "services": ["Trazabilidad de Fibra", "Notarización por Etapa", "Pasaporte Digital de Fibra", "Certificación de Origen Post-Consumo", "Integración con Marcas de Moda"]
     },
     "rare-earth-recover": {
       "title": "Minería Urbana de Tierras Raras",
       "sector": "RAEE / E-Waste",
       "metricLabel": "Margen Venta",
-      "description": "Datasets de composición química con IA para vender a fundiciones especializadas vs gestores genéricos."
+      "description": "Datasets de composición química con IA para vender a fundiciones especializadas vs gestores genéricos.",
+      "challenge": "Rare Earth Recover procesaba RAEE (residuos electrónicos) pero no podía identificar qué aparatos contenían tierras raras valiosas. Todo se vendía a gestores genéricos que pagaban precio de chatarra.",
+      "solution": "IA analiza fotografías y códigos de modelo para predecir la composición química de cada aparato. Los lotes ricos en tierras raras se venden a fundiciones especializadas a precios 10x superiores.",
+      "ariaQuote": "La IA identificó que un lote de discos duros antiguos contenía imanes de neodimio valorados en 50€/kg. En lugar de venderlo como chatarra a 2€/kg, lo vendimos a una fundición japonesa. Margen multiplicado por 25.",
+      "services": ["IA de Composición Química", "Clasificación de RAEE", "Marketplace de Tierras Raras", "Integración con Fundiciones", "Optimización de Valorización"]
     },
     "alu-cycle": {
       "title": "Ahorro Energético del Aluminio Infinito",
       "sector": "Aluminio Secundario",
       "metricLabel": "Energía vs Virgen",
-      "description": "Smart Contract calcula CO2 ahorrado para emitir Certificados de Ahorro Energético (CAEs)."
+      "description": "Smart Contract calcula CO2 ahorrado para emitir Certificados de Ahorro Energético (CAEs).",
+      "challenge": "Alu Cycle producía aluminio secundario (reciclado) que consume un 95% menos de energía que el primario, pero no podía monetizar este ahorro energético. Los Certificados de Ahorro Energético (CAEs) requerían auditorías costosas.",
+      "solution": "Smart contract calcula automáticamente el CO2 y energía ahorrados comparando producción secundaria vs. primaria. Los CAEs se emiten automáticamente y se venden en el mercado de eficiencia energética.",
+      "ariaQuote": "Por cada tonelada de aluminio reciclado, nuestro smart contract emite CAEs por el equivalente de 14 MWh ahorrados. Ingresos adicionales de 200€/tonelada que antes no monetizábamos.",
+      "services": ["Smart Contracts de CAEs", "Calculadora de Ahorro Energético", "Marketplace de Certificados", "Trazabilidad de Aluminio Secundario", "Reporte de Impacto Ambiental"]
     },
     "producer-trust": {
       "title": "Auditoría RAP Automática",
       "sector": "Certificación RAP",
       "metricLabel": "Auditoría Anual",
-      "description": "Dashboard de cumplimiento RAP que agrega datos de múltiples Data Holders con firmas DID inmutables."
+      "description": "Dashboard de cumplimiento RAP que agrega datos de múltiples Data Holders con firmas DID inmutables.",
+      "challenge": "Producer Trust certificaba el cumplimiento de la Responsabilidad Ampliada del Productor (RAP) para fabricantes de envases. Agregar datos de múltiples gestores de residuos era un proceso manual que tardaba 3 meses por auditoría.",
+      "solution": "Dashboard que agrega automáticamente datos de recogida, reciclaje y valorización de múltiples Data Holders. Cada dato tiene firma DID inmutable que garantiza su integridad para los auditores.",
+      "ariaQuote": "El fabricante de envases ve en tiempo real cuántas toneladas de su plástico se han reciclado realmente. Los auditores de Ecoembes verifican los datos en blockchain en minutos, no en meses.",
+      "services": ["Dashboard RAP", "Agregación Multi-Holder", "Firmas DID Inmutables", "Integración con SCRAPS", "Auditoría Automática"]
     },
     "eco-orchestrator": {
       "title": "Coordinación de SCRAPS",
       "sector": "Gestión SCRAPS",
       "metricLabel": "Ecotasa",
-      "description": "Multi-Tenant RLS asegura que cada socio solo ve su cuota mientras el SCRAP ve el agregado."
+      "description": "Multi-Tenant RLS asegura que cada socio solo ve su cuota mientras el SCRAP ve el agregado.",
+      "challenge": "Eco Orchestrator coordinaba un SCRAP (Sistema Colectivo de RAP) con 50 fabricantes socios. Cada socio debía ver solo sus datos de aportación y cumplimiento, pero el SCRAP necesitaba ver el agregado. La gestión de permisos era un caos.",
+      "solution": "Multi-Tenant RLS (Row Level Security) que asegura que cada socio accede solo a sus datos mientras el SCRAP ve el agregado. Políticas ODRL definen quién puede ver qué, auditables en blockchain.",
+      "ariaQuote": "Cada fabricante ve solo su cuota de aportación y cumplimiento. El SCRAP ve el agregado para reportar al Ministerio. Los auditores ven todo. Cero filtraciones de datos competitivos entre socios.",
+      "services": ["Multi-Tenant RLS", "Políticas ODRL de Acceso", "Dashboard por Rol", "Agregación para SCRAP", "Auditoría de Permisos"]
     },
     "raw-market": {
       "title": "Marketplace de Materias Primas Secundarias",
       "sector": "Revalorización",
       "metricLabel": "Ingresos vs Gestión",
-      "description": "Políticas ODRL aseguran que el comprador usa el residuo para reciclaje y no para vertedero."
+      "description": "Políticas ODRL aseguran que el comprador usa el residuo para reciclaje y no para vertedero.",
+      "challenge": "Raw Market conectaba generadores de residuos con recicladores, pero no podía garantizar que el comprador realmente reciclaría el material en lugar de enviarlo a vertedero. Los generadores temían responsabilidades legales.",
+      "solution": "Políticas ODRL en el contrato de venta obligan al comprador a demostrar el reciclaje efectivo. Si el material acaba en vertedero, el smart contract ejecuta penalizaciones automáticas.",
+      "ariaQuote": "El generador de residuos vende su plástico con la garantía de que será reciclado. Si el comprador lo envía a vertedero, pierde su depósito de garantía automáticamente. Responsabilidad transferida y verificada.",
+      "services": ["Marketplace de Residuos", "Políticas ODRL de Uso", "Smart Contracts de Garantía", "Trazabilidad de Destino", "Verificación de Reciclaje"]
     },
     "battery-life": {
       "title": "Segunda Vida de Baterías EV",
       "sector": "Baterías Litio",
       "metricLabel": "Vida Útil Extra",
-      "description": "Audit Logs inmutables certifican historial de uso para decidir reciclaje vs almacenamiento estacionario."
+      "description": "Audit Logs inmutables certifican historial de uso para decidir reciclaje vs almacenamiento estacionario.",
+      "challenge": "Battery Life recibía baterías de vehículos eléctricos al final de su vida útil, pero no podía determinar si tenían capacidad suficiente para una segunda vida como almacenamiento estacionario o debían ir directamente a reciclaje.",
+      "solution": "Audit logs inmutables del historial de carga/descarga de cada batería permiten calcular su estado de salud real. Las baterías con >70% de capacidad van a segunda vida; el resto, a reciclaje.",
+      "ariaQuote": "Una batería de Tesla con 75% de capacidad tiene 8 años más de vida útil como almacenamiento estacionario. Antes las reciclábamos todas. Ahora las vendemos a 3.000€ en lugar de recibir 200€ del reciclador.",
+      "services": ["Historial de Batería Inmutable", "Cálculo de Estado de Salud", "Marketplace de Segunda Vida", "Certificación de Capacidad", "Decisión Automática Reciclar/Reusar"]
     },
     "urban-mining": {
       "title": "Certificación de Oro Ético Reciclado",
       "sector": "Metales Preciosos",
       "metricLabel": "Sobreprecio Ético",
-      "description": "Prueba de integridad blockchain que vincula lote de entrada (basura) con salida (lingote)."
+      "description": "Prueba de integridad blockchain que vincula lote de entrada (basura) con salida (lingote).",
+      "challenge": "Urban Mining recuperaba oro de residuos electrónicos, pero no podía demostrar a joyeros que el oro era realmente reciclado y no mezclado con oro de minería ilegal. Sin certificación creíble, el precio era igual al del oro convencional.",
+      "solution": "Prueba de integridad blockchain que vincula cada lote de entrada (RAEE) con el lingote de salida. Los joyeros verifican en blockchain que el oro de su anillo proviene 100% de reciclaje.",
+      "ariaQuote": "Cartier paga un 15% más por nuestro oro reciclado certificado porque puede demostrar a sus clientes que no proviene de minería destructiva. La trazabilidad blockchain es la clave del sobreprecio ético.",
+      "services": ["Trazabilidad de Oro Reciclado", "Prueba de Integridad Blockchain", "Certificación de Origen", "Integración con Joyeros", "Auditoría de Cadena de Custodia"]
     },
     "waste-to-value": {
       "title": "Auditoría de Vertido Cero",
       "sector": "Zero Waste",
       "metricLabel": "Desviación Vertedero",
-      "description": "Conciliación automática entre el dato de salida de fábrica y entrada del reciclador via Webhooks."
+      "description": "Conciliación automática entre el dato de salida de fábrica y entrada del reciclador via Webhooks.",
+      "challenge": "Waste to Value certificaba fábricas Zero Waste, pero la conciliación entre residuos declarados por la fábrica y recibidos por el reciclador era manual y discrepaba en un 20%. Las auditorías tardaban semanas.",
+      "solution": "Webhooks conectan los sistemas de pesaje de fábrica y reciclador. El smart contract concilia automáticamente las entradas y salidas, detectando discrepancias en tiempo real.",
+      "ariaQuote": "Si la fábrica declara 100 toneladas de residuo y el reciclador recibe 95, el sistema alerta inmediatamente. Antes descubríamos las discrepancias meses después. Ahora, en tiempo real y con evidencia inmutable.",
+      "services": ["Webhooks de Pesaje", "Conciliación Automática", "Alertas de Discrepancia", "Certificación Zero Waste", "Dashboard de Flujos de Residuos"]
     },
     "green-gov-circular": {
       "title": "Licitación Pública de Plástico Local",
       "sector": "Compra Pública Verde",
       "metricLabel": "SROI Local",
-      "description": "Validador DID Web3 confirma que el plástico proviene de la planta de reciclaje local."
+      "description": "Validador DID Web3 confirma que el plástico proviene de la planta de reciclaje local.",
+      "challenge": "Green Gov Circular gestionaba licitaciones públicas que exigían plástico reciclado de origen local, pero los licitadores presentaban certificados de origen dudosos. Verificar que el plástico realmente provenía de la planta local era imposible.",
+      "solution": "Validador DID Web3 confirma que cada kg de plástico reciclado tiene un pasaporte digital emitido por la planta de reciclaje local. Los licitadores sin DID válido quedan automáticamente excluidos.",
+      "ariaQuote": "Solo aceptamos ofertas con plástico reciclado que tenga DID de la planta de Valdemingómez. Los licitadores con certificados de papel de origen chino quedan excluidos automáticamente. Compra local garantizada.",
+      "services": ["Validador DID de Origen", "Integración con Plantas Locales", "Exclusión Automática de No Conformes", "Dashboard de Licitaciones Verdes", "Reporte de Impacto Local"]
     },
     "avocado-trust": {
       "title": "Exportación Fitosanitaria USA",
       "sector": "Exportación Fitosanitaria",
       "metricLabel": "Rechazo Aduana",
-      "description": "Sensores IoT de trampas generan pre-certificado fitosanitario USDA con evidencia blockchain."
+      "description": "Sensores IoT de trampas generan pre-certificado fitosanitario USDA con evidencia blockchain.",
+      "challenge": "Avocado Trust exportaba aguacates a USA, pero el 8% de los contenedores eran rechazados en aduana por presencia de plagas. Cada rechazo costaba 25.000€ en destrucción y re-exportación.",
+      "solution": "Sensores IoT en trampas de monitoreo de plagas generan datos en tiempo real que alimentan un pre-certificado fitosanitario. La evidencia blockchain permite que el inspector USDA valide remotamente antes del embarque.",
+      "ariaQuote": "El inspector USDA ve en blockchain los datos de 90 días de trampas sin capturas de mosca de la fruta. El contenedor se pre-aprueba antes de zarpar. Rechazo en aduana de 8% a 0.5%.",
+      "services": ["Sensores IoT de Trampas", "Pre-Certificado Fitosanitario", "Evidencia Blockchain", "Validación Remota USDA", "Dashboard de Cumplimiento"]
     },
     "olive-origin": {
       "title": "Soberanía de Marca D.O. Jaén",
       "sector": "Aceite D.O.",
       "metricLabel": "Precio Premium",
-      "description": "Pasaporte Digital vincula lote de almazara con coordenadas GPS de recolección via DID."
+      "description": "Pasaporte Digital vincula lote de almazara con coordenadas GPS de recolección via DID.",
+      "challenge": "Olive Origin producía aceite D.O. Sierra Mágina, pero competía con aceites italianos que usaban aceitunas españolas etiquetadas como italianas. No podía demostrar al consumidor que su aceite era realmente de Jaén.",
+      "solution": "Pasaporte Digital que vincula cada botella con las coordenadas GPS de los olivos de origen. El consumidor escanea y ve el mapa con la finca exacta de donde provienen sus aceitunas.",
+      "ariaQuote": "El consumidor en Alemania escanea el QR y ve que sus aceitunas se recogieron en la finca 'Los Almendros' de Mancha Real. Eso es soberanía de marca. Precio premium de 18€ en lugar de 12€.",
+      "services": ["Pasaporte Digital de Aceite", "GPS de Origen", "QR de Trazabilidad", "Mapa Interactivo de Fincas", "Certificación D.O. Digital"]
     },
     "zero-chem-wine": {
       "title": "Certificación Zero Residue Vinos",
       "sector": "Vinos Orgánicos",
       "metricLabel": "Zero Residue",
-      "description": "36 meses sin síntesis química certificados con sensores de nitratos y pasaporte digital."
+      "description": "36 meses sin síntesis química certificados con sensores de nitratos y pasaporte digital.",
+      "challenge": "Zero Chem Wine producía vinos sin residuos químicos, pero la certificación tradicional solo auditaba una vez al año. Los consumidores exigían garantías continuas de que no se usaban pesticidas sintéticos.",
+      "solution": "Sensores de nitratos y conductividad en el suelo transmiten datos en tiempo real durante los 36 meses de conversión. El pasaporte digital muestra el historial completo de ausencia de químicos.",
+      "ariaQuote": "El consumidor ve 36 meses de datos de sensores que demuestran cero aplicaciones de síntesis química. Eso es más creíble que un sello anual. Precio premium de 25€ en lugar de 15€ por botella.",
+      "services": ["Sensores de Suelo IoT", "Monitoreo Continuo", "Pasaporte Digital de Viñedo", "Certificación Zero Residue", "Dashboard de Conversión Orgánica"]
     },
     "citrus-check": {
       "title": "Validación LMR Multi-País",
       "sector": "Cítricos LMR",
       "metricLabel": "Países Aptos",
-      "description": "Cruce automático de aplicaciones fitosanitarias con normativas de 150 países."
+      "description": "Cruce automático de aplicaciones fitosanitarias con normativas de 150 países.",
+      "challenge": "Citrus Check exportaba cítricos a 40 países, pero cada país tenía diferentes Límites Máximos de Residuos (LMR). Verificar manualmente si una aplicación fitosanitaria era compatible con todos los destinos era un caos.",
+      "solution": "Sistema que cruza automáticamente las aplicaciones fitosanitarias registradas en el cuaderno de campo con los LMR de 150 países. El agricultor sabe en tiempo real a qué mercados puede exportar.",
+      "ariaQuote": "Apliqué un fungicida y el sistema me dijo inmediatamente que ese lote ya no podía ir a Japón por superar su LMR. Redirigí la venta a Alemania donde sí cumple. Cero rechazos y máxima rentabilidad.",
+      "services": ["Base de Datos LMR Global", "Cruce Automático de Aplicaciones", "Alertas de Incompatibilidad", "Dashboard de Mercados Aptos", "Cuaderno de Campo Digital"]
     },
     "berry-water": {
       "title": "Certificación Huella Hídrica",
       "sector": "Eficiencia Hídrica",
       "metricLabel": "Eficiencia Riego",
-      "description": "Sondas de humedad y caudalímetros notarizan ahorro para certificación GlobalG.A.P."
+      "description": "Sondas de humedad y caudalímetros notarizan ahorro para certificación GlobalG.A.P.",
+      "challenge": "Berry Water cultivaba frutos rojos en Huelva, donde la escasez de agua era crítica. Los supermercados exigían certificación GlobalG.A.P. SPRING con datos reales de eficiencia hídrica, no solo declaraciones.",
+      "solution": "Sondas de humedad y caudalímetros transmiten datos en tiempo real a blockchain. El certificado GlobalG.A.P. incluye la huella hídrica real verificada, no estimaciones.",
+      "ariaQuote": "Sainsbury's paga un 20% más por nuestras frambuesas porque puede demostrar a sus clientes que se cultivaron con riego de precisión. Los datos de sensores en blockchain son la prueba.",
+      "services": ["Sondas de Humedad IoT", "Caudalímetros Conectados", "Certificación GlobalG.A.P. SPRING", "Dashboard de Eficiencia Hídrica", "Huella Hídrica por Kg"]
     },
     "rice-satellite": {
       "title": "Validación Satelital de D.O.",
       "sector": "Validación Remota",
       "metricLabel": "Confianza D.O.",
-      "description": "Firma espectral NDVI confirma variedad y bloquea mezclas con grano de importación."
+      "description": "Firma espectral NDVI confirma variedad y bloquea mezclas con grano de importación.",
+      "challenge": "Rice Satellite certificaba arroz D.O. Valencia, pero había sospechas de que algunos productores mezclaban arroz valenciano con importaciones de Asia. Las inspecciones físicas eran costosas e insuficientes.",
+      "solution": "Imágenes satelitales NDVI durante el ciclo de cultivo crean una firma espectral única de cada parcela. La IA compara la firma del arroz cosechado con la esperada para detectar mezclas.",
+      "ariaQuote": "La firma espectral de un arrozal de Sueca es diferente a la de uno de Vietnam. Si un productor mezcla, la IA lo detecta. Confianza del 100% en la D.O. y precio premium del 30%.",
+      "services": ["Imágenes Satelitales NDVI", "IA de Detección de Mezclas", "Firma Espectral por Parcela", "Certificación D.O. Satelital", "Dashboard de Integridad"]
     },
     "bio-cotton-trace": {
       "title": "Trazabilidad Algodón GOTS",
       "sector": "Algodón Orgánico",
       "metricLabel": "Transparencia",
-      "description": "Cadena de custodia: Semilla → Campo → Desmotadora → Bala con ID único."
+      "description": "Cadena de custodia: Semilla → Campo → Desmotadora → Bala con ID único.",
+      "challenge": "Bio Cotton Trace certificaba algodón GOTS, pero la cadena de custodia desde la semilla hasta la bala era opaca. Las marcas de moda exigían trazabilidad completa para evitar fraudes de mezcla con algodón convencional.",
+      "solution": "Cada etapa de la cadena de custodia (semilla, campo, desmotadora, bala) se registra con un ID único en blockchain. Las marcas verifican el origen completo escaneando un QR.",
+      "ariaQuote": "H&M verifica que su algodón orgánico realmente viene de campos certificados en India. Cada bala tiene un pasaporte digital con la trazabilidad completa. Cero fraude y premium de sostenibilidad.",
+      "services": ["Trazabilidad de Semilla a Bala", "IDs Únicos por Etapa", "QR de Verificación", "Integración GOTS", "Dashboard de Cadena de Custodia"]
     },
     "greenhouse-ai": {
       "title": "Invernaderos IoT Anti-Mildiu",
       "sector": "Control Fitosanitario",
       "metricLabel": "Químicos",
-      "description": "IA gestiona microclima para prevenir hongos sin fungicidas sistémicos."
+      "description": "IA gestiona microclima para prevenir hongos sin fungicidas sistémicos.",
+      "challenge": "Greenhouse AI gestionaba invernaderos de tomate donde el mildiu causaba pérdidas del 15%. Los fungicidas sistémicos dejaban residuos inaceptables para supermercados premium como Waitrose.",
+      "solution": "IA analiza temperatura, humedad y punto de rocío para gestionar ventilación y calefacción, creando un microclima hostil al mildiu. Tratamientos solo con cobre, azufre y biocontroles permitidos en orgánico.",
+      "ariaQuote": "La IA detecta que la humedad relativa superará el 85% a las 6 AM y activa la calefacción a las 5 AM. El mildiu no tiene ventana de infección. Reducción de fungicidas del 90% y acceso a mercados premium.",
+      "services": ["IA de Gestión de Microclima", "Sensores de Humedad y Temperatura", "Control de Ventilación Automático", "Dashboard de Riesgo Fitosanitario", "Cuaderno de Campo Digital"]
     },
     "tropical-flash": {
       "title": "Aduana Express Perecederos",
       "sector": "Logística Tropical",
       "metricLabel": "Frescura Ganada",
-      "description": "Pre-validación digital 48h antes reduce merma y extiende vida útil en lineal."
+      "description": "Pre-validación digital 48h antes reduce merma y extiende vida útil en lineal.",
+      "challenge": "Tropical Flash importaba frutas tropicales de Costa Rica, pero las demoras aduaneras de 72h reducían la vida útil en lineal. La merma alcanzaba el 12% y los supermercados penalizaban con devoluciones.",
+      "solution": "Pre-validación digital de documentación fitosanitaria y aduanera 48h antes de la llegada. Cuando el contenedor llega al puerto, el despacho está listo y sale en menos de 4 horas.",
+      "ariaQuote": "La piña llega al supermercado con 5 días más de vida útil gracias a la pre-validación. Merma del 12% al 3% y cero penalizaciones por devolución. El ROI de la digitalización es brutal.",
+      "services": ["Pre-Validación Aduanera", "Documentación Digital Fitosanitaria", "Integración con Puertos", "Dashboard de Tiempos de Despacho", "Alertas de Caducidad"]
     },
     "urban-hydro": {
       "title": "Granja Vertical Km 0",
       "sector": "Agricultura Urbana",
       "metricLabel": "Huella Logística",
-      "description": "Producción hidropónica urbana con energía LED renovable certificada."
+      "description": "Producción hidropónica urbana con energía LED renovable certificada.",
+      "challenge": "Urban Hydro operaba granjas verticales urbanas, pero no podía demostrar a restaurantes que sus lechugas tenían menor huella de carbono que las del campo. Sin datos, el argumento Km 0 era marketing vacío.",
+      "solution": "Certificación de energía renovable para los LEDs, cálculo automático de huella de carbono logística (0 km vs. 400 km del campo) y pasaporte digital con comparativa de impacto ambiental.",
+      "ariaQuote": "El restaurante ve que nuestra lechuga tiene 0.1 kg CO2/kg vs. 0.8 kg CO2/kg de la lechuga de Murcia. Los datos hablan: Km 0 real, no marketing. Premium del 40% justificado.",
+      "services": ["Certificación de Energía Renovable", "Calculadora de Huella Logística", "Pasaporte Digital de Producto", "Comparativa de Impacto", "QR para Restaurantes"]
     }
   },
   "detail": {
