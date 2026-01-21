@@ -218,6 +218,14 @@ import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRou
 import ValerdataMiembros from "./pages/partners/ValerdataMiembros";
 import ValerdataProyecto from "./pages/partners/ValerdataProyecto";
 import SeresProyecto from "./pages/partners/SeresProyecto";
+import SeresLogin from "./pages/partners/SeresLogin";
+import SeresMiembros from "./pages/partners/SeresMiembros";
+import SeresExploracion from "./pages/partners/SeresExploracion";
+import SeresArquitectura from "./pages/partners/SeresArquitectura";
+import SeresFuncionalidades from "./pages/partners/SeresFuncionalidades";
+import SeresCasosUso from "./pages/partners/SeresCasosUso";
+import SeresMonetizacion from "./pages/partners/SeresMonetizacion";
+import SeresRoadmap from "./pages/partners/SeresRoadmap";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -524,7 +532,43 @@ const App = () => (
                   } />
 
                   {/* Partner Pages - SERES */}
+                  <Route path="/partners/seres" element={<SeresLogin />} />
                   <Route path="/partners/seres/proyecto" element={<SeresProyecto />} />
+                  <Route path="/partners/seres/miembros" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresMiembros />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/exploracion" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresExploracion />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/arquitectura" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresArquitectura />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/funcionalidades" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresFuncionalidades />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresCasosUso />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/monetizacion" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresMonetizacion />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/roadmap" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresRoadmap />
+                    </PartnerProtectedRoute>
+                  } />
 
                   {/* Partner Pages - CloserStill Media */}
                   <Route path="/partners/closerstill" element={<CloserStillLogin />} />
