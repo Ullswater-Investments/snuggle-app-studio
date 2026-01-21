@@ -147,6 +147,19 @@ export const partnersByCountry: CountryData[] = [
         priority: "inmediato",
         type: "ecosystemBuilder",
       },
+      {
+        id: "seres",
+        name: "SERES",
+        fullName: "SERES (Grupo Docaposte) - Intercambio Electrónico Seguro de Documentos",
+        logo: null,
+        link: "/partners/seres/proyecto",
+        status: "activo",
+        sector: "technology",
+        hasDocTecnico: false,
+        keyInitiative: "EDI, e-Factura, Compliance B2B/B2G, Gaia-X Ready",
+        priority: "inmediato",
+        type: "ecosystemBuilder",
+      },
       // Clústeres Empresariales (5)
       {
         id: "gaia-cluster",

@@ -305,6 +305,9 @@
     },
     "flux50": {
       "description": "Smart-Energy-Cluster: Smart Grids, Energieeffizienz (Flandern). +150 Unternehmen."
+    },
+    "seres": {
+      "description": "Pioniere im sicheren elektronischen Dokumentenaustausch mit über 30 Jahren Erfahrung. Spezialisten für EDI, E-Rechnung, Steuer-Compliance und Supply-Chain-Automatisierung. Docaposte-Gruppe - Gaia-X Ready."
     }
   }
 }
