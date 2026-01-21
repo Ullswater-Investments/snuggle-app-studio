@@ -26,6 +26,7 @@ import esContract from './locales/es/contract.json';
 import esCloserstill from './locales/es/closerstill.json';
 import esCatalogDetails from './locales/es/catalogDetails.json';
 import esGreenProcurement from './locales/es/greenProcurement.json';
+import esUseCases from './locales/es/useCases.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -49,6 +50,7 @@ import frRegister from './locales/fr/register.json';
 import frContract from './locales/fr/contract.json';
 import frCloserstill from './locales/fr/closerstill.json';
 import frCatalogDetails from './locales/fr/catalogDetails.json';
+import frUseCases from './locales/fr/useCases.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -73,6 +75,7 @@ import ptRegister from './locales/pt/register.json';
 import ptContract from './locales/pt/contract.json';
 import ptCloserstill from './locales/pt/closerstill.json';
 import ptCatalogDetails from './locales/pt/catalogDetails.json';
+import ptUseCases from './locales/pt/useCases.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -97,6 +100,7 @@ import deRegister from './locales/de/register.json';
 import deContract from './locales/de/contract.json';
 import deCloserstill from './locales/de/closerstill.json';
 import deCatalogDetails from './locales/de/catalogDetails.json';
+import deUseCases from './locales/de/useCases.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -121,6 +125,7 @@ import itRegister from './locales/it/register.json';
 import itContract from './locales/it/contract.json';
 import itCloserstill from './locales/it/closerstill.json';
 import itCatalogDetails from './locales/it/catalogDetails.json';
+import itUseCases from './locales/it/useCases.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -145,6 +150,7 @@ import nlRegister from './locales/nl/register.json';
 import nlContract from './locales/nl/contract.json';
 import nlCloserstill from './locales/nl/closerstill.json';
 import nlCatalogDetails from './locales/nl/catalogDetails.json';
+import nlUseCases from './locales/nl/useCases.json';
 
 // English
 import enMotor from './locales/en/motor.json';
@@ -157,6 +163,7 @@ import enRegister from './locales/en/register.json';
 import enContract from './locales/en/contract.json';
 import enCloserstill from './locales/en/closerstill.json';
 import enCatalogDetails from './locales/en/catalogDetails.json';
+import enUseCases from './locales/en/useCases.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -197,6 +204,7 @@ i18n
         contract: esContract,
         closerstill: esCloserstill,
         catalogDetails: esCatalogDetails,
+        useCases: esUseCases,
         greenProcurement: esGreenProcurement,
       },
       en: {
