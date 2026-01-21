@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Server, Database, Cpu, Shield, Lock, Cloud } from "lucide-react";
 import { usePartnerAuth } from "@/hooks/usePartnerAuth";
-import MermaidDiagram from "@/components/MermaidDiagram";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 import ComputeToDataVisual from "@/components/partners/seres/visuals/ComputeToDataVisual";
 
 const SeresArquitectura = () => {

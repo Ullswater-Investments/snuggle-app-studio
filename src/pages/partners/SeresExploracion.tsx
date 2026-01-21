@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Lightbulb, TrendingUp, Shield, Database, Server, FileSignature } from "lucide-react";
 import { usePartnerAuth } from "@/hooks/usePartnerAuth";
-import MermaidDiagram from "@/components/MermaidDiagram";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 import EDIToOracleVisual from "@/components/partners/seres/visuals/EDIToOracleVisual";
 
 const SeresExploracion = () => {
