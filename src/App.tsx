@@ -226,6 +226,13 @@ import SeresFuncionalidades from "./pages/partners/SeresFuncionalidades";
 import SeresCasosUso from "./pages/partners/SeresCasosUso";
 import SeresMonetizacion from "./pages/partners/SeresMonetizacion";
 import SeresRoadmap from "./pages/partners/SeresRoadmap";
+// SERES Case Study Detail Pages
+import SeresNestle from "./pages/partners/seres/casos/SeresNestle";
+import SeresCovirán from "./pages/partners/seres/casos/SeresCovirán";
+import SeresIlunion from "./pages/partners/seres/casos/SeresIlunion";
+import SeresSiemensGamesa from "./pages/partners/seres/casos/SeresSiemensGamesa";
+import SeresAmadeus from "./pages/partners/seres/casos/SeresAmadeus";
+import SeresBT from "./pages/partners/seres/casos/SeresBT";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -557,6 +564,36 @@ const App = () => (
                   <Route path="/partners/seres/miembros/casos-uso" element={
                     <PartnerProtectedRoute partnerSlug="seres">
                       <SeresCasosUso />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso/nestle" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresNestle />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso/coviran" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresCovirán />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso/ilunion" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresIlunion />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso/siemens-gamesa" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresSiemensGamesa />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso/amadeus" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresAmadeus />
+                    </PartnerProtectedRoute>
+                  } />
+                  <Route path="/partners/seres/miembros/casos-uso/bt" element={
+                    <PartnerProtectedRoute partnerSlug="seres">
+                      <SeresBT />
                     </PartnerProtectedRoute>
                   } />
                   <Route path="/partners/seres/miembros/monetizacion" element={

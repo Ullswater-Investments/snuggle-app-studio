@@ -45,19 +45,25 @@ const SeresCasosUso = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cases.map((c, i) => (
             <motion.div key={c.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
-              <Card className="bg-slate-800/50 border-slate-700/50 h-full hover:border-blue-500/50 transition-colors">
+              <Card 
+                className="bg-slate-800/50 border-slate-700/50 h-full hover:border-blue-500/50 transition-colors cursor-pointer group"
+                onClick={() => navigate(`/partners/seres/miembros/casos-uso/${c.id}`)}
+              >
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${c.color} flex items-center justify-center`}>
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${c.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                       <c.icon className="h-6 w-6 text-white" />
                     </div>
                     <Badge variant="outline" className="text-slate-400 border-slate-600">{c.years}</Badge>
                   </div>
-                  <CardTitle className="text-white">{c.name}</CardTitle>
+                  <CardTitle className="text-white group-hover:text-blue-400 transition-colors">{c.name}</CardTitle>
                   <Badge className="w-fit bg-slate-700/50 text-slate-300">{c.sector}</Badge>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-slate-400">{c.desc}</p>
+                  <p className="text-sm text-slate-400 mb-4">{c.desc}</p>
+                  <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 p-0 h-auto">
+                    Ver caso completo →
+                  </Button>
                 </CardContent>
               </Card>
             </motion.div>
