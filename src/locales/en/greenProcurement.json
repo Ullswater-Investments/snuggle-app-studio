@@ -1,0 +1,180 @@
+{
+  "common": {
+    "badges": {
+      "greenProcurement": "Green Procurement",
+      "greenProcurementTooltip": "Verified dataset for sustainable procurement and green supply chain",
+      "lcaCertified": "LCA Certified",
+      "lcaTooltip": "ISO 14044 certified Life Cycle Assessment methodology",
+      "circularEconomy": "Circular Economy",
+      "circularTooltip": "Data for circular economy strategies",
+      "eudrCompliant": "EUDR Compliant",
+      "eudrTooltip": "Complies with EU Deforestation Regulation",
+      "scope3Ready": "Scope 3 Ready",
+      "scope3Tooltip": "Ready for Scope 3 emissions calculation",
+      "scope2Ready": "Scope 2 Ready",
+      "openData": "Open Data",
+      "conflictFree": "Conflict-Free",
+      "dueDiligence": "Due Diligence",
+      "ecolabels": "Ecolabels",
+      "reachCompliant": "REACH Compliant",
+      "satellite": "Satellite",
+      "leedBreeam": "LEED/BREEAM",
+      "esgScoring": "ESG Scoring",
+      "humanRights": "Human Rights",
+      "rightToRepair": "Right to Repair",
+      "diversity": "Diversity",
+      "socialImpact": "Social Impact",
+      "re100": "RE100",
+      "goosRecs": "GoOs/RECs",
+      "electrification": "Electrification",
+      "tcoAnalysis": "TCO Analysis",
+      "carbonCredits": "Carbon Credits",
+      "netZero": "Net Zero",
+      "energyEfficiency": "Energy Efficiency",
+      "waterRisk": "Water Risk",
+      "bioMaterials": "Bio-Materials",
+      "pueMetrics": "PUE Metrics"
+    },
+    "categories": {
+      "lca": "Carbon Footprint and LCA",
+      "circular": "Circular Economy",
+      "compliance": "Regulatory Compliance",
+      "esg": "ESG Risk",
+      "finance": "Green Finance"
+    }
+  },
+  "products": {
+    "factores-emision-materiales": {
+      "category": "Environmental Impact",
+      "title": "Industrial Material Emission Factors",
+      "shortDescription": "Database with cradle-to-gate CO2e emission factors for industrial materials: steel, aluminum, cement, glass and plastics. Includes recycled content and regional origin.",
+      "provider": "Ecoinvent AG",
+      "custody": "Swiss Data Center (Zurich, CH)",
+      "rating": "4.7",
+      "reviewCount": "234",
+      "metrics": {
+        "update": "Quarterly",
+        "records": "12,000+",
+        "materials": "450+",
+        "regions": "Global"
+      },
+      "description": {
+        "paragraph1": "World-leading scientific reference database for calculating embodied carbon footprint in construction and industrial materials. Developed by Ecoinvent, the most cited source in Life Cycle Assessment (LCA) studies.",
+        "paragraph2": "Emission factors follow ISO 14044 methodology and are segmented by production region, allowing precise calculations based on material origin. Essential for ESG reporting, CSRD compliance and sustainable procurement specifications."
+      },
+      "useCases": [
+        "Carbon footprint calculation for manufactured products",
+        "Alternative material comparison in design phase",
+        "ESG reporting and CSRD directive compliance",
+        "Complete life cycle assessment (LCA)",
+        "Sustainable procurement specifications in tenders"
+      ],
+      "schema": [
+        { "field": "material_id", "type": "String", "description": "Unique material ID (format: MAT-[TYPE]-[NUM])" },
+        { "field": "material_name", "type": "String", "description": "Material name in English" },
+        { "field": "material_category", "type": "Enum", "description": "'steel' | 'aluminum' | 'cement' | 'glass' | 'plastic'" },
+        { "field": "co2e_per_kg", "type": "Float", "description": "kg CO2e per kg of material (cradle-to-gate)" },
+        { "field": "recycled_content_pct", "type": "Float (0-100)", "description": "Recycled content percentage" },
+        { "field": "production_region", "type": "String", "description": "Production region (ISO 3166-1)" },
+        { "field": "energy_mj_per_kg", "type": "Float", "description": "Energy consumed in production (MJ/kg)" },
+        { "field": "water_liters_per_kg", "type": "Float", "description": "Water consumption (L/kg)" },
+        { "field": "data_quality_score", "type": "Integer (1-5)", "description": "Data quality according to Ecoinvent" },
+        { "field": "last_review", "type": "Date", "description": "Last scientific review" }
+      ],
+      "odrl": {
+        "permitted": [
+          "Internal LCA calculations",
+          "Integration in eco-design tools",
+          "ESG and CSRD reporting",
+          "Material comparisons for procurement"
+        ],
+        "prohibited": [
+          "Commercial redistribution of the database",
+          "Use for greenwashing without evidence",
+          "Publication of individual factors without context",
+          "Creation of derivative databases"
+        ],
+        "obligations": [
+          "Cite source: Ecoinvent v3.x",
+          "Comply with commercial use license",
+          "Mandatory annual update",
+          "Usage audit on demand"
+        ]
+      },
+      "quality": {
+        "completeness": { "value": 98.5, "description": "Industrial materials coverage" },
+        "freshness": { "value": 95.0, "description": "Quarterly update" },
+        "accuracy": { "value": 97.2, "description": "Peer-reviewed scientific validation" },
+        "consistency": { "value": 99.5, "description": "ISO 14044 methodology" },
+        "availability": { "value": 99.9, "description": "API with guaranteed SLA" }
+      },
+      "pricing": {
+        "amount": "€800/month",
+        "model": "subscription",
+        "description": "Monthly subscription"
+      }
+    },
+    "intensidad-carbono-red": {
+      "category": "Energy",
+      "title": "Electricity Grid Carbon Intensity",
+      "shortDescription": "Real-time and historical data on electricity grid carbon intensity (gCO2/kWh) for over 150 countries. Complete energy mix.",
+      "provider": "Electricity Maps",
+      "custody": "EU Cloud (Copenhagen, DK)",
+      "rating": "4.9",
+      "reviewCount": "567",
+      "metrics": {
+        "update": "5 minutes",
+        "countries": "150+",
+        "dataHistory": "5 years",
+        "precision": "Hourly"
+      },
+      "description": {
+        "paragraph1": "Electricity Maps provides real-time electricity carbon intensity data, allowing companies to make informed decisions about when and where to consume energy to minimize their carbon footprint.",
+        "paragraph2": "The dataset includes the complete energy mix (solar, wind, coal, gas, nuclear, hydro), allowing precise geographic Scope 2 emissions calculation. Essential for sustainable energy procurement strategies."
+      },
+      "useCases": [
+        "Location selection for new factories or data centers",
+        "Consumption optimization based on 'clean energy hours'",
+        "Precise Scope 2 emissions calculation",
+        "Renewable energy procurement strategies",
+        "RE100 and CDP Climate reporting"
+      ],
+      "pricing": {
+        "amount": "Free",
+        "model": "free",
+        "description": "Open Data with limited API"
+      }
+    },
+    "emisiones-logisticas-modal": {
+      "category": "Transport / Logistics",
+      "title": "Logistics Emissions by Transport Mode",
+      "shortDescription": "Emission factors for different transport modes (air, sea, road, rail) adjusted by cargo type and distance.",
+      "provider": "Smart Freight Centre",
+      "custody": "AWS EU (Amsterdam, NL)",
+      "rating": "4.6",
+      "reviewCount": "189",
+      "metrics": {
+        "update": "Monthly",
+        "modes": "12+",
+        "regions": "Global",
+        "precision": "99.2%"
+      },
+      "description": {
+        "paragraph1": "GLEC (Global Logistics Emissions Council) framework implemented as API. Provides certified emission factors to calculate freight transport carbon footprint according to ISO 14083 methodology.",
+        "paragraph2": "Includes adjustments for vehicle type, load factor, distance, topography and fuel. Essential for Scope 3 category 4 (upstream transport) and 9 (downstream transport) reporting."
+      },
+      "useCases": [
+        "Scope 3 transport emissions calculation",
+        "Supply chain route optimization",
+        "Modal comparison (road vs rail vs sea)",
+        "EcoVadis and CDP Supply Chain reporting",
+        "Carrier selection criteria"
+      ],
+      "pricing": {
+        "amount": "€450/month",
+        "model": "subscription",
+        "description": "Monthly subscription"
+      }
+    }
+  }
+}

@@ -1,0 +1,503 @@
+{
+  "sectors": {
+    "industrial": { "label": "Industrial", "icon": "Factory" },
+    "comercio": { "label": "Retail", "icon": "ShoppingBag" },
+    "agroalimentario": { "label": "AgriFood", "icon": "Wheat" },
+    "movilidad_sostenible": { "label": "Sustainable Mobility", "icon": "Truck" },
+    "salud": { "label": "Health", "icon": "Heart" },
+    "economia_social": { "label": "Social Economy", "icon": "Users" },
+    "energia": { "label": "Energy", "icon": "Zap" },
+    "construccion": { "label": "Construction", "icon": "Building" },
+    "tecnologia": { "label": "Technology", "icon": "Cpu" },
+    "financiero": { "label": "Financial", "icon": "Landmark" },
+    "logistica": { "label": "Logistics", "icon": "Package" },
+    "aerospace": { "label": "Aerospace", "icon": "Plane" },
+    "pharma": { "label": "Pharmaceutical", "icon": "Pill" }
+  },
+
+  "organizations": {
+    "titan-manufacturas": {
+      "name": "Titan Manufacturing S.A.",
+      "type": "provider",
+      "sector": "Industrial",
+      "description": "Leading manufacturer of precision industrial components"
+    },
+    "iberia-supplies": {
+      "name": "Iberia Industrial Supplies",
+      "type": "provider",
+      "sector": "Industrial",
+      "description": "Wholesale distributor of industrial supplies"
+    },
+    "ecovolt": {
+      "name": "EcoVolt Generation",
+      "type": "provider",
+      "sector": "Energy",
+      "description": "Renewable energy generation and efficiency solutions"
+    },
+    "constructora-horizonte": {
+      "name": "Horizon Construction",
+      "type": "consumer",
+      "sector": "Construction",
+      "description": "Construction company specialized in sustainable building"
+    },
+    "global-retail": {
+      "name": "Global Retail Group",
+      "type": "consumer",
+      "sector": "Retail",
+      "description": "Leading group in retail distribution"
+    },
+    "ecomotion": {
+      "name": "EcoMotion Fleets",
+      "type": "consumer",
+      "sector": "Sustainable Mobility",
+      "description": "Electric fleet management and green mobility"
+    },
+    "agrobio": {
+      "name": "AgroBio Foods Coop",
+      "type": "provider",
+      "sector": "AgriFood",
+      "description": "Organic agri-food production cooperative"
+    },
+    "pharmacare": {
+      "name": "PharmaCare Labs",
+      "type": "provider",
+      "sector": "Health",
+      "description": "Pharmaceutical laboratory specialized in biotechnology"
+    },
+    "capital-trade": {
+      "name": "Capital Trade Bank",
+      "type": "data_holder",
+      "sector": "Financial",
+      "description": "B2B trade finance services"
+    },
+    "techsolutions-erp": {
+      "name": "TechSolutions ERP",
+      "type": "data_holder",
+      "sector": "Technology",
+      "description": "Enterprise ERP solutions provider"
+    },
+    "greenmetrics": {
+      "name": "GreenMetrics AI",
+      "type": "provider",
+      "sector": "Technology",
+      "description": "AI-powered sustainability analytics"
+    },
+    "datashield": {
+      "name": "DataShield Compliance",
+      "type": "provider",
+      "sector": "Legal",
+      "description": "Regulatory compliance and data protection services"
+    },
+    "chainforge": {
+      "name": "ChainForge Labs",
+      "type": "provider",
+      "sector": "Blockchain",
+      "description": "Blockchain traceability solutions"
+    },
+    "retail-giant": {
+      "name": "Retail Giant Corp",
+      "type": "consumer",
+      "sector": "Retail",
+      "description": "Leading corporation in retail"
+    },
+    "green-finance": {
+      "name": "Green Finance Bank",
+      "type": "consumer",
+      "sector": "Finance",
+      "description": "Bank specialized in green financing"
+    },
+    "logistics-ai": {
+      "name": "Logistics AI Solutions",
+      "type": "consumer",
+      "sector": "Logistics",
+      "description": "AI-powered logistics solutions"
+    },
+    "ecotech": {
+      "name": "EcoTech Industrial",
+      "type": "consumer",
+      "sector": "Industrial",
+      "description": "Industrial company focused on sustainability"
+    },
+    "agridata": {
+      "name": "AgriData Consulting",
+      "type": "consumer",
+      "sector": "AgriFood",
+      "description": "Consulting specialized in agricultural data"
+    },
+    "olivetrust": {
+      "name": "OliveTrust Coop",
+      "type": "provider",
+      "sector": "AgriFood",
+      "description": "Olive oil production cooperative"
+    },
+    "urbandeliver": {
+      "name": "UrbanDeliver S.L.",
+      "type": "consumer",
+      "sector": "Logistics",
+      "description": "Sustainable urban delivery services"
+    },
+    "biomed": {
+      "name": "BioMed Hospital Group",
+      "type": "consumer",
+      "sector": "Health",
+      "description": "Hospital group with biomedical technology"
+    },
+    "gigafactory": {
+      "name": "GigaFactory North",
+      "type": "consumer",
+      "sector": "Industrial",
+      "description": "Large-scale production factory"
+    },
+    "alianza-social": {
+      "name": "Social Alliance Hub",
+      "type": "consumer",
+      "sector": "Social Economy",
+      "description": "Social economy enterprise network"
+    }
+  },
+
+  "dataProducts": {
+    "ficha-tecnica-proveedor": {
+      "name": "Certified Supplier Technical Sheet",
+      "category": "Compliance",
+      "version": "v2.0",
+      "description": "Complete supplier master data with KYB validation"
+    },
+    "pack-certificaciones-iso": {
+      "name": "Complete ISO Certifications Pack",
+      "category": "Compliance",
+      "version": "v1.5",
+      "description": "ISO 9001, 14001, 45001 verified by accredited body"
+    },
+    "telemetria-iot": {
+      "name": "Industrial Machinery IoT Telemetry",
+      "category": "Industrial",
+      "version": "v2.0",
+      "description": "Real-time sensor data with blockchain notarization"
+    },
+    "esg-corporate-report": {
+      "name": "ESG Corporate Report",
+      "category": "ESG",
+      "version": "v1.0",
+      "description": "Complete Scope 1, 2, 3 report + environmental certifications"
+    },
+    "historial-pedidos": {
+      "name": "B2B Order History",
+      "category": "Industrial",
+      "version": "v1.0",
+      "description": "Complete commercial transaction record"
+    },
+    "scoring-crediticio": {
+      "name": "Business Credit Scoring",
+      "category": "Financial",
+      "version": "v1.5",
+      "description": "Z-Score, financial ratios and risk alerts"
+    },
+    "capacidad-productiva": {
+      "name": "Production Capacity",
+      "category": "Industrial",
+      "version": "v1.0",
+      "description": "Quarterly production metrics and capacity"
+    },
+    "trazabilidad-supply-chain": {
+      "name": "Supply Chain Traceability",
+      "category": "Supply Chain",
+      "version": "v2.0",
+      "description": "Complete tracking from origin to destination"
+    },
+    "certificados-cbam": {
+      "name": "CBAM Certificates",
+      "category": "ESG",
+      "version": "v1.0",
+      "description": "Carbon footprint for importers under EU regulations"
+    },
+    "digital-twin": {
+      "name": "Digital Twin Dataset",
+      "category": "IoT",
+      "version": "v1.0",
+      "description": "Operational parameters for digital twin"
+    },
+    "prediccion-demanda": {
+      "name": "AI Demand Prediction",
+      "category": "AI/ML",
+      "version": "v1.5",
+      "description": "Historical dataset for ML forecasting"
+    },
+    "pasaporte-producto-digital": {
+      "name": "Digital Product Passport",
+      "category": "Compliance",
+      "version": "v1.0",
+      "description": "DPP according to EU regulations for traceability"
+    },
+    "datos-sanitarios": {
+      "name": "Anonymized Health Data",
+      "category": "Health",
+      "version": "v1.0",
+      "description": "Anonymized clinical data compliant with GDPR"
+    },
+    "metricas-impacto-social": {
+      "name": "Social Impact Metrics",
+      "category": "ESG",
+      "version": "v1.0",
+      "description": "SROI, job placement and social metrics"
+    }
+  },
+
+  "services": {
+    "homologacion-flash": {
+      "name": "Flash Approval",
+      "category": "Compliance",
+      "description": "Automatic supplier validation in 24h with KYB verification",
+      "features": [
+        "Automatic KYB validation",
+        "Basic credit scoring",
+        "ISO certificates verification",
+        "Transaction history"
+      ]
+    },
+    "auditoria-iso": {
+      "name": "Digital ISO Audit",
+      "category": "Compliance",
+      "description": "Automated certification verification with issuing body validation",
+      "features": [
+        "Certificate origin verification",
+        "Validity dates validation",
+        "Accredited body check",
+        "Discrepancy report"
+      ]
+    },
+    "due-diligence": {
+      "name": "Express Due Diligence",
+      "category": "Compliance",
+      "description": "Quick counterparty risk analysis for business decisions",
+      "features": [
+        "Ownership analysis",
+        "Sanctions verification",
+        "Litigation history",
+        "Risk scoring"
+      ]
+    },
+    "auditoria-csrd": {
+      "name": "CSRD Audit",
+      "category": "Compliance",
+      "description": "Sustainability audit according to European CSRD directive",
+      "features": [
+        "Double materiality verification",
+        "ESG metrics validation",
+        "ESRS compliant report",
+        "Improvement recommendations"
+      ]
+    },
+    "trade-finance": {
+      "name": "Trade Finance Scoring",
+      "category": "Financing",
+      "description": "Credit assessment for international trade operations",
+      "features": [
+        "Multi-variable scoring",
+        "Country risk analysis",
+        "Commercial history",
+        "Recommended limit"
+      ]
+    },
+    "invoice-factoring": {
+      "name": "Invoice Factoring Connect",
+      "category": "Financing",
+      "description": "Connection with factors for B2B invoice advance",
+      "features": [
+        "Multi-factor connection",
+        "Automatic quotation",
+        "Invoice validation",
+        "Collection tracking"
+      ]
+    },
+    "prediccion-demanda-ai": {
+      "name": "AI Demand Prediction",
+      "category": "AI & Analytics",
+      "description": "Predictive models for demand forecasting",
+      "features": [
+        "ML forecasting",
+        "Seasonality analysis",
+        "ERP integration",
+        "Automatic alerts"
+      ]
+    },
+    "supplier-risk-monitor": {
+      "name": "Supplier Risk Monitor",
+      "category": "AI & Analytics",
+      "description": "Continuous supplier risk monitoring",
+      "features": [
+        "Real-time alerts",
+        "Dynamic scoring",
+        "News analysis",
+        "Executive dashboard"
+      ]
+    },
+    "price-intelligence": {
+      "name": "Price Intelligence",
+      "category": "AI & Analytics",
+      "description": "Market and competitor price analysis",
+      "features": [
+        "Price benchmarking",
+        "Variation alerts",
+        "Trend analysis",
+        "Recommendations"
+      ]
+    },
+    "carbon-calculator": {
+      "name": "Carbon Footprint Calculator",
+      "category": "Sustainability",
+      "description": "Free corporate carbon footprint calculator",
+      "features": [
+        "Scope 1-2-3 calculation",
+        "GHG Protocol methodology",
+        "Sector comparison",
+        "Recommendations"
+      ]
+    },
+    "esg-report-generator": {
+      "name": "ESG Report Generator",
+      "category": "Sustainability",
+      "description": "Automatic sustainability report generation",
+      "features": [
+        "ESRS templates",
+        "Data integration",
+        "Automatic charts",
+        "PDF/HTML export"
+      ]
+    },
+    "green-badge": {
+      "name": "Green Badge Certification",
+      "category": "Sustainability",
+      "description": "Blockchain-verified sustainability certification",
+      "features": [
+        "ESG verification",
+        "Pontus-X seal",
+        "Third-party validation",
+        "Marketplace badge"
+      ]
+    },
+    "carbon-tracker": {
+      "name": "Carbon Tracker ISO 14064",
+      "category": "Sustainability",
+      "description": "Continuous emissions tracking according to ISO 14064",
+      "features": [
+        "Automatic tracking",
+        "Threshold alerts",
+        "Monthly reporting",
+        "External verification"
+      ]
+    },
+    "pontus-notary": {
+      "name": "Pontus-X Notary Node",
+      "category": "Blockchain",
+      "description": "Notarization node for data certification",
+      "features": [
+        "Automatic notarization",
+        "Temporal proof",
+        "Public verification",
+        "API integration"
+      ]
+    },
+    "certificado-blockchain": {
+      "name": "Blockchain Certificate",
+      "category": "Blockchain",
+      "description": "Immutable blockchain certificate issuance",
+      "features": [
+        "SHA-256 hash",
+        "Verifiable timestamp",
+        "QR verification",
+        "PDF download"
+      ]
+    },
+    "erp-connector": {
+      "name": "ERP Connector Pack",
+      "category": "Data Ops",
+      "description": "Connectors for ERP system integration",
+      "features": [
+        "SAP integration",
+        "Oracle support",
+        "Microsoft Dynamics",
+        "REST/GraphQL API"
+      ]
+    },
+    "data-quality": {
+      "name": "Data Quality Validator",
+      "category": "Data Ops",
+      "description": "Automatic data quality validation",
+      "features": [
+        "Anomaly detection",
+        "Quality scoring",
+        "Automatic cleaning",
+        "Detailed report"
+      ]
+    },
+    "normalizacion-jsonld": {
+      "name": "JSON-LD Normalization",
+      "category": "Data Ops",
+      "description": "Data conversion and normalization to standard format",
+      "features": [
+        "Automatic mapping",
+        "Schema validation",
+        "Bulk transformation",
+        "Streaming API"
+      ]
+    },
+    "verificacion-vies": {
+      "name": "VIES Tax Verification",
+      "category": "Compliance",
+      "description": "Intra-community VAT number validation",
+      "features": [
+        "VIES query",
+        "Instant validation",
+        "Query history",
+        "Validity certificate"
+      ]
+    },
+    "monitor-riesgo": {
+      "name": "Supplier Risk Monitor",
+      "category": "Risk",
+      "description": "Continuous supplier risk monitoring",
+      "features": [
+        "Change alerts",
+        "Dynamic scoring",
+        "Weekly report",
+        "Risk dashboard"
+      ]
+    },
+    "api-odrl": {
+      "name": "ODRL Query API",
+      "category": "Governance",
+      "description": "API for data usage policy query and management",
+      "features": [
+        "Policy queries",
+        "Permission validation",
+        "Access auditing",
+        "EDC integration"
+      ]
+    }
+  },
+
+  "opportunities": {
+    "ficha-tier2-auto": {
+      "title": "Tier 2 Automotive Supplier Technical Sheet",
+      "category": "Industrial",
+      "budgetRange": "5,000-10,000",
+      "description": "We need certified master data from Tier 2 automotive suppliers for approval in our supply chain.",
+      "consumer": "EcoTech Industrial"
+    },
+    "iso-aeronautico": {
+      "title": "Aerospace Sector ISO Certifications",
+      "category": "Aerospace",
+      "budgetRange": "3,000-6,000",
+      "description": "Looking for ISO certification data provider for European aerospace manufacturers.",
+      "consumer": "EcoTech Industrial"
+    },
+    "telemetria-cnc": {
+      "title": "CNC Machinery IoT Telemetry",
+      "category": "IoT",
+      "budgetRange": "4,000-8,000",
+      "description": "We require CNC machinery sensor data for predictive maintenance.",
+      "consumer": "Logistics AI Solutions"
+    }
+  }
+}

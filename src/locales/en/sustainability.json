@@ -1,0 +1,74 @@
+{
+  "pageTitle": "Corporate Sustainability",
+  "pageDescription": "Carbon footprint management and ESG metrics for {{orgName}}",
+  "newReport": "New Annual Report",
+  "dialog": {
+    "title": "Register ESG Metrics",
+    "description": "Enter emissions and energy data for the fiscal year.",
+    "reportYear": "Report Year",
+    "scope1": "Scope 1 (tCO2e)",
+    "scope2": "Scope 2 (tCO2e)",
+    "renewablePercent": "% Renewable Energy",
+    "saving": "Saving...",
+    "save": "Save Report"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "scope3": "Scope 3 (Supply Chain)",
+    "trends": "Trends",
+    "history": "History"
+  },
+  "kpis": {
+    "scope1": "Scope 1",
+    "scope1Desc": "Direct emissions",
+    "scope2": "Scope 2",
+    "scope2Desc": "Purchased electricity",
+    "scope3": "Scope 3",
+    "scope3Desc": "{{count}} suppliers",
+    "total": "Total",
+    "year": "Year {{year}}"
+  },
+  "scope3Section": {
+    "title": "Scope 3 Emissions - Supply Chain",
+    "description": "Indirect emissions from your data suppliers",
+    "noSuppliers": "No supplier data",
+    "noSuppliersDesc": "You don't have completed transactions with suppliers reporting ESG data yet.",
+    "supplier": "Supplier",
+    "emissions": "Emissions (tCO2e)",
+    "renewable": "% Renewable",
+    "yourContribution": "Your Scope 3 Contribution"
+  },
+  "trends": {
+    "title": "Emissions Evolution",
+    "description": "Historical carbon footprint trend",
+    "totalLabel": "Total (tCO2e)",
+    "renewableLabel": "% Renewable"
+  },
+  "history": {
+    "title": "Historical Reports",
+    "description": "All ESG reports from your organization",
+    "year": "Year",
+    "certifications": "Certifications"
+  },
+  "emptyState": {
+    "title": "No sustainability data",
+    "description": "Start tracking your carbon footprint by adding your first annual report.",
+    "cta": "Create First Report"
+  },
+  "toast": {
+    "reportSaved": "ESG report saved successfully",
+    "duplicateYear": "A report already exists for the selected year.",
+    "error": "Error saving report: {{message}}"
+  },
+  "badges": {
+    "renewableLeader": "Renewable Leader",
+    "energyTransition": "Energy Transition",
+    "multiCertified": "Multi-Certified",
+    "cleanChain": "Clean Chain",
+    "iso14001": "ISO 14001"
+  },
+  "currentReport": {
+    "title": "Current Report ({{year}})",
+    "description": "Executive summary of environmental impact"
+  }
+}

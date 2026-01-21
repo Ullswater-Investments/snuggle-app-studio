@@ -1,0 +1,81 @@
+{
+  "pageTitle": "Market Opportunities",
+  "pageDescription": "Find active buyers or publish your own data needs.",
+  "publishNeed": "Publish Need",
+  "searchPlaceholder": "Search opportunities...",
+  "allCategories": "All categories",
+  "categories": {
+    "Industrial": "Industrial",
+    "AgriFood": "AgriFood",
+    "Logistics": "Logistics",
+    "Pharma": "Pharmaceutical",
+    "Retail": "Retail",
+    "ESG": "ESG",
+    "AI": "Artificial Intelligence",
+    "IoT": "IoT",
+    "Blockchain": "Blockchain",
+    "Fintech": "Fintech",
+    "Aerospace": "Aerospace",
+    "Energy": "Energy",
+    "Automotive": "Automotive",
+    "Construction": "Construction",
+    "Finance": "Finance",
+    "Tech": "Technology"
+  },
+  "dialog": {
+    "title": "Publish New Data Request",
+    "description": "Describe what type of data you need and providers will contact you with proposals.",
+    "titleLabel": "Request Title",
+    "titlePlaceholder": "E.g.: I need electric vehicle telemetry data",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Select a category",
+    "budgetLabel": "Estimated Budget",
+    "budgetPlaceholder": "E.g.: 2,000 - 5,000 EUR",
+    "descriptionLabel": "Detailed Description",
+    "descriptionPlaceholder": "Describe what data you need, for what purpose, what characteristics it should have...",
+    "cancel": "Cancel",
+    "publishing": "Publishing...",
+    "publish": "Publish Request"
+  },
+  "validation": {
+    "titleMin": "Title must be at least 10 characters",
+    "selectCategory": "Select a category",
+    "budgetRequired": "Indicate a budget range",
+    "descriptionMin": "Description must be at least 50 characters"
+  },
+  "emptyState": {
+    "noOpportunities": "No opportunities published",
+    "noOpportunitiesDesc": "Be the first to publish a data need. Providers will contact you with personalized proposals.",
+    "noResults": "No results",
+    "noResultsDesc": "No opportunities found with the applied filters. Try different terms.",
+    "exploreCatalog": "Explore Catalog",
+    "viewTrends": "View Trends"
+  },
+  "card": {
+    "urgent": "Urgent",
+    "by": "by",
+    "verified": "Verified",
+    "budget": "Budget",
+    "deadline": "Deadline",
+    "daysLeft": "{{count}} days left",
+    "proposals": "{{count}} proposals",
+    "isOwner": "Your opportunity",
+    "submitProposal": "Submit Proposal",
+    "submitting": "Submitting...",
+    "deleteOpportunity": "Delete",
+    "deleteConfirmTitle": "Delete this opportunity?",
+    "deleteConfirmDesc": "This action cannot be undone. It will be permanently deleted."
+  },
+  "toast": {
+    "opportunityPublished": "Opportunity Published",
+    "opportunityPublishedDesc": "Your data request has been published in the marketplace.",
+    "publishError": "Error publishing",
+    "proposalSent": "Proposal sent",
+    "proposalSentDesc": "The buyer will receive your proposal and contact you soon.",
+    "proposalError": "Error sending proposal",
+    "loginRequired": "You must log in to submit proposals",
+    "deleteSuccess": "Opportunity deleted",
+    "deleteSuccessDesc": "The opportunity has been successfully deleted.",
+    "deleteError": "Error deleting"
+  }
+}

@@ -165,8 +165,19 @@ import nlDiagrams from './locales/nl/diagrams.json';
 import nlDashboard from './locales/nl/dashboard.json';
 
 // English
+import enCommon from './locales/en/common.json';
 import enNav from './locales/en/nav.json';
+import enLanding from './locales/en/landing.json';
+import enSimulators from './locales/en/simulators.json';
+import enSuccess from './locales/en/success.json';
+import enCatalog from './locales/en/catalog.json';
+import enServices from './locales/en/services.json';
+import enInnovation from './locales/en/innovation.json';
+import enSustainability from './locales/en/sustainability.json';
+import enOpportunities from './locales/en/opportunities.json';
+import enModels from './locales/en/models.json';
 import enMotor from './locales/en/motor.json';
+import enSyntheticData from './locales/en/syntheticData.json';
 import enPartnerProducts from './locales/en/partnerProducts.json';
 import enPremiumPartners from './locales/en/premium-partners.json';
 import enPartners from './locales/en/partners.json';
@@ -176,12 +187,14 @@ import enRegister from './locales/en/register.json';
 import enContract from './locales/en/contract.json';
 import enCloserstill from './locales/en/closerstill.json';
 import enCatalogDetails from './locales/en/catalogDetails.json';
+import enGreenProcurement from './locales/en/greenProcurement.json';
 import enUseCases from './locales/en/useCases.json';
 import enDiagrams from './locales/en/diagrams.json';
 import enDashboard from './locales/en/dashboard.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'pt', name: 'Português', flag: '🇵🇹' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
@@ -225,8 +238,19 @@ i18n
         dashboard: esDashboard,
       },
       en: {
+        common: enCommon,
         nav: enNav,
+        landing: enLanding,
+        simulators: enSimulators,
+        success: enSuccess,
+        catalog: enCatalog,
+        services: enServices,
+        innovation: enInnovation,
+        sustainability: enSustainability,
+        opportunities: enOpportunities,
+        models: enModels,
         motor: enMotor,
+        syntheticData: enSyntheticData,
         partnerProducts: enPartnerProducts,
         premiumPartners: enPremiumPartners,
         partners: enPartners,
@@ -237,6 +261,7 @@ i18n
         closerstill: enCloserstill,
         catalogDetails: enCatalogDetails,
         useCases: enUseCases,
+        greenProcurement: enGreenProcurement,
         diagrams: enDiagrams,
         dashboard: enDashboard,
       },
