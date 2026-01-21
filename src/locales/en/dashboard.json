@@ -1,0 +1,99 @@
+{
+  "greeting": "Hello,",
+  "summary": {
+    "provider": "Summary of commercial performance and assets.",
+    "consumer": "Summary of data consumption and subscriptions."
+  },
+  "buttons": {
+    "viewAnalytics": "View Analytics",
+    "goToMarket": "Go to Market"
+  },
+  "cards": {
+    "walletBalance": "Wallet Balance",
+    "walletAvailable": "Available for transactions",
+    "walletNotConfigured": "No wallet configured",
+    "revenueMonth": "Monthly Revenue",
+    "spendMonth": "Monthly Spend",
+    "vsPrevMonth": "vs previous month",
+    "activeTransactions": "Active Transactions",
+    "pendingAction": "Pending action",
+    "completed6Months": "Completed (6 months)",
+    "totalClosed": "Total closed operations"
+  },
+  "chart": {
+    "title": "Financial Evolution",
+    "description": "Revenue and expenses for the last 6 months",
+    "demoData": "Demo Data",
+    "revenue": "Revenue",
+    "expenses": "Expenses"
+  },
+  "activity": {
+    "title": "Recent Activity",
+    "loading": "Loading...",
+    "noActivity": "No recent activity",
+    "demo": "Demo"
+  },
+  "transactions": {
+    "title": "Recent Transactions",
+    "viewAll": "View All",
+    "noTransactions": "No recent transactions",
+    "willAppear": "Transactions will appear here",
+    "date": "Date",
+    "product": "Product",
+    "counterparty": "Counterparty",
+    "type": "Type",
+    "status": "Status",
+    "amount": "Amount",
+    "buy": "Purchase",
+    "sell": "Sale",
+    "defaultProduct": "Product"
+  },
+  "transactionStatus": {
+    "initiated": "Initiated",
+    "pending_subject": "Pending",
+    "pending_holder": "Pending",
+    "approved": "Approved",
+    "completed": "Completed",
+    "denied_subject": "Denied",
+    "denied_holder": "Denied",
+    "cancelled": "Cancelled"
+  },
+  "wallet": {
+    "title": "Total Balance",
+    "monthlyIncome": "Monthly income",
+    "monthlyExpense": "Monthly expense",
+    "web3Status": "Web3 Status",
+    "euroe": "EUROe",
+    "gas": "Gas",
+    "connected": "Connected",
+    "notConnected": "Not connected",
+    "breakdown": "Category Breakdown",
+    "quickActions": "Quick Actions",
+    "reload": "Reload",
+    "explorer": "Explorer",
+    "connectWallet": "Connect Wallet",
+    "installMetamask": "Install MetaMask",
+    "others": "Others"
+  },
+  "stats": {
+    "walletBalance": "Wallet Balance",
+    "monthlySpend": "Monthly Spend",
+    "ofBudget": "of budget",
+    "transactions": "Transactions",
+    "completed": "Completed",
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "noData": "No data",
+    "operationalExcellence": "Operational Excellence",
+    "dataQuality": "Data Quality",
+    "sustainability": "Sustainability",
+    "activity": "Activity"
+  },
+  "activityFeed": {
+    "preApproved": "Pre-approved",
+    "approved": "Approved",
+    "denied": "Denied",
+    "cancelled": "Cancelled",
+    "aRequest": "a request"
+  }
+}

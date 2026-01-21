@@ -1,0 +1,99 @@
+{
+  "greeting": "Hola,",
+  "summary": {
+    "provider": "Resumen de rendimiento comercial y activos.",
+    "consumer": "Resumen de consumo de datos y suscripciones."
+  },
+  "buttons": {
+    "viewAnalytics": "Ver Analytics",
+    "goToMarket": "Ir al Mercado"
+  },
+  "cards": {
+    "walletBalance": "Balance Wallet",
+    "walletAvailable": "Disponible para transacciones",
+    "walletNotConfigured": "Sin wallet configurada",
+    "revenueMonth": "Ingresos del Mes",
+    "spendMonth": "Gastos del Mes",
+    "vsPrevMonth": "vs mes anterior",
+    "activeTransactions": "Transacciones Activas",
+    "pendingAction": "Pendientes de acción",
+    "completed6Months": "Completadas (6 meses)",
+    "totalClosed": "Total de operaciones cerradas"
+  },
+  "chart": {
+    "title": "Evolución Financiera",
+    "description": "Ingresos y gastos de los últimos 6 meses",
+    "demoData": "Datos Demo",
+    "revenue": "Ingresos",
+    "expenses": "Gastos"
+  },
+  "activity": {
+    "title": "Última Actividad",
+    "loading": "Cargando...",
+    "noActivity": "No hay actividad reciente",
+    "demo": "Demo"
+  },
+  "transactions": {
+    "title": "Transacciones Recientes",
+    "viewAll": "Ver Todas",
+    "noTransactions": "Sin transacciones recientes",
+    "willAppear": "Las operaciones aparecerán aquí",
+    "date": "Fecha",
+    "product": "Producto",
+    "counterparty": "Contraparte",
+    "type": "Tipo",
+    "status": "Estado",
+    "amount": "Importe",
+    "buy": "Compra",
+    "sell": "Venta",
+    "defaultProduct": "Producto"
+  },
+  "transactionStatus": {
+    "initiated": "Iniciada",
+    "pending_subject": "Pendiente",
+    "pending_holder": "Pendiente",
+    "approved": "Aprobada",
+    "completed": "Completada",
+    "denied_subject": "Rechazada",
+    "denied_holder": "Rechazada",
+    "cancelled": "Cancelada"
+  },
+  "wallet": {
+    "title": "Balance Total",
+    "monthlyIncome": "Ingresos del mes",
+    "monthlyExpense": "Gastos del mes",
+    "web3Status": "Estado Web3",
+    "euroe": "EUROe",
+    "gas": "Gas",
+    "connected": "Conectado",
+    "notConnected": "No conectado",
+    "breakdown": "Desglose por Categoría",
+    "quickActions": "Acciones Rápidas",
+    "reload": "Recargar",
+    "explorer": "Explorer",
+    "connectWallet": "Conectar Wallet",
+    "installMetamask": "Instalar MetaMask",
+    "others": "Otros"
+  },
+  "stats": {
+    "walletBalance": "Balance Wallet",
+    "monthlySpend": "Gastos del Mes",
+    "ofBudget": "del presupuesto",
+    "transactions": "Transacciones",
+    "completed": "Completadas",
+    "pending": "Pendientes",
+    "inProgress": "En Proceso",
+    "noData": "Sin datos",
+    "operationalExcellence": "Excelencia Operativa",
+    "dataQuality": "Calidad de Datos",
+    "sustainability": "Sostenibilidad",
+    "activity": "Actividad"
+  },
+  "activityFeed": {
+    "preApproved": "Pre-aprobó",
+    "approved": "Aprobó",
+    "denied": "Rechazó",
+    "cancelled": "Canceló",
+    "aRequest": "una solicitud"
+  }
+}

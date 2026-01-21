@@ -13,9 +13,11 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, A
 import { DollarSign, ShoppingCart, Package, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
 import { CHART_COLORS, CHART_GRADIENTS, CHART_TOOLTIP_STYLE, CHART_GRID_STYLE, CHART_ANIMATION_CONFIG } from "@/lib/chartTheme";
 import { StaggerContainer, StaggerItem, ChartFadeIn } from "@/components/AnimatedSection";
+import { useTranslation } from "react-i18next";
+import { formatCurrency as formatCurrencyI18n } from "@/lib/i18nFormatters";
 
 interface WalletData {
   id: string;
@@ -41,26 +43,19 @@ interface TransactionData {
   subject_org?: { name: string };
 }
 
-// Mock data for when no real data exists
-const MOCK_CHART_DATA: MonthlyData[] = [
-  { name: 'Ago', revenue: 4200, spend: 2800 },
-  { name: 'Sep', revenue: 5100, spend: 3200 },
-  { name: 'Oct', revenue: 3800, spend: 4500 },
-  { name: 'Nov', revenue: 6200, spend: 2900 },
-  { name: 'Dic', revenue: 4800, spend: 3600 },
-  { name: 'Ene', revenue: 5500, spend: 3100 },
-];
-
 interface MonthlyData {
   name: string;
   revenue: number;
   spend: number;
 }
 
+const localeMap: Record<string, Locale> = { es, en: enUS, de, fr, pt, it, nl };
+
 // Process transactions into monthly chart data
 const processTransactionsForChart = (
   transactions: TransactionData[] | undefined,
-  orgId: string | undefined
+  orgId: string | undefined,
+  locale: Locale
 ): MonthlyData[] => {
   if (!transactions || !orgId) return [];
 
@@ -69,7 +64,7 @@ const processTransactionsForChart = (
   // Initialize last 6 months
   for (let i = 5; i >= 0; i--) {
     const date = subMonths(new Date(), i);
-    const monthKey = format(date, "MMM", { locale: es });
+    const monthKey = format(date, "MMM", { locale });
     monthlyData[monthKey] = { revenue: 0, spend: 0 };
   }
 
@@ -77,7 +72,7 @@ const processTransactionsForChart = (
     if (tx.status !== "completed") return;
     
     const txDate = new Date(tx.created_at);
-    const monthKey = format(txDate, "MMM", { locale: es });
+    const monthKey = format(txDate, "MMM", { locale });
     
     if (!monthlyData[monthKey]) return;
     
@@ -141,7 +136,23 @@ const calculateCurrentMonthMetrics = (
 
 export default function Dashboard() {
   const { activeOrg } = useOrganizationContext();
+  const { t, i18n } = useTranslation('dashboard');
   const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
+  const currentLocale = localeMap[i18n.language] || es;
+
+  // Mock data for when no real data exists - localized
+  const MOCK_CHART_DATA: MonthlyData[] = (() => {
+    const months = [];
+    for (let i = 5; i >= 0; i--) {
+      const date = subMonths(new Date(), i);
+      months.push({
+        name: format(date, "MMM", { locale: currentLocale }),
+        revenue: [4200, 5100, 3800, 6200, 4800, 5500][5 - i],
+        spend: [2800, 3200, 4500, 2900, 3600, 3100][5 - i],
+      });
+    }
+    return months;
+  })();
 
   // Fetch wallet balance
   const { data: wallet, isLoading: walletLoading } = useQuery({
@@ -217,7 +228,7 @@ export default function Dashboard() {
   });
 
   // Process data
-  const realChartData = processTransactionsForChart(transactions, activeOrg?.id);
+  const realChartData = processTransactionsForChart(transactions, activeOrg?.id, currentLocale);
   const hasRealData = realChartData.some(d => d.revenue > 0 || d.spend > 0);
   const chartData = hasRealData ? realChartData : MOCK_CHART_DATA;
   
@@ -243,7 +254,7 @@ export default function Dashboard() {
         : tx.consumer_org_id === activeOrg?.id;
       
       if (isRelevant && tx.status === "completed") {
-        const category = tx.asset?.product?.category || "Otros";
+        const category = tx.asset?.product?.category || t('wallet.others');
         const amount = tx.asset?.price || 0;
         categoryMap[category] = (categoryMap[category] || 0) + amount;
       }
@@ -255,7 +266,7 @@ export default function Dashboard() {
         { category: "ESG", amount: 680, percentage: 42 },
         { category: "Logística", amount: 565, percentage: 35 },
         { category: "IoT", amount: 242, percentage: 15 },
-        { category: "Otros", amount: 129, percentage: 8 },
+        { category: t('wallet.others'), amount: 129, percentage: 8 },
       ];
     }
     
@@ -274,12 +285,7 @@ export default function Dashboard() {
   const isLoading = walletLoading || transactionsLoading;
 
   const formatCurrency = (amount: number, currency: string = "EUR") => {
-    return new Intl.NumberFormat("es-ES", {
-      style: "currency",
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
+    return formatCurrencyI18n(amount, i18n.language, currency);
   };
 
   return (
@@ -288,21 +294,21 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Hola, {activeOrg?.name}</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{t('greeting')} {activeOrg?.name}</h2>
           <p className="text-muted-foreground">
             {isProvider 
-              ? "Resumen de rendimiento comercial y activos." 
-              : "Resumen de consumo de datos y suscripciones."}
+              ? t('summary.provider')
+              : t('summary.consumer')}
           </p>
         </div>
         <div className="flex gap-2">
           {isProvider ? (
             <Link to="/analytics">
-              <Button variant="outline" className="gap-2"><TrendingUp className="h-4 w-4"/> Ver Analytics</Button>
+              <Button variant="outline" className="gap-2"><TrendingUp className="h-4 w-4"/> {t('buttons.viewAnalytics')}</Button>
             </Link>
           ) : (
             <Link to="/catalog">
-              <Button variant="brand" className="gap-2"><ShoppingCart className="h-4 w-4"/> Ir al Mercado</Button>
+              <Button variant="brand" className="gap-2"><ShoppingCart className="h-4 w-4"/> {t('buttons.goToMarket')}</Button>
             </Link>
           )}
         </div>
@@ -315,7 +321,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Balance Wallet
+              {t('cards.walletBalance')}
             </CardTitle>
             <Wallet className="h-4 w-4 text-[hsl(32_94%_54%)]" />
           </CardHeader>
@@ -328,7 +334,7 @@ export default function Dashboard() {
               </div>
             )}
             <p className="text-xs text-muted-foreground mt-1">
-              {wallet ? "Disponible para transacciones" : "Sin wallet configurada"}
+              {wallet ? t('cards.walletAvailable') : t('cards.walletNotConfigured')}
             </p>
           </CardContent>
         </Card>
@@ -339,7 +345,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              {isProvider ? "Ingresos del Mes" : "Gastos del Mes"}
+              {isProvider ? t('cards.revenueMonth') : t('cards.spendMonth')}
             </CardTitle>
             <DollarSign className="h-4 w-4 text-[hsl(32_94%_50%)]" />
           </CardHeader>
@@ -361,7 +367,7 @@ export default function Dashboard() {
               ) : (
                 <ArrowDownRight className="h-3 w-3" />
               )}
-              {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% vs mes anterior
+              {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% {t('cards.vsPrevMonth')}
             </p>
           </CardContent>
         </Card>
@@ -372,7 +378,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Transacciones Activas
+              {t('cards.activeTransactions')}
             </CardTitle>
             <Activity className="h-4 w-4 text-[hsl(32_94%_54%)]" />
           </CardHeader>
@@ -383,7 +389,7 @@ export default function Dashboard() {
               <div className="text-2xl font-bold">{activeTransactionsCount}</div>
             )}
             <p className="text-xs text-muted-foreground mt-1">
-              Pendientes de acción
+              {t('cards.pendingAction')}
             </p>
           </CardContent>
         </Card>
@@ -394,7 +400,7 @@ export default function Dashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Completadas (6 meses)
+              {t('cards.completed6Months')}
             </CardTitle>
             <TrendingUp className="h-4 w-4 text-[hsl(32_90%_50%)]" />
           </CardHeader>
@@ -407,7 +413,7 @@ export default function Dashboard() {
               </div>
             )}
             <p className="text-xs text-muted-foreground mt-1">
-              Total de operaciones cerradas
+              {t('cards.totalClosed')}
             </p>
           </CardContent>
         </Card>
@@ -425,15 +431,15 @@ export default function Dashboard() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Evolución Financiera</CardTitle>
+                <CardTitle>{t('chart.title')}</CardTitle>
                 <CardDescription>
-                  Ingresos y gastos de los últimos 6 meses
+                  {t('chart.description')}
                 </CardDescription>
               </div>
               {!hasRealData && (
                 <Badge variant="outline" className="bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300">
                   <Info className="h-3 w-3 mr-1" />
-                  Datos Demo
+                  {t('chart.demoData')}
                 </Badge>
               )}
             </div>
@@ -470,7 +476,7 @@ export default function Dashboard() {
                   <Area 
                     type="monotone" 
                     dataKey="revenue" 
-                    name="Ingresos"
+                    name={t('chart.revenue')}
                     stroke={CHART_COLORS.primary} 
                     fill={`url(#${CHART_GRADIENTS.primary.id})`}
                     animationDuration={CHART_ANIMATION_CONFIG.area.animationDuration}
@@ -479,7 +485,7 @@ export default function Dashboard() {
                   <Area 
                     type="monotone" 
                     dataKey="spend" 
-                    name="Gastos"
+                    name={t('chart.expenses')}
                     stroke={CHART_COLORS.secondary} 
                     fill={`url(#${CHART_GRADIENTS.secondary.id})`}
                     animationDuration={CHART_ANIMATION_CONFIG.area.animationDuration}
@@ -512,7 +518,7 @@ export default function Dashboard() {
 
       {/* Activity Feed */}
       <div className="grid gap-4">
-        <h3 className="text-lg font-semibold">Última Actividad</h3>
+        <h3 className="text-lg font-semibold">{t('activity.title')}</h3>
         <ActivityFeed />
       </div>
     </div>

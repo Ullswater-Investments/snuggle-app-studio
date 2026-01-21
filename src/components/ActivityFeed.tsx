@@ -7,18 +7,24 @@ import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CheckCircle, XCircle, Clock, ArrowRight, Info } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
 
-const ACTION_LABELS: Record<string, { label: string; icon: any; color: string }> = {
-  pre_approve: { label: "Pre-aprobó", icon: CheckCircle, color: "text-[hsl(32_94%_54%)]" },
-  approve: { label: "Aprobó", icon: CheckCircle, color: "text-[hsl(32_94%_44%)]" },
-  deny: { label: "Denegó", icon: XCircle, color: "text-destructive" },
-  initiated: { label: "Inició", icon: ArrowRight, color: "text-[hsl(0_0%_40%)] dark:text-[hsl(0_0%_60%)]" },
-};
+const localeMap: Record<string, Locale> = { es, en: enUS, de, fr, pt, it, nl };
 
 export const ActivityFeed = () => {
   const { activeOrg, isDemo } = useOrganizationContext();
   const queryClient = useQueryClient();
+  const { t, i18n } = useTranslation('dashboard');
+  const currentLocale = localeMap[i18n.language] || es;
+
+  const ACTION_LABELS: Record<string, { labelKey: string; icon: any; color: string }> = {
+    pre_approve: { labelKey: "activityFeed.preApproved", icon: CheckCircle, color: "text-[hsl(32_94%_54%)]" },
+    approve: { labelKey: "activityFeed.approved", icon: CheckCircle, color: "text-[hsl(32_94%_44%)]" },
+    deny: { labelKey: "activityFeed.denied", icon: XCircle, color: "text-destructive" },
+    cancel: { labelKey: "activityFeed.cancelled", icon: XCircle, color: "text-muted-foreground" },
+    initiated: { labelKey: "activityFeed.preApproved", icon: ArrowRight, color: "text-[hsl(0_0%_40%)] dark:text-[hsl(0_0%_60%)]" },
+  };
 
   const { data: activities, isLoading } = useQuery({
     queryKey: ["activity-feed", activeOrg?.id, isDemo],
@@ -96,10 +102,10 @@ export const ActivityFeed = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Actividad Reciente</CardTitle>
+          <CardTitle>{t('activity.title')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">Cargando...</p>
+          <p className="text-sm text-muted-foreground">{t('activity.loading')}</p>
         </CardContent>
       </Card>
     );
@@ -108,14 +114,14 @@ export const ActivityFeed = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Actividad Reciente</CardTitle>
+        <CardTitle>{t('activity.title')}</CardTitle>
       </CardHeader>
       <CardContent>
         {!activities || activities.length === 0 ? (
           <div className="text-center py-6">
             <Clock className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
             <p className="text-sm text-muted-foreground">
-              No hay actividad reciente
+              {t('activity.noActivity')}
             </p>
           </div>
         ) : (
@@ -134,9 +140,9 @@ export const ActivityFeed = () => {
                     <div className="flex items-center gap-2">
                       <p className="text-sm">
                         <span className="font-medium">{activity.actor_org.name}</span>
-                        {" "}{actionInfo.label}{" "}
+                        {" "}{t(actionInfo.labelKey)}{" "}
                         <span className="text-muted-foreground">
-                          {activity.transaction?.asset?.product?.name || "una solicitud"}
+                          {activity.transaction?.asset?.product?.name || t('activityFeed.aRequest')}
                         </span>
                       </p>
                       {isDemo && (
@@ -145,12 +151,12 @@ export const ActivityFeed = () => {
                             <TooltipTrigger>
                               <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700 text-[10px] px-1 py-0">
                                 <Info className="h-2 w-2 mr-0.5" />
-                                DEMO
+                                {t('activity.demo').toUpperCase()}
                               </Badge>
                             </TooltipTrigger>
                             <TooltipContent>
                               <p className="text-xs max-w-xs">
-                                Actividad sintética de demostración. En producción, verás el historial real de tu organización.
+                                {t('activity.noActivity')}
                               </p>
                             </TooltipContent>
                           </Tooltip>
@@ -160,7 +166,7 @@ export const ActivityFeed = () => {
                     <p className="text-xs text-muted-foreground">
                       {formatDistanceToNow(new Date(activity.created_at), {
                         addSuffix: true,
-                        locale: es,
+                        locale: currentLocale,
                       })}
                     </p>
                     {activity.notes && (

@@ -7,9 +7,11 @@ import { ProgressCard } from "@/components/dashboard/ProgressCard";
 import { MiniPieChart } from "@/components/dashboard/MiniPieChart";
 import { HealthScoreGauge } from "@/components/dashboard/HealthScoreGauge";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export const DashboardStats = () => {
   const { activeOrg, isDemo } = useOrganizationContext();
+  const { t, i18n } = useTranslation('dashboard');
 
   const { data: stats } = useQuery({
     queryKey: ["dashboard-stats", activeOrg?.id, isDemo],
@@ -108,19 +110,19 @@ export const DashboardStats = () => {
     const baseValue = stats?.walletBalance || 10000;
     return Array.from({ length: 7 }, (_, i) => ({
       value: baseValue * (0.85 + Math.random() * 0.3),
-      date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('es-ES', { weekday: 'short' })
+      date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toLocaleDateString(i18n.language === 'en' ? 'en-US' : `${i18n.language}-${i18n.language.toUpperCase()}`, { weekday: 'short' })
     }));
-  }, [stats?.walletBalance]);
+  }, [stats?.walletBalance, i18n.language]);
 
   // Transaction status pie chart data
   const transactionPieData = useMemo(() => {
     if (!stats?.statusCounts) return [];
     return [
-      { name: "Completadas", value: stats.statusCounts.completed || 0, color: "hsl(var(--chart-2))" },
-      { name: "Pendientes", value: (stats.statusCounts.pending_subject || 0) + (stats.statusCounts.pending_holder || 0), color: "hsl(var(--chart-4))" },
-      { name: "En Proceso", value: stats.statusCounts.approved || 0, color: "hsl(var(--chart-1))" }
+      { name: t('stats.completed'), value: stats.statusCounts.completed || 0, color: "hsl(var(--chart-2))" },
+      { name: t('stats.pending'), value: (stats.statusCounts.pending_subject || 0) + (stats.statusCounts.pending_holder || 0), color: "hsl(var(--chart-4))" },
+      { name: t('stats.inProgress'), value: stats.statusCounts.approved || 0, color: "hsl(var(--chart-1))" }
     ].filter(item => item.value > 0);
-  }, [stats?.statusCounts]);
+  }, [stats?.statusCounts, t]);
 
   // Calculate health scores
   const healthScores = useMemo(() => {
@@ -140,7 +142,7 @@ export const DashboardStats = () => {
       {/* Main KPI Row */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <SparklineCard
-          title="Balance Wallet"
+          title={t('stats.walletBalance')}
           value={stats.walletBalance}
           data={walletTrendData}
           trend={12.5}
@@ -151,10 +153,10 @@ export const DashboardStats = () => {
         />
 
         <ProgressCard
-          title="Gastos del Mes"
+          title={t('stats.monthlySpend')}
           value={Math.round(stats.walletBalance * 0.15)}
           progress={budgetProgress}
-          progressLabel="del presupuesto"
+          progressLabel={t('stats.ofBudget')}
           trend={-5.2}
           icon={TrendingDown}
           iconColor="text-[hsl(32_94%_44%)]"
@@ -162,10 +164,10 @@ export const DashboardStats = () => {
         />
 
         <MiniPieChart
-          title="Transacciones"
+          title={t('stats.transactions')}
           total={totalTransactions}
           data={transactionPieData.length > 0 ? transactionPieData : [
-            { name: "Sin datos", value: 1, color: "hsl(var(--muted))" }
+            { name: t('stats.noData'), value: 1, color: "hsl(var(--muted))" }
           ]}
           icon={ClipboardList}
           iconColor="text-[hsl(0_0%_35%)] dark:text-[hsl(0_0%_65%)]"
