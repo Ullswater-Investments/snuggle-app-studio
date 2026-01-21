@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Carousel,
   CarouselContent,
@@ -26,108 +27,27 @@ import {
 
 interface UseCase {
   id: string;
-  title: string;
-  description: string;
   icon: LucideIcon;
-  badge: string;
   color: string;
   bgColor: string;
 }
 
 const USE_CASES: UseCase[] = [
-  {
-    id: "kyb-onboarding",
-    title: "Onboarding KYB",
-    description: "Verificación instantánea de proveedores mediante identidad soberana (DID) en Pontus-X.",
-    icon: ShieldCheck,
-    badge: "Identity",
-    color: "text-blue-500",
-    bgColor: "bg-blue-500/10",
-  },
-  {
-    id: "huella-carbono",
-    title: "Huella de Carbono",
-    description: "Reportes ESG inmutables y auditables para cumplir con normativas CSRD.",
-    icon: Leaf,
-    badge: "Sustainability",
-    color: "text-green-500",
-    bgColor: "bg-green-500/10",
-  },
-  {
-    id: "marketplace-euroe",
-    title: "Marketplace de Datos",
-    description: "Compraventa segura de activos industriales pagando con EUROe.",
-    icon: Coins,
-    badge: "Commerce",
-    color: "text-yellow-500",
-    bgColor: "bg-yellow-500/10",
-  },
-  {
-    id: "kill-switch",
-    title: "Kill-Switch de Datos",
-    description: "Revocación de accesos en tiempo real ante brechas de seguridad.",
-    icon: LockKeyhole,
-    badge: "Security",
-    color: "text-red-500",
-    bgColor: "bg-red-500/10",
-  },
-  {
-    id: "pasaporte-digital",
-    title: "Pasaporte Digital (DPP)",
-    description: "Trazabilidad completa del producto agregando datos de múltiples proveedores.",
-    icon: Package,
-    badge: "Compliance",
-    color: "text-purple-500",
-    bgColor: "bg-purple-500/10",
-  },
-  {
-    id: "compute-to-data",
-    title: "Compute-to-Data",
-    description: "Entrena IA sobre datos sensibles sin exponerlos fuera del sandbox.",
-    icon: Cpu,
-    badge: "AI Privacy",
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-  },
-  {
-    id: "gestion-recalls",
-    title: "Gestión de Recalls",
-    description: "Rastreo instantáneo de lotes defectuosos en toda la cadena de suministro.",
-    icon: AlertTriangle,
-    badge: "Quality",
-    color: "text-orange-500",
-    bgColor: "bg-orange-500/10",
-  },
-  {
-    id: "financiacion-defi",
-    title: "Financiación DeFi",
-    description: "Historial de entregas verificado en blockchain para acceder a crédito.",
-    icon: Landmark,
-    badge: "Finance",
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
-  },
-  {
-    id: "cadena-frio",
-    title: "Auditoría Cadena Frío",
-    description: "Sensores IoT registran temperatura inmutablemente para resolver disputas.",
-    icon: Thermometer,
-    badge: "IoT",
-    color: "text-cyan-500",
-    bgColor: "bg-cyan-500/10",
-  },
-  {
-    id: "licencias-odrl",
-    title: "Licencias ODRL",
-    description: "Negociación dinámica de contratos con restricciones temporales y de uso.",
-    icon: FileSignature,
-    badge: "Legal",
-    color: "text-indigo-500",
-    bgColor: "bg-indigo-500/10",
-  },
+  { id: "kyb-onboarding", icon: ShieldCheck, color: "text-blue-500", bgColor: "bg-blue-500/10" },
+  { id: "huella-carbono", icon: Leaf, color: "text-green-500", bgColor: "bg-green-500/10" },
+  { id: "marketplace-euroe", icon: Coins, color: "text-yellow-500", bgColor: "bg-yellow-500/10" },
+  { id: "kill-switch", icon: LockKeyhole, color: "text-red-500", bgColor: "bg-red-500/10" },
+  { id: "pasaporte-digital", icon: Package, color: "text-purple-500", bgColor: "bg-purple-500/10" },
+  { id: "compute-to-data", icon: Cpu, color: "text-violet-500", bgColor: "bg-violet-500/10" },
+  { id: "gestion-recalls", icon: AlertTriangle, color: "text-orange-500", bgColor: "bg-orange-500/10" },
+  { id: "financiacion-defi", icon: Landmark, color: "text-emerald-500", bgColor: "bg-emerald-500/10" },
+  { id: "cadena-frio", icon: Thermometer, color: "text-cyan-500", bgColor: "bg-cyan-500/10" },
+  { id: "licencias-odrl", icon: FileSignature, color: "text-indigo-500", bgColor: "bg-indigo-500/10" },
 ];
 
 export default function UseCasesCarousel() {
+  const { t } = useTranslation('useCases');
+
   return (
     <Carousel
       opts={{
@@ -151,18 +71,18 @@ export default function UseCasesCarousel() {
                       <IconComponent className={`h-6 w-6 ${useCase.color}`} />
                     </div>
                     <Badge variant="secondary" className="text-xs">
-                      {useCase.badge}
+                      {t(`cases.${useCase.id}.badge`)}
                     </Badge>
                   </div>
-                  <h3 className="font-semibold text-lg">{useCase.title}</h3>
+                  <h3 className="font-semibold text-lg">{t(`cases.${useCase.id}.title`)}</h3>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <p className="text-sm text-muted-foreground mb-4 min-h-[60px]">
-                    {useCase.description}
+                    {t(`cases.${useCase.id}.shortDesc`)}
                   </p>
                   <Button asChild variant="outline" size="sm" className="w-full group">
                     <Link to={`/use-cases#${useCase.id}`}>
-                      Ver Detalle
+                      {t('viewDetail')}
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
