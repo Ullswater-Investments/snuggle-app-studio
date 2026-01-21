@@ -13,7 +13,10 @@
     "premiumPaid": "Premium / Bezahlt",
     "trustGuarantee": "Garantie und Vertrauen",
     "sustainableESG": "Nachhaltig (ESG)",
-    "verifiedKYB": "Verifiziert (KYB)"
+    "verifiedKYB": "Verifiziert (KYB)",
+    "partner": "Partner",
+    "country": "Land",
+    "category": "Kategorie"
   },
   "emptyState": {
     "title": "Keine Ergebnisse gefunden",
