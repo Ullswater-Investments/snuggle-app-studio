@@ -39,6 +39,7 @@ import { toast } from "sonner";
 
 // Partner Products Component
 import { PartnerProductCard, PartnerProduct } from "@/components/catalog/PartnerProductCard";
+import { CatalogFilters, CatalogFiltersState } from "@/components/catalog/CatalogFilters";
 
 // --- Tipos alineados con la vista SQL 'marketplace_listings' ---
 interface MarketplaceListing {
@@ -86,10 +87,13 @@ export default function Catalog() {
   const { t: tPartners } = useTranslation('partnerProducts');
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<CatalogFiltersState>({
     onlyGreen: false,
     onlyVerified: false,
-    priceType: 'all' // all, free, paid
+    priceType: 'all',
+    partner: 'all',
+    country: 'all',
+    category: 'all'
   });
   
   // Estado para comparación
@@ -312,14 +316,18 @@ export default function Catalog() {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           (item.partnerName || "").toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeTab === 'all' || item.category === activeTab;
+    const matchesCategory = (activeTab === 'all' && filters.category === 'all') || 
+                            item.category === activeTab ||
+                            item.category === filters.category;
     const matchesGreen = !filters.onlyGreen || item.hasGreenBadge;
     const matchesVerified = !filters.onlyVerified || item.kybVerified;
     const matchesPrice = filters.priceType === 'all' 
       ? true 
       : filters.priceType === 'free' ? item.price === 0 : item.price > 0;
+    const matchesPartner = filters.partner === 'all' || item.partnerId === filters.partner;
+    const matchesCountry = filters.country === 'all' || item.partnerCountry === filters.country;
 
-    return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
+    return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice && matchesPartner && matchesCountry;
   });
 
   // Categorías dinámicas extraídas de los datos reales + partner products
@@ -392,76 +400,13 @@ export default function Catalog() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         
         {/* SIDEBAR DE FILTROS */}
-        <div className="hidden lg:block space-y-6">
-          <div className="sticky top-24">
-            <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <Filter className="h-4 w-4" /> {t('filters.title')}
-            </h3>
-            
-            <Card>
-              <CardContent className="p-4 space-y-6">
-                {/* Filtro Precio */}
-                <div className="space-y-3">
-                  <Label>{t('filters.priceModel')}</Label>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="price-all" 
-                        checked={filters.priceType === 'all'} 
-                        onCheckedChange={() => setFilters(f => ({...f, priceType: 'all'}))}
-                      />
-                      <label htmlFor="price-all" className="text-sm font-medium">{t('filters.all')}</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="price-free" 
-                        checked={filters.priceType === 'free'}
-                        onCheckedChange={() => setFilters(f => ({...f, priceType: filters.priceType === 'free' ? 'all' : 'free'}))}
-                      />
-                      <label htmlFor="price-free" className="text-sm">{t('filters.freeOpenData')}</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="price-paid" 
-                        checked={filters.priceType === 'paid'}
-                        onCheckedChange={() => setFilters(f => ({...f, priceType: filters.priceType === 'paid' ? 'all' : 'paid'}))}
-                      />
-                      <label htmlFor="price-paid" className="text-sm">{t('filters.premiumPaid')}</label>
-                    </div>
-                  </div>
-                </div>
-
-                <Separator />
-
-                {/* Filtro Calidad/Confianza */}
-                <div className="space-y-3">
-                  <Label>{t('filters.trustGuarantee')}</Label>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="check-green" 
-                        checked={filters.onlyGreen}
-                        onCheckedChange={(c) => setFilters(f => ({...f, onlyGreen: !!c}))}
-                      />
-                      <label htmlFor="check-green" className="text-sm flex items-center gap-1">
-                        <Leaf className="h-3 w-3 text-green-600" /> {t('filters.sustainableESG')}
-                      </label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox 
-                        id="check-kyb" 
-                        checked={filters.onlyVerified}
-                        onCheckedChange={(c) => setFilters(f => ({...f, onlyVerified: !!c}))}
-                      />
-                      <label htmlFor="check-kyb" className="text-sm flex items-center gap-1">
-                        <ShieldCheck className="h-3 w-3 text-blue-600" /> {t('filters.verifiedKYB')}
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+        <div className="hidden lg:block">
+          <CatalogFilters
+            filters={filters}
+            onFiltersChange={setFilters}
+            partnerProducts={partnerProducts}
+            categories={dynamicCategories}
+          />
         </div>
 
         {/* GRID DE PRODUCTOS */}
@@ -537,7 +482,14 @@ export default function Catalog() {
                   <p className="text-muted-foreground">{t('emptyState.description')}</p>
                   <Button variant="link" onClick={() => {
                     setSearchTerm("");
-                    setFilters({onlyGreen: false, onlyVerified: false, priceType: 'all'});
+                    setFilters({
+                      onlyGreen: false, 
+                      onlyVerified: false, 
+                      priceType: 'all',
+                      partner: 'all',
+                      country: 'all',
+                      category: 'all'
+                    });
                     setActiveTab("all");
                   }}>{t('emptyState.clearFilters')}</Button>
                 </div>

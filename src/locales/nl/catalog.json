@@ -13,7 +13,10 @@
     "premiumPaid": "Premium / Betaald",
     "trustGuarantee": "Garantie en Vertrouwen",
     "sustainableESG": "Duurzaam (ESG)",
-    "verifiedKYB": "Geverifieerd (KYB)"
+    "verifiedKYB": "Geverifieerd (KYB)",
+    "partner": "Partner",
+    "country": "Land",
+    "category": "Categorie"
   },
   "emptyState": {
     "title": "Geen resultaten gevonden",
