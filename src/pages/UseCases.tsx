@@ -37,6 +37,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { useState, useEffect } from "react";
+import { getUseCaseDiagram } from "@/utils/mermaidTranslations";
 
 interface Industry {
   id: string;
@@ -62,7 +63,6 @@ interface UseCaseData {
   icon: LucideIcon;
   color: string;
   bgColor: string;
-  mermaidChart: string;
   industries: string[];
 }
 
@@ -72,18 +72,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: ShieldCheck,
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
-    mermaidChart: `sequenceDiagram
-    participant P as Proveedor
-    participant W as Wallet MetaMask
-    participant PD as PROCUREDATA
-    participant PX as Pontus-X
-    
-    P->>W: Conectar Wallet
-    W->>PD: Firma Autorización
-    PD->>PD: Generar DID (did:ethr)
-    PD->>PX: Verificar Registro Corporativo
-    PX-->>PD: Credencial Validada
-    PD-->>P: Perfil Creado ✓`,
     industries: ["Automotive", "Energy", "Pharma", "Retail", "Construction", "Finance", "Logistics", "AgriFood", "Aerospace", "Tech"]
   },
   {
@@ -91,14 +79,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: Leaf,
     color: "text-green-500",
     bgColor: "bg-green-500/10",
-    mermaidChart: `flowchart LR
-    A[Manufacturera] -->|Solicita ESG| B[PROCUREDATA]
-    B -->|Notifica| C[Proveedor 1]
-    B -->|Notifica| D[Proveedor 2]
-    C -->|Sube Reporte| E[Hash en Blockchain]
-    D -->|Sube Reporte| E
-    E -->|Acceso Controlado| A
-    E -->|Auditoría| F[Auditor Externo]`,
     industries: ["Automotive", "Energy", "Pharma", "Construction", "Logistics", "AgriFood", "Aerospace"]
   },
   {
@@ -106,18 +86,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: Coins,
     color: "text-yellow-500",
     bgColor: "bg-yellow-500/10",
-    mermaidChart: `sequenceDiagram
-    participant V as Vendedor
-    participant C as Comprador
-    participant SC as Smart Contract
-    participant BC as Blockchain
-    
-    V->>SC: Publica Dataset + Precio
-    C->>SC: Pago EUROe
-    SC->>BC: Verificar Transferencia
-    BC-->>SC: Confirmado ✓
-    SC->>C: Access Token Liberado
-    C->>V: Descarga Datos`,
     industries: ["Automotive", "Energy", "Pharma", "Retail", "Construction", "Finance", "Logistics", "AgriFood", "Aerospace", "Tech"]
   },
   {
@@ -125,13 +93,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: LockKeyhole,
     color: "text-red-500",
     bgColor: "bg-red-500/10",
-    mermaidChart: `flowchart TD
-    A[Detectar Brecha] -->|Alerta| B[Director Seguridad]
-    B -->|Click| C[RevokeAccessButton]
-    C -->|Ejecuta| D[Smart Contract]
-    D -->|Invalida| E[Todos los Access Tokens]
-    D -->|Registra| F[Audit Log Inmutable]
-    E -->|Resultado| G[Acceso Bloqueado Instantáneo]`,
     industries: ["Pharma", "Finance", "Tech", "Aerospace"]
   },
   {
@@ -139,22 +100,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: Package,
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
-    mermaidChart: `flowchart LR
-    subgraph Proveedores
-        P1[🧵 Tela]
-        P2[🎨 Tinte]
-        P3[✂️ Confección]
-        P4[🚚 Transporte]
-        P5[🏪 Retail]
-    end
-    
-    P1 -->|Firma DID| DPP[📦 Pasaporte Digital]
-    P2 -->|Firma DID| DPP
-    P3 -->|Firma DID| DPP
-    P4 -->|Firma DID| DPP
-    P5 -->|Firma DID| DPP
-    
-    DPP -->|QR Code| Consumer[👤 Consumidor Final]`,
     industries: ["Automotive", "Pharma", "Retail", "AgriFood", "Aerospace"]
   },
   {
@@ -162,18 +107,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: Cpu,
     color: "text-violet-500",
     bgColor: "bg-violet-500/10",
-    mermaidChart: `sequenceDiagram
-    participant AI as Startup IA
-    participant PD as PROCUREDATA
-    participant H as Hospital
-    participant SB as Sandbox Seguro
-    
-    AI->>PD: Sube Modelo IA
-    PD->>H: Solicita Acceso C2D
-    H->>PD: Aprueba (datos NO salen)
-    PD->>SB: Provisiona Entorno
-    SB->>SB: Ejecuta Modelo sobre Datos
-    SB-->>AI: Solo Resultados (sin datos crudos)`,
     industries: ["Pharma", "Finance", "Tech", "Aerospace"]
   },
   {
@@ -181,13 +114,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: AlertTriangle,
     color: "text-orange-500",
     bgColor: "bg-orange-500/10",
-    mermaidChart: `flowchart TD
-    A[⚠️ Detectar Pieza Defectuosa] -->|Query| B[DataLineage]
-    B -->|Traza| C[Blockchain History]
-    C -->|Identifica| D[Lote Proveedor X]
-    D -->|Consulta| E[Vehículos Afectados]
-    E -->|Lista| F[1,247 Coches]
-    F -->|Inicia| G[✅ Recall Inmediato]`,
     industries: ["Automotive", "Pharma", "AgriFood", "Aerospace"]
   },
   {
@@ -195,12 +121,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: Landmark,
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
-    mermaidChart: `flowchart LR
-    A[🌾 Agricultor] -->|Comparte| B[Historial Entregas]
-    B -->|Verificado en| C[Blockchain]
-    C -->|Score| D[Reputación: 98%]
-    D -->|Presenta a| E[🏦 Banco/DeFi]
-    E -->|Aprueba| F[💰 Crédito Tasa Reducida]`,
     industries: ["Retail", "Construction", "Finance", "AgriFood"]
   },
   {
@@ -208,22 +128,6 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: Thermometer,
     color: "text-cyan-500",
     bgColor: "bg-cyan-500/10",
-    mermaidChart: `sequenceDiagram
-    participant S as 🌡️ Sensor IoT
-    participant EF as Edge Function
-    participant BC as Blockchain
-    participant A as Sistema Alertas
-    
-    loop Cada Hora
-        S->>EF: Lectura Temperatura
-        EF->>EF: Verificar Umbral
-        alt Temperatura OK
-            EF->>BC: Notarizar Lectura ✓
-        else Temperatura Excedida
-            EF->>BC: Notarizar Brecha ⚠️
-            EF->>A: Alerta Inmediata
-        end
-    end`,
     industries: ["Pharma", "AgriFood", "Logistics"]
   },
   {
@@ -231,21 +135,12 @@ const USE_CASES_DATA: UseCaseData[] = [
     icon: FileSignature,
     color: "text-indigo-500",
     bgColor: "bg-indigo-500/10",
-    mermaidChart: `flowchart TD
-    A[🔬 Investigador] -->|Abre| B[NegotiationChat]
-    B -->|Define| C[Restricciones]
-    C --> D{⏱️ 30 días}
-    C --> E{📚 Solo Académico}
-    C --> F{🇪🇺 Solo UE}
-    D & E & F -->|Genera| G[📜 Política ODRL]
-    G -->|Despliega| H[Smart Contract]
-    H -->|Otorga| I[✅ Acceso Limitado]`,
     industries: ["Pharma", "Finance", "Tech", "Aerospace"]
   }
 ];
 
 export default function UseCases() {
-  const { t } = useTranslation('useCases');
+  const { t } = useTranslation(['useCases', 'diagrams']);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [selectedIndustry, setSelectedIndustry] = useState<string>("all");
 
@@ -481,7 +376,7 @@ export default function UseCases() {
                       <TabsContent value="flow" className="mt-4">
                         <Card>
                           <CardContent className="pt-6">
-                            <MermaidDiagram chart={useCase.mermaidChart} />
+                            <MermaidDiagram chart={getUseCaseDiagram(useCase.id, t)} />
                           </CardContent>
                         </Card>
                       </TabsContent>
