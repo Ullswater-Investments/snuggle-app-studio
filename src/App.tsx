@@ -135,6 +135,55 @@ import GarantiasOrigenDetail from "./pages/catalog/green-procurement/GarantiasOr
 import TcoVehiculosDetail from "./pages/catalog/green-procurement/TcoVehiculosDetail";
 import CreditosCarbonoDetail from "./pages/catalog/green-procurement/CreditosCarbonoDetail";
 import EficienciaMaquinariaDetail from "./pages/catalog/green-procurement/EficienciaMaquinariaDetail";
+// Partner Product Detail Pages - GAIA
+import TelemetriaIotDetail from "./pages/catalog/partners/gaia/TelemetriaIotDetail";
+// Partner Product Detail Pages - FEIQUE
+import CumplimientoReachDetail from "./pages/catalog/partners/feique/CumplimientoReachDetail";
+import HuellaQuimicaDetail from "./pages/catalog/partners/feique/HuellaQuimicaDetail";
+import CapacidadQuimicaDetail from "./pages/catalog/partners/feique/CapacidadQuimicaDetail";
+import PreciosQuimicosDetail from "./pages/catalog/partners/feique/PreciosQuimicosDetail";
+import AnalisisLaboratorioDetail from "./pages/catalog/partners/feique/AnalisisLaboratorioDetail";
+// Partner Product Detail Pages - Agoria
+import SostenibilidadIndustrialDetail from "./pages/catalog/partners/agoria/SostenibilidadIndustrialDetail";
+import IntegracionRoboticaDetail from "./pages/catalog/partners/agoria/IntegracionRoboticaDetail";
+import PreciosAutomatizacionDetail from "./pages/catalog/partners/agoria/PreciosAutomatizacionDetail";
+import TelemetriaCobotDetail from "./pages/catalog/partners/agoria/TelemetriaCobotDetail";
+// Partner Product Detail Pages - ANFIA
+import ProveedoresAutomotricesItalianosDet from "./pages/catalog/partners/anfia/ProveedoresAutomotricesItalianosDet";
+import TransicionEvItaliaDetail from "./pages/catalog/partners/anfia/TransicionEvItaliaDetail";
+import EstampacionFundicionDetail from "./pages/catalog/partners/anfia/EstampacionFundicionDetail";
+import PreciosRecambiosDetail from "./pages/catalog/partners/anfia/PreciosRecambiosDetail";
+import EnsayosSeguridadDetail from "./pages/catalog/partners/anfia/EnsayosSeguridadDetail";
+// Partner Product Detail Pages - FNSEA
+import ExplotacionesAgricolasDetail from "./pages/catalog/partners/fnsea/ExplotacionesAgricolasDetail";
+import SostenibilidadAgricolaDetail from "./pages/catalog/partners/fnsea/SostenibilidadAgricolaDetail";
+import CapacidadCosechaDetail from "./pages/catalog/partners/fnsea/CapacidadCosechaDetail";
+import PreciosCommoditiesDetail from "./pages/catalog/partners/fnsea/PreciosCommoditiesDetail";
+import AgriculturaPrecisionDetail from "./pages/catalog/partners/fnsea/AgriculturaPrecisionDetail";
+// Partner Product Detail Pages - NEVI
+import ProfesionalesComprasDetail from "./pages/catalog/partners/nevi/ProfesionalesComprasDetail";
+import ComprasSosteniblesDetail from "./pages/catalog/partners/nevi/ComprasSosteniblesDetail";
+import ProveedoresPrecualificadosDetail from "./pages/catalog/partners/nevi/ProveedoresPrecualificadosDetail";
+import AnalisisGastoDetail from "./pages/catalog/partners/nevi/AnalisisGastoDetail";
+import RiesgoSupplyChainDetail from "./pages/catalog/partners/nevi/RiesgoSupplyChainDetail";
+// Partner Product Detail Pages - AIP
+import DirectorioIndustrialDetail from "./pages/catalog/partners/aip/DirectorioIndustrialDetail";
+import SostenibilidadPortugalDetail from "./pages/catalog/partners/aip/SostenibilidadPortugalDetail";
+import FabricacionSubcontratacionDetail from "./pages/catalog/partners/aip/FabricacionSubcontratacionDetail";
+import CostesIndustrialesDetail from "./pages/catalog/partners/aip/CostesIndustrialesDetail";
+import FabricacionMoldesDetail from "./pages/catalog/partners/aip/FabricacionMoldesDetail";
+// Partner Product Detail Pages - Food Valley
+import EmpresasAgroalimentariasDetail from "./pages/catalog/partners/food-valley/EmpresasAgroalimentariasDetail";
+import NutricionSostenibleDetail from "./pages/catalog/partners/food-valley/NutricionSostenibleDetail";
+import ProcesamientoAlimentarioDetail from "./pages/catalog/partners/food-valley/ProcesamientoAlimentarioDetail";
+import PreciosIngredientesDetail from "./pages/catalog/partners/food-valley/PreciosIngredientesDetail";
+import AnalisisSensorialDetail from "./pages/catalog/partners/food-valley/AnalisisSensorialDetail";
+// Partner Product Detail Pages - BioWin
+import EmpresasBiotechDetail from "./pages/catalog/partners/biowin/EmpresasBiotechDetail";
+import SostenibilidadFarmaDetail from "./pages/catalog/partners/biowin/SostenibilidadFarmaDetail";
+import EnsayosClinicosDetail from "./pages/catalog/partners/biowin/EnsayosClinicosDetail";
+import PreciosApiDetail from "./pages/catalog/partners/biowin/PreciosApiDetail";
+import GenomicaBiomarcadoresDetail from "./pages/catalog/partners/biowin/GenomicaBiomarcadoresDetail";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import DynamicPartnerLogin from "./pages/DynamicPartnerLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
@@ -327,6 +376,55 @@ const App = () => (
             <Route path="/catalog/tco-vehiculos-ev-ice" element={<TcoVehiculosDetail />} />
             <Route path="/catalog/creditos-carbono-voluntarios" element={<CreditosCarbonoDetail />} />
             <Route path="/catalog/eficiencia-maquinaria-industrial" element={<EficienciaMaquinariaDetail />} />
+            {/* Partner Product Detail Routes - GAIA */}
+            <Route path="/catalog/telemetria-industrial-iot" element={<TelemetriaIotDetail />} />
+            {/* Partner Product Detail Routes - FEIQUE */}
+            <Route path="/catalog/cumplimiento-reach-clp" element={<CumplimientoReachDetail />} />
+            <Route path="/catalog/huella-ambiental-quimica" element={<HuellaQuimicaDetail />} />
+            <Route path="/catalog/capacidad-produccion-quimica" element={<CapacidadQuimicaDetail />} />
+            <Route path="/catalog/precios-productos-quimicos" element={<PreciosQuimicosDetail />} />
+            <Route path="/catalog/analisis-laboratorio-quimico" element={<AnalisisLaboratorioDetail />} />
+            {/* Partner Product Detail Routes - Agoria */}
+            <Route path="/catalog/sostenibilidad-industria-belga" element={<SostenibilidadIndustrialDetail />} />
+            <Route path="/catalog/integracion-robotica" element={<IntegracionRoboticaDetail />} />
+            <Route path="/catalog/precios-automatizacion" element={<PreciosAutomatizacionDetail />} />
+            <Route path="/catalog/telemetria-cobots" element={<TelemetriaCobotDetail />} />
+            {/* Partner Product Detail Routes - ANFIA */}
+            <Route path="/catalog/proveedores-automotrices-italianos" element={<ProveedoresAutomotricesItalianosDet />} />
+            <Route path="/catalog/transicion-ev-italia" element={<TransicionEvItaliaDetail />} />
+            <Route path="/catalog/estampacion-fundicion" element={<EstampacionFundicionDetail />} />
+            <Route path="/catalog/precios-recambios-automotrices" element={<PreciosRecambiosDetail />} />
+            <Route path="/catalog/ensayos-seguridad-vehicular" element={<EnsayosSeguridadDetail />} />
+            {/* Partner Product Detail Routes - FNSEA */}
+            <Route path="/catalog/explotaciones-agricolas-francesas" element={<ExplotacionesAgricolasDetail />} />
+            <Route path="/catalog/sostenibilidad-agricola" element={<SostenibilidadAgricolaDetail />} />
+            <Route path="/catalog/capacidad-cosecha" element={<CapacidadCosechaDetail />} />
+            <Route path="/catalog/precios-commodities-agricolas" element={<PreciosCommoditiesDetail />} />
+            <Route path="/catalog/agricultura-precision" element={<AgriculturaPrecisionDetail />} />
+            {/* Partner Product Detail Routes - NEVI */}
+            <Route path="/catalog/profesionales-compras" element={<ProfesionalesComprasDetail />} />
+            <Route path="/catalog/compras-sostenibles" element={<ComprasSosteniblesDetail />} />
+            <Route path="/catalog/proveedores-precualificados" element={<ProveedoresPrecualificadosDetail />} />
+            <Route path="/catalog/analisis-gasto-categoria" element={<AnalisisGastoDetail />} />
+            <Route path="/catalog/riesgo-supply-chain" element={<RiesgoSupplyChainDetail />} />
+            {/* Partner Product Detail Routes - AIP */}
+            <Route path="/catalog/directorio-industrial-portugues" element={<DirectorioIndustrialDetail />} />
+            <Route path="/catalog/sostenibilidad-portugal" element={<SostenibilidadPortugalDetail />} />
+            <Route path="/catalog/fabricacion-subcontratacion" element={<FabricacionSubcontratacionDetail />} />
+            <Route path="/catalog/costes-industriales-portugal" element={<CostesIndustrialesDetail />} />
+            <Route path="/catalog/fabricacion-moldes" element={<FabricacionMoldesDetail />} />
+            {/* Partner Product Detail Routes - Food Valley */}
+            <Route path="/catalog/empresas-agroalimentarias" element={<EmpresasAgroalimentariasDetail />} />
+            <Route path="/catalog/nutricion-sostenible" element={<NutricionSostenibleDetail />} />
+            <Route path="/catalog/procesamiento-alimentario" element={<ProcesamientoAlimentarioDetail />} />
+            <Route path="/catalog/precios-ingredientes" element={<PreciosIngredientesDetail />} />
+            <Route path="/catalog/analisis-sensorial" element={<AnalisisSensorialDetail />} />
+            {/* Partner Product Detail Routes - BioWin */}
+            <Route path="/catalog/empresas-biotecnologicas" element={<EmpresasBiotechDetail />} />
+            <Route path="/catalog/sostenibilidad-farmaceutica" element={<SostenibilidadFarmaDetail />} />
+            <Route path="/catalog/ensayos-clinicos" element={<EnsayosClinicosDetail />} />
+            <Route path="/catalog/precios-apis-farmaceuticos" element={<PreciosApiDetail />} />
+            <Route path="/catalog/genomica-biomarcadores" element={<GenomicaBiomarcadoresDetail />} />
                     <Route path="/sustainability" element={<Sustainability />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/services/:id" element={<ServiceDetail />} />
