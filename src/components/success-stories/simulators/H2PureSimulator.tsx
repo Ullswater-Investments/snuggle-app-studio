@@ -97,22 +97,22 @@ export const H2PureSimulator = ({ onValuesChange }: H2PureSimulatorProps) => {
           <div className="space-y-4">
             <div className="bg-slate-900/60 rounded-xl p-4 border border-emerald-900/30">
               <div className="flex items-start gap-3"><Sparkles className="w-5 h-5 text-emerald-400 mt-0.5" />
-                <div><p className="text-sm text-white font-medium mb-1">{t('h2pure.aria.certifHyTitle')}</p>
-                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: renewableMix >= 95 ? t('h2pure.aria.certifHyIssued', { amount: calculations.subsidyAmount.toLocaleString() }) : t('h2pure.aria.certifHyPending') }} />
+                <div><p className="text-sm text-white font-medium mb-1">{t('h2pure.ariaInsight1Title')}</p>
+                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: renewableMix >= 95 ? t('h2pure.ariaInsight1Desc', { amount: calculations.subsidyAmount.toLocaleString() }) : t('h2pure.ariaInsight1DescPending') }} />
                 </div>
               </div>
             </div>
             <div className="bg-slate-900/60 rounded-xl p-4 border border-teal-900/30">
               <div className="flex items-start gap-3"><Zap className="w-5 h-5 text-teal-400 mt-0.5" />
-                <div><p className="text-sm text-white font-medium mb-1">{t('h2pure.aria.climateTitle')}</p>
-                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: t('h2pure.aria.climateDesc', { tons: calculations.co2Avoided.toFixed(0) }) }} />
+                <div><p className="text-sm text-white font-medium mb-1">{t('h2pure.ariaInsight2Title')}</p>
+                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{ __html: t('h2pure.ariaInsight2Desc', { tons: calculations.co2Avoided.toFixed(0) }) }} />
                 </div>
               </div>
             </div>
             {renewableMix >= 95 && (
               <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 rounded-xl p-4 border border-emerald-500/30">
-                <div className="flex items-center gap-2 mb-2"><Award className="w-5 h-5 text-emerald-400" /><span className="text-sm font-bold text-emerald-300">{t('h2pure.aria.greenCertified')}</span></div>
-                <p className="text-xs text-slate-300">{t('h2pure.aria.eligibleProjects')}</p>
+                <div className="flex items-center gap-2 mb-2"><Award className="w-5 h-5 text-emerald-400" /><span className="text-sm font-bold text-emerald-300">{t('h2pure.ariaBadgeTitle')}</span></div>
+                <p className="text-xs text-slate-300">{t('h2pure.ariaBadgeDesc')}</p>
               </div>
             )}
           </div>
