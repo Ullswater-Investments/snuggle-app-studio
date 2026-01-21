@@ -1,0 +1,100 @@
+{
+  "pageTitle": "Innovation Lab",
+  "pageBadge": "BETA",
+  "pageDescription": "Experimental environment for scenario simulation and AI-powered data auditing.",
+  "tabs": {
+    "concepts": "R&D Concepts",
+    "simulator": "Simulator",
+    "aiAuditor": "AI Auditor",
+    "insights": "Insights"
+  },
+  "searchPlaceholder": "Search concepts...",
+  "categories": {
+    "all": "All",
+    "ai": "AI",
+    "blockchain": "Blockchain",
+    "iot": "IoT",
+    "sustainability": "Sustainability"
+  },
+  "emptyState": {
+    "title": "No concepts found",
+    "description": "No innovation concepts registered yet"
+  },
+  "simulator": {
+    "title": "Scenario Simulator",
+    "description": "Adjust parameters to see projections",
+    "demandFactor": "Demand Factor",
+    "supplyVolatility": "Supply Volatility",
+    "innovationImpact": "Innovation Impact",
+    "projection": "Projection",
+    "safetyLimit": "Safety Limit",
+    "maxCapacity": "Max Capacity"
+  },
+  "contractSteps": {
+    "step1Title": "Agreement Signing",
+    "step1Desc": "Supply contract digitally signed",
+    "step2Title": "Oracle Validation",
+    "step2Desc": "External conditions verification",
+    "step3Title": "Trigger Activated",
+    "step3Desc": "Penalty clause evaluated",
+    "step4Title": "Payment Settlement",
+    "step4Desc": "Transfer executed automatically"
+  },
+  "smartContract": {
+    "title": "Smart Contract Executor",
+    "description": "Visualize the smart contract execution flow",
+    "startSimulation": "Start Simulation",
+    "simulating": "Simulating..."
+  },
+  "sentinel": {
+    "title": "Contract Sentinel",
+    "description": "AI-powered contract risk analysis",
+    "uploadContract": "Upload Contract",
+    "analyzing": "Analyzing...",
+    "scanComplete": "Analysis Complete",
+    "riskScore": "Risk Score",
+    "criticalClause": "Abusive Penalty Clause",
+    "ambiguousTerms": "Ambiguity in Payment Terms",
+    "standardClause": "Standard Force Majeure Clause",
+    "critical": "Critical",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "auditor": {
+    "title": "Quality Audit",
+    "description": "AI-powered data integrity analysis",
+    "startAudit": "Start AI Audit",
+    "analyzing": "Analyzing...",
+    "qualityScore": "Quality Score",
+    "dataIntegrity": "Data Integrity",
+    "gdprCompliance": "GDPR Compliance",
+    "schemaValidation": "Schema Validation",
+    "freshness": "Data Freshness"
+  },
+  "radar": {
+    "title": "Technology Radar",
+    "description": "Comparison with sector leaders",
+    "yourCompany": "Your Company",
+    "sectorLeader": "Sector Leader",
+    "innovationLevel": "Innovation Level"
+  },
+  "prioritization": {
+    "title": "Prioritization Matrix",
+    "description": "Effort vs Impact of initiatives",
+    "effort": "Effort",
+    "impact": "Impact",
+    "quickWins": "Quick Wins",
+    "strategic": "Strategic"
+  },
+  "toast": {
+    "aiAnalysisComplete": "Artificial Intelligence analysis completed",
+    "contractExecuted": "Contract executed successfully",
+    "allStepsValidated": "All Smart Contract steps have been validated.",
+    "scanComplete": "Analysis completed: {{count}} alerts detected"
+  },
+  "concept": {
+    "maturity": "Maturity",
+    "viewDetails": "View details",
+    "businessImpact": "Business Impact"
+  }
+}

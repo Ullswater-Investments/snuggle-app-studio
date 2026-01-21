@@ -1,0 +1,32 @@
+{
+  "pageTitle": "Services Marketplace",
+  "pageDescription": "Algorithms and value-added services to process your data",
+  "searchPlaceholder": "Search services...",
+  "all": "All",
+  "emptyState": {
+    "title": "No services found",
+    "description": "Try adjusting the search filters."
+  },
+  "tabs": {
+    "globalMarket": "Global Market",
+    "myServices": "My Services"
+  },
+  "card": {
+    "recommended": "Recommended",
+    "active": "Active",
+    "coreService": "Core Service",
+    "docs": "Docs",
+    "free": "Free",
+    "subscribe": "Subscribe"
+  },
+  "pricing": {
+    "free": "Free",
+    "perMonth": "/month",
+    "perUse": "/use"
+  },
+  "toast": {
+    "processingPayment": "Processing payment of {{price}}...",
+    "serviceActivated": "Service \"{{name}}\" activated successfully",
+    "availableInDashboard": "You can now use it from your Dashboard."
+  }
+}
