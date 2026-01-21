@@ -217,6 +217,7 @@ import CloserStillUseCaseDetail from "./pages/partners/CloserStillUseCaseDetail"
 import { PartnerProtectedRoute } from "./components/partners/PartnerProtectedRoute";
 import ValerdataMiembros from "./pages/partners/ValerdataMiembros";
 import ValerdataProyecto from "./pages/partners/ValerdataProyecto";
+import SeresProyecto from "./pages/partners/SeresProyecto";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -521,6 +522,9 @@ const App = () => (
                       <ValerdataMiembros />
                     </PartnerProtectedRoute>
                   } />
+
+                  {/* Partner Pages - SERES */}
+                  <Route path="/partners/seres/proyecto" element={<SeresProyecto />} />
 
                   {/* Partner Pages - CloserStill Media */}
                   <Route path="/partners/closerstill" element={<CloserStillLogin />} />

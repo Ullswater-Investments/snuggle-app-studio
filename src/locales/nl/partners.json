@@ -305,6 +305,9 @@
     },
     "flux50": {
       "description": "Het cluster voor slimme energie: Smart Grids, energie-efficiëntie (Vlaanderen). +150 bedrijven."
+    },
+    "seres": {
+      "description": "Pioniers in veilige elektronische documentuitwisseling met meer dan 30 jaar ervaring. Specialisten in EDI, e-facturering, fiscale compliance en supply chain automatisering. Docaposte Groep - Gaia-X Ready."
     }
   }
 }

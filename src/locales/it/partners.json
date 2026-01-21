@@ -305,6 +305,9 @@
     },
     "flux50": {
       "description": "Il cluster dell'energia intelligente: Smart Grids, efficienza energetica (Fiandre). +150 aziende."
+    },
+    "seres": {
+      "description": "Pionieri nello scambio elettronico sicuro di documenti con oltre 30 anni di esperienza. Specialisti in EDI, fatturazione elettronica, compliance fiscale e automazione della supply chain. Gruppo Docaposte - Gaia-X Ready."
     }
   }
 }
