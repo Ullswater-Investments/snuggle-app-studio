@@ -1,34 +1,57 @@
 {
   "hero": {
-    "badge": "Aprobado por SEDIA",
+    "badge": "Homologado por SEDIA (Secretaría de Estado de Digitalización e IA)",
     "title": "Lidera la Economía del Dato",
     "titleHighlight": "en tu Sector",
-    "description": "Crea tu propio Nodo Soberano de Datos. Despliega un marketplace sectorial completo con la infraestructura de ProcureData.",
-    "cta": "Solicitar Estudio de Viabilidad",
-    "ctaSecondary": "Ver Requisitos Técnicos"
+    "description": "Crea tu propio <strong>Nodo Soberano</strong> en PROCUREDATA. Infraestructura tecnológica financiada al <strong>100%</strong> por el programa",
+    "kitLink": "Kit Espacio de Datos",
+    "cta": "Solicitar Estudio de Nodo",
+    "ctaSecondary": "Ver Arquitectura Técnica",
+    "access": "Acceder"
+  },
+  "concept": {
+    "badge": "Concepto",
+    "title": "Tu Isla Privada en un Océano de Datos",
+    "description": "Los <strong>Nodos Propietarios</strong> permiten a Clústers, Asociaciones y Grandes Empresas crear su propio espacio delimitado dentro de PROCUREDATA. Mantén gobernanza total aprovechando nuestra tecnología ya validada.",
+    "benefits": [
+      "Gobernanza total sobre el catálogo de datos.",
+      "Políticas de compartición privadas (ODRL).",
+      "Comisiones propias por transferencia de datos.",
+      "Marca blanca 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Infraestructura Validada",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Océano abierto",
+    "federated": "Federado",
+    "yourNode": "Tu Nodo Sectorial",
+    "yourNodeDesc": "Isla privada",
+    "techDescription": "Aprovecha nuestra tecnología (Blockchain, IDSA, Web3) bajo tus propias reglas de negocio."
   },
   "benefits": {
-    "title": "Beneficios Exclusivos del Nodo",
+    "badge": "Ventajas",
+    "title": "Ventajas para el Promotor",
+    "description": "Al adquirir un Nodo, obtienes gobernanza total sobre tu ecosistema de datos.",
     "marketplace": {
       "title": "Marketplace Propio",
-      "description": "Decide qué datasets se ofrecen y a quién. Curación total del catálogo sectorial."
+      "description": "Decide qué datasets y servicios se publican en tu catálogo privado."
     },
     "odrl": {
       "title": "Políticas ODRL",
-      "description": "Define reglas de compartición, restricciones geográficas y limitaciones de uso."
+      "description": "Define reglas de compartición específicas para tu industria."
     },
     "monetization": {
       "title": "Monetización",
-      "description": "Establece comisiones por transacción. Genera ingresos recurrentes."
+      "description": "Establece comisiones por transacción y vende servicios de valor añadido."
     },
     "whiteLabel": {
       "title": "Marca Blanca",
-      "description": "Personalización completa con tu identidad corporativa."
+      "description": "Personalización con tu logo e identidad, powered by ProcureData."
     }
   },
   "inherited": {
-    "title": "Capacidades Heredadas de ProcureData",
-    "description": "Tu nodo incluye automáticamente toda la infraestructura enterprise",
+    "badge": "Tecnología",
+    "title": "Funcionalidades Heredadas",
+    "description": "Tu Nodo nace con toda la potencia de PROCUREDATA v3.1 desde el día 1.",
     "did": "Identidad Soberana (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "Pagos EUROe",
@@ -36,28 +59,91 @@
     "idsa": "Gobernanza IDSA",
     "rls": "Multi-Tenant RLS"
   },
-  "roadmap": {
-    "title": "Roadmap de Implementación",
-    "phase1": {
-      "title": "Fase 1: Análisis",
-      "duration": "2 semanas",
-      "description": "Estudio de viabilidad y definición del modelo de negocio"
+  "financial": {
+    "badge": "Financiación NextGenerationEU",
+    "title": "Coste Cero para tu Ecosistema",
+    "description": "Gracias al programa <strong>KIT ESPACIO DE DATOS</strong>, subvencionamos el 100% de la creación del nodo.",
+    "promoter": {
+      "label": "PROMOTOR (Tú)",
+      "costLabel": "COSTE desarrollo de un NODO PROPIETARIO",
+      "totalCost": "30.000 €",
+      "step1": {
+        "title": "A la firma (Anticipo)",
+        "amount": "5.000 €",
+        "description": "Generación de instancia y configuración inicial"
+      },
+      "step2": {
+        "title": "Concesión Ayuda",
+        "amount": "30.000 €",
+        "description": "Os ayudamos a solicitar KIT ESPACIO de DATOS"
+      },
+      "step3": {
+        "title": "Paga el principal cuando recibas la Subvención de RED.es",
+        "amount": "25.000 €"
+      },
+      "note": "Los 30.000€ son <strong>100% subvencionables</strong>. Recuperas el anticipo al cobrar la ayuda."
     },
-    "phase2": {
-      "title": "Fase 2: Configuración",
-      "duration": "4 semanas",
-      "description": "Despliegue de infraestructura y personalización"
+    "participant": {
+      "label": "PARTICIPANTE (×5)",
+      "costLabel": "COSTE de CONEXIÓN (Anualidad)",
+      "totalCost": "3.000 €",
+      "perCompany": "por cada empresa participante",
+      "step1": {
+        "title": "Firma Contrato 1 año",
+        "amount": "250 € al mes",
+        "description": "Alta de identidad y wallet Web3"
+      },
+      "step2": {
+        "title": "Concesión Ayuda",
+        "amount": "15.000 €",
+        "description": "Os ayudamos a solicitar KIT ESPACIO de DATOS"
+      },
+      "step3": {
+        "title": "Renovación Contrato de Conexión + 1 año contra resolución favorable de la subvención",
+        "amount": "3.000 €"
+      },
+      "note": "El participante dispondrá hasta <strong>9.000€</strong> para pagar los servicios del Cluster ó otros gastos relacionados con el Espacio de Datos"
     },
-    "phase3": {
-      "title": "Fase 3: Onboarding",
-      "duration": "2 semanas",
-      "description": "Formación y migración de datos iniciales"
+    "disclaimer": "* El pago por anticipado se incluye como gasto subvencionable, lo que significa que el solicitante recupera el dinero anticipado íntegramente cuando recibe la subvención."
+  },
+  "requirements": {
+    "badge": "Requisitos",
+    "title": "Requisitos para Activar un Nodo",
+    "promoter": {
+      "title": "Entidad Promotora",
+      "description": "Capacidad jurídica para facturar y gestionar el nodo."
     },
-    "phase4": {
-      "title": "Fase 4: Lanzamiento",
-      "duration": "Continuo",
-      "description": "Go-live y soporte operativo"
+    "ecosystem": {
+      "title": "Ecosistema",
+      "description": "Carta de adhesión firmada por al menos 5 empresas tractoras/participantes."
+    },
+    "deadlines": {
+      "title": "Plazos",
+      "description": "La solicitud debe presentarse dentro de los plazos de la convocatoria vigente."
     }
+  },
+  "roadmap": {
+    "badge": "Roadmap",
+    "title": "Proceso de Activación",
+    "step1": {
+      "title": "Firma de MOU",
+      "description": "Acuerdo de intenciones y pago de reserva (anticipos recuperables)."
+    },
+    "step2": {
+      "title": "Solicitud Conjunta",
+      "description": "El equipo de PROCUREDATA prepara la memoria técnica para la SEDIA."
+    },
+    "step3": {
+      "title": "Despliegue Técnico",
+      "description": "Una vez concedida la ayuda, desplegamos tu Nodo en 4 semanas."
+    }
+  },
+  "cta": {
+    "title": "¿Tienes un Ecosistema?",
+    "description": "Si representas a un clúster o asociación con al menos 5 empresas interesadas, podemos desplegar tu Nodo en menos de 4 semanas.",
+    "button1": "Contactar con Equipo de Nodos",
+    "button2": "Ver Memoria Técnica SEDIA",
+    "note": "Te ayudamos con la memoria técnica para la solicitud SEDIA."
   },
   "layout": {
     "backToOverview": "Volver a Vista General",

@@ -1,34 +1,57 @@
 {
   "hero": {
-    "badge": "Approved by SEDIA",
+    "badge": "Approved by SEDIA (State Secretariat for Digitalization and AI)",
     "title": "Lead the Data Economy",
     "titleHighlight": "in your Sector",
-    "description": "Create your own Sovereign Data Node. Deploy a complete sectoral marketplace with ProcureData infrastructure.",
-    "cta": "Request Feasibility Study",
-    "ctaSecondary": "View Technical Requirements"
+    "description": "Create your own <strong>Sovereign Node</strong> in PROCUREDATA. Technology infrastructure <strong>100%</strong> funded by the",
+    "kitLink": "Data Space Kit",
+    "cta": "Request Node Study",
+    "ctaSecondary": "View Technical Architecture",
+    "access": "Login"
+  },
+  "concept": {
+    "badge": "Concept",
+    "title": "Your Private Island in an Ocean of Data",
+    "description": "<strong>Proprietary Nodes</strong> allow Clusters, Associations and Large Companies to create their own delimited space within PROCUREDATA. Maintain total governance while leveraging our already validated technology.",
+    "benefits": [
+      "Total governance over the data catalog.",
+      "Private sharing policies (ODRL).",
+      "Custom commissions for data transfer.",
+      "White label 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Validated Infrastructure",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Open ocean",
+    "federated": "Federated",
+    "yourNode": "Your Sectoral Node",
+    "yourNodeDesc": "Private island",
+    "techDescription": "Leverage our technology (Blockchain, IDSA, Web3) under your own business rules."
   },
   "benefits": {
-    "title": "Exclusive Node Benefits",
+    "badge": "Advantages",
+    "title": "Benefits for the Promoter",
+    "description": "By acquiring a Node, you get total governance over your data ecosystem.",
     "marketplace": {
       "title": "Own Marketplace",
-      "description": "Decide which datasets are offered and to whom. Total curation of the sectoral catalog."
+      "description": "Decide which datasets and services are published in your private catalog."
     },
     "odrl": {
       "title": "ODRL Policies",
-      "description": "Define sharing rules, geographic restrictions and usage limitations."
+      "description": "Define industry-specific sharing rules."
     },
     "monetization": {
       "title": "Monetization",
-      "description": "Set transaction fees. Generate recurring revenue."
+      "description": "Set transaction fees and sell value-added services."
     },
     "whiteLabel": {
       "title": "White Label",
-      "description": "Complete customization with your corporate identity."
+      "description": "Customization with your logo and identity, powered by ProcureData."
     }
   },
   "inherited": {
-    "title": "Inherited ProcureData Capabilities",
-    "description": "Your node automatically includes all enterprise infrastructure",
+    "badge": "Technology",
+    "title": "Inherited Features",
+    "description": "Your Node is born with all the power of PROCUREDATA v3.1 from day 1.",
     "did": "Sovereign Identity (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "EUROe Payments",
@@ -36,28 +59,91 @@
     "idsa": "IDSA Governance",
     "rls": "Multi-Tenant RLS"
   },
-  "roadmap": {
-    "title": "Implementation Roadmap",
-    "phase1": {
-      "title": "Phase 1: Analysis",
-      "duration": "2 weeks",
-      "description": "Feasibility study and business model definition"
+  "financial": {
+    "badge": "NextGenerationEU Funding",
+    "title": "Zero Cost for Your Ecosystem",
+    "description": "Thanks to the <strong>DATA SPACE KIT</strong> program, we subsidize 100% of node creation.",
+    "promoter": {
+      "label": "PROMOTER (You)",
+      "costLabel": "COST for PROPRIETARY NODE development",
+      "totalCost": "€30,000",
+      "step1": {
+        "title": "At signing (Advance)",
+        "amount": "€5,000",
+        "description": "Instance generation and initial configuration"
+      },
+      "step2": {
+        "title": "Grant Approval",
+        "amount": "€30,000",
+        "description": "We help you apply for DATA SPACE KIT"
+      },
+      "step3": {
+        "title": "Pay the principal when you receive the RED.es Subsidy",
+        "amount": "€25,000"
+      },
+      "note": "The €30,000 are <strong>100% subsidizable</strong>. You recover the advance when collecting the grant."
     },
-    "phase2": {
-      "title": "Phase 2: Configuration",
-      "duration": "4 weeks",
-      "description": "Infrastructure deployment and customization"
+    "participant": {
+      "label": "PARTICIPANT (×5)",
+      "costLabel": "CONNECTION COST (Annual)",
+      "totalCost": "€3,000",
+      "perCompany": "per participating company",
+      "step1": {
+        "title": "Sign 1-year Contract",
+        "amount": "€250/month",
+        "description": "Identity and Web3 wallet setup"
+      },
+      "step2": {
+        "title": "Grant Approval",
+        "amount": "€15,000",
+        "description": "We help you apply for DATA SPACE KIT"
+      },
+      "step3": {
+        "title": "Connection Contract renewal + 1 year upon favorable subsidy resolution",
+        "amount": "€3,000"
+      },
+      "note": "The participant will have up to <strong>€9,000</strong> to pay for Cluster services or other Data Space related expenses"
     },
-    "phase3": {
-      "title": "Phase 3: Onboarding",
-      "duration": "2 weeks",
-      "description": "Training and initial data migration"
+    "disclaimer": "* The advance payment is included as a subsidizable expense, meaning the applicant fully recovers the advanced money when receiving the subsidy."
+  },
+  "requirements": {
+    "badge": "Requirements",
+    "title": "Requirements to Activate a Node",
+    "promoter": {
+      "title": "Promoting Entity",
+      "description": "Legal capacity to invoice and manage the node."
     },
-    "phase4": {
-      "title": "Phase 4: Launch",
-      "duration": "Ongoing",
-      "description": "Go-live and operational support"
+    "ecosystem": {
+      "title": "Ecosystem",
+      "description": "Letter of adhesion signed by at least 5 driving/participating companies."
+    },
+    "deadlines": {
+      "title": "Deadlines",
+      "description": "The application must be submitted within the deadlines of the current call."
     }
+  },
+  "roadmap": {
+    "badge": "Roadmap",
+    "title": "Activation Process",
+    "step1": {
+      "title": "MOU Signing",
+      "description": "Letter of intent and reserve payment (recoverable advances)."
+    },
+    "step2": {
+      "title": "Joint Application",
+      "description": "The PROCUREDATA team prepares the technical report for SEDIA."
+    },
+    "step3": {
+      "title": "Technical Deployment",
+      "description": "Once the grant is approved, we deploy your Node in 4 weeks."
+    }
+  },
+  "cta": {
+    "title": "Do You Have an Ecosystem?",
+    "description": "If you represent a cluster or association with at least 5 interested companies, we can deploy your Node in less than 4 weeks.",
+    "button1": "Contact Node Team",
+    "button2": "View SEDIA Technical Report",
+    "note": "We help you with the technical report for the SEDIA application."
   },
   "layout": {
     "backToOverview": "Back to Overview",
