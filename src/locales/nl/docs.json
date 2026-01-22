@@ -1,0 +1,88 @@
+{
+  "common": {
+    "backToGuide": "Terug naar Gids",
+    "back": "Terug",
+    "nextDocument": "Volgend Document",
+    "documentOf": "Document {{current}} van {{total}}",
+    "yourProgress": "Je voortgang",
+    "sections": "secties",
+    "sectionsCompleted": "{{completed}}/{{total}} secties",
+    "completed": "Voltooid",
+    "quiz": "Begripsvraag",
+    "quizPrefix": "🎯",
+    "incorrectHint": "Onjuist antwoord. Bekijk de inhoud!",
+    "congratulations": "Gefeliciteerd!",
+    "documentCompleted": "Je hebt Uitlegdocument {{number}} voltooid",
+    "profilesExplored": "{{completed}}/{{total}} profielen verkend",
+    "readingProgress": "Leesvoortgang",
+    "result": "Resultaat",
+    "correctAnswers": "{{correct}}/{{total}} correcte antwoorden",
+    "perfectScore": "Perfect! Je beheerst de echte gebruikscases."
+  },
+  "doc1": {
+    "title": "Fundamenten, Visie en het \"nxm\"-Model",
+    "subtitle": "Het definiëren van de aard van ProcureData, het structurele probleem en de pijlers van vertrouwen."
+  },
+  "doc2": {
+    "title": "Servicecatalogus en Operationele Werking",
+    "subtitle": "Serviceaanbod, kostenstructuur en technische stroom voor werking in ProcureData."
+  },
+  "doc3": {
+    "title": "Duurzaamheid, EU-Regelgeving en Gebruikscases",
+    "subtitle": "Regelgevende, milieu-compliance en gegevensbescherming onder Europese normen."
+  },
+  "doc4": {
+    "title": "Financiën, Cybersecurity en ERP-Integratie",
+    "subtitle": "EUROe financiële infrastructuur, beveiligingsprotocollen en integratiestrategieën."
+  },
+  "doc5": {
+    "title": "Verkoop, Marketing en Groeistrategieën",
+    "subtitle": "Commerciële waardepropositie, uitbreidingsmodel en partnermogelijkheden."
+  },
+  "doc6": {
+    "title": "Gebruikershandleiding, Interface en Ondersteuning",
+    "subtitle": "Snelle referentiehandleiding voor navigatie, gebruikersbeheer en incidentoplossing."
+  },
+  "doc7": {
+    "title": "Data Governance, ODRL en de Rol van Data Holders",
+    "subtitle": "Technische en juridische mechanismen die datasoevereiniteit garanderen."
+  },
+  "doc8": {
+    "title": "Geavanceerde Analytics, BI en Synthetische Data",
+    "subtitle": "Ruwe data transformeren naar strategische intelligentie."
+  },
+  "doc9": {
+    "title": "Technische Integratie en Beveiliging voor Ontwikkelaars",
+    "subtitle": "Technische referentie voor IT-teams: APIs, Webhooks, SDKs en beveiliging."
+  },
+  "doc10": {
+    "title": "Veerkracht, Governance en Extreme Scenario's",
+    "subtitle": "Beheer van kritieke situaties, systeemfouten en complexe juridische conflicten."
+  },
+  "doc11": {
+    "title": "Verdieping per Strategische Sector",
+    "subtitle": "Hoe PROCUREDATA zich aanpast aan de behoeften van de 6 prioriteitssectoren."
+  },
+  "doc12": {
+    "title": "Ontwikkelaarshandleiding en Cloud AI-Architectuur",
+    "subtitle": "Tech stack, databaseschema, serverloze functies en deployment flow."
+  },
+  "doc13": {
+    "title": "Dialoogsimulatie en NLU-Training",
+    "subtitle": "ARIA's persoonlijkheid, begripsvaardigheden en continu leren."
+  },
+  "doc14": {
+    "title": "Bibliotheek van Echte Gebruikscases",
+    "subtitle": "Gedetailleerde gebruikersverhalen per professioneel profiel"
+  },
+  "doc15": {
+    "title": "Uitgebreid Woordenboek en Glossarium",
+    "subtitle": "{{count}} technische, juridische en zakelijke termen van PROCUREDATA",
+    "searchPlaceholder": "Zoek term of definitie...",
+    "all": "Alle",
+    "tech": "Tech",
+    "blockchain": "Blockchain",
+    "governance": "Governance",
+    "business": "Business"
+  }
+}

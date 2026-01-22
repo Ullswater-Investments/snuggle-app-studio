@@ -1,0 +1,88 @@
+{
+  "common": {
+    "backToGuide": "Zurück zum Leitfaden",
+    "back": "Zurück",
+    "nextDocument": "Nächstes Dokument",
+    "documentOf": "Dokument {{current}} von {{total}}",
+    "yourProgress": "Ihr Fortschritt",
+    "sections": "Abschnitte",
+    "sectionsCompleted": "{{completed}}/{{total}} Abschnitte",
+    "completed": "Abgeschlossen",
+    "quiz": "Verständnisfrage",
+    "quizPrefix": "🎯",
+    "incorrectHint": "Falsche Antwort. Überprüfen Sie den Inhalt!",
+    "congratulations": "Herzlichen Glückwunsch!",
+    "documentCompleted": "Sie haben das Erklärungsdokument {{number}} abgeschlossen",
+    "profilesExplored": "{{completed}}/{{total}} Profile erkundet",
+    "readingProgress": "Lesefortschritt",
+    "result": "Ergebnis",
+    "correctAnswers": "{{correct}}/{{total}} richtige Antworten",
+    "perfectScore": "Perfekt! Sie beherrschen die realen Anwendungsfälle."
+  },
+  "doc1": {
+    "title": "Grundlagen, Vision und das \"nxm\"-Modell",
+    "subtitle": "Definition der Natur von ProcureData, des strukturellen Problems und der Vertrauenssäulen."
+  },
+  "doc2": {
+    "title": "Servicekatalog und Betriebsablauf",
+    "subtitle": "Serviceangebot, Kostenstruktur und technischer Ablauf für den Betrieb in ProcureData."
+  },
+  "doc3": {
+    "title": "Nachhaltigkeit, EU-Vorschriften und Anwendungsfälle",
+    "subtitle": "Regulatorische, ökologische Compliance und Datenschutz nach europäischen Standards."
+  },
+  "doc4": {
+    "title": "Finanzen, Cybersicherheit und ERP-Integration",
+    "subtitle": "EUROe-Finanzinfrastruktur, Sicherheitsprotokolle und Integrationsstrategien."
+  },
+  "doc5": {
+    "title": "Vertrieb, Marketing und Wachstumsstrategien",
+    "subtitle": "Kommerzielles Wertversprechen, Expansionsmodell und Partnermöglichkeiten."
+  },
+  "doc6": {
+    "title": "Benutzerhandbuch, Oberfläche und Support",
+    "subtitle": "Schnellreferenz für Navigation, Benutzerverwaltung und Problemlösung."
+  },
+  "doc7": {
+    "title": "Daten-Governance, ODRL und die Rolle der Data Holders",
+    "subtitle": "Technische und rechtliche Mechanismen zur Gewährleistung der Datensouveränität."
+  },
+  "doc8": {
+    "title": "Erweiterte Analytik, BI und synthetische Daten",
+    "subtitle": "Rohdaten in strategische Intelligenz verwandeln."
+  },
+  "doc9": {
+    "title": "Technische Integration und Sicherheit für Entwickler",
+    "subtitle": "Technische Referenz für IT-Teams: APIs, Webhooks, SDKs und Sicherheit."
+  },
+  "doc10": {
+    "title": "Resilienz, Governance und Extremszenarien",
+    "subtitle": "Management kritischer Situationen, Systemausfälle und komplexer Rechtskonflikte."
+  },
+  "doc11": {
+    "title": "Vertiefung nach strategischen Sektoren",
+    "subtitle": "Wie PROCUREDATA sich an die Bedürfnisse der 6 Prioritätssektoren anpasst."
+  },
+  "doc12": {
+    "title": "Entwicklerhandbuch und Cloud-AI-Architektur",
+    "subtitle": "Tech-Stack, Datenbankschema, serverlose Funktionen und Deployment-Flow."
+  },
+  "doc13": {
+    "title": "Dialogsimulation und NLU-Training",
+    "subtitle": "ARIAs Persönlichkeit, Verständnisfähigkeiten und kontinuierliches Lernen."
+  },
+  "doc14": {
+    "title": "Bibliothek realer Anwendungsfälle",
+    "subtitle": "Detaillierte Benutzergeschichten nach Berufsprofil"
+  },
+  "doc15": {
+    "title": "Umfassendes Wörterbuch und Glossar",
+    "subtitle": "{{count}} technische, rechtliche und geschäftliche Begriffe von PROCUREDATA",
+    "searchPlaceholder": "Begriff oder Definition suchen...",
+    "all": "Alle",
+    "tech": "Tech",
+    "blockchain": "Blockchain",
+    "governance": "Governance",
+    "business": "Business"
+  }
+}

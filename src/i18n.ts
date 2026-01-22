@@ -48,6 +48,7 @@ import esAracea from './locales/es/aracea.json';
 import esTelenatura from './locales/es/telenatura.json';
 import esAerce from './locales/es/aerce.json';
 import esArchitecture from './locales/es/architecture.json';
+import esDocs from './locales/es/docs.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -93,6 +94,7 @@ import frUserGuide from './locales/fr/userGuide.json';
 import frGuide from './locales/fr/guide.json';
 import frWhitepaper from './locales/fr/whitepaper.json';
 import frKit from './locales/fr/kit.json';
+import frDocs from './locales/fr/docs.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -138,6 +140,7 @@ import ptUserGuide from './locales/pt/userGuide.json';
 import ptGuide from './locales/pt/guide.json';
 import ptWhitepaper from './locales/pt/whitepaper.json';
 import ptKit from './locales/pt/kit.json';
+import ptDocs from './locales/pt/docs.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -183,6 +186,7 @@ import deUserGuide from './locales/de/userGuide.json';
 import deGuide from './locales/de/guide.json';
 import deWhitepaper from './locales/de/whitepaper.json';
 import deKit from './locales/de/kit.json';
+import deDocs from './locales/de/docs.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -229,6 +233,7 @@ import itUserGuide from './locales/it/userGuide.json';
 import itGuide from './locales/it/guide.json';
 import itWhitepaper from './locales/it/whitepaper.json';
 import itKit from './locales/it/kit.json';
+import itDocs from './locales/it/docs.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -275,6 +280,7 @@ import nlUserGuide from './locales/nl/userGuide.json';
 import nlGuide from './locales/nl/guide.json';
 import nlWhitepaper from './locales/nl/whitepaper.json';
 import nlKit from './locales/nl/kit.json';
+import nlDocs from './locales/nl/docs.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -322,6 +328,7 @@ import enUserGuide from './locales/en/userGuide.json';
 import enGuide from './locales/en/guide.json';
 import enWhitepaper from './locales/en/whitepaper.json';
 import enKit from './locales/en/kit.json';
+import enDocs from './locales/en/docs.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -385,6 +392,7 @@ i18n
         guide: esGuide,
         whitepaper: esWhitepaper,
         kit: esKit,
+        docs: esDocs,
       },
       en: {
         common: enCommon,
@@ -427,6 +435,7 @@ i18n
         guide: enGuide,
         whitepaper: enWhitepaper,
         kit: enKit,
+        docs: enDocs,
       },
       fr: {
         common: frCommon,
@@ -468,6 +477,7 @@ i18n
         guide: frGuide,
         whitepaper: frWhitepaper,
         kit: frKit,
+        docs: frDocs,
       },
       pt: {
         common: ptCommon,
@@ -509,6 +519,7 @@ i18n
         guide: ptGuide,
         whitepaper: ptWhitepaper,
         kit: ptKit,
+        docs: ptDocs,
       },
       de: {
         common: deCommon,
@@ -550,6 +561,7 @@ i18n
         guide: deGuide,
         whitepaper: deWhitepaper,
         kit: deKit,
+        docs: deDocs,
       },
       it: {
         common: itCommon,
@@ -591,6 +603,7 @@ i18n
         guide: itGuide,
         whitepaper: itWhitepaper,
         kit: itKit,
+        docs: itDocs,
       },
       nl: {
         common: nlCommon,
@@ -632,6 +645,7 @@ i18n
         guide: nlGuide,
         whitepaper: nlWhitepaper,
         kit: nlKit,
+        docs: nlDocs,
       },
     },
     fallbackLng: 'es',

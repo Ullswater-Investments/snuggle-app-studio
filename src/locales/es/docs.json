@@ -1,0 +1,237 @@
+{
+  "common": {
+    "backToGuide": "Volver a Guía",
+    "back": "Volver",
+    "nextDocument": "Siguiente Documento",
+    "documentOf": "Documento {{current}} de {{total}}",
+    "yourProgress": "Tu progreso",
+    "sections": "secciones",
+    "sectionsCompleted": "{{completed}}/{{total}} secciones",
+    "completed": "Completado",
+    "quiz": "Pregunta de comprensión",
+    "quizPrefix": "🎯",
+    "incorrectHint": "Respuesta incorrecta. ¡Revisa el contenido!",
+    "congratulations": "¡Felicidades!",
+    "documentCompleted": "Has completado el Documento Explicativo {{number}}",
+    "profilesExplored": "{{completed}}/{{total}} perfiles explorados",
+    "readingProgress": "Progreso de lectura",
+    "result": "Resultado",
+    "correctAnswers": "{{correct}}/{{total}} respuestas correctas",
+    "perfectScore": "¡Perfecto! Dominas los casos de uso reales."
+  },
+  "doc1": {
+    "title": "Fundamentos, Visión y el Modelo \"nxm\"",
+    "subtitle": "Definir la naturaleza de ProcureData, el problema estructural que resuelve y los pilares de confianza.",
+    "sections": {
+      "intro": {
+        "title": "¿Qué es ProcureData?",
+        "content": "<p><strong>ProcureData</strong> es un <badge>Espacio de Datos para la Función de Compras</badge> (Procurement Data Space).</p><p>Se trata de una infraestructura digital diseñada para facilitar la <strong>compartición de datos de valor añadido</strong> entre empresas, siguiendo los estándares europeos de soberanía, transparencia y seguridad.</p><p><strong>No es una base de datos centralizada</strong>, sino un ecosistema descentralizado donde cada organización mantiene el control sobre su información.</p>",
+        "quiz": {
+          "question": "¿Qué tipo de infraestructura es ProcureData?",
+          "options": ["Una base de datos centralizada", "Un ecosistema descentralizado", "Un servidor único de almacenamiento", "Una red social empresarial"],
+          "correctIndex": 1
+        }
+      },
+      "problema": {
+        "title": "El Problema nxm",
+        "currentSituation": "Situación Actual",
+        "currentDesc": "Cada proveedor <strong>(n)</strong> debe repetir sus procesos de alta, homologación y certificados para cada nuevo cliente <strong>(m)</strong>.",
+        "redundancy": "Redundancia masiva",
+        "solution": "Solución ProcureData",
+        "solutionDesc": "Un proveedor se valida <strong>una sola vez</strong>. Su \"Pasaporte Digital\" se comparte instantáneamente.",
+        "singleValidation": "1 validación",
+        "impact": "El Impacto",
+        "impactItems": ["Semanas de retraso administrativo eliminadas", "Reducción drástica de costes operativos", "Eliminación de errores en custodia de documentos"],
+        "quiz": {
+          "question": "¿Qué problema resuelve el modelo nxm?",
+          "options": ["Problemas de conectividad a internet", "Redundancia en procesos de validación entre proveedores y clientes", "Falta de espacio de almacenamiento", "Problemas de idioma entre empresas"],
+          "correctIndex": 1
+        }
+      },
+      "roles": {
+        "title": "Roles del Ecosistema",
+        "intro": "El <strong>Triángulo de Confianza</strong> define tres actores principales:",
+        "consumer": {
+          "role": "Consumer",
+          "subtitle": "Consumidor",
+          "description": "La entidad (generalmente el comprador) que solicita acceso a datos específicos para validar a un proveedor o analizar riesgos."
+        },
+        "provider": {
+          "role": "Provider",
+          "subtitle": "Proveedor/Sujeto",
+          "description": "El titular original de los datos. Es quien ejerce la soberanía, autorizando o denegando quién puede ver su información."
+        },
+        "dataHolder": {
+          "role": "Data Holder",
+          "subtitle": "Custodio",
+          "description": "La entidad técnica (como agencias certificadoras o ERPs) que posee físicamente el dato verificado y lo entrega de forma segura."
+        },
+        "quiz": {
+          "question": "¿Quién ejerce la soberanía sobre los datos en ProcureData?",
+          "options": ["El Consumer (Comprador)", "El Data Holder (Custodio)", "El Provider (Proveedor/Sujeto)", "La Unión Europea"],
+          "correctIndex": 2
+        }
+      },
+      "estandares": {
+        "title": "Infraestructura y Estándares Europeos",
+        "intro": "ProcureData está alineado con la estrategia de la <strong>Unión Europea</strong> para espacios de datos:",
+        "gaiax": { "name": "Gaia-X", "description": "Trust Framework para verificar entidades legales", "badge": "Confianza" },
+        "ids": { "name": "IDS (International Data Spaces)", "description": "Conector EDC y protocolo IDS para intercambio soberano", "badge": "Interoperabilidad" },
+        "pontus": { "name": "Blockchain Pontus-X", "description": "Huella inmutable (hash) de cada transacción", "badge": "Inmutabilidad" },
+        "quiz": {
+          "question": "¿Qué tecnología garantiza la inmutabilidad de las transacciones?",
+          "options": ["Gaia-X", "IDS Protocol", "Blockchain Pontus-X", "Eclipse Connector"],
+          "correctIndex": 2
+        }
+      },
+      "sectores": {
+        "title": "Sectores Estratégicos",
+        "intro": "ProcureData prioriza los siguientes sectores según su cuota de uso de sistemas ERP:",
+        "industrial": { "name": "Industrial", "percent": 51.18, "note": "Foco principal" },
+        "comercio": { "name": "Comercio", "percent": 15 },
+        "agroalimentario": { "name": "Agroalimentario", "percent": 12 },
+        "movilidad": { "name": "Movilidad Sostenible", "percent": 10 },
+        "salud": { "name": "Salud", "percent": 7 },
+        "social": { "name": "Economía Social", "percent": 5 },
+        "quiz": {
+          "question": "¿Cuál es el sector con mayor foco en ProcureData?",
+          "options": ["Comercio", "Salud", "Industrial", "Agroalimentario"],
+          "correctIndex": 2
+        }
+      }
+    }
+  },
+  "doc2": {
+    "title": "Catálogo de Servicios y Funcionamiento Operativo",
+    "subtitle": "Oferta de servicios, estructura de costes y flujo técnico para operar en ProcureData.",
+    "sections": {
+      "catalogo": {
+        "title": "El Catálogo de los 21 Servicios",
+        "intro": "ProcureData ofrece un ecosistema de <strong>21 servicios especializados</strong> para potenciar la función de compras:",
+        "categories": {
+          "compliance": { "name": "Compliance", "services": ["Homologación Flash 24h", "Auditoría Digital ISO", "ODRL License Validator", "Due Diligence Express"] },
+          "sustainability": { "name": "Sostenibilidad y ESG", "services": ["Calculadora Scope 3 (gratuita)", "Auditoría CSRD Automática", "Carbon Tracker ISO 14064", "Certificación Green Partner"] },
+          "ai": { "name": "IA & Analytics", "services": ["Predicción de Demanda AI", "Monitor de Riesgo Proveedor", "Supply Chain Risk AI"] },
+          "blockchain": { "name": "Blockchain", "services": ["Pontus-X Notary Node", "Validador DID Web3"] },
+          "dataops": { "name": "Data Ops y Privacidad", "services": ["Anonimizador GDPR", "Conector Universal ERP", "Raw Data Normalizer", "GDPR PII Shield"] },
+          "intelligence": { "name": "Inteligencia e Integración", "services": ["Alertas Comerciales", "Sincronizador ERP", "Trade Finance Scoring", "Factoring Connect"] }
+        },
+        "quiz": {
+          "question": "¿Cuántos servicios especializados ofrece ProcureData?",
+          "options": ["15 servicios", "21 servicios", "30 servicios", "10 servicios"],
+          "correctIndex": 1
+        }
+      },
+      "economia": {
+        "title": "Modelo Económico y Tarifas",
+        "euroTitle": "EUROe: Euro Tokenizado",
+        "euroDesc": "Euro tokenizado en la red Pontus-X con <strong>paridad 1:1</strong> para garantizar trazabilidad inmutable.",
+        "freeTier": "Tier Gratuito",
+        "freePrice": "1 EUROe",
+        "freeUnit": "por transacción",
+        "freeFeatures": ["Pago por uso", "Acceso total al marketplace", "Sin costes fijos"],
+        "proTier": "Membresía Pro",
+        "proPopular": "Popular",
+        "proPrice": "100 EUROe",
+        "proUnit": "por año",
+        "proFeatures": ["Transacciones ilimitadas", "Soporte prioritario", "APIs avanzadas"],
+        "premiumNote": "Los servicios premium tienen costes específicos (ej. Homologación Flash: 150 EUROe)",
+        "quiz": {
+          "question": "¿Cuál es la unidad de pago en ProcureData?",
+          "options": ["Bitcoin", "EUROe (euro tokenizado)", "Dólares USD", "Puntos de crédito"],
+          "correctIndex": 1
+        }
+      },
+      "flujo": {
+        "title": "Flujo Operativo: Del Registro a la Transacción",
+        "intro": "Proceso técnico para completar un intercambio de datos soberano:",
+        "steps": [
+          { "title": "Registro y Validación KYB", "desc": "La empresa se registra y aporta documentación legal. Se realiza proceso Know Your Business.", "status": "Entidad Verificada" },
+          { "title": "Configuración de la Wallet", "desc": "Se asigna una dirección DID única y se carga saldo en EUROe.", "status": "Wallet Activa" },
+          { "title": "Búsqueda en el Marketplace", "desc": "Buscar proveedores usando filtros por sector, certificaciones ISO o badges.", "status": "Exploración" },
+          { "title": "Solicitud de Acceso", "desc": "El comprador solicita el Pasaporte Digital. Los fondos se bloquean en Escrow.", "status": "Initiated" },
+          { "title": "Aprobación del Proveedor", "desc": "El titular autoriza el intercambio basándose en la política ODRL.", "status": "Pending Subject" },
+          { "title": "Entrega y Notarización", "desc": "El Data Holder libera la información. Se genera hash en blockchain.", "status": "Completed" }
+        ],
+        "quiz": {
+          "question": "¿Qué ocurre cuando el comprador solicita un Pasaporte Digital?",
+          "options": ["Se envía un email al proveedor", "Los fondos se bloquean en un contrato Escrow", "Se descarga automáticamente", "Se cancela la transacción"],
+          "correctIndex": 1
+        }
+      },
+      "herramientas": {
+        "title": "Herramientas e Interfaz Interactiva",
+        "intro": "La aplicación integra widgets dinámicos para facilitar la toma de decisiones:",
+        "tools": [
+          { "name": "Calculadora de ROI", "desc": "Simula el ahorro económico anual al migrar de procesos manuales a la automatización." },
+          { "name": "Impact Gauge (ESG)", "desc": "Visor tipo semáforo que muestra el desempeño ambiental y simula mejoras." },
+          { "name": "Innovation Lab", "desc": "Radar de Madurez Tecnológica y Simulador de Smart Contracts." },
+          { "name": "Health Score", "desc": "Indicador de calidad y actualización de datos. Mayor puntuación = mejor posicionamiento." }
+        ],
+        "quiz": {
+          "question": "¿Qué indicador determina el posicionamiento en el marketplace?",
+          "options": ["Calculadora de ROI", "Innovation Lab", "Health Score", "Impact Gauge"],
+          "correctIndex": 2
+        }
+      }
+    }
+  },
+  "doc3": {
+    "title": "Sostenibilidad, Normativa Europea y Casos de Uso",
+    "subtitle": "Cumplimiento normativo, ambiental y protección de datos bajo estándares europeos."
+  },
+  "doc4": {
+    "title": "Finanzas, Ciberseguridad e Integración ERP",
+    "subtitle": "Infraestructura financiera EUROe, protocolos de seguridad y estrategias de integración."
+  },
+  "doc5": {
+    "title": "Ventas, Marketing y Estrategias de Crecimiento",
+    "subtitle": "Propuesta de valor comercial, modelo de expansión y oportunidades para partners."
+  },
+  "doc6": {
+    "title": "Guía de Usuario, Interfaz y Soporte",
+    "subtitle": "Manual de consulta rápida para navegación, gestión de usuarios y resolución de incidencias."
+  },
+  "doc7": {
+    "title": "Gobernanza de Datos, ODRL y el Rol de los Data Holders",
+    "subtitle": "Mecanismos técnicos y legales que garantizan la soberanía del dato."
+  },
+  "doc8": {
+    "title": "Analítica Avanzada, BI y Datos Sintéticos",
+    "subtitle": "Transformando datos brutos en inteligencia estratégica."
+  },
+  "doc9": {
+    "title": "Integración Técnica y Seguridad para Desarrolladores",
+    "subtitle": "Referencia técnica para equipos de IT: APIs, Webhooks, SDKs y seguridad."
+  },
+  "doc10": {
+    "title": "Resiliencia, Gobernanza y Escenarios Extremos",
+    "subtitle": "Gestión de situaciones críticas, fallos sistémicos y conflictos legales complejos."
+  },
+  "doc11": {
+    "title": "Profundización por Sectores Estratégicos",
+    "subtitle": "Cómo PROCUREDATA se adapta a las necesidades de los 6 sectores prioritarios."
+  },
+  "doc12": {
+    "title": "Manual del Desarrollador y Arquitectura Cloud AI",
+    "subtitle": "Stack técnico, esquema de base de datos, funciones serverless y flujo de despliegue."
+  },
+  "doc13": {
+    "title": "Simulación de Diálogos y Entrenamiento de Lenguaje Natural (NLU)",
+    "subtitle": "Personalidad, capacidades de comprensión y aprendizaje continuo de ARIA."
+  },
+  "doc14": {
+    "title": "Biblioteca de Casos de Uso Reales",
+    "subtitle": "Historias de Usuario detalladas por perfil profesional"
+  },
+  "doc15": {
+    "title": "Gran Diccionario y Glosario",
+    "subtitle": "{{count}} términos técnicos, legales y de negocio de PROCUREDATA",
+    "searchPlaceholder": "Buscar término o definición...",
+    "all": "Todos",
+    "tech": "Tech",
+    "blockchain": "Blockchain",
+    "governance": "Gobernanza",
+    "business": "Negocio"
+  }
+}
