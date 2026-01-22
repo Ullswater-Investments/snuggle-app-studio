@@ -3182,53 +3182,53 @@ export const bouwendNederland: PremiumPartner = {
 export const itbid: PremiumPartner = {
   id: "itbid",
   name: "ITBID",
-  fullName: "ITBID - Plataforma de Licitaciones Públicas",
+  fullName: "ITBID - El Cerebro Digital de Compras Empresariales",
   country: { code: "ES", flag: "🇪🇸", name: "España" },
-  vertical: "Sector Público y Licitaciones",
+  vertical: "Source-to-Pay & Gestión de Proveedores",
   
   authorityContext: {
-    narrative: "ITBID ocupa un lugar único en el ecosistema: no es una asociación gremial, sino una plataforma tecnológica que actúa como nodo conector entre la Administración Pública y el mercado privado. Es líder en soluciones de e-sourcing y gestión de licitaciones. Para ProcureData, este partner es la llave maestra para acceder a datos de contratación pública, transparencia y volúmenes de compra gubernamental.",
+    narrative: "ITBID es el 'cerebro digital' que utilizan las grandes y medianas empresas para gestionar todo lo que compran y su relación con quienes se lo venden. Es una plataforma en la nube que sustituye el caos de correos electrónicos, excels y llamadas por un sistema centralizado y eficiente. Gracias a su integración con PROCUREDATA y PONTUS-X, conecta a las compañías a una 'autopista digital europea' segura donde la información de los proveedores fluye de manera verificada, protegiendo a las empresas de fraudes y ayudándolas a cumplir con sus objetivos de sostenibilidad.",
     keyStats: [
-      { value: "€50Bn+", label: "Licitaciones Procesadas" },
-      { value: "10.000+", label: "Entidades Públicas" },
-      { value: "#1", label: "e-Sourcing Público España" }
+      { value: "Source-to-Pay", label: "Ciclo Completo de Compras" },
+      { value: "ESG Ready", label: "Homologación Sostenible" },
+      { value: "GAIA-X", label: "Integrado con Pontus-X" }
     ],
     headquarters: "Madrid, España"
   },
   
   ecosystem: [
+    { name: "PROCUREDATA", description: "Ecosistema de Datos Verificados" },
+    { name: "PONTUS-X", description: "Infraestructura GAIA-X / Web3" },
     { name: "Navantia", description: "Construcción naval militar" },
     { name: "Generalitat de Catalunya", description: "Administración regional" },
+    { name: "Acciona", description: "Infraestructuras sostenibles" },
+    { name: "Correos", description: "Logística nacional" },
     { name: "Metro de Madrid", description: "Transporte público" },
-    { name: "Acciona", description: "Infraestructuras" },
-    { name: "FCC", description: "Servicios ciudadanos" },
-    { name: "Correos", description: "Logística pública" },
-    { name: "Tragsa", description: "Medio ambiente y servicios rurales" },
     { name: "Aena", description: "Gestión aeroportuaria" }
   ],
   
   dataAnalysis: {
-    summary: "Datos masivos y estructurados sobre licitaciones públicas, precios de adjudicación vs. presupuesto base y solvencia de proveedores del estado.",
+    summary: "Plataforma integral que cubre el ciclo completo de compras: desde el portal de proveedores hasta el control de calidad, pasando por homologación ESG y automatización de pedidos.",
     capabilities: [
-      "Predicción de licitaciones",
-      "Desviación presupuestaria",
-      "Riesgo de proveedor público",
-      "Competencia en concursos"
+      "Portal de Proveedores - Colaboración y documentos compartidos",
+      "Homologación y Riesgos - Análisis legal, financiero y ESG",
+      "Negociación y Pedidos - Automatización de RFx a factura",
+      "Control de Calidad - Gestión de incidencias"
     ],
-    uniqueValue: "Acceso a la mayor base de datos de contratación pública española: licitaciones, adjudicaciones, precios de referencia y análisis de competencia."
+    uniqueValue: "El único sistema Source-to-Pay conectado a un Espacio de Datos Compartido europeo (PROCUREDATA + PONTUS-X), eliminando la burocracia de altas de proveedores mediante inteligencia colectiva verificada."
   },
   
   useCases: [
-    { id: "tender-prediction", title: "Predicción de Licitaciones", description: "Calendario estimado de renovación de grandes contratos públicos.", type: "forecast" },
-    { id: "budget-deviation", title: "Desviación Presupuestaria", description: "Diferencial medio entre precio licitado y adjudicado por sector.", type: "benchmark" },
-    { id: "public-supplier-risk", title: "Riesgo de Proveedor Público", description: "Historial de cumplimiento de plazos en obras públicas.", type: "risk" },
-    { id: "energy-reference-prices", title: "Precios de Referencia en Energía", description: "Costes de suministro eléctrico adjudicados por ayuntamientos.", type: "benchmark" },
-    { id: "time-to-contract", title: "Tiempos de Adjudicación", description: "Duración media de los procesos burocráticos.", type: "benchmark" },
-    { id: "tender-competition", title: "Competencia en Concursos", description: "Número medio de ofertas presentadas por tipo de licitación.", type: "index" },
-    { id: "public-tech-spending", title: "Gasto Público en Tecnología", description: "Inversión de la administración en hardware y licencias.", type: "index" },
-    { id: "abnormal-bids", title: "Bajas Temerarias", description: "Estadísticas de ofertas descartadas por precio anormalmente bajo.", type: "risk" },
-    { id: "sme-participation", title: "Participación de PYMEs", description: "Cuota de mercado de pequeñas empresas en contratación pública.", type: "index" },
-    { id: "transparency-index", title: "Índice de Transparencia", description: "Métricas de publicación de datos abiertos por entidad.", type: "benchmark" }
+    { id: "supplier-portal", title: "Portal de Proveedores Federado", description: "Espacio de colaboración donde empresas y proveedores comparten documentos con total transparencia.", type: "directory" },
+    { id: "supplier-qualification", title: "Homologación Automática", description: "Validación de proveedores usando datos verificados del ecosistema PROCUREDATA.", type: "risk" },
+    { id: "esg-scoring", title: "Scoring ESG de Proveedores", description: "Análisis de sostenibilidad, responsabilidad social y gobierno corporativo.", type: "index" },
+    { id: "financial-health", title: "Salud Financiera", description: "Evaluación de solvencia y riesgo de quiebra de proveedores.", type: "risk" },
+    { id: "rfx-automation", title: "Automatización de RFx", description: "Desde la petición de ofertas hasta la adjudicación sin errores manuales.", type: "forecast" },
+    { id: "contract-management", title: "Gestión de Contratos", description: "Ciclo de vida completo desde negociación hasta renovación.", type: "strategy" },
+    { id: "invoice-matching", title: "Conciliación de Facturas", description: "Matching automático entre pedidos, recepciones y facturas.", type: "benchmark" },
+    { id: "quality-incidents", title: "Gestión de Incidencias", description: "Seguimiento y resolución de problemas de calidad en entregas.", type: "risk" },
+    { id: "spend-analytics", title: "Analítica de Gasto", description: "Dashboard de gasto por categoría, proveedor y período.", type: "benchmark" },
+    { id: "data-sovereignty", title: "Soberanía del Dato", description: "Compartir información sin perder control mediante tecnología Pontus-X.", type: "strategy" }
   ],
   
   status: "active",
