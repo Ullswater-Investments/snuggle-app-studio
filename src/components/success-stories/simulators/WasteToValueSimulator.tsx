@@ -5,39 +5,41 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FunnelChart, Funnel, LabelList, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 interface WasteToValueSimulatorProps {
   onValuesChange?: (values: { totalWaste: number; recoveryRate: number; cdrValue: number }) => void;
 }
 
 export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [totalWaste, setTotalWaste] = useState(3500);
   const [recoveryRate, setRecoveryRate] = useState(96);
 
   const calculations = useMemo(() => {
     const recovered = totalWaste * (recoveryRate / 100);
     const landfillDiverted = recovered;
-    const cdrProduced = recovered * 0.4; // 40% se convierte en CDR
-    const materialRecycled = recovered * 0.45; // 45% material reciclado
-    const compost = recovered * 0.15; // 15% compost
-    const cdrValue = cdrProduced * 45; // 45 EUR/ton CDR
-    const recycledValue = materialRecycled * 120; // 120 EUR/ton material
+    const cdrProduced = recovered * 0.4;
+    const materialRecycled = recovered * 0.45;
+    const compost = recovered * 0.15;
+    const cdrValue = cdrProduced * 45;
+    const recycledValue = materialRecycled * 120;
     const totalValue = cdrValue + recycledValue;
-    const zeroWasteScore = recoveryRate >= 99.9 ? 'Excelencia' : recoveryRate >= 95 ? 'Avanzado' : 'En Progreso';
+    const zeroWasteScore = recoveryRate >= 99.9 ? t('wasteToValue.scores.excellence') : recoveryRate >= 95 ? t('wasteToValue.scores.advanced') : t('wasteToValue.scores.inProgress');
     const landfillPercent = 100 - recoveryRate;
     
     return { 
       recovered, landfillDiverted, cdrProduced, materialRecycled, compost,
       cdrValue, recycledValue, totalValue, zeroWasteScore, landfillPercent 
     };
-  }, [totalWaste, recoveryRate]);
+  }, [totalWaste, recoveryRate, t]);
 
   const funnelData = useMemo(() => [
-    { name: 'Generación', value: totalWaste, fill: '#64748B' },
-    { name: 'Triaje', value: totalWaste * 0.98, fill: '#F97316' },
-    { name: 'Valorización', value: calculations.recovered, fill: '#22C55E' },
-    { name: 'CDR + Reciclaje', value: calculations.cdrProduced + calculations.materialRecycled, fill: '#10B981' },
-  ], [totalWaste, calculations]);
+    { name: t('wasteToValue.funnel.generation'), value: totalWaste, fill: '#64748B' },
+    { name: t('wasteToValue.funnel.sorting'), value: totalWaste * 0.98, fill: '#F97316' },
+    { name: t('wasteToValue.funnel.valorization'), value: calculations.recovered, fill: '#22C55E' },
+    { name: t('wasteToValue.funnel.cdrRecycling'), value: calculations.cdrProduced + calculations.materialRecycled, fill: '#10B981' },
+  ], [totalWaste, calculations, t]);
 
   const pontusHash = useMemo(() => {
     const base = Math.floor(totalWaste * recoveryRate * 1.89);
@@ -50,7 +52,7 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Columna Izquierda - Simulador Interactivo */}
+      {/* Left Column - Interactive Simulator */}
       <div className="lg:col-span-7">
         <Card className="bg-gradient-to-br from-orange-950/40 to-green-950/30 border-orange-500/20 shadow-2xl overflow-hidden h-full">
           <CardContent className="p-6 space-y-6">
@@ -61,8 +63,8 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
                   <Trash2 className="w-6 h-6 text-orange-400" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">WASTE-TO-VALUE</h3>
-                  <p className="text-xs text-slate-400">Vertido Cero - Valorización Total</p>
+                  <h3 className="font-bold text-white">{t('wasteToValue.title')}</h3>
+                  <p className="text-xs text-slate-400">{t('wasteToValue.subtitle')}</p>
                 </div>
               </div>
               <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30 font-mono text-xs">
@@ -72,7 +74,7 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
 
             {/* Funnel Chart */}
             <div className="bg-slate-900/60 rounded-xl p-4 border border-orange-900/30">
-              <p className="text-xs text-slate-400 mb-3 uppercase font-bold">Embudo de Valorización</p>
+              <p className="text-xs text-slate-400 mb-3 uppercase font-bold">{t('wasteToValue.funnelTitle')}</p>
               <ResponsiveContainer width="100%" height={200}>
                 <FunnelChart>
                   <Tooltip
@@ -103,7 +105,7 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
             <div className="space-y-5 bg-slate-900/40 p-4 rounded-xl border border-orange-900/20">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-300">Residuos Totales Generados</span>
+                  <span className="text-slate-300">{t('wasteToValue.sliders.totalWaste')}</span>
                   <span className="font-bold text-orange-400">{totalWaste.toLocaleString()} t</span>
                 </div>
                 <Slider
@@ -118,7 +120,7 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-300">Tasa de Recuperación</span>
+                  <span className="text-slate-300">{t('wasteToValue.sliders.recoveryRate')}</span>
                   <span className="font-bold text-green-400">{recoveryRate}%</span>
                 </div>
                 <Slider
@@ -135,24 +137,24 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
             {/* KPIs Grid */}
             <div className="grid grid-cols-4 gap-2">
               <div className="bg-orange-950/40 p-3 rounded-xl border border-orange-800/30 text-center">
-                <p className="text-[10px] uppercase font-bold text-orange-400 mb-1">CDR</p>
+                <p className="text-[10px] uppercase font-bold text-orange-400 mb-1">{t('wasteToValue.kpis.cdr')}</p>
                 <p className="text-lg font-black text-white">{calculations.cdrProduced.toLocaleString()}</p>
-                <p className="text-[10px] text-slate-400">toneladas</p>
+                <p className="text-[10px] text-slate-400">{t('wasteToValue.tons')}</p>
               </div>
               <div className="bg-green-950/40 p-3 rounded-xl border border-green-800/30 text-center">
-                <p className="text-[10px] uppercase font-bold text-green-400 mb-1">Reciclado</p>
+                <p className="text-[10px] uppercase font-bold text-green-400 mb-1">{t('wasteToValue.kpis.recycled')}</p>
                 <p className="text-lg font-black text-white">{calculations.materialRecycled.toLocaleString()}</p>
-                <p className="text-[10px] text-slate-400">toneladas</p>
+                <p className="text-[10px] text-slate-400">{t('wasteToValue.tons')}</p>
               </div>
               <div className="bg-lime-950/40 p-3 rounded-xl border border-lime-800/30 text-center">
-                <p className="text-[10px] uppercase font-bold text-lime-400 mb-1">Compost</p>
+                <p className="text-[10px] uppercase font-bold text-lime-400 mb-1">{t('wasteToValue.kpis.compost')}</p>
                 <p className="text-lg font-black text-white">{calculations.compost.toLocaleString()}</p>
-                <p className="text-[10px] text-slate-400">toneladas</p>
+                <p className="text-[10px] text-slate-400">{t('wasteToValue.tons')}</p>
               </div>
               <div className="bg-red-950/40 p-3 rounded-xl border border-red-800/30 text-center">
-                <p className="text-[10px] uppercase font-bold text-red-400 mb-1">Vertedero</p>
+                <p className="text-[10px] uppercase font-bold text-red-400 mb-1">{t('wasteToValue.kpis.landfill')}</p>
                 <p className="text-lg font-black text-white">{calculations.landfillPercent.toFixed(1)}%</p>
-                <p className="text-[10px] text-slate-400">mínimo</p>
+                <p className="text-[10px] text-slate-400">{t('wasteToValue.minimum')}</p>
               </div>
             </div>
 
@@ -160,13 +162,13 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
             <div className="bg-gradient-to-r from-orange-900/50 to-green-900/50 p-5 rounded-2xl border border-green-500/30">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-[10px] uppercase font-black text-green-300 mb-2">Valor Total Generado</p>
+                  <p className="text-[10px] uppercase font-black text-green-300 mb-2">{t('wasteToValue.totalValue')}</p>
                   <p className="text-3xl font-black text-white">€{calculations.totalValue.toLocaleString()}</p>
                 </div>
                 <div className="flex gap-2">
                   <Badge className={`${
-                    calculations.zeroWasteScore === 'Excelencia' ? 'bg-emerald-500/20 text-emerald-300' :
-                    calculations.zeroWasteScore === 'Avanzado' ? 'bg-green-500/20 text-green-300' :
+                    calculations.zeroWasteScore === t('wasteToValue.scores.excellence') ? 'bg-emerald-500/20 text-emerald-300' :
+                    calculations.zeroWasteScore === t('wasteToValue.scores.advanced') ? 'bg-green-500/20 text-green-300' :
                     'bg-amber-500/20 text-amber-300'
                   }`}>
                     {calculations.zeroWasteScore}
@@ -178,7 +180,7 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
         </Card>
       </div>
 
-      {/* Columna Derecha - Panel ARIA */}
+      {/* Right Column - ARIA Panel */}
       <div className="lg:col-span-5">
         <Card className="bg-[#020617] border-orange-500/20 shadow-2xl h-full">
           <CardContent className="p-6 space-y-5">
@@ -188,23 +190,24 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
                 A
               </div>
               <div>
-                <p className="text-white font-semibold">ARIA</p>
-                <p className="text-xs text-orange-400">Asesora de Vertido Cero</p>
+                <p className="text-white font-semibold">{t('aria.name')}</p>
+                <p className="text-xs text-orange-400">{t('wasteToValue.aria.role')}</p>
               </div>
             </div>
 
-            {/* Insights Dinámicos */}
+            {/* Dynamic Insights */}
             <div className="space-y-4">
               <div className="bg-green-950/30 rounded-xl p-4 border border-green-800/30">
                 <div className="flex items-start gap-3">
                   <Leaf className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-white font-medium mb-1">Objetivo Vertido Cero</p>
-                    <p className="text-xs text-slate-400">
-                      Has alcanzado un <span className="text-green-400 font-bold">{recoveryRate}%</span> de 
-                      recuperación. Tu organización califica para el sello de 
-                      <span className="text-white font-bold"> '{calculations.zeroWasteScore}'</span> de ProcureData.
-                    </p>
+                    <p className="text-sm text-white font-medium mb-1">{t('wasteToValue.aria.zeroWasteTitle')}</p>
+                    <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{
+                      __html: t('wasteToValue.aria.zeroWasteDesc', {
+                        rate: recoveryRate,
+                        score: calculations.zeroWasteScore
+                      })
+                    }} />
                   </div>
                 </div>
               </div>
@@ -213,11 +216,13 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
                 <div className="flex items-start gap-3">
                   <Flame className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-white font-medium mb-1">Combustible Derivado (CDR)</p>
-                    <p className="text-xs text-slate-400">
-                      Has producido <span className="text-orange-400 font-bold">{calculations.cdrProduced.toLocaleString()} toneladas</span> de CDR, 
-                      generando <span className="text-white font-bold">€{calculations.cdrValue.toLocaleString()}</span> en valor energético.
-                    </p>
+                    <p className="text-sm text-white font-medium mb-1">{t('wasteToValue.aria.cdrTitle')}</p>
+                    <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{
+                      __html: t('wasteToValue.aria.cdrDesc', {
+                        cdr: calculations.cdrProduced.toLocaleString(),
+                        value: calculations.cdrValue.toLocaleString()
+                      })
+                    }} />
                   </div>
                 </div>
               </div>
@@ -227,11 +232,10 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
                   <div className="flex items-start gap-3">
                     <Sparkles className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-sm text-white font-medium mb-1">¡Excelencia Circular!</p>
-                      <p className="text-xs text-slate-400">
-                        Con un {recoveryRate}% de recuperación, calificas para el <span className="text-emerald-400 font-bold">Sello de Excelencia Circular</span> de 
-                        ProcureData, reconocido por la Comisión Europea.
-                      </p>
+                      <p className="text-sm text-white font-medium mb-1">{t('wasteToValue.aria.excellenceTitle')}</p>
+                      <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{
+                        __html: t('wasteToValue.aria.excellenceDesc', { rate: recoveryRate })
+                      }} />
                     </div>
                   </div>
                 </div>
@@ -240,25 +244,27 @@ export const WasteToValueSimulator = ({ onValuesChange }: WasteToValueSimulatorP
 
             {/* Quote ARIA */}
             <div className="bg-gradient-to-r from-orange-900/30 to-green-900/30 rounded-xl p-4 border border-orange-500/20">
-              <p className="text-sm text-slate-300 italic leading-relaxed">
-                "De <span className="text-orange-400 font-semibold">{totalWaste.toLocaleString()} toneladas</span> generadas, 
-                has desviado de vertedero <span className="text-green-400 font-semibold">{calculations.landfillDiverted.toLocaleString()} t</span>, 
-                generando <span className="text-white font-bold">€{calculations.totalValue.toLocaleString()}</span> en valor circular 
-                y evitando emisiones equivalentes a {Math.round(calculations.recovered * 0.5)} tonCO₂."
-              </p>
+              <p className="text-sm text-slate-300 italic leading-relaxed" dangerouslySetInnerHTML={{
+                __html: t('wasteToValue.aria.quote', {
+                  waste: totalWaste.toLocaleString(),
+                  diverted: calculations.landfillDiverted.toLocaleString(),
+                  value: calculations.totalValue.toLocaleString(),
+                  co2: Math.round(calculations.recovered * 0.5)
+                })
+              }} />
             </div>
 
             {/* Footer */}
             <div className="pt-4 border-t border-slate-800">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs text-slate-500">Verificado en Pontus-X</p>
+                <p className="text-xs text-slate-500">{t('common.pontusVerified')}</p>
                 <Badge variant="outline" className="text-[10px] border-orange-500/30 text-orange-400 font-mono">
                   {pontusHash}
                 </Badge>
               </div>
               <Button className="w-full bg-gradient-to-r from-orange-600 to-green-600 hover:from-orange-500 hover:to-green-500 text-white">
                 <Download className="w-4 h-4 mr-2" />
-                Descargar Certificado Zero Waste
+                {t('wasteToValue.downloadCert')}
               </Button>
             </div>
           </CardContent>

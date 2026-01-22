@@ -21,13 +21,13 @@ export const GridFlexSimulator = ({ onValuesChange }: GridFlexSimulatorProps) =>
     const annualIncentive = monthlyIncentive * 12;
     const gridReliability = Math.min(100, 85 + (reductionCapacity / 500));
     const eventsPerMonth = Math.min(8, Math.ceil(reductionCapacity / 500));
-    const co2Avoided = (reductionCapacity * 0.4) / 1000; // tonCO2
+    const co2Avoided = (reductionCapacity * 0.4) / 1000;
     return { monthlyIncentive, annualIncentive, gridReliability, eventsPerMonth, co2Avoided };
   }, [reductionCapacity, incentivePrice]);
 
   const loadData = useMemo(() => [
-    { name: t('gridflex.baseLoad'), load: 100 },
-    { name: t('gridflex.activeReduction'), load: 100 - (reductionCapacity / 50) }
+    { name: t('gridFlex.baseLoad'), load: 100 },
+    { name: t('gridFlex.activeReduction'), load: 100 - (reductionCapacity / 50) }
   ], [reductionCapacity, t]);
 
   const pontusHash = useMemo(() => {

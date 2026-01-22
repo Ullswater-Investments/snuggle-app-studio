@@ -5,12 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip, ReferenceLine } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 interface PharmaColdSimulatorProps {
   onValuesChange?: (values: { batchValue: number; tempSensitivity: number; protectedValue: number }) => void;
 }
 
 export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [batchValue, setBatchValue] = useState(120000);
   const [tempSensitivity, setTempSensitivity] = useState(5);
 
@@ -58,12 +60,12 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
                 <Thermometer className="w-6 h-6 text-red-400" />
               </div>
               <div>
-                <h3 className="text-red-400 font-bold text-sm">COLD CHAIN GUARDIAN</h3>
+                <h3 className="text-red-400 font-bold text-sm">{t('pharmaCold.title')}</h3>
                 <p className="text-[10px] text-slate-400 font-mono">{pontusHash}</p>
               </div>
             </div>
             <Badge className={calculations.escrowStatus === 'LOCKED' ? 'bg-red-500/20 text-red-400' : 'bg-green-500/20 text-green-400'}>
-              {calculations.escrowStatus === 'LOCKED' ? 'Escrow Bloqueado' : 'Pago Liberado'}
+              {calculations.escrowStatus === 'LOCKED' ? t('pharmaCold.escrowLocked') : t('pharmaCold.paymentReleased')}
             </Badge>
           </div>
 
@@ -73,7 +75,7 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
               <div className="flex items-center gap-3">
                 <Snowflake className={`w-10 h-10 ${tempSensitivity > 7 ? 'text-red-400' : 'text-blue-400'} ${tempSensitivity > 7 ? '' : 'animate-pulse'}`} />
                 <div>
-                  <p className="text-xs text-slate-400">Temperatura Crítica</p>
+                  <p className="text-xs text-slate-400">{t('pharmaCold.criticalTemp')}</p>
                   <p className={`text-2xl font-black ${tempSensitivity > 7 ? 'text-red-400' : 'text-blue-300'}`}>
                     {(2 + tempSensitivity * 0.8).toFixed(1)}°C
                   </p>
@@ -94,18 +96,18 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
                   style={{ width: `${tempSensitivity * 10}%` }}
                 />
               </div>
-              <span className="text-xs text-slate-400">Riesgo: {tempSensitivity}/10</span>
+              <span className="text-xs text-slate-400">{t('pharmaCold.risk')}: {tempSensitivity}/10</span>
             </div>
           </div>
 
           {/* Temperature Chart */}
           <div className="bg-slate-900/60 rounded-xl p-4 border border-blue-900/20 mb-6">
             <div className="flex justify-between items-center mb-3">
-              <span className="text-xs text-slate-400 uppercase font-bold">Monitorización Térmica 24h</span>
+              <span className="text-xs text-slate-400 uppercase font-bold">{t('pharmaCold.thermalMonitoring')}</span>
               {calculations.chainBreakRisk && (
                 <Badge className="bg-red-500/20 text-red-400">
                   <AlertTriangle className="w-3 h-3 mr-1" />
-                  Cold Break Detectado
+                  {t('pharmaCold.coldBreakDetected')}
                 </Badge>
               )}
             </div>
@@ -120,7 +122,7 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
                   </defs>
                   <XAxis dataKey="time" tick={{ fill: '#94a3b8', fontSize: 10 }} axisLine={false} />
                   <YAxis domain={[0, 12]} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                  <ReferenceLine y={8} stroke="#ef4444" strokeDasharray="5 5" label={{ value: 'Max 8°C', fill: '#ef4444', fontSize: 10 }} />
+                  <ReferenceLine y={8} stroke="#ef4444" strokeDasharray="5 5" label={{ value: t('pharmaCold.max8c'), fill: '#ef4444', fontSize: 10 }} />
                   <Tooltip contentStyle={{ background: '#1e293b', border: 'none', borderRadius: '8px' }} />
                   <Area type="monotone" dataKey="temp" stroke={tempSensitivity > 7 ? '#ef4444' : '#3b82f6'} strokeWidth={2} fill="url(#coldGradient)" />
                 </AreaChart>
@@ -132,7 +134,7 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
           <div className="space-y-5 bg-slate-900/40 p-4 rounded-xl border border-blue-900/20 mb-6">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-300">Valor del Lote de Vacunas</span>
+                <span className="text-slate-300">{t('pharmaCold.sliders.batchValue')}</span>
                 <span className="font-bold text-blue-400">{batchValue.toLocaleString()} €</span>
               </div>
               <Slider value={[batchValue]} onValueChange={(v) => setBatchValue(v[0])} min={10000} max={500000} step={10000} className="[&>span]:bg-blue-600" />
@@ -140,7 +142,7 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
             
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-300">Sensibilidad Térmica del Producto</span>
+                <span className="text-slate-300">{t('pharmaCold.sliders.tempSensitivity')}</span>
                 <span className={`font-bold ${tempSensitivity > 7 ? 'text-red-400' : 'text-cyan-400'}`}>{tempSensitivity}/10</span>
               </div>
               <Slider value={[tempSensitivity]} onValueChange={(v) => setTempSensitivity(v[0])} min={1} max={10} step={1} className="[&>span]:bg-cyan-600" />
@@ -151,10 +153,10 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
           <div className={`p-5 rounded-2xl border ${calculations.escrowStatus === 'LOCKED' ? 'bg-gradient-to-r from-red-900/50 to-orange-900/50 border-red-500/30' : 'bg-gradient-to-r from-blue-900/50 to-cyan-900/50 border-blue-500/30'}`}>
             <div className="flex items-center gap-2 mb-2">
               {calculations.escrowStatus === 'LOCKED' ? <Lock className="w-5 h-5 text-red-400" /> : <Shield className="w-5 h-5 text-blue-400" />}
-              <p className="text-[10px] uppercase font-black text-slate-300">Valor Protegido en Escrow</p>
+              <p className="text-[10px] uppercase font-black text-slate-300">{t('pharmaCold.protectedValueEscrow')}</p>
             </div>
             <p className="text-4xl font-black text-white">{calculations.protectedValue.toLocaleString()} <span className="text-lg text-blue-400">EUROe</span></p>
-            <p className="text-xs text-slate-400 mt-1">Smart Contract activo en Pontus-X</p>
+            <p className="text-xs text-slate-400 mt-1">{t('pharmaCold.smartContractActive')}</p>
           </div>
         </Card>
       </div>
@@ -166,8 +168,8 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-blue-600 flex items-center justify-center text-white font-black text-lg">A</div>
             <div>
-              <h4 className="text-white font-bold">ARIA</h4>
-              <p className="text-[10px] text-slate-400">Guardiana de Cadena de Frío</p>
+              <h4 className="text-white font-bold">{t('aria.name')}</h4>
+              <p className="text-[10px] text-slate-400">{t('pharmaCold.aria.role')}</p>
             </div>
           </div>
 
@@ -177,10 +179,10 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
               <div className="flex items-start gap-3">
                 <Sparkles className="w-5 h-5 text-blue-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Cold Chain Guardian Activado</p>
-                  <p className="text-xs text-slate-400">
-                    He activado el Cold Chain Guardian. Si la temperatura sube de <span className="text-red-400 font-bold">8°C</span>, tus <span className="text-blue-400 font-bold">{batchValue.toLocaleString()} EUROe</span> quedan protegidos automáticamente en la red Pontus-X.
-                  </p>
+                  <p className="text-sm text-white font-medium mb-1">{t('pharmaCold.aria.guardianTitle')}</p>
+                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{
+                    __html: t('pharmaCold.aria.guardianDesc', { value: batchValue.toLocaleString() })
+                  }} />
                 </div>
               </div>
             </div>
@@ -189,10 +191,8 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
               <div className="flex items-start gap-3">
                 <Shield className="w-5 h-5 text-emerald-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Cumplimiento GDP Pharma</p>
-                  <p className="text-xs text-slate-400">
-                    Tu sistema de trazabilidad cumple las directrices <span className="text-emerald-400">EU GDP 2013/C 343/01</span> para distribución farmacéutica. El registro inmutable garantiza la integridad ante auditorías de la AEMPS.
-                  </p>
+                  <p className="text-sm text-white font-medium mb-1">{t('pharmaCold.aria.gdpTitle')}</p>
+                  <p className="text-xs text-slate-400">{t('pharmaCold.aria.gdpDesc')}</p>
                 </div>
               </div>
             </div>
@@ -201,10 +201,10 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
               <div className="flex items-start gap-3">
                 <Lock className="w-5 h-5 text-cyan-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Ahorro en Seguros</p>
-                  <p className="text-xs text-slate-400">
-                    La protección blockchain reduce la prima de seguro farmacéutico en un <span className="text-cyan-400 font-bold">3.5%</span>, ahorrando <span className="text-white font-bold">{calculations.insuranceSavings.toLocaleString()} €</span> anuales.
-                  </p>
+                  <p className="text-sm text-white font-medium mb-1">{t('pharmaCold.aria.insuranceTitle')}</p>
+                  <p className="text-xs text-slate-400" dangerouslySetInnerHTML={{
+                    __html: t('pharmaCold.aria.insuranceDesc', { savings: calculations.insuranceSavings.toLocaleString() })
+                  }} />
                 </div>
               </div>
             </div>
@@ -213,11 +213,9 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
               <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 rounded-xl p-4 border border-red-500/30">
                 <div className="flex items-center gap-2 mb-2">
                   <AlertTriangle className="w-5 h-5 text-red-400" />
-                  <span className="text-sm font-bold text-red-300">Alerta de Rotura de Cadena</span>
+                  <span className="text-sm font-bold text-red-300">{t('pharmaCold.aria.chainBreakTitle')}</span>
                 </div>
-                <p className="text-xs text-slate-300">
-                  Se ha detectado un riesgo elevado de rotura térmica. El Smart Contract ha bloqueado automáticamente el pago al transportista hasta verificar la integridad del lote.
-                </p>
+                <p className="text-xs text-slate-300">{t('pharmaCold.aria.chainBreakDesc')}</p>
               </div>
             )}
 
@@ -225,11 +223,9 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
               <div className="bg-gradient-to-r from-emerald-900/30 to-cyan-900/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-center gap-2 mb-2">
                   <Snowflake className="w-5 h-5 text-cyan-400" />
-                  <span className="text-sm font-bold text-cyan-300">Cadena de Frío Óptima</span>
+                  <span className="text-sm font-bold text-cyan-300">{t('pharmaCold.aria.optimalTitle')}</span>
                 </div>
-                <p className="text-xs text-slate-300">
-                  Tu nivel de riesgo es bajo. El pago se libera automáticamente al transportista tras confirmación de entrega con temperatura validada.
-                </p>
+                <p className="text-xs text-slate-300">{t('pharmaCold.aria.optimalDesc')}</p>
               </div>
             )}
           </div>
@@ -239,7 +235,7 @@ export const PharmaColdSimulator = ({ onValuesChange }: PharmaColdSimulatorProps
             <p className="text-[10px] font-mono text-slate-500 mb-3">{pontusHash}</p>
             <Button className="w-full bg-gradient-to-r from-red-600 to-blue-600 hover:from-red-700 hover:to-blue-700">
               <FileText className="w-4 h-4 mr-2" />
-              Descargar Reporte GDP
+              {t('pharmaCold.downloadReport')}
             </Button>
           </div>
         </Card>
