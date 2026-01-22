@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Voltar aos Parceiros"
+  },
+  "hero": {
+    "badges": {
+      "procurement": "Compras Profissionais",
+      "association": "Associação Setorial",
+      "network": "Rede de Compradores"
+    },
+    "title": "AERCE",
+    "subtitle": "Associação Espanhola de Profissionais de Compras",
+    "description": "A AERCE representa mais de 3.000 profissionais de compras, facilitando a digitalização do procurement e o acesso a inteligência de mercado partilhada."
+  },
+  "stats": {
+    "members": { "value": "3.000+", "label": "Profissionais associados" },
+    "companies": { "value": "500+", "label": "Empresas membro" },
+    "savings": { "value": "€2,5B", "label": "Volume gerido/ano" }
+  },
+  "about": {
+    "badge": "Quem Somos",
+    "title": "A Voz do Procurement em Espanha",
+    "description": "Desde 1986, a AERCE impulsiona a profissionalização das compras, promovendo melhores práticas e a transformação digital do setor.",
+    "pillars": {
+      "training": { "title": "Formação", "description": "Programas certificados em gestão de compras e supply chain." },
+      "networking": { "title": "Networking", "description": "Eventos e fóruns de intercâmbio entre profissionais." },
+      "advocacy": { "title": "Representação", "description": "Voz do setor perante instituições e reguladores." },
+      "innovation": { "title": "Inovação", "description": "Impulso de tecnologias emergentes em procurement." }
+    }
+  },
+  "project": {
+    "badge": "Projeto PROCUREDATA",
+    "title": "Nó de Dados de Compras",
+    "description": "A AERCE lidera a criação do Data Space de Procurement, conectando os seus membros num ecossistema de inteligência de preços.",
+    "features": {
+      "benchmark": { "title": "Benchmarking de Preços", "description": "Comparações anónimas de condições de compra entre membros." },
+      "suppliers": { "title": "Avaliação de Fornecedores", "description": "Scoring partilhado baseado em desempenho verificável." },
+      "market": { "title": "Inteligência de Mercado", "description": "Tendências de preços e alertas de oportunidades." },
+      "contracts": { "title": "Contratos-Quadro", "description": "Acesso a acordos negociados coletivamente." }
+    }
+  },
+  "services": {
+    "badge": "Serviços para Membros",
+    "title": "Valor Acrescentado AERCE",
+    "items": {
+      "certification": { "title": "Certificação CPP", "description": "Acreditação profissional em compras reconhecida internacionalmente." },
+      "observatory": { "title": "Observatório de Compras", "description": "Estudos e análises do estado do procurement em Espanha." },
+      "legal": { "title": "Assessoria Jurídica", "description": "Consultoria em contratos e regulamentação de compras." },
+      "events": { "title": "Congresso Anual", "description": "O maior evento de networking de compras em Espanha." }
+    }
+  },
+  "cta": {
+    "title": "É profissional de compras?",
+    "description": "Junte-se à AERCE e aceda à rede de inteligência de procurement mais poderosa de Espanha.",
+    "buttons": {
+      "join": "Tornar-se Sócio",
+      "info": "Saber Mais"
+    }
+  }
+}

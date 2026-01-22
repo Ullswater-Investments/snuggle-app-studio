@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "backToPartners": "Voltar aos Parceiros"
+  },
+  "hero": {
+    "badges": {
+      "agri": "Setor Agroalimentar",
+      "gaiaX": "Gaia-X Ready",
+      "traceability": "Rastreabilidade Completa"
+    },
+    "title": "TELENATURA",
+    "subtitle": "Plataforma de Dados Soberanos para a Cadeia Agroalimentar",
+    "description": "TELENATURA conecta produtores, distribuidores e retalhistas num ecossistema de dados seguro, garantindo a rastreabilidade do campo à mesa."
+  },
+  "stats": {
+    "producers": { "value": "+500", "label": "Produtores conectados" },
+    "products": { "value": "15K", "label": "Referências rastreadas" },
+    "retailers": { "value": "+50", "label": "Cadeias de retalho" }
+  },
+  "solutions": {
+    "badge": "Soluções",
+    "title": "Digitalização da Cadeia de Valor",
+    "description": "Ferramentas para cada elo da cadeia agroalimentar.",
+    "items": {
+      "traceability": { "title": "Rastreabilidade Integral", "description": "Seguimento desde a origem até ao ponto de venda com dados imutáveis." },
+      "quality": { "title": "Controlo de Qualidade", "description": "Monitorização das condições de transporte e armazenamento." },
+      "certification": { "title": "Certificações", "description": "Gestão digital de certificados ecológicos, denominações de origem." },
+      "analytics": { "title": "Analítica Preditiva", "description": "Previsão de procura e otimização de inventários." }
+    }
+  },
+  "dataSpace": {
+    "badge": "Data Space Agroalimentar",
+    "title": "Ecossistema de Dados Conectados",
+    "description": "TELENATURA opera como nó do ecossistema PROCUREDATA, permitindo o intercâmbio seguro de dados entre todos os atores da cadeia.",
+    "features": {
+      "sovereignty": "Soberania total sobre dados de produção",
+      "interop": "Interoperabilidade com sistemas de retalho",
+      "compliance": "Conformidade com regulamentações alimentares UE",
+      "blockchain": "Registo imutável para auditorias"
+    }
+  },
+  "useCases": {
+    "badge": "Casos de Uso",
+    "title": "Aplicações Reais",
+    "cases": {
+      "organic": { "title": "Certificação Ecológica", "description": "Verificação automática de práticas de cultivo para selos bio." },
+      "freshness": { "title": "Frescura Garantida", "description": "Monitorização IoT da cadeia de frio em tempo real." },
+      "waste": { "title": "Redução de Desperdício", "description": "Previsão de caducidade para otimizar rotação." },
+      "dop": { "title": "Denominação de Origem", "description": "Rastreabilidade geográfica certificada para produtos premium." }
+    }
+  },
+  "cta": {
+    "title": "Produz, distribui ou vende alimentos?",
+    "description": "Junte-se à TELENATURA e aceda à rede de dados mais completa do setor agroalimentar.",
+    "buttons": {
+      "producer": "Sou Produtor",
+      "distributor": "Sou Distribuidor",
+      "retailer": "Sou Retalhista"
+    }
+  }
+}

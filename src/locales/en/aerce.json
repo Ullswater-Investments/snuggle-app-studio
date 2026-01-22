@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Back to Partners"
+  },
+  "hero": {
+    "badges": {
+      "procurement": "Professional Procurement",
+      "association": "Sectoral Association",
+      "network": "Buyer Network"
+    },
+    "title": "AERCE",
+    "subtitle": "Spanish Association of Purchasing Professionals",
+    "description": "AERCE represents over 3,000 procurement professionals, facilitating procurement digitalization and access to shared market intelligence."
+  },
+  "stats": {
+    "members": { "value": "3,000+", "label": "Associated professionals" },
+    "companies": { "value": "500+", "label": "Member companies" },
+    "savings": { "value": "€2.5B", "label": "Managed volume/year" }
+  },
+  "about": {
+    "badge": "Who We Are",
+    "title": "The Voice of Procurement in Spain",
+    "description": "Since 1986, AERCE has driven the professionalization of purchasing, promoting best practices and the digital transformation of the sector.",
+    "pillars": {
+      "training": { "title": "Training", "description": "Certified programs in purchasing management and supply chain." },
+      "networking": { "title": "Networking", "description": "Events and exchange forums among professionals." },
+      "advocacy": { "title": "Advocacy", "description": "Voice of the sector before institutions and regulators." },
+      "innovation": { "title": "Innovation", "description": "Promotion of emerging technologies in procurement." }
+    }
+  },
+  "project": {
+    "badge": "PROCUREDATA Project",
+    "title": "Procurement Data Node",
+    "description": "AERCE leads the creation of the Procurement Data Space, connecting its members in a price intelligence ecosystem.",
+    "features": {
+      "benchmark": { "title": "Price Benchmarking", "description": "Anonymous comparisons of purchasing conditions among members." },
+      "suppliers": { "title": "Supplier Evaluation", "description": "Shared scoring based on verifiable performance." },
+      "market": { "title": "Market Intelligence", "description": "Price trends and opportunity alerts." },
+      "contracts": { "title": "Framework Contracts", "description": "Access to collectively negotiated agreements." }
+    }
+  },
+  "services": {
+    "badge": "Member Services",
+    "title": "AERCE Added Value",
+    "items": {
+      "certification": { "title": "CPP Certification", "description": "Internationally recognized professional procurement accreditation." },
+      "observatory": { "title": "Procurement Observatory", "description": "Studies and analysis of the state of procurement in Spain." },
+      "legal": { "title": "Legal Advisory", "description": "Consultancy on contracts and procurement regulations." },
+      "events": { "title": "Annual Congress", "description": "The largest procurement networking event in Spain." }
+    }
+  },
+  "cta": {
+    "title": "Are you a procurement professional?",
+    "description": "Join AERCE and access Spain's most powerful procurement intelligence network.",
+    "buttons": {
+      "join": "Become a Member",
+      "info": "Learn More"
+    }
+  }
+}

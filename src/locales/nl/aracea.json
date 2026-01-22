@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "backToPartners": "Terug naar Partners"
+  },
+  "hero": {
+    "badges": {
+      "cement": "Cementsector",
+      "gaiaX": "Gaia-X Ready",
+      "sustainability": "Industriële Duurzaamheid"
+    },
+    "title": "ARACEA",
+    "subtitle": "Sectoraal Dataknooppunt voor de Cementindustrie",
+    "description": "ARACEA verbindt de actoren van de cementsector in een soevereine dataruimte, waardoor materiaaltraceerbaarheid, ESG-compliance en supply chain-optimalisatie worden vergemakkelijkt."
+  },
+  "stats": {
+    "members": { "value": "+40", "label": "Verbonden cementfabrieken" },
+    "data": { "value": "2,5M", "label": "Ton getraceerd/maand" },
+    "compliance": { "value": "100%", "label": "CBAM-compliance" }
+  },
+  "whatIs": {
+    "badge": "Wat is het?",
+    "title": "De Cement Data Space",
+    "description": "ARACEA is de gedeelde data-infrastructuur die de cementindustrie in staat stelt informatie veilig uit te wisselen met behoud van soevereiniteit over hun gegevens.",
+    "features": {
+      "traceability": { "title": "Materiaaltraceerbaarheid", "description": "Volledige tracking van groeve tot eindproduct." },
+      "carbon": { "title": "CO2-voetafdruk", "description": "Automatische berekening van emissies per product en proces." },
+      "compliance": { "title": "Regelgevende Compliance", "description": "Automatische aanpassing aan CBAM, CSRD en groene taxonomie." },
+      "optimization": { "title": "Logistieke Optimalisatie", "description": "Gedeelde data voor efficiënte routes en kostenreductie." }
+    }
+  },
+  "forWhat": {
+    "badge": "Waarvoor?",
+    "title": "Industriële Toepassingen",
+    "description": "Concrete toepassingen die al waarde genereren in de sector.",
+    "cases": {
+      "cbam": { "title": "CBAM-aangifte", "description": "Automatische generatie van CO2-voetafdrukrepporten voor het grensaanpassingsmechanisme." },
+      "circular": { "title": "Circulaire Economie", "description": "Traceerbaarheid van gerecyclede materialen en industriële bijproducten." },
+      "supplier": { "title": "Leveranciersevaluatie", "description": "ESG-scoring op basis van verifieerbare supply chain-gegevens." },
+      "benchmark": { "title": "Sectorale Benchmarking", "description": "Anonieme vergelijkingen van energie-efficiëntie en emissies." }
+    }
+  },
+  "whoUses": {
+    "badge": "Wie gebruikt het?",
+    "title": "Ecosysteem Actoren",
+    "description": "Deelnemers die al deel uitmaken van het ARACEA-netwerk.",
+    "actors": {
+      "producers": { "title": "Cementproducenten", "description": "Grote cementfabrieken die productie- en emissiegegevens delen." },
+      "suppliers": { "title": "Grondstoffenleveranciers", "description": "Groeves en leveranciers van kite, gips en additieven." },
+      "logistics": { "title": "Logistieke Operators", "description": "Vervoerders die routes optimaliseren met gedeelde data." },
+      "construction": { "title": "Bouwbedrijven", "description": "Bedrijven die cement met CO2-voetafdrukcertificering nodig hebben." }
+    }
+  },
+  "integration": {
+    "badge": "PROCUREDATA Integratie",
+    "title": "Knooppunt Verbonden met het Europese Ecosysteem",
+    "description": "ARACEA opereert als sectoraal knooppunt binnen het PROCUREDATA-netwerk, wat interoperabiliteit met andere industriële Data Spaces garandeert.",
+    "features": {
+      "gaiax": "Volledige compatibiliteit met Gaia-X-standaarden",
+      "idsa": "IDS-connectors voor soevereine uitwisseling",
+      "odrl": "ODRL-beleid voor datagebruikscontrole",
+      "dpp": "Geïntegreerd Digitaal Productpaspoort"
+    }
+  },
+  "cta": {
+    "title": "Werkt uw organisatie met cement?",
+    "description": "Sluit u aan bij ARACEA en krijg toegang tot de data-intelligentie van de cementsector.",
+    "buttons": {
+      "join": "Lidmaatschap Aanvragen",
+      "info": "Meer Informatie"
+    }
+  }
+}

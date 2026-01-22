@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Torna ai Partner"
+  },
+  "hero": {
+    "badges": {
+      "procurement": "Acquisti Professionali",
+      "association": "Associazione di Settore",
+      "network": "Rete di Acquirenti"
+    },
+    "title": "AERCE",
+    "subtitle": "Associazione Spagnola dei Professionisti degli Acquisti",
+    "description": "AERCE rappresenta oltre 3.000 professionisti del procurement, facilitando la digitalizzazione degli acquisti e l'accesso all'intelligenza di mercato condivisa."
+  },
+  "stats": {
+    "members": { "value": "3.000+", "label": "Professionisti associati" },
+    "companies": { "value": "500+", "label": "Aziende membre" },
+    "savings": { "value": "€2,5B", "label": "Volume gestito/anno" }
+  },
+  "about": {
+    "badge": "Chi Siamo",
+    "title": "La Voce del Procurement in Spagna",
+    "description": "Dal 1986, AERCE promuove la professionalizzazione degli acquisti, diffondendo le migliori pratiche e la trasformazione digitale del settore.",
+    "pillars": {
+      "training": { "title": "Formazione", "description": "Programmi certificati in gestione acquisti e supply chain." },
+      "networking": { "title": "Networking", "description": "Eventi e forum di scambio tra professionisti." },
+      "advocacy": { "title": "Rappresentanza", "description": "Voce del settore presso istituzioni e regolatori." },
+      "innovation": { "title": "Innovazione", "description": "Promozione di tecnologie emergenti nel procurement." }
+    }
+  },
+  "project": {
+    "badge": "Progetto PROCUREDATA",
+    "title": "Nodo Dati Acquisti",
+    "description": "AERCE guida la creazione del Data Space del Procurement, collegando i suoi membri in un ecosistema di intelligenza dei prezzi.",
+    "features": {
+      "benchmark": { "title": "Benchmarking dei Prezzi", "description": "Confronti anonimi delle condizioni di acquisto tra membri." },
+      "suppliers": { "title": "Valutazione Fornitori", "description": "Scoring condiviso basato su performance verificabili." },
+      "market": { "title": "Intelligenza di Mercato", "description": "Tendenze dei prezzi e avvisi di opportunità." },
+      "contracts": { "title": "Contratti Quadro", "description": "Accesso ad accordi negoziati collettivamente." }
+    }
+  },
+  "services": {
+    "badge": "Servizi per i Membri",
+    "title": "Valore Aggiunto AERCE",
+    "items": {
+      "certification": { "title": "Certificazione CPP", "description": "Accreditamento professionale negli acquisti riconosciuto a livello internazionale." },
+      "observatory": { "title": "Osservatorio degli Acquisti", "description": "Studi e analisi sullo stato del procurement in Spagna." },
+      "legal": { "title": "Consulenza Legale", "description": "Consulenza su contratti e normative degli acquisti." },
+      "events": { "title": "Congresso Annuale", "description": "Il più grande evento di networking per acquisti in Spagna." }
+    }
+  },
+  "cta": {
+    "title": "Sei un professionista degli acquisti?",
+    "description": "Unisciti ad AERCE e accedi alla rete di intelligenza procurement più potente della Spagna.",
+    "buttons": {
+      "join": "Diventa Socio",
+      "info": "Scopri di Più"
+    }
+  }
+}

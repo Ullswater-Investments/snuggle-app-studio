@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "backToPartners": "Retour aux Partenaires"
+  },
+  "hero": {
+    "badges": {
+      "agri": "Secteur Agroalimentaire",
+      "gaiaX": "Gaia-X Ready",
+      "traceability": "Traçabilité Complète"
+    },
+    "title": "TELENATURA",
+    "subtitle": "Plateforme de Données Souveraines pour la Chaîne Agroalimentaire",
+    "description": "TELENATURA connecte producteurs, distributeurs et détaillants dans un écosystème de données sécurisé, garantissant la traçabilité de la ferme à la table."
+  },
+  "stats": {
+    "producers": { "value": "+500", "label": "Producteurs connectés" },
+    "products": { "value": "15K", "label": "Références tracées" },
+    "retailers": { "value": "+50", "label": "Chaînes de distribution" }
+  },
+  "solutions": {
+    "badge": "Solutions",
+    "title": "Digitalisation de la Chaîne de Valeur",
+    "description": "Outils pour chaque maillon de la chaîne agroalimentaire.",
+    "items": {
+      "traceability": { "title": "Traçabilité Intégrale", "description": "Suivi de l'origine au point de vente avec données immuables." },
+      "quality": { "title": "Contrôle Qualité", "description": "Surveillance des conditions de transport et stockage." },
+      "certification": { "title": "Certifications", "description": "Gestion numérique des certificats bio, appellations d'origine." },
+      "analytics": { "title": "Analytique Prédictive", "description": "Prévision de la demande et optimisation des stocks." }
+    }
+  },
+  "dataSpace": {
+    "badge": "Data Space Agroalimentaire",
+    "title": "Écosystème de Données Connectées",
+    "description": "TELENATURA fonctionne comme un nœud de l'écosystème PROCUREDATA, permettant l'échange sécurisé de données entre tous les acteurs de la chaîne.",
+    "features": {
+      "sovereignty": "Souveraineté totale sur les données de production",
+      "interop": "Interopérabilité avec les systèmes de distribution",
+      "compliance": "Conformité aux réglementations alimentaires UE",
+      "blockchain": "Registre immuable pour les audits"
+    }
+  },
+  "useCases": {
+    "badge": "Cas d'Usage",
+    "title": "Applications Réelles",
+    "cases": {
+      "organic": { "title": "Certification Biologique", "description": "Vérification automatique des pratiques de culture pour les labels bio." },
+      "freshness": { "title": "Fraîcheur Garantie", "description": "Surveillance IoT en temps réel de la chaîne du froid." },
+      "waste": { "title": "Réduction du Gaspillage", "description": "Prédiction d'expiration pour optimiser la rotation." },
+      "dop": { "title": "Appellation d'Origine", "description": "Traçabilité géographique certifiée pour les produits premium." }
+    }
+  },
+  "cta": {
+    "title": "Vous produisez, distribuez ou vendez des aliments ?",
+    "description": "Rejoignez TELENATURA et accédez au réseau de données le plus complet du secteur agroalimentaire.",
+    "buttons": {
+      "producer": "Je suis Producteur",
+      "distributor": "Je suis Distributeur",
+      "retailer": "Je suis Détaillant"
+    }
+  }
+}

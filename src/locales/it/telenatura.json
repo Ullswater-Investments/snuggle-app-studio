@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "backToPartners": "Torna ai Partner"
+  },
+  "hero": {
+    "badges": {
+      "agri": "Settore Agroalimentare",
+      "gaiaX": "Gaia-X Ready",
+      "traceability": "Tracciabilità Completa"
+    },
+    "title": "TELENATURA",
+    "subtitle": "Piattaforma Dati Sovrani per la Filiera Agroalimentare",
+    "description": "TELENATURA connette produttori, distributori e retailer in un ecosistema di dati sicuro, garantendo la tracciabilità dal campo alla tavola."
+  },
+  "stats": {
+    "producers": { "value": "+500", "label": "Produttori connessi" },
+    "products": { "value": "15K", "label": "Referenze tracciate" },
+    "retailers": { "value": "+50", "label": "Catene retail" }
+  },
+  "solutions": {
+    "badge": "Soluzioni",
+    "title": "Digitalizzazione della Catena del Valore",
+    "description": "Strumenti per ogni anello della filiera agroalimentare.",
+    "items": {
+      "traceability": { "title": "Tracciabilità Integrale", "description": "Tracciamento dall'origine al punto vendita con dati immutabili." },
+      "quality": { "title": "Controllo Qualità", "description": "Monitoraggio delle condizioni di trasporto e stoccaggio." },
+      "certification": { "title": "Certificazioni", "description": "Gestione digitale di certificati biologici, denominazioni di origine." },
+      "analytics": { "title": "Analitica Predittiva", "description": "Previsione della domanda e ottimizzazione delle scorte." }
+    }
+  },
+  "dataSpace": {
+    "badge": "Data Space Agroalimentare",
+    "title": "Ecosistema di Dati Connessi",
+    "description": "TELENATURA opera come nodo dell'ecosistema PROCUREDATA, permettendo lo scambio sicuro di dati tra tutti gli attori della filiera.",
+    "features": {
+      "sovereignty": "Sovranità totale sui dati di produzione",
+      "interop": "Interoperabilità con sistemi retail",
+      "compliance": "Conformità alle normative alimentari UE",
+      "blockchain": "Registro immutabile per audit"
+    }
+  },
+  "useCases": {
+    "badge": "Casi d'Uso",
+    "title": "Applicazioni Reali",
+    "cases": {
+      "organic": { "title": "Certificazione Biologica", "description": "Verifica automatica delle pratiche di coltivazione per marchi bio." },
+      "freshness": { "title": "Freschezza Garantita", "description": "Monitoraggio IoT in tempo reale della catena del freddo." },
+      "waste": { "title": "Riduzione degli Sprechi", "description": "Previsione della scadenza per ottimizzare la rotazione." },
+      "dop": { "title": "Denominazione di Origine", "description": "Tracciabilità geografica certificata per prodotti premium." }
+    }
+  },
+  "cta": {
+    "title": "Produci, distribuisci o vendi alimenti?",
+    "description": "Unisciti a TELENATURA e accedi alla rete dati più completa del settore agroalimentare.",
+    "buttons": {
+      "producer": "Sono Produttore",
+      "distributor": "Sono Distributore",
+      "retailer": "Sono Retailer"
+    }
+  }
+}

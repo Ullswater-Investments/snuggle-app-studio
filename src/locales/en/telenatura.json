@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "backToPartners": "Back to Partners"
+  },
+  "hero": {
+    "badges": {
+      "agri": "Agri-Food Sector",
+      "gaiaX": "Gaia-X Ready",
+      "traceability": "Complete Traceability"
+    },
+    "title": "TELENATURA",
+    "subtitle": "Sovereign Data Platform for the Agri-Food Chain",
+    "description": "TELENATURA connects producers, distributors and retailers in a secure data ecosystem, ensuring farm-to-table traceability."
+  },
+  "stats": {
+    "producers": { "value": "+500", "label": "Connected producers" },
+    "products": { "value": "15K", "label": "Traced references" },
+    "retailers": { "value": "+50", "label": "Retail chains" }
+  },
+  "solutions": {
+    "badge": "Solutions",
+    "title": "Value Chain Digitalization",
+    "description": "Tools for every link in the agri-food chain.",
+    "items": {
+      "traceability": { "title": "Integral Traceability", "description": "Tracking from origin to point of sale with immutable data." },
+      "quality": { "title": "Quality Control", "description": "Monitoring of transport and storage conditions." },
+      "certification": { "title": "Certifications", "description": "Digital management of organic certificates, designations of origin." },
+      "analytics": { "title": "Predictive Analytics", "description": "Demand forecasting and inventory optimization." }
+    }
+  },
+  "dataSpace": {
+    "badge": "Agri-Food Data Space",
+    "title": "Connected Data Ecosystem",
+    "description": "TELENATURA operates as a node of the PROCUREDATA ecosystem, enabling secure data exchange between all actors in the chain.",
+    "features": {
+      "sovereignty": "Total sovereignty over production data",
+      "interop": "Interoperability with retail systems",
+      "compliance": "Compliance with EU food regulations",
+      "blockchain": "Immutable registry for audits"
+    }
+  },
+  "useCases": {
+    "badge": "Use Cases",
+    "title": "Real Applications",
+    "cases": {
+      "organic": { "title": "Organic Certification", "description": "Automatic verification of cultivation practices for bio labels." },
+      "freshness": { "title": "Guaranteed Freshness", "description": "Real-time IoT monitoring of cold chain." },
+      "waste": { "title": "Waste Reduction", "description": "Expiry prediction to optimize rotation." },
+      "dop": { "title": "Designation of Origin", "description": "Certified geographic traceability for premium products." }
+    }
+  },
+  "cta": {
+    "title": "Do you produce, distribute or sell food?",
+    "description": "Join TELENATURA and access the most complete data network in the agri-food sector.",
+    "buttons": {
+      "producer": "I'm a Producer",
+      "distributor": "I'm a Distributor",
+      "retailer": "I'm a Retailer"
+    }
+  }
+}

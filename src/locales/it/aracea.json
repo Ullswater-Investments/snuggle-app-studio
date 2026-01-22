@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "backToPartners": "Torna ai Partner"
+  },
+  "hero": {
+    "badges": {
+      "cement": "Settore Cemento",
+      "gaiaX": "Gaia-X Ready",
+      "sustainability": "Sostenibilità Industriale"
+    },
+    "title": "ARACEA",
+    "subtitle": "Nodo Dati Settoriale per l'Industria del Cemento",
+    "description": "ARACEA connette gli attori del settore cementiero in uno spazio dati sovrano, facilitando la tracciabilità dei materiali, la conformità ESG e l'ottimizzazione della supply chain."
+  },
+  "stats": {
+    "members": { "value": "+40", "label": "Cementerie connesse" },
+    "data": { "value": "2,5M", "label": "Tonnellate tracciate/mese" },
+    "compliance": { "value": "100%", "label": "Conformità CBAM" }
+  },
+  "whatIs": {
+    "badge": "Cos'è?",
+    "title": "Il Data Space del Cemento",
+    "description": "ARACEA è l'infrastruttura dati condivisa che permette all'industria del cemento di scambiare informazioni in modo sicuro mantenendo la sovranità sui propri dati.",
+    "features": {
+      "traceability": { "title": "Tracciabilità dei Materiali", "description": "Tracciamento completo dalla cava al prodotto finale." },
+      "carbon": { "title": "Impronta di Carbonio", "description": "Calcolo automatico delle emissioni per prodotto e processo." },
+      "compliance": { "title": "Conformità Normativa", "description": "Adattamento automatico a CBAM, CSRD e tassonomia verde." },
+      "optimization": { "title": "Ottimizzazione Logistica", "description": "Dati condivisi per percorsi efficienti e riduzione dei costi." }
+    }
+  },
+  "forWhat": {
+    "badge": "A cosa serve?",
+    "title": "Casi d'Uso Industriali",
+    "description": "Applicazioni concrete che già generano valore nel settore.",
+    "cases": {
+      "cbam": { "title": "Dichiarazione CBAM", "description": "Generazione automatica di report sull'impronta di carbonio per il meccanismo di adeguamento alle frontiere." },
+      "circular": { "title": "Economia Circolare", "description": "Tracciabilità dei materiali riciclati e sottoprodotti industriali." },
+      "supplier": { "title": "Valutazione Fornitori", "description": "Scoring ESG basato su dati verificabili della supply chain." },
+      "benchmark": { "title": "Benchmarking Settoriale", "description": "Confronti anonimi di efficienza energetica ed emissioni." }
+    }
+  },
+  "whoUses": {
+    "badge": "Chi lo usa?",
+    "title": "Attori dell'Ecosistema",
+    "description": "Partecipanti che già fanno parte della rete ARACEA.",
+    "actors": {
+      "producers": { "title": "Produttori di Cemento", "description": "Grandi cementerie che condividono dati di produzione ed emissioni." },
+      "suppliers": { "title": "Fornitori di Materie Prime", "description": "Cave e fornitori di clinker, gesso e additivi." },
+      "logistics": { "title": "Operatori Logistici", "description": "Trasportatori che ottimizzano i percorsi con dati condivisi." },
+      "construction": { "title": "Imprese di Costruzione", "description": "Aziende che richiedono cemento con certificazione dell'impronta di carbonio." }
+    }
+  },
+  "integration": {
+    "badge": "Integrazione PROCUREDATA",
+    "title": "Nodo Connesso all'Ecosistema Europeo",
+    "description": "ARACEA opera come nodo settoriale all'interno della rete PROCUREDATA, garantendo interoperabilità con altri Data Spaces industriali.",
+    "features": {
+      "gaiax": "Piena compatibilità con gli standard Gaia-X",
+      "idsa": "Connettori IDS per scambio sovrano",
+      "odrl": "Politiche ODRL per il controllo dell'uso dei dati",
+      "dpp": "Passaporto Digitale di Prodotto integrato"
+    }
+  },
+  "cta": {
+    "title": "La tua organizzazione lavora con il cemento?",
+    "description": "Unisciti ad ARACEA e accedi all'intelligenza dei dati del settore cementiero.",
+    "buttons": {
+      "join": "Richiedi Adesione",
+      "info": "Maggiori Informazioni"
+    }
+  }
+}

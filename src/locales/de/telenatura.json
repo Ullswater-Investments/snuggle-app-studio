@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "backToPartners": "Zurück zu Partnern"
+  },
+  "hero": {
+    "badges": {
+      "agri": "Agrar-Lebensmittel-Sektor",
+      "gaiaX": "Gaia-X Ready",
+      "traceability": "Vollständige Rückverfolgbarkeit"
+    },
+    "title": "TELENATURA",
+    "subtitle": "Souveräne Datenplattform für die Agrar-Lebensmittel-Kette",
+    "description": "TELENATURA verbindet Produzenten, Distributoren und Einzelhändler in einem sicheren Datenökosystem und gewährleistet Rückverfolgbarkeit vom Feld bis zum Tisch."
+  },
+  "stats": {
+    "producers": { "value": "+500", "label": "Verbundene Produzenten" },
+    "products": { "value": "15K", "label": "Nachverfolgte Referenzen" },
+    "retailers": { "value": "+50", "label": "Einzelhandelsketten" }
+  },
+  "solutions": {
+    "badge": "Lösungen",
+    "title": "Digitalisierung der Wertschöpfungskette",
+    "description": "Werkzeuge für jedes Glied der Agrar-Lebensmittel-Kette.",
+    "items": {
+      "traceability": { "title": "Integrale Rückverfolgbarkeit", "description": "Verfolgung vom Ursprung bis zum Verkaufsort mit unveränderlichen Daten." },
+      "quality": { "title": "Qualitätskontrolle", "description": "Überwachung von Transport- und Lagerbedingungen." },
+      "certification": { "title": "Zertifizierungen", "description": "Digitale Verwaltung von Bio-Zertifikaten, Herkunftsbezeichnungen." },
+      "analytics": { "title": "Prädiktive Analytik", "description": "Nachfrageprognose und Bestandsoptimierung." }
+    }
+  },
+  "dataSpace": {
+    "badge": "Agrar-Lebensmittel Data Space",
+    "title": "Vernetztes Datenökosystem",
+    "description": "TELENATURA operiert als Knoten des PROCUREDATA-Ökosystems und ermöglicht den sicheren Datenaustausch zwischen allen Akteuren der Kette.",
+    "features": {
+      "sovereignty": "Vollständige Souveränität über Produktionsdaten",
+      "interop": "Interoperabilität mit Einzelhandelssystemen",
+      "compliance": "Einhaltung der EU-Lebensmittelvorschriften",
+      "blockchain": "Unveränderliches Register für Audits"
+    }
+  },
+  "useCases": {
+    "badge": "Anwendungsfälle",
+    "title": "Reale Anwendungen",
+    "cases": {
+      "organic": { "title": "Bio-Zertifizierung", "description": "Automatische Überprüfung von Anbau-Praktiken für Bio-Siegel." },
+      "freshness": { "title": "Garantierte Frische", "description": "Echtzeit-IoT-Überwachung der Kühlkette." },
+      "waste": { "title": "Abfallreduzierung", "description": "Verfallsvorhersage zur Optimierung der Rotation." },
+      "dop": { "title": "Herkunftsbezeichnung", "description": "Zertifizierte geografische Rückverfolgbarkeit für Premium-Produkte." }
+    }
+  },
+  "cta": {
+    "title": "Produzieren, vertreiben oder verkaufen Sie Lebensmittel?",
+    "description": "Treten Sie TELENATURA bei und erhalten Sie Zugang zum umfassendsten Datennetzwerk im Agrar-Lebensmittel-Sektor.",
+    "buttons": {
+      "producer": "Ich bin Produzent",
+      "distributor": "Ich bin Distributor",
+      "retailer": "Ich bin Einzelhändler"
+    }
+  }
+}

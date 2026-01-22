@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "backToPartners": "Zurück zu Partnern"
+  },
+  "hero": {
+    "badges": {
+      "cement": "Zementsektor",
+      "gaiaX": "Gaia-X Ready",
+      "sustainability": "Industrielle Nachhaltigkeit"
+    },
+    "title": "ARACEA",
+    "subtitle": "Sektoraler Datenknoten für die Zementindustrie",
+    "description": "ARACEA verbindet die Akteure des Zementsektors in einem souveränen Datenraum und erleichtert die Materialrückverfolgbarkeit, ESG-Compliance und Supply-Chain-Optimierung."
+  },
+  "stats": {
+    "members": { "value": "+40", "label": "Verbundene Zementwerke" },
+    "data": { "value": "2,5M", "label": "Tonnen nachverfolgt/Monat" },
+    "compliance": { "value": "100%", "label": "CBAM-Konformität" }
+  },
+  "whatIs": {
+    "badge": "Was ist es?",
+    "title": "Der Zement Data Space",
+    "description": "ARACEA ist die gemeinsame Dateninfrastruktur, die es der Zementindustrie ermöglicht, Informationen sicher auszutauschen und dabei die Souveränität über ihre Daten zu wahren.",
+    "features": {
+      "traceability": { "title": "Materialrückverfolgbarkeit", "description": "Vollständige Verfolgung vom Steinbruch bis zum Endprodukt." },
+      "carbon": { "title": "CO2-Fußabdruck", "description": "Automatische Berechnung der Emissionen pro Produkt und Prozess." },
+      "compliance": { "title": "Regulatorische Konformität", "description": "Automatische Anpassung an CBAM, CSRD und grüne Taxonomie." },
+      "optimization": { "title": "Logistikoptimierung", "description": "Geteilte Daten für effiziente Routen und Kostensenkung." }
+    }
+  },
+  "forWhat": {
+    "badge": "Wofür?",
+    "title": "Industrielle Anwendungsfälle",
+    "description": "Konkrete Anwendungen, die bereits Wert im Sektor generieren.",
+    "cases": {
+      "cbam": { "title": "CBAM-Erklärung", "description": "Automatische Erstellung von CO2-Fußabdruckberichten für den Grenzausgleichsmechanismus." },
+      "circular": { "title": "Kreislaufwirtschaft", "description": "Rückverfolgbarkeit von Recyclingmaterialien und industriellen Nebenprodukten." },
+      "supplier": { "title": "Lieferantenbewertung", "description": "ESG-Scoring basierend auf überprüfbaren Lieferkettendaten." },
+      "benchmark": { "title": "Sektorales Benchmarking", "description": "Anonyme Vergleiche von Energieeffizienz und Emissionen." }
+    }
+  },
+  "whoUses": {
+    "badge": "Wer nutzt es?",
+    "title": "Ökosystem-Akteure",
+    "description": "Teilnehmer, die bereits Teil des ARACEA-Netzwerks sind.",
+    "actors": {
+      "producers": { "title": "Zementproduzenten", "description": "Große Zementwerke, die Produktions- und Emissionsdaten teilen." },
+      "suppliers": { "title": "Rohstofflieferanten", "description": "Steinbrüche und Lieferanten von Klinker, Gips und Zusatzstoffen." },
+      "logistics": { "title": "Logistikbetreiber", "description": "Spediteure, die Routen mit geteilten Daten optimieren." },
+      "construction": { "title": "Bauunternehmen", "description": "Unternehmen, die Zement mit CO2-Fußabdruck-Zertifizierung benötigen." }
+    }
+  },
+  "integration": {
+    "badge": "PROCUREDATA-Integration",
+    "title": "Mit dem europäischen Ökosystem verbundener Knoten",
+    "description": "ARACEA operiert als sektoraler Knoten innerhalb des PROCUREDATA-Netzwerks und gewährleistet Interoperabilität mit anderen industriellen Data Spaces.",
+    "features": {
+      "gaiax": "Volle Kompatibilität mit Gaia-X-Standards",
+      "idsa": "IDS-Konnektoren für souveränen Austausch",
+      "odrl": "ODRL-Richtlinien zur Datennutzungskontrolle",
+      "dpp": "Integrierter Digitaler Produktpass"
+    }
+  },
+  "cta": {
+    "title": "Arbeitet Ihre Organisation mit Zement?",
+    "description": "Treten Sie ARACEA bei und erhalten Sie Zugang zur Datenintelligenz des Zementsektors.",
+    "buttons": {
+      "join": "Mitgliedschaft Beantragen",
+      "info": "Weitere Informationen"
+    }
+  }
+}

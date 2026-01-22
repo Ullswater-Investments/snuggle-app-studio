@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "backToPartners": "Terug naar Partners"
+  },
+  "hero": {
+    "badges": {
+      "agri": "Agri-foodsector",
+      "gaiaX": "Gaia-X Ready",
+      "traceability": "Volledige Traceerbaarheid"
+    },
+    "title": "TELENATURA",
+    "subtitle": "Soeverein Dataplatform voor de Agri-foodketen",
+    "description": "TELENATURA verbindt producenten, distributeurs en retailers in een veilig data-ecosysteem, met gegarandeerde traceerbaarheid van boer tot bord."
+  },
+  "stats": {
+    "producers": { "value": "+500", "label": "Verbonden producenten" },
+    "products": { "value": "15K", "label": "Getraceerde referenties" },
+    "retailers": { "value": "+50", "label": "Retailketens" }
+  },
+  "solutions": {
+    "badge": "Oplossingen",
+    "title": "Digitalisering van de Waardeketen",
+    "description": "Tools voor elke schakel in de agri-foodketen.",
+    "items": {
+      "traceability": { "title": "Integrale Traceerbaarheid", "description": "Tracking van oorsprong tot verkooppunt met onveranderlijke data." },
+      "quality": { "title": "Kwaliteitscontrole", "description": "Monitoring van transport- en opslagcondities." },
+      "certification": { "title": "Certificeringen", "description": "Digitaal beheer van biologische certificaten, herkomstbenamingen." },
+      "analytics": { "title": "Voorspellende Analyse", "description": "Vraagvoorspelling en voorraadoptimalisatie." }
+    }
+  },
+  "dataSpace": {
+    "badge": "Agri-food Data Space",
+    "title": "Verbonden Data-ecosysteem",
+    "description": "TELENATURA opereert als knooppunt van het PROCUREDATA-ecosysteem, waardoor veilige data-uitwisseling tussen alle actoren in de keten mogelijk wordt.",
+    "features": {
+      "sovereignty": "Volledige soevereiniteit over productiegegevens",
+      "interop": "Interoperabiliteit met retailsystemen",
+      "compliance": "Naleving van EU-voedselregelgeving",
+      "blockchain": "Onveranderlijk register voor audits"
+    }
+  },
+  "useCases": {
+    "badge": "Toepassingen",
+    "title": "Echte Toepassingen",
+    "cases": {
+      "organic": { "title": "Biologische Certificering", "description": "Automatische verificatie van teeltpraktijken voor bio-labels." },
+      "freshness": { "title": "Gegarandeerde Versheid", "description": "Real-time IoT-monitoring van de koelketen." },
+      "waste": { "title": "Verspillingsreductie", "description": "Houdbaarheidvoorspelling om rotatie te optimaliseren." },
+      "dop": { "title": "Herkomstbenaming", "description": "Gecertificeerde geografische traceerbaarheid voor premium producten." }
+    }
+  },
+  "cta": {
+    "title": "Produceert, distribueert of verkoopt u voedsel?",
+    "description": "Sluit u aan bij TELENATURA en krijg toegang tot het meest complete datanetwerk in de agri-foodsector.",
+    "buttons": {
+      "producer": "Ik ben Producent",
+      "distributor": "Ik ben Distributeur",
+      "retailer": "Ik ben Retailer"
+    }
+  }
+}

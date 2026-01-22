@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Terug naar Partners"
+  },
+  "hero": {
+    "badges": {
+      "procurement": "Professionele Inkoop",
+      "association": "Sectorvereniging",
+      "network": "Inkoopnetwerk"
+    },
+    "title": "AERCE",
+    "subtitle": "Spaanse Vereniging van Inkoopprofessionals",
+    "description": "AERCE vertegenwoordigt meer dan 3.000 inkoopprofessionals, faciliteert de digitalisering van procurement en biedt toegang tot gedeelde marktintelligentie."
+  },
+  "stats": {
+    "members": { "value": "3.000+", "label": "Aangesloten professionals" },
+    "companies": { "value": "500+", "label": "Lidbedrijven" },
+    "savings": { "value": "€2,5B", "label": "Beheerd volume/jaar" }
+  },
+  "about": {
+    "badge": "Wie Wij Zijn",
+    "title": "De Stem van Procurement in Spanje",
+    "description": "Sinds 1986 stimuleert AERCE de professionalisering van inkoop, bevordert best practices en de digitale transformatie van de sector.",
+    "pillars": {
+      "training": { "title": "Opleiding", "description": "Gecertificeerde programma's in inkoopmanagement en supply chain." },
+      "networking": { "title": "Networking", "description": "Evenementen en uitwisselingsfora onder professionals." },
+      "advocacy": { "title": "Belangenbehartiging", "description": "Stem van de sector richting instellingen en toezichthouders." },
+      "innovation": { "title": "Innovatie", "description": "Bevordering van opkomende technologieën in procurement." }
+    }
+  },
+  "project": {
+    "badge": "PROCUREDATA Project",
+    "title": "Inkoop Data Knooppunt",
+    "description": "AERCE leidt de creatie van de Procurement Data Space, waarbij leden worden verbonden in een prijsintelligentie-ecosysteem.",
+    "features": {
+      "benchmark": { "title": "Prijs Benchmarking", "description": "Anonieme vergelijkingen van inkoopvoorwaarden tussen leden." },
+      "suppliers": { "title": "Leveranciersevaluatie", "description": "Gedeelde scoring op basis van verifieerbare prestaties." },
+      "market": { "title": "Marktintelligentie", "description": "Prijstrends en kanswaarschuwingen." },
+      "contracts": { "title": "Raamcontracten", "description": "Toegang tot collectief onderhandelde overeenkomsten." }
+    }
+  },
+  "services": {
+    "badge": "Ledenservices",
+    "title": "AERCE Toegevoegde Waarde",
+    "items": {
+      "certification": { "title": "CPP Certificering", "description": "Internationaal erkende professionele inkoopaccreditatie." },
+      "observatory": { "title": "Inkoopobservatorium", "description": "Studies en analyses van de staat van procurement in Spanje." },
+      "legal": { "title": "Juridisch Advies", "description": "Consultancy over contracten en inkoopregulering." },
+      "events": { "title": "Jaarcongres", "description": "Het grootste inkoop-netwerkeven in Spanje." }
+    }
+  },
+  "cta": {
+    "title": "Bent u inkoopprofessional?",
+    "description": "Sluit u aan bij AERCE en krijg toegang tot het krachtigste inkoop-intelligentienetwerk van Spanje.",
+    "buttons": {
+      "join": "Lid Worden",
+      "info": "Meer Weten"
+    }
+  }
+}

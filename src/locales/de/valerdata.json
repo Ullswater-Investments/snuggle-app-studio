@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "backToPartners": "Zurück zu Partnern"
+  },
+  "hero": {
+    "badges": {
+      "aiPowered": "Fortschrittliche KI",
+      "gaiaX": "Gaia-X Ready",
+      "dataSpace": "Nativer Data Space"
+    },
+    "title": "VALERDATA",
+    "subtitle": "Intelligentes Ausführungsgedächtnis für Beschaffung",
+    "description": "VALERDATA wandelt historische Einkaufsdaten in handlungsfähige Intelligenz um und ermöglicht evidenzbasierte Beschaffungsentscheidungen und Preistransparenz."
+  },
+  "stats": {
+    "savings": { "value": "15-25%", "label": "Durchschnittliche Einkaufseinsparungen" },
+    "accuracy": { "value": "99,2%", "label": "Vorhersagegenauigkeit" },
+    "transactions": { "value": "+50M", "label": "Analysierte Transaktionen" }
+  },
+  "problem": {
+    "badge": "Das Problem",
+    "title": "Intransparenz bei Einkaufspreisen",
+    "description": "Organisationen fehlt die Sicht auf faire Marktpreise, sie verhandeln blind und verlieren Millionen durch Überteuerung.",
+    "items": {
+      "visibility": { "title": "Mangelnde Transparenz", "description": "Kein Zugang zu vergleichbaren Marktdaten für Benchmarking." },
+      "fragmentation": { "title": "Fragmentierte Daten", "description": "Einkaufsinformationen verstreut über mehrere nicht konsolidierte Systeme." },
+      "negotiation": { "title": "Ineffiziente Verhandlung", "description": "Entscheidungen basierend auf Intuition statt objektiver Daten." }
+    }
+  },
+  "solution": {
+    "badge": "Die Lösung",
+    "title": "Souveräne Preisintelligenz",
+    "description": "VALERDATA verbindet Beschaffungsdaten mehrerer Organisationen sicher und generiert Markt-Benchmarks ohne sensible Informationen preiszugeben.",
+    "features": {
+      "privacy": { "title": "Privacy by Design", "description": "Föderiertes Computing, das Daten am Ursprungsort belässt." },
+      "ai": { "title": "Prädiktive KI", "description": "Machine-Learning-Modelle zur Preisvorhersage." },
+      "benchmark": { "title": "Anonymes Benchmarking", "description": "Marktvergleiche ohne Offenlegung von Identitäten." },
+      "integration": { "title": "ERP-Integration", "description": "Native Konnektoren mit SAP, Oracle und führenden ERPs." }
+    }
+  },
+  "useCases": {
+    "badge": "Anwendungsfälle",
+    "title": "Industrielle Anwendungen",
+    "description": "Branchen, die bereits VALERDATA-Intelligenz nutzen.",
+    "items": {
+      "manufacturing": { "title": "Fertigung", "description": "Optimierung der Rohstoff- und Komponentenkosten." },
+      "retail": { "title": "Einzelhandel", "description": "Verhandlung von Konditionen mit Konsumgüterlieferanten." },
+      "construction": { "title": "Bauwesen", "description": "Kostenkontrolle in Infrastrukturprojekten." },
+      "healthcare": { "title": "Gesundheitswesen", "description": "Effiziente Beschaffung medizinischer Versorgungsgüter." }
+    }
+  },
+  "ecosystem": {
+    "badge": "Ökosystem",
+    "title": "Kollaboratives Datennetzwerk",
+    "description": "VALERDATA operiert als Knoten im PROCUREDATA-Ökosystem und verbindet Organisationen, die sicher Preisintelligenz teilen.",
+    "features": {
+      "sovereignty": "Vollständige Souveränität über Ihre Daten",
+      "compliance": "DSGVO- und Data Governance Act-Konformität",
+      "interoperability": "Interoperabilität mit europäischen Data Spaces",
+      "trust": "Smart Contracts für Einwilligungsmanagement"
+    }
+  },
+  "cta": {
+    "title": "Bereit, den fairen Preis zu entdecken?",
+    "description": "Schließen Sie sich Organisationen an, die ihre Einkäufe bereits mit souveräner Datenintelligenz optimieren.",
+    "buttons": {
+      "contact": "Demo Anfragen",
+      "members": "Mitgliederzugang"
+    }
+  }
+}

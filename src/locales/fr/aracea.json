@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "backToPartners": "Retour aux Partenaires"
+  },
+  "hero": {
+    "badges": {
+      "cement": "Secteur Ciment",
+      "gaiaX": "Gaia-X Ready",
+      "sustainability": "Durabilité Industrielle"
+    },
+    "title": "ARACEA",
+    "subtitle": "Nœud de Données Sectoriel pour l'Industrie du Ciment",
+    "description": "ARACEA connecte les acteurs du secteur cimentier dans un espace de données souverain, facilitant la traçabilité des matériaux, la conformité ESG et l'optimisation de la chaîne d'approvisionnement."
+  },
+  "stats": {
+    "members": { "value": "+40", "label": "Cimenteries connectées" },
+    "data": { "value": "2,5M", "label": "Tonnes tracées/mois" },
+    "compliance": { "value": "100%", "label": "Conformité CBAM" }
+  },
+  "whatIs": {
+    "badge": "Qu'est-ce que c'est ?",
+    "title": "Le Data Space du Ciment",
+    "description": "ARACEA est l'infrastructure de données partagée qui permet à l'industrie du ciment d'échanger des informations de manière sécurisée tout en maintenant la souveraineté sur leurs données.",
+    "features": {
+      "traceability": { "title": "Traçabilité des Matériaux", "description": "Suivi complet de la carrière au produit final." },
+      "carbon": { "title": "Empreinte Carbone", "description": "Calcul automatique des émissions par produit et processus." },
+      "compliance": { "title": "Conformité Réglementaire", "description": "Adaptation automatique au CBAM, CSRD et taxonomie verte." },
+      "optimization": { "title": "Optimisation Logistique", "description": "Données partagées pour des itinéraires efficaces et réduction des coûts." }
+    }
+  },
+  "forWhat": {
+    "badge": "À quoi ça sert ?",
+    "title": "Cas d'Usage Industriels",
+    "description": "Applications concrètes générant déjà de la valeur dans le secteur.",
+    "cases": {
+      "cbam": { "title": "Déclaration CBAM", "description": "Génération automatique de rapports d'empreinte carbone pour le mécanisme d'ajustement aux frontières." },
+      "circular": { "title": "Économie Circulaire", "description": "Traçabilité des matériaux recyclés et sous-produits industriels." },
+      "supplier": { "title": "Évaluation des Fournisseurs", "description": "Scoring ESG basé sur des données vérifiables de la chaîne d'approvisionnement." },
+      "benchmark": { "title": "Benchmarking Sectoriel", "description": "Comparaisons anonymes d'efficacité énergétique et d'émissions." }
+    }
+  },
+  "whoUses": {
+    "badge": "Qui l'utilise ?",
+    "title": "Acteurs de l'Écosystème",
+    "description": "Participants faisant déjà partie du réseau ARACEA.",
+    "actors": {
+      "producers": { "title": "Producteurs de Ciment", "description": "Grandes cimenteries partageant des données de production et d'émissions." },
+      "suppliers": { "title": "Fournisseurs de Matières Premières", "description": "Carrières et fournisseurs de clinker, gypse et additifs." },
+      "logistics": { "title": "Opérateurs Logistiques", "description": "Transporteurs optimisant les itinéraires avec des données partagées." },
+      "construction": { "title": "Entreprises de Construction", "description": "Entreprises nécessitant du ciment avec certification d'empreinte carbone." }
+    }
+  },
+  "integration": {
+    "badge": "Intégration PROCUREDATA",
+    "title": "Nœud Connecté à l'Écosystème Européen",
+    "description": "ARACEA fonctionne comme un nœud sectoriel au sein du réseau PROCUREDATA, garantissant l'interopérabilité avec d'autres Data Spaces industriels.",
+    "features": {
+      "gaiax": "Compatibilité totale avec les standards Gaia-X",
+      "idsa": "Connecteurs IDS pour échange souverain",
+      "odrl": "Politiques ODRL pour le contrôle d'usage des données",
+      "dpp": "Passeport Numérique de Produit intégré"
+    }
+  },
+  "cta": {
+    "title": "Votre organisation travaille avec le ciment ?",
+    "description": "Rejoignez ARACEA et accédez à l'intelligence des données du secteur cimentier.",
+    "buttons": {
+      "join": "Demander l'Adhésion",
+      "info": "Plus d'Informations"
+    }
+  }
+}
