@@ -4,25 +4,27 @@ import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ScatterChart, Scatter, XAxis, YAxis, ResponsiveContainer, Tooltip, ZAxis, ReferenceLine } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, ResponsiveContainer, Tooltip, ZAxis } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 interface GlobalBridgeSimulatorProps {
   onValuesChange?: (values: { exportVolume: number; marketDiversity: number; savedCost: number; weeksEliminated: number }) => void;
 }
 
 export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [exportVolume, setExportVolume] = useState(25);
   const [marketDiversity, setMarketDiversity] = useState(5);
 
   const calculations = useMemo(() => {
     const baseHomologationWeeks = 12;
     const connectedNodes = marketDiversity * 3;
-    const costPerMarket = 45000; // EUR tradicional
-    const digitalCost = 8000; // EUR con EDC
+    const costPerMarket = 45000;
+    const digitalCost = 8000;
     const savedCost = (costPerMarket - digitalCost) * marketDiversity;
     const weeksEliminated = baseHomologationWeeks;
     const activeHubs = marketDiversity >= 5 ? ['EU', 'LatAm', 'Asia'] : marketDiversity >= 3 ? ['EU', 'LatAm'] : ['EU'];
-    const revenueUnlocked = exportVolume * 0.15; // 15% revenue adicional
+    const revenueUnlocked = exportVolume * 0.15;
     return { connectedNodes, savedCost, weeksEliminated, activeHubs, revenueUnlocked };
   }, [exportVolume, marketDiversity]);
 
@@ -63,8 +65,8 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
                   <Globe2 className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-emerald-300 uppercase tracking-wider">Global-Bridge</h3>
-                  <p className="text-xs text-slate-400">Interoperabilidad Internacional</p>
+                  <h3 className="text-sm font-bold text-emerald-300 uppercase tracking-wider">{t('globalBridge.title')}</h3>
+                  <p className="text-xs text-slate-400">{t('globalBridge.subtitle')}</p>
                 </div>
               </div>
               <Badge className="bg-emerald-900/50 text-emerald-300 font-mono text-[10px]">{pontusHash}</Badge>
@@ -72,14 +74,14 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
 
             {/* Scatter Chart - Global Nodes */}
             <div className="bg-slate-900/60 rounded-xl p-4 border border-emerald-900/20">
-              <p className="text-xs text-slate-400 mb-3 uppercase font-bold">Nodos Conectados vs Coste de Entrada</p>
+              <p className="text-xs text-slate-400 mb-3 uppercase font-bold">{t('globalBridge.chartTitle')}</p>
               <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
                   <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
                     <XAxis 
                       type="number" 
                       dataKey="x" 
-                      name="Longitud" 
+                      name={t('globalBridge.chart.longitude')}
                       tick={{ fill: '#94a3b8', fontSize: 10 }} 
                       axisLine={false}
                       tickLine={false}
@@ -89,7 +91,7 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
                     <YAxis 
                       type="number" 
                       dataKey="y" 
-                      name="Latitud" 
+                      name={t('globalBridge.chart.latitude')}
                       tick={{ fill: '#94a3b8', fontSize: 10 }} 
                       axisLine={false}
                       tickLine={false}
@@ -99,8 +101,8 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
                     <ZAxis type="number" dataKey="size" range={[50, 200]} />
                     <Tooltip
                       contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: '8px' }}
-                      formatter={(value: any, name: string, props: any) => {
-                        if (name === 'cost') return [`${value.toLocaleString()} €`, 'Coste'];
+                      formatter={(value: any, name: string) => {
+                        if (name === 'cost') return [`${value.toLocaleString()} €`, t('globalBridge.chart.cost')];
                         return [value, name];
                       }}
                       labelFormatter={(label: any, payload: any) => payload[0]?.payload?.name || ''}
@@ -132,7 +134,7 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
                 </ResponsiveContainer>
               </div>
               <div className="flex items-center justify-center gap-4 mt-2 text-[10px]">
-                {calculations.activeHubs.map((hub, i) => (
+                {calculations.activeHubs.map((hub) => (
                   <Badge key={hub} className="bg-emerald-900/50 text-emerald-300">
                     <Link2 className="w-3 h-3 mr-1" /> {hub}
                   </Badge>
@@ -144,7 +146,7 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
             <div className="space-y-5 bg-slate-900/40 p-4 rounded-xl border border-emerald-900/20">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-300">Volumen Exportación</span>
+                  <span className="text-slate-300">{t('globalBridge.sliders.exportVolume')}</span>
                   <span className="font-bold text-emerald-400">{exportVolume} M€</span>
                 </div>
                 <Slider
@@ -159,8 +161,8 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-slate-300">Diversidad de Mercados</span>
-                  <span className="font-bold text-indigo-400">{marketDiversity} países</span>
+                  <span className="text-slate-300">{t('globalBridge.sliders.marketDiversity')}</span>
+                  <span className="font-bold text-indigo-400">{marketDiversity} {t('globalBridge.countries')}</span>
                 </div>
                 <Slider
                   value={[marketDiversity]}
@@ -177,13 +179,13 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-emerald-950/40 p-4 rounded-xl border border-emerald-800/30 text-center">
                 <Coins className="w-5 h-5 text-emerald-400 mx-auto mb-2" />
-                <p className="text-[10px] uppercase font-black text-emerald-400 mb-1">Ahorro en Homologación</p>
+                <p className="text-[10px] uppercase font-black text-emerald-400 mb-1">{t('globalBridge.kpis.homologationSaving')}</p>
                 <p className="text-3xl font-black text-white">{calculations.savedCost.toLocaleString()}</p>
                 <p className="text-xs text-slate-400">€</p>
               </div>
               <div className="bg-indigo-950/40 p-4 rounded-xl border border-indigo-800/30 text-center">
                 <Clock className="w-5 h-5 text-indigo-400 mx-auto mb-2" />
-                <p className="text-[10px] uppercase font-black text-indigo-400 mb-1">Semanas Eliminadas</p>
+                <p className="text-[10px] uppercase font-black text-indigo-400 mb-1">{t('globalBridge.kpis.weeksEliminated')}</p>
                 <p className="text-3xl font-black text-white">{calculations.weeksEliminated}</p>
               </div>
             </div>
@@ -201,8 +203,8 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
                 A
               </div>
               <div>
-                <p className="text-sm font-bold text-white">ARIA</p>
-                <p className="text-xs text-slate-400">Asesora de Interoperabilidad</p>
+                <p className="text-sm font-bold text-white">{t('aria.name')}</p>
+                <p className="text-xs text-slate-400">{t('globalBridge.aria.role')}</p>
               </div>
             </div>
 
@@ -210,28 +212,30 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
             <div className="space-y-4">
               <div className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
                 <Sparkles className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-slate-300">
-                  Tu conector EDC ahora habla con <span className="text-indigo-400 font-bold">{calculations.connectedNodes}</span> nodos 
-                  en <span className="text-emerald-400 font-bold">{calculations.activeHubs.join(', ')}</span>.
-                </p>
+                <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                  __html: t('globalBridge.aria.connectorDesc', {
+                    nodes: calculations.connectedNodes,
+                    hubs: calculations.activeHubs.join(', ')
+                  })
+                }} />
               </div>
 
               <div className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg border border-slate-800">
                 <Clock className="w-4 h-4 text-indigo-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-slate-300">
-                  Hemos eliminado las <span className="text-amber-400 font-bold">{calculations.weeksEliminated} semanas</span> de 
-                  homologación técnica internacional, ahorrando 
-                  <span className="text-emerald-400 font-bold"> {calculations.savedCost.toLocaleString()} €</span>.
-                </p>
+                <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                  __html: t('globalBridge.aria.weeksDesc', {
+                    weeks: calculations.weeksEliminated,
+                    savings: calculations.savedCost.toLocaleString()
+                  })
+                }} />
               </div>
 
               {calculations.activeHubs.length >= 3 && (
                 <div className="flex items-start gap-3 p-3 bg-emerald-950/30 rounded-lg border border-emerald-800/30">
                   <Globe2 className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-emerald-300">
-                    <span className="font-bold">Triple-Hub Active.</span> Conectado a los Data Spaces de EU, 
-                    LatAm y Asia. Revenue potencial: <span className="font-bold">{calculations.revenueUnlocked.toFixed(1)} M€</span>.
-                  </p>
+                  <p className="text-sm text-emerald-300" dangerouslySetInnerHTML={{
+                    __html: t('globalBridge.aria.tripleHub', { revenue: calculations.revenueUnlocked.toFixed(1) })
+                  }} />
                 </div>
               )}
             </div>
@@ -240,7 +244,7 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
             <div className="bg-gradient-to-r from-emerald-900/30 to-indigo-900/30 p-4 rounded-xl border border-emerald-500/30">
               <div className="flex items-center gap-2 mb-3">
                 <Link2 className="w-5 h-5 text-emerald-400" />
-                <span className="text-xs font-bold text-emerald-300 uppercase">Hubs Activos</span>
+                <span className="text-xs font-bold text-emerald-300 uppercase">{t('globalBridge.activeHubs')}</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {calculations.activeHubs.map((hub) => (
@@ -254,12 +258,12 @@ export const GlobalBridgeSimulator = ({ onValuesChange }: GlobalBridgeSimulatorP
             {/* Footer */}
             <div className="pt-4 border-t border-slate-800 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500">Pontus-X Hash</span>
+                <span className="text-slate-500">{t('common.pontusHash')}</span>
                 <span className="font-mono text-emerald-400">{pontusHash}</span>
               </div>
               <Button className="w-full bg-gradient-to-r from-emerald-600 to-indigo-600 hover:from-emerald-700 hover:to-indigo-700 text-white">
                 <Download className="w-4 h-4 mr-2" />
-                Descargar Mapa de Conectividad
+                {t('globalBridge.downloadMap')}
               </Button>
             </div>
           </CardContent>
