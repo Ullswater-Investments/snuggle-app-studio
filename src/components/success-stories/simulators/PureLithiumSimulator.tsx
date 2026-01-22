@@ -5,8 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Gem, TrendingUp, Shield, Award, FileText, Zap } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
-export const PureLithiumSimulator = () => {
+interface PureLithiumSimulatorProps {
+  onValuesChange?: (values: { esgImprovement: number; projectScale: number; attractedCapital: number }) => void;
+}
+
+export const PureLithiumSimulator = ({ onValuesChange }: PureLithiumSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [esgImprovement, setEsgImprovement] = useState(22);
   const [projectScale, setProjectScale] = useState(25);
 
@@ -16,7 +22,7 @@ export const PureLithiumSimulator = () => {
     const attractedCapital = baseInvestment * esgMultiplier;
     const greenPremium = attractedCapital - baseInvestment;
     const confidenceLevel = esgImprovement >= 30 ? 'AAA' : esgImprovement >= 25 ? 'AA+' : esgImprovement >= 15 ? 'A' : 'BBB';
-    const investorAccess = esgImprovement >= 20 ? 'Institucional' : 'Retail';
+    const investorAccess = esgImprovement >= 20 ? t('pureLithium.investorInstitutional') : t('pureLithium.investorRetail');
     
     return {
       baseInvestment,
@@ -26,7 +32,7 @@ export const PureLithiumSimulator = () => {
       investorAccess,
       multiplier: esgMultiplier
     };
-  }, [esgImprovement, projectScale]);
+  }, [esgImprovement, projectScale, t]);
 
   const chartData = useMemo(() => {
     return Array.from({ length: 6 }, (_, i) => {
@@ -44,9 +50,16 @@ export const PureLithiumSimulator = () => {
     return `${base}...C7D1`;
   }, [esgImprovement, projectScale]);
 
+  React.useEffect(() => {
+    onValuesChange?.({
+      esgImprovement,
+      projectScale,
+      attractedCapital: calculations.attractedCapital
+    });
+  }, [esgImprovement, projectScale, calculations.attractedCapital, onValuesChange]);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Panel Izquierdo - Simulación */}
       <div className="lg:col-span-7 space-y-6">
         <Card className="border-emerald-500/30 bg-gradient-to-br from-emerald-950/20 to-background">
           <CardHeader className="pb-4">
@@ -56,12 +69,12 @@ export const PureLithiumSimulator = () => {
                   <Gem className="h-6 w-6 text-emerald-400" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl">Simulador de Capital ESG</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">PureLithium - Inversión Verde Certificada</p>
+                  <CardTitle className="text-xl">{t('pureLithium.title')}</CardTitle>
+                  <p className="text-sm text-muted-foreground mt-1">{t('pureLithium.subtitle')}</p>
                 </div>
               </div>
               <Badge variant="outline" className="border-emerald-500/50 text-emerald-400">
-                Minería ESG
+                {t('pureLithium.badge')}
               </Badge>
             </div>
             <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground font-mono">
@@ -71,12 +84,11 @@ export const PureLithiumSimulator = () => {
           </CardHeader>
           
           <CardContent className="space-y-6">
-            {/* Sliders */}
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Mejora Score ESG</span>
-                  <span className="font-semibold text-emerald-400">+{esgImprovement} puntos</span>
+                  <span className="text-muted-foreground">{t('pureLithium.sliders.esgImprovement')}</span>
+                  <span className="font-semibold text-emerald-400">+{esgImprovement} {t('pureLithium.units.points')}</span>
                 </div>
                 <Slider
                   value={[esgImprovement]}
@@ -90,7 +102,7 @@ export const PureLithiumSimulator = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Escala del proyecto</span>
+                  <span className="text-muted-foreground">{t('pureLithium.sliders.projectScale')}</span>
                   <span className="font-semibold text-emerald-400">{projectScale} M€</span>
                 </div>
                 <Slider
@@ -104,34 +116,32 @@ export const PureLithiumSimulator = () => {
               </div>
             </div>
 
-            {/* KPIs */}
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
                 <div className="flex items-center gap-2 text-emerald-400 mb-2">
                   <TrendingUp className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Capital Atraído</span>
+                  <span className="text-xs uppercase tracking-wider">{t('pureLithium.kpis.attractedCapital')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">
                   {(calculations.attractedCapital / 1000000).toFixed(1)}M€
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  +{(calculations.greenPremium / 1000000).toFixed(2)}M€ premium verde
+                  +{(calculations.greenPremium / 1000000).toFixed(2)}M€ {t('pureLithium.kpis.greenPremium')}
                 </p>
               </div>
               
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
                 <div className="flex items-center gap-2 text-emerald-400 mb-2">
                   <Award className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Rating ESG</span>
+                  <span className="text-xs uppercase tracking-wider">{t('pureLithium.kpis.esgRating')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">{calculations.confidenceLevel}</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Acceso {calculations.investorAccess}
+                  {t('pureLithium.kpis.access')} {calculations.investorAccess}
                 </p>
               </div>
             </div>
 
-            {/* Gráfico */}
             <div className="h-48">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
@@ -144,7 +154,7 @@ export const PureLithiumSimulator = () => {
                   <XAxis dataKey="year" tick={{ fontSize: 12 }} />
                   <YAxis tickFormatter={(v) => `${v}M`} tick={{ fontSize: 12 }} />
                   <Tooltip 
-                    formatter={(value: number) => [`${value.toFixed(1)} M€`, 'Capital']}
+                    formatter={(value: number) => [`${value.toFixed(1)} M€`, t('pureLithium.chart.capital')]}
                     contentStyle={{ backgroundColor: '#1e1e2e', border: '1px solid #10b981' }}
                   />
                   <Area 
@@ -162,7 +172,6 @@ export const PureLithiumSimulator = () => {
         </Card>
       </div>
 
-      {/* Panel Derecho - ARIA */}
       <div className="lg:col-span-5">
         <Card className="h-full bg-[#020617] border-emerald-500/20">
           <CardHeader className="pb-4">
@@ -171,59 +180,56 @@ export const PureLithiumSimulator = () => {
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg text-white">Análisis ARIA</CardTitle>
-                <p className="text-xs text-slate-400">Due Diligence Minerals</p>
+                <CardTitle className="text-lg text-white">{t('pureLithium.aria.name')}</CardTitle>
+                <p className="text-xs text-slate-400">{t('pureLithium.aria.role')}</p>
               </div>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-4">
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-emerald-400 font-semibold">Atracción de Capital:</span> Una mejora de{' '}
-                <span className="text-emerald-400 font-bold">+{esgImprovement} puntos</span> en tu score ESG 
-                genera un multiplicador de {calculations.multiplier.toFixed(2)}x sobre la inversión base.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('pureLithium.aria.capitalAttraction', {
+                  improvement: esgImprovement,
+                  multiplier: calculations.multiplier.toFixed(2)
+                })
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-emerald-400 font-semibold">Premium Verde:</span> El mercado valora tu 
-                certificación blockchain en{' '}
-                <span className="text-emerald-400 font-bold">
-                  +{(calculations.greenPremium / 1000000).toFixed(2)} M€
-                </span>{' '}
-                adicionales sobre proyectos sin trazabilidad verificada.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('pureLithium.aria.greenPremiumDesc', {
+                  premium: (calculations.greenPremium / 1000000).toFixed(2)
+                })
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-emerald-400 font-semibold">Acceso a Fondos:</span> Con rating{' '}
-                <span className="text-emerald-400 font-bold">{calculations.confidenceLevel}</span>, 
-                accedes al segmento <strong>{calculations.investorAccess}</strong> de fondos de inversión 
-                especializados en transición energética.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('pureLithium.aria.fundAccess', {
+                  level: calculations.confidenceLevel,
+                  access: calculations.investorAccess
+                })
+              }} />
             </div>
 
-            {calculations.confidenceLevel === 'AA+' || calculations.confidenceLevel === 'AAA' ? (
+            {(calculations.confidenceLevel === 'AA+' || calculations.confidenceLevel === 'AAA') && (
               <div className="p-4 rounded-lg bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/40">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-emerald-500 text-white">
-                    🌿 Conflict-Free Certified
+                    🌿 {t('pureLithium.aria.conflictFree')}
                   </Badge>
                 </div>
-                <p className="text-sm text-slate-300">
-                  Tu proyecto cumple con los estándares <strong className="text-emerald-400">EU Critical Raw Materials Act</strong> y 
-                  es elegible para financiación del European Investment Bank.
-                </p>
+                <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                  __html: t('pureLithium.aria.euCompliance')
+                }} />
               </div>
-            ) : null}
+            )}
 
             <div className="pt-4 border-t border-slate-700">
               <Button className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600">
                 <FileText className="h-4 w-4 mr-2" />
-                Descargar Reporte ESG
+                {t('pureLithium.downloadReport')}
               </Button>
               <p className="text-xs text-slate-500 text-center mt-2 font-mono">
                 Hash: {pontusHash}
