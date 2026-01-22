@@ -114,7 +114,10 @@ export default function Guide() {
                 <h3 className="text-2xl font-semibold mb-2">{t('sections.features.marketplace.title')}</h3>
                 <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: t('sections.features.marketplace.description') }} />
                 <ul className="list-disc pl-6 space-y-1 text-sm">
-                  {(t('sections.features.marketplace.items', { returnObjects: true }) as string[]).map((item, idx) => (
+                  {(Array.isArray(t('sections.features.marketplace.items', { returnObjects: true })) 
+                    ? t('sections.features.marketplace.items', { returnObjects: true }) as string[]
+                    : []
+                  ).map((item, idx) => (
                     <li key={idx} dangerouslySetInnerHTML={{ __html: item }} />
                   ))}
                 </ul>
@@ -129,7 +132,10 @@ export default function Guide() {
                 <h3 className="text-2xl font-semibold mb-2">{t('sections.features.innovationLab.title')}</h3>
                 <p className="text-muted-foreground mb-2" dangerouslySetInnerHTML={{ __html: t('sections.features.innovationLab.description') }} />
                 <div className="flex gap-2">
-                  {(t('sections.features.innovationLab.items', { returnObjects: true }) as string[]).map((item, idx) => (
+                  {(Array.isArray(t('sections.features.innovationLab.items', { returnObjects: true }))
+                    ? t('sections.features.innovationLab.items', { returnObjects: true }) as string[]
+                    : []
+                  ).map((item, idx) => (
                     <Badge key={idx} variant="secondary">{item}</Badge>
                   ))}
                 </div>
@@ -146,7 +152,10 @@ export default function Guide() {
               {t('sections.business.description')}
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {(t('sections.business.models', { returnObjects: true }) as string[]).map((model, idx) => (
+              {(Array.isArray(t('sections.business.models', { returnObjects: true }))
+                ? t('sections.business.models', { returnObjects: true }) as string[]
+                : []
+              ).map((model, idx) => (
                 <li key={idx} className="bg-muted/30 p-3 rounded" dangerouslySetInnerHTML={{ __html: model }} />
               ))}
             </ul>
@@ -159,7 +168,10 @@ export default function Guide() {
               {t('sections.tech.description')}
             </p>
             <div className="flex flex-wrap gap-2">
-              {(t('sections.tech.stack', { returnObjects: true }) as string[]).map((tech, idx) => (
+              {(Array.isArray(t('sections.tech.stack', { returnObjects: true }))
+                ? t('sections.tech.stack', { returnObjects: true }) as string[]
+                : []
+              ).map((tech, idx) => (
                 <Badge key={idx}>{tech}</Badge>
               ))}
             </div>
