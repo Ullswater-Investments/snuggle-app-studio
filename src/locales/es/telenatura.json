@@ -18,25 +18,30 @@
     "retailers": { "value": "+50", "label": "Cadenas de retail" }
   },
   "solutions": {
-    "badge": "Soluciones",
-    "title": "Digitalización de la Cadena de Valor",
-    "description": "Herramientas para cada eslabón de la cadena agroalimentaria.",
+    "badge": "Servicios",
+    "title": "Soluciones Tecnológicas",
+    "description": "Convergencia entre Hardware y Software para la digitalización del sector primario",
     "items": {
-      "traceability": { "title": "Trazabilidad Integral", "description": "Seguimiento desde origen hasta punto de venta con datos inmutables." },
-      "quality": { "title": "Control de Calidad", "description": "Monitorización de condiciones de transporte y almacenamiento." },
-      "certification": { "title": "Certificaciones", "description": "Gestión digital de certificados ecológicos, denominaciones de origen." },
-      "analytics": { "title": "Analítica Predictiva", "description": "Previsión de demanda y optimización de inventarios." }
+      "hardware": { "title": "Hardware de Campo", "description": "Sensores, estaciones de telecontrol y dispositivos IoT para monitorización en tiempo real", "tags": ["Sensores", "Estaciones", "Telecontrol"] },
+      "software": { "title": "Software de Gestión", "description": "Sistemas de gestión, automatización y SIG para toma de decisiones basada en datos", "tags": ["SIG", "Automatización", "Gestión"] },
+      "drones": { "title": "Drones y Fotogrametría", "description": "Servicios de topografía, cartografía y análisis de cultivos mediante drones", "tags": ["Drones", "Topografía", "Cartografía"] },
+      "energy": { "title": "Auditorías Energéticas", "description": "Análisis y optimización del consumo energético en explotaciones agrarias", "tags": ["Eficiencia", "Energía", "Auditoría"] },
+      "water": { "title": "Gestión del Agua", "description": "Sistemas de riego inteligente y monitorización de recursos hídricos", "tags": ["Riego", "Hídricos", "Smart"] },
+      "valuations": { "title": "Valoraciones Agrarias", "description": "Tasaciones, peritaciones y valoraciones de fincas y explotaciones", "tags": ["Tasación", "Peritación", "Valoración"] }
     }
   },
   "dataSpace": {
-    "badge": "Data Space Agroalimentario",
-    "title": "Ecosistema de Datos Conectados",
-    "description": "TELENATURA opera como nodo del ecosistema PROCUREDATA, permitiendo el intercambio seguro de datos entre todos los actores de la cadena.",
+    "badge": "Data Space",
+    "title": "Integración con Pontus-X",
+    "description": "TeleNatura conecta la agricultura de precisión con el ecosistema europeo de datos soberanos",
     "features": {
-      "sovereignty": "Soberanía total sobre datos de producción",
-      "interop": "Interoperabilidad con sistemas de retail",
-      "compliance": "Cumplimiento de normativas alimentarias UE",
-      "blockchain": "Registro inmutable para auditorías"
+      "sovereignty": { "title": "Datos Agrarios Soberanos", "description": "Control total sobre los datos generados en explotaciones agrarias, desde sensores hasta análisis de cultivos." },
+      "privacy": { "title": "Privacidad y Cumplimiento", "description": "Gestión de datos conforme a GDPR y normativas del sector agrario europeo." },
+      "interoperability": { "title": "Interoperabilidad", "description": "Integración con otros data spaces europeos: AgriDataSpace, GreenDeal DataSpace." },
+      "cloud": { "title": "Cloud Agrario", "description": "Almacenamiento seguro y escalable para datos de telemetría, imágenes de drones y series temporales." }
+    },
+    "diagram": {
+      "sensors": "Sensores IoT"
     }
   },
   "useCases": {
@@ -50,12 +55,17 @@
     }
   },
   "cta": {
-    "title": "¿Produces, distribuyes o vendes alimentos?",
-    "description": "Únete a TELENATURA y accede a la red de datos más completa del sector agroalimentario.",
+    "title": "¿Listo para digitalizar tu explotación?",
+    "description": "Contacta con TeleNatura para una consulta personalizada sobre automatización, telemetría y agricultura de precisión.",
     "buttons": {
-      "producer": "Soy Productor",
-      "distributor": "Soy Distribuidor",
-      "retailer": "Soy Retailer"
+      "visitWeb": "Visitar Web",
+      "contact": "Contactar"
+    },
+    "contact": {
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación",
+      "country": "España"
     }
   }
 }

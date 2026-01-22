@@ -18,25 +18,30 @@
     "retailers": { "value": "+50", "label": "Retail chains" }
   },
   "solutions": {
-    "badge": "Solutions",
-    "title": "Value Chain Digitalization",
-    "description": "Tools for every link in the agri-food chain.",
+    "badge": "Services",
+    "title": "Technological Solutions",
+    "description": "Convergence between Hardware and Software for the digitalization of the primary sector",
     "items": {
-      "traceability": { "title": "Integral Traceability", "description": "Tracking from origin to point of sale with immutable data." },
-      "quality": { "title": "Quality Control", "description": "Monitoring of transport and storage conditions." },
-      "certification": { "title": "Certifications", "description": "Digital management of organic certificates, designations of origin." },
-      "analytics": { "title": "Predictive Analytics", "description": "Demand forecasting and inventory optimization." }
+      "hardware": { "title": "Field Hardware", "description": "Sensors, telecontrol stations and IoT devices for real-time monitoring", "tags": ["Sensors", "Stations", "Telecontrol"] },
+      "software": { "title": "Management Software", "description": "Management, automation and GIS systems for data-driven decision making", "tags": ["GIS", "Automation", "Management"] },
+      "drones": { "title": "Drones and Photogrammetry", "description": "Topography, cartography and crop analysis services using drones", "tags": ["Drones", "Topography", "Cartography"] },
+      "energy": { "title": "Energy Audits", "description": "Analysis and optimization of energy consumption in agricultural operations", "tags": ["Efficiency", "Energy", "Audit"] },
+      "water": { "title": "Water Management", "description": "Smart irrigation systems and water resource monitoring", "tags": ["Irrigation", "Water", "Smart"] },
+      "valuations": { "title": "Agricultural Valuations", "description": "Appraisals, assessments and valuations of farms and operations", "tags": ["Appraisal", "Assessment", "Valuation"] }
     }
   },
   "dataSpace": {
-    "badge": "Agri-Food Data Space",
-    "title": "Connected Data Ecosystem",
-    "description": "TELENATURA operates as a node of the PROCUREDATA ecosystem, enabling secure data exchange between all actors in the chain.",
+    "badge": "Data Space",
+    "title": "Integration with Pontus-X",
+    "description": "TeleNatura connects precision agriculture with the European sovereign data ecosystem",
     "features": {
-      "sovereignty": "Total sovereignty over production data",
-      "interop": "Interoperability with retail systems",
-      "compliance": "Compliance with EU food regulations",
-      "blockchain": "Immutable registry for audits"
+      "sovereignty": { "title": "Sovereign Agricultural Data", "description": "Total control over data generated in agricultural operations, from sensors to crop analysis." },
+      "privacy": { "title": "Privacy and Compliance", "description": "Data management compliant with GDPR and European agricultural sector regulations." },
+      "interoperability": { "title": "Interoperability", "description": "Integration with other European data spaces: AgriDataSpace, GreenDeal DataSpace." },
+      "cloud": { "title": "Agricultural Cloud", "description": "Secure and scalable storage for telemetry data, drone imagery and time series." }
+    },
+    "diagram": {
+      "sensors": "IoT Sensors"
     }
   },
   "useCases": {
@@ -50,12 +55,17 @@
     }
   },
   "cta": {
-    "title": "Do you produce, distribute or sell food?",
-    "description": "Join TELENATURA and access the most complete data network in the agri-food sector.",
+    "title": "Ready to digitalize your farm?",
+    "description": "Contact TeleNatura for a personalized consultation on automation, telemetry and precision agriculture.",
     "buttons": {
-      "producer": "I'm a Producer",
-      "distributor": "I'm a Distributor",
-      "retailer": "I'm a Retailer"
+      "visitWeb": "Visit Website",
+      "contact": "Contact"
+    },
+    "contact": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location",
+      "country": "Spain"
     }
   }
 }

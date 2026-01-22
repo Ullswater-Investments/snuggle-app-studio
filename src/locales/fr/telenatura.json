@@ -18,25 +18,30 @@
     "retailers": { "value": "+50", "label": "Chaînes de distribution" }
   },
   "solutions": {
-    "badge": "Solutions",
-    "title": "Digitalisation de la Chaîne de Valeur",
-    "description": "Outils pour chaque maillon de la chaîne agroalimentaire.",
+    "badge": "Services",
+    "title": "Solutions Technologiques",
+    "description": "Convergence entre Hardware et Software pour la digitalisation du secteur primaire",
     "items": {
-      "traceability": { "title": "Traçabilité Intégrale", "description": "Suivi de l'origine au point de vente avec données immuables." },
-      "quality": { "title": "Contrôle Qualité", "description": "Surveillance des conditions de transport et stockage." },
-      "certification": { "title": "Certifications", "description": "Gestion numérique des certificats bio, appellations d'origine." },
-      "analytics": { "title": "Analytique Prédictive", "description": "Prévision de la demande et optimisation des stocks." }
+      "hardware": { "title": "Hardware de Terrain", "description": "Capteurs, stations de télécontrôle et dispositifs IoT pour la surveillance en temps réel", "tags": ["Capteurs", "Stations", "Télécontrôle"] },
+      "software": { "title": "Logiciel de Gestion", "description": "Systèmes de gestion, automatisation et SIG pour la prise de décision basée sur les données", "tags": ["SIG", "Automatisation", "Gestion"] },
+      "drones": { "title": "Drones et Photogrammétrie", "description": "Services de topographie, cartographie et analyse des cultures par drones", "tags": ["Drones", "Topographie", "Cartographie"] },
+      "energy": { "title": "Audits Énergétiques", "description": "Analyse et optimisation de la consommation énergétique dans les exploitations agricoles", "tags": ["Efficacité", "Énergie", "Audit"] },
+      "water": { "title": "Gestion de l'Eau", "description": "Systèmes d'irrigation intelligente et surveillance des ressources hydriques", "tags": ["Irrigation", "Hydrique", "Smart"] },
+      "valuations": { "title": "Évaluations Agricoles", "description": "Estimations, expertises et évaluations de fermes et exploitations", "tags": ["Estimation", "Expertise", "Évaluation"] }
     }
   },
   "dataSpace": {
-    "badge": "Data Space Agroalimentaire",
-    "title": "Écosystème de Données Connectées",
-    "description": "TELENATURA fonctionne comme un nœud de l'écosystème PROCUREDATA, permettant l'échange sécurisé de données entre tous les acteurs de la chaîne.",
+    "badge": "Data Space",
+    "title": "Intégration avec Pontus-X",
+    "description": "TeleNatura connecte l'agriculture de précision à l'écosystème européen des données souveraines",
     "features": {
-      "sovereignty": "Souveraineté totale sur les données de production",
-      "interop": "Interopérabilité avec les systèmes de distribution",
-      "compliance": "Conformité aux réglementations alimentaires UE",
-      "blockchain": "Registre immuable pour les audits"
+      "sovereignty": { "title": "Données Agricoles Souveraines", "description": "Contrôle total sur les données générées dans les exploitations agricoles, des capteurs à l'analyse des cultures." },
+      "privacy": { "title": "Confidentialité et Conformité", "description": "Gestion des données conforme au RGPD et aux réglementations du secteur agricole européen." },
+      "interoperability": { "title": "Interopérabilité", "description": "Intégration avec d'autres espaces de données européens : AgriDataSpace, GreenDeal DataSpace." },
+      "cloud": { "title": "Cloud Agricole", "description": "Stockage sécurisé et évolutif pour les données de télémétrie, les images de drones et les séries temporelles." }
+    },
+    "diagram": {
+      "sensors": "Capteurs IoT"
     }
   },
   "useCases": {
@@ -50,12 +55,17 @@
     }
   },
   "cta": {
-    "title": "Vous produisez, distribuez ou vendez des aliments ?",
-    "description": "Rejoignez TELENATURA et accédez au réseau de données le plus complet du secteur agroalimentaire.",
+    "title": "Prêt à digitaliser votre exploitation ?",
+    "description": "Contactez TeleNatura pour une consultation personnalisée sur l'automatisation, la télémétrie et l'agriculture de précision.",
     "buttons": {
-      "producer": "Je suis Producteur",
-      "distributor": "Je suis Distributeur",
-      "retailer": "Je suis Détaillant"
+      "visitWeb": "Visiter le Site",
+      "contact": "Contacter"
+    },
+    "contact": {
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Emplacement",
+      "country": "Espagne"
     }
   }
 }

@@ -18,25 +18,30 @@
     "retailers": { "value": "+50", "label": "Cadeias de retalho" }
   },
   "solutions": {
-    "badge": "Soluções",
-    "title": "Digitalização da Cadeia de Valor",
-    "description": "Ferramentas para cada elo da cadeia agroalimentar.",
+    "badge": "Serviços",
+    "title": "Soluções Tecnológicas",
+    "description": "Convergência entre Hardware e Software para a digitalização do setor primário",
     "items": {
-      "traceability": { "title": "Rastreabilidade Integral", "description": "Seguimento desde a origem até ao ponto de venda com dados imutáveis." },
-      "quality": { "title": "Controlo de Qualidade", "description": "Monitorização das condições de transporte e armazenamento." },
-      "certification": { "title": "Certificações", "description": "Gestão digital de certificados ecológicos, denominações de origem." },
-      "analytics": { "title": "Analítica Preditiva", "description": "Previsão de procura e otimização de inventários." }
+      "hardware": { "title": "Hardware de Campo", "description": "Sensores, estações de telecontrolo e dispositivos IoT para monitorização em tempo real", "tags": ["Sensores", "Estações", "Telecontrolo"] },
+      "software": { "title": "Software de Gestão", "description": "Sistemas de gestão, automação e SIG para tomada de decisões baseada em dados", "tags": ["SIG", "Automação", "Gestão"] },
+      "drones": { "title": "Drones e Fotogrametria", "description": "Serviços de topografia, cartografia e análise de culturas por drones", "tags": ["Drones", "Topografia", "Cartografia"] },
+      "energy": { "title": "Auditorias Energéticas", "description": "Análise e otimização do consumo energético em explorações agrícolas", "tags": ["Eficiência", "Energia", "Auditoria"] },
+      "water": { "title": "Gestão da Água", "description": "Sistemas de rega inteligente e monitorização de recursos hídricos", "tags": ["Rega", "Hídricos", "Smart"] },
+      "valuations": { "title": "Avaliações Agrárias", "description": "Avaliações, peritagens e valorações de propriedades e explorações", "tags": ["Avaliação", "Peritagem", "Valoração"] }
     }
   },
   "dataSpace": {
-    "badge": "Data Space Agroalimentar",
-    "title": "Ecossistema de Dados Conectados",
-    "description": "TELENATURA opera como nó do ecossistema PROCUREDATA, permitindo o intercâmbio seguro de dados entre todos os atores da cadeia.",
+    "badge": "Data Space",
+    "title": "Integração com Pontus-X",
+    "description": "TeleNatura conecta a agricultura de precisão ao ecossistema europeu de dados soberanos",
     "features": {
-      "sovereignty": "Soberania total sobre dados de produção",
-      "interop": "Interoperabilidade com sistemas de retalho",
-      "compliance": "Conformidade com regulamentações alimentares UE",
-      "blockchain": "Registo imutável para auditorias"
+      "sovereignty": { "title": "Dados Agrários Soberanos", "description": "Controlo total sobre os dados gerados nas explorações agrícolas, desde sensores até análise de culturas." },
+      "privacy": { "title": "Privacidade e Conformidade", "description": "Gestão de dados em conformidade com o RGPD e regulamentações do setor agrário europeu." },
+      "interoperability": { "title": "Interoperabilidade", "description": "Integração com outros data spaces europeus: AgriDataSpace, GreenDeal DataSpace." },
+      "cloud": { "title": "Cloud Agrário", "description": "Armazenamento seguro e escalável para dados de telemetria, imagens de drones e séries temporais." }
+    },
+    "diagram": {
+      "sensors": "Sensores IoT"
     }
   },
   "useCases": {
@@ -50,12 +55,17 @@
     }
   },
   "cta": {
-    "title": "Produz, distribui ou vende alimentos?",
-    "description": "Junte-se à TELENATURA e aceda à rede de dados mais completa do setor agroalimentar.",
+    "title": "Pronto para digitalizar a sua exploração?",
+    "description": "Contacte a TeleNatura para uma consulta personalizada sobre automação, telemetria e agricultura de precisão.",
     "buttons": {
-      "producer": "Sou Produtor",
-      "distributor": "Sou Distribuidor",
-      "retailer": "Sou Retalhista"
+      "visitWeb": "Visitar Site",
+      "contact": "Contactar"
+    },
+    "contact": {
+      "email": "Email",
+      "phone": "Telefone",
+      "location": "Localização",
+      "country": "Espanha"
     }
   }
 }

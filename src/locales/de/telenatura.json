@@ -18,25 +18,30 @@
     "retailers": { "value": "+50", "label": "Einzelhandelsketten" }
   },
   "solutions": {
-    "badge": "Lösungen",
-    "title": "Digitalisierung der Wertschöpfungskette",
-    "description": "Werkzeuge für jedes Glied der Agrar-Lebensmittel-Kette.",
+    "badge": "Dienstleistungen",
+    "title": "Technologische Lösungen",
+    "description": "Konvergenz zwischen Hardware und Software für die Digitalisierung des Primärsektors",
     "items": {
-      "traceability": { "title": "Integrale Rückverfolgbarkeit", "description": "Verfolgung vom Ursprung bis zum Verkaufsort mit unveränderlichen Daten." },
-      "quality": { "title": "Qualitätskontrolle", "description": "Überwachung von Transport- und Lagerbedingungen." },
-      "certification": { "title": "Zertifizierungen", "description": "Digitale Verwaltung von Bio-Zertifikaten, Herkunftsbezeichnungen." },
-      "analytics": { "title": "Prädiktive Analytik", "description": "Nachfrageprognose und Bestandsoptimierung." }
+      "hardware": { "title": "Feld-Hardware", "description": "Sensoren, Fernsteuerungsstationen und IoT-Geräte für Echtzeit-Überwachung", "tags": ["Sensoren", "Stationen", "Fernsteuerung"] },
+      "software": { "title": "Management-Software", "description": "Verwaltungs-, Automatisierungs- und GIS-Systeme für datenbasierte Entscheidungen", "tags": ["GIS", "Automatisierung", "Verwaltung"] },
+      "drones": { "title": "Drohnen und Fotogrammetrie", "description": "Topographie-, Kartographie- und Kulturanalyse-Dienste mittels Drohnen", "tags": ["Drohnen", "Topographie", "Kartographie"] },
+      "energy": { "title": "Energieaudits", "description": "Analyse und Optimierung des Energieverbrauchs in landwirtschaftlichen Betrieben", "tags": ["Effizienz", "Energie", "Audit"] },
+      "water": { "title": "Wassermanagement", "description": "Intelligente Bewässerungssysteme und Überwachung von Wasserressourcen", "tags": ["Bewässerung", "Wasser", "Smart"] },
+      "valuations": { "title": "Agrarbewertungen", "description": "Schätzungen, Gutachten und Bewertungen von Höfen und Betrieben", "tags": ["Schätzung", "Gutachten", "Bewertung"] }
     }
   },
   "dataSpace": {
-    "badge": "Agrar-Lebensmittel Data Space",
-    "title": "Vernetztes Datenökosystem",
-    "description": "TELENATURA operiert als Knoten des PROCUREDATA-Ökosystems und ermöglicht den sicheren Datenaustausch zwischen allen Akteuren der Kette.",
+    "badge": "Data Space",
+    "title": "Integration mit Pontus-X",
+    "description": "TeleNatura verbindet Präzisionslandwirtschaft mit dem europäischen Ökosystem für souveräne Daten",
     "features": {
-      "sovereignty": "Vollständige Souveränität über Produktionsdaten",
-      "interop": "Interoperabilität mit Einzelhandelssystemen",
-      "compliance": "Einhaltung der EU-Lebensmittelvorschriften",
-      "blockchain": "Unveränderliches Register für Audits"
+      "sovereignty": { "title": "Souveräne Agrardaten", "description": "Vollständige Kontrolle über die in landwirtschaftlichen Betrieben generierten Daten, von Sensoren bis zur Kulturanalyse." },
+      "privacy": { "title": "Datenschutz und Compliance", "description": "Datenmanagement gemäß DSGVO und Vorschriften des europäischen Agrarsektors." },
+      "interoperability": { "title": "Interoperabilität", "description": "Integration mit anderen europäischen Data Spaces: AgriDataSpace, GreenDeal DataSpace." },
+      "cloud": { "title": "Agrar-Cloud", "description": "Sichere und skalierbare Speicherung für Telemetriedaten, Drohnenbilder und Zeitreihen." }
+    },
+    "diagram": {
+      "sensors": "IoT-Sensoren"
     }
   },
   "useCases": {
@@ -50,12 +55,17 @@
     }
   },
   "cta": {
-    "title": "Produzieren, vertreiben oder verkaufen Sie Lebensmittel?",
-    "description": "Treten Sie TELENATURA bei und erhalten Sie Zugang zum umfassendsten Datennetzwerk im Agrar-Lebensmittel-Sektor.",
+    "title": "Bereit, Ihren Betrieb zu digitalisieren?",
+    "description": "Kontaktieren Sie TeleNatura für eine persönliche Beratung zu Automatisierung, Telemetrie und Präzisionslandwirtschaft.",
     "buttons": {
-      "producer": "Ich bin Produzent",
-      "distributor": "Ich bin Distributor",
-      "retailer": "Ich bin Einzelhändler"
+      "visitWeb": "Website besuchen",
+      "contact": "Kontaktieren"
+    },
+    "contact": {
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "location": "Standort",
+      "country": "Spanien"
     }
   }
 }

@@ -18,25 +18,30 @@
     "retailers": { "value": "+50", "label": "Catene retail" }
   },
   "solutions": {
-    "badge": "Soluzioni",
-    "title": "Digitalizzazione della Catena del Valore",
-    "description": "Strumenti per ogni anello della filiera agroalimentare.",
+    "badge": "Servizi",
+    "title": "Soluzioni Tecnologiche",
+    "description": "Convergenza tra Hardware e Software per la digitalizzazione del settore primario",
     "items": {
-      "traceability": { "title": "Tracciabilità Integrale", "description": "Tracciamento dall'origine al punto vendita con dati immutabili." },
-      "quality": { "title": "Controllo Qualità", "description": "Monitoraggio delle condizioni di trasporto e stoccaggio." },
-      "certification": { "title": "Certificazioni", "description": "Gestione digitale di certificati biologici, denominazioni di origine." },
-      "analytics": { "title": "Analitica Predittiva", "description": "Previsione della domanda e ottimizzazione delle scorte." }
+      "hardware": { "title": "Hardware da Campo", "description": "Sensori, stazioni di telecontrollo e dispositivi IoT per il monitoraggio in tempo reale", "tags": ["Sensori", "Stazioni", "Telecontrollo"] },
+      "software": { "title": "Software di Gestione", "description": "Sistemi di gestione, automazione e GIS per decisioni basate sui dati", "tags": ["GIS", "Automazione", "Gestione"] },
+      "drones": { "title": "Droni e Fotogrammetria", "description": "Servizi di topografia, cartografia e analisi delle colture tramite droni", "tags": ["Droni", "Topografia", "Cartografia"] },
+      "energy": { "title": "Audit Energetici", "description": "Analisi e ottimizzazione del consumo energetico nelle aziende agricole", "tags": ["Efficienza", "Energia", "Audit"] },
+      "water": { "title": "Gestione dell'Acqua", "description": "Sistemi di irrigazione intelligente e monitoraggio delle risorse idriche", "tags": ["Irrigazione", "Idrico", "Smart"] },
+      "valuations": { "title": "Valutazioni Agrarie", "description": "Stime, perizie e valutazioni di terreni e aziende agricole", "tags": ["Stima", "Perizia", "Valutazione"] }
     }
   },
   "dataSpace": {
-    "badge": "Data Space Agroalimentare",
-    "title": "Ecosistema di Dati Connessi",
-    "description": "TELENATURA opera come nodo dell'ecosistema PROCUREDATA, permettendo lo scambio sicuro di dati tra tutti gli attori della filiera.",
+    "badge": "Data Space",
+    "title": "Integrazione con Pontus-X",
+    "description": "TeleNatura collega l'agricoltura di precisione all'ecosistema europeo dei dati sovrani",
     "features": {
-      "sovereignty": "Sovranità totale sui dati di produzione",
-      "interop": "Interoperabilità con sistemi retail",
-      "compliance": "Conformità alle normative alimentari UE",
-      "blockchain": "Registro immutabile per audit"
+      "sovereignty": { "title": "Dati Agricoli Sovrani", "description": "Controllo totale sui dati generati nelle aziende agricole, dai sensori alle analisi delle colture." },
+      "privacy": { "title": "Privacy e Conformità", "description": "Gestione dei dati conforme al GDPR e alle normative del settore agricolo europeo." },
+      "interoperability": { "title": "Interoperabilità", "description": "Integrazione con altri data space europei: AgriDataSpace, GreenDeal DataSpace." },
+      "cloud": { "title": "Cloud Agricolo", "description": "Archiviazione sicura e scalabile per dati di telemetria, immagini da droni e serie temporali." }
+    },
+    "diagram": {
+      "sensors": "Sensori IoT"
     }
   },
   "useCases": {
@@ -50,12 +55,17 @@
     }
   },
   "cta": {
-    "title": "Produci, distribuisci o vendi alimenti?",
-    "description": "Unisciti a TELENATURA e accedi alla rete dati più completa del settore agroalimentare.",
+    "title": "Pronto a digitalizzare la tua azienda agricola?",
+    "description": "Contatta TeleNatura per una consulenza personalizzata su automazione, telemetria e agricoltura di precisione.",
     "buttons": {
-      "producer": "Sono Produttore",
-      "distributor": "Sono Distributore",
-      "retailer": "Sono Retailer"
+      "visitWeb": "Visita il Sito",
+      "contact": "Contatta"
+    },
+    "contact": {
+      "email": "Email",
+      "phone": "Telefono",
+      "location": "Ubicazione",
+      "country": "Spagna"
     }
   }
 }
