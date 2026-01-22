@@ -47,6 +47,7 @@ import esValerdata from './locales/es/valerdata.json';
 import esAracea from './locales/es/aracea.json';
 import esTelenatura from './locales/es/telenatura.json';
 import esAerce from './locales/es/aerce.json';
+import esArchitecture from './locales/es/architecture.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -87,6 +88,7 @@ import frValerdata from './locales/fr/valerdata.json';
 import frAracea from './locales/fr/aracea.json';
 import frTelenatura from './locales/fr/telenatura.json';
 import frAerce from './locales/fr/aerce.json';
+import frArchitecture from './locales/fr/architecture.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -210,6 +212,7 @@ import itValerdata from './locales/it/valerdata.json';
 import itAracea from './locales/it/aracea.json';
 import itTelenatura from './locales/it/telenatura.json';
 import itAerce from './locales/it/aerce.json';
+import itArchitecture from './locales/it/architecture.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -251,6 +254,7 @@ import nlValerdata from './locales/nl/valerdata.json';
 import nlAracea from './locales/nl/aracea.json';
 import nlTelenatura from './locales/nl/telenatura.json';
 import nlAerce from './locales/nl/aerce.json';
+import nlArchitecture from './locales/nl/architecture.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -293,6 +297,11 @@ import enValerdata from './locales/en/valerdata.json';
 import enAracea from './locales/en/aracea.json';
 import enTelenatura from './locales/en/telenatura.json';
 import enAerce from './locales/en/aerce.json';
+import enArchitecture from './locales/en/architecture.json';
+
+// German and Portuguese architecture imports
+import deArchitecture from './locales/de/architecture.json';
+import ptArchitecture from './locales/pt/architecture.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -347,6 +356,7 @@ i18n
         aracea: esAracea,
         telenatura: esTelenatura,
         aerce: esAerce,
+        architecture: esArchitecture,
       },
       en: {
         common: enCommon,
@@ -384,6 +394,7 @@ i18n
         aracea: enAracea,
         telenatura: enTelenatura,
         aerce: enAerce,
+        architecture: enArchitecture,
       },
       fr: {
         common: frCommon,
@@ -420,6 +431,7 @@ i18n
         aracea: frAracea,
         telenatura: frTelenatura,
         aerce: frAerce,
+        architecture: frArchitecture,
       },
       pt: {
         common: ptCommon,
@@ -456,6 +468,7 @@ i18n
         aracea: ptAracea,
         telenatura: ptTelenatura,
         aerce: ptAerce,
+        architecture: ptArchitecture,
       },
       de: {
         common: deCommon,
@@ -492,6 +505,7 @@ i18n
         aracea: deAracea,
         telenatura: deTelenatura,
         aerce: deAerce,
+        architecture: deArchitecture,
       },
       it: {
         common: itCommon,
@@ -528,6 +542,7 @@ i18n
         aracea: itAracea,
         telenatura: itTelenatura,
         aerce: itAerce,
+        architecture: itArchitecture,
       },
       nl: {
         common: nlCommon,
@@ -564,11 +579,12 @@ i18n
         aracea: nlAracea,
         telenatura: nlTelenatura,
         aerce: nlAerce,
+        architecture: nlArchitecture,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture'],
     interpolation: {
       escapeValue: false,
     },

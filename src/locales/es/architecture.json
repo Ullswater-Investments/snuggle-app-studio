@@ -220,5 +220,104 @@
     "exploreCode": "¿Quieres explorar el código?",
     "ctaDesc": "Revisa la documentación técnica completa o prueba la demo",
     "viewDocs": "Ver Documentación"
+  },
+  "diagrams": {
+    "fe": {
+      "title": "Frontend React + Vite",
+      "ui": "shadcn UI",
+      "query": "TanStack Query",
+      "router": "React Router",
+      "hooks": "Custom Hooks"
+    },
+    "be": {
+      "title": "Backend Cloud AI",
+      "auth": "JWT Auth",
+      "db": "PostgreSQL 31 Tablas",
+      "rls": "Row Level Security",
+      "edge": "Edge Functions",
+      "realtime": "Realtime WS"
+    },
+    "bc": {
+      "title": "Blockchain Pontus-X",
+      "did": "DID:ethr",
+      "euroe": "Stablecoin EUROe",
+      "notarization": "Notarización"
+    },
+    "er": {
+      "has": "tiene",
+      "owns": "posee",
+      "generates": "genera",
+      "holds": "custodia",
+      "pays": "paga",
+      "logs": "registra",
+      "receives": "recibe",
+      "contains": "contiene"
+    },
+    "rls": {
+      "query": "Query",
+      "checkRls": "Verificar RLS",
+      "getOrgId": "Obtener org_id",
+      "filterRows": "Filtrar filas",
+      "denied": "DENEGADO",
+      "returnFiltered": "Retornar filtrado",
+      "result": "Resultado"
+    },
+    "web3": {
+      "user": "Usuario",
+      "app": "Aplicación",
+      "pontusx": "Pontus-X",
+      "connectWallet": "Conectar Wallet",
+      "signMessage": "Firmar Mensaje",
+      "getDid": "Obtener DID",
+      "checkBalance": "Consultar Saldo",
+      "notarize": "Notarizar Hash",
+      "txConfirm": "Confirmación TX"
+    },
+    "states": {
+      "initiated": "initiated",
+      "pendingSubject": "pending_subject",
+      "pendingHolder": "pending_holder",
+      "approved": "approved",
+      "completed": "completed",
+      "deniedSubject": "denied_subject",
+      "deniedHolder": "denied_holder",
+      "cancelled": "cancelled",
+      "consumerRequests": "Consumer solicita",
+      "send": "enviar",
+      "cancel": "cancelar",
+      "subjectApproves": "Subject aprueba",
+      "subjectDenies": "Subject deniega",
+      "holderReleases": "Holder libera",
+      "holderDenies": "Holder deniega",
+      "payAndDeliver": "Pagar + Entregar"
+    },
+    "sequence": {
+      "consumer": "Consumer",
+      "subject": "Subject",
+      "holder": "Holder",
+      "blockchain": "Blockchain",
+      "requestAccess": "Solicitar acceso a asset",
+      "validatePurpose": "Validar propósito",
+      "preApprove": "Pre-aprobar",
+      "releaseData": "Liberar datos",
+      "deliverPayload": "Entregar payload",
+      "processPayment": "Procesar pago EUROe",
+      "notarizeHash": "Notarizar hash TX",
+      "confirmBlock": "Confirmación de bloque"
+    },
+    "registration": {
+      "entity": "Entidad",
+      "platform": "Plataforma",
+      "admin": "Admin",
+      "submitForm": "Enviar formulario de registro",
+      "validateTaxId": "Validar NIF/CIF",
+      "createPending": "Crear solicitud pendiente",
+      "notifyAdmin": "Notificar admin",
+      "reviewKyb": "Revisar KYB",
+      "approveReject": "Aprobar/Rechazar",
+      "createOrg": "Crear organización",
+      "assignRole": "Asignar rol admin",
+      "sendCredentials": "Enviar credenciales"
+    }
   }
 }
