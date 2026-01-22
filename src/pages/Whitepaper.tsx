@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Home, Download, FileText, Menu, X, FileDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -10,7 +11,15 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { FundingFooter } from '@/components/FundingFooter';
 import { generateWhitepaperProcuredataPDF } from '@/utils/generateWhitepaperProcuredataPDF';
-import docContent from '../../docs/WHITEPAPER_PROCUREDATA.md?raw';
+
+// Import all language versions of the whitepaper
+import docContentES from '../../docs/WHITEPAPER_PROCUREDATA.md?raw';
+import docContentEN from '../../docs/WHITEPAPER_PROCUREDATA_EN.md?raw';
+import docContentFR from '../../docs/WHITEPAPER_PROCUREDATA_FR.md?raw';
+import docContentPT from '../../docs/WHITEPAPER_PROCUREDATA_PT.md?raw';
+import docContentDE from '../../docs/WHITEPAPER_PROCUREDATA_DE.md?raw';
+import docContentIT from '../../docs/WHITEPAPER_PROCUREDATA_IT.md?raw';
+import docContentNL from '../../docs/WHITEPAPER_PROCUREDATA_NL.md?raw';
 
 interface TocItem {
   id: string;
@@ -18,9 +27,36 @@ interface TocItem {
   level: number;
 }
 
+// Map language codes to document content
+const documentMap: Record<string, string> = {
+  es: docContentES,
+  en: docContentEN,
+  fr: docContentFR,
+  pt: docContentPT,
+  de: docContentDE,
+  it: docContentIT,
+  nl: docContentNL,
+};
+
+// Map language codes to file suffixes for download
+const fileSuffixMap: Record<string, string> = {
+  es: '',
+  en: '_EN',
+  fr: '_FR',
+  pt: '_PT',
+  de: '_DE',
+  it: '_IT',
+  nl: '_NL',
+};
+
 export default function Whitepaper() {
+  const { t, i18n } = useTranslation('whitepaper');
   const [activeSection, setActiveSection] = useState<string>('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Get current language and document content
+  const currentLang = i18n.language?.split('-')[0] || 'es';
+  const docContent = documentMap[currentLang] || documentMap.es;
 
   // Parse table of contents from markdown headings
   const tableOfContents = useMemo<TocItem[]>(() => {
@@ -40,7 +76,7 @@ export default function Whitepaper() {
     }
 
     return items;
-  }, []);
+  }, [docContent]);
 
   // Scroll spy effect
   useEffect(() => {
@@ -69,7 +105,8 @@ export default function Whitepaper() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'WHITEPAPER_PROCUREDATA_v1.0.md';
+    const suffix = fileSuffixMap[currentLang] || '';
+    a.download = `WHITEPAPER_PROCUREDATA${suffix}_v1.0.md`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -77,10 +114,10 @@ export default function Whitepaper() {
   };
 
   const handleDownloadPDF = () => {
-    toast.info("Generando PDF del Whitepaper...");
+    toast.info(t('generating'));
     setTimeout(() => {
       generateWhitepaperProcuredataPDF();
-      toast.success("PDF generado correctamente");
+      toast.success(t('generated'));
     }, 100);
   };
 
@@ -112,14 +149,14 @@ export default function Whitepaper() {
           <div className="flex items-center gap-2">
             <Button variant="default" size="sm" onClick={handleDownloadPDF} className="hidden sm:flex">
               <FileDown className="h-4 w-4 mr-2" />
-              Descargar PDF
+              {t('download')}
             </Button>
             <Button variant="outline" size="sm" onClick={handleDownload} className="hidden sm:flex">
               <Download className="h-4 w-4 mr-2" />
-              Descargar MD
+              {t('downloadMd')}
             </Button>
             <Button variant="outline" size="sm" asChild className="hidden sm:flex">
-              <Link to="/auth">Ir al Demo</Link>
+              <Link to="/auth">{t('goToDemo')}</Link>
             </Button>
             <ThemeToggle />
             <Button 
@@ -145,7 +182,7 @@ export default function Whitepaper() {
           <ScrollArea className="h-full py-4">
             <div className="px-4 mb-4">
               <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">
-                Índice de Contenidos
+                {t('tableOfContents')}
               </h2>
             </div>
             <nav className="px-2 space-y-0.5">
@@ -187,12 +224,12 @@ export default function Whitepaper() {
                 <Button variant="outline" asChild>
                   <Link to="/">
                     <Home className="h-4 w-4 mr-2" />
-                    Volver al Inicio
+                    {t('backToHome')}
                   </Link>
                 </Button>
                 <Button asChild>
                   <Link to="/auth">
-                    Probar Demo Interactiva
+                    {t('tryDemo')}
                   </Link>
                 </Button>
               </div>
