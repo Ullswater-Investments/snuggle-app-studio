@@ -29,33 +29,33 @@
     }
   },
   "concept": {
-    "title": "Was ist ein Sektoraler Knoten?",
-    "description": "Ein Sektoraler Knoten ist eine validierte Organisation, die als spezialisierter Zugangspunkt zum europäischen Datenraum in ihrer Branche fungiert. Sie garantieren Compliance, Sicherheit und Governance für alle Teilnehmer ihres Ökosystems.",
-    "roles": {
-      "title": "Schlüsselrollen",
-      "operator": "Infrastruktur-Betreiber",
-      "validator": "Compliance-Validator",
-      "facilitator": "Austausch-Facilitator"
-    }
+    "badge": "Konzept",
+    "title": "Ihre Private Insel in einem Datenozean",
+    "description": "<strong>Eigene Knoten</strong> ermöglichen Clustern, Verbänden und Großunternehmen, ihren eigenen abgegrenzten Bereich innerhalb von PROCUREDATA zu schaffen. Behalten Sie die volle Governance und nutzen Sie unsere bereits validierte Technologie.",
+    "benefits": [
+      "Volle Governance über den Datenkatalog.",
+      "Private Sharing-Policies (ODRL).",
+      "Eigene Provisionen pro Datenübertragung.",
+      "White-Label 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Validierte Infrastruktur",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Offener Ozean",
+    "federated": "Föderiert",
+    "yourNode": "Ihr Sektoraler Knoten",
+    "yourNodeDesc": "Private Insel",
+    "techDescription": "Nutzen Sie unsere Technologie (Blockchain, IDSA, Web3) nach Ihren eigenen Geschäftsregeln."
   },
   "inherited": {
-    "title": "Vererbte Fähigkeiten",
-    "subtitle": "Jeder Sektorale Knoten erbt automatisch die vollständige PROCUREDATA-Infrastruktur",
-    "description": "Ihr Knoten enthält automatisch die gesamte Enterprise-Infrastruktur",
+    "badge": "Technologie",
+    "title": "Vererbte Funktionalitäten",
+    "description": "Ihr Knoten wird ab Tag 1 mit der vollen Leistung von PROCUREDATA v3.1 geboren.",
     "did": "Souveräne Identität (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "EUROe-Zahlungen",
     "erp": "ERP-Konnektoren",
     "idsa": "IDSA-Governance",
-    "rls": "Multi-Tenant RLS",
-    "capabilities": [
-      { "title": "Souveräne Identität (SSI)", "description": "DIDs und Verifiable Credentials für alle Teilnehmer" },
-      { "title": "EDC Connector", "description": "Gaia-X konformer souveräner Datenaustausch" },
-      { "title": "EURe Wallet", "description": "Programmierbare Zahlungen in europäischer Stablecoin" },
-      { "title": "ODRL Policies", "description": "Intelligente Datennutzungsverträge" },
-      { "title": "Dezentraler Speicher", "description": "IPFS/Filecoin für sensible Daten" },
-      { "title": "Föderierter Katalog", "description": "Sektorübergreifende Datenprodukt-Entdeckung" }
-    ]
+    "rls": "Multi-Tenant RLS"
   },
   "financial": {
     "badge": "NextGenerationEU Finanzierung",

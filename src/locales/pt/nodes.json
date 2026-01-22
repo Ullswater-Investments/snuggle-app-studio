@@ -29,33 +29,33 @@
     }
   },
   "concept": {
-    "title": "O que é um Nó Setorial?",
-    "description": "Um Nó Setorial é uma organização validada que opera como ponto de acesso especializado ao espaço de dados europeu na sua indústria. Garantem conformidade, segurança e governança para todos os participantes do seu ecossistema.",
-    "roles": {
-      "title": "Papéis Chave",
-      "operator": "Operador de Infraestrutura",
-      "validator": "Validador de Conformidade",
-      "facilitator": "Facilitador de Trocas"
-    }
+    "badge": "Conceito",
+    "title": "A Sua Ilha Privada num Oceano de Dados",
+    "description": "Os <strong>Nós Proprietários</strong> permitem a Clusters, Associações e Grandes Empresas criar o seu próprio espaço delimitado dentro do PROCUREDATA. Mantenha a governança total enquanto aproveita a nossa tecnologia já validada.",
+    "benefits": [
+      "Governança total sobre o catálogo de dados.",
+      "Políticas de partilha privadas (ODRL).",
+      "Comissões próprias por transferência de dados.",
+      "Marca branca 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Infraestrutura Validada",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Oceano aberto",
+    "federated": "Federado",
+    "yourNode": "O Seu Nó Setorial",
+    "yourNodeDesc": "Ilha privada",
+    "techDescription": "Aproveite a nossa tecnologia (Blockchain, IDSA, Web3) segundo as suas próprias regras de negócio."
   },
   "inherited": {
-    "title": "Capacidades Herdadas",
-    "subtitle": "Cada Nó Setorial herda automaticamente a infraestrutura completa PROCUREDATA",
-    "description": "Seu nó inclui automaticamente toda a infraestrutura enterprise",
+    "badge": "Tecnologia",
+    "title": "Funcionalidades Herdadas",
+    "description": "O seu Nó nasce com toda a potência do PROCUREDATA v3.1 desde o primeiro dia.",
     "did": "Identidade Soberana (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "Pagamentos EUROe",
     "erp": "Conectores ERP",
     "idsa": "Governança IDSA",
-    "rls": "Multi-Tenant RLS",
-    "capabilities": [
-      { "title": "Identidade Soberana (SSI)", "description": "DIDs e Verifiable Credentials para todos os participantes" },
-      { "title": "Conector EDC", "description": "Troca de dados soberana conforme Gaia-X" },
-      { "title": "Carteira EURe", "description": "Pagamentos programáveis em stablecoin europeia" },
-      { "title": "Políticas ODRL", "description": "Contratos inteligentes de uso de dados" },
-      { "title": "Armazenamento Descentralizado", "description": "IPFS/Filecoin para dados sensíveis" },
-      { "title": "Catálogo Federado", "description": "Descoberta de produtos de dados entre setores" }
-    ]
+    "rls": "Multi-Tenant RLS"
   },
   "financial": {
     "badge": "Financiamento NextGenerationEU",

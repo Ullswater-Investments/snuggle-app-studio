@@ -29,33 +29,33 @@
     }
   },
   "concept": {
-    "title": "Cos'è un Nodo Settoriale?",
-    "description": "Un Nodo Settoriale è un'organizzazione validata che opera come punto di accesso specializzato allo spazio dati europeo nella sua industria. Garantiscono conformità, sicurezza e governance per tutti i partecipanti del loro ecosistema.",
-    "roles": {
-      "title": "Ruoli Chiave",
-      "operator": "Operatore Infrastruttura",
-      "validator": "Validatore Conformità",
-      "facilitator": "Facilitatore Scambi"
-    }
+    "badge": "Concetto",
+    "title": "La Tua Isola Privata in un Oceano di Dati",
+    "description": "I <strong>Nodi Proprietari</strong> permettono a Cluster, Associazioni e Grandi Aziende di creare il proprio spazio delimitato all'interno di PROCUREDATA. Mantieni la governance totale sfruttando la nostra tecnologia già validata.",
+    "benefits": [
+      "Governance totale sul catalogo dati.",
+      "Politiche di condivisione private (ODRL).",
+      "Commissioni proprie per trasferimento dati.",
+      "White-label 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Infrastruttura Validata",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Oceano aperto",
+    "federated": "Federato",
+    "yourNode": "Il Tuo Nodo Settoriale",
+    "yourNodeDesc": "Isola privata",
+    "techDescription": "Sfrutta la nostra tecnologia (Blockchain, IDSA, Web3) secondo le tue regole di business."
   },
   "inherited": {
-    "title": "Capacità Ereditate",
-    "subtitle": "Ogni Nodo Settoriale eredita automaticamente l'infrastruttura completa PROCUREDATA",
-    "description": "Il tuo nodo include automaticamente tutta l'infrastruttura enterprise",
+    "badge": "Tecnologia",
+    "title": "Funzionalità Ereditate",
+    "description": "Il tuo Nodo nasce con tutta la potenza di PROCUREDATA v3.1 dal primo giorno.",
     "did": "Identità Sovrana (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "Pagamenti EUROe",
     "erp": "Connettori ERP",
     "idsa": "Governance IDSA",
-    "rls": "Multi-Tenant RLS",
-    "capabilities": [
-      { "title": "Identità Sovrana (SSI)", "description": "DIDs e Verifiable Credentials per tutti i partecipanti" },
-      { "title": "Connettore EDC", "description": "Scambio dati sovrano conforme Gaia-X" },
-      { "title": "Portafoglio EURe", "description": "Pagamenti programmabili in stablecoin europea" },
-      { "title": "Politiche ODRL", "description": "Contratti intelligenti di utilizzo dati" },
-      { "title": "Storage Decentralizzato", "description": "IPFS/Filecoin per dati sensibili" },
-      { "title": "Catalogo Federato", "description": "Scoperta di prodotti dati tra settori" }
-    ]
+    "rls": "Multi-Tenant RLS"
   },
   "financial": {
     "badge": "Finanziamento NextGenerationEU",

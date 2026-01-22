@@ -29,33 +29,33 @@
     }
   },
   "concept": {
-    "title": "Qu'est-ce qu'un Nœud Sectoriel ?",
-    "description": "Un Nœud Sectoriel est une organisation validée qui opère comme point d'accès spécialisé à l'espace de données européen dans son industrie. Ils garantissent la conformité, la sécurité et la gouvernance pour tous les participants de leur écosystème.",
-    "roles": {
-      "title": "Rôles Clés",
-      "operator": "Opérateur d'Infrastructure",
-      "validator": "Validateur de Conformité",
-      "facilitator": "Facilitateur d'Échanges"
-    }
+    "badge": "Concept",
+    "title": "Votre Île Privée dans un Océan de Données",
+    "description": "Les <strong>Nœuds Propriétaires</strong> permettent aux Clusters, Associations et Grandes Entreprises de créer leur propre espace délimité au sein de PROCUREDATA. Conservez une gouvernance totale tout en tirant parti de notre technologie déjà validée.",
+    "benefits": [
+      "Gouvernance totale sur le catalogue de données.",
+      "Politiques de partage privées (ODRL).",
+      "Commissions propres par transfert de données.",
+      "Marque blanche 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Infrastructure Validée",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Océan ouvert",
+    "federated": "Fédéré",
+    "yourNode": "Votre Nœud Sectoriel",
+    "yourNodeDesc": "Île privée",
+    "techDescription": "Tirez parti de notre technologie (Blockchain, IDSA, Web3) selon vos propres règles commerciales."
   },
   "inherited": {
-    "title": "Capacités Héritées",
-    "subtitle": "Chaque Nœud Sectoriel hérite automatiquement de l'infrastructure complète PROCUREDATA",
-    "description": "Votre nœud inclut automatiquement toute l'infrastructure enterprise",
+    "badge": "Technologie",
+    "title": "Fonctionnalités Héritées",
+    "description": "Votre Nœud naît avec toute la puissance de PROCUREDATA v3.1 dès le premier jour.",
     "did": "Identité Souveraine (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "Paiements EUROe",
     "erp": "Connecteurs ERP",
     "idsa": "Gouvernance IDSA",
-    "rls": "Multi-Tenant RLS",
-    "capabilities": [
-      { "title": "Identité Souveraine (SSI)", "description": "DIDs et Verifiable Credentials pour tous les participants" },
-      { "title": "Connecteur EDC", "description": "Échange de données souverain conforme Gaia-X" },
-      { "title": "Portefeuille EURe", "description": "Paiements programmables en stablecoin européen" },
-      { "title": "Politiques ODRL", "description": "Contrats intelligents d'usage des données" },
-      { "title": "Stockage Décentralisé", "description": "IPFS/Filecoin pour données sensibles" },
-      { "title": "Catalogue Fédéré", "description": "Découverte de produits de données entre secteurs" }
-    ]
+    "rls": "Multi-Tenant RLS"
   },
   "financial": {
     "badge": "Financement NextGenerationEU",
