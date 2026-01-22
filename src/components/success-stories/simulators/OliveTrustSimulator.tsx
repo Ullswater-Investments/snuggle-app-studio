@@ -5,8 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { RadialBarChart, RadialBar, ResponsiveContainer, PolarAngleAxis } from 'recharts';
 import { Leaf, MapPin, Euro, Shield, FileText, Zap } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const OliveTrustSimulator = () => {
+  const { t } = useTranslation('simulators');
   const [litersProduced, setLitersProduced] = useState(25000);
   const [collectionRadius, setCollectionRadius] = useState(12);
 
@@ -18,7 +20,7 @@ export const OliveTrustSimulator = () => {
     const totalRevenue = litersProduced * premiumPrice;
     const baseRevenue = litersProduced * basePrice;
     const brandEquity = totalRevenue - baseRevenue;
-    const fraudProtection = purityIndex >= 80 ? 'Máxima' : purityIndex >= 60 ? 'Alta' : 'Moderada';
+    const fraudProtection = purityIndex >= 80 ? t('oliveTrust.protectionMax') : purityIndex >= 60 ? t('oliveTrust.protectionHigh') : t('oliveTrust.protectionModerate');
     
     return {
       purityIndex: Math.round(purityIndex),
@@ -28,10 +30,10 @@ export const OliveTrustSimulator = () => {
       totalRevenue,
       fraudProtection
     };
-  }, [litersProduced, collectionRadius]);
+  }, [litersProduced, collectionRadius, t]);
 
   const chartData = [
-    { name: 'Pureza', value: calculations.purityIndex, fill: '#166534' }
+    { name: t('oliveTrust.chart.purity'), value: calculations.purityIndex, fill: '#166534' }
   ];
 
   const pontusHash = useMemo(() => {
@@ -41,7 +43,6 @@ export const OliveTrustSimulator = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Panel Izquierdo - Simulación */}
       <div className="lg:col-span-7 space-y-6">
         <Card className="border-green-700/30 bg-gradient-to-br from-green-950/20 to-background">
           <CardHeader className="pb-4">
@@ -51,12 +52,12 @@ export const OliveTrustSimulator = () => {
                   <Leaf className="h-6 w-6 text-green-600" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl">Simulador Green Premium</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">OliveTrust Coop - D.O. Jaén Verificada</p>
+                  <CardTitle className="text-xl">{t('oliveTrust.title')}</CardTitle>
+                  <p className="text-sm text-muted-foreground mt-1">{t('oliveTrust.subtitle')}</p>
                 </div>
               </div>
               <Badge variant="outline" className="border-green-700/50 text-green-600">
-                Agroalimentario
+                {t('oliveTrust.badge')}
               </Badge>
             </div>
             <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground font-mono">
@@ -66,12 +67,11 @@ export const OliveTrustSimulator = () => {
           </CardHeader>
           
           <CardContent className="space-y-6">
-            {/* Sliders */}
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Producción anual</span>
-                  <span className="font-semibold text-green-600">{litersProduced.toLocaleString()} litros</span>
+                  <span className="text-muted-foreground">{t('oliveTrust.slider.production')}</span>
+                  <span className="font-semibold text-green-600">{litersProduced.toLocaleString()} {t('oliveTrust.slider.liters')}</span>
                 </div>
                 <Slider
                   value={[litersProduced]}
@@ -85,7 +85,7 @@ export const OliveTrustSimulator = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Radio de recolección</span>
+                  <span className="text-muted-foreground">{t('oliveTrust.slider.radius')}</span>
                   <span className="font-semibold text-green-600">{collectionRadius} km</span>
                 </div>
                 <Slider
@@ -99,32 +99,30 @@ export const OliveTrustSimulator = () => {
               </div>
             </div>
 
-            {/* KPIs */}
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-green-700/10 border border-green-700/20">
                 <div className="flex items-center gap-2 text-green-600 mb-2">
                   <Euro className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Premium Obtenido</span>
+                  <span className="text-xs uppercase tracking-wider">{t('oliveTrust.kpi.premiumObtained')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">+{calculations.premiumPercent}%</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {calculations.premiumPrice}€/litro
+                  {calculations.premiumPrice}€/{t('oliveTrust.slider.liter')}
                 </p>
               </div>
               
               <div className="p-4 rounded-xl bg-green-700/10 border border-green-700/20">
                 <div className="flex items-center gap-2 text-green-600 mb-2">
                   <MapPin className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Índice Pureza</span>
+                  <span className="text-xs uppercase tracking-wider">{t('oliveTrust.kpi.purityIndex')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">{calculations.purityIndex}%</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Origen 100% Jaén
+                  {t('oliveTrust.kpi.origin100')}
                 </p>
               </div>
             </div>
 
-            {/* Gráfico Radial */}
             <div className="h-48 flex items-center justify-center">
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart 
@@ -147,7 +145,7 @@ export const OliveTrustSimulator = () => {
                     {calculations.purityIndex}%
                   </text>
                   <text x="50%" y="60%" textAnchor="middle" className="fill-muted-foreground text-xs">
-                    Pureza Geográfica
+                    {t('oliveTrust.chart.geoPurity')}
                   </text>
                 </RadialBarChart>
               </ResponsiveContainer>
@@ -156,7 +154,6 @@ export const OliveTrustSimulator = () => {
         </Card>
       </div>
 
-      {/* Panel Derecho - ARIA */}
       <div className="lg:col-span-5">
         <Card className="h-full bg-[#020617] border-green-700/20">
           <CardHeader className="pb-4">
@@ -165,50 +162,47 @@ export const OliveTrustSimulator = () => {
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg text-white">Análisis ARIA</CardTitle>
-                <p className="text-xs text-slate-400">Pasaporte Digital D.O.</p>
+                <CardTitle className="text-lg text-white">{t('oliveTrust.aria.title')}</CardTitle>
+                <p className="text-xs text-slate-400">{t('oliveTrust.aria.subtitle')}</p>
               </div>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-4">
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-green-500 font-semibold">Valor de Marca:</span> Con un índice de pureza 
-                del <span className="text-green-500 font-bold">{calculations.purityIndex}%</span>, tu aceite 
-                obtiene un sobreprecio de <span className="text-green-500 font-bold">+{calculations.premiumPercent}%</span>, 
-                generando <span className="text-green-500 font-bold">{calculations.brandEquity.toLocaleString()}€</span> adicionales 
-                en valor de marca anual.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('oliveTrust.aria.brandValueDesc', {
+                  purity: calculations.purityIndex,
+                  premium: calculations.premiumPercent,
+                  equity: calculations.brandEquity.toLocaleString()
+                })
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-green-500 font-semibold">Protección Anti-Fraude:</span> El registro GPS 
-                de cada oliva en blockchain proporciona protección <span className="text-green-500 font-bold">{calculations.fraudProtection}</span> contra 
-                el fraude de mezcla con aceites de menor calidad.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('oliveTrust.aria.fraudProtectionDesc', { protection: calculations.fraudProtection })
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-green-500 font-semibold">Mercado Premium:</span> Un radio de 
-                recolección de <span className="text-green-500 font-bold">{collectionRadius} km</span> te 
-                posiciona en el segmento {collectionRadius <= 15 ? 'ultra-premium' : collectionRadius <= 30 ? 'premium' : 'estándar'} del 
-                mercado de aceites de oliva virgen extra.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('oliveTrust.aria.premiumMarketDesc', {
+                  radius: collectionRadius,
+                  segment: collectionRadius <= 15 ? t('oliveTrust.segmentUltraPremium') : collectionRadius <= 30 ? t('oliveTrust.segmentPremium') : t('oliveTrust.segmentStandard')
+                })
+              }} />
             </div>
 
             {calculations.purityIndex >= 90 && (
               <div className="p-4 rounded-lg bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-600/40">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-green-600 text-white">
-                    🫒 D.O. Jaén Certificada
+                    🫒 {t('oliveTrust.aria.doCertified')}
                   </Badge>
                 </div>
                 <p className="text-sm text-slate-300">
-                  Tu cooperativa cumple los requisitos para el sello <strong className="text-green-500">Origen Protegido Blockchain</strong>, 
-                  accediendo a distribuidores gourmet internacionales.
+                  {t('oliveTrust.aria.doCertifiedDesc')}
                 </p>
               </div>
             )}
@@ -216,7 +210,7 @@ export const OliveTrustSimulator = () => {
             <div className="pt-4 border-t border-slate-700">
               <Button className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700">
                 <FileText className="h-4 w-4 mr-2" />
-                Descargar Pasaporte Digital
+                {t('oliveTrust.downloadPassport')}
               </Button>
               <p className="text-xs text-slate-500 text-center mt-2 font-mono">
                 Hash: {pontusHash}

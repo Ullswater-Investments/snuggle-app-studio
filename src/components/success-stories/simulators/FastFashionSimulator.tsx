@@ -5,8 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Shirt, ShieldCheck, TrendingUp, AlertTriangle, FileText, Zap } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const FastFashionSimulator = () => {
+  const { t } = useTranslation('simulators');
   const [transparencyLevel, setTransparencyLevel] = useState(85);
   const [annualVolume, setAnnualVolume] = useState(15);
 
@@ -30,8 +32,8 @@ export const FastFashionSimulator = () => {
   }, [transparencyLevel, annualVolume]);
 
   const chartData = [
-    { name: 'Sin Sello', conversion: parseFloat(calculations.baseConversion), fill: '#64748b' },
-    { name: 'Con Blockchain', conversion: parseFloat(calculations.newConversion), fill: '#d946ef' }
+    { name: t('fastFashion.chart.noSeal'), conversion: parseFloat(calculations.baseConversion), fill: '#64748b' },
+    { name: t('fastFashion.chart.withBlockchain'), conversion: parseFloat(calculations.newConversion), fill: '#d946ef' }
   ];
 
   const pontusHash = useMemo(() => {
@@ -41,7 +43,6 @@ export const FastFashionSimulator = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Panel Izquierdo - Simulación */}
       <div className="lg:col-span-7 space-y-6">
         <Card className="border-fuchsia-500/30 bg-gradient-to-br from-fuchsia-950/20 to-background">
           <CardHeader className="pb-4">
@@ -51,12 +52,12 @@ export const FastFashionSimulator = () => {
                   <Shirt className="h-6 w-6 text-fuchsia-400" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl">Simulador de Confianza Retail</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">FastFashion - Trazabilidad Ética</p>
+                  <CardTitle className="text-xl">{t('fastFashion.title')}</CardTitle>
+                  <p className="text-sm text-muted-foreground mt-1">{t('fastFashion.subtitle')}</p>
                 </div>
               </div>
               <Badge variant="outline" className="border-fuchsia-500/50 text-fuchsia-400">
-                Retail Moda
+                {t('fastFashion.badge')}
               </Badge>
             </div>
             <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground font-mono">
@@ -66,11 +67,10 @@ export const FastFashionSimulator = () => {
           </CardHeader>
           
           <CardContent className="space-y-6">
-            {/* Sliders */}
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Nivel de transparencia cadena</span>
+                  <span className="text-muted-foreground">{t('fastFashion.slider.transparency')}</span>
                   <span className="font-semibold text-fuchsia-400">{transparencyLevel}%</span>
                 </div>
                 <Slider
@@ -85,7 +85,7 @@ export const FastFashionSimulator = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Volumen anual de ventas</span>
+                  <span className="text-muted-foreground">{t('fastFashion.slider.volume')}</span>
                   <span className="font-semibold text-fuchsia-400">{annualVolume} M€</span>
                 </div>
                 <Slider
@@ -99,41 +99,39 @@ export const FastFashionSimulator = () => {
               </div>
             </div>
 
-            {/* KPIs */}
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-fuchsia-500/10 border border-fuchsia-500/20">
                 <div className="flex items-center gap-2 text-fuchsia-400 mb-2">
                   <TrendingUp className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Sales Uplift</span>
+                  <span className="text-xs uppercase tracking-wider">{t('fastFashion.kpi.salesUplift')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">
                   +{(calculations.salesUplift / 1000).toFixed(0)}K€
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  +{calculations.conversionIncrease}% conversión
+                  +{calculations.conversionIncrease}% {t('fastFashion.kpi.conversion')}
                 </p>
               </div>
               
               <div className="p-4 rounded-xl bg-fuchsia-500/10 border border-fuchsia-500/20">
                 <div className="flex items-center gap-2 text-fuchsia-400 mb-2">
                   <AlertTriangle className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Riesgo Reducido</span>
+                  <span className="text-xs uppercase tracking-wider">{t('fastFashion.kpi.riskReduced')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">-{calculations.riskReduction}%</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Incidencias Tier 3
+                  {t('fastFashion.kpi.tier3Incidents')}
                 </p>
               </div>
             </div>
 
-            {/* Gráfico */}
             <div className="h-48">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 10, right: 20, left: 20, bottom: 5 }}>
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                   <YAxis tickFormatter={(v) => `${v}%`} domain={[0, 8]} tick={{ fontSize: 12 }} />
                   <Tooltip 
-                    formatter={(value: number) => [`${value.toFixed(1)}%`, 'Tasa Conversión']}
+                    formatter={(value: number) => [`${value.toFixed(1)}%`, t('fastFashion.chart.conversionRate')]}
                     contentStyle={{ backgroundColor: '#1e1e2e', border: '1px solid #d946ef' }}
                   />
                   <Bar dataKey="conversion" radius={[4, 4, 0, 0]} animationDuration={800}>
@@ -148,7 +146,6 @@ export const FastFashionSimulator = () => {
         </Card>
       </div>
 
-      {/* Panel Derecho - ARIA */}
       <div className="lg:col-span-5">
         <Card className="h-full bg-[#020617] border-fuchsia-500/20">
           <CardHeader className="pb-4">
@@ -157,49 +154,44 @@ export const FastFashionSimulator = () => {
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg text-white">Análisis ARIA</CardTitle>
-                <p className="text-xs text-slate-400">Ethical Supply Chain</p>
+                <CardTitle className="text-lg text-white">{t('fastFashion.aria.title')}</CardTitle>
+                <p className="text-xs text-slate-400">{t('fastFashion.aria.subtitle')}</p>
               </div>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-4">
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-fuchsia-400 font-semibold">Confianza del Consumidor:</span> Un nivel de 
-                transparencia del <span className="text-fuchsia-400 font-bold">{transparencyLevel}%</span> incrementa 
-                la conversión en <span className="text-fuchsia-400 font-bold">+{calculations.conversionIncrease}%</span>, 
-                generando ventas adicionales por valor de{' '}
-                <span className="text-fuchsia-400 font-bold">{(calculations.salesUplift / 1000).toFixed(0)}K€</span>.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('fastFashion.aria.consumerTrustDesc', {
+                  transparency: transparencyLevel,
+                  conversionIncrease: calculations.conversionIncrease,
+                  salesUplift: (calculations.salesUplift / 1000).toFixed(0)
+                })
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-fuchsia-400 font-semibold">Protección Reputacional:</span> La trazabilidad 
-                blockchain reduce un <span className="text-fuchsia-400 font-bold">{calculations.riskReduction}%</span> el 
-                riesgo de escándalos en proveedores Tier 3, protegiendo el valor de marca ante activismo social.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('fastFashion.aria.reputationDesc', { riskReduction: calculations.riskReduction })
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-fuchsia-400 font-semibold">Cobertura de Cadena:</span> Tu sistema de 
-                verificación cubre el <span className="text-fuchsia-400 font-bold">{calculations.tierCoverage}%</span> de 
-                los proveedores hasta el origen del algodón y los tintes.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{
+                __html: t('fastFashion.aria.chainCoverageDesc', { tierCoverage: calculations.tierCoverage })
+              }} />
             </div>
 
             {transparencyLevel >= 90 && (
               <div className="p-4 rounded-lg bg-gradient-to-r from-fuchsia-500/20 to-pink-500/20 border border-fuchsia-500/40">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-fuchsia-500 text-white">
-                    ✨ Ethical Supply Verified
+                    ✨ {t('fastFashion.aria.ethicalVerified')}
                   </Badge>
                 </div>
                 <p className="text-sm text-slate-300">
-                  Con +90% de transparencia, accedes al sello <strong className="text-fuchsia-400">Fair Fashion Alliance</strong> y 
-                  a campañas de marketing de impacto social verificado.
+                  {t('fastFashion.aria.ethicalVerifiedDesc')}
                 </p>
               </div>
             )}
@@ -207,7 +199,7 @@ export const FastFashionSimulator = () => {
             <div className="pt-4 border-t border-slate-700">
               <Button className="w-full bg-gradient-to-r from-fuchsia-500 to-pink-500 hover:from-fuchsia-600 hover:to-pink-600">
                 <FileText className="h-4 w-4 mr-2" />
-                Descargar Reporte Ético
+                {t('fastFashion.downloadReport')}
               </Button>
               <p className="text-xs text-slate-500 text-center mt-2 font-mono">
                 Hash: {pontusHash}
