@@ -115,19 +115,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Exigences Techniques",
-      "subtitle": "Spécifications minimales pour opérer un Nœud Sectoriel",
-      "diagram": {
-        "title": "Architecture Requise",
-        "layers": { "infrastructure": "Couche Infrastructure", "security": "Couche Sécurité", "application": "Couche Application" },
-        "components": ["Kubernetes", "HSM", "WAF", "API Gateway", "EDC Connector", "SSI Wallet"]
+      "title": "Conditions d'Adhésion",
+      "subtitle": "Feuille de route administrative, technique et économique pour la constitution de votre Espace de Données Souverain selon la réglementation Gaia-X.",
+      "badge": "Conditions d'Adhésion",
+      "backToOverview": "Retour à l'Aperçu",
+      "ecosystem": {
+        "title": "L'Écosystème Minimum Viable",
+        "description": "Pour activer un Nœud et accéder à la subvention, il est indispensable de formaliser un consortium minimum de 1 Promoteur + 5 Participants.",
+        "company": "Ent.",
+        "adhered": "Adhéré",
+        "nodeManager": "Gestionnaire du Nœud",
+        "yourEntity": "Votre Entité",
+        "billingGovernance": "Facturation & Gouvernance",
+        "infrastructure": "Infrastructure Technologique Homologuée (SEDIA + Gaia-X)"
       },
       "benefits": [
-        { "title": "Entité Légale UE", "desc": "Entreprise ou association établie dans un État membre." },
-        { "title": "Équipe Technique", "desc": "Personnel dédié pour la configuration initiale et la maintenance." },
-        { "title": "Engagement Réseau", "desc": "Minimum 12 mois de participation active dans l'écosystème." },
-        { "title": "Haute Disponibilité", "desc": "SLA 99,9% avec redondance multi-zone" }
-      ]
+        { "title": "Légalité Gaia-X", "desc": "Le Nœud inclut la licence d'utilisation de la technologie PROCUREDATA, garantissant la conformité automatique aux standards Gaia-X et IDSA requis par l'appel." },
+        { "title": "Adhésion Simple", "desc": "Nous fournissons les modèles de 'Lettre d'Intérêt' et 'MOU' (Memorandum of Understanding) prêts à être signés par vos entreprises associées." },
+        { "title": "Support Technique", "desc": "Pas besoin d'équipe IT. Le déploiement, la maintenance et la sécurité du nœud sont gérés par l'équipe d'ingénierie de ProcureData." }
+      ],
+      "financial": {
+        "title": "Mécanique Financière Détaillée",
+        "description": "Répartition transparente des coûts et flux de trésorerie. Tous les montants sont subventionnables à 100%.",
+        "promoter": {
+          "label": "PROMOTEUR (Vous)",
+          "costLabel": "COÛT développement d'un NŒUD PROPRIÉTAIRE",
+          "totalCost": "30 000 €",
+          "step1Title": "À la signature (Acompte)",
+          "step1Amount": "5 000 €",
+          "step1Desc": "Génération d'instance et configuration initiale",
+          "step2Title": "Octroi de l'Aide",
+          "step2Amount": "30 000 €",
+          "step2Desc": "Nous vous aidons à demander le KIT ESPACE DE DONNÉES",
+          "step3Title": "Payez le principal à réception de la Subvention RED.es",
+          "step3Amount": "25 000 €",
+          "note": "Les 30 000€ sont <strong>100% subventionnables</strong>. Vous récupérez l'acompte lors de l'encaissement de l'aide."
+        },
+        "participant": {
+          "label": "PARTICIPANT (×5)",
+          "costLabel": "COÛT de CONNEXION (Annuel)",
+          "totalCost": "3 000 €",
+          "perCompany": "par entreprise participante",
+          "step1Title": "Signature Contrat 1 an",
+          "step1Amount": "250 €/mois",
+          "step1Desc": "Création d'identité et wallet Web3",
+          "step2Title": "Octroi de l'Aide",
+          "step2Amount": "15 000 €",
+          "step2Desc": "Nous vous aidons à demander le KIT ESPACE DE DONNÉES",
+          "step3Title": "Renouvellement Contrat de Connexion + 1 an sur résolution favorable de la subvention",
+          "step3Amount": "3 000 €",
+          "note": "Le participant disposera jusqu'à <strong>9 000€</strong> pour payer les services du Cluster ou autres dépenses liées à l'Espace de Données"
+        },
+        "guarantee": {
+          "title": "Garantie de Retour",
+          "description": "Les paiements anticipés sont considérés comme des dépenses exécutées et sont <strong>intégralement remboursés</strong> à réception de l'aide Kit Espace de Données. Le risque financier est minimal."
+        }
+      },
+      "form": {
+        "title": "Valider l'Éligibilité",
+        "description": "Vérifions si votre organisation remplit les conditions pour être Promoteur de Nœud.",
+        "entityName": "Nom de l'Entité",
+        "entityNamePlaceholder": "Cluster Industriel de...",
+        "entityType": "Type d'Entité",
+        "entityTypePlaceholder": "Sélectionnez le type",
+        "entityTypes": {
+          "cluster": "Cluster / Association",
+          "empresa": "Grande Entreprise",
+          "centro": "Centre Technologique",
+          "otro": "Autre"
+        },
+        "ecosystemStatus": "État de l'Écosystème",
+        "ecosystemStatusPlaceholder": "Avez-vous 5+ entreprises intéressées ?",
+        "ecosystemOptions": {
+          "ready": "Oui, j'ai déjà le groupe identifié",
+          "process": "En cours de recrutement",
+          "help": "Non, j'ai besoin d'aide pour les recruter"
+        },
+        "email": "Email du Responsable",
+        "emailPlaceholder": "contact@votrecluster.fr",
+        "submit": "Demander Brouillon du MOU",
+        "submitting": "Envoi en cours...",
+        "disclaimer": "Sans engagement. Vous recevrez le modèle d'accord et la documentation technique SEDIA.",
+        "successTitle": "Demande envoyée avec succès !",
+        "successDesc": "Vous recevrez le brouillon du MOU sous 24-48 heures.",
+        "errorTitle": "Erreur lors de l'envoi",
+        "errorDesc": "Veuillez réessayer plus tard.",
+        "validationError": "Veuillez remplir tous les champs obligatoires"
+      },
+      "cta": {
+        "title": "Des questions sur votre éligibilité ?",
+        "description": "Planifiez un appel de 15 minutes avec notre équipe commerciale. Nous vous aiderons à évaluer votre cas sans engagement.",
+        "button": "Planifier une Consultation Gratuite"
+      }
     },
     "techStack": {
       "title": "Stack Technologique",

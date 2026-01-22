@@ -115,19 +115,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Requisitos Técnicos",
-      "subtitle": "Especificações mínimas para operar um Nó Setorial",
-      "diagram": {
-        "title": "Arquitetura Requerida",
-        "layers": { "infrastructure": "Camada de Infraestrutura", "security": "Camada de Segurança", "application": "Camada de Aplicação" },
-        "components": ["Kubernetes", "HSM", "WAF", "API Gateway", "EDC Connector", "SSI Wallet"]
+      "title": "Condições de Adesão",
+      "subtitle": "Roteiro administrativo, técnico e econômico para a constituição do seu Espaço de Dados Soberano segundo as regulamentações Gaia-X.",
+      "badge": "Requisitos de Adesão",
+      "backToOverview": "Voltar à Visão Geral",
+      "ecosystem": {
+        "title": "O Ecossistema Mínimo Viável",
+        "description": "Para ativar um Nó e acessar o subsídio, é indispensável formalizar um consórcio mínimo de 1 Promotor + 5 Participantes.",
+        "company": "Emp.",
+        "adhered": "Aderido",
+        "nodeManager": "Gestor do Nó",
+        "yourEntity": "Sua Entidade",
+        "billingGovernance": "Faturamento & Governança",
+        "infrastructure": "Infraestrutura Tecnológica Homologada (SEDIA + Gaia-X)"
       },
       "benefits": [
-        { "title": "Entidade Legal UE", "desc": "Empresa ou associação constituída em um Estado membro." },
-        { "title": "Equipe Técnica", "desc": "Pessoal dedicado para configuração inicial e manutenção." },
-        { "title": "Compromisso de Rede", "desc": "Mínimo 12 meses de participação ativa no ecossistema." },
-        { "title": "Alta Disponibilidade", "desc": "SLA 99,9% com redundância multi-zona" }
-      ]
+        { "title": "Legalidade Gaia-X", "desc": "O Nó inclui a licença de uso da tecnologia PROCUREDATA, garantindo conformidade automática com os padrões Gaia-X e IDSA exigidos pela convocatória." },
+        { "title": "Adesão Simples", "desc": "Fornecemos os modelos de 'Carta de Interesse' e 'MOU' (Memorandum of Understanding) prontos para serem assinados pelas suas empresas associadas." },
+        { "title": "Suporte Técnico", "desc": "Não precisa de equipe de TI. A implantação, manutenção e segurança do nó ficam a cargo da equipe de engenharia da ProcureData." }
+      ],
+      "financial": {
+        "title": "Mecânica Financeira Detalhada",
+        "description": "Desdobramento transparente de custos e fluxo de caixa. Todos os valores são 100% subsidiáveis.",
+        "promoter": {
+          "label": "PROMOTOR (Você)",
+          "costLabel": "CUSTO desenvolvimento de um NÓ PROPRIETÁRIO",
+          "totalCost": "30.000 €",
+          "step1Title": "Na assinatura (Adiantamento)",
+          "step1Amount": "5.000 €",
+          "step1Desc": "Geração de instância e configuração inicial",
+          "step2Title": "Concessão de Ajuda",
+          "step2Amount": "30.000 €",
+          "step2Desc": "Ajudamos você a solicitar o KIT ESPAÇO DE DADOS",
+          "step3Title": "Pague o principal ao receber o Subsídio RED.es",
+          "step3Amount": "25.000 €",
+          "note": "Os 30.000€ são <strong>100% subsidiáveis</strong>. Você recupera o adiantamento ao receber a ajuda."
+        },
+        "participant": {
+          "label": "PARTICIPANTE (×5)",
+          "costLabel": "CUSTO de CONEXÃO (Anual)",
+          "totalCost": "3.000 €",
+          "perCompany": "por cada empresa participante",
+          "step1Title": "Assinar Contrato de 1 ano",
+          "step1Amount": "250 €/mês",
+          "step1Desc": "Criação de identidade e wallet Web3",
+          "step2Title": "Concessão de Ajuda",
+          "step2Amount": "15.000 €",
+          "step2Desc": "Ajudamos você a solicitar o KIT ESPAÇO DE DADOS",
+          "step3Title": "Renovação do Contrato de Conexão + 1 ano mediante resolução favorável do subsídio",
+          "step3Amount": "3.000 €",
+          "note": "O participante terá até <strong>9.000€</strong> para pagar serviços do Cluster ou outras despesas relacionadas ao Espaço de Dados"
+        },
+        "guarantee": {
+          "title": "Garantia de Retorno",
+          "description": "Os pagamentos adiantados são considerados despesas executadas e são <strong>integralmente reembolsados</strong> ao receber a ajuda do Kit Espaço de Dados. O risco financeiro é mínimo."
+        }
+      },
+      "form": {
+        "title": "Validar Elegibilidade",
+        "description": "Vamos verificar se sua organização atende aos requisitos para ser Promotor de Nó.",
+        "entityName": "Nome da Entidade",
+        "entityNamePlaceholder": "Cluster Industrial de...",
+        "entityType": "Tipo de Entidade",
+        "entityTypePlaceholder": "Selecione o tipo",
+        "entityTypes": {
+          "cluster": "Cluster / Associação",
+          "empresa": "Grande Empresa",
+          "centro": "Centro Tecnológico",
+          "otro": "Outro"
+        },
+        "ecosystemStatus": "Estado do Ecossistema",
+        "ecosystemStatusPlaceholder": "Você tem 5+ empresas interessadas?",
+        "ecosystemOptions": {
+          "ready": "Sim, já tenho o grupo identificado",
+          "process": "Em processo de captação",
+          "help": "Não, preciso de ajuda para captá-las"
+        },
+        "email": "Email do Responsável",
+        "emailPlaceholder": "contato@seucluster.pt",
+        "submit": "Solicitar Rascunho do MOU",
+        "submitting": "Enviando...",
+        "disclaimer": "Sem compromisso. Você receberá o modelo de acordo e a documentação técnica SEDIA.",
+        "successTitle": "Solicitação enviada com sucesso!",
+        "successDesc": "Você receberá o rascunho do MOU em 24-48 horas.",
+        "errorTitle": "Erro ao enviar",
+        "errorDesc": "Por favor, tente novamente mais tarde.",
+        "validationError": "Por favor, preencha todos os campos obrigatórios"
+      },
+      "cta": {
+        "title": "Dúvidas sobre sua elegibilidade?",
+        "description": "Agende uma ligação de 15 minutos com nossa equipe comercial. Ajudaremos você a avaliar seu caso sem compromisso.",
+        "button": "Agendar Consulta Gratuita"
+      }
     },
     "techStack": {
       "title": "Stack Tecnológico",
