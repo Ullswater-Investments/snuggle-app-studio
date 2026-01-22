@@ -59,120 +59,205 @@
       "description": "Mise en production et support opérationnel"
     }
   },
+  "cta": {
+    "title": "Prêt à déployer votre Nœud?"
+  },
   "layout": {
-    "backToOverview": "Retour à la Vue d'Ensemble",
+    "backToNodes": "Retour à la Vue d'Ensemble",
     "ownerNode": "NŒUD Propriétaire",
-    "flowDescription": "Représentation du flux logique du système",
-    "cta": {
-      "title": "Prêt à déployer votre Nœud?",
-      "description": "Tous les modules inclus dans le financement du Kit Espace de Données. Coût final: 0€.",
-      "button": "Demander une Étude de Faisabilité"
-    }
+    "nodeFlow": "Représentation du flux logique du système",
+    "requestStudy": "Demander une Étude de Faisabilité",
+    "requestStudyDesc": "Tous les modules inclus dans le financement du Kit Espace de Données. Coût final: 0€."
   },
   "pages": {
     "requirements": {
       "title": "Exigences Techniques",
       "subtitle": "Spécifications minimales pour opérer un Nœud Sectoriel",
-      "infrastructure": "Infrastructure Cloud",
-      "security": "Certifications de Sécurité",
-      "team": "Équipe Technique"
+      "benefits": [
+        { "title": "Entité Légale UE", "desc": "Entreprise ou association établie dans un État membre." },
+        { "title": "Équipe Technique", "desc": "Personnel dédié pour la configuration initiale et la maintenance." },
+        { "title": "Engagement Réseau", "desc": "Minimum 12 mois de participation active dans l'écosystème." }
+      ]
     },
-    "technology": {
+    "techStack": {
       "title": "Stack Technologique",
-      "subtitle": "Architecture complète du Nœud Sectoriel",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "blockchain": "Blockchain"
+      "subtitle": "Architecture certifiée Gaia-X construite sur des standards ouverts.",
+      "benefits": [
+        { "title": "IDS Connector", "desc": "Connecteur certifié IDSA pour l'échange de données souverain." },
+        { "title": "Pontus-X Blockchain", "desc": "Registre immuable pour les contrats et la traçabilité." },
+        { "title": "Supabase + PostgreSQL", "desc": "Base de données relationnelle avec RLS pour multi-tenancy." }
+      ]
     },
     "marketplace": {
       "title": "Marketplace Propre",
-      "subtitle": "Créez et gérez votre catalogue de produits de données sectoriels.",
+      "subtitle": "Catalogue de données curé exclusivement pour votre secteur. Vous décidez qui publie et quoi.",
       "benefits": [
-        { "title": "Curation Totale", "desc": "Contrôle absolu sur les produits affichés dans votre marketplace." },
-        { "title": "Tarification Personnalisée", "desc": "Définissez des modèles de prix spécifiques à votre secteur." },
-        { "title": "Catégories Propres", "desc": "Taxonomie adaptée à votre industrie." }
-      ]
+        { "title": "Curation de Contenu", "desc": "Approuvez ou rejetez les actifs de données avant publication." },
+        { "title": "Catégories Personnalisées", "desc": "Organisez le catalogue selon la taxonomie de votre industrie." },
+        { "title": "Contrôle Qualité", "desc": "Établissez des standards minimums pour les données publiées." }
+      ],
+      "diagram": {
+        "externalData": "Données Externes",
+        "sources": ["Fournisseurs", "IoT", "APIs"],
+        "governance": "Votre Gouvernance",
+        "filters": ["Filtre", "Validation", "Approbation"],
+        "catalog": "Catalogue Premium",
+        "outputs": ["Vérifié", "Catégorisé", "Tarifé"]
+      }
     },
     "odrl": {
       "title": "Politiques ODRL",
-      "subtitle": "Gouvernance des données avec les standards W3C. Définissez permissions, interdictions et obligations.",
+      "subtitle": "Définissez des règles d'accès granulaires pour chaque actif. Qui peut accéder, pendant combien de temps, dans quel but.",
       "benefits": [
-        { "title": "Permissions Granulaires", "desc": "Contrôlez qui peut lire, écrire ou redistribuer les données." },
-        { "title": "Restrictions Géographiques", "desc": "Limitez l'utilisation à des régions ou pays spécifiques." },
-        { "title": "Audit Complet", "desc": "Traçabilité de chaque accès et opération." }
-      ]
+        { "title": "Granularité Extrême", "desc": "Contrôlez l'accès par utilisateur, organisation, temps et finalité." },
+        { "title": "Souveraineté Réelle", "desc": "Les données ne voyagent jamais sans politique jointe." },
+        { "title": "Audit Automatique", "desc": "Chaque accès est enregistré et vérifiable." }
+      ],
+      "diagram": {
+        "input": "Dataset Sensible",
+        "engine": "Moteur Smart Contract",
+        "rules": "Règles ODRL",
+        "rulesList": ["permission: lecture", "constraint: isMember", "obligation: logAccess"],
+        "allowed": "Accès Autorisé",
+        "blocked": "Accès Bloqué",
+        "conditionMet": "Condition Remplie",
+        "conditionNotMet": "Condition Non Remplie"
+      }
     },
     "monetization": {
-      "title": "Monétisation",
-      "subtitle": "Modèles de revenus flexibles pour votre Nœud Sectoriel.",
+      "title": "Modèle de Monétisation",
+      "subtitle": "Générez des revenus récurrents grâce aux commissions sur chaque transaction de données de votre Nœud.",
       "benefits": [
-        { "title": "Frais de Transaction", "desc": "Pourcentage configurable sur chaque vente de données." },
-        { "title": "Abonnements", "desc": "Plans mensuels ou annuels pour l'accès au catalogue." },
-        { "title": "Partage de Revenus", "desc": "Distribution automatique entre fournisseurs et le nœud." }
-      ]
+        { "title": "Commissions Configurables", "desc": "Définissez le pourcentage de chaque transaction." },
+        { "title": "Règlement Instantané", "desc": "Recevez votre part en secondes grâce à EUROe." },
+        { "title": "Nouveaux Revenus Récurrents", "desc": "Transformez votre écosystème en source de revenus." }
+      ],
+      "diagram": {
+        "dataInput": "Données",
+        "totalValue": "Valeur Totale",
+        "provider": "Fournisseur",
+        "promoter": "Promoteur Nœud",
+        "settlement": "Règlement Stablecoin",
+        "instant": "Instantané"
+      }
     },
     "whiteLabel": {
       "title": "Marque Blanche",
-      "subtitle": "Personnalisation complète avec votre identité d'entreprise.",
+      "subtitle": "Votre marque, votre domaine, votre identité visuelle. Technologie ProcureData invisible.",
       "benefits": [
-        { "title": "Logo et Couleurs", "desc": "Appliquez votre branding sur toute la plateforme." },
-        { "title": "Domaine Propre", "desc": "marketplace.votreentreprise.com" },
-        { "title": "Emails Personnalisés", "desc": "Communications avec votre identité." }
-      ]
+        { "title": "Domaine Propre", "desc": "donnees.votresecteur.eu ou ce que vous préférez." },
+        { "title": "Identité Visuelle", "desc": "Vos couleurs, votre logo, votre typographie." },
+        { "title": "Communication Indépendante", "desc": "Vos partenaires n'ont pas besoin de savoir que nous sommes derrière." }
+      ],
+      "diagram": {
+        "yourDomain": "votresecteur.eu",
+        "logo": "Votre Logo",
+        "primaryAction": "Action Principale",
+        "certifiedTech": "Technologie certifiée Gaia-X sous votre marque"
+      }
     },
-    "identityDid": {
+    "did": {
       "title": "Identité Souveraine (DID)",
-      "subtitle": "Identifiants décentralisés pour toutes les entités de l'écosystème.",
+      "subtitle": "Identifiants Décentralisés (DID) et Credentials Vérifiables. Chaque organisation de votre Nœud aura une identité cryptographique unique.",
       "benefits": [
-        { "title": "Auto-Souveraineté", "desc": "Les organisations contrôlent leur propre identité." },
-        { "title": "Vérification On-Chain", "desc": "DIDs enregistrés sur Pontus-X." },
-        { "title": "Interopérabilité", "desc": "Compatible avec d'autres Espaces de Données." }
-      ]
+        { "title": "Auto-Souveraineté", "desc": "Chaque organisation contrôle sa propre identité sans dépendre de tiers." },
+        { "title": "Vérification Instantanée", "desc": "Validez les credentials en millisecondes sans requêtes centralisées." },
+        { "title": "Interopérabilité Européenne", "desc": "Compatible avec eIDAS 2.0 et le Wallet de la Commission Européenne." }
+      ],
+      "diagram": {
+        "didGeneration": "Moteur de Génération DID",
+        "organization": "Organisation",
+        "enterData": "Saisir les données",
+        "exampleDid": "did:web:procuredata.es:org:12345",
+        "verifiedIdentity": "Identité Vérifiée",
+        "credentials": ["NIF Vérifié", "DID Actif", "Membre Gaia-X"],
+        "federatedTrust": "Réseau de Confiance Fédéré",
+        "standards": ["Gaia-X Trust", "eIDAS 2.0", "W3C DID"]
+      }
     },
     "smartContracts": {
       "title": "Smart Contracts",
-      "subtitle": "Contrats intelligents ODRL qui s'exécutent automatiquement.",
+      "subtitle": "Contrats intelligents ODRL qui s'exécutent automatiquement. Sans intermédiaires, sans litiges, avec traçabilité totale sur blockchain.",
       "benefits": [
-        { "title": "Exécution Automatique", "desc": "Sans intermédiaires ni litiges." },
-        { "title": "Immutabilité", "desc": "Règles vérifiables par toutes les parties." },
-        { "title": "Règlement Instantané", "desc": "Paiements automatiques quand les conditions sont remplies." }
-      ]
+        { "title": "Exécution Automatique", "desc": "Quand les conditions sont remplies, les données sont transférées automatiquement." },
+        { "title": "Sans Litiges Juridiques", "desc": "Le code fait loi. Les règles sont programmées et vérifiables par les deux parties." },
+        { "title": "Audit Immuable", "desc": "Chaque exécution est enregistrée sur Pontus-X Blockchain." }
+      ],
+      "diagram": {
+        "title": "Contrat Intelligent",
+        "fileName": "data-access-v1.odrl",
+        "contract": "contrat",
+        "permission": "permission",
+        "constraint": "contrainte",
+        "price": "prix",
+        "conditionsMet": "Conditions Remplies",
+        "dataTransferred": "→ Données Transférées",
+        "conditionsNotMet": "Conditions NON Remplies",
+        "accessDenied": "→ Accès Refusé",
+        "badges": ["Immuable", "Automatique", "Auditable", "Règlement Instant."]
+      }
     },
-    "paymentsEuroe": {
+    "euroe": {
       "title": "Paiements EUROe",
-      "subtitle": "Règlement instantané avec stablecoin régulé.",
+      "subtitle": "Règlement instantané avec stablecoin régulé. Sans SWIFT, sans banques intermédiaires, sans attente.",
       "benefits": [
-        { "title": "3 Secondes", "desc": "Règlement plus rapide que SEPA." },
-        { "title": "Sans Frais Bancaires", "desc": "Zéro frais d'intermédiaires." },
-        { "title": "Partage de Revenus", "desc": "Division automatique entre les parties." }
-      ]
+        { "title": "Règlement en 3 Secondes", "desc": "Oubliez les 2-3 jours ouvrables pour les transferts SEPA." },
+        { "title": "Revenue Split Automatique", "desc": "Le Smart Contract divise automatiquement le paiement entre Promoteur et Fournisseur." },
+        { "title": "Zéro Frais Bancaires", "desc": "Sans SWIFT fees, sans intermédiaires. Token EUROe garanti 1:1 par des euros." }
+      ],
+      "diagram": {
+        "buyer": "Acheteur",
+        "revenueSplitter": "Revenue Splitter",
+        "provider": "Fournisseur",
+        "promoter": "Promoteur",
+        "badges": ["Règlement < 3 sec", "Régulé BCE", "24/7", "Sans frais"]
+      }
     },
-    "erpConnectors": {
+    "erp": {
       "title": "Connecteurs ERP",
-      "subtitle": "Intégration plug-and-play avec les systèmes de gestion.",
+      "subtitle": "Intégration plug-and-play avec votre système de gestion. SAP, Microsoft, Oracle, Odoo...",
       "benefits": [
-        { "title": "Zéro Code", "desc": "Configuration visuelle sans programmation." },
-        { "title": "Bidirectionnel", "desc": "Synchronisation dans les deux sens." },
-        { "title": "Multi-ERP", "desc": "SAP, Oracle, Dynamics, Odoo..." }
-      ]
+        { "title": "Intégration Zero Code", "desc": "Connectez votre ERP en minutes avec notre interface visuelle." },
+        { "title": "Synchronisation Bidirectionnelle", "desc": "Les données circulent dans les deux sens automatiquement." },
+        { "title": "Mapping Intelligent", "desc": "Notre système détecte la structure de vos données et suggère le mapping optimal." }
+      ],
+      "diagram": {
+        "bridge": "ProcureData Bridge",
+        "outputs": ["Catalogue Gaia-X", "Contrats ODRL", "Marketplace"],
+        "protocols": ["REST API", "GraphQL", "OData", "Webhook"]
+      }
     },
-    "idsaGovernance": {
+    "idsa": {
       "title": "Gouvernance IDSA",
       "subtitle": "Architecture de référence certifiée par l'International Data Spaces Association.",
       "benefits": [
-        { "title": "Certification Officielle", "desc": "Conformité avec Gaia-X Trust Framework." },
-        { "title": "Interopérabilité", "desc": "Connexion avec d'autres espaces de données certifiés." },
-        { "title": "Souveraineté", "desc": "Les données ne sortent jamais sans consentement explicite." }
-      ]
+        { "title": "Certification Officielle", "desc": "ProcureData est conforme au Gaia-X Trust Framework." },
+        { "title": "Interopérabilité Garantie", "desc": "Votre nœud peut se connecter à tout autre Espace de Données certifié." },
+        { "title": "Souveraineté par Design", "desc": "Les données ne sortent jamais sans votre consentement explicite." }
+      ],
+      "diagram": {
+        "ecosystem": "Écosystème Gaia-X / IDSA",
+        "pillars": ["IDS Connector", "DAPS (Identity)", "Metadata Broker"],
+        "certifications": ["IDSA Certified", "Gaia-X Compliant", "ISO 27001", "GDPR Ready"]
+      }
     },
-    "multiTenantRls": {
+    "rls": {
       "title": "Multi-Tenant RLS",
-      "subtitle": "Isolation des données au niveau de la base de données.",
+      "subtitle": "Isolation des données au niveau de la base de données. Chaque organisation ne voit que ses propres données.",
       "benefits": [
-        { "title": "Isolation Totale", "desc": "Politiques RLS au niveau PostgreSQL." },
-        { "title": "Efficacité", "desc": "Un seul déploiement pour plusieurs organisations." },
-        { "title": "Scalabilité", "desc": "Ajouter de nouveaux tenants est instantané." }
-      ]
+        { "title": "Isolation Totale", "desc": "Les politiques RLS s'appliquent au niveau PostgreSQL. Physiquement impossible d'accéder aux données d'une autre organisation." },
+        { "title": "Efficacité des Coûts", "desc": "Un seul déploiement sert plusieurs organisations en réduisant les coûts." },
+        { "title": "Scalabilité Linéaire", "desc": "Ajouter de nouveaux tenants est instantané." }
+      ],
+      "diagram": {
+        "sharedDb": "Base de Données Partagée",
+        "rlsActive": "RLS Actif",
+        "headers": ["ID", "Donnée", "org_id", "Visibilité"],
+        "visible": "Visible",
+        "hidden": "Masqué",
+        "telemetry": "Télémétrie...",
+        "badges": ["Isolation DB", "Zero Trust", "GDPR", "Scalable"]
+      }
     }
   }
 }

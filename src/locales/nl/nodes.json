@@ -59,120 +59,205 @@
       "description": "Go-live en operationele ondersteuning"
     }
   },
+  "cta": {
+    "title": "Klaar om uw Knooppunt te deployen?"
+  },
   "layout": {
-    "backToOverview": "Terug naar Overzicht",
+    "backToNodes": "Terug naar Overzicht",
     "ownerNode": "EIGENAAR KNOOPPUNT",
-    "flowDescription": "Logische systeemflow representatie",
-    "cta": {
-      "title": "Klaar om uw Knooppunt te deployen?",
-      "description": "Alle modules inbegrepen in Data Space Kit financiering. Eindkosten: €0.",
-      "button": "Haalbaarheidsonderzoek Aanvragen"
-    }
+    "nodeFlow": "Logische systeemflow representatie",
+    "requestStudy": "Haalbaarheidsonderzoek Aanvragen",
+    "requestStudyDesc": "Alle modules inbegrepen in Data Space Kit financiering. Eindkosten: €0."
   },
   "pages": {
     "requirements": {
       "title": "Technische Vereisten",
       "subtitle": "Minimale specificaties voor het bedienen van een Sectoraal Knooppunt",
-      "infrastructure": "Cloud Infrastructuur",
-      "security": "Beveiligingscertificeringen",
-      "team": "Technisch Team"
+      "benefits": [
+        { "title": "EU Rechtspersoon", "desc": "Bedrijf of vereniging gevestigd in een lidstaat." },
+        { "title": "Technisch Team", "desc": "Toegewijd personeel voor initiële configuratie en onderhoud." },
+        { "title": "Netwerk Commitment", "desc": "Minimaal 12 maanden actieve deelname aan het ecosysteem." }
+      ]
     },
-    "technology": {
+    "techStack": {
       "title": "Technologie Stack",
-      "subtitle": "Complete Sectoraal Knooppunt Architectuur",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "blockchain": "Blockchain"
+      "subtitle": "Gaia-X gecertificeerde architectuur gebouwd op open standaarden.",
+      "benefits": [
+        { "title": "IDS Connector", "desc": "IDSA gecertificeerde connector voor soevereine data-uitwisseling." },
+        { "title": "Pontus-X Blockchain", "desc": "Onveranderlijk register voor contracten en traceerbaarheid." },
+        { "title": "Supabase + PostgreSQL", "desc": "Relationele database met RLS voor multi-tenancy." }
+      ]
     },
     "marketplace": {
       "title": "Eigen Marktplaats",
-      "subtitle": "Creëer en beheer uw sectorale dataproductencatalogus.",
+      "subtitle": "Gecureerde datacatalogus exclusief voor uw sector. U bepaalt wie wat publiceert.",
       "benefits": [
-        { "title": "Totale Curatie", "desc": "Absolute controle over welke producten in uw marktplaats verschijnen." },
-        { "title": "Aangepaste Prijzen", "desc": "Definieer sectorspecifieke prijsmodellen." },
-        { "title": "Eigen Categorieën", "desc": "Taxonomie aangepast aan uw industrie." }
-      ]
+        { "title": "Content Curatie", "desc": "Keur data-assets goed of af vóór publicatie." },
+        { "title": "Aangepaste Categorieën", "desc": "Organiseer de catalogus volgens uw industrietaxonomie." },
+        { "title": "Kwaliteitscontrole", "desc": "Stel minimumnormen vast voor gepubliceerde data." }
+      ],
+      "diagram": {
+        "externalData": "Externe Data",
+        "sources": ["Leveranciers", "IoT", "APIs"],
+        "governance": "Uw Governance",
+        "filters": ["Filter", "Validatie", "Goedkeuring"],
+        "catalog": "Premium Catalogus",
+        "outputs": ["Geverifieerd", "Gecategoriseerd", "Geprijsd"]
+      }
     },
     "odrl": {
       "title": "ODRL-Beleid",
-      "subtitle": "Datagovernance met W3C-standaarden. Definieer rechten, verboden en verplichtingen.",
+      "subtitle": "Definieer granulaire toegangsregels voor elk asset. Wie heeft toegang, hoe lang, voor welk doel.",
       "benefits": [
-        { "title": "Granulaire Rechten", "desc": "Controleer wie data kan lezen, schrijven of herdistribueren." },
-        { "title": "Geografische Beperkingen", "desc": "Beperk gebruik tot specifieke regio's of landen." },
-        { "title": "Volledige Audit", "desc": "Traceerbaarheid van elke toegang en operatie." }
-      ]
+        { "title": "Extreme Granulariteit", "desc": "Beheer toegang per gebruiker, organisatie, tijd en doel." },
+        { "title": "Echte Soevereiniteit", "desc": "Data reist nooit zonder bijgevoegd beleid." },
+        { "title": "Automatische Audit", "desc": "Elke toegang wordt gelogd en is verifieerbaar." }
+      ],
+      "diagram": {
+        "input": "Gevoelige Dataset",
+        "engine": "Smart Contract Engine",
+        "rules": "ODRL-Regels",
+        "rulesList": ["permission: lezen", "constraint: isMember", "obligation: logAccess"],
+        "allowed": "Toegang Toegestaan",
+        "blocked": "Toegang Geblokkeerd",
+        "conditionMet": "Voorwaarde Voldaan",
+        "conditionNotMet": "Voorwaarde Niet Voldaan"
+      }
     },
     "monetization": {
-      "title": "Monetisatie",
-      "subtitle": "Flexibele inkomstenmodellen voor uw Sectoraal Knooppunt.",
+      "title": "Monetisatiemodel",
+      "subtitle": "Genereer terugkerende inkomsten via kosten op elke datatransactie in uw Knooppunt.",
       "benefits": [
-        { "title": "Transactiekosten", "desc": "Configureerbaar percentage bij elke dataverkoop." },
-        { "title": "Abonnementen", "desc": "Maandelijkse of jaarlijkse plannen voor catalogustoegang." },
-        { "title": "Opbrengstverdeling", "desc": "Automatische verdeling tussen leveranciers en het knooppunt." }
-      ]
+        { "title": "Configureerbare Kosten", "desc": "Definieer het percentage van elke transactie." },
+        { "title": "Directe Afrekening", "desc": "Ontvang uw deel in seconden dankzij EUROe." },
+        { "title": "Nieuwe Terugkerende Inkomsten", "desc": "Transformeer uw ecosysteem in een inkomstenbron." }
+      ],
+      "diagram": {
+        "dataInput": "Data",
+        "totalValue": "Totale Waarde",
+        "provider": "Leverancier",
+        "promoter": "Knooppunt Promoter",
+        "settlement": "Stablecoin Afrekening",
+        "instant": "Direct"
+      }
     },
     "whiteLabel": {
       "title": "White Label",
-      "subtitle": "Volledige aanpassing met uw bedrijfsidentiteit.",
+      "subtitle": "Uw merk, uw domein, uw visuele identiteit. ProcureData technologie onzichtbaar.",
       "benefits": [
-        { "title": "Logo en Kleuren", "desc": "Pas uw branding toe op het hele platform." },
-        { "title": "Eigen Domein", "desc": "marketplace.uwbedrijf.nl" },
-        { "title": "Aangepaste Emails", "desc": "Communicatie met uw identiteit." }
-      ]
+        { "title": "Eigen Domein", "desc": "data.uwsector.nl of wat u verkiest." },
+        { "title": "Visuele Identiteit", "desc": "Uw kleuren, uw logo, uw typografie." },
+        { "title": "Onafhankelijke Communicatie", "desc": "Uw partners hoeven niet te weten dat wij erachter zitten." }
+      ],
+      "diagram": {
+        "yourDomain": "uwsector.nl",
+        "logo": "Uw Logo",
+        "primaryAction": "Primaire Actie",
+        "certifiedTech": "Gaia-X gecertificeerde technologie onder uw merk"
+      }
     },
-    "identityDid": {
+    "did": {
       "title": "Soevereine Identiteit (DID)",
-      "subtitle": "Gedecentraliseerde identifiers voor alle ecosysteem-entiteiten.",
+      "subtitle": "Gedecentraliseerde Identifiers (DID) en Verifieerbare Credentials. Elke organisatie in uw Knooppunt heeft een unieke cryptografische identiteit.",
       "benefits": [
-        { "title": "Zelfsoevereiniteit", "desc": "Organisaties beheren hun eigen identiteit." },
-        { "title": "On-Chain Verificatie", "desc": "DID's geregistreerd op Pontus-X." },
-        { "title": "Interoperabiliteit", "desc": "Compatibel met andere Data Spaces." }
-      ]
+        { "title": "Zelfsoevereiniteit", "desc": "Elke organisatie beheert haar eigen identiteit zonder afhankelijkheid van derden." },
+        { "title": "Directe Verificatie", "desc": "Valideer credentials in milliseconden zonder gecentraliseerde queries." },
+        { "title": "Europese Interoperabiliteit", "desc": "Compatibel met eIDAS 2.0 en de EU Commissie Wallet." }
+      ],
+      "diagram": {
+        "didGeneration": "DID-Generatiemotor",
+        "organization": "Organisatie",
+        "enterData": "Gegevens invoeren",
+        "exampleDid": "did:web:procuredata.es:org:12345",
+        "verifiedIdentity": "Geverifieerde Identiteit",
+        "credentials": ["NIF Geverifieerd", "DID Actief", "Gaia-X Lid"],
+        "federatedTrust": "Gefedereerd Vertrouwensnetwerk",
+        "standards": ["Gaia-X Trust", "eIDAS 2.0", "W3C DID"]
+      }
     },
     "smartContracts": {
       "title": "Smart Contracts",
-      "subtitle": "ODRL smart contracts die automatisch worden uitgevoerd.",
+      "subtitle": "ODRL smart contracts die automatisch worden uitgevoerd. Geen tussenpersonen, geen geschillen, met volledige blockchain-traceerbaarheid.",
       "benefits": [
-        { "title": "Automatische Uitvoering", "desc": "Geen tussenpersonen of geschillen." },
-        { "title": "Onveranderlijkheid", "desc": "Regels verifieerbaar door alle partijen." },
-        { "title": "Directe Afrekening", "desc": "Automatische betalingen wanneer voorwaarden zijn vervuld." }
-      ]
+        { "title": "Automatische Uitvoering", "desc": "Wanneer voorwaarden zijn vervuld, worden data automatisch overgedragen." },
+        { "title": "Geen Juridische Geschillen", "desc": "Code is wet. Regels zijn geprogrammeerd en verifieerbaar door beide partijen." },
+        { "title": "Onveranderlijke Audit", "desc": "Elke uitvoering wordt vastgelegd op Pontus-X Blockchain." }
+      ],
+      "diagram": {
+        "title": "Smart Contract",
+        "fileName": "data-access-v1.odrl",
+        "contract": "contract",
+        "permission": "toestemming",
+        "constraint": "beperking",
+        "price": "prijs",
+        "conditionsMet": "Voorwaarden Voldaan",
+        "dataTransferred": "→ Data Overgedragen",
+        "conditionsNotMet": "Voorwaarden NIET Voldaan",
+        "accessDenied": "→ Toegang Geweigerd",
+        "badges": ["Onveranderlijk", "Automatisch", "Auditeerbaar", "Directe Afrekening"]
+      }
     },
-    "paymentsEuroe": {
+    "euroe": {
       "title": "EUROe-Betalingen",
-      "subtitle": "Directe afrekening met gereguleerde stablecoin.",
+      "subtitle": "Directe afrekening met gereguleerde stablecoin. Geen SWIFT, geen tussenbanken, geen wachten.",
       "benefits": [
-        { "title": "3 Seconden", "desc": "Snellere afrekening dan SEPA." },
-        { "title": "Geen Bankkosten", "desc": "Nul tussenpersonenkosten." },
-        { "title": "Opbrengstverdeling", "desc": "Automatische verdeling tussen partijen." }
-      ]
+        { "title": "3-Seconden Afrekening", "desc": "Vergeet 2-3 werkdagen wachten op SEPA-overboekingen." },
+        { "title": "Automatische Revenue Split", "desc": "Smart Contract verdeelt betaling automatisch tussen Promoter en Leverancier." },
+        { "title": "Nul Bankkosten", "desc": "Geen SWIFT-kosten, geen tussenpersonen. EUROe token 1:1 gedekt door euro's." }
+      ],
+      "diagram": {
+        "buyer": "Koper",
+        "revenueSplitter": "Revenue Splitter",
+        "provider": "Leverancier",
+        "promoter": "Promoter",
+        "badges": ["Afrekening < 3 sec", "ECB Gereguleerd", "24/7", "Geen kosten"]
+      }
     },
-    "erpConnectors": {
+    "erp": {
       "title": "ERP-Connectoren",
-      "subtitle": "Plug-and-play integratie met beheersystemen.",
+      "subtitle": "Plug-and-play integratie met uw beheersysteem. SAP, Microsoft, Oracle, Odoo...",
       "benefits": [
-        { "title": "Geen Code", "desc": "Visuele configuratie zonder programmeren." },
-        { "title": "Bidirectioneel", "desc": "Synchronisatie in beide richtingen." },
-        { "title": "Multi-ERP", "desc": "SAP, Oracle, Dynamics, Odoo..." }
-      ]
+        { "title": "Zero-Code Integratie", "desc": "Verbind uw ERP in minuten met onze visuele interface." },
+        { "title": "Bidirectionele Synchronisatie", "desc": "Data stroomt automatisch in beide richtingen." },
+        { "title": "Intelligente Mapping", "desc": "Ons systeem detecteert uw datastructuur en stelt optimale mapping voor." }
+      ],
+      "diagram": {
+        "bridge": "ProcureData Bridge",
+        "outputs": ["Gaia-X Catalogus", "ODRL-Contracten", "Marktplaats"],
+        "protocols": ["REST API", "GraphQL", "OData", "Webhook"]
+      }
     },
-    "idsaGovernance": {
+    "idsa": {
       "title": "IDSA-Governance",
       "subtitle": "Referentiearchitectuur gecertificeerd door de International Data Spaces Association.",
       "benefits": [
-        { "title": "Officiële Certificering", "desc": "Naleving van Gaia-X Trust Framework." },
-        { "title": "Interoperabiliteit", "desc": "Verbinding met andere gecertificeerde dataruimtes." },
-        { "title": "Soevereiniteit", "desc": "Data verlaat nooit zonder uitdrukkelijke toestemming." }
-      ]
+        { "title": "Officiële Certificering", "desc": "ProcureData voldoet aan het Gaia-X Trust Framework." },
+        { "title": "Gegarandeerde Interoperabiliteit", "desc": "Uw knooppunt kan verbinden met elke andere gecertificeerde Dataruimte." },
+        { "title": "Soevereiniteit by Design", "desc": "Data verlaat nooit zonder uw expliciete toestemming." }
+      ],
+      "diagram": {
+        "ecosystem": "Gaia-X / IDSA Ecosysteem",
+        "pillars": ["IDS Connector", "DAPS (Identity)", "Metadata Broker"],
+        "certifications": ["IDSA Certified", "Gaia-X Compliant", "ISO 27001", "GDPR Ready"]
+      }
     },
-    "multiTenantRls": {
+    "rls": {
       "title": "Multi-Tenant RLS",
-      "subtitle": "Data-isolatie op databaseniveau.",
+      "subtitle": "Data-isolatie op databaseniveau. Elke organisatie ziet alleen haar eigen data.",
       "benefits": [
-        { "title": "Totale Isolatie", "desc": "RLS-beleid op PostgreSQL-niveau." },
-        { "title": "Efficiëntie", "desc": "Eén deployment voor meerdere organisaties." },
-        { "title": "Schaalbaarheid", "desc": "Nieuwe tenants toevoegen is direct." }
-      ]
+        { "title": "Totale Isolatie", "desc": "RLS-beleid geldt op PostgreSQL-niveau. Fysiek onmogelijk om data van andere organisaties te benaderen." },
+        { "title": "Kostenefficiëntie", "desc": "Eén deployment bedient meerdere organisaties en verlaagt kosten." },
+        { "title": "Lineaire Schaalbaarheid", "desc": "Nieuwe tenants toevoegen is direct." }
+      ],
+      "diagram": {
+        "sharedDb": "Gedeelde Database",
+        "rlsActive": "RLS Actief",
+        "headers": ["ID", "Data", "org_id", "Zichtbaarheid"],
+        "visible": "Zichtbaar",
+        "hidden": "Verborgen",
+        "telemetry": "Telemetrie...",
+        "badges": ["DB-Isolatie", "Zero Trust", "AVG", "Schaalbaar"]
+      }
     }
   }
 }
