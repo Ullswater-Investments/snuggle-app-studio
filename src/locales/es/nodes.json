@@ -154,13 +154,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Requisitos Técnicos",
-      "subtitle": "Especificaciones mínimas para operar un Nodo Sectorial",
+      "title": "Condiciones de Adhesión",
+      "subtitle": "Hoja de ruta administrativa, técnica y económica para la constitución de tu Espacio de Datos Soberano bajo normativa Gaia-X.",
+      "badge": "Requisitos de Adhesión",
+      "backToOverview": "Volver a Visión General",
+      "ecosystem": {
+        "title": "El Ecosistema Mínimo Viable",
+        "description": "Para activar un Nodo y acceder a la subvención, es indispensable formalizar un consorcio mínimo de 1 Promotor + 5 Participantes.",
+        "company": "Emp.",
+        "adhered": "Adherido",
+        "nodeManager": "Gestor del Nodo",
+        "yourEntity": "Tu Entidad",
+        "billingGovernance": "Facturación & Gobernanza",
+        "infrastructure": "Infraestructura Tecnológica Homologada (SEDIA + Gaia-X)"
+      },
       "benefits": [
-        { "title": "Entidad Legal UE", "desc": "Empresa o asociación constituida en un Estado miembro." },
-        { "title": "Equipo Técnico", "desc": "Personal dedicado para configuración inicial y mantenimiento." },
-        { "title": "Compromiso de Red", "desc": "Mínimo 12 meses de participación activa en el ecosistema." }
-      ]
+        { "title": "Legalidad Gaia-X", "desc": "El Nodo incluye la licencia de uso de la tecnología PROCUREDATA, garantizando el cumplimiento automático de los estándares Gaia-X e IDSA requeridos por la convocatoria." },
+        { "title": "Adhesión Simple", "desc": "Proporcionamos las plantillas de 'Carta de Interés' y 'MOU' (Memorandum of Understanding) listas para firmar por tus empresas asociadas." },
+        { "title": "Soporte Técnico", "desc": "No necesitas equipo de IT. El despliegue, mantenimiento y seguridad del nodo corre a cargo del equipo de ingeniería de ProcureData." }
+      ],
+      "financial": {
+        "title": "Mecánica Financiera Detallada",
+        "description": "Desglose transparente de costes y flujo de caja. Todos los importes son 100% subvencionables.",
+        "promoter": {
+          "label": "PROMOTOR (Tú)",
+          "costLabel": "COSTE desarrollo de un NODO PROPIETARIO",
+          "totalCost": "30.000 €",
+          "step1Title": "A la firma (Anticipo)",
+          "step1Amount": "5.000 €",
+          "step1Desc": "Generación de instancia y configuración inicial",
+          "step2Title": "Concesión Ayuda",
+          "step2Amount": "30.000 €",
+          "step2Desc": "Os ayudamos a solicitar KIT ESPACIO de DATOS",
+          "step3Title": "Paga el principal cuando recibas la Subvención de RED.es",
+          "step3Amount": "25.000 €",
+          "note": "Los 30.000€ son <strong>100% subvencionables</strong>. Recuperas el anticipo al cobrar la ayuda."
+        },
+        "participant": {
+          "label": "PARTICIPANTE (×5)",
+          "costLabel": "COSTE de CONEXIÓN (Anualidad)",
+          "totalCost": "3.000 €",
+          "perCompany": "por cada empresa participante",
+          "step1Title": "Firma Contrato 1 año",
+          "step1Amount": "250 € al mes",
+          "step1Desc": "Alta de identidad y wallet Web3",
+          "step2Title": "Concesión Ayuda",
+          "step2Amount": "15.000 €",
+          "step2Desc": "Os ayudamos a solicitar KIT ESPACIO de DATOS",
+          "step3Title": "Renovación Contrato de Conexión + 1 año contra resolución favorable de la subvención",
+          "step3Amount": "3.000 €",
+          "note": "El participante dispondrá hasta <strong>9.000€</strong> para pagar los servicios del Cluster ó otros gastos relacionados con el Espacio de Datos"
+        },
+        "guarantee": {
+          "title": "Garantía de Retorno",
+          "description": "Los pagos anticipados se consideran gastos ejecutados y son <strong>reembolsados íntegramente</strong> al recibir la ayuda del Kit Espacio de Datos. El riesgo financiero es mínimo."
+        }
+      },
+      "form": {
+        "title": "Validar Elegibilidad",
+        "description": "Comprobemos si tu organización cumple los requisitos para ser Promotor de Nodo.",
+        "entityName": "Nombre de la Entidad",
+        "entityNamePlaceholder": "Clúster Industrial de...",
+        "entityType": "Tipo de Entidad",
+        "entityTypePlaceholder": "Selecciona tipo",
+        "entityTypes": {
+          "cluster": "Clúster / Asociación",
+          "empresa": "Gran Empresa",
+          "centro": "Centro Tecnológico",
+          "otro": "Otro"
+        },
+        "ecosystemStatus": "Estado del Ecosistema",
+        "ecosystemStatusPlaceholder": "¿Tienes 5+ empresas interesadas?",
+        "ecosystemOptions": {
+          "ready": "Sí, ya tengo el grupo identificado",
+          "process": "En proceso de captación",
+          "help": "No, necesito ayuda para captarlas"
+        },
+        "email": "Email del Responsable",
+        "emailPlaceholder": "responsable@tucluster.com",
+        "submit": "Solicitar Borrador de MOU",
+        "submitting": "Enviando solicitud...",
+        "disclaimer": "Sin compromiso. Recibirás el modelo de acuerdo y la documentación técnica de SEDIA.",
+        "successTitle": "¡Solicitud enviada correctamente!",
+        "successDesc": "Recibirás el borrador del MOU en 24-48 horas.",
+        "errorTitle": "Error al enviar la solicitud",
+        "errorDesc": "Por favor, inténtalo de nuevo más tarde.",
+        "validationError": "Por favor, completa todos los campos obligatorios"
+      },
+      "cta": {
+        "title": "¿Tienes dudas sobre tu elegibilidad?",
+        "description": "Agenda una llamada de 15 minutos con nuestro equipo comercial. Te ayudaremos a evaluar tu caso sin compromiso.",
+        "button": "Agendar Consulta Gratuita"
+      }
     },
     "techStack": {
       "title": "Stack Tecnológico",

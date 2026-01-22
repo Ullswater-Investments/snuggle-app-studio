@@ -115,19 +115,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Technische Anforderungen",
-      "subtitle": "Mindestspezifikationen für den Betrieb eines Sektorknotens",
-      "diagram": {
-        "title": "Erforderliche Architektur",
-        "layers": { "infrastructure": "Infrastrukturschicht", "security": "Sicherheitsschicht", "application": "Anwendungsschicht" },
-        "components": ["Kubernetes", "HSM", "WAF", "API Gateway", "EDC Connector", "SSI Wallet"]
+      "title": "Mitgliedschaftsbedingungen",
+      "subtitle": "Administrative, technische und wirtschaftliche Roadmap für die Errichtung Ihres Souveränen Datenraums nach Gaia-X-Vorschriften.",
+      "badge": "Mitgliedschaftsanforderungen",
+      "backToOverview": "Zurück zur Übersicht",
+      "ecosystem": {
+        "title": "Das Minimum Viable Ecosystem",
+        "description": "Um einen Knoten zu aktivieren und auf die Förderung zuzugreifen, ist es unerlässlich, ein Mindestkonsortium von 1 Promoter + 5 Teilnehmern zu formalisieren.",
+        "company": "Unt.",
+        "adhered": "Beigetreten",
+        "nodeManager": "Knoten-Manager",
+        "yourEntity": "Ihre Einheit",
+        "billingGovernance": "Abrechnung & Governance",
+        "infrastructure": "Zertifizierte Technologie-Infrastruktur (SEDIA + Gaia-X)"
       },
       "benefits": [
-        { "title": "EU-Rechtsperson", "desc": "In einem Mitgliedstaat gegründetes Unternehmen oder Verband." },
-        { "title": "Technisches Team", "desc": "Dediziertes Personal für Erstkonfiguration und Wartung." },
-        { "title": "Netzwerk-Commitment", "desc": "Mindestens 12 Monate aktive Teilnahme am Ökosystem." },
-        { "title": "Hohe Verfügbarkeit", "desc": "99,9% SLA mit Multi-Zone-Redundanz" }
-      ]
+        { "title": "Gaia-X Legalität", "desc": "Der Knoten enthält die Nutzungslizenz für PROCUREDATA-Technologie und gewährleistet die automatische Einhaltung der von der Ausschreibung geforderten Gaia-X- und IDSA-Standards." },
+        { "title": "Einfacher Beitritt", "desc": "Wir stellen 'Interessensbekundung' und 'MOU' (Memorandum of Understanding) Vorlagen bereit, die von Ihren Partnerunternehmen unterschrieben werden können." },
+        { "title": "Technischer Support", "desc": "Kein IT-Team erforderlich. Bereitstellung, Wartung und Sicherheit des Knotens werden vom ProcureData-Engineering-Team übernommen." }
+      ],
+      "financial": {
+        "title": "Detaillierte Finanzmechanik",
+        "description": "Transparente Kostenaufschlüsselung und Cashflow. Alle Beträge sind zu 100% förderfähig.",
+        "promoter": {
+          "label": "PROMOTER (Sie)",
+          "costLabel": "KOSTEN für PROPRIETÄRE KNOTEN-Entwicklung",
+          "totalCost": "30.000 €",
+          "step1Title": "Bei Vertragsunterzeichnung (Anzahlung)",
+          "step1Amount": "5.000 €",
+          "step1Desc": "Instanzgenerierung und Erstkonfiguration",
+          "step2Title": "Förderbewilligung",
+          "step2Amount": "30.000 €",
+          "step2Desc": "Wir helfen Ihnen bei der Beantragung des DATENRAUM-KITS",
+          "step3Title": "Zahlen Sie den Hauptbetrag bei Erhalt der RED.es-Förderung",
+          "step3Amount": "25.000 €",
+          "note": "Die 30.000€ sind <strong>100% förderfähig</strong>. Sie erhalten die Anzahlung bei Erhalt der Förderung zurück."
+        },
+        "participant": {
+          "label": "TEILNEHMER (×5)",
+          "costLabel": "ANSCHLUSSKOSTEN (Jährlich)",
+          "totalCost": "3.000 €",
+          "perCompany": "pro teilnehmendes Unternehmen",
+          "step1Title": "1-Jahres-Vertrag unterschreiben",
+          "step1Amount": "250 €/Monat",
+          "step1Desc": "Identitäts- und Web3-Wallet-Einrichtung",
+          "step2Title": "Förderbewilligung",
+          "step2Amount": "15.000 €",
+          "step2Desc": "Wir helfen Ihnen bei der Beantragung des DATENRAUM-KITS",
+          "step3Title": "Vertragsverlängerung + 1 Jahr bei positivem Förderbescheid",
+          "step3Amount": "3.000 €",
+          "note": "Der Teilnehmer verfügt über bis zu <strong>9.000€</strong> für Cluster-Dienste oder andere datenraumbezogene Ausgaben"
+        },
+        "guarantee": {
+          "title": "Rückgabegarantie",
+          "description": "Vorauszahlungen gelten als ausgeführte Ausgaben und werden bei Erhalt der Datenraum-Kit-Förderung <strong>vollständig erstattet</strong>. Das finanzielle Risiko ist minimal."
+        }
+      },
+      "form": {
+        "title": "Berechtigung Prüfen",
+        "description": "Prüfen wir, ob Ihre Organisation die Anforderungen für einen Knoten-Promoter erfüllt.",
+        "entityName": "Name der Einheit",
+        "entityNamePlaceholder": "Industriecluster von...",
+        "entityType": "Art der Einheit",
+        "entityTypePlaceholder": "Typ auswählen",
+        "entityTypes": {
+          "cluster": "Cluster / Verband",
+          "empresa": "Großunternehmen",
+          "centro": "Technologiezentrum",
+          "otro": "Sonstiges"
+        },
+        "ecosystemStatus": "Ökosystem-Status",
+        "ecosystemStatusPlaceholder": "Haben Sie 5+ interessierte Unternehmen?",
+        "ecosystemOptions": {
+          "ready": "Ja, ich habe die Gruppe bereits identifiziert",
+          "process": "Im Rekrutierungsprozess",
+          "help": "Nein, ich brauche Hilfe bei der Rekrutierung"
+        },
+        "email": "Kontakt-E-Mail",
+        "emailPlaceholder": "kontakt@ihrcluster.de",
+        "submit": "MOU-Entwurf Anfordern",
+        "submitting": "Wird gesendet...",
+        "disclaimer": "Ohne Verpflichtung. Sie erhalten das Vertragsmodell und die technische SEDIA-Dokumentation.",
+        "successTitle": "Anfrage erfolgreich gesendet!",
+        "successDesc": "Sie erhalten den MOU-Entwurf innerhalb von 24-48 Stunden.",
+        "errorTitle": "Fehler beim Senden",
+        "errorDesc": "Bitte versuchen Sie es später erneut.",
+        "validationError": "Bitte füllen Sie alle Pflichtfelder aus"
+      },
+      "cta": {
+        "title": "Fragen zu Ihrer Berechtigung?",
+        "description": "Vereinbaren Sie einen 15-minütigen Anruf mit unserem Vertriebsteam. Wir helfen Ihnen, Ihren Fall unverbindlich zu bewerten.",
+        "button": "Kostenlose Beratung Vereinbaren"
+      }
     },
     "techStack": {
       "title": "Technologie-Stack",

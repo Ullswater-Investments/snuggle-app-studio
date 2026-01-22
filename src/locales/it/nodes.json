@@ -115,19 +115,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Requisiti Tecnici",
-      "subtitle": "Specifiche minime per operare un Nodo Settoriale",
-      "diagram": {
-        "title": "Architettura Richiesta",
-        "layers": { "infrastructure": "Layer Infrastruttura", "security": "Layer Sicurezza", "application": "Layer Applicazione" },
-        "components": ["Kubernetes", "HSM", "WAF", "API Gateway", "EDC Connector", "SSI Wallet"]
+      "title": "Condizioni di Adesione",
+      "subtitle": "Roadmap amministrativa, tecnica ed economica per la costituzione del tuo Spazio Dati Sovrano secondo le normative Gaia-X.",
+      "badge": "Requisiti di Adesione",
+      "backToOverview": "Torna alla Panoramica",
+      "ecosystem": {
+        "title": "L'Ecosistema Minimo Vitale",
+        "description": "Per attivare un Nodo e accedere al sussidio, è indispensabile formalizzare un consorzio minimo di 1 Promotore + 5 Partecipanti.",
+        "company": "Imp.",
+        "adhered": "Aderito",
+        "nodeManager": "Gestore del Nodo",
+        "yourEntity": "La Tua Entità",
+        "billingGovernance": "Fatturazione & Governance",
+        "infrastructure": "Infrastruttura Tecnologica Omologata (SEDIA + Gaia-X)"
       },
       "benefits": [
-        { "title": "Entità Legale UE", "desc": "Azienda o associazione costituita in uno Stato membro." },
-        { "title": "Team Tecnico", "desc": "Personale dedicato per configurazione iniziale e manutenzione." },
-        { "title": "Impegno di Rete", "desc": "Minimo 12 mesi di partecipazione attiva nell'ecosistema." },
-        { "title": "Alta Disponibilità", "desc": "SLA 99,9% con ridondanza multi-zona" }
-      ]
+        { "title": "Legalità Gaia-X", "desc": "Il Nodo include la licenza d'uso della tecnologia PROCUREDATA, garantendo la conformità automatica agli standard Gaia-X e IDSA richiesti dal bando." },
+        { "title": "Adesione Semplice", "desc": "Forniamo i modelli di 'Lettera d'Interesse' e 'MOU' (Memorandum of Understanding) pronti per essere firmati dalle tue aziende associate." },
+        { "title": "Supporto Tecnico", "desc": "Non serve un team IT. Il deployment, la manutenzione e la sicurezza del nodo sono gestiti dal team di ingegneria di ProcureData." }
+      ],
+      "financial": {
+        "title": "Meccanica Finanziaria Dettagliata",
+        "description": "Ripartizione trasparente dei costi e flusso di cassa. Tutti gli importi sono sovvenzionabili al 100%.",
+        "promoter": {
+          "label": "PROMOTORE (Tu)",
+          "costLabel": "COSTO sviluppo di un NODO PROPRIETARIO",
+          "totalCost": "30.000 €",
+          "step1Title": "Alla firma (Anticipo)",
+          "step1Amount": "5.000 €",
+          "step1Desc": "Generazione istanza e configurazione iniziale",
+          "step2Title": "Concessione Aiuto",
+          "step2Amount": "30.000 €",
+          "step2Desc": "Ti aiutiamo a richiedere il KIT SPAZIO DATI",
+          "step3Title": "Paga il principale quando ricevi il Sussidio RED.es",
+          "step3Amount": "25.000 €",
+          "note": "I 30.000€ sono <strong>100% sovvenzionabili</strong>. Recuperi l'anticipo al ricevimento dell'aiuto."
+        },
+        "participant": {
+          "label": "PARTECIPANTE (×5)",
+          "costLabel": "COSTO di CONNESSIONE (Annuale)",
+          "totalCost": "3.000 €",
+          "perCompany": "per ogni azienda partecipante",
+          "step1Title": "Firma Contratto 1 anno",
+          "step1Amount": "250 €/mese",
+          "step1Desc": "Attivazione identità e wallet Web3",
+          "step2Title": "Concessione Aiuto",
+          "step2Amount": "15.000 €",
+          "step2Desc": "Ti aiutiamo a richiedere il KIT SPAZIO DATI",
+          "step3Title": "Rinnovo Contratto di Connessione + 1 anno su risoluzione favorevole del sussidio",
+          "step3Amount": "3.000 €",
+          "note": "Il partecipante avrà fino a <strong>9.000€</strong> per pagare i servizi del Cluster o altre spese relative allo Spazio Dati"
+        },
+        "guarantee": {
+          "title": "Garanzia di Ritorno",
+          "description": "I pagamenti anticipati sono considerati spese eseguite e vengono <strong>integralmente rimborsati</strong> al ricevimento dell'aiuto Kit Spazio Dati. Il rischio finanziario è minimo."
+        }
+      },
+      "form": {
+        "title": "Verifica Idoneità",
+        "description": "Verifichiamo se la tua organizzazione soddisfa i requisiti per essere Promotore di Nodo.",
+        "entityName": "Nome dell'Entità",
+        "entityNamePlaceholder": "Cluster Industriale di...",
+        "entityType": "Tipo di Entità",
+        "entityTypePlaceholder": "Seleziona tipo",
+        "entityTypes": {
+          "cluster": "Cluster / Associazione",
+          "empresa": "Grande Azienda",
+          "centro": "Centro Tecnologico",
+          "otro": "Altro"
+        },
+        "ecosystemStatus": "Stato dell'Ecosistema",
+        "ecosystemStatusPlaceholder": "Hai 5+ aziende interessate?",
+        "ecosystemOptions": {
+          "ready": "Sì, ho già il gruppo identificato",
+          "process": "In fase di reclutamento",
+          "help": "No, ho bisogno di aiuto per reclutarle"
+        },
+        "email": "Email del Responsabile",
+        "emailPlaceholder": "contatto@tuocluster.it",
+        "submit": "Richiedi Bozza del MOU",
+        "submitting": "Invio in corso...",
+        "disclaimer": "Senza impegno. Riceverai il modello di accordo e la documentazione tecnica SEDIA.",
+        "successTitle": "Richiesta inviata con successo!",
+        "successDesc": "Riceverai la bozza del MOU entro 24-48 ore.",
+        "errorTitle": "Errore nell'invio",
+        "errorDesc": "Per favore riprova più tardi.",
+        "validationError": "Per favore compila tutti i campi obbligatori"
+      },
+      "cta": {
+        "title": "Domande sulla tua idoneità?",
+        "description": "Prenota una chiamata di 15 minuti con il nostro team commerciale. Ti aiuteremo a valutare il tuo caso senza impegno.",
+        "button": "Prenota Consulenza Gratuita"
+      }
     },
     "techStack": {
       "title": "Stack Tecnologico",

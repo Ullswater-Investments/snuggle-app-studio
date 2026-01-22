@@ -154,13 +154,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Technical Requirements",
-      "subtitle": "Minimum specifications to operate a Sectoral Node",
+      "title": "Membership Conditions",
+      "subtitle": "Administrative, technical, and economic roadmap for establishing your Sovereign Data Space under Gaia-X regulations.",
+      "badge": "Membership Requirements",
+      "backToOverview": "Back to Overview",
+      "ecosystem": {
+        "title": "The Minimum Viable Ecosystem",
+        "description": "To activate a Node and access the subsidy, it is essential to formalize a minimum consortium of 1 Promoter + 5 Participants.",
+        "company": "Co.",
+        "adhered": "Joined",
+        "nodeManager": "Node Manager",
+        "yourEntity": "Your Entity",
+        "billingGovernance": "Billing & Governance",
+        "infrastructure": "Approved Technology Infrastructure (SEDIA + Gaia-X)"
+      },
       "benefits": [
-        { "title": "EU Legal Entity", "desc": "Company or association established in a member state." },
-        { "title": "Technical Team", "desc": "Dedicated personnel for initial configuration and maintenance." },
-        { "title": "Network Commitment", "desc": "Minimum 12 months of active participation in the ecosystem." }
-      ]
+        { "title": "Gaia-X Legality", "desc": "The Node includes the license to use PROCUREDATA technology, ensuring automatic compliance with Gaia-X and IDSA standards required by the call." },
+        { "title": "Simple Adhesion", "desc": "We provide 'Letter of Interest' and 'MOU' (Memorandum of Understanding) templates ready to be signed by your associated companies." },
+        { "title": "Technical Support", "desc": "No IT team needed. Node deployment, maintenance, and security are handled by the ProcureData engineering team." }
+      ],
+      "financial": {
+        "title": "Detailed Financial Mechanics",
+        "description": "Transparent cost breakdown and cash flow. All amounts are 100% subsidizable.",
+        "promoter": {
+          "label": "PROMOTER (You)",
+          "costLabel": "COST for PROPRIETARY NODE development",
+          "totalCost": "€30,000",
+          "step1Title": "At signing (Advance)",
+          "step1Amount": "€5,000",
+          "step1Desc": "Instance generation and initial configuration",
+          "step2Title": "Grant Approval",
+          "step2Amount": "€30,000",
+          "step2Desc": "We help you apply for DATA SPACE KIT",
+          "step3Title": "Pay the principal when you receive the RED.es Subsidy",
+          "step3Amount": "€25,000",
+          "note": "The €30,000 are <strong>100% subsidizable</strong>. You recover the advance when collecting the grant."
+        },
+        "participant": {
+          "label": "PARTICIPANT (×5)",
+          "costLabel": "CONNECTION COST (Annual)",
+          "totalCost": "€3,000",
+          "perCompany": "per participating company",
+          "step1Title": "Sign 1-year Contract",
+          "step1Amount": "€250/month",
+          "step1Desc": "Identity and Web3 wallet setup",
+          "step2Title": "Grant Approval",
+          "step2Amount": "€15,000",
+          "step2Desc": "We help you apply for DATA SPACE KIT",
+          "step3Title": "Connection Contract renewal + 1 year upon favorable subsidy resolution",
+          "step3Amount": "€3,000",
+          "note": "The participant will have up to <strong>€9,000</strong> to pay for Cluster services or other Data Space related expenses"
+        },
+        "guarantee": {
+          "title": "Return Guarantee",
+          "description": "Advance payments are considered executed expenses and are <strong>fully reimbursed</strong> when receiving the Data Space Kit grant. Financial risk is minimal."
+        }
+      },
+      "form": {
+        "title": "Validate Eligibility",
+        "description": "Let's check if your organization meets the requirements to be a Node Promoter.",
+        "entityName": "Entity Name",
+        "entityNamePlaceholder": "Industrial Cluster of...",
+        "entityType": "Entity Type",
+        "entityTypePlaceholder": "Select type",
+        "entityTypes": {
+          "cluster": "Cluster / Association",
+          "empresa": "Large Company",
+          "centro": "Technology Center",
+          "otro": "Other"
+        },
+        "ecosystemStatus": "Ecosystem Status",
+        "ecosystemStatusPlaceholder": "Do you have 5+ interested companies?",
+        "ecosystemOptions": {
+          "ready": "Yes, I already have the group identified",
+          "process": "In the process of recruiting",
+          "help": "No, I need help recruiting them"
+        },
+        "email": "Contact Email",
+        "emailPlaceholder": "contact@yourcluster.com",
+        "submit": "Request MOU Draft",
+        "submitting": "Sending request...",
+        "disclaimer": "No commitment. You will receive the agreement template and SEDIA technical documentation.",
+        "successTitle": "Request sent successfully!",
+        "successDesc": "You will receive the MOU draft within 24-48 hours.",
+        "errorTitle": "Error sending request",
+        "errorDesc": "Please try again later.",
+        "validationError": "Please complete all required fields"
+      },
+      "cta": {
+        "title": "Questions about your eligibility?",
+        "description": "Schedule a 15-minute call with our sales team. We'll help you evaluate your case with no commitment.",
+        "button": "Schedule Free Consultation"
+      }
     },
     "techStack": {
       "title": "Technology Stack",

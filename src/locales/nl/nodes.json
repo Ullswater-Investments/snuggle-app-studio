@@ -154,13 +154,98 @@
   },
   "pages": {
     "requirements": {
-      "title": "Technische Vereisten",
-      "subtitle": "Minimale specificaties voor het bedienen van een Sectoraal Knooppunt",
+      "title": "Lidmaatschapsvoorwaarden",
+      "subtitle": "Administratieve, technische en economische roadmap voor het opzetten van uw Soevereine Dataruimte volgens Gaia-X-regelgeving.",
+      "badge": "Lidmaatschapsvereisten",
+      "backToOverview": "Terug naar Overzicht",
+      "ecosystem": {
+        "title": "Het Minimum Viable Ecosystem",
+        "description": "Om een Knooppunt te activeren en toegang te krijgen tot de subsidie, is het essentieel om een minimumconsortium van 1 Promotor + 5 Deelnemers te formaliseren.",
+        "company": "Bed.",
+        "adhered": "Aangesloten",
+        "nodeManager": "Knooppuntbeheerder",
+        "yourEntity": "Uw Entiteit",
+        "billingGovernance": "Facturering & Governance",
+        "infrastructure": "Goedgekeurde Technologie-infrastructuur (SEDIA + Gaia-X)"
+      },
       "benefits": [
-        { "title": "EU Rechtspersoon", "desc": "Bedrijf of vereniging gevestigd in een lidstaat." },
-        { "title": "Technisch Team", "desc": "Toegewijd personeel voor initiële configuratie en onderhoud." },
-        { "title": "Netwerk Commitment", "desc": "Minimaal 12 maanden actieve deelname aan het ecosysteem." }
-      ]
+        { "title": "Gaia-X Legaliteit", "desc": "Het Knooppunt bevat de gebruikslicentie voor PROCUREDATA-technologie, waardoor automatische naleving van Gaia-X- en IDSA-standaarden die door de oproep vereist zijn, wordt gegarandeerd." },
+        { "title": "Eenvoudige Aansluiting", "desc": "Wij verstrekken 'Interesseverklaring' en 'MOU' (Memorandum of Understanding) sjablonen klaar om te worden ondertekend door uw geassocieerde bedrijven." },
+        { "title": "Technische Ondersteuning", "desc": "Geen IT-team nodig. De implementatie, het onderhoud en de beveiliging van het knooppunt worden afgehandeld door het ProcureData-engineeringteam." }
+      ],
+      "financial": {
+        "title": "Gedetailleerde Financiële Mechaniek",
+        "description": "Transparante kostenopbouw en cashflow. Alle bedragen zijn 100% subsidiabel.",
+        "promoter": {
+          "label": "PROMOTOR (U)",
+          "costLabel": "KOSTEN voor PROPRIETARY KNOOPPUNT-ontwikkeling",
+          "totalCost": "€ 30.000",
+          "step1Title": "Bij ondertekening (Voorschot)",
+          "step1Amount": "€ 5.000",
+          "step1Desc": "Instantiegeneratie en initiële configuratie",
+          "step2Title": "Subsidietoekenning",
+          "step2Amount": "€ 30.000",
+          "step2Desc": "Wij helpen u bij het aanvragen van het DATARUIMTE-KIT",
+          "step3Title": "Betaal het hoofdbedrag bij ontvangst van de RED.es-subsidie",
+          "step3Amount": "€ 25.000",
+          "note": "De € 30.000 zijn <strong>100% subsidiabel</strong>. U krijgt het voorschot terug bij ontvangst van de subsidie."
+        },
+        "participant": {
+          "label": "DEELNEMER (×5)",
+          "costLabel": "AANSLUITINGSKOSTEN (Jaarlijks)",
+          "totalCost": "€ 3.000",
+          "perCompany": "per deelnemend bedrijf",
+          "step1Title": "Teken 1-jarig Contract",
+          "step1Amount": "€ 250/maand",
+          "step1Desc": "Identiteits- en Web3-wallet setup",
+          "step2Title": "Subsidietoekenning",
+          "step2Amount": "€ 15.000",
+          "step2Desc": "Wij helpen u bij het aanvragen van het DATARUIMTE-KIT",
+          "step3Title": "Contractverlenging + 1 jaar bij gunstige subsidiebeslissing",
+          "step3Amount": "€ 3.000",
+          "note": "De deelnemer heeft tot <strong>€ 9.000</strong> beschikbaar voor Clusterdiensten of andere Dataruimte-gerelateerde uitgaven"
+        },
+        "guarantee": {
+          "title": "Retourgarantie",
+          "description": "Voorschotten worden beschouwd als uitgevoerde uitgaven en worden <strong>volledig vergoed</strong> bij ontvangst van de Dataruimte Kit-subsidie. Het financiële risico is minimaal."
+        }
+      },
+      "form": {
+        "title": "Geschiktheid Valideren",
+        "description": "Laten we controleren of uw organisatie voldoet aan de vereisten om Knooppunt Promotor te zijn.",
+        "entityName": "Naam van de Entiteit",
+        "entityNamePlaceholder": "Industriecluster van...",
+        "entityType": "Type Entiteit",
+        "entityTypePlaceholder": "Selecteer type",
+        "entityTypes": {
+          "cluster": "Cluster / Vereniging",
+          "empresa": "Groot Bedrijf",
+          "centro": "Technologiecentrum",
+          "otro": "Anders"
+        },
+        "ecosystemStatus": "Ecosysteemstatus",
+        "ecosystemStatusPlaceholder": "Heeft u 5+ geïnteresseerde bedrijven?",
+        "ecosystemOptions": {
+          "ready": "Ja, ik heb de groep al geïdentificeerd",
+          "process": "Bezig met werving",
+          "help": "Nee, ik heb hulp nodig bij werving"
+        },
+        "email": "Contact E-mail",
+        "emailPlaceholder": "contact@uwcluster.nl",
+        "submit": "MOU Concept Aanvragen",
+        "submitting": "Verzenden...",
+        "disclaimer": "Zonder verplichting. U ontvangt het overeenkomstmodel en de technische SEDIA-documentatie.",
+        "successTitle": "Aanvraag succesvol verzonden!",
+        "successDesc": "U ontvangt het MOU-concept binnen 24-48 uur.",
+        "errorTitle": "Fout bij verzenden",
+        "errorDesc": "Probeer het later opnieuw.",
+        "validationError": "Vul alle verplichte velden in"
+      },
+      "cta": {
+        "title": "Vragen over uw geschiktheid?",
+        "description": "Plan een 15-minuten telefoongesprek met ons verkoopteam. We helpen u uw situatie vrijblijvend te beoordelen.",
+        "button": "Gratis Consultatie Plannen"
+      }
     },
     "techStack": {
       "title": "Technologie Stack",
