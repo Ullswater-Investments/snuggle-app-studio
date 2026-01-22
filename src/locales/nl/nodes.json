@@ -1,34 +1,57 @@
 {
   "hero": {
-    "badge": "Goedgekeurd door SEDIA",
+    "badge": "Goedgekeurd door SEDIA (Staatssecretariaat voor Digitalisering en AI)",
     "title": "Leid de Data-Economie",
     "titleHighlight": "in uw Sector",
-    "description": "Creëer uw eigen Soeverein Data Knooppunt. Implementeer een complete sectorale marktplaats met ProcureData-infrastructuur.",
-    "cta": "Haalbaarheidsonderzoek Aanvragen",
-    "ctaSecondary": "Technische Vereisten Bekijken"
+    "description": "Creëer uw eigen <strong>Soeverein Knooppunt</strong> in PROCUREDATA. Technologische infrastructuur <strong>100%</strong> gefinancierd door het programma",
+    "kitLink": "Kit Data Space",
+    "cta": "Knooppuntstudie Aanvragen",
+    "ctaSecondary": "Technische Architectuur Bekijken",
+    "access": "Inloggen"
+  },
+  "concept": {
+    "badge": "Concept",
+    "title": "Uw Privé-eiland in een Oceaan van Data",
+    "description": "<strong>Proprietaire Knooppunten</strong> stellen Clusters, Verenigingen en Grote Ondernemingen in staat hun eigen afgebakende ruimte te creëren binnen PROCUREDATA. Behoud volledige governance terwijl u onze reeds gevalideerde technologie benut.",
+    "benefits": [
+      "Volledige governance over de datacatalogus.",
+      "Privé deelbeleid (ODRL).",
+      "Eigen commissies voor dataoverdracht.",
+      "White label 'Powered by ProcureData'."
+    ],
+    "validatedInfra": "Gevalideerde Infrastructuur",
+    "globalNode": "ProcureData Global",
+    "globalDesc": "Open oceaan",
+    "federated": "Gefedereerd",
+    "yourNode": "Uw Sectoraal Knooppunt",
+    "yourNodeDesc": "Privé-eiland",
+    "techDescription": "Benut onze technologie (Blockchain, IDSA, Web3) volgens uw eigen bedrijfsregels."
   },
   "benefits": {
-    "title": "Exclusieve Knooppuntvoordelen",
+    "badge": "Voordelen",
+    "title": "Voordelen voor de Promotor",
+    "description": "Door een Knooppunt te verwerven, krijgt u volledige governance over uw data-ecosysteem.",
     "marketplace": {
       "title": "Eigen Marktplaats",
-      "description": "Bepaal welke datasets aan wie worden aangeboden. Totale curatie van de sectorale catalogus."
+      "description": "Bepaal welke datasets en diensten in uw privécatalogus worden gepubliceerd."
     },
     "odrl": {
       "title": "ODRL-Beleid",
-      "description": "Definieer deelregels, geografische beperkingen en gebruiksbeperkingen."
+      "description": "Definieer branchespecifieke deelregels."
     },
     "monetization": {
       "title": "Monetisatie",
-      "description": "Stel transactiekosten in. Genereer terugkerende inkomsten."
+      "description": "Stel transactiekosten in en verkoop diensten met toegevoegde waarde."
     },
     "whiteLabel": {
       "title": "White Label",
-      "description": "Volledige aanpassing met uw bedrijfsidentiteit."
+      "description": "Aanpassing met uw logo en identiteit, powered by ProcureData."
     }
   },
   "inherited": {
-    "title": "Overgeërfde ProcureData-Mogelijkheden",
-    "description": "Uw knooppunt bevat automatisch alle enterprise-infrastructuur",
+    "badge": "Technologie",
+    "title": "Geërfde Functionaliteiten",
+    "description": "Uw Knooppunt wordt geboren met alle kracht van PROCUREDATA v3.1 vanaf dag 1.",
     "did": "Soevereine Identiteit (DID)",
     "smartContracts": "Smart Contracts",
     "euroe": "EUROe-Betalingen",
@@ -36,38 +59,98 @@
     "idsa": "IDSA-Governance",
     "rls": "Multi-Tenant RLS"
   },
+  "financial": {
+    "badge": "NextGenerationEU Financiering",
+    "title": "Nul Kosten voor uw Ecosysteem",
+    "description": "Dankzij het <strong>KIT DATA SPACE</strong>-programma subsidiëren we 100% van de knooppuntcreatie.",
+    "promoter": {
+      "label": "PROMOTOR (U)",
+      "costLabel": "KOSTEN voor PROPRIETAIR KNOOPPUNT-ontwikkeling",
+      "totalCost": "€ 30.000",
+      "step1": {
+        "title": "Bij ondertekening (Voorschot)",
+        "amount": "€ 5.000",
+        "description": "Instantiecreatie en initiële configuratie"
+      },
+      "step2": {
+        "title": "Subsidietoekenning",
+        "amount": "€ 30.000",
+        "description": "We helpen u bij de aanvraag van het DATA SPACE KIT"
+      },
+      "step3": {
+        "title": "Betaal de hoofdsom bij ontvangst van de RED.es Subsidie",
+        "amount": "€ 25.000"
+      },
+      "note": "De € 30.000 zijn <strong>100% subsidiabel</strong>. U recupereert het voorschot bij ontvangst van de subsidie."
+    },
+    "participant": {
+      "label": "DEELNEMER (×5)",
+      "costLabel": "VERBINDINGSKOSTEN (Jaarlijks)",
+      "totalCost": "€ 3.000",
+      "perCompany": "per deelnemende onderneming",
+      "step1": {
+        "title": "1-jarig Contract Ondertekenen",
+        "amount": "€ 250/maand",
+        "description": "Identiteits- en Web3-wallet setup"
+      },
+      "step2": {
+        "title": "Subsidietoekenning",
+        "amount": "€ 15.000",
+        "description": "We helpen u bij de aanvraag van het DATA SPACE KIT"
+      },
+      "step3": {
+        "title": "Contractverlenging + 1 jaar bij gunstige subsidiebeslissing",
+        "amount": "€ 3.000"
+      },
+      "note": "De deelnemer krijgt tot <strong>€ 9.000</strong> voor Clusterdiensten of andere Data Space-gerelateerde uitgaven"
+    },
+    "disclaimer": "* De vooruitbetaling is opgenomen als subsidiabele uitgave, wat betekent dat de aanvrager het voorgeschoten bedrag volledig terugkrijgt bij ontvangst van de subsidie."
+  },
+  "requirements": {
+    "badge": "Vereisten",
+    "title": "Vereisten om een Knooppunt te Activeren",
+    "promoter": {
+      "title": "Promotor Entiteit",
+      "description": "Juridische capaciteit om te factureren en het knooppunt te beheren."
+    },
+    "ecosystem": {
+      "title": "Ecosysteem",
+      "description": "Toetredingsbrief ondertekend door minimaal 5 leidende/deelnemende bedrijven."
+    },
+    "deadlines": {
+      "title": "Deadlines",
+      "description": "De aanvraag moet worden ingediend binnen de deadlines van de huidige oproep."
+    }
+  },
   "roadmap": {
-    "title": "Implementatie Roadmap",
-    "phase1": {
-      "title": "Fase 1: Analyse",
-      "duration": "2 weken",
-      "description": "Haalbaarheidsonderzoek en businessmodel definitie"
+    "badge": "Roadmap",
+    "title": "Activeringsproces",
+    "step1": {
+      "title": "MOU Ondertekening",
+      "description": "Intentieverklaring en reserveringsbetaling (terugvorderbare voorschotten)."
     },
-    "phase2": {
-      "title": "Fase 2: Configuratie",
-      "duration": "4 weken",
-      "description": "Infrastructuur deployment en aanpassing"
+    "step2": {
+      "title": "Gezamenlijke Aanvraag",
+      "description": "Het PROCUREDATA-team bereidt het technisch rapport voor SEDIA voor."
     },
-    "phase3": {
-      "title": "Fase 3: Onboarding",
-      "duration": "2 weken",
-      "description": "Training en initiële datamigratie"
-    },
-    "phase4": {
-      "title": "Fase 4: Lancering",
-      "duration": "Doorlopend",
-      "description": "Go-live en operationele ondersteuning"
+    "step3": {
+      "title": "Technische Implementatie",
+      "description": "Na goedkeuring van de subsidie implementeren we uw Knooppunt in 4 weken."
     }
   },
   "cta": {
-    "title": "Klaar om uw Knooppunt te deployen?"
+    "title": "Heeft u een Ecosysteem?",
+    "description": "Als u een cluster of vereniging vertegenwoordigt met minimaal 5 geïnteresseerde bedrijven, kunnen we uw Knooppunt in minder dan 4 weken implementeren.",
+    "button1": "Contact Knooppunt Team",
+    "button2": "SEDIA Technisch Rapport Bekijken",
+    "note": "We helpen u met het technisch rapport voor de SEDIA-aanvraag."
   },
   "layout": {
     "backToNodes": "Terug naar Overzicht",
     "ownerNode": "EIGENAAR KNOOPPUNT",
     "nodeFlow": "Logische systeemflow representatie",
     "requestStudy": "Haalbaarheidsonderzoek Aanvragen",
-    "requestStudyDesc": "Alle modules inbegrepen in Data Space Kit financiering. Eindkosten: €0."
+    "requestStudyDesc": "Alle modules inbegrepen in Data Space Kit financiering. Eindkosten: € 0."
   },
   "pages": {
     "requirements": {
