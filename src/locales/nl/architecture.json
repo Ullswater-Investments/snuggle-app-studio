@@ -220,5 +220,104 @@
     "exploreCode": "Wilt u de code verkennen?",
     "ctaDesc": "Bekijk de volledige technische documentatie of test de demo",
     "viewDocs": "Bekijk Documentatie"
+  },
+  "diagrams": {
+    "fe": {
+      "title": "Frontend React + Vite",
+      "ui": "shadcn UI",
+      "query": "TanStack Query",
+      "router": "React Router",
+      "hooks": "Custom Hooks"
+    },
+    "be": {
+      "title": "Backend Cloud AI",
+      "auth": "JWT Auth",
+      "db": "PostgreSQL 31 Tabellen",
+      "rls": "Row Level Security",
+      "edge": "Edge Functions",
+      "realtime": "Realtime WS"
+    },
+    "bc": {
+      "title": "Blockchain Pontus-X",
+      "did": "DID:ethr",
+      "euroe": "Stablecoin EUROe",
+      "notarization": "Notarisatie"
+    },
+    "er": {
+      "has": "heeft",
+      "owns": "bezit",
+      "generates": "genereert",
+      "holds": "bewaart",
+      "pays": "betaalt",
+      "logs": "logt",
+      "receives": "ontvangt",
+      "contains": "bevat"
+    },
+    "rls": {
+      "query": "Query",
+      "checkRls": "Controleer RLS",
+      "getOrgId": "Haal org_id op",
+      "filterRows": "Filter rijen",
+      "denied": "GEWEIGERD",
+      "returnFiltered": "Gefilterd retourneren",
+      "result": "Resultaat"
+    },
+    "web3": {
+      "user": "Gebruiker",
+      "app": "Applicatie",
+      "pontusx": "Pontus-X",
+      "connectWallet": "Verbind Wallet",
+      "signMessage": "Onderteken Bericht",
+      "getDid": "Verkrijg DID",
+      "checkBalance": "Controleer Saldo",
+      "notarize": "Notariseer Hash",
+      "txConfirm": "TX Bevestiging"
+    },
+    "states": {
+      "initiated": "geïnitieerd",
+      "pendingSubject": "pending_subject",
+      "pendingHolder": "pending_holder",
+      "approved": "goedgekeurd",
+      "completed": "voltooid",
+      "deniedSubject": "geweigerd_subject",
+      "deniedHolder": "geweigerd_holder",
+      "cancelled": "geannuleerd",
+      "consumerRequests": "Consumer vraagt aan",
+      "send": "verzend",
+      "cancel": "annuleer",
+      "subjectApproves": "Subject keurt goed",
+      "subjectDenies": "Subject weigert",
+      "holderReleases": "Holder geeft vrij",
+      "holderDenies": "Holder weigert",
+      "payAndDeliver": "Betaal + Lever"
+    },
+    "sequence": {
+      "consumer": "Consumer",
+      "subject": "Subject",
+      "holder": "Holder",
+      "blockchain": "Blockchain",
+      "requestAccess": "Vraag toegang tot asset",
+      "validatePurpose": "Valideer doel",
+      "preApprove": "Pre-goedkeuren",
+      "releaseData": "Gegevens vrijgeven",
+      "deliverPayload": "Lever payload",
+      "processPayment": "Verwerk EUROe-betaling",
+      "notarizeHash": "Notariseer TX-hash",
+      "confirmBlock": "Blokbevestiging"
+    },
+    "registration": {
+      "entity": "Entiteit",
+      "platform": "Platform",
+      "admin": "Admin",
+      "submitForm": "Registratieformulier indienen",
+      "validateTaxId": "Valideer BTW-nr",
+      "createPending": "Maak wachtend verzoek aan",
+      "notifyAdmin": "Informeer admin",
+      "reviewKyb": "Beoordeel KYB",
+      "approveReject": "Goedkeuren/Afwijzen",
+      "createOrg": "Maak organisatie aan",
+      "assignRole": "Wijs admin-rol toe",
+      "sendCredentials": "Verstuur inloggegevens"
+    }
   }
 }
