@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "badge": "Die Plattform",
+    "title": "Was ist ITBID?",
+    "subtitle": "Das \"digitale Gehirn\", das große und mittelständische Unternehmen nutzen, um alles zu verwalten, was sie kaufen, und ihre Beziehung zu ihren Lieferanten.",
+    "description": "Es ist eine Cloud-Plattform, die das Chaos von E-Mails, Tabellenkalkulationen und Anrufen durch ein zentralisiertes und effizientes System ersetzt.",
+    "features": {
+      "sourceToPay": "Source-to-Pay",
+      "cloudPlatform": "Cloud-Plattform",
+      "esgReady": "ESG Ready"
+    }
+  },
+  "coreFeatures": {
+    "badge": "Vollständiger Source-to-Pay-Zyklus",
+    "title": "Kernfunktionen",
+    "subtitle": "ITBID ersetzt das Chaos von E-Mails, Tabellenkalkulationen und Anrufen durch ein zentralisiertes und effizientes System.",
+    "supplierPortal": {
+      "title": "Lieferantenportal",
+      "description": "Ein einzigartiger Raum, in dem Unternehmen und Lieferanten zusammenarbeiten, Nachrichten austauschen und Dokumente mit vollständiger Transparenz teilen.",
+      "tags": ["Zusammenarbeit", "Transparenz", "Dokumente"]
+    },
+    "qualification": {
+      "title": "Qualifizierung & Risiken",
+      "description": "Bevor Sie einen Lieferanten beauftragen, ermöglicht ITBID eine genaue Prüfung. Es analysiert rechtliche Konformität, finanzielle Gesundheit und ESG-Kriterien.",
+      "tags": ["Rechtliche Konformität", "Finanzen", "ESG"]
+    },
+    "negotiation": {
+      "title": "Verhandlung & Bestellungen",
+      "description": "Automatisiert von der Angebotsanfrage ('wer verkauft das günstiger und besser?') bis zur Rechnungsstellung und eliminiert manuelle Fehler.",
+      "tags": ["Automatisierung", "RFx", "Rechnungsstellung"]
+    },
+    "quality": {
+      "title": "Qualitätskontrolle",
+      "description": "Wenn etwas falsch ankommt, verwaltet das System den Vorfall für eine schnelle Lösung. Vollständige Nachverfolgung jedes Einkaufslebenszyklus.",
+      "tags": ["Vorfälle", "Lösung", "Rückverfolgbarkeit"]
+    }
+  },
+  "alliance": {
+    "badge": "Der Sprung in die Zukunft",
+    "title": "Die Allianz mit",
+    "subtitle": "Was ITBID wirklich innovativ macht, ist nicht nur, dass es Einkäufe verwaltet, sondern dass es nicht mehr als isolierte 'Insel' funktioniert, sondern mit einem sicheren globalen Datennetzwerk verbunden ist.",
+    "procuredata": {
+      "title": "PROCUREDATA",
+      "subtitle": "Das Daten-Ökosystem",
+      "description": "Stellen Sie sich vor, Sie müssten jedes Mal, wenn Sie einen neuen Arzt besuchen, dasselbe Formular mit Ihrer Geschichte von Grund auf ausfüllen. Das erleiden Unternehmen mit ihren Lieferanten.",
+      "solution": "ITBID, ausgerichtet auf PROCUREDATA, löst dies durch die Schaffung eines gemeinsamen Datenraums.",
+      "benefit": "Wenn ein Lieferant bereits validiert wurde (seine Identität, Nachhaltigkeitszertifikate, Bankdaten) innerhalb des Ökosystems, ist diese Information sicher zugänglich.",
+      "highlight": "Automatisches Onboarding",
+      "highlightDesc": "Einsparung von Tausenden Stunden Bürokratie",
+      "badges": ["Verifizierte Daten", "Kollektive Intelligenz"]
+    },
+    "pontusx": {
+      "title": "PONTUS-X",
+      "subtitle": "Sicherheit und Souveränität",
+      "description": "Das Teilen so sensibler Informationen zwischen konkurrierenden Unternehmen erfordert Sicherheit auf militärischem Niveau.",
+      "solution": "PONTUS-X ist die europäische technologische Infrastruktur (basierend auf Gaia-X-Prinzipien und Web3/Blockchain-Technologie), über die die Daten übertragen werden.",
+      "benefit": "PONTUS-X garantiert Datensouveränität. Unternehmen teilen Informationen, ohne die Kontrolle darüber zu verlieren.",
+      "highlight": "Datensouveränität",
+      "highlightDesc": "Wahrhaftige, unveränderliche Daten konform mit europäischen Vorschriften",
+      "badges": ["Gaia-X", "Web3", "Blockchain", "DSGVO"]
+    },
+    "flow": {
+      "itbid": "Verwaltung",
+      "procuredata": "Verifizierte Daten",
+      "pontusx": "Souveräne Sicherheit"
+    }
+  },
+  "summary": {
+    "badge": "Executive Summary",
+    "title": "Zusammenfassung für die Öffentlichkeit",
+    "description": "ITBID ist das Werkzeug, das Unternehmen nutzen, um intelligent und nachhaltig einzukaufen. Dank der Integration mit PROCUREDATA und PONTUS-X bietet es nicht nur Verwaltungssoftware, sondern verbindet Unternehmen mit einer sicheren 'europäischen digitalen Autobahn', auf der Lieferanteninformationen verifiziert fließen.",
+    "benefits": {
+      "protection": {
+        "title": "Betrugsschutz",
+        "description": "Schutz der Unternehmen vor finanziellen Risiken"
+      },
+      "sustainability": {
+        "title": "Ökologische Konformität",
+        "description": "Hilfe bei der Erreichung von Umweltzielen"
+      },
+      "verified": {
+        "title": "Verifizierte Informationen",
+        "description": "Informationen, die auf einer sicheren digitalen Autobahn fließen"
+      }
+    }
+  },
+  "problem": {
+    "title": "Datensilos",
+    "subtitle": "Das aktuelle Problem in der Lieferanten-Kunden-Beziehung"
+  },
+  "solution": {
+    "title": "Föderierter Datenraum",
+    "subtitle": "Die Lösung, die ohne zu zentralisieren vereint"
+  },
+  "useCases": {
+    "title": "Anwendungsfälle",
+    "subtitle": "Praktische Anwendungen des ITBID-Ökosystems"
+  },
+  "benefits": {
+    "title": "Wettbewerbsvorteile",
+    "subtitle": "Vorteile nach Stakeholder"
+  },
+  "architecture": {
+    "title": "Technische Architektur",
+    "subtitle": "Gateway- und Connector-Infrastruktur"
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Phasenweiser Implementierungsplan"
+  },
+  "dataSpaceKit": {
+    "title": "Data Space Kit",
+    "subtitle": "Europäisches Förderprogramm"
+  },
+  "ctaSection": {
+    "title": "Bereit, Ihren Einkauf zu transformieren?",
+    "subtitle": "Treten Sie dem ITBID + PROCUREDATA + PONTUS-X Ökosystem bei",
+    "requestDemo": "Demo anfordern",
+    "downloadDocs": "Dokumentation herunterladen",
+    "contactManager": "Partner Manager kontaktieren"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "badge": "Het Platform",
+    "title": "Wat is ITBID?",
+    "subtitle": "Het \"digitale brein\" dat grote en middelgrote bedrijven gebruiken om alles wat ze kopen en hun relatie met leveranciers te beheren.",
+    "description": "Het is een cloudplatform dat de chaos van e-mails, spreadsheets en telefoontjes vervangt door een gecentraliseerd en efficiënt systeem.",
+    "features": {
+      "sourceToPay": "Source-to-Pay",
+      "cloudPlatform": "Cloud Platform",
+      "esgReady": "ESG Ready"
+    }
+  },
+  "coreFeatures": {
+    "badge": "Complete Source-to-Pay Cyclus",
+    "title": "Kernfunctionaliteiten",
+    "subtitle": "ITBID vervangt de chaos van e-mails, spreadsheets en telefoontjes door een gecentraliseerd en efficiënt systeem.",
+    "supplierPortal": {
+      "title": "Leveranciersportaal",
+      "description": "Een unieke ruimte waar bedrijven en leveranciers samenwerken, berichten uitwisselen en documenten delen met volledige transparantie.",
+      "tags": ["Samenwerking", "Transparantie", "Documenten"]
+    },
+    "qualification": {
+      "title": "Kwalificatie & Risico's",
+      "description": "Voordat u een leverancier inhuurt, kunt u met ITBID deze 'onder de loep' nemen. Het analyseert juridische naleving, financiële gezondheid en ESG-criteria.",
+      "tags": ["Juridische Naleving", "Financiën", "ESG"]
+    },
+    "negotiation": {
+      "title": "Onderhandeling & Orders",
+      "description": "Automatiseert van offerteaanvraag ('wie verkoopt dit goedkoper en beter?') tot factuuruitgifte, waardoor handmatige fouten worden geëlimineerd.",
+      "tags": ["Automatisering", "RFx", "Facturatie"]
+    },
+    "quality": {
+      "title": "Kwaliteitscontrole",
+      "description": "Als er iets fout aankomt, beheert het systeem het incident voor snelle oplossing. Complete tracking van elke aankooplevencyclus.",
+      "tags": ["Incidenten", "Oplossing", "Traceerbaarheid"]
+    }
+  },
+  "alliance": {
+    "badge": "De Sprong naar de Toekomst",
+    "title": "De Alliantie met",
+    "subtitle": "Wat ITBID echt innovatief maakt, is niet alleen dat het inkopen beheert, maar dat het niet langer functioneert als een geïsoleerd 'eiland', maar verbonden is met een veilig wereldwijd datanetwerk.",
+    "procuredata": {
+      "title": "PROCUREDATA",
+      "subtitle": "Het Data-Ecosysteem",
+      "description": "Stel je voor dat je elke keer als je een nieuwe arts bezoekt hetzelfde formulier met je geschiedenis helemaal opnieuw moet invullen. Dat is wat bedrijven doormaken met hun leveranciers.",
+      "solution": "ITBID, afgestemd op PROCUREDATA, lost dit op door een Gedeelde Dataruimte te creëren.",
+      "benefit": "Als een leverancier al is gevalideerd (identiteit, duurzaamheidscertificaten, bankgegevens) binnen het ecosysteem, is die informatie veilig toegankelijk.",
+      "highlight": "Automatische onboarding",
+      "highlightDesc": "Besparing van duizenden uren bureaucratie",
+      "badges": ["Geverifieerde Data", "Collectieve Intelligentie"]
+    },
+    "pontusx": {
+      "title": "PONTUS-X",
+      "subtitle": "Veiligheid en Soevereiniteit",
+      "description": "Het delen van zulke gevoelige informatie tussen concurrerende bedrijven vereist beveiliging van militair niveau.",
+      "solution": "PONTUS-X is de Europese technologische infrastructuur (gebaseerd op Gaia-X-principes en Web3/Blockchain-technologie) waarover de data reist.",
+      "benefit": "PONTUS-X garandeert Datasoevereiniteit. Bedrijven delen informatie zonder de controle erover te verliezen.",
+      "highlight": "Datasoevereiniteit",
+      "highlightDesc": "Waarheidsgetrouwe, onveranderlijke data conform Europese regelgeving",
+      "badges": ["Gaia-X", "Web3", "Blockchain", "AVG"]
+    },
+    "flow": {
+      "itbid": "Beheer",
+      "procuredata": "Geverifieerde Data",
+      "pontusx": "Soevereine Beveiliging"
+    }
+  },
+  "summary": {
+    "badge": "Executive Summary",
+    "title": "Samenvatting voor het Algemene Publiek",
+    "description": "ITBID is de tool die bedrijven gebruiken om intelligent en duurzaam in te kopen. Dankzij de integratie met PROCUREDATA en PONTUS-X biedt het niet alleen beheersoftware, maar verbindt het bedrijven met een veilige 'Europese digitale snelweg' waar leveranciersinformatie geverifieerd stroomt.",
+    "benefits": {
+      "protection": {
+        "title": "Fraudebescherming",
+        "description": "Bescherming van bedrijven tegen financiële risico's"
+      },
+      "sustainability": {
+        "title": "Ecologische Naleving",
+        "description": "Helpen bij het bereiken van milieudoelstellingen"
+      },
+      "verified": {
+        "title": "Geverifieerde Informatie",
+        "description": "Informatie die stroomt over een veilige digitale snelweg"
+      }
+    }
+  },
+  "problem": {
+    "title": "Datasilo's",
+    "subtitle": "Het huidige probleem in de leverancier-klantrelatie"
+  },
+  "solution": {
+    "title": "Gefedereerde Dataruimte",
+    "subtitle": "De oplossing die verenigt zonder te centraliseren"
+  },
+  "useCases": {
+    "title": "Use Cases",
+    "subtitle": "Praktische toepassingen van het ITBID-ecosysteem"
+  },
+  "benefits": {
+    "title": "Concurrentievoordelen",
+    "subtitle": "Voordelen per Stakeholder"
+  },
+  "architecture": {
+    "title": "Technische Architectuur",
+    "subtitle": "Gateway en connector-infrastructuur"
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Gefaseerd implementatieplan"
+  },
+  "dataSpaceKit": {
+    "title": "Data Space Kit",
+    "subtitle": "Europees subsidieprogramma"
+  },
+  "ctaSection": {
+    "title": "Klaar om uw inkoop te transformeren?",
+    "subtitle": "Sluit u aan bij het ITBID + PROCUREDATA + PONTUS-X ecosysteem",
+    "requestDemo": "Demo Aanvragen",
+    "downloadDocs": "Documentatie Downloaden",
+    "contactManager": "Partner Manager Contacteren"
+  }
+}

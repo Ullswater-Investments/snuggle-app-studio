@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "badge": "La Plataforma",
+    "title": "¿Qué es ITBID?",
+    "subtitle": "El \"cerebro digital\" que utilizan las grandes y medianas empresas para gestionar todo lo que compran y su relación con quienes se lo venden (proveedores).",
+    "description": "Es una plataforma en la nube que sustituye el caos de correos electrónicos, hojas de cálculo y llamadas por un sistema centralizado y eficiente.",
+    "features": {
+      "sourceToPay": "Source-to-Pay",
+      "cloudPlatform": "Plataforma Cloud",
+      "esgReady": "ESG Ready"
+    }
+  },
+  "coreFeatures": {
+    "badge": "Ciclo Completo Source-to-Pay",
+    "title": "Funcionalidades Clave",
+    "subtitle": "ITBID sustituye el caos de correos electrónicos, hojas de cálculo y llamadas por un sistema centralizado y eficiente.",
+    "supplierPortal": {
+      "title": "Portal de Proveedores",
+      "description": "Un espacio único donde empresas y proveedores colaboran, intercambian mensajes y comparten documentos con total transparencia.",
+      "tags": ["Colaboración", "Transparencia", "Documentos"]
+    },
+    "qualification": {
+      "title": "Homologación y Riesgos",
+      "description": "Antes de contratar a un proveedor, ITBID permite examinarlo 'bajo lupa'. Analiza cumplimiento legal, salud financiera y criterios ESG.",
+      "tags": ["Cumplimiento Legal", "Finanzas", "ESG"]
+    },
+    "negotiation": {
+      "title": "Negociación y Pedidos",
+      "description": "Automatiza desde la petición de ofertas ('¿quién vende esto más barato y mejor?') hasta la emisión de facturas, eliminando errores manuales.",
+      "tags": ["Automatización", "RFx", "Facturación"]
+    },
+    "quality": {
+      "title": "Control de Calidad",
+      "description": "Si algo llega mal, el sistema gestiona la incidencia para resolverla rápidamente. Trazabilidad completa del ciclo de vida de cada compra.",
+      "tags": ["Incidencias", "Resolución", "Trazabilidad"]
+    }
+  },
+  "alliance": {
+    "badge": "El Salto al Futuro",
+    "title": "La Alianza con",
+    "subtitle": "Lo que hace a ITBID verdaderamente innovador no es solo que gestione compras, sino que ya no funciona como una 'isla' aislada, sino conectado a una red global de datos segura.",
+    "procuredata": {
+      "title": "PROCUREDATA",
+      "subtitle": "El Ecosistema de Datos",
+      "description": "Imagina tener que rellenar el mismo formulario con tu historial desde cero cada vez que visitas un médico nuevo. Eso es lo que sufren las empresas con sus proveedores.",
+      "solution": "ITBID, alineado con PROCUREDATA, resuelve esto creando un Espacio de Datos Compartido.",
+      "benefit": "Si un proveedor ya ha sido validado (su identidad, certificados de sostenibilidad, datos bancarios) dentro del ecosistema, esa información es accesible de forma segura.",
+      "highlight": "Alta automática",
+      "highlightDesc": "Ahorro de miles de horas de burocracia",
+      "badges": ["Datos Verificados", "Inteligencia Colectiva"]
+    },
+    "pontusx": {
+      "title": "PONTUS-X",
+      "subtitle": "Seguridad y Soberanía",
+      "description": "Compartir información tan sensible entre empresas que compiten requiere seguridad de nivel militar.",
+      "solution": "PONTUS-X es la infraestructura tecnológica europea (basada en principios Gaia-X y tecnología Web3/Blockchain) sobre la que viajan los datos.",
+      "benefit": "PONTUS-X garantiza la Soberanía del Dato. Las empresas comparten información sin perder el control sobre ella.",
+      "highlight": "Soberanía del Dato",
+      "highlightDesc": "Datos veraces, inmutables y conformes a la regulación europea",
+      "badges": ["Gaia-X", "Web3", "Blockchain", "GDPR"]
+    },
+    "flow": {
+      "itbid": "Gestión",
+      "procuredata": "Datos Verificados",
+      "pontusx": "Seguridad Soberana"
+    }
+  },
+  "summary": {
+    "badge": "Resumen Ejecutivo",
+    "title": "Resumen para el Público General",
+    "description": "ITBID es la herramienta que las empresas usan para comprar de forma inteligente y sostenible. Gracias a su integración con PROCUREDATA y PONTUS-X, no solo ofrece software de gestión, sino que conecta a las compañías a una 'autopista digital europea' segura donde la información de los proveedores fluye de manera verificada.",
+    "benefits": {
+      "protection": {
+        "title": "Protección Contra Fraudes",
+        "description": "Protegiendo a las empresas de riesgos financieros"
+      },
+      "sustainability": {
+        "title": "Cumplimiento Ecológico",
+        "description": "Ayudando a alcanzar objetivos ambientales"
+      },
+      "verified": {
+        "title": "Información Verificada",
+        "description": "Información que fluye en una autopista digital segura"
+      }
+    }
+  },
+  "problem": {
+    "title": "Los Silos de Datos",
+    "subtitle": "El problema actual en la relación proveedor-cliente"
+  },
+  "solution": {
+    "title": "Espacio de Datos Federado",
+    "subtitle": "La solución que unifica sin centralizar"
+  },
+  "useCases": {
+    "title": "Casos de Uso",
+    "subtitle": "Aplicaciones prácticas del ecosistema ITBID"
+  },
+  "benefits": {
+    "title": "Ventajas Competitivas",
+    "subtitle": "Beneficios por Stakeholder"
+  },
+  "architecture": {
+    "title": "Arquitectura Técnica",
+    "subtitle": "Gateway e infraestructura del conector"
+  },
+  "roadmap": {
+    "title": "Hoja de Ruta",
+    "subtitle": "Plan de implementación por fases"
+  },
+  "dataSpaceKit": {
+    "title": "Kit Espacio de Datos",
+    "subtitle": "Programa de subvenciones europeas"
+  },
+  "ctaSection": {
+    "title": "¿Listo para transformar tus compras?",
+    "subtitle": "Únete al ecosistema ITBID + PROCUREDATA + PONTUS-X",
+    "requestDemo": "Solicitar Demo",
+    "downloadDocs": "Descargar Documentación",
+    "contactManager": "Contactar Partner Manager"
+  }
+}

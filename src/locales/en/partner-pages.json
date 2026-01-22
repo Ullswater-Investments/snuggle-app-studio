@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Back to Partners",
+    "downloadPdf": "Download PDF",
+    "generating": "Generating...",
+    "technicalDoc": "Technical Doc",
+    "whitepaper": "Whitepaper",
+    "successCases": "Success Cases"
+  },
+  "cta": {
+    "accessMarketplace": "Access Marketplace",
+    "contactForApi": "Contact for API",
+    "exploreEcosystem": "Explore Ecosystem",
+    "readyToAccess": "Ready to access {{partnerName}} intelligence?",
+    "exploreFullCatalog": "Explore the full data catalog or request personalized API access"
+  },
+  "sections": {
+    "ecosystemLeaders": "Ecosystem Leaders",
+    "worldClassCompanies": "World-class companies that are part of this knowledge and data network",
+    "sectorImpact": "Sector Impact Analysis",
+    "understandingValue": "Understanding the unique value of {{partnerName}} aggregated data",
+    "whyDataUnique": "Why is {{partnerName}} data unique?",
+    "aggregationCapabilities": "Aggregation Capabilities",
+    "dataCatalog": "Data Product Catalog",
+    "tangibleProducts": "10 tangible data products available through ProcureData Marketplace"
+  },
+  "badges": {
+    "premiumPartner": "PROCUREDATA PREMIUM PARTNER",
+    "verified": "GAIA-X Verified Data",
+    "gdpr": "GDPR Compliance",
+    "blockchain": "Polygon Blockchain"
+  },
+  "footer": {
+    "partnerOf": "{{partnerName}} is a Premium Partner of ProcureData.",
+    "dataAggregated": "All data is aggregated and anonymized according to GAIA-X standards."
+  },
+  "dataTypes": {
+    "benchmark": "BENCHMARK",
+    "index": "INDEX",
+    "forecast": "FORECAST",
+    "directory": "DIRECTORY",
+    "capacity": "CAPACITY",
+    "risk": "RISK",
+    "cost": "COST",
+    "strategy": "STRATEGY"
+  },
+  "dataTypesLabels": {
+    "comparisons": "Comparisons",
+    "indices": "Indices",
+    "forecasts": "Forecasts",
+    "directories": "Directories",
+    "capacities": "Capacities",
+    "risks": "Risks",
+    "costs": "Costs",
+    "strategies": "Strategies"
+  },
+  "quote": "Tell me who you walk with and I'll tell you who you are",
+  "viewDetail": "View Detail",
+  "powerOfNetwork": "The power of the network"
+}

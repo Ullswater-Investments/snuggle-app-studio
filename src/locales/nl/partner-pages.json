@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Terug naar Partners",
+    "downloadPdf": "PDF downloaden",
+    "generating": "Genereren...",
+    "technicalDoc": "Tech. Doc.",
+    "whitepaper": "Whitepaper",
+    "successCases": "Succesverhalen"
+  },
+  "cta": {
+    "accessMarketplace": "Naar Marketplace",
+    "contactForApi": "Contact voor API",
+    "exploreEcosystem": "Verken Ecosysteem",
+    "readyToAccess": "Klaar voor {{partnerName}} intelligence?",
+    "exploreFullCatalog": "Verken de volledige datacatalogus of vraag gepersonaliseerde API-toegang aan"
+  },
+  "sections": {
+    "ecosystemLeaders": "Ecosysteem Leiders",
+    "worldClassCompanies": "Wereldklasse bedrijven die deel uitmaken van dit kennis- en datanetwerk",
+    "sectorImpact": "Sectorale Impactanalyse",
+    "understandingValue": "De unieke waarde van {{partnerName}} geaggregeerde data begrijpen",
+    "whyDataUnique": "Waarom zijn de gegevens van {{partnerName}} uniek?",
+    "aggregationCapabilities": "Aggregatie Capaciteiten",
+    "dataCatalog": "Dataproduct Catalogus",
+    "tangibleProducts": "10 tastbare dataproducten beschikbaar via de ProcureData Marketplace"
+  },
+  "badges": {
+    "premiumPartner": "PROCUREDATA PREMIUM PARTNER",
+    "verified": "GAIA-X geverifieerde data",
+    "gdpr": "AVG-Compliance",
+    "blockchain": "Polygon Blockchain"
+  },
+  "footer": {
+    "partnerOf": "{{partnerName}} is een Premium Partner van ProcureData.",
+    "dataAggregated": "Alle data is geaggregeerd en geanonimiseerd volgens GAIA-X standaarden."
+  },
+  "dataTypes": {
+    "benchmark": "BENCHMARK",
+    "index": "INDEX",
+    "forecast": "PROGNOSE",
+    "directory": "DIRECTORY",
+    "capacity": "CAPACITEIT",
+    "risk": "RISICO",
+    "cost": "KOSTEN",
+    "strategy": "STRATEGIE"
+  },
+  "dataTypesLabels": {
+    "comparisons": "Vergelijkingen",
+    "indices": "Indices",
+    "forecasts": "Prognoses",
+    "directories": "Directories",
+    "capacities": "Capaciteiten",
+    "risks": "Risico's",
+    "costs": "Kosten",
+    "strategies": "Strategieën"
+  },
+  "quote": "Vertel me met wie je omgaat en ik vertel je wie je bent",
+  "viewDetail": "Detail bekijken",
+  "powerOfNetwork": "De kracht van het netwerk"
+}

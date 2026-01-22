@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Zurück zu Partnern",
+    "downloadPdf": "PDF herunterladen",
+    "generating": "Wird generiert...",
+    "technicalDoc": "Tech. Dok.",
+    "whitepaper": "Whitepaper",
+    "successCases": "Erfolgsgeschichten"
+  },
+  "cta": {
+    "accessMarketplace": "Zum Marketplace",
+    "contactForApi": "API-Kontakt",
+    "exploreEcosystem": "Ökosystem erkunden",
+    "readyToAccess": "Bereit für {{partnerName}}-Intelligence?",
+    "exploreFullCatalog": "Erkunden Sie den vollständigen Datenkatalog oder fordern Sie personalisierten API-Zugang an"
+  },
+  "sections": {
+    "ecosystemLeaders": "Ökosystem-Führende",
+    "worldClassCompanies": "Weltklasse-Unternehmen, die Teil dieses Wissens- und Datennetzwerks sind",
+    "sectorImpact": "Sektorale Wirkungsanalyse",
+    "understandingValue": "Den einzigartigen Wert der aggregierten Daten von {{partnerName}} verstehen",
+    "whyDataUnique": "Warum sind die Daten von {{partnerName}} einzigartig?",
+    "aggregationCapabilities": "Aggregationsfähigkeiten",
+    "dataCatalog": "Datenprodukt-Katalog",
+    "tangibleProducts": "10 greifbare Datenprodukte verfügbar über den ProcureData Marketplace"
+  },
+  "badges": {
+    "premiumPartner": "PROCUREDATA PREMIUM-PARTNER",
+    "verified": "GAIA-X verifizierte Daten",
+    "gdpr": "DSGVO-Konformität",
+    "blockchain": "Polygon Blockchain"
+  },
+  "footer": {
+    "partnerOf": "{{partnerName}} ist ein Premium-Partner von ProcureData.",
+    "dataAggregated": "Alle Daten werden nach GAIA-X-Standards aggregiert und anonymisiert."
+  },
+  "dataTypes": {
+    "benchmark": "BENCHMARK",
+    "index": "INDEX",
+    "forecast": "PROGNOSE",
+    "directory": "VERZEICHNIS",
+    "capacity": "KAPAZITÄT",
+    "risk": "RISIKO",
+    "cost": "KOSTEN",
+    "strategy": "STRATEGIE"
+  },
+  "dataTypesLabels": {
+    "comparisons": "Vergleiche",
+    "indices": "Indizes",
+    "forecasts": "Prognosen",
+    "directories": "Verzeichnisse",
+    "capacities": "Kapazitäten",
+    "risks": "Risiken",
+    "costs": "Kosten",
+    "strategies": "Strategien"
+  },
+  "quote": "Sage mir, mit wem du gehst, und ich sage dir, wer du bist",
+  "viewDetail": "Detail anzeigen",
+  "powerOfNetwork": "Die Macht des Netzwerks"
+}

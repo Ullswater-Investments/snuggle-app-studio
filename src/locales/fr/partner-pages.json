@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Retour aux Partenaires",
+    "downloadPdf": "Télécharger PDF",
+    "generating": "Génération...",
+    "technicalDoc": "Doc. Technique",
+    "whitepaper": "Livre Blanc",
+    "successCases": "Cas de Succès"
+  },
+  "cta": {
+    "accessMarketplace": "Accéder au Marketplace",
+    "contactForApi": "Contacter pour API",
+    "exploreEcosystem": "Explorer l'Écosystème",
+    "readyToAccess": "Prêt à accéder à l'intelligence de {{partnerName}} ?",
+    "exploreFullCatalog": "Explorez le catalogue complet de données ou demandez un accès personnalisé à l'API"
+  },
+  "sections": {
+    "ecosystemLeaders": "Leaders de l'Écosystème",
+    "worldClassCompanies": "Entreprises de classe mondiale qui font partie de ce réseau de connaissances et de données",
+    "sectorImpact": "Analyse d'Impact Sectoriel",
+    "understandingValue": "Comprendre la valeur unique des données agrégées de {{partnerName}}",
+    "whyDataUnique": "Pourquoi les données de {{partnerName}} sont-elles uniques ?",
+    "aggregationCapabilities": "Capacités d'Agrégation",
+    "dataCatalog": "Catalogue de Produits de Données",
+    "tangibleProducts": "10 produits de données tangibles disponibles via le Marketplace ProcureData"
+  },
+  "badges": {
+    "premiumPartner": "PARTENAIRE PREMIUM PROCUREDATA",
+    "verified": "Données vérifiées GAIA-X",
+    "gdpr": "Conformité RGPD",
+    "blockchain": "Blockchain Polygon"
+  },
+  "footer": {
+    "partnerOf": "{{partnerName}} est un Partenaire Premium de ProcureData.",
+    "dataAggregated": "Toutes les données sont agrégées et anonymisées selon les normes GAIA-X."
+  },
+  "dataTypes": {
+    "benchmark": "RÉFÉRENCE",
+    "index": "INDICE",
+    "forecast": "PRÉVISION",
+    "directory": "RÉPERTOIRE",
+    "capacity": "CAPACITÉ",
+    "risk": "RISQUE",
+    "cost": "COÛT",
+    "strategy": "STRATÉGIE"
+  },
+  "dataTypesLabels": {
+    "comparisons": "Comparaisons",
+    "indices": "Indices",
+    "forecasts": "Prévisions",
+    "directories": "Répertoires",
+    "capacities": "Capacités",
+    "risks": "Risques",
+    "costs": "Coûts",
+    "strategies": "Stratégies"
+  },
+  "quote": "Dis-moi qui tu fréquentes et je te dirai qui tu es",
+  "viewDetail": "Voir Détail",
+  "powerOfNetwork": "Le pouvoir du réseau"
+}

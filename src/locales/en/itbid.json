@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "badge": "The Platform",
+    "title": "What is ITBID?",
+    "subtitle": "The \"digital brain\" that large and medium-sized companies use to manage everything they buy and their relationship with their vendors (suppliers).",
+    "description": "It's a cloud platform that replaces the chaos of emails, spreadsheets, and calls with a centralized and efficient system.",
+    "features": {
+      "sourceToPay": "Source-to-Pay",
+      "cloudPlatform": "Cloud Platform",
+      "esgReady": "ESG Ready"
+    }
+  },
+  "coreFeatures": {
+    "badge": "Complete Source-to-Pay Cycle",
+    "title": "Core Features",
+    "subtitle": "ITBID replaces the chaos of emails, spreadsheets, and calls with a centralized and efficient system.",
+    "supplierPortal": {
+      "title": "Supplier Portal",
+      "description": "A unique space where companies and suppliers collaborate, exchange messages, and share documents with complete transparency.",
+      "tags": ["Collaboration", "Transparency", "Documents"]
+    },
+    "qualification": {
+      "title": "Qualification & Risks",
+      "description": "Before hiring a supplier, ITBID allows you to examine them 'under the magnifying glass'. It analyzes legal compliance, financial health, and ESG criteria.",
+      "tags": ["Legal Compliance", "Finance", "ESG"]
+    },
+    "negotiation": {
+      "title": "Negotiation & Orders",
+      "description": "Automates from request for quotes ('who sells this cheaper and better?') to invoice issuance, eliminating manual errors.",
+      "tags": ["Automation", "RFx", "Invoicing"]
+    },
+    "quality": {
+      "title": "Quality Control",
+      "description": "If something arrives wrong, the system manages the incident for quick resolution. Complete tracking of each purchase lifecycle.",
+      "tags": ["Incidents", "Resolution", "Traceability"]
+    }
+  },
+  "alliance": {
+    "badge": "The Leap to the Future",
+    "title": "The Alliance with",
+    "subtitle": "What makes ITBID truly innovative is not just that it manages purchases, but that it no longer functions as an isolated 'island', but is connected to a secure global data network.",
+    "procuredata": {
+      "title": "PROCUREDATA",
+      "subtitle": "The Data Ecosystem",
+      "description": "Imagine having to fill out the same form with your history from scratch every time you visit a new doctor. That's what companies suffer with their suppliers.",
+      "solution": "ITBID, aligned with PROCUREDATA, solves this by creating a Shared Data Space.",
+      "benefit": "If a supplier has already been validated (their identity, sustainability certificates, bank details) within the ecosystem, that information is securely accessible.",
+      "highlight": "Automatic onboarding",
+      "highlightDesc": "Saving thousands of hours of bureaucracy",
+      "badges": ["Verified Data", "Collective Intelligence"]
+    },
+    "pontusx": {
+      "title": "PONTUS-X",
+      "subtitle": "Security and Sovereignty",
+      "description": "Sharing such sensitive information between competing companies requires military-grade security.",
+      "solution": "PONTUS-X is the European technological infrastructure (based on Gaia-X principles and Web3/Blockchain technology) on which the data travels.",
+      "benefit": "PONTUS-X guarantees Data Sovereignty. Companies share information without losing control over it.",
+      "highlight": "Data Sovereignty",
+      "highlightDesc": "Truthful, immutable data compliant with European regulations",
+      "badges": ["Gaia-X", "Web3", "Blockchain", "GDPR"]
+    },
+    "flow": {
+      "itbid": "Management",
+      "procuredata": "Verified Data",
+      "pontusx": "Sovereign Security"
+    }
+  },
+  "summary": {
+    "badge": "Executive Summary",
+    "title": "Summary for the General Public",
+    "description": "ITBID is the tool that companies use to purchase intelligently and sustainably. Thanks to its integration with PROCUREDATA and PONTUS-X, it not only offers management software, but connects companies to a secure 'European digital highway' where supplier information flows in a verified way.",
+    "benefits": {
+      "protection": {
+        "title": "Fraud Protection",
+        "description": "Protecting companies from financial risks"
+      },
+      "sustainability": {
+        "title": "Ecological Compliance",
+        "description": "Helping achieve environmental objectives"
+      },
+      "verified": {
+        "title": "Verified Information",
+        "description": "Information that flows on a secure digital highway"
+      }
+    }
+  },
+  "problem": {
+    "title": "Data Silos",
+    "subtitle": "The current problem in the supplier-client relationship"
+  },
+  "solution": {
+    "title": "Federated Data Space",
+    "subtitle": "The solution that unifies without centralizing"
+  },
+  "useCases": {
+    "title": "Use Cases",
+    "subtitle": "Practical applications of the ITBID ecosystem"
+  },
+  "benefits": {
+    "title": "Competitive Advantages",
+    "subtitle": "Benefits by Stakeholder"
+  },
+  "architecture": {
+    "title": "Technical Architecture",
+    "subtitle": "Gateway and connector infrastructure"
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Phased implementation plan"
+  },
+  "dataSpaceKit": {
+    "title": "Data Space Kit",
+    "subtitle": "European grants program"
+  },
+  "ctaSection": {
+    "title": "Ready to transform your procurement?",
+    "subtitle": "Join the ITBID + PROCUREDATA + PONTUS-X ecosystem",
+    "requestDemo": "Request Demo",
+    "downloadDocs": "Download Documentation",
+    "contactManager": "Contact Partner Manager"
+  }
+}

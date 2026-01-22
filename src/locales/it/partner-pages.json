@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "backToPartners": "Torna ai Partner",
+    "downloadPdf": "Scarica PDF",
+    "generating": "Generazione...",
+    "technicalDoc": "Doc. Tecnico",
+    "whitepaper": "Whitepaper",
+    "successCases": "Casi di Successo"
+  },
+  "cta": {
+    "accessMarketplace": "Accedi al Marketplace",
+    "contactForApi": "Contatta per API",
+    "exploreEcosystem": "Esplora Ecosistema",
+    "readyToAccess": "Pronto ad accedere all'intelligence di {{partnerName}}?",
+    "exploreFullCatalog": "Esplora il catalogo completo dei dati o richiedi accesso personalizzato all'API"
+  },
+  "sections": {
+    "ecosystemLeaders": "Leader dell'Ecosistema",
+    "worldClassCompanies": "Aziende di livello mondiale che fanno parte di questa rete di conoscenza e dati",
+    "sectorImpact": "Analisi dell'Impatto Settoriale",
+    "understandingValue": "Comprendere il valore unico dei dati aggregati di {{partnerName}}",
+    "whyDataUnique": "Perché i dati di {{partnerName}} sono unici?",
+    "aggregationCapabilities": "Capacità di Aggregazione",
+    "dataCatalog": "Catalogo Prodotti Dati",
+    "tangibleProducts": "10 prodotti dati tangibili disponibili tramite il Marketplace ProcureData"
+  },
+  "badges": {
+    "premiumPartner": "PARTNER PREMIUM PROCUREDATA",
+    "verified": "Dati verificati GAIA-X",
+    "gdpr": "Conformità GDPR",
+    "blockchain": "Blockchain Polygon"
+  },
+  "footer": {
+    "partnerOf": "{{partnerName}} è un Partner Premium di ProcureData.",
+    "dataAggregated": "Tutti i dati sono aggregati e anonimizzati secondo gli standard GAIA-X."
+  },
+  "dataTypes": {
+    "benchmark": "BENCHMARK",
+    "index": "INDICE",
+    "forecast": "PREVISIONE",
+    "directory": "DIRECTORY",
+    "capacity": "CAPACITÀ",
+    "risk": "RISCHIO",
+    "cost": "COSTO",
+    "strategy": "STRATEGIA"
+  },
+  "dataTypesLabels": {
+    "comparisons": "Confronti",
+    "indices": "Indici",
+    "forecasts": "Previsioni",
+    "directories": "Directory",
+    "capacities": "Capacità",
+    "risks": "Rischi",
+    "costs": "Costi",
+    "strategies": "Strategie"
+  },
+  "quote": "Dimmi con chi vai e ti dirò chi sei",
+  "viewDetail": "Vedi Dettaglio",
+  "powerOfNetwork": "Il potere della rete"
+}

@@ -39,6 +39,8 @@ import esGuide from './locales/es/guide.json';
 import esUserGuide from './locales/es/userGuide.json';
 import esWhitepaper from './locales/es/whitepaper.json';
 import esNodes from './locales/es/nodes.json';
+import esPartnerPages from './locales/es/partner-pages.json';
+import esItbid from './locales/es/itbid.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -71,6 +73,8 @@ import frReports from './locales/fr/reports.json';
 import frNotifications from './locales/fr/notifications.json';
 import frAnalytics from './locales/fr/analytics.json';
 import frNodes from './locales/fr/nodes.json';
+import frPartnerPages from './locales/fr/partner-pages.json';
+import frItbid from './locales/fr/itbid.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -104,6 +108,8 @@ import ptReports from './locales/pt/reports.json';
 import ptNotifications from './locales/pt/notifications.json';
 import ptAnalytics from './locales/pt/analytics.json';
 import ptNodes from './locales/pt/nodes.json';
+import ptPartnerPages from './locales/pt/partner-pages.json';
+import ptItbid from './locales/pt/itbid.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -137,6 +143,8 @@ import deReports from './locales/de/reports.json';
 import deNotifications from './locales/de/notifications.json';
 import deAnalytics from './locales/de/analytics.json';
 import deNodes from './locales/de/nodes.json';
+import dePartnerPages from './locales/de/partner-pages.json';
+import deItbid from './locales/de/itbid.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -170,6 +178,8 @@ import itReports from './locales/it/reports.json';
 import itNotifications from './locales/it/notifications.json';
 import itAnalytics from './locales/it/analytics.json';
 import itNodes from './locales/it/nodes.json';
+import itPartnerPages from './locales/it/partner-pages.json';
+import itItbid from './locales/it/itbid.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -203,6 +213,8 @@ import nlReports from './locales/nl/reports.json';
 import nlNotifications from './locales/nl/notifications.json';
 import nlAnalytics from './locales/nl/analytics.json';
 import nlNodes from './locales/nl/nodes.json';
+import nlPartnerPages from './locales/nl/partner-pages.json';
+import nlItbid from './locales/nl/itbid.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -237,6 +249,8 @@ import enReports from './locales/en/reports.json';
 import enNotifications from './locales/en/notifications.json';
 import enAnalytics from './locales/en/analytics.json';
 import enNodes from './locales/en/nodes.json';
+import enPartnerPages from './locales/en/partner-pages.json';
+import enItbid from './locales/en/itbid.json';
 
 export const supportedLanguages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -283,6 +297,8 @@ i18n
         diagrams: esDiagrams,
         dashboard: esDashboard,
         nodes: esNodes,
+        'partner-pages': esPartnerPages,
+        itbid: esItbid,
       },
       en: {
         common: enCommon,
@@ -312,6 +328,8 @@ i18n
         diagrams: enDiagrams,
         dashboard: enDashboard,
         nodes: enNodes,
+        'partner-pages': enPartnerPages,
+        itbid: enItbid,
       },
       fr: {
         common: frCommon,
@@ -340,6 +358,8 @@ i18n
         diagrams: frDiagrams,
         dashboard: frDashboard,
         nodes: frNodes,
+        'partner-pages': frPartnerPages,
+        itbid: frItbid,
       },
       pt: {
         common: ptCommon,
@@ -368,6 +388,8 @@ i18n
         diagrams: ptDiagrams,
         dashboard: ptDashboard,
         nodes: ptNodes,
+        'partner-pages': ptPartnerPages,
+        itbid: ptItbid,
       },
       de: {
         common: deCommon,
@@ -396,6 +418,8 @@ i18n
         diagrams: deDiagrams,
         dashboard: deDashboard,
         nodes: deNodes,
+        'partner-pages': dePartnerPages,
+        itbid: deItbid,
       },
       it: {
         common: itCommon,
@@ -424,6 +448,8 @@ i18n
         diagrams: itDiagrams,
         dashboard: itDashboard,
         nodes: itNodes,
+        'partner-pages': itPartnerPages,
+        itbid: itItbid,
       },
       nl: {
         common: nlCommon,
@@ -452,6 +478,8 @@ i18n
         diagrams: nlDiagrams,
         dashboard: nlDashboard,
         nodes: nlNodes,
+        'partner-pages': nlPartnerPages,
+        itbid: nlItbid,
       },
     },
     fallbackLng: 'es',
