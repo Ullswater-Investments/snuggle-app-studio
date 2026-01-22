@@ -1,0 +1,21 @@
+{
+  "title": "Gebruikershandleiding",
+  "subtitle": "Volledige documentatie voor gebruikers van het ProcureData-platform",
+  "documents": {
+    "1": { "title": "Verklarend Document 1", "subtitle": "Grondbeginselen, Visie en het 'nxm'-Model" },
+    "2": { "title": "Verklarend Document 2", "subtitle": "Servicecatalogus en Operationele Werking" },
+    "3": { "title": "Verklarend Document 3", "subtitle": "Duurzaamheid, Europese Regelgeving en Gebruiksscenario's" },
+    "4": { "title": "Verklarend Document 4", "subtitle": "Financiën, Cybersecurity en ERP-Integratie" },
+    "5": { "title": "Verklarend Document 5", "subtitle": "Verkoop, Marketing en Groeistrategieën" },
+    "6": { "title": "Verklarend Document 6", "subtitle": "Gebruikershandleiding, Interface en Ondersteuning" },
+    "7": { "title": "Verklarend Document 7", "subtitle": "Datagovernance, ODRL en Data Holders" },
+    "8": { "title": "Verklarend Document 8", "subtitle": "Geavanceerde Analytics, BI en Synthetische Data" },
+    "9": { "title": "Verklarend Document 9", "subtitle": "Technische Integratie en Beveiliging" },
+    "10": { "title": "Verklarend Document 10", "subtitle": "Veerkracht, Governance en Extreme Scenario's" },
+    "11": { "title": "Verklarend Document 11", "subtitle": "Verdieping per Strategische Sector" },
+    "12": { "title": "Verklarend Document 12", "subtitle": "Ontwikkelaarshandleiding en Architectuur" },
+    "13": { "title": "Verklarend Document 13", "subtitle": "Dialogen en NLU-Training" },
+    "14": { "title": "Verklarend Document 14", "subtitle": "Bibliotheek van Echte Gebruiksscenario's" },
+    "15": { "title": "Verklarend Document 15", "subtitle": "Groot Woordenboek en Begrippenlijst" }
+  }
+}

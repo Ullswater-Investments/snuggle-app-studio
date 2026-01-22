@@ -1,0 +1,21 @@
+{
+  "title": "Benutzerhandbuch",
+  "subtitle": "Vollständige Dokumentation für Benutzer der ProcureData-Plattform",
+  "documents": {
+    "1": { "title": "Erläuterndes Dokument 1", "subtitle": "Grundlagen, Vision und das 'nxm'-Modell" },
+    "2": { "title": "Erläuterndes Dokument 2", "subtitle": "Servicekatalog und Betriebsablauf" },
+    "3": { "title": "Erläuterndes Dokument 3", "subtitle": "Nachhaltigkeit, Europäische Vorschriften und Anwendungsfälle" },
+    "4": { "title": "Erläuterndes Dokument 4", "subtitle": "Finanzen, Cybersicherheit und ERP-Integration" },
+    "5": { "title": "Erläuterndes Dokument 5", "subtitle": "Vertrieb, Marketing und Wachstumsstrategien" },
+    "6": { "title": "Erläuterndes Dokument 6", "subtitle": "Benutzerhandbuch, Oberfläche und Support" },
+    "7": { "title": "Erläuterndes Dokument 7", "subtitle": "Daten-Governance, ODRL und Data Holders" },
+    "8": { "title": "Erläuterndes Dokument 8", "subtitle": "Erweiterte Analytik, BI und Synthetische Daten" },
+    "9": { "title": "Erläuterndes Dokument 9", "subtitle": "Technische Integration und Sicherheit" },
+    "10": { "title": "Erläuterndes Dokument 10", "subtitle": "Resilienz, Governance und Extremszenarien" },
+    "11": { "title": "Erläuterndes Dokument 11", "subtitle": "Vertiefung nach Strategischen Sektoren" },
+    "12": { "title": "Erläuterndes Dokument 12", "subtitle": "Entwicklerhandbuch und Architektur" },
+    "13": { "title": "Erläuterndes Dokument 13", "subtitle": "Dialoge und NLU-Training" },
+    "14": { "title": "Erläuterndes Dokument 14", "subtitle": "Bibliothek Realer Anwendungsfälle" },
+    "15": { "title": "Erläuterndes Dokument 15", "subtitle": "Großes Wörterbuch und Glossar der Begriffe" }
+  }
+}

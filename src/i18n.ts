@@ -89,6 +89,10 @@ import frAracea from './locales/fr/aracea.json';
 import frTelenatura from './locales/fr/telenatura.json';
 import frAerce from './locales/fr/aerce.json';
 import frArchitecture from './locales/fr/architecture.json';
+import frUserGuide from './locales/fr/userGuide.json';
+import frGuide from './locales/fr/guide.json';
+import frWhitepaper from './locales/fr/whitepaper.json';
+import frKit from './locales/fr/kit.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -130,6 +134,10 @@ import ptValerdata from './locales/pt/valerdata.json';
 import ptAracea from './locales/pt/aracea.json';
 import ptTelenatura from './locales/pt/telenatura.json';
 import ptAerce from './locales/pt/aerce.json';
+import ptUserGuide from './locales/pt/userGuide.json';
+import ptGuide from './locales/pt/guide.json';
+import ptWhitepaper from './locales/pt/whitepaper.json';
+import ptKit from './locales/pt/kit.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -171,6 +179,10 @@ import deValerdata from './locales/de/valerdata.json';
 import deAracea from './locales/de/aracea.json';
 import deTelenatura from './locales/de/telenatura.json';
 import deAerce from './locales/de/aerce.json';
+import deUserGuide from './locales/de/userGuide.json';
+import deGuide from './locales/de/guide.json';
+import deWhitepaper from './locales/de/whitepaper.json';
+import deKit from './locales/de/kit.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -213,6 +225,10 @@ import itAracea from './locales/it/aracea.json';
 import itTelenatura from './locales/it/telenatura.json';
 import itAerce from './locales/it/aerce.json';
 import itArchitecture from './locales/it/architecture.json';
+import itUserGuide from './locales/it/userGuide.json';
+import itGuide from './locales/it/guide.json';
+import itWhitepaper from './locales/it/whitepaper.json';
+import itKit from './locales/it/kit.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -255,6 +271,10 @@ import nlAracea from './locales/nl/aracea.json';
 import nlTelenatura from './locales/nl/telenatura.json';
 import nlAerce from './locales/nl/aerce.json';
 import nlArchitecture from './locales/nl/architecture.json';
+import nlUserGuide from './locales/nl/userGuide.json';
+import nlGuide from './locales/nl/guide.json';
+import nlWhitepaper from './locales/nl/whitepaper.json';
+import nlKit from './locales/nl/kit.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -298,6 +318,10 @@ import enAracea from './locales/en/aracea.json';
 import enTelenatura from './locales/en/telenatura.json';
 import enAerce from './locales/en/aerce.json';
 import enArchitecture from './locales/en/architecture.json';
+import enUserGuide from './locales/en/userGuide.json';
+import enGuide from './locales/en/guide.json';
+import enWhitepaper from './locales/en/whitepaper.json';
+import enKit from './locales/en/kit.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -357,6 +381,10 @@ i18n
         telenatura: esTelenatura,
         aerce: esAerce,
         architecture: esArchitecture,
+        userGuide: esUserGuide,
+        guide: esGuide,
+        whitepaper: esWhitepaper,
+        kit: esKit,
       },
       en: {
         common: enCommon,
@@ -395,6 +423,10 @@ i18n
         telenatura: enTelenatura,
         aerce: enAerce,
         architecture: enArchitecture,
+        userGuide: enUserGuide,
+        guide: enGuide,
+        whitepaper: enWhitepaper,
+        kit: enKit,
       },
       fr: {
         common: frCommon,
@@ -432,6 +464,10 @@ i18n
         telenatura: frTelenatura,
         aerce: frAerce,
         architecture: frArchitecture,
+        userGuide: frUserGuide,
+        guide: frGuide,
+        whitepaper: frWhitepaper,
+        kit: frKit,
       },
       pt: {
         common: ptCommon,
@@ -469,6 +505,10 @@ i18n
         telenatura: ptTelenatura,
         aerce: ptAerce,
         architecture: ptArchitecture,
+        userGuide: ptUserGuide,
+        guide: ptGuide,
+        whitepaper: ptWhitepaper,
+        kit: ptKit,
       },
       de: {
         common: deCommon,
@@ -506,6 +546,10 @@ i18n
         telenatura: deTelenatura,
         aerce: deAerce,
         architecture: deArchitecture,
+        userGuide: deUserGuide,
+        guide: deGuide,
+        whitepaper: deWhitepaper,
+        kit: deKit,
       },
       it: {
         common: itCommon,
@@ -543,6 +587,10 @@ i18n
         telenatura: itTelenatura,
         aerce: itAerce,
         architecture: itArchitecture,
+        userGuide: itUserGuide,
+        guide: itGuide,
+        whitepaper: itWhitepaper,
+        kit: itKit,
       },
       nl: {
         common: nlCommon,
@@ -580,11 +628,15 @@ i18n
         telenatura: nlTelenatura,
         aerce: nlAerce,
         architecture: nlArchitecture,
+        userGuide: nlUserGuide,
+        guide: nlGuide,
+        whitepaper: nlWhitepaper,
+        kit: nlKit,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit'],
     interpolation: {
       escapeValue: false,
     },

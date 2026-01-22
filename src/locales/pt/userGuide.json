@@ -1,0 +1,21 @@
+{
+  "title": "Guia do Usuário",
+  "subtitle": "Documentação completa para usuários da plataforma ProcureData",
+  "documents": {
+    "1": { "title": "Documento Explicativo 1", "subtitle": "Fundamentos, Visão e o Modelo 'nxm'" },
+    "2": { "title": "Documento Explicativo 2", "subtitle": "Catálogo de Serviços e Funcionamento Operacional" },
+    "3": { "title": "Documento Explicativo 3", "subtitle": "Sustentabilidade, Regulamentação Europeia e Casos de Uso" },
+    "4": { "title": "Documento Explicativo 4", "subtitle": "Finanças, Cibersegurança e Integração ERP" },
+    "5": { "title": "Documento Explicativo 5", "subtitle": "Vendas, Marketing e Estratégias de Crescimento" },
+    "6": { "title": "Documento Explicativo 6", "subtitle": "Guia do Usuário, Interface e Suporte" },
+    "7": { "title": "Documento Explicativo 7", "subtitle": "Governança de Dados, ODRL e Data Holders" },
+    "8": { "title": "Documento Explicativo 8", "subtitle": "Análise Avançada, BI e Dados Sintéticos" },
+    "9": { "title": "Documento Explicativo 9", "subtitle": "Integração Técnica e Segurança" },
+    "10": { "title": "Documento Explicativo 10", "subtitle": "Resiliência, Governança e Cenários Extremos" },
+    "11": { "title": "Documento Explicativo 11", "subtitle": "Aprofundamento por Setores Estratégicos" },
+    "12": { "title": "Documento Explicativo 12", "subtitle": "Manual do Desenvolvedor e Arquitetura" },
+    "13": { "title": "Documento Explicativo 13", "subtitle": "Diálogos e Treinamento NLU" },
+    "14": { "title": "Documento Explicativo 14", "subtitle": "Biblioteca de Casos de Uso Reais" },
+    "15": { "title": "Documento Explicativo 15", "subtitle": "Grande Dicionário e Glossário de Termos" }
+  }
+}

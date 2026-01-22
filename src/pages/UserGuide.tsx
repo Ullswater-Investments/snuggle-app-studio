@@ -1,27 +1,31 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 export default function UserGuide() {
-  const documents = [
-    { id: 1, title: "Documento Explicativo 1", subtitle: "Fundamentos, Visión y el Modelo 'nxm'" },
-    { id: 2, title: "Documento Explicativo 2", subtitle: "Catálogo de Servicios y Funcionamiento Operativo" },
-    { id: 3, title: "Documento Explicativo 3", subtitle: "Sostenibilidad, Normativa Europea y Casos de Uso" },
-    { id: 4, title: "Documento Explicativo 4", subtitle: "Finanzas, Ciberseguridad e Integración ERP" },
-    { id: 5, title: "Documento Explicativo 5", subtitle: "Ventas, Marketing y Estrategias de Crecimiento" },
-    { id: 6, title: "Documento Explicativo 6", subtitle: "Guía de Usuario, Interfaz y Soporte" },
-    { id: 7, title: "Documento Explicativo 7", subtitle: "Gobernanza de Datos, ODRL y Data Holders" },
-    { id: 8, title: "Documento Explicativo 8", subtitle: "Analítica Avanzada, BI y Datos Sintéticos" },
-    { id: 9, title: "Documento Explicativo 9", subtitle: "Integración Técnica y Seguridad" },
-    { id: 10, title: "Documento Explicativo 10", subtitle: "Resiliencia, Gobernanza y Escenarios Extremos" },
-    { id: 11, title: "Documento Explicativo 11", subtitle: "Profundización por Sectores Estratégicos" },
-    { id: 12, title: "Documento Explicativo 12", subtitle: "Manual del Desarrollador y Arquitectura" },
-    { id: 13, title: "Documento Explicativo 13", subtitle: "Diálogos y Entrenamiento NLU" },
-    { id: 14, title: "Documento Explicativo 14", subtitle: "Biblioteca de Casos de Uso Reales" },
-    { id: 15, title: "Documento Explicativo 15", subtitle: "Gran Diccionario y Glosario de Términos" }
-  ];
+  const { t } = useTranslation('userGuide');
+
+  const documentIds = Array.from({ length: 15 }, (_, i) => i + 1);
+
+  const routes: Record<number, string> = {
+    1: '/documento-explicativo-1',
+    2: '/documento-explicativo-2',
+    3: '/documento-explicativo-3',
+    4: '/documento-explicativo-4',
+    5: '/documento-explicativo-5',
+    6: '/documento-explicativo-6',
+    7: '/documento-explicativo-7',
+    8: '/documento-explicativo-8',
+    9: '/documento-explicativo-9',
+    10: '/documento-explicativo-10',
+    11: '/documento-explicativo-11',
+    12: '/documento-explicativo-12',
+    13: '/documento-explicativo-13',
+    14: '/documento-explicativo-14',
+    15: '/documento-explicativo-15'
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,46 +37,31 @@ export default function UserGuide() {
           </Link>
         </div>
         
-        <h1 className="text-4xl font-bold mb-4">Guía de Usuario</h1>
+        <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
         <p className="text-xl text-muted-foreground mb-12">
-          Documentación completa para usuarios de la plataforma ProcureData
+          {t('subtitle')}
         </p>
 
         {/* Grid de 15 documentos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {documents.map((doc) => {
-            const routes: Record<number, string> = {
-              1: '/documento-explicativo-1',
-              2: '/documento-explicativo-2',
-              3: '/documento-explicativo-3',
-              4: '/documento-explicativo-4',
-              5: '/documento-explicativo-5',
-              6: '/documento-explicativo-6',
-              7: '/documento-explicativo-7',
-              8: '/documento-explicativo-8',
-              9: '/documento-explicativo-9',
-              10: '/documento-explicativo-10',
-              11: '/documento-explicativo-11',
-              12: '/documento-explicativo-12',
-              13: '/documento-explicativo-13',
-              14: '/documento-explicativo-14',
-              15: '/documento-explicativo-15'
-            };
+          {documentIds.map((id) => {
+            const docTitle = t(`documents.${id}.title`);
+            const docSubtitle = t(`documents.${id}.subtitle`);
             
             const cardContent = (
               <Card className="cursor-pointer hover:shadow-lg hover:border-primary/50 transition-all duration-200 h-[200px]">
                 <CardContent className="h-full flex flex-col items-center justify-center gap-2 p-4">
                   <FileText className="h-8 w-8 text-primary/60" />
-                  <span className="text-sm font-bold text-center">{doc.title}</span>
-                  <span className="text-xs text-muted-foreground text-center leading-tight">{doc.subtitle}</span>
+                  <span className="text-sm font-bold text-center">{docTitle}</span>
+                  <span className="text-xs text-muted-foreground text-center leading-tight">{docSubtitle}</span>
                 </CardContent>
               </Card>
             );
             
-            if (routes[doc.id]) {
-              return <Link key={doc.id} to={routes[doc.id]}>{cardContent}</Link>;
+            if (routes[id]) {
+              return <Link key={id} to={routes[id]}>{cardContent}</Link>;
             }
-            return <div key={doc.id}>{cardContent}</div>;
+            return <div key={id}>{cardContent}</div>;
           })}
         </div>
       </div>
