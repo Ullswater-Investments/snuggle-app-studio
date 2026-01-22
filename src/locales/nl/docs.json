@@ -29,51 +29,507 @@
   },
   "doc3": {
     "title": "Duurzaamheid, EU-Regelgeving en Gebruikscases",
-    "subtitle": "Regelgevende, milieu-compliance en gegevensbescherming onder Europese normen."
+    "subtitle": "Regelgevende, milieu-compliance en gegevensbescherming onder Europese normen.",
+    "sections": {
+      "csrd": {
+        "title": "CSRD-Richtlijn en ESG-Rapportage",
+        "content": "<p>De <strong>Corporate Sustainability Reporting Directive (CSRD)</strong> verplicht Europese bedrijven om verifieerbare duurzaamheidsgegevens te rapporteren.</p><p>ProcureData automatiseert de verzameling van ESG-gegevens van leveranciers, wat regelgevende compliance vergemakkelijkt.</p>",
+        "quiz": {
+          "question": "Welke Europese richtlijn regelt de duurzaamheidsrapportage van bedrijven?",
+          "options": ["AVG", "CSRD", "NIS2", "eIDAS"],
+          "correctIndex": 1
+        }
+      },
+      "scope3": {
+        "title": "Scope 3 Emissieberekening",
+        "content": "<p><strong>Scope 3</strong>-emissies vertegenwoordigen 70-90% van de bedrijfs-CO2-voetafdruk en omvatten de gehele toeleveringsketen.</p><p>De gratis calculator van ProcureData schat deze emissies op basis van echte leveranciersgegevens.</p>",
+        "quiz": {
+          "question": "Welk percentage van de bedrijfs-CO2-voetafdruk vertegenwoordigen Scope 3-emissies?",
+          "options": ["10-20%", "30-40%", "50-60%", "70-90%"],
+          "correctIndex": 3
+        }
+      },
+      "gdpr": {
+        "title": "AVG en Gegevensbescherming",
+        "content": "<p>De <strong>Algemene Verordening Gegevensbescherming (AVG)</strong> garandeert privacyrechten in de EU.</p><p>ProcureData implementeert Privacy by Design met automatische anonimisering en granulaire toestemmingscontrole.</p>",
+        "quiz": {
+          "question": "Welk ontwerpprincipe implementeert ProcureData voor AVG-compliance?",
+          "options": ["Security by Default", "Privacy by Design", "Open by Default", "Gecentraliseerde Controle"],
+          "correctIndex": 1
+        }
+      },
+      "useCases": {
+        "title": "Praktische Gebruikscases",
+        "content": "<p>Echte implementatievoorbeelden: <strong>Geautomatiseerde ESG-audit</strong> voor fabrikanten, <strong>grondstoftraceerbaarheid</strong> in voedselproductie, en <strong>validatie van duurzame leveranciers</strong> in retail.</p>",
+        "quiz": {
+          "question": "Wat is GEEN gebruikscase van ProcureData?",
+          "options": ["Geautomatiseerde ESG-audit", "Grondstoftraceerbaarheid", "Social media management", "Validatie van duurzame leveranciers"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc4": {
     "title": "Financiën, Cybersecurity en ERP-Integratie",
-    "subtitle": "EUROe financiële infrastructuur, beveiligingsprotocollen en integratiestrategieën."
+    "subtitle": "EUROe financiële infrastructuur, beveiligingsprotocollen en integratiestrategieën.",
+    "sections": {
+      "euroe": {
+        "title": "EUROe: De Digitale Euro",
+        "content": "<p><strong>EUROe</strong> is een getokeniseerde euro met 1:1 pariteit, gereguleerd en geauditeerd, werkend op het Pontus-X netwerk.</p><p>Het maakt directe betalingen, onveranderlijke traceerbaarheid en automatische escrow smart contracts mogelijk.</p>",
+        "quiz": {
+          "question": "Welk kenmerk heeft EUROe vergeleken met de traditionele euro?",
+          "options": ["Fluctuerende waarde", "1:1 pariteit", "Alleen offline gebruik", "Ongereguleerd"],
+          "correctIndex": 1
+        }
+      },
+      "seguridad": {
+        "title": "Cybersecurity Protocollen",
+        "content": "<p>ProcureData implementeert <strong>AES-256 encryptie</strong> in rust, <strong>TLS 1.3</strong> in transit, en verplichte multi-factor authenticatie.</p><p>Voldoet aan ISO 27001 en het Europese cybersecurity-certificeringsschema.</p>",
+        "quiz": {
+          "question": "Welke encryptiestandaard gebruikt ProcureData voor data in rust?",
+          "options": ["DES", "MD5", "AES-256", "SHA-1"],
+          "correctIndex": 2
+        }
+      },
+      "erp": {
+        "title": "ERP-Systeemintegratie",
+        "content": "<p>De <strong>Universele ERP-Connector</strong> ondersteunt SAP, Oracle, Microsoft Dynamics, Sage en andere systemen via REST API's en webhooks.</p><p>Bidirectionele synchronisatie garandeert real-time bijgewerkte gegevens.</p>",
+        "quiz": {
+          "question": "Welk type synchronisatie biedt de Universele ERP-Connector?",
+          "options": ["Alleen lezen", "Alleen schrijven", "Bidirectioneel", "Alleen handmatig"],
+          "correctIndex": 2
+        }
+      },
+      "escrow": {
+        "title": "Smart Contracts en Escrow",
+        "content": "<p><strong>Smart contracts</strong> automatiseren de betalingsstroom: fondsen worden vergrendeld bij gegevensaanvraag en automatisch vrijgegeven na geverifieerde levering.</p>",
+        "quiz": {
+          "question": "Wanneer worden escrow-fondsen vrijgegeven?",
+          "options": ["Direct", "Na geverifieerde levering", "Na 30 dagen", "Handmatig door admin"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc5": {
     "title": "Verkoop, Marketing en Groeistrategieën",
-    "subtitle": "Commerciële waardepropositie, uitbreidingsmodel en partnermogelijkheden."
+    "subtitle": "Commerciële waardepropositie, uitbreidingsmodel en partnermogelijkheden.",
+    "sections": {
+      "propuesta": {
+        "title": "Unieke Waardepropositie",
+        "content": "<p>ProcureData biedt <strong>80% reductie in homologatietijd</strong>, <strong>administratieve kostenbesparing</strong> en <strong>toegang tot geverifieerde leveranciersgegevens</strong>.</p>",
+        "quiz": {
+          "question": "Hoeveel homologatietijd kan ProcureData reduceren?",
+          "options": ["20%", "50%", "80%", "100%"],
+          "correctIndex": 2
+        }
+      },
+      "segmentos": {
+        "title": "Marktsegmenten",
+        "content": "<p>Drie hoofdsegmenten: <strong>Grote ondernemingen</strong> (globale compliance), <strong>MKB</strong> (markttoegang), en <strong>Data Holders</strong> (data-monetisatie).</p>",
+        "quiz": {
+          "question": "Hoeveel hoofdmarktsegmenten heeft ProcureData?",
+          "options": ["2", "3", "5", "7"],
+          "correctIndex": 1
+        }
+      },
+      "partners": {
+        "title": "Partnerprogramma",
+        "content": "<p>Het programma omvat <strong>gecertificeerde resellers</strong>, <strong>technologie-integrators</strong> en <strong>gespecialiseerde consultants</strong> met 15-30% commissies.</p>",
+        "quiz": {
+          "question": "Wat is het commissiebereik voor partners?",
+          "options": ["5-10%", "15-30%", "40-50%", "Vast tarief"],
+          "correctIndex": 1
+        }
+      },
+      "expansion": {
+        "title": "Uitbreidingsstrategie",
+        "content": "<p>Roadmap: Spanje (2024), <strong>West-Europa</strong> (2025), <strong>Oost-Europa</strong> (2026), en <strong>wereldwijde uitbreiding</strong> (2027+).</p>",
+        "quiz": {
+          "question": "In welk jaar is de West-Europa uitbreiding gepland?",
+          "options": ["2024", "2025", "2026", "2027"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc6": {
     "title": "Gebruikershandleiding, Interface en Ondersteuning",
-    "subtitle": "Snelle referentiehandleiding voor navigatie, gebruikersbeheer en incidentoplossing."
+    "subtitle": "Snelle referentiehandleiding voor navigatie, gebruikersbeheer en incidentoplossing.",
+    "sections": {
+      "navegacion": {
+        "title": "Hoofdnavigatie",
+        "content": "<p>De interface is georganiseerd in: <strong>Dashboard</strong> (overzicht), <strong>Catalogus</strong> (leveranciers zoeken), <strong>Transacties</strong> (geschiedenis) en <strong>Instellingen</strong> (configuratie).</p>",
+        "quiz": {
+          "question": "Waar bevindt zich de transactiegeschiedenis?",
+          "options": ["Dashboard", "Catalogus", "Transacties", "Instellingen"],
+          "correctIndex": 2
+        }
+      },
+      "usuarios": {
+        "title": "Gebruikers- en Rollenbeheer",
+        "content": "<p>Beschikbare rollen: <strong>Admin</strong> (volledige controle), <strong>Approver</strong> (autoriseert transacties), <strong>Viewer</strong> (alleen lezen) en <strong>API Configurator</strong> (integraties).</p>",
+        "quiz": {
+          "question": "Welke rol kan transacties autoriseren?",
+          "options": ["Viewer", "API Configurator", "Approver", "Alleen Admin"],
+          "correctIndex": 2
+        }
+      },
+      "aria": {
+        "title": "ARIA Assistent",
+        "content": "<p><strong>ARIA</strong> is de geïntegreerde AI-assistent die vragen beantwoordt, processen begeleidt en gepersonaliseerde aanbevelingen biedt op basis van gebruikerscontext.</p>",
+        "quiz": {
+          "question": "Wat is ARIA in ProcureData?",
+          "options": ["Een rapportagemodule", "Een AI-assistent", "Een type certificering", "Een cryptocurrency"],
+          "correctIndex": 1
+        }
+      },
+      "soporte": {
+        "title": "Ondersteuningskanalen",
+        "content": "<p>Ondersteuning beschikbaar via: <strong>Live chat</strong> (kantooruren), <strong>Email</strong> (24u), <strong>Kennisbank</strong> en <strong>Prioriteit ondersteuning</strong> voor Pro.</p>",
+        "quiz": {
+          "question": "Welk abonnementsniveau heeft prioriteit ondersteuning?",
+          "options": ["Free", "Basic", "Pro", "Alle"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc7": {
     "title": "Data Governance, ODRL en de Rol van Data Holders",
-    "subtitle": "Technische en juridische mechanismen die datasoevereiniteit garanderen."
+    "subtitle": "Technische en juridische mechanismen die datasoevereiniteit garanderen.",
+    "sections": {
+      "soberania": {
+        "title": "Datasoevereiniteit Principe",
+        "content": "<p><strong>Datasoevereiniteit</strong> betekent dat de oorspronkelijke eigenaar volledige controle behoudt over wie toegang krijgt, wanneer en onder welke voorwaarden.</p>",
+        "quiz": {
+          "question": "Wie behoudt controle over de gegevens in het soevereiniteitsmodel?",
+          "options": ["De koper", "Het platform", "De oorspronkelijke eigenaar", "De overheid"],
+          "correctIndex": 2
+        }
+      },
+      "odrl": {
+        "title": "ODRL-Beleid",
+        "content": "<p><strong>ODRL (Open Digital Rights Language)</strong> is de W3C-standaard voor het uitdrukken van machtigingen, verboden en verplichtingen op gegevens in machineleesbare vorm.</p>",
+        "quiz": {
+          "question": "Welke organisatie standaardiseert ODRL?",
+          "options": ["ISO", "W3C", "IEEE", "IETF"],
+          "correctIndex": 1
+        }
+      },
+      "dataholders": {
+        "title": "De Rol van Data Holders",
+        "content": "<p><strong>Data Holders</strong> zijn technische bewaarders die gegevens verifiëren, opslaan en leveren volgens het beleid dat door de eigenaar is gedefinieerd.</p>",
+        "quiz": {
+          "question": "Wat is de hoofdfunctie van een Data Holder?",
+          "options": ["Gegevens kopen", "Geverifieerde gegevens bewaren en leveren", "De markt reguleren", "Prijzen vaststellen"],
+          "correctIndex": 1
+        }
+      },
+      "consentimiento": {
+        "title": "Toestemmingsbeheer",
+        "content": "<p>Het systeem registreert elke autorisatie met <strong>onveranderlijke timestamp</strong>, specifiek doel en beperkte duur, wat volledige traceerbaarheid garandeert.</p>",
+        "quiz": {
+          "question": "Wat garandeert het registreren van elke autorisatie?",
+          "options": ["Totale anonimiteit", "Volledige traceerbaarheid", "Onbeperkte toegang", "Vaste prijs"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc8": {
     "title": "Geavanceerde Analytics, BI en Synthetische Data",
-    "subtitle": "Ruwe data transformeren naar strategische intelligentie."
+    "subtitle": "Ruwe data transformeren naar strategische intelligentie.",
+    "sections": {
+      "dashboards": {
+        "title": "Uitvoerende Dashboards",
+        "content": "<p>Interactieve panelen met <strong>real-time KPI's</strong>: actieve transacties, gevalideerde leveranciers, opgebouwde besparingen en risicoscore.</p>",
+        "quiz": {
+          "question": "Welk type metrics tonen uitvoerende dashboards?",
+          "options": ["Alleen historisch", "Real-time", "Alleen projecties", "Onverwerkte data"],
+          "correctIndex": 1
+        }
+      },
+      "prediccion": {
+        "title": "Voorspellende Modellen",
+        "content": "<p><strong>Machine Learning</strong>-algoritmen om leveranciersrisico, toekomstige vraag en voorraadoptimalisatie te voorspellen op basis van historische gegevens.</p>",
+        "quiz": {
+          "question": "Welke technologie drijft voorspellende modellen aan?",
+          "options": ["Spreadsheets", "Machine Learning", "Handmatige formulieren", "SQL-databases"],
+          "correctIndex": 1
+        }
+      },
+      "sinteticos": {
+        "title": "Synthetische Data",
+        "content": "<p><strong>Synthetische data</strong> maakt het mogelijk modellen te trainen en te testen zonder echte informatie bloot te stellen, terwijl statistische eigenschappen behouden blijven.</p>",
+        "quiz": {
+          "question": "Waarvoor wordt synthetische data gebruikt?",
+          "options": ["Echte data permanent vervangen", "Modellen trainen zonder echte informatie bloot te stellen", "Goedkopere opslag", "Automatische AVG-compliance"],
+          "correctIndex": 1
+        }
+      },
+      "exportacion": {
+        "title": "BI-Export en Integratie",
+        "content": "<p>Data exporteerbaar naar <strong>Power BI, Tableau, Looker</strong> en andere systemen via native connectors en REST API's.</p>",
+        "quiz": {
+          "question": "Met welke BI-tools integreert ProcureData?",
+          "options": ["Alleen Excel", "Power BI, Tableau, Looker", "Geen externe tools", "Alleen eigen tools"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc9": {
     "title": "Technische Integratie en Beveiliging voor Ontwikkelaars",
-    "subtitle": "Technische referentie voor IT-teams: APIs, Webhooks, SDKs en beveiliging."
+    "subtitle": "Technische referentie voor IT-teams: APIs, Webhooks, SDKs en beveiliging.",
+    "sections": {
+      "apis": {
+        "title": "RESTful APIs",
+        "content": "<p>Volledige API met <strong>endpoints voor transacties, catalogus, gebruikers en webhooks</strong>. OpenAPI 3.0 documentatie beschikbaar.</p>",
+        "quiz": {
+          "question": "Welke documentatiestandaard gebruikt de API?",
+          "options": ["SOAP", "GraphQL", "OpenAPI 3.0", "WSDL"],
+          "correctIndex": 2
+        }
+      },
+      "webhooks": {
+        "title": "Webhook-Systeem",
+        "content": "<p>Real-time push notificaties voor events zoals <strong>nieuwe transactie, goedkeuring, afwijzing of toegangsvervaldatum</strong>.</p>",
+        "quiz": {
+          "question": "Welk type notificaties sturen webhooks?",
+          "options": ["Alleen email", "Real-time push", "SMS", "Post"],
+          "correctIndex": 1
+        }
+      },
+      "sdks": {
+        "title": "Beschikbare SDKs",
+        "content": "<p>Officiële SDKs voor <strong>JavaScript/TypeScript, Python, Java en .NET</strong> met codevoorbeelden en snelstartgidsen.</p>",
+        "quiz": {
+          "question": "Hoeveel talen hebben officiële SDKs?",
+          "options": ["2", "3", "4", "6"],
+          "correctIndex": 2
+        }
+      },
+      "autenticacion": {
+        "title": "Authenticatie en Autorisatie",
+        "content": "<p>Systeem gebaseerd op <strong>OAuth 2.0 met JWT-tokens</strong>, refresh tokens en granulaire scopes voor toegangscontrole.</p>",
+        "quiz": {
+          "question": "Welk authenticatieprotocol gebruikt ProcureData?",
+          "options": ["Basic Auth", "API Key", "OAuth 2.0", "SAML"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc10": {
     "title": "Veerkracht, Governance en Extreme Scenario's",
-    "subtitle": "Beheer van kritieke situaties, systeemfouten en complexe juridische conflicten."
+    "subtitle": "Beheer van kritieke situaties, systeemfouten en complexe juridische conflicten.",
+    "sections": {
+      "continuidad": {
+        "title": "Bedrijfscontinuïteitsplan",
+        "content": "<p><strong>4 uur RTO en 1 uur RPO</strong> gegarandeerd door geografische replica's en automatische incrementele backups.</p>",
+        "quiz": {
+          "question": "Wat is de gegarandeerde RTO (Recovery Time Objective)?",
+          "options": ["1 uur", "4 uur", "24 uur", "1 week"],
+          "correctIndex": 1
+        }
+      },
+      "incidentes": {
+        "title": "Incidentbeheer",
+        "content": "<p>Responsprotocol met <strong>ernstniveaus (P1-P4)</strong>, automatische escalatie en transparante communicatie naar betrokkenen.</p>",
+        "quiz": {
+          "question": "Hoeveel ernstniveaus heeft het incidentprotocol?",
+          "options": ["2", "3", "4", "5"],
+          "correctIndex": 2
+        }
+      },
+      "disputas": {
+        "title": "Geschillenbeslechting",
+        "content": "<p><strong>Intern arbitragesysteem</strong> met blockchain-bewijs, optionele bemiddeling en escalatie naar bevoegde jurisdictie indien nodig.</p>",
+        "quiz": {
+          "question": "Welk type bewijs wordt gebruikt bij geschillen?",
+          "options": ["Alleen getuigenis", "Blockchain", "Geen formeel bewijs", "Alleen PDF-documenten"],
+          "correctIndex": 1
+        }
+      },
+      "gobernanza": {
+        "title": "Ecosysteem Governance",
+        "content": "<p>Governance-comité met vertegenwoordigers van <strong>gebruikers, Data Holders en toezichthouders</strong> voor consensusgebaseerde evolutie van de standaard.</p>",
+        "quiz": {
+          "question": "Wie neemt deel aan het governance-comité?",
+          "options": ["Alleen het bedrijf", "Gebruikers, Data Holders en toezichthouders", "Alleen toezichthouders", "Alleen aandeelhouders"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc11": {
     "title": "Verdieping per Strategische Sector",
-    "subtitle": "Hoe PROCUREDATA zich aanpast aan de behoeften van de 6 prioriteitssectoren."
+    "subtitle": "Hoe PROCUREDATA zich aanpast aan de behoeften van de 6 prioriteitssectoren.",
+    "sections": {
+      "industrial": {
+        "title": "Industriële Sector",
+        "content": "<p>Focus op <strong>componenttraceerbaarheid, ISO-certificeringen en tier-n leveranciersbeheer</strong> voor complexe toeleveringsketens.</p>",
+        "quiz": {
+          "question": "Welk aspect is cruciaal in de industriële sector?",
+          "options": ["Sociale netwerken", "Componenttraceerbaarheid", "Digitale marketing", "Entertainment"],
+          "correctIndex": 1
+        }
+      },
+      "agroalimentario": {
+        "title": "Agrarische en Voedingssector",
+        "content": "<p>Oplossingen voor <strong>farm-to-fork traceerbaarheid, biologische certificeringen en gezondheidsregelgeving-compliance</strong>.</p>",
+        "quiz": {
+          "question": "Welk type traceerbaarheid is essentieel in de voedingsindustrie?",
+          "options": ["Digitale marketing", "Farm-to-fork", "Financieel", "Reverse logistics"],
+          "correctIndex": 1
+        }
+      },
+      "movilidad": {
+        "title": "Duurzame Mobiliteit",
+        "content": "<p>Focus op <strong>batterij-toeleveringsketen, kritieke materialen en CO2-voetafdruk verificatie</strong> bij elektrische voertuigen.</p>",
+        "quiz": {
+          "question": "Wat is kritiek bij duurzame mobiliteit?",
+          "options": ["Fossiele brandstoffen", "Batterij-toeleveringsketen", "Traditionele reclame", "Bedrukt papier"],
+          "correctIndex": 1
+        }
+      },
+      "salud": {
+        "title": "Gezondheidssector",
+        "content": "<p>Specialisatie in <strong>farmaceutische regelgevings-compliance, traceerbaarheid van medische hulpmiddelen en bescherming van gevoelige gegevens</strong>.</p>",
+        "quiz": {
+          "question": "Welk type gegevens vereist speciale bescherming in de gezondheidszorg?",
+          "options": ["Openbare gegevens", "Gevoelige gegevens", "Marketinggegevens", "Generieke gegevens"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc12": {
     "title": "Ontwikkelaarshandleiding en Cloud AI-Architectuur",
-    "subtitle": "Tech stack, databaseschema, serverloze functies en deployment flow."
+    "subtitle": "Tech stack, databaseschema, serverloze functies en deployment flow.",
+    "sections": {
+      "stack": {
+        "title": "Technologie Stack",
+        "content": "<p>Frontend: <strong>React + TypeScript + Tailwind</strong>. Backend: <strong>Supabase (PostgreSQL + Edge Functions)</strong>. Blockchain: <strong>Pontus-X</strong>.</p>",
+        "quiz": {
+          "question": "Welk frontend framework gebruikt ProcureData?",
+          "options": ["Angular", "Vue", "React", "Svelte"],
+          "correctIndex": 2
+        }
+      },
+      "database": {
+        "title": "Database Schema",
+        "content": "<p>Hoofdtabellen: <strong>organizations, data_assets, data_transactions, user_profiles</strong> met RLS (Row Level Security) voor isolatie.</p>",
+        "quiz": {
+          "question": "Welk mechanisme garandeert data-isolatie tussen organisaties?",
+          "options": ["Firewalls", "Row Level Security (RLS)", "Handmatige encryptie", "Aparte kopieën"],
+          "correctIndex": 1
+        }
+      },
+      "serverless": {
+        "title": "Serverloze Functies",
+        "content": "<p>Edge Functions in Deno voor <strong>transactievalidatie, push notificaties en blockchain-verbinding</strong>.</p>",
+        "quiz": {
+          "question": "In welke runtime draaien Edge Functions?",
+          "options": ["Node.js", "Python", "Deno", "Go"],
+          "correctIndex": 2
+        }
+      },
+      "despliegue": {
+        "title": "Deployment Flow",
+        "content": "<p>CI/CD met <strong>GitHub Actions, automatische preview deployments en directe rollback</strong> bij fouten.</p>",
+        "quiz": {
+          "question": "Welke tool beheert CI/CD?",
+          "options": ["Jenkins", "GitLab CI", "GitHub Actions", "Travis CI"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc13": {
     "title": "Dialoogsimulatie en NLU-Training",
-    "subtitle": "ARIA's persoonlijkheid, begripsvaardigheden en continu leren."
+    "subtitle": "ARIA's persoonlijkheid, begripsvaardigheden en continu leren.",
+    "sections": {
+      "personalidad": {
+        "title": "ARIA's Persoonlijkheid",
+        "content": "<p>ARIA combineert <strong>professionaliteit, duidelijkheid en empathie</strong>. Ze past haar toon aan de context aan: formeel bij compliance, vriendelijk bij support.</p>",
+        "quiz": {
+          "question": "Welke kenmerken definiëren ARIA's persoonlijkheid?",
+          "options": ["Afstandelijk en technisch", "Professionaliteit, duidelijkheid en empathie", "Altijd informeel", "Robotachtig en koud"],
+          "correctIndex": 1
+        }
+      },
+      "comprension": {
+        "title": "Begripsvermogen",
+        "content": "<p>Meertalige NLU met <strong>intentie-, entiteit- en sentimentdetectie</strong> voor gecontextualiseerde antwoorden.</p>",
+        "quiz": {
+          "question": "Wat detecteert ARIA's NLU-systeem?",
+          "options": ["Alleen trefwoorden", "Intentie, entiteiten en sentiment", "Alleen taal", "Niets automatisch"],
+          "correctIndex": 1
+        }
+      },
+      "aprendizaje": {
+        "title": "Continu Leren",
+        "content": "<p><strong>Feedback loop</strong>-systeem: gebruikerscorrecties verbeteren toekomstige antwoorden via gesuperviseerde hertraining.</p>",
+        "quiz": {
+          "question": "Hoe verbetert ARIA haar antwoorden?",
+          "options": ["Verbetert nooit", "Met gebruikersfeedback", "Alleen handmatige updates", "Willekeurig"],
+          "correctIndex": 1
+        }
+      },
+      "multimodal": {
+        "title": "Multimodale Capaciteiten",
+        "content": "<p>Ondersteuning voor <strong>tekst, spraak en geüploade documentanalyse</strong>, met automatische extractie van relevante informatie.</p>",
+        "quiz": {
+          "question": "Welke inputtypen ondersteunt ARIA?",
+          "options": ["Alleen tekst", "Tekst, spraak en documenten", "Alleen spraak", "Alleen afbeeldingen"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc14": {
     "title": "Bibliotheek van Echte Gebruikscases",
-    "subtitle": "Gedetailleerde gebruikersverhalen per professioneel profiel"
+    "subtitle": "Gedetailleerde gebruikersverhalen per professioneel profiel",
+    "sections": {
+      "comprador": {
+        "title": "Profiel: Inkoopdirecteur",
+        "content": "<p><strong>María, Inkoopdirecteur Voedingsindustrie</strong>: Reduceerde de leveranciershomologatietijd van 6 weken naar 3 dagen met het Digitale Paspoort.</p>",
+        "quiz": {
+          "question": "Hoeveel homologatietijd bespaarde María?",
+          "options": ["1 dag", "1 week", "Bijna 6 weken", "Geen"],
+          "correctIndex": 2
+        }
+      },
+      "proveedor": {
+        "title": "Profiel: MKB-Leverancier",
+        "content": "<p><strong>TechParts SL</strong>: Een elektronische componenten MKB dat nu zijn ISO-certificering eenmalig deelt en 50+ potentiële klanten bereikt.</p>",
+        "quiz": {
+          "question": "Hoe vaak moet TechParts zijn ISO-certificering valideren?",
+          "options": ["Eén keer per klant", "Slechts één keer", "Maandelijks", "Jaarlijks"],
+          "correctIndex": 1
+        }
+      },
+      "dataholder": {
+        "title": "Profiel: Certificeringsinstantie",
+        "content": "<p><strong>CertifiEU</strong>: Certificeringsinstantie die haar ISO-verificaties monetariseert door geverifieerde gegevens op aanvraag aan te bieden in de marketplace.</p>",
+        "quiz": {
+          "question": "Hoe monetariseert CertifiEU op ProcureData?",
+          "options": ["Reclame", "Geverifieerde gegevens op aanvraag aanbieden", "Vaste maandelijkse kosten", "Monetariseert niet"],
+          "correctIndex": 1
+        }
+      },
+      "compliance": {
+        "title": "Profiel: Compliance Officer",
+        "content": "<p><strong>Carlos, Compliance Officer</strong>: Automatiseerde de CSRD-audit voor 200 leveranciers, waardoor handmatig werk van 3 maanden naar 2 weken werd teruggebracht.</p>",
+        "quiz": {
+          "question": "Hoeveel tijd bespaarde Carlos op audits?",
+          "options": ["1 week", "2 weken", "Meer dan 2 maanden", "Geen"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc15": {
     "title": "Uitgebreid Woordenboek en Glossarium",

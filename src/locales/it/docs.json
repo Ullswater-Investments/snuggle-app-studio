@@ -29,51 +29,507 @@
   },
   "doc3": {
     "title": "Sostenibilità, Normativa Europea e Casi d'Uso",
-    "subtitle": "Conformità normativa, ambientale e protezione dei dati secondo gli standard europei."
+    "subtitle": "Conformità normativa, ambientale e protezione dei dati secondo gli standard europei.",
+    "sections": {
+      "csrd": {
+        "title": "Direttiva CSRD e Reporting ESG",
+        "content": "<p>La <strong>Corporate Sustainability Reporting Directive (CSRD)</strong> obbliga le aziende europee a rendicontare metriche di sostenibilità verificabili.</p><p>ProcureData automatizza la raccolta di dati ESG dai fornitori, facilitando la conformità normativa.</p>",
+        "quiz": {
+          "question": "Quale direttiva europea regola il reporting di sostenibilità aziendale?",
+          "options": ["GDPR", "CSRD", "NIS2", "eIDAS"],
+          "correctIndex": 1
+        }
+      },
+      "scope3": {
+        "title": "Calcolo delle Emissioni Scope 3",
+        "content": "<p>Le emissioni <strong>Scope 3</strong> rappresentano il 70-90% dell'impronta di carbonio aziendale e includono l'intera catena di fornitura.</p><p>Il calcolatore gratuito di ProcureData stima queste emissioni basandosi su dati reali dei fornitori.</p>",
+        "quiz": {
+          "question": "Quale percentuale dell'impronta di carbonio aziendale rappresentano le emissioni Scope 3?",
+          "options": ["10-20%", "30-40%", "50-60%", "70-90%"],
+          "correctIndex": 3
+        }
+      },
+      "gdpr": {
+        "title": "GDPR e Protezione dei Dati",
+        "content": "<p>Il <strong>Regolamento Generale sulla Protezione dei Dati (GDPR)</strong> garantisce i diritti alla privacy nell'UE.</p><p>ProcureData implementa Privacy by Design con anonimizzazione automatica e controllo del consenso granulare.</p>",
+        "quiz": {
+          "question": "Quale principio di progettazione implementa ProcureData per la conformità GDPR?",
+          "options": ["Security by Default", "Privacy by Design", "Open by Default", "Controllo Centralizzato"],
+          "correctIndex": 1
+        }
+      },
+      "useCases": {
+        "title": "Casi d'Uso Pratici",
+        "content": "<p>Esempi reali di implementazione: <strong>Audit ESG automatizzato</strong> per produttori, <strong>tracciabilità delle materie prime</strong> nell'agroalimentare, e <strong>validazione dei fornitori sostenibili</strong> nel retail.</p>",
+        "quiz": {
+          "question": "Quale NON è un caso d'uso di ProcureData?",
+          "options": ["Audit ESG automatizzato", "Tracciabilità delle materie prime", "Gestione dei social media", "Validazione dei fornitori sostenibili"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc4": {
     "title": "Finanza, Cybersecurity e Integrazione ERP",
-    "subtitle": "Infrastruttura finanziaria EUROe, protocolli di sicurezza e strategie di integrazione."
+    "subtitle": "Infrastruttura finanziaria EUROe, protocolli di sicurezza e strategie di integrazione.",
+    "sections": {
+      "euroe": {
+        "title": "EUROe: L'Euro Digitale",
+        "content": "<p><strong>EUROe</strong> è un euro tokenizzato con parità 1:1, regolato e verificato, che opera sulla rete Pontus-X.</p><p>Consente pagamenti istantanei, tracciabilità immutabile e smart contract di escrow automatico.</p>",
+        "quiz": {
+          "question": "Quale caratteristica ha EUROe rispetto all'euro tradizionale?",
+          "options": ["Valore fluttuante", "Parità 1:1", "Solo uso offline", "Non regolato"],
+          "correctIndex": 1
+        }
+      },
+      "seguridad": {
+        "title": "Protocolli di Cybersecurity",
+        "content": "<p>ProcureData implementa la <strong>crittografia AES-256</strong> a riposo, <strong>TLS 1.3</strong> in transito, e autenticazione multifattore obbligatoria.</p><p>Conforme a ISO 27001 e allo schema europeo di certificazione della cybersecurity.</p>",
+        "quiz": {
+          "question": "Quale standard di crittografia usa ProcureData per i dati a riposo?",
+          "options": ["DES", "MD5", "AES-256", "SHA-1"],
+          "correctIndex": 2
+        }
+      },
+      "erp": {
+        "title": "Integrazione Sistemi ERP",
+        "content": "<p>Il <strong>Connettore Universale ERP</strong> supporta SAP, Oracle, Microsoft Dynamics, Sage e altri sistemi via API REST e webhook.</p><p>La sincronizzazione bidirezionale garantisce dati aggiornati in tempo reale.</p>",
+        "quiz": {
+          "question": "Quale tipo di sincronizzazione offre il Connettore Universale ERP?",
+          "options": ["Solo lettura", "Solo scrittura", "Bidirezionale", "Solo manuale"],
+          "correctIndex": 2
+        }
+      },
+      "escrow": {
+        "title": "Smart Contract e Escrow",
+        "content": "<p>Gli <strong>smart contract</strong> automatizzano il flusso di pagamento: i fondi vengono bloccati alla richiesta di dati e rilasciati automaticamente dopo la consegna verificata.</p>",
+        "quiz": {
+          "question": "Quando vengono rilasciati i fondi dell'escrow?",
+          "options": ["Immediatamente", "Dopo consegna verificata", "Dopo 30 giorni", "Manualmente dall'admin"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc5": {
     "title": "Vendite, Marketing e Strategie di Crescita",
-    "subtitle": "Proposta di valore commerciale, modello di espansione e opportunità per partner."
+    "subtitle": "Proposta di valore commerciale, modello di espansione e opportunità per partner.",
+    "sections": {
+      "propuesta": {
+        "title": "Proposta di Valore Unica",
+        "content": "<p>ProcureData offre <strong>riduzione dell'80% del tempo di omologazione</strong>, <strong>risparmio sui costi amministrativi</strong> e <strong>accesso a dati verificati dei fornitori</strong>.</p>",
+        "quiz": {
+          "question": "Di quanto può ridurre il tempo di omologazione ProcureData?",
+          "options": ["20%", "50%", "80%", "100%"],
+          "correctIndex": 2
+        }
+      },
+      "segmentos": {
+        "title": "Segmenti di Mercato",
+        "content": "<p>Tre segmenti principali: <strong>Grandi imprese</strong> (compliance globale), <strong>PMI</strong> (accesso al mercato) e <strong>Data Holder</strong> (monetizzazione dati).</p>",
+        "quiz": {
+          "question": "Quanti segmenti di mercato principali ha ProcureData?",
+          "options": ["2", "3", "5", "7"],
+          "correctIndex": 1
+        }
+      },
+      "partners": {
+        "title": "Programma Partner",
+        "content": "<p>Il programma include <strong>rivenditori certificati</strong>, <strong>integratori tecnologici</strong> e <strong>consulenti specializzati</strong> con commissioni del 15-30%.</p>",
+        "quiz": {
+          "question": "Qual è la gamma di commissioni per i partner?",
+          "options": ["5-10%", "15-30%", "40-50%", "Tariffa fissa"],
+          "correctIndex": 1
+        }
+      },
+      "expansion": {
+        "title": "Strategia di Espansione",
+        "content": "<p>Roadmap: Spagna (2024), <strong>Europa Occidentale</strong> (2025), <strong>Europa Orientale</strong> (2026) e <strong>espansione globale</strong> (2027+).</p>",
+        "quiz": {
+          "question": "In quale anno è prevista l'espansione in Europa Occidentale?",
+          "options": ["2024", "2025", "2026", "2027"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc6": {
     "title": "Guida Utente, Interfaccia e Supporto",
-    "subtitle": "Manuale di riferimento rapido per navigazione, gestione utenti e risoluzione incidenti."
+    "subtitle": "Manuale di riferimento rapido per navigazione, gestione utenti e risoluzione incidenti.",
+    "sections": {
+      "navegacion": {
+        "title": "Navigazione Principale",
+        "content": "<p>L'interfaccia è organizzata in: <strong>Dashboard</strong> (panoramica), <strong>Catalogo</strong> (ricerca fornitori), <strong>Transazioni</strong> (storico) e <strong>Impostazioni</strong> (configurazione).</p>",
+        "quiz": {
+          "question": "Dove si trova lo storico delle transazioni?",
+          "options": ["Dashboard", "Catalogo", "Transazioni", "Impostazioni"],
+          "correctIndex": 2
+        }
+      },
+      "usuarios": {
+        "title": "Gestione Utenti e Ruoli",
+        "content": "<p>Ruoli disponibili: <strong>Admin</strong> (controllo totale), <strong>Approver</strong> (autorizza transazioni), <strong>Viewer</strong> (sola lettura) e <strong>API Configurator</strong> (integrazioni).</p>",
+        "quiz": {
+          "question": "Quale ruolo può autorizzare le transazioni?",
+          "options": ["Viewer", "API Configurator", "Approver", "Solo Admin"],
+          "correctIndex": 2
+        }
+      },
+      "aria": {
+        "title": "Assistente ARIA",
+        "content": "<p><strong>ARIA</strong> è l'assistente IA integrato che risponde alle domande, guida i processi e offre raccomandazioni personalizzate basate sul contesto dell'utente.</p>",
+        "quiz": {
+          "question": "Cos'è ARIA in ProcureData?",
+          "options": ["Un modulo di reporting", "Un assistente IA", "Un tipo di certificazione", "Una criptovaluta"],
+          "correctIndex": 1
+        }
+      },
+      "soporte": {
+        "title": "Canali di Supporto",
+        "content": "<p>Supporto disponibile via: <strong>Chat dal vivo</strong> (orari lavorativi), <strong>Email</strong> (24h), <strong>Base di conoscenza</strong> e <strong>Supporto prioritario</strong> per Pro.</p>",
+        "quiz": {
+          "question": "Quale livello di abbonamento ha il supporto prioritario?",
+          "options": ["Free", "Basic", "Pro", "Tutti"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc7": {
     "title": "Governance dei Dati, ODRL e il Ruolo dei Data Holders",
-    "subtitle": "Meccanismi tecnici e legali che garantiscono la sovranità dei dati."
+    "subtitle": "Meccanismi tecnici e legali che garantiscono la sovranità dei dati.",
+    "sections": {
+      "soberania": {
+        "title": "Principio di Sovranità dei Dati",
+        "content": "<p>La <strong>sovranità dei dati</strong> significa che il proprietario originale mantiene il controllo totale su chi accede, quando e a quali condizioni.</p>",
+        "quiz": {
+          "question": "Chi mantiene il controllo sui dati nel modello di sovranità?",
+          "options": ["L'acquirente", "La piattaforma", "Il proprietario originale", "Il governo"],
+          "correctIndex": 2
+        }
+      },
+      "odrl": {
+        "title": "Politiche ODRL",
+        "content": "<p><strong>ODRL (Open Digital Rights Language)</strong> è lo standard W3C per esprimere permessi, divieti e obblighi sui dati in forma leggibile dalle macchine.</p>",
+        "quiz": {
+          "question": "Quale organizzazione standardizza ODRL?",
+          "options": ["ISO", "W3C", "IEEE", "IETF"],
+          "correctIndex": 1
+        }
+      },
+      "dataholders": {
+        "title": "Il Ruolo dei Data Holders",
+        "content": "<p>I <strong>Data Holders</strong> sono custodi tecnici che verificano, archiviano e consegnano i dati secondo le politiche definite dal proprietario.</p>",
+        "quiz": {
+          "question": "Qual è la funzione principale di un Data Holder?",
+          "options": ["Acquistare dati", "Custodire e consegnare dati verificati", "Regolare il mercato", "Fissare i prezzi"],
+          "correctIndex": 1
+        }
+      },
+      "consentimiento": {
+        "title": "Gestione del Consenso",
+        "content": "<p>Il sistema registra ogni autorizzazione con <strong>timestamp immutabile</strong>, scopo specifico e durata limitata, garantendo tracciabilità completa.</p>",
+        "quiz": {
+          "question": "Cosa garantisce la registrazione di ogni autorizzazione?",
+          "options": ["Anonimato totale", "Tracciabilità completa", "Accesso illimitato", "Prezzo fisso"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc8": {
     "title": "Analitica Avanzata, BI e Dati Sintetici",
-    "subtitle": "Trasformare dati grezzi in intelligenza strategica."
+    "subtitle": "Trasformare dati grezzi in intelligenza strategica.",
+    "sections": {
+      "dashboards": {
+        "title": "Dashboard Esecutive",
+        "content": "<p>Pannelli interattivi con <strong>KPI in tempo reale</strong>: transazioni attive, fornitori validati, risparmi accumulati e punteggio di rischio.</p>",
+        "quiz": {
+          "question": "Che tipo di metriche mostrano le dashboard esecutive?",
+          "options": ["Solo storiche", "Tempo reale", "Solo proiezioni", "Dati non elaborati"],
+          "correctIndex": 1
+        }
+      },
+      "prediccion": {
+        "title": "Modelli Predittivi",
+        "content": "<p>Algoritmi di <strong>Machine Learning</strong> per prevedere rischio fornitori, domanda futura e ottimizzazione del magazzino basati su dati storici.</p>",
+        "quiz": {
+          "question": "Quale tecnologia alimenta i modelli predittivi?",
+          "options": ["Fogli di calcolo", "Machine Learning", "Moduli manuali", "Database SQL"],
+          "correctIndex": 1
+        }
+      },
+      "sinteticos": {
+        "title": "Dati Sintetici",
+        "content": "<p>I <strong>dati sintetici</strong> permettono di addestrare modelli e testare senza esporre informazioni reali, mantenendo le proprietà statistiche.</p>",
+        "quiz": {
+          "question": "A cosa servono i dati sintetici?",
+          "options": ["Sostituire permanentemente i dati reali", "Addestrare modelli senza esporre informazioni reali", "Storage più economico", "Conformità GDPR automatica"],
+          "correctIndex": 1
+        }
+      },
+      "exportacion": {
+        "title": "Esportazione e Integrazione BI",
+        "content": "<p>Dati esportabili verso <strong>Power BI, Tableau, Looker</strong> e altri sistemi tramite connettori nativi e API REST.</p>",
+        "quiz": {
+          "question": "Con quali strumenti BI si integra ProcureData?",
+          "options": ["Solo Excel", "Power BI, Tableau, Looker", "Nessuno strumento esterno", "Solo strumenti proprietari"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc9": {
     "title": "Integrazione Tecnica e Sicurezza per Sviluppatori",
-    "subtitle": "Riferimento tecnico per team IT: API, Webhook, SDK e sicurezza."
+    "subtitle": "Riferimento tecnico per team IT: API, Webhook, SDK e sicurezza.",
+    "sections": {
+      "apis": {
+        "title": "API RESTful",
+        "content": "<p>API completa con <strong>endpoint per transazioni, catalogo, utenti e webhook</strong>. Documentazione OpenAPI 3.0 disponibile.</p>",
+        "quiz": {
+          "question": "Quale standard di documentazione usa l'API?",
+          "options": ["SOAP", "GraphQL", "OpenAPI 3.0", "WSDL"],
+          "correctIndex": 2
+        }
+      },
+      "webhooks": {
+        "title": "Sistema di Webhook",
+        "content": "<p>Notifiche push in tempo reale per eventi come <strong>nuova transazione, approvazione, rifiuto o scadenza accesso</strong>.</p>",
+        "quiz": {
+          "question": "Che tipo di notifiche inviano i webhook?",
+          "options": ["Solo email", "Push in tempo reale", "SMS", "Posta ordinaria"],
+          "correctIndex": 1
+        }
+      },
+      "sdks": {
+        "title": "SDK Disponibili",
+        "content": "<p>SDK ufficiali per <strong>JavaScript/TypeScript, Python, Java e .NET</strong> con esempi di codice e guide rapide.</p>",
+        "quiz": {
+          "question": "Quanti linguaggi hanno SDK ufficiali?",
+          "options": ["2", "3", "4", "6"],
+          "correctIndex": 2
+        }
+      },
+      "autenticacion": {
+        "title": "Autenticazione e Autorizzazione",
+        "content": "<p>Sistema basato su <strong>OAuth 2.0 con token JWT</strong>, refresh token e scope granulari per il controllo degli accessi.</p>",
+        "quiz": {
+          "question": "Quale protocollo di autenticazione usa ProcureData?",
+          "options": ["Basic Auth", "API Key", "OAuth 2.0", "SAML"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc10": {
     "title": "Resilienza, Governance e Scenari Estremi",
-    "subtitle": "Gestione di situazioni critiche, guasti sistemici e conflitti legali complessi."
+    "subtitle": "Gestione di situazioni critiche, guasti sistemici e conflitti legali complessi.",
+    "sections": {
+      "continuidad": {
+        "title": "Piano di Continuità Operativa",
+        "content": "<p><strong>RTO di 4 ore e RPO di 1 ora</strong> garantiti tramite repliche geografiche e backup incrementali automatici.</p>",
+        "quiz": {
+          "question": "Qual è l'RTO (Recovery Time Objective) garantito?",
+          "options": ["1 ora", "4 ore", "24 ore", "1 settimana"],
+          "correctIndex": 1
+        }
+      },
+      "incidentes": {
+        "title": "Gestione degli Incidenti",
+        "content": "<p>Protocollo di risposta con <strong>livelli di severità (P1-P4)</strong>, escalation automatica e comunicazione trasparente agli interessati.</p>",
+        "quiz": {
+          "question": "Quanti livelli di severità ha il protocollo degli incidenti?",
+          "options": ["2", "3", "4", "5"],
+          "correctIndex": 2
+        }
+      },
+      "disputas": {
+        "title": "Risoluzione delle Dispute",
+        "content": "<p>Sistema di <strong>arbitrato interno</strong> con prove blockchain, mediazione opzionale ed escalation alla giurisdizione competente se necessario.</p>",
+        "quiz": {
+          "question": "Che tipo di prove vengono usate nelle dispute?",
+          "options": ["Solo testimoniali", "Blockchain", "Nessuna prova formale", "Solo documenti PDF"],
+          "correctIndex": 1
+        }
+      },
+      "gobernanza": {
+        "title": "Governance dell'Ecosistema",
+        "content": "<p>Comitato di governance con rappresentanti di <strong>utenti, Data Holder e regolatori</strong> per un'evoluzione consensuale dello standard.</p>",
+        "quiz": {
+          "question": "Chi partecipa al comitato di governance?",
+          "options": ["Solo l'azienda", "Utenti, Data Holder e regolatori", "Solo regolatori", "Solo azionisti"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc11": {
     "title": "Approfondimento per Settori Strategici",
-    "subtitle": "Come PROCUREDATA si adatta alle esigenze dei 6 settori prioritari."
+    "subtitle": "Come PROCUREDATA si adatta alle esigenze dei 6 settori prioritari.",
+    "sections": {
+      "industrial": {
+        "title": "Settore Industriale",
+        "content": "<p>Focus sulla <strong>tracciabilità dei componenti, certificazioni ISO e gestione fornitori tier-n</strong> per catene di fornitura complesse.</p>",
+        "quiz": {
+          "question": "Quale aspetto è chiave nel settore industriale?",
+          "options": ["Social network", "Tracciabilità dei componenti", "Marketing digitale", "Intrattenimento"],
+          "correctIndex": 1
+        }
+      },
+      "agroalimentario": {
+        "title": "Settore Agroalimentare",
+        "content": "<p>Soluzioni per <strong>tracciabilità farm-to-fork, certificazioni biologiche e conformità normativa sanitaria</strong>.</p>",
+        "quiz": {
+          "question": "Quale tipo di tracciabilità è essenziale nell'agroalimentare?",
+          "options": ["Marketing digitale", "Farm-to-fork", "Finanziaria", "Logistica inversa"],
+          "correctIndex": 1
+        }
+      },
+      "movilidad": {
+        "title": "Mobilità Sostenibile",
+        "content": "<p>Focus sulla <strong>catena di fornitura delle batterie, materiali critici e verifica dell'impronta di carbonio</strong> nei veicoli elettrici.</p>",
+        "quiz": {
+          "question": "Cosa è critico nella mobilità sostenibile?",
+          "options": ["Combustibili fossili", "Catena di fornitura delle batterie", "Pubblicità tradizionale", "Carta stampata"],
+          "correctIndex": 1
+        }
+      },
+      "salud": {
+        "title": "Settore Sanità",
+        "content": "<p>Specializzazione in <strong>conformità normativa farmaceutica, tracciabilità dei dispositivi medici e protezione dei dati sensibili</strong>.</p>",
+        "quiz": {
+          "question": "Quale tipo di dati richiede protezione speciale nella sanità?",
+          "options": ["Dati pubblici", "Dati sensibili", "Dati di marketing", "Dati generici"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc12": {
     "title": "Manuale Sviluppatore e Architettura Cloud AI",
-    "subtitle": "Stack tecnico, schema database, funzioni serverless e flusso di deployment."
+    "subtitle": "Stack tecnico, schema database, funzioni serverless e flusso di deployment.",
+    "sections": {
+      "stack": {
+        "title": "Stack Tecnologico",
+        "content": "<p>Frontend: <strong>React + TypeScript + Tailwind</strong>. Backend: <strong>Supabase (PostgreSQL + Edge Functions)</strong>. Blockchain: <strong>Pontus-X</strong>.</p>",
+        "quiz": {
+          "question": "Quale framework frontend usa ProcureData?",
+          "options": ["Angular", "Vue", "React", "Svelte"],
+          "correctIndex": 2
+        }
+      },
+      "database": {
+        "title": "Schema Database",
+        "content": "<p>Tabelle principali: <strong>organizations, data_assets, data_transactions, user_profiles</strong> con RLS (Row Level Security) per l'isolamento.</p>",
+        "quiz": {
+          "question": "Quale meccanismo garantisce l'isolamento dei dati tra organizzazioni?",
+          "options": ["Firewall", "Row Level Security (RLS)", "Crittografia manuale", "Copie separate"],
+          "correctIndex": 1
+        }
+      },
+      "serverless": {
+        "title": "Funzioni Serverless",
+        "content": "<p>Edge Functions in Deno per <strong>validazione transazioni, notifiche push e connessione blockchain</strong>.</p>",
+        "quiz": {
+          "question": "In quale runtime vengono eseguite le Edge Functions?",
+          "options": ["Node.js", "Python", "Deno", "Go"],
+          "correctIndex": 2
+        }
+      },
+      "despliegue": {
+        "title": "Flusso di Deployment",
+        "content": "<p>CI/CD con <strong>GitHub Actions, deployment preview automatici e rollback istantaneo</strong> in caso di errori.</p>",
+        "quiz": {
+          "question": "Quale strumento gestisce il CI/CD?",
+          "options": ["Jenkins", "GitLab CI", "GitHub Actions", "Travis CI"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc13": {
     "title": "Simulazione Dialoghi e Training NLU",
-    "subtitle": "Personalità, capacità di comprensione e apprendimento continuo di ARIA."
+    "subtitle": "Personalità, capacità di comprensione e apprendimento continuo di ARIA.",
+    "sections": {
+      "personalidad": {
+        "title": "Personalità di ARIA",
+        "content": "<p>ARIA combina <strong>professionalità, chiarezza e empatia</strong>. Adatta il suo tono al contesto: formale in compliance, amichevole nel supporto.</p>",
+        "quiz": {
+          "question": "Quali caratteristiche definiscono la personalità di ARIA?",
+          "options": ["Distante e tecnica", "Professionalità, chiarezza e empatia", "Sempre informale", "Robotica e fredda"],
+          "correctIndex": 1
+        }
+      },
+      "comprension": {
+        "title": "Capacità di Comprensione",
+        "content": "<p>NLU multilingue con rilevamento di <strong>intento, entità e sentiment</strong> per risposte contestualizzate.</p>",
+        "quiz": {
+          "question": "Cosa rileva il sistema NLU di ARIA?",
+          "options": ["Solo parole chiave", "Intento, entità e sentiment", "Solo la lingua", "Niente automaticamente"],
+          "correctIndex": 1
+        }
+      },
+      "aprendizaje": {
+        "title": "Apprendimento Continuo",
+        "content": "<p>Sistema di <strong>feedback loop</strong>: le correzioni degli utenti migliorano le risposte future tramite riaddestramento supervisionato.</p>",
+        "quiz": {
+          "question": "Come migliora ARIA le sue risposte?",
+          "options": ["Non migliora mai", "Con il feedback degli utenti", "Solo aggiornamenti manuali", "Casualmente"],
+          "correctIndex": 1
+        }
+      },
+      "multimodal": {
+        "title": "Capacità Multimodali",
+        "content": "<p>Supporto per <strong>testo, voce e analisi di documenti</strong> caricati, con estrazione automatica delle informazioni rilevanti.</p>",
+        "quiz": {
+          "question": "Quali tipi di input supporta ARIA?",
+          "options": ["Solo testo", "Testo, voce e documenti", "Solo voce", "Solo immagini"],
+          "correctIndex": 1
+        }
+      }
+    }
   },
   "doc14": {
     "title": "Biblioteca di Casi d'Uso Reali",
-    "subtitle": "Storie utente dettagliate per profilo professionale"
+    "subtitle": "Storie utente dettagliate per profilo professionale",
+    "sections": {
+      "comprador": {
+        "title": "Profilo: Direttore Acquisti",
+        "content": "<p><strong>María, Direttrice Acquisti Industria Alimentare</strong>: Ha ridotto il tempo di omologazione fornitori da 6 settimane a 3 giorni usando il Passaporto Digitale.</p>",
+        "quiz": {
+          "question": "Quanto tempo di omologazione ha risparmiato María?",
+          "options": ["1 giorno", "1 settimana", "Quasi 6 settimane", "Nessuno"],
+          "correctIndex": 2
+        }
+      },
+      "proveedor": {
+        "title": "Profilo: PMI Fornitrice",
+        "content": "<p><strong>TechParts SL</strong>: Una PMI di componenti elettronici che ora condivide la sua certificazione ISO una sola volta e accede a 50+ clienti potenziali.</p>",
+        "quiz": {
+          "question": "Quante volte TechParts deve validare la sua certificazione ISO?",
+          "options": ["Una per cliente", "Solo una volta", "Mensilmente", "Annualmente"],
+          "correctIndex": 1
+        }
+      },
+      "dataholder": {
+        "title": "Profilo: Agenzia di Certificazione",
+        "content": "<p><strong>CertifiEU</strong>: Agenzia di certificazione che monetizza le sue verifiche ISO offrendo dati verificati su richiesta nel marketplace.</p>",
+        "quiz": {
+          "question": "Come monetizza CertifiEU su ProcureData?",
+          "options": ["Pubblicità", "Offrendo dati verificati su richiesta", "Tariffe mensili fisse", "Non monetizza"],
+          "correctIndex": 1
+        }
+      },
+      "compliance": {
+        "title": "Profilo: Responsabile Compliance",
+        "content": "<p><strong>Carlos, Compliance Officer</strong>: Ha automatizzato l'audit CSRD di 200 fornitori, riducendo il lavoro manuale da 3 mesi a 2 settimane.</p>",
+        "quiz": {
+          "question": "Quanto tempo ha risparmiato Carlos sugli audit?",
+          "options": ["1 settimana", "2 settimane", "Più di 2 mesi", "Nessuno"],
+          "correctIndex": 2
+        }
+      }
+    }
   },
   "doc15": {
     "title": "Grande Dizionario e Glossario",
