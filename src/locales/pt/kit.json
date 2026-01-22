@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "badge": "Kit Completo de Componentes",
+    "title": "KIT ESPAÇO DE DADOS",
+    "description": "Tudo o que você precisa para construir, operar e escalar seu próprio Espaço de Dados em conformidade com os padrões europeus. Componentes modulares, interoperáveis e prontos para produção.",
+    "adhesionContract": "Contrato de Adesão",
+    "access": "Acessar"
+  },
+  "subsidy": {
+    "title": "Programa de auxílios para a incorporação de empresas ao ecossistema de Espaços de Dados Europeus GAIA-X",
+    "optionA": {
+      "amount": "SUBSÍDIO DE 15.000€",
+      "title": "Adesão Espaço de Dados GDC",
+      "subtitle": "Membros básico do ecossistema",
+      "features": ["Conector IDS/GAIA-X certificado", "Carteira de Identidade Soberana (W3C-DID)", "Associação e Formação especializada", "Membresia 3 anos no ecossistema"],
+      "applyLabel": "Solicitar o subsídio:",
+      "upfront": "2.000€",
+      "afterGrant": "+ 13.000€ ao receber o subsídio"
+    },
+    "optionB": {
+      "amount": "SUBSÍDIO DE 30.000€",
+      "recommended": "⭐ RECOMENDADO",
+      "title": "Adesão + Caso de Uso",
+      "subtitle": "Projeto completo com desenvolvimento sob medida",
+      "features": ["Tudo incluído da Opção A", "Consultoria personalizada de Caso de Uso", "Desenvolvimento Sob Medida", "Visibilidade como Pioneiro do ecossistema"],
+      "applyLabel": "Solicitar o subsídio:",
+      "upfront": "5.000€",
+      "afterGrant": "+ 25.000€ ao receber o subsídio"
+    }
+  },
+  "components": {
+    "title": "Componentes do Kit",
+    "subtitle": "Cada componente é projetado para funcionar de forma independente ou integrado ao resto do ecossistema PROCUREDATA.",
+    "explore": "Explorar",
+    "federatedCatalog": {
+      "title": "Catálogo de Dados Federado",
+      "description": "Registro centralizado de produtos de dados com metadados padronizados e busca avançada.",
+      "features": ["Metadados DCAT-AP", "Busca semântica", "Categorização automática"]
+    },
+    "odrlGovernance": {
+      "title": "Governança ODRL",
+      "description": "Motor de políticas de uso de dados baseado no padrão ODRL para controle granular de acesso.",
+      "features": ["Políticas declarativas", "Enforcement automático", "Auditoria completa"]
+    },
+    "web3Wallet": {
+      "title": "Carteira Web3 Corporativa",
+      "description": "Carteira digital para gestão de identidade descentralizada e transações tokenizadas.",
+      "features": ["Identidade SSI", "Tokens EUROe", "Multi-assinatura corporativa"]
+    },
+    "ssiIdentity": {
+      "title": "Identidade Auto-Soberana (SSI)",
+      "description": "Sistema de credenciais verificáveis para autenticação sem intermediários.",
+      "features": ["DIDs W3C", "Credenciais verificáveis", "Provas zero-knowledge"]
+    },
+    "idsConnectors": {
+      "title": "Conectores IDS/IDSA",
+      "description": "Integração nativa com o ecossistema International Data Spaces para interoperabilidade.",
+      "features": ["Conector IDS", "Usage Control", "Clearing House"]
+    },
+    "erpConnectors": {
+      "title": "Conectores ERP",
+      "description": "Integração bidirecional com sistemas empresariais SAP, Oracle, Microsoft Dynamics.",
+      "features": ["SAP S/4HANA", "Oracle Cloud", "Dynamics 365"]
+    },
+    "edgeFunctions": {
+      "title": "Edge Functions",
+      "description": "Processamento serverless na borda para transformações e validações em tempo real.",
+      "features": ["Baixa latência", "Auto-escala", "TypeScript nativo"]
+    },
+    "multiTenantRLS": {
+      "title": "Multi-Tenant & RLS",
+      "description": "Arquitetura multi-inquilino com isolamento ao nível de linha para máxima segurança.",
+      "features": ["Row Level Security", "Isolamento de tenant", "RBAC avançado"]
+    }
+  },
+  "benefits": {
+    "title": "Por que escolher nosso Kit?",
+    "description": "PROCUREDATA oferece a única solução completa de Espaço de Dados projetada especificamente para compras, com conformidade regulatória europeia e conectividade com o ecossistema Gaia-X.",
+    "items": [
+      "Soberania total sobre seus dados",
+      "Conformidade nativa LGPD/GDPR",
+      "Interoperabilidade Gaia-X",
+      "Monetização de ativos de dados",
+      "Rastreabilidade blockchain opcional",
+      "Implantação on-premise ou cloud"
+    ],
+    "ecosystemTitle": "Ecossistema Europeu",
+    "ecosystemDesc": "Compatível com as iniciativas europeias de espaços de dados setoriais:"
+  },
+  "cta": {
+    "title": "Pronto para construir seu Espaço de Dados?",
+    "description": "Entre em contato para uma demonstração personalizada e descubra como PROCUREDATA pode transformar sua gestão de dados de fornecedores.",
+    "startNow": "Começar Agora",
+    "downloadWhitepaper": "Baixar Whitepaper"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "sidebar": {
+    "vision": "1. Allgemeine Vision",
+    "roles": "2. Das Vertrauensdreieck",
+    "features": "3. Kernfunktionen",
+    "business": "4. Geschäftsmodell",
+    "tech": "5. Technische Architektur",
+    "web3": "6. Web3-Integration",
+    "backToApp": "Zurück zur App"
+  },
+  "header": {
+    "badge": "White Paper v3.1",
+    "title": "ProcureData Ökosystem-Leitfaden",
+    "subtitle": "Technisches und kommerzielles Handbuch für Benutzer, Partner und Integratoren der souveränen Datenplattform."
+  },
+  "sections": {
+    "vision": {
+      "title": "1. Allgemeine Vision",
+      "description": "PROCUREDATA ist die definitive Infrastruktur für die Datenwirtschaft. Wir transformieren den B2B-Informationsaustausch (langsam, unsicher und manuell) in einen sofortigen transaktionalen Marktplatz.",
+      "quote": "\"Wir verkaufen keine Daten. Wir verkaufen die rechtliche, technische und finanzielle Gewissheit, dass die Daten genutzt werden können.\""
+    },
+    "roles": {
+      "title": "2. Geschäftslogik: Das Vertrauensdreieck",
+      "description": "Die Plattform orchestriert drei fundamentale Akteure in jeder Transaktion:",
+      "provider": { "title": "Anbieter (Provider)", "description": "Geistiger Eigentümer. Definiert Preis und ODRL-Regeln. Z.B.: Iberdrola Data Hub." },
+      "holder": { "title": "Verwahrer (Holder)", "description": "Technische Infrastruktur. Speichert und liefert Bits über API. Z.B.: AWS S3." },
+      "consumer": { "title": "Verbraucher (Consumer)", "description": "Erwerber. Zahlt und unterzeichnet die Nutzungslizenz. Z.B.: NovaTech Solutions." }
+    },
+    "features": {
+      "title": "3. Kernfunktionen",
+      "marketplace": { "title": "A. Marketplace & Storefront", "description": "Ein visueller Katalog mit erweiterten Filtern. Ermöglicht die Entdeckung von \"Green Data\" (nachhaltig) und verifizierten (KYB) Assets.", "items": ["Data Sandbox: Echte Vorschau von 5-10 Datenzeilen vor dem Kauf.", "Bundles: Kauf von multisektoralen Datenpaketen."] },
+      "dealRoom": { "title": "B. Verhandlungsraum", "description": "B2B-Verträge erfordern Dialog. Der Deal Room ermöglicht Chatten, Gegenangebote senden und das Modifizieren des Smart Contracts in Echtzeit vor der Unterzeichnung." },
+      "innovationLab": { "title": "C. Innovation Lab", "description": "Künstliche-Intelligenz-Modul mit:", "items": ["AI Auditor", "Predictive Simulator", "Market Insights"] }
+    },
+    "business": {
+      "title": "4. Monetarisierung",
+      "description": "Das System unterstützt mehrere wirtschaftliche Modelle, die vom Verkäufer konfigurierbar sind:",
+      "models": ["Einmalzahlung: Dauerhafter Kauf des Datasets.", "Abonnement: Wiederkehrender Zugang (Monatlich/Jährlich) zu Live-Datenstreams.", "Plattformgebühr: ProcureData behält einen % jeder Transaktion.", "Freemium: Kostenlose Basisdaten mit kostenpflichtigen Premium-Optionen."]
+    },
+    "tech": {
+      "title": "5. Technische Architektur",
+      "description": "Gebaut auf einem modernen und skalierbaren Stack:",
+      "stack": ["React + Vite", "Supabase (PostgreSQL)", "Tailwind CSS", "Recharts", "Edge Functions"],
+      "note": "Integrationen bereit für Gaia-X über EDC-Connectors und Support für Enterprise-Webhooks."
+    },
+    "web3": {
+      "title": "6. Web3-Integration",
+      "badge": "Neu in v3.1",
+      "description": "ProcureData integriert sich nativ mit der Pontus-X-Blockchain, um dezentrale Identität, sichere Zahlungen und unveränderliche Rückverfolgbarkeit von Datenvereinbarungen zu bieten.",
+      "pontusX": { "title": "🔗 Pontus-X Network", "description": "Europäisches Blockchain-Netzwerk für Datenaustausch kompatibel mit Gaia-X." },
+      "euroe": { "title": "💶 EUROe Wallet", "description": "Regulierter Stablecoin für sofortige Zahlungen ohne Volatilität." },
+      "did": { "title": "🆔 DID Identity", "description": "Dezentrale Identität (did:ethr) für on-chain verifizierbare Signaturen." },
+      "note": "Das Web3StatusWidget des Dashboards zeigt in Echtzeit Verbindungsstatus, Guthaben und DID des Benutzers."
+    }
+  }
+}

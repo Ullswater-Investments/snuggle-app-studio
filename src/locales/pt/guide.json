@@ -1,0 +1,56 @@
+{
+  "sidebar": {
+    "vision": "1. Visão Geral",
+    "roles": "2. O Triângulo de Confiança",
+    "features": "3. Funcionalidades Core",
+    "business": "4. Modelo de Negócio",
+    "tech": "5. Arquitetura Técnica",
+    "web3": "6. Integração Web3",
+    "backToApp": "Voltar para a App"
+  },
+  "header": {
+    "badge": "White Paper v3.1",
+    "title": "Guia do Ecossistema ProcureData",
+    "subtitle": "Manual técnico e comercial para usuários, parceiros e integradores da plataforma de dados soberanos."
+  },
+  "sections": {
+    "vision": {
+      "title": "1. Visão Geral",
+      "description": "PROCUREDATA é a infraestrutura definitiva para a economia de dados. Transformamos a troca de informações B2B (lenta, insegura e manual) em um Marketplace Transacional instantâneo.",
+      "quote": "\"Não vendemos dados. Vendemos a certeza legal, técnica e financeira de que os dados podem ser utilizados.\""
+    },
+    "roles": {
+      "title": "2. Lógica de Negócio: O Triângulo de Confiança",
+      "description": "A plataforma orquestra três atores fundamentais em cada transação:",
+      "provider": { "title": "Provedor (Provider)", "description": "Proprietário intelectual. Define o preço e as regras ODRL. Ex: Iberdrola Data Hub." },
+      "holder": { "title": "Custodiante (Holder)", "description": "Infraestrutura técnica. Armazena e serve os bits via API. Ex: AWS S3." },
+      "consumer": { "title": "Consumidor (Consumer)", "description": "Adquirente. Paga e assina a licença de uso. Ex: NovaTech Solutions." }
+    },
+    "features": {
+      "title": "3. Funcionalidades Core",
+      "marketplace": { "title": "A. Marketplace & Storefront", "description": "Um catálogo visual com filtros avançados. Permite descobrir ativos \"Green Data\" (Sustentáveis) e verificados (KYB).", "items": ["Data Sandbox: Pré-visualização real de 5-10 linhas de dados antes da compra.", "Bundles: Compra de pacotes de dados multissetoriais."] },
+      "dealRoom": { "title": "B. Sala de Negociação", "description": "Contratos B2B requerem diálogo. A Deal Room permite chat, envio de contra-ofertas e modificação do Smart Contract em tempo real antes da assinatura." },
+      "innovationLab": { "title": "C. Innovation Lab", "description": "Módulo de inteligência artificial que inclui:", "items": ["AI Auditor", "Predictive Simulator", "Market Insights"] }
+    },
+    "business": {
+      "title": "4. Monetização",
+      "description": "O sistema suporta múltiplos modelos econômicos configuráveis pelo vendedor:",
+      "models": ["Pagamento Único: Compra perpétua do dataset.", "Assinatura: Acesso recorrente (Mensal/Anual) a streams de dados ao vivo.", "Taxa de Plataforma: ProcureData retém uma % de cada transação.", "Freemium: Dados básicos gratuitos com opções premium pagas."]
+    },
+    "tech": {
+      "title": "5. Arquitetura Técnica",
+      "description": "Construído sobre uma stack moderna e escalável:",
+      "stack": ["React + Vite", "Supabase (PostgreSQL)", "Tailwind CSS", "Recharts", "Edge Functions"],
+      "note": "Integrações prontas para Gaia-X via conectores EDC e suporte para Webhooks empresariais."
+    },
+    "web3": {
+      "title": "6. Integração Web3",
+      "badge": "Novo na v3.1",
+      "description": "ProcureData integra-se nativamente com a blockchain Pontus-X para oferecer identidade descentralizada, pagamentos seguros e rastreabilidade imutável de acordos de dados.",
+      "pontusX": { "title": "🔗 Pontus-X Network", "description": "Rede blockchain europeia para troca de dados compatível com Gaia-X." },
+      "euroe": { "title": "💶 EUROe Wallet", "description": "Stablecoin regulada para pagamentos instantâneos sem volatilidade." },
+      "did": { "title": "🆔 DID Identity", "description": "Identidade descentralizada (did:ethr) para assinaturas verificáveis on-chain." },
+      "note": "O Web3StatusWidget do Dashboard mostra em tempo real o status de conexão, saldo e DID do usuário."
+    }
+  }
+}

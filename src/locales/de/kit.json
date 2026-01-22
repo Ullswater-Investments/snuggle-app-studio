@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "badge": "Komplettes Komponenten-Kit",
+    "title": "DATENRAUM-KIT",
+    "description": "Alles, was Sie brauchen, um Ihren eigenen Datenraum gemäß europäischen Standards zu erstellen, zu betreiben und zu skalieren. Modulare, interoperable und produktionsreife Komponenten.",
+    "adhesionContract": "Beitrittsvertrag",
+    "access": "Zugriff"
+  },
+  "subsidy": {
+    "title": "Förderprogramm zur Integration von Unternehmen in das europäische GAIA-X Datenraum-Ökosystem",
+    "optionA": {
+      "amount": "15.000€ FÖRDERUNG",
+      "title": "GDC Datenraum-Mitgliedschaft",
+      "subtitle": "Basis-Ökosystem-Mitgliedschaft",
+      "features": ["Zertifizierter IDS/GAIA-X Connector", "Souveräne Identitäts-Wallet (W3C-DID)", "Verband und Spezialausbildung", "3-jährige Ökosystem-Mitgliedschaft"],
+      "applyLabel": "Förderung beantragen:",
+      "upfront": "2.000€",
+      "afterGrant": "+ 13.000€ bei Förderbewilligung"
+    },
+    "optionB": {
+      "amount": "30.000€ FÖRDERUNG",
+      "recommended": "⭐ EMPFOHLEN",
+      "title": "Mitgliedschaft + Anwendungsfall",
+      "subtitle": "Komplettes Projekt mit maßgeschneiderter Entwicklung",
+      "features": ["Alles aus Option A enthalten", "Personalisierte Anwendungsfall-Beratung", "Maßgeschneiderte Entwicklung", "Sichtbarkeit als Ökosystem-Pionier"],
+      "applyLabel": "Förderung beantragen:",
+      "upfront": "5.000€",
+      "afterGrant": "+ 25.000€ bei Förderbewilligung"
+    }
+  },
+  "components": {
+    "title": "Kit-Komponenten",
+    "subtitle": "Jede Komponente ist so konzipiert, dass sie unabhängig oder integriert mit dem restlichen PROCUREDATA-Ökosystem funktioniert.",
+    "explore": "Erkunden",
+    "federatedCatalog": {
+      "title": "Föderierter Datenkatalog",
+      "description": "Zentralisiertes Datenprodukt-Register mit standardisierten Metadaten und erweiterter Suche.",
+      "features": ["DCAT-AP Metadaten", "Semantische Suche", "Auto-Kategorisierung"]
+    },
+    "odrlGovernance": {
+      "title": "ODRL Governance",
+      "description": "Datennutzungsrichtlinien-Engine basierend auf dem ODRL-Standard für granulare Zugriffskontrolle.",
+      "features": ["Deklarative Richtlinien", "Automatisches Enforcement", "Vollständige Prüfung"]
+    },
+    "web3Wallet": {
+      "title": "Unternehmens-Web3-Wallet",
+      "description": "Digitale Wallet für dezentrales Identitätsmanagement und tokenisierte Transaktionen.",
+      "features": ["SSI-Identität", "EUROe-Token", "Unternehmens-Multisignatur"]
+    },
+    "ssiIdentity": {
+      "title": "Selbstsouveräne Identität (SSI)",
+      "description": "Verifizierbares Credential-System für Authentifizierung ohne Vermittler.",
+      "features": ["W3C DIDs", "Verifizierbare Credentials", "Zero-Knowledge-Beweise"]
+    },
+    "idsConnectors": {
+      "title": "IDS/IDSA Connectors",
+      "description": "Native Integration mit dem International Data Spaces Ökosystem für Interoperabilität.",
+      "features": ["IDS Connector", "Usage Control", "Clearing House"]
+    },
+    "erpConnectors": {
+      "title": "ERP Connectors",
+      "description": "Bidirektionale Integration mit Unternehmenssystemen SAP, Oracle, Microsoft Dynamics.",
+      "features": ["SAP S/4HANA", "Oracle Cloud", "Dynamics 365"]
+    },
+    "edgeFunctions": {
+      "title": "Edge Functions",
+      "description": "Serverlose Edge-Verarbeitung für Echtzeit-Transformationen und Validierungen.",
+      "features": ["Niedrige Latenz", "Auto-Skalierung", "Natives TypeScript"]
+    },
+    "multiTenantRLS": {
+      "title": "Multi-Tenant & RLS",
+      "description": "Multi-Tenant-Architektur mit Isolation auf Zeilenebene für maximale Sicherheit.",
+      "features": ["Row Level Security", "Tenant-Isolation", "Erweitertes RBAC"]
+    }
+  },
+  "benefits": {
+    "title": "Warum unser Kit wählen?",
+    "description": "PROCUREDATA bietet die einzige komplette Datenraumlösung, die speziell für den Einkauf entwickelt wurde, mit europäischer regulatorischer Compliance und Gaia-X Ökosystem-Konnektivität.",
+    "items": [
+      "Volle Souveränität über Ihre Daten",
+      "Native DSGVO-Konformität",
+      "Gaia-X Interoperabilität",
+      "Monetarisierung von Datenassets",
+      "Optionale Blockchain-Rückverfolgbarkeit",
+      "On-Premise oder Cloud-Deployment"
+    ],
+    "ecosystemTitle": "Europäisches Ökosystem",
+    "ecosystemDesc": "Kompatibel mit europäischen sektoralen Datenraum-Initiativen:"
+  },
+  "cta": {
+    "title": "Bereit, Ihren Datenraum zu bauen?",
+    "description": "Kontaktieren Sie uns für eine personalisierte Demo und entdecken Sie, wie PROCUREDATA Ihr Lieferantendatenmanagement transformieren kann.",
+    "startNow": "Jetzt Starten",
+    "downloadWhitepaper": "Whitepaper Herunterladen"
+  }
+}

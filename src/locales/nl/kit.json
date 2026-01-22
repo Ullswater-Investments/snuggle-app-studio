@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "badge": "Compleet Componenten Kit",
+    "title": "DATARUIMTE KIT",
+    "description": "Alles wat u nodig heeft om uw eigen Dataruimte te bouwen, te beheren en op te schalen conform Europese standaarden. Modulaire, interoperabele en productie-klare componenten.",
+    "adhesionContract": "Aansluitingscontract",
+    "access": "Toegang"
+  },
+  "subsidy": {
+    "title": "Subsidieprogramma voor het integreren van bedrijven in het Europese GAIA-X Dataruimte ecosysteem",
+    "optionA": {
+      "amount": "€15.000 SUBSIDIE",
+      "title": "GDC Dataruimte Lidmaatschap",
+      "subtitle": "Basis ecosysteem lidmaatschap",
+      "features": ["Gecertificeerde IDS/GAIA-X Connector", "Soevereine Identiteits-Wallet (W3C-DID)", "Vereniging en Gespecialiseerde Training", "3-jarig ecosysteem lidmaatschap"],
+      "applyLabel": "Subsidie aanvragen:",
+      "upfront": "€2.000",
+      "afterGrant": "+ €13.000 bij subsidietoekenning"
+    },
+    "optionB": {
+      "amount": "€30.000 SUBSIDIE",
+      "recommended": "⭐ AANBEVOLEN",
+      "title": "Lidmaatschap + Use Case",
+      "subtitle": "Compleet project met maatwerk ontwikkeling",
+      "features": ["Alles uit Optie A inbegrepen", "Gepersonaliseerd Use Case advies", "Maatwerk Ontwikkeling", "Zichtbaarheid als ecosysteem Pionier"],
+      "applyLabel": "Subsidie aanvragen:",
+      "upfront": "€5.000",
+      "afterGrant": "+ €25.000 bij subsidietoekenning"
+    }
+  },
+  "components": {
+    "title": "Kit Componenten",
+    "subtitle": "Elk component is ontworpen om onafhankelijk of geïntegreerd met de rest van het PROCUREDATA ecosysteem te functioneren.",
+    "explore": "Verkennen",
+    "federatedCatalog": {
+      "title": "Gefedereerde Datacatalogus",
+      "description": "Gecentraliseerd dataproduct register met gestandaardiseerde metadata en geavanceerd zoeken.",
+      "features": ["DCAT-AP Metadata", "Semantisch Zoeken", "Auto-categorisatie"]
+    },
+    "odrlGovernance": {
+      "title": "ODRL Governance",
+      "description": "Datagebruiksbeleid engine gebaseerd op de ODRL standaard voor granulaire toegangscontrole.",
+      "features": ["Declaratief Beleid", "Automatische Handhaving", "Volledige Audit"]
+    },
+    "web3Wallet": {
+      "title": "Zakelijke Web3 Wallet",
+      "description": "Digitale wallet voor gedecentraliseerd identiteitsbeheer en getokeniseerde transacties.",
+      "features": ["SSI Identiteit", "EUROe Tokens", "Zakelijke Multi-handtekening"]
+    },
+    "ssiIdentity": {
+      "title": "Zelfsoevereine Identiteit (SSI)",
+      "description": "Verifieerbaar credential systeem voor authenticatie zonder tussenpersonen.",
+      "features": ["W3C DIDs", "Verifieerbare Credentials", "Zero-knowledge bewijzen"]
+    },
+    "idsConnectors": {
+      "title": "IDS/IDSA Connectors",
+      "description": "Native integratie met het International Data Spaces ecosysteem voor interoperabiliteit.",
+      "features": ["IDS Connector", "Gebruikscontrole", "Clearing House"]
+    },
+    "erpConnectors": {
+      "title": "ERP Connectors",
+      "description": "Bidirectionele integratie met bedrijfssystemen SAP, Oracle, Microsoft Dynamics.",
+      "features": ["SAP S/4HANA", "Oracle Cloud", "Dynamics 365"]
+    },
+    "edgeFunctions": {
+      "title": "Edge Functions",
+      "description": "Serverless edge verwerking voor real-time transformaties en validaties.",
+      "features": ["Lage latentie", "Auto-schaling", "Native TypeScript"]
+    },
+    "multiTenantRLS": {
+      "title": "Multi-Tenant & RLS",
+      "description": "Multi-tenant architectuur met rij-niveau isolatie voor maximale beveiliging.",
+      "features": ["Row Level Security", "Tenant isolatie", "Geavanceerde RBAC"]
+    }
+  },
+  "benefits": {
+    "title": "Waarom ons Kit kiezen?",
+    "description": "PROCUREDATA biedt de enige complete Dataruimte oplossing specifiek ontworpen voor inkoop, met Europese regelgevende compliance en Gaia-X ecosysteem connectiviteit.",
+    "items": [
+      "Volledige soevereiniteit over uw data",
+      "Native AVG compliance",
+      "Gaia-X interoperabiliteit",
+      "Monetisatie van data-assets",
+      "Optionele blockchain traceerbaarheid",
+      "On-premise of cloud deployment"
+    ],
+    "ecosystemTitle": "Europees Ecosysteem",
+    "ecosystemDesc": "Compatibel met Europese sectorale dataruimte initiatieven:"
+  },
+  "cta": {
+    "title": "Klaar om uw Dataruimte te bouwen?",
+    "description": "Neem contact met ons op voor een gepersonaliseerde demo en ontdek hoe PROCUREDATA uw leveranciersdatabeheer kan transformeren.",
+    "startNow": "Nu Beginnen",
+    "downloadWhitepaper": "Whitepaper Downloaden"
+  }
+}

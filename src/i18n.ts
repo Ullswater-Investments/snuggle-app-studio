@@ -34,6 +34,10 @@ import esData from './locales/es/data.json';
 import esReports from './locales/es/reports.json';
 import esNotifications from './locales/es/notifications.json';
 import esAnalytics from './locales/es/analytics.json';
+import esKit from './locales/es/kit.json';
+import esGuide from './locales/es/guide.json';
+import esUserGuide from './locales/es/userGuide.json';
+import esWhitepaper from './locales/es/whitepaper.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';

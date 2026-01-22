@@ -1,0 +1,56 @@
+{
+  "sidebar": {
+    "vision": "1. Vision Générale",
+    "roles": "2. Le Triangle de Confiance",
+    "features": "3. Fonctionnalités Core",
+    "business": "4. Modèle Commercial",
+    "tech": "5. Architecture Technique",
+    "web3": "6. Intégration Web3",
+    "backToApp": "Retour à l'App"
+  },
+  "header": {
+    "badge": "White Paper v3.1",
+    "title": "Guide de l'Écosystème ProcureData",
+    "subtitle": "Manuel technique et commercial pour les utilisateurs, partenaires et intégrateurs de la plateforme de données souveraines."
+  },
+  "sections": {
+    "vision": {
+      "title": "1. Vision Générale",
+      "description": "PROCUREDATA est l'infrastructure définitive pour l'économie des données. Nous transformons l'échange d'informations B2B (lent, non sécurisé et manuel) en un Marketplace Transactionnel instantané.",
+      "quote": "\"Nous ne vendons pas de données. Nous vendons la certitude légale, technique et financière que les données peuvent être utilisées.\""
+    },
+    "roles": {
+      "title": "2. Logique Commerciale: Le Triangle de Confiance",
+      "description": "La plateforme orchestre trois acteurs fondamentaux dans chaque transaction:",
+      "provider": { "title": "Fournisseur (Provider)", "description": "Propriétaire intellectuel. Définit le prix et les règles ODRL. Ex: Iberdrola Data Hub." },
+      "holder": { "title": "Dépositaire (Holder)", "description": "Infrastructure technique. Stocke et sert les bits via API. Ex: AWS S3." },
+      "consumer": { "title": "Consommateur (Consumer)", "description": "Acquéreur. Paie et signe la licence d'utilisation. Ex: NovaTech Solutions." }
+    },
+    "features": {
+      "title": "3. Fonctionnalités Core",
+      "marketplace": { "title": "A. Marketplace & Storefront", "description": "Un catalogue visuel avec des filtres avancés. Permet de découvrir les actifs \"Green Data\" (Durables) et vérifiés (KYB).", "items": ["Data Sandbox: Prévisualisation réelle de 5-10 lignes de données avant achat.", "Bundles: Achat de packages de données multi-sectoriels."] },
+      "dealRoom": { "title": "B. Salle de Négociation", "description": "Les contrats B2B nécessitent un dialogue. La Deal Room permet de chatter, envoyer des contre-offres et modifier le Smart Contract en temps réel avant signature." },
+      "innovationLab": { "title": "C. Innovation Lab", "description": "Module d'intelligence artificielle qui comprend:", "items": ["AI Auditor", "Predictive Simulator", "Market Insights"] }
+    },
+    "business": {
+      "title": "4. Monétisation",
+      "description": "Le système supporte plusieurs modèles économiques configurables par le vendeur:",
+      "models": ["Paiement Unique: Achat perpétuel du dataset.", "Abonnement: Accès récurrent (Mensuel/Annuel) aux flux de données en direct.", "Frais de Plateforme: ProcureData retient un % de chaque transaction.", "Freemium: Données de base gratuites avec options premium payantes."]
+    },
+    "tech": {
+      "title": "5. Architecture Technique",
+      "description": "Construit sur une stack moderne et évolutive:",
+      "stack": ["React + Vite", "Supabase (PostgreSQL)", "Tailwind CSS", "Recharts", "Edge Functions"],
+      "note": "Intégrations prêtes pour Gaia-X via les connecteurs EDC et support pour Webhooks d'entreprise."
+    },
+    "web3": {
+      "title": "6. Intégration Web3",
+      "badge": "Nouveau dans v3.1",
+      "description": "ProcureData s'intègre nativement avec la blockchain Pontus-X pour offrir une identité décentralisée, des paiements sécurisés et une traçabilité immuable des accords de données.",
+      "pontusX": { "title": "🔗 Pontus-X Network", "description": "Réseau blockchain européen pour l'échange de données compatible avec Gaia-X." },
+      "euroe": { "title": "💶 EUROe Wallet", "description": "Stablecoin réglementé pour des paiements instantanés sans volatilité." },
+      "did": { "title": "🆔 DID Identity", "description": "Identité décentralisée (did:ethr) pour des signatures vérifiables on-chain." },
+      "note": "Le Web3StatusWidget du Dashboard montre en temps réel l'état de connexion, le solde et le DID de l'utilisateur."
+    }
+  }
+}

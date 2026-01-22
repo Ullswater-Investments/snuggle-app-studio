@@ -1,0 +1,56 @@
+{
+  "sidebar": {
+    "vision": "1. Algemene Visie",
+    "roles": "2. De Vertrouwensdriehoek",
+    "features": "3. Kernfunctionaliteiten",
+    "business": "4. Bedrijfsmodel",
+    "tech": "5. Technische Architectuur",
+    "web3": "6. Web3 Integratie",
+    "backToApp": "Terug naar App"
+  },
+  "header": {
+    "badge": "White Paper v3.1",
+    "title": "ProcureData Ecosysteem Gids",
+    "subtitle": "Technische en commerciële handleiding voor gebruikers, partners en integratoren van het soevereine dataplatform."
+  },
+  "sections": {
+    "vision": {
+      "title": "1. Algemene Visie",
+      "description": "PROCUREDATA is de definitieve infrastructuur voor de data-economie. Wij transformeren B2B-informatie-uitwisseling (traag, onveilig en handmatig) naar een onmiddellijke Transactionele Marktplaats.",
+      "quote": "\"Wij verkopen geen data. Wij verkopen de juridische, technische en financiële zekerheid dat de data kan worden gebruikt.\""
+    },
+    "roles": {
+      "title": "2. Bedrijfslogica: De Vertrouwensdriehoek",
+      "description": "Het platform orkestreert drie fundamentele actoren in elke transactie:",
+      "provider": { "title": "Aanbieder (Provider)", "description": "Intellectueel eigenaar. Definieert prijs en ODRL-regels. Bijv.: Iberdrola Data Hub." },
+      "holder": { "title": "Bewaarder (Holder)", "description": "Technische infrastructuur. Slaat op en serveert bits via API. Bijv.: AWS S3." },
+      "consumer": { "title": "Consument (Consumer)", "description": "Verwerver. Betaalt en ondertekent de gebruikslicentie. Bijv.: NovaTech Solutions." }
+    },
+    "features": {
+      "title": "3. Kernfunctionaliteiten",
+      "marketplace": { "title": "A. Marketplace & Storefront", "description": "Een visuele catalogus met geavanceerde filters. Maakt het ontdekken van \"Green Data\" (Duurzaam) en geverifieerde (KYB) assets mogelijk.", "items": ["Data Sandbox: Echte preview van 5-10 rijen data voor aankoop.", "Bundles: Aankoop van multisectorale datapakketten."] },
+      "dealRoom": { "title": "B. Onderhandelingsruimte", "description": "B2B-contracten vereisen dialoog. De Deal Room maakt chatten, tegenbiedingen versturen en het wijzigen van het Smart Contract in real-time voor ondertekening mogelijk." },
+      "innovationLab": { "title": "C. Innovation Lab", "description": "Kunstmatige intelligentie module inclusief:", "items": ["AI Auditor", "Predictive Simulator", "Market Insights"] }
+    },
+    "business": {
+      "title": "4. Monetisatie",
+      "description": "Het systeem ondersteunt meerdere economische modellen die door de verkoper kunnen worden geconfigureerd:",
+      "models": ["Eenmalige Betaling: Permanente aankoop van de dataset.", "Abonnement: Terugkerende toegang (Maandelijks/Jaarlijks) tot live datastreams.", "Platformfee: ProcureData behoudt een % van elke transactie.", "Freemium: Gratis basisdata met betaalde premium opties."]
+    },
+    "tech": {
+      "title": "5. Technische Architectuur",
+      "description": "Gebouwd op een moderne en schaalbare stack:",
+      "stack": ["React + Vite", "Supabase (PostgreSQL)", "Tailwind CSS", "Recharts", "Edge Functions"],
+      "note": "Integraties gereed voor Gaia-X via EDC-connectors en ondersteuning voor zakelijke Webhooks."
+    },
+    "web3": {
+      "title": "6. Web3 Integratie",
+      "badge": "Nieuw in v3.1",
+      "description": "ProcureData integreert native met de Pontus-X blockchain om gedecentraliseerde identiteit, veilige betalingen en onveranderlijke traceerbaarheid van data-overeenkomsten te bieden.",
+      "pontusX": { "title": "🔗 Pontus-X Network", "description": "Europees blockchain-netwerk voor data-uitwisseling compatibel met Gaia-X." },
+      "euroe": { "title": "💶 EUROe Wallet", "description": "Gereguleerde stablecoin voor directe betalingen zonder volatiliteit." },
+      "did": { "title": "🆔 DID Identity", "description": "Gedecentraliseerde identiteit (did:ethr) voor on-chain verifieerbare handtekeningen." },
+      "note": "De Web3StatusWidget van het Dashboard toont real-time verbindingsstatus, saldo en DID van de gebruiker."
+    }
+  }
+}

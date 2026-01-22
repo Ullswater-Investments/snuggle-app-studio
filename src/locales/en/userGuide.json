@@ -1,0 +1,21 @@
+{
+  "title": "User Guide",
+  "subtitle": "Complete documentation for ProcureData platform users",
+  "documents": {
+    "1": { "title": "Explanatory Document 1", "subtitle": "Fundamentals, Vision and the 'nxm' Model" },
+    "2": { "title": "Explanatory Document 2", "subtitle": "Service Catalog and Operational Functioning" },
+    "3": { "title": "Explanatory Document 3", "subtitle": "Sustainability, European Regulations and Use Cases" },
+    "4": { "title": "Explanatory Document 4", "subtitle": "Finance, Cybersecurity and ERP Integration" },
+    "5": { "title": "Explanatory Document 5", "subtitle": "Sales, Marketing and Growth Strategies" },
+    "6": { "title": "Explanatory Document 6", "subtitle": "User Guide, Interface and Support" },
+    "7": { "title": "Explanatory Document 7", "subtitle": "Data Governance, ODRL and Data Holders" },
+    "8": { "title": "Explanatory Document 8", "subtitle": "Advanced Analytics, BI and Synthetic Data" },
+    "9": { "title": "Explanatory Document 9", "subtitle": "Technical Integration and Security" },
+    "10": { "title": "Explanatory Document 10", "subtitle": "Resilience, Governance and Extreme Scenarios" },
+    "11": { "title": "Explanatory Document 11", "subtitle": "Deep Dive into Strategic Sectors" },
+    "12": { "title": "Explanatory Document 12", "subtitle": "Developer Manual and Architecture" },
+    "13": { "title": "Explanatory Document 13", "subtitle": "Dialogues and NLU Training" },
+    "14": { "title": "Explanatory Document 14", "subtitle": "Library of Real Use Cases" },
+    "15": { "title": "Explanatory Document 15", "subtitle": "Complete Dictionary and Glossary of Terms" }
+  }
+}

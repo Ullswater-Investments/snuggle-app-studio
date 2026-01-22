@@ -1,0 +1,96 @@
+{
+  "hero": {
+    "badge": "Complete Component Kit",
+    "title": "DATA SPACE KIT",
+    "description": "Everything you need to build, operate and scale your own Data Space compliant with European standards. Modular, interoperable, and production-ready components.",
+    "adhesionContract": "Adhesion Contract",
+    "access": "Access"
+  },
+  "subsidy": {
+    "title": "Grant program for incorporating companies into the European GAIA-X Data Spaces ecosystem",
+    "optionA": {
+      "amount": "€15,000 GRANT",
+      "title": "GDC Data Space Membership",
+      "subtitle": "Basic ecosystem membership",
+      "features": ["Certified IDS/GAIA-X Connector", "Sovereign Identity Wallet (W3C-DID)", "Association and Specialized Training", "3-year ecosystem membership"],
+      "applyLabel": "Apply for grant:",
+      "upfront": "€2,000",
+      "afterGrant": "+ €13,000 upon grant approval"
+    },
+    "optionB": {
+      "amount": "€30,000 GRANT",
+      "recommended": "⭐ RECOMMENDED",
+      "title": "Membership + Use Case",
+      "subtitle": "Complete project with custom development",
+      "features": ["Everything included in Option A", "Personalized Use Case consulting", "Custom Development", "Visibility as ecosystem Pioneer"],
+      "applyLabel": "Apply for grant:",
+      "upfront": "€5,000",
+      "afterGrant": "+ €25,000 upon grant approval"
+    }
+  },
+  "components": {
+    "title": "Kit Components",
+    "subtitle": "Each component is designed to work independently or integrated with the rest of the PROCUREDATA ecosystem.",
+    "explore": "Explore",
+    "federatedCatalog": {
+      "title": "Federated Data Catalog",
+      "description": "Centralized data product registry with standardized metadata and advanced search.",
+      "features": ["DCAT-AP Metadata", "Semantic Search", "Auto-categorization"]
+    },
+    "odrlGovernance": {
+      "title": "ODRL Governance",
+      "description": "Data usage policy engine based on ODRL standard for granular access control.",
+      "features": ["Declarative Policies", "Automatic Enforcement", "Complete Auditing"]
+    },
+    "web3Wallet": {
+      "title": "Corporate Web3 Wallet",
+      "description": "Digital wallet for decentralized identity management and tokenized transactions.",
+      "features": ["SSI Identity", "EUROe Tokens", "Corporate Multi-signature"]
+    },
+    "ssiIdentity": {
+      "title": "Self-Sovereign Identity (SSI)",
+      "description": "Verifiable credential system for authentication without intermediaries.",
+      "features": ["W3C DIDs", "Verifiable Credentials", "Zero-knowledge proofs"]
+    },
+    "idsConnectors": {
+      "title": "IDS/IDSA Connectors",
+      "description": "Native integration with International Data Spaces ecosystem for interoperability.",
+      "features": ["IDS Connector", "Usage Control", "Clearing House"]
+    },
+    "erpConnectors": {
+      "title": "ERP Connectors",
+      "description": "Bidirectional integration with enterprise systems SAP, Oracle, Microsoft Dynamics.",
+      "features": ["SAP S/4HANA", "Oracle Cloud", "Dynamics 365"]
+    },
+    "edgeFunctions": {
+      "title": "Edge Functions",
+      "description": "Serverless edge processing for real-time transformations and validations.",
+      "features": ["Low latency", "Auto-scaling", "Native TypeScript"]
+    },
+    "multiTenantRLS": {
+      "title": "Multi-Tenant & RLS",
+      "description": "Multi-tenant architecture with row-level isolation for maximum security.",
+      "features": ["Row Level Security", "Tenant isolation", "Advanced RBAC"]
+    }
+  },
+  "benefits": {
+    "title": "Why choose our Kit?",
+    "description": "PROCUREDATA offers the only complete Data Space solution specifically designed for procurement, with European regulatory compliance and Gaia-X ecosystem connectivity.",
+    "items": [
+      "Full sovereignty over your data",
+      "Native GDPR/LOPD compliance",
+      "Gaia-X interoperability",
+      "Data asset monetization",
+      "Optional blockchain traceability",
+      "On-premise or cloud deployment"
+    ],
+    "ecosystemTitle": "European Ecosystem",
+    "ecosystemDesc": "Compatible with European sectoral data space initiatives:"
+  },
+  "cta": {
+    "title": "Ready to build your Data Space?",
+    "description": "Contact us for a personalized demo and discover how PROCUREDATA can transform your supplier data management.",
+    "startNow": "Start Now",
+    "downloadWhitepaper": "Download Whitepaper"
+  }
+}
