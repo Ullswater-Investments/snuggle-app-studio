@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "backToPartners": "Back to Partners",
+    "badges": {
+      "strategic": "Strategic Partner",
+      "dataSpaceKit": "Data Space Kit Ready"
+    }
+  },
+  "hero": {
+    "badge": "Ecosystem Builder",
+    "title": "CloserStill Media",
+    "subtitle": "Global leader in organizing professional trade fairs and B2B events. Enabler of the <strong>Digital Commerce Data Space</strong> in Spain.",
+    "stats": {
+      "countries": "Spain & UK",
+      "visitors": "+50,000 Visitors/year",
+      "exhibitors": "+1,500 Exhibitors"
+    }
+  },
+  "profile": {
+    "title": "Corporate Profile",
+    "paragraph1": "CloserStill Media is the global leader in organizing professional trade fairs and B2B events. In Spain, it manages the most powerful networking ecosystem in the market, connecting supply and demand through \"umbrella event\" strategies that bring together C-Level executives from multiple verticals in the same venue.",
+    "paragraph2": "Its approach spans from critical technology infrastructure to digital retail and the pharmaceutical sector, acting as the main driver of in-person business in Madrid and Barcelona."
+  },
+  "ecosystems": {
+    "title": "Connected Ecosystems Portfolio",
+    "description": "Through this alliance, ProcureData enables data interoperability in the following key events:",
+    "madrid": {
+      "name": "Madrid Tech Show",
+      "location": "IFEMA, Madrid",
+      "description": "Spain's largest technology convergence",
+      "subEvents": ["E-Show Madrid", "Big Data & AI World", "Cyber Security World", "Cloud & AI Infrastructure", "Data Centre World", "Connectivity World", "Technology for Marketing (TFM)"]
+    },
+    "barcelona": {
+      "name": "Barcelona Digital Hub",
+      "location": "Barcelona",
+      "description": "Focus on digital business and retail transformation",
+      "subEvents": ["E-Show Barcelona (Senior Edition)", "TFM Barcelona"]
+    },
+    "health": {
+      "name": "Health & Pharma Sector",
+      "location": "National",
+      "description": "Leading events in pharmaceutical and dental sector",
+      "subEvents": ["Infarma (Leading pharmaceutical congress)", "Dental Summit"]
+    },
+    "eforums": {
+      "badge": "High-Value Format",
+      "title": "eForums (One to One)",
+      "description": "Private executive \"speed dating\" meetings powered by pre-validated identity verification"
+    }
+  },
+  "valueProposition": {
+    "badge": "The Partnership",
+    "title": "Joint Value Proposition",
+    "description": "The <strong>ProcureData x CloserStill</strong> alliance transforms trade fairs into <span>Liquid Data Spaces</span>",
+    "items": {
+      "fastTrack": {
+        "title": "Commercial Fast-Track",
+        "description": "Exhibitors and visitors use their ProcureData Digital Passport to instantly validate credentials (Solvency, ISOs, ESG) when scanning their badge."
+      },
+      "dataSpace": {
+        "title": "Federated Data Space",
+        "description": "We enable CloserStill to act as orchestrator of the 'Digital Commerce Data Space', allowing exhibitors to access Data Space Kit funding."
+      },
+      "matchmaking": {
+        "title": "Verified Matchmaking",
+        "description": "At eForums, we ensure every 'One to One' meeting occurs between pre-approved parties, eliminating post-event compliance friction."
+      }
+    }
+  },
+  "services": {
+    "title": "Integrated Services",
+    "subtitle": "Features enabled by ProcureData infrastructure",
+    "items": {
+      "onboarding": {
+        "title": "Exhibitor Onboarding",
+        "description": "Automatic KYB (Know Your Business) validation"
+      },
+      "leads": {
+        "title": "Sovereign Lead Exchange",
+        "description": "Use of EDC connectors to share contact data under ODRL contracts"
+      },
+      "certification": {
+        "title": "Attendance Certification",
+        "description": "Issuance of verifiable credentials for participation and training on blockchain"
+      }
+    }
+  },
+  "cta": {
+    "title": "Are you an exhibitor at CloserStill events?",
+    "description": "Access the advantages of the Data Space Kit and optimize your participation with instant business credential validation.",
+    "buttons": {
+      "opportunities": "View Ecosystem Opportunities",
+      "dataSpaceKit": "More about Data Space Kit"
+    }
+  }
+}

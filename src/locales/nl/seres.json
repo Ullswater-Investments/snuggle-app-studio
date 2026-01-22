@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "backToPartners": "Terug naar Partners"
+  },
+  "hero": {
+    "badges": {
+      "group": "Docaposte Groep",
+      "gaiaX": "Gaia-X Ready",
+      "experience": "+30 jaar ervaring"
+    },
+    "title": "SERES",
+    "subtitle": "Vertrouwde Derde Partij voor Veilige Elektronische Documentuitwisseling",
+    "description": "Met meer dan 30 jaar ervaring faciliteert SERES de digitale transformatie van bedrijven door het optimaliseren, automatiseren en beveiligen van documentbeheerprocessen in B2B-, B2G- en B2C-relaties."
+  },
+  "stats": {
+    "experience": { "value": "+30", "label": "Jaar ervaring" },
+    "countries": { "value": "+100", "label": "Operationele landen" },
+    "compliance": { "value": "100%", "label": "Gegarandeerde compliance" }
+  },
+  "profile": {
+    "title": "Bedrijfsprofiel",
+    "subtitle": "Deel van de Docaposte Groep",
+    "paragraph1": "SERES is een pionierend technologiebedrijf gespecialiseerd in Oplossingen voor Veilige Elektronische Documentuitwisseling. Het fungeert als een Vertrouwde Derde Partij om de digitale transformatie van bedrijven te faciliteren.",
+    "paragraph2": "Het behoort tot de Franse groep Docaposte, een digitale dochteronderneming van de La Poste Groep, wat het een solide internationale ondersteuning en toegang tot geavanceerde technologieën in digitale identiteit, gecertificeerde archivering en digitaal vertrouwen biedt.",
+    "paragraph3": "Het hoofdkantoor voor Iberië en LATAM is sterk verankerd in Spanje, opereert wereldwijd en faciliteert verbindingen in meer dan honderd landen met compliance- en e-factureringsoplossingen."
+  },
+  "solutions": {
+    "badge": "Activiteitsgebieden",
+    "title": "Digitale Uitwisselingsoplossingen",
+    "description": "Volledig portfolio om papier en handmatige processen te elimineren, terwijl regelgevende compliance in elk land wordt gegarandeerd.",
+    "items": {
+      "eInvoice": {
+        "title": "e-Factuur",
+        "description": "Platforms voor het uitgeven en ontvangen van elektronische facturen in overeenstemming met geldende wettelijke voorschriften (Ley Crea y Crece, LATAM-voorschriften).",
+        "tags": ["SII", "TicketBAI", "LATAM"]
+      },
+      "edi": {
+        "title": "EDI (Elektronische Gegevensuitwisseling)",
+        "description": "Gestandaardiseerde uitwisseling van commerciële documenten tussen partners: bestellingen, afleveringsbonnen, facturen.",
+        "tags": ["Retail", "Automotive", "B2B"]
+      },
+      "s2p": {
+        "title": "Source to Pay (S2P)",
+        "description": "Volledige automatisering van de inkoopyclus, van aanvraag tot betaling.",
+        "tags": ["Inkoop", "Automatisering"]
+      },
+      "o2c": {
+        "title": "Order to Cash (O2C)",
+        "description": "Integrale oplossingen voor de verkoopcyclus: van bestelling tot incasso.",
+        "tags": ["Verkoop", "Cashflow"]
+      },
+      "fiscal": {
+        "title": "Fiscale Rapportage en Compliance",
+        "description": "Aangepaste tools voor SII, TicketBAI en internationale fiscale verplichtingen.",
+        "tags": ["Compliance", "Fiscaal"]
+      },
+      "erp": {
+        "title": "ERP-integratie",
+        "description": "Native connectors met SAP, Oracle en toonaangevende markt-ERPs.",
+        "tags": ["SAP", "Oracle", "API"]
+      }
+    }
+  },
+  "successStories": {
+    "badge": "Succesverhalen",
+    "title": "Klanten die SERES Vertrouwen",
+    "description": "Toonaangevende bedrijven uit meerdere sectoren die hun documentprocessen hebben getransformeerd.",
+    "sectors": {
+      "retail": {
+        "title": "Consumentengoederen en Retail",
+        "companies": {
+          "nestle": { "name": "Nestlé", "highlight": "+25 jaar klant", "description": "EDI voor massale documentuitwisseling" },
+          "coviran": { "name": "Covirán", "highlight": "Geautomatiseerde SII", "description": "Digitalisering van factuurontvangst" },
+          "bonarea": { "name": "BonÀrea", "highlight": "Slimme tracking", "description": "Factuurautomatisering en -tracking" },
+          "chovi": { "name": "Choví", "highlight": "Commerciële efficiëntie", "description": "Verbetering van factureringsprocessen" }
+        }
+      },
+      "services": {
+        "title": "Diensten en Telecommunicatie",
+        "companies": {
+          "ilunion": { "name": "Ilunion", "highlight": "Geautomatiseerde ontvangst", "description": "Automatisering van leveranciersfacturen" },
+          "atresmedia": { "name": "Atresmedia", "highlight": "Documentbeheer", "description": "Digitalisering van documentprocessen" },
+          "bt": { "name": "BT", "highlight": "e-Factuur OV", "description": "Uitgifte van elektronische facturen voor Overheden" }
+        }
+      },
+      "industry": {
+        "title": "Industrie en Energie",
+        "companies": {
+          "siemens": { "name": "Siemens Gamesa", "highlight": "Leveranciersdigitalisering", "description": "Optimalisatie van factuurontvangst" },
+          "sonepar": { "name": "Sonepar", "highlight": "Administratieve reductie", "description": "Eliminatie van onproductieve taken" },
+          "energizer": { "name": "Energizer", "highlight": "SRI Ecuador", "description": "LATAM regelgevende compliance" }
+        }
+      },
+      "international": {
+        "title": "Internationale Projecten",
+        "companies": {
+          "amadeus": { "name": "Amadeus", "highlight": "Multi-land LATAM", "description": "Centralisatie van elektronische facturering conform de regelgeving van elk land" }
+        }
+      }
+    }
+  },
+  "valueProposition": {
+    "badge": "Differentiële Waarde",
+    "title": "Waarom SERES?",
+    "description": "Niet alleen software: advies en begeleiding bij digitaal verandermanagement.",
+    "items": {
+      "costs": { "title": "Kostenreductie", "description": "Eliminatie van handmatige fouten en papieren processen. Aantoonbare ROI in maanden." },
+      "collection": { "title": "Incassoversnelling", "description": "DSO-reductie (Days Sales Outstanding) dankzij factuurtraceerbaarheid." },
+      "compliance": { "title": "Wettelijke Compliance", "description": "Regelgevende conformiteit zonder behoefte aan complexe interne ontwikkeling." }
+    }
+  },
+  "integration": {
+    "badges": {
+      "strategic": "Strategische Integratie",
+      "gaiaX": "Gaia-X · Pontus-X"
+    },
+    "title": "PROCUREDATA Node: Soevereine Brug naar Europese Data Spaces",
+    "paragraph1": "De waardepropositie van PROCUREDATA sluit rechtstreeks aan bij de digitale soevereiniteitsstrategie van de Europese Unie. De Data Act beoogt industriële data vrij te maken om innovatie te bevorderen, terwijl het Gaia-X-framework de vertrouwensregels voor veilige uitwisseling vaststelt.",
+    "paragraph2": "SERES positioneert zich door de adoptie van PONTUS-X automatisch als een Gaia-X-compatibele actor, in staat om te interageren met Gaia-X Digital Clearing Houses (GXDCH) om identiteiten en diensten te verifiëren. Dit is cruciaal om relevant te blijven in gereguleerde sectoren zoals automotive (Catena-X) of lucht- en ruimtevaart.",
+    "features": {
+      "gdpr": "AVG en Data Governance Act compliance by design",
+      "smartContracts": "Smart contracts voor toestemmingsbeheer",
+      "did": "Gedecentraliseerde Identiteiten (DID) voor authenticatie",
+      "interoperability": "Interoperabiliteit met andere sectorale Data Spaces"
+    }
+  },
+  "cta": {
+    "title": "Klaar om uw documentprocessen te transformeren?",
+    "description": "Sluit u aan bij de duizenden bedrijven die SERES vertrouwen voor hun digitale transformatie.",
+    "buttons": {
+      "contact": "Contact SERES",
+      "members": "Ledentoegang"
+    }
+  }
+}

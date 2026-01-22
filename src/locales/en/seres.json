@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "backToPartners": "Back to Partners"
+  },
+  "hero": {
+    "badges": {
+      "group": "Docaposte Group",
+      "gaiaX": "Gaia-X Ready",
+      "experience": "+30 years of experience"
+    },
+    "title": "SERES",
+    "subtitle": "Trusted Third Party for Secure Electronic Document Exchange",
+    "description": "With over 30 years of experience, SERES enables businesses' digital transformation by optimizing, automating and securing document management processes in B2B, B2G and B2C relationships."
+  },
+  "stats": {
+    "experience": { "value": "+30", "label": "Years of experience" },
+    "countries": { "value": "+100", "label": "Operating countries" },
+    "compliance": { "value": "100%", "label": "Guaranteed compliance" }
+  },
+  "profile": {
+    "title": "Corporate Profile",
+    "subtitle": "Part of Docaposte Group",
+    "paragraph1": "SERES is a pioneering technology company specializing in Secure Electronic Document Exchange Solutions. It acts as a Trusted Third Party to facilitate the digital transformation of businesses.",
+    "paragraph2": "It belongs to the French group Docaposte, a digital subsidiary of La Poste Group, which provides solid international backing and access to cutting-edge technologies in digital identity, certified archiving and digital trust.",
+    "paragraph3": "Its headquarters for Iberia and LATAM is strongly rooted in Spain, operating globally and facilitating connections in over a hundred countries with its compliance and electronic invoicing solutions."
+  },
+  "solutions": {
+    "badge": "Activity Areas",
+    "title": "Digital Exchange Solutions",
+    "description": "Complete portfolio to eliminate paper and manual processes, ensuring regulatory compliance in every country.",
+    "items": {
+      "eInvoice": {
+        "title": "e-Invoice",
+        "description": "Platforms for issuing and receiving electronic invoices in compliance with current legal regulations (Crea y Crece Law, LATAM regulations).",
+        "tags": ["SII", "TicketBAI", "LATAM"]
+      },
+      "edi": {
+        "title": "EDI (Electronic Data Interchange)",
+        "description": "Standardized exchange of commercial documents between partners: orders, delivery notes, invoices.",
+        "tags": ["Retail", "Automotive", "B2B"]
+      },
+      "s2p": {
+        "title": "Source to Pay (S2P)",
+        "description": "Complete automation of the procurement cycle, from requisition to payment.",
+        "tags": ["Procurement", "Automation"]
+      },
+      "o2c": {
+        "title": "Order to Cash (O2C)",
+        "description": "Comprehensive solutions for the sales cycle: from order to collection.",
+        "tags": ["Sales", "Cash Flow"]
+      },
+      "fiscal": {
+        "title": "Tax Reporting and Compliance",
+        "description": "Tools adapted for SII, TicketBAI and international tax obligations.",
+        "tags": ["Compliance", "Tax"]
+      },
+      "erp": {
+        "title": "ERP Integration",
+        "description": "Native connectors with SAP, Oracle and leading market ERPs.",
+        "tags": ["SAP", "Oracle", "API"]
+      }
+    }
+  },
+  "successStories": {
+    "badge": "Success Stories",
+    "title": "Clients Who Trust SERES",
+    "description": "Leading companies from multiple sectors that have transformed their document processes.",
+    "sectors": {
+      "retail": {
+        "title": "Consumer Goods and Retail",
+        "companies": {
+          "nestle": { "name": "Nestlé", "highlight": "+25 years as client", "description": "EDI for massive document exchange" },
+          "coviran": { "name": "Covirán", "highlight": "Automated SII", "description": "Invoice reception digitalization" },
+          "bonarea": { "name": "BonÀrea", "highlight": "Smart tracking", "description": "Invoice automation and tracking" },
+          "chovi": { "name": "Choví", "highlight": "Commercial efficiency", "description": "Invoicing process improvement" }
+        }
+      },
+      "services": {
+        "title": "Services and Telecommunications",
+        "companies": {
+          "ilunion": { "name": "Ilunion", "highlight": "Automated reception", "description": "Supplier invoice automation" },
+          "atresmedia": { "name": "Atresmedia", "highlight": "Document management", "description": "Document process digitalization" },
+          "bt": { "name": "BT", "highlight": "e-Invoice for PA", "description": "Electronic invoice issuance for Public Administrations" }
+        }
+      },
+      "industry": {
+        "title": "Industry and Energy",
+        "companies": {
+          "siemens": { "name": "Siemens Gamesa", "highlight": "Supplier digitalization", "description": "Invoice reception optimization" },
+          "sonepar": { "name": "Sonepar", "highlight": "Administrative reduction", "description": "Elimination of unproductive tasks" },
+          "energizer": { "name": "Energizer", "highlight": "SRI Ecuador", "description": "LATAM regulatory compliance" }
+        }
+      },
+      "international": {
+        "title": "International Projects",
+        "companies": {
+          "amadeus": { "name": "Amadeus", "highlight": "Multi-country LATAM", "description": "Centralization of electronic invoicing compliant with each country's regulations" }
+        }
+      }
+    }
+  },
+  "valueProposition": {
+    "badge": "Differential Value",
+    "title": "Why SERES?",
+    "description": "Not just software: consulting and support in digital change management.",
+    "items": {
+      "costs": { "title": "Cost Reduction", "description": "Elimination of manual errors and paper processes. Demonstrable ROI in months." },
+      "collection": { "title": "Collection Acceleration", "description": "DSO (Days Sales Outstanding) reduction thanks to invoice traceability." },
+      "compliance": { "title": "Legal Compliance", "description": "Regulatory conformity without need for complex internal development." }
+    }
+  },
+  "integration": {
+    "badges": {
+      "strategic": "Strategic Integration",
+      "gaiaX": "Gaia-X · Pontus-X"
+    },
+    "title": "PROCUREDATA Node: Sovereign Bridge to European Data Spaces",
+    "paragraph1": "PROCUREDATA's value proposition aligns directly with the European Union's digital sovereignty strategy. The Data Act seeks to unlock industrial data to foster innovation, while the Gaia-X framework establishes the trust rules for secure exchange.",
+    "paragraph2": "SERES, by adopting PONTUS-X, automatically positions itself as a Gaia-X compatible actor, capable of interacting with Gaia-X Digital Clearing Houses (GXDCH) to verify identities and services. This is critical to maintain relevance in regulated sectors such as automotive (Catena-X) or aerospace.",
+    "features": {
+      "gdpr": "GDPR and Data Governance Act compliance by design",
+      "smartContracts": "Smart contracts for consent management",
+      "did": "Decentralized Identities (DID) for authentication",
+      "interoperability": "Interoperability with other sectoral Data Spaces"
+    }
+  },
+  "cta": {
+    "title": "Ready to transform your document processes?",
+    "description": "Join the thousands of companies that trust SERES for their digital transformation.",
+    "buttons": {
+      "contact": "Contact SERES",
+      "members": "Members Access"
+    }
+  }
+}

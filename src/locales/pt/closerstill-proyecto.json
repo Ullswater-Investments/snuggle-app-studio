@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "backToPartners": "Voltar aos Parceiros",
+    "badges": {
+      "strategic": "Parceiro Estratégico",
+      "dataSpaceKit": "Kit Data Space Ready"
+    }
+  },
+  "hero": {
+    "badge": "Ecosystem Builder",
+    "title": "CloserStill Media",
+    "subtitle": "Líder global na organização de feiras profissionais e eventos B2B. Dinamizador do <strong>Espaço de Dados do Comércio Digital</strong> em Espanha.",
+    "stats": {
+      "countries": "Espanha & UK",
+      "visitors": "+50.000 Visitantes/ano",
+      "exhibitors": "+1.500 Expositores"
+    }
+  },
+  "profile": {
+    "title": "Perfil Corporativo",
+    "paragraph1": "A CloserStill Media é líder global na organização de feiras profissionais e eventos B2B. Em Espanha, gere o ecossistema de networking mais poderoso do mercado, conectando oferta e procura através de estratégias de \"eventos guarda-chuva\" que reúnem executivos C-Level de múltiplas verticais no mesmo local.",
+    "paragraph2": "A sua abordagem abrange desde a infraestrutura tecnológica crítica até ao retalho digital e ao setor farmacêutico, atuando como o principal dinamizador de negócios presenciais em Madrid e Barcelona."
+  },
+  "ecosystems": {
+    "title": "Portfolio de Ecossistemas Conectados",
+    "description": "Através desta aliança, a ProcureData habilita a interoperabilidade de dados nos seguintes eventos-chave:",
+    "madrid": {
+      "name": "Madrid Tech Show",
+      "location": "IFEMA, Madrid",
+      "description": "A maior convergência tecnológica de Espanha",
+      "subEvents": ["E-Show Madrid", "Big Data & AI World", "Cyber Security World", "Cloud & AI Infrastructure", "Data Centre World", "Connectivity World", "Technology for Marketing (TFM)"]
+    },
+    "barcelona": {
+      "name": "Hub Digital Barcelona",
+      "location": "Barcelona",
+      "description": "Foco em negócio digital e transformação do retalho",
+      "subEvents": ["E-Show Barcelona (Edição Senior)", "TFM Barcelona"]
+    },
+    "health": {
+      "name": "Setor Saúde & Pharma",
+      "location": "Nacional",
+      "description": "Eventos líderes no setor farmacêutico e dentário",
+      "subEvents": ["Infarma (Congresso farmacêutico líder)", "Dental Summit"]
+    },
+    "eforums": {
+      "badge": "Formato High-Value",
+      "title": "eForums (One to One)",
+      "description": "Reuniões executivas privadas \"speed dating\" potenciadas por validação prévia de identidade"
+    }
+  },
+  "valueProposition": {
+    "badge": "The Partnership",
+    "title": "Proposta de Valor Conjunta",
+    "description": "A aliança <strong>ProcureData x CloserStill</strong> transforma as feiras comerciais em <span>Espaços de Dados Líquidos</span>",
+    "items": {
+      "fastTrack": {
+        "title": "Fast-Track Comercial",
+        "description": "Os expositores e visitantes utilizam o seu Passaporte Digital ProcureData para validar credenciais (Solvência, ISOs, ESG) instantaneamente ao digitalizar a sua acreditação."
+      },
+      "dataSpace": {
+        "title": "Espaço de Dados Federado",
+        "description": "Facilitamos que a CloserStill atue como orquestrador do 'Espaço de Dados do Comércio Digital', permitindo aos seus expositores aceder às ajudas do Kit Data Space."
+      },
+      "matchmaking": {
+        "title": "Matchmaking Verificado",
+        "description": "Nos eForums, garantimos que cada reunião 'One to One' ocorra entre partes previamente homologadas, eliminando a fricção de compliance pós-evento."
+      }
+    }
+  },
+  "services": {
+    "title": "Serviços Integrados",
+    "subtitle": "Funcionalidades habilitadas pela infraestrutura ProcureData",
+    "items": {
+      "onboarding": {
+        "title": "Onboarding de Expositores",
+        "description": "Validação automática KYB (Know Your Business)"
+      },
+      "leads": {
+        "title": "Intercâmbio Soberano de Leads",
+        "description": "Uso de conectores EDC para partilhar dados de contacto sob contratos ODRL"
+      },
+      "certification": {
+        "title": "Certificação de Participação",
+        "description": "Emissão de credenciais verificáveis de participação e formação em blockchain"
+      }
+    }
+  },
+  "cta": {
+    "title": "É expositor em eventos CloserStill?",
+    "description": "Aceda às vantagens do Kit Data Space e otimize a sua participação com validação instantânea de credenciais empresariais.",
+    "buttons": {
+      "opportunities": "Ver Oportunidades do Ecossistema",
+      "dataSpaceKit": "Mais sobre Kit Data Space"
+    }
+  }
+}

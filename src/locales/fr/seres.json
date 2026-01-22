@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "backToPartners": "Retour aux Partenaires"
+  },
+  "hero": {
+    "badges": {
+      "group": "Groupe Docaposte",
+      "gaiaX": "Gaia-X Ready",
+      "experience": "+30 ans d'expérience"
+    },
+    "title": "SERES",
+    "subtitle": "Tiers de Confiance pour l'Échange Électronique Sécurisé de Documents",
+    "description": "Avec plus de 30 ans d'expérience, SERES facilite la transformation numérique des entreprises en optimisant, automatisant et sécurisant les processus de gestion documentaire dans les relations B2B, B2G et B2C."
+  },
+  "stats": {
+    "experience": { "value": "+30", "label": "Années d'expérience" },
+    "countries": { "value": "+100", "label": "Pays opérationnels" },
+    "compliance": { "value": "100%", "label": "Conformité garantie" }
+  },
+  "profile": {
+    "title": "Profil d'Entreprise",
+    "subtitle": "Partie du Groupe Docaposte",
+    "paragraph1": "SERES est une entreprise technologique pionnière et spécialisée dans les Solutions d'Échange Électronique Sécurisé de Documents. Elle agit comme un Tiers de Confiance pour faciliter la transformation numérique des entreprises.",
+    "paragraph2": "Elle appartient au groupe français Docaposte, filiale numérique du Groupe La Poste, ce qui lui confère un soutien international solide et un accès aux technologies de pointe en matière d'identité numérique, d'archivage certifié et de confiance numérique.",
+    "paragraph3": "Son siège principal pour l'Ibérie et l'Amérique latine est fortement enraciné en Espagne, opérant à l'échelle mondiale et facilitant la connexion dans plus d'une centaine de pays avec ses solutions de conformité et de facturation électronique."
+  },
+  "solutions": {
+    "badge": "Domaines d'Activité",
+    "title": "Solutions d'Échange Numérique",
+    "description": "Portefeuille complet pour éliminer le papier et les processus manuels, garantissant la conformité réglementaire dans chaque pays.",
+    "items": {
+      "eInvoice": {
+        "title": "e-Facture",
+        "description": "Plateformes pour l'émission et la réception de factures électroniques conformes aux réglementations légales en vigueur (Loi Crea y Crece, réglementations LATAM).",
+        "tags": ["SII", "TicketBAI", "LATAM"]
+      },
+      "edi": {
+        "title": "EDI (Échange de Données Informatisé)",
+        "description": "Échange standardisé de documents commerciaux entre partenaires : commandes, bons de livraison, factures.",
+        "tags": ["Retail", "Automobile", "B2B"]
+      },
+      "s2p": {
+        "title": "Source to Pay (S2P)",
+        "description": "Automatisation complète du cycle d'achat, de la demande au paiement.",
+        "tags": ["Achats", "Automatisation"]
+      },
+      "o2c": {
+        "title": "Order to Cash (O2C)",
+        "description": "Solutions intégrales pour le cycle de vente : de la commande à l'encaissement.",
+        "tags": ["Ventes", "Trésorerie"]
+      },
+      "fiscal": {
+        "title": "Déclarations Fiscales et Conformité",
+        "description": "Outils adaptés pour SII, TicketBAI et obligations fiscales internationales.",
+        "tags": ["Conformité", "Fiscal"]
+      },
+      "erp": {
+        "title": "Intégration ERP",
+        "description": "Connecteurs natifs avec SAP, Oracle et les principaux ERP du marché.",
+        "tags": ["SAP", "Oracle", "API"]
+      }
+    }
+  },
+  "successStories": {
+    "badge": "Cas de Réussite",
+    "title": "Clients qui Font Confiance à SERES",
+    "description": "Entreprises leaders de multiples secteurs ayant transformé leurs processus documentaires.",
+    "sectors": {
+      "retail": {
+        "title": "Grande Consommation et Retail",
+        "companies": {
+          "nestle": { "name": "Nestlé", "highlight": "+25 ans comme client", "description": "EDI pour échange massif de documents" },
+          "coviran": { "name": "Covirán", "highlight": "SII automatisé", "description": "Numérisation de réception de factures" },
+          "bonarea": { "name": "BonÀrea", "highlight": "Suivi intelligent", "description": "Automatisation et suivi de factures" },
+          "chovi": { "name": "Choví", "highlight": "Efficacité commerciale", "description": "Amélioration des processus de facturation" }
+        }
+      },
+      "services": {
+        "title": "Services et Télécommunications",
+        "companies": {
+          "ilunion": { "name": "Ilunion", "highlight": "Réception automatisée", "description": "Automatisation des factures fournisseurs" },
+          "atresmedia": { "name": "Atresmedia", "highlight": "Gestion documentaire", "description": "Numérisation des processus documentaires" },
+          "bt": { "name": "BT", "highlight": "e-Facture AP", "description": "Émission de facture électronique pour les Administrations Publiques" }
+        }
+      },
+      "industry": {
+        "title": "Industrie et Énergie",
+        "companies": {
+          "siemens": { "name": "Siemens Gamesa", "highlight": "Numérisation fournisseurs", "description": "Optimisation de réception de factures" },
+          "sonepar": { "name": "Sonepar", "highlight": "Réduction administrative", "description": "Élimination des tâches improductives" },
+          "energizer": { "name": "Energizer", "highlight": "SRI Équateur", "description": "Conformité réglementaire LATAM" }
+        }
+      },
+      "international": {
+        "title": "Projets Internationaux",
+        "companies": {
+          "amadeus": { "name": "Amadeus", "highlight": "LATAM multi-pays", "description": "Centralisation de la facturation électronique conforme aux réglementations de chaque pays" }
+        }
+      }
+    }
+  },
+  "valueProposition": {
+    "badge": "Valeur Différentielle",
+    "title": "Pourquoi SERES ?",
+    "description": "Pas seulement un logiciel : conseil et accompagnement dans la gestion du changement numérique.",
+    "items": {
+      "costs": { "title": "Réduction des Coûts", "description": "Élimination des erreurs manuelles et des processus papier. ROI démontrable en quelques mois." },
+      "collection": { "title": "Accélération des Encaissements", "description": "Réduction du DSO (Days Sales Outstanding) grâce à la traçabilité des factures." },
+      "compliance": { "title": "Conformité Légale", "description": "Conformité réglementaire sans besoin de développement interne complexe." }
+    }
+  },
+  "integration": {
+    "badges": {
+      "strategic": "Intégration Stratégique",
+      "gaiaX": "Gaia-X · Pontus-X"
+    },
+    "title": "Nœud PROCUREDATA : Pont Souverain vers les Data Spaces Européens",
+    "paragraph1": "La proposition de valeur de PROCUREDATA s'aligne directement sur la stratégie de souveraineté numérique de l'Union Européenne. Le Data Act vise à libérer les données industrielles pour favoriser l'innovation, tandis que le cadre Gaia-X établit les règles de confiance pour un échange sécurisé.",
+    "paragraph2": "SERES, en adoptant PONTUS-X, se positionne automatiquement comme un acteur compatible Gaia-X, capable d'interagir avec les Gaia-X Digital Clearing Houses (GXDCH) pour vérifier les identités et les services. C'est crucial pour maintenir la pertinence dans les secteurs réglementés comme l'automobile (Catena-X) ou l'aérospatiale.",
+    "features": {
+      "gdpr": "Conformité RGPD et Data Governance Act par conception",
+      "smartContracts": "Contrats intelligents pour la gestion du consentement",
+      "did": "Identités Décentralisées (DID) pour l'authentification",
+      "interoperability": "Interopérabilité avec d'autres Data Spaces sectoriels"
+    }
+  },
+  "cta": {
+    "title": "Prêt à transformer vos processus documentaires ?",
+    "description": "Rejoignez les milliers d'entreprises qui font confiance à SERES pour leur transformation numérique.",
+    "buttons": {
+      "contact": "Contacter SERES",
+      "members": "Accès Membres"
+    }
+  }
+}
