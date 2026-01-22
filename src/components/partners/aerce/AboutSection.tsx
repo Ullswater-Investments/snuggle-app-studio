@@ -1,31 +1,34 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Building2, Target, Sparkles, Globe } from "lucide-react";
-
-const highlights = [
-  {
-    icon: Building2,
-    title: "Más de 30 años de historia",
-    description: "Fundada en 1988, AERCE ha sido testigo y protagonista de la evolución de la función de compras en España.",
-  },
-  {
-    icon: Target,
-    title: "Misión clara",
-    description: "Maximizar el valor de la función de Compras en las organizaciones mediante formación, certificación y networking.",
-  },
-  {
-    icon: Sparkles,
-    title: "Innovación continua",
-    description: "Liderando la transformación digital de la función de compras con herramientas y metodologías de vanguardia.",
-  },
-  {
-    icon: Globe,
-    title: "Alcance internacional",
-    description: "Miembro de IFPSM, conectando a profesionales españoles con las mejores prácticas globales.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export const AboutSection = () => {
+  const { t } = useTranslation('aerce');
+
+  const highlights = [
+    {
+      icon: Building2,
+      title: t('about.pillars.training.title'),
+      description: t('about.pillars.training.description'),
+    },
+    {
+      icon: Target,
+      title: t('about.pillars.networking.title'),
+      description: t('about.pillars.networking.description'),
+    },
+    {
+      icon: Sparkles,
+      title: t('about.pillars.advocacy.title'),
+      description: t('about.pillars.advocacy.description'),
+    },
+    {
+      icon: Globe,
+      title: t('about.pillars.innovation.title'),
+      description: t('about.pillars.innovation.description'),
+    },
+  ];
+
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
@@ -38,19 +41,15 @@ export const AboutSection = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              La referencia institucional en Compras
+              {t('about.title')}
             </h2>
             
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              AERCE (Asociación Española de Profesionales de Compras, Contratación y Aprovisionamientos) 
-              es la voz de los profesionales de compras en España. Con más de tres décadas de experiencia, 
-              hemos acompañado a miles de profesionales en su desarrollo profesional.
+              {t('about.description')}
             </p>
             
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Nuestra misión es elevar el estándar de la profesión, proporcionando las herramientas, 
-              conocimientos y conexiones que los profesionales de compras necesitan para generar valor 
-              en sus organizaciones.
+              {t('hero.description')}
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -58,7 +57,7 @@ export const AboutSection = () => {
                 #Compras
               </span>
               <span className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
-                #Aprovisionamiento
+                #Procurement
               </span>
               <span className="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
                 #SupplyChain

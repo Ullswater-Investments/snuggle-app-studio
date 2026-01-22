@@ -1,26 +1,27 @@
-import { Link } from "react-router-dom";
 import { ArrowLeft, Download, FileText, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { HeroSection } from "@/components/partners/aerce/HeroSection";
-import { ServicesSection } from "@/components/partners/aerce/ServicesSection";
 import { AboutSection } from "@/components/partners/aerce/AboutSection";
+import { ServicesSection } from "@/components/partners/aerce/ServicesSection";
 import { CTASection } from "@/components/partners/aerce/CTASection";
-import { 
-  ProblemSection, 
-  SolutionSection, 
-  EcosystemSection, 
-  CertificationSection, 
-  SuccessCasesSection 
-} from "@/components/partners/aerce/proyecto";
+import { ProblemSection } from "@/components/partners/aerce/proyecto/ProblemSection";
+import { SolutionSection } from "@/components/partners/aerce/proyecto/SolutionSection";
+import { EcosystemSection } from "@/components/partners/aerce/proyecto/EcosystemSection";
+import { CertificationSection } from "@/components/partners/aerce/proyecto/CertificationSection";
+import { SuccessCasesSection } from "@/components/partners/aerce/proyecto/SuccessCasesSection";
 import { FundingFooter } from "@/components/FundingFooter";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 
 const AerceProyecto = () => {
+  const { t } = useTranslation(['aerce', 'common']);
+
   const handleDownloadPDF = () => {
-    toast.info("Generando PDF del proyecto AERCE...");
+    toast.info(t('common:downloading'));
     setTimeout(() => {
-      toast.success("PDF generado correctamente");
+      toast.success(t('common:downloadComplete'));
     }, 1000);
   };
 
@@ -38,7 +39,7 @@ const AerceProyecto = () => {
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="hidden sm:inline">Volver a Partners</span>
+                <span className="hidden sm:inline">{t('nav.backToPartners')}</span>
               </Link>
             </div>
 
@@ -46,7 +47,7 @@ const AerceProyecto = () => {
             <div className="hidden sm:flex items-center gap-2">
               <Button variant="default" size="sm" onClick={handleDownloadPDF} className="gap-2">
                 <Download className="w-4 h-4" />
-                Descargar PDF
+                {t('common:downloadPDF')}
               </Button>
               
               <div className="h-4 w-px bg-border" />

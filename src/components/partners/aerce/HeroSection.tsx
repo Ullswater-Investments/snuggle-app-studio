@@ -2,14 +2,17 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Award, Users } from "lucide-react";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
-
-const metrics = [
-  { value: "+30", label: "Años de Excelencia", icon: Award, color: "text-blue-600" },
-  { value: "2.000+", label: "Profesionales CPO", icon: Users, color: "text-blue-500" },
-  { value: "UNE 15896", label: "Certificación Europea", icon: GraduationCap, color: "text-blue-700" },
-];
+import { useTranslation } from "react-i18next";
 
 export const HeroSection = () => {
+  const { t } = useTranslation('aerce');
+
+  const metrics = [
+    { value: t('stats.members.value'), label: t('stats.members.label'), icon: Award, color: "text-blue-600" },
+    { value: t('stats.companies.value'), label: t('stats.companies.label'), icon: Users, color: "text-blue-500" },
+    { value: t('stats.savings.value'), label: t('stats.savings.label'), icon: GraduationCap, color: "text-blue-700" },
+  ];
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-blue-50">
       {/* Background Pattern */}
@@ -40,7 +43,7 @@ export const HeroSection = () => {
           className="flex justify-center mb-6"
         >
           <Badge variant="outline" className="px-4 py-2 text-sm bg-blue-50 border-blue-200 text-blue-700">
-            🎓 Excelencia en Compras
+            🎓 {t('hero.badges.procurement')}
           </Badge>
         </motion.div>
 
@@ -57,10 +60,10 @@ export const HeroSection = () => {
             </span>
           </h1>
           <p className="text-2xl md:text-3xl text-muted-foreground font-light max-w-4xl mx-auto">
-            Impulsando la Excelencia en la Función de Compras
+            {t('hero.subtitle')}
           </p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            La referencia institucional para los profesionales de Compras, Contratación y Aprovisionamientos en España
+            {t('hero.description')}
           </p>
         </motion.div>
 

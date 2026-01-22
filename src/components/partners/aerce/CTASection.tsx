@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ExternalLink, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const CTASection = () => {
+  const { t } = useTranslation('aerce');
+
   return (
     <section className="py-24 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
       {/* Background decoration */}
@@ -23,12 +26,11 @@ export const CTASection = () => {
           <Users className="w-16 h-16 text-blue-200 mx-auto mb-6" />
           
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            ¿Eres miembro de AERCE?
+            {t('cta.title')}
           </h2>
           
           <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-            Accede al área exclusiva de miembros para disfrutar de recursos premium, 
-            formación especializada y conexión con la comunidad de profesionales de compras.
+            {t('cta.description')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -37,7 +39,7 @@ export const CTASection = () => {
                 size="lg" 
                 className="bg-white text-blue-700 hover:bg-blue-50 font-semibold px-8 py-6 text-lg shadow-lg"
               >
-                Acceso Miembros
+                {t('cta.buttons.join')}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
@@ -52,15 +54,11 @@ export const CTASection = () => {
                 variant="outline"
                 className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 py-6 text-lg"
               >
-                Web Oficial AERCE
+                {t('cta.buttons.info')}
                 <ExternalLink className="ml-2 w-5 h-5" />
               </Button>
             </a>
           </div>
-
-          <p className="text-blue-200 text-sm mt-8">
-            ¿Aún no eres socio? <a href="https://www.aerce.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">Descubre las ventajas de asociarte</a>
-          </p>
         </motion.div>
       </div>
     </section>

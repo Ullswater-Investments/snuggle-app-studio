@@ -8,16 +8,14 @@ import {
   Target, 
   TrendingUp,
   Brain,
-  Layers,
-  CheckCircle2,
   ArrowRight,
   ExternalLink,
   Sparkles,
   BarChart3,
   Cpu,
-  LineChart,
   Factory,
   Building2,
+  LineChart,
   Coins
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,34 +24,37 @@ import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 import { FundingFooter } from "@/components/FundingFooter";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { useTranslation } from "react-i18next";
 
 const ValerdataProyecto = () => {
+  const { t } = useTranslation('valerdata');
+
   const features = [
     {
       icon: Database,
-      title: "Ingesta Multi-Fuente",
-      description: "Conexión con 3+ datasets industriales de proveedores certificados Gaia-X para alimentar modelos de IA.",
+      title: t('features.items.ingestion.title'),
+      description: t('features.items.ingestion.description'),
       color: "text-blue-600",
       bgColor: "bg-blue-50"
     },
     {
       icon: Brain,
-      title: "IA Predictiva",
-      description: "Entrenamiento de modelos de machine learning para predicción de precios y tendencias de mercado.",
+      title: t('features.items.ai.title'),
+      description: t('features.items.ai.description'),
       color: "text-purple-600",
       bgColor: "bg-purple-50"
     },
     {
       icon: Shield,
-      title: "Soberanía de Datos",
-      description: "Control total sobre los datos adquiridos con trazabilidad blockchain y políticas ODRL.",
+      title: t('features.items.sovereignty.title'),
+      description: t('features.items.sovereignty.description'),
       color: "text-emerald-600",
       bgColor: "bg-emerald-50"
     },
     {
       icon: Wallet,
-      title: "Pagos Web3",
-      description: "Transacciones con EUROe stablecoin en la red Pontus-X para máxima transparencia.",
+      title: t('features.items.payments.title'),
+      description: t('features.items.payments.description'),
       color: "text-amber-600",
       bgColor: "bg-amber-50"
     }
@@ -62,33 +63,33 @@ const ValerdataProyecto = () => {
   const problems = [
     {
       icon: Factory,
-      title: "Datos Fragmentados",
-      description: "Los datos de precios industriales están dispersos en múltiples fuentes sin estandarización."
+      title: t('problem.items.fragmented.title'),
+      description: t('problem.items.fragmented.description')
     },
     {
       icon: LineChart,
-      title: "Predicciones Limitadas",
-      description: "Sin acceso a datos de calidad, los modelos de IA no pueden generar predicciones precisas."
+      title: t('problem.items.predictions.title'),
+      description: t('problem.items.predictions.description')
     },
     {
       icon: Building2,
-      title: "Negociación Ciega",
-      description: "Los compradores industriales negocian sin visibilidad del mercado real."
+      title: t('problem.items.blind.title'),
+      description: t('problem.items.blind.description')
     }
   ];
 
   const benefits = [
-    { metric: "30%", label: "Mejora en precisión de predicciones" },
-    { metric: "3+", label: "Datasets industriales integrados" },
-    { metric: "100%", label: "Trazabilidad de origen" },
-    { metric: "€15K", label: "Financiación NextGenEU" }
+    { metric: t('stats.accuracy.value'), label: t('stats.accuracy.label') },
+    { metric: t('stats.datasets.value'), label: t('stats.datasets.label') },
+    { metric: t('stats.traceability.value'), label: t('stats.traceability.label') },
+    { metric: t('stats.funding.value'), label: t('stats.funding.label') }
   ];
 
   const ecosystemRoles = [
-    { role: "Consumer", org: "VALERDATA S.L.", description: "Adquiere datasets para entrenar modelos de IA" },
-    { role: "Provider", org: "DataHub Industrial", description: "Suministra precios B2B históricos" },
-    { role: "Provider", org: "Commodity Exchange", description: "Datos de materias primas en tiempo real" },
-    { role: "Provider", org: "Industry Analytics", description: "Benchmarking sectorial trimestral" }
+    { role: "Consumer", org: "VALERDATA S.L.", description: t('ecosystem.consumer') },
+    { role: "Provider", org: "DataHub Industrial", description: t('ecosystem.provider1') },
+    { role: "Provider", org: "Commodity Exchange", description: t('ecosystem.provider2') },
+    { role: "Provider", org: "Industry Analytics", description: t('ecosystem.provider3') }
   ];
 
   return (
@@ -104,7 +105,7 @@ const ValerdataProyecto = () => {
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="hidden sm:inline">Volver a Partners</span>
+                <span className="hidden sm:inline">{t('nav.backToPartners')}</span>
               </Link>
             </div>
 
@@ -112,7 +113,7 @@ const ValerdataProyecto = () => {
               <Button variant="default" size="sm" asChild>
                 <Link to="/partners/valerdata/login" className="gap-2">
                   <ExternalLink className="w-4 h-4" />
-                  Área Miembros
+                  {t('nav.membersArea')}
                 </Link>
               </Button>
             </div>
@@ -133,7 +134,7 @@ const ValerdataProyecto = () => {
           >
             <Badge className="mb-6 bg-white/10 text-white border-white/20 px-4 py-2">
               <Sparkles className="w-4 h-4 mr-2" />
-              Kit Espacios de Datos · NextGenerationEU
+              {t('hero.badges.kit')}
             </Badge>
             
             <div className="flex items-center justify-center gap-4 mb-6">
@@ -141,22 +142,22 @@ const ValerdataProyecto = () => {
                 <span className="text-white font-bold text-3xl">V</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold text-white">
-                PROCUREDATA
+                {t('hero.title')}
               </h1>
             </div>
             
             <p className="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed">
-              Ingesta de datasets industriales para entrenar modelos de IA de predicción de precios
+              {t('hero.subtitle')}
             </p>
             
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-50 gap-2">
                 <Target className="w-5 h-5" />
-                Ver Proyecto Completo
+                {t('hero.cta.project')}
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2" asChild>
                 <Link to="/partners/valerdata/login">
-                  Acceso Miembros
+                  {t('hero.cta.members')}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
@@ -194,18 +195,14 @@ const ValerdataProyecto = () => {
         <div className="container mx-auto px-4">
           <FadeIn>
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <Badge variant="outline" className="mb-4 text-red-600 border-red-200">El Problema</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                La información de precios industriales es opaca
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Las empresas compradoras carecen de datos fiables para tomar decisiones de compra informadas
-              </p>
+              <Badge variant="outline" className="mb-4 text-red-600 border-red-200">{t('problem.badge')}</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('problem.title')}</h2>
+              <p className="text-lg text-muted-foreground">{t('problem.description')}</p>
             </div>
           </FadeIn>
 
           <StaggerContainer className="grid md:grid-cols-3 gap-6">
-            {problems.map((problem, index) => (
+            {problems.map((problem) => (
               <StaggerItem key={problem.title}>
                 <Card className="h-full border-red-100 bg-red-50/30 hover:shadow-lg transition-shadow">
                   <CardHeader>
@@ -227,18 +224,14 @@ const ValerdataProyecto = () => {
         <div className="container mx-auto px-4">
           <FadeIn>
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <Badge variant="outline" className="mb-4 text-emerald-600 border-emerald-200">La Solución</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                PROCUREDATA: IA alimentada por datos soberanos
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Un proyecto que conecta múltiples fuentes de datos industriales para entrenar modelos predictivos de última generación
-              </p>
+              <Badge variant="outline" className="mb-4 text-emerald-600 border-emerald-200">{t('solution.badge')}</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('solution.title')}</h2>
+              <p className="text-lg text-muted-foreground">{t('solution.description')}</p>
             </div>
           </FadeIn>
 
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
+            {features.map((feature) => (
               <StaggerItem key={feature.title}>
                 <Card className="h-full hover:shadow-lg transition-all group">
                   <CardHeader>
@@ -262,13 +255,9 @@ const ValerdataProyecto = () => {
         <div className="container mx-auto px-4">
           <FadeIn>
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <Badge variant="outline" className="mb-4 text-purple-600 border-purple-200">Ecosistema</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Roles en el Data Space
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                VALERDATA actúa como Consumer, adquiriendo datos de múltiples Providers certificados
-              </p>
+              <Badge variant="outline" className="mb-4 text-purple-600 border-purple-200">{t('ecosystem.badge')}</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('ecosystem.title')}</h2>
+              <p className="text-lg text-muted-foreground">{t('ecosystem.description')}</p>
             </div>
           </FadeIn>
 
@@ -301,10 +290,8 @@ const ValerdataProyecto = () => {
         <div className="container mx-auto px-4">
           <FadeIn>
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <Badge className="mb-4 bg-white/10 text-white border-white/20">Stack Tecnológico</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Infraestructura Web3 + IA
-              </h2>
+              <Badge className="mb-4 bg-white/10 text-white border-white/20">{t('techStack.badge')}</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('techStack.title')}</h2>
             </div>
           </FadeIn>
 
@@ -318,10 +305,8 @@ const ValerdataProyecto = () => {
               <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
                 <Cpu className="h-8 w-8 text-blue-400" />
               </div>
-              <h3 className="font-bold text-xl mb-2">Gaia-X Compliance</h3>
-              <p className="text-slate-400">
-                Federación de datos europea con identidades soberanas (DID) y catálogo interoperable
-              </p>
+              <h3 className="font-bold text-xl mb-2">{t('techStack.items.gaiax.title')}</h3>
+              <p className="text-slate-400">{t('techStack.items.gaiax.description')}</p>
             </motion.div>
 
             <motion.div
@@ -334,10 +319,8 @@ const ValerdataProyecto = () => {
               <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4">
                 <BarChart3 className="h-8 w-8 text-purple-400" />
               </div>
-              <h3 className="font-bold text-xl mb-2">Machine Learning</h3>
-              <p className="text-slate-400">
-                Modelos de predicción entrenados con datos industriales de alta calidad y trazabilidad
-              </p>
+              <h3 className="font-bold text-xl mb-2">{t('techStack.items.ml.title')}</h3>
+              <p className="text-slate-400">{t('techStack.items.ml.description')}</p>
             </motion.div>
 
             <motion.div
@@ -350,10 +333,8 @@ const ValerdataProyecto = () => {
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
                 <Coins className="h-8 w-8 text-emerald-400" />
               </div>
-              <h3 className="font-bold text-xl mb-2">EUROe Stablecoin</h3>
-              <p className="text-slate-400">
-                Pagos instantáneos y transparentes en la red Pontus-X con stablecoin respaldada por euros
-              </p>
+              <h3 className="font-bold text-xl mb-2">{t('techStack.items.euroe.title')}</h3>
+              <p className="text-slate-400">{t('techStack.items.euroe.description')}</p>
             </motion.div>
           </div>
         </div>
@@ -367,22 +348,18 @@ const ValerdataProyecto = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              ¿Quieres conocer más sobre PROCUREDATA?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Accede al área de miembros para consultar la memoria de ejecución completa, cronograma y datasets contratados
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('cta.title')}</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">{t('cta.description')}</p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-50 gap-2" asChild>
                 <Link to="/partners/valerdata/login">
-                  Acceder al Área de Miembros
+                  {t('cta.buttons.members')}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2" asChild>
                 <Link to="/catalog">
-                  Explorar Catálogo
+                  {t('cta.buttons.catalog')}
                 </Link>
               </Button>
             </div>

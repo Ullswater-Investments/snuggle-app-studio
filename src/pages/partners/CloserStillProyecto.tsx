@@ -18,76 +18,65 @@ import {
   Handshake,
   Award
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CloserStillProyecto = () => {
+  const { t } = useTranslation('closerstill-proyecto');
+
   const ecosystems = [
     {
-      name: "Madrid Tech Show",
-      location: "IFEMA, Madrid",
-      description: "La mayor convergencia tecnológica de España",
-      subEvents: [
-        "E-Show Madrid",
-        "Big Data & AI World",
-        "Cyber Security World",
-        "Cloud & AI Infrastructure",
-        "Data Centre World",
-        "Connectivity World",
-        "Technology for Marketing (TFM)"
-      ]
+      name: t('ecosystems.madrid.name'),
+      location: t('ecosystems.madrid.location'),
+      description: t('ecosystems.madrid.description'),
+      subEvents: t('ecosystems.madrid.subEvents', { returnObjects: true }) as string[]
     },
     {
-      name: "Hub Digital Barcelona",
-      location: "Barcelona",
-      description: "Foco en negocio digital y transformación del retail",
-      subEvents: [
-        "E-Show Barcelona (Edición Decana)",
-        "TFM Barcelona"
-      ]
+      name: t('ecosystems.barcelona.name'),
+      location: t('ecosystems.barcelona.location'),
+      description: t('ecosystems.barcelona.description'),
+      subEvents: t('ecosystems.barcelona.subEvents', { returnObjects: true }) as string[]
     },
     {
-      name: "Sector Salud & Pharma",
-      location: "Nacional",
-      description: "Eventos líderes en el sector farmacéutico y dental",
-      subEvents: [
-        "Infarma (Congreso farmacéutico líder)",
-        "Dental Summit"
-      ]
+      name: t('ecosystems.health.name'),
+      location: t('ecosystems.health.location'),
+      description: t('ecosystems.health.description'),
+      subEvents: t('ecosystems.health.subEvents', { returnObjects: true }) as string[]
     }
   ];
 
   const valuePropositions = [
     {
       icon: Zap,
-      title: "Fast-Track Comercial",
-      description: "Los expositores y visitantes utilizan su Pasaporte Digital de ProcureData para validar credenciales (Solvencia, ISOs, ESG) instantáneamente al escanear su acreditación."
+      title: t('valueProposition.items.fastTrack.title'),
+      description: t('valueProposition.items.fastTrack.description')
     },
     {
       icon: Network,
-      title: "Espacio de Datos Federado",
-      description: "Facilitamos que CloserStill actúe como orquestador del 'Espacio de Datos de Comercio Digital', permitiendo a sus expositores acceder a las ayudas del Kit Espacio de Datos."
+      title: t('valueProposition.items.dataSpace.title'),
+      description: t('valueProposition.items.dataSpace.description')
     },
     {
       icon: Handshake,
-      title: "Matchmaking Verificado",
-      description: "En los eForums, garantizamos que cada reunión 'One to One' ocurra entre partes previamente homologadas, eliminando la fricción de compliance post-evento."
+      title: t('valueProposition.items.matchmaking.title'),
+      description: t('valueProposition.items.matchmaking.description')
     }
   ];
 
   const integratedServices = [
     {
       icon: FileCheck,
-      title: "Onboarding de Expositores",
-      description: "Validación automática KYB (Know Your Business)"
+      title: t('services.items.onboarding.title'),
+      description: t('services.items.onboarding.description')
     },
     {
       icon: Shield,
-      title: "Intercambio de Leads Soberano",
-      description: "Uso de conectores EDC para compartir datos de contacto bajo contratos ODRL"
+      title: t('services.items.leads.title'),
+      description: t('services.items.leads.description')
     },
     {
       icon: Award,
-      title: "Certificación de Asistencia",
-      description: "Emisión de credenciales verificables de participación y formación en blockchain"
+      title: t('services.items.certification.title'),
+      description: t('services.items.certification.description')
     }
   ];
 
@@ -100,13 +89,13 @@ const CloserStillProyecto = () => {
             <Button variant="ghost" asChild className="gap-2">
               <Link to="/partners">
                 <ArrowLeft className="h-4 w-4" />
-                Volver a Partners
+                {t('nav.backToPartners')}
               </Link>
             </Button>
             <div className="flex items-center gap-2">
-              <Badge className="bg-blue-600 text-white">Strategic Partner</Badge>
+              <Badge className="bg-blue-600 text-white">{t('hero.badges.strategic')}</Badge>
               <Badge variant="outline" className="border-blue-500 text-blue-600">
-                Kit Espacio de Datos Ready
+                {t('hero.badges.kitReady')}
               </Badge>
             </div>
           </div>
@@ -119,30 +108,27 @@ const CloserStillProyecto = () => {
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
               <Calendar className="h-5 w-5 text-blue-400" />
-              <span className="text-blue-200 font-medium">Ecosystem Builder</span>
+              <span className="text-blue-200 font-medium">{t('hero.badges.ecosystem')}</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold">
-              CloserStill Media
+              {t('hero.title')}
             </h1>
             
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Líder global en la organización de ferias profesionales y eventos B2B. 
-              Dinamizador del <strong className="text-white">Espacio de Datos de Comercio Digital</strong> en España.
-            </p>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: t('hero.subtitle') }} />
 
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg">
                 <Globe className="h-4 w-4 text-blue-400" />
-                <span>España & UK</span>
+                <span>{t('stats.countries.value')}</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg">
                 <Users className="h-4 w-4 text-blue-400" />
-                <span>+50.000 Visitantes/año</span>
+                <span>{t('stats.visitors.value')}</span>
               </div>
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg">
                 <Sparkles className="h-4 w-4 text-blue-400" />
-                <span>+1.500 Expositores</span>
+                <span>{t('stats.exhibitors.value')}</span>
               </div>
             </div>
           </div>
@@ -155,19 +141,11 @@ const CloserStillProyecto = () => {
           <div className="max-w-4xl mx-auto">
             <Card className="border-l-4 border-l-blue-600">
               <CardHeader>
-                <CardTitle className="text-2xl">Perfil Corporativo</CardTitle>
+                <CardTitle className="text-2xl">{t('profile.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-muted-foreground">
-                <p>
-                  CloserStill Media es el líder global en la organización de ferias profesionales y eventos B2B. 
-                  En España, gestiona el ecosistema de networking más potente del mercado, conectando oferta y demanda 
-                  a través de estrategias de "eventos paraguas" que reúnen a directivos C-Level de múltiples verticales 
-                  en un mismo recinto.
-                </p>
-                <p>
-                  Su enfoque abarca desde la infraestructura tecnológica crítica hasta el retail digital y el sector 
-                  farmacéutico, actuando como el principal dinamizador de negocios presenciales en Madrid y Barcelona.
-                </p>
+                <p>{t('profile.paragraph1')}</p>
+                <p>{t('profile.paragraph2')}</p>
               </CardContent>
             </Card>
           </div>
@@ -179,9 +157,9 @@ const CloserStillProyecto = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl font-bold">Portfolio de Ecosistemas Conectados</h2>
+              <h2 className="text-3xl font-bold">{t('ecosystems.title')}</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                A través de esta alianza, ProcureData habilita la interoperabilidad de datos en los siguientes eventos clave:
+                {t('ecosystems.description')}
               </p>
             </div>
 
@@ -213,11 +191,9 @@ const CloserStillProyecto = () => {
             {/* eForums Card */}
             <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
               <CardHeader>
-                <Badge className="w-fit bg-blue-600">Formato High-Value</Badge>
-                <CardTitle className="text-xl mt-2">eForums (One to One)</CardTitle>
-                <CardDescription>
-                  Reuniones ejecutivas privadas "speed dating" potenciadas por validación previa de identidad
-                </CardDescription>
+                <Badge className="w-fit bg-blue-600">{t('eforums.badge')}</Badge>
+                <CardTitle className="text-xl mt-2">{t('eforums.title')}</CardTitle>
+                <CardDescription>{t('eforums.description')}</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -230,13 +206,10 @@ const CloserStillProyecto = () => {
           <div className="max-w-5xl mx-auto space-y-8">
             <div className="text-center space-y-4">
               <Badge variant="outline" className="border-blue-500 text-blue-600">
-                The Partnership
+                {t('valueProposition.badge')}
               </Badge>
-              <h2 className="text-3xl font-bold">Propuesta de Valor Conjunta</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                La alianza <strong>ProcureData x CloserStill</strong> transforma las ferias comerciales en 
-                <span className="text-blue-600 font-semibold"> Espacios de Datos Líquidos</span>
-              </p>
+              <h2 className="text-3xl font-bold">{t('valueProposition.title')}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('valueProposition.description') }} />
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -263,10 +236,8 @@ const CloserStillProyecto = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="text-center space-y-4">
-              <h2 className="text-3xl font-bold">Servicios Integrados</h2>
-              <p className="text-blue-200">
-                Funcionalidades habilitadas por la infraestructura ProcureData
-              </p>
+              <h2 className="text-3xl font-bold">{t('services.title')}</h2>
+              <p className="text-blue-200">{t('services.description')}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -293,14 +264,11 @@ const CloserStillProyecto = () => {
           <div className="max-w-3xl mx-auto">
             <Card className="bg-gradient-to-br from-blue-600 to-blue-700 text-white border-0">
               <CardContent className="p-8 text-center space-y-6">
-                <h3 className="text-2xl font-bold">¿Eres expositor en eventos CloserStill?</h3>
-                <p className="text-blue-100">
-                  Accede a las ventajas del Kit Espacio de Datos y optimiza tu participación 
-                  con validación instantánea de credenciales empresariales.
-                </p>
+                <h3 className="text-2xl font-bold">{t('cta.title')}</h3>
+                <p className="text-blue-100">{t('cta.description')}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" className="bg-white text-blue-700 hover:bg-blue-50">
-                    Ver Oportunidades del Ecosistema
+                    {t('cta.buttons.opportunities')}
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
                   <Button 
@@ -309,7 +277,7 @@ const CloserStillProyecto = () => {
                     asChild
                   >
                     <Link to="/kit-espacio-datos">
-                      Más sobre Kit Espacio de Datos
+                      {t('cta.buttons.kit')}
                     </Link>
                   </Button>
                 </div>
