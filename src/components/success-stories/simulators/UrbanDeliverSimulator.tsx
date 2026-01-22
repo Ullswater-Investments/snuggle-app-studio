@@ -5,8 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Truck, Leaf, Banknote, BarChart3, FileText, Zap, Shield } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export const UrbanDeliverSimulator = () => {
+  const { t } = useTranslation('simulators');
   const [fleetSize, setFleetSize] = useState(85);
   const [electricRatio, setElectricRatio] = useState(65);
 
@@ -18,7 +20,7 @@ export const UrbanDeliverSimulator = () => {
     const emissionsSaved = totalBaseEmissions - currentEmissions;
     const financialSaving = emissionsSaved * 85;
     const csrdScore = Math.min(100, Math.round(electricRatio * 0.95 + (fleetSize > 100 ? 5 : 0)));
-    const greenLoanEligibility = electricRatio >= 50 ? 'Elegible' : 'No elegible';
+    const greenLoanEligibility = electricRatio >= 50 ? t('urbanDeliver.aria.eligible') : t('urbanDeliver.aria.notEligible');
     const interestReduction = electricRatio >= 70 ? 1.5 : electricRatio >= 50 ? 0.75 : 0;
     
     return {
@@ -30,7 +32,7 @@ export const UrbanDeliverSimulator = () => {
       greenLoanEligibility,
       interestReduction
     };
-  }, [fleetSize, electricRatio]);
+  }, [fleetSize, electricRatio, t]);
 
   const chartData = useMemo(() => {
     return Array.from({ length: 5 }, (_, i) => {
@@ -52,7 +54,6 @@ export const UrbanDeliverSimulator = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Panel Izquierdo - Simulación */}
       <div className="lg:col-span-7 space-y-6">
         <Card className="border-teal-500/30 bg-gradient-to-br from-teal-950/20 to-background">
           <CardHeader className="pb-4">
@@ -62,27 +63,26 @@ export const UrbanDeliverSimulator = () => {
                   <Truck className="h-6 w-6 text-teal-400" />
                 </div>
                 <div>
-                  <CardTitle className="text-xl">Simulador de Financiación Verde</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">UrbanDeliver BCN - CSRD Automatizado</p>
+                  <CardTitle className="text-xl">{t('urbanDeliver.title')}</CardTitle>
+                  <p className="text-sm text-muted-foreground mt-1">{t('urbanDeliver.subtitle')}</p>
                 </div>
               </div>
               <Badge variant="outline" className="border-teal-500/50 text-teal-400">
-                Movilidad
+                {t('urbanDeliver.badge')}
               </Badge>
             </div>
             <div className="flex items-center gap-2 mt-3 text-xs text-muted-foreground font-mono">
               <Shield className="h-3 w-3" />
-              <span>Pontus-X: {pontusHash}</span>
+              <span>{t('common.pontusX')}: {pontusHash}</span>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-6">
-            {/* Sliders */}
             <div className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Tamaño de flota</span>
-                  <span className="font-semibold text-teal-400">{fleetSize} vehículos</span>
+                  <span className="text-muted-foreground">{t('urbanDeliver.sliders.fleetSize')}</span>
+                  <span className="font-semibold text-teal-400">{fleetSize} {t('urbanDeliver.sliders.vehicles')}</span>
                 </div>
                 <Slider
                   value={[fleetSize]}
@@ -96,7 +96,7 @@ export const UrbanDeliverSimulator = () => {
               
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Ratio vehículos eléctricos</span>
+                  <span className="text-muted-foreground">{t('urbanDeliver.sliders.electricRatio')}</span>
                   <span className="font-semibold text-teal-400">{electricRatio}%</span>
                 </div>
                 <Slider
@@ -110,32 +110,26 @@ export const UrbanDeliverSimulator = () => {
               </div>
             </div>
 
-            {/* KPIs */}
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-teal-500/10 border border-teal-500/20">
                 <div className="flex items-center gap-2 text-teal-400 mb-2">
                   <Leaf className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">CO₂ Evitado</span>
+                  <span className="text-xs uppercase tracking-wider">{t('urbanDeliver.kpis.co2Avoided')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">{calculations.emissionsSaved}</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  toneladas/año
-                </p>
+                <p className="text-xs text-muted-foreground mt-1">{t('urbanDeliver.kpis.tonsYear')}</p>
               </div>
               
               <div className="p-4 rounded-xl bg-teal-500/10 border border-teal-500/20">
                 <div className="flex items-center gap-2 text-teal-400 mb-2">
                   <Banknote className="h-4 w-4" />
-                  <span className="text-xs uppercase tracking-wider">Ahorro Financiero</span>
+                  <span className="text-xs uppercase tracking-wider">{t('urbanDeliver.kpis.financialSaving')}</span>
                 </div>
                 <p className="text-3xl font-bold text-foreground">{(calculations.financialSaving / 1000).toFixed(1)}K€</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  En préstamos verdes
-                </p>
+                <p className="text-xs text-muted-foreground mt-1">{t('urbanDeliver.kpis.greenLoans')}</p>
               </div>
             </div>
 
-            {/* Gráfico */}
             <div className="h-48">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
@@ -150,7 +144,7 @@ export const UrbanDeliverSimulator = () => {
                   <Tooltip 
                     formatter={(value: number, name: string) => [
                       `${value} tonCO₂`, 
-                      name === 'emissions' ? 'Emisiones Actuales' : 'Baseline'
+                      name === 'emissions' ? t('urbanDeliver.chart.currentEmissions') : t('urbanDeliver.chart.baseline')
                     ]}
                     contentStyle={{ backgroundColor: '#1e1e2e', border: '1px solid #14b8a6' }}
                   />
@@ -177,7 +171,6 @@ export const UrbanDeliverSimulator = () => {
         </Card>
       </div>
 
-      {/* Panel Derecho - ARIA */}
       <div className="lg:col-span-5">
         <Card className="h-full bg-[#020617] border-teal-500/20">
           <CardHeader className="pb-4">
@@ -186,58 +179,57 @@ export const UrbanDeliverSimulator = () => {
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <div>
-                <CardTitle className="text-lg text-white">Análisis ARIA</CardTitle>
-                <p className="text-xs text-slate-400">Green Finance Report</p>
+                <CardTitle className="text-lg text-white">{t('common.ariaAnalysis')}</CardTitle>
+                <p className="text-xs text-slate-400">{t('urbanDeliver.aria.greenFinanceReport')}</p>
               </div>
             </div>
           </CardHeader>
           
           <CardContent className="space-y-4">
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-teal-400 font-semibold">Impacto Ambiental:</span> Tu flota de{' '}
-                <span className="text-teal-400 font-bold">{fleetSize} vehículos</span> con un{' '}
-                <span className="text-teal-400 font-bold">{electricRatio}%</span> eléctrico evita{' '}
-                <span className="text-teal-400 font-bold">{calculations.emissionsSaved} toneladas</span> de 
-                CO₂ anuales frente a una flota 100% diésel.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{ 
+                __html: t('urbanDeliver.aria.environmentalDesc', { 
+                  fleet: fleetSize, 
+                  ratio: electricRatio, 
+                  emissions: calculations.emissionsSaved 
+                }) 
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-teal-400 font-semibold">Ventaja Financiera:</span> Esta reducción 
-                de emisiones se traduce en <span className="text-teal-400 font-bold">{(calculations.financialSaving / 1000).toFixed(1)}K€</span> de 
-                ahorro anual en acceso a préstamos verdes con tipos reducidos.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{ 
+                __html: t('urbanDeliver.aria.financialAdvantageDesc', { 
+                  savings: (calculations.financialSaving / 1000).toFixed(1) 
+                }) 
+              }} />
             </div>
             
             <div className="p-4 rounded-lg bg-slate-800/50 border border-slate-700">
-              <p className="text-sm text-slate-300">
-                <span className="text-teal-400 font-semibold">Score CSRD:</span> Tu puntuación de{' '}
-                <span className="text-teal-400 font-bold">{calculations.csrdScore}/100</span> en 
-                el indicador de movilidad sostenible te posiciona como{' '}
-                {calculations.csrdScore >= 80 ? 'líder del sector' : calculations.csrdScore >= 60 ? 'referente emergente' : 'en transición'}.
-              </p>
+              <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{ 
+                __html: t('urbanDeliver.aria.csrdScoreDesc', { 
+                  score: calculations.csrdScore,
+                  position: calculations.csrdScore >= 80 ? t('urbanDeliver.aria.sectorLeader') : calculations.csrdScore >= 60 ? t('urbanDeliver.aria.emergingReference') : t('urbanDeliver.aria.inTransition')
+                }) 
+              }} />
             </div>
 
             {calculations.interestReduction > 0 && (
               <div className="p-4 rounded-lg bg-gradient-to-r from-teal-500/20 to-cyan-500/20 border border-teal-500/40">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge className="bg-teal-500 text-white">
-                    🏦 Green Loan Certified
+                    🏦 {t('urbanDeliver.aria.greenLoanCertified')}
                   </Badge>
                 </div>
-                <p className="text-sm text-slate-300">
-                  Tu flota califica para una reducción de <strong className="text-teal-400">-{calculations.interestReduction}%</strong> en 
-                  tipos de interés con el <strong className="text-teal-400">European Green Finance Bank</strong>.
-                </p>
+                <p className="text-sm text-slate-300" dangerouslySetInnerHTML={{ 
+                  __html: t('urbanDeliver.aria.greenLoanDesc', { reduction: calculations.interestReduction }) 
+                }} />
               </div>
             )}
 
             <div className="pt-4 border-t border-slate-700">
               <Button className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600">
                 <FileText className="h-4 w-4 mr-2" />
-                Descargar Reporte CSRD
+                {t('urbanDeliver.aria.downloadCsrd')}
               </Button>
               <p className="text-xs text-slate-500 text-center mt-2 font-mono">
                 Hash: {pontusHash}
