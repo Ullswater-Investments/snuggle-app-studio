@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { FundingFooter } from '../components/FundingFooter';
+import { useTranslation } from 'react-i18next';
 
 interface NodeFeatureLayoutProps {
   title: string;
@@ -23,17 +24,19 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
   benefits,
   children
 }) => {
+  const { t } = useTranslation('nodes');
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white border-b border-border sticky top-0 z-50">
+      <header className="bg-white dark:bg-background border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/nodos-sectoriales" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
-            <span className="text-sm font-medium">Volver a Visión General</span>
+            <span className="text-sm font-medium">{t('layout.backToNodes')}</span>
           </Link>
           <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100">
-            NODO Propietario
+            {t('layout.ownerNode')}
           </Badge>
         </div>
       </header>
@@ -68,7 +71,7 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
             {visualComponent}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-4">
-            Representación del flujo lógico del sistema
+            {t('layout.nodeFlow')}
           </p>
         </motion.div>
 
@@ -118,10 +121,10 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
         >
           <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              ¿Listo para desplegar tu Nodo?
+              {t('cta.title')}
             </h2>
             <p className="text-orange-100 mb-6 max-w-xl mx-auto">
-              Recuerda que todos estos módulos están incluidos en el paquete financiado por el Kit Espacio de Datos. Coste final: 0€.
+              {t('layout.requestStudyDesc')}
             </p>
             <Button
               asChild
@@ -129,7 +132,7 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
               className="bg-white text-orange-600 hover:bg-orange-50"
             >
               <Link to="/nodos-sectoriales#contacto">
-                Solicitar Estudio de Viabilidad
+                {t('layout.requestStudy')}
               </Link>
             </Button>
           </div>
