@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   Building2, 
   Users, 
@@ -9,7 +10,6 @@ import {
   Server, 
   ArrowRight, 
   CheckCircle2, 
-  Download,
   Network,
   Globe,
   Coins,
@@ -24,7 +24,7 @@ import {
   Landmark
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FundingFooter } from '../components/FundingFooter';
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -32,6 +32,8 @@ import { ThemeToggle } from "../components/ThemeToggle";
 import { ProcuredataLogo } from "../components/ProcuredataLogo";
 
 const SectoralNodesPage = () => {
+  const { t } = useTranslation('nodes');
+
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -49,56 +51,58 @@ const SectoralNodesPage = () => {
   const promoterBenefits = [
     {
       icon: Layers,
-      title: "Marketplace Propio",
-      description: "Decide qué datasets y servicios se publican en tu catálogo privado.",
+      title: t('benefits.marketplace.title'),
+      description: t('benefits.marketplace.description'),
       link: "/nodos/marketplace"
     },
     {
       icon: ShieldCheck,
-      title: "Políticas ODRL",
-      description: "Define reglas de compartición específicas para tu industria.",
+      title: t('benefits.odrl.title'),
+      description: t('benefits.odrl.description'),
       link: "/nodos/odrl"
     },
     {
       icon: Coins,
-      title: "Monetización",
-      description: "Establece comisiones por transacción y vende servicios de valor añadido.",
+      title: t('benefits.monetization.title'),
+      description: t('benefits.monetization.description'),
       link: "/nodos/monetizacion"
     },
     {
       icon: Sparkles,
-      title: "Marca Blanca",
-      description: "Personalización con tu logo e identidad, powered by ProcureData.",
+      title: t('benefits.whiteLabel.title'),
+      description: t('benefits.whiteLabel.description'),
       link: "/nodos/marca-blanca"
     }
   ];
 
   const inheritedFeatures = [
-    { icon: Fingerprint, label: "Identidad Soberana (DID)", link: "/nodos/identidad-did" },
-    { icon: FileCode, label: "Smart Contracts", link: "/nodos/smart-contracts" },
-    { icon: Wallet, label: "Pagos EUROe", link: "/nodos/pagos-euroe" },
-    { icon: Network, label: "Conectores ERP", link: "/nodos/conectores-erp" },
-    { icon: ShieldCheck, label: "Gobernanza IDSA", link: "/nodos/gobernanza-idsa" },
-    { icon: Server, label: "Multi-Tenant RLS", link: "/nodos/multi-tenant-rls" }
+    { icon: Fingerprint, label: t('inherited.did'), link: "/nodos/identidad-did" },
+    { icon: FileCode, label: t('inherited.smartContracts'), link: "/nodos/smart-contracts" },
+    { icon: Wallet, label: t('inherited.euroe'), link: "/nodos/pagos-euroe" },
+    { icon: Network, label: t('inherited.erp'), link: "/nodos/conectores-erp" },
+    { icon: ShieldCheck, label: t('inherited.idsa'), link: "/nodos/gobernanza-idsa" },
+    { icon: Server, label: t('inherited.rls'), link: "/nodos/multi-tenant-rls" }
   ];
 
   const roadmapSteps = [
     {
       step: 1,
-      title: "Firma de MOU",
-      description: "Acuerdo de intenciones y pago de reserva (anticipos recuperables)."
+      title: t('roadmap.step1.title'),
+      description: t('roadmap.step1.description')
     },
     {
       step: 2,
-      title: "Solicitud Conjunta",
-      description: "El equipo de PROCUREDATA prepara la memoria técnica para la SEDIA."
+      title: t('roadmap.step2.title'),
+      description: t('roadmap.step2.description')
     },
     {
       step: 3,
-      title: "Despliegue Técnico",
-      description: "Una vez concedida la ayuda, desplegamos tu Nodo en 4 semanas."
+      title: t('roadmap.step3.title'),
+      description: t('roadmap.step3.description')
     }
   ];
+
+  const conceptBenefits = t('concept.benefits', { returnObjects: true }) as string[];
 
   return (
     <div className="min-h-screen bg-background">
@@ -112,7 +116,7 @@ const SectoralNodesPage = () => {
             <LanguageSwitcher />
             <ThemeToggle />
             <Link to="/auth">
-              <Button variant="outline" size="sm">Acceder</Button>
+              <Button variant="outline" size="sm">{t('hero.access')}</Button>
             </Link>
           </div>
         </div>
@@ -136,33 +140,29 @@ const SectoralNodesPage = () => {
           >
             <Badge className="mb-6 bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300 border-orange-200 dark:border-orange-800">
               <ShieldCheck className="h-3 w-3 mr-1" />
-              Homologado por SEDIA (Secretaría de Estado de Digitalización e IA)
+              {t('hero.badge')}
             </Badge>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-              Lidera la Economía del Dato{' '}
+              {t('hero.title')}{' '}
               <span className="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
-                en tu Sector
+                {t('hero.titleHighlight')}
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Crea tu propio <strong>Nodo Soberano</strong> en PROCUREDATA. 
-              Infraestructura tecnológica financiada al <strong>100%</strong> por el programa{' '}
-              <span className="text-orange-600 dark:text-orange-400">Kit Espacio de Datos</span>.
-            </p>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: `${t('hero.description')} <span class="text-orange-600 dark:text-orange-400">${t('hero.kitLink')}</span>.` }} />
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-orange-600 hover:bg-orange-700 text-white" asChild>
                 <Link to="/nodos/requisitos">
-                  Solicitar Estudio de Nodo
+                  {t('hero.cta')}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link to="/nodos/tecnologia">
                   <Network className="mr-2 h-4 w-4" />
-                  Ver Arquitectura Técnica
+                  {t('hero.ctaSecondary')}
                 </Link>
               </Button>
             </div>
@@ -182,22 +182,13 @@ const SectoralNodesPage = () => {
           >
             {/* Text Column */}
             <motion.div variants={fadeInUp}>
-              <Badge variant="outline" className="mb-4">Concepto</Badge>
+              <Badge variant="outline" className="mb-4">{t('concept.badge')}</Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Tu Isla Privada en un Océano de Datos
+                {t('concept.title')}
               </h2>
-              <p className="text-muted-foreground mb-6 text-lg">
-                Los <strong>Nodos Propietarios</strong> permiten a Clústers, Asociaciones y Grandes Empresas 
-                crear su propio espacio delimitado dentro de PROCUREDATA. Mantén gobernanza total 
-                aprovechando nuestra tecnología ya validada.
-              </p>
+              <p className="text-muted-foreground mb-6 text-lg" dangerouslySetInnerHTML={{ __html: t('concept.description') }} />
               <ul className="space-y-3">
-                {[
-                  "Gobernanza total sobre el catálogo de datos.",
-                  "Políticas de compartición privadas (ODRL).",
-                  "Comisiones propias por transferencia de datos.",
-                  "Marca blanca 'Powered by ProcureData'."
-                ].map((item, i) => (
+                {Array.isArray(conceptBenefits) && conceptBenefits.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
                     <span>{item}</span>
@@ -212,7 +203,7 @@ const SectoralNodesPage = () => {
                 <CardContent className="p-8">
                   <div className="text-center mb-6">
                     <Badge className="bg-primary/10 text-primary border-primary/20">
-                      Infraestructura Validada
+                      {t('concept.validatedInfra')}
                     </Badge>
                   </div>
                   
@@ -222,15 +213,15 @@ const SectoralNodesPage = () => {
                       <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-3 mx-auto">
                         <Globe className="h-10 w-10 text-blue-600 dark:text-blue-400" />
                       </div>
-                      <p className="font-semibold text-sm">ProcureData Global</p>
-                      <p className="text-xs text-muted-foreground">Océano abierto</p>
+                      <p className="font-semibold text-sm">{t('concept.globalNode')}</p>
+                      <p className="text-xs text-muted-foreground">{t('concept.globalDesc')}</p>
                     </div>
 
                     {/* Connection Arrow */}
                     <div className="flex flex-col items-center gap-1">
                       <Network className="h-6 w-6 text-orange-500" />
                       <div className="w-16 h-0.5 bg-gradient-to-r from-blue-400 to-orange-500" />
-                      <span className="text-xs text-muted-foreground">Federado</span>
+                      <span className="text-xs text-muted-foreground">{t('concept.federated')}</span>
                     </div>
 
                     {/* Your Node */}
@@ -238,13 +229,13 @@ const SectoralNodesPage = () => {
                       <div className="w-20 h-20 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-3 mx-auto ring-4 ring-orange-500/20">
                         <Server className="h-10 w-10 text-orange-600 dark:text-orange-400" />
                       </div>
-                      <p className="font-semibold text-sm">Tu Nodo Sectorial</p>
-                      <p className="text-xs text-muted-foreground">Isla privada</p>
+                      <p className="font-semibold text-sm">{t('concept.yourNode')}</p>
+                      <p className="text-xs text-muted-foreground">{t('concept.yourNodeDesc')}</p>
                     </div>
                   </div>
 
                   <p className="text-center text-sm text-muted-foreground">
-                    Aprovecha nuestra tecnología (Blockchain, IDSA, Web3) bajo tus propias reglas de negocio.
+                    {t('concept.techDescription')}
                   </p>
                 </CardContent>
               </Card>
@@ -262,12 +253,12 @@ const SectoralNodesPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Badge variant="outline" className="mb-4">Ventajas</Badge>
+            <Badge variant="outline" className="mb-4">{t('benefits.badge')}</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ventajas para el Promotor
+              {t('benefits.title')}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Al adquirir un Nodo, obtienes gobernanza total sobre tu ecosistema de datos.
+              {t('benefits.description')}
             </p>
           </motion.div>
 
@@ -311,12 +302,12 @@ const SectoralNodesPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Badge variant="outline" className="mb-4">Tecnología</Badge>
+            <Badge variant="outline" className="mb-4">{t('inherited.badge')}</Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Funcionalidades Heredadas
+              {t('inherited.title')}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Tu Nodo nace con toda la potencia de PROCUREDATA v3.1 desde el día 1.
+              {t('inherited.description')}
             </p>
           </motion.div>
 
@@ -352,14 +343,12 @@ const SectoralNodesPage = () => {
             viewport={{ once: true }}
           >
             <Badge className="mb-4 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200 dark:border-blue-800">
-              Financiación NextGenerationEU
+              {t('financial.badge')}
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Coste Cero para tu Ecosistema
+              {t('financial.title')}
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Gracias al programa <strong>KIT ESPACIO DE DATOS</strong>, subvencionamos el 100% de la creación del nodo.
-            </p>
+            <p className="text-muted-foreground max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('financial.description') }} />
           </motion.div>
 
           <motion.div 
@@ -375,13 +364,13 @@ const SectoralNodesPage = () => {
                 <CardHeader className="bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4">
                   <div className="flex items-center gap-3">
                     <Landmark className="w-6 h-6" />
-                    <span className="font-bold text-lg">PROMOTOR (Tú)</span>
+                    <span className="font-bold text-lg">{t('financial.promoter.label')}</span>
                   </div>
                 </CardHeader>
                 <CardContent className="p-8">
                   <div className="text-center mb-6">
-                    <p className="text-sm text-muted-foreground mb-1">COSTE desarrollo de un NODO PROPIETARIO</p>
-                    <p className="text-4xl font-bold text-foreground">30.000 €</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t('financial.promoter.costLabel')}</p>
+                    <p className="text-4xl font-bold text-foreground">{t('financial.promoter.totalCost')}</p>
                   </div>
 
                   <div className="space-y-4">
@@ -389,10 +378,10 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">A la firma (Anticipo)</span>
-                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">5.000 €</span>
+                          <span className="font-medium text-foreground">{t('financial.promoter.step1.title')}</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">{t('financial.promoter.step1.amount')}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Generación de instancia y configuración inicial</p>
+                        <p className="text-xs text-muted-foreground">{t('financial.promoter.step1.description')}</p>
                       </div>
                     </div>
 
@@ -400,10 +389,10 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">Concesión Ayuda</span>
-                          <span className="font-bold text-green-600 whitespace-nowrap shrink-0">30.000 €</span>
+                          <span className="font-medium text-foreground">{t('financial.promoter.step2.title')}</span>
+                          <span className="font-bold text-green-600 whitespace-nowrap shrink-0">{t('financial.promoter.step2.amount')}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
+                        <p className="text-xs text-muted-foreground">{t('financial.promoter.step2.description')}</p>
                       </div>
                     </div>
 
@@ -411,8 +400,8 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">Paga el principal cuando recibas la Subvención de RED.es</span>
-                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">25.000 €</span>
+                          <span className="font-medium text-foreground">{t('financial.promoter.step3.title')}</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">{t('financial.promoter.step3.amount')}</span>
                         </div>
                       </div>
                     </div>
@@ -420,9 +409,7 @@ const SectoralNodesPage = () => {
 
                   <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/50 flex items-start gap-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                    <p className="text-sm text-blue-800 dark:text-blue-200">
-                      Los 30.000€ son <strong>100% subvencionables</strong>. Recuperas el anticipo al cobrar la ayuda.
-                    </p>
+                    <p className="text-sm text-blue-800 dark:text-blue-200" dangerouslySetInnerHTML={{ __html: t('financial.promoter.note') }} />
                   </div>
                 </CardContent>
               </Card>
@@ -434,14 +421,14 @@ const SectoralNodesPage = () => {
                 <CardHeader className="bg-gradient-to-r from-slate-700 to-slate-800 text-white py-4">
                   <div className="flex items-center gap-3">
                     <Users className="w-6 h-6" />
-                    <span className="font-bold text-lg">PARTICIPANTE (×5)</span>
+                    <span className="font-bold text-lg">{t('financial.participant.label')}</span>
                   </div>
                 </CardHeader>
                 <CardContent className="p-8">
                   <div className="text-center mb-6">
-                    <p className="text-sm text-muted-foreground mb-1">COSTE de CONEXIÓN (Anualidad)</p>
-                    <p className="text-4xl font-bold text-foreground">3.000 €</p>
-                    <p className="text-xs text-muted-foreground mt-1">por cada empresa participante</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t('financial.participant.costLabel')}</p>
+                    <p className="text-4xl font-bold text-foreground">{t('financial.participant.totalCost')}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t('financial.participant.perCompany')}</p>
                   </div>
 
                   <div className="space-y-4">
@@ -449,10 +436,10 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">1</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">Firma Contrato 1 año</span>
-                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">250 € al mes</span>
+                          <span className="font-medium text-foreground">{t('financial.participant.step1.title')}</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">{t('financial.participant.step1.amount')}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Alta de identidad y wallet Web3</p>
+                        <p className="text-xs text-muted-foreground">{t('financial.participant.step1.description')}</p>
                       </div>
                     </div>
 
@@ -460,10 +447,10 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm shrink-0">2</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">Concesión Ayuda</span>
-                          <span className="font-bold text-green-600 whitespace-nowrap shrink-0">15.000 €</span>
+                          <span className="font-medium text-foreground">{t('financial.participant.step2.title')}</span>
+                          <span className="font-bold text-green-600 whitespace-nowrap shrink-0">{t('financial.participant.step2.amount')}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Os ayudamos a solicitar KIT ESPACIO de DATOS</p>
+                        <p className="text-xs text-muted-foreground">{t('financial.participant.step2.description')}</p>
                       </div>
                     </div>
 
@@ -471,8 +458,8 @@ const SectoralNodesPage = () => {
                       <div className="w-8 h-8 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shrink-0">3</div>
                       <div className="flex-1">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-foreground">Renovación Contrato de Conexión + 1 año contra resolución favorable de la subvención</span>
-                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">3.000 €</span>
+                          <span className="font-medium text-foreground">{t('financial.participant.step3.title')}</span>
+                          <span className="font-bold text-orange-600 whitespace-nowrap shrink-0">{t('financial.participant.step3.amount')}</span>
                         </div>
                       </div>
                     </div>
@@ -480,9 +467,7 @@ const SectoralNodesPage = () => {
 
                   <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/50 flex items-start gap-3">
                     <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
-                    <p className="text-sm text-blue-800 dark:text-blue-200">
-                      El participante dispondrá hasta <strong>9.000€</strong> para pagar los servicios del Cluster ó otros gastos relacionados con el Espacio de Datos
-                    </p>
+                    <p className="text-sm text-blue-800 dark:text-blue-200" dangerouslySetInnerHTML={{ __html: t('financial.participant.note') }} />
                   </div>
                 </CardContent>
               </Card>
@@ -495,8 +480,7 @@ const SectoralNodesPage = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            * El pago por anticipado se incluye como gasto subvencionable, lo que significa que el solicitante 
-            recupera el dinero anticipado íntegramente cuando recibe la subvención.
+            {t('financial.disclaimer')}
           </motion.p>
         </div>
       </section>
@@ -511,9 +495,9 @@ const SectoralNodesPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <Badge variant="outline" className="mb-4">Requisitos</Badge>
+              <Badge variant="outline" className="mb-4">{t('requirements.badge')}</Badge>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Requisitos para Activar un Nodo
+                {t('requirements.title')}
               </h2>
               <div className="space-y-4">
                 <Card>
@@ -522,8 +506,8 @@ const SectoralNodesPage = () => {
                       <Building2 className="h-5 w-5 text-orange-600" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">Entidad Promotora</h4>
-                      <p className="text-sm text-muted-foreground">Capacidad jurídica para facturar y gestionar el nodo.</p>
+                      <h4 className="font-semibold">{t('requirements.promoter.title')}</h4>
+                      <p className="text-sm text-muted-foreground">{t('requirements.promoter.description')}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -533,8 +517,8 @@ const SectoralNodesPage = () => {
                       <Users className="h-5 w-5 text-orange-600" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">Ecosistema</h4>
-                      <p className="text-sm text-muted-foreground">Carta de adhesión firmada por al menos 5 empresas tractoras/participantes.</p>
+                      <h4 className="font-semibold">{t('requirements.ecosystem.title')}</h4>
+                      <p className="text-sm text-muted-foreground">{t('requirements.ecosystem.description')}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -544,8 +528,8 @@ const SectoralNodesPage = () => {
                       <Clock className="h-5 w-5 text-orange-600" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">Plazos</h4>
-                      <p className="text-sm text-muted-foreground">La solicitud debe presentarse dentro de los plazos de la convocatoria vigente.</p>
+                      <h4 className="font-semibold">{t('requirements.deadlines.title')}</h4>
+                      <p className="text-sm text-muted-foreground">{t('requirements.deadlines.description')}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -558,9 +542,9 @@ const SectoralNodesPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <Badge variant="outline" className="mb-4">Roadmap</Badge>
+              <Badge variant="outline" className="mb-4">{t('roadmap.badge')}</Badge>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">
-                Proceso de Activación
+                {t('roadmap.title')}
               </h2>
               <div className="space-y-6">
                 {roadmapSteps.map((step, index) => (
@@ -596,24 +580,23 @@ const SectoralNodesPage = () => {
           >
             <Target className="h-12 w-12 mx-auto mb-6 opacity-80" />
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              ¿Tienes un Ecosistema?
+              {t('cta.title')}
             </h2>
             <p className="text-orange-100 mb-8 text-lg">
-              Si representas a un clúster o asociación con al menos 5 empresas interesadas, 
-              podemos desplegar tu Nodo en menos de 4 semanas.
+              {t('cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="secondary" className="text-orange-600">
-                Contactar con Equipo de Nodos
+                {t('cta.button1')}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button size="lg" variant="secondary" className="text-orange-600">
                 <FileText className="mr-2 h-4 w-4" />
-                Ver Memoria Técnica SEDIA
+                {t('cta.button2')}
               </Button>
             </div>
             <p className="text-orange-200 text-sm mt-6">
-              Te ayudamos con la memoria técnica para la solicitud SEDIA.
+              {t('cta.note')}
             </p>
           </motion.div>
         </div>
