@@ -5,12 +5,14 @@ import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, Tooltip } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 interface BioMedSimulatorProps {
   onValuesChange?: (values: { numDevices: number; predictivePower: number; savings: number }) => void;
 }
 
 export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
+  const { t } = useTranslation('simulators');
   const [numDevices, setNumDevices] = useState(35);
   const [predictivePower, setPredictivePower] = useState(85);
 
@@ -25,13 +27,13 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
   }, [numDevices, predictivePower]);
 
   const uptimeData = useMemo(() => [
-    { month: 'Ene', uptime: 92 + (predictivePower * 0.06) },
-    { month: 'Feb', uptime: 93 + (predictivePower * 0.05) },
-    { month: 'Mar', uptime: 94 + (predictivePower * 0.04) },
-    { month: 'Abr', uptime: 95 + (predictivePower * 0.03) },
-    { month: 'May', uptime: 96 + (predictivePower * 0.02) },
-    { month: 'Jun', uptime: 97 + (predictivePower * 0.01) },
-  ], [predictivePower]);
+    { month: t('bioMed.months.jan'), uptime: 92 + (predictivePower * 0.06) },
+    { month: t('bioMed.months.feb'), uptime: 93 + (predictivePower * 0.05) },
+    { month: t('bioMed.months.mar'), uptime: 94 + (predictivePower * 0.04) },
+    { month: t('bioMed.months.apr'), uptime: 95 + (predictivePower * 0.03) },
+    { month: t('bioMed.months.may'), uptime: 96 + (predictivePower * 0.02) },
+    { month: t('bioMed.months.jun'), uptime: 97 + (predictivePower * 0.01) },
+  ], [predictivePower, t]);
 
   const pontusHash = useMemo(() => {
     const base = (numDevices * 1000 + predictivePower * 100).toString(16);
@@ -46,24 +48,21 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      {/* Left Column - Simulation Panel */}
       <div className="lg:col-span-7">
         <Card className="bg-gradient-to-br from-slate-900 to-rose-950/30 border-rose-500/20 shadow-2xl overflow-hidden p-6">
-          {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-rose-500/20">
                 <Stethoscope className="w-6 h-6 text-rose-400" />
               </div>
               <div>
-                <h3 className="text-rose-400 font-bold text-sm">MEDICAL DEVICE INTEGRITY MONITOR</h3>
+                <h3 className="text-rose-400 font-bold text-sm">{t('bioMed.title')}</h3>
                 <p className="text-[10px] text-slate-400 font-mono">{pontusHash}</p>
               </div>
             </div>
-            <Badge className="bg-green-500/20 text-green-400">MDR Compliant</Badge>
+            <Badge className="bg-green-500/20 text-green-400">{t('bioMed.badge')}</Badge>
           </div>
 
-          {/* Heartbeat Monitor Visual */}
           <div className="relative bg-slate-950 rounded-2xl p-6 border border-rose-900/30 overflow-hidden mb-6">
             <div className="absolute inset-0 opacity-20">
               <svg className="w-full h-full" preserveAspectRatio="none">
@@ -88,7 +87,7 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
                 </div>
                 <div>
                   <p className="text-2xl font-black text-white">{numDevices}</p>
-                  <p className="text-xs text-slate-400">Equipos RM en Red</p>
+                  <p className="text-xs text-slate-400">{t('bioMed.visual.mriUnits')}</p>
                 </div>
               </div>
               
@@ -102,10 +101,9 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
             </div>
           </div>
 
-          {/* Uptime Chart */}
           <div className="bg-slate-900/60 rounded-xl p-4 border border-rose-900/20 mb-6">
             <div className="flex justify-between items-center mb-3">
-              <span className="text-xs text-slate-400 uppercase font-bold">Disponibilidad de Equipos</span>
+              <span className="text-xs text-slate-400 uppercase font-bold">{t('bioMed.visual.availability')}</span>
               <span className="text-lg font-black text-rose-400">{(97 + predictivePower * 0.02).toFixed(1)}%</span>
             </div>
             <div className="h-32">
@@ -126,11 +124,10 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
             </div>
           </div>
 
-          {/* Sliders */}
           <div className="space-y-5 bg-slate-900/40 p-4 rounded-xl border border-rose-900/20 mb-6">
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-300">Equipos Médicos en Red</span>
+                <span className="text-slate-300">{t('bioMed.sliders.mriUnits')}</span>
                 <span className="font-bold text-rose-400">{numDevices}</span>
               </div>
               <Slider value={[numDevices]} onValueChange={(v) => setNumDevices(v[0])} min={5} max={100} step={5} className="[&>span]:bg-rose-600" />
@@ -138,60 +135,55 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
             
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-300">Nivel Mantenimiento Predictivo</span>
+                <span className="text-slate-300">{t('bioMed.sliders.avgAge')}</span>
                 <span className="font-bold text-emerald-400">{predictivePower}%</span>
               </div>
               <Slider value={[predictivePower]} onValueChange={(v) => setPredictivePower(v[0])} min={0} max={100} step={5} className="[&>span]:bg-emerald-600" />
             </div>
           </div>
 
-          {/* KPIs Grid */}
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div className="bg-rose-950/40 p-4 rounded-xl border border-rose-800/30 text-center">
-              <p className="text-[10px] uppercase font-black text-rose-400 mb-1">Cirugías Recuperadas</p>
+              <p className="text-[10px] uppercase font-black text-rose-400 mb-1">{t('bioMed.kpis.criticalFailures')}</p>
               <p className="text-3xl font-black text-white">{calculations.cirugiasRecuperadas}</p>
-              <p className="text-[10px] text-slate-400">/mes adicionales</p>
+              <p className="text-[10px] text-slate-400">{t('bioMed.kpis.prediction')}</p>
             </div>
             <div className="bg-emerald-950/40 p-4 rounded-xl border border-emerald-800/30 text-center">
-              <p className="text-[10px] uppercase font-black text-emerald-400 mb-1">FTEs Liberados</p>
+              <p className="text-[10px] uppercase font-black text-emerald-400 mb-1">{t('gigaFactory.kpis.ftesLiberated')}</p>
               <p className="text-3xl font-black text-white">{calculations.fteEquivalent}</p>
-              <p className="text-[10px] text-slate-400">Personas</p>
+              <p className="text-[10px] text-slate-400">{t('gigaFactory.kpis.strategicTasks')}</p>
             </div>
           </div>
 
-          {/* Total Savings */}
           <div className="bg-gradient-to-r from-rose-900/50 to-pink-900/50 p-5 rounded-2xl border border-rose-500/30">
-            <p className="text-[10px] uppercase font-black text-rose-300 mb-2">Ahorro en Paradas de Línea</p>
+            <p className="text-[10px] uppercase font-black text-rose-300 mb-2">{t('bioMed.kpis.downtimeSaving')}</p>
             <p className="text-4xl font-black text-white">{calculations.savedAmount.toLocaleString()} <span className="text-lg text-rose-400">EUROe</span></p>
             <div className="flex gap-2 mt-2">
-              <Badge className="bg-rose-500/20 text-rose-300">-30% Fallos Críticos</Badge>
+              <Badge className="bg-rose-500/20 text-rose-300">-30% {t('bioMed.kpis.criticalFailures')}</Badge>
               <Badge className="bg-green-500/20 text-green-300">100% GDPR</Badge>
             </div>
           </div>
         </Card>
       </div>
 
-      {/* Right Column - ARIA Panel */}
       <div className="lg:col-span-5">
         <Card className="bg-[#020617] border-rose-500/20 shadow-2xl h-full p-6">
-          {/* ARIA Header */}
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white font-black text-lg">A</div>
             <div>
-              <h4 className="text-white font-bold">ARIA</h4>
-              <p className="text-[10px] text-slate-400">Asesora de Integridad Médica</p>
+              <h4 className="text-white font-bold">{t('aria.name')}</h4>
+              <p className="text-[10px] text-slate-400">{t('bioMed.aria.role')}</p>
             </div>
           </div>
 
-          {/* Insights */}
           <div className="space-y-4">
             <div className="bg-slate-900/60 rounded-xl p-4 border border-rose-900/30">
               <div className="flex items-start gap-3">
                 <Sparkles className="w-5 h-5 text-rose-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Disponibilidad Incrementada</p>
+                  <p className="text-sm text-white font-medium mb-1">{t('bioMed.aria.predictiveMaintenance')}</p>
                   <p className="text-xs text-slate-400">
-                    Al reducir la latencia de respuesta técnica con mantenimiento predictivo al <span className="text-rose-400 font-bold">{predictivePower}%</span>, has recuperado la capacidad de realizar <span className="text-emerald-400 font-bold">{calculations.cirugiasRecuperadas} cirugías extra</span> al mes.
+                    {t('bioMed.aria.predictiveDesc', { unit: 'RM-07', saving: calculations.savedAmount.toLocaleString() })}
                   </p>
                 </div>
               </div>
@@ -201,10 +193,8 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
               <div className="flex items-start gap-3">
                 <ShieldAlert className="w-5 h-5 text-emerald-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Cumplimiento MDR EU 2017/745</p>
-                  <p className="text-xs text-slate-400">
-                    Basado en el estándar de la <span className="text-emerald-400">EMA</span>, tu sistema de telemetría anonimizada cumple el <span className="text-white font-bold">{calculations.mdrCompliance}%</span> de los requisitos de trazabilidad de equipos médicos críticos.
-                  </p>
+                  <p className="text-sm text-white font-medium mb-1">{t('bioMed.aria.patientPrivacy')}</p>
+                  <p className="text-xs text-slate-400">{t('bioMed.aria.privacyDesc')}</p>
                 </div>
               </div>
             </div>
@@ -213,9 +203,9 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
               <div className="flex items-start gap-3">
                 <Activity className="w-5 h-5 text-blue-400 mt-0.5" />
                 <div>
-                  <p className="text-sm text-white font-medium mb-1">Capacidad Liberada</p>
+                  <p className="text-sm text-white font-medium mb-1">{t('bioMed.aria.uptime')}</p>
                   <p className="text-xs text-slate-400">
-                    Los <span className="text-blue-400 font-bold">{calculations.fteEquivalent} FTEs liberados</span> de tareas de mantenimiento reactivo pueden reorientarse a innovación clínica y mejora de protocolos de atención.
+                    {t('bioMed.aria.uptimeDesc', { uptime: (97 + predictivePower * 0.02).toFixed(1) })}
                   </p>
                 </div>
               </div>
@@ -225,21 +215,18 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
               <div className="bg-gradient-to-r from-rose-900/30 to-pink-900/30 rounded-xl p-4 border border-rose-500/30">
                 <div className="flex items-center gap-2 mb-2">
                   <HeartPulse className="w-5 h-5 text-rose-400" />
-                  <span className="text-sm font-bold text-rose-300">Excelencia Clínica Certificada</span>
+                  <span className="text-sm font-bold text-rose-300">{t('bioMed.aria.clinicalExcellence')}</span>
                 </div>
-                <p className="text-xs text-slate-300">
-                  Tu nivel de mantenimiento predictivo supera el umbral recomendado por la Joint Commission International para hospitales de excelencia.
-                </p>
+                <p className="text-xs text-slate-300">{t('bioMed.aria.clinicalExcellenceDesc')}</p>
               </div>
             )}
           </div>
 
-          {/* Footer */}
           <div className="mt-6 pt-4 border-t border-slate-800">
             <p className="text-[10px] font-mono text-slate-500 mb-3">{pontusHash}</p>
             <Button className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700">
               <FileText className="w-4 h-4 mr-2" />
-              Descargar Certificado MDR
+              {t('bioMed.aria.downloadMaintenance')}
             </Button>
           </div>
         </Card>
