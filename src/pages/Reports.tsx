@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,7 +12,7 @@ import { BarChart3, TrendingUp, TrendingDown, Clock, CheckCircle, Download, Cale
 import { FadeIn } from "@/components/AnimatedSection";
 import { toast } from "sonner";
 import { format, subDays, startOfYear, startOfMonth, endOfMonth, eachMonthOfInterval, isSameMonth } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
 import jsPDF from "jspdf";
 import {
   BarChart,
@@ -52,9 +53,22 @@ interface TopProvider {
   transactions: number;
 }
 
+const DATE_LOCALE_MAP: Record<string, Locale> = {
+  es,
+  en: enUS,
+  de,
+  fr,
+  pt,
+  it,
+  nl,
+};
+
 const Reports = () => {
+  const { t, i18n } = useTranslation("reports");
   const { activeOrg, isDemo } = useOrganizationContext();
   const [dateRange, setDateRange] = useState<DateRange>("90days");
+
+  const currentLocale = DATE_LOCALE_MAP[i18n.language] || es;
 
   // Calculate date filter
   const getDateFilter = () => {
@@ -73,6 +87,20 @@ const Reports = () => {
 
   const dateFilter = getDateFilter();
 
+  // Get status label translation
+  const getStatusLabel = (status: string): string => {
+    const statusMap: Record<string, string> = {
+      pending_subject: t("status.pending_subject"),
+      pending_holder: t("status.pending_holder"),
+      approved: t("status.approved"),
+      completed: t("status.completed"),
+      cancelled: t("status.cancelled"),
+      denied_subject: t("status.denied_subject"),
+      denied_holder: t("status.denied_holder"),
+    };
+    return statusMap[status] || t("status.other");
+  };
+
   // Fetch dynamic KPIs using RPC function
   const { data: kpis } = useQuery<OrgKPIs | null>({
     queryKey: ["org-kpis", activeOrg?.id],
@@ -89,7 +117,7 @@ const Reports = () => {
 
   // Fetch transactions grouped by status for activeOrg with date filter
   const { data: transactionsByStatus } = useQuery({
-    queryKey: ["transactions-by-status", activeOrg?.id, dateRange],
+    queryKey: ["transactions-by-status", activeOrg?.id, dateRange, i18n.language],
     queryFn: async () => {
       if (!activeOrg) return [];
 
@@ -102,13 +130,7 @@ const Reports = () => {
       if (error) throw error;
 
       const statusCount = data.reduce((acc, t) => {
-        const label = t.status === "pending_subject" ? "Pendiente Proveedor" :
-                     t.status === "pending_holder" ? "Pendiente Custodio" :
-                     t.status === "approved" ? "Aprobado" :
-                     t.status === "completed" ? "Completado" :
-                     t.status === "cancelled" ? "Cancelado" :
-                     t.status === "denied_subject" ? "Rechazado" : "Otro";
-        
+        const label = getStatusLabel(t.status);
         acc[label] = (acc[label] || 0) + 1;
         return acc;
       }, {} as Record<string, number>);
@@ -141,7 +163,7 @@ const Reports = () => {
       if (error) throw error;
 
       const productCounts = data.reduce((acc: Record<string, { count: number; revenue: number }>, t) => {
-        const productName = t.asset?.product?.name || "Desconocido";
+        const productName = t.asset?.product?.name || "Unknown";
         const price = t.asset?.price || 0;
         if (!acc[productName]) {
           acc[productName] = { count: 0, revenue: 0 };
@@ -161,7 +183,7 @@ const Reports = () => {
 
   // Fetch monthly trends for AreaChart
   const { data: monthlyTrends } = useQuery<MonthlyTrend[]>({
-    queryKey: ["monthly-trends", activeOrg?.id, dateRange],
+    queryKey: ["monthly-trends", activeOrg?.id, dateRange, i18n.language],
     queryFn: async () => {
       if (!activeOrg) return [];
 
@@ -197,7 +219,7 @@ const Reports = () => {
           .reduce((sum, t) => sum + (t.asset?.price || 0), 0);
 
         return {
-          month: format(month, "MMM", { locale: es }),
+          month: format(month, "MMM", { locale: currentLocale }),
           gasto,
           ingreso
         };
@@ -229,7 +251,7 @@ const Reports = () => {
 
       const providerMap = data.reduce((acc: Record<string, { name: string; volume: number; transactions: number }>, t) => {
         const id = t.holder_org_id;
-        const name = t.holder?.name || "Desconocido";
+        const name = t.holder?.name || "Unknown";
         const price = t.asset?.price || 0;
 
         if (!acc[id]) {
@@ -259,35 +281,34 @@ const Reports = () => {
     
     doc.setFontSize(20);
     doc.setTextColor(33, 33, 33);
-    doc.text("PROCUREDATA - Reporte de Analytics", pageWidth / 2, 20, { align: "center" });
+    doc.text(t("pdf.title"), pageWidth / 2, 20, { align: "center" });
     
     doc.setFontSize(12);
     doc.setTextColor(100, 100, 100);
-    const dateRangeLabel = dateRange === "30days" ? "Últimos 30 días" : 
-                           dateRange === "90days" ? "Últimos 90 días" : "Año Actual (YTD)";
-    doc.text(`Periodo: ${dateRangeLabel}`, pageWidth / 2, 28, { align: "center" });
-    doc.text(`Generado: ${format(new Date(), "PPP", { locale: es })}`, pageWidth / 2, 35, { align: "center" });
-    doc.text(`Organización: ${activeOrg?.name || "—"}`, pageWidth / 2, 42, { align: "center" });
+    const dateRangeLabel = t(`dateRange.${dateRange}`);
+    doc.text(`${t("pdf.period")}: ${dateRangeLabel}`, pageWidth / 2, 28, { align: "center" });
+    doc.text(`${t("pdf.generated")}: ${format(new Date(), "PPP", { locale: currentLocale })}`, pageWidth / 2, 35, { align: "center" });
+    doc.text(`${t("pdf.organization")}: ${activeOrg?.name || "—"}`, pageWidth / 2, 42, { align: "center" });
     
     doc.setDrawColor(200, 200, 200);
     doc.line(20, 48, pageWidth - 20, 48);
     
     doc.setFontSize(14);
     doc.setTextColor(33, 33, 33);
-    doc.text("Métricas Clave", 20, 60);
+    doc.text(t("pdf.keyMetrics"), 20, 60);
     
     doc.setFontSize(11);
     doc.setTextColor(60, 60, 60);
     
     const kpiData = [
-      ["Volumen Total (Gasto)", `€ ${totalGasto.toLocaleString("es-ES")}`],
-      ["Ingresos por Datos", `€ ${totalIngreso.toLocaleString("es-ES")}`],
-      ["Datasets Activos", `${datasetsActivos}`],
-      ["Tasa de Aprobación", `${kpis?.approval_rate ?? 0}%`],
-      ["Tiempo Promedio", kpis?.avg_time_hours ? 
+      [t("pdf.volumeTotal"), `€ ${totalGasto.toLocaleString(i18n.language)}`],
+      [t("pdf.dataRevenue"), `€ ${totalIngreso.toLocaleString(i18n.language)}`],
+      [t("kpis.activeDatasets"), `${datasetsActivos}`],
+      [t("metrics.approvalRate"), `${kpis?.approval_rate ?? 0}%`],
+      [t("pdf.avgTimeLabel"), kpis?.avg_time_hours ? 
         kpis.avg_time_hours >= 24 ? 
-          `${(kpis.avg_time_hours / 24).toFixed(1)} días` : 
-          `${kpis.avg_time_hours.toFixed(1)} horas` : "—"],
+          `${(kpis.avg_time_hours / 24).toFixed(1)} ${t("metrics.days")}` : 
+          `${kpis.avg_time_hours.toFixed(1)} ${t("metrics.hours")}` : "—"],
     ];
     
     let yPos = 70;
@@ -298,7 +319,7 @@ const Reports = () => {
     
     doc.setFontSize(14);
     doc.setTextColor(33, 33, 33);
-    doc.text("Transacciones por Estado", 20, yPos + 10);
+    doc.text(t("pdf.transactionsByStatus"), 20, yPos + 10);
     
     doc.setFontSize(11);
     doc.setTextColor(60, 60, 60);
@@ -310,13 +331,13 @@ const Reports = () => {
         yPos += 8;
       });
     } else {
-      doc.text("No hay datos disponibles", 25, yPos);
+      doc.text(t("charts.noData"), 25, yPos);
       yPos += 8;
     }
     
     doc.setFontSize(14);
     doc.setTextColor(33, 33, 33);
-    doc.text("Productos Más Solicitados", 20, yPos + 10);
+    doc.text(t("pdf.topRequestedProducts"), 20, yPos + 10);
     
     doc.setFontSize(11);
     doc.setTextColor(60, 60, 60);
@@ -324,21 +345,21 @@ const Reports = () => {
     
     if (topProducts && topProducts.length > 0) {
       topProducts.forEach((item: any, index: number) => {
-        doc.text(`${index + 1}. ${item.name}: ${item.count} solicitudes (€ ${item.revenue.toLocaleString("es-ES")})`, 25, yPos);
+        doc.text(`${index + 1}. ${item.name}: ${item.count} ${t("charts.requests")} (€ ${item.revenue.toLocaleString(i18n.language)})`, 25, yPos);
         yPos += 8;
       });
     } else {
-      doc.text("No hay datos disponibles", 25, yPos);
+      doc.text(t("charts.noData"), 25, yPos);
     }
     
     doc.setFontSize(9);
     doc.setTextColor(150, 150, 150);
-    doc.text("Este reporte fue generado automáticamente por PROCUREDATA", pageWidth / 2, 280, { align: "center" });
+    doc.text(t("pdf.footer"), pageWidth / 2, 280, { align: "center" });
     
     const fileName = `procuredata-report-${format(new Date(), "yyyy-MM-dd")}.pdf`;
     doc.save(fileName);
     
-    toast.success("Reporte PDF generado correctamente", {
+    toast.success(t("pdf.success"), {
       description: fileName,
     });
   };
@@ -346,10 +367,10 @@ const Reports = () => {
   // Export CSV function
   const handleExportCSV = () => {
     const rows = [
-      ["Tipo", "Nombre", "Valor"],
-      ...transactionsByStatus?.map(s => ["Estado", s.name, s.value.toString()]) || [],
-      ...topProducts?.map((p: any) => ["Producto", p.name, p.count.toString()]) || [],
-      ...topProviders?.map(p => ["Proveedor", p.name, p.volume.toString()]) || [],
+      [t("csv.headers.type"), t("csv.headers.name"), t("csv.headers.value")],
+      ...transactionsByStatus?.map(s => [t("csv.types.status"), s.name, s.value.toString()]) || [],
+      ...topProducts?.map((p: any) => [t("csv.types.product"), p.name, p.count.toString()]) || [],
+      ...topProviders?.map(p => [t("csv.types.provider"), p.name, p.volume.toString()]) || [],
     ];
     
     const csvContent = rows.map(row => row.join(",")).join("\n");
@@ -360,7 +381,7 @@ const Reports = () => {
     link.setAttribute("download", `procuredata-data-${format(new Date(), "yyyy-MM-dd")}.csv`);
     link.click();
     
-    toast.success("Datos exportados a CSV");
+    toast.success(t("csv.success"));
   };
 
   return (
@@ -371,14 +392,13 @@ const Reports = () => {
             <div>
               <Badge variant="secondary" className="mb-4">
                 <BarChart3 className="mr-1 h-3 w-3" />
-                Analytics
+                {t("badge")}
               </Badge>
               <h1 className="text-4xl font-bold mb-3">
-                Reportes y Estadísticas
+                {t("hero.title")}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                Analiza el rendimiento del sistema, visualiza tendencias y obtén insights
-                sobre las transacciones de datos.
+                {t("hero.description")}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -388,9 +408,9 @@ const Reports = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="30days">Últimos 30 días</SelectItem>
-                  <SelectItem value="90days">Últimos 90 días</SelectItem>
-                  <SelectItem value="ytd">Este Año (YTD)</SelectItem>
+                  <SelectItem value="30days">{t("dateRange.30days")}</SelectItem>
+                  <SelectItem value="90days">{t("dateRange.90days")}</SelectItem>
+                  <SelectItem value="ytd">{t("dateRange.ytd")}</SelectItem>
                 </SelectContent>
               </Select>
               <Button onClick={handleExportCSV} variant="outline" className="gap-2">
@@ -413,15 +433,15 @@ const Reports = () => {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Gasto Total</p>
-                  <p className="text-3xl font-bold">€ {totalGasto.toLocaleString("es-ES")}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("kpis.totalSpend")}</p>
+                  <p className="text-3xl font-bold">€ {totalGasto.toLocaleString(i18n.language)}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
                     <ArrowUpRight className="h-5 w-5 text-red-600 dark:text-red-400" />
                   </div>
                   <Badge variant="outline" className="text-xs bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400 border-red-200">
-                    Consumo
+                    {t("kpis.consumption")}
                   </Badge>
                 </div>
               </div>
@@ -432,15 +452,15 @@ const Reports = () => {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Ingresos</p>
-                  <p className="text-3xl font-bold">€ {totalIngreso.toLocaleString("es-ES")}</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("kpis.revenue")}</p>
+                  <p className="text-3xl font-bold">€ {totalIngreso.toLocaleString(i18n.language)}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
                     <ArrowDownRight className="h-5 w-5 text-green-600 dark:text-green-400" />
                   </div>
                   <Badge variant="outline" className="text-xs bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400 border-green-200">
-                    Proveedor
+                    {t("kpis.provider")}
                   </Badge>
                 </div>
               </div>
@@ -451,7 +471,7 @@ const Reports = () => {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Datasets Activos</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("kpis.activeDatasets")}</p>
                   <p className="text-3xl font-bold">{datasetsActivos}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
@@ -459,7 +479,7 @@ const Reports = () => {
                     <Database className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-400 border-blue-200">
-                    Productos
+                    {t("kpis.products")}
                   </Badge>
                 </div>
               </div>
@@ -470,7 +490,7 @@ const Reports = () => {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Eficiencia</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("kpis.efficiency")}</p>
                   <p className="text-3xl font-bold">{kpis?.compliance_percent ?? 98}%</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
@@ -478,7 +498,7 @@ const Reports = () => {
                     <Zap className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                   </div>
                   <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-400 border-purple-200">
-                    Uptime
+                    {t("kpis.uptime")}
                   </Badge>
                 </div>
               </div>
@@ -491,9 +511,9 @@ const Reports = () => {
       <FadeIn delay={0.1}>
         <Card>
           <CardHeader>
-            <CardTitle>Tendencia de Transacciones</CardTitle>
+            <CardTitle>{t("charts.transactionsTrend")}</CardTitle>
             <CardDescription>
-              Evolución de gastos vs ingresos por período
+              {t("charts.trendDescription")}
             </CardDescription>
           </CardHeader>
           <CardContent className="h-[300px]">
@@ -514,7 +534,7 @@ const Reports = () => {
                   <XAxis dataKey="month" className="text-xs" />
                   <YAxis className="text-xs" tickFormatter={(v) => `€${v}`} />
                   <Tooltip 
-                    formatter={(value: number) => [`€ ${value.toLocaleString("es-ES")}`, ""]}
+                    formatter={(value: number) => [`€ ${value.toLocaleString(i18n.language)}`, ""]}
                     contentStyle={{ 
                       backgroundColor: 'hsl(var(--card))', 
                       border: '1px solid hsl(var(--border))',
@@ -527,7 +547,7 @@ const Reports = () => {
                     dataKey="gasto" 
                     stroke="#ef4444" 
                     fill="url(#gastoGradient)" 
-                    name="Gasto"
+                    name={t("charts.spend")}
                     strokeWidth={2}
                   />
                   <Area 
@@ -535,14 +555,14 @@ const Reports = () => {
                     dataKey="ingreso" 
                     stroke="#10b981" 
                     fill="url(#ingresoGradient)" 
-                    name="Ingreso"
+                    name={t("charts.income")}
                     strokeWidth={2}
                   />
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
               <div className="flex items-center justify-center h-full text-muted-foreground">
-                No hay datos de tendencia disponibles
+                {t("charts.noTrendData")}
               </div>
             )}
           </CardContent>
@@ -553,9 +573,9 @@ const Reports = () => {
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
-              <CardTitle>Transacciones por Estado</CardTitle>
+              <CardTitle>{t("charts.byStatus")}</CardTitle>
               <CardDescription>
-                Distribución actual de solicitudes en el sistema
+                {t("charts.statusDescription")}
               </CardDescription>
             </CardHeader>
             <CardContent className="h-[300px]">
@@ -582,7 +602,7 @@ const Reports = () => {
                 </ResponsiveContainer>
               ) : (
                 <div className="flex items-center justify-center h-full text-muted-foreground">
-                  No hay datos disponibles
+                  {t("charts.noData")}
                 </div>
               )}
             </CardContent>
@@ -590,9 +610,9 @@ const Reports = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>Productos Más Solicitados</CardTitle>
+              <CardTitle>{t("charts.topProducts")}</CardTitle>
               <CardDescription>
-                Top 5 productos de datos más demandados
+                {t("charts.topProductsDescription")}
               </CardDescription>
             </CardHeader>
             <CardContent className="h-[300px]">
@@ -609,8 +629,8 @@ const Reports = () => {
                     />
                     <Tooltip 
                       formatter={(value: number, name: string) => [
-                        name === "count" ? `${value} solicitudes` : `€ ${value.toLocaleString("es-ES")}`,
-                        name === "count" ? "Cantidad" : "Ingresos"
+                        name === "count" ? `${value} ${t("charts.requests")}` : `€ ${value.toLocaleString(i18n.language)}`,
+                        name === "count" ? t("metrics.volume") : t("kpis.revenue")
                       ]}
                       contentStyle={{ 
                         backgroundColor: 'hsl(var(--card))', 
@@ -623,7 +643,7 @@ const Reports = () => {
                 </ResponsiveContainer>
               ) : (
                 <div className="flex items-center justify-center h-full text-muted-foreground">
-                  No hay datos disponibles
+                  {t("charts.noData")}
                 </div>
               )}
             </CardContent>
@@ -635,9 +655,9 @@ const Reports = () => {
       <FadeIn delay={0.2}>
         <Card>
           <CardHeader>
-            <CardTitle>Top Proveedores de Datos</CardTitle>
+            <CardTitle>{t("charts.topProviders")}</CardTitle>
             <CardDescription>
-              Ranking de proveedores con los que más interactúas
+              {t("charts.topProvidersDescription")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -645,16 +665,16 @@ const Reports = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Proveedor</TableHead>
-                    <TableHead className="text-right">Volumen (€)</TableHead>
-                    <TableHead className="text-right"># Transacciones</TableHead>
+                    <TableHead>{t("kpis.provider")}</TableHead>
+                    <TableHead className="text-right">{t("metrics.volume")} (€)</TableHead>
+                    <TableHead className="text-right"># {t("metrics.transactions")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {topProviders.map((provider, index) => (
                     <TableRow key={index}>
                       <TableCell className="font-medium">{provider.name}</TableCell>
-                      <TableCell className="text-right">€ {provider.volume.toLocaleString("es-ES")}</TableCell>
+                      <TableCell className="text-right">€ {provider.volume.toLocaleString(i18n.language)}</TableCell>
                       <TableCell className="text-right">{provider.transactions}</TableCell>
                     </TableRow>
                   ))}
@@ -662,7 +682,7 @@ const Reports = () => {
               </Table>
             ) : (
               <div className="text-center py-8 text-muted-foreground">
-                No hay datos de proveedores disponibles
+                {t("charts.noProvidersData")}
               </div>
             )}
           </CardContent>
@@ -673,9 +693,9 @@ const Reports = () => {
       <FadeIn delay={0.25}>
         <Card>
           <CardHeader>
-            <CardTitle>Métricas de Rendimiento</CardTitle>
+            <CardTitle>{t("metrics.title")}</CardTitle>
             <CardDescription>
-              Indicadores de eficiencia del sistema
+              {t("metrics.description")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -684,13 +704,13 @@ const Reports = () => {
                 <TrendingUp className="h-8 w-8 text-green-600 dark:text-green-400 mt-1" />
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Tasa de Aprobación
+                    {t("metrics.approvalRate")}
                   </p>
                   <p className="text-2xl font-bold">
                     {kpis?.approval_rate ?? 0}%
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {kpis?.total_volume ?? 0} transacciones totales
+                    {kpis?.total_volume ?? 0} {t("metrics.totalTransactions")}
                   </p>
                 </div>
               </div>
@@ -699,17 +719,17 @@ const Reports = () => {
                 <Clock className="h-8 w-8 text-amber-600 dark:text-amber-400 mt-1" />
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Tiempo Promedio
+                    {t("metrics.avgTime")}
                   </p>
                   <p className="text-2xl font-bold">
                     {kpis?.avg_time_hours ? 
                       kpis.avg_time_hours >= 24 ? 
-                        `${(kpis.avg_time_hours / 24).toFixed(1)} días` : 
-                        `${kpis.avg_time_hours.toFixed(1)} horas`
+                        `${(kpis.avg_time_hours / 24).toFixed(1)} ${t("metrics.days")}` : 
+                        `${kpis.avg_time_hours.toFixed(1)} ${t("metrics.hours")}`
                       : '-'}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    De solicitud a aprobación
+                    {t("metrics.fromRequestToApproval")}
                   </p>
                 </div>
               </div>
@@ -718,13 +738,13 @@ const Reports = () => {
                 <CheckCircle className="h-8 w-8 text-blue-600 dark:text-blue-400 mt-1" />
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">
-                    Cumplimiento
+                    {t("metrics.compliance")}
                   </p>
                   <p className="text-2xl font-bold">
                     {kpis?.compliance_percent ?? 0}%
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Políticas ODRL aplicadas
+                    {t("metrics.odrlPolicies")}
                   </p>
                 </div>
               </div>

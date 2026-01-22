@@ -1,7 +1,16 @@
 {
   "title": "Rapporten & Analyses",
   "subtitle": "Gedetailleerde analyse van uw databewerkingen",
-  "badge": "Rapporten",
+  "badge": "Analytics",
+  "hero": {
+    "title": "Rapporten & Statistieken",
+    "description": "Analyseer systeemprestaties, visualiseer trends en krijg inzichten in datatransacties."
+  },
+  "dateRange": {
+    "30days": "Laatste 30 dagen",
+    "90days": "Laatste 90 dagen",
+    "ytd": "Jaar tot nu (YTD)"
+  },
   "tabs": {
     "overview": "Overzicht",
     "transactions": "Transacties",
@@ -16,14 +25,22 @@
     "cancelled": "Geannuleerd",
     "denied_subject": "Afgewezen door Aanbieder",
     "denied_holder": "Afgewezen door Bewaarder",
-    "initiated": "Gestart"
+    "initiated": "Gestart",
+    "other": "Overig"
   },
   "kpis": {
     "totalSpend": "Totale Uitgaven",
     "totalRevenue": "Totale Inkomsten",
+    "revenue": "Inkomsten",
     "activeTransactions": "Actieve Transacties",
     "completedTransactions": "Voltooide Transacties",
-    "pendingApprovals": "Openstaande Goedkeuringen"
+    "pendingApprovals": "Openstaande Goedkeuringen",
+    "activeDatasets": "Actieve Datasets",
+    "efficiency": "Efficiëntie",
+    "consumption": "Verbruik",
+    "provider": "Aanbieder",
+    "products": "Producten",
+    "uptime": "Beschikbaarheid"
   },
   "export": {
     "pdf": "PDF Exporteren",
@@ -36,9 +53,64 @@
     "organization": "Organisatie"
   },
   "charts": {
+    "transactionsTrend": "Transactietrend",
+    "trendDescription": "Uitgaven vs. inkomsten evolutie per periode",
+    "spend": "Uitgaven",
+    "income": "Inkomsten",
+    "byStatus": "Transacties per Status",
+    "statusDescription": "Huidige verdeling van aanvragen in het systeem",
+    "topProducts": "Meest Gevraagde Producten",
+    "topProductsDescription": "Top 5 meest gevraagde dataproducten",
+    "topProviders": "Top Data-aanbieders",
+    "topProvidersDescription": "Ranking van aanbieders op interactievolume",
+    "noTrendData": "Geen trendgegevens beschikbaar",
+    "noData": "Geen gegevens beschikbaar",
+    "noProvidersData": "Geen aanbiedergegevens beschikbaar",
     "transactionsByMonth": "Transacties per Maand",
     "revenueByCategory": "Inkomsten per Categorie",
-    "statusDistribution": "Statusverdeling"
+    "statusDistribution": "Statusverdeling",
+    "requests": "aanvragen"
+  },
+  "metrics": {
+    "title": "Prestatie-indicatoren",
+    "description": "Systeemefficiëntie-indicatoren",
+    "approvalRate": "Goedkeuringspercentage",
+    "totalTransactions": "totale transacties",
+    "avgTime": "Gemiddelde Tijd",
+    "fromRequestToApproval": "Van aanvraag tot goedkeuring",
+    "compliance": "Naleving",
+    "odrlPolicies": "Toegepaste ODRL-beleid",
+    "days": "dagen",
+    "hours": "uren",
+    "volume": "Volume",
+    "transactions": "transacties"
+  },
+  "pdf": {
+    "title": "PROCUREDATA - Analyserapport",
+    "period": "Periode",
+    "generated": "Gegenereerd",
+    "organization": "Organisatie",
+    "keyMetrics": "Belangrijkste Statistieken",
+    "transactionsByStatus": "Transacties per Status",
+    "topRequestedProducts": "Meest Gevraagde Producten",
+    "success": "PDF-rapport succesvol gegenereerd",
+    "footer": "Dit rapport is automatisch gegenereerd door PROCUREDATA",
+    "volumeTotal": "Totaal Volume (Uitgaven)",
+    "dataRevenue": "Data-inkomsten",
+    "avgTimeLabel": "Gemiddelde Tijd"
+  },
+  "csv": {
+    "success": "Gegevens geëxporteerd naar CSV",
+    "headers": {
+      "type": "Type",
+      "name": "Naam",
+      "value": "Waarde"
+    },
+    "types": {
+      "status": "Status",
+      "product": "Product",
+      "provider": "Aanbieder"
+    }
   },
   "table": {
     "columns": {
@@ -53,5 +125,6 @@
   "empty": {
     "title": "Geen rapportgegevens",
     "description": "Geen gegevens beschikbaar voor de geselecteerde periode."
-  }
+  },
+  "unknown": "Onbekend"
 }

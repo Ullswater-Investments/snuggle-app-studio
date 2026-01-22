@@ -1,7 +1,16 @@
 {
   "title": "Relatórios e Análises",
   "subtitle": "Análise detalhada das suas operações de dados",
-  "badge": "Relatórios",
+  "badge": "Analytics",
+  "hero": {
+    "title": "Relatórios e Estatísticas",
+    "description": "Analise o desempenho do sistema, visualize tendências e obtenha insights sobre transações de dados."
+  },
+  "dateRange": {
+    "30days": "Últimos 30 dias",
+    "90days": "Últimos 90 dias",
+    "ytd": "Ano até a data (YTD)"
+  },
   "tabs": {
     "overview": "Visão Geral",
     "transactions": "Transações",
@@ -16,14 +25,22 @@
     "cancelled": "Cancelada",
     "denied_subject": "Rejeitada pelo Fornecedor",
     "denied_holder": "Rejeitada pelo Custodiante",
-    "initiated": "Iniciada"
+    "initiated": "Iniciada",
+    "other": "Outro"
   },
   "kpis": {
     "totalSpend": "Gasto Total",
     "totalRevenue": "Receita Total",
+    "revenue": "Receita",
     "activeTransactions": "Transações Ativas",
     "completedTransactions": "Transações Concluídas",
-    "pendingApprovals": "Aprovações Pendentes"
+    "pendingApprovals": "Aprovações Pendentes",
+    "activeDatasets": "Datasets Ativos",
+    "efficiency": "Eficiência",
+    "consumption": "Consumo",
+    "provider": "Fornecedor",
+    "products": "Produtos",
+    "uptime": "Disponibilidade"
   },
   "export": {
     "pdf": "Exportar PDF",
@@ -36,9 +53,64 @@
     "organization": "Organização"
   },
   "charts": {
+    "transactionsTrend": "Tendência de Transações",
+    "trendDescription": "Evolução de gastos vs receitas por período",
+    "spend": "Gasto",
+    "income": "Receita",
+    "byStatus": "Transações por Status",
+    "statusDescription": "Distribuição atual de solicitações no sistema",
+    "topProducts": "Produtos Mais Solicitados",
+    "topProductsDescription": "Top 5 produtos de dados mais demandados",
+    "topProviders": "Principais Fornecedores de Dados",
+    "topProvidersDescription": "Ranking de fornecedores por volume de interações",
+    "noTrendData": "Sem dados de tendência disponíveis",
+    "noData": "Sem dados disponíveis",
+    "noProvidersData": "Sem dados de fornecedores disponíveis",
     "transactionsByMonth": "Transações por Mês",
     "revenueByCategory": "Receita por Categoria",
-    "statusDistribution": "Distribuição por Status"
+    "statusDistribution": "Distribuição por Status",
+    "requests": "solicitações"
+  },
+  "metrics": {
+    "title": "Métricas de Desempenho",
+    "description": "Indicadores de eficiência do sistema",
+    "approvalRate": "Taxa de Aprovação",
+    "totalTransactions": "transações totais",
+    "avgTime": "Tempo Médio",
+    "fromRequestToApproval": "Da solicitação à aprovação",
+    "compliance": "Conformidade",
+    "odrlPolicies": "Políticas ODRL aplicadas",
+    "days": "dias",
+    "hours": "horas",
+    "volume": "Volume",
+    "transactions": "transações"
+  },
+  "pdf": {
+    "title": "PROCUREDATA - Relatório Analítico",
+    "period": "Período",
+    "generated": "Gerado",
+    "organization": "Organização",
+    "keyMetrics": "Métricas Principais",
+    "transactionsByStatus": "Transações por Status",
+    "topRequestedProducts": "Produtos Mais Solicitados",
+    "success": "Relatório PDF gerado com sucesso",
+    "footer": "Este relatório foi gerado automaticamente pelo PROCUREDATA",
+    "volumeTotal": "Volume Total (Gasto)",
+    "dataRevenue": "Receita de Dados",
+    "avgTimeLabel": "Tempo Médio"
+  },
+  "csv": {
+    "success": "Dados exportados para CSV",
+    "headers": {
+      "type": "Tipo",
+      "name": "Nome",
+      "value": "Valor"
+    },
+    "types": {
+      "status": "Status",
+      "product": "Produto",
+      "provider": "Fornecedor"
+    }
   },
   "table": {
     "columns": {
@@ -53,5 +125,6 @@
   "empty": {
     "title": "Sem dados de relatório",
     "description": "Nenhum dado disponível para o período selecionado."
-  }
+  },
+  "unknown": "Desconhecido"
 }

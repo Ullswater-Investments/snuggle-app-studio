@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,9 +32,19 @@ import {
 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { formatDistanceToNow, isToday, isYesterday, isBefore, startOfDay, subDays } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+
+const DATE_LOCALE_MAP: Record<string, Locale> = {
+  es,
+  en: enUS,
+  de,
+  fr,
+  pt,
+  it,
+  nl,
+};
 
 type NotificationType = "info" | "success" | "warning" | "error";
 
@@ -54,10 +65,13 @@ interface NotificationGroup {
 }
 
 const Notifications = () => {
+  const { t, i18n } = useTranslation("notifications");
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [filter, setFilter] = useState<"all" | "unread" | "priority">("all");
+  
+  const currentLocale = DATE_LOCALE_MAP[i18n.language] || es;
 
   // Fetch notifications from the notifications table
   const { data: notifications, isLoading } = useQuery({
@@ -102,7 +116,7 @@ const Notifications = () => {
         },
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
-          toast.info("Nueva notificación recibida", {
+          toast.info(t("toast.newNotification"), {
             description: (payload.new as Notification).title,
           });
         }
@@ -143,7 +157,7 @@ const Notifications = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success("Notificación eliminada");
+      toast.success(t("actions.delete"));
     },
     onError: () => {
       toast.error("Error al eliminar la notificación");
@@ -166,10 +180,10 @@ const Notifications = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success("Todas las notificaciones marcadas como leídas");
+      toast.success(t("toast.allMarkedAsRead"));
     },
     onError: () => {
-      toast.error("Error al marcar notificaciones");
+      toast.error("Error");
     },
   });
 
@@ -259,12 +273,12 @@ const Notifications = () => {
     });
 
     const groups: NotificationGroup[] = [];
-    if (today.length > 0) groups.push({ label: "Hoy", notifications: today });
-    if (yesterday.length > 0) groups.push({ label: "Ayer", notifications: yesterday });
-    if (older.length > 0) groups.push({ label: "Anteriores", notifications: older });
+    if (today.length > 0) groups.push({ label: t("groups.today"), notifications: today });
+    if (yesterday.length > 0) groups.push({ label: t("groups.yesterday"), notifications: yesterday });
+    if (older.length > 0) groups.push({ label: t("groups.older"), notifications: older });
 
     return groups;
-  }, [notifications]);
+  }, [notifications, t]);
 
   const unreadCount = notifications?.filter((n) => !n.is_read).length || 0;
   const priorityCount = notifications?.filter((n) => n.type === "warning" || n.type === "error").length || 0;
@@ -296,13 +310,13 @@ const Notifications = () => {
           <div className="relative z-10">
             <Badge variant="secondary" className="mb-4">
               <Bell className="mr-1 h-3 w-3" />
-              Centro de Actividad
+              {t("badge")}
             </Badge>
             <h1 className="text-4xl font-bold mb-3">
-              Notificaciones
+              {t("title")}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Mantente al día con solicitudes de acceso, pagos Web3, contratos inteligentes y alertas del sistema.
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -316,14 +330,14 @@ const Notifications = () => {
               onClick={() => setFilter("all")}
               size="sm"
             >
-              Todas
+              {t("filters.all")}
             </Button>
             <Button
               variant={filter === "unread" ? "default" : "outline"}
               onClick={() => setFilter("unread")}
               size="sm"
             >
-              No leídas
+              {t("filters.unread")}
               {unreadCount > 0 && (
                 <Badge variant="secondary" className="ml-2 bg-primary/20">
                   {unreadCount}
@@ -337,7 +351,7 @@ const Notifications = () => {
               className="gap-1"
             >
               <AlertTriangle className="h-4 w-4" />
-              Alta Prioridad
+              {t("filters.highPriority")}
               {priorityCount > 0 && (
                 <Badge variant="secondary" className="ml-1 bg-orange-500/20 text-orange-700 dark:text-orange-400">
                   {priorityCount}
@@ -355,7 +369,7 @@ const Notifications = () => {
               className="gap-2 text-muted-foreground hover:text-foreground"
             >
               <CheckCheck className="h-4 w-4" />
-              Marcar todo como leído
+              {t("actions.markAllRead")}
             </Button>
           )}
         </div>
@@ -379,13 +393,9 @@ const Notifications = () => {
             ) : !notifications || notifications.length === 0 ? (
               <div className="text-center py-12">
                 <Bell className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">No hay notificaciones</h3>
+                <h3 className="text-lg font-semibold mb-2">{t("empty.title")}</h3>
                 <p className="text-sm text-muted-foreground">
-                  {filter === "unread"
-                    ? "No tienes notificaciones sin leer"
-                    : filter === "priority"
-                    ? "No hay notificaciones de alta prioridad"
-                    : "No tienes notificaciones en este momento"}
+                  {t("empty.description")}
                 </p>
               </div>
             ) : (
@@ -438,7 +448,7 @@ const Notifications = () => {
                               <p className="text-xs text-muted-foreground">
                                 {formatDistanceToNow(new Date(notification.created_at || ""), {
                                   addSuffix: true,
-                                  locale: es,
+                                  locale: currentLocale,
                                 })}
                               </p>
                             </div>
@@ -451,7 +461,7 @@ const Notifications = () => {
                                   onClick={() => handleNotificationClick(notification)}
                                   className="gap-1"
                                 >
-                                  Revisar
+                                  {t("actions.viewDetails")}
                                   <ExternalLink className="h-3 w-3" />
                                 </Button>
                               )}
@@ -474,12 +484,12 @@ const Notifications = () => {
                                     {notification.is_read ? (
                                       <>
                                         <Mail className="mr-2 h-4 w-4" />
-                                        Marcar como no leída
+                                        {t("actions.markAsRead")}
                                       </>
                                     ) : (
                                       <>
                                         <MailOpen className="mr-2 h-4 w-4" />
-                                        Marcar como leída
+                                        {t("actions.markAsRead")}
                                       </>
                                     )}
                                   </DropdownMenuItem>

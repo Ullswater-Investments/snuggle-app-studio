@@ -1,7 +1,16 @@
 {
   "title": "Informes y Analíticas",
   "subtitle": "Análisis detallado de tus operaciones de datos",
-  "badge": "Informes",
+  "badge": "Analytics",
+  "hero": {
+    "title": "Reportes y Estadísticas",
+    "description": "Analiza el rendimiento del sistema, visualiza tendencias y obtén insights sobre las transacciones de datos."
+  },
+  "dateRange": {
+    "30days": "Últimos 30 días",
+    "90days": "Últimos 90 días",
+    "ytd": "Este Año (YTD)"
+  },
   "tabs": {
     "overview": "Resumen",
     "transactions": "Transacciones",
@@ -11,19 +20,27 @@
   "status": {
     "pending_subject": "Pendiente Proveedor",
     "pending_holder": "Pendiente Custodio",
-    "approved": "Aprobada",
-    "completed": "Completada",
-    "cancelled": "Cancelada",
-    "denied_subject": "Rechazada Proveedor",
-    "denied_holder": "Rechazada Custodio",
-    "initiated": "Iniciada"
+    "approved": "Aprobado",
+    "completed": "Completado",
+    "cancelled": "Cancelado",
+    "denied_subject": "Rechazado",
+    "denied_holder": "Rechazado",
+    "initiated": "Iniciada",
+    "other": "Otro"
   },
   "kpis": {
     "totalSpend": "Gasto Total",
     "totalRevenue": "Ingresos Totales",
+    "revenue": "Ingresos",
     "activeTransactions": "Transacciones Activas",
     "completedTransactions": "Transacciones Completadas",
-    "pendingApprovals": "Aprobaciones Pendientes"
+    "pendingApprovals": "Aprobaciones Pendientes",
+    "activeDatasets": "Datasets Activos",
+    "efficiency": "Eficiencia",
+    "consumption": "Consumo",
+    "provider": "Proveedor",
+    "products": "Productos",
+    "uptime": "Uptime"
   },
   "export": {
     "pdf": "Exportar PDF",
@@ -36,9 +53,64 @@
     "organization": "Organización"
   },
   "charts": {
+    "transactionsTrend": "Tendencia de Transacciones",
+    "trendDescription": "Evolución de gasto vs ingresos por período",
+    "spend": "Gasto",
+    "income": "Ingreso",
+    "byStatus": "Transacciones por Estado",
+    "statusDescription": "Distribución actual de solicitudes en el sistema",
+    "topProducts": "Productos más Solicitados",
+    "topProductsDescription": "Top 5 productos de datos más demandados",
+    "topProviders": "Principales Proveedores de Datos",
+    "topProvidersDescription": "Ranking de proveedores por volumen de interacciones",
+    "noTrendData": "No hay datos de tendencia disponibles",
+    "noData": "No hay datos disponibles",
+    "noProvidersData": "No hay datos de proveedores disponibles",
     "transactionsByMonth": "Transacciones por Mes",
     "revenueByCategory": "Ingresos por Categoría",
-    "statusDistribution": "Distribución por Estado"
+    "statusDistribution": "Distribución por Estado",
+    "requests": "solicitudes"
+  },
+  "metrics": {
+    "title": "Métricas de Rendimiento",
+    "description": "Indicadores de eficiencia del sistema",
+    "approvalRate": "Tasa de Aprobación",
+    "totalTransactions": "transacciones totales",
+    "avgTime": "Tiempo Promedio",
+    "fromRequestToApproval": "De solicitud a aprobación",
+    "compliance": "Cumplimiento",
+    "odrlPolicies": "Políticas ODRL aplicadas",
+    "days": "días",
+    "hours": "horas",
+    "volume": "Volumen",
+    "transactions": "transacciones"
+  },
+  "pdf": {
+    "title": "PROCUREDATA - Reporte de Analytics",
+    "period": "Periodo",
+    "generated": "Generado",
+    "organization": "Organización",
+    "keyMetrics": "Métricas Clave",
+    "transactionsByStatus": "Transacciones por Estado",
+    "topRequestedProducts": "Productos Más Solicitados",
+    "success": "Reporte PDF generado correctamente",
+    "footer": "Este reporte fue generado automáticamente por PROCUREDATA",
+    "volumeTotal": "Volumen Total (Gasto)",
+    "dataRevenue": "Ingresos por Datos",
+    "avgTimeLabel": "Tiempo Promedio"
+  },
+  "csv": {
+    "success": "Datos exportados a CSV",
+    "headers": {
+      "type": "Tipo",
+      "name": "Nombre",
+      "value": "Valor"
+    },
+    "types": {
+      "status": "Estado",
+      "product": "Producto",
+      "provider": "Proveedor"
+    }
   },
   "table": {
     "columns": {
@@ -53,5 +125,6 @@
   "empty": {
     "title": "Sin datos de informes",
     "description": "No hay datos disponibles para el período seleccionado."
-  }
+  },
+  "unknown": "Desconocido"
 }
