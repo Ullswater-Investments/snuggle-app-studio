@@ -319,6 +319,9 @@
     },
     "seres": {
       "description": "Pioneros en intercambio electrónico seguro de documentos con +30 años de experiencia. Especialistas en EDI, e-Factura, compliance fiscal y automatización de cadenas de suministro. Grupo Docaposte - Gaia-X Ready."
+    },
+    "cdi-agro": {
+      "description": "Cluster de Innovación Agroalimentaria que impulsa la transformación digital del sector agrícola español. Conecta productores, cooperativas y empresas tecnológicas para optimizar la cadena de valor agroalimentaria."
     }
   }
 }

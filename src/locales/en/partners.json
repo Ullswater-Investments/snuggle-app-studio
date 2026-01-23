@@ -317,6 +317,9 @@
     },
     "seres": {
       "description": "Pioneers in secure electronic document exchange with 30+ years of experience. Specialists in EDI, e-Invoicing, tax compliance and supply chain automation. Docaposte Group - Gaia-X Ready."
+    },
+    "cdi-agro": {
+      "description": "Agri-Food Innovation Cluster driving the digital transformation of Spanish agriculture. Connects producers, cooperatives, and technology companies to optimize the agri-food value chain."
     }
   }
 }
