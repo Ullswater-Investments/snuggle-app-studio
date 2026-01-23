@@ -226,6 +226,10 @@ import SeresFuncionalidades from "./pages/partners/SeresFuncionalidades";
 import SeresCasosUso from "./pages/partners/SeresCasosUso";
 import SeresMonetizacion from "./pages/partners/SeresMonetizacion";
 import SeresRoadmap from "./pages/partners/SeresRoadmap";
+// CDI Agro
+import CdiAgroLogin from "./pages/partners/CdiAgroLogin";
+import CdiAgroMiembros from "./pages/partners/CdiAgroMiembros";
+import CdiAgroProyecto from "./pages/partners/CdiAgroProyecto";
 // SERES Case Study Detail Pages
 import SeresNestle from "./pages/partners/seres/casos/SeresNestle";
 import SeresCovirán from "./pages/partners/seres/casos/SeresCovirán";
@@ -604,6 +608,16 @@ const App = () => (
                   <Route path="/partners/seres/miembros/roadmap" element={
                     <PartnerProtectedRoute partnerSlug="seres">
                       <SeresRoadmap />
+                    </PartnerProtectedRoute>
+                  } />
+
+                  {/* Partner Pages - CDI Agro */}
+                  <Route path="/partners/cdi-agro" element={<CdiAgroLogin />} />
+                  <Route path="/partners/cdi-agro/login" element={<CdiAgroLogin />} />
+                  <Route path="/partners/cdi-agro/proyecto" element={<CdiAgroProyecto />} />
+                  <Route path="/partners/cdi-agro/miembros" element={
+                    <PartnerProtectedRoute partnerSlug="cdi-agro">
+                      <CdiAgroMiembros />
                     </PartnerProtectedRoute>
                   } />
 
