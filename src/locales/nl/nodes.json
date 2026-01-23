@@ -322,7 +322,11 @@
         "governance": "Uw Governance",
         "filters": ["Filter", "Validatie", "Goedkeuring"],
         "catalog": "Premium Catalogus",
-        "outputs": ["Geverifieerd", "Gecategoriseerd", "Geprijsd"]
+        "outputs": ["Geverifieerd", "Gecategoriseerd", "Geprijsd"],
+        "yourCluster": "Uw Knooppunt",
+        "unverified": "Niet geverifieerd",
+        "verified": "Geverifieerd",
+        "filtering": "Filtering en Validatie"
       }
     },
     "odrl": {
@@ -341,7 +345,15 @@
         "allowed": "Toegang Toegestaan",
         "blocked": "Toegang Geblokkeerd",
         "conditionMet": "Voorwaarde Voldaan",
-        "conditionNotMet": "Voorwaarde Niet Voldaan"
+        "conditionNotMet": "Voorwaarde Niet Voldaan",
+        "rulesEngine": "Regels Engine",
+        "condition1": "permission: lezen",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Verificatie-hash gegenereerd",
+        "dataEncrypted": "Data blijft versleuteld",
+        "conditionsMet": "Voorwaarden Voldaan",
+        "conditionFailed": "Voorwaarde Gefaald"
       }
     },
     "monetization": {
@@ -358,7 +370,16 @@
         "provider": "Leverancier",
         "promoter": "Knooppunt Promoter",
         "settlement": "Stablecoin Afrekening",
-        "instant": "Direct"
+        "instant": "Direct",
+        "dataTransaction": "Data Transactie",
+        "completed": "Voltooid",
+        "transactionValue": "Transactiewaarde",
+        "nodePromoter": "Knooppunt Promoter",
+        "automaticTransfer": "Automatische overdracht",
+        "automaticCommission": "Automatische commissie",
+        "yourCluster": "Uw Cluster",
+        "dataOwner": "Data-eigenaar",
+        "instantSettlement": "Directe afrekening via"
       }
     },
     "whiteLabel": {
@@ -373,7 +394,13 @@
         "yourDomain": "uwsector.nl",
         "logo": "Uw Logo",
         "primaryAction": "Primaire Actie",
-        "certifiedTech": "Gaia-X gecertificeerde technologie onder uw merk"
+        "certifiedTech": "Gecertificeerde technologie",
+        "yourCluster": "uwsector",
+        "customizable": "Aanpasbaar",
+        "yourLogo": "Uw Logo",
+        "yourColor": "Uw kleur",
+        "secondary": "Secundair",
+        "underYourBrand": "onder uw merk"
       }
     },
     "did": {

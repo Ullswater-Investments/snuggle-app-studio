@@ -336,7 +336,11 @@
         "catalog": "Catalogue Premium",
         "outputs": ["Vérifié", "Catégorisé", "Tarifé"],
         "roles": ["Fournisseurs", "Consommateurs", "Validateurs"],
-        "flows": ["Publication", "Découverte", "Négociation", "Échange"]
+        "flows": ["Publication", "Découverte", "Négociation", "Échange"],
+        "yourCluster": "Votre Nœud",
+        "unverified": "Non vérifié",
+        "verified": "Vérifié",
+        "filtering": "Filtrage et Validation"
       },
       "benefits": [
         { "title": "Curation de Contenu", "desc": "Approuvez ou rejetez les actifs de données avant publication." },
@@ -358,7 +362,15 @@
         "blocked": "Accès Bloqué",
         "conditionMet": "Condition Remplie",
         "conditionNotMet": "Condition Non Remplie",
-        "elements": ["Permissions", "Interdictions", "Obligations", "Contraintes"]
+        "elements": ["Permissions", "Interdictions", "Obligations", "Contraintes"],
+        "rulesEngine": "Moteur de Règles",
+        "condition1": "permission: lecture",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Hash de vérification généré",
+        "dataEncrypted": "Données restent chiffrées",
+        "conditionsMet": "Conditions Remplies",
+        "conditionFailed": "Condition Échouée"
       },
       "benefits": [
         { "title": "Granularité Extrême", "desc": "Contrôlez l'accès par utilisateur, organisation, temps et finalité." },
@@ -378,7 +390,16 @@
         "promoter": "Promoteur Nœud",
         "settlement": "Règlement Stablecoin",
         "instant": "Instantané",
-        "streams": ["Transactions", "Adhésions", "Services Premium", "Valeur Ajoutée"]
+        "streams": ["Transactions", "Adhésions", "Services Premium", "Valeur Ajoutée"],
+        "dataTransaction": "Transaction de Données",
+        "completed": "Complétée",
+        "transactionValue": "Valeur de Transaction",
+        "nodePromoter": "Promoteur du Nœud",
+        "automaticTransfer": "Transfert automatique",
+        "automaticCommission": "Commission automatique",
+        "yourCluster": "Votre Cluster",
+        "dataOwner": "Propriétaire des données",
+        "instantSettlement": "Règlement instantané via"
       },
       "benefits": [
         { "title": "Commissions Configurables", "desc": "Définissez le pourcentage de chaque transaction." },
@@ -399,7 +420,13 @@
         "yourDomain": "votresecteur.eu",
         "logo": "Votre Logo",
         "primaryAction": "Action Principale",
-        "certifiedTech": "Technologie certifiée Gaia-X sous votre marque"
+        "certifiedTech": "Technologie certifiée",
+        "yourCluster": "votresecteur",
+        "customizable": "Personnalisable",
+        "yourLogo": "Votre Logo",
+        "yourColor": "Votre couleur",
+        "secondary": "Secondaire",
+        "underYourBrand": "sous votre marque"
       }
     },
     "did": {

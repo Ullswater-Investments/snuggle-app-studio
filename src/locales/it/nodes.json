@@ -336,7 +336,11 @@
         "catalog": "Catalogo Premium",
         "outputs": ["Verificato", "Categorizzato", "Prezzato"],
         "roles": ["Fornitori", "Consumatori", "Validatori"],
-        "flows": ["Pubblicazione", "Scoperta", "Negoziazione", "Scambio"]
+        "flows": ["Pubblicazione", "Scoperta", "Negoziazione", "Scambio"],
+        "yourCluster": "Il Tuo Nodo",
+        "unverified": "Non verificato",
+        "verified": "Verificato",
+        "filtering": "Filtraggio e Validazione"
       },
       "benefits": [
         { "title": "Curazione Contenuti", "desc": "Approva o rifiuta asset di dati prima della pubblicazione." },
@@ -358,7 +362,15 @@
         "blocked": "Accesso Bloccato",
         "conditionMet": "Condizione Soddisfatta",
         "conditionNotMet": "Condizione Non Soddisfatta",
-        "elements": ["Permessi", "Divieti", "Obblighi", "Vincoli"]
+        "elements": ["Permessi", "Divieti", "Obblighi", "Vincoli"],
+        "rulesEngine": "Motore di Regole",
+        "condition1": "permission: lettura",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Hash di verifica generato",
+        "dataEncrypted": "Dati rimangono crittografati",
+        "conditionsMet": "Condizioni Soddisfatte",
+        "conditionFailed": "Condizione Fallita"
       },
       "benefits": [
         { "title": "Granularità Estrema", "desc": "Controlla l'accesso per utente, organizzazione, tempo e finalità." },
@@ -378,7 +390,16 @@
         "promoter": "Promotore Nodo",
         "settlement": "Regolamento Stablecoin",
         "instant": "Istantaneo",
-        "streams": ["Transazioni", "Adesioni", "Servizi Premium", "Valore Aggiunto"]
+        "streams": ["Transazioni", "Adesioni", "Servizi Premium", "Valore Aggiunto"],
+        "dataTransaction": "Transazione Dati",
+        "completed": "Completata",
+        "transactionValue": "Valore Transazione",
+        "nodePromoter": "Promotore del Nodo",
+        "automaticTransfer": "Trasferimento automatico",
+        "automaticCommission": "Commissione automatica",
+        "yourCluster": "Il Tuo Cluster",
+        "dataOwner": "Proprietario dei dati",
+        "instantSettlement": "Regolamento istantaneo via"
       },
       "benefits": [
         { "title": "Commissioni Configurabili", "desc": "Definisci la percentuale di ogni transazione." },
@@ -399,7 +420,13 @@
         "yourDomain": "tuosettore.eu",
         "logo": "Il Tuo Logo",
         "primaryAction": "Azione Principale",
-        "certifiedTech": "Tecnologia certificata Gaia-X sotto il tuo brand"
+        "certifiedTech": "Tecnologia certificata",
+        "yourCluster": "tuosettore",
+        "customizable": "Personalizzabile",
+        "yourLogo": "Il Tuo Logo",
+        "yourColor": "Il tuo colore",
+        "secondary": "Secondario",
+        "underYourBrand": "sotto il tuo brand"
       }
     },
     "did": {

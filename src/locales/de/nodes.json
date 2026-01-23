@@ -336,7 +336,11 @@
         "catalog": "Premium-Katalog",
         "outputs": ["Verifiziert", "Kategorisiert", "Bepreist"],
         "roles": ["Anbieter", "Konsumenten", "Validatoren"],
-        "flows": ["Veröffentlichung", "Entdeckung", "Verhandlung", "Austausch"]
+        "flows": ["Veröffentlichung", "Entdeckung", "Verhandlung", "Austausch"],
+        "yourCluster": "Ihr Knoten",
+        "unverified": "Nicht verifiziert",
+        "verified": "Verifiziert",
+        "filtering": "Filterung und Validierung"
       },
       "benefits": [
         { "title": "Content-Kuration", "desc": "Genehmigen oder lehnen Sie Daten-Assets vor der Veröffentlichung ab." },
@@ -358,7 +362,15 @@
         "blocked": "Zugriff Blockiert",
         "conditionMet": "Bedingung Erfüllt",
         "conditionNotMet": "Bedingung Nicht Erfüllt",
-        "elements": ["Erlaubnisse", "Verbote", "Pflichten", "Einschränkungen"]
+        "elements": ["Erlaubnisse", "Verbote", "Pflichten", "Einschränkungen"],
+        "rulesEngine": "Regel-Engine",
+        "condition1": "permission: lesen",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Verifizierungs-Hash generiert",
+        "dataEncrypted": "Daten bleiben verschlüsselt",
+        "conditionsMet": "Bedingungen Erfüllt",
+        "conditionFailed": "Bedingung Fehlgeschlagen"
       },
       "benefits": [
         { "title": "Extreme Granularität", "desc": "Kontrollieren Sie den Zugriff nach Benutzer, Organisation, Zeit und Zweck." },
@@ -378,7 +390,16 @@
         "promoter": "Knoten-Promoter",
         "settlement": "Stablecoin-Abrechnung",
         "instant": "Sofort",
-        "streams": ["Transaktionen", "Mitgliedschaften", "Premium-Services", "Mehrwert"]
+        "streams": ["Transaktionen", "Mitgliedschaften", "Premium-Services", "Mehrwert"],
+        "dataTransaction": "Datentransaktion",
+        "completed": "Abgeschlossen",
+        "transactionValue": "Transaktionswert",
+        "nodePromoter": "Knoten-Promoter",
+        "automaticTransfer": "Automatische Übertragung",
+        "automaticCommission": "Automatische Provision",
+        "yourCluster": "Ihr Cluster",
+        "dataOwner": "Dateninhaber",
+        "instantSettlement": "Sofortige Abrechnung via"
       },
       "benefits": [
         { "title": "Konfigurierbare Gebühren", "desc": "Definieren Sie den Prozentsatz jeder Transaktion." },
@@ -399,7 +420,13 @@
         "yourDomain": "ihrebranche.eu",
         "logo": "Ihr Logo",
         "primaryAction": "Primäre Aktion",
-        "certifiedTech": "Gaia-X zertifizierte Technologie unter Ihrer Marke"
+        "certifiedTech": "Zertifizierte Technologie",
+        "yourCluster": "ihrebranche",
+        "customizable": "Anpassbar",
+        "yourLogo": "Ihr Logo",
+        "yourColor": "Ihre Farbe",
+        "secondary": "Sekundär",
+        "underYourBrand": "unter Ihrer Marke"
       }
     },
     "did": {

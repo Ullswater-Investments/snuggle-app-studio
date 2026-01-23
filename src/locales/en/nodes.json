@@ -322,7 +322,11 @@
         "governance": "Your Governance",
         "filters": ["Filter", "Validation", "Approval"],
         "catalog": "Premium Catalog",
-        "outputs": ["Verified", "Categorized", "Priced"]
+        "outputs": ["Verified", "Categorized", "Priced"],
+        "yourCluster": "Your Node",
+        "unverified": "Unverified",
+        "verified": "Verified",
+        "filtering": "Filtering and Validation"
       }
     },
     "odrl": {
@@ -341,7 +345,15 @@
         "allowed": "Access Allowed",
         "blocked": "Access Blocked",
         "conditionMet": "Condition Met",
-        "conditionNotMet": "Condition Not Met"
+        "conditionNotMet": "Condition Not Met",
+        "rulesEngine": "Rules Engine",
+        "condition1": "permission: read",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Verification hash generated",
+        "dataEncrypted": "Data remains encrypted",
+        "conditionsMet": "Conditions Met",
+        "conditionFailed": "Condition Failed"
       }
     },
     "monetization": {
@@ -358,7 +370,16 @@
         "provider": "Provider",
         "promoter": "Node Promoter",
         "settlement": "Stablecoin Settlement",
-        "instant": "Instant"
+        "instant": "Instant",
+        "dataTransaction": "Data Transaction",
+        "completed": "Completed",
+        "transactionValue": "Transaction Value",
+        "nodePromoter": "Node Promoter",
+        "automaticTransfer": "Automatic transfer",
+        "automaticCommission": "Automatic commission",
+        "yourCluster": "Your Cluster",
+        "dataOwner": "Data owner",
+        "instantSettlement": "Instant settlement via"
       }
     },
     "whiteLabel": {
@@ -373,7 +394,13 @@
         "yourDomain": "yoursector.eu",
         "logo": "Your Logo",
         "primaryAction": "Primary Action",
-        "certifiedTech": "Gaia-X certified technology under your brand"
+        "certifiedTech": "Certified technology",
+        "yourCluster": "yoursector",
+        "customizable": "Customizable",
+        "yourLogo": "Your Logo",
+        "yourColor": "Your color",
+        "secondary": "Secondary",
+        "underYourBrand": "under your brand"
       }
     },
     "did": {

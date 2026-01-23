@@ -322,7 +322,11 @@
         "governance": "Tu Gobernanza",
         "filters": ["Filtro", "Validación", "Aprobación"],
         "catalog": "Catálogo Premium",
-        "outputs": ["Verificado", "Categorizado", "Precificado"]
+        "outputs": ["Verificado", "Categorizado", "Precificado"],
+        "yourCluster": "Tu Nodo",
+        "unverified": "Sin verificar",
+        "verified": "Verificado",
+        "filtering": "Filtrado y Validación"
       }
     },
     "odrl": {
@@ -341,7 +345,15 @@
         "allowed": "Acceso Permitido",
         "blocked": "Acceso Bloqueado",
         "conditionMet": "Condición Cumplida",
-        "conditionNotMet": "Condición No Cumplida"
+        "conditionNotMet": "Condición No Cumplida",
+        "rulesEngine": "Motor de Reglas",
+        "condition1": "permission: lectura",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Hash de verificación generado",
+        "dataEncrypted": "Dato permanece encriptado",
+        "conditionsMet": "Condiciones Cumplidas",
+        "conditionFailed": "Condición Fallida"
       }
     },
     "monetization": {
@@ -358,7 +370,16 @@
         "provider": "Proveedor",
         "promoter": "Promotor Nodo",
         "settlement": "Liquidación Stablecoin",
-        "instant": "Instantáneo"
+        "instant": "Instantáneo",
+        "dataTransaction": "Transacción de Datos",
+        "completed": "Completada",
+        "transactionValue": "Valor de Transacción",
+        "nodePromoter": "Promotor del Nodo",
+        "automaticTransfer": "Transferencia automática",
+        "automaticCommission": "Comisión automática",
+        "yourCluster": "Tu Clúster",
+        "dataOwner": "Propietario del dato",
+        "instantSettlement": "Liquidación instantánea vía"
       }
     },
     "whiteLabel": {
@@ -373,7 +394,13 @@
         "yourDomain": "tusector.eu",
         "logo": "Tu Logo",
         "primaryAction": "Acción Principal",
-        "certifiedTech": "Tecnología certificada Gaia-X bajo tu marca"
+        "certifiedTech": "Tecnología certificada",
+        "yourCluster": "tusector",
+        "customizable": "Personalizable",
+        "yourLogo": "Tu Logo",
+        "yourColor": "Tu color",
+        "secondary": "Secundario",
+        "underYourBrand": "bajo tu marca"
       }
     },
     "did": {

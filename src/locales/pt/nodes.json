@@ -336,7 +336,11 @@
         "catalog": "Catálogo Premium",
         "outputs": ["Verificado", "Categorizado", "Precificado"],
         "roles": ["Fornecedores", "Consumidores", "Validadores"],
-        "flows": ["Publicação", "Descoberta", "Negociação", "Troca"]
+        "flows": ["Publicação", "Descoberta", "Negociação", "Troca"],
+        "yourCluster": "Seu Nó",
+        "unverified": "Não verificado",
+        "verified": "Verificado",
+        "filtering": "Filtragem e Validação"
       },
       "benefits": [
         { "title": "Curadoria de Conteúdo", "desc": "Aprove ou rejeite ativos de dados antes da publicação." },
@@ -358,7 +362,15 @@
         "blocked": "Acesso Bloqueado",
         "conditionMet": "Condição Cumprida",
         "conditionNotMet": "Condição Não Cumprida",
-        "elements": ["Permissões", "Proibições", "Obrigações", "Restrições"]
+        "elements": ["Permissões", "Proibições", "Obrigações", "Restrições"],
+        "rulesEngine": "Motor de Regras",
+        "condition1": "permission: leitura",
+        "condition2": "constraint: isMember",
+        "condition3": "obligation: logAccess",
+        "hashGenerated": "Hash de verificação gerado",
+        "dataEncrypted": "Dados permanecem criptografados",
+        "conditionsMet": "Condições Cumpridas",
+        "conditionFailed": "Condição Falhada"
       },
       "benefits": [
         { "title": "Granularidade Extrema", "desc": "Controle o acesso por usuário, organização, tempo e finalidade." },
@@ -378,7 +390,16 @@
         "promoter": "Promotor Nó",
         "settlement": "Liquidação Stablecoin",
         "instant": "Instantâneo",
-        "streams": ["Transações", "Adesões", "Serviços Premium", "Valor Acrescentado"]
+        "streams": ["Transações", "Adesões", "Serviços Premium", "Valor Acrescentado"],
+        "dataTransaction": "Transação de Dados",
+        "completed": "Concluída",
+        "transactionValue": "Valor da Transação",
+        "nodePromoter": "Promotor do Nó",
+        "automaticTransfer": "Transferência automática",
+        "automaticCommission": "Comissão automática",
+        "yourCluster": "Seu Cluster",
+        "dataOwner": "Proprietário dos dados",
+        "instantSettlement": "Liquidação instantânea via"
       },
       "benefits": [
         { "title": "Comissões Configuráveis", "desc": "Defina a porcentagem de cada transação." },
@@ -399,7 +420,13 @@
         "yourDomain": "seusetor.eu",
         "logo": "Seu Logo",
         "primaryAction": "Ação Principal",
-        "certifiedTech": "Tecnologia certificada Gaia-X sob sua marca"
+        "certifiedTech": "Tecnologia certificada",
+        "yourCluster": "seusetor",
+        "customizable": "Personalizável",
+        "yourLogo": "Seu Logo",
+        "yourColor": "Sua cor",
+        "secondary": "Secundário",
+        "underYourBrand": "sob sua marca"
       }
     },
     "did": {
