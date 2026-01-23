@@ -465,9 +465,9 @@ const CdiAgroMiembros = () => {
           </div>
           
           <div className="text-center mt-8">
-            <Card className="bg-gradient-to-r from-green-600/30 to-lime-600/30 border-green-500/50 inline-block">
+            <Card className="bg-gradient-to-r from-green-700 to-lime-700 border-green-500 inline-block">
               <CardContent className="py-6 px-10">
-                <p className="text-green-300 mb-2">Beneficio TOTAL del Consorcio</p>
+                <p className="text-green-100 mb-2">Beneficio TOTAL del Consorcio</p>
                 <p className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-lime-400">
                   +97.200€
                 </p>
@@ -547,12 +547,12 @@ const CdiAgroMiembros = () => {
           transition={{ delay: 0.7 }}
           className="text-center py-12"
         >
-          <Card className="bg-gradient-to-br from-green-600/30 to-emerald-600/30 border-green-500/50 max-w-3xl mx-auto">
+          <Card className="bg-gradient-to-br from-green-700 to-emerald-800 border-green-500 max-w-3xl mx-auto">
             <CardContent className="py-10 px-6">
               <h3 className="text-3xl font-bold text-white mb-4">
                 ¿Listo para Recuperar el Control?
               </h3>
-              <p className="text-green-200/80 text-lg mb-8">
+              <p className="text-green-100 text-lg mb-8">
                 Únete al consorcio CDI Agro y empieza a ganar desde el día 1
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
