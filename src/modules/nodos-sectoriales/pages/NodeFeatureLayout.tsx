@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { FundingFooter } from '../components/FundingFooter';
 import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface NodeFeatureLayoutProps {
   title: string;
@@ -35,9 +37,13 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
             <ArrowLeft className="h-4 w-4" />
             <span className="text-sm font-medium">{t('layout.backToNodes')}</span>
           </Link>
-          <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100">
-            {t('layout.ownerNode')}
-          </Badge>
+          <div className="flex items-center gap-3">
+            <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100 hidden sm:inline-flex">
+              {t('layout.ownerNode')}
+            </Badge>
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -67,7 +73,7 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-20"
         >
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-8 md:p-12 border border-slate-200 shadow-sm">
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-slate-700 shadow-sm">
             {visualComponent}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-4">
@@ -85,9 +91,9 @@ export const NodeFeatureLayout: React.FC<NodeFeatureLayoutProps> = ({
           {benefits.map((benefit, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-shadow"
+              className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 text-orange-600 font-bold text-lg mb-4">
+              <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400 font-bold text-lg mb-4">
                 {i + 1}
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2">
