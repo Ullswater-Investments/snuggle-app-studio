@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { FundingFooter } from "@/components/FundingFooter";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const AraceaProyecto = () => {
   const { t } = useTranslation('aracea');
@@ -51,6 +53,10 @@ const AraceaProyecto = () => {
                   {t('cta.buttons.join')}
                 </Link>
               </Button>
+
+              <div className="h-4 w-px bg-border" />
+              <LanguageSwitcher />
+              <ThemeToggle />
             </div>
 
             {/* Mobile: External link */}

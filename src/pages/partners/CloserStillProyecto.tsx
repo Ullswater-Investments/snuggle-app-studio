@@ -19,6 +19,8 @@ import {
   Award
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const CloserStillProyecto = () => {
   const { t } = useTranslation('closerstill-proyecto');
@@ -97,6 +99,9 @@ const CloserStillProyecto = () => {
               <Badge variant="outline" className="border-blue-500 text-blue-600">
                 {t('hero.badges.kitReady')}
               </Badge>
+              <div className="h-4 w-px bg-border" />
+              <LanguageSwitcher />
+              <ThemeToggle />
             </div>
           </div>
         </div>

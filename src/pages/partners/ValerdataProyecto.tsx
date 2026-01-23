@@ -25,6 +25,8 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/AnimatedSect
 import { FundingFooter } from "@/components/FundingFooter";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const ValerdataProyecto = () => {
   const { t } = useTranslation('valerdata');
@@ -116,6 +118,9 @@ const ValerdataProyecto = () => {
                   {t('nav.membersArea')}
                 </Link>
               </Button>
+              <div className="h-4 w-px bg-border" />
+              <LanguageSwitcher />
+              <ThemeToggle />
             </div>
           </div>
         </div>

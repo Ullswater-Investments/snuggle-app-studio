@@ -25,6 +25,8 @@ import {
   Users,
   Beaker
 } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -206,23 +208,29 @@ export function PartnerProductDetailBase({
   return (
     <div className={`min-h-screen bg-gradient-to-br from-${gradient.bgFrom} via-${gradient.bgVia} to-${gradient.bgTo}`}>
       {/* Header Navigation */}
-      <div className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <div className="border-b bg-white/80 dark:bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/catalog" className="flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                {tCommon('common.backToCatalog')}
-              </Link>
-            </Button>
-            <Separator orientation="vertical" className="h-6" />
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link to="/catalog" className="hover:text-foreground transition-colors">{tCommon('common.catalog')}</Link>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-primary font-medium">{String(partner?.name || "")}</span>
-              <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground font-medium truncate max-w-[200px]">{String(product?.name || "")}</span>
-            </nav>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/catalog" className="flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  {tCommon('common.backToCatalog')}
+                </Link>
+              </Button>
+              <Separator orientation="vertical" className="h-6" />
+              <nav className="hidden md:flex items-center gap-2 text-sm text-muted-foreground">
+                <Link to="/catalog" className="hover:text-foreground transition-colors">{tCommon('common.catalog')}</Link>
+                <ChevronRight className="h-4 w-4" />
+                <span className="text-primary font-medium">{String(partner?.name || "")}</span>
+                <ChevronRight className="h-4 w-4" />
+                <span className="text-foreground font-medium truncate max-w-[200px]">{String(product?.name || "")}</span>
+              </nav>
+            </div>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

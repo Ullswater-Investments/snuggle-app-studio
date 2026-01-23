@@ -5,6 +5,8 @@ import { ArrowLeft, ChevronUp, Menu, X, FileText, Download } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { FundingFooter } from "@/components/FundingFooter";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   DocHero,
   DocQuienesSomos,
@@ -114,6 +116,9 @@ const AerceDocInstitucional = () => {
                 White Paper
               </Link>
             </Button>
+            <div className="h-4 w-px bg-border" />
+            <LanguageSwitcher />
+            <ThemeToggle />
           </div>
           <Button variant="ghost" size="sm" className="sm:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

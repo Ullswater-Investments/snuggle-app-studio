@@ -10,6 +10,8 @@ import { PublicSummarySection } from "@/components/partners/itbid/PublicSummaryS
 import { CTASection } from "@/components/partners/itbid/CTASection";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
 import { FundingFooter } from "@/components/FundingFooter";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const ItbidProyecto = () => {
   const handleDownloadPDF = () => {
@@ -57,6 +59,9 @@ const ItbidProyecto = () => {
                 White Paper
               </Link>
             </Button>
+            <div className="h-4 w-px bg-border" />
+            <LanguageSwitcher />
+            <ThemeToggle />
           </div>
         </div>
       </div>

@@ -8,6 +8,8 @@ import { SolutionSection } from "@/components/partners/telenatura/SolutionSectio
 import { DataSpaceSection } from "@/components/partners/telenatura/DataSpaceSection";
 import { CTASection } from "@/components/partners/telenatura/CTASection";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const TeleNaturaProyecto = () => {
   const handleDownloadPDF = () => {
@@ -62,6 +64,9 @@ const TeleNaturaProyecto = () => {
                 Acuerdo Marco
               </Link>
             </Button>
+            <div className="h-4 w-px bg-border" />
+            <LanguageSwitcher />
+            <ThemeToggle />
           </div>
         </div>
       </div>

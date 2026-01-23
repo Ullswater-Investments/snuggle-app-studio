@@ -14,6 +14,8 @@ import { CertificationSection } from "@/components/partners/aerce/proyecto/Certi
 import { SuccessCasesSection } from "@/components/partners/aerce/proyecto/SuccessCasesSection";
 import { FundingFooter } from "@/components/FundingFooter";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const AerceProyecto = () => {
   const { t } = useTranslation(['aerce', 'common']);
@@ -70,6 +72,10 @@ const AerceProyecto = () => {
                   White Paper
                 </Link>
               </Button>
+
+              <div className="h-4 w-px bg-border" />
+              <LanguageSwitcher />
+              <ThemeToggle />
             </div>
 
             {/* Mobile: External link */}

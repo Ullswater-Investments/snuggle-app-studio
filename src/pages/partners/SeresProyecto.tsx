@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -94,12 +96,18 @@ export default function SeresProyecto() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAzMHYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30" />
         
         <div className="container mx-auto px-4 py-16 relative z-10">
-          <Link to="/partners">
-            <Button variant="ghost" className="text-white/80 hover:text-white hover:bg-white/10 mb-6">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {t('nav.backToPartners')}
-            </Button>
-          </Link>
+          <div className="flex items-center justify-between mb-6">
+            <Link to="/partners">
+              <Button variant="ghost" className="text-white/80 hover:text-white hover:bg-white/10">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                {t('nav.backToPartners')}
+              </Button>
+            </Link>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
+          </div>
 
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">

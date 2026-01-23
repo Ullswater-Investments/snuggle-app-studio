@@ -16,6 +16,8 @@ import {
   ExternalLink,
   Shield
 } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const AerceMiembros = () => {
   const { session, logout } = usePartnerAuth("aerce");
@@ -109,10 +111,14 @@ const AerceMiembros = () => {
             </Badge>
           </div>
 
-          <Button variant="outline" size="sm" onClick={handleLogout}>
-            <LogOut className="h-4 w-4 mr-2" />
-            Cerrar Sesión
-          </Button>
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Cerrar Sesión
+            </Button>
+          </div>
         </div>
       </header>
 

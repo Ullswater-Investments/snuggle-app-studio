@@ -17,6 +17,8 @@ import {
 import { RoleSelectionStep } from '@/components/register/RoleSelectionStep';
 import { useRegistration } from '@/hooks/useRegistration';
 import { FundingFooter } from '@/components/FundingFooter';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const STORAGE_KEY = 'procuredata_registration';
 
@@ -259,6 +261,12 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Fixed Language/Theme Toggle */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
+
       {/* Header */}
       <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b">
         <div className="container mx-auto px-4 py-8">

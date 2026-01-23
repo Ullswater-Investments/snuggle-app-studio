@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { generateAerceDocTecnicoPDF } from "@/utils/generateAerceDocTecnicoPDF";
 import { FundingFooter } from "@/components/FundingFooter";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import {
   DocTecnicoHero,
   DocResumenEjecutivo,
@@ -131,6 +133,9 @@ const AerceDocTecnico = () => {
                 White Paper
               </Link>
             </Button>
+            <div className="h-4 w-px bg-border" />
+            <LanguageSwitcher />
+            <ThemeToggle />
           </div>
           
           <Button 

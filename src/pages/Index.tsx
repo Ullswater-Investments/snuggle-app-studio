@@ -22,6 +22,8 @@ import {
 import { FadeIn, SlideUp, ScaleIn, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 import { FundingFooter } from "@/components/FundingFooter";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -91,6 +93,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Fixed Language/Theme Toggle */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
+
       {/* Hero Section with Parallax */}
       <section
         ref={heroRef}

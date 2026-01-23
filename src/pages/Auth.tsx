@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const authSchema = z.object({
   email: z.string().trim().min(1, "El email es obligatorio").email("Introduce un email válido").max(255, "Email demasiado largo"),
@@ -56,7 +58,13 @@ const Auth = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4 relative">
+      {/* Fixed Language/Theme Toggle */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
+
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>

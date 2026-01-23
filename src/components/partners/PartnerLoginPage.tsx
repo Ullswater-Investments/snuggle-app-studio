@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Lock, User } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface PartnerLoginPageProps {
   partnerSlug: string;
@@ -106,7 +108,13 @@ export const PartnerLoginPage = ({ partnerSlug }: PartnerLoginPageProps) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted/30 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-muted/30 p-4 relative">
+      {/* Fixed Language/Theme Toggle */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
+
       <div className="w-full max-w-md">
         <Card className="shadow-xl border-border/50">
           <CardHeader className="text-center space-y-4 pb-2">

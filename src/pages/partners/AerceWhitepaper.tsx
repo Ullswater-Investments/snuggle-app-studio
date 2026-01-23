@@ -7,6 +7,8 @@ import { ArrowLeft, ChevronUp, Download, FileText, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { FundingFooter } from "@/components/FundingFooter";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { FadeIn } from "@/components/AnimatedSection";
@@ -101,6 +103,9 @@ const AerceWhitepaper = () => {
             <Button variant="outline" size="sm" asChild><Link to="/partners/aerce/proyecto" className="gap-2"><FileText className="h-4 w-4" />Doc Proyecto</Link></Button>
             <Button variant="outline" size="sm" asChild><Link to="/partners/aerce/doc-institucional" className="gap-2"><FileText className="h-4 w-4" />Doc Institucional</Link></Button>
             <Button variant="secondary" size="sm" disabled className="gap-2"><FileText className="h-4 w-4" />White Paper</Button>
+            <div className="h-4 w-px bg-border" />
+            <LanguageSwitcher />
+            <ThemeToggle />
           </div>
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild><Button variant="ghost" size="sm" className="sm:hidden"><Menu className="h-5 w-5" /></Button></SheetTrigger>
