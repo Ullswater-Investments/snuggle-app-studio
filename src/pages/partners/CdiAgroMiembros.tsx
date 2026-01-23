@@ -371,18 +371,18 @@ const CdiAgroMiembros = () => {
               Kit Digital · NextGenerationEU
             </Badge>
             <h3 className="text-3xl font-bold text-white mb-2">El Kit Digital te Paga a Ti</h3>
-            <p className="text-green-300/70">Escenario financiero del Consorcio 4+4</p>
+            <p className="text-green-200">Escenario financiero del Consorcio 4+4</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Promoter Card */}
-            <Card className="bg-gradient-to-br from-blue-900/50 to-indigo-900/50 border-blue-500/50 overflow-hidden">
-              <CardHeader className="border-b border-blue-500/30 bg-blue-900/30">
+            <Card className="bg-gradient-to-br from-blue-900 to-indigo-900 border-blue-500 overflow-hidden">
+              <CardHeader className="border-b border-blue-500/30 bg-blue-950">
                 <div className="flex items-center gap-3">
                   <Building2 className="h-6 w-6 text-blue-400" />
                   <CardTitle className="text-white">Empresa PROMOTORA</CardTitle>
                 </div>
-                <CardDescription className="text-blue-300/70">Líder del Consorcio</CardDescription>
+                <CardDescription className="text-blue-200">Líder del Consorcio</CardDescription>
               </CardHeader>
               <CardContent className="pt-6 space-y-4">
                 <div className="flex items-center justify-between p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">
@@ -410,13 +410,13 @@ const CdiAgroMiembros = () => {
             </Card>
 
             {/* User Card */}
-            <Card className="bg-gradient-to-br from-purple-900/50 to-violet-900/50 border-purple-500/50 overflow-hidden">
-              <CardHeader className="border-b border-purple-500/30 bg-purple-900/30">
+            <Card className="bg-gradient-to-br from-purple-900 to-violet-900 border-purple-500 overflow-hidden">
+              <CardHeader className="border-b border-purple-500/30 bg-purple-950">
                 <div className="flex items-center gap-3">
                   <Truck className="h-6 w-6 text-purple-400" />
                   <CardTitle className="text-white">Empresa USUARIA</CardTitle>
                 </div>
-                <CardDescription className="text-purple-300/70">Socio del Consorcio</CardDescription>
+                <CardDescription className="text-purple-200">Socio del Consorcio</CardDescription>
               </CardHeader>
               <CardContent className="pt-6 space-y-4">
                 <div className="flex items-center justify-between p-3 bg-purple-500/10 rounded-lg border border-purple-500/30">
