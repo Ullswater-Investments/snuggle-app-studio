@@ -23,6 +23,8 @@ import { Link } from 'react-router-dom';
 import { FundingFooter } from '@/components/FundingFooter';
 import { toast } from 'sonner';
 import { useNodeEligibility } from '@/hooks/useNodeEligibility';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export const NodeRequirementsPage = () => {
   const { t } = useTranslation(['nodes']);
@@ -209,15 +211,19 @@ export const NodeRequirementsPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white border-b border-border sticky top-0 z-50">
+      <header className="bg-white dark:bg-background border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/nodos-sectoriales" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
             <span className="text-sm font-medium">{t('pages.requirements.backToOverview')}</span>
           </Link>
-          <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100">
-            {t('pages.requirements.badge')}
-          </Badge>
+          <div className="flex items-center gap-3">
+            <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100 hidden sm:inline-flex">
+              {t('pages.requirements.badge')}
+            </Badge>
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
