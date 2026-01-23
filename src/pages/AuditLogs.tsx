@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { Shield, Search, Download, Eye, Calendar, Filter, Globe } from "lucide-react";
+import { Shield, Search, Download, Eye, Calendar, Filter, Globe, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,9 @@ import { FadeIn } from "@/components/AnimatedSection";
 import { formatDistanceToNow, format } from "date-fns";
 import { es } from "date-fns/locale";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import type { AuditLog } from "@/types/database.extensions";
 
 export default function AuditLogs() {
@@ -85,7 +88,22 @@ export default function AuditLogs() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-8">
+    <div className="min-h-screen bg-background">
+      {/* Header with LanguageSwitcher */}
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <Link to="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+            <ArrowLeft className="h-4 w-4" />
+            <span className="text-sm font-medium">Volver al Dashboard</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto p-6 space-y-8">
       <FadeIn>
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-red-500/10 via-background to-background border border-red-500/20 p-8">
           <div className="relative z-10">
@@ -223,6 +241,7 @@ export default function AuditLogs() {
           </CardContent>
         </Card>
       </FadeIn>
+      </div>
     </div>
   );
 }
