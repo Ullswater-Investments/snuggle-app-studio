@@ -6,6 +6,8 @@ import { AgentAvatar } from "@/components/ai/AgentAvatar";
 import { SourceCitation, parseSourceMarkers } from "@/components/ai/SourceCitation";
 import { FollowUpSuggestions, parseFollowUpMarkers } from "@/components/ai/FollowUpSuggestions";
 import { LiveMetricsBar } from "@/components/ai/LiveMetricsBar";
+import { TokenWalletBadge } from "@/components/ai/TokenWalletBadge";
+import { useTokenWallet } from "@/contexts/TokenWalletContext";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
