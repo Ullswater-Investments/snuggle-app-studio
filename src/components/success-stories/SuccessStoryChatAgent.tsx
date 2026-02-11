@@ -28,7 +28,7 @@ interface CaseContext {
 
 interface Props {
   caseContext: CaseContext;
-  onHighlightedNodesChange?: (nodes: string[]) => void;
+  onStreamingTextChange?: (text: string) => void;
 }
 
 export const SuccessStoryChatAgent = ({ caseContext, onHighlightedNodesChange }: Props) => {
