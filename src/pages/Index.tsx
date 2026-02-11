@@ -24,6 +24,9 @@ import { FundingFooter } from "@/components/FundingFooter";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { FederatedHeroChat } from "@/components/landing/FederatedHeroChat";
+import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
+import { RoadmapPhases } from "@/components/landing/RoadmapPhases";
 
 const Index = () => {
   const [email, setEmail] = useState("");
