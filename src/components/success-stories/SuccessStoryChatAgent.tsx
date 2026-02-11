@@ -10,7 +10,7 @@ import { TokenWalletBadge } from "@/components/ai/TokenWalletBadge";
 import { useTokenWallet } from "@/contexts/TokenWalletContext";
 import ReactMarkdown from "react-markdown";
 
-type Msg = { role: "user" | "assistant"; content: string };
+type Msg = { role: "user" | "assistant"; content: string; tokens?: number };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/success-story-agent`;
 
