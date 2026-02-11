@@ -76,6 +76,7 @@ export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
     setIsLoading(true);
     setIsThinking(true);
     setTokenCount(0);
+    setLastQuestion(text.trim().slice(0, 80));
 
     await new Promise((r) => setTimeout(r, 4000));
 
