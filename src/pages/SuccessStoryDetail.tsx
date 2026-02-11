@@ -55,6 +55,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { ROISimulator } from "@/components/ROISimulator";
+import { SuccessStoryChatAgent } from "@/components/success-stories/SuccessStoryChatAgent";
 import { AgroROISimulator } from "@/components/AgroROISimulator";
 import { SocialImpactDashboard } from "@/components/SocialImpactDashboard";
 import { MobilityScope3Report } from "@/components/success-stories/MobilityScope3Report";
