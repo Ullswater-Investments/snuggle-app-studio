@@ -236,6 +236,11 @@ export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
                 {msg.role === "assistant" && i === messages.length - 1 && !isLoading && sources.length > 0 && (
                   <SourceCitation sources={sources} />
                 )}
+                {msg.role === "assistant" && msg.tokens && !isLoading && (
+                  <span className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
+                    ⚡ {msg.tokens.toLocaleString("es-ES")} tokens
+                  </span>
+                )}
               </div>
             </div>
           ))}
