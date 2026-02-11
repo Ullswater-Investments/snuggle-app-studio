@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Shield,
   GitBranch,
@@ -24,6 +24,9 @@ import { FundingFooter } from "@/components/FundingFooter";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { FederatedHeroChat } from "@/components/landing/FederatedHeroChat";
+import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
+import { RoadmapPhases } from "@/components/landing/RoadmapPhases";
 
 const Index = () => {
   const [email, setEmail] = useState("");
@@ -32,20 +35,7 @@ const Index = () => {
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
   const heroRef = useRef<HTMLDivElement>(null);
-
-  // Parallax scroll effects
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  // Different transform values for parallax layers
-  const yBadge = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const yTitle = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const ySubtitle = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const yButtons = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const [isAgentProcessing, setIsAgentProcessing] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -99,62 +89,68 @@ const Index = () => {
         <ThemeToggle />
       </div>
 
-      {/* Hero Section with Parallax */}
+      {/* Hero Section - Chat First */}
       <section
         ref={heroRef}
         className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5"
       >
-        {/* Decorative background elements with parallax */}
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -300]), opacity: 0.1 }}
-          className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl"
-        />
-        <motion.div
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -200]), opacity: 0.1 }}
-          className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"
-        />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl opacity-[0.07]" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl opacity-[0.07]" />
 
-        <motion.div style={{ opacity, scale }} className="container mx-auto px-4 py-20 lg:py-32 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="container mx-auto px-4 py-12 lg:py-20 relative z-10">
+          {/* Top: brand + badges */}
+          <div className="text-center mb-8 space-y-3">
             <FadeIn delay={0.1}>
-              <motion.div style={{ y: yBadge }} className="inline-block">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-                  <Sparkles className="w-4 h-4" />
-                  Sistema de Gobernanza Multi-Tenant
-                </div>
-              </motion.div>
-            </FadeIn>
-
-            <SlideUp delay={0.2}>
-              <motion.h1 style={{ y: yTitle }} className="text-4xl md:text-6xl font-bold text-foreground leading-tight flex justify-center">
+              <div className="flex justify-center">
                 <ProcuredataLogo size="xl" />
-              </motion.h1>
-            </SlideUp>
-
-            <FadeIn delay={0.3}>
-              <motion.p
-                style={{ y: ySubtitle }}
-                className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
-              >
-                Plataforma integral para la gestión y gobernanza de transacciones de datos entre organizaciones con
-                flujos de aprobación multi-actor
-              </motion.p>
+              </div>
             </FadeIn>
-
-            <FadeIn delay={0.4}>
-              <motion.div style={{ y: yButtons }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="hero" onClick={scrollToAuth} className="text-lg">
-                  Comenzar Ahora
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button size="lg" variant="premium" onClick={handleDemoAccess} disabled={loading}>
-                  🎭 Ver Demo
-                </Button>
-              </motion.div>
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Espacio de Datos Federados con IA para la Función de Compras
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {["Gaia-X", "ODRL 2.0", "Pontus-X", "IDSA"].map((badge) => (
+                  <span
+                    key={badge}
+                    className="px-2.5 py-1 rounded-full text-[10px] font-semibold border bg-card text-muted-foreground"
+                  >
+                    {badge}
+                  </span>
+                ))}
+              </div>
             </FadeIn>
           </div>
-        </motion.div>
+
+          {/* Main: chat + diagram */}
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-8 items-start">
+            <FadeIn delay={0.4}>
+              <Card className="shadow-xl border-2">
+                <CardContent className="pt-6 pb-4">
+                  <FederatedHeroChat onProcessingChange={setIsAgentProcessing} />
+                </CardContent>
+              </Card>
+            </FadeIn>
+
+            <FadeIn delay={0.5}>
+              <div className="hidden lg:block">
+                <FederatedNetworkDiagram isProcessing={isAgentProcessing} />
+                <div className="text-center mt-4">
+                  <Button size="lg" variant="hero" onClick={scrollToAuth} className="text-lg">
+                    Comenzar Ahora
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
       </section>
+
+      {/* Roadmap 10 Phases */}
+      <RoadmapPhases />
 
       {/* Features Section */}
       <section className="py-20 bg-background">
@@ -486,7 +482,7 @@ const Index = () => {
                     <p className="text-sm text-muted-foreground text-center mb-3">¿Quiere explorar primero?</p>
                     <Button
                       variant="outline"
-                      className="w-full border-2 border-amber-500 text-amber-700 hover:bg-amber-50 hover:text-amber-800"
+                      className="w-full border-2 border-accent text-accent-foreground hover:bg-accent"
                       onClick={handleDemoAccess}
                       disabled={loading}
                     >

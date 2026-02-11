@@ -1,1 +1,4 @@
 project_id = "bxyoirmvxugbfyxhlfaf"
+
+[functions.federated-agent]
+verify_jwt = false
