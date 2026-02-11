@@ -54,7 +54,9 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
   const [isLoading, setIsLoading] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [tokenCount, setTokenCount] = useState(0);
+  const [lastQuestion, setLastQuestion] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { recordOperation } = useTokenWallet();
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
