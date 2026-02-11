@@ -398,16 +398,22 @@ export default function Landing() {
         <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-5">{t('successCases')}</h2>
-            <motion.div className="flex flex-wrap justify-center gap-3 md:gap-4" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}>
+            <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}>
               {sectors.map(sector => (
                 <motion.div key={sector.caseId} variants={{ hidden: { opacity: 0, y: 20, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 20 } } }}>
-                  <Link to={`/success-stories/${sector.caseId}`} className="group block">
-                    <div className={cn("flex flex-col items-center p-3 md:p-4 rounded-xl transition-all duration-300 border border-border/50 shadow-sm hover:shadow-md hover:-translate-y-1", sector.bgColor)}>
+                  <Link to={`/success-stories/${sector.caseId}`} className="group block h-full">
+                    <div className={cn("flex flex-col items-center p-3 md:p-4 rounded-xl transition-all duration-300 border border-border/50 shadow-sm hover:shadow-md hover:-translate-y-1 h-full", sector.bgColor)}>
                       <div className="p-3 rounded-lg bg-card shadow-sm mb-2 transition-transform group-hover:scale-110">
                         <sector.icon className={cn("w-6 h-6", sector.color)} />
                       </div>
                       <span className="text-[10px] md:text-xs font-semibold tracking-wide text-muted-foreground group-hover:text-foreground">
                         {sector.label}
+                      </span>
+                      <span className="text-[9px] md:text-[10px] font-bold text-foreground/80 mt-1 text-center leading-tight">
+                        {sector.company}
+                      </span>
+                      <span className="text-[8px] md:text-[9px] text-muted-foreground text-center leading-tight mt-0.5">
+                        {sector.description}
                       </span>
                     </div>
                   </Link>
