@@ -172,97 +172,129 @@ export default function Landing() {
     icon: BarChart3,
     color: 'text-rose-400',
     bgColor: 'bg-rose-50 dark:bg-rose-950/30',
-    caseId: 'gigafactory-north'
+    caseId: 'gigafactory-north',
+    company: t('sectorCompanies.industrial'),
+    description: t('sectorDescriptions.industrial')
   }, {
     label: t('sectors.agro'),
     icon: Wheat,
     color: 'text-emerald-500',
     bgColor: 'bg-emerald-50 dark:bg-emerald-950/30',
-    caseId: 'olivetrust-coop'
+    caseId: 'olivetrust-coop',
+    company: t('sectorCompanies.agro'),
+    description: t('sectorDescriptions.agro')
   }, {
     label: t('sectors.mobility'),
     icon: Truck,
     color: 'text-teal-500',
     bgColor: 'bg-teal-50 dark:bg-teal-950/30',
-    caseId: 'urbandeliver-bcn'
+    caseId: 'urbandeliver-bcn',
+    company: t('sectorCompanies.mobility'),
+    description: t('sectorDescriptions.mobility')
   }, {
     label: t('sectors.social'),
     icon: Heart,
     color: 'text-violet-500',
     bgColor: 'bg-violet-50 dark:bg-violet-950/30',
-    caseId: 'alianza-social-hub'
+    caseId: 'alianza-social-hub',
+    company: t('sectorCompanies.social'),
+    description: t('sectorDescriptions.social')
   }, {
     label: t('sectors.health'),
     icon: HeartPulse,
     color: 'text-rose-500',
     bgColor: 'bg-rose-50 dark:bg-rose-950/30',
-    caseId: 'biomed-hospital'
+    caseId: 'biomed-hospital',
+    company: t('sectorCompanies.health'),
+    description: t('sectorDescriptions.health')
   }, {
     label: t('sectors.retail'),
     icon: ShoppingBag,
     color: 'text-blue-500',
     bgColor: 'bg-blue-50 dark:bg-blue-950/30',
-    caseId: 'globalretail-prime'
+    caseId: 'globalretail-prime',
+    company: t('sectorCompanies.retail'),
+    description: t('sectorDescriptions.retail')
   }, {
     label: t('sectors.energy'),
     icon: Zap,
     color: 'text-yellow-500',
     bgColor: 'bg-yellow-50 dark:bg-yellow-950/30',
-    caseId: 'helios-fields'
+    caseId: 'helios-fields',
+    company: t('sectorCompanies.energy'),
+    description: t('sectorDescriptions.energy')
   }, {
     label: t('sectors.aero'),
     icon: Send,
     color: 'text-cyan-500',
     bgColor: 'bg-cyan-50 dark:bg-cyan-950/30',
-    caseId: 'turbine-chain'
+    caseId: 'turbine-chain',
+    company: t('sectorCompanies.aero'),
+    description: t('sectorDescriptions.aero')
   }, {
     label: t('sectors.wines'),
     icon: Wine,
     color: 'text-purple-600',
     bgColor: 'bg-purple-50 dark:bg-purple-950/30',
-    caseId: 'vinosdoe-elite'
+    caseId: 'vinosdoe-elite',
+    company: t('sectorCompanies.wines'),
+    description: t('sectorDescriptions.wines')
   }, {
     label: t('sectors.pharma'),
     icon: Pill,
     color: 'text-pink-400',
     bgColor: 'bg-pink-50 dark:bg-pink-950/30',
-    caseId: 'pharmacold-logistix'
+    caseId: 'pharmacold-logistix',
+    company: t('sectorCompanies.pharma'),
+    description: t('sectorDescriptions.pharma')
   }, {
     label: t('sectors.port'),
     icon: Ship,
     color: 'text-sky-500',
     bgColor: 'bg-sky-50 dark:bg-sky-950/30',
-    caseId: 'portbcn-smart-trade'
+    caseId: 'portbcn-smart-trade',
+    company: t('sectorCompanies.port'),
+    description: t('sectorDescriptions.port')
   }, {
     label: t('sectors.gov'),
     icon: Landmark,
     color: 'text-amber-600',
     bgColor: 'bg-amber-50 dark:bg-amber-950/30',
-    caseId: 'ayuntamiento-etico'
+    caseId: 'ayuntamiento-etico',
+    company: t('sectorCompanies.gov'),
+    description: t('sectorDescriptions.gov')
   }, {
     label: t('sectors.mining'),
     icon: Mountain,
     color: 'text-slate-500',
     bgColor: 'bg-slate-100 dark:bg-slate-950/30',
-    caseId: 'purelithium-sourcing'
+    caseId: 'purelithium-sourcing',
+    company: t('sectorCompanies.mining'),
+    description: t('sectorDescriptions.mining')
   }, {
     label: t('sectors.fashion'),
     icon: Shirt,
     color: 'text-orange-500',
     bgColor: 'bg-orange-50 dark:bg-orange-950/30',
-    caseId: 'fastfashion-trace'
+    caseId: 'fastfashion-trace',
+    company: t('sectorCompanies.fashion'),
+    description: t('sectorDescriptions.fashion')
   }, {
     label: t('sectors.finance'),
     icon: DollarSign,
     color: 'text-green-500',
     bgColor: 'bg-green-50 dark:bg-green-950/30',
-    caseId: 'greenfinance-esg'
+    caseId: 'greenfinance-esg',
+    company: t('sectorCompanies.finance'),
+    description: t('sectorDescriptions.finance')
   }, {
     label: t('sectors.grid'),
     icon: LayoutGrid,
     color: 'text-emerald-500',
     bgColor: 'bg-emerald-50 dark:bg-emerald-950/30',
-    caseId: 'gridflex-demand'
+    caseId: 'gridflex-demand',
+    company: t('sectorCompanies.grid'),
+    description: t('sectorDescriptions.grid')
   }];
   return <div className="min-h-screen bg-background flex flex-col">
       {/* Navbar Simplificado */}
