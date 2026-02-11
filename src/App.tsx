@@ -303,6 +303,7 @@ const App = () => (
                   <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
                   <Route path="/kit-espacio-datos" element={<KitEspacioDatos />} />
                   <Route path="/contrato-adhesion" element={<ContratoAdhesion />} />
+                  <Route path="/token-wallet" element={<TokenWallet />} />
                   <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
                   <Route path="/nodos/marketplace" element={<MarketplacePage />} />
                   <Route path="/nodos/odrl" element={<OdrlPage />} />

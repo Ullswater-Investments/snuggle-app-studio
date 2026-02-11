@@ -52,6 +52,13 @@ const Settings = () => {
       path: "/settings/notifications",
       color: "text-indigo-600 dark:text-indigo-400",
     },
+    {
+      title: "Token Wallet IA",
+      description: "Consulta el consumo de tokens y saldo de tu wallet virtual",
+      icon: Coins,
+      path: "/token-wallet",
+      color: "text-amber-600 dark:text-amber-400",
+    },
   ];
 
   return (
