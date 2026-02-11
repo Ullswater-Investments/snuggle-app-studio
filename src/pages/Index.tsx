@@ -601,6 +601,9 @@ const Index = () => {
 
       {/* FundingFooter - Créditos oficiales según Memoria Técnica */}
       <FundingFooter variant="light" />
+
+      {/* Floating AI Agent Chat */}
+      <FederatedAgentChat />
     </div>
   );
 };
