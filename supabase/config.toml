@@ -2,3 +2,6 @@ project_id = "bxyoirmvxugbfyxhlfaf"
 
 [functions.federated-agent]
 verify_jwt = false
+
+[functions.success-story-agent]
+verify_jwt = false

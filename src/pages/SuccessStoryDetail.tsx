@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { 
   ArrowLeft,
+  Sparkles,
   Award,
   Factory,
   Wheat,
@@ -55,6 +56,7 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { ROISimulator } from "@/components/ROISimulator";
+import { SuccessStoryChatAgent } from "@/components/success-stories/SuccessStoryChatAgent";
 import { AgroROISimulator } from "@/components/AgroROISimulator";
 import { SocialImpactDashboard } from "@/components/SocialImpactDashboard";
 import { MobilityScope3Report } from "@/components/success-stories/MobilityScope3Report";
@@ -1128,6 +1130,27 @@ const SuccessStoryDetail = () => {
           quote={t(`cases.${id}.ariaQuote`, { defaultValue: caseData.ariaQuote })}
           sectorColor={sectorColor}
         />
+
+        {/* ZONA 3.5: Agente IA del Caso */}
+        <div>
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles className="w-5 h-5 text-primary" />
+            <h2 className="text-2xl font-bold">Pregunta al Agente IA sobre este caso</h2>
+          </div>
+          <SuccessStoryChatAgent
+            caseContext={{
+              company: caseData.company,
+              sector: caseData.sector,
+              title: caseData.title,
+              challenge: caseData.challenge,
+              solution: caseData.solution,
+              services: caseData.services,
+              ariaQuote: caseData.ariaQuote,
+              metric: caseData.metric,
+              metricLabel: caseData.metricLabel,
+            }}
+          />
+        </div>
 
         {/* Navigation Buttons - Bottom */}
         <SuccessStoryNavButtons currentCaseId={id || ''} />
