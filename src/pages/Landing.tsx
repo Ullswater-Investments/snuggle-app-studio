@@ -599,5 +599,8 @@ export default function Landing() {
 
       {/* Chatbot ARIA flotante */}
       <AIConcierge />
+
+      {/* Agente Federado flotante */}
+      <FederatedAgentChat />
     </div>;
 }
