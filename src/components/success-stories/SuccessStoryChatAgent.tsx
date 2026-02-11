@@ -36,7 +36,9 @@ export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [tokenCount, setTokenCount] = useState(0);
+  const [lastQuestion, setLastQuestion] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { recordOperation } = useTokenWallet();
 
   const suggestedQuestions = [
     `¿Cuál fue el reto principal de ${caseContext.company}?`,
