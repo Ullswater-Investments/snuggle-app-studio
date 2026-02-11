@@ -102,12 +102,11 @@ const Index = () => {
         <ThemeToggle />
       </div>
 
-      {/* Hero Section with Parallax */}
+      {/* Hero Section - Federated Data Space */}
       <section
         ref={heroRef}
         className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5"
       >
-        {/* Decorative background elements with parallax */}
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, -300]), opacity: 0.1 }}
           className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl"
@@ -117,43 +116,56 @@ const Index = () => {
           className="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"
         />
 
-        <motion.div style={{ opacity, scale }} className="container mx-auto px-4 py-20 lg:py-32 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-8">
-            <FadeIn delay={0.1}>
-              <motion.div style={{ y: yBadge }} className="inline-block">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-sm font-medium text-primary backdrop-blur-sm">
-                  <Sparkles className="w-4 h-4" />
-                  Sistema de Gobernanza Multi-Tenant
+        <motion.div style={{ opacity, scale }} className="container mx-auto px-4 py-16 lg:py-24 relative z-10">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Text */}
+            <div className="space-y-6">
+              <FadeIn delay={0.1}>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 rounded-full text-xs font-medium text-primary">
+                    <Sparkles className="w-3 h-3" /> Gaia-X
+                  </span>
+                  <span className="inline-flex items-center px-3 py-1 bg-accent rounded-full text-xs font-medium text-accent-foreground">
+                    ODRL 2.0
+                  </span>
+                  <span className="inline-flex items-center px-3 py-1 bg-secondary rounded-full text-xs font-medium text-secondary-foreground">
+                    Pontus-X
+                  </span>
                 </div>
-              </motion.div>
-            </FadeIn>
+              </FadeIn>
 
-            <SlideUp delay={0.2}>
-              <motion.h1 style={{ y: yTitle }} className="text-4xl md:text-6xl font-bold text-foreground leading-tight flex justify-center">
-                <ProcuredataLogo size="xl" />
-              </motion.h1>
-            </SlideUp>
+              <SlideUp delay={0.2}>
+                <motion.div style={{ y: yTitle }}>
+                  <ProcuredataLogo size="xl" />
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mt-3 leading-tight">
+                    Espacio de Datos Federados con IA
+                  </h2>
+                </motion.div>
+              </SlideUp>
 
+              <FadeIn delay={0.3}>
+                <motion.p style={{ y: ySubtitle }} className="text-lg text-muted-foreground">
+                  Solución al problema 'nxm' en el alta de proveedores mediante identidades compartidas.
+                  Alta automática en tu ERP a partir de datos ya validados por otros clientes.
+                </motion.p>
+              </FadeIn>
+
+              <FadeIn delay={0.4}>
+                <motion.div style={{ y: yButtons }} className="flex flex-col sm:flex-row gap-3">
+                  <Button size="lg" variant="hero" onClick={scrollToAuth} className="text-base">
+                    Comenzar Ahora
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                  <Button size="lg" variant="premium" onClick={handleDemoAccess} disabled={loading}>
+                    🎭 Ver Demo
+                  </Button>
+                </motion.div>
+              </FadeIn>
+            </div>
+
+            {/* Right: Federated Network Diagram */}
             <FadeIn delay={0.3}>
-              <motion.p
-                style={{ y: ySubtitle }}
-                className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
-              >
-                Plataforma integral para la gestión y gobernanza de transacciones de datos entre organizaciones con
-                flujos de aprobación multi-actor
-              </motion.p>
-            </FadeIn>
-
-            <FadeIn delay={0.4}>
-              <motion.div style={{ y: yButtons }} className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="hero" onClick={scrollToAuth} className="text-lg">
-                  Comenzar Ahora
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button size="lg" variant="premium" onClick={handleDemoAccess} disabled={loading}>
-                  🎭 Ver Demo
-                </Button>
-              </motion.div>
+              <FederatedNetworkDiagram />
             </FadeIn>
           </div>
         </motion.div>
