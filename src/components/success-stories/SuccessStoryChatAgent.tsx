@@ -28,9 +28,10 @@ interface CaseContext {
 
 interface Props {
   caseContext: CaseContext;
+  onStreamingTextChange?: (text: string) => void;
 }
 
-export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
+export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Props) => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +69,9 @@ export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
     return { sources: s.sources, followUps: f.followUps };
   }, [lastAssistantMsg]);
 
+  useEffect(() => {
+    onStreamingTextChange?.(lastAssistantMsg);
+  }, [lastAssistantMsg, onStreamingTextChange]);
   const send = async (text: string) => {
     if (!text.trim() || isLoading) return;
     const userMsg: Msg = { role: "user", content: text.trim() };

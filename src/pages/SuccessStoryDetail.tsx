@@ -70,6 +70,9 @@ import { SectorSelector } from "@/components/success-stories/SectorSelector";
 import { NarrativeBlock } from "@/components/success-stories/NarrativeBlock";
 import { AriaQuoteCard } from "@/components/success-stories/AriaQuoteCard";
 import { SuccessStoryNavButtons } from "@/components/success-stories/SuccessStoryNavButtons";
+import { CaseFlowDiagram, detectCaseHighlights } from "@/components/success-stories/CaseFlowDiagram";
+import { caseFlowConfigs } from "@/components/success-stories/caseFlowConfigs";
+import { useState, useCallback } from "react";
 
 const casesData: Record<string, {
   id: string;
@@ -1011,6 +1014,17 @@ const SuccessStoryDetail = () => {
   const { t } = useTranslation('success');
   const { id } = useParams<{ id: string }>();
   const caseData = id ? casesData[id] : null;
+  const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
+
+  const flowConfig = id ? caseFlowConfigs[id] : null;
+
+  const handleStreamingText = useCallback((text: string) => {
+    if (flowConfig && text) {
+      setHighlightedNodes(detectCaseHighlights(text, flowConfig.keywordMap));
+    } else {
+      setHighlightedNodes([]);
+    }
+  }, [flowConfig]);
 
   if (!caseData) {
     return (
@@ -1131,25 +1145,38 @@ const SuccessStoryDetail = () => {
           sectorColor={sectorColor}
         />
 
-        {/* ZONA 3.5: Agente IA del Caso */}
+        {/* ZONA 3.5: Agente IA del Caso + Diagrama de Flujo */}
         <div>
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="w-5 h-5 text-primary" />
             <h2 className="text-2xl font-bold">Pregunta al Agente IA sobre este caso</h2>
           </div>
-          <SuccessStoryChatAgent
-            caseContext={{
-              company: caseData.company,
-              sector: caseData.sector,
-              title: caseData.title,
-              challenge: caseData.challenge,
-              solution: caseData.solution,
-              services: caseData.services,
-              ariaQuote: caseData.ariaQuote,
-              metric: caseData.metric,
-              metricLabel: caseData.metricLabel,
-            }}
-          />
+          <div className={`grid gap-6 ${flowConfig ? 'lg:grid-cols-2' : ''}`}>
+            <SuccessStoryChatAgent
+              caseContext={{
+                company: caseData.company,
+                sector: caseData.sector,
+                title: caseData.title,
+                challenge: caseData.challenge,
+                solution: caseData.solution,
+                services: caseData.services,
+                ariaQuote: caseData.ariaQuote,
+                metric: caseData.metric,
+                metricLabel: caseData.metricLabel,
+              }}
+              onStreamingTextChange={handleStreamingText}
+            />
+            {flowConfig && (
+              <div className="rounded-2xl border bg-card/50 backdrop-blur-sm p-6 flex items-center justify-center">
+                <CaseFlowDiagram
+                  nodes={flowConfig.nodes}
+                  connections={flowConfig.connections}
+                  highlightedNodes={highlightedNodes}
+                  isProcessing={false}
+                />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Navigation Buttons - Bottom */}
