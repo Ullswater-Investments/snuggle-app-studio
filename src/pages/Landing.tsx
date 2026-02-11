@@ -388,6 +388,9 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* CENTRO DE INTELIGENCIA FEDERADA */}
+        <FederatedIntelligenceSection />
+
         {/* DEMO HUB - ACCESO DIRECTO */}
         <section id="cases" className="py-10 bg-muted/30">
           <div className="container mx-auto px-4">
