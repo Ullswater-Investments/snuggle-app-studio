@@ -1167,13 +1167,18 @@ const SuccessStoryDetail = () => {
               onStreamingTextChange={handleStreamingText}
             />
             {flowConfig && (
-              <div className="rounded-2xl border bg-card/50 backdrop-blur-sm p-6 flex items-center justify-center">
-                <CaseFlowDiagram
-                  nodes={flowConfig.nodes}
-                  connections={flowConfig.connections}
-                  highlightedNodes={highlightedNodes}
-                  isProcessing={false}
-                />
+              <div className="rounded-2xl border bg-card/50 backdrop-blur-sm p-6 flex flex-col">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+                  Arquitectura del Caso
+                </p>
+                <div className="flex-1 flex items-center justify-center">
+                  <CaseFlowDiagram
+                    nodes={flowConfig.nodes}
+                    connections={flowConfig.connections}
+                    highlightedNodes={highlightedNodes}
+                    isProcessing={false}
+                  />
+                </div>
               </div>
             )}
           </div>
