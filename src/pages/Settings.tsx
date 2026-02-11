@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Settings as SettingsIcon, Server, Building2, User, Webhook, Shield, BellRing } from "lucide-react";
+import { Settings as SettingsIcon, Server, Building2, User, Webhook, Shield, BellRing, Coins } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 
 const Settings = () => {
