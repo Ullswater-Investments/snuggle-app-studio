@@ -1130,6 +1130,27 @@ const SuccessStoryDetail = () => {
           sectorColor={sectorColor}
         />
 
+        {/* ZONA 3.5: Agente IA del Caso */}
+        <div>
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles className="w-5 h-5 text-primary" />
+            <h2 className="text-2xl font-bold">Pregunta al Agente IA sobre este caso</h2>
+          </div>
+          <SuccessStoryChatAgent
+            caseContext={{
+              company: caseData.company,
+              sector: caseData.sector,
+              title: caseData.title,
+              challenge: caseData.challenge,
+              solution: caseData.solution,
+              services: caseData.services,
+              ariaQuote: caseData.ariaQuote,
+              metric: caseData.metric,
+              metricLabel: caseData.metricLabel,
+            }}
+          />
+        </div>
+
         {/* Navigation Buttons - Bottom */}
         <SuccessStoryNavButtons currentCaseId={id || ''} />
 
