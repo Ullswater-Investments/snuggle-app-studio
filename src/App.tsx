@@ -238,6 +238,7 @@ import SeresIlunion from "./pages/partners/seres/casos/SeresIlunion";
 import SeresSiemensGamesa from "./pages/partners/seres/casos/SeresSiemensGamesa";
 import SeresAmadeus from "./pages/partners/seres/casos/SeresAmadeus";
 import SeresBT from "./pages/partners/seres/casos/SeresBT";
+import TokenWallet from "./pages/TokenWallet";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
