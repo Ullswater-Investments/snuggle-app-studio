@@ -130,7 +130,7 @@ const Index = () => {
             <FadeIn delay={0.4}>
               <Card className="shadow-xl border-2">
                 <CardContent className="pt-6 pb-4">
-                  <FederatedHeroChat onProcessingChange={setIsAgentProcessing} />
+                  <FederatedHeroChat onProcessingChange={setIsAgentProcessing} onHighlightedNodesChange={setHighlightedNodes} />
                 </CardContent>
               </Card>
             </FadeIn>
