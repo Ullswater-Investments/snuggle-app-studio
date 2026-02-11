@@ -36,6 +36,7 @@ const Index = () => {
   const navigate = useNavigate();
   const heroRef = useRef<HTMLDivElement>(null);
   const [isAgentProcessing, setIsAgentProcessing] = useState(false);
+  const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
 
   useEffect(() => {
     if (user) {
