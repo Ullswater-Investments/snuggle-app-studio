@@ -199,8 +199,11 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
 
   return (
     <div className="flex flex-col h-full max-h-[520px]">
-      {/* Live metrics */}
-      <LiveMetricsBar isStreaming={isLoading && !isThinking} tokenCount={tokenCount} />
+      {/* Header with metrics and wallet */}
+      <div className="flex items-center justify-between gap-2">
+        <LiveMetricsBar isStreaming={isLoading && !isThinking} tokenCount={tokenCount} />
+        <TokenWalletBadge />
+      </div>
 
       {/* Messages area */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0 mt-1">
