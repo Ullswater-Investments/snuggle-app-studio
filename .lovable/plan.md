@@ -1,84 +1,153 @@
 
 
-## Plan: Interfaz de Chat IA en cada Caso de Exito
+## Plan: Mejoras Visuales e Interactivas para los Agentes IA
 
-### Objetivo
-Agregar a cada pagina de detalle de caso de exito (`/success-stories/:id`) una interfaz de chat IA identica a la del hero principal (`FederatedHeroChat`), pero con un agente especializado en el caso concreto. El agente conocera todos los detalles del caso (reto, solucion, servicios, metricas, cita ARIA, sector) y podra responder preguntas especificas.
+### Resumen
 
----
-
-### Cambios
-
-#### 1. Componente reutilizable: `SuccessStoryChatAgent`
-Nuevo archivo: `src/components/success-stories/SuccessStoryChatAgent.tsx`
-
-- Reutiliza la misma estructura visual que `FederatedHeroChat` (barra de entrada, mensajes con markdown, streaming SSE, panel de pensamiento)
-- Recibe como props los datos del caso: `title`, `company`, `sector`, `challenge`, `solution`, `services`, `ariaQuote`, `metric`, `metricLabel`
-- Las preguntas sugeridas se generan dinamicamente segun el sector y caso, por ejemplo:
-  - "Cual fue el reto principal de {company}?"
-  - "Que servicios de ProcureData se usaron?"
-  - "Que resultados se obtuvieron?"
-  - "Como se aplica esto a mi sector?"
-- El badge superior dira "Agente IA - {company}" en lugar de "Agente IA Federado"
-- El placeholder dira "Pregunta sobre el caso {company}..."
-
-#### 2. Nueva Edge Function: `success-story-agent`
-Archivo: `supabase/functions/success-story-agent/index.ts`
-
-- Recibe `messages` + `caseContext` (objeto con todos los datos del caso)
-- Construye un system prompt dinamico que incluye:
-  - Todos los datos del caso (challenge, solution, services, ariaQuote, metric, etc.)
-  - Contexto general de ProcureData (mismo que el agente federado)
-  - Instrucciones para responder solo sobre ese caso y redirigir al contexto general si la pregunta no aplica
-- Usa `google/gemini-3-flash-preview` con streaming SSE
-- Manejo de errores 429/402
-
-#### 3. Integracion en `SuccessStoryDetail.tsx`
-- Agregar el componente `SuccessStoryChatAgent` como nueva seccion entre la cita ARIA y el simulador de impacto
-- Pasar todos los datos de `caseData` como props al componente
-- Titulo de seccion: "Pregunta al Agente IA sobre este caso"
-
-#### 4. Actualizacion de `supabase/config.toml`
-- Agregar la configuracion de la nueva edge function `success-story-agent`
+Transformar los agentes IA actuales (Hero Federado + Casos de Exito) de interfaces de texto plano a experiencias inmersivas con visualizaciones reactivas, avatares animados, citaciones de fuentes, y efectos que respondan en tiempo real al contenido de las respuestas.
 
 ---
 
-### Estructura Visual del Chat en cada Caso
+### 1. Avatar Animado del Agente con Estados Visuales
 
-```text
-+--------------------------------------------------+
-|  [Sparkles] Agente IA - GigaFactory North        |
-|                                                    |
-|  Pregunta sobre el caso de GigaFactory North,     |
-|  su reto, solucion o los servicios utilizados.     |
-|                                                    |
-|  [Cual fue el reto?] [Que servicios se usaron?]   |
-|  [Que resultados?]  [Aplicable a mi sector?]      |
-|                                                    |
-|  +----------------------------------------------+ |
-|  | Pregunta sobre el caso GigaFactory North...  | |
-|  +----------------------------------------------+ |
-+--------------------------------------------------+
-```
+**Nuevo componente:** `src/components/ai/AgentAvatar.tsx`
 
-### Flujo de Datos
+Un avatar circular animado con Framer Motion que cambia de estado segun la actividad del agente:
 
-1. Usuario entra en `/success-stories/gigafactory-north`
-2. Se carga `caseData` con todos los detalles del caso
-3. Se renderiza `SuccessStoryChatAgent` con esos datos
-4. Al enviar una pregunta, se llama a `success-story-agent` con `messages` + `caseContext`
-5. La edge function construye el prompt con contexto completo del caso
-6. Streaming de respuesta con panel de pensamiento ("Analizando datos del caso...", "Consultando metricas...", "Preparando respuesta...")
+- **Idle**: Pulso suave en gradiente morado/azul con icono de Sparkles
+- **Listening**: Ondas concentricas simulando escucha activa
+- **Thinking**: Orbitas de particulas girando alrededor del avatar (3 puntos en rotacion)
+- **Speaking**: Barras de ecualizador animadas dentro del avatar simulando voz
+
+Se coloca junto a cada burbuja de respuesta del asistente, reemplazando el texto plano por una experiencia mas "humana".
+
+---
+
+### 2. Citaciones de Fuentes Federadas en Respuestas
+
+**Nuevo componente:** `src/components/ai/SourceCitation.tsx`
+
+Cuando el agente menciona fuentes (Gaia-X, Pontus-X, ODRL, nodo industrial), se renderizan como chips interactivos al pie de cada respuesta:
+
+- Chips con icono + nombre de fuente (ej: icono Globe + "Red Gaia-X", icono Shield + "Politica ODRL")
+- Hover muestra tooltip con descripcion breve
+- Animacion de entrada escalonada (stagger) al aparecer
+- Color diferenciado por tipo de fuente
+
+**Cambio en edge functions:** Instruir al modelo para que envuelva referencias en marcadores especiales (ej: `[source:gaiax]`, `[source:pontus]`) que el frontend parsea y renderiza como chips.
+
+---
+
+### 3. Diagrama de Red Reactivo al Chat (solo Hero)
+
+**Mejora en:** `FederatedNetworkDiagram.tsx`
+
+Conectar el diagrama de red al contenido del chat:
+
+- Cuando el agente menciona "Consumer", el nodo Consumer se ilumina con un brillo pulsante
+- Cuando menciona "Gaia-X", el nodo Gaia-X emite particulas
+- Cuando menciona "ODRL" o "politicas", las lineas de conexion cambian a color verde con efecto de "verificacion"
+- Nueva prop `highlightedNodes: string[]` que el chat actualiza en tiempo real parseando las palabras clave de la respuesta streaming
+
+---
+
+### 4. Panel de Metricas en Vivo durante Respuestas
+
+**Nuevo componente:** `src/components/ai/LiveMetricsBar.tsx`
+
+Barra horizontal animada que aparece durante el streaming mostrando:
+
+- Tokens procesados (contador animado)
+- Nodos consultados (iconos que se encienden secuencialmente)
+- Tiempo de respuesta (cronometro en tiempo real)
+- Nivel de confianza (barra de progreso que crece durante el streaming)
+
+Usa Framer Motion para numeros que hacen "flip" al cambiar y barras con transiciones suaves.
+
+---
+
+### 5. Efecto de Typing Mejorado con Cursor Parpadeante
+
+**Mejora en:** `FederatedHeroChat.tsx` y `SuccessStoryChatAgent.tsx`
+
+Agregar un cursor parpadeante (`|`) al final del texto durante el streaming, igual que ChatGPT:
+
+- Cursor con animacion `animate-pulse` despues del ultimo caracter
+- Se oculta automaticamente cuando termina el streaming
+- Efecto visual de "maquina de escribir" mas convincente
+
+---
+
+### 6. Preguntas de Seguimiento Dinamicas
+
+**Nuevo componente:** `src/components/ai/FollowUpSuggestions.tsx`
+
+Despues de cada respuesta del agente, mostrar 2-3 preguntas de seguimiento contextuales:
+
+- Generadas por el propio modelo (instruccion en el system prompt para incluir `[followup:pregunta]` al final)
+- Aparecen con animacion de slide-up escalonada
+- Chips clickeables que envian la pregunta automaticamente
+- Desaparecen cuando el usuario escribe una nueva pregunta
+
+---
+
+### 7. ThinkingPanel Mejorado con Barra de Progreso Global
+
+**Mejora en:** `ThinkingPanel.tsx`
+
+Agregar una barra de progreso continua sobre los pasos de pensamiento:
+
+- Barra horizontal con gradiente que avanza conforme se completan pasos (0%, 25%, 50%, 75%, 100%)
+- Efecto de particulas/chispas en el borde de avance de la barra
+- Los pasos de pensamiento se personalizan por contexto:
+  - Hero: "Conectando nodo ProcureData... / Federando red Gaia-X... / Verificando ODRL..."
+  - Casos de exito: "Analizando caso {company}... / Consultando metricas... / Preparando informe..."
+
+---
+
+### 8. Modo de Vista Expandida para el Chat
+
+**Nuevo componente:** `src/components/ai/ExpandableChatWrapper.tsx`
+
+Boton para expandir el chat a pantalla completa (modal/drawer):
+
+- Boton `Expand` (icono Maximize2) en la esquina superior derecha del chat
+- Al expandir, el chat ocupa un overlay con fondo blur
+- Layout de dos columnas en pantalla completa: chat a la izquierda, visualizaciones/metricas a la derecha
+- Boton para volver al tamano normal
+
+---
 
 ### Archivos a Crear
+
 | Archivo | Descripcion |
 |---------|-------------|
-| `src/components/success-stories/SuccessStoryChatAgent.tsx` | Chat IA reutilizable para casos de exito |
-| `supabase/functions/success-story-agent/index.ts` | Edge function con prompt dinamico por caso |
+| `src/components/ai/AgentAvatar.tsx` | Avatar animado con estados (idle, thinking, speaking) |
+| `src/components/ai/SourceCitation.tsx` | Chips de fuentes federadas con tooltips |
+| `src/components/ai/LiveMetricsBar.tsx` | Barra de metricas en tiempo real durante streaming |
+| `src/components/ai/FollowUpSuggestions.tsx` | Preguntas de seguimiento dinamicas post-respuesta |
+| `src/components/ai/ExpandableChatWrapper.tsx` | Wrapper para modo pantalla completa |
 
 ### Archivos a Modificar
+
 | Archivo | Cambio |
 |---------|--------|
-| `src/pages/SuccessStoryDetail.tsx` | Agregar seccion de chat IA con SuccessStoryChatAgent |
-| `supabase/config.toml` | Agregar configuracion de success-story-agent |
+| `src/components/landing/FederatedHeroChat.tsx` | Integrar avatar, citaciones, cursor, follow-ups, metricas, expand |
+| `src/components/success-stories/SuccessStoryChatAgent.tsx` | Mismas mejoras adaptadas al contexto de caso |
+| `src/components/landing/ThinkingPanel.tsx` | Agregar barra de progreso global y pasos contextuales |
+| `src/components/landing/FederatedNetworkDiagram.tsx` | Nueva prop `highlightedNodes` para iluminacion reactiva |
+| `supabase/functions/federated-agent/index.ts` | Actualizar prompt para emitir marcadores de fuentes y follow-ups |
+| `supabase/functions/success-story-agent/index.ts` | Misma actualizacion de prompt |
+
+---
+
+### Detalles Tecnicos
+
+**Parseo de marcadores en streaming:**
+El frontend detecta patrones como `[source:gaiax]` y `[followup:pregunta]` en el texto streaming y los extrae antes de renderizar con ReactMarkdown. Los marcadores se convierten en componentes React interactivos.
+
+**Deteccion de nodos para el diagrama:**
+Un hook `useNodeHighlighter` escanea el texto de la ultima respuesta buscando palabras clave (Consumer, Provider, Gaia-X, ODRL, ERP, Pontus-X) y actualiza el array `highlightedNodes` que se pasa al diagrama.
+
+**Todas las animaciones** usan Framer Motion (ya instalado) para consistencia con el sistema actual.
 
