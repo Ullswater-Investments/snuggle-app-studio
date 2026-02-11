@@ -174,7 +174,10 @@ export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
   return (
     <div className="rounded-2xl border bg-card/50 backdrop-blur-sm p-6">
       <div className="flex flex-col h-full max-h-[520px]">
-        <LiveMetricsBar isStreaming={isLoading && !isThinking} tokenCount={tokenCount} />
+        <div className="flex items-center justify-between gap-2">
+          <LiveMetricsBar isStreaming={isLoading && !isThinking} tokenCount={tokenCount} />
+          <TokenWalletBadge />
+        </div>
 
         <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0 mt-1">
           {messages.length === 0 && (
