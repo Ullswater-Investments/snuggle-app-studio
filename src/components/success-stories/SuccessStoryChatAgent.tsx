@@ -31,7 +31,7 @@ interface Props {
   onStreamingTextChange?: (text: string) => void;
 }
 
-export const SuccessStoryChatAgent = ({ caseContext, onHighlightedNodesChange }: Props) => {
+export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Props) => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
