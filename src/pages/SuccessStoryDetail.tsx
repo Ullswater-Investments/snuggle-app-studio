@@ -1014,6 +1014,17 @@ const SuccessStoryDetail = () => {
   const { t } = useTranslation('success');
   const { id } = useParams<{ id: string }>();
   const caseData = id ? casesData[id] : null;
+  const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
+
+  const flowConfig = id ? caseFlowConfigs[id] : null;
+
+  const handleStreamingText = useCallback((text: string) => {
+    if (flowConfig && text) {
+      setHighlightedNodes(detectCaseHighlights(text, flowConfig.keywordMap));
+    } else {
+      setHighlightedNodes([]);
+    }
+  }, [flowConfig]);
 
   if (!caseData) {
     return (
