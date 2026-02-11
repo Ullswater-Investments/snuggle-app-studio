@@ -17,7 +17,7 @@ const SUGGESTED_QUESTIONS = [
   "¿Cómo se integra con mi ERP?",
 ];
 
-type Msg = { role: "user" | "assistant"; content: string };
+type Msg = { role: "user" | "assistant"; content: string; tokens?: number };
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/federated-agent`;
 
