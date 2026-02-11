@@ -150,6 +150,19 @@ export const SuccessStoryChatAgent = ({ caseContext }: Props) => {
     }
 
     setIsLoading(false);
+
+    // Record in wallet
+    if (localTokenCount > 0) {
+      recordOperation({
+        agent: "success-story",
+        caseLabel: caseContext.company,
+        question: lastQuestion,
+        tokensConsumed: localTokenCount,
+      });
+      setMessages((prev) =>
+        prev.map((m, i) => (i === prev.length - 1 && m.role === "assistant" ? { ...m, tokens: localTokenCount } : m))
+      );
+    }
   };
 
   const renderAssistantContent = (content: string) => {
