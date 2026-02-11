@@ -3,9 +3,6 @@ import { useTranslation } from "react-i18next";
 import { ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle, Sparkles, Wallet, ShieldCheck, Coins, Radio, Bell, Users, FileText, Plug, HelpCircle, BookOpen, Triangle, BarChart3, Wheat, Truck, Heart, HeartPulse, ShoppingBag, Send, Wine, Pill, Ship, Landmark, Mountain, Shirt, DollarSign, LayoutGrid, Brain } from "lucide-react";
 import { FundingFooter } from "@/components/FundingFooter";
 import { AIConcierge } from "@/components/AIConcierge";
-import { RoadmapPhases } from "@/components/landing/RoadmapPhases";
-import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
-import { FederatedIntelligenceSection } from "@/components/landing/FederatedIntelligenceSection";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -303,46 +300,30 @@ export default function Landing() {
         {/* HERO SECTION - Textos oficiales según Memoria Técnica */}
         <section className="py-20 md:py-32 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:bg-grid-slate-900/25 dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.5))]" />
-          <div className="container relative mx-auto px-4 max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              {/* Left column - text */}
-              <div className="text-center md:text-left">
-                <Badge className="mb-4" variant="secondary">{t('version')}</Badge>
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-                  {t('brand')} <br />
-                  <span className="procuredata-gradient">{t('tagline')}</span>
-                </h1>
-                <p className="text-xl text-muted-foreground mb-8 max-w-2xl">
-                  {t('heroDescription')}
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 flex-wrap justify-center md:justify-start">
-                  <Button size="lg" className="h-12 px-8 text-lg" asChild>
-                    <Link to="/auth">{tc('tryInteractiveDemo')}</Link>
-                  </Button>
-                  <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
-                    <Link to="/whitepaper">WHITEPAPER</Link>
-                  </Button>
-                  <Button size="lg" className="h-12 px-8 text-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 border-0" asChild>
-                    <Link to="/kit-espacio-datos">KIT ESPACIO DE DATOS</Link>
-                  </Button>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-6 justify-center md:justify-start">
-                  <Badge variant="outline" className="text-xs">Gaia-X</Badge>
-                  <Badge variant="outline" className="text-xs">ODRL 2.0</Badge>
-                  <Badge variant="outline" className="text-xs">Pontus-X</Badge>
-                  <Badge variant="outline" className="text-xs">IDSA</Badge>
-                </div>
-              </div>
-
-              {/* Right column - diagram */}
-              <div className="hidden md:block">
-                <FederatedNetworkDiagram />
-              </div>
+          <div className="container relative mx-auto px-4 text-center max-w-4xl">
+            <Badge className="mb-4" variant="secondary">{t('version')}</Badge>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+              {t('brand')} <br />
+              <span className="procuredata-gradient">{t('tagline')}</span>
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              {t('heroDescription')}
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+              <Button size="lg" className="h-12 px-8 text-lg" asChild>
+                <Link to="/auth">{tc('tryInteractiveDemo')}</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
+                <Link to="/whitepaper">WHITEPAPER</Link>
+              </Button>
+              <Button size="lg" className="h-12 px-8 text-lg bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 border-0" asChild>
+                <Link to="/kit-espacio-datos">KIT ESPACIO DE DATOS</Link>
+              </Button>
             </div>
 
             {/* CASOS DE ÉXITO - Menú de iconos por sector */}
-            <div className="mt-16">
-              <h2 className="text-2xl md:text-3xl font-bold mb-5 text-center">{t('successCases')}</h2>
+            <div className="mt-10">
+              <h2 className="text-2xl md:text-3xl font-bold mb-5">{t('successCases')}</h2>
               
               <motion.div className="flex flex-wrap justify-center gap-3 md:gap-4" initial="hidden" whileInView="visible" viewport={{
               once: true,
@@ -388,9 +369,6 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* CENTRO DE INTELIGENCIA FEDERADA */}
-        <FederatedIntelligenceSection />
-
         {/* DEMO HUB - ACCESO DIRECTO */}
         <section id="cases" className="py-10 bg-muted/30">
           <div className="container mx-auto px-4">
@@ -418,9 +396,6 @@ export default function Landing() {
             </div>
           </div>
         </section>
-
-        {/* ROADMAP TÉCNICO - 10 Fases */}
-        <RoadmapPhases />
 
         {/* MODELOS DE NEGOCIO TEASER */}
         <section id="models" className="py-20 bg-gradient-to-b from-background to-slate-50">
@@ -602,6 +577,5 @@ export default function Landing() {
 
       {/* Chatbot ARIA flotante */}
       <AIConcierge />
-
     </div>;
 }

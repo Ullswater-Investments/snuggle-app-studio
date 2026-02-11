@@ -1,86 +1,68 @@
 
 
-## Plan: Integrar Chat de Agentes IA y Visualizador de Datos en la Pagina Principal
+## Plan: Rediseño del Hero + Agente IA Especializado + Visualización de Red Federada
 
-### Vision
-Crear una nueva seccion destacada en la pagina principal que combine un **chat de agentes IA embebido** (no solo flotante) con un **visualizador de datos interactivo** que muestre metricas del ecosistema federado, el diagrama de red y animaciones de flujo de datos. Esta seccion reemplazara o complementara el hero actual para que sea lo primero que el usuario vea.
+### Visión General
+Rediseñar la sección hero de la página principal para mostrar ProcureData como un **espacio de datos federados con IA**, con un chat de agente especializado integrado, un diagrama interactivo de red federada con animaciones de flujo de datos, y mantener el resto de secciones existentes (features, how it works, benefits, auth).
 
 ---
 
 ### Cambios Principales
 
-#### 1. Nueva Seccion "Centro de Inteligencia Federada"
-Una seccion prominente en la pagina principal con layout de dos paneles:
+#### 1. Nuevo Hero Interactivo
+Reemplazar el hero actual por un diseño en **dos columnas**:
+- **Columna izquierda**: Título, subtítulo descriptivo del espacio de datos federados, y badges de tecnologías clave (Gaia-X, ODRL, Pontus-X)
+- **Columna derecha**: Diagrama animado de red federada con nodos conectados que muestran flujo de datos en tiempo real
 
-```text
-+------------------------------------------------------+
-|          CENTRO DE INTELIGENCIA FEDERADA              |
-+---------------------------+--------------------------+
-|                           |                          |
-|   CHAT AGENTES IA         |   VISUALIZADOR DE DATOS  |
-|   (embebido, no flotante) |                          |
-|                           |   - Diagrama red federada|
-|   - Preguntas sugeridas   |   - Metricas animadas    |
-|   - Streaming en vivo     |   - Flujo de datos       |
-|   - Markdown render       |   - KPIs del ecosistema  |
-|                           |                          |
-+---------------------------+--------------------------+
-```
+#### 2. Diagrama de Red Federada Animado
+Un componente visual interactivo que muestra:
+- **Nodos** representando organizaciones (Consumer, Subject, Holder, ProcureData Hub)
+- **Conexiones animadas** con partículas/puntos que fluyen entre nodos simulando transacciones de datos
+- **Colores diferenciados** por tipo de actor
+- Animaciones continuas con Framer Motion mostrando datos en movimiento
+- Efecto de "pulso" en el nodo central (ProcureData)
 
-- **Panel izquierdo**: Chat de agente IA embebido directamente en la pagina (no como widget flotante). Misma funcionalidad del `FederatedAgentChat` pero con interfaz mas amplia y visible.
-- **Panel derecho**: Visualizador con pestanas que alterna entre:
-  - Diagrama de red federada animado (ya existente)
-  - Metricas del ecosistema (graficos Recharts con datos sinteticos: transacciones, nodos activos, politicas ODRL generadas)
-  - Animacion de flujo de datos en tiempo real
+#### 3. Chat de Agente IA Especializado
+Un nuevo agente de IA integrado en la página principal:
+- **Interfaz de chat compacta** en la parte inferior del hero o como widget flotante
+- **Agente especializado** en consultas sobre espacios de datos federados, arquitectura y capacidades de la plataforma
+- Conectado al backend mediante una nueva edge function dedicada
+- Respuestas con formato markdown y streaming en tiempo real
+- Ejemplos de preguntas sugeridas: "¿Qué es un espacio de datos federado?", "¿Cómo funciona la soberanía de datos?", "¿Qué papel juega Gaia-X?"
 
-#### 2. Componentes Nuevos a Crear
+#### 4. 10 Fases del Roadmap Técnico (Sección Nueva)
+Una nueva sección debajo del hero con las 10 fases de evolución incremental:
 
-| Componente | Descripcion |
-|------------|-------------|
-| `FederatedIntelligenceSection` | Seccion contenedora con layout de 2 paneles responsivo |
-| `EmbeddedAgentChat` | Version embebida del chat IA (mas grande, siempre visible, sin boton flotante) |
-| `DataVisualizer` | Panel con pestanas: Red Federada, Metricas, Flujo de Datos |
-| `EcosystemMetrics` | Graficos Recharts con metricas sinteticas del espacio de datos |
-| `LiveDataFlow` | Animacion Framer Motion de datos fluyendo entre nodos con contadores |
+| Fase | Nombre | Descripción |
+|------|--------|-------------|
+| 1 | **Fundamentos** | Plataforma base con autenticación, RBAC y RLS multi-tenant |
+| 2 | **Catálogo de Datos** | Registro y descubrimiento de activos de datos con metadatos |
+| 3 | **Flujo de Aprobaciones 3-Actores** | Máquina de estados Consumer → Subject → Holder |
+| 4 | **Políticas ODRL** | Contratos digitales automáticos siguiendo estándar ODRL 2.0 |
+| 5 | **Integración Web3 y DIDs** | Identidades descentralizadas y pagos EUROe en Pontus-X |
+| 6 | **IA Conversacional (ARIA)** | Asistente inteligente con base de conocimiento contextual |
+| 7 | **Conectores ERP** | Integración bidireccional con sistemas empresariales |
+| 8 | **Red Federada Gaia-X** | Conectores IDS, Eclipse Dataspace y credenciales verificables |
+| 9 | **Analytics Avanzado y BI** | Dashboards predictivos, datos sintéticos e inteligencia de mercado |
+| 10 | **Ecosistema Multi-Sector** | Nodos sectoriales, marketplace de servicios y gobernanza distribuida |
 
-#### 3. Metricas del Ecosistema (datos sinteticos)
-Graficos interactivos mostrando:
-- **Transacciones federadas**: Grafico de area con transacciones por mes
-- **Nodos activos**: Indicador con numero de organizaciones conectadas
-- **Politicas ODRL**: Contador de contratos generados automaticamente
-- **Soberania de datos**: Porcentaje de datos bajo control del titular
-
-#### 4. Cambios en Landing.tsx
-- Insertar la nueva seccion `FederatedIntelligenceSection` justo despues del hero actual
-- El widget flotante `FederatedAgentChat` se mantiene como acceso rapido en el resto de paginas, pero en Landing se oculta para no duplicar
-- Mantener todas las demas secciones intactas
-
-#### 5. Responsividad
-- En desktop: dos columnas (chat | visualizador)
-- En tablet: dos columnas compactas
-- En movil: apilado vertical (visualizador arriba, chat debajo)
+Cada fase se mostrará como un nodo en un diagrama de flujo con animaciones de progreso.
 
 ---
 
-### Detalle Tecnico
+### Componentes Nuevos a Crear
 
-**Archivos a crear:**
-- `src/components/landing/FederatedIntelligenceSection.tsx` - Contenedor principal
-- `src/components/landing/EmbeddedAgentChat.tsx` - Chat IA embebido (reutiliza logica de streaming del `FederatedAgentChat` existente)
-- `src/components/landing/DataVisualizer.tsx` - Panel con pestanas de visualizacion
-- `src/components/landing/EcosystemMetrics.tsx` - Graficos Recharts
-- `src/components/landing/LiveDataFlow.tsx` - Animacion de flujo de datos en vivo
+1. **`FederatedNetworkDiagram`** - Diagrama SVG/Canvas animado con nodos y flujos de datos
+2. **`DataFlowAnimation`** - Partículas animadas que fluyen entre nodos usando Framer Motion
+3. **`FederatedAgentChat`** - Widget de chat compacto para el agente especializado
+4. **`RoadmapPhases`** - Sección visual de las 10 fases con estados y progreso
 
-**Archivos a modificar:**
-- `src/pages/Landing.tsx` - Importar e insertar `FederatedIntelligenceSection`, ocultar widget flotante duplicado
+### Backend (Edge Function)
+- **`federated-agent`** - Nueva edge function para el agente IA especializado en datos federados, usando Lovable AI con prompt especializado en arquitectura de espacios de datos, Gaia-X y soberanía de datos
 
-**Sin cambios backend:**
-- Reutiliza la edge function `federated-agent` ya desplegada
-- No necesita nuevas tablas ni migraciones
-
-**Librerias utilizadas (ya instaladas):**
-- `recharts` para graficos
-- `framer-motion` para animaciones
-- `react-markdown` para renderizado de respuestas IA
-- `lucide-react` para iconografia
+### Resultado Visual Esperado
+- Hero moderno y dinámico con animaciones de flujo de datos
+- Chat IA accesible directamente desde la portada
+- Las 10 fases visibles como roadmap interactivo
+- El resto de la página (features, how it works, benefits, auth) se mantiene intacto
 
