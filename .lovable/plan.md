@@ -1,52 +1,86 @@
 
 
-## Revision: Integrar las 10 Fases de Desarrollo en la Pagina Principal Real
+## Plan: Integrar Chat de Agentes IA y Visualizador de Datos en la Pagina Principal
 
-### Problema Detectado
-Los componentes del roadmap (`RoadmapPhases`, `FederatedNetworkDiagram`, `FederatedAgentChat`) se integraron en `src/pages/Index.tsx`, pero la ruta `/` renderiza `src/pages/Landing.tsx`. Por tanto, las fases no son visibles en la pagina principal.
+### Vision
+Crear una nueva seccion destacada en la pagina principal que combine un **chat de agentes IA embebido** (no solo flotante) con un **visualizador de datos interactivo** que muestre metricas del ecosistema federado, el diagrama de red y animaciones de flujo de datos. Esta seccion reemplazara o complementara el hero actual para que sea lo primero que el usuario vea.
 
-### Plan de Correccion
+---
 
-#### 1. Integrar RoadmapPhases en Landing.tsx
-- Importar el componente `RoadmapPhases` en `Landing.tsx`
-- Colocarlo despues de la seccion "Demo Hub" y antes de "Modelos de Negocio", para dar visibilidad al roadmap tecnico sin romper el flujo actual
+### Cambios Principales
 
-#### 2. Integrar FederatedNetworkDiagram en el Hero de Landing.tsx
-- Convertir el hero actual (centrado, solo texto) en un layout de dos columnas en desktop:
-  - Columna izquierda: titulo, descripcion y botones (contenido actual)
-  - Columna derecha: diagrama de red federada animado
-- En movil se mantiene apilado verticalmente
+#### 1. Nueva Seccion "Centro de Inteligencia Federada"
+Una seccion prominente en la pagina principal con layout de dos paneles:
 
-#### 3. Integrar FederatedAgentChat como widget flotante
-- Anadir el componente `FederatedAgentChat` al final de Landing.tsx como widget flotante, disponible en toda la pagina
+```text
++------------------------------------------------------+
+|          CENTRO DE INTELIGENCIA FEDERADA              |
++---------------------------+--------------------------+
+|                           |                          |
+|   CHAT AGENTES IA         |   VISUALIZADOR DE DATOS  |
+|   (embebido, no flotante) |                          |
+|                           |   - Diagrama red federada|
+|   - Preguntas sugeridas   |   - Metricas animadas    |
+|   - Streaming en vivo     |   - Flujo de datos       |
+|   - Markdown render       |   - KPIs del ecosistema  |
+|                           |                          |
++---------------------------+--------------------------+
+```
 
-#### 4. Revisar las 10 fases actuales
-Las fases definidas actualmente en `RoadmapPhases.tsx` son:
+- **Panel izquierdo**: Chat de agente IA embebido directamente en la pagina (no como widget flotante). Misma funcionalidad del `FederatedAgentChat` pero con interfaz mas amplia y visible.
+- **Panel derecho**: Visualizador con pestanas que alterna entre:
+  - Diagrama de red federada animado (ya existente)
+  - Metricas del ecosistema (graficos Recharts con datos sinteticos: transacciones, nodos activos, politicas ODRL generadas)
+  - Animacion de flujo de datos en tiempo real
 
-| Fase | Nombre | Estado |
-|------|--------|--------|
-| F1 | Fundamentos (Auth, RBAC, RLS) | Completada |
-| F2 | Catalogo de Datos | Completada |
-| F3 | Aprobaciones 3-Actores | Completada |
-| F4 | Politicas ODRL | Completada |
-| F5 | Web3 y DIDs | Completada |
-| F6 | IA Conversacional (ARIA) | Completada |
-| F7 | Conectores ERP | Pendiente |
-| F8 | Red Federada Gaia-X | Pendiente |
-| F9 | Analytics y BI | Pendiente |
-| F10 | Ecosistema Multi-Sector | Pendiente |
+#### 2. Componentes Nuevos a Crear
 
-Estas fases reflejan correctamente la evolucion incremental de la plataforma segun la arquitectura documentada en `entrenamientoIA/14_DEVELOPER_ARCHITECTURE.md`. No requieren cambios en contenido.
+| Componente | Descripcion |
+|------------|-------------|
+| `FederatedIntelligenceSection` | Seccion contenedora con layout de 2 paneles responsivo |
+| `EmbeddedAgentChat` | Version embebida del chat IA (mas grande, siempre visible, sin boton flotante) |
+| `DataVisualizer` | Panel con pestanas: Red Federada, Metricas, Flujo de Datos |
+| `EcosystemMetrics` | Graficos Recharts con metricas sinteticas del espacio de datos |
+| `LiveDataFlow` | Animacion Framer Motion de datos fluyendo entre nodos con contadores |
 
-### Archivos a Modificar
-- `src/pages/Landing.tsx` - Importar e integrar los 3 componentes nuevos (RoadmapPhases, FederatedNetworkDiagram, FederatedAgentChat)
+#### 3. Metricas del Ecosistema (datos sinteticos)
+Graficos interactivos mostrando:
+- **Transacciones federadas**: Grafico de area con transacciones por mes
+- **Nodos activos**: Indicador con numero de organizaciones conectadas
+- **Politicas ODRL**: Contador de contratos generados automaticamente
+- **Soberania de datos**: Porcentaje de datos bajo control del titular
 
-### Archivos Sin Cambios
-- `src/components/landing/RoadmapPhases.tsx` - Ya correcto
-- `src/components/landing/FederatedNetworkDiagram.tsx` - Ya correcto
-- `src/components/landing/FederatedAgentChat.tsx` - Ya correcto
+#### 4. Cambios en Landing.tsx
+- Insertar la nueva seccion `FederatedIntelligenceSection` justo despues del hero actual
+- El widget flotante `FederatedAgentChat` se mantiene como acceso rapido en el resto de paginas, pero en Landing se oculta para no duplicar
+- Mantener todas las demas secciones intactas
 
-### Resultado Esperado
-- La pagina principal (`/`) mostrara el diagrama de red federada en el hero
-- Las 10 fases del roadmap seran visibles como seccion de la pagina principal
-- El chat de agente IA estara disponible como widget flotante
+#### 5. Responsividad
+- En desktop: dos columnas (chat | visualizador)
+- En tablet: dos columnas compactas
+- En movil: apilado vertical (visualizador arriba, chat debajo)
+
+---
+
+### Detalle Tecnico
+
+**Archivos a crear:**
+- `src/components/landing/FederatedIntelligenceSection.tsx` - Contenedor principal
+- `src/components/landing/EmbeddedAgentChat.tsx` - Chat IA embebido (reutiliza logica de streaming del `FederatedAgentChat` existente)
+- `src/components/landing/DataVisualizer.tsx` - Panel con pestanas de visualizacion
+- `src/components/landing/EcosystemMetrics.tsx` - Graficos Recharts
+- `src/components/landing/LiveDataFlow.tsx` - Animacion de flujo de datos en vivo
+
+**Archivos a modificar:**
+- `src/pages/Landing.tsx` - Importar e insertar `FederatedIntelligenceSection`, ocultar widget flotante duplicado
+
+**Sin cambios backend:**
+- Reutiliza la edge function `federated-agent` ya desplegada
+- No necesita nuevas tablas ni migraciones
+
+**Librerias utilizadas (ya instaladas):**
+- `recharts` para graficos
+- `framer-motion` para animaciones
+- `react-markdown` para renderizado de respuestas IA
+- `lucide-react` para iconografia
+
