@@ -22,9 +22,10 @@ const connections = [
 
 interface Props {
   isProcessing?: boolean;
+  highlightedNodes?: string[];
 }
 
-export const FederatedNetworkDiagram = ({ isProcessing = false }: Props) => {
+export const FederatedNetworkDiagram = ({ isProcessing = false, highlightedNodes = [] }: Props) => {
   const [activeConnection, setActiveConnection] = useState(0);
 
   useEffect(() => {
@@ -36,6 +37,8 @@ export const FederatedNetworkDiagram = ({ isProcessing = false }: Props) => {
 
   const getNode = (id: string) => nodes.find((n) => n.id === id)!;
 
+  const isHighlighted = (id: string) => highlightedNodes.includes(id);
+
   return (
     <div className="w-full aspect-square max-w-[500px] mx-auto">
       <svg viewBox="0 0 500 420" className="w-full h-full">
@@ -43,19 +46,20 @@ export const FederatedNetworkDiagram = ({ isProcessing = false }: Props) => {
         {connections.map((conn, i) => {
           const from = getNode(conn.from);
           const to = getNode(conn.to);
+          const bothHighlighted = isHighlighted(conn.from) && isHighlighted(conn.to);
           return (
             <g key={`conn-${i}`}>
-              <line
+              <motion.line
                 x1={from.x}
                 y1={from.y}
                 x2={to.x}
                 y2={to.y}
-                stroke="hsl(var(--border))"
-                strokeWidth={1.5}
+                stroke={bothHighlighted ? "hsl(142, 71%, 45%)" : "hsl(var(--border))"}
+                strokeWidth={bothHighlighted ? 2 : 1.5}
                 strokeDasharray="4 4"
-                opacity={0.5}
+                animate={{ opacity: bothHighlighted ? 0.9 : 0.5 }}
+                transition={{ duration: 0.4 }}
               />
-              {/* Animated particle */}
               {(i === activeConnection || isProcessing) && (
                 <motion.circle
                   r={3}
@@ -75,41 +79,58 @@ export const FederatedNetworkDiagram = ({ isProcessing = false }: Props) => {
         })}
 
         {/* Nodes */}
-        {nodes.map((node) => (
-          <g key={node.id}>
-            {/* Pulse ring for hub */}
-            {node.id === "hub" && (
+        {nodes.map((node) => {
+          const highlighted = isHighlighted(node.id);
+          return (
+            <g key={node.id}>
+              {/* Highlight glow ring */}
+              {highlighted && (
+                <motion.circle
+                  cx={node.x}
+                  cy={node.y}
+                  r={node.size + 10}
+                  fill="none"
+                  stroke={node.color}
+                  strokeWidth={2.5}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ scale: [1, 1.25, 1], opacity: [0.7, 0.2, 0.7] }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                />
+              )}
+
+              {/* Pulse ring for hub */}
+              {node.id === "hub" && !highlighted && (
+                <motion.circle
+                  cx={node.x}
+                  cy={node.y}
+                  r={node.size + 8}
+                  fill="none"
+                  stroke={node.color}
+                  strokeWidth={2}
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.6, 0, 0.6] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                />
+              )}
               <motion.circle
                 cx={node.x}
                 cy={node.y}
-                r={node.size + 8}
-                fill="none"
-                stroke={node.color}
-                strokeWidth={2}
-                animate={{ scale: [1, 1.3, 1], opacity: [0.6, 0, 0.6] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                r={node.size}
+                fill={node.color}
+                animate={{ opacity: highlighted ? [0.2, 0.45, 0.2] : isProcessing ? [0.15, 0.35, 0.15] : 0.15 }}
+                transition={{ duration: 1.5, repeat: Infinity }}
               />
-            )}
-            <motion.circle
-              cx={node.x}
-              cy={node.y}
-              r={node.size}
-              fill={node.color}
-              opacity={0.15}
-              animate={isProcessing ? { opacity: [0.15, 0.35, 0.15] } : {}}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-            <circle cx={node.x} cy={node.y} r={node.size * 0.6} fill={node.color} opacity={0.9} />
-            <text
-              x={node.x}
-              y={node.y + node.size + 16}
-              textAnchor="middle"
-              className="fill-foreground text-[11px] font-medium"
-            >
-              {node.label}
-            </text>
-          </g>
-        ))}
+              <circle cx={node.x} cy={node.y} r={node.size * 0.6} fill={node.color} opacity={0.9} />
+              <text
+                x={node.x}
+                y={node.y + node.size + 16}
+                textAnchor="middle"
+                className="fill-foreground text-[11px] font-medium"
+              >
+                {node.label}
+              </text>
+            </g>
+          );
+        })}
       </svg>
     </div>
   );

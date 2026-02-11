@@ -1,7 +1,11 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThinkingPanel } from "./ThinkingPanel";
+import { AgentAvatar } from "@/components/ai/AgentAvatar";
+import { SourceCitation, parseSourceMarkers } from "@/components/ai/SourceCitation";
+import { FollowUpSuggestions, parseFollowUpMarkers } from "@/components/ai/FollowUpSuggestions";
+import { LiveMetricsBar } from "@/components/ai/LiveMetricsBar";
 import ReactMarkdown from "react-markdown";
 
 const SUGGESTED_QUESTIONS = [
@@ -17,13 +21,37 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/federated-ag
 
 interface Props {
   onProcessingChange?: (processing: boolean) => void;
+  onHighlightedNodesChange?: (nodes: string[]) => void;
 }
 
-export const FederatedHeroChat = ({ onProcessingChange }: Props) => {
+/** Detect keywords in text to highlight diagram nodes */
+function detectHighlightedNodes(text: string): string[] {
+  const map: Record<string, string> = {
+    consumer: "consumer",
+    provider: "provider",
+    holder: "holder",
+    "data holder": "holder",
+    "gaia-x": "gaiax",
+    gaiax: "gaiax",
+    erp: "erp",
+    odrl: "gaiax",
+    "pontus-x": "gaiax",
+    procuredata: "hub",
+  };
+  const found: string[] = [];
+  const lower = text.toLowerCase();
+  for (const [keyword, nodeId] of Object.entries(map)) {
+    if (lower.includes(keyword) && !found.includes(nodeId)) found.push(nodeId);
+  }
+  return found;
+}
+
+export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange }: Props) => {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
+  const [tokenCount, setTokenCount] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,6 +62,29 @@ export const FederatedHeroChat = ({ onProcessingChange }: Props) => {
     setIsThinking(false);
   }, []);
 
+  // Parse last assistant message for sources, follow-ups, and node highlights
+  const lastAssistantMsg = useMemo(() => {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (messages[i].role === "assistant") return messages[i].content;
+    }
+    return "";
+  }, [messages]);
+
+  const { sources, followUps } = useMemo(() => {
+    const s = parseSourceMarkers(lastAssistantMsg);
+    const f = parseFollowUpMarkers(s.cleanText);
+    return { sources: s.sources, followUps: f.followUps };
+  }, [lastAssistantMsg]);
+
+  // Update highlighted nodes based on streaming content
+  useEffect(() => {
+    if (lastAssistantMsg) {
+      onHighlightedNodesChange?.(detectHighlightedNodes(lastAssistantMsg));
+    } else {
+      onHighlightedNodesChange?.([]);
+    }
+  }, [lastAssistantMsg, onHighlightedNodesChange]);
+
   const send = async (text: string) => {
     if (!text.trim() || isLoading) return;
     const userMsg: Msg = { role: "user", content: text.trim() };
@@ -41,14 +92,17 @@ export const FederatedHeroChat = ({ onProcessingChange }: Props) => {
     setInput("");
     setIsLoading(true);
     setIsThinking(true);
+    setTokenCount(0);
     onProcessingChange?.(true);
 
-    // Wait for thinking animation before streaming
     await new Promise((r) => setTimeout(r, 4000));
 
     let assistantSoFar = "";
+    let localTokenCount = 0;
     const upsertAssistant = (chunk: string) => {
       assistantSoFar += chunk;
+      localTokenCount += chunk.split(/\s+/).length;
+      setTokenCount(localTokenCount);
       setMessages((prev) => {
         const last = prev[prev.length - 1];
         if (last?.role === "assistant") {
@@ -117,12 +171,25 @@ export const FederatedHeroChat = ({ onProcessingChange }: Props) => {
     onProcessingChange?.(false);
   };
 
+  /** Render a message, stripping markers for display */
+  const renderAssistantContent = (content: string) => {
+    const s = parseSourceMarkers(content);
+    const f = parseFollowUpMarkers(s.cleanText);
+    return <ReactMarkdown>{f.cleanText}</ReactMarkdown>;
+  };
+
   return (
     <div className="flex flex-col h-full max-h-[520px]">
+      {/* Live metrics */}
+      <LiveMetricsBar isStreaming={isLoading && !isThinking} tokenCount={tokenCount} />
+
       {/* Messages area */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0 mt-1">
         {messages.length === 0 && (
           <div className="text-center py-6 space-y-4">
+            <div className="flex justify-center">
+              <AgentAvatar state="idle" size={40} />
+            </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-xs font-medium text-primary">
               <Sparkles className="w-3 h-3" />
               Agente IA Federado
@@ -145,20 +212,47 @@ export const FederatedHeroChat = ({ onProcessingChange }: Props) => {
         )}
 
         {messages.map((msg, i) => (
-          <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-            <div
-              className={`max-w-[85%] rounded-xl px-3 py-2 text-sm ${
-                msg.role === "user"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-muted text-foreground prose prose-sm max-w-none"
-              }`}
-            >
-              {msg.role === "assistant" ? <ReactMarkdown>{msg.content}</ReactMarkdown> : msg.content}
+          <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+            {msg.role === "assistant" && (
+              <AgentAvatar
+                state={isLoading && i === messages.length - 1 ? "speaking" : "idle"}
+                size={28}
+              />
+            )}
+            <div className="flex flex-col max-w-[80%]">
+              <div
+                className={`rounded-xl px-3 py-2 text-sm ${
+                  msg.role === "user"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-foreground prose prose-sm max-w-none"
+                }`}
+              >
+                {msg.role === "assistant" ? (
+                  <>
+                    {renderAssistantContent(msg.content)}
+                    {/* Blinking cursor during streaming */}
+                    {isLoading && i === messages.length - 1 && (
+                      <span className="inline-block w-[2px] h-4 bg-primary ml-0.5 animate-pulse align-middle" />
+                    )}
+                  </>
+                ) : (
+                  msg.content
+                )}
+              </div>
+              {/* Source citations on last assistant message */}
+              {msg.role === "assistant" && i === messages.length - 1 && !isLoading && sources.length > 0 && (
+                <SourceCitation sources={sources} />
+              )}
             </div>
           </div>
         ))}
 
-        {isThinking && <ThinkingPanel isVisible={isThinking} onComplete={handleThinkingComplete} />}
+        {isThinking && <ThinkingPanel isVisible={isThinking} onComplete={handleThinkingComplete} context="hero" />}
+
+        {/* Follow-up suggestions after last response */}
+        {!isLoading && followUps.length > 0 && (
+          <FollowUpSuggestions suggestions={followUps} onSelect={send} isVisible={true} />
+        )}
       </div>
 
       {/* Input */}

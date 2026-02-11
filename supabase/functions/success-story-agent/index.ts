@@ -63,7 +63,17 @@ INSTRUCCIONES:
 - Si preguntan cómo se aplica a su sector, haz analogías con los servicios usados en este caso
 - Usa formato markdown cuando sea apropiado
 - Máximo 400 palabras por respuesta
-- Si preguntan algo totalmente fuera de contexto, redirige amablemente al caso de éxito`;
+- Si preguntan algo totalmente fuera de contexto, redirige amablemente al caso de éxito
+
+MARCADORES ESPECIALES (OBLIGATORIO usar cuando aplique):
+- Cuando cites o refieras a Gaia-X, añade [source:gaiax] al final de esa oración
+- Cuando menciones políticas ODRL, añade [source:odrl]
+- Cuando menciones Pontus-X o pagos EUROe, añade [source:pontus]
+- Cuando menciones la arquitectura IDSA, añade [source:idsa]
+- Cuando menciones conectores ERP, añade [source:erp]
+- Cuando menciones DIDs o identidades descentralizadas, añade [source:did]
+- Al final de tu respuesta, sugiere 2-3 preguntas de seguimiento usando el formato [followup:texto de la pregunta]
+- Ejemplo: [followup:¿Cómo se integraron los conectores ERP en este caso?]`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
