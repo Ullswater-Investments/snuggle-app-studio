@@ -1,0 +1,28 @@
+{
+  "backToHome": "Retour à l'accueil",
+  "badge": "Phase 10 — Multi-Secteur",
+  "title": "Multi-Secteur ProcureData",
+  "subtitle": "Nœuds sectoriels indépendants avec gouvernance fédérée et transactions cross-secteur",
+  "layers": {
+    "nodes": { "label": "Couche 1 — Nœuds Sectoriels", "title": "Nœuds Sectoriels Indépendants" },
+    "governance": { "label": "Couche 2 — Gouvernance", "title": "Gouvernance Décentralisée" },
+    "federation": { "label": "Couche 3 — Fédération", "title": "Catalogue Fédéré Cross-Secteur" },
+    "monetization": { "label": "Couche 4 — Monétisation", "title": "Écosystème et Monétisation" }
+  },
+  "metrics": {
+    "sectors": "Secteurs Prioritaires",
+    "governance": "Gouvernance Fédérée",
+    "cases": "Cas Vérifiés"
+  },
+  "chat": {
+    "badge": "ARIA Multi-Secteur",
+    "description": "Experte en nœuds sectoriels, gouvernance et fédération de données",
+    "placeholder": "Posez une question sur les nœuds sectoriels...",
+    "sectionTitle": "Agent IA Multi-Secteur",
+    "sectionSubtitle": "Spécialiste des nœuds sectoriels, gouvernance IDSA et transactions cross-secteur",
+    "q1": "Comment fonctionnent les nœuds sectoriels de ProcureData ?",
+    "q2": "Comment les transactions cross-secteur sont-elles gouvernées ?",
+    "q3": "Quel rôle jouent les partenaires sectoriels comme GAIA ou FEIQUE ?",
+    "q4": "Comment le Multi-Secteur s'applique-t-il au cas GigaFactory ?"
+  }
+}

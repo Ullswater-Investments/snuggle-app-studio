@@ -1,0 +1,28 @@
+{
+  "backToHome": "Zurück zur Startseite",
+  "badge": "Phase 10 — Multi-Sektor",
+  "title": "ProcureData Multi-Sektor",
+  "subtitle": "Unabhängige Sektorknoten mit föderierter Governance und sektorübergreifenden Transaktionen",
+  "layers": {
+    "nodes": { "label": "Schicht 1 — Sektorknoten", "title": "Unabhängige Sektorknoten" },
+    "governance": { "label": "Schicht 2 — Governance", "title": "Dezentrale Governance" },
+    "federation": { "label": "Schicht 3 — Föderation", "title": "Föderierter Cross-Sektor-Katalog" },
+    "monetization": { "label": "Schicht 4 — Monetarisierung", "title": "Ökosystem & Monetarisierung" }
+  },
+  "metrics": {
+    "sectors": "Prioritätssektoren",
+    "governance": "Föderierte Governance",
+    "cases": "Verifizierte Fälle"
+  },
+  "chat": {
+    "badge": "ARIA Multi-Sektor",
+    "description": "Expertin für Sektorknoten, Governance und Datenföderation",
+    "placeholder": "Fragen zu Sektorknoten und Governance...",
+    "sectionTitle": "Multi-Sektor KI-Agent",
+    "sectionSubtitle": "Spezialist für Sektorknoten, IDSA-Governance und sektorübergreifende Transaktionen",
+    "q1": "Wie funktionieren die Sektorknoten von ProcureData?",
+    "q2": "Wie werden sektorübergreifende Transaktionen gesteuert?",
+    "q3": "Welche Rolle spielen Sektorpartner wie GAIA oder FEIQUE?",
+    "q4": "Wie wird Multi-Sektor im GigaFactory-Fall angewendet?"
+  }
+}

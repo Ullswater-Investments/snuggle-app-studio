@@ -1,0 +1,28 @@
+{
+  "backToHome": "Voltar ao início",
+  "badge": "Fase 10 — Multi-Setor",
+  "title": "Multi-Setor ProcureData",
+  "subtitle": "Nós setoriais independentes com governança federada e transações cross-setor",
+  "layers": {
+    "nodes": { "label": "Camada 1 — Nós Setoriais", "title": "Nós Setoriais Independentes" },
+    "governance": { "label": "Camada 2 — Governança", "title": "Governança Descentralizada" },
+    "federation": { "label": "Camada 3 — Federação", "title": "Catálogo Federado Cross-Setor" },
+    "monetization": { "label": "Camada 4 — Monetização", "title": "Ecossistema e Monetização" }
+  },
+  "metrics": {
+    "sectors": "Setores Prioritários",
+    "governance": "Governança Federada",
+    "cases": "Casos Verificados"
+  },
+  "chat": {
+    "badge": "ARIA Multi-Setor",
+    "description": "Especialista em nós setoriais, governança e federação de dados",
+    "placeholder": "Pergunte sobre nós setoriais e governança...",
+    "sectionTitle": "Agente IA Multi-Setor",
+    "sectionSubtitle": "Especialista em nós setoriais, governança IDSA e transações cross-setor",
+    "q1": "Como funcionam os nós setoriais do ProcureData?",
+    "q2": "Como são governadas as transações cross-setor?",
+    "q3": "Qual o papel dos parceiros setoriais como GAIA ou FEIQUE?",
+    "q4": "Como o Multi-Setor é aplicado no caso GigaFactory?"
+  }
+}

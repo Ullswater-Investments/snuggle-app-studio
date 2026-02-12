@@ -248,6 +248,7 @@ import IAConversacional from "./pages/IAConversacional";
 import ConectoresErpPage from "./pages/ConectoresErp";
 import RedGaiaX from "./pages/RedGaiaX";
 import AnalyticsBi from "./pages/AnalyticsBi";
+import MultiSector from "./pages/MultiSector";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -322,6 +323,7 @@ const App = () => (
                   <Route path="/conectores-erp" element={<ConectoresErpPage />} />
                   <Route path="/red-gaia-x" element={<RedGaiaX />} />
                   <Route path="/analytics-bi" element={<AnalyticsBi />} />
+                  <Route path="/multi-sector" element={<MultiSector />} />
                   <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
                   <Route path="/nodos/marketplace" element={<MarketplacePage />} />
                   <Route path="/nodos/odrl" element={<OdrlPage />} />

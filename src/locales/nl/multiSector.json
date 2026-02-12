@@ -1,0 +1,28 @@
+{
+  "backToHome": "Terug naar home",
+  "badge": "Fase 10 — Multi-Sector",
+  "title": "ProcureData Multi-Sector",
+  "subtitle": "Onafhankelijke sectorale knooppunten met gefedereerd bestuur en cross-sector transacties",
+  "layers": {
+    "nodes": { "label": "Laag 1 — Sectorale Knooppunten", "title": "Onafhankelijke Sectorale Knooppunten" },
+    "governance": { "label": "Laag 2 — Governance", "title": "Gedecentraliseerd Bestuur" },
+    "federation": { "label": "Laag 3 — Federatie", "title": "Gefedereerde Cross-Sector Catalogus" },
+    "monetization": { "label": "Laag 4 — Monetisatie", "title": "Ecosysteem & Monetisatie" }
+  },
+  "metrics": {
+    "sectors": "Prioritaire Sectoren",
+    "governance": "Gefedereerd Bestuur",
+    "cases": "Geverifieerde Cases"
+  },
+  "chat": {
+    "badge": "ARIA Multi-Sector",
+    "description": "Expert in sectorale knooppunten, governance en datafederatie",
+    "placeholder": "Vraag over sectorale knooppunten en governance...",
+    "sectionTitle": "Multi-Sector AI Agent",
+    "sectionSubtitle": "Specialist in sectorale knooppunten, IDSA-governance en cross-sector transacties",
+    "q1": "Hoe werken de sectorale knooppunten van ProcureData?",
+    "q2": "Hoe worden cross-sector transacties bestuurd?",
+    "q3": "Welke rol spelen sectorale partners zoals GAIA of FEIQUE?",
+    "q4": "Hoe wordt Multi-Sector toegepast in de GigaFactory-case?"
+  }
+}
