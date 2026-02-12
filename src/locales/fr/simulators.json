@@ -164,7 +164,7 @@
       "smartContract": "Smart Contract"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "Conseiller IA",
       "role": "Conseillère en Énergie Éolienne",
       "instantTitle": "Règlement Instantané",
       "instantDesc": "Avec un vent à <strong>{{windSpeed}} m/s</strong> et un prix PPA de <strong>{{price}}€/MWh</strong>, votre règlement instantané génère <strong>{{payout}} EUROe</strong> dans le bloc actuel.",
