@@ -1,0 +1,851 @@
+{
+  "common": {
+    "badges": {
+      "greenProcurement": "Green Procurement",
+      "greenProcurementTooltip": "Geverifieerde dataset voor duurzaam inkopen en groene toeleveringsketen",
+      "lcaCertified": "LCA Gecertificeerd",
+      "lcaTooltip": "ISO 14044 gecertificeerde Levenscyclusanalyse methodologie",
+      "circularEconomy": "Circulaire Economie",
+      "circularTooltip": "Data voor circulaire economie strategieën",
+      "eudrCompliant": "EUDR Compliant",
+      "eudrTooltip": "Voldoet aan de EU-ontbossingsverordening",
+      "scope3Ready": "Scope 3 Ready",
+      "scope3Tooltip": "Gereed voor Scope 3-emissieberekening",
+      "scope2Ready": "Scope 2 Ready",
+      "openData": "Open Data",
+      "conflictFree": "Conflict-Free",
+      "dueDiligence": "Due Diligence",
+      "ecolabels": "Ecolabels",
+      "reachCompliant": "REACH Compliant",
+      "satellite": "Satelliet",
+      "leedBreeam": "LEED/BREEAM",
+      "esgScoring": "ESG Scoring",
+      "humanRights": "Mensenrechten",
+      "rightToRepair": "Recht op Reparatie",
+      "diversity": "Diversiteit",
+      "socialImpact": "Sociale Impact",
+      "re100": "RE100",
+      "goosRecs": "GoOs/RECs",
+      "electrification": "Elektrificatie",
+      "tcoAnalysis": "TCO Analyse",
+      "carbonCredits": "Koolstofkredieten",
+      "netZero": "Net Zero",
+      "energyEfficiency": "Energie-efficiëntie",
+      "waterRisk": "Waterrisico",
+      "bioMaterials": "Bio-Materialen",
+      "pueMetrics": "PUE Metrics"
+    },
+    "categories": {
+      "lca": "Koolstofvoetafdruk en LCA",
+      "circular": "Circulaire Economie",
+      "compliance": "Regelgevende Conformiteit",
+      "esg": "ESG Risico",
+      "finance": "Groene Financiering"
+    }
+  },
+  "products": {
+    "factores-emision-materiales": {
+      "category": "Milieu-impact",
+      "title": "Emissiefactoren van Industriële Materialen",
+      "shortDescription": "Database met cradle-to-gate CO2e emissiefactoren voor industriële materialen: staal, aluminium, cement, glas en kunststoffen. Inclusief gerecycled gehalte en regionale herkomst.",
+      "provider": "Ecoinvent AG",
+      "custody": "Swiss Data Center (Zürich, CH)",
+      "rating": "4.7",
+      "reviewCount": "234",
+      "metrics": { "update": "Driemaandelijks", "records": "12.000+", "materials": "450+", "regions": "Wereldwijd" },
+      "description": {
+        "paragraph1": "Wereldwijd toonaangevende wetenschappelijke referentiedatabase voor het berekenen van de ingebedde koolstofvoetafdruk in bouw- en industriële materialen. Ontwikkeld door Ecoinvent, de meest geciteerde bron in Levenscyclusanalyse (LCA) studies.",
+        "paragraph2": "Emissiefactoren volgen de ISO 14044 methodologie en zijn gesegmenteerd naar productieregio, wat nauwkeurige berekeningen mogelijk maakt op basis van de herkomst van materialen. Essentieel voor ESG-rapportage, CSRD-naleving en duurzame inkoopspecificaties."
+      },
+      "useCases": ["Berekening van de koolstofvoetafdruk van geproduceerde producten", "Vergelijking van alternatieve materialen in de ontwerpfase", "ESG-rapportage en naleving van CSRD-richtlijn", "Volledige levenscyclusanalyse (LCA)", "Duurzame inkoopspecificaties bij aanbestedingen"],
+      "schema": [
+        { "field": "material_id", "type": "String", "description": "Uniek materiaal-ID (formaat: MAT-[TYPE]-[NUM])" },
+        { "field": "material_name", "type": "String", "description": "Materiaalnaam in het Engels" },
+        { "field": "material_category", "type": "Enum", "description": "'steel' | 'aluminum' | 'cement' | 'glass' | 'plastic'" },
+        { "field": "co2e_per_kg", "type": "Float", "description": "kg CO2e per kg materiaal (cradle-to-gate)" },
+        { "field": "recycled_content_pct", "type": "Float (0-100)", "description": "Percentage gerecycled gehalte" },
+        { "field": "production_region", "type": "String", "description": "Productieregio (ISO 3166-1)" },
+        { "field": "energy_mj_per_kg", "type": "Float", "description": "Energieverbruik bij productie (MJ/kg)" },
+        { "field": "water_liters_per_kg", "type": "Float", "description": "Waterverbruik (L/kg)" },
+        { "field": "data_quality_score", "type": "Integer (1-5)", "description": "Datakwaliteit volgens Ecoinvent" },
+        { "field": "last_review", "type": "Date", "description": "Laatste wetenschappelijke beoordeling" }
+      ],
+      "odrl": {
+        "permitted": ["Interne LCA-berekeningen", "Integratie in eco-design tools", "ESG- en CSRD-rapportage", "Materiaalvergelijkingen voor inkoop"],
+        "prohibited": ["Commerciële herdistributie van de database", "Gebruik voor greenwashing zonder bewijs", "Publicatie van individuele factoren zonder context", "Aanmaak van afgeleide databases"],
+        "obligations": ["Bron vermelden: Ecoinvent v3.x", "Commerciële gebruikslicentie naleven", "Verplichte jaarlijkse update", "Gebruiksaudit op verzoek"]
+      },
+      "quality": {
+        "completeness": { "value": 98.5, "description": "Dekking van industriële materialen" },
+        "freshness": { "value": 95.0, "description": "Driemaandelijkse update" },
+        "accuracy": { "value": 97.2, "description": "Peer-reviewed wetenschappelijke validatie" },
+        "consistency": { "value": 99.5, "description": "ISO 14044 methodologie" },
+        "availability": { "value": 99.9, "description": "API met gegarandeerde SLA" }
+      },
+      "pricing": { "amount": "€800/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "intensidad-carbono-red": {
+      "category": "Energie",
+      "title": "Koolstofintensiteit van het Elektriciteitsnet",
+      "shortDescription": "Realtime en historische gegevens over de koolstofintensiteit (gCO2/kWh) van het nationale elektriciteitsnet van meer dan 150 landen. Volledige energiemix.",
+      "provider": "Electricity Maps",
+      "custody": "EU Cloud (Kopenhagen, DK)",
+      "rating": "4.9",
+      "reviewCount": "567",
+      "metrics": { "update": "5 minuten", "countries": "150+", "dataHistory": "5 jaar", "precision": "Per uur" },
+      "description": {
+        "paragraph1": "Electricity Maps biedt realtime koolstofintensiteitsgegevens van elektriciteit, waardoor bedrijven weloverwogen beslissingen kunnen nemen over wanneer en waar energie te verbruiken om hun koolstofvoetafdruk te minimaliseren.",
+        "paragraph2": "De dataset bevat de volledige energiemix (zon, wind, kolen, gas, nucleair, waterkracht), waardoor nauwkeurige geografische Scope 2-emissieberekeningen mogelijk zijn. Essentieel voor duurzame energie-inkoopstrategieën."
+      },
+      "useCases": ["Locatiekeuze voor nieuwe fabrieken of datacenters", "Verbruiksoptimalisatie op basis van 'clean energy hours'", "Nauwkeurige Scope 2-emissieberekening", "Strategieën voor inkoop van hernieuwbare energie", "RE100- en CDP Climate-rapportage"],
+      "schema": [
+        { "field": "timestamp", "type": "ISO 8601 DateTime", "description": "UTC-tijdstempel van de registratie" },
+        { "field": "zone_key", "type": "String", "description": "Elektrische zonecode (bijv: ES, DE, FR)" },
+        { "field": "carbon_intensity", "type": "Float", "description": "gCO2eq/kWh van de opwekking" },
+        { "field": "fossil_fuel_pct", "type": "Float", "description": "% fossiele opwekking" },
+        { "field": "renewable_pct", "type": "Float", "description": "% hernieuwbare opwekking" },
+        { "field": "solar_pct", "type": "Float", "description": "% zonne-energie" },
+        { "field": "wind_pct", "type": "Float", "description": "% windenergie" },
+        { "field": "hydro_pct", "type": "Float", "description": "% waterkracht" },
+        { "field": "nuclear_pct", "type": "Float", "description": "% kernenergie" },
+        { "field": "is_estimated", "type": "Boolean", "description": "Of het een schatting of werkelijke data is" }
+      ],
+      "odrl": {
+        "permitted": ["Scope 2-emissieberekeningen", "Optimalisatie van energieverbruik", "Visualisatie in interne dashboards", "ESG- en CDP-rapportage"],
+        "prohibited": ["Commerciële herdistributie zonder licentie", "Gebruik voor marktmanipulatie", "Massaopslag zonder abonnement", "Aanmaak van concurrerende producten"],
+        "obligations": ["Bronvermelding Electricity Maps", "API-gebruik volgens rate limits", "Minimaal dagelijkse update voor rapportage"]
+      },
+      "quality": {
+        "completeness": { "value": 99.2, "description": "Temporele dekking" },
+        "freshness": { "value": 99.9, "description": "Update elke 5 min" },
+        "accuracy": { "value": 95.0, "description": "Gevalideerd met nationale TSO's" },
+        "consistency": { "value": 99.8, "description": "Gestandaardiseerde methodologie" },
+        "availability": { "value": 99.95, "description": "API availability SLA" }
+      },
+      "pricing": { "amount": "Gratis", "model": "free", "description": "Open Data met beperkte API" }
+    },
+    "emisiones-logisticas-modal": {
+      "category": "Transport / Logistiek",
+      "title": "Logistieke Emissies per Transportmodus",
+      "shortDescription": "Emissiefactoren voor verschillende transportmodi (lucht, zee, weg, spoor) aangepast aan ladingtype en afstand.",
+      "provider": "Smart Freight Centre",
+      "custody": "AWS EU (Amsterdam, NL)",
+      "rating": "4.6",
+      "reviewCount": "189",
+      "metrics": { "update": "Maandelijks", "modes": "12+", "regions": "Wereldwijd", "precision": "99,2%" },
+      "description": {
+        "paragraph1": "GLEC (Global Logistics Emissions Council) framework geïmplementeerd als API. Biedt gecertificeerde emissiefactoren voor het berekenen van de koolstofvoetafdruk van goederentransport volgens ISO 14083 methodologie.",
+        "paragraph2": "Omvat aanpassingen voor voertuigtype, beladingsgraad, afstand, topografie en brandstof. Essentieel voor Scope 3 categorie 4 (upstream transport) en 9 (downstream transport) rapportage."
+      },
+      "useCases": ["Berekening van Scope 3-transportemissies", "Optimalisatie van supply chain routes", "Modale vergelijking (weg vs spoor vs zee)", "Rapportage voor EcoVadis en CDP Supply Chain", "Selectiecriteria voor vervoerders"],
+      "schema": [
+        { "field": "transport_mode", "type": "Enum", "description": "'road' | 'rail' | 'sea' | 'air' | 'inland_waterway'" },
+        { "field": "vehicle_type", "type": "String", "description": "Specifiek voertuigtype" },
+        { "field": "fuel_type", "type": "Enum", "description": "'diesel' | 'lng' | 'electric' | 'hvo' | 'saf'" },
+        { "field": "load_factor", "type": "Float (0-1)", "description": "Beladingsfactor" },
+        { "field": "distance_km", "type": "Float", "description": "Afstand van het traject" },
+        { "field": "co2e_per_tkm", "type": "Float", "description": "gCO2e per ton-kilometer" },
+        { "field": "well_to_wheel", "type": "Boolean", "description": "Of upstream brandstof is inbegrepen" },
+        { "field": "region", "type": "String", "description": "Toepassingsregio" },
+        { "field": "glec_version", "type": "String", "description": "Versie van het GLEC framework" }
+      ],
+      "odrl": {
+        "permitted": ["Berekening van logistieke emissies", "Integratie in TMS/WMS", "Scope 3-rapportage", "Benchmarking van logistieke dienstverleners"],
+        "prohibited": ["Herdistributie zonder GLEC-licentie", "Wijziging van gecertificeerde factoren", "Gebruik voor openbare verklaringen zonder audit"],
+        "obligations": ["GLEC/ISO 14083 methodologie vermelden", "Jaarlijkse verificatie voor openbare rapportage", "Traceerbaarheid van berekeningen waarborgen"]
+      },
+      "quality": {
+        "completeness": { "value": 97.5, "description": "Dekking van modi en routes" },
+        "freshness": { "value": 98.0, "description": "Maandelijkse update" },
+        "accuracy": { "value": 99.2, "description": "Gevalideerd door Smart Freight Centre" },
+        "consistency": { "value": 99.8, "description": "Gestandaardiseerde GLEC methodologie" },
+        "availability": { "value": 99.9, "description": "API availability" }
+      },
+      "pricing": { "amount": "€450/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "emisiones-scope3-cloud": {
+      "category": "IT / Diensten",
+      "title": "Scope 3 Emissies: Clouddiensten",
+      "shortDescription": "Schattingen van energieverbruik en koolstofvoetafdruk van aanbieders van digitale diensten (AWS, Azure, Google) en dataverkeer.",
+      "provider": "Green Software Foundation",
+      "custody": "Azure EU (Dublin, IE)",
+      "rating": "4.5",
+      "reviewCount": "145",
+      "metrics": { "update": "Dagelijks", "providers": "15+", "regions": "60+", "services": "200+" },
+      "description": {
+        "paragraph1": "Dataset van de Green Software Foundation met energie-efficiëntie- en koolstofemissie-metrics voor clouddiensten. Inclusief PUE (Power Usage Effectiveness) en CFE (Carbon Free Energy) score per datacenter.",
+        "paragraph2": "Stelt bedrijven in staat de emissies van hun cloud workloads te berekenen en te optimaliseren, door regio's en diensten met de laagste milieubelasting te selecteren. Essentieel voor Green IT-inkoop."
+      },
+      "useCases": ["Green procurement van IT-diensten", "Selectie van cloudregio op duurzaamheid", "Scope 3 categorie 1 berekening (ingekochte diensten)", "Workload-optimalisatie op koolstofintensiteit", "CSRD-rapportage voor digitale diensten"],
+      "schema": [
+        { "field": "provider", "type": "Enum", "description": "'aws' | 'azure' | 'gcp' | 'alibaba' | 'oracle'" },
+        { "field": "region", "type": "String", "description": "Datacenterregio" },
+        { "field": "datacenter_id", "type": "String", "description": "Datacenter-ID" },
+        { "field": "pue", "type": "Float", "description": "Power Usage Effectiveness" },
+        { "field": "cfe_score", "type": "Float (0-100)", "description": "Carbon Free Energy score" },
+        { "field": "grid_carbon_intensity", "type": "Float", "description": "gCO2/kWh van het lokale net" },
+        { "field": "renewable_pct", "type": "Float", "description": "% hernieuwbare energie" },
+        { "field": "service_category", "type": "String", "description": "Categorie van de clouddienst" },
+        { "field": "embodied_carbon_estimate", "type": "Float", "description": "Geschatte ingebedde koolstof (kg CO2e/jaar)" }
+      ],
+      "odrl": {
+        "permitted": ["IT-emissieberekening", "Selectie van duurzame leveranciers", "Optimalisatie van cloud-infrastructuur", "ESG-rapportage"],
+        "prohibited": ["Commerciële herdistributie", "Gebruik voor marketingclaims zonder verificatie", "Wijziging van SCI-methodologie"],
+        "obligations": ["Green Software Foundation vermelden", "SCI-methodologie gebruiken voor berekeningen", "Driemaandelijkse data-update"]
+      },
+      "quality": {
+        "completeness": { "value": 94.0, "description": "Dekking van belangrijkste providers" },
+        "freshness": { "value": 98.5, "description": "Dagelijkse update" },
+        "accuracy": { "value": 92.0, "description": "Gebaseerd op openbare data van providers" },
+        "consistency": { "value": 99.0, "description": "Gestandaardiseerde SCI-methodologie" },
+        "availability": { "value": 99.9, "description": "API availability" }
+      },
+      "pricing": { "amount": "€250/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "precios-materiales-reciclados": {
+      "category": "Markt / Circulaire Economie",
+      "title": "Prijsindex van Gerecyclede Materialen",
+      "shortDescription": "Monitoring van prijsvolatiliteit van secundaire grondstoffen versus primaire. R-PET, gerecycled staal, glas cullet, teruggewonnen papier.",
+      "provider": "S&P Global Platts",
+      "custody": "Secure Financial Cloud (Londen, UK)",
+      "rating": "4.4",
+      "reviewCount": "98",
+      "metrics": { "update": "Dagelijks", "materials": "25+", "markets": "Wereldwijd", "history": "10 jaar" },
+      "description": {
+        "paragraph1": "Spot- en termijnprijsindex voor gerecyclede materialen, waarmee de kosten van secundaire versus primaire grondstoffen vergeleken kunnen worden. Essentieel voor inkoopbeslissingen in de circulaire economie.",
+        "paragraph2": "Bevat analyse van voorraad beschikbaarheid, zuiverheidsgraad en technische specificaties. Essentieel voor financiële afdekking bij inkoop van duurzame verpakkingen en gerecyclede bouwmaterialen."
+      },
+      "useCases": ["Financiële afdekking voor inkoop van duurzame verpakkingen", "Analyse van prijspariteit gerecycled vs primair", "Planning van circulaire inkoop", "Due diligence bij M&A van recyclingbedrijven", "Benchmarking van kosten circulaire economie"],
+      "schema": [
+        { "field": "material_code", "type": "String", "description": "Materiaalcode (bijv: R-PET-CL, STL-EAF)" },
+        { "field": "material_name", "type": "String", "description": "Naam van het gerecyclede materiaal" },
+        { "field": "grade", "type": "String", "description": "Kwaliteits-/zuiverheidsgraad" },
+        { "field": "price_eur_ton", "type": "Float", "description": "Prijs in EUR/ton" },
+        { "field": "price_change_pct", "type": "Float", "description": "Wijziging vs vorige dag (%)" },
+        { "field": "virgin_price_eur_ton", "type": "Float", "description": "Equivalente primaire prijs" },
+        { "field": "green_premium_pct", "type": "Float", "description": "Groene premie (% boven primair)" },
+        { "field": "availability", "type": "Enum", "description": "'abundant' | 'normal' | 'scarce'" },
+        { "field": "region", "type": "String", "description": "Regio van notering" },
+        { "field": "timestamp", "type": "ISO 8601", "description": "Datum/tijd van notering" }
+      ],
+      "odrl": {
+        "permitted": ["Interne prijsanalyse", "Inkoopplanning", "Financiële afdekking (hedging)", "Rapportage aan stakeholders"],
+        "prohibited": ["Herdistributie van prijzen aan derden", "Gebruik voor marktmanipulatie", "Realtime publicatie zonder licentie"],
+        "obligations": ["Commerciële S&P Platts licentie", "Geen publicatie van exacte prijzen", "Gebruik volgens abonnementsvoorwaarden"]
+      },
+      "quality": {
+        "completeness": { "value": 96.0, "description": "Dekking van belangrijkste materialen" },
+        "freshness": { "value": 99.5, "description": "Dagelijkse update" },
+        "accuracy": { "value": 98.0, "description": "Geverifieerde transactieprijzen" },
+        "consistency": { "value": 99.2, "description": "Gestandaardiseerde methodologie" },
+        "availability": { "value": 99.9, "description": "API availability" }
+      },
+      "pricing": { "amount": "€75/query", "model": "usage", "description": "Betaling per query" }
+    },
+    "inventario-bioplasticos": {
+      "category": "Materialen / Innovatie",
+      "title": "Inventaris van Bioplastics en Bio-based Polymeren",
+      "shortDescription": "Technische catalogus van alternatieven voor fossiel plastic, inclusief mechanische eigenschappen, biomassa-oorsprong en composteerbaarheidscertificering.",
+      "provider": "European Bioplastics",
+      "custody": "EU Cloud (Berlijn, DE)",
+      "rating": "4.3",
+      "reviewCount": "67",
+      "metrics": { "update": "Halfjaarlijks", "materials": "180+", "producers": "85+", "certifications": "12" },
+      "description": {
+        "paragraph1": "Volledige technische database van commercieel beschikbare bioplastics en bio-based polymeren. Inclusief technische specificaties, biomassa-oorsprong, composteerbaarheidscertificeringen en leveranciers.",
+        "paragraph2": "Essentieel voor de vervanging van fossiele verpakkingen door bio-alternatieven in de FMCG-sector. Inclusief prestatie-, kosten- en beschikbaarheidsvergelijkingen per regio."
+      },
+      "useCases": ["Vervanging van fossiele verpakkingen door bio-alternatieven", "Materiaalselectie voor productontwerp", "Naleving SUP-verordening (Single-Use Plastics)", "Analyse van bioplastic-leveranciers", "Technische specificaties voor aanbestedingen"],
+      "schema": [
+        { "field": "material_id", "type": "String", "description": "Uniek materiaal-ID" },
+        { "field": "material_name", "type": "String", "description": "Commerciële naam" },
+        { "field": "polymer_type", "type": "Enum", "description": "'PLA' | 'PHA' | 'PBS' | 'starch_blend' | 'cellulose'" },
+        { "field": "biomass_source", "type": "String", "description": "Oorsprong van de biomassa" },
+        { "field": "bio_content_pct", "type": "Float", "description": "% bio-based gehalte" },
+        { "field": "compostability", "type": "Enum", "description": "'industrial' | 'home' | 'marine' | 'none'" },
+        { "field": "ok_compost_cert", "type": "Boolean", "description": "OK Compost certificering" },
+        { "field": "tensile_strength_mpa", "type": "Float", "description": "Treksterkte (MPa)" },
+        { "field": "heat_resistance_c", "type": "Float", "description": "Maximale hittebestendigheid (°C)" },
+        { "field": "producer", "type": "String", "description": "Fabrikant" },
+        { "field": "price_range_eur_kg", "type": "String", "description": "Prijsrange (EUR/kg)" }
+      ],
+      "odrl": {
+        "permitted": ["Materiaalselectie voor producten", "Specificaties bij aanbestedingen", "Interne vergelijkende analyses", "Training van R&D-teams"],
+        "prohibited": ["Commerciële herdistributie", "Gebruik voor certificering zonder verificatie", "Publicatie van fabrikantgegevens zonder toestemming"],
+        "obligations": ["European Bioplastics vermelden", "Data verifiëren bij fabrikanten vóór contractering", "Jaarlijkse update van de inventaris"]
+      },
+      "quality": {
+        "completeness": { "value": 92.0, "description": "Dekking Europese markt" },
+        "freshness": { "value": 90.0, "description": "Halfjaarlijkse update" },
+        "accuracy": { "value": 95.0, "description": "Geverifieerde fabrikantgegevens" },
+        "consistency": { "value": 98.0, "description": "Gestandaardiseerd formaat" },
+        "availability": { "value": 99.5, "description": "Download en API" }
+      },
+      "pricing": { "amount": "€350", "model": "one_time", "description": "Eenmalige betaling" }
+    },
+    "riesgo-hidrico-agricultura": {
+      "category": "Natuurlijke Hulpbronnen / Agri-food",
+      "title": "Waterrisico-mapping in de Landbouw",
+      "shortDescription": "Geospatiale data over waterstress in stroomgebieden waar grondstoffen worden verbouwd: katoen, avocado, amandelen, koffie, cacao.",
+      "provider": "WRI Aqueduct",
+      "custody": "Open Cloud (Washington, US)",
+      "rating": "4.8",
+      "reviewCount": "312",
+      "metrics": { "update": "Maandelijks", "basins": "15.000+", "crops": "40+", "resolution": "30m" },
+      "description": {
+        "paragraph1": "WRI Aqueduct biedt wereldwijde waterstressdata op stroomgebiedniveau. Maakt het mogelijk het waterrisico van de agrarische en textiele toeleveringsketen te beoordelen.",
+        "paragraph2": "Bevat klimaatprojecties, historische droogte- en overstromingsgegevens, en waterverbruik per gewas. Essentieel voor due diligence van agrarische leveranciers en klimaatrisico-rapportage (TCFD)."
+      },
+      "useCases": ["Risicomitigatie in textiele toeleveringsketen", "Due diligence van agrarische leveranciers", "TCFD-rapportage over fysieke risico's", "Water stewardship strategieën", "Selectie van duurzame inkoopgebieden"],
+      "schema": [
+        { "field": "basin_id", "type": "String", "description": "Stroomgebied-ID" },
+        { "field": "basin_name", "type": "String", "description": "Naam van het stroomgebied" },
+        { "field": "country", "type": "String", "description": "Land" },
+        { "field": "water_stress_level", "type": "Enum", "description": "'low' | 'low_medium' | 'medium_high' | 'high' | 'extremely_high'" },
+        { "field": "water_stress_score", "type": "Float (0-5)", "description": "Waterstress-score" },
+        { "field": "crop_type", "type": "String", "description": "Hoofdgewastype" },
+        { "field": "water_use_liters_kg", "type": "Float", "description": "Liter water per kg product" },
+        { "field": "drought_risk", "type": "Float (0-1)", "description": "Droogtekans" },
+        { "field": "flood_risk", "type": "Float (0-1)", "description": "Overstromingskans" },
+        { "field": "future_stress_2030", "type": "Enum", "description": "Stressprojectie voor 2030" }
+      ],
+      "odrl": {
+        "permitted": ["Supply chain risicoanalyse", "Due diligence van leveranciers", "TCFD- en CDP Water-rapportage", "Gebruik in publieke rapporten met bronvermelding"],
+        "prohibited": ["Commercieel gebruik zonder licentie", "Wijziging van originele data", "Herdistributie zonder WRI-bronvermelding"],
+        "obligations": ["Bronvermelding WRI Aqueduct", "Gebruik volgens Creative Commons licentie", "Jaarlijkse update voor rapportage"]
+      },
+      "quality": {
+        "completeness": { "value": 98.5, "description": "Wereldwijde dekking van stroomgebieden" },
+        "freshness": { "value": 97.0, "description": "Maandelijkse update" },
+        "accuracy": { "value": 94.0, "description": "Gevalideerd met hydrologische data" },
+        "consistency": { "value": 99.0, "description": "Gestandaardiseerde WRI-methodologie" },
+        "availability": { "value": 99.9, "description": "Open Data" }
+      },
+      "pricing": { "amount": "Gratis", "model": "free", "description": "Open Data" }
+    },
+    "minerales-conflicto-3tg": {
+      "category": "Conformiteit / Mijnbouw",
+      "title": "Traceerbaarheid van Conflictmineralen (3TG)",
+      "shortDescription": "Register van smelterijen en raffinaderijen gecertificeerd als conflictvrij voor Tin, Tantaal, Wolfraam en Goud (3TG). RMAP-geverifieerd proces.",
+      "provider": "RMI - Responsible Minerals Initiative",
+      "custody": "Secure Cloud (Arlington, US)",
+      "rating": "4.7",
+      "reviewCount": "156",
+      "metrics": { "update": "Wekelijks", "smelters": "450+", "countries": "50+", "audits": "Jaarlijks" },
+      "description": {
+        "paragraph1": "Officiële RMI-database met de lijst van smelterijen en raffinaderijen die het RMAP (Responsible Minerals Assurance Process) hebben doorlopen. Essentieel voor regelgevende naleving in de elektronica.",
+        "paragraph2": "Maakt het mogelijk te verifiëren dat mineralen in uw toeleveringsketen niet afkomstig zijn uit gebieden met gewapend conflict. Verplicht voor naleving van Dodd-Frank Act (VS) en EU-verordening Conflictmineralen."
+      },
+      "useCases": ["Due diligence van elektronicaleveranciers", "Naleving Dodd-Frank Act Sectie 1502", "Naleving EU-verordening Conflictmineralen", "CMRT (Conflict Minerals Reporting Template)", "ESG- en MVO-rapportage"],
+      "schema": [
+        { "field": "smelter_id", "type": "String", "description": "Uniek smelterij-ID" },
+        { "field": "smelter_name", "type": "String", "description": "Naam van de smelterij" },
+        { "field": "mineral_type", "type": "Enum", "description": "'tin' | 'tantalum' | 'tungsten' | 'gold'" },
+        { "field": "country", "type": "String", "description": "Land van vestiging" },
+        { "field": "rmap_status", "type": "Enum", "description": "'conformant' | 'active' | 'not_participating'" },
+        { "field": "audit_date", "type": "Date", "description": "Datum van laatste audit" },
+        { "field": "audit_result", "type": "String", "description": "Auditresultaat" },
+        { "field": "sourcing_countries", "type": "Array<String>", "description": "Herkomstlanden van het mineraal" },
+        { "field": "conflict_free", "type": "Boolean", "description": "Gecertificeerd als conflictvrij" }
+      ],
+      "odrl": {
+        "permitted": ["Due diligence van leveranciers", "CMRT-generatie", "Regelgevende rapportage", "Verificatie van toeleveringsketen"],
+        "prohibited": ["Gebruik voor discriminatie zonder grondslag", "Publicatie van vertrouwelijke auditdata", "Commerciële herdistributie"],
+        "obligations": ["RMI-lidmaatschap voor volledige toegang", "Gebruik volgens RMI-beleid", "Jaarlijkse update van verificaties"]
+      },
+      "quality": {
+        "completeness": { "value": 95.0, "description": "Dekking van belangrijkste smelterijen" },
+        "freshness": { "value": 99.0, "description": "Wekelijkse update" },
+        "accuracy": { "value": 99.5, "description": "Onafhankelijke audits" },
+        "consistency": { "value": 99.8, "description": "Gestandaardiseerd RMAP-proces" },
+        "availability": { "value": 99.9, "description": "Portaal en API" }
+      },
+      "pricing": { "amount": "€600/maand", "model": "subscription", "description": "Maandelijks abonnement (inclusief RMI-lidmaatschap)" }
+    },
+    "registro-ecolabels": {
+      "category": "Certificeringen",
+      "title": "Wereldwijd Register van Ecologische Certificeringen",
+      "shortDescription": "Uniforme database die de geldigheid van leverancierscertificeringen valideert: FSC, MSC, Blue Angel, EU Ecolabel, Cradle to Cradle en meer.",
+      "provider": "Global Ecolabelling Network",
+      "custody": "EU Cloud (Brussel, BE)",
+      "rating": "4.5",
+      "reviewCount": "123",
+      "metrics": { "update": "Dagelijks", "ecolabels": "50+", "certificates": "2M+", "countries": "120+" },
+      "description": {
+        "paragraph1": "Gecentraliseerd register van geverifieerde ecologische certificeringen. Maakt automatische validatie mogelijk of een leverancier of product over geldige en authentieke milieucertificeringen beschikt.",
+        "paragraph2": "Inclusief authenticiteitsverificatie, vervaldatum, certificeringsbereik en certificeringsinstantie. Essentieel voor het automatiseren van groene KYS (Know Your Supplier)."
+      },
+      "useCases": ["Automatische verificatie van leveranciersreferenties", "Automatisering van duurzame inkoop", "Due diligence bij onboarding van leveranciers", "Audit van duurzaamheidsclaims", "Scoring van leveranciers op certificeringen"],
+      "schema": [
+        { "field": "certificate_id", "type": "String", "description": "Uniek certificaat-ID" },
+        { "field": "ecolabel_type", "type": "String", "description": "Type certificering" },
+        { "field": "holder_name", "type": "String", "description": "Titularis bedrijf" },
+        { "field": "holder_country", "type": "String", "description": "Land van het bedrijf" },
+        { "field": "product_scope", "type": "String", "description": "Productbereik" },
+        { "field": "issue_date", "type": "Date", "description": "Uitgiftedatum" },
+        { "field": "expiry_date", "type": "Date", "description": "Vervaldatum" },
+        { "field": "status", "type": "Enum", "description": "'valid' | 'expired' | 'suspended' | 'revoked'" },
+        { "field": "certifying_body", "type": "String", "description": "Certificeringsinstantie" },
+        { "field": "verification_url", "type": "String", "description": "Openbare verificatie-URL" }
+      ],
+      "odrl": {
+        "permitted": ["Verificatie van leverancierscertificaten", "Inkoopautomatisering", "Duurzaamheidsrapportage", "Due diligence bij aanbestedingen"],
+        "prohibited": ["Aanmaak van valse certificaten", "Commerciële herdistributie van het register", "Gebruik voor oneerlijke concurrentie"],
+        "obligations": ["Verificatie bij certificeringsinstantie bij twijfel", "Continue statusupdate", "Melding van gedetecteerde afwijkingen"]
+      },
+      "quality": {
+        "completeness": { "value": 93.0, "description": "Dekking van belangrijkste ecolabels" },
+        "freshness": { "value": 99.0, "description": "Dagelijkse update" },
+        "accuracy": { "value": 98.0, "description": "Gevalideerd met certificeringsinstanties" },
+        "consistency": { "value": 99.5, "description": "Gestandaardiseerd formaat" },
+        "availability": { "value": 99.9, "description": "API availability" }
+      },
+      "pricing": { "amount": "€200/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "sustancias-reach-rohs": {
+      "category": "Chemie / Gezondheid",
+      "title": "Lijst van Beperkte Stoffen REACH & RoHS",
+      "shortDescription": "Bijgewerkte lijst van SVHC-stoffen (Substances of Very High Concern) en hun wettelijke limieten in verschillende jurisdicties. ECHA-database.",
+      "provider": "ECHA Data Hub",
+      "custody": "EU Cloud (Helsinki, FI)",
+      "rating": "4.9",
+      "reviewCount": "445",
+      "metrics": { "update": "Continu", "substances": "250+", "jurisdictions": "30+", "casNumbers": "10.000+" },
+      "description": {
+        "paragraph1": "Officiële database van het Europees Agentschap voor Chemische Stoffen (ECHA) met de volledige lijst van zeer zorgwekkende stoffen (SVHC), REACH-beperkingen en RoHS-limieten.",
+        "paragraph2": "Inclusief CAS-nummer, concentratielimieten, verbodsdatums (sunset dates) en voorgestelde alternatieven. Essentieel voor screening van stuklijsten (BOM) en chemische naleving bij import."
+      },
+      "useCases": ["Screening van stuklijsten (BOM)", "REACH-naleving bij import", "RoHS-conformiteitsverificatie", "Vervanging van gevaarlijke stoffen", "Chemische due diligence van leveranciers"],
+      "schema": [
+        { "field": "substance_id", "type": "String", "description": "ECHA stof-ID" },
+        { "field": "substance_name", "type": "String", "description": "Naam van de stof" },
+        { "field": "cas_number", "type": "String", "description": "CAS-nummer" },
+        { "field": "ec_number", "type": "String", "description": "EC-nummer" },
+        { "field": "svhc_listed", "type": "Boolean", "description": "Of het op de SVHC-lijst staat" },
+        { "field": "reach_restricted", "type": "Boolean", "description": "Of het REACH-beperkingen heeft" },
+        { "field": "rohs_restricted", "type": "Boolean", "description": "Of het RoHS-beperkingen heeft" },
+        { "field": "max_concentration_pct", "type": "Float", "description": "Maximaal toegestane concentratie (%)" },
+        { "field": "sunset_date", "type": "Date", "description": "Verbodsdatum" },
+        { "field": "alternatives", "type": "Array<String>", "description": "Voorgestelde alternatieven" }
+      ],
+      "odrl": {
+        "permitted": ["Conformiteitsscreening", "Due diligence van leveranciers", "Training van inkoopteams", "Gebruik in materiaalbeheersystemen"],
+        "prohibited": ["Gebruik om regelgeving te omzeilen", "Wijziging van officiële data", "Herdistributie zonder ECHA-bronvermelding"],
+        "obligations": ["ECHA-bron vermelden", "Officiële updates verifiëren", "Juridische experts raadplegen bij twijfel"]
+      },
+      "quality": {
+        "completeness": { "value": 100, "description": "Volledige officiële lijst" },
+        "freshness": { "value": 99.9, "description": "Continue update" },
+        "accuracy": { "value": 100, "description": "Officiële ECHA-bron" },
+        "consistency": { "value": 100, "description": "Gestandaardiseerd regelgevend formaat" },
+        "availability": { "value": 99.9, "description": "Open Data" }
+      },
+      "pricing": { "amount": "Gratis", "model": "free", "description": "Officiële Open Data" }
+    },
+    "deforestacion-eudr": {
+      "category": "Geospatiaal / Regelgeving",
+      "title": "Satellietdata Ontbossing (EUDR)",
+      "shortDescription": "Historische monitoring van bosbedekking gekoppeld aan GPS-coördinaten van landbouwpercelen. Naleving van de EU-ontbossingsverordening.",
+      "provider": "Global Forest Watch",
+      "custody": "AWS Cloud (Virginia, US)",
+      "rating": "4.8",
+      "reviewCount": "234",
+      "metrics": { "update": "Wekelijks", "coverage": "Wereldwijd", "resolution": "10m", "history": "2000-2024" },
+      "description": {
+        "paragraph1": "Global Forest Watch biedt satellietdata over verandering in bosbedekking met een resolutie van 10 meter. Maakt het mogelijk GPS-coördinaten van landbouwpercelen te koppelen aan ontbossingshistorie.",
+        "paragraph2": "Essentieel voor naleving van de EUDR (EU Deforestation Regulation) die vereist aan te tonen dat grondstoffen zoals cacao, koffie, hout, soja, palmolie en rubber niet afkomstig zijn uit na 2020 ontboste gebieden."
+      },
+      "useCases": ["Verplichte EUDR-naleving", "Due diligence van agrarische leveranciers", "Verificatie van herkomst van grondstoffen", "Traceerbaarheid van toeleveringsketen", "Ontbossingsrisico-rapportage"],
+      "schema": [
+        { "field": "parcel_id", "type": "String", "description": "Perceel-ID" },
+        { "field": "coordinates", "type": "GeoJSON", "description": "Perceelpolygoon" },
+        { "field": "country", "type": "String", "description": "Land" },
+        { "field": "commodity", "type": "Enum", "description": "'cocoa' | 'coffee' | 'palm' | 'soy' | 'rubber' | 'cattle' | 'wood'" },
+        { "field": "forest_cover_2020", "type": "Float (%)", "description": "Bosbedekking in 2020" },
+        { "field": "forest_cover_current", "type": "Float (%)", "description": "Huidige bosbedekking" },
+        { "field": "deforestation_detected", "type": "Boolean", "description": "Ontbossing gedetecteerd na 2020" },
+        { "field": "tree_loss_ha", "type": "Float", "description": "Hectare bosverlies" },
+        { "field": "risk_level", "type": "Enum", "description": "'low' | 'standard' | 'high'" },
+        { "field": "analysis_date", "type": "Date", "description": "Datum van satellietanalyse" }
+      ],
+      "odrl": {
+        "permitted": ["EUDR due diligence", "Leveranciersverificatie", "Risicorapportage", "Gebruik in traceerbaarheidssystemen"],
+        "prohibited": ["Vervalsing van coördinaten", "Gebruik om EUDR te omzeilen", "Commerciële herdistributie zonder licentie"],
+        "obligations": ["Update volgens EUDR-deadlines", "Bewijsmateriaal bewaren voor audits", "Gedetecteerde afwijkingen melden"]
+      },
+      "quality": {
+        "completeness": { "value": 98.0, "description": "Wereldwijde dekking van bosgebieden" },
+        "freshness": { "value": 97.0, "description": "Wekelijkse update" },
+        "accuracy": { "value": 95.0, "description": "10m resolutie Sentinel-2" },
+        "consistency": { "value": 99.0, "description": "Hansen/UMD-methodologie" },
+        "availability": { "value": 99.5, "description": "API en bulk download" }
+      },
+      "pricing": { "amount": "€500/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "epd-construccion": {
+      "category": "Bouw / Technische Data",
+      "title": "Milieuproductverklaringen (EPD)",
+      "shortDescription": "Digitaal repository van geverifieerde EPD's voor bouwmaterialen: isolatie, beton, vloeren, kozijnen. Data voor LEED en BREEAM.",
+      "provider": "EPD International",
+      "custody": "EU Cloud (Stockholm, SE)",
+      "rating": "4.6",
+      "reviewCount": "178",
+      "metrics": { "update": "Continu", "epds": "12.000+", "categories": "85+", "countries": "45+" },
+      "description": {
+        "paragraph1": "Officieel repository van geverifieerde Milieuproductverklaringen (EPD) volgens ISO 14025 en EN 15804. Biedt milieuimpactdata van bouwmaterialen gevalideerd door een derde partij.",
+        "paragraph2": "Inclusief Aardopwarmingsvermogen (GWP), ozonafbraak, verzuring en andere indicatoren. Essentieel voor projecten met LEED-, BREEAM- of DGNB-certificering."
+      },
+      "useCases": ["Materiaalselectie voor LEED/BREEAM-gebouwen", "Milieuvergelijking van equivalente producten", "Berekening koolstofvoetafdruk van gebouwen", "Technische specificaties bij openbare aanbestedingen", "Verificatie van milieuclaims van fabrikanten"],
+      "schema": [
+        { "field": "epd_id", "type": "String", "description": "EPD-registratienummer" },
+        { "field": "product_name", "type": "String", "description": "Productnaam" },
+        { "field": "manufacturer", "type": "String", "description": "Fabrikant" },
+        { "field": "category", "type": "String", "description": "Productcategorie" },
+        { "field": "gwp_a1_a3", "type": "Float", "description": "GWP fasen A1-A3 (kg CO2e/eenheid)" },
+        { "field": "gwp_total", "type": "Float", "description": "GWP volledige levenscyclus" },
+        { "field": "odp", "type": "Float", "description": "Ozonafbraakpotentieel" },
+        { "field": "ap", "type": "Float", "description": "Verzuringspotentieel" },
+        { "field": "functional_unit", "type": "String", "description": "Functionele referentie-eenheid" },
+        { "field": "valid_until", "type": "Date", "description": "Geldigheidsdatum van de EPD" },
+        { "field": "verification_body", "type": "String", "description": "Verificatie-instantie" }
+      ],
+      "odrl": {
+        "permitted": ["Selectie van duurzame materialen", "Berekening gebouwvoetafdruk", "Gebruik bij openbare aanbestedingen", "Milieuvergelijkingen"],
+        "prohibited": ["Wijziging van geverifieerde data", "Gebruik van verlopen EPD's voor claims", "Commerciële herdistributie"],
+        "obligations": ["Geldigheid van EPD verifiëren", "EPD-registratienummer vermelden", "Correcte functionele eenheid gebruiken"]
+      },
+      "quality": {
+        "completeness": { "value": 95.0, "description": "Dekking van belangrijkste materialen" },
+        "freshness": { "value": 98.0, "description": "Continue update" },
+        "accuracy": { "value": 99.0, "description": "Verificatie door derde partij" },
+        "consistency": { "value": 99.5, "description": "Gestandaardiseerde EN 15804 norm" },
+        "availability": { "value": 99.9, "description": "Portaal en API" }
+      },
+      "pricing": { "amount": "€300", "model": "one_time", "description": "Jaarlijkse toegang" }
+    },
+    "scoring-esg-proveedores": {
+      "category": "Risicobeheer",
+      "title": "ESG-scoring van Leveranciers",
+      "shortDescription": "Beoordelingen van milieu-, sociale en governance-prestaties van bedrijven. Evaluatie van meer dan 100.000 wereldwijde leveranciers. EcoVadis-methodologie.",
+      "provider": "EcoVadis",
+      "custody": "EU Cloud (Parijs, FR)",
+      "rating": "4.7",
+      "reviewCount": "289",
+      "metrics": { "update": "Continu", "companies": "100K+", "criteria": "21", "industries": "200+" },
+      "description": {
+        "paragraph1": "Toonaangevend ESG-beoordelingsplatform voor toeleveringsketens. Beoordeelt leveranciers op 4 dimensies: Milieu, Arbeidspraktijken en Mensenrechten, Ethiek en Duurzame Inkoop.",
+        "paragraph2": "Biedt gedetailleerde scorecard, sectorale benchmarking en verbeterplan. Essentieel voor leveranciersrisicobeheer en naleving van due diligence richtlijnen."
+      },
+      "useCases": ["Gunningscriterium bij aanbestedingen", "Onboarding en audit van leveranciers", "Naleving CS3D-richtlijn (Due Diligence)", "Identificatie van risico's in de supply chain", "Leveranciersverbeteringsprogramma's"],
+      "schema": [
+        { "field": "company_id", "type": "String", "description": "Bedrijfs-ID in EcoVadis" },
+        { "field": "company_name", "type": "String", "description": "Bedrijfsnaam" },
+        { "field": "country", "type": "String", "description": "Land van hoofdkantoor" },
+        { "field": "industry", "type": "String", "description": "Industriesector" },
+        { "field": "overall_score", "type": "Integer (0-100)", "description": "Totale ESG-score" },
+        { "field": "environment_score", "type": "Integer (0-100)", "description": "Milieuscore" },
+        { "field": "labor_score", "type": "Integer (0-100)", "description": "Arbeid- en mensenrechtenscore" },
+        { "field": "ethics_score", "type": "Integer (0-100)", "description": "Ethiekscore" },
+        { "field": "procurement_score", "type": "Integer (0-100)", "description": "Score duurzame inkoop" },
+        { "field": "medal", "type": "Enum", "description": "'platinum' | 'gold' | 'silver' | 'bronze' | 'none'" },
+        { "field": "last_assessment", "type": "Date", "description": "Datum van laatste beoordeling" }
+      ],
+      "odrl": {
+        "permitted": ["Leveranciersbeoordeling", "Criterium bij aanbestedingen", "ESG supply chain rapportage", "Due diligence"],
+        "prohibited": ["Delen van scorecards zonder toestemming", "Gebruik voor discriminatie zonder grondslag", "Herdistributie van data"],
+        "obligations": ["Actieve EcoVadis-licentie", "Vertrouwelijkheid van scores", "Gebruik volgens servicevoorwaarden"]
+      },
+      "quality": {
+        "completeness": { "value": 96.0, "description": "Dekking van belangrijkste leveranciers" },
+        "freshness": { "value": 98.0, "description": "Continue beoordelingen" },
+        "accuracy": { "value": 95.0, "description": "Documentaire verificatie" },
+        "consistency": { "value": 99.5, "description": "Gestandaardiseerde methodologie" },
+        "availability": { "value": 99.9, "description": "Platform en API" }
+      },
+      "pricing": { "amount": "€75/query", "model": "usage", "description": "Betaling per scorecard-query" }
+    },
+    "violaciones-laborales": {
+      "category": "Sociaal / Mensenrechten",
+      "title": "Arbeidsrechtenschendingen en Sancties",
+      "shortDescription": "Database van negatief nieuws, boetes en NGO-rapporten over kinderarbeid, dwangarbeid, onveilige omstandigheden en mensenrechtenschendingen.",
+      "provider": "Business & Human Rights Resource Centre",
+      "custody": "UK Cloud (Londen, UK)",
+      "rating": "4.5",
+      "reviewCount": "167",
+      "metrics": { "update": "Dagelijks", "incidents": "15K+", "companies": "25K+", "sources": "500+" },
+      "description": {
+        "paragraph1": "Database die negatief nieuws, overheidsboetes en NGO-rapporten monitort met betrekking tot mensenrechtenschendingen in wereldwijde toeleveringsketens.",
+        "paragraph2": "Omvat kinderarbeid, dwangarbeid, onveilige arbeidsomstandigheden, discriminatie en represailles. Essentieel voor due diligence onder de CS3D-richtlijn en de Duitse Wet Zorgplicht Toeleveringsketens."
+      },
+      "useCases": ["Due diligence op mensenrechten", "Screening van nieuwe leveranciers", "Continue monitoring van toeleveringsketen", "Naleving Duitse Wet Zorgplicht Toeleveringsketens", "Voorbereiding op CS3D-richtlijn"],
+      "schema": [
+        { "field": "incident_id", "type": "String", "description": "Incident-ID" },
+        { "field": "company_name", "type": "String", "description": "Betrokken bedrijf" },
+        { "field": "incident_type", "type": "Enum", "description": "'child_labor' | 'forced_labor' | 'unsafe_conditions' | 'discrimination' | 'other'" },
+        { "field": "country", "type": "String", "description": "Land van het incident" },
+        { "field": "severity", "type": "Enum", "description": "'low' | 'medium' | 'high' | 'critical'" },
+        { "field": "source_type", "type": "Enum", "description": "'news' | 'ngo_report' | 'government_fine' | 'lawsuit'" },
+        { "field": "source_url", "type": "String", "description": "URL van de bron" },
+        { "field": "date_reported", "type": "Date", "description": "Datum van het rapport" },
+        { "field": "company_response", "type": "String", "description": "Reactie van het bedrijf (indien aanwezig)" },
+        { "field": "remediation_status", "type": "Enum", "description": "'no_action' | 'in_progress' | 'resolved'" }
+      ],
+      "odrl": {
+        "permitted": ["Due diligence van leveranciers", "Reputatierisico-analyse", "Rapportage aan stakeholders", "Training van inkoopteams"],
+        "prohibited": ["Laster zonder verificatie", "Gebruik voor commerciële chantage", "Commerciële herdistributie"],
+        "obligations": ["Originele bronnen verifiëren", "Reactie van bedrijf in overweging nemen", "Verantwoord gebruik van gevoelige informatie"]
+      },
+      "quality": {
+        "completeness": { "value": 90.0, "description": "Dekking van openbare incidenten" },
+        "freshness": { "value": 99.0, "description": "Dagelijkse update" },
+        "accuracy": { "value": 92.0, "description": "Bronnenverificatie" },
+        "consistency": { "value": 95.0, "description": "Gestandaardiseerde taxonomie" },
+        "availability": { "value": 99.5, "description": "Portaal en API" }
+      },
+      "pricing": { "amount": "€400/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "indice-reparabilidad": {
+      "category": "Circulaire Economie / IT",
+      "title": "Repareerbaarheidsindex van Elektronica",
+      "shortDescription": "Data over demontagemak, beschikbaarheid van onderdelen en reparatiekosten van IT-apparaten. Scoring 1-10 volgens iFixit-methodologie.",
+      "provider": "iFixit Pro",
+      "custody": "US Cloud (Californië, US)",
+      "rating": "4.4",
+      "reviewCount": "112",
+      "metrics": { "update": "Continu", "devices": "5.000+", "brands": "200+", "repairGuides": "80K+" },
+      "description": {
+        "paragraph1": "Repareerbaar­heidsdatabase van elektronische apparaten op basis van iFixit-methodologie. Beoordeelt demontagemak, beschikbaarheid van onderdelen, servicedocumentatie en reparatiekosten.",
+        "paragraph2": "Essentieel voor inkoop van bedrijfsfloten van computers, smartphones en tablets met criterium van verlengde levensduur. Voldoet aan het Europese recht op reparatie."
+      },
+      "useCases": ["Inkoop van IT-vloten met langere levensduur", "Repareerbaarheidscriterium bij aanbestedingen", "TCO-berekening inclusief reparatie", "Naleving EU recht op reparatie", "Circulaire economie IT-strategieën"],
+      "schema": [
+        { "field": "device_id", "type": "String", "description": "Uniek apparaat-ID" },
+        { "field": "brand", "type": "String", "description": "Merk" },
+        { "field": "model", "type": "String", "description": "Model" },
+        { "field": "category", "type": "Enum", "description": "'laptop' | 'smartphone' | 'tablet' | 'desktop'" },
+        { "field": "repairability_score", "type": "Float (1-10)", "description": "Repareerbaar­heidsscore" },
+        { "field": "disassembly_ease", "type": "Integer (1-10)", "description": "Demontagemak" },
+        { "field": "parts_availability", "type": "Enum", "description": "'excellent' | 'good' | 'limited' | 'poor'" },
+        { "field": "repair_manual_available", "type": "Boolean", "description": "Reparatiehandleiding beschikbaar" },
+        { "field": "software_support_years", "type": "Integer", "description": "Jaren softwareondersteuning" },
+        { "field": "avg_repair_cost_pct", "type": "Float", "description": "Gemiddelde reparatiekosten (% van prijs)" }
+      ],
+      "odrl": {
+        "permitted": ["Inkoopcriterium voor apparaten", "Specificaties bij aanbestedingen", "TCO-analyse", "Training van inkoopteams"],
+        "prohibited": ["Commerciële herdistributie", "Gebruik voor merklaster", "Wijziging van officiële data", "Gebruik voor vergelijkende reclame zonder verificatie"],
+        "obligations": ["iFixit als bron vermelden", "Data verifiëren vóór kritieke beslissingen", "Pro-licentie voor commercieel gebruik"]
+      },
+      "quality": {
+        "completeness": { "value": 88.0, "description": "Dekking van belangrijkste apparaten" },
+        "freshness": { "value": 95.0, "description": "Update bij nieuwe lanceringen" },
+        "accuracy": { "value": 98.0, "description": "Werkelijke geverifieerde demontages" },
+        "consistency": { "value": 99.0, "description": "Gestandaardiseerde iFixit-methodologie" },
+        "availability": { "value": 99.5, "description": "Pro API" }
+      },
+      "pricing": { "amount": "€180/maand", "model": "subscription", "description": "Maandelijks Pro-abonnement" }
+    },
+    "diversidad-proveedores": {
+      "category": "Sociaal / Governance",
+      "title": "Directory Diversiteit Leveranciers",
+      "shortDescription": "Directory van bedrijven in eigendom van vrouwen, minderheden, veteranen en gecertificeerde sociale ondernemingen. Naleving van MVO-quota's in inkoop.",
+      "provider": "Supplier.io",
+      "custody": "US Cloud (Chicago, US)",
+      "rating": "4.3",
+      "reviewCount": "89",
+      "metrics": { "update": "Wekelijks", "suppliers": "250K+", "certifications": "15+", "countries": "30+" },
+      "description": {
+        "paragraph1": "Geverifieerde directory van bedrijven in eigendom van diverse groepen: vrouwen (WBE), minderheden (MBE), veteranen (VOBE), gehandicapten (DOBE), LGBTQ+ en sociale ondernemingen.",
+        "paragraph2": "Inclusief geverifieerde certificeringen, locatie, product-/dienstcategorieën en capaciteiten. Essentieel voor naleving van bedrijfsprogramma's voor diversiteit in de toeleveringsketen."
+      },
+      "useCases": ["Naleving van diversiteitsquota's bij inkoop", "Identificatie van diverse leveranciers", "Rapportage van sociale impact", "Gunningscriterium bij aanbestedingen", "Leveranciersontwikkelingsprogramma's"],
+      "schema": [
+        { "field": "supplier_id", "type": "String", "description": "Leveranciers-ID" },
+        { "field": "company_name", "type": "String", "description": "Bedrijfsnaam" },
+        { "field": "diversity_type", "type": "Array<Enum>", "description": "'WBE' | 'MBE' | 'VOBE' | 'DOBE' | 'LGBTBE' | 'social_enterprise'" },
+        { "field": "certifying_body", "type": "String", "description": "Certificeringsinstantie" },
+        { "field": "certification_expiry", "type": "Date", "description": "Vervaldatum" },
+        { "field": "country", "type": "String", "description": "Land" },
+        { "field": "industry_codes", "type": "Array<String>", "description": "NAICS/UNSPSC-codes" },
+        { "field": "products_services", "type": "String", "description": "Aangeboden producten/diensten" },
+        { "field": "employee_count", "type": "Integer", "description": "Aantal werknemers" },
+        { "field": "annual_revenue", "type": "String", "description": "Jaarlijkse omzetrange" }
+      ],
+      "odrl": {
+        "permitted": ["Zoeken naar diverse leveranciers", "Rapportage over diversiteit in inkoop", "Criterium bij selectieprocessen", "Leveranciersontwikkelingsprogramma's"],
+        "prohibited": ["Omgekeerde discriminatie zonder wettelijke basis", "Herdistributie van de directory", "Gebruik van data voor direct marketing"],
+        "obligations": ["Certificeringen verifiëren alvorens te rapporteren", "Gebruik volgens bedrijfsdiversiteitsbeleid", "Bescherming van leveranciersgegevens"]
+      },
+      "quality": {
+        "completeness": { "value": 92.0, "description": "Dekking van gecertificeerde leveranciers" },
+        "freshness": { "value": 97.0, "description": "Wekelijkse update" },
+        "accuracy": { "value": 95.0, "description": "Geverifieerde certificeringen" },
+        "consistency": { "value": 98.0, "description": "Gestandaardiseerde taxonomie" },
+        "availability": { "value": 99.5, "description": "Portaal en API" }
+      },
+      "pricing": { "amount": "€250/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "garantias-origen-recs": {
+      "category": "Energie / Trading",
+      "title": "Markt voor Garanties van Oorsprong (GoOs/RECs)",
+      "shortDescription": "Prijzen en volumes van certificaten voor hernieuwbare energie (zon, wind, water) per markt. Data voor inkoop van energieattributen RE100.",
+      "provider": "AIB Hub",
+      "custody": "EU Cloud (Brussel, BE)",
+      "rating": "4.6",
+      "reviewCount": "198",
+      "metrics": { "update": "Dagelijks", "markets": "30+", "technologies": "8", "volume": "500TWh+" },
+      "description": {
+        "paragraph1": "Database van de Europese Garanties van Oorsprong-markt en Noord-Amerikaanse RECs. Biedt spot- en termijnprijzen, verhandelde volumes en beschikbaarheid per technologie en vintage.",
+        "paragraph2": "Essentieel voor strategieën voor inkoop van energieattributen ter naleving van RE100-doelstellingen, CDP Climate en Scope 2-emissie rapportage (market-based)."
+      },
+      "useCases": ["Inkoop van Garanties van Oorsprong voor RE100", "PPA- en energieattributenstrategie", "Scope 2 market-based rapportage", "Trading van hernieuwbare certificaten", "Planning van duurzaamheidsbudget"],
+      "schema": [
+        { "field": "market", "type": "String", "description": "Markt (bijv: AIB Europe, I-RECs)" },
+        { "field": "technology", "type": "Enum", "description": "'solar' | 'wind_onshore' | 'wind_offshore' | 'hydro' | 'biomass'" },
+        { "field": "country_of_origin", "type": "String", "description": "Land van opwekking" },
+        { "field": "vintage_year", "type": "Integer", "description": "Jaar van opwekking" },
+        { "field": "price_eur_mwh", "type": "Float", "description": "Prijs in EUR/MWh" },
+        { "field": "price_change_pct", "type": "Float", "description": "Wijziging %" },
+        { "field": "volume_mwh", "type": "Float", "description": "Beschikbaar volume" },
+        { "field": "delivery_period", "type": "String", "description": "Leveringsperiode" },
+        { "field": "additionality", "type": "Boolean", "description": "Additionaliteitscriterium" },
+        { "field": "timestamp", "type": "ISO 8601", "description": "Datum/tijd van notering" }
+      ],
+      "odrl": {
+        "permitted": ["Interne marktanalyse", "Planning van GoOs/RECs-inkoop", "Energiestrategierapportage", "Certificatenhandel"],
+        "prohibited": ["Realtime herdistributie van prijzen", "Gebruik voor marktmanipulatie", "Publicatie zonder bronvermelding"],
+        "obligations": ["Commerciële AIB/I-REC licentie", "Gebruik volgens marktvoorwaarden", "Update voor rapportage"]
+      },
+      "quality": {
+        "completeness": { "value": 97.0, "description": "Dekking van belangrijkste markten" },
+        "freshness": { "value": 99.0, "description": "Dagelijkse update" },
+        "accuracy": { "value": 99.0, "description": "Werkelijke transactieprijzen" },
+        "consistency": { "value": 99.5, "description": "Gestandaardiseerd EECS-formaat" },
+        "availability": { "value": 99.9, "description": "API" }
+      },
+      "pricing": { "amount": "€350/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "tco-vehiculos-ev-ice": {
+      "category": "Mobiliteit / Financiën",
+      "title": "TCO Voertuigen: EV vs ICE",
+      "shortDescription": "Vergelijkend datamodel van total cost of ownership: aanschaf, brandstof/energie, onderhoud, verzekeringen, belastingen en restwaarde.",
+      "provider": "Bloomberg NEF",
+      "custody": "Financial Cloud (New York, US)",
+      "rating": "4.7",
+      "reviewCount": "234",
+      "metrics": { "update": "Maandelijks", "models": "500+", "markets": "25+", "horizon": "7 jaar" },
+      "description": {
+        "paragraph1": "Vergelijkend TCO-model (Total Cost of Ownership) tussen elektrische en verbrandingsvoertuigen. Inclusief alle kosten: aanschaf, energie/brandstof, onderhoud, verzekeringen, belastingen en restwaarde.",
+        "paragraph2": "Biedt break-even punt (breakeven mileage), gevoeligheid voor elektriciteits- en brandstofprijzen, en fiscale stimulansen per markt. Essentieel voor financiële onderbouwing van vlootelektrificatie."
+      },
+      "useCases": ["Financiële onderbouwing van vlootelektrificatie", "TCO-analyse voor aanbestedingen", "Planning van vlootvernieuwing", "Gevoeligheidsanalyse voor energieprijzen", "Rapportage van besparingen door EV-transitie"],
+      "schema": [
+        { "field": "vehicle_id", "type": "String", "description": "Voertuig-ID" },
+        { "field": "brand_model", "type": "String", "description": "Merk en model" },
+        { "field": "powertrain", "type": "Enum", "description": "'bev' | 'phev' | 'hev' | 'ice_petrol' | 'ice_diesel'" },
+        { "field": "segment", "type": "String", "description": "Segment (stadsauto, SUV, bestelwagen, enz.)" },
+        { "field": "market", "type": "String", "description": "Land van analyse" },
+        { "field": "msrp_eur", "type": "Float", "description": "Aanschafprijs" },
+        { "field": "incentives_eur", "type": "Float", "description": "Beschikbare stimulansen" },
+        { "field": "tco_3y_eur", "type": "Float", "description": "TCO na 3 jaar" },
+        { "field": "tco_5y_eur", "type": "Float", "description": "TCO na 5 jaar" },
+        { "field": "breakeven_km", "type": "Integer", "description": "Kilometers tot break-even vs ICE" },
+        { "field": "energy_cost_per_km", "type": "Float", "description": "Energiekosten per km" },
+        { "field": "maintenance_cost_per_km", "type": "Float", "description": "Onderhoudskosten per km" },
+        { "field": "residual_value_pct", "type": "Float", "description": "Restwaarde na 5 jaar (%)" }
+      ],
+      "odrl": {
+        "permitted": ["Interne TCO-analyse", "Onderbouwing van vlootinvesteringen", "Presentaties aan directie", "Criterium bij aanbestedingen"],
+        "prohibited": ["Commerciële herdistributie", "Publicatie van data zonder licentie", "Gebruik voor vergelijkende reclame"],
+        "obligations": ["Bloomberg NEF-licentie", "Update voor actuele beslissingen", "Bronvermelding in presentaties"]
+      },
+      "quality": {
+        "completeness": { "value": 95.0, "description": "Dekking van belangrijkste modellen" },
+        "freshness": { "value": 98.0, "description": "Maandelijkse update" },
+        "accuracy": { "value": 94.0, "description": "Gebaseerd op werkelijke marktdata" },
+        "consistency": { "value": 99.0, "description": "Gestandaardiseerde BNEF-methodologie" },
+        "availability": { "value": 99.9, "description": "Portaal en API" }
+      },
+      "pricing": { "amount": "€500/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "creditos-carbono-precio": {
+      "category": "Financiën / Compensatie",
+      "title": "Koolstofkredietprijzen",
+      "shortDescription": "Marktdata over de prijs per ton CO2 in ETS-systemen (EU, UK, China) en vrijwillige markten (VCM). Spot en futures.",
+      "provider": "ICE Endex",
+      "custody": "Financial Cloud (Amsterdam, NL)",
+      "rating": "4.5",
+      "reviewCount": "178",
+      "metrics": { "update": "Realtime", "markets": "12+", "products": "50+", "history": "15 jaar" },
+      "description": {
+        "paragraph1": "Koolstofkredietprijsdata van gereguleerde (ETS) en vrijwillige (VCM) markten. Inclusief EU ETS, UK ETS, China ETS en belangrijkste vrijwillige standaarden zoals Verra VCS en Gold Standard.",
+        "paragraph2": "Biedt spotprijzen, futures, historische volatiliteit en analyse per projecttype. Essentieel voor budgettering van compensatiekosten in Net Zero-strategieën."
+      },
+      "useCases": ["Budgettering van compensatiekosten", "Net Zero-strategie", "Hedging van koolstofkosten", "Investeringsanalyse in koolstofprojecten", "Rapportage van internal carbon pricing"],
+      "schema": [
+        { "field": "market", "type": "Enum", "description": "'eu_ets' | 'uk_ets' | 'china_ets' | 'verra_vcs' | 'gold_standard'" },
+        { "field": "product", "type": "String", "description": "Type product/contract" },
+        { "field": "vintage", "type": "Integer", "description": "Jaar van het krediet" },
+        { "field": "project_type", "type": "String", "description": "Type project (bos, hernieuwbaar, enz.)" },
+        { "field": "price_eur_ton", "type": "Float", "description": "Prijs in EUR/tCO2e" },
+        { "field": "price_change_pct", "type": "Float", "description": "Wijziging %" },
+        { "field": "volume", "type": "Float", "description": "Verhandeld volume" },
+        { "field": "delivery", "type": "String", "description": "Leveringsperiode (spot, Dec24, enz.)" },
+        { "field": "timestamp", "type": "ISO 8601", "description": "Datum/tijd" }
+      ],
+      "odrl": {
+        "permitted": ["Interne marktanalyse", "Planning koolstofbudget", "Rapportage internal carbon price", "Kredietenhandel"],
+        "prohibited": ["Realtime herdistributie van prijzen", "Marktmanipulatie", "Publicatie zonder licentie"],
+        "obligations": ["ICE Data Services licentie", "Gebruik volgens beursvoorwaarden", "Bronvermelding in rapporten"]
+      },
+      "quality": {
+        "completeness": { "value": 98.0, "description": "Dekking van belangrijkste markten" },
+        "freshness": { "value": 99.9, "description": "Realtime" },
+        "accuracy": { "value": 100, "description": "Officiële transactieprijzen" },
+        "consistency": { "value": 100, "description": "Beursdata" },
+        "availability": { "value": 99.99, "description": "Financiële feed" }
+      },
+      "pricing": { "amount": "€400/maand", "model": "subscription", "description": "Maandelijks abonnement" }
+    },
+    "eficiencia-maquinaria": {
+      "category": "CapEx / Operaties",
+      "title": "Energie-efficiëntie van Industriële Machines",
+      "shortDescription": "Benchmarkingdatabase van energieverbruik van motoren, compressoren, pompen en industriële HVAC-systemen. Klassen IE3, IE4, IE5.",
+      "provider": "TopRunner EU",
+      "custody": "EU Cloud (Brussel, BE)",
+      "rating": "4.8",
+      "reviewCount": "356",
+      "metrics": { "update": "Driemaandelijks", "equipment": "8.000+", "categories": "25+", "manufacturers": "200+" },
+      "description": {
+        "paragraph1": "Officiële database van het EU TopRunner-programma met specificaties voor energie-efficiëntie van industriële machines. Inclusief elektromotoren, compressoren, pompen, ventilatoren en HVAC-systemen.",
+        "paragraph2": "Biedt efficiëntieklassen (IE3, IE4, IE5), geschat jaarlijks verbruik en besparingspotentieel. Essentieel voor ROI-analyse bij vervanging van verouderde machines."
+      },
+      "useCases": ["ROI-analyse voor machinevervanging", "Efficiëntiespecificaties bij aanbestedingen", "Industriële energie-audits", "Naleving Ecodesign-verordening", "Planning van duurzame CapEx-investeringen"],
+      "schema": [
+        { "field": "equipment_id", "type": "String", "description": "Apparatuur-ID" },
+        { "field": "manufacturer", "type": "String", "description": "Fabrikant" },
+        { "field": "model", "type": "String", "description": "Model" },
+        { "field": "category", "type": "Enum", "description": "'motor' | 'compressor' | 'pump' | 'fan' | 'hvac'" },
+        { "field": "power_kw", "type": "Float", "description": "Nominaal vermogen (kW)" },
+        { "field": "efficiency_class", "type": "Enum", "description": "'IE1' | 'IE2' | 'IE3' | 'IE4' | 'IE5'" },
+        { "field": "efficiency_pct", "type": "Float", "description": "Efficiëntie (%)" },
+        { "field": "annual_consumption_kwh", "type": "Float", "description": "Geschat jaarlijks verbruik (kWh)" },
+        { "field": "savings_vs_ie2_pct", "type": "Float", "description": "Besparing vs IE2 (%)" },
+        { "field": "payback_years", "type": "Float", "description": "Geschatte terugverdientijd (jaren)" },
+        { "field": "ecodesign_compliant", "type": "Boolean", "description": "Voldoet aan Ecodesign 2021" }
+      ],
+      "odrl": {
+        "permitted": ["Interne efficiëntie-analyse", "Specificaties bij aanbestedingen", "Energie-audits", "Training van inkoopteams"],
+        "prohibited": ["Commerciële herdistributie", "Wijziging van officiële data", "Gebruik voor vergelijkende reclame zonder verificatie"],
+        "obligations": ["TopRunner/Ecodesign programma vermelden", "Actuele data verifiëren bij fabrikant", "Gebruik volgens EU Open Data licentie"]
+      },
+      "quality": {
+        "completeness": { "value": 96.0, "description": "Dekking van belangrijkste apparatuur" },
+        "freshness": { "value": 95.0, "description": "Driemaandelijkse update" },
+        "accuracy": { "value": 99.0, "description": "Gecertificeerde fabrikantgegevens" },
+        "consistency": { "value": 99.5, "description": "Gestandaardiseerde IEC-normen" },
+        "availability": { "value": 99.9, "description": "Open Data" }
+      },
+      "pricing": { "amount": "Gratis", "model": "free", "description": "Officiële EU Open Data" }
+    }
+  }
+}
