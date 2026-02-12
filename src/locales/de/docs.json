@@ -464,7 +464,7 @@
         "title": "Verständnisfähigkeiten",
         "content": "<p>Mehrsprachiges NLU mit <strong>Absichts-, Entitäts- und Stimmungserkennung</strong> für kontextualisierte Antworten.</p>",
         "quiz": {
-          "question": "Was erkennt ARIAs NLU-System?",
+          "question": "Was erkennt das NLU-System des KI-Beraters?",
           "options": ["Nur Schlüsselwörter", "Absicht, Entitäten und Stimmung", "Nur Sprache", "Nichts automatisch"],
           "correctIndex": 1
         }
