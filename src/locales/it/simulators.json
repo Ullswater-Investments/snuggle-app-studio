@@ -225,7 +225,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "Consulente IA",
       "role": "Consulente di Manutenzione Solare",
       "recoveryTitle": "Recupero Energia",
       "recoveryDesc": "Riducendo la sporcizia a <span>{{days}} giorni</span>, recuperi <span>{{mwh}} MWh</span> giornalieri, generando <span>{{revenue}}€</span> aggiuntivi.",
