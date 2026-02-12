@@ -60,6 +60,7 @@ import esConectoresErp from './locales/es/conectoresErp.json';
 import esRedGaiaX from './locales/es/redGaiaX.json';
 import esAnalyticsBi from './locales/es/analyticsBi.json';
 import esMultiSector from './locales/es/multiSector.json';
+import esUne0087 from './locales/es/une0087.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -118,6 +119,7 @@ import frConectoresErp from './locales/fr/conectoresErp.json';
 import frRedGaiaX from './locales/fr/redGaiaX.json';
 import frAnalyticsBi from './locales/fr/analyticsBi.json';
 import frMultiSector from './locales/fr/multiSector.json';
+import frUne0087 from './locales/fr/une0087.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -175,6 +177,7 @@ import ptConectoresErp from './locales/pt/conectoresErp.json';
 import ptRedGaiaX from './locales/pt/redGaiaX.json';
 import ptAnalyticsBi from './locales/pt/analyticsBi.json';
 import ptMultiSector from './locales/pt/multiSector.json';
+import ptUne0087 from './locales/pt/une0087.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -233,6 +236,7 @@ import deConectoresErp from './locales/de/conectoresErp.json';
 import deRedGaiaX from './locales/de/redGaiaX.json';
 import deAnalyticsBi from './locales/de/analyticsBi.json';
 import deMultiSector from './locales/de/multiSector.json';
+import deUne0087 from './locales/de/une0087.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -291,6 +295,7 @@ import itConectoresErp from './locales/it/conectoresErp.json';
 import itRedGaiaX from './locales/it/redGaiaX.json';
 import itAnalyticsBi from './locales/it/analyticsBi.json';
 import itMultiSector from './locales/it/multiSector.json';
+import itUne0087 from './locales/it/une0087.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -349,6 +354,7 @@ import nlConectoresErp from './locales/nl/conectoresErp.json';
 import nlRedGaiaX from './locales/nl/redGaiaX.json';
 import nlAnalyticsBi from './locales/nl/analyticsBi.json';
 import nlMultiSector from './locales/nl/multiSector.json';
+import nlUne0087 from './locales/nl/une0087.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -408,6 +414,7 @@ import enConectoresErp from './locales/en/conectoresErp.json';
 import enRedGaiaX from './locales/en/redGaiaX.json';
 import enAnalyticsBi from './locales/en/analyticsBi.json';
 import enMultiSector from './locales/en/multiSector.json';
+import enUne0087 from './locales/en/une0087.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -483,6 +490,7 @@ i18n
         redGaiaX: esRedGaiaX,
         analyticsBi: esAnalyticsBi,
         multiSector: esMultiSector,
+        une0087: esUne0087,
       },
       en: {
         common: enCommon,
@@ -537,6 +545,7 @@ i18n
         redGaiaX: enRedGaiaX,
         analyticsBi: enAnalyticsBi,
         multiSector: enMultiSector,
+        une0087: enUne0087,
       },
       fr: {
         common: frCommon,
@@ -591,6 +600,7 @@ i18n
         redGaiaX: frRedGaiaX,
         analyticsBi: frAnalyticsBi,
         multiSector: frMultiSector,
+        une0087: frUne0087,
       },
       pt: {
         common: ptCommon,
@@ -644,6 +654,7 @@ i18n
         redGaiaX: ptRedGaiaX,
         analyticsBi: ptAnalyticsBi,
         multiSector: ptMultiSector,
+        une0087: ptUne0087,
       },
       de: {
         common: deCommon,
@@ -698,6 +709,7 @@ i18n
         redGaiaX: deRedGaiaX,
         analyticsBi: deAnalyticsBi,
         multiSector: deMultiSector,
+        une0087: deUne0087,
       },
       it: {
         common: itCommon,
@@ -751,6 +763,7 @@ i18n
         redGaiaX: itRedGaiaX,
         analyticsBi: itAnalyticsBi,
         multiSector: itMultiSector,
+        une0087: itUne0087,
       },
       nl: {
         common: nlCommon,
@@ -804,11 +817,12 @@ i18n
         redGaiaX: nlRedGaiaX,
         analyticsBi: nlAnalyticsBi,
         multiSector: nlMultiSector,
+        une0087: nlUne0087,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087'],
     interpolation: {
       escapeValue: false,
     },

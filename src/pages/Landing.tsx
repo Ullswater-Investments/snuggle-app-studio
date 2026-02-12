@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle, Sparkles, Wallet, ShieldCheck, Coins, Radio, Bell, Users, FileText, Plug, HelpCircle, BookOpen, Triangle, BarChart3, Wheat, Truck, Heart, HeartPulse, ShoppingBag, Send, Wine, Pill, Ship, Landmark, Mountain, Shirt, DollarSign, LayoutGrid, Brain } from "lucide-react";
+import { ArrowRight, Database, Shield, Zap, Globe, Layers, CheckCircle, Sparkles, Wallet, ShieldCheck, Coins, Radio, Bell, Users, FileText, Plug, HelpCircle, BookOpen, Triangle, BarChart3, Wheat, Truck, Heart, HeartPulse, ShoppingBag, Send, Wine, Pill, Ship, Landmark, Mountain, Shirt, DollarSign, LayoutGrid, Brain, Scale } from "lucide-react";
 import { FundingFooter } from "@/components/FundingFooter";
 import { AIConcierge } from "@/components/AIConcierge";
 import { motion } from "framer-motion";
@@ -464,6 +464,12 @@ export default function Landing() {
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="/whitepaper">{t('viewWhitepaper')}</Link>
+              </Button>
+              <Button asChild size="lg" className="bg-[hsl(210,100%,20%)] hover:bg-[hsl(210,100%,25%)] text-white">
+                <Link to="/une-0087">
+                  <Scale className="mr-2 h-4 w-4" />
+                  {t('viewUne0087')}
+                </Link>
               </Button>
             </div>
           </div>
