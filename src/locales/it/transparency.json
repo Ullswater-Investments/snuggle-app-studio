@@ -1,0 +1,59 @@
+{
+  "title": "Portale della Trasparenza",
+  "subtitle": "Informazioni pubbliche su governance, tariffe e metriche dello spazio dati ProcureData.",
+  "badge": "Trasparenza",
+  "backToHome": "Torna alla Home",
+  "sections": {
+    "metrics": "Metriche dello Spazio",
+    "fees": "Tariffe in Vigore",
+    "documents": "Documenti di Governance",
+    "authority": "Autorità di Governo",
+    "audits": "Report e Audit",
+    "communication": "Canale di Comunicazione"
+  },
+  "metrics": {
+    "participants": "Partecipanti attivi",
+    "transactions": "Transazioni elaborate",
+    "sectors": "Settori coperti",
+    "availability": "Disponibilità SLA",
+    "disclaimer": "* Dati sintetici dimostrativi. Le metriche reali verranno aggiornate periodicamente."
+  },
+  "fees": {
+    "payPerUse": "Pay per use",
+    "payPerUseDetail": "Tariffa standard per ogni transazione di scambio dati tra partecipanti.",
+    "proMembership": "Iscrizione Pro",
+    "proMembershipDetail": "Accesso completo a funzionalità avanzate, analytics e supporto prioritario.",
+    "registration": "Registrazione e adesione",
+    "registrationDetail": "La registrazione, verifica KYB e ottenimento DID sono gratuiti.",
+    "additionalServices": "Servizi aggiuntivi",
+    "additionalServicesDetail": "Consulenza, integrazione ERP personalizzata e supporto dedicato su richiesta.",
+    "free": "Gratuito",
+    "variable": "Variabile"
+  },
+  "docs": {
+    "rulebook": "Libro delle Regole",
+    "rulebookDesc": "Quadro completo di diritti, obblighi, SLA e regime sanzionatorio.",
+    "adhesionContract": "Contratto di Adesione",
+    "adhesionContractDesc": "Documento legale di adesione con firma digitale conforme eIDAS.",
+    "glossary": "Glossario UNE 0087",
+    "glossaryDesc": "Mappatura di ogni termine normativo alla sua implementazione tecnica in ProcureData.",
+    "uneReport": "Rapporto di Conformità UNE",
+    "uneReportDesc": "Analisi esaustiva del livello di conformità con UNE 0087:2025."
+  },
+  "authority": {
+    "technical": "Comitato Tecnico",
+    "technicalDesc": "Responsabile degli standard tecnici, interoperabilità, sicurezza ed evoluzione architetturale.",
+    "ethics": "Comitato Etico",
+    "ethicsDesc": "Supervisiona l'uso responsabile dei dati, risolve i conflitti e gestisce il regime sanzionatorio.",
+    "executive": "Segreteria Esecutiva",
+    "executiveDesc": "Coordina le operazioni quotidiane, la gestione delle adesioni e la comunicazione con i partecipanti."
+  },
+  "audits": {
+    "description": "Sezione preparata per la pubblicazione di report periodici di audit, conformità e performance.",
+    "upcoming": "Primo report di audit programmato"
+  },
+  "communication": {
+    "description": "Domande sullo spazio dati, tariffe o governance? Contatta la Segreteria Esecutiva.",
+    "cta": "Contattaci"
+  }
+}

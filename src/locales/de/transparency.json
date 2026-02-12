@@ -1,0 +1,59 @@
+{
+  "title": "Transparenzportal",
+  "subtitle": "Öffentliche Informationen über Governance, Gebühren und Metriken des ProcureData-Datenraums.",
+  "badge": "Transparenz",
+  "backToHome": "Zurück zur Startseite",
+  "sections": {
+    "metrics": "Datenraum-Metriken",
+    "fees": "Aktuelle Gebühren",
+    "documents": "Governance-Dokumente",
+    "authority": "Governance-Behörde",
+    "audits": "Berichte & Audits",
+    "communication": "Kommunikationskanal"
+  },
+  "metrics": {
+    "participants": "Aktive Teilnehmer",
+    "transactions": "Verarbeitete Transaktionen",
+    "sectors": "Abgedeckte Sektoren",
+    "availability": "SLA-Verfügbarkeit",
+    "disclaimer": "* Synthetische Demodaten. Echte Metriken werden regelmäßig aktualisiert."
+  },
+  "fees": {
+    "payPerUse": "Pay-per-Use",
+    "payPerUseDetail": "Standardgebühr pro Datenaustausch-Transaktion zwischen Teilnehmern.",
+    "proMembership": "Pro-Mitgliedschaft",
+    "proMembershipDetail": "Vollzugang zu erweiterten Funktionen, Analytics und priorisiertem Support.",
+    "registration": "Registrierung & Onboarding",
+    "registrationDetail": "Registrierung, KYB-Verifizierung und DID-Ausstellung sind kostenlos.",
+    "additionalServices": "Zusätzliche Dienste",
+    "additionalServicesDetail": "Beratung, individuelle ERP-Integration und dedizierter Support auf Anfrage.",
+    "free": "Kostenlos",
+    "variable": "Variabel"
+  },
+  "docs": {
+    "rulebook": "Regelbuch",
+    "rulebookDesc": "Vollständiger Rahmen für Rechte, Pflichten, SLAs und Sanktionsregime.",
+    "adhesionContract": "Beitrittsvertrag",
+    "adhesionContractDesc": "Rechtliches Beitrittsdokument mit eIDAS-konformer digitaler Signatur.",
+    "glossary": "UNE 0087 Glossar",
+    "glossaryDesc": "Zuordnung jedes normativen Begriffs zu seiner technischen Umsetzung in ProcureData.",
+    "uneReport": "UNE-Konformitätsbericht",
+    "uneReportDesc": "Umfassende Analyse des Konformitätsniveaus mit UNE 0087:2025."
+  },
+  "authority": {
+    "technical": "Technischer Ausschuss",
+    "technicalDesc": "Verantwortlich für technische Standards, Interoperabilität, Sicherheit und architektonische Weiterentwicklung.",
+    "ethics": "Ethik-Ausschuss",
+    "ethicsDesc": "Überwacht den verantwortungsvollen Datengebrauch, löst Konflikte und verwaltet das Sanktionsregime.",
+    "executive": "Geschäftsstelle",
+    "executiveDesc": "Koordiniert den täglichen Betrieb, die Mitgliederverwaltung und die Teilnehmerkommunikation."
+  },
+  "audits": {
+    "description": "Bereich für die Veröffentlichung periodischer Audit-, Konformitäts- und Leistungsberichte.",
+    "upcoming": "Erster Auditbericht geplant"
+  },
+  "communication": {
+    "description": "Fragen zum Datenraum, zu Gebühren oder zur Governance? Kontaktieren Sie die Geschäftsstelle.",
+    "cta": "Kontakt aufnehmen"
+  }
+}
