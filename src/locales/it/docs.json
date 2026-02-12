@@ -449,13 +449,13 @@
   },
   "doc13": {
     "title": "Simulazione Dialoghi e Training NLU",
-    "subtitle": "Personalità, capacità di comprensione e apprendimento continuo di ARIA.",
+    "subtitle": "Personalità, capacità di comprensione e apprendimento continuo del Consulente IA.",
     "sections": {
       "personalidad": {
-        "title": "Personalità di ARIA",
-        "content": "<p>ARIA combina <strong>professionalità, chiarezza e empatia</strong>. Adatta il suo tono al contesto: formale in compliance, amichevole nel supporto.</p>",
+        "title": "Personalità del Consulente IA",
+        "content": "<p>Il Consulente IA combina <strong>professionalità, chiarezza e empatia</strong>. Adatta il suo tono al contesto: formale in compliance, amichevole nel supporto.</p>",
         "quiz": {
-          "question": "Quali caratteristiche definiscono la personalità di ARIA?",
+          "question": "Quali caratteristiche definiscono la personalità del Consulente IA?",
           "options": ["Distante e tecnica", "Professionalità, chiarezza e empatia", "Sempre informale", "Robotica e fredda"],
           "correctIndex": 1
         }
