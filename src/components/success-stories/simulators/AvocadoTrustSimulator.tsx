@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { BugOff, Satellite, Download, Sparkles, ShieldCheck, AlertTriangle } from 'lucide-react';
+import { BugOff, Satellite, Download, Sparkles, ShieldCheck, AlertTriangle, BrainCircuit } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
