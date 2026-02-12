@@ -684,7 +684,7 @@ export function AIConcierge() {
       });
       toast({
         title: "Feedback enviado",
-        description: "Revisaremos esta respuesta para mejorar ARIA 📝",
+        description: "Revisaremos esta respuesta para mejorar el asistente 📝",
       });
     } catch (error) {
       console.error("Error saving correction:", error);
