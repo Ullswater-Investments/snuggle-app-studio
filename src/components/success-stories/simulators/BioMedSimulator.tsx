@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { HeartPulse, ShieldAlert, Activity, Stethoscope, Lock, FileText, Sparkles } from 'lucide-react';
+import { HeartPulse, ShieldAlert, Activity, Stethoscope, Lock, FileText, BrainCircuit } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
