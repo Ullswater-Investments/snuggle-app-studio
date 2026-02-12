@@ -164,7 +164,7 @@
       "smartContract": "Smart Contract"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "AI Adviseur",
       "role": "Windenergie Adviseur",
       "instantTitle": "Directe Afrekening",
       "instantDesc": "Met wind op <strong>{{windSpeed}} m/s</strong> en een PPA-prijs van <strong>{{price}}€/MWh</strong>, genereert je directe afrekening <strong>{{payout}} EUROe</strong> in het huidige blok.",
