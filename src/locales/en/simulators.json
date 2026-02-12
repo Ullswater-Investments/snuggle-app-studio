@@ -384,7 +384,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "AI Advisor",
       "role": "Solar Maintenance Advisor",
       "recoveryTitle": "Energy Recovery",
       "recoveryDesc": "By reducing dirt to <span>{{days}} days</span>, you recover <span>{{mwh}} MWh</span> daily, generating <span>{{revenue}}€</span> additional.",
