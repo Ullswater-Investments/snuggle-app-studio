@@ -1,0 +1,28 @@
+{
+  "backToHome": "Back to home",
+  "badge": "Phase 6 — Conversational AI",
+  "title": "ProcureData Conversational AI",
+  "subtitle": "ARIA Assistant with NLU engine, specialized agents, verified knowledge base and continuous improvement through feedback",
+  "layers": {
+    "nlu": { "label": "Layer 1 — NLU Engine", "title": "Natural Language Understanding" },
+    "agents": { "label": "Layer 2 — Agents", "title": "Specialized Agents" },
+    "knowledge": { "label": "Layer 3 — Knowledge", "title": "Verified Knowledge Base" },
+    "learning": { "label": "Layer 4 — Learning Loop", "title": "Continuous Improvement" }
+  },
+  "metrics": {
+    "agents": "Specialized AI Agents",
+    "references": "Verified References",
+    "cases": "Verified Success Cases"
+  },
+  "chat": {
+    "badge": "Conversational AI Agent",
+    "description": "Specialist in NLU architecture, AI agents and continuous improvement at ProcureData",
+    "placeholder": "Ask about conversational AI, agents or the ARIA Assistant...",
+    "sectionTitle": "Specialized Conversational AI Chat",
+    "sectionSubtitle": "Ask about the NLU engine, specialized agents and the Learning Loop",
+    "q1": "How does ProcureData's AI Assistant work?",
+    "q2": "What specialized agents does the platform have?",
+    "q3": "How is the AI trained and improved with user feedback?",
+    "q4": "How does conversational AI help in the GigaFactory case?"
+  }
+}

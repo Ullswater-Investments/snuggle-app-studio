@@ -1,0 +1,28 @@
+{
+  "backToHome": "Voltar ao início",
+  "badge": "Fase 6 — IA Conversacional",
+  "title": "IA Conversacional da ProcureData",
+  "subtitle": "Assistente ARIA com motor NLU, agentes especializados, base de conhecimento verificada e melhoria contínua através de feedback",
+  "layers": {
+    "nlu": { "label": "Camada 1 — Motor NLU", "title": "Compreensão de Linguagem Natural" },
+    "agents": { "label": "Camada 2 — Agentes", "title": "Agentes Especializados" },
+    "knowledge": { "label": "Camada 3 — Conhecimento", "title": "Base de Conhecimento Verificada" },
+    "learning": { "label": "Camada 4 — Learning Loop", "title": "Melhoria Contínua" }
+  },
+  "metrics": {
+    "agents": "Agentes IA Especializados",
+    "references": "Referências Verificadas",
+    "cases": "Casos de Sucesso Verificados"
+  },
+  "chat": {
+    "badge": "Agente IA Conversacional",
+    "description": "Especialista em arquitetura NLU, agentes IA e melhoria contínua da ProcureData",
+    "placeholder": "Pergunte sobre IA conversacional, agentes ou o Assistente ARIA...",
+    "sectionTitle": "Chat IA Especializado em IA Conversacional",
+    "sectionSubtitle": "Consulte o motor NLU, os agentes especializados e o Learning Loop",
+    "q1": "Como funciona o Assistente IA da ProcureData?",
+    "q2": "Quais agentes especializados tem a plataforma?",
+    "q3": "Como a IA é treinada e melhorada com feedback dos utilizadores?",
+    "q4": "Como a IA conversacional ajuda no caso GigaFactory?"
+  }
+}

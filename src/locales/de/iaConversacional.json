@@ -1,0 +1,28 @@
+{
+  "backToHome": "Zurück zur Startseite",
+  "badge": "Phase 6 — Konversations-KI",
+  "title": "ProcureData Konversations-KI",
+  "subtitle": "ARIA-Assistent mit NLU-Engine, spezialisierten Agenten, verifizierter Wissensbasis und kontinuierlicher Verbesserung durch Feedback",
+  "layers": {
+    "nlu": { "label": "Schicht 1 — NLU-Engine", "title": "Natürliches Sprachverständnis" },
+    "agents": { "label": "Schicht 2 — Agenten", "title": "Spezialisierte Agenten" },
+    "knowledge": { "label": "Schicht 3 — Wissen", "title": "Verifizierte Wissensbasis" },
+    "learning": { "label": "Schicht 4 — Learning Loop", "title": "Kontinuierliche Verbesserung" }
+  },
+  "metrics": {
+    "agents": "Spezialisierte KI-Agenten",
+    "references": "Verifizierte Referenzen",
+    "cases": "Verifizierte Erfolgsfälle"
+  },
+  "chat": {
+    "badge": "Konversations-KI-Agent",
+    "description": "Spezialist für NLU-Architektur, KI-Agenten und kontinuierliche Verbesserung bei ProcureData",
+    "placeholder": "Fragen Sie zur Konversations-KI, Agenten oder dem ARIA-Assistenten...",
+    "sectionTitle": "Spezialisierter Konversations-KI-Chat",
+    "sectionSubtitle": "Fragen Sie zur NLU-Engine, spezialisierten Agenten und dem Learning Loop",
+    "q1": "Wie funktioniert der KI-Assistent von ProcureData?",
+    "q2": "Welche spezialisierten Agenten hat die Plattform?",
+    "q3": "Wie wird die KI mit Benutzerfeedback trainiert und verbessert?",
+    "q4": "Wie hilft die Konversations-KI im GigaFactory-Fall?"
+  }
+}

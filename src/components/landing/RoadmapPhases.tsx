@@ -11,7 +11,7 @@ const phases = [
   { icon: GitBranch, name: "Flujo 3-Actores", desc: "Consumer → Subject → Holder", slug: "flujo-3-actores" },
   { icon: FileText, name: "Políticas ODRL", desc: "Contratos digitales automáticos", slug: "politicas-odrl" },
   { icon: Wallet, name: "Web3 y DIDs", desc: "Identidades descentralizadas y EUROe", slug: "web3-dids" },
-  { icon: Bot, name: "IA Conversacional", desc: "Asistente ARIA con contexto" },
+  { icon: Bot, name: "IA Conversacional", desc: "Asistente ARIA con contexto", slug: "ia-conversacional" },
   { icon: Settings, name: "Conectores ERP", desc: "SAP, Oracle, Dynamics" },
   { icon: Globe, name: "Red Gaia-X", desc: "IDS, Eclipse Dataspace" },
   { icon: BarChart3, name: "Analytics y BI", desc: "Dashboards predictivos" },

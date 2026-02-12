@@ -1,0 +1,28 @@
+{
+  "backToHome": "Terug naar home",
+  "badge": "Fase 6 — Conversationele AI",
+  "title": "ProcureData Conversationele AI",
+  "subtitle": "ARIA-assistent met NLU-engine, gespecialiseerde agenten, geverifieerde kennisbasis en continue verbetering door feedback",
+  "layers": {
+    "nlu": { "label": "Laag 1 — NLU-Engine", "title": "Natuurlijk Taalbegrip" },
+    "agents": { "label": "Laag 2 — Agenten", "title": "Gespecialiseerde Agenten" },
+    "knowledge": { "label": "Laag 3 — Kennis", "title": "Geverifieerde Kennisbasis" },
+    "learning": { "label": "Laag 4 — Learning Loop", "title": "Continue Verbetering" }
+  },
+  "metrics": {
+    "agents": "Gespecialiseerde AI-Agenten",
+    "references": "Geverifieerde Referenties",
+    "cases": "Geverifieerde Succescases"
+  },
+  "chat": {
+    "badge": "Conversationele AI-Agent",
+    "description": "Specialist in NLU-architectuur, AI-agenten en continue verbetering bij ProcureData",
+    "placeholder": "Vraag over conversationele AI, agenten of de ARIA-Assistent...",
+    "sectionTitle": "Gespecialiseerde Conversationele AI Chat",
+    "sectionSubtitle": "Vraag over de NLU-engine, gespecialiseerde agenten en de Learning Loop",
+    "q1": "Hoe werkt de AI-Assistent van ProcureData?",
+    "q2": "Welke gespecialiseerde agenten heeft het platform?",
+    "q3": "Hoe wordt de AI getraind en verbeterd met gebruikersfeedback?",
+    "q4": "Hoe helpt conversationele AI bij de GigaFactory-case?"
+  }
+}
