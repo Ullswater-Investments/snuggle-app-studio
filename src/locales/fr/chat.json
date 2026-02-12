@@ -57,6 +57,8 @@
     "errorRateLimit": "⚠️ Limite de requêtes atteinte. Réessayez dans quelques instants.",
     "errorCredits": "⚠️ Crédits IA épuisés. Contactez l'administrateur.",
     "errorGeneric": "Désolé, une erreur s'est produite. Réessayez.",
-    "errorConnection": "Erreur de connexion. Vérifiez votre réseau et réessayez."
+    "errorConnection": "Erreur de connexion. Vérifiez votre réseau et réessayez.",
+    "nodeInactive": "Nœud inactif",
+    "nodeActive": "Nœud actif ({{count}})"
   }
 }

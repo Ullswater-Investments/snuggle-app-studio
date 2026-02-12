@@ -57,6 +57,8 @@
     "errorRateLimit": "⚠️ Anfragelimit erreicht. Versuchen Sie es in Kürze erneut.",
     "errorCredits": "⚠️ KI-Credits aufgebraucht. Kontaktieren Sie den Administrator.",
     "errorGeneric": "Entschuldigung, ein Fehler ist aufgetreten. Versuchen Sie es erneut.",
-    "errorConnection": "Verbindungsfehler. Überprüfen Sie Ihr Netzwerk und versuchen Sie es erneut."
+    "errorConnection": "Verbindungsfehler. Überprüfen Sie Ihr Netzwerk und versuchen Sie es erneut.",
+    "nodeInactive": "Inaktiver Knoten",
+    "nodeActive": "Aktiver Knoten ({{count}})"
   }
 }

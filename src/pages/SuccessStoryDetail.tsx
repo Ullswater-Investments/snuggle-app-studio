@@ -1149,7 +1149,7 @@ const SuccessStoryDetail = () => {
         <div>
           <div className="flex items-center gap-2 mb-6">
             <Sparkles className="w-5 h-5 text-primary" />
-            <h2 className="text-2xl font-bold">Pregunta al Agente IA sobre este caso</h2>
+            <h2 className="text-2xl font-bold">{t('detail.askAgent', { ns: 'success' })}</h2>
           </div>
           <div className={`grid gap-6 ${flowConfig ? 'lg:grid-cols-2' : ''}`}>
             <SuccessStoryChatAgent
@@ -1169,7 +1169,7 @@ const SuccessStoryDetail = () => {
             {flowConfig && (
               <div className="rounded-2xl border bg-card/50 backdrop-blur-sm p-6 flex flex-col">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4">
-                  Arquitectura del Caso
+                  {t('detail.caseArchitecture', { ns: 'success' })}
                 </p>
                 <div className="flex-1 flex items-center justify-center">
                   <CaseFlowDiagram

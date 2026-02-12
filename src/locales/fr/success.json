@@ -502,6 +502,8 @@
     "verifiedOn": "Vérifié sur Pontus-X",
     "block": "Bloc",
     "sectorImpactPanel": "Panel d'Impact Sectoriel",
+    "askAgent": "Posez une question à l'Agent IA sur ce cas",
+    "caseArchitecture": "Architecture du Cas",
     "impactSimulator": "Simulateur d'Impact",
     "ctaTitle": "Vous voulez obtenir des résultats similaires?",
     "ctaDescription": "Découvrez comment ProcureData peut transformer vos processus d'achat et démontrer votre impact ESG.",
