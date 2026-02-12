@@ -449,13 +449,13 @@
   },
   "doc13": {
     "title": "Dialogsimulation und NLU-Training",
-    "subtitle": "ARIAs Persönlichkeit, Verständnisfähigkeiten und kontinuierliches Lernen.",
+    "subtitle": "Persönlichkeit, Verständnisfähigkeiten und kontinuierliches Lernen des KI-Beraters.",
     "sections": {
       "personalidad": {
-        "title": "ARIAs Persönlichkeit",
-        "content": "<p>ARIA kombiniert <strong>Professionalität, Klarheit und Empathie</strong>. Sie passt ihren Ton dem Kontext an: formell bei Compliance, freundlich bei Support.</p>",
+        "title": "Persönlichkeit des KI-Beraters",
+        "content": "<p>Der KI-Berater kombiniert <strong>Professionalität, Klarheit und Empathie</strong>. Er passt seinen Ton dem Kontext an: formell bei Compliance, freundlich bei Support.</p>",
         "quiz": {
-          "question": "Welche Eigenschaften definieren ARIAs Persönlichkeit?",
+          "question": "Welche Eigenschaften definieren die Persönlichkeit des KI-Beraters?",
           "options": ["Distanziert und technisch", "Professionalität, Klarheit und Empathie", "Immer informell", "Roboterhaft und kalt"],
           "correctIndex": 1
         }
