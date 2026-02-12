@@ -56,6 +56,7 @@ import esFlujo3Actores from './locales/es/flujo3Actores.json';
 import esPoliticasOdrl from './locales/es/politicasOdrl.json';
 import esWeb3Dids from './locales/es/web3Dids.json';
 import esIAConversacional from './locales/es/iaConversacional.json';
+import esConectoresErp from './locales/es/conectoresErp.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -110,6 +111,7 @@ import frFlujo3Actores from './locales/fr/flujo3Actores.json';
 import frPoliticasOdrl from './locales/fr/politicasOdrl.json';
 import frWeb3Dids from './locales/fr/web3Dids.json';
 import frIAConversacional from './locales/fr/iaConversacional.json';
+import frConectoresErp from './locales/fr/conectoresErp.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -163,6 +165,7 @@ import ptFlujo3Actores from './locales/pt/flujo3Actores.json';
 import ptPoliticasOdrl from './locales/pt/politicasOdrl.json';
 import ptWeb3Dids from './locales/pt/web3Dids.json';
 import ptIAConversacional from './locales/pt/iaConversacional.json';
+import ptConectoresErp from './locales/pt/conectoresErp.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -217,6 +220,7 @@ import deFlujo3Actores from './locales/de/flujo3Actores.json';
 import dePoliticasOdrl from './locales/de/politicasOdrl.json';
 import deWeb3Dids from './locales/de/web3Dids.json';
 import deIAConversacional from './locales/de/iaConversacional.json';
+import deConectoresErp from './locales/de/conectoresErp.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -271,6 +275,7 @@ import itFlujo3Actores from './locales/it/flujo3Actores.json';
 import itPoliticasOdrl from './locales/it/politicasOdrl.json';
 import itWeb3Dids from './locales/it/web3Dids.json';
 import itIAConversacional from './locales/it/iaConversacional.json';
+import itConectoresErp from './locales/it/conectoresErp.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -325,6 +330,7 @@ import nlFlujo3Actores from './locales/nl/flujo3Actores.json';
 import nlPoliticasOdrl from './locales/nl/politicasOdrl.json';
 import nlWeb3Dids from './locales/nl/web3Dids.json';
 import nlIAConversacional from './locales/nl/iaConversacional.json';
+import nlConectoresErp from './locales/nl/conectoresErp.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -380,6 +386,7 @@ import enFlujo3Actores from './locales/en/flujo3Actores.json';
 import enPoliticasOdrl from './locales/en/politicasOdrl.json';
 import enWeb3Dids from './locales/en/web3Dids.json';
 import enIAConversacional from './locales/en/iaConversacional.json';
+import enConectoresErp from './locales/en/conectoresErp.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -451,6 +458,7 @@ i18n
         politicasOdrl: esPoliticasOdrl,
         web3Dids: esWeb3Dids,
         iaConversacional: esIAConversacional,
+        conectoresErp: esConectoresErp,
       },
       en: {
         common: enCommon,
@@ -501,6 +509,7 @@ i18n
         politicasOdrl: enPoliticasOdrl,
         web3Dids: enWeb3Dids,
         iaConversacional: enIAConversacional,
+        conectoresErp: enConectoresErp,
       },
       fr: {
         common: frCommon,
@@ -551,6 +560,7 @@ i18n
         politicasOdrl: frPoliticasOdrl,
         web3Dids: frWeb3Dids,
         iaConversacional: frIAConversacional,
+        conectoresErp: frConectoresErp,
       },
       pt: {
         common: ptCommon,
@@ -600,6 +610,7 @@ i18n
         politicasOdrl: ptPoliticasOdrl,
         web3Dids: ptWeb3Dids,
         iaConversacional: ptIAConversacional,
+        conectoresErp: ptConectoresErp,
       },
       de: {
         common: deCommon,
@@ -650,6 +661,7 @@ i18n
         politicasOdrl: dePoliticasOdrl,
         web3Dids: deWeb3Dids,
         iaConversacional: deIAConversacional,
+        conectoresErp: deConectoresErp,
       },
       it: {
         common: itCommon,
@@ -699,6 +711,7 @@ i18n
         politicasOdrl: itPoliticasOdrl,
         web3Dids: itWeb3Dids,
         iaConversacional: itIAConversacional,
+        conectoresErp: itConectoresErp,
       },
       nl: {
         common: nlCommon,
@@ -748,11 +761,12 @@ i18n
         politicasOdrl: nlPoliticasOdrl,
         web3Dids: nlWeb3Dids,
         iaConversacional: nlIAConversacional,
+        conectoresErp: nlConectoresErp,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp'],
     interpolation: {
       escapeValue: false,
     },
