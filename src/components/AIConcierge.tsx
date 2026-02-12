@@ -654,7 +654,7 @@ export function AIConcierge() {
       });
       toast({
         title: "¡Gracias!",
-        description: "Tu feedback nos ayuda a mejorar ARIA 🚀",
+        description: "Tu feedback nos ayuda a mejorar el asistente 🚀",
       });
     } catch (error) {
       console.error("Error saving feedback:", error);
