@@ -61,6 +61,7 @@ import esRedGaiaX from './locales/es/redGaiaX.json';
 import esAnalyticsBi from './locales/es/analyticsBi.json';
 import esMultiSector from './locales/es/multiSector.json';
 import esUne0087 from './locales/es/une0087.json';
+import esUneRecommendations from './locales/es/uneRecommendations.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -120,6 +121,7 @@ import frRedGaiaX from './locales/fr/redGaiaX.json';
 import frAnalyticsBi from './locales/fr/analyticsBi.json';
 import frMultiSector from './locales/fr/multiSector.json';
 import frUne0087 from './locales/fr/une0087.json';
+import frUneRecommendations from './locales/fr/uneRecommendations.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -178,6 +180,7 @@ import ptRedGaiaX from './locales/pt/redGaiaX.json';
 import ptAnalyticsBi from './locales/pt/analyticsBi.json';
 import ptMultiSector from './locales/pt/multiSector.json';
 import ptUne0087 from './locales/pt/une0087.json';
+import ptUneRecommendations from './locales/pt/uneRecommendations.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -237,6 +240,7 @@ import deRedGaiaX from './locales/de/redGaiaX.json';
 import deAnalyticsBi from './locales/de/analyticsBi.json';
 import deMultiSector from './locales/de/multiSector.json';
 import deUne0087 from './locales/de/une0087.json';
+import deUneRecommendations from './locales/de/uneRecommendations.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -296,6 +300,7 @@ import itRedGaiaX from './locales/it/redGaiaX.json';
 import itAnalyticsBi from './locales/it/analyticsBi.json';
 import itMultiSector from './locales/it/multiSector.json';
 import itUne0087 from './locales/it/une0087.json';
+import itUneRecommendations from './locales/it/uneRecommendations.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -355,6 +360,7 @@ import nlRedGaiaX from './locales/nl/redGaiaX.json';
 import nlAnalyticsBi from './locales/nl/analyticsBi.json';
 import nlMultiSector from './locales/nl/multiSector.json';
 import nlUne0087 from './locales/nl/une0087.json';
+import nlUneRecommendations from './locales/nl/uneRecommendations.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -415,6 +421,7 @@ import enRedGaiaX from './locales/en/redGaiaX.json';
 import enAnalyticsBi from './locales/en/analyticsBi.json';
 import enMultiSector from './locales/en/multiSector.json';
 import enUne0087 from './locales/en/une0087.json';
+import enUneRecommendations from './locales/en/uneRecommendations.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -491,6 +498,7 @@ i18n
         analyticsBi: esAnalyticsBi,
         multiSector: esMultiSector,
         une0087: esUne0087,
+        uneRecommendations: esUneRecommendations,
       },
       en: {
         common: enCommon,
@@ -546,6 +554,7 @@ i18n
         analyticsBi: enAnalyticsBi,
         multiSector: enMultiSector,
         une0087: enUne0087,
+        uneRecommendations: enUneRecommendations,
       },
       fr: {
         common: frCommon,
@@ -601,6 +610,7 @@ i18n
         analyticsBi: frAnalyticsBi,
         multiSector: frMultiSector,
         une0087: frUne0087,
+        uneRecommendations: frUneRecommendations,
       },
       pt: {
         common: ptCommon,
@@ -655,6 +665,7 @@ i18n
         analyticsBi: ptAnalyticsBi,
         multiSector: ptMultiSector,
         une0087: ptUne0087,
+        uneRecommendations: ptUneRecommendations,
       },
       de: {
         common: deCommon,
@@ -710,6 +721,7 @@ i18n
         analyticsBi: deAnalyticsBi,
         multiSector: deMultiSector,
         une0087: deUne0087,
+        uneRecommendations: deUneRecommendations,
       },
       it: {
         common: itCommon,
@@ -764,6 +776,7 @@ i18n
         analyticsBi: itAnalyticsBi,
         multiSector: itMultiSector,
         une0087: itUne0087,
+        uneRecommendations: itUneRecommendations,
       },
       nl: {
         common: nlCommon,
@@ -818,11 +831,12 @@ i18n
         analyticsBi: nlAnalyticsBi,
         multiSector: nlMultiSector,
         une0087: nlUne0087,
+        uneRecommendations: nlUneRecommendations,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations'],
     interpolation: {
       escapeValue: false,
     },
