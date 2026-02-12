@@ -1,0 +1,62 @@
+{
+  "assetChat": {
+    "welcome": "Hello! 👋 I'm your **AI Assistant** expert in the PONTUS-X ecosystem. 🌐\n\nI'm analyzing the asset **\"{{assetName}}\"** to answer your questions precisely.\n\nWhat would you like to know about this dataset?",
+    "title": "Ask the AI Assistant",
+    "description": "AI Assistant with asset context",
+    "placeholder": "Ask about this dataset...",
+    "loading": "Querying DDO metadata...",
+    "footer": "The assistant queries blockchain-verified metadata (PONTUS-X)",
+    "errorIdentify": "Error: Could not identify the asset",
+    "errorConnect": "Error connecting to the assistant",
+    "errorGeneric": "❌ Sorry, there was an error processing your query. Please try again."
+  },
+  "concierge": {
+    "welcome": "Hello! 👋 I'm your **AI Assistant** from ProcureData. I can help you with information about services, pricing, sustainability and blockchain technology. How can I help you?",
+    "title": "AI Assistant",
+    "subtitle": "ProcureData Assistant",
+    "clickToExpand": "Click to expand",
+    "placeholder": "Ask the assistant...",
+    "errorGeneric": "Sorry, an error occurred. Please try again. 😔",
+    "errorConnect": "Error connecting to the assistant",
+    "feedbackThanks": "Thanks!",
+    "feedbackThanksDescription": "Your feedback helps us improve the assistant 🚀",
+    "feedbackSent": "Feedback sent",
+    "feedbackSentDescription": "We'll review this response to improve the assistant 📝",
+    "feedbackQuestion": "How should the assistant have responded?",
+    "feedbackPlaceholder": "Describe the correct response (optional)",
+    "cancel": "Cancel",
+    "submitFeedback": "Submit Feedback",
+    "feedbackPositive": "👍 Thanks!",
+    "feedbackNegative": "📝 Feedback sent",
+    "you": "YOU",
+    "minimize": "Minimize",
+    "maximize": "Maximize",
+    "close": "Close"
+  },
+  "federated": {
+    "badge": "Federated AI Agent",
+    "description": "Ask about federated data spaces, data sovereignty, Gaia-X or ProcureData capabilities.",
+    "placeholder": "Ask about the federated data space...",
+    "q1": "What is a federated data space?",
+    "q2": "How does data sovereignty work?",
+    "q3": "What role does Gaia-X play?",
+    "q4": "How does it integrate with my ERP?",
+    "errorRateLimit": "⚠️ Rate limit reached. Please try again in a moment.",
+    "errorCredits": "⚠️ AI credits exhausted. Contact the administrator.",
+    "errorGeneric": "Sorry, an error occurred. Please try again.",
+    "errorConnection": "Connection error. Check your network and try again."
+  },
+  "successStory": {
+    "badge": "AI Agent — {{company}}",
+    "description": "Ask about {{company}}'s case, their challenge, solution or services used.",
+    "placeholder": "Ask about the {{company}} case...",
+    "q1": "What was {{company}}'s main challenge?",
+    "q2": "Which ProcureData services were used?",
+    "q3": "What results were achieved?",
+    "q4": "How does this apply to my sector?",
+    "errorRateLimit": "⚠️ Rate limit reached. Please try again in a moment.",
+    "errorCredits": "⚠️ AI credits exhausted. Contact the administrator.",
+    "errorGeneric": "Sorry, an error occurred. Please try again.",
+    "errorConnection": "Connection error. Check your network and try again."
+  }
+}

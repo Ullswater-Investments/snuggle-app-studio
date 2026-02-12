@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Bot, Send, User, Loader2, Sparkles, AlertCircle } from "lucide-react";
+import { Bot, Send, User, Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   id: string;
@@ -21,17 +22,23 @@ interface AssetChatInterfaceProps {
 }
 
 export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      role: "assistant",
-      content: `¡Hola! Soy **ARIA**, tu asistente experto en el ecosistema PONTUS-X. 🌐\n\nEstoy analizando el activo **"${assetName}"** para responder tus preguntas con precisión.\n\n¿Qué te gustaría saber sobre este dataset?`,
-      timestamp: new Date(),
-    },
-  ]);
+  const { t } = useTranslation("chat");
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Set welcome message after translation is ready
+  useEffect(() => {
+    setMessages([
+      {
+        id: "welcome",
+        role: "assistant",
+        content: t("assetChat.welcome", { assetName }),
+        timestamp: new Date(),
+      },
+    ]);
+  }, [t, assetName]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -43,14 +50,12 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
     const currentInput = inputValue.trim();
     if (!currentInput || isLoading) return;
 
-    // Validación de seguridad
     if (!did) {
       console.error("No DID provided to Asset Chat Interface");
-      toast.error("Error: No se pudo identificar el activo");
+      toast.error(t("assetChat.errorIdentify"));
       return;
     }
 
-    // Add user message
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       role: "user",
@@ -61,7 +66,6 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
     setInputValue("");
     setIsLoading(true);
 
-    // Build history for context
     const history = messages
       .filter((m) => m.id !== "welcome")
       .map((m) => ({ role: m.role, content: m.content }));
@@ -78,7 +82,7 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
           body: JSON.stringify({
             message: currentInput,
             history,
-            did: did, // Pass the DID for DDO context
+            did: did,
             context: {
               currentPage: `/product/${did}`,
             },
@@ -95,14 +99,12 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
         throw new Error("No response body");
       }
 
-      // Process streaming response
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let textBuffer = "";
       let assistantContent = "";
       const assistantMessageId = `assistant-${Date.now()}`;
 
-      // Add empty assistant message
       setMessages((prev) => [
         ...prev,
         {
@@ -155,15 +157,14 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      toast.error("Error al conectar con el asistente PONTUS-X");
+      toast.error(t("assetChat.errorConnect"));
       
-      // Add error message
       setMessages((prev) => [
         ...prev,
         {
           id: `error-${Date.now()}`,
           role: "assistant",
-          content: "❌ Lo siento, hubo un error al procesar tu consulta. Por favor, inténtalo de nuevo.",
+          content: t("assetChat.errorGeneric"),
           timestamp: new Date(),
         },
       ]);
@@ -189,11 +190,11 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
             </div>
             <div>
               <CardTitle className="text-lg flex items-center gap-2">
-                Pregunta a ARIA
+                {t("assetChat.title")}
                 <Sparkles className="h-4 w-4 text-yellow-500" />
               </CardTitle>
               <CardDescription className="text-xs">
-                Asistente IA con contexto del activo
+                {t("assetChat.description")}
               </CardDescription>
             </div>
           </div>
@@ -204,7 +205,6 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-        {/* Messages Area */}
         <ScrollArea className="flex-1 px-4" ref={scrollRef}>
           <div className="space-y-4 py-4">
             {messages.map((message) => (
@@ -247,7 +247,7 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
                 </div>
                 <div className="bg-muted rounded-xl px-4 py-3">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>Consultando metadatos del DDO...</span>
+                    <span>{t("assetChat.loading")}</span>
                   </div>
                 </div>
               </div>
@@ -255,11 +255,10 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
           </div>
         </ScrollArea>
 
-        {/* Input Area */}
         <div className="p-4 border-t bg-background">
           <div className="flex gap-2">
             <Input
-              placeholder="Pregunta sobre este dataset..."
+              placeholder={t("assetChat.placeholder")}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
@@ -279,7 +278,7 @@ export function AssetChatInterface({ did, assetName }: AssetChatInterfaceProps) 
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-2 text-center">
-            ARIA consulta metadatos verificados en blockchain (PONTUS-X)
+            {t("assetChat.footer")}
           </p>
         </div>
       </CardContent>

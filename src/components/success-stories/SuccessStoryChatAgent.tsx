@@ -9,6 +9,7 @@ import { LiveMetricsBar } from "@/components/ai/LiveMetricsBar";
 import { TokenWalletBadge } from "@/components/ai/TokenWalletBadge";
 import { useTokenWallet } from "@/contexts/TokenWalletContext";
 import ReactMarkdown from "react-markdown";
+import { useTranslation } from "react-i18next";
 
 type Msg = { role: "user" | "assistant"; content: string; tokens?: number };
 
@@ -32,6 +33,7 @@ interface Props {
 }
 
 export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Props) => {
+  const { t } = useTranslation("chat");
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -42,10 +44,10 @@ export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Pr
   const { recordOperation } = useTokenWallet();
 
   const suggestedQuestions = [
-    `¿Cuál fue el reto principal de ${caseContext.company}?`,
-    `¿Qué servicios de ProcureData se usaron?`,
-    `¿Qué resultados se obtuvieron?`,
-    `¿Cómo se aplica esto a mi sector?`,
+    t("successStory.q1", { company: caseContext.company }),
+    t("successStory.q2"),
+    t("successStory.q3"),
+    t("successStory.q4"),
   ];
 
   useEffect(() => {
@@ -110,12 +112,12 @@ export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Pr
       });
 
       if (!resp.ok || !resp.body) {
-        if (resp.status === 429) {
-          upsertAssistant("⚠️ Límite de solicitudes alcanzado. Inténtalo de nuevo en unos momentos.");
+      if (resp.status === 429) {
+          upsertAssistant(t("successStory.errorRateLimit"));
         } else if (resp.status === 402) {
-          upsertAssistant("⚠️ Créditos de IA agotados. Contacta al administrador.");
+          upsertAssistant(t("successStory.errorCredits"));
         } else {
-          upsertAssistant("Lo siento, ocurrió un error. Inténtalo de nuevo.");
+          upsertAssistant(t("successStory.errorGeneric"));
         }
         setIsLoading(false);
         return;
@@ -150,7 +152,7 @@ export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Pr
         }
       }
     } catch {
-      upsertAssistant("Error de conexión. Verifica tu red e inténtalo de nuevo.");
+      upsertAssistant(t("successStory.errorConnection"));
     }
 
     setIsLoading(false);
@@ -194,7 +196,7 @@ export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Pr
                 Agente IA — {caseContext.company}
               </div>
               <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-                Pregunta sobre el caso de {caseContext.company}, su reto, solución o los servicios utilizados.
+                {t("successStory.description", { company: caseContext.company })}
               </p>
               <div className="flex flex-wrap gap-2 justify-center">
                 {suggestedQuestions.map((q) => (
@@ -273,7 +275,7 @@ export const SuccessStoryChatAgent = ({ caseContext, onStreamingTextChange }: Pr
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Pregunta sobre el caso ${caseContext.company}...`}
+            placeholder={t("successStory.placeholder", { company: caseContext.company })}
             className="flex-1 rounded-xl border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
             disabled={isLoading}
           />

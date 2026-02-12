@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Bot, X, Send, Sparkles, ThumbsUp, ThumbsDown, ExternalLink, Calculator, Gauge, Activity, FileCheck, Minimize2, Maximize2, GripVertical, Heart, HeartPulse, ShoppingBag, Zap, Plane, Wine, Thermometer, Ship, Building2, Mountain, Shirt, Receipt, Cpu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -331,6 +332,7 @@ function detectWidgets(content: string): WidgetAction[] {
 }
 
 export function AIConcierge() {
+  const { t } = useTranslation("chat");
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [chatSize, setChatSize] = useState({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
@@ -338,7 +340,7 @@ export function AIConcierge() {
     {
       id: "welcome",
       role: "assistant",
-      content: "¡Hola! 👋 Soy tu **Asistente IA** de ProcureData. Puedo ayudarte con información sobre servicios, precios, sostenibilidad y tecnología blockchain. ¿En qué puedo ayudarte?",
+      content: t("concierge.welcome"),
       timestamp: new Date(),
     },
   ]);
@@ -595,7 +597,7 @@ export function AIConcierge() {
       console.error("Chat error:", error);
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Error al conectar con el asistente",
+        description: error instanceof Error ? error.message : t("concierge.errorConnect"),
         variant: "destructive",
       });
       // Add error message
@@ -604,7 +606,7 @@ export function AIConcierge() {
         {
           id: `error-${Date.now()}`,
           role: "assistant",
-          content: "Lo siento, ha ocurrido un error. Por favor, inténtalo de nuevo. 😔",
+          content: t("concierge.errorGeneric"),
           timestamp: new Date(),
         },
       ]);
@@ -653,8 +655,8 @@ export function AIConcierge() {
         user_sector: sector || null,
       });
       toast({
-        title: "¡Gracias!",
-        description: "Tu feedback nos ayuda a mejorar el asistente 🚀",
+        title: t("concierge.feedbackThanks"),
+        description: t("concierge.feedbackThanksDescription"),
       });
     } catch (error) {
       console.error("Error saving feedback:", error);
@@ -683,8 +685,8 @@ export function AIConcierge() {
         user_sector: sector || null,
       });
       toast({
-        title: "Feedback enviado",
-        description: "Revisaremos esta respuesta para mejorar el asistente 📝",
+        title: t("concierge.feedbackSent"),
+        description: t("concierge.feedbackSentDescription"),
       });
     } catch (error) {
       console.error("Error saving correction:", error);
@@ -773,9 +775,9 @@ export function AIConcierge() {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <CardTitle className="text-base">AI Assistant</CardTitle>
+                      <CardTitle className="text-base">{t("concierge.title")}</CardTitle>
                       <CardDescription className="text-xs">
-                        {isMinimized ? "Click para expandir" : "Asistente ProcureData"}
+                        {isMinimized ? t("concierge.clickToExpand") : t("concierge.subtitle")}
                       </CardDescription>
                     </div>
                   </div>
@@ -785,7 +787,7 @@ export function AIConcierge() {
                       size="sm" 
                       onClick={(e) => { e.stopPropagation(); setIsMinimized(!isMinimized); }} 
                       className="h-8 w-8 p-0"
-                      title={isMinimized ? "Restaurar" : "Minimizar"}
+                      title={isMinimized ? t("concierge.maximize") : t("concierge.minimize")}
                     >
                       <Minimize2 className="h-4 w-4" />
                     </Button>
@@ -794,7 +796,7 @@ export function AIConcierge() {
                       size="sm" 
                       onClick={(e) => { e.stopPropagation(); handleMaximize(); }} 
                       className="h-8 w-8 p-0"
-                      title="Maximizar"
+                      title={t("concierge.maximize")}
                     >
                       <Maximize2 className="h-4 w-4" />
                     </Button>
@@ -803,7 +805,7 @@ export function AIConcierge() {
                       size="sm" 
                       onClick={(e) => { e.stopPropagation(); setIsOpen(false); }} 
                       className="h-8 w-8 p-0"
-                      title="Cerrar"
+                      title={t("concierge.close")}
                     >
                       <X className="h-4 w-4" />
                     </Button>
@@ -869,7 +871,7 @@ export function AIConcierge() {
                                       <div className="flex items-center gap-1 ml-1">
                                         {message.feedbackGiven ? (
                                           <span className="text-xs text-muted-foreground">
-                                            {message.feedbackGiven === "positive" ? "👍 ¡Gracias!" : "📝 Feedback enviado"}
+                                            {message.feedbackGiven === "positive" ? t("concierge.feedbackPositive") : t("concierge.feedbackNegative")}
                                           </span>
                                         ) : (
                                           <>
@@ -948,7 +950,7 @@ export function AIConcierge() {
                       <div className="border-t p-4 bg-background">
                         <div className="flex gap-2">
                           <Input
-                            placeholder="Pregunta al asistente..."
+                            placeholder={t("concierge.placeholder")}
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyPress={handleKeyPress}
@@ -975,9 +977,9 @@ export function AIConcierge() {
                   exit={{ opacity: 0, y: 10 }}
                   className="absolute bottom-full mb-2 left-0 right-0 bg-background border rounded-lg shadow-xl p-4"
                 >
-                  <p className="text-sm font-medium mb-2">¿Cómo debería haber respondido el asistente?</p>
+                  <p className="text-sm font-medium mb-2">{t("concierge.feedbackQuestion")}</p>
                   <Textarea
-                    placeholder="Describe la respuesta correcta (opcional)"
+                    placeholder={t("concierge.feedbackPlaceholder")}
                     value={correctionText}
                     onChange={(e) => setCorrectionText(e.target.value)}
                     className="mb-2"
@@ -985,10 +987,10 @@ export function AIConcierge() {
                   />
                   <div className="flex gap-2 justify-end">
                     <Button variant="ghost" size="sm" onClick={() => { setShowCorrectionModal(null); setCorrectionText(""); }}>
-                      Cancelar
+                      {t("concierge.cancel")}
                     </Button>
                     <Button size="sm" onClick={submitCorrection}>
-                      Enviar Feedback
+                      {t("concierge.submitFeedback")}
                     </Button>
                   </div>
                 </motion.div>

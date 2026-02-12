@@ -1,0 +1,62 @@
+{
+  "assetChat": {
+    "welcome": "Hallo! 👋 Ik ben uw **AI Assistent** en expert in het PONTUS-X ecosysteem. 🌐\n\nIk analyseer het asset **\"{{assetName}}\"** om uw vragen nauwkeurig te beantwoorden.\n\nWat wilt u weten over deze dataset?",
+    "title": "Stel een vraag aan de AI Assistent",
+    "description": "AI Assistent met asset-context",
+    "placeholder": "Stel een vraag over deze dataset...",
+    "loading": "DDO-metadata wordt opgevraagd...",
+    "footer": "De assistent raadpleegt blockchain-geverifieerde metadata (PONTUS-X)",
+    "errorIdentify": "Fout: Kon het asset niet identificeren",
+    "errorConnect": "Verbindingsfout met de assistent",
+    "errorGeneric": "❌ Sorry, er is een fout opgetreden bij het verwerken van uw verzoek. Probeer het opnieuw."
+  },
+  "concierge": {
+    "welcome": "Hallo! 👋 Ik ben uw **AI Assistent** van ProcureData. Ik kan u helpen met informatie over diensten, prijzen, duurzaamheid en blockchain-technologie. Hoe kan ik u helpen?",
+    "title": "AI Assistent",
+    "subtitle": "ProcureData Assistent",
+    "clickToExpand": "Klik om uit te vouwen",
+    "placeholder": "Stel een vraag aan de assistent...",
+    "errorGeneric": "Sorry, er is een fout opgetreden. Probeer het opnieuw. 😔",
+    "errorConnect": "Verbindingsfout met de assistent",
+    "feedbackThanks": "Bedankt!",
+    "feedbackThanksDescription": "Uw feedback helpt ons de assistent te verbeteren 🚀",
+    "feedbackSent": "Feedback verzonden",
+    "feedbackSentDescription": "We zullen dit antwoord beoordelen om de assistent te verbeteren 📝",
+    "feedbackQuestion": "Hoe had de assistent moeten antwoorden?",
+    "feedbackPlaceholder": "Beschrijf het juiste antwoord (optioneel)",
+    "cancel": "Annuleren",
+    "submitFeedback": "Feedback verzenden",
+    "feedbackPositive": "👍 Bedankt!",
+    "feedbackNegative": "📝 Feedback verzonden",
+    "you": "JIJ",
+    "minimize": "Minimaliseren",
+    "maximize": "Maximaliseren",
+    "close": "Sluiten"
+  },
+  "federated": {
+    "badge": "Gefedereerde AI Agent",
+    "description": "Stel vragen over gefedereerde dataruimtes, datasoevereiniteit, Gaia-X of de mogelijkheden van ProcureData.",
+    "placeholder": "Stel een vraag over de gefedereerde dataruimte...",
+    "q1": "Wat is een gefedereerde dataruimte?",
+    "q2": "Hoe werkt datasoevereiniteit?",
+    "q3": "Welke rol speelt Gaia-X?",
+    "q4": "Hoe integreert het met mijn ERP?",
+    "errorRateLimit": "⚠️ Aanvraaglimiet bereikt. Probeer het over enkele ogenblikken opnieuw.",
+    "errorCredits": "⚠️ AI-credits uitgeput. Neem contact op met de beheerder.",
+    "errorGeneric": "Sorry, er is een fout opgetreden. Probeer het opnieuw.",
+    "errorConnection": "Verbindingsfout. Controleer uw netwerk en probeer het opnieuw."
+  },
+  "successStory": {
+    "badge": "AI Agent — {{company}}",
+    "description": "Stel vragen over het geval van {{company}}, hun uitdaging, oplossing of gebruikte diensten.",
+    "placeholder": "Stel een vraag over het geval {{company}}...",
+    "q1": "Wat was de belangrijkste uitdaging van {{company}}?",
+    "q2": "Welke ProcureData-diensten werden gebruikt?",
+    "q3": "Welke resultaten werden behaald?",
+    "q4": "Hoe is dit van toepassing op mijn sector?",
+    "errorRateLimit": "⚠️ Aanvraaglimiet bereikt. Probeer het over enkele ogenblikken opnieuw.",
+    "errorCredits": "⚠️ AI-credits uitgeput. Neem contact op met de beheerder.",
+    "errorGeneric": "Sorry, er is een fout opgetreden. Probeer het opnieuw.",
+    "errorConnection": "Verbindingsfout. Controleer uw netwerk en probeer het opnieuw."
+  }
+}

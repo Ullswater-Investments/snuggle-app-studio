@@ -1,0 +1,62 @@
+{
+  "assetChat": {
+    "welcome": "Hallo! 👋 Ich bin Ihr **KI-Assistent** und Experte im PONTUS-X-Ökosystem. 🌐\n\nIch analysiere das Asset **\"{{assetName}}\"**, um Ihre Fragen präzise zu beantworten.\n\nWas möchten Sie über diesen Datensatz wissen?",
+    "title": "Fragen Sie den KI-Assistenten",
+    "description": "KI-Assistent mit Asset-Kontext",
+    "placeholder": "Fragen Sie zu diesem Datensatz...",
+    "loading": "DDO-Metadaten werden abgefragt...",
+    "footer": "Der Assistent fragt blockchain-verifizierte Metadaten ab (PONTUS-X)",
+    "errorIdentify": "Fehler: Das Asset konnte nicht identifiziert werden",
+    "errorConnect": "Verbindungsfehler mit dem Assistenten",
+    "errorGeneric": "❌ Entschuldigung, bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "concierge": {
+    "welcome": "Hallo! 👋 Ich bin Ihr **KI-Assistent** von ProcureData. Ich kann Ihnen mit Informationen zu Dienstleistungen, Preisen, Nachhaltigkeit und Blockchain-Technologie helfen. Wie kann ich Ihnen helfen?",
+    "title": "KI-Assistent",
+    "subtitle": "ProcureData-Assistent",
+    "clickToExpand": "Klicken zum Erweitern",
+    "placeholder": "Fragen Sie den Assistenten...",
+    "errorGeneric": "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut. 😔",
+    "errorConnect": "Verbindungsfehler mit dem Assistenten",
+    "feedbackThanks": "Danke!",
+    "feedbackThanksDescription": "Ihr Feedback hilft uns, den Assistenten zu verbessern 🚀",
+    "feedbackSent": "Feedback gesendet",
+    "feedbackSentDescription": "Wir werden diese Antwort überprüfen, um den Assistenten zu verbessern 📝",
+    "feedbackQuestion": "Wie hätte der Assistent antworten sollen?",
+    "feedbackPlaceholder": "Beschreiben Sie die korrekte Antwort (optional)",
+    "cancel": "Abbrechen",
+    "submitFeedback": "Feedback senden",
+    "feedbackPositive": "👍 Danke!",
+    "feedbackNegative": "📝 Feedback gesendet",
+    "you": "SIE",
+    "minimize": "Minimieren",
+    "maximize": "Maximieren",
+    "close": "Schließen"
+  },
+  "federated": {
+    "badge": "Föderierter KI-Agent",
+    "description": "Fragen Sie zu föderierten Datenräumen, Datensouveränität, Gaia-X oder den Fähigkeiten von ProcureData.",
+    "placeholder": "Fragen Sie zum föderierten Datenraum...",
+    "q1": "Was ist ein föderierter Datenraum?",
+    "q2": "Wie funktioniert Datensouveränität?",
+    "q3": "Welche Rolle spielt Gaia-X?",
+    "q4": "Wie wird es in mein ERP integriert?",
+    "errorRateLimit": "⚠️ Anfragelimit erreicht. Versuchen Sie es in Kürze erneut.",
+    "errorCredits": "⚠️ KI-Credits aufgebraucht. Kontaktieren Sie den Administrator.",
+    "errorGeneric": "Entschuldigung, ein Fehler ist aufgetreten. Versuchen Sie es erneut.",
+    "errorConnection": "Verbindungsfehler. Überprüfen Sie Ihr Netzwerk und versuchen Sie es erneut."
+  },
+  "successStory": {
+    "badge": "KI-Agent — {{company}}",
+    "description": "Fragen Sie zum Fall von {{company}}, der Herausforderung, Lösung oder den genutzten Diensten.",
+    "placeholder": "Fragen Sie zum Fall {{company}}...",
+    "q1": "Was war die Hauptherausforderung von {{company}}?",
+    "q2": "Welche ProcureData-Dienste wurden genutzt?",
+    "q3": "Welche Ergebnisse wurden erzielt?",
+    "q4": "Wie lässt sich das auf meinen Sektor anwenden?",
+    "errorRateLimit": "⚠️ Anfragelimit erreicht. Versuchen Sie es in Kürze erneut.",
+    "errorCredits": "⚠️ KI-Credits aufgebraucht. Kontaktieren Sie den Administrator.",
+    "errorGeneric": "Entschuldigung, ein Fehler ist aufgetreten. Versuchen Sie es erneut.",
+    "errorConnection": "Verbindungsfehler. Überprüfen Sie Ihr Netzwerk und versuchen Sie es erneut."
+  }
+}

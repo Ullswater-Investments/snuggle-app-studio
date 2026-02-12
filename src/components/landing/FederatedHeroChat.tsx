@@ -9,13 +9,7 @@ import { LiveMetricsBar } from "@/components/ai/LiveMetricsBar";
 import { TokenWalletBadge } from "@/components/ai/TokenWalletBadge";
 import { useTokenWallet } from "@/contexts/TokenWalletContext";
 import ReactMarkdown from "react-markdown";
-
-const SUGGESTED_QUESTIONS = [
-  "¿Qué es un espacio de datos federado?",
-  "¿Cómo funciona la soberanía de datos?",
-  "¿Qué rol juega Gaia-X?",
-  "¿Cómo se integra con mi ERP?",
-];
+import { useTranslation } from "react-i18next";
 
 type Msg = { role: "user" | "assistant"; content: string; tokens?: number };
 
@@ -49,6 +43,13 @@ function detectHighlightedNodes(text: string): string[] {
 }
 
 export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange }: Props) => {
+  const { t } = useTranslation("chat");
+  const SUGGESTED_QUESTIONS = [
+    t("federated.q1"),
+    t("federated.q2"),
+    t("federated.q3"),
+    t("federated.q4"),
+  ];
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -128,12 +129,12 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
       });
 
       if (!resp.ok || !resp.body) {
-        if (resp.status === 429) {
-          upsertAssistant("⚠️ Límite de solicitudes alcanzado. Inténtalo de nuevo en unos momentos.");
+      if (resp.status === 429) {
+          upsertAssistant(t("federated.errorRateLimit"));
         } else if (resp.status === 402) {
-          upsertAssistant("⚠️ Créditos de IA agotados. Contacta al administrador.");
+          upsertAssistant(t("federated.errorCredits"));
         } else {
-          upsertAssistant("Lo siento, ocurrió un error. Inténtalo de nuevo.");
+          upsertAssistant(t("federated.errorGeneric"));
         }
         setIsLoading(false);
         onProcessingChange?.(false);
@@ -169,7 +170,7 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
         }
       }
     } catch {
-      upsertAssistant("Error de conexión. Verifica tu red e inténtalo de nuevo.");
+      upsertAssistant(t("federated.errorConnection"));
     }
 
     setIsLoading(false);
@@ -217,7 +218,7 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
               Agente IA Federado
             </div>
             <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-              Pregunta sobre espacios de datos federados, soberanía de datos, Gaia-X o las capacidades de ProcureData.
+              {t("federated.description")}
             </p>
             <div className="flex flex-wrap gap-2 justify-center">
               {SUGGESTED_QUESTIONS.map((q) => (
@@ -293,7 +294,7 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Pregunta sobre el espacio de datos federado..."
+          placeholder={t("federated.placeholder")}
           className="flex-1 rounded-xl border bg-background px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring placeholder:text-muted-foreground"
           disabled={isLoading}
         />

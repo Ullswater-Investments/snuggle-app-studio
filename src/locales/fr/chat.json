@@ -1,0 +1,62 @@
+{
+  "assetChat": {
+    "welcome": "Bonjour ! 👋 Je suis votre **Assistant IA** expert de l'écosystème PONTUS-X. 🌐\n\nJ'analyse l'actif **\"{{assetName}}\"** pour répondre à vos questions avec précision.\n\nQue souhaitez-vous savoir sur ce dataset ?",
+    "title": "Posez une question à l'Assistant IA",
+    "description": "Assistant IA avec contexte de l'actif",
+    "placeholder": "Posez une question sur ce dataset...",
+    "loading": "Interrogation des métadonnées DDO...",
+    "footer": "L'assistant interroge des métadonnées vérifiées sur la blockchain (PONTUS-X)",
+    "errorIdentify": "Erreur : Impossible d'identifier l'actif",
+    "errorConnect": "Erreur de connexion avec l'assistant",
+    "errorGeneric": "❌ Désolé, une erreur s'est produite lors du traitement de votre demande. Veuillez réessayer."
+  },
+  "concierge": {
+    "welcome": "Bonjour ! 👋 Je suis votre **Assistant IA** de ProcureData. Je peux vous aider avec des informations sur les services, les tarifs, la durabilité et la technologie blockchain. Comment puis-je vous aider ?",
+    "title": "Assistant IA",
+    "subtitle": "Assistant ProcureData",
+    "clickToExpand": "Cliquez pour agrandir",
+    "placeholder": "Posez une question à l'assistant...",
+    "errorGeneric": "Désolé, une erreur s'est produite. Veuillez réessayer. 😔",
+    "errorConnect": "Erreur de connexion avec l'assistant",
+    "feedbackThanks": "Merci !",
+    "feedbackThanksDescription": "Vos retours nous aident à améliorer l'assistant 🚀",
+    "feedbackSent": "Retour envoyé",
+    "feedbackSentDescription": "Nous examinerons cette réponse pour améliorer l'assistant 📝",
+    "feedbackQuestion": "Comment l'assistant aurait-il dû répondre ?",
+    "feedbackPlaceholder": "Décrivez la réponse correcte (optionnel)",
+    "cancel": "Annuler",
+    "submitFeedback": "Envoyer le retour",
+    "feedbackPositive": "👍 Merci !",
+    "feedbackNegative": "📝 Retour envoyé",
+    "you": "VOUS",
+    "minimize": "Réduire",
+    "maximize": "Agrandir",
+    "close": "Fermer"
+  },
+  "federated": {
+    "badge": "Agent IA Fédéré",
+    "description": "Posez des questions sur les espaces de données fédérés, la souveraineté des données, Gaia-X ou les capacités de ProcureData.",
+    "placeholder": "Posez une question sur l'espace de données fédéré...",
+    "q1": "Qu'est-ce qu'un espace de données fédéré ?",
+    "q2": "Comment fonctionne la souveraineté des données ?",
+    "q3": "Quel rôle joue Gaia-X ?",
+    "q4": "Comment s'intègre-t-il avec mon ERP ?",
+    "errorRateLimit": "⚠️ Limite de requêtes atteinte. Réessayez dans quelques instants.",
+    "errorCredits": "⚠️ Crédits IA épuisés. Contactez l'administrateur.",
+    "errorGeneric": "Désolé, une erreur s'est produite. Réessayez.",
+    "errorConnection": "Erreur de connexion. Vérifiez votre réseau et réessayez."
+  },
+  "successStory": {
+    "badge": "Agent IA — {{company}}",
+    "description": "Posez des questions sur le cas de {{company}}, son défi, sa solution ou les services utilisés.",
+    "placeholder": "Posez une question sur le cas {{company}}...",
+    "q1": "Quel était le défi principal de {{company}} ?",
+    "q2": "Quels services de ProcureData ont été utilisés ?",
+    "q3": "Quels résultats ont été obtenus ?",
+    "q4": "Comment cela s'applique-t-il à mon secteur ?",
+    "errorRateLimit": "⚠️ Limite de requêtes atteinte. Réessayez dans quelques instants.",
+    "errorCredits": "⚠️ Crédits IA épuisés. Contactez l'administrateur.",
+    "errorGeneric": "Désolé, une erreur s'est produite. Réessayez.",
+    "errorConnection": "Erreur de connexion. Vérifiez votre réseau et réessayez."
+  }
+}
