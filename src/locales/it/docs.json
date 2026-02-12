@@ -482,7 +482,7 @@
         "title": "Capacità Multimodali",
         "content": "<p>Supporto per <strong>testo, voce e analisi di documenti</strong> caricati, con estrazione automatica delle informazioni rilevanti.</p>",
         "quiz": {
-          "question": "Quali tipi di input supporta ARIA?",
+          "question": "Quali tipi di input supporta il Consulente IA?",
           "options": ["Solo testo", "Testo, voce e documenti", "Solo voce", "Solo immagini"],
           "correctIndex": 1
         }

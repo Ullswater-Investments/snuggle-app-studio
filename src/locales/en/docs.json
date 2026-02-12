@@ -631,7 +631,7 @@
         "title": "Multimodal Capabilities",
         "content": "<p>Support for <strong>text, voice and uploaded document analysis</strong>, with automatic extraction of relevant information.</p>",
         "quiz": {
-          "question": "What input types does ARIA support?",
+          "question": "What input types does the AI Assistant support?",
           "options": ["Text only", "Text, voice and documents", "Voice only", "Images only"],
           "correctIndex": 1
         }

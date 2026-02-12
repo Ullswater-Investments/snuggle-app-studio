@@ -482,7 +482,7 @@
         "title": "Multimodale Capaciteiten",
         "content": "<p>Ondersteuning voor <strong>tekst, spraak en geüploade documentanalyse</strong>, met automatische extractie van relevante informatie.</p>",
         "quiz": {
-          "question": "Welke inputtypen ondersteunt ARIA?",
+          "question": "Welke inputtypen ondersteunt de AI Adviseur?",
           "options": ["Alleen tekst", "Tekst, spraak en documenten", "Alleen spraak", "Alleen afbeeldingen"],
           "correctIndex": 1
         }

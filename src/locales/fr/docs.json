@@ -482,7 +482,7 @@
         "title": "Capacités Multimodales",
         "content": "<p>Support pour <strong>texte, voix et analyse de documents</strong> téléchargés, avec extraction automatique des informations pertinentes.</p>",
         "quiz": {
-          "question": "Quels types d'entrée ARIA supporte-t-elle?",
+          "question": "Quels types d'entrée l'Assistant IA supporte-t-il?",
           "options": ["Texte uniquement", "Texte, voix et documents", "Voix uniquement", "Images uniquement"],
           "correctIndex": 1
         }

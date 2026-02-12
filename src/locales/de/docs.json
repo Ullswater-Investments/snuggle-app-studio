@@ -482,7 +482,7 @@
         "title": "Multimodale Fähigkeiten",
         "content": "<p>Unterstützung für <strong>Text, Sprache und hochgeladene Dokumentenanalyse</strong> mit automatischer Extraktion relevanter Informationen.</p>",
         "quiz": {
-          "question": "Welche Eingabetypen unterstützt ARIA?",
+          "question": "Welche Eingabetypen unterstützt der KI-Berater?",
           "options": ["Nur Text", "Text, Sprache und Dokumente", "Nur Sprache", "Nur Bilder"],
           "correctIndex": 1
         }
