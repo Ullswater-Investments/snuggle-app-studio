@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.fundamentos-agent]
 verify_jwt = false
+
+[functions.catalogo-datos-agent]
+verify_jwt = false

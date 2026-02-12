@@ -7,7 +7,7 @@ import {
 
 const phases = [
   { icon: Shield, name: "Fundamentos", desc: "Autenticación, RBAC y RLS multi-tenant", slug: "fundamentos" },
-  { icon: Database, name: "Catálogo de Datos", desc: "Registro y descubrimiento de activos" },
+  { icon: Database, name: "Catálogo de Datos", desc: "Registro y descubrimiento de activos", slug: "catalogo-datos" },
   { icon: GitBranch, name: "Flujo 3-Actores", desc: "Consumer → Subject → Holder" },
   { icon: FileText, name: "Políticas ODRL", desc: "Contratos digitales automáticos" },
   { icon: Wallet, name: "Web3 y DIDs", desc: "Identidades descentralizadas y EUROe" },

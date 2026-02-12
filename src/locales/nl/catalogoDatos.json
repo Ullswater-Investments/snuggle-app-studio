@@ -1,0 +1,27 @@
+{
+  "backToHome": "Terug naar home",
+  "badge": "Fase 2 — Gegevenscatalogus",
+  "title": "ProcureData Gegevenscatalogus",
+  "subtitle": "Registratie, ontdekking en governance van data-assets: de motor die de 47 succesverhalen verbindt.",
+  "layers": {
+    "registro": { "label": "Laag 1", "title": "Asset-registratie" },
+    "descubrimiento": { "label": "Laag 2", "title": "Ontdekking & Zoeken" },
+    "gobernanza": { "label": "Laag 3", "title": "Governance & Kwaliteit" }
+  },
+  "metrics": {
+    "categories": "Geregistreerde asset-categorieën",
+    "cases": "Succesverhalen verbonden met de catalogus",
+    "formats": "Ondersteunde dataformaten"
+  },
+  "chat": {
+    "badge": "AI-agent — Gegevenscatalogus",
+    "description": "Vraag over asset-registratie, gefedereerde ontdekking, datagovernance of hoe ze worden toegepast in de 47 cases.",
+    "placeholder": "Vraag over de gegevenscatalogus...",
+    "sectionTitle": "Gespecialiseerde AI Chat",
+    "sectionSubtitle": "Raadpleeg elk aspect van de gegevenscatalogus met onze expertAgent over de 47 succesverhalen.",
+    "q1": "Hoe wordt een data-asset geregistreerd in ProcureData?",
+    "q2": "Wat is DCAT-AP en hoe wordt het toegepast op de catalogus?",
+    "q3": "Hoe werkt gefedereerde data-ontdekking?",
+    "q4": "Hoe wordt de catalogus toegepast in de GigaFactory-case?"
+  }
+}

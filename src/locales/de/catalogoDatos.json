@@ -1,0 +1,27 @@
+{
+  "backToHome": "Zurück zur Startseite",
+  "badge": "Phase 2 — Datenkatalog",
+  "title": "ProcureData Datenkatalog",
+  "subtitle": "Registrierung, Entdeckung und Governance von Datenbeständen: der Motor, der die 47 Erfolgsgeschichten verbindet.",
+  "layers": {
+    "registro": { "label": "Schicht 1", "title": "Asset-Registrierung" },
+    "descubrimiento": { "label": "Schicht 2", "title": "Entdeckung & Suche" },
+    "gobernanza": { "label": "Schicht 3", "title": "Governance & Qualität" }
+  },
+  "metrics": {
+    "categories": "Registrierte Asset-Kategorien",
+    "cases": "Erfolgsgeschichten mit dem Katalog verbunden",
+    "formats": "Unterstützte Datenformate"
+  },
+  "chat": {
+    "badge": "KI-Agent — Datenkatalog",
+    "description": "Fragen Sie zu Asset-Registrierung, föderierter Entdeckung, Daten-Governance oder deren Anwendung in den 47 Fällen.",
+    "placeholder": "Frage zum Datenkatalog...",
+    "sectionTitle": "Spezialisierter KI-Chat",
+    "sectionSubtitle": "Befragen Sie unseren Experten-Agenten zu jedem Aspekt des Datenkatalogs in den 47 Erfolgsgeschichten.",
+    "q1": "Wie wird ein Daten-Asset in ProcureData registriert?",
+    "q2": "Was ist DCAT-AP und wie wird es im Katalog angewendet?",
+    "q3": "Wie funktioniert die föderierte Datenentdeckung?",
+    "q4": "Wie wird der Katalog im GigaFactory-Fall angewendet?"
+  }
+}
