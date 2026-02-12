@@ -10,6 +10,8 @@ import { OrganizationProvider } from "@/hooks/useOrganizationContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
+import { AdminLayout } from "@/components/admin/AdminLayout";
+import { AdminProtectedRoute } from "@/components/admin/AdminProtectedRoute";
 import { PublicDemoLayout } from "@/components/PublicDemoLayout";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Landing from "./pages/Landing";
@@ -21,6 +23,7 @@ import Catalog from "./pages/Catalog";
 import ProductDetail from "./pages/ProductDetail";
 import Requests from "./pages/Requests";
 import RequestWizard from "./pages/RequestWizard";
+import RequestDetailPage from "./pages/requests/RequestDetailPage";
 import Data from "./pages/Data";
 import DataView from "./pages/DataView";
 import Reports from "./pages/Reports";
@@ -45,6 +48,15 @@ import TechnicalDocs from "./pages/TechnicalDocs";
 import BusinessModels from "./pages/BusinessModels";
 import UseCases from "./pages/UseCases";
 import AdminFeedback from "./pages/AdminFeedback";
+import ExportSuccessCasesPage from "./pages/admin/ExportSuccessCasesPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminOrganizations from "./pages/admin/AdminOrganizations";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminTransactions from "./pages/admin/AdminTransactions";
+import AdminTransactionDetail from "./pages/admin/AdminTransactionDetail";
+import AdminGovernance from "./pages/admin/AdminGovernance";
+import AdminPublications from "./pages/admin/AdminPublications";
+import AdminPublicationDetail from "./pages/admin/AdminPublicationDetail";
 import UserGuide from "./pages/UserGuide";
 import DocumentoExplicativo1 from "./pages/DocumentoExplicativo1";
 import DocumentoExplicativo2 from "./pages/DocumentoExplicativo2";
@@ -185,6 +197,8 @@ import SostenibilidadFarmaDetail from "./pages/catalog/partners/biowin/Sostenibi
 import EnsayosClinicosDetail from "./pages/catalog/partners/biowin/EnsayosClinicosDetail";
 import PreciosApiDetail from "./pages/catalog/partners/biowin/PreciosApiDetail";
 import GenomicaBiomarcadoresDetail from "./pages/catalog/partners/biowin/GenomicaBiomarcadoresDetail";
+// Dataset Publishing Page
+import PublishDataset from "./pages/dashboard/PublishDataset";
 import PartnerItbidLogin from "./pages/PartnerItbidLogin";
 import DynamicPartnerLogin from "./pages/DynamicPartnerLogin";
 import ItbidProyecto from "./pages/partners/ItbidProyecto";
@@ -273,6 +287,8 @@ import NodeTechPage from "./pages/nodos/NodeTechPage";
 import AgileProcurementPrivateArea from "./pages/AgileProcurementPrivateArea";
 import AgileProcurementLogin from "./pages/AgileProcurementLogin";
 import AgileProcurementProtectedRoute from "./components/AgileProcurementProtectedRoute";
+import CreateOrganization from "./pages/onboarding/CreateOrganization";
+import RequestInvite from "./pages/onboarding/RequestInvite";
 
 const queryClient = new QueryClient();
 
@@ -286,445 +302,471 @@ const App = () => (
           <BrowserRouter>
             <ScrollToTop />
             <TokenWalletProvider>
-            <AuthProvider>
-              <OrganizationProvider>
-                <Routes>
-                  {/* Public routes */}
-                  <Route path="/" element={<Landing />} />
-                  <Route path="/auth" element={<Auth />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/guide" element={<Guide />} />
-                  <Route path="/architecture" element={<Architecture />} />
-                  <Route path="/whitepaper" element={<Whitepaper />} />
-                  <Route path="/docs/tecnico" element={<TechnicalDocs />} />
-                  <Route path="/models" element={<BusinessModels />} />
-                  <Route path="/use-cases" element={<UseCases />} />
-                  <Route path="/user-guide" element={<UserGuide />} />
-                  <Route path="/documento-explicativo-1" element={<DocumentoExplicativo1 />} />
-                  <Route path="/documento-explicativo-2" element={<DocumentoExplicativo2 />} />
-                  <Route path="/documento-explicativo-3" element={<DocumentoExplicativo3 />} />
-                  <Route path="/documento-explicativo-4" element={<DocumentoExplicativo4 />} />
-                  <Route path="/documento-explicativo-5" element={<DocumentoExplicativo5 />} />
-                  <Route path="/documento-explicativo-6" element={<DocumentoExplicativo6 />} />
-                  <Route path="/documento-explicativo-7" element={<DocumentoExplicativo7 />} />
-                  <Route path="/documento-explicativo-8" element={<DocumentoExplicativo8 />} />
-                  <Route path="/documento-explicativo-9" element={<DocumentoExplicativo9 />} />
-                  <Route path="/documento-explicativo-10" element={<DocumentoExplicativo10 />} />
-                  <Route path="/documento-explicativo-11" element={<DocumentoExplicativo11 />} />
-                  <Route path="/documento-explicativo-12" element={<DocumentoExplicativo12 />} />
-                  <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
-                  <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
-                  <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
-                  <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
-                  <Route path="/kit-espacio-datos" element={<KitEspacioDatos />} />
-                  <Route path="/contrato-adhesion" element={<ContratoAdhesion />} />
-                  <Route path="/token-wallet" element={<TokenWallet />} />
-                  <Route path="/fundamentos" element={<Fundamentos />} />
-                  <Route path="/catalogo-datos" element={<CatalogoDatos />} />
-                  <Route path="/flujo-3-actores" element={<Flujo3Actores />} />
-                  <Route path="/politicas-odrl" element={<PoliticasOdrl />} />
-                  <Route path="/web3-dids" element={<Web3Dids />} />
-                  <Route path="/ia-conversacional" element={<IAConversacional />} />
-                  <Route path="/conectores-erp" element={<ConectoresErpPage />} />
-                  <Route path="/red-gaia-x" element={<RedGaiaX />} />
-                  <Route path="/analytics-bi" element={<AnalyticsBi />} />
-                  <Route path="/multi-sector" element={<MultiSector />} />
-                  <Route path="/une-0087" element={<Une0087 />} />
-                  <Route path="/recomendaciones-une" element={<RecomendacionesUne />} />
-                  <Route path="/libro-de-reglas" element={<LibroDeReglas />} />
-                  <Route path="/glosario-une" element={<GlosarioUne />} />
-                  <Route path="/transparencia" element={<PortalTransparencia />} />
-                  <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
-                  <Route path="/nodos/marketplace" element={<MarketplacePage />} />
-                  <Route path="/nodos/odrl" element={<OdrlPage />} />
-                  <Route path="/nodos/monetizacion" element={<MonetizacionPage />} />
-                  <Route path="/nodos/marca-blanca" element={<MarcaBlancaPage />} />
-                  <Route path="/nodos/identidad-did" element={<IdentidadDIDPage />} />
-                  <Route path="/nodos/smart-contracts" element={<SmartContractsPage />} />
-                  <Route path="/nodos/pagos-euroe" element={<PagosEUROePage />} />
-                  <Route path="/nodos/conectores-erp" element={<ConectoresERPPage />} />
-                  <Route path="/nodos/gobernanza-idsa" element={<GobernanzaIDSAPage />} />
-                  <Route path="/nodos/multi-tenant-rls" element={<MultiTenantRLSPage />} />
-                  <Route path="/nodos/requisitos" element={<NodeRequirementsPage />} />
-                  <Route path="/nodos/tecnologia" element={<NodeTechPage />} />
-                  <Route path="/agile-procurement/login" element={<AgileProcurementLogin />} />
-                  <Route path="/agile-procurement" element={
-                    <AgileProcurementProtectedRoute>
-                      <AgileProcurementPrivateArea />
-                    </AgileProcurementProtectedRoute>
-                  } />
-                  
-                  {/* Motor de ProcureData - Technical Deep Dives */}
-                  <Route path="/motor" element={<Navigate to="/models" replace />} />
-                  <Route path="/motor/wallet-web3" element={<WalletWeb3 />} />
-                  <Route path="/motor/identidad-ssi" element={<IdentidadSSI />} />
-                  <Route path="/motor/pagos-euroe" element={<PagosEUROe />} />
-                  <Route path="/motor/activity-feed" element={<MotorActivityFeed />} />
-                  <Route path="/motor/smart-alerts" element={<SmartAlerts />} />
-                  <Route path="/motor/gobernanza-odrl" element={<GobernanzaODRL />} />
-                  <Route path="/motor/multi-tenant-rls" element={<MultiTenantRLS />} />
-                  <Route path="/motor/audit-logs" element={<MotorAuditLogs />} />
-                  <Route path="/motor/modelo-idsa" element={<ModeloIDSA />} />
-                  <Route path="/motor/conectores-erp" element={<ConectoresERP />} />
-                  <Route path="/motor/edge-functions" element={<EdgeFunctions />} />
-                  <Route path="/motor/tour-guiado" element={<TourGuiado />} />
-                  <Route path="/motor/docs-interactivos" element={<DocsInteractivos />} />
+              <AuthProvider>
+                <OrganizationProvider>
+                  <Routes>
+                    {/* Public routes */}
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/guide" element={<Guide />} />
+                    <Route path="/architecture" element={<Architecture />} />
+                    <Route path="/whitepaper" element={<Whitepaper />} />
+                    <Route path="/docs/tecnico" element={<TechnicalDocs />} />
+                    <Route path="/models" element={<BusinessModels />} />
+                    <Route path="/use-cases" element={<UseCases />} />
+                    <Route path="/user-guide" element={<UserGuide />} />
+                    <Route path="/documento-explicativo-1" element={<DocumentoExplicativo1 />} />
+                    <Route path="/documento-explicativo-2" element={<DocumentoExplicativo2 />} />
+                    <Route path="/documento-explicativo-3" element={<DocumentoExplicativo3 />} />
+                    <Route path="/documento-explicativo-4" element={<DocumentoExplicativo4 />} />
+                    <Route path="/documento-explicativo-5" element={<DocumentoExplicativo5 />} />
+                    <Route path="/documento-explicativo-6" element={<DocumentoExplicativo6 />} />
+                    <Route path="/documento-explicativo-7" element={<DocumentoExplicativo7 />} />
+                    <Route path="/documento-explicativo-8" element={<DocumentoExplicativo8 />} />
+                    <Route path="/documento-explicativo-9" element={<DocumentoExplicativo9 />} />
+                    <Route path="/documento-explicativo-10" element={<DocumentoExplicativo10 />} />
+                    <Route path="/documento-explicativo-11" element={<DocumentoExplicativo11 />} />
+                    <Route path="/documento-explicativo-12" element={<DocumentoExplicativo12 />} />
+                    <Route path="/documento-explicativo-13" element={<DocumentoExplicativo13 />} />
+                    <Route path="/documento-explicativo-14" element={<DocumentoExplicativo14 />} />
+                    <Route path="/documento-explicativo-15" element={<DocumentoExplicativo15 />} />
+                    <Route path="/capacidades-enterprise" element={<CapacidadesEnterprise />} />
+                    <Route path="/kit-espacio-datos" element={<KitEspacioDatos />} />
+                    <Route path="/contrato-adhesion" element={<ContratoAdhesion />} />
+                    <Route path="/token-wallet" element={<TokenWallet />} />
+                    <Route path="/fundamentos" element={<Fundamentos />} />
+                    <Route path="/catalogo-datos" element={<CatalogoDatos />} />
+                    <Route path="/flujo-3-actores" element={<Flujo3Actores />} />
+                    <Route path="/politicas-odrl" element={<PoliticasOdrl />} />
+                    <Route path="/web3-dids" element={<Web3Dids />} />
+                    <Route path="/ia-conversacional" element={<IAConversacional />} />
+                    <Route path="/conectores-erp" element={<ConectoresErpPage />} />
+                    <Route path="/red-gaia-x" element={<RedGaiaX />} />
+                    <Route path="/analytics-bi" element={<AnalyticsBi />} />
+                    <Route path="/multi-sector" element={<MultiSector />} />
+                    <Route path="/une-0087" element={<Une0087 />} />
+                    <Route path="/recomendaciones-une" element={<RecomendacionesUne />} />
+                    <Route path="/libro-de-reglas" element={<LibroDeReglas />} />
+                    <Route path="/glosario-une" element={<GlosarioUne />} />
+                    <Route path="/transparencia" element={<PortalTransparencia />} />
+                    <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
+                    <Route path="/nodos/marketplace" element={<MarketplacePage />} />
+                    <Route path="/nodos/odrl" element={<OdrlPage />} />
+                    <Route path="/nodos/monetizacion" element={<MonetizacionPage />} />
+                    <Route path="/nodos/marca-blanca" element={<MarcaBlancaPage />} />
+                    <Route path="/nodos/identidad-did" element={<IdentidadDIDPage />} />
+                    <Route path="/nodos/smart-contracts" element={<SmartContractsPage />} />
+                    <Route path="/nodos/pagos-euroe" element={<PagosEUROePage />} />
+                    <Route path="/nodos/conectores-erp" element={<ConectoresERPPage />} />
+                    <Route path="/nodos/gobernanza-idsa" element={<GobernanzaIDSAPage />} />
+                    <Route path="/nodos/multi-tenant-rls" element={<MultiTenantRLSPage />} />
+                    <Route path="/nodos/requisitos" element={<NodeRequirementsPage />} />
+                    <Route path="/nodos/tecnologia" element={<NodeTechPage />} />
 
-                  {/* Public Demo Routes - Accessible without authentication */}
-                  <Route element={<PublicDemoLayout />}>
-                    <Route path="/catalog" element={<Catalog />} />
-            <Route path="/catalog/telemetria-flota" element={<TelemetriaFlotaDetail />} />
-            <Route path="/catalog/consumo-electrico-industrial" element={<ConsumoElectricoDetail />} />
-            <Route path="/catalog/historico-meteorologico" element={<HistoricoMeteorologicoDetail />} />
-            <Route path="/catalog/trazabilidad-aceite-oliva" element={<TrazabilidadAceiteDetail />} />
-            <Route path="/catalog/score-crediticio-b2b" element={<ScoreCrediticioDetail />} />
-            <Route path="/catalog/huella-hidrica-agricola" element={<HuellaHidricaDetail />} />
-            <Route path="/catalog/resiliencia-supply-chain" element={<ResilienciaSupplyChainDetail />} />
-            <Route path="/catalog/huella-carbono-automotriz" element={<HuellaCarbonAutomotrizDetail />} />
-            <Route path="/catalog/capacidad-productiva-automotriz" element={<CapacidadProductivaDetail />} />
-            <Route path="/catalog/benchmarking-precios-componentes" element={<BenchmarkingPreciosDetail />} />
-            <Route path="/catalog/telemetria-ia-automotriz" element={<TelemetriaIAAutomotrizDetail />} />
-            <Route path="/catalog/certificaciones-aeronauticas" element={<CertificacionesAeronauticasDetail />} />
-            <Route path="/catalog/combustibles-saf-aviacion" element={<CombustiblesSAFDetail />} />
-            <Route path="/catalog/disponibilidad-mro-aeronautico" element={<DisponibilidadMRODetail />} />
-            <Route path="/catalog/precios-aleaciones-aeronauticas" element={<PreciosAleacionesDetail />} />
-            <Route path="/catalog/tolerancia-termica-aleaciones" element={<ToleranciaTérmicaDetail />} />
-            <Route path="/catalog/proveedores-premium-automotrices" element={<ProveedoresPremiumDetail />} />
-            <Route path="/catalog/energia-limpia-motor-valley" element={<EnergiaLimpiaMotorValleyDetail />} />
-            <Route path="/catalog/produccion-artesanal-automotriz" element={<ProduccionArtesanalDetail />} />
-            <Route path="/catalog/precios-componentes-superdeportivos" element={<PreciosComponentesSuperdeportivosDetail />} />
-            <Route path="/catalog/telemetria-alto-desempeno" element={<TelemetriaAltoDesempenoDetail />} />
-            <Route path="/catalog/certificaciones-semiconductores" element={<CertificacionesSemiconductoresDetail />} />
-            <Route path="/catalog/impacto-ambiental-chips" element={<ImpactoAmbientalChipsDetail />} />
-            <Route path="/catalog/capacidad-sala-limpia" element={<CapacidadSalaLimpiaDetail />} />
-            <Route path="/catalog/precios-componentes-electronicos" element={<PreciosComponentesElectronicosDetail />} />
-            <Route path="/catalog/caracterizacion-nanomateriales" element={<CaracterizacionNanomaterialesDetail />} />
-            <Route path="/catalog/madurez-digital-tic" element={<MadurezDigitalTICDetail />} />
-            <Route path="/catalog/economia-circular-tic" element={<EconomiaCircularTICDetail />} />
-            <Route path="/catalog/capacidad-desarrollo-software" element={<CapacidadDesarrolloSoftwareDetail />} />
-            <Route path="/catalog/scoring-financiero-digital" element={<ScoringFinancieroDigitalDetail />} />
-            <Route path="/catalog/operadores-red-energetica" element={<OperadoresRedEnergeticaDetail />} />
-            <Route path="/catalog/mix-energetico-alemania" element={<MixEnergeticoAlemaniaDetail />} />
-            <Route path="/catalog/flexibilidad-energetica" element={<FlexibilidadEnergeticaDetail />} />
-            <Route path="/catalog/precios-mayoristas-energia" element={<PreciosMayoristasEnergiaDetail />} />
-            <Route path="/catalog/smart-grid-contadores" element={<SmartGridContadoresDetail />} />
-            <Route path="/catalog/empresas-tecnologicas-belgas" element={<EmpresasTecnologicasBelgasDetail />} />
-            {/* Green Procurement Catalog Routes */}
-            <Route path="/catalog/factores-emision-materiales" element={<FactoresEmisionDetail />} />
-            <Route path="/catalog/intensidad-carbono-red" element={<IntensidadCarbonoRedDetail />} />
-            <Route path="/catalog/emisiones-logisticas-modal" element={<EmisionesLogisticasDetail />} />
-            <Route path="/catalog/emisiones-scope3-cloud" element={<EmisionesScope3CloudDetail />} />
-            <Route path="/catalog/precios-materiales-reciclados" element={<PreciosMaterialesRecicladosDetail />} />
-            <Route path="/catalog/inventario-bioplasticos" element={<InventarioBioplasticosDetail />} />
-            <Route path="/catalog/riesgo-hidrico-proveedores" element={<RiesgoHidricoDetail />} />
-            <Route path="/catalog/minerales-conflicto-3tg" element={<MineralesConflictoDetail />} />
-            <Route path="/catalog/registro-ecolabels" element={<RegistroEcolabelsDetail />} />
-            <Route path="/catalog/sustancias-reach-rohs" element={<SustanciasReachRohsDetail />} />
-            <Route path="/catalog/deforestacion-eudr" element={<DeforestacionEudrDetail />} />
-            <Route path="/catalog/epd-construccion" element={<EpdConstruccionDetail />} />
-            <Route path="/catalog/scoring-esg-proveedores" element={<ScoringEsgDetail />} />
-            <Route path="/catalog/violaciones-laborales" element={<ViolacionesLaboralesDetail />} />
-            <Route path="/catalog/indice-reparabilidad" element={<IndiceReparabilidadDetail />} />
-            <Route path="/catalog/diversidad-proveedores" element={<DiversidadProveedoresDetail />} />
-            <Route path="/catalog/garantias-origen-renovable" element={<GarantiasOrigenDetail />} />
-            <Route path="/catalog/tco-vehiculos-ev-ice" element={<TcoVehiculosDetail />} />
-            <Route path="/catalog/creditos-carbono-voluntarios" element={<CreditosCarbonoDetail />} />
-            <Route path="/catalog/eficiencia-maquinaria-industrial" element={<EficienciaMaquinariaDetail />} />
-            {/* Partner Product Detail Routes - GAIA */}
-            <Route path="/catalog/telemetria-industrial-iot" element={<TelemetriaIotDetail />} />
-            {/* Partner Product Detail Routes - FEIQUE */}
-            <Route path="/catalog/cumplimiento-reach-clp" element={<CumplimientoReachDetail />} />
-            <Route path="/catalog/huella-ambiental-quimica" element={<HuellaQuimicaDetail />} />
-            <Route path="/catalog/capacidad-produccion-quimica" element={<CapacidadQuimicaDetail />} />
-            <Route path="/catalog/precios-productos-quimicos" element={<PreciosQuimicosDetail />} />
-            <Route path="/catalog/analisis-laboratorio-quimico" element={<AnalisisLaboratorioDetail />} />
-            {/* Partner Product Detail Routes - Agoria */}
-            <Route path="/catalog/sostenibilidad-industria-belga" element={<SostenibilidadIndustrialDetail />} />
-            <Route path="/catalog/integracion-robotica" element={<IntegracionRoboticaDetail />} />
-            <Route path="/catalog/precios-automatizacion" element={<PreciosAutomatizacionDetail />} />
-            <Route path="/catalog/telemetria-cobots" element={<TelemetriaCobotDetail />} />
-            {/* Partner Product Detail Routes - ANFIA */}
-            <Route path="/catalog/proveedores-automotrices-italianos" element={<ProveedoresAutomotricesItalianosDet />} />
-            <Route path="/catalog/transicion-ev-italia" element={<TransicionEvItaliaDetail />} />
-            <Route path="/catalog/estampacion-fundicion" element={<EstampacionFundicionDetail />} />
-            <Route path="/catalog/precios-recambios-automotrices" element={<PreciosRecambiosDetail />} />
-            <Route path="/catalog/ensayos-seguridad-vehicular" element={<EnsayosSeguridadDetail />} />
-            {/* Partner Product Detail Routes - FNSEA */}
-            <Route path="/catalog/explotaciones-agricolas-francesas" element={<ExplotacionesAgricolasDetail />} />
-            <Route path="/catalog/sostenibilidad-agricola" element={<SostenibilidadAgricolaDetail />} />
-            <Route path="/catalog/capacidad-cosecha" element={<CapacidadCosechaDetail />} />
-            <Route path="/catalog/precios-commodities-agricolas" element={<PreciosCommoditiesDetail />} />
-            <Route path="/catalog/agricultura-precision" element={<AgriculturaPrecisionDetail />} />
-            {/* Partner Product Detail Routes - NEVI */}
-            <Route path="/catalog/profesionales-compras" element={<ProfesionalesComprasDetail />} />
-            <Route path="/catalog/compras-sostenibles" element={<ComprasSosteniblesDetail />} />
-            <Route path="/catalog/proveedores-precualificados" element={<ProveedoresPrecualificadosDetail />} />
-            <Route path="/catalog/analisis-gasto-categoria" element={<AnalisisGastoDetail />} />
-            <Route path="/catalog/riesgo-supply-chain" element={<RiesgoSupplyChainDetail />} />
-            {/* Partner Product Detail Routes - AIP */}
-            <Route path="/catalog/directorio-industrial-portugues" element={<DirectorioIndustrialDetail />} />
-            <Route path="/catalog/sostenibilidad-portugal" element={<SostenibilidadPortugalDetail />} />
-            <Route path="/catalog/fabricacion-subcontratacion" element={<FabricacionSubcontratacionDetail />} />
-            <Route path="/catalog/costes-industriales-portugal" element={<CostesIndustrialesDetail />} />
-            <Route path="/catalog/fabricacion-moldes" element={<FabricacionMoldesDetail />} />
-            {/* Partner Product Detail Routes - Food Valley */}
-            <Route path="/catalog/empresas-agroalimentarias" element={<EmpresasAgroalimentariasDetail />} />
-            <Route path="/catalog/nutricion-sostenible" element={<NutricionSostenibleDetail />} />
-            <Route path="/catalog/procesamiento-alimentario" element={<ProcesamientoAlimentarioDetail />} />
-            <Route path="/catalog/precios-ingredientes" element={<PreciosIngredientesDetail />} />
-            <Route path="/catalog/analisis-sensorial" element={<AnalisisSensorialDetail />} />
-            {/* Partner Product Detail Routes - BioWin */}
-            <Route path="/catalog/empresas-biotecnologicas" element={<EmpresasBiotechDetail />} />
-            <Route path="/catalog/sostenibilidad-farmaceutica" element={<SostenibilidadFarmaDetail />} />
-            <Route path="/catalog/ensayos-clinicos" element={<EnsayosClinicosDetail />} />
-            <Route path="/catalog/precios-apis-farmaceuticos" element={<PreciosApiDetail />} />
-            <Route path="/catalog/genomica-biomarcadores" element={<GenomicaBiomarcadoresDetail />} />
-                    <Route path="/sustainability" element={<Sustainability />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/services/:id" element={<ServiceDetail />} />
-                    <Route path="/innovation" element={<InnovationLab />} />
-                    <Route path="/success-stories" element={<SuccessStories />} />
-                    <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
-                    <Route path="/partners" element={<Partners />} />
-                  </Route>
-                  
-                  {/* Premium Partners */}
-                  <Route path="/partners/premium" element={<PremiumPartners />} />
-                  <Route path="/partners/premium/:partnerId" element={<PremiumPartnerPage />} />
+                    {/* Onboarding routes */}
+                    <Route path="/onboarding/create-organization" element={<CreateOrganization />} />
+                    <Route path="/onboarding/request-invite" element={<RequestInvite />} />
 
-                  {/* Partner Pages - Dynamic route */}
-                  <Route path="/partners/:partnerSlug/login" element={<DynamicPartnerLogin />} />
-                  
-                  {/* Partner Pages - ITBID specific */}
-                  <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
-                  <Route path="/partners/itbid/proyecto" element={<ItbidProtectedRoute><ItbidProyecto /></ItbidProtectedRoute>} />
-                  <Route path="/partners/itbid/casos-exito" element={<ItbidProtectedRoute><ItbidCasosExito /></ItbidProtectedRoute>} />
-                  <Route path="/partners/itbid/whitepaper" element={<ItbidProtectedRoute><ItbidWhitepaper /></ItbidProtectedRoute>} />
-                  <Route path="/partners/itbid/doc-tecnico" element={<ItbidProtectedRoute><ItbidDocTecnico /></ItbidProtectedRoute>} />
+                    <Route path="/agile-procurement/login" element={<AgileProcurementLogin />} />
+                    <Route path="/agile-procurement" element={
+                      <AgileProcurementProtectedRoute>
+                        <AgileProcurementPrivateArea />
+                      </AgileProcurementProtectedRoute>
+                    } />
 
-                  {/* Partner Pages - TeleNatura EBT specific */}
-                  <Route path="/partners/telenatura-ebt/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaMiembros />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/telenatura-ebt/proyecto" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaProyecto />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/telenatura-ebt/doc-tecnico" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaDocTecnico />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/telenatura-ebt/whitepaper" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaWhitepaper />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/telenatura-ebt/presentacion" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaPresentacion />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/telenatura-ebt/catalogo" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaCatalogo />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/telenatura-ebt/acuerdo" element={
-                    <PartnerProtectedRoute partnerSlug="telenatura-ebt">
-                      <TeleNaturaAcuerdo />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Motor de ProcureData - Technical Deep Dives */}
+                    <Route path="/motor" element={<Navigate to="/models" replace />} />
+                    <Route path="/motor/wallet-web3" element={<WalletWeb3 />} />
+                    <Route path="/motor/identidad-ssi" element={<IdentidadSSI />} />
+                    <Route path="/motor/pagos-euroe" element={<PagosEUROe />} />
+                    <Route path="/motor/activity-feed" element={<MotorActivityFeed />} />
+                    <Route path="/motor/smart-alerts" element={<SmartAlerts />} />
+                    <Route path="/motor/gobernanza-odrl" element={<GobernanzaODRL />} />
+                    <Route path="/motor/multi-tenant-rls" element={<MultiTenantRLS />} />
+                    <Route path="/motor/audit-logs" element={<MotorAuditLogs />} />
+                    <Route path="/motor/modelo-idsa" element={<ModeloIDSA />} />
+                    <Route path="/motor/conectores-erp" element={<ConectoresERP />} />
+                    <Route path="/motor/edge-functions" element={<EdgeFunctions />} />
+                    <Route path="/motor/tour-guiado" element={<TourGuiado />} />
+                    <Route path="/motor/docs-interactivos" element={<DocsInteractivos />} />
 
-                  {/* Partner Pages - AERCE */}
-                  <Route path="/partners/aerce/proyecto" element={<AerceProyecto />} />
-                  <Route path="/partners/aerce/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="aerce">
-                      <AerceMiembros />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/aerce/doc-tecnico" element={
-                    <PartnerProtectedRoute partnerSlug="aerce">
-                      <AerceDocTecnico />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/aerce/doc-institucional" element={
-                    <Navigate to="/partners/aerce/doc-tecnico" replace />
-                  } />
-                  <Route path="/partners/aerce/whitepaper" element={
-                    <PartnerProtectedRoute partnerSlug="aerce">
-                      <AerceWhitepaper />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Public Demo Routes - Accessible without authentication */}
+                    <Route element={<PublicDemoLayout />}>
+                      <Route path="/catalog" element={<Catalog />} />
+                      <Route path="/catalog/telemetria-flota" element={<TelemetriaFlotaDetail />} />
+                      <Route path="/catalog/consumo-electrico-industrial" element={<ConsumoElectricoDetail />} />
+                      <Route path="/catalog/historico-meteorologico" element={<HistoricoMeteorologicoDetail />} />
+                      <Route path="/catalog/trazabilidad-aceite-oliva" element={<TrazabilidadAceiteDetail />} />
+                      <Route path="/catalog/score-crediticio-b2b" element={<ScoreCrediticioDetail />} />
+                      <Route path="/catalog/huella-hidrica-agricola" element={<HuellaHidricaDetail />} />
+                      <Route path="/catalog/resiliencia-supply-chain" element={<ResilienciaSupplyChainDetail />} />
+                      <Route path="/catalog/huella-carbono-automotriz" element={<HuellaCarbonAutomotrizDetail />} />
+                      <Route path="/catalog/capacidad-productiva-automotriz" element={<CapacidadProductivaDetail />} />
+                      <Route path="/catalog/benchmarking-precios-componentes" element={<BenchmarkingPreciosDetail />} />
+                      <Route path="/catalog/telemetria-ia-automotriz" element={<TelemetriaIAAutomotrizDetail />} />
+                      <Route path="/catalog/certificaciones-aeronauticas" element={<CertificacionesAeronauticasDetail />} />
+                      <Route path="/catalog/combustibles-saf-aviacion" element={<CombustiblesSAFDetail />} />
+                      <Route path="/catalog/disponibilidad-mro-aeronautico" element={<DisponibilidadMRODetail />} />
+                      <Route path="/catalog/precios-aleaciones-aeronauticas" element={<PreciosAleacionesDetail />} />
+                      <Route path="/catalog/tolerancia-termica-aleaciones" element={<ToleranciaTérmicaDetail />} />
+                      <Route path="/catalog/proveedores-premium-automotrices" element={<ProveedoresPremiumDetail />} />
+                      <Route path="/catalog/energia-limpia-motor-valley" element={<EnergiaLimpiaMotorValleyDetail />} />
+                      <Route path="/catalog/produccion-artesanal-automotriz" element={<ProduccionArtesanalDetail />} />
+                      <Route path="/catalog/precios-componentes-superdeportivos" element={<PreciosComponentesSuperdeportivosDetail />} />
+                      <Route path="/catalog/telemetria-alto-desempeno" element={<TelemetriaAltoDesempenoDetail />} />
+                      <Route path="/catalog/certificaciones-semiconductores" element={<CertificacionesSemiconductoresDetail />} />
+                      <Route path="/catalog/impacto-ambiental-chips" element={<ImpactoAmbientalChipsDetail />} />
+                      <Route path="/catalog/capacidad-sala-limpia" element={<CapacidadSalaLimpiaDetail />} />
+                      <Route path="/catalog/precios-componentes-electronicos" element={<PreciosComponentesElectronicosDetail />} />
+                      <Route path="/catalog/caracterizacion-nanomateriales" element={<CaracterizacionNanomaterialesDetail />} />
+                      <Route path="/catalog/madurez-digital-tic" element={<MadurezDigitalTICDetail />} />
+                      <Route path="/catalog/economia-circular-tic" element={<EconomiaCircularTICDetail />} />
+                      <Route path="/catalog/capacidad-desarrollo-software" element={<CapacidadDesarrolloSoftwareDetail />} />
+                      <Route path="/catalog/scoring-financiero-digital" element={<ScoringFinancieroDigitalDetail />} />
+                      <Route path="/catalog/operadores-red-energetica" element={<OperadoresRedEnergeticaDetail />} />
+                      <Route path="/catalog/mix-energetico-alemania" element={<MixEnergeticoAlemaniaDetail />} />
+                      <Route path="/catalog/flexibilidad-energetica" element={<FlexibilidadEnergeticaDetail />} />
+                      <Route path="/catalog/precios-mayoristas-energia" element={<PreciosMayoristasEnergiaDetail />} />
+                      <Route path="/catalog/smart-grid-contadores" element={<SmartGridContadoresDetail />} />
+                      <Route path="/catalog/empresas-tecnologicas-belgas" element={<EmpresasTecnologicasBelgasDetail />} />
+                      {/* Green Procurement Catalog Routes */}
+                      <Route path="/catalog/factores-emision-materiales" element={<FactoresEmisionDetail />} />
+                      <Route path="/catalog/intensidad-carbono-red" element={<IntensidadCarbonoRedDetail />} />
+                      <Route path="/catalog/emisiones-logisticas-modal" element={<EmisionesLogisticasDetail />} />
+                      <Route path="/catalog/emisiones-scope3-cloud" element={<EmisionesScope3CloudDetail />} />
+                      <Route path="/catalog/precios-materiales-reciclados" element={<PreciosMaterialesRecicladosDetail />} />
+                      <Route path="/catalog/inventario-bioplasticos" element={<InventarioBioplasticosDetail />} />
+                      <Route path="/catalog/riesgo-hidrico-proveedores" element={<RiesgoHidricoDetail />} />
+                      <Route path="/catalog/minerales-conflicto-3tg" element={<MineralesConflictoDetail />} />
+                      <Route path="/catalog/registro-ecolabels" element={<RegistroEcolabelsDetail />} />
+                      <Route path="/catalog/sustancias-reach-rohs" element={<SustanciasReachRohsDetail />} />
+                      <Route path="/catalog/deforestacion-eudr" element={<DeforestacionEudrDetail />} />
+                      <Route path="/catalog/epd-construccion" element={<EpdConstruccionDetail />} />
+                      <Route path="/catalog/scoring-esg-proveedores" element={<ScoringEsgDetail />} />
+                      <Route path="/catalog/violaciones-laborales" element={<ViolacionesLaboralesDetail />} />
+                      <Route path="/catalog/indice-reparabilidad" element={<IndiceReparabilidadDetail />} />
+                      <Route path="/catalog/diversidad-proveedores" element={<DiversidadProveedoresDetail />} />
+                      <Route path="/catalog/garantias-origen-renovable" element={<GarantiasOrigenDetail />} />
+                      <Route path="/catalog/tco-vehiculos-ev-ice" element={<TcoVehiculosDetail />} />
+                      <Route path="/catalog/creditos-carbono-voluntarios" element={<CreditosCarbonoDetail />} />
+                      <Route path="/catalog/eficiencia-maquinaria-industrial" element={<EficienciaMaquinariaDetail />} />
+                      {/* Partner Product Detail Routes - GAIA */}
+                      <Route path="/catalog/telemetria-industrial-iot" element={<TelemetriaIotDetail />} />
+                      {/* Partner Product Detail Routes - FEIQUE */}
+                      <Route path="/catalog/cumplimiento-reach-clp" element={<CumplimientoReachDetail />} />
+                      <Route path="/catalog/huella-ambiental-quimica" element={<HuellaQuimicaDetail />} />
+                      <Route path="/catalog/capacidad-produccion-quimica" element={<CapacidadQuimicaDetail />} />
+                      <Route path="/catalog/precios-productos-quimicos" element={<PreciosQuimicosDetail />} />
+                      <Route path="/catalog/analisis-laboratorio-quimico" element={<AnalisisLaboratorioDetail />} />
+                      {/* Partner Product Detail Routes - Agoria */}
+                      <Route path="/catalog/sostenibilidad-industria-belga" element={<SostenibilidadIndustrialDetail />} />
+                      <Route path="/catalog/integracion-robotica" element={<IntegracionRoboticaDetail />} />
+                      <Route path="/catalog/precios-automatizacion" element={<PreciosAutomatizacionDetail />} />
+                      <Route path="/catalog/telemetria-cobots" element={<TelemetriaCobotDetail />} />
+                      {/* Partner Product Detail Routes - ANFIA */}
+                      <Route path="/catalog/proveedores-automotrices-italianos" element={<ProveedoresAutomotricesItalianosDet />} />
+                      <Route path="/catalog/transicion-ev-italia" element={<TransicionEvItaliaDetail />} />
+                      <Route path="/catalog/estampacion-fundicion" element={<EstampacionFundicionDetail />} />
+                      <Route path="/catalog/precios-recambios-automotrices" element={<PreciosRecambiosDetail />} />
+                      <Route path="/catalog/ensayos-seguridad-vehicular" element={<EnsayosSeguridadDetail />} />
+                      {/* Partner Product Detail Routes - FNSEA */}
+                      <Route path="/catalog/explotaciones-agricolas-francesas" element={<ExplotacionesAgricolasDetail />} />
+                      <Route path="/catalog/sostenibilidad-agricola" element={<SostenibilidadAgricolaDetail />} />
+                      <Route path="/catalog/capacidad-cosecha" element={<CapacidadCosechaDetail />} />
+                      <Route path="/catalog/precios-commodities-agricolas" element={<PreciosCommoditiesDetail />} />
+                      <Route path="/catalog/agricultura-precision" element={<AgriculturaPrecisionDetail />} />
+                      {/* Partner Product Detail Routes - NEVI */}
+                      <Route path="/catalog/profesionales-compras" element={<ProfesionalesComprasDetail />} />
+                      <Route path="/catalog/compras-sostenibles" element={<ComprasSosteniblesDetail />} />
+                      <Route path="/catalog/proveedores-precualificados" element={<ProveedoresPrecualificadosDetail />} />
+                      <Route path="/catalog/analisis-gasto-categoria" element={<AnalisisGastoDetail />} />
+                      <Route path="/catalog/riesgo-supply-chain" element={<RiesgoSupplyChainDetail />} />
+                      {/* Partner Product Detail Routes - AIP */}
+                      <Route path="/catalog/directorio-industrial-portugues" element={<DirectorioIndustrialDetail />} />
+                      <Route path="/catalog/sostenibilidad-portugal" element={<SostenibilidadPortugalDetail />} />
+                      <Route path="/catalog/fabricacion-subcontratacion" element={<FabricacionSubcontratacionDetail />} />
+                      <Route path="/catalog/costes-industriales-portugal" element={<CostesIndustrialesDetail />} />
+                      <Route path="/catalog/fabricacion-moldes" element={<FabricacionMoldesDetail />} />
+                      {/* Partner Product Detail Routes - Food Valley */}
+                      <Route path="/catalog/empresas-agroalimentarias" element={<EmpresasAgroalimentariasDetail />} />
+                      <Route path="/catalog/nutricion-sostenible" element={<NutricionSostenibleDetail />} />
+                      <Route path="/catalog/procesamiento-alimentario" element={<ProcesamientoAlimentarioDetail />} />
+                      <Route path="/catalog/precios-ingredientes" element={<PreciosIngredientesDetail />} />
+                      <Route path="/catalog/analisis-sensorial" element={<AnalisisSensorialDetail />} />
+                      {/* Partner Product Detail Routes - BioWin */}
+                      <Route path="/catalog/empresas-biotecnologicas" element={<EmpresasBiotechDetail />} />
+                      <Route path="/catalog/sostenibilidad-farmaceutica" element={<SostenibilidadFarmaDetail />} />
+                      <Route path="/catalog/ensayos-clinicos" element={<EnsayosClinicosDetail />} />
+                      <Route path="/catalog/precios-apis-farmaceuticos" element={<PreciosApiDetail />} />
+                      <Route path="/catalog/genomica-biomarcadores" element={<GenomicaBiomarcadoresDetail />} />
+                      <Route path="/sustainability" element={<Sustainability />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/services/:id" element={<ServiceDetail />} />
+                      <Route path="/innovation" element={<InnovationLab />} />
+                      <Route path="/success-stories" element={<SuccessStories />} />
+                      <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
+                      <Route path="/partners" element={<Partners />} />
+                      {/* Admin export page - public access for marketing downloads */}
+                      <Route path="/admin/export-success-cases" element={<ExportSuccessCasesPage />} />
+                    </Route>
 
-                  {/* Partner Pages - ARACEA */}
-                  <Route path="/partners/aracea/proyecto" element={<AraceaProyecto />} />
-                  <Route path="/partners/aracea/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="aracea">
-                      <AraceaMiembros />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Premium Partners */}
+                    <Route path="/partners/premium" element={<PremiumPartners />} />
+                    <Route path="/partners/premium/:partnerId" element={<PremiumPartnerPage />} />
 
-                  {/* Partner Pages - VALERDATA */}
-                  <Route path="/partners/valerdata/proyecto" element={<ValerdataProyecto />} />
-                  <Route path="/partners/valerdata/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="valerdata">
-                      <ValerdataMiembros />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Partner Pages - Dynamic route */}
+                    <Route path="/partners/:partnerSlug/login" element={<DynamicPartnerLogin />} />
 
-                  {/* Partner Pages - SERES */}
-                  <Route path="/partners/seres" element={<SeresLogin />} />
-                  <Route path="/partners/seres/proyecto" element={<SeresProyecto />} />
-                  <Route path="/partners/seres/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresMiembros />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/exploracion" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresExploracion />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/arquitectura" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresArquitectura />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/funcionalidades" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresFuncionalidades />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresCasosUso />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso/nestle" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresNestle />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso/coviran" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresCovirán />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso/ilunion" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresIlunion />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso/siemens-gamesa" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresSiemensGamesa />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso/amadeus" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresAmadeus />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/casos-uso/bt" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresBT />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/monetizacion" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresMonetizacion />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/seres/miembros/roadmap" element={
-                    <PartnerProtectedRoute partnerSlug="seres">
-                      <SeresRoadmap />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Partner Pages - ITBID specific */}
+                    <Route path="/partners/itbid" element={<PartnerItbidLogin />} />
+                    <Route path="/partners/itbid/proyecto" element={<ItbidProtectedRoute><ItbidProyecto /></ItbidProtectedRoute>} />
+                    <Route path="/partners/itbid/casos-exito" element={<ItbidProtectedRoute><ItbidCasosExito /></ItbidProtectedRoute>} />
+                    <Route path="/partners/itbid/whitepaper" element={<ItbidProtectedRoute><ItbidWhitepaper /></ItbidProtectedRoute>} />
+                    <Route path="/partners/itbid/doc-tecnico" element={<ItbidProtectedRoute><ItbidDocTecnico /></ItbidProtectedRoute>} />
 
-                  {/* Partner Pages - CDI Agro */}
-                  <Route path="/partners/cdi-agro" element={<CdiAgroLogin />} />
-                  <Route path="/partners/cdi-agro/login" element={<CdiAgroLogin />} />
-                  <Route path="/partners/cdi-agro/proyecto" element={<CdiAgroProyecto />} />
-                  <Route path="/partners/cdi-agro/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="cdi-agro">
-                      <CdiAgroMiembros />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Partner Pages - TeleNatura EBT specific */}
+                    <Route path="/partners/telenatura-ebt/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/telenatura-ebt/proyecto" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaProyecto />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/telenatura-ebt/doc-tecnico" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaDocTecnico />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/telenatura-ebt/whitepaper" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaWhitepaper />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/telenatura-ebt/presentacion" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaPresentacion />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/telenatura-ebt/catalogo" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaCatalogo />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/telenatura-ebt/acuerdo" element={
+                      <PartnerProtectedRoute partnerSlug="telenatura-ebt">
+                        <TeleNaturaAcuerdo />
+                      </PartnerProtectedRoute>
+                    } />
 
-                  {/* Partner Pages - CloserStill Media */}
-                  <Route path="/partners/closerstill" element={<CloserStillLogin />} />
-                  <Route path="/partners/closerstill/proyecto" element={<CloserStillProyecto />} />
-                  <Route path="/partners/closerstill/miembros" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStillMiembros />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/closerstill/miembros/365" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStill365 />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/closerstill/miembros/casos-uso" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStillCasosUso />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/closerstill/miembros/innovacion" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStillInnovation />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/closerstill/miembros/innovacion/:caseId" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStillUseCaseDetail />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/closerstill/miembros/pioneer" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStillPioneer />
-                    </PartnerProtectedRoute>
-                  } />
-                  <Route path="/partners/closerstill/miembros/prismaticos" element={
-                    <PartnerProtectedRoute partnerSlug="closerstill">
-                      <CloserStillPrismaticos />
-                    </PartnerProtectedRoute>
-                  } />
+                    {/* Partner Pages - AERCE */}
+                    <Route path="/partners/aerce/proyecto" element={<AerceProyecto />} />
+                    <Route path="/partners/aerce/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="aerce">
+                        <AerceMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/aerce/doc-tecnico" element={
+                      <PartnerProtectedRoute partnerSlug="aerce">
+                        <AerceDocTecnico />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/aerce/doc-institucional" element={
+                      <Navigate to="/partners/aerce/doc-tecnico" replace />
+                    } />
+                    <Route path="/partners/aerce/whitepaper" element={
+                      <PartnerProtectedRoute partnerSlug="aerce">
+                        <AerceWhitepaper />
+                      </PartnerProtectedRoute>
+                    } />
 
-                  {/* Protected routes with AppLayout */}
-                  <Route element={
-                    <ProtectedRoute>
-                      <AppLayout />
-                    </ProtectedRoute>
-                  }>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/catalog/product/:id" element={<ProductDetail />} />
-                    <Route path="/requests" element={<Requests />} />
-                    <Route path="/requests/new" element={<RequestWizard />} />
-                    <Route path="/data" element={<Data />} />
-                    <Route path="/data/view/:id" element={<DataView />} />
-                    <Route path="/opportunities" element={<Opportunities />} />
-                    <Route path="/reports" element={<Reports />} />
-                    <Route path="/analytics" element={<SellerAnalytics />} />
-                    <Route path="/notifications" element={<Notifications />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/settings/erp-config" element={<ERPConfig />} />
-                    <Route path="/settings/organization" element={<SettingsOrganization />} />
-                    <Route path="/settings/preferences" element={<SettingsPreferences />} />
-                    <Route path="/settings/notifications" element={<SettingsNotifications />} />
-                    <Route path="/settings/webhooks" element={<WebhookSettings />} />
-                    <Route path="/settings/audit" element={<AuditLogs />} />
-                    <Route path="/admin/feedback" element={<AdminFeedback />} />
-                  </Route>
-                  
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </OrganizationProvider>
-            </AuthProvider>
+                    {/* Partner Pages - ARACEA */}
+                    <Route path="/partners/aracea/proyecto" element={<AraceaProyecto />} />
+                    <Route path="/partners/aracea/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="aracea">
+                        <AraceaMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+
+                    {/* Partner Pages - VALERDATA */}
+                    <Route path="/partners/valerdata/proyecto" element={<ValerdataProyecto />} />
+                    <Route path="/partners/valerdata/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="valerdata">
+                        <ValerdataMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+
+                    {/* Partner Pages - SERES */}
+                    <Route path="/partners/seres" element={<SeresLogin />} />
+                    <Route path="/partners/seres/proyecto" element={<SeresProyecto />} />
+                    <Route path="/partners/seres/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/exploracion" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresExploracion />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/arquitectura" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresArquitectura />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/funcionalidades" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresFuncionalidades />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresCasosUso />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso/nestle" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresNestle />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso/coviran" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresCovirán />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso/ilunion" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresIlunion />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso/siemens-gamesa" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresSiemensGamesa />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso/amadeus" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresAmadeus />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/casos-uso/bt" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresBT />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/monetizacion" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresMonetizacion />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/seres/miembros/roadmap" element={
+                      <PartnerProtectedRoute partnerSlug="seres">
+                        <SeresRoadmap />
+                      </PartnerProtectedRoute>
+                    } />
+
+                    {/* Partner Pages - CDI Agro */}
+                    <Route path="/partners/cdi-agro" element={<CdiAgroLogin />} />
+                    <Route path="/partners/cdi-agro/login" element={<CdiAgroLogin />} />
+                    <Route path="/partners/cdi-agro/proyecto" element={<CdiAgroProyecto />} />
+                    <Route path="/partners/cdi-agro/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="cdi-agro">
+                        <CdiAgroMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+
+                    {/* Partner Pages - CloserStill Media */}
+                    <Route path="/partners/closerstill" element={<CloserStillLogin />} />
+                    <Route path="/partners/closerstill/proyecto" element={<CloserStillProyecto />} />
+                    <Route path="/partners/closerstill/miembros" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStillMiembros />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/closerstill/miembros/365" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStill365 />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/closerstill/miembros/casos-uso" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStillCasosUso />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/closerstill/miembros/innovacion" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStillInnovation />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/closerstill/miembros/innovacion/:caseId" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStillUseCaseDetail />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/closerstill/miembros/pioneer" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStillPioneer />
+                      </PartnerProtectedRoute>
+                    } />
+                    <Route path="/partners/closerstill/miembros/prismaticos" element={
+                      <PartnerProtectedRoute partnerSlug="closerstill">
+                        <CloserStillPrismaticos />
+                      </PartnerProtectedRoute>
+                    } />
+
+                    {/* Admin Protected Routes */}
+                    <Route element={
+                      <AdminProtectedRoute>
+                        <AdminLayout />
+                      </AdminProtectedRoute>
+                    }>
+                      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                      <Route path="/admin/organizations" element={<AdminOrganizations />} />
+                      <Route path="/admin/users" element={<AdminUsers />} />
+                      <Route path="/admin/transactions" element={<AdminTransactions />} />
+                      <Route path="/admin/transactions/:id" element={<AdminTransactionDetail />} />
+                      <Route path="/admin/governance" element={<AdminGovernance />} />
+                      <Route path="/admin/publications" element={<AdminPublications />} />
+                      <Route path="/admin/publications/:id" element={<AdminPublicationDetail />} />
+                    </Route>
+
+                    {/* Protected routes with AppLayout */}
+                    <Route element={
+                      <ProtectedRoute>
+                        <AppLayout />
+                      </ProtectedRoute>
+                    }>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/catalog/product/:id" element={<ProductDetail />} />
+                      <Route path="/requests" element={<Requests />} />
+                      <Route path="/requests/:requestId" element={<RequestDetailPage />} />
+                      <Route path="/requests/new" element={<RequestWizard />} />
+                      <Route path="/request-wizard" element={<RequestWizard />} />
+                      <Route path="/dashboard/publish" element={<PublishDataset />} />
+                      <Route path="/data" element={<Data />} />
+                      <Route path="/data/view/:id" element={<DataView />} />
+                      <Route path="/opportunities" element={<Opportunities />} />
+                      <Route path="/reports" element={<Reports />} />
+                      <Route path="/analytics" element={<SellerAnalytics />} />
+                      <Route path="/notifications" element={<Notifications />} />
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/settings/erp-config" element={<ERPConfig />} />
+                      <Route path="/settings/organization" element={<SettingsOrganization />} />
+                      <Route path="/settings/preferences" element={<SettingsPreferences />} />
+                      <Route path="/settings/notifications" element={<SettingsNotifications />} />
+                      <Route path="/settings/webhooks" element={<WebhookSettings />} />
+                      <Route path="/settings/audit" element={<AuditLogs />} />
+                      <Route path="/admin/feedback" element={<AdminFeedback />} />
+                    </Route>
+
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </OrganizationProvider>
+              </AuthProvider>
             </TokenWalletProvider>
           </BrowserRouter>
         </QueryClientProvider>

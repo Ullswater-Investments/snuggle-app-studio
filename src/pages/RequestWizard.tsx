@@ -10,7 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight, CheckCircle, Package } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Package, Info, Shield, Ban, AlertTriangle, ExternalLink, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { z } from "zod";
 import { OrderSummary } from "@/components/OrderSummary";
@@ -18,7 +19,6 @@ import { PaymentGateway } from "@/components/PaymentGateway";
 
 const requestSchema = z.object({
   purpose: z.string().min(10, "El propósito debe tener al menos 10 caracteres").max(500),
-  accessDuration: z.number().min(1).max(365),
   justification: z.string().min(20, "La justificación debe tener al menos 20 caracteres").max(1000),
 });
 
@@ -44,10 +44,10 @@ const RequestWizard = () => {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [formData, setFormData] = useState({
     purpose: "",
-    accessDuration: 90,
     justification: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [governanceReviewed, setGovernanceReviewed] = useState(false);
   const { sendNotification } = useNotifications();
 
   const STORAGE_KEY = "procuredata_wizard_draft";
@@ -109,6 +109,7 @@ const RequestWizard = () => {
           pricing_model,
           billing_period,
           status,
+          custom_metadata,
           subject_org:organizations!data_assets_subject_org_id_fkey (
             id, name, tax_id, type
           ),
@@ -135,6 +136,9 @@ const RequestWizard = () => {
     enabled: !!assetId,
   });
 
+  // Get the access timeout from the asset's governance policy
+  const accessTimeoutDays = (asset?.custom_metadata as any)?.access_policy?.access_timeout_days || 90;
+
   // Obtener organización del usuario
   const { data: userProfile } = useQuery({
     queryKey: ["user-profile"],
@@ -150,11 +154,46 @@ const RequestWizard = () => {
     },
   });
 
+  // Check for existing active transaction for this asset
+  const { data: existingTransaction } = useQuery({
+    queryKey: ["existing-transaction", assetId, userProfile?.organization_id],
+    queryFn: async () => {
+      if (!assetId || !userProfile?.organization_id) return null;
+      const { data } = await supabase
+        .from("data_transactions")
+        .select("id, status")
+        .eq("asset_id", assetId)
+        .eq("consumer_org_id", userProfile.organization_id)
+        .in("status", ["initiated", "pending_subject", "pending_holder", "approved", "completed"])
+        .limit(1)
+        .maybeSingle();
+      return data;
+    },
+    enabled: !!assetId && !!userProfile?.organization_id,
+  });
+
+  // Redirect to existing transaction if found
+  useEffect(() => {
+    if (existingTransaction) {
+      if (existingTransaction.status === "completed") {
+        toast.info("Ya tienes acceso a este activo. Redirigiendo...");
+        navigate(`/data/view/${assetId}`);
+      } else {
+        toast.info("Ya tienes una solicitud activa para este activo. Redirigiendo...");
+        navigate(`/requests/${existingTransaction.id}`);
+      }
+    }
+  }, [existingTransaction, assetId, navigate]);
+
+
+
   const createTransactionMutation = useMutation({
     mutationFn: async () => {
-      if (!asset || !userProfile) throw new Error("Missing data");
+      if (!asset || !userProfile || !asset.subject_org || !asset.holder_org) {
+        throw new Error("Missing data");
+      }
 
-      // Crear transacción
+      // Crear transacción con registro de aceptación de políticas
       const { data: transaction, error: transactionError } = await supabase
         .from("data_transactions")
         .insert({
@@ -163,18 +202,23 @@ const RequestWizard = () => {
           subject_org_id: asset.subject_org.id,
           holder_org_id: asset.holder_org.id,
           purpose: formData.purpose,
-          access_duration_days: formData.accessDuration,
+          access_duration_days: accessTimeoutDays,
           justification: formData.justification,
           requested_by: user?.id,
           status: "pending_subject",
+          metadata: {
+            governance_accepted: true,
+            governance_accepted_at: new Date().toISOString(),
+            access_timeout_days: accessTimeoutDays,
+          },
         })
         .select()
         .single();
 
       if (transactionError) throw transactionError;
 
-      // Generar política ODRL básica
-      const odrlPolicy = {
+      // Generar política de uso básica
+      const usagePolicy = {
         "@context": "http://www.w3.org/ns/odrl.jsonld",
         "@type": "Offer",
         uid: transaction.id,
@@ -191,7 +235,7 @@ const RequestWizard = () => {
           }, {
             leftOperand: "elapsedTime",
             operator: "lteq",
-            rightOperand: `P${formData.accessDuration}D`
+            rightOperand: `P${accessTimeoutDays}D`
           }]
         }]
       };
@@ -201,7 +245,7 @@ const RequestWizard = () => {
         .from("data_policies")
         .insert({
           transaction_id: transaction.id,
-          odrl_policy_json: odrlPolicy,
+          odrl_policy_json: usagePolicy,
         });
 
       if (policyError) throw policyError;
@@ -230,11 +274,10 @@ const RequestWizard = () => {
       newErrors.purpose = "Debes seleccionar un propósito";
     }
 
-    if (step === 3 && formData.accessDuration < 1) {
-      newErrors.accessDuration = "La duración debe ser al menos 1 día";
-    }
 
-    if (step === 4) {
+
+
+    if (step === 3) {
       try {
         requestSchema.parse(formData);
       } catch (error) {
@@ -281,13 +324,13 @@ const RequestWizard = () => {
     );
   }
 
-  if (!asset || !assetId) {
+  if (!asset || !assetId || !asset.product) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Card>
           <CardContent className="pt-6">
-            <p className="text-center">Activo no encontrado</p>
-            <Button className="mt-4" onClick={() => navigate("/catalog")}>
+            <p className="text-center">Activo no encontrado o datos incompletos</p>
+            <Button className="mt-4 w-full" onClick={() => navigate("/catalog")}>
               Volver al catálogo
             </Button>
           </CardContent>
@@ -296,26 +339,17 @@ const RequestWizard = () => {
     );
   }
 
+  // Extract governance policies from asset metadata
+  const accessPolicy = (asset?.custom_metadata as any)?.access_policy;
+  const permissions = accessPolicy?.permissions || [];
+  const prohibitions = accessPolicy?.prohibitions || [];
+  const obligations = accessPolicy?.obligations || [];
+  const externalTermsUrl = accessPolicy?.terms_url || accessPolicy?.external_policy_url;
+
   const progress = (step / 5) * 100;
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <h1 className="text-2xl font-bold cursor-pointer" onClick={() => navigate("/dashboard")}>
-            <span className="procuredata-gradient">PROCUREDATA</span>
-          </h1>
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" onClick={() => navigate("/requests")}>
-              Mis Solicitudes
-            </Button>
-            <span className="text-sm text-muted-foreground">{user?.email}</span>
-            <Button variant="outline" onClick={signOut}>
-              Cerrar Sesión
-            </Button>
-          </div>
-        </div>
-      </header>
 
       <main className="container mx-auto p-6">
         {/* Layout de 2 Columnas: Formulario + Resumen */}
@@ -353,9 +387,9 @@ const RequestWizard = () => {
               <div className="flex items-center gap-4 rounded-lg border p-4">
                 <Package className="h-12 w-12 text-primary" />
                 <div className="flex-1">
-                  <h3 className="font-semibold">{asset.product.name}</h3>
+                  <h3 className="font-semibold">{asset.product?.name || "Dataset"}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {asset.product.description}
+                    {asset.product?.description || "Sin descripción"}
                   </p>
                 </div>
               </div>
@@ -363,15 +397,15 @@ const RequestWizard = () => {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-sm font-medium">Proveedor (Subject):</span>
-                  <span className="text-sm">{asset.subject_org.name}</span>
+                  <span className="text-sm">{asset.subject_org?.name || "N/A"}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm font-medium">Poseedor de datos (Holder):</span>
-                  <span className="text-sm">{asset.holder_org.name}</span>
+                  <span className="text-sm">{asset.holder_org?.name || "N/A"}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm font-medium">Categoría:</span>
-                  <span className="text-sm">{asset.product.category}</span>
+                  <span className="text-sm">{asset.product?.category || "General"}</span>
                 </div>
               </div>
 
@@ -429,57 +463,27 @@ const RequestWizard = () => {
           </Card>
         )}
 
-        {/* Paso 3: Duración del acceso */}
+        {/* Paso 3: Justificación (was step 4) */}
         {step === 3 && (
           <Card>
             <CardHeader>
-              <CardTitle>3. Duración del Acceso</CardTitle>
-              <CardDescription>¿Por cuánto tiempo necesitas acceder a los datos?</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="duration">Duración en días *</Label>
-                <Select
-                  value={formData.accessDuration.toString()}
-                  onValueChange={(value) => setFormData({ ...formData, accessDuration: parseInt(value) })}
-                >
-                  <SelectTrigger id="duration">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="30">30 días (1 mes)</SelectItem>
-                    <SelectItem value="90">90 días (3 meses)</SelectItem>
-                    <SelectItem value="180">180 días (6 meses)</SelectItem>
-                    <SelectItem value="365">365 días (1 año)</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors.accessDuration && (
-                  <p className="text-sm text-destructive">{errors.accessDuration}</p>
-                )}
-              </div>
-
-              <div className="flex justify-between">
-                <Button variant="outline" onClick={handleBack}>
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Atrás
-                </Button>
-                <Button onClick={handleNext}>
-                  Continuar
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Paso 4: Justificación */}
-        {step === 4 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>4. Justificación</CardTitle>
+              <CardTitle>3. Justificación</CardTitle>
               <CardDescription>Explica por qué necesitas estos datos</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/* Informative block about access conditions */}
+              <div className="rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 p-4">
+                <div className="flex items-start gap-3">
+                  <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-1">Condiciones de acceso</p>
+                    <p className="text-sm text-blue-700 dark:text-blue-300">
+                      Este activo se concede por un periodo de <strong>{accessTimeoutDays} días</strong>, según la política del proveedor.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="justification">Justificación detallada *</Label>
                 <Textarea
@@ -512,6 +516,117 @@ const RequestWizard = () => {
           </Card>
         )}
 
+        {/* Paso 4: Revisión de Gobernanza */}
+        {step === 4 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>4. Revisión de Gobernanza</CardTitle>
+              <CardDescription>Revisa las políticas de uso del activo antes de confirmar</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              {/* Permisos */}
+              <div className="rounded-lg border border-green-200 bg-green-50 dark:bg-green-950/20 dark:border-green-800 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Shield className="h-5 w-5 text-green-600" />
+                  <h4 className="font-semibold text-green-800 dark:text-green-300">Permisos</h4>
+                </div>
+                {permissions.length > 0 ? (
+                  <ul className="space-y-1.5">
+                    {permissions.map((p: any, i: number) => (
+                      <li key={i} className="text-sm text-green-700 dark:text-green-400 flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 mt-0.5 shrink-0" />
+                        <span>{typeof p === 'string' ? p : p.description || p.action || JSON.stringify(p)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-sm text-green-600 dark:text-green-400">Uso estándar según términos de la plataforma.</p>
+                )}
+              </div>
+
+              {/* Prohibiciones */}
+              <div className="rounded-lg border border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-800 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Ban className="h-5 w-5 text-red-600" />
+                  <h4 className="font-semibold text-red-800 dark:text-red-300">Prohibiciones</h4>
+                </div>
+                {prohibitions.length > 0 ? (
+                  <ul className="space-y-1.5">
+                    {prohibitions.map((p: any, i: number) => (
+                      <li key={i} className="text-sm text-red-700 dark:text-red-400 flex items-start gap-2">
+                        <Ban className="h-4 w-4 mt-0.5 shrink-0" />
+                        <span>{typeof p === 'string' ? p : p.description || p.action || JSON.stringify(p)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-sm text-red-600 dark:text-red-400">No se han definido prohibiciones específicas.</p>
+                )}
+              </div>
+
+              {/* Obligaciones */}
+              <div className="rounded-lg border border-amber-200 bg-amber-50 dark:bg-amber-950/20 dark:border-amber-800 p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertTriangle className="h-5 w-5 text-amber-600" />
+                  <h4 className="font-semibold text-amber-800 dark:text-amber-300">Obligaciones</h4>
+                </div>
+                {obligations.length > 0 ? (
+                  <ul className="space-y-1.5">
+                    {obligations.map((p: any, i: number) => (
+                      <li key={i} className="text-sm text-amber-700 dark:text-amber-400 flex items-start gap-2">
+                        <AlertTriangle className="h-4 w-4 mt-0.5 shrink-0" />
+                        <span>{typeof p === 'string' ? p : p.description || p.action || JSON.stringify(p)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-sm text-amber-600 dark:text-amber-400">No se han definido obligaciones específicas.</p>
+                )}
+              </div>
+
+              {/* External Terms URL */}
+              {externalTermsUrl && (
+                <a 
+                  href={externalTermsUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 p-4 rounded-lg border-2 border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors"
+                >
+                  <ExternalLink className="h-5 w-5 text-primary shrink-0" />
+                  <div>
+                    <p className="font-semibold text-primary">Consultar Términos y Condiciones Completos</p>
+                    <p className="text-xs text-muted-foreground truncate">{externalTermsUrl}</p>
+                  </div>
+                </a>
+              )}
+
+              {/* Timeout */}
+              <div className="rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 p-4">
+                <div className="flex items-center gap-3">
+                  <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400 shrink-0" />
+                  <div>
+                    <p className="text-sm font-medium text-blue-900 dark:text-blue-200">Duración del acceso</p>
+                    <p className="text-sm text-blue-700 dark:text-blue-300">
+                      <strong>{accessTimeoutDays} días</strong> desde la aprobación, según la política del proveedor.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-between">
+                <Button variant="outline" onClick={handleBack}>
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Atrás
+                </Button>
+                <Button onClick={() => { setGovernanceReviewed(true); handleNext(); }}>
+                  He revisado las políticas
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Paso 5: Confirmación */}
         {step === 5 && (
           <Card>
@@ -530,8 +645,8 @@ const RequestWizard = () => {
                   <p className="text-base">{formData.purpose}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Duración</p>
-                  <p className="text-base">{formData.accessDuration} días</p>
+                  <p className="text-sm font-medium text-muted-foreground">Duración de Acceso</p>
+                  <p className="text-base">{accessTimeoutDays} días (definido por el proveedor)</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Justificación</p>

@@ -15,7 +15,6 @@ interface Organization {
   website?: string;
   linkedin_url?: string;
   marketplace_description?: string;
-  assurance_level?: string;
 }
 
 interface OrganizationContextType {
@@ -62,12 +61,18 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
         .select('id, is_demo, sector')
         .in('id', orgIds.map(o => o.id)) as any; // Temporal hasta que se actualicen los tipos
 
-      // Combinar los datos
-      const orgs: Organization[] = orgIds.map(org => ({
-        ...org,
-        is_demo: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.is_demo ?? false,
-        sector: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.sector,
-      }));
+      // Combinar los datos y deduplicar por ID
+      const seen = new Set<string>();
+      const orgs: Organization[] = [];
+      for (const org of orgIds) {
+        if (seen.has(org.id)) continue;
+        seen.add(org.id);
+        orgs.push({
+          ...org,
+          is_demo: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.is_demo ?? false,
+          sector: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.sector,
+        });
+      }
 
       return orgs;
     },

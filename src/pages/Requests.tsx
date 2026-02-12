@@ -15,7 +15,8 @@ import { NegotiationChat } from "@/components/NegotiationChat";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download, BarChart3, Unlock } from "lucide-react";
+import { Clock, CheckCircle, XCircle, ArrowRight, ClipboardList, Plus, Info, Search, AlertCircle, Lock, Rocket, History, LayoutList, LayoutGrid, Calendar, Loader2, Download, BarChart3, Unlock, ShieldAlert } from "lucide-react";
+import { RevokeAccessButton } from "@/components/RevokeAccessButton";
 import { RequestsAnalyticsDashboard } from "@/components/RequestsAnalyticsDashboard";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
@@ -34,6 +35,7 @@ const STATUS_CONFIG: Record<string, { label: string; icon: any; color: string; t
   denied_holder: { label: "Acceso Denegado", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "El Provider ha denegado el acceso" },
   completed: { label: "Acceso Activo", icon: Unlock, color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400", tooltip: "Puedes descargar el dataset vía Ocean Provider" },
   cancelled: { label: "Cancelada", icon: XCircle, color: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400", tooltip: "Transacción cancelada" },
+  revoked: { label: "Acceso Revocado", icon: ShieldAlert, color: "bg-red-200 text-red-900 dark:bg-red-900/40 dark:text-red-300", tooltip: "El proveedor ha revocado el acceso a estos datos" },
 };
 
 const Requests = () => {
@@ -209,7 +211,7 @@ const Requests = () => {
   ));
 
   const historicalTransactions = applyFilters(filteredTransactions.filter((t) => 
-    ["completed", "approved", "denied_subject", "denied_holder", "cancelled"].includes(t.status)
+    ["completed", "approved", "denied_subject", "denied_holder", "cancelled", "revoked"].includes(t.status)
   ));
 
   const allTransactions = applyFilters(filteredTransactions);
@@ -570,7 +572,7 @@ const Requests = () => {
                         </div>
                         <div>
                           <p className="text-sm font-medium text-muted-foreground">Duración</p>
-                          <p className="text-sm">{transaction.access_duration_days} días</p>
+                          <p className="text-sm">{transaction.access_duration_days} días (proveedor)</p>
                         </div>
                       </div>
                       <div>
@@ -605,83 +607,13 @@ const Requests = () => {
                           )}
                           Denegar
                         </Button>
-                        <Sheet>
-                          <SheetTrigger asChild>
-                            <Button
-                              variant="outline"
-                              onClick={() => setSelectedTransaction(transaction)}
-                            >
-                              Ver Detalle
-                              <ArrowRight className="ml-2 h-4 w-4" />
-                            </Button>
-                          </SheetTrigger>
-                          <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
-                            <SheetHeader>
-                              <SheetTitle>{transaction.asset.product.name}</SheetTitle>
-                              <SheetDescription>
-                                Detalle completo de la solicitud de datos
-                              </SheetDescription>
-                            </SheetHeader>
-                            
-                            <Tabs defaultValue="details" className="mt-6">
-                              <TabsList className="grid w-full grid-cols-3">
-                                <TabsTrigger value="details">Detalles</TabsTrigger>
-                                <TabsTrigger value="timeline">Timeline</TabsTrigger>
-                                <TabsTrigger value="messages">Mensajes</TabsTrigger>
-                              </TabsList>
-                              
-                              <TabsContent value="details" className="mt-4">
-                                <div className="space-y-4">
-                                  <div className="flex items-center gap-4">
-                                    <div className="flex-1 text-center">
-                                      <div className="text-sm font-medium">{transaction.consumer_org.name}</div>
-                                      <div className="text-xs text-muted-foreground">Solicitante</div>
-                                    </div>
-                                    <ArrowRight className="h-6 w-6 text-muted-foreground" />
-                                    <div className="flex-1 text-center">
-                                      <div className="text-sm font-medium">{transaction.subject_org.name}</div>
-                                      <div className="text-xs text-muted-foreground">Proveedor</div>
-                                    </div>
-                                  </div>
-
-                                  <div>
-                                    <h4 className="text-sm font-semibold mb-2">Propósito</h4>
-                                    <p className="text-sm text-muted-foreground">{transaction.purpose}</p>
-                                  </div>
-
-                                  <div>
-                                    <h4 className="text-sm font-semibold mb-2">Justificación</h4>
-                                    <p className="text-sm text-muted-foreground">{transaction.justification}</p>
-                                  </div>
-
-                                  <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                      <h4 className="text-sm font-semibold mb-1">Duración</h4>
-                                      <p className="text-sm text-muted-foreground">{transaction.access_duration_days} días</p>
-                                    </div>
-                                    <div>
-                                      <h4 className="text-sm font-semibold mb-1">Estado</h4>
-                                      <Badge className={STATUS_CONFIG[transaction.status].color}>
-                                        {React.createElement(STATUS_CONFIG[transaction.status].icon, {
-                                          className: "mr-1 h-3 w-3"
-                                        })}
-                                        {STATUS_CONFIG[transaction.status].label}
-                                      </Badge>
-                                    </div>
-                                  </div>
-                                </div>
-                              </TabsContent>
-                              
-                              <TabsContent value="timeline" className="mt-4">
-                                <TransactionDetailView transaction={transaction} role={role} />
-                              </TabsContent>
-                              
-                              <TabsContent value="messages" className="mt-4">
-                                <NegotiationChat transactionId={transaction.id} />
-                              </TabsContent>
-                            </Tabs>
-                          </SheetContent>
-                        </Sheet>
+                        <Button
+                          variant="outline"
+                          onClick={() => navigate(`/requests/${transaction.id}`)}
+                        >
+                          Ver Detalle
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
                       </div>
                     </CardContent>
                   </Card>
@@ -789,12 +721,24 @@ const Requests = () => {
                           Creada: {new Date(transaction.created_at).toLocaleDateString("es-ES")}
                         </p>
                       </div>
-                      <Button
-                        variant="outline"
-                        onClick={() => navigate(`/data/view/${transaction.id}`)}
-                      >
-                        Ver Datos Recibidos
-                      </Button>
+                      <div className="flex gap-2">
+                        {transaction.status === "completed" &&
+                          (transaction.subject_org_id === activeOrg?.id || transaction.holder_org_id === activeOrg?.id) && (
+                          <RevokeAccessButton
+                            transactionId={transaction.id}
+                            resourceName={transaction.asset?.product?.name}
+                            actorOrgId={activeOrg!.id}
+                            onRevoked={() => queryClient.invalidateQueries({ queryKey: ["transactions"] })}
+                          />
+                        )}
+                        <Button
+                          variant="outline"
+                          onClick={() => navigate(`/requests/${transaction.id}`)}
+                        >
+                          Ver Detalles
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -886,13 +830,23 @@ const Requests = () => {
                         <p className="text-xs text-muted-foreground">
                           {formatDistanceToNow(new Date(transaction.created_at), { addSuffix: true, locale: es })}
                         </p>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => navigate(`/requests/${transaction.id}`)}
-                        >
-                          Ver Detalle
-                        </Button>
+                        <div className="flex gap-2">
+                          {transaction.status === "completed" && (role === "subject" || role === "holder") && (
+                            <RevokeAccessButton
+                              transactionId={transaction.id}
+                              resourceName={transaction.asset?.product?.name}
+                              actorOrgId={activeOrg!.id}
+                              onRevoked={() => queryClient.invalidateQueries({ queryKey: ["transactions"] })}
+                            />
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => navigate(`/requests/${transaction.id}`)}
+                          >
+                            Ver Detalle
+                          </Button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -991,12 +945,22 @@ const Requests = () => {
                       <p className="text-sm text-muted-foreground">
                         Creada: {new Date(transaction.created_at).toLocaleDateString("es-ES")}
                       </p>
-                      <Button
-                        variant="outline"
-                        onClick={() => navigate(`/requests/${transaction.id}`)}
-                      >
-                        Ver Detalle
-                      </Button>
+                      <div className="flex gap-2">
+                        {transaction.status === "completed" && (role === "subject" || role === "holder") && (
+                          <RevokeAccessButton
+                            transactionId={transaction.id}
+                            resourceName={transaction.asset?.product?.name}
+                            actorOrgId={activeOrg!.id}
+                            onRevoked={() => queryClient.invalidateQueries({ queryKey: ["transactions"] })}
+                          />
+                        )}
+                        <Button
+                          variant="outline"
+                          onClick={() => navigate(`/requests/${transaction.id}`)}
+                        >
+                          Ver Detalle
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -1216,7 +1180,7 @@ const TransactionDetailView = ({ transaction, role }: { transaction: any; role: 
         <div className="grid grid-cols-2 gap-4">
           <div>
             <h4 className="text-sm font-semibold mb-1">Duración de Acceso</h4>
-            <p className="text-sm text-muted-foreground">{transaction.access_duration_days} días</p>
+            <p className="text-sm text-muted-foreground">{transaction.access_duration_days} días (política del proveedor)</p>
           </div>
           <div>
             <h4 className="text-sm font-semibold mb-1">Estado Actual</h4>

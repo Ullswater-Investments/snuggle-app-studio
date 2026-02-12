@@ -4,29 +4,29 @@
 
 // Primary brand colors for charts
 export const CHART_COLORS = {
-  // Primary palette (Blue tones)
-  primary: "hsl(209, 100%, 65%)",
-  primaryDark: "hsl(209, 100%, 50%)",
-  primaryLight: "hsl(209, 90%, 75%)",
+  // Primary palette (Orange tones)
+  primary: "hsl(32, 94%, 54%)",
+  primaryDark: "hsl(32, 94%, 44%)",
+  primaryLight: "hsl(32, 90%, 65%)",
   
-  // Secondary palette (Navy tones)
-  secondary: "hsl(213, 37%, 30%)",
-  secondaryDark: "hsl(213, 37%, 18%)",
-  secondaryLight: "hsl(213, 25%, 55%)",
+  // Secondary palette (Gray tones)
+  secondary: "hsl(0, 0%, 40%)",
+  secondaryDark: "hsl(0, 0%, 24%)",
+  secondaryLight: "hsl(0, 0%, 60%)",
   
   // Extended palette for multiple series
   palette: [
-    "hsl(209, 100%, 65%)",   // Azul primario
-    "hsl(213, 37%, 30%)",    // Navy
-    "hsl(209, 80%, 80%)",    // Azul claro
-    "hsl(213, 25%, 55%)",    // Gris azulado
-    "hsl(209, 60%, 50%)",    // Azul medio
-    "hsl(213, 37%, 18%)",    // Navy oscuro
+    "hsl(32, 94%, 54%)",   // Naranja primario
+    "hsl(0, 0%, 40%)",     // Gris
+    "hsl(32, 80%, 70%)",   // Naranja claro
+    "hsl(0, 0%, 55%)",     // Gris medio
+    "hsl(32, 60%, 45%)",   // Naranja oscuro
+    "hsl(0, 0%, 30%)",     // Gris oscuro
   ],
   
   // Status colors
   success: "hsl(142, 76%, 36%)",
-  warning: "hsl(45, 93%, 47%)",
+  warning: "hsl(32, 94%, 54%)",
   error: "hsl(0, 84%, 60%)",
 };
 

@@ -5,6 +5,21 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useWeb3Wallet } from "@/hooks/useWeb3Wallet";
 
+// User metadata for registration
+interface UserMetadata {
+  nombre: string;
+  apellido: string;
+  full_name?: string;
+  document_type?: string;
+  document_number?: string;
+  country?: string;
+  city?: string;
+  address?: string;
+  postal_code?: string;
+  phone?: string;
+  birth_date?: string;
+}
+
 interface AuthContextType {
   user: User | null;
   session: Session | null;
@@ -16,7 +31,7 @@ interface AuthContextType {
   connectWallet: (silent?: boolean) => Promise<void>;
   disconnectWallet: () => void;
   // Auth methods
-  signUp: (email: string, password: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, metadata?: UserMetadata) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
@@ -28,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  
+
   // Integrate Web3 wallet
   const { wallet, connect, disconnect, hasWeb3 } = useWeb3Wallet();
 
@@ -52,14 +67,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, metadata?: UserMetadata) => {
     const redirectUrl = `${window.location.origin}/`;
-    
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: redirectUrl
+        emailRedirectTo: redirectUrl,
+        data: metadata ? {
+          nombre: metadata.nombre,
+          apellido: metadata.apellido,
+          full_name: metadata.full_name,
+          document_type: metadata.document_type,
+          document_number: metadata.document_number,
+          country: metadata.country,
+          city: metadata.city,
+          address: metadata.address,
+          postal_code: metadata.postal_code,
+          phone: metadata.phone,
+          birth_date: metadata.birth_date,
+        } : undefined
       }
     });
 
