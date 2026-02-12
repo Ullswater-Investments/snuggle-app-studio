@@ -569,7 +569,7 @@ export default function Landing() {
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
               <div className="mb-4">
-                <img src={procuredataTransparentLogo} alt="PROCUREDATA" className="h-10 object-contain" />
+                <img src={procuredataTransparentLogo} alt="PROCUREDATA" className="h-[60px] object-contain" />
               </div>
               <p className="text-sm text-gray-400 mb-4">
                 {t('footer.tagline')}
