@@ -225,7 +225,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "Consultor IA",
       "role": "Consultora de Manutenção Solar",
       "recoveryTitle": "Recuperação de Energia",
       "recoveryDesc": "Ao reduzir a sujeira para <span>{{days}} dias</span>, você recupera <span>{{mwh}} MWh</span> diários, gerando <span>{{revenue}}€</span> adicionais.",
