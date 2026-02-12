@@ -174,11 +174,11 @@ export const UrbanHydroSimulator: React.FC<UrbanHydroSimulatorProps> = ({ onValu
         <Card className="h-full bg-[#020617] border-lime-500/30">
           <CardContent className="p-6 flex flex-col h-full">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-lime-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
-                A
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-lime-500 to-cyan-500 flex items-center justify-center">
+                <BrainCircuit className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-white">ARIA</h4>
+                <h4 className="font-semibold text-white">{t('aria.name')}</h4>
                 <p className="text-xs text-slate-400">{t('urbanHydro.aria.role')}</p>
               </div>
             </div>

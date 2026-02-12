@@ -134,11 +134,11 @@ export const RawMarketSimulator = ({ onValuesChange }: RawMarketSimulatorProps) 
       <Card className="lg:col-span-5 bg-[#020617] border-emerald-500/20 shadow-xl rounded-3xl overflow-hidden">
         <CardContent className="p-6 flex flex-col h-full">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-emerald-500/30">
-              A
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+              <BrainCircuit className="w-5 h-5 text-white" />
             </div>
             <div>
-              <p className="font-bold text-white">ARIA</p>
+              <p className="font-bold text-white">{t('aria.name')}</p>
               <p className="text-xs text-emerald-400">{t('rawMarket.aria.role')}</p>
             </div>
           </div>
