@@ -1,90 +1,112 @@
 
-## Plan: Etiquetas Descriptivas en Casos de Exito de la Landing
 
-### Objetivo
-Anadir una breve descripcion (etiqueta explicativa) debajo de cada icono de sector en la seccion "CASOS DE EXITO" de la pagina principal, mostrando el nombre de la empresa y una frase corta sobre el caso.
+## Plan: Eliminar ARIA de toda la plataforma
 
----
-
-### Cambios
-
-#### 1. Ampliar el array `sectors` en `Landing.tsx`
-
-Agregar un campo `description` a cada entrada del array de sectores con una frase corta (maximo 6-8 palabras) que describa el caso:
-
-| Sector | Empresa | Descripcion |
-|--------|---------|-------------|
-| Industrial | GigaFactory North | Homologacion industrial en 24h |
-| Agro | OliveTrust Coop | Trazabilidad ESG aceite de oliva |
-| Movilidad | UrbanDeliver BCN | Reporting Scope 3 logistico |
-| Social | Alianza Social Hub | Impacto social verificable SROI |
-| Salud | BioMed Hospital | Mantenimiento predictivo equipos RM |
-| Retail | GlobalRetail Prime | Auditoria etica supply chain |
-| Energia | Helios Fields | Certificacion energetica renovable |
-| Aero | Turbine Chain | Trazabilidad componentes aeronauticos |
-| Vinos | VinosD.O.E Elite | Pasaporte digital denominacion origen |
-| Pharma | PharmaCold Logistix | Cadena de frio certificada |
-| Puerto | PortBCN Smart Trade | Despacho aduanero inteligente |
-| Gov | Ayuntamiento Etico | Compra publica responsable |
-| Mineria | PureLithium Sourcing | Sourcing responsable de litio |
-| Moda | FastFashion Trace | Trazabilidad textil sostenible |
-| Finanzas | GreenFinance ESG | Finanzas verdes y scoring ESG |
-| Grid | GridFlex Demand | Gestion flexible de demanda energetica |
-
-#### 2. Modificar el renderizado de cada tarjeta de sector
-
-Actualmente cada tarjeta muestra solo icono + label del sector. Se ampliara para incluir:
-
-- **Nombre de la empresa** en texto pequeno y bold debajo del icono
-- **Descripcion corta** en texto aun mas pequeno y color `text-muted-foreground`
-- Se aumenta ligeramente el ancho minimo de cada tarjeta (de ~80px a ~140px) para acomodar el texto
-- Layout cambia de `flex-wrap justify-center gap-3` a un `grid` responsive: `grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8` para la primera fila de 8 y similar para la segunda
-
-#### 3. Internacionalizacion (opcional pero recomendado)
-
-Agregar las descripciones al archivo de traducciones `landing.json` bajo una nueva clave `sectorDescriptions` para mantener consistencia multiidioma. Ejemplo en `es/landing.json`:
-
-```text
-"sectorDescriptions": {
-  "industrial": "Homologacion industrial en 24h",
-  "agro": "Trazabilidad ESG aceite de oliva",
-  ...
-}
-```
-
-Se replicara en los archivos `it`, `nl`, `pt`, `de` con traducciones apropiadas.
+### Contexto
+ARIA (Asistente de Recursos e Informacion Automatizada) ha sido sustituida por los agentes de IA especificos por caso. Todos los componentes, referencias visuales y textos de ARIA deben eliminarse o renombrarse.
 
 ---
 
-### Archivos a Modificar
+### Alcance del cambio
 
-| Archivo | Cambio |
-|---------|--------|
-| `src/pages/Landing.tsx` | Agregar campo `description` y `company` al array `sectors`, modificar el JSX de renderizado para mostrar etiquetas descriptivas |
-| `src/locales/es/landing.json` | Agregar claves `sectorDescriptions` y `sectorCompanies` |
-| `src/locales/it/landing.json` | Traducciones italianas de las descripciones |
-| `src/locales/nl/landing.json` | Traducciones neerlandesas |
-| `src/locales/pt/landing.json` | Traducciones portuguesas |
-| `src/locales/de/landing.json` | Traducciones alemanas |
+El nombre "ARIA" aparece en **3 niveles** de la plataforma:
+
+| Nivel | Archivos afectados | Tipo de cambio |
+|-------|-------------------|----------------|
+| Componentes dedicados | 2 archivos | Eliminar |
+| Simuladores con panel ARIA | ~47 simuladores | Renombrar/reemplazar branding |
+| Pagina de detalle | 1 archivo | Eliminar seccion AriaQuoteCard |
+| Archivos de traduccion | ~30 archivos JSON (6 idiomas) | Eliminar/renombrar claves `aria.*` y `ariaQuote` |
+| Datos de entrenamiento IA | 1 archivo MD | Eliminar |
+| Chat agent | 1 archivo | Limpiar referencia `ariaQuote` |
 
 ---
 
-### Resultado Visual Esperado
+### Cambios detallados
 
-Cada tarjeta de sector pasara de mostrar:
+#### 1. Eliminar componentes ARIA dedicados
 
-```text
-  [Icono]
- INDUSTRIAL
-```
+- **Eliminar** `src/components/success-stories/AriaDynamicReport.tsx`
+- **Eliminar** `src/components/success-stories/AriaQuoteCard.tsx`
 
-A mostrar:
+#### 2. Refactorizar `ImpactSimulator.tsx`
 
-```text
-    [Icono]
-  INDUSTRIAL
- GigaFactory North
-Homologacion 24h
-```
+- Eliminar import de `AriaDynamicReport`
+- Reemplazar el panel ARIA por un panel generico "Informe Estrategico" o "AI Insights" sin branding ARIA
+- Mantener la misma estructura visual pero con titulo generico (ej: "Analisis Estrategico", "Strategic Insights")
 
-Las tarjetas mantendran el hover con elevacion y enlace al caso de exito correspondiente, con las animaciones stagger existentes.
+#### 3. Refactorizar `SuccessStoryDetail.tsx`
+
+- Eliminar import de `AriaQuoteCard`
+- Eliminar la ZONA 3 completa ("ARIA Quote - Consultoria Humana")
+- O reemplazarla por una tarjeta generica de "Strategic Insight" sin branding ARIA
+
+#### 4. Refactorizar ~47 simuladores
+
+En cada simulador que muestra `t('aria.name')` o un avatar con "A":
+
+- Reemplazar `t('aria.name')` por `t('ai.name')` o texto generico como "AI Assistant" / "Asistente IA"
+- Reemplazar el avatar circular con "A" por un icono generico (ej: `Bot`, `BrainCircuit` de lucide)
+- Eliminar referencias a `aria.role`, `aria.insight` etc.
+
+Simuladores afectados (lista parcial):
+- BateriaHubSimulator, SocialHubSimulator, TropicalFlashSimulator
+- PureLithiumSimulator, KYCSovereignSimulator, GreenFinanceESGSimulator
+- WasteToValueSimulator, UrbanMiningSimulator, UniSynthSimulator
+- BerryWaterSimulator, RetailEthicsAudit
+- Y todos los demas que referencien `aria.*`
+
+#### 5. Limpiar archivos de traduccion
+
+En los 6 idiomas (`es`, `en`, `fr`, `it`, `nl`, `pt`, `de`):
+
+**simulators.json:**
+- Renombrar claves `aria.name`, `aria.strategicReport`, `aria.insight` a `ai.name`, `ai.strategicReport`, `ai.insight`
+- Cambiar valores de "ARIA" a "AI Assistant" / "Asistente IA" (segun idioma)
+- Renombrar todas las claves `*.aria.role`, `*.aria.insight1`, etc. a `*.ai.role`, `*.ai.insight1`
+
+**success.json:**
+- Las claves `ariaQuote` en cada caso se pueden renombrar a `strategicInsight` o eliminarse si ya no se muestran
+
+#### 6. Limpiar SuccessStoryChatAgent.tsx
+
+- Eliminar la propiedad `ariaQuote` de la interfaz del caso si ya no se usa en la UI
+- O mantenerla renombrada como `strategicInsight` si el chat agent la necesita como contexto
+
+#### 7. Eliminar archivo de entrenamiento
+
+- Eliminar `entrenamientoIA/15_NLU_DIALOG_TRAINING.md` (define personalidad y capacidades de ARIA)
+
+---
+
+### Estrategia de reemplazo
+
+| Antes (ARIA) | Despues |
+|--------------|---------|
+| "ARIA" como nombre | "AI Assistant" / "Asistente IA" |
+| Avatar circular con "A" gradiente | Icono `BrainCircuit` o `Bot` de lucide |
+| `AriaDynamicReport` | Panel inline "Strategic Insights" |
+| `AriaQuoteCard` | Eliminar o card generico |
+| `t('aria.name')` | `t('ai.name')` |
+| `ariaQuote` en datos | `strategicInsight` (renombrar) |
+
+---
+
+### Orden de ejecucion
+
+1. Eliminar `AriaDynamicReport.tsx` y `AriaQuoteCard.tsx`
+2. Actualizar `ImpactSimulator.tsx` (reemplazar panel ARIA por panel generico)
+3. Actualizar `SuccessStoryDetail.tsx` (eliminar AriaQuoteCard)
+4. Actualizar los ~47 simuladores (renombrar branding)
+5. Actualizar archivos de traduccion en los 6 idiomas
+6. Limpiar `SuccessStoryChatAgent.tsx`
+7. Eliminar `entrenamientoIA/15_NLU_DIALOG_TRAINING.md`
+
+---
+
+### Riesgo
+
+- **Alto volumen de archivos**: ~80+ archivos modificados
+- **Mitigacion**: Los cambios son mecanicos (buscar/reemplazar), no logicos
+- **Las traducciones `ariaQuote`** en success.json se mantendran renombradas como `strategicInsight` para no perder el contenido narrativo que usan los agentes de IA como contexto
+
