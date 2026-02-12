@@ -51,8 +51,8 @@ export const AriaQuoteCard = ({
           {/* Quote content */}
           <div className="space-y-3 flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-foreground">ARIA</span>
-              <span className="text-xs text-muted-foreground">• Strategic Insight</span>
+              <span className="font-bold text-foreground">AI Advisor</span>
+              <span className="text-xs text-muted-foreground">• Strategic Analysis</span>
             </div>
             
             <blockquote className="text-muted-foreground leading-relaxed italic">
