@@ -1,0 +1,28 @@
+{
+  "backToHome": "Back to home",
+  "badge": "Phase 7 — ERP/CRM Connectors",
+  "title": "ProcureData ERP & CRM Connectors",
+  "subtitle": "Bidirectional integration with SAP, Oracle, Dynamics 365, Odoo and Salesforce to sync supplier data with your federated data space.",
+  "layers": {
+    "erps": { "label": "Layer 1", "title": "Supported ERP/CRM Systems" },
+    "protocols": { "label": "Layer 2", "title": "Protocols & Standards" },
+    "bridge": { "label": "Layer 3", "title": "Integration Bridge" },
+    "security": { "label": "Layer 4", "title": "Security & Audit" }
+  },
+  "metrics": {
+    "erps": "5 ERPs/CRMs Integrated",
+    "protocols": "8+ Protocols Supported",
+    "cases": "47 Verified Cases"
+  },
+  "chat": {
+    "badge": "ERP/CRM Agent",
+    "description": "Expert in enterprise system integration with ProcureData",
+    "placeholder": "Ask about ERP, CRM connectors...",
+    "sectionTitle": "Consult the ERP/CRM Connector Expert",
+    "sectionSubtitle": "Ask about integration with SAP, Oracle, Dynamics, Odoo or Salesforce",
+    "q1": "How does SAP S/4HANA integrate with ProcureData?",
+    "q2": "What protocols does the Salesforce integration support?",
+    "q3": "How does bidirectional sync work with Odoo?",
+    "q4": "How are ERP connectors applied in the GigaFactory case?"
+  }
+}

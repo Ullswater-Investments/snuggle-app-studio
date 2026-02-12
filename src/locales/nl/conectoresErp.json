@@ -1,0 +1,28 @@
+{
+  "backToHome": "Terug naar home",
+  "badge": "Fase 7 — ERP/CRM-connectoren",
+  "title": "ProcureData ERP- & CRM-connectoren",
+  "subtitle": "Bidirectionele integratie met SAP, Oracle, Dynamics 365, Odoo en Salesforce om leveranciersdata te synchroniseren met uw gefedereerde dataruimte.",
+  "layers": {
+    "erps": { "label": "Laag 1", "title": "Ondersteunde ERP/CRM-systemen" },
+    "protocols": { "label": "Laag 2", "title": "Protocollen en Standaarden" },
+    "bridge": { "label": "Laag 3", "title": "Integratiebrug" },
+    "security": { "label": "Laag 4", "title": "Beveiliging en Audit" }
+  },
+  "metrics": {
+    "erps": "5 ERPs/CRMs Geïntegreerd",
+    "protocols": "8+ Protocollen Ondersteund",
+    "cases": "47 Geverifieerde Cases"
+  },
+  "chat": {
+    "badge": "ERP/CRM-agent",
+    "description": "Expert in bedrijfssysteemintegratie met ProcureData",
+    "placeholder": "Vraag over ERP-, CRM-connectoren...",
+    "sectionTitle": "Raadpleeg de ERP/CRM-connector Expert",
+    "sectionSubtitle": "Stel vragen over integratie met SAP, Oracle, Dynamics, Odoo of Salesforce",
+    "q1": "Hoe integreert SAP S/4HANA met ProcureData?",
+    "q2": "Welke protocollen ondersteunt de Salesforce-integratie?",
+    "q3": "Hoe werkt de bidirectionele synchronisatie met Odoo?",
+    "q4": "Hoe worden ERP-connectoren toegepast in de GigaFactory-case?"
+  }
+}
