@@ -66,7 +66,7 @@ export const AreaChartSkeleton = ({
       <defs>
         <linearGradient id="skeleton-area-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="hsl(var(--muted))" />
-          <stop offset="50%" stopColor="hsl(32 94% 54% / 0.25)">
+          <stop offset="50%" stopColor="hsl(209 100% 65% / 0.25)">
             <animate 
               attributeName="offset" 
               values="0;1;0" 
@@ -77,8 +77,8 @@ export const AreaChartSkeleton = ({
           <stop offset="100%" stopColor="hsl(var(--muted))" />
         </linearGradient>
         <linearGradient id="skeleton-area-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(32 94% 54% / 0.15)" />
-          <stop offset="100%" stopColor="hsl(32 94% 54% / 0.02)" />
+          <stop offset="0%" stopColor="hsl(209 100% 65% / 0.15)" />
+          <stop offset="100%" stopColor="hsl(209 100% 65% / 0.02)" />
         </linearGradient>
       </defs>
       {/* Area shape */}
@@ -167,7 +167,7 @@ export const LineChartSkeleton = ({
       <defs>
         <linearGradient id="skeleton-line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="hsl(var(--muted))" />
-          <stop offset="50%" stopColor="hsl(32 94% 54% / 0.6)">
+          <stop offset="50%" stopColor="hsl(209 100% 65% / 0.6)">
             <animate 
               attributeName="offset" 
               values="0;1;0" 
@@ -233,7 +233,7 @@ export const PieChartSkeleton = ({
         <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-full">
           <defs>
             <linearGradient id="skeleton-pie-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="hsl(32 94% 54% / 0.4)" />
+              <stop offset="0%" stopColor="hsl(209 100% 65% / 0.4)" />
               <stop offset="50%" stopColor="hsl(0 0% 40% / 0.3)" />
               <stop offset="100%" stopColor="hsl(var(--muted))" />
             </linearGradient>

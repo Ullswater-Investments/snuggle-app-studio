@@ -19,8 +19,8 @@ export const ActivityFeed = () => {
   const currentLocale = localeMap[i18n.language] || es;
 
   const ACTION_LABELS: Record<string, { labelKey: string; icon: any; color: string }> = {
-    pre_approve: { labelKey: "activityFeed.preApproved", icon: CheckCircle, color: "text-[hsl(32_94%_54%)]" },
-    approve: { labelKey: "activityFeed.approved", icon: CheckCircle, color: "text-[hsl(32_94%_44%)]" },
+    pre_approve: { labelKey: "activityFeed.preApproved", icon: CheckCircle, color: "text-[hsl(209_100%_65%)]" },
+    approve: { labelKey: "activityFeed.approved", icon: CheckCircle, color: "text-[hsl(209_100%_50%)]" },
     deny: { labelKey: "activityFeed.denied", icon: XCircle, color: "text-destructive" },
     cancel: { labelKey: "activityFeed.cancelled", icon: XCircle, color: "text-muted-foreground" },
     initiated: { labelKey: "activityFeed.preApproved", icon: ArrowRight, color: "text-[hsl(0_0%_40%)] dark:text-[hsl(0_0%_60%)]" },

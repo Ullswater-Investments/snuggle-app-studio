@@ -9,32 +9,32 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 213 37% 18%;
 
     --card: 210 20% 98%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 213 37% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 213 37% 18%;
 
-    --primary: 32 94% 44%;
+    --primary: 209 100% 65%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 214 32% 91%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary-foreground: 213 37% 18%;
 
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 32 80% 92%;
-    --accent-foreground: 32 94% 35%;
+    --accent: 209 80% 92%;
+    --accent-foreground: 209 100% 40%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 32 94% 54%;
+    --ring: 209 100% 65%;
 
     --radius: 0.5rem;
 
@@ -43,93 +43,93 @@ All colors MUST be HSL.
     --itbid-lime: 66 68% 54%;
     --itbid-magenta: 340 82% 52%;
     --itbid-purple: 262 52% 47%;
-    --itbid-navy: 210 50% 24%;
+    --itbid-navy: 213 37% 18%;
 
     /* Chart colors - PROCUREDATA palette */
-    --chart-1: 32 94% 54%;
-    --chart-2: 215 16% 47%;
-    --chart-3: 32 80% 70%;
-    --chart-4: 215 20% 65%;
-    --chart-5: 32 60% 45%;
-    --chart-6: 215 25% 27%;
+    --chart-1: 209 100% 65%;
+    --chart-2: 213 37% 30%;
+    --chart-3: 209 80% 80%;
+    --chart-4: 213 25% 55%;
+    --chart-5: 209 60% 50%;
+    --chart-6: 213 37% 18%;
 
     /* Code block colors - Light mode (GitHub style) */
     --code-bg: 210 40% 96%;
     --code-border: 214.3 31.8% 91.4%;
-    --code-text: 215 25% 27%;
+    --code-text: 213 37% 18%;
     --code-keyword: 271 81% 56%;
     --code-string: 142 71% 29%;
-    --code-property: 32 94% 44%;
+    --code-property: 209 100% 45%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(32 94% 54%) 100%);
-    --gradient-primary-hover: linear-gradient(135deg, hsl(222 47% 15%) 0%, hsl(32 94% 48%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(213 37% 18%) 0%, hsl(209 100% 65%) 100%);
+    --gradient-primary-hover: linear-gradient(135deg, hsl(213 37% 22%) 0%, hsl(209 100% 58%) 100%);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 32 94% 44%;
+    --sidebar-foreground: 213 37% 18%;
+    --sidebar-primary: 209 100% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 40% 96%;
-    --sidebar-accent-foreground: 32 94% 35%;
+    --sidebar-accent-foreground: 209 100% 40%;
     --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 32 94% 54%;
+    --sidebar-ring: 209 100% 65%;
   }
 
   .dark {
-    --background: 222 84% 4.9%;
+    --background: 211 32% 20%;
     --foreground: 210 40% 98%;
 
-    --card: 217 33% 7%;
+    --card: 213 33% 16%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 84% 4.9%;
+    --popover: 211 32% 20%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 32 90% 55%;
-    --primary-foreground: 222 47% 11%;
+    --primary: 209 100% 65%;
+    --primary-foreground: 213 37% 11%;
 
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 32 90% 60%;
+    --secondary: 213 33% 25%;
+    --secondary-foreground: 209 90% 75%;
 
-    --muted: 217 33% 12%;
+    --muted: 213 33% 16%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 32 50% 20%;
-    --accent-foreground: 32 90% 65%;
+    --accent: 209 50% 25%;
+    --accent-foreground: 209 90% 75%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 32 90% 55%;
+    --border: 213 33% 25%;
+    --input: 213 33% 25%;
+    --ring: 209 100% 65%;
 
     /* Chart colors - PROCUREDATA palette (dark mode) */
-    --chart-1: 32 90% 60%;
-    --chart-2: 215 20% 65%;
-    --chart-3: 32 85% 75%;
-    --chart-4: 215 25% 75%;
-    --chart-5: 32 70% 55%;
-    --chart-6: 215 20% 55%;
+    --chart-1: 209 100% 70%;
+    --chart-2: 213 30% 55%;
+    --chart-3: 209 85% 80%;
+    --chart-4: 213 25% 65%;
+    --chart-5: 209 70% 60%;
+    --chart-6: 213 30% 45%;
 
     /* Code block colors - Dark mode (VSCode style) */
-    --code-bg: 217 33% 7%;
-    --code-border: 217 33% 17%;
+    --code-bg: 213 33% 16%;
+    --code-border: 213 33% 25%;
     --code-text: 215 20% 65%;
     --code-keyword: 271 91% 65%;
     --code-string: 142 71% 45%;
-    --code-property: 32 90% 60%;
+    --code-property: 209 100% 65%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(217 33% 12%) 0%, hsl(32 90% 55%) 100%);
-    --gradient-primary-hover: linear-gradient(135deg, hsl(217 33% 17%) 0%, hsl(32 90% 50%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(213 33% 16%) 0%, hsl(209 100% 65%) 100%);
+    --gradient-primary-hover: linear-gradient(135deg, hsl(213 33% 20%) 0%, hsl(209 100% 58%) 100%);
 
-    --sidebar-background: 217 33% 7%;
+    --sidebar-background: 213 33% 14%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 32 90% 55%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 32 30% 18%;
-    --sidebar-accent-foreground: 32 90% 60%;
-    --sidebar-border: 217 33% 17%;
-    --sidebar-ring: 32 90% 55%;
+    --sidebar-primary: 209 100% 65%;
+    --sidebar-primary-foreground: 213 37% 11%;
+    --sidebar-accent: 209 30% 22%;
+    --sidebar-accent-foreground: 209 90% 75%;
+    --sidebar-border: 213 33% 25%;
+    --sidebar-ring: 209 100% 65%;
   }
 }
 
@@ -146,7 +146,7 @@ All colors MUST be HSL.
 
 /* Gradient for PROCUREDATA branding */
 .procuredata-gradient {
-  background: linear-gradient(135deg, hsl(0 0% 24%) 0%, hsl(32 94% 54%) 100%);
+  background: linear-gradient(135deg, hsl(213 37% 18%) 0%, hsl(209 100% 65%) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -165,7 +165,7 @@ All colors MUST be HSL.
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
 }
 
@@ -181,18 +181,18 @@ All colors MUST be HSL.
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 300;
 }
 
 .itbid-title {
   color: hsl(var(--itbid-navy));
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
 }
 
 .itbid-font {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 /* Chart skeleton shimmer animation */
@@ -209,7 +209,7 @@ All colors MUST be HSL.
   background: linear-gradient(
     90deg,
     hsl(var(--muted)) 0%,
-    hsl(32 94% 54% / 0.25) 50%,
+    hsl(209 100% 65% / 0.25) 50%,
     hsl(var(--muted)) 100%
   );
   background-size: 200% 100%;

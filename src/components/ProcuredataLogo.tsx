@@ -8,12 +8,14 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import procuredataLogo from "@/assets/procuredata-logo.png";
+import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
 
 interface ProcuredataLogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showNavigation?: boolean;
   linkToHome?: boolean;
+  variant?: 'light' | 'dark' | 'auto';
 }
 
 const sizes = {
@@ -27,24 +29,38 @@ export function ProcuredataLogo({
   size = 'md', 
   showNavigation = false,
   linkToHome = true,
+  variant = 'auto',
   className 
 }: ProcuredataLogoProps) {
   const navigate = useNavigate();
 
+  const logoSrc = variant === 'dark' ? procuredataLogoDark : procuredataLogo;
+
   const logoElement = (
     <img 
-      src={procuredataLogo} 
+      src={logoSrc} 
       alt="PROCUREDATA" 
       style={{ height: sizes[size].height }}
-      className="object-contain"
+      className={cn(
+        "object-contain",
+        variant === 'auto' && "dark:hidden"
+      )}
     />
   );
+
+  const logoDarkElement = variant === 'auto' ? (
+    <img 
+      src={procuredataLogoDark} 
+      alt="PROCUREDATA" 
+      style={{ height: sizes[size].height }}
+      className="object-contain hidden dark:block"
+    />
+  ) : null;
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
       {showNavigation && (
         <>
-          {/* Botón Atrás */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -60,7 +76,6 @@ export function ProcuredataLogo({
             <TooltipContent>Atrás</TooltipContent>
           </Tooltip>
 
-          {/* Botón Adelante */}
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -81,10 +96,12 @@ export function ProcuredataLogo({
       {linkToHome ? (
         <Link to="/" className="hover:opacity-80 transition-opacity flex-shrink-0">
           {logoElement}
+          {logoDarkElement}
         </Link>
       ) : (
         <div className="flex-shrink-0">
           {logoElement}
+          {logoDarkElement}
         </div>
       )}
     </div>
