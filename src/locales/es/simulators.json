@@ -349,7 +349,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "AI Advisor",
       "role": "Asesora de Hidrógeno Verde",
       "certifHyTitle": "Certificación CertifHy",
       "certifHyIssued": "Al superar el 95% de mix renovable, he emitido el <strong>Pasaporte Digital de Hidrógeno</strong>, desbloqueando <strong>{{amount}}€</strong> en fondos europeos.",
