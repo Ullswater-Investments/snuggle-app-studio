@@ -26,7 +26,7 @@ export const RoadmapPhases = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-xs font-medium text-primary mb-4">
             Roadmap Técnico
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">10 Fases de Evolución</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">10 Componentes Arquitectura Espacio de Datos</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Arquitectura incremental del espacio de datos federado ProcureData
           </p>
