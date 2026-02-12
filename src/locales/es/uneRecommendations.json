@@ -8,5 +8,15 @@
   "date": "2026",
   "publisher": "ProcureData · Equipo Técnico",
   "goToDemo": "Ir al Demo",
-  "viewStandard": "Ver Norma UNE"
+  "viewStandard": "Ver Norma UNE",
+  "complianceBanner": {
+    "title": "Estado de Conformidad UNE 0087:2025",
+    "percentage": "78%",
+    "compliant": "14 Cumple",
+    "partial": "7 Parcial",
+    "pending": "1 Pendiente",
+    "viewRulebook": "Libro de Reglas",
+    "viewGlossary": "Glosario UNE",
+    "viewTransparency": "Portal de Transparencia"
+  }
 }

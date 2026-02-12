@@ -1,10 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Home, Download, Scale, Menu, X } from 'lucide-react';
+import { Home, Download, Scale, Menu, X, CheckCircle, AlertTriangle, Clock, BookOpen, FileText, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { MarkdownRenderer } from '@/components/MarkdownRenderer';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -184,6 +185,43 @@ export default function RecomendacionesUne() {
         <main className="flex-1 overflow-auto">
           <ScrollArea className="h-[calc(100vh-3.5rem)]">
             <div className="container max-w-4xl mx-auto px-4 py-8 lg:px-8">
+              {/* Compliance Banner */}
+              <div className="mb-8 p-6 rounded-xl border-2" style={{ borderColor: 'hsl(210, 100%, 20%)', backgroundColor: 'hsl(210, 100%, 97%)' }}>
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center font-black text-2xl text-white" style={{ backgroundColor: 'hsl(210, 100%, 20%)' }}>
+                      {t('complianceBanner.percentage')}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-foreground">{t('complianceBanner.title')}</h3>
+                      <Progress value={78} className="w-48 h-2 mt-1" />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-3 mb-4">
+                  <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 gap-1">
+                    <CheckCircle className="h-3 w-3" /> {t('complianceBanner.compliant')}
+                  </Badge>
+                  <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 gap-1">
+                    <AlertTriangle className="h-3 w-3" /> {t('complianceBanner.partial')}
+                  </Badge>
+                  <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 gap-1">
+                    <Clock className="h-3 w-3" /> {t('complianceBanner.pending')}
+                  </Badge>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/libro-de-reglas"><BookOpen className="h-3 w-3 mr-1" />{t('complianceBanner.viewRulebook')}</Link>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/glosario-une"><FileText className="h-3 w-3 mr-1" />{t('complianceBanner.viewGlossary')}</Link>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/transparencia"><Eye className="h-3 w-3 mr-1" />{t('complianceBanner.viewTransparency')}</Link>
+                  </Button>
+                </div>
+              </div>
+
               {/* Document metadata badge */}
               <div className="mb-8 flex flex-wrap items-center gap-3">
                 <Badge style={{ backgroundColor: 'hsl(210, 100%, 20%)', color: 'white' }}>

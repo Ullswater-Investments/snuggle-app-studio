@@ -355,6 +355,10 @@ export default function Landing() {
                     {badge}
                   </span>
                 ))}
+                <Link to="/recomendaciones-une" className="px-2.5 py-1 rounded-full text-[10px] font-semibold border bg-card text-muted-foreground hover:border-primary hover:text-primary transition-colors flex items-center gap-1">
+                  <Scale className="h-3 w-3" />
+                  UNE 0087:2025 · 78%
+                </Link>
               </div>
             </div>
 
@@ -594,10 +598,12 @@ export default function Landing() {
               <h4 className="font-semibold mb-4 text-white">{t('footer.transparency')}</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 
+                <li><Link to="/transparencia" className="hover:text-white transition-colors">{t('footer.transparencyPortal')}</Link></li>
                 <li><Link to="/architecture" className="hover:text-white transition-colors">{t('footer.governanceModel')}</Link></li>
                 <li><Link to="/user-guide" className="hover:text-white transition-colors">{t('footer.userGuide')}</Link></li>
                 <li><Link to="/models" className="hover:text-white transition-colors">{t('footer.businessPlan')}</Link></li>
                 <li><Link to="/recomendaciones-une" className="hover:text-white transition-colors">{t('footer.uneRecommendations')}</Link></li>
+                <li><Link to="/glosario-une" className="hover:text-white transition-colors">{t('footer.glossaryUne')}</Link></li>
                 <li><Link to="/libro-de-reglas" className="hover:text-white transition-colors">{t('footer.rulebook')}</Link></li>
               </ul>
             </div>

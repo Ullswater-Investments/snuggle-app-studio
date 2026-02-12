@@ -8,5 +8,15 @@
   "date": "2026",
   "publisher": "ProcureData · Technisch Team",
   "goToDemo": "Naar Demo",
-  "viewStandard": "Bekijk UNE-norm"
+  "viewStandard": "Bekijk UNE-norm",
+  "complianceBanner": {
+    "title": "Conformiteitsstatus UNE 0087:2025",
+    "percentage": "78%",
+    "compliant": "14 Conform",
+    "partial": "7 Gedeeltelijk",
+    "pending": "1 In afwachting",
+    "viewRulebook": "Regelboek",
+    "viewGlossary": "UNE-glossarium",
+    "viewTransparency": "Transparantieportaal"
+  }
 }
