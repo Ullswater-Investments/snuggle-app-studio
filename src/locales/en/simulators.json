@@ -415,7 +415,7 @@
       "events": "events"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "AI Advisor",
       "role": "Demand Management Advisor",
       "monetizationTitle": "Flexibility Monetization",
       "monetizationDesc": "By notarizing your reduction of <span>{{kw}} kW</span> on Pontus-X, you have earned <span>{{earnings}} EUROe</span> in flexibility incentives this month.",
