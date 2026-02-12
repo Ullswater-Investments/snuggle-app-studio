@@ -1,131 +1,125 @@
 
-## Plan: Página "Fundamentos" con Infografía Dinámica y Chat IA Especializado
+## Plan: Pagina "Catalogo de Datos" con Infografia Dinamica y Chat IA Especializado
 
-### Objetivo
-Crear una nueva página `/fundamentos` accesible desde la tarjeta "Fundamentos" en el Roadmap, con:
-1. Infografía animada e interactiva sobre Autenticación, RBAC y RLS multi-tenant
-2. Chat IA conectado a un agente especializado con conocimiento de los 47 casos de éxito
+Replica exacta del patron establecido en la pagina "Fundamentos", adaptado al dominio de Registro y Descubrimiento de Activos de datos.
 
 ---
 
-### 1. Enlazar la tarjeta "Fundamentos" a la nueva página
+### 1. Enlazar la tarjeta en el Roadmap
 
 **Archivo: `src/components/landing/RoadmapPhases.tsx`**
-- Añadir `slug` a las fases (ej. `slug: "fundamentos"` solo para la primera fase)
-- Envolver la tarjeta "Fundamentos" en un `<Link to="/fundamentos">` manteniendo el estilo actual
-- Las demás tarjetas sin enlace por ahora (sin cambio visual)
+- Anadir `slug: "catalogo-datos"` a la fase 2 (Catalogo de Datos) en el array `phases`
+- El sistema de Link ya existe y detecta automaticamente el slug para envolver la tarjeta
 
-### 2. Crear la página `/fundamentos`
+### 2. Crear la pagina principal
 
-**Archivo nuevo: `src/pages/Fundamentos.tsx`**
+**Archivo nuevo: `src/pages/CatalogoDatos.tsx`**
 
-La página tendrá las siguientes secciones:
+Estructura identica a Fundamentos.tsx:
+- **Hero**: Badge "Fase 2", titulo "Catalogo de Datos de ProcureData", subtitulo sobre registro y descubrimiento de activos
+- **Infografia dinamica**: Componente `CatalogoDatosInfographic`
+- **Metricas animadas**: 3 contadores (20 Categorias de Activos, 47 Casos Conectados, 5 Formatos Soportados)
+- **Chat IA**: Componente `CatalogoDatosChatAgent`
 
-#### Sección Hero
-- Título animado "Fundamentos de ProcureData"
-- Subtítulo: "Autenticación, RBAC y RLS Multi-Tenant"
-- Badge con icono Shield
+### 3. Crear la infografia interactiva
 
-#### Sección Infográfica Dinámica (componente nuevo)
-**Archivo nuevo: `src/components/fundamentos/FundamentosInfographic.tsx`**
+**Archivo nuevo: `src/components/catalogo-datos/CatalogoDatosInfographic.tsx`**
 
-Diagrama animado con Framer Motion que muestra la arquitectura en 3 capas interactivas:
+Diagrama animado con 3 capas interactivas (mismo patron visual que FundamentosInfographic):
 
 ```text
-+------------------------------------------+
-|  CAPA 1: AUTENTICACION                   |
-|  [Usuario] --> [Supabase Auth] --> [JWT]  |
-|  Animación: flujo de tokens               |
-+------------------------------------------+
++-----------------------------------------------+
+|  CAPA 1: REGISTRO DE ACTIVOS                  |
+|  [Proveedor] --> [Metadatos] --> [Catalogo]    |
+|  Publicacion de datasets con esquema DCAT-AP   |
++-----------------------------------------------+
            |
            v
-+------------------------------------------+
-|  CAPA 2: RBAC (Control de Acceso)        |
-|  [Admin] [Moderador] [Usuario]           |
-|  Tabla user_roles con enum app_role      |
-|  Animación: nodos que se iluminan        |
-+------------------------------------------+
++-----------------------------------------------+
+|  CAPA 2: DESCUBRIMIENTO Y BUSQUEDA            |
+|  [Busqueda] [Filtros] [Recomendaciones]        |
+|  Motor de busqueda federado con facetas        |
++-----------------------------------------------+
            |
            v
-+------------------------------------------+
-|  CAPA 3: RLS MULTI-TENANT               |
-|  [Tenant A] | [Tenant B] | [Tenant C]   |
-|  Políticas por organización              |
-|  Animación: muros de separación          |
-+------------------------------------------+
++-----------------------------------------------+
+|  CAPA 3: GOBERNANZA Y CALIDAD                 |
+|  [Validacion] [Scoring] [Linaje]              |
+|  Puntuacion de calidad y trazabilidad          |
++-----------------------------------------------+
 ```
 
-Cada capa será un bloque clicable que expande detalles técnicos con animación `AnimatePresence`. Incluirá:
-- Iconos animados (Shield, Users, Lock, Building)
-- Líneas de conexión SVG animadas entre capas
-- Partículas/pulsos que fluyen entre nodos para simular el flujo de datos
-- Tarjetas expandibles al hacer clic mostrando detalles técnicos
+Cada capa expandible al hacer clic con detalles tecnicos:
+- **Registro**: DCAT-AP, esquemas JSON-LD, publicacion automatica via ERP Connector, versionado de activos
+- **Descubrimiento**: Busqueda full-text, filtros por sector/formato/licencia, recomendaciones basadas en perfil organizativo
+- **Gobernanza**: Scoring de calidad (completitud, frescura, documentacion), linaje de datos, politicas ODRL de acceso
 
-#### Sección de Métricas
-- 3 tarjetas con métricas clave animadas (contadores incrementales):
-  - "47 Casos de Éxito" implementando estos fundamentos
-  - "100% Multi-Tenant" con aislamiento RLS verificado
-  - "24h Onboarding" gracias a la automatización RBAC
+### 4. Crear el Chat IA especializado
 
-#### Sección Chat IA Especializado
-**Archivo nuevo: `src/components/fundamentos/FundamentosChatAgent.tsx`**
+**Archivo nuevo: `src/components/catalogo-datos/CatalogoDatosChatAgent.tsx`**
 
-Chat conectado a una nueva Edge Function especializada:
-- Reutiliza el patrón de `FederatedHeroChat` (streaming SSE, ThinkingPanel, AgentAvatar, SourceCitation, FollowUpSuggestions, TokenWallet)
+Replica del FundamentosChatAgent con:
+- Conexion a nueva edge function `catalogo-datos-agent`
 - Preguntas sugeridas contextuales:
-  - "¿Cómo funciona la autenticación en ProcureData?"
-  - "¿Qué es RBAC y cómo se aplica a los 47 casos?"
-  - "¿Cómo protege RLS los datos entre organizaciones?"
-  - "¿Cómo se implementan estos fundamentos en el caso GigaFactory?"
-- Integra chatGuard para anti-sabotaje
-- Registra tokens en el TokenWallet
+  - "Como se registra un activo de datos en ProcureData?"
+  - "Que es DCAT-AP y como se aplica al catalogo?"
+  - "Como funciona el descubrimiento federado de datos?"
+  - "Como se aplica el catalogo en el caso GigaFactory?"
+- Integracion con chatGuard y TokenWallet
 
-### 3. Edge Function del Agente
+### 5. Edge Function del Agente
 
-**Archivo nuevo: `supabase/functions/fundamentos-agent/index.ts`**
+**Archivo nuevo: `supabase/functions/catalogo-datos-agent/index.ts`**
 
 - Modelo: `google/gemini-3-flash-preview`
-- System prompt especializado que incluye:
-  - Conocimiento detallado de Autenticación (JWT, Supabase Auth, OAuth)
-  - Conocimiento de RBAC (roles, permisos, tablas user_roles, funciones security definer)
-  - Conocimiento de RLS Multi-Tenant (políticas por organización, aislamiento de datos)
-  - Resumen de los 47 casos de éxito y cómo cada uno aplica estos fundamentos
+- System prompt especializado que cubre:
+  - Registro de activos (DCAT-AP, metadatos, esquemas, formatos)
+  - Descubrimiento federado (busqueda, filtros, recomendaciones)
+  - Gobernanza de datos (calidad, scoring, linaje, politicas ODRL)
+  - Como cada uno de los 47 casos de exito utiliza el catalogo de datos
   - Reglas de seguridad anti-sabotaje (SECURITY_RULES)
-- Streaming SSE como los demás agentes
-- Manejo de errores 429/402
+  - LANGUAGE_BRIDGE para respuesta multilingue
+- Streaming SSE, manejo de 429/402
 
-### 4. Traducciones i18n
+### 6. Traducciones i18n (7 idiomas)
 
-**Archivos: `src/locales/*/fundamentos.json` (7 idiomas)**
+**Archivos nuevos: `src/locales/*/catalogoDatos.json`** (es, en, fr, de, it, pt, nl)
 
-Claves para:
-- Título, subtítulo, descripciones de las 3 capas
-- Métricas
-- Preguntas sugeridas del chat
-- Mensajes de error del agente
-- Textos de la infografía
+Claves:
+- `backToHome`, `badge`, `title`, `subtitle`
+- `layers.registro.label/title`, `layers.descubrimiento.label/title`, `layers.gobernanza.label/title`
+- `metrics.categories/cases/formats`
+- `chat.badge/description/placeholder/sectionTitle/sectionSubtitle/q1/q2/q3/q4`
 
-### 5. Registro de Ruta
+### 7. Registro de ruta y configuracion
 
 **Archivo: `src/App.tsx`**
-- Importar la nueva página `Fundamentos`
-- Añadir ruta: `<Route path="/fundamentos" element={<Fundamentos />} />`
+- Importar `CatalogoDatos` y anadir ruta: `<Route path="/catalogo-datos" element={<CatalogoDatos />} />`
 
-### 6. Config TOML
+**Archivo: `src/i18n.ts`**
+- Importar los 7 archivos `catalogoDatos.json` y registrar el namespace `catalogoDatos` en cada idioma
 
 **Archivo: `supabase/config.toml`**
-- Añadir la nueva función `fundamentos-agent` con `verify_jwt = false`
+- Anadir `[functions.catalogo-datos-agent]` con `verify_jwt = false`
 
 ---
 
-### Resumen de Archivos
+### Resumen de archivos
 
-| Archivo | Acción |
+| Archivo | Accion |
 |---------|--------|
-| `src/pages/Fundamentos.tsx` | CREAR |
-| `src/components/fundamentos/FundamentosInfographic.tsx` | CREAR |
-| `src/components/fundamentos/FundamentosChatAgent.tsx` | CREAR |
-| `supabase/functions/fundamentos-agent/index.ts` | CREAR |
-| `src/components/landing/RoadmapPhases.tsx` | MODIFICAR - Añadir Link |
-| `src/App.tsx` | MODIFICAR - Añadir ruta |
-| `src/locales/*/fundamentos.json` (x7) | CREAR |
+| `src/pages/CatalogoDatos.tsx` | CREAR |
+| `src/components/catalogo-datos/CatalogoDatosInfographic.tsx` | CREAR |
+| `src/components/catalogo-datos/CatalogoDatosChatAgent.tsx` | CREAR |
+| `supabase/functions/catalogo-datos-agent/index.ts` | CREAR |
+| `src/locales/es/catalogoDatos.json` | CREAR |
+| `src/locales/en/catalogoDatos.json` | CREAR |
+| `src/locales/fr/catalogoDatos.json` | CREAR |
+| `src/locales/de/catalogoDatos.json` | CREAR |
+| `src/locales/it/catalogoDatos.json` | CREAR |
+| `src/locales/pt/catalogoDatos.json` | CREAR |
+| `src/locales/nl/catalogoDatos.json` | CREAR |
+| `src/components/landing/RoadmapPhases.tsx` | MODIFICAR - Anadir slug |
+| `src/App.tsx` | MODIFICAR - Anadir ruta |
+| `src/i18n.ts` | MODIFICAR - Registrar namespace |
+| `supabase/config.toml` | MODIFICAR - Anadir funcion |
