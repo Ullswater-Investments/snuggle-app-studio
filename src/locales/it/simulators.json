@@ -256,7 +256,7 @@
       "events": "eventi"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "Consulente IA",
       "role": "Consulente di Gestione della Domanda",
       "monetizationTitle": "Monetizzazione della Flessibilità",
       "monetizationDesc": "Notarizzando la tua riduzione di <span>{{kw}} kW</span> su Pontus-X, hai guadagnato <span>{{earnings}} EUROe</span> in incentivi di flessibilità questo mese.",
