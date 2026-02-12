@@ -11,10 +11,10 @@
   "viewStandard": "Ver Norma UNE",
   "complianceBanner": {
     "title": "Estado de Conformidade UNE 0087:2025",
-    "percentage": "78%",
-    "compliant": "14 Conforme",
-    "partial": "7 Parcial",
-    "pending": "1 Pendente",
+    "percentage": "90%",
+    "compliant": "19 Conforme",
+    "partial": "3 Parcial",
+    "pending": "0 Pendente",
     "viewRulebook": "Livro de Regras",
     "viewGlossary": "Glossário UNE",
     "viewTransparency": "Portal de Transparência"

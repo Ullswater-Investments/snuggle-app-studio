@@ -11,10 +11,10 @@
   "viewStandard": "Bekijk UNE-norm",
   "complianceBanner": {
     "title": "Conformiteitsstatus UNE 0087:2025",
-    "percentage": "78%",
-    "compliant": "14 Conform",
-    "partial": "7 Gedeeltelijk",
-    "pending": "1 In afwachting",
+    "percentage": "90%",
+    "compliant": "19 Conform",
+    "partial": "3 Gedeeltelijk",
+    "pending": "0 In afwachting",
     "viewRulebook": "Regelboek",
     "viewGlossary": "UNE-glossarium",
     "viewTransparency": "Transparantieportaal"

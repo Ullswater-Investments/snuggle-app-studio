@@ -15,6 +15,7 @@ interface Organization {
   website?: string;
   linkedin_url?: string;
   marketplace_description?: string;
+  assurance_level?: string;
 }
 
 interface OrganizationContextType {

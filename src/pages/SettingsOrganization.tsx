@@ -15,6 +15,8 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Save, Upload, Globe, Linkedin, Building2, CheckCircle2, AlertCircle } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
+import { AssuranceLevelBadge } from "@/components/AssuranceLevelBadge";
+import { VerifiableCredentialsPanel } from "@/components/VerifiableCredentialsPanel";
 
 export default function SettingsOrganization() {
   const { activeOrg } = useOrganizationContext();
@@ -99,6 +101,7 @@ export default function SettingsOrganization() {
         <TabsList>
           <TabsTrigger value="profile">Perfil Público</TabsTrigger>
           <TabsTrigger value="team">Equipo</TabsTrigger>
+          <TabsTrigger value="credentials">Credenciales</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile" className="space-y-6">
@@ -192,6 +195,24 @@ export default function SettingsOrganization() {
               <TeamManagement />
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="credentials" className="space-y-6">
+          {/* Assurance Level */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                Nivel de Aseguramiento (LoA)
+                <AssuranceLevelBadge level={(activeOrg.assurance_level as 'low' | 'substantial' | 'high') || 'low'} />
+              </CardTitle>
+              <CardDescription>
+                Nivel de confianza eIDAS basado en las verificaciones completadas por tu organización.
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          {/* Verifiable Credentials */}
+          <VerifiableCredentialsPanel organizationId={activeOrg.id} />
         </TabsContent>
       </Tabs>
     </div>

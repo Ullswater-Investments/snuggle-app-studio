@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Web3DidsInfographic } from "@/components/web3-dids/Web3DidsInfographic";
 import { Web3DidsChatAgent } from "@/components/web3-dids/Web3DidsChatAgent";
+import { VerifiableCredentialsPanel } from "@/components/VerifiableCredentialsPanel";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 
 const Counter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
@@ -34,6 +36,7 @@ const metrics = [
 
 const Web3Dids = () => {
   const { t } = useTranslation("web3Dids");
+  const { activeOrg } = useOrganizationContext();
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,6 +61,15 @@ const Web3Dids = () => {
           <Web3DidsInfographic />
         </div>
       </section>
+
+      {/* Verifiable Credentials Section */}
+      {activeOrg && (
+        <section className="pb-16">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <VerifiableCredentialsPanel organizationId={activeOrg.id} />
+          </div>
+        </section>
+      )}
 
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
