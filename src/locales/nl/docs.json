@@ -464,7 +464,7 @@
         "title": "Begripsvermogen",
         "content": "<p>Meertalige NLU met <strong>intentie-, entiteit- en sentimentdetectie</strong> voor gecontextualiseerde antwoorden.</p>",
         "quiz": {
-          "question": "Wat detecteert ARIA's NLU-systeem?",
+          "question": "Wat detecteert het NLU-systeem van de AI Adviseur?",
           "options": ["Alleen trefwoorden", "Intentie, entiteiten en sentiment", "Alleen taal", "Niets automatisch"],
           "correctIndex": 1
         }
