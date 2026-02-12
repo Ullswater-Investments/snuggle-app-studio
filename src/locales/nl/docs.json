@@ -176,10 +176,10 @@
         }
       },
       "aria": {
-        "title": "ARIA Assistent",
-        "content": "<p><strong>ARIA</strong> is de geïntegreerde AI-assistent die vragen beantwoordt, processen begeleidt en gepersonaliseerde aanbevelingen biedt op basis van gebruikerscontext.</p>",
+        "title": "AI Adviseur",
+        "content": "<p>De <strong>AI Adviseur</strong> is de geïntegreerde intelligente assistent die vragen beantwoordt, processen begeleidt en gepersonaliseerde aanbevelingen biedt op basis van gebruikerscontext.</p>",
         "quiz": {
-          "question": "Wat is ARIA in ProcureData?",
+          "question": "Wat is de AI Adviseur in ProcureData?",
           "options": ["Een rapportagemodule", "Een AI-assistent", "Een type certificering", "Een cryptocurrency"],
           "correctIndex": 1
         }
