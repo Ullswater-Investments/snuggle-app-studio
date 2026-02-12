@@ -1,112 +1,101 @@
 
 
-## Plan: Eliminar ARIA de toda la plataforma
+## Plan: Eliminar ARIA solo del front-end visible
 
-### Contexto
-ARIA (Asistente de Recursos e Informacion Automatizada) ha sido sustituida por los agentes de IA especificos por caso. Todos los componentes, referencias visuales y textos de ARIA deben eliminarse o renombrarse.
-
----
-
-### Alcance del cambio
-
-El nombre "ARIA" aparece en **3 niveles** de la plataforma:
-
-| Nivel | Archivos afectados | Tipo de cambio |
-|-------|-------------------|----------------|
-| Componentes dedicados | 2 archivos | Eliminar |
-| Simuladores con panel ARIA | ~47 simuladores | Renombrar/reemplazar branding |
-| Pagina de detalle | 1 archivo | Eliminar seccion AriaQuoteCard |
-| Archivos de traduccion | ~30 archivos JSON (6 idiomas) | Eliminar/renombrar claves `aria.*` y `ariaQuote` |
-| Datos de entrenamiento IA | 1 archivo MD | Eliminar |
-| Chat agent | 1 archivo | Limpiar referencia `ariaQuote` |
+### Filosofia
+Mantener todas las claves de datos (`ariaQuote`, `aria.insight1`, etc.) intactas en el background. Solo cambiar lo que el usuario **ve**: el nombre "ARIA" y el avatar circular con "A".
 
 ---
 
-### Cambios detallados
+### Cambios (minimos y seguros)
 
-#### 1. Eliminar componentes ARIA dedicados
+#### 1. Traducciones: Cambiar solo el VALOR de `aria.name` (6 idiomas)
 
-- **Eliminar** `src/components/success-stories/AriaDynamicReport.tsx`
-- **Eliminar** `src/components/success-stories/AriaQuoteCard.tsx`
+En cada `simulators.json`, cambiar unicamente:
+```
+"aria.name": "ARIA"  -->  "aria.name": "AI Advisor"
+```
 
-#### 2. Refactorizar `ImpactSimulator.tsx`
+Las claves `aria.role`, `aria.insight1`, etc. se mantienen identicas. Solo cambia el valor visible del nombre.
 
-- Eliminar import de `AriaDynamicReport`
-- Reemplazar el panel ARIA por un panel generico "Informe Estrategico" o "AI Insights" sin branding ARIA
-- Mantener la misma estructura visual pero con titulo generico (ej: "Analisis Estrategico", "Strategic Insights")
+| Idioma | Antes | Despues |
+|--------|-------|---------|
+| es | "ARIA" | "AI Advisor" |
+| en | "ARIA" | "AI Advisor" |
+| it | "ARIA" | "Consulente IA" |
+| nl | "ARIA" | "AI Adviseur" |
+| pt | "ARIA" | "Consultor IA" |
+| de | "ARIA" | "KI-Berater" |
 
-#### 3. Refactorizar `SuccessStoryDetail.tsx`
+#### 2. Simuladores (~31 archivos): Cambiar avatar "A" por icono Bot
 
-- Eliminar import de `AriaQuoteCard`
-- Eliminar la ZONA 3 completa ("ARIA Quote - Consultoria Humana")
-- O reemplazarla por una tarjeta generica de "Strategic Insight" sin branding ARIA
+En cada simulador, reemplazar:
+```tsx
+// ANTES
+<div className="w-10 h-10 rounded-full bg-gradient-to-br from-X to-Y flex items-center justify-center text-white font-black text-lg">A</div>
 
-#### 4. Refactorizar ~47 simuladores
+// DESPUES
+<div className="w-10 h-10 rounded-full bg-gradient-to-br from-X to-Y flex items-center justify-center">
+  <BrainCircuit className="w-5 h-5 text-white" />
+</div>
+```
 
-En cada simulador que muestra `t('aria.name')` o un avatar con "A":
+No se toca nada mas del simulador: ni las claves de traduccion, ni la logica, ni los insights.
 
-- Reemplazar `t('aria.name')` por `t('ai.name')` o texto generico como "AI Assistant" / "Asistente IA"
-- Reemplazar el avatar circular con "A" por un icono generico (ej: `Bot`, `BrainCircuit` de lucide)
-- Eliminar referencias a `aria.role`, `aria.insight` etc.
+#### 3. AriaDynamicReport.tsx: Cambiar solo el icono y el titulo visual
 
-Simuladores afectados (lista parcial):
-- BateriaHubSimulator, SocialHubSimulator, TropicalFlashSimulator
-- PureLithiumSimulator, KYCSovereignSimulator, GreenFinanceESGSimulator
-- WasteToValueSimulator, UrbanMiningSimulator, UniSynthSimulator
-- BerryWaterSimulator, RetailEthicsAudit
-- Y todos los demas que referencien `aria.*`
+- Reemplazar el avatar de Sparkles por BrainCircuit
+- El titulo ya usa `t('aria.name')` que se cambiara automaticamente con el paso 1
+- NO se elimina el componente, solo se rebranda visualmente
 
-#### 5. Limpiar archivos de traduccion
+#### 4. AriaQuoteCard.tsx: Cambiar "ARIA" hardcoded por "AI Advisor"
 
-En los 6 idiomas (`es`, `en`, `fr`, `it`, `nl`, `pt`, `de`):
+Linea 58: `<span className="font-bold">ARIA</span>` --> `<span className="font-bold">AI Advisor</span>`
+Y cambiar "Strategic Insight" a algo como "Strategic Analysis"
 
-**simulators.json:**
-- Renombrar claves `aria.name`, `aria.strategicReport`, `aria.insight` a `ai.name`, `ai.strategicReport`, `ai.insight`
-- Cambiar valores de "ARIA" a "AI Assistant" / "Asistente IA" (segun idioma)
-- Renombrar todas las claves `*.aria.role`, `*.aria.insight1`, etc. a `*.ai.role`, `*.ai.insight1`
+#### 5. AIConcierge.tsx: Cambiar textos hardcoded
 
-**success.json:**
-- Las claves `ariaQuote` en cada caso se pueden renombrar a `strategicInsight` o eliminarse si ya no se muestran
+- Linea 341: "Soy **ARIA**" --> "Soy tu **Asistente IA**"
+- Linea 598: "Error al conectar con ARIA" --> "Error al conectar con el asistente"
+- Linea 657/687: "mejorar ARIA" --> "mejorar el asistente"
+- Linea 776: "ARIA" --> "AI Assistant"
+- Linea 951: "Pregunta a ARIA" --> "Pregunta al asistente"
+- Linea 978: "respondido ARIA" --> "respondido el asistente"
 
-#### 6. Limpiar SuccessStoryChatAgent.tsx
+#### 6. entrenamientoIA/15_NLU_DIALOG_TRAINING.md: NO se elimina
 
-- Eliminar la propiedad `ariaQuote` de la interfaz del caso si ya no se usa en la UI
-- O mantenerla renombrada como `strategicInsight` si el chat agent la necesita como contexto
-
-#### 7. Eliminar archivo de entrenamiento
-
-- Eliminar `entrenamientoIA/15_NLU_DIALOG_TRAINING.md` (define personalidad y capacidades de ARIA)
-
----
-
-### Estrategia de reemplazo
-
-| Antes (ARIA) | Despues |
-|--------------|---------|
-| "ARIA" como nombre | "AI Assistant" / "Asistente IA" |
-| Avatar circular con "A" gradiente | Icono `BrainCircuit` o `Bot` de lucide |
-| `AriaDynamicReport` | Panel inline "Strategic Insights" |
-| `AriaQuoteCard` | Eliminar o card generico |
-| `t('aria.name')` | `t('ai.name')` |
-| `ariaQuote` en datos | `strategicInsight` (renombrar) |
+Se mantiene como documentacion interna. Opcionalmente se puede actualizar el nombre pero no es visible para usuarios.
 
 ---
 
-### Orden de ejecucion
+### Lo que NO se toca
 
-1. Eliminar `AriaDynamicReport.tsx` y `AriaQuoteCard.tsx`
-2. Actualizar `ImpactSimulator.tsx` (reemplazar panel ARIA por panel generico)
-3. Actualizar `SuccessStoryDetail.tsx` (eliminar AriaQuoteCard)
-4. Actualizar los ~47 simuladores (renombrar branding)
-5. Actualizar archivos de traduccion en los 6 idiomas
-6. Limpiar `SuccessStoryChatAgent.tsx`
-7. Eliminar `entrenamientoIA/15_NLU_DIALOG_TRAINING.md`
+| Elemento | Razon para mantenerlo |
+|----------|----------------------|
+| Claves `ariaQuote` en success.json | El agente IA las usa como contexto |
+| Claves `aria.role`, `aria.insight1/2/3` en simulators.json | Contenido narrativo valioso, solo cambia el nombre visible |
+| Propiedad `ariaQuote` en CaseContext interface | El chat agent la necesita |
+| Estructura de AriaDynamicReport | Solo se rebranda, no se elimina |
+| Nombres de archivos (.tsx) | Cambiar nombres de archivos es riesgoso y no aporta valor al usuario |
 
 ---
 
-### Riesgo
+### Archivos a modificar
 
-- **Alto volumen de archivos**: ~80+ archivos modificados
-- **Mitigacion**: Los cambios son mecanicos (buscar/reemplazar), no logicos
-- **Las traducciones `ariaQuote`** en success.json se mantendran renombradas como `strategicInsight` para no perder el contenido narrativo que usan los agentes de IA como contexto
+| Archivo | Cambio |
+|---------|--------|
+| 6x simulators.json (es/en/it/nl/pt/de) | Valor de `aria.name` |
+| ~31 simuladores .tsx | Avatar "A" por icono BrainCircuit |
+| AriaDynamicReport.tsx | Icono visual |
+| AriaQuoteCard.tsx | Texto "ARIA" hardcoded |
+| AIConcierge.tsx | ~6 textos hardcoded |
+
+---
+
+### Ventajas de este enfoque
+
+- **0 riesgo de rotura logica**: No se tocan interfaces, claves de datos, ni flujos
+- **~40 archivos** en vez de ~80+
+- **Cambios puramente cosmeticos**: Buscar/reemplazar mecanico
+- **El agente IA sigue funcionando** con todo su contexto intacto
 
