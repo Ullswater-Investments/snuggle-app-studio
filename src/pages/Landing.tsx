@@ -16,6 +16,7 @@ import UseCasesCarousel from "@/components/UseCasesCarousel";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
+import procuredataTransparentLogo from "@/assets/procuredata-transparent-logo.png";
 import { cn } from "@/lib/utils";
 import { FederatedHeroChat } from "@/components/landing/FederatedHeroChat";
 import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
@@ -567,8 +568,8 @@ export default function Landing() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center gap-2 font-bold text-xl mb-4">
-                <span className="procuredata-gradient">{t('brand')}</span>
+              <div className="mb-4">
+                <img src={procuredataTransparentLogo} alt="PROCUREDATA" className="h-10 object-contain" />
               </div>
               <p className="text-sm text-gray-400 mb-4">
                 {t('footer.tagline')}
