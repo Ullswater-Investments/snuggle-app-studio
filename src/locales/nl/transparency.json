@@ -1,0 +1,59 @@
+{
+  "title": "Transparantieportaal",
+  "subtitle": "Publieke informatie over governance, tarieven en statistieken van de ProcureData-dataruimte.",
+  "badge": "Transparantie",
+  "backToHome": "Terug naar Home",
+  "sections": {
+    "metrics": "Dataruimte Statistieken",
+    "fees": "Huidige Tarieven",
+    "documents": "Governance Documenten",
+    "authority": "Bestuursautoriteit",
+    "audits": "Rapporten & Audits",
+    "communication": "Communicatiekanaal"
+  },
+  "metrics": {
+    "participants": "Actieve deelnemers",
+    "transactions": "Verwerkte transacties",
+    "sectors": "Gedekte sectoren",
+    "availability": "SLA-beschikbaarheid",
+    "disclaimer": "* Synthetische demodata. Echte statistieken worden periodiek bijgewerkt."
+  },
+  "fees": {
+    "payPerUse": "Pay-per-use",
+    "payPerUseDetail": "Standaardtarief per data-uitwisselingstransactie tussen deelnemers.",
+    "proMembership": "Pro-lidmaatschap",
+    "proMembershipDetail": "Volledige toegang tot geavanceerde functies, analytics en prioriteitsondersteuning.",
+    "registration": "Registratie & onboarding",
+    "registrationDetail": "Registratie, KYB-verificatie en DID-uitgifte zijn gratis.",
+    "additionalServices": "Aanvullende diensten",
+    "additionalServicesDetail": "Advies, aangepaste ERP-integratie en toegewijd support op aanvraag.",
+    "free": "Gratis",
+    "variable": "Variabel"
+  },
+  "docs": {
+    "rulebook": "Regelboek",
+    "rulebookDesc": "Volledig kader van rechten, verplichtingen, SLA's en sanctieregime.",
+    "adhesionContract": "Toetredingsovereenkomst",
+    "adhesionContractDesc": "Juridisch toetredingsdocument met eIDAS-conforme digitale handtekening.",
+    "glossary": "UNE 0087 Woordenlijst",
+    "glossaryDesc": "Koppeling van elk normatief begrip aan de technische implementatie in ProcureData.",
+    "uneReport": "UNE-conformiteitsrapport",
+    "uneReportDesc": "Uitgebreide analyse van het conformiteitsniveau met UNE 0087:2025."
+  },
+  "authority": {
+    "technical": "Technisch Comité",
+    "technicalDesc": "Verantwoordelijk voor technische standaarden, interoperabiliteit, beveiliging en architectonische evolutie.",
+    "ethics": "Ethisch Comité",
+    "ethicsDesc": "Houdt toezicht op verantwoord datagebruik, lost conflicten op en beheert het sanctieregime.",
+    "executive": "Uitvoerend Secretariaat",
+    "executiveDesc": "Coördineert dagelijkse operaties, ledenbeheer en communicatie met deelnemers."
+  },
+  "audits": {
+    "description": "Sectie voorbereid voor publicatie van periodieke audit-, conformiteits- en prestatierapporten.",
+    "upcoming": "Eerste auditrapport gepland"
+  },
+  "communication": {
+    "description": "Vragen over de dataruimte, tarieven of governance? Neem contact op met het Uitvoerend Secretariaat.",
+    "cta": "Contact opnemen"
+  }
+}

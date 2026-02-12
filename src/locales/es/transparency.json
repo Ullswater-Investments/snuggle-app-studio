@@ -1,0 +1,59 @@
+{
+  "title": "Portal de Transparencia",
+  "subtitle": "Información pública sobre gobernanza, tarifas y métricas del espacio de datos ProcureData.",
+  "badge": "Transparencia",
+  "backToHome": "Volver al Inicio",
+  "sections": {
+    "metrics": "Métricas del Espacio",
+    "fees": "Tarifas Vigentes",
+    "documents": "Documentos de Gobernanza",
+    "authority": "Autoridad de Gobierno",
+    "audits": "Informes y Auditorías",
+    "communication": "Canal de Comunicación"
+  },
+  "metrics": {
+    "participants": "Participantes activos",
+    "transactions": "Transacciones procesadas",
+    "sectors": "Sectores cubiertos",
+    "availability": "Disponibilidad SLA",
+    "disclaimer": "* Datos sintéticos de demostración. Las métricas reales se actualizarán periódicamente."
+  },
+  "fees": {
+    "payPerUse": "Pago por uso",
+    "payPerUseDetail": "Tarifa estándar por cada transacción de intercambio de datos entre participantes.",
+    "proMembership": "Membresía Pro",
+    "proMembershipDetail": "Acceso completo a funcionalidades avanzadas, analytics y soporte prioritario.",
+    "registration": "Registro y adhesión",
+    "registrationDetail": "El proceso de registro, verificación KYB y obtención de DID no tiene coste.",
+    "additionalServices": "Servicios adicionales",
+    "additionalServicesDetail": "Consultoría, integración ERP personalizada y soporte dedicado bajo demanda.",
+    "free": "Gratuito",
+    "variable": "Variable"
+  },
+  "docs": {
+    "rulebook": "Libro de Reglas",
+    "rulebookDesc": "Marco completo de derechos, obligaciones, SLAs y régimen sancionador del espacio.",
+    "adhesionContract": "Contrato de Adhesión",
+    "adhesionContractDesc": "Documento legal de adhesión al espacio con firma digital conforme eIDAS.",
+    "glossary": "Glosario UNE 0087",
+    "glossaryDesc": "Mapeo de cada término normativo a su implementación técnica en ProcureData.",
+    "uneReport": "Informe de Conformidad UNE",
+    "uneReportDesc": "Análisis exhaustivo del nivel de cumplimiento con UNE 0087:2025."
+  },
+  "authority": {
+    "technical": "Comité Técnico",
+    "technicalDesc": "Responsable de estándares técnicos, interoperabilidad, seguridad y evolución de la arquitectura del espacio.",
+    "ethics": "Comité de Ética",
+    "ethicsDesc": "Supervisa el uso responsable de datos, resuelve conflictos y gestiona el régimen sancionador.",
+    "executive": "Secretaría Ejecutiva",
+    "executiveDesc": "Coordina las operaciones diarias, gestión de adhesiones y comunicación con participantes."
+  },
+  "audits": {
+    "description": "Sección preparada para publicar informes periódicos de auditoría, conformidad y rendimiento del espacio de datos.",
+    "upcoming": "Primer informe de auditoría programado"
+  },
+  "communication": {
+    "description": "¿Tienes preguntas sobre el espacio de datos, las tarifas o la gobernanza? Contacta con la Secretaría Ejecutiva.",
+    "cta": "Contactar"
+  }
+}

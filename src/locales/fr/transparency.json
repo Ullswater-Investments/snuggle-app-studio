@@ -1,0 +1,59 @@
+{
+  "title": "Portail de Transparence",
+  "subtitle": "Informations publiques sur la gouvernance, les tarifs et les métriques de l'espace de données ProcureData.",
+  "badge": "Transparence",
+  "backToHome": "Retour à l'accueil",
+  "sections": {
+    "metrics": "Métriques de l'Espace",
+    "fees": "Tarifs en Vigueur",
+    "documents": "Documents de Gouvernance",
+    "authority": "Autorité de Gouvernance",
+    "audits": "Rapports et Audits",
+    "communication": "Canal de Communication"
+  },
+  "metrics": {
+    "participants": "Participants actifs",
+    "transactions": "Transactions traitées",
+    "sectors": "Secteurs couverts",
+    "availability": "Disponibilité SLA",
+    "disclaimer": "* Données synthétiques de démonstration. Les métriques réelles seront mises à jour périodiquement."
+  },
+  "fees": {
+    "payPerUse": "Paiement à l'usage",
+    "payPerUseDetail": "Tarif standard par transaction d'échange de données entre participants.",
+    "proMembership": "Adhésion Pro",
+    "proMembershipDetail": "Accès complet aux fonctionnalités avancées, analytics et support prioritaire.",
+    "registration": "Inscription et adhésion",
+    "registrationDetail": "Le processus d'inscription, vérification KYB et obtention de DID est gratuit.",
+    "additionalServices": "Services additionnels",
+    "additionalServicesDetail": "Conseil, intégration ERP personnalisée et support dédié sur demande.",
+    "free": "Gratuit",
+    "variable": "Variable"
+  },
+  "docs": {
+    "rulebook": "Livre de Règles",
+    "rulebookDesc": "Cadre complet de droits, obligations, SLAs et régime de sanctions.",
+    "adhesionContract": "Contrat d'Adhésion",
+    "adhesionContractDesc": "Document juridique d'adhésion avec signature numérique conforme eIDAS.",
+    "glossary": "Glossaire UNE 0087",
+    "glossaryDesc": "Correspondance de chaque terme normatif à son implémentation dans ProcureData.",
+    "uneReport": "Rapport de Conformité UNE",
+    "uneReportDesc": "Analyse exhaustive du niveau de conformité avec UNE 0087:2025."
+  },
+  "authority": {
+    "technical": "Comité Technique",
+    "technicalDesc": "Responsable des standards techniques, interopérabilité, sécurité et évolution architecturale.",
+    "ethics": "Comité d'Éthique",
+    "ethicsDesc": "Supervise l'utilisation responsable des données, résout les conflits et gère le régime de sanctions.",
+    "executive": "Secrétariat Exécutif",
+    "executiveDesc": "Coordonne les opérations quotidiennes, la gestion des adhésions et la communication."
+  },
+  "audits": {
+    "description": "Section préparée pour la publication de rapports périodiques d'audit, conformité et performance.",
+    "upcoming": "Premier rapport d'audit programmé"
+  },
+  "communication": {
+    "description": "Des questions sur l'espace de données, les tarifs ou la gouvernance ? Contactez le Secrétariat Exécutif.",
+    "cta": "Nous contacter"
+  }
+}

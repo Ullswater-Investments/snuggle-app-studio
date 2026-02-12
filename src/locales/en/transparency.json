@@ -1,0 +1,59 @@
+{
+  "title": "Transparency Portal",
+  "subtitle": "Public information about governance, fees and metrics of the ProcureData data space.",
+  "badge": "Transparency",
+  "backToHome": "Back to Home",
+  "sections": {
+    "metrics": "Data Space Metrics",
+    "fees": "Current Fees",
+    "documents": "Governance Documents",
+    "authority": "Governance Authority",
+    "audits": "Reports & Audits",
+    "communication": "Communication Channel"
+  },
+  "metrics": {
+    "participants": "Active participants",
+    "transactions": "Processed transactions",
+    "sectors": "Covered sectors",
+    "availability": "SLA Availability",
+    "disclaimer": "* Synthetic demo data. Real metrics will be updated periodically."
+  },
+  "fees": {
+    "payPerUse": "Pay per use",
+    "payPerUseDetail": "Standard fee per data exchange transaction between participants.",
+    "proMembership": "Pro Membership",
+    "proMembershipDetail": "Full access to advanced features, analytics and priority support.",
+    "registration": "Registration & onboarding",
+    "registrationDetail": "Registration, KYB verification and DID issuance are free of charge.",
+    "additionalServices": "Additional services",
+    "additionalServicesDetail": "Consulting, custom ERP integration and dedicated support on demand.",
+    "free": "Free",
+    "variable": "Variable"
+  },
+  "docs": {
+    "rulebook": "Rulebook",
+    "rulebookDesc": "Complete framework of rights, obligations, SLAs and sanctioning regime.",
+    "adhesionContract": "Adhesion Contract",
+    "adhesionContractDesc": "Legal adhesion document with eIDAS-compliant digital signature.",
+    "glossary": "UNE 0087 Glossary",
+    "glossaryDesc": "Mapping of each normative term to its technical implementation in ProcureData.",
+    "uneReport": "UNE Compliance Report",
+    "uneReportDesc": "Comprehensive analysis of compliance level with UNE 0087:2025."
+  },
+  "authority": {
+    "technical": "Technical Committee",
+    "technicalDesc": "Responsible for technical standards, interoperability, security and architectural evolution.",
+    "ethics": "Ethics Committee",
+    "ethicsDesc": "Oversees responsible data use, resolves conflicts and manages the sanctioning regime.",
+    "executive": "Executive Secretariat",
+    "executiveDesc": "Coordinates daily operations, membership management and participant communication."
+  },
+  "audits": {
+    "description": "Section prepared for publishing periodic audit, compliance and performance reports.",
+    "upcoming": "First audit report scheduled"
+  },
+  "communication": {
+    "description": "Have questions about the data space, fees or governance? Contact the Executive Secretariat.",
+    "cta": "Contact Us"
+  }
+}

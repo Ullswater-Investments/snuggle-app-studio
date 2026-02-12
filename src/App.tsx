@@ -253,6 +253,7 @@ import Une0087 from "./pages/Une0087";
 import RecomendacionesUne from "./pages/RecomendacionesUne";
 import LibroDeReglas from "./pages/LibroDeReglas";
 import GlosarioUne from "./pages/GlosarioUne";
+import PortalTransparencia from "./pages/PortalTransparencia";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -332,6 +333,7 @@ const App = () => (
                   <Route path="/recomendaciones-une" element={<RecomendacionesUne />} />
                   <Route path="/libro-de-reglas" element={<LibroDeReglas />} />
                   <Route path="/glosario-une" element={<GlosarioUne />} />
+                  <Route path="/transparencia" element={<PortalTransparencia />} />
                   <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
                   <Route path="/nodos/marketplace" element={<MarketplacePage />} />
                   <Route path="/nodos/odrl" element={<OdrlPage />} />
