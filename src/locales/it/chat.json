@@ -57,6 +57,8 @@
     "errorRateLimit": "⚠️ Limite di richieste raggiunto. Riprova tra qualche istante.",
     "errorCredits": "⚠️ Crediti IA esauriti. Contatta l'amministratore.",
     "errorGeneric": "Spiacente, si è verificato un errore. Riprova.",
-    "errorConnection": "Errore di connessione. Verifica la tua rete e riprova."
+    "errorConnection": "Errore di connessione. Verifica la tua rete e riprova.",
+    "nodeInactive": "Nodo inattivo",
+    "nodeActive": "Nodo attivo ({{count}})"
   }
 }

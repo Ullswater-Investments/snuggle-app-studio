@@ -57,6 +57,8 @@
     "errorRateLimit": "⚠️ Limite de pedidos alcançado. Tente novamente em alguns instantes.",
     "errorCredits": "⚠️ Créditos de IA esgotados. Contacte o administrador.",
     "errorGeneric": "Desculpe, ocorreu um erro. Tente novamente.",
-    "errorConnection": "Erro de conexão. Verifique a sua rede e tente novamente."
+    "errorConnection": "Erro de conexão. Verifique a sua rede e tente novamente.",
+    "nodeInactive": "Nó inativo",
+    "nodeActive": "Nó ativo ({{count}})"
   }
 }

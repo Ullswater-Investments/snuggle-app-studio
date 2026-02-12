@@ -57,6 +57,8 @@
     "errorRateLimit": "⚠️ Rate limit reached. Please try again in a moment.",
     "errorCredits": "⚠️ AI credits exhausted. Contact the administrator.",
     "errorGeneric": "Sorry, an error occurred. Please try again.",
-    "errorConnection": "Connection error. Check your network and try again."
+    "errorConnection": "Connection error. Check your network and try again.",
+    "nodeInactive": "Inactive node",
+    "nodeActive": "Active node ({{count}})"
   }
 }

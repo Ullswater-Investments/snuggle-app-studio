@@ -57,6 +57,8 @@
     "errorRateLimit": "⚠️ Aanvraaglimiet bereikt. Probeer het over enkele ogenblikken opnieuw.",
     "errorCredits": "⚠️ AI-credits uitgeput. Neem contact op met de beheerder.",
     "errorGeneric": "Sorry, er is een fout opgetreden. Probeer het opnieuw.",
-    "errorConnection": "Verbindingsfout. Controleer uw netwerk en probeer het opnieuw."
+    "errorConnection": "Verbindingsfout. Controleer uw netwerk en probeer het opnieuw.",
+    "nodeInactive": "Inactieve node",
+    "nodeActive": "Actieve node ({{count}})"
   }
 }

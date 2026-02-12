@@ -215,7 +215,7 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full text-xs font-medium text-primary">
               <Sparkles className="w-3 h-3" />
-              Agente IA Federado
+              {t("federated.badge")}
             </div>
             <p className="text-sm text-muted-foreground max-w-sm mx-auto">
               {t("federated.description")}
@@ -268,7 +268,7 @@ export const FederatedHeroChat = ({ onProcessingChange, onHighlightedNodesChange
               )}
               {msg.role === "assistant" && msg.tokens && !isLoading && (
                 <span className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
-                  ⚡ {msg.tokens.toLocaleString("es-ES")} tokens
+                  ⚡ {msg.tokens.toLocaleString()} tokens
                 </span>
               )}
             </div>

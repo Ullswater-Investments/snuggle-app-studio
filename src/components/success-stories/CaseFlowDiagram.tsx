@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface FlowNode {
   id: string;
@@ -23,6 +24,7 @@ interface Props {
 }
 
 export const CaseFlowDiagram = ({ nodes, connections, highlightedNodes = [], isProcessing = false }: Props) => {
+  const { t } = useTranslation("chat");
   const [activeConnection, setActiveConnection] = useState(0);
 
   useEffect(() => {
@@ -43,11 +45,11 @@ export const CaseFlowDiagram = ({ nodes, connections, highlightedNodes = [], isP
       <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
         <span className="flex items-center gap-1">
           <span className="inline-block w-2 h-2 rounded-full bg-primary/40" />
-          Nodo inactivo
+          {t("successStory.nodeInactive")}
         </span>
         <span className="flex items-center gap-1">
           <span className="inline-block w-2 h-2 rounded-full" style={{ background: "hsl(142, 71%, 45%)" }} />
-          Nodo activo ({activeCount})
+          {t("successStory.nodeActive", { count: activeCount })}
         </span>
       </div>
 
