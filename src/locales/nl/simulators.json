@@ -225,7 +225,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "AI Adviseur",
       "role": "Solar Onderhoud Adviseur",
       "recoveryTitle": "Energie Herstel",
       "recoveryDesc": "Door vervuiling te verminderen naar <span>{{days}} dagen</span>, herstel je <span>{{mwh}} MWh</span> dagelijks, wat <span>{{revenue}}€</span> extra genereert.",
