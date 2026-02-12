@@ -1,0 +1,28 @@
+{
+  "backToHome": "Voltar ao início",
+  "badge": "Fase 9 — Analytics & BI",
+  "title": "Analytics & BI da ProcureData",
+  "subtitle": "Dashboards preditivos, Spend Analysis multidimensional, Health Score e simulador de cenários para inteligência estratégica de compras.",
+  "layers": {
+    "dashboards": { "label": "Camada 1", "title": "Dashboards em Tempo Real" },
+    "spend": { "label": "Camada 2", "title": "Spend Analysis (Cubo de Gastos)" },
+    "predictive": { "label": "Camada 3", "title": "Analítica Preditiva" },
+    "dataops": { "label": "Camada 4", "title": "Data Ops & Qualidade" }
+  },
+  "metrics": {
+    "tools": "5 Ferramentas Chave",
+    "realtime": "100% Tempo Real",
+    "cases": "47 Casos Verificados"
+  },
+  "chat": {
+    "badge": "Agente Analytics",
+    "description": "Especialista em Analytics, BI e Dashboards Preditivos aplicados à ProcureData",
+    "placeholder": "Pergunte sobre dashboards, forecasting, spend analysis...",
+    "sectionTitle": "Consulte o Especialista em Analytics & BI",
+    "sectionSubtitle": "Pergunte sobre dashboards preditivos, Health Score, simulador de cenários ou spend analysis",
+    "q1": "Como funcionam os dashboards preditivos da ProcureData?",
+    "q2": "O que é o Health Score e como é calculado?",
+    "q3": "Como funciona o Simulador de Cenários para risco de fornecedor?",
+    "q4": "Como Analytics & BI é aplicado no caso GigaFactory?"
+  }
+}

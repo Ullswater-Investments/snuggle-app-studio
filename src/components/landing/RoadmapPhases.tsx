@@ -14,7 +14,7 @@ const phases = [
   { icon: Bot, name: "IA Conversacional", desc: "Asistente ARIA con contexto", slug: "ia-conversacional" },
   { icon: Settings, name: "Conectores ERP", desc: "SAP, Oracle, Dynamics", slug: "conectores-erp" },
   { icon: Globe, name: "Red Gaia-X", desc: "IDS, Eclipse Dataspace", slug: "red-gaia-x" },
-  { icon: BarChart3, name: "Analytics y BI", desc: "Dashboards predictivos" },
+  { icon: BarChart3, name: "Analytics y BI", desc: "Dashboards predictivos", slug: "analytics-bi" },
   { icon: Layers, name: "Multi-Sector", desc: "Nodos sectoriales y gobernanza" },
 ];
 

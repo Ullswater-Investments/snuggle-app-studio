@@ -29,3 +29,6 @@ verify_jwt = false
 
 [functions.red-gaia-x-agent]
 verify_jwt = false
+
+[functions.analytics-bi-agent]
+verify_jwt = false
