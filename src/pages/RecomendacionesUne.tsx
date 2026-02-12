@@ -194,7 +194,7 @@ export default function RecomendacionesUne() {
                     </div>
                     <div>
                       <h3 className="font-bold text-lg text-foreground">{t('complianceBanner.title')}</h3>
-                      <Progress value={78} className="w-48 h-2 mt-1" />
+                      <Progress value={90} className="w-48 h-2 mt-1" />
                     </div>
                   </div>
                 </div>

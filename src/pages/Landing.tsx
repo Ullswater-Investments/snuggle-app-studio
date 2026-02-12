@@ -357,7 +357,7 @@ export default function Landing() {
                 ))}
                 <Link to="/recomendaciones-une" className="px-2.5 py-1 rounded-full text-[10px] font-semibold border bg-card text-muted-foreground hover:border-primary hover:text-primary transition-colors flex items-center gap-1">
                   <Scale className="h-3 w-3" />
-                  UNE 0087:2025 · 78%
+                  UNE 0087:2025 · 90%
                 </Link>
               </div>
             </div>
