@@ -1,0 +1,28 @@
+{
+  "backToHome": "Torna alla home",
+  "badge": "Fase 8 — Rete Gaia-X",
+  "title": "Rete Gaia-X di ProcureData",
+  "subtitle": "Sovranità digitale europea con IDS, Eclipse Dataspace Connector e Trust Framework per lo scambio federato di dati industriali.",
+  "layers": {
+    "trust": { "label": "Livello 1", "title": "Trust Framework (Quadro di Fiducia)" },
+    "ids": { "label": "Livello 2", "title": "IDS / Eclipse Dataspace Connector" },
+    "catalogue": { "label": "Livello 3", "title": "Catalogo Federato" },
+    "compliance": { "label": "Livello 4", "title": "Compliance e Governance" }
+  },
+  "metrics": {
+    "components": "4 Componenti Chiave",
+    "sovereign": "100% Sovrano",
+    "cases": "47 Casi Verificati"
+  },
+  "chat": {
+    "badge": "Agente Gaia-X",
+    "description": "Esperto in Rete Gaia-X, IDS ed Eclipse Dataspace applicato a ProcureData",
+    "placeholder": "Chiedi informazioni su Gaia-X, IDS, EDC...",
+    "sectionTitle": "Consulta l'Esperto della Rete Gaia-X",
+    "sectionSubtitle": "Domande su Trust Framework, IDS, Eclipse Dataspace o sovranità dei dati",
+    "q1": "Come funziona il Trust Framework di Gaia-X in ProcureData?",
+    "q2": "Cos'è l'Eclipse Dataspace Connector e come si integra?",
+    "q3": "Come garantisce Gaia-X la sovranità dei dati?",
+    "q4": "Come si applica Gaia-X nel caso GigaFactory?"
+  }
+}

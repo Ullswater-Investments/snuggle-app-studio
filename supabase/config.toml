@@ -26,3 +26,6 @@ verify_jwt = false
 
 [functions.conectores-erp-agent]
 verify_jwt = false
+
+[functions.red-gaia-x-agent]
+verify_jwt = false
