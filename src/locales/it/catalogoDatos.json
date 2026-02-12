@@ -1,0 +1,27 @@
+{
+  "backToHome": "Torna alla home",
+  "badge": "Fase 2 — Catalogo Dati",
+  "title": "Catalogo Dati ProcureData",
+  "subtitle": "Registrazione, scoperta e governance degli asset di dati: il motore che collega i 47 casi di successo.",
+  "layers": {
+    "registro": { "label": "Livello 1", "title": "Registrazione Asset" },
+    "descubrimiento": { "label": "Livello 2", "title": "Scoperta e Ricerca" },
+    "gobernanza": { "label": "Livello 3", "title": "Governance e Qualità" }
+  },
+  "metrics": {
+    "categories": "Categorie di Asset registrate",
+    "cases": "Casi di successo collegati al catalogo",
+    "formats": "Formati dati supportati"
+  },
+  "chat": {
+    "badge": "Agente IA — Catalogo Dati",
+    "description": "Chiedi informazioni sulla registrazione degli asset, la scoperta federata o la governance dei dati.",
+    "placeholder": "Domanda sul catalogo dati...",
+    "sectionTitle": "Chat IA Specializzata",
+    "sectionSubtitle": "Consulta qualsiasi aspetto del catalogo dati con il nostro agente esperto sui 47 casi di successo.",
+    "q1": "Come si registra un asset di dati in ProcureData?",
+    "q2": "Cos'è DCAT-AP e come si applica al catalogo?",
+    "q3": "Come funziona la scoperta federata dei dati?",
+    "q4": "Come si applica il catalogo al caso GigaFactory?"
+  }
+}

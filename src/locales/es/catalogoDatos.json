@@ -1,0 +1,27 @@
+{
+  "backToHome": "Volver al inicio",
+  "badge": "Fase 2 — Catálogo de Datos",
+  "title": "Catálogo de Datos de ProcureData",
+  "subtitle": "Registro, descubrimiento y gobernanza de activos de datos: el motor que conecta los 47 casos de éxito.",
+  "layers": {
+    "registro": { "label": "Capa 1", "title": "Registro de Activos" },
+    "descubrimiento": { "label": "Capa 2", "title": "Descubrimiento y Búsqueda" },
+    "gobernanza": { "label": "Capa 3", "title": "Gobernanza y Calidad" }
+  },
+  "metrics": {
+    "categories": "Categorías de Activos registradas",
+    "cases": "Casos de Éxito conectados al catálogo",
+    "formats": "Formatos de datos soportados"
+  },
+  "chat": {
+    "badge": "Agente IA — Catálogo de Datos",
+    "description": "Pregunta sobre registro de activos, descubrimiento federado, gobernanza de datos o cómo se aplican en los 47 casos.",
+    "placeholder": "Pregunta sobre el catálogo de datos...",
+    "sectionTitle": "Chat IA Especializado",
+    "sectionSubtitle": "Consulta cualquier aspecto del catálogo de datos con nuestro agente experto en los 47 casos de éxito.",
+    "q1": "¿Cómo se registra un activo de datos en ProcureData?",
+    "q2": "¿Qué es DCAT-AP y cómo se aplica al catálogo?",
+    "q3": "¿Cómo funciona el descubrimiento federado de datos?",
+    "q4": "¿Cómo se aplica el catálogo en el caso GigaFactory?"
+  }
+}

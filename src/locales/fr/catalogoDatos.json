@@ -1,0 +1,27 @@
+{
+  "backToHome": "Retour à l'accueil",
+  "badge": "Phase 2 — Catalogue de Données",
+  "title": "Catalogue de Données ProcureData",
+  "subtitle": "Enregistrement, découverte et gouvernance des actifs de données : le moteur reliant les 47 cas de succès.",
+  "layers": {
+    "registro": { "label": "Couche 1", "title": "Enregistrement des Actifs" },
+    "descubrimiento": { "label": "Couche 2", "title": "Découverte et Recherche" },
+    "gobernanza": { "label": "Couche 3", "title": "Gouvernance et Qualité" }
+  },
+  "metrics": {
+    "categories": "Catégories d'actifs enregistrées",
+    "cases": "Cas de succès connectés au catalogue",
+    "formats": "Formats de données supportés"
+  },
+  "chat": {
+    "badge": "Agent IA — Catalogue de Données",
+    "description": "Posez vos questions sur l'enregistrement des actifs, la découverte fédérée ou la gouvernance des données.",
+    "placeholder": "Question sur le catalogue de données...",
+    "sectionTitle": "Chat IA Spécialisé",
+    "sectionSubtitle": "Consultez tout aspect du catalogue de données avec notre agent expert sur les 47 cas de succès.",
+    "q1": "Comment enregistre-t-on un actif de données dans ProcureData ?",
+    "q2": "Qu'est-ce que DCAT-AP et comment s'applique-t-il au catalogue ?",
+    "q3": "Comment fonctionne la découverte fédérée de données ?",
+    "q4": "Comment le catalogue s'applique-t-il au cas GigaFactory ?"
+  }
+}

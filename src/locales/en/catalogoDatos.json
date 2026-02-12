@@ -1,0 +1,27 @@
+{
+  "backToHome": "Back to home",
+  "badge": "Phase 2 — Data Catalog",
+  "title": "ProcureData Data Catalog",
+  "subtitle": "Registration, discovery, and governance of data assets: the engine connecting the 47 success stories.",
+  "layers": {
+    "registro": { "label": "Layer 1", "title": "Asset Registration" },
+    "descubrimiento": { "label": "Layer 2", "title": "Discovery & Search" },
+    "gobernanza": { "label": "Layer 3", "title": "Governance & Quality" }
+  },
+  "metrics": {
+    "categories": "Registered Asset Categories",
+    "cases": "Success Stories connected to the catalog",
+    "formats": "Supported data formats"
+  },
+  "chat": {
+    "badge": "AI Agent — Data Catalog",
+    "description": "Ask about asset registration, federated discovery, data governance, or how they apply across the 47 cases.",
+    "placeholder": "Ask about the data catalog...",
+    "sectionTitle": "Specialized AI Chat",
+    "sectionSubtitle": "Consult any aspect of the data catalog with our expert agent on the 47 success stories.",
+    "q1": "How is a data asset registered in ProcureData?",
+    "q2": "What is DCAT-AP and how does it apply to the catalog?",
+    "q3": "How does federated data discovery work?",
+    "q4": "How is the catalog applied in the GigaFactory case?"
+  }
+}
