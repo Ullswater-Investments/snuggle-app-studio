@@ -598,13 +598,13 @@
   },
   "doc13": {
     "title": "Simulación de Diálogos y Entrenamiento de Lenguaje Natural (NLU)",
-    "subtitle": "Personalidad, capacidades de comprensión y aprendizaje continuo de ARIA.",
+    "subtitle": "Personalidad, capacidades de comprensión y aprendizaje continuo del Asistente IA.",
     "sections": {
       "personalidad": {
-        "title": "Personalidad de ARIA",
-        "content": "<p>ARIA combina <strong>profesionalismo, claridad y empatía</strong>. Adapta su tono según el contexto: formal en compliance, cercano en soporte.</p>",
+        "title": "Personalidad del Asistente IA",
+        "content": "<p>El Asistente IA combina <strong>profesionalismo, claridad y empatía</strong>. Adapta su tono según el contexto: formal en compliance, cercano en soporte.</p>",
         "quiz": {
-          "question": "¿Qué características definen la personalidad de ARIA?",
+          "question": "¿Qué características definen la personalidad del Asistente IA?",
           "options": ["Distante y técnica", "Profesionalismo, claridad y empatía", "Informal siempre", "Robótica y fría"],
           "correctIndex": 1
         }
