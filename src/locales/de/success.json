@@ -11,26 +11,548 @@
     "cta": "Starten Sie Ihre Geschichte"
   },
   "sectors": {
-    "all": "Alle Sektoren"
+    "all": "Alle",
+    "industrial": "Industrie",
+    "comercio": "Handel",
+    "agroalimentario": "Agrar",
+    "movilidad": "Mobilität",
+    "salud": "Gesundheit",
+    "social": "Soziales",
+    "energia": "Energie",
+    "finanzas": "Finanzen",
+    "tecnologia": "Tech",
+    "circular": "Kreislauf",
+    "agritech": "Agri-Tech"
   },
-  "detail": {
-    "challenge": "Herausforderung",
-    "solution": "Lösung",
-    "impact": "Auswirkung",
-    "servicesUsed": "Genutzte Dienste",
-    "verifiedOn": "Verifiziert auf Pontus-X",
-    "block": "Block",
-    "sectorImpactPanel": "Sektor-Impact-Panel",
-    "impactSimulator": "Impact-Simulator",
-    "ctaTitle": "Möchten Sie ähnliche Ergebnisse erzielen?",
-    "ctaButton": "Ähnliche Lösung implementieren",
-    "askAgent": "Fragen Sie den KI-Agenten zu diesem Fall",
-    "caseArchitecture": "Fall-Architektur"
+  "superCategories": {
+    "all": "Alle",
+    "industriaInfraestructura": "Industrie",
+    "saludPharma": "Gesundheit & Pharma",
+    "retailConsumo": "Einzelhandel",
+    "movilidadEnergia": "Mobilität & Energie",
+    "sectorPublico": "Öffentlicher Sektor",
+    "agroalimentario": "Agrar & Ernährung"
+  },
+  "transversalTags": {
+    "greenProcurement": "Grüne Beschaffung",
+    "circular": "Kreislaufwirtschaft"
   },
   "cases": {
     "gigafactory-north": {
-      "ariaQuote": "Die Homologation von 12.000 Lieferanten in 24 Stunden ist ein beispielloser Meilenstein in der Branche.",
-      "metricLabel": "Onboarding-Zeit"
+      "title": "Automatisierung der industriellen Homologation",
+      "sector": "Industrie",
+      "metricLabel": "Onboarding-Zeit",
+      "description": "Von 22 Tagen auf 48 Stunden im Tier-2-Lieferanten-Homologationsprozess.",
+      "challenge": "Der Onboarding-Prozess für metallurgische Tier-2-Lieferanten dauerte durchschnittlich 22 Tage. Jeder neue Lieferant erforderte manuelle Validierungen von ISO 9001, IATF 16949 und Arbeitssicherheitszertifizierungen. Das Einkaufsteam widmete mehr als 40% seiner Zeit repetitiven administrativen Aufgaben.",
+      "solution": "Implementierung des Services 'Flash Homologation 24h' in Kombination mit Digitalen Pässen, die im Pontus-X-Netzwerk verifiziert sind. Lieferanten laden ihre Zertifizierungen einmalig hoch und GigaFactory greift in Echtzeit auf den Verifizierten Pass zu, wodurch doppelte Validierungen entfallen.",
+      "ariaQuote": "Die Automatisierung durch ODRL-Richtlinien ermöglichte die automatische Vertragsunterzeichnung bei Erfüllung der Sicherheitsanforderungen. Das Einkaufsteam widmet nun seine Zeit der strategischen Verhandlung, nicht der Dokumentenjagd.",
+      "services": ["Flash Homologation 24h", "Enterprise Web3 Wallet", "Automatische ODRL-Signatur", "Universeller ERP-Konnektor"]
+    },
+    "olivetrust-coop": {
+      "title": "ESG-Rückverfolgbarkeit für Export",
+      "sector": "Agrar & Ernährung",
+      "metricLabel": "Exportwert",
+      "description": "Wasser-Fußabdruck-Zertifizierung für den Zugang zum deutschen Markt mit Premium-Preisen.",
+      "challenge": "OliveTrust musste den tatsächlichen Wasser-Fußabdruck seiner Betriebe in Jaén nachweisen, um die Ausschreibungsbedingungen des deutschen Distributors Edeka zu erfüllen. Jede traditionelle Zertifizierung kostete 3.500€ und dauerte 45 Tage.",
+      "solution": "Automatisierte Erfassung von IoT-Bewässerungsdaten von Feldsensoren und Blockchain-Notarisierung von Ursprungszertifikaten. Der Digitale Olivenöl-Pass umfasst die Rückverfolgbarkeit vom Feld bis zum Point of Sale.",
+      "ariaQuote": "Der Digitale Lieferantenpass eliminierte die Notwendigkeit von 5 redundanten physischen Audits. Jetzt greift jeder europäische Käufer auf die gleichen verifizierten Daten zu, ohne zusätzliche Kosten für die Genossenschaft.",
+      "services": ["Sofortige ESG-Zertifizierung", "Blockchain-Notarisierung", "Digitaler Produktpass", "Rückverfolgbarkeits-API"]
+    },
+    "urbandeliver-bcn": {
+      "title": "Sofortiges Scope-3-Reporting",
+      "sector": "Nachhaltige Mobilität",
+      "metricLabel": "CSRD-Audit",
+      "description": "Erstellung eines Scope-3-Emissionsberichts für den Zugang zu grünem Bankkredit.",
+      "challenge": "UrbanDeliver musste die tatsächlichen Emissionen seiner Logistikflotte auditieren, um einen grünen Kredit von 2 Mio. € der Green Finance Bank zu erhalten. Manuelle Berichte dauerten Wochen und wurden von der Finanzinstitution nicht akzeptiert.",
+      "solution": "Integration des Universellen ERP-Konnektors zur Extraktion realer Flottenverbrauchstelemetrie (OBD-II) und automatische Erstellung des CSRD-Berichts mit zertifizierten Scope 1, 2 und 3 Emissionen.",
+      "ariaQuote": "Dank der direkten Telemetrie, die mit ProcureData integriert ist, genehmigte die Green Finance Bank den grünen Kredit in Rekordzeit. Die Datentransparenz eliminierte die üblichen 12 Wochen Due Diligence.",
+      "services": ["Universeller ERP-Konnektor", "Scope-3-Rechner", "Automatischer CSRD-Bericht", "Grüne Zertifizierung"]
+    },
+    "alianza-social-hub": {
+      "title": "Messung sozialer Wirkung",
+      "sector": "Sozialwirtschaft",
+      "metricLabel": "SROI-Verhältnis",
+      "description": "Verifizierter Nachweis der sozialen Rendite von Investitionen in ethische Lieferanten.",
+      "challenge": "Alianza Social Hub vereint 15 Beschäftigungswerkstätten. Das Hauptproblem: Große Unternehmen mit Quotenpflichten mussten die tatsächliche Wirkung jedes investierten Euros bei ethischen Lieferanten nachweisen. CSR-Abteilungen konnten nur Ausgaben melden, nicht den generierten sozialen Wert.",
+      "solution": "Implementierung des SROI-Metriken-Dashboards mit drei Säulen: 1) Wirkungsmonetisierung mit Berechnung der Einsparungen bei öffentlichen Subventionen. 2) Anti-Social-Washing-Garantie mit verifizierter DID auf Pontus-X. 3) Automatisches CSRD-Reporting für Nachhaltigkeitsberichte.",
+      "ariaQuote": "Wir haben verifiziert, dass 100% der Lieferanten die Beschäftigungsquoten erfüllen. Für jeden investierten Euro werden 3,8€ sozialer Wert generiert. 78% der Investition wird in die lokale Wirtschaft reinvestiert.",
+      "services": ["SROI-Dashboard", "Digitales Sozial-Audit", "Ethischer Lieferantenpass", "Automatischer Nachhaltigkeitsbericht", "Anti-Social-Washing DID-Verifizierung"]
+    },
+    "biomed-hospital": {
+      "title": "Garantierte Versorgungskontinuität",
+      "sector": "Gesundheit",
+      "metricLabel": "Kritische Ausfälle",
+      "description": "Prädiktive Wartung von MRT-Geräten mit anonymisierter DSGVO-konformer Telemetrie.",
+      "challenge": "Das Krankenhaus litt unter unerwarteten Ausfallzeiten seiner Magnetresonanztomographie-Geräte (MRT), die 15.000€ pro Inaktivitätstag kosteten und kritische Operationen verzögerten. Keine Sichtbarkeit des tatsächlichen Gerätezustands und keine Möglichkeit, Logs zu teilen, ohne Patientendaten preiszugeben (DSGVO).",
+      "solution": "Implementierung von Edge Functions zur Anonymisierung von Patientendaten bei gleichzeitiger Echtzeit-Übertragung von Magnet-Fehlerprotokollen an den Lieferanten EcoTech Industrial. ML-Prädiktivmodell erkennt Ausfälle 72h im Voraus. Automatische Alarme an den zugelassenen Ersatzteillieferanten.",
+      "ariaQuote": "Dank des IDS-Konnektors teilte das Krankenhaus technische Logs, ohne personenbezogene Patientendaten preiszugeben. Das prädiktive Modell erkennt Ausfälle 72h im Voraus und vermeidet ungeplante Stillstände.",
+      "services": ["Sicherer IDS-Konnektor", "DSGVO-Anonymisierer", "Prädiktive Wartungs-API", "Intelligente Alarme", "MRO-Lieferanten-Homologation"]
+    },
+    "globalretail-prime": {
+      "title": "Ethisches Lieferketten-Audit",
+      "sector": "Handel",
+      "metricLabel": "Ethische Vorfälle",
+      "description": "Überprüfung der SA8000-Konformität bei 200 asiatischen Textillieferanten.",
+      "challenge": "Ein Einzelhandels-Multinational musste sicherstellen, dass seine 200 Textillieferanten in Asien die SA8000-Standards erfüllten, um Reputationsrisiken zu vermeiden. Teure Vor-Ort-Audits, fälschbare Dokumente und keine Garantie der Kontinuität zwischen Inspektionen.",
+      "solution": "Implementierung des Digitalen Lieferantenpasses mit von externen Zertifizierern digital signierten Audits. ODRL-Richtlinien erlauben nur dem Ethikkomitee den Zugang zu sensiblen Details. Blockchain-Rückverfolgbarkeit garantiert die Integrität der Zertifikate.",
+      "ariaQuote": "Die Blockchain-Rückverfolgbarkeit auf Pontus-X garantiert, dass das SA8000-Zertifikat seit seiner Ausstellung am Ursprungsort nicht manipuliert wurde. Null ethische Vorfälle im Jahresaudit und +25% Verbrauchervertrauen.",
+      "services": ["Digitaler Lieferantenpass", "Digitales ISO-Audit", "ODRL License Validator", "DID Web3 Validator", "Lieferanten-Risikomonitor"]
+    },
+    "ecovolt-manufacturing": {
+      "title": "Automatisierter Einkauf erneuerbarer Energie",
+      "sector": "Industrieenergie",
+      "metricLabel": "Erneuerbare Energie",
+      "description": "Sofortige Abrechnung von Herkunftsnachweisen über Smart Contracts und EUROe.",
+      "challenge": "Eine Aluminiumfabrik musste zertifizieren, dass 100% ihres Verbrauchs erneuerbar war, um Steuervorteile zu erhalten. Die Abstimmung von Rechnungen und Herkunftsnachweisen (HKN) dauerte Monate und Steuervorteile gingen verloren.",
+      "solution": "Automatisierung über Smart Contracts und EUROe. IoT-Zähler meldet Verbrauch in Echtzeit. Smart Contract kauft automatisch HKN-Zertifikate und bezahlt im selben Block. Sofortige buchhalterische Abstimmung und automatisches Carbon-Neutral-Siegel.",
+      "ariaQuote": "Die Zahlung in EUROe ermöglicht, dass Wertübertragung und Energiezertifikat im selben Blockchain-Block erfolgen. Sofortige buchhalterische Abstimmung, von Monaten auf 12 Sekunden.",
+      "services": ["Enterprise Web3 Wallet", "Pontus-X Notary Node", "Universeller ERP-Konnektor", "Carbon Tracker ISO 14064", "Green Partner Zertifizierung"]
+    },
+    "sky-aero-systems": {
+      "title": "EN9100 Luft- und Raumfahrtzertifizierung",
+      "sector": "Luft- und Raumfahrtindustrie",
+      "metricLabel": "Verifizierungszeit",
+      "description": "Automatische Validierung von EN9100-Zertifikaten von 120 globalen Lieferanten kritischer Teile.",
+      "challenge": "Sky Aero Systems hatte einen 3-monatigen Verifizierungsrückstand bei Zulieferern von Luft- und Raumfahrtkomponenten. Die manuelle Überprüfung der EN9100-Zertifizierungen gegen die IAQG OASIS-Datenbank war fehleranfällig und ressourcenintensiv.",
+      "solution": "Automatisierte Zertifikatsvalidierungspipeline, die IAQG OASIS direkt mit dem Digitalen Pass-System von ProcureData verbindet. Echtzeit-Statusaktualisierungen und automatische Alarme für ablaufende Zertifizierungen.",
+      "ariaQuote": "Die Verbindung unserer Lieferantenhomologation mit verifizierten Branchendatenbanken reduzierte unser Zertifizierungsrisiko auf nahezu null. Jedes kritische Teil hat jetzt eine verifizierte digitale Herkunftskette.",
+      "services": ["Flash Homologation 24h", "OASIS-Integration", "Digitaler Lieferantenpass", "Automatisches Alarmsystem"]
+    },
+    "vinosdoe-elite": {
+      "title": "Null Betrug bei g.U.-Exporten",
+      "sector": "Agrar & Ernährung",
+      "metricLabel": "Verbrauchervertrauen",
+      "description": "Chargen- und g.U.-Notarisierung mit dynamischem QR verknüpft mit Geolokalisierungs-DID.",
+      "challenge": "Premium-Weinexporte nach Asien waren von Fälschungen geplagt. Traditionelle Papierzertifikate waren leicht zu fälschen und Verbraucher hatten keine Möglichkeit, die Echtheit zu überprüfen.",
+      "solution": "Implementierung dynamischer QR-Codes auf jeder Flasche, verknüpft mit einer Blockchain-verifizierten DID mit GPS-Koordinaten des Weinbergs, Erntedatum und Verifizierung durch den g.U.-Rat.",
+      "ariaQuote": "Jede Flasche erzählt jetzt ihre authentische Geschichte vom Weinberg bis ins Glas. Fälscher können die Blockchain-Verifizierung, die Verbraucher mit ihren Handys prüfen, nicht replizieren.",
+      "services": ["Blockchain-Notarisierung", "Dynamische QR-Generierung", "DID-Geolokalisierung", "Verbraucher-Verifizierungs-App"]
+    },
+    "pharmacold-logistix": {
+      "title": "Kühlketten-Integrität",
+      "sector": "Gesundheit",
+      "metricLabel": "Thermischer Verlust",
+      "description": "Smart Contracts blockieren Zahlung, wenn Sensoren Temperatur >8°C für +10min erkennen.",
+      "challenge": "Die pharmazeutische Kühlkettenlogistik erlitt jährliche Verluste von 2 Mio. € durch Temperaturabweichungen, die erst am Bestimmungsort erkannt wurden. Zahlungsstreitigkeiten und Produktrückrufe waren häufig.",
+      "solution": "IoT-Temperatursensoren streamen kontinuierlich Daten an Smart Contracts. Wenn die Temperatur 8°C für mehr als 10 Minuten überschreitet, wird die Zahlung automatisch blockiert und die Beteiligten werden benachrichtigt.",
+      "ariaQuote": "Die Zahlung ist jetzt an die verifizierte Kühlketten-Konformität gebunden. Lieferanten werden motiviert, die richtigen Temperaturen einzuhalten, und wir haben unwiderlegbare Beweise für etwaige Streitigkeiten.",
+      "services": ["IoT-Temperatursensoren", "Smart-Contract-Zahlungen", "Echtzeit-Alarme", "Blockchain-Beweiskette"]
+    },
+    "portbcn-smart-trade": {
+      "title": "Sofortige digitale Zollabfertigung",
+      "sector": "Mobilität",
+      "metricLabel": "Einsparung/Container",
+      "description": "Webhook-Verbindung mit Hafensystemen für sofortige KYB-Validierung.",
+      "challenge": "Die Containerabfertigung im Hafen dauerte 48-72 Stunden aufgrund manueller Dokumentenprüfung. Lagergebühren summierten sich und verderbliche Waren erlitten Qualitätseinbußen.",
+      "solution": "Direkte Webhook-Integration mit Hafenbehördensystemen für sofortige KYB-Verifizierung. Digitale Lieferantenpässe werden vor der Schiffsankunft vorvalidiert.",
+      "ariaQuote": "Container passieren den Zoll jetzt in Stunden statt Tagen. Die Integration mit Hafensystemen hat unsere Lieferkettgeschwindigkeit transformiert.",
+      "services": ["Hafensystem-Webhooks", "Sofortige KYB-Validierung", "Digitaler Lieferantenpass", "Vorankunftsverarbeitung"]
+    },
+    "ayuntamiento-etico": {
+      "title": "Transparente öffentliche Beschaffung",
+      "sector": "Sozialwirtschaft",
+      "metricLabel": "Ethische Transparenz",
+      "description": "SROI-Dashboard zur Echtzeit-Überprüfung der Behindertenquote von Bietern.",
+      "challenge": "Öffentliche Beschaffung erforderte die Überprüfung sozialer Klauseln, aber Kommunen fehlten die Werkzeuge zur Verifizierung der Bieter-Konformität mit Behinderten-Beschäftigungsquoten vor der Auftragsvergabe.",
+      "solution": "Echtzeit-SROI-Dashboard, das verifizierte DIDs von bietenden Unternehmen abfragt, um die Einhaltung der Behinderten-Beschäftigungsquote zu bestätigen. Automatische Disqualifizierung nicht-konformer Bieter.",
+      "ariaQuote": "Wir können Bürgern jetzt garantieren, dass jeder Euro öffentlicher Gelder an Unternehmen geht, die soziale Kriterien wirklich erfüllen. Die Verifizierung erfolgt in Sekunden, nicht Wochen.",
+      "services": ["SROI-Dashboard", "DID-Verifizierung", "Integration öffentliche Beschaffung", "Compliance-Automatisierung"]
+    },
+    "purelithium-sourcing": {
+      "title": "Konfliktfreie Mineralien CSRD",
+      "sector": "Bergbauindustrie",
+      "metricLabel": "Zertifizierung",
+      "description": "Tier-3-Lithium-Rückverfolgbarkeit mit ODRL-Signatur ethischer Nutzungsrichtlinien.",
+      "challenge": "Der Nachweis, dass Lithium nicht aus Gebieten mit Kinderarbeitsausbeutung stammt, war für CSRD-Berichterstattung von Automobilkunden mit traditionellen Auditverfahren nahezu unmöglich.",
+      "solution": "Tier-3-Lieferantenrückverfolgbarkeit durch ODRL-Governance. Unterzeichnung von 'Ethische Nutzung'-Richtlinien an jedem Glied der Lieferkette, von der Mine bis zur Batteriezelle.",
+      "ariaQuote": "Datensouveränität ermöglicht die Rückverfolgung der Ethik von der Mine bis zum Elektroauto. Jedes Gramm Lithium hat eine verifizierbare Geschichte.",
+      "services": ["ODRL-Governance", "ERP-Konnektor", "CSRD-Bericht", "B-Corp-Zertifizierung"]
+    },
+    "fastfashion-trace": {
+      "title": "Kreislauf-Mode ohne Greenwashing",
+      "sector": "Handel",
+      "metricLabel": "Genaue Etikettierung",
+      "description": "PLM-Synchronisierung mit Textilzusammensetzungs-Zertifikaten für 1 Mio. Kleidungsstücke.",
+      "challenge": "Modemarken standen unter regulatorischem Druck, Angaben zur Bekleidungszusammensetzung zu belegen. Manuelles Zertifikat-Tracking über Tausende von SKUs war in großem Maßstab unmöglich.",
+      "solution": "Direkte PLM-Integration, die Textilzusammensetzungs-Zertifikate auf SKU-Ebene synchronisiert. Blockchain-Verifizierung stellt sicher, dass Etikettenangaben mit tatsächlichen Materialien übereinstimmen.",
+      "ariaQuote": "Jedes Kleidungsstück-Etikett wird jetzt durch verifizierte Zusammensetzungsdaten gestützt. Regulierungsbehörden und Verbraucher können unseren Nachhaltigkeitsangaben vertrauen.",
+      "services": ["PLM-Integration", "Zusammensetzungszertifikate", "Blockchain-Verifizierung", "Etiketten-Konformität"]
+    },
+    "invoicetrust-b2b": {
+      "title": "Factoring mit Blockchain-Score",
+      "sector": "B2B-Finanzen",
+      "metricLabel": "KMU-Liquidität",
+      "description": "Unveränderlicher Solvenz-Score basierend auf ODRL-Vertragserfüllungshistorie.",
+      "challenge": "KMU hatten Schwierigkeiten, auf Factoring-Dienste zuzugreifen, da ihre begrenzte Kredithistorie keine Aussage über ihre tatsächliche Zahlungszuverlässigkeit machte.",
+      "solution": "Blockchain-basierte Kreditbewertung, die die verifizierte ODRL-Vertragserfüllungshistorie aggregiert. Unveränderliche Zahlungsbilanz zugänglich für Factoring-Anbieter.",
+      "ariaQuote": "Unsere Zahlungshistorie ist jetzt unser stärkstes Kapital. Factoring-Anbieter vertrauen der unveränderlichen Blockchain-Aufzeichnung unserer Vertragserfüllung.",
+      "services": ["ODRL-Compliance-Tracking", "Blockchain-Kredit-Score", "Factoring-Integration", "Zahlungshistorie-API"]
+    },
+    "gridflow-energy": {
+      "title": "Energieüberschuss-Management",
+      "sector": "Energie",
+      "metricLabel": "Verbundene Einrichtungen",
+      "description": "Tägliche Abrechnung von Mikrozahlungen für Energie zwischen Industriegemeinschaften.",
+      "challenge": "Industrieparks mit Solaranlagen konnten überschüssige Energie zwischen Gebäuden nicht effizient handeln. Manuelle Abrechnung war für Mikrotransaktionen unpraktisch.",
+      "solution": "Automatisierte Mikrozahlungsabrechnung für Peer-to-Peer-Energiehandel innerhalb von Industriegemeinschaften. Smart Contracts übernehmen die Abrechnung in 15-Minuten-Intervallen.",
+      "ariaQuote": "Unser Industriepark ist zu einer sich selbst ausbalancierenden Energiegemeinschaft geworden. Überschüssige Solarenergie aus einem Gebäude versorgt automatisch seine Nachbarn.",
+      "services": ["P2P-Energiehandel", "Mikrozahlungsabrechnung", "Smart Contracts", "Gemeinschafts-Dashboard"]
+    },
+    "ailabs-research": {
+      "title": "KI-Training mit synthetischen Daten",
+      "sector": "Technologie",
+      "metricLabel": "Trainingszeit",
+      "description": "Synthetische Datensätze mit hoher statistischer Treue ohne reale Datenlecks.",
+      "challenge": "KI-Labore benötigten vielfältige Trainingsdaten, standen aber vor Datenschutzbeschränkungen. Reale Produktionsdaten konnten nicht geteilt werden, was die Modellentwicklung einschränkte.",
+      "solution": "Synthetische Datengenerierung, die statistische Eigenschaften bewahrt und gleichzeitig null reale Datenlecks garantiert. ODRL-Richtlinien regeln die Nutzungsrechte synthetischer Daten.",
+      "ariaQuote": "Wir können Modelle jetzt mit statistisch validen synthetischen Daten trainieren, ohne Datenschutzbedenken. Die Entwicklungsgeschwindigkeit hat sich verdreifacht.",
+      "services": ["Synthetische Datengenerierung", "ODRL-Daten-Governance", "Datenschutz-Konformität", "ML-Pipeline-Integration"]
+    },
+    "helios-fields": {
+      "title": "Prädiktive Solar-Wartung",
+      "sector": "Solarenergie",
+      "metricLabel": "Reparaturkosten",
+      "description": "IoT-Telemetrie von 1 Mio. täglichen Messungen zur Erkennung thermischer Anomalien in Wechselrichtern.",
+      "challenge": "Wechselrichterausfälle in Solarparks verursachten erhebliche Produktionsverluste. Reaktive Wartung bedeutete, dass Probleme erst entdeckt wurden, nachdem die Energieerzeugung zurückgegangen war.",
+      "solution": "Hochfrequente IoT-Überwachung mit ML-basierter Anomalieerkennung. Thermische Signaturen sagen Wechselrichterausfälle 2 Wochen vor dem Auftreten voraus.",
+      "ariaQuote": "Wir reparieren Wechselrichter jetzt bevor sie ausfallen. Prädiktive Wartung hat ungeplante Ausfallzeiten in unserem Solarportfolio praktisch eliminiert.",
+      "services": ["IoT-Telemetrie-Plattform", "ML-Anomalieerkennung", "Prädiktive Wartung", "Alarm-Automatisierung"]
+    },
+    "aeolus-wind": {
+      "title": "Programmierbare PPAs mit Smart Contracts",
+      "sector": "Windenergie",
+      "metricLabel": "PPA-Abstimmung",
+      "description": "Sofortige Abrechnung von PPA-Verträgen über Smart Contracts und EUROe.",
+      "challenge": "Die Abstimmung von Stromabnahmeverträgen umfasste monatelangen Austausch zwischen Energieerzeugern und Abnehmern. Cashflow-Verzögerungen beeinträchtigten die Projektfinanzierung.",
+      "solution": "Smart-Contract-basierte PPA-Abrechnung, die automatisch auf Basis verifizierter Erzeugungsdaten ausgeführt wird. Zahlung in EUROe bietet sofortige Abrechnung.",
+      "ariaQuote": "Unsere PPA-Abrechnungen erfolgen jetzt in Echtzeit. Die Cashflow-Planbarkeit hat unsere Fähigkeit zur Finanzierung neuer Windprojekte transformiert.",
+      "services": ["Smart-Contract-PPAs", "EUROe-Zahlungen", "Erzeugungsverifizierung", "Automatische Abstimmung"]
+    },
+    "h2-pure": {
+      "title": "Grüner Wasserstoff-Zertifizierung",
+      "sector": "Grüner Wasserstoff",
+      "metricLabel": "Verkaufswert",
+      "description": "Unveränderlicher digitaler HKN, der die Verbindung Windpark-Elektrolyseur zertifiziert.",
+      "challenge": "Grüner Wasserstoff-Prämien erforderten den Nachweis der erneuerbaren Stromquelle. Die Rückverfolgung des spezifischen Windparks, der einen Elektrolyseur versorgt, war manuell intensiv.",
+      "solution": "Digitaler Herkunftsnachweis, der eine unveränderliche Blockchain-Verbindung zwischen spezifischen Windturbinen und Elektrolyseur-Produktionschargen herstellt.",
+      "ariaQuote": "Käufer zahlen Premium-Preise, weil sie genau verifizieren können, welche Windturbinen den Strom für ihren Wasserstoff erzeugt haben.",
+      "services": ["Digitaler HKN", "Blockchain-Rückverfolgbarkeit", "Elektrolyseur-Integration", "Premium-Zertifizierung"]
+    },
+    "poligono-ecolink": {
+      "title": "Energiegemeinschafts-Marktplatz",
+      "sector": "Industrieller Eigenverbrauch",
+      "metricLabel": "Stromrechnung",
+      "description": "ODRL-Governance für Echtzeit-Solarüberschusstausch zwischen Einrichtungen.",
+      "challenge": "Industrieparks wollten Solarenergie teilen, hatten aber keine Governance-Rahmen für faire Zuteilung und Abrechnung zwischen teilnehmenden Unternehmen.",
+      "solution": "ODRL-basierte Governance-Richtlinien, die Energiezuteilung, Preisgestaltung und Abrechnung für gemeinschaftliches Solar-Sharing automatisieren.",
+      "ariaQuote": "Unsere Industriegemeinschaft funktioniert jetzt als eine einzige Energieeinheit. Jeder Teilnehmer profitiert von der gemeinsamen Solarinfrastruktur.",
+      "services": ["ODRL-Governance", "Energie-Marktplatz", "Gemeinschaftsabrechnung", "Echtzeit-Zuteilung"]
+    },
+    "gridflex-demand": {
+      "title": "Smart-Grid-Flexibilitätszertifikate",
+      "sector": "Smart Grid",
+      "metricLabel": "Ausfälle/Jahr",
+      "description": "Smart Alerts aktivieren selektive Abschaltprotokolle mit EUROe-Anreizen.",
+      "challenge": "Netzbetreiber benötigten Demand-Response-Mechanismen, hatten aber keinen verifizierbaren Nachweis der Lastreduzierung für Flexibilitätszahlungen.",
+      "solution": "Zertifizierte Flexibilitätsreaktion mit Blockchain-Verifizierung. Smart Alerts lösen Lastabwurf aus, und die verifizierte Reaktion verdient EUROe-Anreize.",
+      "ariaQuote": "Unsere Flexibilität ist jetzt ein verifiziertes Gut. Netzbetreiber vertrauen unserer Reaktion, weil sie Blockchain-zertifiziert ist.",
+      "services": ["Smart Alerts", "Flexibilitätszertifizierung", "EUROe-Anreize", "Netzintegration"]
+    },
+    "bateria-hub": {
+      "title": "Energiearbitrage mit KI",
+      "sector": "Speicher",
+      "metricLabel": "Batterie-ROI",
+      "description": "KI-Algorithmen prognostizieren Pool-Preise zur Automatisierung des Energiekaufs/-verkaufs.",
+      "challenge": "Batteriespeicherbetreiber verpassten optimale Handelsfenster aufgrund manueller Entscheidungsfindung. Preisprognose und Ausführungszeitpunkt waren suboptimal.",
+      "solution": "KI-gesteuerte Preisprognose mit automatisierter Smart-Contract-Ausführung für optimale Lade-/Entladezyklen basierend auf Spot-Marktpreisen.",
+      "ariaQuote": "Unsere Batteriesysteme handeln jetzt autonom. KI erfasst Arbitragemöglichkeiten, die menschliche Händler verpassen würden.",
+      "services": ["KI-Preisprognose", "Automatisierter Handel", "Smart-Contract-Ausführung", "Marktintegration"]
+    },
+    "bioheat-district": {
+      "title": "RED III Biomasse-Rückverfolgbarkeit",
+      "sector": "Biomasse",
+      "metricLabel": "RED-Konformität",
+      "description": "DID pro Charge mit Einschlag-Geolokalisierung zur Zertifizierung nachhaltiger Waldpflege.",
+      "challenge": "RED III-Konformität erforderte den Nachweis, dass Biomasse aus nachhaltiger Forstwirtschaft stammte. Die papierbasierte Lieferkette war leicht zu fälschen.",
+      "solution": "Pro-Chargen-DID mit GPS-Koordinaten der Einschlagsorte. Blockchain-Verifizierung der nachhaltigen Forstwirtschaftszertifizierung am Ursprung.",
+      "ariaQuote": "Jede Tonne Biomasse hat einen verifizierten Ursprung. RED III-Auditoren können unseren Brennstoff bis zu bestimmten Waldparzellen zurückverfolgen.",
+      "services": ["Chargen-DID-System", "GPS-Geolokalisierung", "RED III-Konformität", "Forstwirtschaftszertifizierung"]
+    },
+    "turbine-chain": {
+      "title": "Grüner Stahl für Windturbinen",
+      "sector": "Lieferkette",
+      "metricLabel": "Gewonnener Vertrag",
+      "description": "Konsolidierung der Scope-3-Emissionen von 15 Stahllieferanten für CSRD-Berichterstattung.",
+      "challenge": "Windturbinenhersteller benötigten verifizierte Scope-3-Daten von Stahllieferanten, hatten aber fragmentierte Daten von über 15 Tier-2-Zulieferern.",
+      "solution": "Konsolidiertes Scope-3-Dashboard, das verifizierte Emissionsdaten aller Stahllieferanten in einem einzigen CSRD-konformen Bericht aggregiert.",
+      "ariaQuote": "Wir haben einen großen Turbinenvertrag gewonnen, weil wir den CO₂-Fußabdruck unserer Stahl-Lieferkette nachweisen konnten. Verifizierte Daten sind ein Wettbewerbsvorteil.",
+      "services": ["Scope-3-Konsolidierung", "Multi-Lieferanten-Dashboard", "CSRD-Berichterstattung", "CO₂-Verifizierung"]
+    },
+    "aquapower-nexus": {
+      "title": "Wasser-Energie-Nexus-Management",
+      "sector": "Wasserkraft",
+      "metricLabel": "Wassereffizienz",
+      "description": "ODRL-Richtlinien regeln die Wassernutzung zwischen Bewässerung und Stromerzeugung in Echtzeit.",
+      "challenge": "Konkurrierende Anforderungen an Wasser zwischen landwirtschaftlicher Bewässerung und Wasserkrafterzeugung erforderten komplexe Zuteilungsentscheidungen.",
+      "solution": "ODRL-Richtlinien, die Wasserrechte dynamisch basierend auf Strompreisen, landwirtschaftlicher Nachfrage und Umweltdurchflussanforderungen zuteilen.",
+      "ariaQuote": "Die Wasserzuteilung wird jetzt in Echtzeit optimiert. Landwirte und Energieerzeuger profitieren beide von intelligenterem Ressourcenmanagement.",
+      "services": ["ODRL-Wasserrichtlinien", "Echtzeit-Zuteilung", "Multi-Stakeholder-Dashboard", "Umweltkonformität"]
+    },
+    "smartcharge-ev": {
+      "title": "Herkunftsnachweis für E-Fahrzeug-Nutzer",
+      "sector": "Elektromobilität",
+      "metricLabel": "EV-Kundenbindung",
+      "description": "API fragt Notary Node ab, um Solar-/Windursprung in der Lade-App anzuzeigen.",
+      "challenge": "E-Fahrzeug-Fahrer wollten den Nachweis, dass ihre Ladeenergie aus erneuerbaren Quellen stammt, aber bestehende Apps konnten den Energieursprung nicht verifizieren.",
+      "solution": "Lade-App-Integration, die den Notary Node abfragt, um den verifizierten erneuerbaren Ursprung für jede Ladesitzung anzuzeigen.",
+      "ariaQuote": "Unsere Fahrer sehen genau, woher ihre Energie kommt. Der Nachweis erneuerbaren Ladens erhöht die Kundenbindung.",
+      "services": ["Notary Node API", "Lade-App-Integration", "HKN-Verifizierung", "Kunden-Dashboard"]
+    },
+    "fiber-loop": {
+      "title": "Post-Consumer-Faser-Rückverfolgbarkeit",
+      "sector": "Textilrecycling",
+      "metricLabel": "EPR-Konformität",
+      "description": "Blockchain-Notarisierung von Fasergewicht und -qualität bei jeder Transformation zur Vermeidung von Greenwashing-Strafen.",
+      "challenge": "Erweiterte Herstellerverantwortung erforderte den Nachweis von Recycling-Anteilen, aber die Fasernachverfolgung durch mehrere Transformationsstufen war unmöglich.",
+      "solution": "Blockchain-Notarisierung bei jeder Transformationsstufe. Gewichts- und Qualitätsdaten erstellen eine auditierbare Lieferkette von der Post-Consumer-Sammlung bis zum neuen Textil.",
+      "ariaQuote": "Wir können genau nachweisen, wie viel Recycling-Anteil in jedem Kleidungsstück steckt. EPR-Konformität ist jetzt automatisiert.",
+      "services": ["Transformations-Tracking", "Blockchain-Notarisierung", "EPR-Berichterstattung", "Qualitätszertifizierung"]
+    },
+    "rare-earth-recover": {
+      "title": "Urban Mining von Seltenen Erden",
+      "sector": "WEEE / Elektroschrott",
+      "metricLabel": "Verkaufsmarge",
+      "description": "KI-Datensätze zur chemischen Zusammensetzung für den Verkauf an spezialisierte Hütten statt generischer Verwerter.",
+      "challenge": "Elektroschrott-Verarbeiter konnten Materialien nicht effektiv für spezialisierte Hütten sortieren, die Premium-Preise für bestimmte Seltene-Erden-Zusammensetzungen zahlen.",
+      "solution": "KI-gesteuerte Analyse der chemischen Zusammensetzung, die Elektroschrott-Chargen für den Verkauf an spezialisierte Hütten zu Premium-Preisen kategorisiert.",
+      "ariaQuote": "Wir extrahieren jetzt 3x mehr Wert aus dem gleichen Elektroschrott-Strom, indem wir Zusammensetzungen mit den richtigen Käufern abgleichen.",
+      "services": ["KI-Zusammensetzungsanalyse", "Hütten-Marktplatz", "Chargenoptimierung", "Premium-Vertriebskanal"]
+    },
+    "alu-cycle": {
+      "title": "Unendliche Aluminium-Energieeinsparung",
+      "sector": "Sekundäraluminium",
+      "metricLabel": "Energie vs. Primär",
+      "description": "Smart Contract berechnet eingesparten CO₂ zur Ausstellung von Energieeinsparzertifikaten (CAEs).",
+      "challenge": "Sekundäraluminium-Produzenten konnten die 95% Energieeinsparung im Vergleich zur Primäraluminium-Produktion nicht monetarisieren.",
+      "solution": "Smart Contracts berechnen verifizierte CO₂-Einsparungen und stellen automatisch Energieeinsparzertifikate aus, die auf Umweltmärkten handelbar sind.",
+      "ariaQuote": "Unsere Energieeinsparungen sind jetzt eine Einnahmequelle. CAE-Zertifikate monetarisieren unseren Beitrag zur Kreislaufwirtschaft.",
+      "services": ["CO₂-Berechnung", "CAE-Ausstellung", "Smart Contracts", "Umweltmärkte"]
+    },
+    "producer-trust": {
+      "title": "Automatisches EPR-Audit",
+      "sector": "EPR-Zertifizierung",
+      "metricLabel": "Jahresaudit",
+      "description": "EPR-Konformitäts-Dashboard aggregiert Daten von mehreren Data Holders mit unveränderlichen DID-Signaturen.",
+      "challenge": "Herstellerverantwortungsorganisationen standen vor jährlichen Audit-Alpträumen bei der Aggregation von Daten Hunderter Mitgliedsunternehmen.",
+      "solution": "Automatisiertes EPR-Konformitäts-Dashboard, das verifizierte Daten von Mitgliedsunternehmen mit unveränderlichen DID-Signaturen aggregiert.",
+      "ariaQuote": "Jahresaudits, die Monate dauerten, werden jetzt in Tagen abgeschlossen. Alle Mitgliedsdaten sind mit unveränderlichen Signaturen vorverifiziert.",
+      "services": ["EPR-Dashboard", "Multi-Holder-Aggregation", "DID-Signaturen", "Audit-Automatisierung"]
+    },
+    "eco-orchestrator": {
+      "title": "SCRAP-Koordination",
+      "sector": "SCRAP-Management",
+      "metricLabel": "Öko-Steuer",
+      "description": "Multi-Tenant RLS stellt sicher, dass jeder Partner nur seine Quote sieht, während SCRAP das Aggregat sieht.",
+      "challenge": "Kollektive Compliance-Systeme mussten aggregierte Daten teilen und gleichzeitig individuelle Mitgliederdaten vertraulich halten.",
+      "solution": "Multi-Tenant RLS-Architektur, bei der Mitglieder nur ihre eigenen Daten sehen, während der Systembetreiber verifizierte Aggregate sieht.",
+      "ariaQuote": "Die Vertraulichkeit der Mitglieder bleibt gewahrt, während wir vollständige Sichtbarkeit der kollektiven Leistung behalten.",
+      "services": ["Multi-Tenant RLS", "Aggregierte Dashboards", "Mitglieder-Datenschutz", "Systemberichterstattung"]
+    },
+    "raw-market": {
+      "title": "Marktplatz für Sekundärrohstoffe",
+      "sector": "Verwertung",
+      "metricLabel": "Umsatz vs. Entsorgung",
+      "description": "ODRL-Richtlinien stellen sicher, dass Käufer Abfall für Recycling nutzen, nicht für die Deponie.",
+      "challenge": "Abfallerzeuger, die Materialien zum Recycling verkauften, hatten keine Garantie, dass Käufer diese nicht illegal auf die Deponie umleiten würden.",
+      "solution": "ODRL-Richtlinien, die an Materialverkäufe angehängt sind und die Recycling-Endverwendung durchsetzen. Verstöße lösen automatische Strafen aus.",
+      "ariaQuote": "Wir verkaufen mit der Gewissheit, dass unsere Materialien recycelt werden. ODRL-Richtlinien machen Käufer rechenschaftspflichtig.",
+      "services": ["ODRL-Materialrichtlinien", "Marktplatz-Plattform", "Endverwendungsverifizierung", "Compliance-Tracking"]
+    },
+    "battery-life": {
+      "title": "Zweites Leben für EV-Batterien",
+      "sector": "Lithiumbatterien",
+      "metricLabel": "Zusätzliche Nutzungsdauer",
+      "description": "Unveränderliche Audit Logs zertifizieren Nutzungshistorie zur Entscheidung über Recycling vs. stationäre Speicherung.",
+      "challenge": "Die Bestimmung, ob EV-Batterien recycelt oder für stationäre Speicherung umgewidmet werden sollten, erforderte Zugang zu zuverlässiger Nutzungshistorie.",
+      "solution": "Unveränderliche Audit Logs vom Fahrzeug-BMS, die die komplette Ladehistorie zertifizieren. KI-Algorithmen bestimmen die optimale Second-Life-Anwendung.",
+      "ariaQuote": "Die Geschichte jeder Batterie ist transparent. Wir können die verbleibende Kapazität für Second-Life-Anwendungen genau bewerten.",
+      "services": ["BMS-Datenintegration", "Audit-Log-Zertifizierung", "Second-Life-Bewertung", "Recycling-Optimierung"]
+    },
+    "urban-mining": {
+      "title": "Ethisches recyceltes Gold-Zertifizierung",
+      "sector": "Edelmetalle",
+      "metricLabel": "Ethischer Aufpreis",
+      "description": "Blockchain-Integritätsnachweis, der Eingabecharge (Abfall) mit Ausgabe (Barren) verknüpft.",
+      "challenge": "Recyceltes Gold hatte Schwierigkeiten, ethische Aufpreise zu erzielen, weil Käufer nicht verifizieren konnten, dass das Material wirklich aus Elektroschrott statt aus Bergbau stammte.",
+      "solution": "Komplette Lieferkette von der Elektroschrott-Sammlung bis zum raffinierten Barren. Blockchain verknüpft Eingangsabfallchargen mit Ausgabe-Goldbarren.",
+      "ariaQuote": "Unser Gold trägt den verifizierten Nachweis seiner recycelten Herkunft. Luxusmarken zahlen Premium-Preise für zertifiziertes ethisches Metall.",
+      "services": ["Lieferkette", "Blockchain-Zertifizierung", "Ethischer Premium-Zugang", "Luxusmarken-Integration"]
+    },
+    "waste-to-value": {
+      "title": "Zero-Landfill-Audit",
+      "sector": "Zero Waste",
+      "metricLabel": "Deponieumleitung",
+      "description": "Automatische Abstimmung zwischen Fabrikausgangsdaten und Verwertereingang über Webhooks.",
+      "challenge": "Unternehmen, die Zero-Waste-to-Landfill behaupteten, konnten es nicht beweisen. Manuelle Abstimmung zwischen Abfallerzeugern und Verwertern war unvollständig.",
+      "solution": "Webhook-Integration, die Abfallausgabe automatisch mit verifiziertem Verwertereingang abstimmt. Jede Diskrepanz löst sofortige Untersuchung aus.",
+      "ariaQuote": "Jedes Kilogramm wird erfasst. Unsere Zero-Waste-Behauptung wird durch kontinuierliche automatisierte Verifizierung gestützt.",
+      "services": ["Webhook-Integration", "Automatische Abstimmung", "Lückenerkennung", "Zero-Waste-Zertifizierung"]
+    },
+    "green-gov-circular": {
+      "title": "Öffentliche Beschaffung von lokalem Kunststoff",
+      "sector": "Grüne öffentliche Beschaffung",
+      "metricLabel": "Lokaler SROI",
+      "description": "DID Web3 Validator bestätigt, dass Kunststoff von der lokalen Recyclinganlage stammt.",
+      "challenge": "Kommunen wollten lokal recycelten Kunststoff priorisieren, konnten aber Lieferantenangaben zur Materialherkunft nicht verifizieren.",
+      "solution": "DID Web3-Validierung, die bestätigt, dass Kunststoffchargen aus der kommunalen Recyclinganlage stammen.",
+      "ariaQuote": "Öffentliche Gelder unterstützen jetzt nachweislich die lokale Kreislaufwirtschaft. Jeder Kauf ist bis zu unserer eigenen Recyclinganlage rückverfolgbar.",
+      "services": ["DID Web3 Validator", "Ursprungsverifizierung", "Integration öffentliche Beschaffung", "Lokale Wirtschaftsverfolgung"]
+    },
+    "avocado-trust": {
+      "title": "Phytosanitärer USA-Export",
+      "sector": "Phytosanitärer Export",
+      "metricLabel": "Zollablehnung",
+      "description": "IoT-Fallensensoren erstellen USDA-Vorzertifikat mit Blockchain-Nachweis.",
+      "challenge": "Avocado-Exporte in die USA hatten hohe Ablehnungsraten aufgrund von Schädlingserkennungsproblemen. Manuelle Zertifizierung war langsam und unzuverlässig.",
+      "solution": "IoT-Schädlingsfallen-Sensoren überwachen Obstplantagen kontinuierlich. Saubere Messwerte erstellen automatisch USDA-konforme phytosanitäre Vorzertifikate mit Blockchain-Nachweis.",
+      "ariaQuote": "Unsere Container passieren den US-Zoll bei der ersten Inspektion. Kontinuierliche IoT-Überwachung liefert die Nachweise, die das USDA verlangt.",
+      "services": ["IoT-Schädlingsüberwachung", "Automatische Zertifizierung", "Blockchain-Nachweis", "USDA-Integration"]
+    },
+    "olive-origin": {
+      "title": "g.U. Jaén Markensouveränität",
+      "sector": "g.U.-Olivenöl",
+      "metricLabel": "Premium-Preis",
+      "description": "Digitaler Pass verknüpft Mühlencharge mit GPS-Erntekoordinaten über DID.",
+      "challenge": "g.U.-Olivenöl-Prämien waren durch betrügerisches Mischen mit Nicht-g.U.-Öl bedroht, das nicht erkannt werden konnte.",
+      "solution": "Digitaler Pass, der jede Ölcharge mit verifizierten GPS-Koordinaten der Olivenernte über DID verknüpft. Mühlenverarbeitung erstellt unveränderliche Kette.",
+      "ariaQuote": "Jeder Tropfen g.U. Jaén-Öl hat verifizierbare Herkunft. Käufer zahlen Premium-Preise, weil die Authentizität garantiert ist.",
+      "services": ["Digitaler Produktpass", "GPS-Verifizierung", "DID-Verknüpfung", "g.U.-Ratsintegration"]
+    },
+    "zero-chem-wine": {
+      "title": "Zero-Residue-Wein-Zertifizierung",
+      "sector": "Bio-Weine",
+      "metricLabel": "Zero Residue",
+      "description": "36 Monate ohne synthetische Chemie, zertifiziert mit Nitratsensoren und digitalem Pass.",
+      "challenge": "Bio-Wein-Zertifizierungen waren Punkt-in-Zeit-Audits. Kontinuierliche Verifizierung des Null-Synthetik-Inputs war mit traditionellen Methoden unmöglich.",
+      "solution": "Kontinuierliche Boden- und Pflanzensensor-Überwachung über 36 Monate. Nitrat- und Chemikalienwerte erstellen verifizierbare Zero-Residue-Zertifizierung.",
+      "ariaQuote": "Drei Jahre kontinuierliche Überwachung beweisen unsere Zero-Residue-Behauptung. Käufer vertrauen Daten, nicht nur jährlichen Audits.",
+      "services": ["Bodensensoren", "Kontinuierliche Überwachung", "Zero-Residue-Zertifizierung", "Digitaler Weinpass"]
+    },
+    "citrus-check": {
+      "title": "Mehrlänger-RHG-Validierung",
+      "sector": "Zitrus-RHG",
+      "metricLabel": "Zugelassene Länder",
+      "description": "Automatischer Abgleich phytosanitärer Anwendungen mit Vorschriften aus 150 Ländern.",
+      "challenge": "Zitrusexporteure mussten verschiedene Rückstandshöchstgehalte (RHG) für 150 Bestimmungsländer einhalten. Manuelle Konformitätsprüfung war fehleranfällig.",
+      "solution": "Automatisierte RHG-Konformitäts-Engine, die Spritzaufzeichnungen mit Bestimmungsland-Vorschriften in Echtzeit abgleicht.",
+      "ariaQuote": "Wir wissen sofort, in welche Märkte unsere Zitrusfrüchte eingeführt werden können. Die Konformität wird vor dem Versand verifiziert, nicht am Zoll.",
+      "services": ["RHG-Datenbank", "Spritzaufzeichnungs-Integration", "Mehrländer-Konformität", "Export-Zertifizierung"]
+    },
+    "berry-water": {
+      "title": "Wasser-Fußabdruck-Zertifizierung",
+      "sector": "Wassereffizienz",
+      "metricLabel": "Bewässerungseffizienz",
+      "description": "Feuchtigkeitssonden und Durchflussmesser notarisieren Einsparungen für GlobalG.A.P.-Zertifizierung.",
+      "challenge": "Beerenproduzenten mussten Wassereffizienz für die GlobalG.A.P.-Zertifizierung nachweisen, hatten aber keine kontinuierliche Messinfrastruktur.",
+      "solution": "IoT-Feuchtigkeitssonden und Durchflussmesser liefern kontinuierliche Wasserverbrauchsdaten. Blockchain-Notarisierung erstellt auditierbare Effizienzaufzeichnungen.",
+      "ariaQuote": "Unser Wasser-Fußabdruck ist jetzt kontinuierlich zertifiziert. GlobalG.A.P.-Auditoren greifen auf verifizierte Daten statt Stichproben zu.",
+      "services": ["IoT-Wasserüberwachung", "GlobalG.A.P.-Integration", "Effizienz-Zertifizierung", "Kontinuierliche Verifizierung"]
+    },
+    "rice-satellite": {
+      "title": "Satellitengestützte g.U.-Validierung",
+      "sector": "Fernvalidierung",
+      "metricLabel": "g.U.-Vertrauen",
+      "description": "NDVI-Spektralsignatur bestätigt Sorte und blockiert Mischung mit Importgetreide.",
+      "challenge": "g.U.-Reis-Betrug durch Mischen mit importierten Sorten war mit traditionellen Inspektionsmethoden nicht erkennbar.",
+      "solution": "Satelliten-NDVI-Analyse, die spezifische Reissorten identifiziert. Spektralsignaturen blockieren betrügerisches Mischen mit Nicht-g.U.-Getreide.",
+      "ariaQuote": "Satellitenbilder erfassen, was Bodeninspektionen übersehen. Unser g.U.-Reis wird aus dem Weltraum verifiziert.",
+      "services": ["Satelliten-NDVI-Analyse", "Sortenidentifizierung", "Anti-Betrugs-Erkennung", "g.U.-Verifizierung"]
+    },
+    "bio-cotton-trace": {
+      "title": "GOTS-Baumwolle-Rückverfolgbarkeit",
+      "sector": "Bio-Baumwolle",
+      "metricLabel": "Transparenz",
+      "description": "Lieferkette: Saatgut → Feld → Entkernung → Ballen mit eindeutiger ID.",
+      "challenge": "GOTS-Bio-Baumwoll-Zertifizierung fehlte die Sichtbarkeit der kompletten Lieferkette vom Saatgut bis zum fertigen Ballen.",
+      "solution": "Komplette Lieferkettenverfolgung mit eindeutigen IDs bei jeder Transformation: Saatgut, Feld, Entkernung und Ballenproduktion.",
+      "ariaQuote": "Jeder Ballen ist bis zu bestimmten Feldern rückverfolgbar. GOTS-Zertifizierung wird jetzt durch vollständige Lieferkettensichtbarkeit gestützt.",
+      "services": ["Saatgut-zu-Ballen-Tracking", "Eindeutiges ID-System", "GOTS-Integration", "Lieferkettensichtbarkeit"]
+    },
+    "greenhouse-ai": {
+      "title": "IoT-Gewächshäuser gegen Mehltau",
+      "sector": "Phytosanitäre Kontrolle",
+      "metricLabel": "Chemikalien",
+      "description": "KI verwaltet Mikroklima zur Pilzprävention ohne systemische Fungizide.",
+      "challenge": "Pilzausbrüche in Gewächshäusern erforderten starken Fungizideinsatz. Rückstandsgrenzen bedrohten den Marktzugang und erhöhten die Kosten.",
+      "solution": "KI-gesteuerte Mikroklimasteuerung, die Pilzbedingungen von vornherein verhindert. Proaktives Umweltmanagement eliminiert den Bedarf an systemischen Fungiziden.",
+      "ariaQuote": "Wir haben seit zwei Jahren keine systemischen Fungizide mehr verwendet. KI hält unsere Gewächshäuser natürlich krankheitsfrei.",
+      "services": ["KI-Klimasteuerung", "Pilzprävention", "Chemikalienreduktion", "Rückstandszertifizierung"]
+    },
+    "tropical-flash": {
+      "title": "Express-Zoll für verderbliche Waren",
+      "sector": "Tropische Logistik",
+      "metricLabel": "Gewonnene Frische",
+      "description": "Digitale Vorvalidierung 48h vorher reduziert Ausschuss und verlängert Haltbarkeit.",
+      "challenge": "Tropische Früchte erlitten Qualitätsverluste während der langen Zollabfertigung. Manuelle Dokumentation fügte 2-3 Tage zur Transitzeit hinzu.",
+      "solution": "Digitale Vorvalidierung 48 Stunden vor Ankunft. Alle Dokumente werden unterwegs verifiziert und ermöglichen sofortige Freigabe bei Ankunft.",
+      "ariaQuote": "Unsere Früchte kommen frischer an, weil die Zollabfertigung in Stunden statt Tagen erfolgt. Vorvalidierung ist ein Gamechanger.",
+      "services": ["Vorankunfts-Validierung", "Dokumentendigitalisierung", "Express-Abfertigung", "Kühlketten-Optimierung"]
+    },
+    "urban-hydro": {
+      "title": "Km 0 Vertikale Farm",
+      "sector": "Urbane Landwirtschaft",
+      "metricLabel": "Logistik-Fußabdruck",
+      "description": "Urbane hydroponische Produktion mit zertifizierter erneuerbarer LED-Energie.",
+      "challenge": "Urbane vertikale Farmen konnten ihre Nachhaltigkeitsansprüche nicht belegen. LED-Energieverbrauch und Logistik wurden von skeptischen Verbrauchern in Frage gestellt.",
+      "solution": "Komplette Nachhaltigkeitszertifizierung mit erneuerbarer LED-Energie, Wasserrecycling und Null-Transport-Logistik-Fußabdruck.",
+      "ariaQuote": "Unser Salat reist 5km vom Feld zum Tisch. Erneuerbare-Energie-Zertifikate beweisen unsere Nachhaltigkeit vom Samen bis zum Supermarkt.",
+      "services": ["Erneuerbare-Energie-Zertifizierung", "Urbane Rückverfolgbarkeit", "Null-km-Verifizierung", "Nachhaltigkeits-Dashboard"]
+    },
+    "greenfinance-esg": {
+      "title": "Grüne finanzielle Due Diligence mit verifizierten ESG-Daten",
+      "sector": "Nachhaltige Finanzen",
+      "metricLabel": "Reduzierter Spread",
+      "description": "Integration verifizierter Blockchain-ESG-Daten zur sofortigen Due Diligence bei grünen Krediten.",
+      "challenge": "Finanzinstitute konnten ESG-Daten von Unternehmen, die grüne Kredite beantragten, nicht in Echtzeit verifizieren, was zu erhöhten Spreads durch wahrgenommenes Risiko führte.",
+      "solution": "Integration von in Blockchain verifizierten ESG-Daten, die sofortige Due Diligence ermöglichen. Die Datenaktualität reduziert den Kreditspread um bis zu 35%.",
+      "ariaQuote": "In Blockchain verifizierte ESG-Transparenz ist das neue Sicherheitspfand. Je aktueller Ihre Daten, desto niedriger Ihre Finanzierungskosten.",
+      "services": ["ESG-Datenverifizierung", "Green-Bond-Eignung", "Trade-Finance-Scoring", "Blockchain-Nachweis"]
     }
+  },
+  "detail": {
+    "notFound": "Fall nicht gefunden",
+    "backToStories": "Zurück zu Erfolgsgeschichten",
+    "verifiedOn": "Verifiziert auf Pontus-X",
+    "block": "Block",
+    "sectorImpactPanel": "Sektor-Impact-Panel",
+    "askAgent": "Fragen Sie den KI-Agenten zu diesem Fall",
+    "caseArchitecture": "Fall-Architektur",
+    "impactSimulator": "Impact-Simulator",
+    "ctaTitle": "Möchten Sie ähnliche Ergebnisse erzielen?",
+    "ctaDescription": "Entdecken Sie, wie ProcureData Ihre Beschaffungsprozesse transformieren und Ihre ESG-Wirkung nachweisen kann.",
+    "exploreCatalog": "Katalog erkunden",
+    "viewServices": "Services ansehen",
+    "ctaButton": "Ähnliche Lösung implementieren",
+    "challenge": "Herausforderung",
+    "solution": "Lösung",
+    "impact": "Auswirkung",
+    "servicesUsed": "Genutzte Dienste"
+  },
+  "navigation": {
+    "previousCase": "Vorheriger Fall",
+    "allCases": "Alle Fälle",
+    "nextCase": "Nächster Fall"
+  },
+  "narrative": {
+    "theChallenge": "Die Herausforderung",
+    "theSolution": "Die Lösung",
+    "servicesUsed": "Genutzte Dienste"
+  },
+  "blockchain": {
+    "hashCopied": "Hash in die Zwischenablage kopiert",
+    "verifiedOn": "Verifiziert auf {{network}}",
+    "transactionHash": "Transaktions-Hash",
+    "block": "Block",
+    "viewInExplorer": "Im Explorer anzeigen"
   }
 }

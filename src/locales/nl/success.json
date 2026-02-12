@@ -11,26 +11,548 @@
     "cta": "Start jouw verhaal"
   },
   "sectors": {
-    "all": "Alle sectoren"
+    "all": "Alle",
+    "industrial": "Industrie",
+    "comercio": "Handel",
+    "agroalimentario": "Agri",
+    "movilidad": "Mobiliteit",
+    "salud": "Gezondheid",
+    "social": "Sociaal",
+    "energia": "Energie",
+    "finanzas": "Financiën",
+    "tecnologia": "Tech",
+    "circular": "Circulair",
+    "agritech": "Agri-Tech"
   },
-  "detail": {
-    "challenge": "Uitdaging",
-    "solution": "Oplossing",
-    "impact": "Impact",
-    "servicesUsed": "Gebruikte diensten",
-    "verifiedOn": "Geverifieerd op Pontus-X",
-    "block": "Blok",
-    "sectorImpactPanel": "Sector Impact Paneel",
-    "impactSimulator": "Impact Simulator",
-    "ctaTitle": "Wil je vergelijkbare resultaten behalen?",
-    "ctaButton": "Implementeer vergelijkbare oplossing",
-    "askAgent": "Vraag de AI Agent over deze casus",
-    "caseArchitecture": "Casus Architectuur"
+  "superCategories": {
+    "all": "Alle",
+    "industriaInfraestructura": "Industrie",
+    "saludPharma": "Gezondheid & Pharma",
+    "retailConsumo": "Retail",
+    "movilidadEnergia": "Mobiliteit & Energie",
+    "sectorPublico": "Publieke Sector",
+    "agroalimentario": "Agri & Voeding"
+  },
+  "transversalTags": {
+    "greenProcurement": "Groene Inkoop",
+    "circular": "Circulaire Economie"
   },
   "cases": {
     "gigafactory-north": {
-      "ariaQuote": "De homologatie van 12.000 leveranciers in 24 uur is een ongekende mijlpaal in de industrie.",
-      "metricLabel": "Onboarding tijd"
+      "title": "Automatisering van Industriële Homologatie",
+      "sector": "Industrie",
+      "metricLabel": "Onboardingtijd",
+      "description": "Van 22 dagen naar 48 uur in het Tier 2-leveranciershomologatieproces.",
+      "challenge": "Het onboardingproces voor metallurgische Tier 2-leveranciers duurde gemiddeld 22 dagen. Elke nieuwe leverancier vereiste handmatige validaties van ISO 9001, IATF 16949 en arbeidsveiligheidscertificeringen. Het inkoopteam besteedde meer dan 40% van zijn tijd aan repetitieve administratieve taken.",
+      "solution": "Implementatie van de 'Flash Homologatie 24u'-service gecombineerd met Digitale Paspoorten geverifieerd op het Pontus-X-netwerk. Leveranciers uploaden hun certificeringen eenmalig en GigaFactory krijgt realtime toegang tot het Geverifieerde Paspoort, waardoor dubbele validaties worden geëlimineerd.",
+      "ariaQuote": "Automatisering via ODRL-beleid maakte automatische contractondertekening mogelijk bij het voldoen aan beveiligingsvereisten. Het inkoopteam besteedt nu zijn tijd aan strategische onderhandeling, niet aan het najagen van documenten.",
+      "services": ["Flash Homologatie 24u", "Enterprise Web3 Wallet", "Automatische ODRL-Handtekening", "Universele ERP-Connector"]
+    },
+    "olivetrust-coop": {
+      "title": "ESG-Traceerbaarheid voor Export",
+      "sector": "Agri & Voeding",
+      "metricLabel": "Exportwaarde",
+      "description": "Watervoetafdruk-certificering voor toegang tot de Duitse markt met premiumprijzen.",
+      "challenge": "OliveTrust moest de werkelijke watervoetafdruk van hun bedrijven in Jaén aantonen om te voldoen aan de aanbestedingseisen van de Duitse distributeur Edeka. Elke traditionele certificering kostte €3.500 en duurde 45 dagen.",
+      "solution": "Geautomatiseerde vastlegging van IoT-irrigatiegegevens van veldsensoren en blockchain-notarisatie van oorsprongscertificaten. Het Digitale Olijfoliepaspoort omvat traceerbaarheid van boerderij tot verkooppunt.",
+      "ariaQuote": "Het Digitale Leverancierspaspoort elimineerde de noodzaak van 5 overbodige fysieke audits. Nu heeft elke Europese koper toegang tot dezelfde geverifieerde gegevens zonder extra kosten voor de coöperatie.",
+      "services": ["Directe ESG-Certificering", "Blockchain-Notarisatie", "Digitaal Productpaspoort", "Traceerbaarheids-API"]
+    },
+    "urbandeliver-bcn": {
+      "title": "Directe Scope 3-Rapportage",
+      "sector": "Duurzame Mobiliteit",
+      "metricLabel": "CSRD-Audit",
+      "description": "Generatie van Scope 3-emissierapport voor toegang tot groen bankkrediet.",
+      "challenge": "UrbanDeliver moest de werkelijke emissies van zijn logistieke vloot auditen om een groen krediet van €2M van de Green Finance Bank te verkrijgen. Handmatige rapporten duurden weken en werden niet geaccepteerd door de financiële instelling.",
+      "solution": "Integratie van de Universele ERP-Connector om werkelijke vlootverbruikstelemetrie (OBD-II) te extraheren en automatische generatie van CSRD-rapport met gecertificeerde Scope 1, 2 en 3 emissies.",
+      "ariaQuote": "Dankzij de directe telemetrie geïntegreerd met ProcureData keurde de Green Finance Bank het groene krediet in recordtijd goed. Datatransparantie elimineerde de gebruikelijke 12 weken due diligence.",
+      "services": ["Universele ERP-Connector", "Scope 3-Calculator", "Automatisch CSRD-Rapport", "Groene Certificering"]
+    },
+    "alianza-social-hub": {
+      "title": "Meting van Sociale Impact",
+      "sector": "Sociale Economie",
+      "metricLabel": "SROI-Ratio",
+      "description": "Geverifieerde demonstratie van sociaal rendement op investering van ethische leveranciers.",
+      "challenge": "Alianza Social Hub verenigt 15 beschutte werkplaatsen. Het hoofdprobleem: Grote bedrijven met quotaverplichtingen moesten de werkelijke impact van elke geïnvesteerde euro bij ethische leveranciers aantonen. CSR-afdelingen konden alleen uitgaven rapporteren, niet de gegenereerde sociale waarde.",
+      "solution": "Implementatie van het SROI-Metrieken Dashboard met drie pijlers: 1) Impactmonetisatie met berekening van besparingen op publieke subsidies. 2) Anti-Social-Washing Garantie met geverifieerde DID op Pontus-X. 3) Automatische CSRD-Rapportage voor Duurzaamheidsrapporten.",
+      "ariaQuote": "We hebben geverifieerd dat 100% van de leveranciers voldoet aan werkgelegenheidsquota. Voor elke geïnvesteerde euro wordt €3,8 aan sociale waarde gegenereerd. 78% van de investering wordt geherinvesteerd in de lokale economie.",
+      "services": ["SROI-Dashboard", "Digitale Sociale Audit", "Ethisch Leverancierspaspoort", "Automatisch Duurzaamheidsrapport", "Anti-Social-Washing DID-Verificatie"]
+    },
+    "biomed-hospital": {
+      "title": "Gegarandeerde Zorgcontinuïteit",
+      "sector": "Gezondheid",
+      "metricLabel": "Kritieke Storingen",
+      "description": "Voorspellend onderhoud van MRI-apparatuur met geanonimiseerde AVG-conforme telemetrie.",
+      "challenge": "Het ziekenhuis leed onder onverwachte uitval van zijn MRI-apparatuur, wat €15.000 per dag inactiviteit kostte en kritieke operaties vertraagde. Geen zicht op de werkelijke apparatuurstatus en geen mogelijkheid om logs te delen zonder patiëntgegevens bloot te stellen (AVG).",
+      "solution": "Implementatie van Edge Functions om patiëntgegevens te anonimiseren terwijl magneetfoutlogs in realtime naar de leverancier EcoTech Industrial worden gestuurd. ML-voorspellend model detecteert storingen 72u van tevoren. Automatische waarschuwingen aan de goedgekeurde reserveonderdelenleverancier.",
+      "ariaQuote": "Dankzij de IDS-connector deelde het ziekenhuis technische logs zonder persoonlijke patiëntgegevens bloot te stellen. Het voorspellende model detecteert storingen 72u van tevoren, waardoor onverwachte uitval wordt voorkomen.",
+      "services": ["Beveiligde IDS-Connector", "AVG-Anonimiseerder", "Voorspellend Onderhoud API", "Slimme Waarschuwingen", "MRO-Leveranciershomologatie"]
+    },
+    "globalretail-prime": {
+      "title": "Ethische Toeleveringsketen-Audit",
+      "sector": "Handel",
+      "metricLabel": "Ethische Incidenten",
+      "description": "Verificatie van SA8000-naleving bij 200 Aziatische textielleveranciers.",
+      "challenge": "Een retailmultinational moest ervoor zorgen dat zijn 200 textielleveranciers in Azië voldeden aan SA8000-normen om reputatierisico's te vermijden. Dure audits ter plaatse, vervalbare documenten en geen garantie van continuïteit tussen inspecties.",
+      "solution": "Implementatie van het Digitale Leverancierspaspoort met audits digitaal ondertekend door externe certificeerders. ODRL-beleid staat alleen het ethiekcomité toe om toegang te krijgen tot gevoelige details. Blockchain-traceerbaarheid garandeert certificaatintegriteit.",
+      "ariaQuote": "Blockchain-traceerbaarheid op Pontus-X garandeert dat het SA8000-certificaat niet is gemanipuleerd sinds de uitgifte bij de bron. Nul ethische incidenten in de jaarlijkse audit en +25% consumentenvertrouwen.",
+      "services": ["Digitaal Leverancierspaspoort", "Digitale ISO-Audit", "ODRL License Validator", "DID Web3 Validator", "Leveranciersrisicomonitor"]
+    },
+    "ecovolt-manufacturing": {
+      "title": "Geautomatiseerde Inkoop Hernieuwbare Energie",
+      "sector": "Industriële Energie",
+      "metricLabel": "Hernieuwbare Energie",
+      "description": "Directe afrekening van garanties van oorsprong via Smart Contracts en EUROe.",
+      "challenge": "Een aluminiumfabriek moest certificeren dat 100% van het verbruik hernieuwbaar was om belastingvoordelen te verkrijgen. De afstemming van facturen en Garanties van Oorsprong (GvO) duurde maanden, waardoor belastingvoordelen verloren gingen.",
+      "solution": "Automatisering via Smart Contracts en EUROe. IoT-meter rapporteert verbruik in realtime. Smart Contract koopt automatisch GvO-certificaten en betaalt in hetzelfde blok. Directe boekhoudkundige afstemming en automatisch Carbon Neutral-keurmerk.",
+      "ariaQuote": "Betaling in EUROe maakt het mogelijk dat waardeoverdracht en energiecertificaat in hetzelfde blockchain-blok plaatsvinden. Directe boekhoudkundige afstemming, van maanden naar 12 seconden.",
+      "services": ["Enterprise Web3 Wallet", "Pontus-X Notary Node", "Universele ERP-Connector", "Carbon Tracker ISO 14064", "Green Partner Certificering"]
+    },
+    "sky-aero-systems": {
+      "title": "EN9100 Luchtvaartcertificering",
+      "sector": "Lucht- en Ruimtevaartindustrie",
+      "metricLabel": "Verificatietijd",
+      "description": "Automatische validatie van EN9100-certificaten van 120 wereldwijde leveranciers van kritieke onderdelen.",
+      "challenge": "Sky Aero Systems had een verificatieachterstand van 3 maanden voor leveranciers van luchtvaartcomponenten. Handmatige kruiscontrole van EN9100-certificeringen tegen de IAQG OASIS-database was foutgevoelig en arbeidsintensief.",
+      "solution": "Geautomatiseerde certificaatvalidatiepipeline die IAQG OASIS rechtstreeks verbindt met het Digitale Paspoort-systeem van ProcureData. Realtime statusupdates en automatische waarschuwingen voor aflopende certificeringen.",
+      "ariaQuote": "Het verbinden van onze leveranciershomologatie met geverifieerde branchedatabases heeft ons certificeringsrisico tot bijna nul gereduceerd. Elk kritiek onderdeel heeft nu een geverifieerde digitale bewakingsketen.",
+      "services": ["Flash Homologatie 24u", "OASIS-Integratie", "Digitaal Leverancierspaspoort", "Automatisch Waarschuwingssysteem"]
+    },
+    "vinosdoe-elite": {
+      "title": "Nul Fraude bij BOB-Export",
+      "sector": "Agri & Voeding",
+      "metricLabel": "Consumentenvertrouwen",
+      "description": "Batch- en BOB-notarisatie met dynamische QR gekoppeld aan geolocatie-DID.",
+      "challenge": "Premium-wijnexport naar Azië werd geteisterd door namaak. Traditionele papieren certificaten waren gemakkelijk te vervalsen en consumenten hadden geen manier om authenticiteit te verifiëren.",
+      "solution": "Implementatie van dynamische QR-codes op elke fles gekoppeld aan een blockchain-geverifieerde DID met GPS-coördinaten van de wijngaard, oogstdatum en BOB-raadverificatie.",
+      "ariaQuote": "Elke fles vertelt nu zijn authentieke verhaal van wijnstok tot glas. Vervalsers kunnen de blockchain-verificatie die consumenten met hun telefoon controleren niet repliceren.",
+      "services": ["Blockchain-Notarisatie", "Dynamische QR-Generatie", "DID-Geolocatie", "Consumentenverificatie-App"]
+    },
+    "pharmacold-logistix": {
+      "title": "Koelketen-Integriteit",
+      "sector": "Gezondheid",
+      "metricLabel": "Thermisch Verlies",
+      "description": "Smart Contracts blokkeren betaling als sensoren temperatuur >8°C detecteren gedurende +10min.",
+      "challenge": "Farmaceutische koelketenlogistiek leed jaarlijks €2M verlies door temperatuurafwijkingen die pas op de bestemming werden ontdekt. Betalingsgeschillen en productterugroepingen waren gebruikelijk.",
+      "solution": "IoT-temperatuursensoren streamen continu data naar Smart Contracts. Als de temperatuur meer dan 10 minuten boven 8°C komt, wordt betaling automatisch geblokkeerd en worden belanghebbenden gewaarschuwd.",
+      "ariaQuote": "Betaling is nu gekoppeld aan geverifieerde koelketennaleving. Leveranciers worden gestimuleerd om de juiste temperaturen te handhaven en we hebben onweerlegbaar bewijs voor geschillen.",
+      "services": ["IoT-Temperatuursensoren", "Smart Contract-Betalingen", "Realtime Waarschuwingen", "Blockchain-Bewijsketen"]
+    },
+    "portbcn-smart-trade": {
+      "title": "Directe Digitale Douane",
+      "sector": "Mobiliteit",
+      "metricLabel": "Besparing/Container",
+      "description": "Webhook-verbinding met havensystemen voor directe KYB-validatie.",
+      "challenge": "Containerverwerking in de haven duurde 48-72 uur door handmatige documentverificatie. Opslagkosten stapelden zich op en bederfelijke goederen leden kwaliteitsverlies.",
+      "solution": "Directe webhook-integratie met havenautoriteitssystemen voor directe KYB-verificatie. Digitale leverancierspaspoorten worden voorgevalideerd vóór aankomst van het schip.",
+      "ariaQuote": "Containers passeren de douane nu in uren in plaats van dagen. De integratie met havensystemen heeft onze toeleveringsketensnelheid getransformeerd.",
+      "services": ["Havensysteem-Webhooks", "Directe KYB-Validatie", "Digitaal Leverancierspaspoort", "Vooraankomstverwerking"]
+    },
+    "ayuntamiento-etico": {
+      "title": "Transparante Openbare Aanbesteding",
+      "sector": "Sociale Economie",
+      "metricLabel": "Ethische Transparantie",
+      "description": "SROI-Dashboard om het arbeidsongeschiktheidsquotum van inschrijvers in realtime te verifiëren.",
+      "challenge": "Openbare aanbesteding vereiste verificatie van sociale clausules, maar gemeenten misten instrumenten om de naleving door inschrijvers van werkgelegenheidsquota voor gehandicapten vóór gunning te verifiëren.",
+      "solution": "Realtime SROI-dashboard dat geverifieerde DID's van inschrijvende bedrijven opvraagt om naleving van het werkgelegenheidsquotum voor gehandicapten te bevestigen. Automatische diskwalificatie van niet-conforme inschrijvers.",
+      "ariaQuote": "We kunnen burgers nu garanderen dat elke euro aan publiek geld gaat naar bedrijven die echt voldoen aan sociale criteria. Verificatie gebeurt in seconden, niet weken.",
+      "services": ["SROI-Dashboard", "DID-Verificatie", "Integratie Openbare Aanbesteding", "Compliance-Automatisering"]
+    },
+    "purelithium-sourcing": {
+      "title": "Conflictvrije Mineralen CSRD",
+      "sector": "Mijnbouwindustrie",
+      "metricLabel": "Certificering",
+      "description": "Tier 3-lithiumtraceerbaarheid met ODRL-ondertekening van ethisch gebruiksbeleid.",
+      "challenge": "Bewijzen dat lithium niet afkomstig was uit gebieden met kinderarbeiduitbuiting voor CSRD-rapportage van automotiveklanten was vrijwel onmogelijk met traditionele auditmethoden.",
+      "solution": "Tier 3-leverancierstraceerbaarheid via ODRL Governance. Ondertekening van 'Ethisch Gebruik'-beleid bij elke schakel in de toeleveringsketen, van mijn tot batterijcel.",
+      "ariaQuote": "Datasoevereiniteit maakt het mogelijk om ethiek te traceren van de mijn tot de elektrische auto. Elk gram lithium heeft een verifieerbare geschiedenis.",
+      "services": ["ODRL Governance", "ERP-Connector", "CSRD-Rapport", "B-Corp Certificering"]
+    },
+    "fastfashion-trace": {
+      "title": "Circulaire Mode Zonder Greenwashing",
+      "sector": "Handel",
+      "metricLabel": "Nauwkeurige Etikettering",
+      "description": "PLM-synchronisatie met textielsamenstelling-certificaten voor 1M kledingstukken.",
+      "challenge": "Modemerken stonden onder regelgevende druk om claims over kledingsamenstelling te bewijzen. Handmatige certificaatopvolging over duizenden SKU's was op schaal onmogelijk.",
+      "solution": "Directe PLM-integratie die textielsamenstelling-certificaten op SKU-niveau synchroniseert. Blockchain-verificatie zorgt ervoor dat etiketclaims overeenkomen met werkelijke materialen.",
+      "ariaQuote": "Elk kledingslabel wordt nu ondersteund door geverifieerde samenstellingsgegevens. Regelgevers en consumenten kunnen onze duurzaamheidsclaims vertrouwen.",
+      "services": ["PLM-Integratie", "Samenstellingscertificaten", "Blockchain-Verificatie", "Etiketconformiteit"]
+    },
+    "invoicetrust-b2b": {
+      "title": "Factoring met Blockchain Score",
+      "sector": "B2B Financiën",
+      "metricLabel": "MKB-Liquiditeit",
+      "description": "Onveranderlijke solvabiliteitsscore gebaseerd op ODRL-contractnaleving.",
+      "challenge": "MKB's hadden moeite met toegang tot factoringdiensten vanwege beperkte krediethistorie. Traditionele kredietscore ving hun werkelijke betalingsbetrouwbaarheid niet.",
+      "solution": "Blockchain-gebaseerde kredietscore die geverifieerde ODRL-contractnaleving aggregeert. Onveranderlijk betalingsrecord toegankelijk voor factoringaanbieders.",
+      "ariaQuote": "Onze betalingshistorie is nu ons sterkste activum. Factoringaanbieders vertrouwen op het onveranderlijke blockchain-record van onze contractnaleving.",
+      "services": ["ODRL Compliance Tracking", "Blockchain Kredietscore", "Factoring-Integratie", "Betalingshistorie-API"]
+    },
+    "gridflow-energy": {
+      "title": "Energieoverschotbeheer",
+      "sector": "Energie",
+      "metricLabel": "Verbonden Faciliteiten",
+      "description": "Dagelijkse afrekening van microbetalingen voor energie tussen industriële gemeenschappen.",
+      "challenge": "Industrieparken met zonne-installaties konden overtollige energie niet efficiënt verhandelen tussen gebouwen. Handmatige facturering was onpraktisch voor microtransacties.",
+      "solution": "Geautomatiseerde microbetalingsafrekening voor peer-to-peer energiehandel binnen industriële gemeenschappen. Smart Contracts verwerken facturering met intervallen van 15 minuten.",
+      "ariaQuote": "Ons industriepark is een zelfbalancerende energiegemeenschap geworden. Overtollige zonne-energie van het ene gebouw voedt automatisch de buren.",
+      "services": ["P2P Energiehandel", "Microbetalingsafrekening", "Smart Contracts", "Gemeenschapsdashboard"]
+    },
+    "ailabs-research": {
+      "title": "AI-Training met Synthetische Data",
+      "sector": "Technologie",
+      "metricLabel": "Trainingstijd",
+      "description": "Synthetische datasets met hoge statistische betrouwbaarheid zonder echte datalekken.",
+      "challenge": "AI-labs hadden diverse trainingsdata nodig maar werden geconfronteerd met privacybeperkingen. Echte productiedata konden niet worden gedeeld, wat modelontwikkeling beperkte.",
+      "solution": "Synthetische datageneratie die statistische eigenschappen behoudt terwijl nul echte datalekken worden gegarandeerd. ODRL-beleid regelt gebruiksrechten van synthetische data.",
+      "ariaQuote": "We kunnen nu modellen trainen op statistisch geldige synthetische data zonder privacyzorgen. De ontwikkelsnelheid is verdrievoudigd.",
+      "services": ["Synthetische Datageneratie", "ODRL Data Governance", "Privacyconformiteit", "ML Pipeline-Integratie"]
+    },
+    "helios-fields": {
+      "title": "Voorspellend Zonneonderhoud",
+      "sector": "Zonne-energie",
+      "metricLabel": "Reparatiekosten",
+      "description": "IoT-telemetrie van 1M dagelijkse metingen om thermische anomalieën in omvormers te detecteren.",
+      "challenge": "Omvormerstoringen in zonneparken veroorzaakten aanzienlijke productieverliezen. Reactief onderhoud betekende dat problemen pas werden ontdekt nadat de energieopwekking was gedaald.",
+      "solution": "Hoogfrequente IoT-monitoring met ML-gebaseerde anomaliedetectie. Thermische handtekeningen voorspellen omvormerstoringen 2 weken voor optreden.",
+      "ariaQuote": "We repareren omvormers nu voordat ze uitvallen. Voorspellend onderhoud heeft ongeplande uitvaltijd in onze zonneportefeuille vrijwel geëlimineerd.",
+      "services": ["IoT-Telemetrieplatform", "ML Anomaliedetectie", "Voorspellend Onderhoud", "Waarschuwingsautomatisering"]
+    },
+    "aeolus-wind": {
+      "title": "Programmeerbare PPA's met Smart Contracts",
+      "sector": "Windenergie",
+      "metricLabel": "PPA-Afstemming",
+      "description": "Directe afrekening van PPA-contracten via Smart Contracts en EUROe.",
+      "challenge": "PPA-afstemming omvatte maandenlange uitwisseling tussen energieopwekkers en afnemers. Cashflowvertragingen beïnvloedden de projectfinanciering.",
+      "solution": "Smart Contract-gebaseerde PPA-afrekening die automatisch wordt uitgevoerd op basis van geverifieerde opwekkingsgegevens. Betaling in EUROe biedt directe afrekening.",
+      "ariaQuote": "Onze PPA-afrekeningen vinden nu in realtime plaats. De cashflow-voorspelbaarheid heeft ons vermogen om nieuwe windprojecten te financieren getransformeerd.",
+      "services": ["Smart Contract PPA's", "EUROe-Betalingen", "Opwekkingsverificatie", "Automatische Afstemming"]
+    },
+    "h2-pure": {
+      "title": "Groene Waterstof-Certificering",
+      "sector": "Groene Waterstof",
+      "metricLabel": "Verkoopwaarde",
+      "description": "Onveranderlijke digitale GvO die de koppeling windpark-elektrolyser certificeert.",
+      "challenge": "Groene waterstofpremies vereisten bewijs van hernieuwbare elektriciteitsbron. Het traceren van het specifieke windpark dat een elektrolyser voedt was handmatig intensief.",
+      "solution": "Digitale Garantie van Oorsprong die een onveranderlijke blockchain-koppeling maakt tussen specifieke windturbines en elektrolyserproductiebatches.",
+      "ariaQuote": "Kopers betalen premiumprijzen omdat ze precies kunnen verifiëren welke windturbines de elektriciteit voor hun waterstof hebben opgewekt.",
+      "services": ["Digitale GvO", "Blockchain-Traceerbaarheid", "Elektrolyser-Integratie", "Premium-Certificering"]
+    },
+    "poligono-ecolink": {
+      "title": "Energiegemeenschaps-Marktplaats",
+      "sector": "Industrieel Eigenverbruik",
+      "metricLabel": "Elektriciteitsrekening",
+      "description": "ODRL-governance voor realtime uitwisseling van zonneoverschotten tussen faciliteiten.",
+      "challenge": "Industrieparken wilden zonne-energie delen maar misten governancekaders voor eerlijke toewijzing en facturering tussen deelnemende bedrijven.",
+      "solution": "ODRL-gebaseerd governancebeleid dat energietoewijzing, prijsstelling en afrekening voor gemeenschappelijk zonnedelen automatiseert.",
+      "ariaQuote": "Onze industriële gemeenschap opereert nu als één energieentiteit. Elke deelnemer profiteert van gedeelde zonne-infrastructuur.",
+      "services": ["ODRL Governance", "Energie-Marktplaats", "Gemeenschapsafrekening", "Realtime Toewijzing"]
+    },
+    "gridflex-demand": {
+      "title": "Smart Grid Flexibiliteitscertificaten",
+      "sector": "Smart Grid",
+      "metricLabel": "Stroomuitval/Jaar",
+      "description": "Smart Alerts die selectieve ontkoppelingsprotocollen activeren met EUROe-incentives.",
+      "challenge": "Netbeheerders hadden vraagresponsmechanismen nodig maar misten verifieerbaar bewijs van lastreductie voor flexibiliteitsbetalingen.",
+      "solution": "Gecertificeerde flexibiliteitsrespons met blockchain-verificatie. Smart Alerts activeren lastafschakeling en de geverifieerde respons verdient EUROe-incentives.",
+      "ariaQuote": "Onze flexibiliteit is nu een geverifieerd activum. Netbeheerders vertrouwen onze respons omdat deze blockchain-gecertificeerd is.",
+      "services": ["Smart Alerts", "Flexibiliteitscertificering", "EUROe-Incentives", "Netintegratie"]
+    },
+    "bateria-hub": {
+      "title": "Energiearbitrage met AI",
+      "sector": "Opslag",
+      "metricLabel": "Batterij-ROI",
+      "description": "AI-algoritmen voorspellen poolprijzen om energiekoop/-verkoop te automatiseren.",
+      "challenge": "Batterijopslagexploitanten misten optimale handelsmomenten door handmatige besluitvorming. Prijsvoorspelling en uitvoeringstiming waren suboptimaal.",
+      "solution": "AI-gestuurde prijsvoorspelling met geautomatiseerde Smart Contract-uitvoering voor optimale laad-/ontlaadcycli op basis van spotmarktprijzen.",
+      "ariaQuote": "Onze batterijsystemen handelen nu autonoom. AI vangt arbitragemogelijkheden die menselijke handelaren zouden missen.",
+      "services": ["AI-Prijsvoorspelling", "Geautomatiseerde Handel", "Smart Contract-Uitvoering", "Marktintegratie"]
+    },
+    "bioheat-district": {
+      "title": "RED III Biomassa-Traceerbaarheid",
+      "sector": "Biomassa",
+      "metricLabel": "RED-Naleving",
+      "description": "DID per batch met kaplokatiegeolocatie om duurzame bosopruiming te certificeren.",
+      "challenge": "RED III-naleving vereiste bewijs dat biomassa afkomstig was van duurzame bosbouw. Papieren keten van bewaring was gemakkelijk te vervalsen.",
+      "solution": "Per-batch DID met GPS-coördinaten van kaplocaties. Blockchain-verificatie van duurzame bosbouwcertificering bij de bron.",
+      "ariaQuote": "Elke ton biomassa heeft een geverifieerde oorsprong. RED III-auditoren kunnen onze brandstof traceren tot specifieke bospercelen.",
+      "services": ["Batch-DID-Systeem", "GPS-Geolocatie", "RED III-Naleving", "Bosbouwcertificering"]
+    },
+    "turbine-chain": {
+      "title": "Groen Staal voor Windturbines",
+      "sector": "Toeleveringsketen",
+      "metricLabel": "Gewonnen Contract",
+      "description": "Consolidatie van Scope 3-emissies van 15 staalleveranciers voor CSRD-rapportage.",
+      "challenge": "Windturbinefabrikanten hadden geverifieerde Scope 3-data nodig van staalleveranciers maar werden geconfronteerd met gefragmenteerde data van meer dan 15 Tier 2-leveranciers.",
+      "solution": "Geconsolideerd Scope 3-dashboard dat geverifieerde emissiedata van alle staalleveranciers aggregeert in één CSRD-conform rapport.",
+      "ariaQuote": "We wonnen een groot turbinecontract omdat we de CO₂-voetafdruk van onze staaltoeleveringsketen konden bewijzen. Geverifieerde data is een concurrentievoordeel.",
+      "services": ["Scope 3-Consolidatie", "Multi-leverancier Dashboard", "CSRD-Rapportage", "CO₂-Verificatie"]
+    },
+    "aquapower-nexus": {
+      "title": "Water-Energie Nexus Beheer",
+      "sector": "Waterkracht",
+      "metricLabel": "Waterefficiëntie",
+      "description": "ODRL-beleid reguleert watergebruik tussen irrigatie en elektriciteitsopwekking in realtime.",
+      "challenge": "Concurrerende waterbehoeften tussen landbouwirrigatie en waterkrachtopwekking vereisten complexe toewijzingsbeslissingen.",
+      "solution": "ODRL-beleid dat waterrechten dynamisch toewijst op basis van elektriciteitsprijzen, landbouwvraag en milieudoorstroomvereisten.",
+      "ariaQuote": "Watertoewijzing wordt nu in realtime geoptimaliseerd. Boeren en energieopwekkers profiteren beide van slimmer hulpbronnenbeheer.",
+      "services": ["ODRL-Waterbeleid", "Realtime Toewijzing", "Multi-stakeholder Dashboard", "Milieuconformiteit"]
+    },
+    "smartcharge-ev": {
+      "title": "Garantie van Oorsprong voor EV-Gebruikers",
+      "sector": "Elektrische Mobiliteit",
+      "metricLabel": "EV-Loyaliteit",
+      "description": "API bevraagt Notary Node om zonne-/windoorsprong in de laadapp weer te geven.",
+      "challenge": "EV-bestuurders wilden bewijs dat hun laadenergie afkomstig was van hernieuwbare bronnen, maar bestaande apps konden de energieoorsprong niet verifiëren.",
+      "solution": "Laadapp-integratie die de Notary Node bevraagt om de geverifieerde hernieuwbare oorsprong voor elke laadsessie weer te geven.",
+      "ariaQuote": "Onze bestuurders zien precies waar hun energie vandaan komt. Bewijs van hernieuwbaar laden verhoogt de klantloyaliteit.",
+      "services": ["Notary Node API", "Laadapp-Integratie", "GvO-Verificatie", "Klantendashboard"]
+    },
+    "fiber-loop": {
+      "title": "Post-Consumer Vezeltraceerbaarheid",
+      "sector": "Textielrecycling",
+      "metricLabel": "UPV-Naleving",
+      "description": "Blockchain-notarisatie van vezelgewicht en -kwaliteit bij elke transformatie om greenwashingboetes te voorkomen.",
+      "challenge": "Uitgebreide Producentenverantwoordelijkheid vereiste bewijs van gerecycled gehalte, maar vezels traceren door meerdere transformatiefasen was onmogelijk.",
+      "solution": "Blockchain-notarisatie bij elke transformatiefase. Gewichts- en kwaliteitsdata creëren een auditeerbare keten van bewaring van post-consumentenverzameling tot nieuw textiel.",
+      "ariaQuote": "We kunnen precies bewijzen hoeveel gerecycled gehalte er in elk kledingstuk zit. UPV-naleving is nu geautomatiseerd.",
+      "services": ["Transformatietracking", "Blockchain-Notarisatie", "UPV-Rapportage", "Kwaliteitscertificering"]
+    },
+    "rare-earth-recover": {
+      "title": "Urban Mining van Zeldzame Aardmetalen",
+      "sector": "AEEA / E-Waste",
+      "metricLabel": "Verkoopmarge",
+      "description": "AI-datasets van chemische samenstelling om te verkopen aan gespecialiseerde smelterijen vs generieke verwerkers.",
+      "challenge": "E-wasteverwerkers konden materialen niet effectief sorteren voor gespecialiseerde smelterijen die premiumprijzen betalen voor specifieke zeldzame aardsamenstelling.",
+      "solution": "AI-gestuurde analyse van chemische samenstelling die e-wastebatches categoriseert voor verkoop aan gespecialiseerde smelterijen tegen premiumprijzen.",
+      "ariaQuote": "We halen nu 3x meer waarde uit dezelfde e-wastestroom door samenstellingen aan de juiste kopers te koppelen.",
+      "services": ["AI-Samenstellingsanalyse", "Smelterij-Marktplaats", "Batchoptimalisatie", "Premium Verkoopkanaal"]
+    },
+    "alu-cycle": {
+      "title": "Oneindige Aluminium Energiebesparing",
+      "sector": "Secundair Aluminium",
+      "metricLabel": "Energie vs Primair",
+      "description": "Smart Contract berekent bespaarde CO₂ om Energiebesparingscertificaten (EBC's) uit te geven.",
+      "challenge": "Secundaire aluminiumproducenten konden de 95% energiebesparing vergeleken met primaire aluminiumproductie niet monetiseren.",
+      "solution": "Smart Contracts die geverifieerde CO₂-besparingen berekenen en automatisch Energiebesparingscertificaten uitgeven die verhandelbaar zijn op milieumarkten.",
+      "ariaQuote": "Onze energiebesparingen zijn nu een inkomstenstroom. EBC-certificaten monetiseren onze bijdrage aan de circulaire economie.",
+      "services": ["CO₂-Berekening", "EBC-Uitgifte", "Smart Contracts", "Milieumarkten"]
+    },
+    "producer-trust": {
+      "title": "Automatische UPV-Audit",
+      "sector": "UPV-Certificering",
+      "metricLabel": "Jaarlijkse Audit",
+      "description": "UPV-nalevingsdashboard aggregeert data van meerdere Data Holders met onveranderlijke DID-handtekeningen.",
+      "challenge": "Producentenverantwoordelijkheidsorganisaties stonden voor jaarlijkse audit-nachtmerries bij het aggregeren van data van honderden lidbedrijven.",
+      "solution": "Geautomatiseerd UPV-nalevingsdashboard dat geverifieerde data van lidbedrijven aggregeert met onveranderlijke DID-handtekeningen.",
+      "ariaQuote": "Jaarlijkse audits die maanden duurden worden nu in dagen afgerond. Alle ledendata is vooraf geverifieerd met onveranderlijke handtekeningen.",
+      "services": ["UPV-Dashboard", "Multi-holder Aggregatie", "DID-Handtekeningen", "Auditautomatisering"]
+    },
+    "eco-orchestrator": {
+      "title": "SCRAP-Coördinatie",
+      "sector": "SCRAP-Beheer",
+      "metricLabel": "Ecotaks",
+      "description": "Multi-Tenant RLS zorgt ervoor dat elke partner alleen zijn quotum ziet terwijl SCRAP het aggregaat ziet.",
+      "challenge": "Collectieve nalevingssystemen moesten geaggregeerde data delen terwijl individuele ledendata vertrouwelijk bleef.",
+      "solution": "Multi-Tenant RLS-architectuur waar leden alleen hun eigen data zien terwijl de systeembeheerder geverifieerde aggregaten ziet.",
+      "ariaQuote": "Vertrouwelijkheid van leden blijft behouden terwijl we volledig zicht houden op collectieve prestaties.",
+      "services": ["Multi-Tenant RLS", "Geaggregeerde Dashboards", "Ledenprivacy", "Systeemrapportage"]
+    },
+    "raw-market": {
+      "title": "Marktplaats voor Secundaire Grondstoffen",
+      "sector": "Valorisatie",
+      "metricLabel": "Opbrengst vs Verwerking",
+      "description": "ODRL-beleid zorgt ervoor dat kopers afval gebruiken voor recycling, niet voor stortplaats.",
+      "challenge": "Afvalproducenten die materialen voor recycling verkochten hadden geen garantie dat kopers deze niet illegaal naar de stortplaats zouden omleiden.",
+      "solution": "ODRL-beleid gekoppeld aan materiaalverkoop dat recycling als eindgebruik afdwingt. Overtredingen activeren automatische boetes.",
+      "ariaQuote": "We verkopen met de zekerheid dat onze materialen worden gerecycled. ODRL-beleid maakt kopers verantwoordelijk.",
+      "services": ["ODRL-Materiaalbeleid", "Marktplaatsplatform", "Eindgebruikverificatie", "Nalevingstracking"]
+    },
+    "battery-life": {
+      "title": "Tweede Leven voor EV-Batterijen",
+      "sector": "Lithiumbatterijen",
+      "metricLabel": "Extra Levensduur",
+      "description": "Onveranderlijke Audit Logs certificeren gebruikshistorie om recycling vs stationaire opslag te bepalen.",
+      "challenge": "Bepalen of EV-batterijen gerecycled of hergebruikt moesten worden voor stationaire opslag vereiste toegang tot betrouwbare gebruikshistorie.",
+      "solution": "Onveranderlijke audit logs van het voertuig-BMS die de complete laadhistorie certificeren. AI-algoritmen bepalen de optimale second-life toepassing.",
+      "ariaQuote": "De geschiedenis van elke batterij is transparant. We kunnen de resterende capaciteit voor second-life toepassingen nauwkeurig beoordelen.",
+      "services": ["BMS-Data-Integratie", "Audit Log-Certificering", "Second-Life Beoordeling", "Recyclingoptimalisatie"]
+    },
+    "urban-mining": {
+      "title": "Ethisch Gerecycled Goud Certificering",
+      "sector": "Edelmetalen",
+      "metricLabel": "Ethische Premie",
+      "description": "Blockchain-integriteitsbewijs dat inputbatch (afval) koppelt aan output (staaf).",
+      "challenge": "Gerecycled goud kon moeilijk ethische premies behalen omdat kopers niet konden verifiëren dat het materiaal echt uit e-waste kwam in plaats van mijnbouw.",
+      "solution": "Volledige keten van bewaring van e-wasteverzameling tot geraffineerde staaf. Blockchain koppelt inputafvalbatches aan outputgoudstaven.",
+      "ariaQuote": "Ons goud draagt geverifieerd bewijs van zijn gerecyclede oorsprong. Luxemerken betalen premiumprijzen voor gecertificeerd ethisch metaal.",
+      "services": ["Keten van Bewaring", "Blockchain-Certificering", "Ethische Premium Toegang", "Luxemerk-Integratie"]
+    },
+    "waste-to-value": {
+      "title": "Nul Stortplaats-Audit",
+      "sector": "Zero Waste",
+      "metricLabel": "Stortplaatsomleiding",
+      "description": "Automatische afstemming tussen fabrieksuitvoerdata en recyclerinvoer via Webhooks.",
+      "challenge": "Bedrijven die zero-waste-to-landfill claimden konden het niet bewijzen. Handmatige afstemming tussen afvalproducenten en recyclers was onvolledig.",
+      "solution": "Webhook-integratie die afvaluitvoer automatisch afstemt met geverifieerde recyclerinvoer. Elke discrepantie activeert onmiddellijk onderzoek.",
+      "ariaQuote": "Elk kilogram wordt verantwoord. Onze zero-waste claim wordt ondersteund door continue geautomatiseerde verificatie.",
+      "services": ["Webhook-Integratie", "Automatische Afstemming", "Gapdetectie", "Zero-waste Certificering"]
+    },
+    "green-gov-circular": {
+      "title": "Openbare Inkoop van Lokaal Plastic",
+      "sector": "Groene Openbare Inkoop",
+      "metricLabel": "Lokale SROI",
+      "description": "DID Web3 Validator bevestigt dat plastic afkomstig is van de lokale recyclingfabriek.",
+      "challenge": "Gemeenten wilden lokaal gerecycled plastic prioriteren maar konden leveranciersclaims over materiaalherkomst niet verifiëren.",
+      "solution": "DID Web3-validatie die bevestigt dat plasticbatches afkomstig zijn van de lokale gemeentelijke recyclingfaciliteit.",
+      "ariaQuote": "Publiek geld ondersteunt nu aantoonbaar de lokale circulaire economie. Elke aankoop is traceerbaar tot onze eigen recyclingfabriek.",
+      "services": ["DID Web3 Validator", "Herkomstverificatie", "Integratie Openbare Inkoop", "Lokale Economietracking"]
+    },
+    "avocado-trust": {
+      "title": "Fytosanitaire USA-Export",
+      "sector": "Fytosanitaire Export",
+      "metricLabel": "Douaneafwijzing",
+      "description": "IoT-valsensoren genereren USDA-voorcertificaat met blockchain-bewijs.",
+      "challenge": "Avocado-exporten naar de VS hadden hoge afwijzingspercentages door problemen met plaagdetectie. Handmatige certificering was traag en onbetrouwbaar.",
+      "solution": "IoT-plaagvalsensoren monitoren boomgaarden continu. Schone metingen genereren automatisch USDA-conforme fytosanitaire voorcertificaten met blockchain-bewijs.",
+      "ariaQuote": "Onze containers passeren de VS-douane bij eerste inspectie. Continue IoT-monitoring levert het bewijs dat het USDA vereist.",
+      "services": ["IoT-Plaagmonitoring", "Automatische Certificering", "Blockchain-Bewijs", "USDA-Integratie"]
+    },
+    "olive-origin": {
+      "title": "BOB Jaén Merksoevereiniteit",
+      "sector": "BOB Olijfolie",
+      "metricLabel": "Premiumprijs",
+      "description": "Digitaal Paspoort koppelt molenbatch aan GPS-oogstcoördinaten via DID.",
+      "challenge": "BOB-olijfoliepremies werden bedreigd door frauduleus mengen met niet-BOB olie dat niet kon worden gedetecteerd.",
+      "solution": "Digitaal Paspoort dat elke oliebatch koppelt aan geverifieerde GPS-coördinaten van de olijvenoogst via DID. Molenverwerking creëert een onveranderlijke keten.",
+      "ariaQuote": "Elke druppel BOB Jaén-olie heeft verifieerbare herkomst. Kopers betalen premiumprijzen omdat authenticiteit gegarandeerd is.",
+      "services": ["Digitaal Productpaspoort", "GPS-Verificatie", "DID-Koppeling", "BOB-Raadintegratie"]
+    },
+    "zero-chem-wine": {
+      "title": "Zero Residu Wijn-Certificering",
+      "sector": "Biologische Wijnen",
+      "metricLabel": "Zero Residu",
+      "description": "36 maanden zonder synthetische chemie gecertificeerd met nitraatsensoren en digitaal paspoort.",
+      "challenge": "Biologische wijncertificeringen waren momentopname-audits. Continue verificatie van nul synthetische input was onmogelijk met traditionele methoden.",
+      "solution": "Continue bodem- en plantsensormonitoring gedurende 36 maanden. Nitraat- en chemicaliënniveaus creëren verifieerbare zero-residu certificering.",
+      "ariaQuote": "Drie jaar continue monitoring bewijst onze zero-residu claim. Kopers vertrouwen data, niet alleen jaarlijkse audits.",
+      "services": ["Bodemsensoren", "Continue Monitoring", "Zero-residu Certificering", "Digitaal Wijnpaspoort"]
+    },
+    "citrus-check": {
+      "title": "Meerlangs MRL-Validatie",
+      "sector": "Citrus MRL",
+      "metricLabel": "Toegelaten Landen",
+      "description": "Automatische kruiscontrole van fytosanitaire toepassingen met regelgeving van 150 landen.",
+      "challenge": "Citrusexporteurs moesten voldoen aan verschillende Maximale Residulimieten in 150 bestemmingslanden. Handmatige nalevingscontrole was foutgevoelig.",
+      "solution": "Geautomatiseerde MRL-nalevingsengine die spuitregistraties kruist met bestemmingslandregelgeving in realtime.",
+      "ariaQuote": "We weten direct welke markten onze citrus kan betreden. Naleving wordt vóór verzending geverifieerd, niet bij de douane.",
+      "services": ["MRL-Database", "Spuitregistratie-Integratie", "Meerlands Naleving", "Exportcertificering"]
+    },
+    "berry-water": {
+      "title": "Watervoetafdruk-Certificering",
+      "sector": "Waterefficiëntie",
+      "metricLabel": "Irrigatie-efficiëntie",
+      "description": "Vochtsonden en debietmeters notariseren besparingen voor GlobalG.A.P.-certificering.",
+      "challenge": "Bessenproducenten moesten waterefficiëntie bewijzen voor GlobalG.A.P.-certificering maar misten continue meetinfrastructuur.",
+      "solution": "IoT-vochtsonden en debietmeters leveren continue waterverbruiksdata. Blockchain-notarisatie creëert auditeerbare efficiëntierecords.",
+      "ariaQuote": "Onze watervoetafdruk is nu continu gecertificeerd. GlobalG.A.P.-auditoren hebben toegang tot geverifieerde data in plaats van steekproeven.",
+      "services": ["IoT-Watermonitoring", "GlobalG.A.P.-Integratie", "Efficiëntiecertificering", "Continue Verificatie"]
+    },
+    "rice-satellite": {
+      "title": "Satelliet BOB-Validatie",
+      "sector": "Afstandsvalidatie",
+      "metricLabel": "BOB-Vertrouwen",
+      "description": "NDVI-spectrale handtekening bevestigt ras en blokkeert menging met importgraan.",
+      "challenge": "BOB-rijstfraude door menging met geïmporteerde rassen was niet detecteerbaar met traditionele inspectiemethoden.",
+      "solution": "Satelliet-NDVI-analyse die specifieke rijstrassen identificeert. Spectrale handtekeningen blokkeren frauduleuze menging met niet-BOB graan.",
+      "ariaQuote": "Satellietbeelden vangen wat grondinspecties missen. Onze BOB-rijst wordt vanuit de ruimte geverifieerd.",
+      "services": ["Satelliet-NDVI-Analyse", "Rasidentificatie", "Antifraudedetectie", "BOB-Verificatie"]
+    },
+    "bio-cotton-trace": {
+      "title": "GOTS Katoenen Traceerbaarheid",
+      "sector": "Biologisch Katoen",
+      "metricLabel": "Transparantie",
+      "description": "Keten van bewaring: Zaad → Veld → Ontpitting → Baal met uniek ID.",
+      "challenge": "GOTS biologische katoencertificering miste zichtbaarheid in de complete toeleveringsketen van zaad tot afgewerkte baal.",
+      "solution": "Volledig keten-van-bewaringtracking met unieke ID's bij elke transformatie: zaad, veld, ontpitting en baalproductie.",
+      "ariaQuote": "Elke baal is traceerbaar tot specifieke velden. GOTS-certificering wordt nu ondersteund door volledige toeleveringsketen-zichtbaarheid.",
+      "services": ["Zaad-tot-Baal Tracking", "Uniek ID-Systeem", "GOTS-Integratie", "Toeleveringsketen-Zichtbaarheid"]
+    },
+    "greenhouse-ai": {
+      "title": "IoT-Kassen tegen Meeldauw",
+      "sector": "Fytosanitaire Controle",
+      "metricLabel": "Chemicaliën",
+      "description": "AI beheert microklimaat om schimmels te voorkomen zonder systemische fungiciden.",
+      "challenge": "Schimmeluitbraken in kassen vereisten zwaar fungicidegebruik. Residulimieten bedreigden de markttoegang en verhoogden de kosten.",
+      "solution": "AI-gestuurde mikroklimaatbeheersing die schimmelcondities voorkomt. Proactief milieubeheer elimineert de behoefte aan systemische fungiciden.",
+      "ariaQuote": "We hebben al twee jaar geen systemische fungiciden meer gebruikt. AI houdt onze kassen van nature ziektevrij.",
+      "services": ["AI-Klimaatbeheersing", "Schimmelpreventie", "Chemicaliënreductie", "Residucertificering"]
+    },
+    "tropical-flash": {
+      "title": "Express Douane Bederfelijke Waren",
+      "sector": "Tropische Logistiek",
+      "metricLabel": "Gewonnen Versheid",
+      "description": "Digitale voorvalidatie 48u vooraf vermindert verspilling en verlengt houdbaarheid.",
+      "challenge": "Tropisch fruit leed kwaliteitsverlies tijdens langdurige douaneafhandeling. Handmatige documentatie voegde 2-3 dagen toe aan de transittijd.",
+      "solution": "Digitale voorvalidatie 48 uur voor aankomst. Alle documentatie wordt onderweg geverifieerd, wat onmiddellijke vrijgave bij aankomst mogelijk maakt.",
+      "ariaQuote": "Ons fruit komt verser aan omdat douaneafhandeling in uren gebeurt, niet in dagen. Voorvalidatie is een gamechanger.",
+      "services": ["Vooraankomstvalidatie", "Documentdigitalisering", "Express Inklaring", "Koelketenoptimalisatie"]
+    },
+    "urban-hydro": {
+      "title": "Km 0 Verticale Boerderij",
+      "sector": "Stadslandbouw",
+      "metricLabel": "Logistieke Voetafdruk",
+      "description": "Stedelijke hydroponische productie met gecertificeerde hernieuwbare LED-energie.",
+      "challenge": "Stedelijke verticale boerderijen konden hun duurzaamheidsclaims niet bewijzen. LED-energieverbruik en logistiek werden in twijfel getrokken door sceptische consumenten.",
+      "solution": "Volledige duurzaamheidscertificering die hernieuwbare LED-energie, waterrecycling en nul-transport logistieke voetafdruk omvat.",
+      "ariaQuote": "Onze sla reist 5km van boerderij naar bord. Hernieuwbare-energiecertificaten bewijzen onze duurzaamheid van zaad tot supermarkt.",
+      "services": ["Hernieuwbare-Energiecertificering", "Stedelijke Traceerbaarheid", "Nul-km Verificatie", "Duurzaamheidsdashboard"]
+    },
+    "greenfinance-esg": {
+      "title": "Groene Financiële Due Diligence met Geverifieerde ESG-Data",
+      "sector": "Duurzame Financiën",
+      "metricLabel": "Verminderde Spread",
+      "description": "Integratie van blockchain-geverifieerde ESG-data voor directe due diligence bij groene leningen.",
+      "challenge": "Financiële instellingen konden ESG-data van bedrijven die groene leningen aanvroegen niet in realtime verifiëren, wat leidde tot verhoogde spreads door waargenomen risico.",
+      "solution": "Integratie van in blockchain geverifieerde ESG-data die directe due diligence mogelijk maken. De actualiteit van de data verlaagt de leningspread met tot 35%.",
+      "ariaQuote": "In blockchain geverifieerde ESG-transparantie is het nieuwe onderpand. Hoe actueler uw data, hoe lager uw financieringskosten.",
+      "services": ["ESG-Dataverificatie", "Green Bond-Geschiktheid", "Trade Finance Scoring", "Blockchain-Bewijs"]
     }
+  },
+  "detail": {
+    "notFound": "Casus niet gevonden",
+    "backToStories": "Terug naar Succesverhalen",
+    "verifiedOn": "Geverifieerd op Pontus-X",
+    "block": "Blok",
+    "sectorImpactPanel": "Sector Impact Paneel",
+    "askAgent": "Vraag de AI Agent over deze casus",
+    "caseArchitecture": "Casus Architectuur",
+    "impactSimulator": "Impact Simulator",
+    "ctaTitle": "Wil je vergelijkbare resultaten behalen?",
+    "ctaDescription": "Ontdek hoe ProcureData je inkoopprocessen kan transformeren en je ESG-impact kan aantonen.",
+    "exploreCatalog": "Catalogus Verkennen",
+    "viewServices": "Diensten Bekijken",
+    "ctaButton": "Implementeer vergelijkbare oplossing",
+    "challenge": "Uitdaging",
+    "solution": "Oplossing",
+    "impact": "Impact",
+    "servicesUsed": "Gebruikte diensten"
+  },
+  "navigation": {
+    "previousCase": "Vorige Casus",
+    "allCases": "Alle Casussen",
+    "nextCase": "Volgende Casus"
+  },
+  "narrative": {
+    "theChallenge": "De Uitdaging",
+    "theSolution": "De Oplossing",
+    "servicesUsed": "Gebruikte Diensten"
+  },
+  "blockchain": {
+    "hashCopied": "Hash gekopieerd naar klembord",
+    "verifiedOn": "Geverifieerd op {{network}}",
+    "transactionHash": "Transactie Hash",
+    "block": "Blok",
+    "viewInExplorer": "Bekijk in Explorer"
   }
 }
