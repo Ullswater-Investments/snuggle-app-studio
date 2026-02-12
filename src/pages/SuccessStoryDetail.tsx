@@ -1155,14 +1155,14 @@ const SuccessStoryDetail = () => {
             <SuccessStoryChatAgent
               caseContext={{
                 company: caseData.company,
-                sector: caseData.sector,
-                title: caseData.title,
-                challenge: caseData.challenge,
-                solution: caseData.solution,
-                services: caseData.services,
-                ariaQuote: caseData.ariaQuote,
+                sector: t(`cases.${id}.sector`, { defaultValue: caseData.sector }),
+                title: t(`cases.${id}.title`, { defaultValue: caseData.title }),
+                challenge: t(`cases.${id}.challenge`, { defaultValue: caseData.challenge }),
+                solution: t(`cases.${id}.solution`, { defaultValue: caseData.solution }),
+                services: t(`cases.${id}.services`, { returnObjects: true, defaultValue: caseData.services }) as string[],
+                ariaQuote: t(`cases.${id}.ariaQuote`, { defaultValue: caseData.ariaQuote }),
                 metric: caseData.metric,
-                metricLabel: caseData.metricLabel,
+                metricLabel: t(`cases.${id}.metricLabel`, { defaultValue: caseData.metricLabel }),
               }}
               onStreamingTextChange={handleStreamingText}
             />
