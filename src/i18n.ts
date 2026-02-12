@@ -58,6 +58,7 @@ import esWeb3Dids from './locales/es/web3Dids.json';
 import esIAConversacional from './locales/es/iaConversacional.json';
 import esConectoresErp from './locales/es/conectoresErp.json';
 import esRedGaiaX from './locales/es/redGaiaX.json';
+import esAnalyticsBi from './locales/es/analyticsBi.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -114,6 +115,7 @@ import frWeb3Dids from './locales/fr/web3Dids.json';
 import frIAConversacional from './locales/fr/iaConversacional.json';
 import frConectoresErp from './locales/fr/conectoresErp.json';
 import frRedGaiaX from './locales/fr/redGaiaX.json';
+import frAnalyticsBi from './locales/fr/analyticsBi.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -169,6 +171,7 @@ import ptWeb3Dids from './locales/pt/web3Dids.json';
 import ptIAConversacional from './locales/pt/iaConversacional.json';
 import ptConectoresErp from './locales/pt/conectoresErp.json';
 import ptRedGaiaX from './locales/pt/redGaiaX.json';
+import ptAnalyticsBi from './locales/pt/analyticsBi.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -225,6 +228,7 @@ import deWeb3Dids from './locales/de/web3Dids.json';
 import deIAConversacional from './locales/de/iaConversacional.json';
 import deConectoresErp from './locales/de/conectoresErp.json';
 import deRedGaiaX from './locales/de/redGaiaX.json';
+import deAnalyticsBi from './locales/de/analyticsBi.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -281,6 +285,7 @@ import itWeb3Dids from './locales/it/web3Dids.json';
 import itIAConversacional from './locales/it/iaConversacional.json';
 import itConectoresErp from './locales/it/conectoresErp.json';
 import itRedGaiaX from './locales/it/redGaiaX.json';
+import itAnalyticsBi from './locales/it/analyticsBi.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -337,6 +342,7 @@ import nlWeb3Dids from './locales/nl/web3Dids.json';
 import nlIAConversacional from './locales/nl/iaConversacional.json';
 import nlConectoresErp from './locales/nl/conectoresErp.json';
 import nlRedGaiaX from './locales/nl/redGaiaX.json';
+import nlAnalyticsBi from './locales/nl/analyticsBi.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -394,6 +400,7 @@ import enWeb3Dids from './locales/en/web3Dids.json';
 import enIAConversacional from './locales/en/iaConversacional.json';
 import enConectoresErp from './locales/en/conectoresErp.json';
 import enRedGaiaX from './locales/en/redGaiaX.json';
+import enAnalyticsBi from './locales/en/analyticsBi.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -467,6 +474,7 @@ i18n
         iaConversacional: esIAConversacional,
         conectoresErp: esConectoresErp,
         redGaiaX: esRedGaiaX,
+        analyticsBi: esAnalyticsBi,
       },
       en: {
         common: enCommon,
@@ -519,6 +527,7 @@ i18n
         iaConversacional: enIAConversacional,
         conectoresErp: enConectoresErp,
         redGaiaX: enRedGaiaX,
+        analyticsBi: enAnalyticsBi,
       },
       fr: {
         common: frCommon,
@@ -571,6 +580,7 @@ i18n
         iaConversacional: frIAConversacional,
         conectoresErp: frConectoresErp,
         redGaiaX: frRedGaiaX,
+        analyticsBi: frAnalyticsBi,
       },
       pt: {
         common: ptCommon,
@@ -622,6 +632,7 @@ i18n
         iaConversacional: ptIAConversacional,
         conectoresErp: ptConectoresErp,
         redGaiaX: ptRedGaiaX,
+        analyticsBi: ptAnalyticsBi,
       },
       de: {
         common: deCommon,
@@ -674,6 +685,7 @@ i18n
         iaConversacional: deIAConversacional,
         conectoresErp: deConectoresErp,
         redGaiaX: deRedGaiaX,
+        analyticsBi: deAnalyticsBi,
       },
       it: {
         common: itCommon,
@@ -725,6 +737,7 @@ i18n
         iaConversacional: itIAConversacional,
         conectoresErp: itConectoresErp,
         redGaiaX: itRedGaiaX,
+        analyticsBi: itAnalyticsBi,
       },
       nl: {
         common: nlCommon,
@@ -776,11 +789,12 @@ i18n
         iaConversacional: nlIAConversacional,
         conectoresErp: nlConectoresErp,
         redGaiaX: nlRedGaiaX,
+        analyticsBi: nlAnalyticsBi,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi'],
     interpolation: {
       escapeValue: false,
     },

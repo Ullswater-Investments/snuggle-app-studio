@@ -1,0 +1,28 @@
+{
+  "backToHome": "Terug naar home",
+  "badge": "Fase 9 — Analytics & BI",
+  "title": "ProcureData Analytics & BI",
+  "subtitle": "Voorspellende dashboards, multidimensionale Spend Analysis, Health Score en scenariosimulator voor strategische inkoopintelligentie.",
+  "layers": {
+    "dashboards": { "label": "Laag 1", "title": "Realtime Dashboards" },
+    "spend": { "label": "Laag 2", "title": "Spend Analysis (Uitgavenkubus)" },
+    "predictive": { "label": "Laag 3", "title": "Voorspellende Analyse" },
+    "dataops": { "label": "Laag 4", "title": "Data Ops & Kwaliteit" }
+  },
+  "metrics": {
+    "tools": "5 Belangrijke Tools",
+    "realtime": "100% Realtime",
+    "cases": "47 Geverifieerde Cases"
+  },
+  "chat": {
+    "badge": "Analytics Agent",
+    "description": "Expert in Analytics, BI en Voorspellende Dashboards toegepast op ProcureData",
+    "placeholder": "Vraag over dashboards, forecasting, spend analysis...",
+    "sectionTitle": "Raadpleeg de Analytics & BI Expert",
+    "sectionSubtitle": "Vraag over voorspellende dashboards, Health Score, scenariosimulator of spend analysis",
+    "q1": "Hoe werken de voorspellende dashboards van ProcureData?",
+    "q2": "Wat is de Health Score en hoe wordt deze berekend?",
+    "q3": "Hoe werkt de Scenariosimulator voor leveranciersrisico?",
+    "q4": "Hoe wordt Analytics & BI toegepast in het GigaFactory-geval?"
+  }
+}
