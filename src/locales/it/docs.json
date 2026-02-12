@@ -464,7 +464,7 @@
         "title": "Capacità di Comprensione",
         "content": "<p>NLU multilingue con rilevamento di <strong>intento, entità e sentiment</strong> per risposte contestualizzate.</p>",
         "quiz": {
-          "question": "Cosa rileva il sistema NLU di ARIA?",
+          "question": "Cosa rileva il sistema NLU del Consulente IA?",
           "options": ["Solo parole chiave", "Intento, entità e sentiment", "Solo la lingua", "Niente automaticamente"],
           "correctIndex": 1
         }
