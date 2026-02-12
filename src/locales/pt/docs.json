@@ -464,7 +464,7 @@
         "title": "Capacidades de Compreensão",
         "content": "<p>NLU multilíngue com detecção de <strong>intenção, entidades e sentimento</strong> para respostas contextualizadas.</p>",
         "quiz": {
-          "question": "O que o sistema NLU do ARIA detecta?",
+          "question": "O que o sistema NLU do Consultor IA detecta?",
           "options": ["Apenas palavras-chave", "Intenção, entidades e sentimento", "Apenas idioma", "Nada automaticamente"],
           "correctIndex": 1
         }
