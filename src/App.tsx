@@ -244,6 +244,7 @@ import CatalogoDatos from "./pages/CatalogoDatos";
 import Flujo3Actores from "./pages/Flujo3Actores";
 import PoliticasOdrl from "./pages/PoliticasOdrl";
 import Web3Dids from "./pages/Web3Dids";
+import IAConversacional from "./pages/IAConversacional";
 import NotFound from "./pages/NotFound";
 import KitEspacioDatos from "./pages/KitEspacioDatos";
 import ContratoAdhesion from "./pages/ContratoAdhesion";
@@ -314,6 +315,7 @@ const App = () => (
                   <Route path="/flujo-3-actores" element={<Flujo3Actores />} />
                   <Route path="/politicas-odrl" element={<PoliticasOdrl />} />
                   <Route path="/web3-dids" element={<Web3Dids />} />
+                  <Route path="/ia-conversacional" element={<IAConversacional />} />
                   <Route path="/nodos-sectoriales" element={<SectoralNodesPage />} />
                   <Route path="/nodos/marketplace" element={<MarketplacePage />} />
                   <Route path="/nodos/odrl" element={<OdrlPage />} />
