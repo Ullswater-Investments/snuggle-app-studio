@@ -948,7 +948,7 @@ export function AIConcierge() {
                       <div className="border-t p-4 bg-background">
                         <div className="flex gap-2">
                           <Input
-                            placeholder="Pregunta a ARIA..."
+                            placeholder="Pregunta al asistente..."
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyPress={handleKeyPress}
