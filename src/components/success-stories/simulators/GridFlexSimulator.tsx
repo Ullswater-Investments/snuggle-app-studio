@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Zap, TrendingDown, Coins, Gauge, Activity, FileText, Sparkles, Shield } from 'lucide-react';
+import { Zap, TrendingDown, Coins, Gauge, Activity, FileText, BrainCircuit, Shield } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
