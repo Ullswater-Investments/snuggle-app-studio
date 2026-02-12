@@ -164,7 +164,7 @@
       "smartContract": "Smart Contract"
     },
     "aria": {
-      "name": "ARIA",
+      "name": "KI-Berater",
       "role": "Windenergie-Beraterin",
       "instantTitle": "Sofortabrechnung",
       "instantDesc": "Bei Wind mit <strong>{{windSpeed}} m/s</strong> und einem PPA-Preis von <strong>{{price}}€/MWh</strong> generiert Ihre Sofortabrechnung <strong>{{payout}} EUROe</strong> im aktuellen Block.",
