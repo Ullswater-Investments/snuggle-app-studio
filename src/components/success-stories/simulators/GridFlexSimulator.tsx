@@ -139,9 +139,9 @@ export const GridFlexSimulator = ({ onValuesChange }: GridFlexSimulatorProps) =>
         <Card className="bg-[#020617] border-purple-500/20 shadow-2xl h-full p-6">
           {/* ARIA Header */}
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white font-black text-lg">A</div>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center"><BrainCircuit className="w-5 h-5 text-white" /></div>
             <div>
-              <h4 className="text-white font-bold">ARIA</h4>
+              <h4 className="text-white font-bold">{t('aria.name')}</h4>
               <p className="text-[10px] text-slate-400">{t('gridflex.aria.role')}</p>
             </div>
           </div>

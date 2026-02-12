@@ -169,7 +169,7 @@ export const BioMedSimulator = ({ onValuesChange }: BioMedSimulatorProps) => {
       <div className="lg:col-span-5">
         <Card className="bg-[#020617] border-rose-500/20 shadow-2xl h-full p-6">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white font-black text-lg">A</div>
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center"><BrainCircuit className="w-5 h-5 text-white" /></div>
             <div>
               <h4 className="text-white font-bold">{t('aria.name')}</h4>
               <p className="text-[10px] text-slate-400">{t('bioMed.aria.role')}</p>
