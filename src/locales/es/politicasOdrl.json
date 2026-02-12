@@ -1,0 +1,28 @@
+{
+  "backToHome": "Volver al inicio",
+  "badge": "Fase 4 — Políticas ODRL",
+  "title": "Políticas ODRL de ProcureData",
+  "subtitle": "Contratos digitales automáticos ODRL 2.0: Permissions, Prohibitions, Duties y Constraints ejecutados por Smart Contracts en los 47 casos de éxito.",
+  "layers": {
+    "permissions": { "label": "Capa 1", "title": "Permissions (Permisos)" },
+    "prohibitions": { "label": "Capa 2", "title": "Prohibitions (Prohibiciones)" },
+    "duties": { "label": "Capa 3", "title": "Duties (Obligaciones)" },
+    "constraints": { "label": "Capa 4", "title": "Constraints (Restricciones)" }
+  },
+  "metrics": {
+    "components": "Componentes ODRL",
+    "automation": "Automatización",
+    "cases": "Casos Verificados"
+  },
+  "chat": {
+    "badge": "Agente IA — Políticas ODRL",
+    "description": "Pregunta sobre contratos digitales automáticos, componentes ODRL o su aplicación en los 47 casos de éxito.",
+    "placeholder": "Pregunta sobre políticas ODRL...",
+    "sectionTitle": "Chat IA Especializado",
+    "sectionSubtitle": "Consulta cualquier aspecto de las políticas ODRL con nuestro agente experto en los 47 casos de éxito.",
+    "q1": "¿Cómo funcionan las políticas ODRL 2.0 en ProcureData?",
+    "q2": "¿Qué componentes tiene un contrato digital automático?",
+    "q3": "¿Cómo se revocan los permisos de acceso a un activo de datos?",
+    "q4": "¿Cómo se aplican las políticas ODRL en el caso GigaFactory?"
+  }
+}

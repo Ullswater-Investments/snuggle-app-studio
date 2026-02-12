@@ -1,0 +1,28 @@
+{
+  "backToHome": "Zurück zur Startseite",
+  "badge": "Phase 4 — ODRL-Richtlinien",
+  "title": "ODRL-Richtlinien von ProcureData",
+  "subtitle": "Automatische digitale Verträge ODRL 2.0: Permissions, Prohibitions, Duties und Constraints, ausgeführt durch Smart Contracts in den 47 Erfolgsgeschichten.",
+  "layers": {
+    "permissions": { "label": "Schicht 1", "title": "Permissions (Berechtigungen)" },
+    "prohibitions": { "label": "Schicht 2", "title": "Prohibitions (Verbote)" },
+    "duties": { "label": "Schicht 3", "title": "Duties (Pflichten)" },
+    "constraints": { "label": "Schicht 4", "title": "Constraints (Einschränkungen)" }
+  },
+  "metrics": {
+    "components": "ODRL-Komponenten",
+    "automation": "Automatisierung",
+    "cases": "Verifizierte Fälle"
+  },
+  "chat": {
+    "badge": "KI-Agent — ODRL-Richtlinien",
+    "description": "Fragen Sie nach automatischen digitalen Verträgen, ODRL-Komponenten oder deren Anwendung in den 47 Erfolgsgeschichten.",
+    "placeholder": "Fragen Sie nach ODRL-Richtlinien...",
+    "sectionTitle": "Spezialisierter KI-Chat",
+    "sectionSubtitle": "Konsultieren Sie jeden Aspekt der ODRL-Richtlinien mit unserem Expertenagenten zu den 47 Erfolgsgeschichten.",
+    "q1": "Wie funktionieren die ODRL 2.0-Richtlinien in ProcureData?",
+    "q2": "Welche Komponenten hat ein automatischer digitaler Vertrag?",
+    "q3": "Wie werden Zugriffsberechtigungen auf ein Datenasset widerrufen?",
+    "q4": "Wie werden ODRL-Richtlinien im GigaFactory-Fall angewendet?"
+  }
+}

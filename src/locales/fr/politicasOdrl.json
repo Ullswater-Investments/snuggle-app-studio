@@ -1,0 +1,28 @@
+{
+  "backToHome": "Retour à l'accueil",
+  "badge": "Phase 4 — Politiques ODRL",
+  "title": "Politiques ODRL de ProcureData",
+  "subtitle": "Contrats numériques automatiques ODRL 2.0 : Permissions, Prohibitions, Duties et Constraints exécutés par Smart Contracts dans les 47 cas de succès.",
+  "layers": {
+    "permissions": { "label": "Couche 1", "title": "Permissions (Autorisations)" },
+    "prohibitions": { "label": "Couche 2", "title": "Prohibitions (Interdictions)" },
+    "duties": { "label": "Couche 3", "title": "Duties (Obligations)" },
+    "constraints": { "label": "Couche 4", "title": "Constraints (Restrictions)" }
+  },
+  "metrics": {
+    "components": "Composants ODRL",
+    "automation": "Automatisation",
+    "cases": "Cas Vérifiés"
+  },
+  "chat": {
+    "badge": "Agent IA — Politiques ODRL",
+    "description": "Posez des questions sur les contrats numériques automatiques, les composants ODRL ou leur application dans les 47 cas.",
+    "placeholder": "Posez une question sur les politiques ODRL...",
+    "sectionTitle": "Chat IA Spécialisé",
+    "sectionSubtitle": "Consultez tout aspect des politiques ODRL avec notre agent expert sur les 47 cas de succès.",
+    "q1": "Comment fonctionnent les politiques ODRL 2.0 dans ProcureData ?",
+    "q2": "Quels composants a un contrat numérique automatique ?",
+    "q3": "Comment révoquer les permissions d'accès à un actif de données ?",
+    "q4": "Comment les politiques ODRL s'appliquent-elles au cas GigaFactory ?"
+  }
+}

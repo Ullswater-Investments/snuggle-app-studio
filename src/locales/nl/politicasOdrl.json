@@ -1,0 +1,28 @@
+{
+  "backToHome": "Terug naar home",
+  "badge": "Fase 4 — ODRL-beleid",
+  "title": "ODRL-beleid van ProcureData",
+  "subtitle": "Automatische digitale contracten ODRL 2.0: Permissions, Prohibitions, Duties en Constraints uitgevoerd door Smart Contracts in de 47 succesverhalen.",
+  "layers": {
+    "permissions": { "label": "Laag 1", "title": "Permissions (Machtigingen)" },
+    "prohibitions": { "label": "Laag 2", "title": "Prohibitions (Verboden)" },
+    "duties": { "label": "Laag 3", "title": "Duties (Verplichtingen)" },
+    "constraints": { "label": "Laag 4", "title": "Constraints (Beperkingen)" }
+  },
+  "metrics": {
+    "components": "ODRL-componenten",
+    "automation": "Automatisering",
+    "cases": "Geverifieerde Cases"
+  },
+  "chat": {
+    "badge": "AI-agent — ODRL-beleid",
+    "description": "Vraag over automatische digitale contracten, ODRL-componenten of hun toepassing in de 47 succesverhalen.",
+    "placeholder": "Vraag over ODRL-beleid...",
+    "sectionTitle": "Gespecialiseerde AI-chat",
+    "sectionSubtitle": "Raadpleeg elk aspect van het ODRL-beleid met onze expert-agent over de 47 succesverhalen.",
+    "q1": "Hoe werken de ODRL 2.0-beleidsregels in ProcureData?",
+    "q2": "Welke componenten heeft een automatisch digitaal contract?",
+    "q3": "Hoe worden toegangsrechten tot een data-asset ingetrokken?",
+    "q4": "Hoe worden ODRL-beleidsregels toegepast in de GigaFactory-case?"
+  }
+}

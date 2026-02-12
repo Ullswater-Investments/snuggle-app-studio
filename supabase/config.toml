@@ -14,3 +14,6 @@ verify_jwt = false
 
 [functions.flujo-3-actores-agent]
 verify_jwt = false
+
+[functions.politicas-odrl-agent]
+verify_jwt = false

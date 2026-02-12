@@ -9,7 +9,7 @@ const phases = [
   { icon: Shield, name: "Fundamentos", desc: "Autenticación, RBAC y RLS multi-tenant", slug: "fundamentos" },
   { icon: Database, name: "Catálogo de Datos", desc: "Registro y descubrimiento de activos", slug: "catalogo-datos" },
   { icon: GitBranch, name: "Flujo 3-Actores", desc: "Consumer → Subject → Holder", slug: "flujo-3-actores" },
-  { icon: FileText, name: "Políticas ODRL", desc: "Contratos digitales automáticos" },
+  { icon: FileText, name: "Políticas ODRL", desc: "Contratos digitales automáticos", slug: "politicas-odrl" },
   { icon: Wallet, name: "Web3 y DIDs", desc: "Identidades descentralizadas y EUROe" },
   { icon: Bot, name: "IA Conversacional", desc: "Asistente ARIA con contexto" },
   { icon: Settings, name: "Conectores ERP", desc: "SAP, Oracle, Dynamics" },
