@@ -473,7 +473,7 @@
         "title": "Kontinuierliches Lernen",
         "content": "<p><strong>Feedback-Loop</strong>-System: Benutzerkorrekturen verbessern zukünftige Antworten durch überwachtes Nachtraining.</p>",
         "quiz": {
-          "question": "Wie verbessert ARIA ihre Antworten?",
+          "question": "Wie verbessert der KI-Berater seine Antworten?",
           "options": ["Verbessert nie", "Mit Benutzer-Feedback", "Nur manuelle Updates", "Zufällig"],
           "correctIndex": 1
         }
