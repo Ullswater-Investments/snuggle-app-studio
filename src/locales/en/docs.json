@@ -622,7 +622,7 @@
         "title": "Continuous Learning",
         "content": "<p><strong>Feedback loop</strong> system: user corrections improve future responses through supervised retraining.</p>",
         "quiz": {
-          "question": "How does ARIA improve its responses?",
+          "question": "How does the AI Assistant improve its responses?",
           "options": ["Never improves", "With user feedback", "Manual updates only", "Randomly"],
           "correctIndex": 1
         }
