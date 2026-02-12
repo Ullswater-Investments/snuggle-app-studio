@@ -345,12 +345,12 @@ export default function Landing() {
                 <img 
                   src={procuredataHeroLogo} 
                   alt="PROCUREDATA" 
-                  className="h-[78px] md:h-[104px] object-contain dark:hidden"
+                  className="h-[101px] md:h-[135px] object-contain dark:hidden"
                 />
                 <img 
                   src={procuredataLogoDark} 
                   alt="PROCUREDATA" 
-                  className="h-[78px] md:h-[104px] object-contain hidden dark:block"
+                  className="h-[101px] md:h-[135px] object-contain hidden dark:block"
                 />
                 <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
                   <span className="procuredata-gradient">{t('tagline')}</span>
