@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Building, Scale, Shield, Award, FileText, Sparkles, Users, CheckCircle2 } from 'lucide-react';
+import { Building, Scale, Shield, Award, FileText, BrainCircuit, Users, CheckCircle2 } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
