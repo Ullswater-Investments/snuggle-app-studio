@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Sun, Users, Zap, FileText, Sparkles, Home } from 'lucide-react';
+import { Sun, Users, Zap, FileText, BrainCircuit, Home } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
