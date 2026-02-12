@@ -1,131 +1,205 @@
 
+# Plan: Cambios Tecnicos para Adecuacion a UNE 0087:2025
 
-## Plan: Implementar Pasos de Cumplimiento Normativo UNE 0087:2025
-
-Basado en el informe de conformidad existente (78% actual), este plan cubre los cambios que se pueden implementar directamente en la plataforma para avanzar hacia el cumplimiento. Se organiza en 4 entregables concretos.
-
----
-
-### Entregable 1: Libro de Reglas (Rulebook) del Espacio de Datos
-
-Crear un documento formal y una pagina dedicada con las reglas del espacio ProcureData.
-
-**Archivo nuevo: `docs/LIBRO_DE_REGLAS_PROCUREDATA.md`**
-
-Contenido estructurado segun el marco IDSA Rulebook:
-- Capitulo 1: Objeto y ambito de aplicacion
-- Capitulo 2: Requisitos de adhesion (KYB, DID, documentacion)
-- Capitulo 3: Derechos y obligaciones de los participantes (Consumer, Provider, Holder)
-- Capitulo 4: Politicas de uso de datos (ODRL, permisos, prohibiciones, deberes)
-- Capitulo 5: Regimen sancionador (advertencias, suspension, expulsion)
-- Capitulo 6: Resolucion de conflictos (Comite de Etica, mediacion, arbitraje)
-- Capitulo 7: Politica de salida y portabilidad de datos
-- Capitulo 8: SLAs con KPIs medibles (disponibilidad 99.5%, respuesta 24h, calidad minima Health Score 70)
-- Capitulo 9: Tarifas vigentes (1 EUROe/transaccion, 100 EUROe/ano Pro)
-- Capitulo 10: Modificaciones y versionado del Libro de Reglas
-
-**Archivo nuevo: `src/pages/LibroDeReglas.tsx`**
-
-Pagina con el mismo patron de diseno UNE que `RecomendacionesUne.tsx`:
-- Cabecera azul UNE (#003366), sidebar ToC sticky, tipografia serif
-- MarkdownRenderer para el contenido
-- Boton de descarga MD
-- Enlace desde footer seccion "Transparencia"
-
-**Traducciones:** `src/locales/*/rulebook.json` (7 idiomas)
-**Ruta:** `/libro-de-reglas` en `App.tsx`
-**Footer:** Anadir enlace "Libro de Reglas" en seccion Transparencia
+Este plan detalla las modificaciones tecnicas concretas necesarias en la plataforma ProcureData para cerrar las brechas de conformidad identificadas en el informe (actualmente al 78%). Se organiza por area tecnica, priorizando los cambios de mayor impacto normativo.
 
 ---
 
-### Entregable 2: Glosario UNE 0087 Mapeado
+## Estado Actual y Brechas Tecnicas
 
-Crear un glosario que mapee cada termino de la norma UNE 0087 a su implementacion concreta en ProcureData.
+La plataforma tiene 7 requisitos en estado "Parcial" y 1 "Pendiente". Los cambios tecnicos que podemos implementar directamente afectan a 4 areas:
 
-**Archivo nuevo: `docs/GLOSARIO_UNE_0087.md`**
-
-Tabla con ~30 terminos clave:
-
-| Termino UNE | Definicion UNE | Implementacion ProcureData | Estado |
-|---|---|---|---|
-| Espacio de Datos | Infraestructura descentralizada... | Plataforma federada con EDC + Pontus-X | Cumple |
-| Producto de Datos | Conjunto con metadatos, politicas... | `data_products` + `data_assets` + `data_policies` | Cumple |
-| Titular de Datos | Entidad custodia... | Rol `data_holder` en `organizations` | Cumple |
-| Conector | Componente software estandarizado... | EDC referenciado + API REST | Parcial |
-| Contrato Inteligente | Acuerdo digital ejecutable... | ODRL JSON-LD + Smart Contract Pontus-X | Cumple |
-| Vocabulario de Datos | Ontologia reutilizable... | JSON-LD (Raw Data Normalizer) | Parcial |
-| Self-Description | Descripcion Gaia-X... | Trust Framework Gaia-X integrado | Cumple |
-| (etc. ~23 terminos mas)
-
-**Archivo nuevo: `src/pages/GlosarioUne.tsx`**
-
-Pagina con diseno UNE, mismo patron, con busqueda por termino.
-
-**Traducciones:** `src/locales/*/glossaryUne.json` (7 idiomas)
-**Ruta:** `/glosario-une` en `App.tsx`
-**Footer:** Anadir enlace en seccion Transparencia
+| Area | Brecha | Impacto |
+|------|--------|---------|
+| Interoperabilidad Semantica | `catalog_metadata` solo tiene 5 campos (id, asset_id, visibility, tags, categories). Faltan campos DCAT-AP 3.0 | Alto |
+| Identidad SSI | DIDs implementados pero sin Verifiable Credentials W3C almacenables | Alto |
+| Gobernanza de Datos | Sin declaracion obligatoria de calidad al publicar activos | Medio |
+| Soberania de Infraestructura | Sin plan de portabilidad documentado ni Docker | Medio |
 
 ---
 
-### Entregable 3: Portal de Transparencia
+## Entregable 1: DCAT-AP 3.0 en Catalogo de Metadatos
 
-Crear una pagina publica con metricas, tarifas, reglas y documentos de gobernanza del espacio.
+Anadir campos estandar europeos a la tabla `catalog_metadata` para cumplir la interoperabilidad semantica (Seccion 5.3 UNE).
 
-**Archivo nuevo: `src/pages/PortalTransparencia.tsx`**
+**Migracion SQL:**
+Anadir columnas DCAT-AP 3.0:
+- `dct_title` (text) — Titulo estandarizado del activo
+- `dct_description` (text) — Descripcion conforme DCAT
+- `dct_publisher` (text) — Organizacion publicadora
+- `dct_issued` (timestamptz) — Fecha de publicacion
+- `dct_modified` (timestamptz) — Ultima modificacion
+- `dct_language` (text[], default '{es}') — Idiomas disponibles
+- `dct_spatial` (text) — Cobertura geografica
+- `dct_temporal_start` / `dct_temporal_end` (timestamptz) — Cobertura temporal
+- `dcat_distribution` (jsonb) — Distribuciones disponibles (formato, URL, mediaType)
+- `dcat_theme` (text[]) — Tematicas segun vocabulario EU
+- `dct_access_rights` (text) — Derechos de acceso (public, restricted, non-public)
+- `dct_conformsTo` (text) — Estandar al que se adhiere
+- `dcat_contact_point` (jsonb) — Punto de contacto
 
-Secciones de la pagina:
-- **Metricas del Espacio**: Participantes activos, transacciones procesadas, sectores cubiertos (datos de demo/sinteticos)
-- **Tarifas Vigentes**: Tabla con precios (1 EUROe/tx, 100 EUROe/ano Pro, servicios adicionales)
-- **Documentos de Gobernanza**: Enlaces a Libro de Reglas, Contrato de Adhesion, Politica ODRL, Informe UNE
-- **Autoridad de Gobierno**: Descripcion de la estructura de gobierno (composicion, funciones, proceso de decision)
-- **Informes y Auditorias**: Seccion preparada para publicar informes periodicos
-- **Canal de Comunicacion**: Enlace al formulario de contacto/feedback
-
-Diseno: Cards con iconos, estadisticas animadas con Framer Motion, paleta azul UNE.
-
-**Traducciones:** `src/locales/*/transparency.json` (7 idiomas)
-**Ruta:** `/transparencia` en `App.tsx`
-**Footer:** Actualizar enlace existente de "Transparencia" para apuntar a esta pagina
-
----
-
-### Entregable 4: Declaracion de Conformidad UNE 0087
-
-Anadir una seccion visible en la pagina de Recomendaciones UNE y en la Landing con el estado de conformidad.
-
-**Modificar: `src/pages/RecomendacionesUne.tsx`**
-
-Anadir banner superior con:
-- Indicador visual de conformidad: 78% (barra de progreso circular)
-- Badge: "14 Cumple / 7 Parcial / 1 Pendiente"
-- Enlace a los documentos creados (Libro de Reglas, Glosario, Portal de Transparencia)
-
-**Modificar: `src/pages/Landing.tsx`**
-
-Anadir en la seccion de badges/credenciales del hero o cerca del footer:
-- Pequeno badge "UNE 0087:2025 · 78% Conformidad" con enlace a `/recomendaciones-une`
+**Codigo:**
+- Crear componente `DcatApMetadataForm.tsx` para captura de metadatos DCAT-AP al publicar activos
+- Crear funcion `generateDcatApJsonLd()` en `src/services/dcatAp.ts` que exporte metadatos en formato JSON-LD conforme DCAT-AP 3.0
+- Modificar el flujo de publicacion de activos para incluir los campos DCAT-AP
 
 ---
 
-### Resumen de archivos
+## Entregable 2: Verifiable Credentials (VCs) W3C
 
-| Archivo | Accion |
-|---------|--------|
-| `docs/LIBRO_DE_REGLAS_PROCUREDATA.md` | CREAR — Rulebook completo |
-| `src/pages/LibroDeReglas.tsx` | CREAR — Pagina estilo UNE |
-| `src/locales/*/rulebook.json` (7) | CREAR — Traducciones |
-| `docs/GLOSARIO_UNE_0087.md` | CREAR — Glosario mapeado |
-| `src/pages/GlosarioUne.tsx` | CREAR — Pagina con busqueda |
-| `src/locales/*/glossaryUne.json` (7) | CREAR — Traducciones |
-| `src/pages/PortalTransparencia.tsx` | CREAR — Portal publico |
-| `src/locales/*/transparency.json` (7) | CREAR — Traducciones |
-| `src/pages/RecomendacionesUne.tsx` | MODIFICAR — Banner de conformidad |
-| `src/pages/Landing.tsx` | MODIFICAR — Badge + enlaces footer |
-| `src/locales/*/landing.json` (7) | MODIFICAR — Claves footer nuevas |
-| `src/App.tsx` | MODIFICAR — 3 rutas nuevas |
-| `src/i18n.ts` | MODIFICAR — 3 namespaces nuevos |
+Completar el sistema SSI pasando de DIDs simples a credenciales verificables almacenables y presentables.
 
-### Secuencia de implementacion
+**Migracion SQL:**
+- Crear tabla `verifiable_credentials`:
+  - `id` (uuid, PK)
+  - `organization_id` (uuid, FK organizations)
+  - `credential_type` (text) — ej: "KYBCredential", "SectorCertification", "GreenPartner"
+  - `issuer_did` (text) — DID del emisor
+  - `subject_did` (text) — DID del sujeto
+  - `credential_data` (jsonb) — W3C VC completa en JSON-LD
+  - `proof` (jsonb) — Prueba criptografica
+  - `issued_at` (timestamptz)
+  - `expires_at` (timestamptz, nullable)
+  - `status` (text) — active, revoked, expired
+  - `revocation_reason` (text, nullable)
+  - RLS: organizaciones solo ven sus propias credenciales + credenciales publicas
 
-Dado el volumen (30+ archivos), se recomienda implementar en 4 mensajes consecutivos, uno por entregable.
+**Codigo:**
+- Crear servicio `src/services/verifiableCredentials.ts` con funciones para:
+  - `issueCredential()` — Generar VC firmada con la wallet Web3 del emisor
+  - `verifyCredential()` — Verificar firma y vigencia
+  - `presentCredential()` — Crear Verifiable Presentation (VP) para compartir
+- Crear componente `VerifiableCredentialsPanel.tsx` que muestre las VCs de una organizacion con estados
+- Integrar en el dashboard de organizacion
 
+---
+
+## Entregable 3: Declaracion de Calidad Obligatoria
+
+Implementar campo obligatorio de calidad al publicar activos (Seccion 6.3 UNE).
+
+**Migracion SQL:**
+- Anadir columnas a `data_assets`:
+  - `quality_declaration` (jsonb) — Declaracion de calidad del proveedor
+  - `update_frequency` (text) — Frecuencia de actualizacion (daily, weekly, monthly, quarterly, annual)
+  - `coverage_percentage` (integer) — Porcentaje de cobertura de datos
+  - `validation_method` (text) — Metodo de validacion usado
+  - `quality_score_declared` (integer) — Health Score declarado por el proveedor (0-100)
+  - `quality_score_verified` (integer, nullable) — Health Score calculado automaticamente
+
+**Codigo:**
+- Crear componente `QualityDeclarationForm.tsx` con formulario de declaracion de calidad
+- Modificar el flujo de publicacion para hacer obligatoria la declaracion
+- Crear funcion `calculateVerifiedQualityScore()` que compare declarado vs real
+
+---
+
+## Entregable 4: Revocacion Automatica por Expiracion
+
+Implementar logica automatica para revocar acceso cuando expire `access_duration_days` (Seccion 4.1.2 UNE).
+
+**Migracion SQL:**
+- Crear funcion SQL `revoke_expired_transactions()` que actualice a estado `expired` las transacciones cuyo `created_at + access_duration_days` haya pasado
+- Crear trigger o cron job usando `pg_cron` (si disponible) o una Edge Function programada
+
+**Codigo:**
+- Crear Edge Function `check-expired-transactions` que ejecute la revocacion periodicamente
+- Crear Edge Function `auto-revoke-cron` invocable por cron que llame a la funcion SQL
+
+---
+
+## Entregable 5: Niveles de Aseguramiento (LoA) eIDAS
+
+Implementar niveles diferenciados de confianza segun el tipo de verificacion (Seccion 6.2 UNE).
+
+**Migracion SQL:**
+- Anadir columna `assurance_level` (text) a `organizations`:
+  - `low` — Solo email verificado
+  - `substantial` — KYB + DID verificado
+  - `high` — KYB + DID + Certificado cualificado eIDAS
+- Anadir columna `required_assurance_level` (text) a `data_assets` para que los proveedores definan el nivel minimo requerido para acceder a sus datos
+
+**Codigo:**
+- Crear funcion `calculateAssuranceLevel()` que determine el nivel automaticamente basado en las verificaciones completadas
+- Modificar flujo de solicitud de datos para validar que el consumer tenga el LoA requerido
+- Crear componente `AssuranceLevelBadge.tsx` visual
+
+---
+
+## Entregable 6: Exportador JSON-LD / DCAT-AP
+
+Crear endpoint que genere la descripcion completa del catalogo en formato DCAT-AP 3.0 para federacion con otros espacios de datos.
+
+**Codigo:**
+- Crear Edge Function `export-dcat-catalog` que genere un documento JSON-LD conforme DCAT-AP 3.0 con todos los activos publicos
+- Incluir contextos `@context` con namespaces dct, dcat, foaf, vcard
+- Anadir boton "Exportar Catalogo DCAT-AP" en el portal de transparencia
+
+---
+
+## Entregable 7: Plan de Portabilidad Documentado
+
+Crear documentacion tecnica de portabilidad para soberania de infraestructura.
+
+**Archivo:** `docs/PLAN_PORTABILIDAD_PROCUREDATA.md`
+
+Contenido:
+- Exportacion completa de PostgreSQL (pg_dump)
+- Migracion de Edge Functions a Deno/Node.js standalone
+- Contenedorizacion con Docker/Docker Compose
+- Despliegue en nubes soberanas europeas (OVHcloud, IONOS, T-Systems)
+- Estimacion de costes y timeline
+
+---
+
+## Resumen de Impacto en Conformidad
+
+| Entregable | Requisito UNE | Estado Actual | Estado Esperado |
+|------------|---------------|---------------|-----------------|
+| 1. DCAT-AP 3.0 | Interoperabilidad Semantica (5.3) | Parcial | Cumple |
+| 2. Verifiable Credentials | Identidad Federada (5.4 IAM) | Parcial | Cumple |
+| 3. Calidad Obligatoria | Gobernanza de Datos (6.3) | Cumple | Cumple+ |
+| 4. Revocacion Automatica | Soberania sobre Activos (4.1.2) | Cumple | Cumple+ |
+| 5. Niveles LoA | Gobernanza Interoperabilidad (6.2) | Cumple | Cumple+ |
+| 6. Exportador DCAT | Interoperabilidad Semantica (5.3) | Parcial | Cumple |
+| 7. Plan Portabilidad | Soberania Infraestructura (4.1.3) | Parcial | Cumple |
+
+**Conformidad estimada tras implementacion: 88-92%** (el 100% requiere acciones externas como certificacion CRED y constitucion juridica de la Autoridad de Gobierno).
+
+---
+
+## Secuencia de Implementacion
+
+Dado el volumen, se recomienda implementar en 4 fases:
+1. **Fase A** (Entregables 1 + 6): DCAT-AP 3.0 — migracion + formulario + exportador
+2. **Fase B** (Entregable 2): Verifiable Credentials — tabla + servicio + panel
+3. **Fase C** (Entregables 3 + 4 + 5): Calidad + Revocacion + LoA — migraciones + logica
+4. **Fase D** (Entregable 7): Documentacion de portabilidad
+
+## Seccion Tecnica
+
+### Migraciones SQL necesarias
+- 1 ALTER TABLE sobre `catalog_metadata` (13 columnas nuevas)
+- 1 CREATE TABLE `verifiable_credentials` (12 columnas)
+- 1 ALTER TABLE sobre `data_assets` (6 columnas nuevas)
+- 1 ALTER TABLE sobre `organizations` (1 columna nueva)
+- 1 ALTER TABLE sobre `data_assets` (1 columna nueva para LoA)
+- 1 CREATE FUNCTION `revoke_expired_transactions()`
+- Politicas RLS para la nueva tabla
+
+### Archivos nuevos estimados
+- `src/services/dcatAp.ts`
+- `src/services/verifiableCredentials.ts`
+- `src/components/DcatApMetadataForm.tsx`
+- `src/components/VerifiableCredentialsPanel.tsx`
+- `src/components/QualityDeclarationForm.tsx`
+- `src/components/AssuranceLevelBadge.tsx`
+- `supabase/functions/export-dcat-catalog/index.ts`
+- `supabase/functions/check-expired-transactions/index.ts`
+- `docs/PLAN_PORTABILIDAD_PROCUREDATA.md`
+
+### Archivos a modificar
+- Flujo de publicacion de activos (para incluir DCAT-AP y calidad)
+- Dashboard de organizacion (para mostrar VCs y LoA)
+- Portal de transparencia (para boton de exportacion DCAT)
+- `src/pages/RecomendacionesUne.tsx` (actualizar porcentaje de conformidad)
