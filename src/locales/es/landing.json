@@ -159,5 +159,18 @@
     "glossaryUne": "Glosario UNE",
     "transparencyPortal": "Portal de Transparencia",
     "rulebook": "Libro de Reglas"
+  },
+  "kitAyudas": {
+    "title": "AYUDAS KIT ESPACIO DE DATOS",
+    "deadline": "Inscripción hasta 20 de Marzo del 2026",
+    "limitedPlaces": "PLAZAS LIMITADAS",
+    "mainMessage": "Digitaliza tu cadena de suministro con hasta {amount} de Subvención a fondo perdido de RED.ES",
+    "amount": "30.000 €",
+    "benefit1": "Tramitación incluida en la cuota mensual",
+    "benefit2": "Subvención 85-90%",
+    "benefit3": "Sin letra pequeña",
+    "heroCta": "SOLICITA LAS AYUDAS KIT ESPACIO DE DATOS",
+    "inscriptionCta": "Solicitar Inscripción por 190€ al mes",
+    "viewConditions": "Ver Condiciones"
   }
 }

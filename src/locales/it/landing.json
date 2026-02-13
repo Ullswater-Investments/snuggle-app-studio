@@ -158,5 +158,18 @@
     "glossaryUne": "Glossario UNE",
     "transparencyPortal": "Portale di Trasparenza",
     "rulebook": "Regolamento"
+  },
+  "kitAyudas": {
+    "title": "CONTRIBUTI KIT SPAZIO DATI",
+    "deadline": "Iscrizione entro il 20 marzo 2026",
+    "limitedPlaces": "POSTI LIMITATI",
+    "mainMessage": "Digitalizza la tua catena di fornitura con fino a {amount} di contributo a fondo perduto da RED.ES",
+    "amount": "30.000 €",
+    "benefit1": "Gestione inclusa nella quota mensile",
+    "benefit2": "Contributo 85-90%",
+    "benefit3": "Senza clausole nascoste",
+    "heroCta": "RICHIEDI I CONTRIBUTI KIT SPAZIO DATI",
+    "inscriptionCta": "Richiedi iscrizione per 190€/mese",
+    "viewConditions": "Vedi condizioni"
   }
 }

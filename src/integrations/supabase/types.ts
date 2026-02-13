@@ -704,6 +704,108 @@ export type Database = {
         }
         Relationships: []
       }
+      kit_inscriptions: {
+        Row: {
+          acceptance_act_accepted: boolean | null
+          address: string
+          cif: string
+          city: string
+          clinic_name: string
+          communications_accepted: boolean | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          contact_role: string
+          contract_accepted: boolean | null
+          contract_accepted_at: string | null
+          created_at: string
+          current_software: string | null
+          email: string
+          has_digital_records: string | null
+          has_website: boolean | null
+          id: string
+          interested_modules: Json | null
+          num_employees: number | null
+          num_veterinarians: number | null
+          phone: string
+          postal_code: string
+          privacy_accepted: boolean
+          province: string
+          status: string | null
+          terms_accepted: boolean
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          acceptance_act_accepted?: boolean | null
+          address: string
+          cif: string
+          city: string
+          clinic_name: string
+          communications_accepted?: boolean | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          contact_role: string
+          contract_accepted?: boolean | null
+          contract_accepted_at?: string | null
+          created_at?: string
+          current_software?: string | null
+          email: string
+          has_digital_records?: string | null
+          has_website?: boolean | null
+          id?: string
+          interested_modules?: Json | null
+          num_employees?: number | null
+          num_veterinarians?: number | null
+          phone: string
+          postal_code: string
+          privacy_accepted?: boolean
+          province: string
+          status?: string | null
+          terms_accepted?: boolean
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          acceptance_act_accepted?: boolean | null
+          address?: string
+          cif?: string
+          city?: string
+          clinic_name?: string
+          communications_accepted?: boolean | null
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          contact_role?: string
+          contract_accepted?: boolean | null
+          contract_accepted_at?: string | null
+          created_at?: string
+          current_software?: string | null
+          email?: string
+          has_digital_records?: string | null
+          has_website?: boolean | null
+          id?: string
+          interested_modules?: Json | null
+          num_employees?: number | null
+          num_veterinarians?: number | null
+          phone?: string
+          postal_code?: string
+          privacy_accepted?: boolean
+          province?: string
+          status?: string | null
+          terms_accepted?: boolean
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
       login_attempts: {
         Row: {
           attempted_at: string | null

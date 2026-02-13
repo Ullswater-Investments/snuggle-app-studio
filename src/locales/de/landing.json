@@ -158,5 +158,18 @@
     "glossaryUne": "UNE-Glossar",
     "transparencyPortal": "Transparenzportal",
     "rulebook": "Regelwerk"
+  },
+  "kitAyudas": {
+    "title": "FÖRDERMITTEL DATENRAUM-KIT",
+    "deadline": "Anmeldung bis 20. März 2026",
+    "limitedPlaces": "BEGRENZTE PLÄTZE",
+    "mainMessage": "Digitalisieren Sie Ihre Lieferkette mit bis zu {amount} nicht rückzahlbarer Förderung von RED.ES",
+    "amount": "30.000 €",
+    "benefit1": "Abwicklung in der Monatsgebühr enthalten",
+    "benefit2": "Förderung 85-90%",
+    "benefit3": "Ohne Kleingedrucktes",
+    "heroCta": "FÖRDERMITTEL DATENRAUM-KIT BEANTRAGEN",
+    "inscriptionCta": "Anmeldung für 190€/Monat anfragen",
+    "viewConditions": "Bedingungen anzeigen"
   }
 }

@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { FederatedHeroChat } from "@/components/landing/FederatedHeroChat";
 import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
 import { RoadmapPhases } from "@/components/landing/RoadmapPhases";
+import { KitDatosCampaignBanner } from "@/components/home/KitDatosCampaignBanner";
 const containerVariants = {
   hidden: {
     opacity: 0
@@ -435,33 +436,8 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* DEMO HUB - ACCESO DIRECTO */}
-        <section id="cases" className="py-10 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">{t('exploreEcosystem')}</h2>
-              <p className="text-muted-foreground">{t('exploreEcosystemDesc')}</p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {demoLinks.map(link => <Link key={link.url} to={link.url}>
-                  <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer border-t-4" style={{
-                borderTopColor: 'currentColor'
-              }}>
-                    <CardHeader>
-                      <link.icon className={`h-8 w-8 mb-2 ${link.color}`} />
-                      <CardTitle className="text-lg">{link.title}</CardTitle>
-                      <CardDescription>{link.desc}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-sm font-medium text-primary flex items-center">
-                        {tc('explore')} <ArrowRight className="ml-1 h-3 w-3" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>)}
-            </div>
-          </div>
-        </section>
+        {/* KIT ESPACIO DE DATOS CAMPAIGN */}
+        <KitDatosCampaignBanner />
 
         {/* MODELOS DE NEGOCIO TEASER */}
         <section id="models" className="py-20 bg-gradient-to-b from-background to-slate-50">

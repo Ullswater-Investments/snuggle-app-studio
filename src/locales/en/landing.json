@@ -159,5 +159,18 @@
         "glossaryUne": "UNE Glossary",
         "transparencyPortal": "Transparency Portal",
         "rulebook": "Rulebook"
+    },
+    "kitAyudas": {
+        "title": "DATA SPACE KIT GRANTS",
+        "deadline": "Registration until March 20, 2026",
+        "limitedPlaces": "LIMITED PLACES",
+        "mainMessage": "Digitize your supply chain with up to {amount} in non-repayable grants from RED.ES",
+        "amount": "€30,000",
+        "benefit1": "Processing included in the monthly fee",
+        "benefit2": "85-90% subsidy",
+        "benefit3": "No fine print",
+        "heroCta": "APPLY FOR DATA SPACE KIT GRANTS",
+        "inscriptionCta": "Request Registration for €190/month",
+        "viewConditions": "View Conditions"
     }
 }

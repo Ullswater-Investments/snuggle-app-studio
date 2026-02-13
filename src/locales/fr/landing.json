@@ -272,5 +272,18 @@
     "glossaryUne": "Glossaire UNE",
     "transparencyPortal": "Portail de Transparence",
     "rulebook": "Livre de Règles"
+  },
+  "kitAyudas": {
+    "title": "AIDES KIT ESPACE DE DONNÉES",
+    "deadline": "Inscription jusqu'au 20 mars 2026",
+    "limitedPlaces": "PLACES LIMITÉES",
+    "mainMessage": "Numérisez votre chaîne d'approvisionnement avec jusqu'à {amount} de subvention à fonds perdus de RED.ES",
+    "amount": "30 000 €",
+    "benefit1": "Traitement inclus dans la cotisation mensuelle",
+    "benefit2": "Subvention 85-90%",
+    "benefit3": "Sans petits caractères",
+    "heroCta": "DEMANDEZ LES AIDES KIT ESPACE DE DONNÉES",
+    "inscriptionCta": "Demander l'inscription pour 190€/mois",
+    "viewConditions": "Voir les conditions"
   }
 }
