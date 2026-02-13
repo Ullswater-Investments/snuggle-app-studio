@@ -9,14 +9,14 @@ export const useIsDataSpaceOwner = () => {
     queryKey: ["is-data-space-owner", user?.id],
     queryFn: async () => {
       if (!user) return false;
-      const { data, error } = await supabase.rpc("is_data_space_owner", {
+      const { data, error } = await (supabase as any).rpc("is_data_space_owner", {
         _user_id: user.id,
       });
       if (error) {
         console.error("Error checking data_space_owner role:", error);
         return false;
       }
-      return data === true;
+      return data === true || data === "true";
     },
     enabled: !!user,
   });

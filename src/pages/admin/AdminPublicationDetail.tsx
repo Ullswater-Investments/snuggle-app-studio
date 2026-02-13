@@ -198,11 +198,11 @@ const AdminPublicationDetail = () => {
       )}
 
       {/* Admin Notes (if rejected) */}
-      {asset.admin_notes && (
+      {(asset as any).admin_notes && (
         <Card className="border-destructive/30 bg-destructive/5">
           <CardContent className="p-5">
             <p className="text-sm font-medium text-destructive mb-1">Motivo del Rechazo:</p>
-            <p className="text-sm">{asset.admin_notes}</p>
+            <p className="text-sm">{(asset as any).admin_notes}</p>
           </CardContent>
         </Card>
       )}
@@ -409,10 +409,10 @@ const AdminPublicationDetail = () => {
                 <p className="text-xs text-muted-foreground">Solicitud</p>
                 <p className="text-sm">{format(new Date(asset.created_at), "dd MMM yyyy HH:mm", { locale: es })}</p>
               </div>
-              {asset.published_at && (
+              {(asset as any).published_at && (
                 <div>
                   <p className="text-xs text-muted-foreground">Publicación</p>
-                  <p className="text-sm">{format(new Date(asset.published_at), "dd MMM yyyy HH:mm", { locale: es })}</p>
+                  <p className="text-sm">{format(new Date((asset as any).published_at), "dd MMM yyyy HH:mm", { locale: es })}</p>
                 </div>
               )}
             </CardContent>
@@ -430,8 +430,8 @@ const AdminPublicationDetail = () => {
                 )}
               </div>
               <div className="flex items-center gap-2">
-                <Badge variant={asset.is_visible ? "default" : "outline"} className="text-xs">
-                  {asset.is_visible ? "Visible" : "Oculto"}
+                <Badge variant={(asset as any).is_visible ? "default" : "outline"} className="text-xs">
+                  {(asset as any).is_visible ? "Visible" : "Oculto"}
                 </Badge>
               </div>
             </CardContent>

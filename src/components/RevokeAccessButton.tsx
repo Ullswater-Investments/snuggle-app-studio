@@ -17,14 +17,18 @@ import { pontusXService, PONTUSX_NETWORK_CONFIG } from "@/services/pontusX";
 import { useWeb3Wallet } from "@/hooks/useWeb3Wallet";
 
 interface RevokeAccessButtonProps {
-  resourceId: string;
+  resourceId?: string;
+  transactionId?: string;
   resourceName?: string;
-  onRevoked?: (txHash: string) => void;
+  actorOrgId?: string;
+  onRevoked?: (txHash: string) => void | Promise<void>;
 }
 
 export const RevokeAccessButton = ({
   resourceId,
+  transactionId,
   resourceName,
+  actorOrgId,
   onRevoked,
 }: RevokeAccessButtonProps) => {
   const [isRevoking, setIsRevoking] = useState(false);
@@ -46,7 +50,8 @@ export const RevokeAccessButton = ({
     setIsRevoking(true);
 
     try {
-      const txHash = await pontusXService.revokeAccess(wallet.did, resourceId);
+      const effectiveId = resourceId || transactionId || "";
+      const txHash = await pontusXService.revokeAccess(wallet.did, effectiveId);
       
       toast.success(
         <div className="space-y-2">
