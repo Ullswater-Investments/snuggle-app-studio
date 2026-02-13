@@ -38,7 +38,7 @@ export const AccessHistoryTable = ({
   const { data: logs, isLoading } = useQuery({
     queryKey: ["access-logs", transactionId, assetId, consumerOrgId],
     queryFn: async () => {
-      let query = supabase
+      let query = (supabase as any)
         .from("access_logs")
         .select("*")
         .order("created_at", { ascending: false })
@@ -57,12 +57,10 @@ export const AccessHistoryTable = ({
       const { data, error } = await query;
       if (error) throw error;
       
-      // Deduplicate: if two logs share the same action, status, asset_id, and 
-      // consumer_org_id within the same second, keep only the most recent one.
-      if (!data) return [];
-      const seen = new Map<string, typeof data[0]>();
-      for (const log of data) {
-        const ts = log.created_at.substring(0, 19); // truncate to second
+      if (!data) return [] as any[];
+      const seen = new Map<string, any>();
+      for (const log of data as any[]) {
+        const ts = log.created_at.substring(0, 19);
         const key = `${ts}_${log.action}_${log.status}_${log.asset_id}_${log.consumer_org_id}`;
         if (!seen.has(key)) {
           seen.set(key, log);
