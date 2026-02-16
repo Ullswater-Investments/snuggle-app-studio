@@ -9,49 +9,60 @@ import {
 import { cn } from "@/lib/utils";
 import procuredataLogo from "@/assets/procuredata-logo.png";
 import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
+import procuredataLogoFull from "@/assets/procuredata-logo-full.png";
 
 interface ProcuredataLogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showNavigation?: boolean;
   linkToHome?: boolean;
-  variant?: 'light' | 'dark' | 'auto';
+  variant?: 'light' | 'dark' | 'auto' | 'full' | 'text';
 }
 
 const sizes = {
-  sm: { height: 24 },
-  md: { height: 32 },
-  lg: { height: 40 },
-  xl: { height: 48 }
+  sm: { height: 24, fontSize: 'text-lg' },
+  md: { height: 32, fontSize: 'text-xl' },
+  lg: { height: 40, fontSize: 'text-2xl' },
+  xl: { height: 48, fontSize: 'text-3xl' }
 };
 
-export function ProcuredataLogo({ 
-  size = 'md', 
+export function ProcuredataLogo({
+  size = 'md',
   showNavigation = false,
   linkToHome = true,
   variant = 'auto',
-  className 
+  className
 }: ProcuredataLogoProps) {
   const navigate = useNavigate();
 
-  const logoSrc = variant === 'dark' ? procuredataLogoDark : procuredataLogo;
+  let logoSrc = variant === 'dark' ? procuredataLogoDark : procuredataLogo;
+  if (variant === 'full') {
+    logoSrc = procuredataLogoFull;
+  }
 
-  const logoElement = (
-    <img 
-      src={logoSrc} 
-      alt="PROCUREDATA" 
+  const logoElement = variant === 'text' ? (
+    <span className={cn(
+      "procuredata-gradient font-bold tracking-tight",
+      sizes[size].fontSize
+    )}>
+      PROCUREDATA
+    </span>
+  ) : (
+    <img
+      src={logoSrc}
+      alt="PROCUREDATA"
       style={{ height: sizes[size].height }}
       className={cn(
         "object-contain",
-        variant === 'auto' && "dark:hidden"
+        (variant === 'auto' || variant === 'full') && "dark:hidden"
       )}
     />
   );
 
-  const logoDarkElement = variant === 'auto' ? (
-    <img 
-      src={procuredataLogoDark} 
-      alt="PROCUREDATA" 
+  const logoDarkElement = (variant === 'auto' || variant === 'full') ? (
+    <img
+      src={procuredataLogoDark}
+      alt="PROCUREDATA"
       style={{ height: sizes[size].height }}
       className="object-contain hidden dark:block"
     />

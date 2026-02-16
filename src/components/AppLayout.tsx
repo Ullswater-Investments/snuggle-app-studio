@@ -5,7 +5,7 @@ import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoBanner } from "@/components/DemoBanner";
 import { DemoTour } from "@/components/DemoTour";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
-import { WalletButton } from "@/components/WalletButton";
+
 import { AppSidebar } from "@/components/AppSidebar";
 import { AIConcierge } from "@/components/AIConcierge";
 import { CommandMenu } from "@/components/CommandMenu";
@@ -30,13 +30,13 @@ export const AppLayout = () => {
         <DemoTour />
         <CommandMenu />
         <AppSidebar />
-        
+
         <div className="flex-1 flex flex-col w-full">
           <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-16 items-center gap-4 px-4">
               <SidebarTrigger />
-              <ProcuredataLogo size="md" showNavigation={true} />
-              
+              <ProcuredataLogo size="md" showNavigation={true} variant="text" />
+
               <div className="ml-auto flex items-center gap-2">
                 {/* Command Palette Trigger */}
                 <Button
@@ -61,11 +61,7 @@ export const AppLayout = () => {
                 <NotificationsBell />
                 <LanguageSwitcher />
                 <ThemeToggle />
-                <WalletButton />
                 <DemoHelpButton />
-                <span className="text-sm text-muted-foreground hidden sm:inline">
-                  {user?.email}
-                </span>
                 <Button variant="outline" size="sm" onClick={signOut}>
                   {t('logout')}
                 </Button>

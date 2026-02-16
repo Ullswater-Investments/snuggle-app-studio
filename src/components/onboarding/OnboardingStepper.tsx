@@ -17,8 +17,8 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
     <div className="w-full px-2 sm:px-0">
       <div className="flex items-start w-full">
         {steps.map((step, index) => (
-          <div 
-            key={step.id} 
+          <div
+            key={step.id}
             className={cn(
               "flex items-start",
               index === 0 ? "flex-shrink-0" : "",
@@ -33,8 +33,8 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
                   currentStep > step.id
                     ? "bg-primary text-primary-foreground shadow-primary/25"
                     : currentStep === step.id
-                    ? "bg-primary text-primary-foreground ring-4 ring-primary/20 shadow-primary/30"
-                    : "bg-muted text-muted-foreground border-2 border-muted-foreground/20"
+                      ? "bg-primary text-primary-foreground ring-4 ring-primary/20 shadow-primary/30"
+                      : "bg-muted text-muted-foreground border-2 border-muted-foreground/20"
                 )}
               >
                 {currentStep > step.id ? (
@@ -68,8 +68,8 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
                 <div
                   className={cn(
                     "w-full h-1 rounded-full transition-all duration-500",
-                    currentStep > step.id 
-                      ? "bg-gradient-to-r from-primary to-primary/80" 
+                    currentStep > step.id
+                      ? "bg-gradient-to-r from-primary to-primary/80"
                       : "bg-muted"
                   )}
                 />

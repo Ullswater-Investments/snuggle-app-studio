@@ -61,15 +61,15 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
     try {
       // Generate random wallet
       const wallet = ethers.Wallet.createRandom();
-      
+
       // Encrypt wallet with password (this is CPU intensive)
       const encryptedJson = await wallet.encrypt(data.password);
-      
+
       setWalletData({
         address: wallet.address,
         encryptedJson,
       });
-      
+
       toast.success("¡Wallet generada exitosamente!");
     } catch (error) {
       console.error("Error generating wallet:", error);
@@ -104,16 +104,16 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
 
   const handleContinue = async () => {
     if (!walletData || !user) return;
-    
+
     setIsSaving(true);
     try {
       // Check if user already has an organization entry or create a registration request
       // For now, we'll store the wallet address in a temporary way
       // The full organization will be created in step 2
-      
+
       // Store wallet address in localStorage temporarily until org is created
       localStorage.setItem('pending_wallet_address', walletData.address);
-      
+
       toast.success("Wallet guardada. Continuando al registro...");
       onComplete(walletData.address);
     } catch (error) {
@@ -169,13 +169,13 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
                   Descarga tu archivo de respaldo
                 </h4>
                 <p className="text-sm text-amber-700 dark:text-amber-400">
-                  Este archivo JSON encriptado es la única forma de recuperar tu wallet. 
+                  Este archivo JSON encriptado es la única forma de recuperar tu wallet.
                   <strong> Guárdalo en un lugar seguro.</strong>
                 </p>
               </div>
             </div>
-            <Button 
-              onClick={downloadKeystore} 
+            <Button
+              onClick={downloadKeystore}
               className="w-full gap-2"
               variant={hasDownloaded ? "outline" : "brand"}
             >
@@ -187,7 +187,7 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
           {/* Next Steps */}
           <div className="space-y-4">
             <h4 className="font-semibold text-lg">Próximos Pasos</h4>
-            
+
             {/* MetaMask Import */}
             <div className="bg-muted/50 rounded-lg p-4 space-y-2">
               <div className="flex items-center gap-2">
@@ -197,7 +197,7 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
                 <h5 className="font-medium">Importa en MetaMask</h5>
               </div>
               <p className="text-sm text-muted-foreground ml-8">
-                Abre MetaMask → Importar cuenta → Selecciona "Archivo JSON" → 
+                Abre MetaMask → Importar cuenta → Selecciona "Archivo JSON" →
                 Sube tu archivo y usa tu contraseña.
               </p>
             </div>
@@ -213,9 +213,9 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
               <p className="text-sm text-muted-foreground ml-8">
                 Para participar en el espacio de datos, tu wallet debe estar verificada en el portal de DeltaDAO.
               </p>
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 className="ml-8 gap-2"
                 onClick={() => window.open("https://onboarding.delta-dao.com/signup", "_blank")}
               >
@@ -234,11 +234,11 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
                 onCheckedChange={(checked) => setHasConfirmed(checked as boolean)}
                 disabled={!hasDownloaded}
               />
-              <Label 
-                htmlFor="confirm-backup" 
+              <Label
+                htmlFor="confirm-backup"
                 className={`text-sm cursor-pointer ${!hasDownloaded ? 'text-muted-foreground' : ''}`}
               >
-                Confirmo que he descargado y guardado mi archivo de respaldo en un lugar seguro, 
+                Confirmo que he descargado y guardado mi archivo de respaldo en un lugar seguro,
                 y que he anotado mi contraseña.
               </Label>
             </div>
@@ -281,7 +281,7 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
           Genera tu Identidad Soberana
         </CardTitle>
         <CardDescription className="text-base">
-          Crea una wallet Web3 que servirá como tu identidad digital descentralizada 
+          Crea una wallet Web3 que servirá como tu identidad digital descentralizada
           en el espacio de datos de PROCUREDATA.
         </CardDescription>
       </CardHeader>
@@ -296,7 +296,7 @@ export function WalletGenerationStep({ onComplete }: WalletGenerationStepProps) 
                     Contraseña de Encriptación
                   </h4>
                   <p className="text-xs text-blue-700 dark:text-blue-400 mt-1">
-                    Esta contraseña se usará para encriptar tu archivo de respaldo. 
+                    Esta contraseña se usará para encriptar tu archivo de respaldo.
                     <strong> Anótala en un lugar seguro</strong>, ya que no podremos recuperarla.
                   </p>
                 </div>

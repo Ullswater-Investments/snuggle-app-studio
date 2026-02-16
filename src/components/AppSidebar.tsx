@@ -19,6 +19,7 @@ import {
   Handshake,
 } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { SidebarWorkspaceSwitcher } from "@/components/SidebarWorkspaceSwitcher";
 import {
   Sidebar,
   SidebarContent,
@@ -28,6 +29,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar";
 
@@ -36,7 +38,7 @@ export function AppSidebar() {
   const location = useLocation();
   const { t } = useTranslation('nav');
   const { activeOrg } = useOrganizationContext();
-  
+
   const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
 
   const menuItems = [
@@ -62,6 +64,11 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="border-r" data-sidebar="nav">
+      {/* Workspace Switcher at the top */}
+      <SidebarHeader className="p-2 border-b border-border/50">
+        <SidebarWorkspaceSwitcher />
+      </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
@@ -70,15 +77,15 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
-                <SidebarMenuItem 
-                  key={item.url} 
+                <SidebarMenuItem
+                  key={item.url}
                   data-tour={
-                    item.url === "/requests" ? "requests-link" : 
-                    item.url === "/catalog" ? "catalog-link" : 
-                    item.url === "/data" ? "data-link" :
-                    item.url === "/reports" ? "reports-link" :
-                    item.url === "/notifications" ? "notifications-link" :
-                    undefined
+                    item.url === "/requests" ? "requests-link" :
+                      item.url === "/catalog" ? "catalog-link" :
+                        item.url === "/data" ? "data-link" :
+                          item.url === "/reports" ? "reports-link" :
+                            item.url === "/notifications" ? "notifications-link" :
+                              undefined
                   }
                 >
                   <SidebarMenuButton asChild>

@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { 
-  Building2, 
-  CheckCircle2, 
-  XCircle, 
-  ExternalLink, 
+import {
+  Building2,
+  CheckCircle2,
+  XCircle,
+  ExternalLink,
   Loader2,
   ArrowLeft,
   ArrowRight,
@@ -41,7 +41,7 @@ import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useQueryClient } from "@tanstack/react-query";
 
 const COUNTRIES = [
-  "España", "Portugal", "Francia", "Alemania", "Italia", "Reino Unido", 
+  "España", "Portugal", "Francia", "Alemania", "Italia", "Reino Unido",
   "Países Bajos", "Bélgica", "Austria", "Suiza", "Polonia", "Suecia",
   "Noruega", "Dinamarca", "Finlandia", "Irlanda", "Grecia", "República Checa",
   "Hungría", "Rumanía", "Bulgaria", "Croacia", "Eslovaquia", "Eslovenia",
@@ -213,7 +213,7 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
             addr.city,
             addr.postal_code,
           ].filter(Boolean);
-          
+
           if (parts.length > 0) {
             form.setValue("address", parts.join(", "), { shouldValidate: true });
             fieldsToLock.add("address");
@@ -348,18 +348,17 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
 
       <CardContent className="space-y-6">
         {/* DeltaDAO Verification Section */}
-        <div className={`p-5 rounded-xl border-2 transition-all ${
-          isVerified 
-            ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800' 
-            : verificationError 
+        <div className={`p-5 rounded-xl border-2 transition-all ${isVerified
+            ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800'
+            : verificationError
               ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
               : 'bg-muted/50 border-muted'
-        }`}>
+          }`}>
           <div className="flex items-center gap-2 mb-3">
             <Shield className="h-5 w-5 text-primary" />
             <h3 className="font-semibold">Verificación DeltaDAO</h3>
           </div>
-          
+
           <p className="text-sm text-muted-foreground mb-4">
             Para registrar tu organización, tu wallet debe estar verificada en el ecosistema DeltaDAO.
           </p>
@@ -444,9 +443,9 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                       {isFieldLocked("legalName") && <Lock className="h-3 w-3 text-green-600" />}
                     </FormLabel>
                     <FormControl>
-                      <Input 
-                        placeholder="Ej: Acme Industries S.L." 
-                        {...field} 
+                      <Input
+                        placeholder="Ej: Acme Industries S.L."
+                        {...field}
                         disabled={isFieldLocked("legalName")}
                         className={isFieldLocked("legalName") ? "bg-muted/60" : ""}
                       />
@@ -467,8 +466,8 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                         Tipo de documento
                         {isFieldLocked("documentType") && <Lock className="h-3 w-3 text-green-600" />}
                       </FormLabel>
-                      <Select 
-                        onValueChange={field.onChange} 
+                      <Select
+                        onValueChange={field.onChange}
                         value={field.value}
                         disabled={isFieldLocked("documentType")}
                       >
@@ -497,9 +496,9 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                         {isFieldLocked("documentNumber") && <Lock className="h-3 w-3 text-green-600" />}
                       </FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="Ej: B12345678" 
-                          {...field} 
+                        <Input
+                          placeholder="Ej: B12345678"
+                          {...field}
                           disabled={isFieldLocked("documentNumber")}
                           className={isFieldLocked("documentNumber") ? "bg-muted/60" : ""}
                         />
@@ -520,8 +519,8 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                       País
                       {isFieldLocked("country") && <Lock className="h-3 w-3 text-green-600" />}
                     </FormLabel>
-                    <Select 
-                      onValueChange={field.onChange} 
+                    <Select
+                      onValueChange={field.onChange}
                       value={field.value}
                       disabled={isFieldLocked("country")}
                     >
@@ -554,8 +553,8 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                       {isFieldLocked("address") && <Lock className="h-3 w-3 text-green-600" />}
                     </FormLabel>
                     <FormControl>
-                      <Input 
-                        placeholder="Ej: Calle Principal 123, 28001 Madrid" 
+                      <Input
+                        placeholder="Ej: Calle Principal 123, 28001 Madrid"
                         {...field}
                         disabled={isFieldLocked("address")}
                         className={isFieldLocked("address") ? "bg-muted/60" : ""}
