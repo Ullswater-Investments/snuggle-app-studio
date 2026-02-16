@@ -507,6 +507,16 @@
       "solution": "Certificación de energía renovable para los LEDs, cálculo automático de huella de carbono logística (0 km vs. 400 km del campo) y pasaporte digital con comparativa de impacto ambiental.",
       "ariaQuote": "El restaurante ve que nuestra lechuga tiene 0.1 kg CO2/kg vs. 0.8 kg CO2/kg de la lechuga de Murcia. Los datos hablan: Km 0 real, no marketing. Premium del 40% justificado.",
       "services": ["Certificación de Energía Renovable", "Calculadora de Huella Logística", "Pasaporte Digital de Producto", "Comparativa de Impacto", "QR para Restaurantes"]
+    },
+    "furndata-alliance": {
+      "title": "Sincronización de Catálogo Multi-Portal",
+      "sector": "Retail Muebles",
+      "metricLabel": "Errores Catálogo",
+      "description": "Espacio de datos federado para sincronizar fichas de producto verificadas con 50+ portales eCommerce.",
+      "challenge": "Los fabricantes de muebles enviaban manualmente fichas de producto a 50+ portales eCommerce (Amazon, Wayfair, portales verticales). Cada portal tenía formatos diferentes, las imágenes se desactualizaban y las certificaciones caducadas seguían publicadas. El 12% de las fichas contenían errores que generaban devoluciones y reclamaciones.",
+      "solution": "Implementación de un Espacio de Datos Federado Gaia-X donde cada fabricante mantiene su catálogo maestro. Los portales eCommerce solicitan acceso mediante políticas ODRL y reciben actualizaciones en tiempo real. Fotografías, especificaciones técnicas y certificaciones se sincronizan automáticamente con la fuente de verdad del fabricante.",
+      "ariaQuote": "Antes enviábamos PDFs por email a 50 portales diferentes. Ahora publicamos una vez en nuestro Data Space y los marketplaces se sincronizan automáticamente. Las certificaciones FSC y REACH siempre están actualizadas porque están enlazadas a la fuente original.",
+      "services": ["Data Space Gaia-X", "Sincronización ODRL", "Pasaporte Digital de Producto", "Certificaciones Verificables", "API de Catálogo Multi-Portal"]
     }
   },
   "detail": {
@@ -515,8 +525,6 @@
     "verifiedOn": "Verificado en Pontus-X",
     "block": "Bloque",
     "sectorImpactPanel": "Panel de Impacto Sectorial",
-    "askAgent": "Pregunta al Agente IA sobre este caso",
-    "caseArchitecture": "Arquitectura del Caso",
     "impactSimulator": "Simulador de Impacto",
     "ctaTitle": "¿Quieres lograr resultados similares?",
     "ctaDescription": "Descubre cómo ProcureData puede transformar tus procesos de compras y demostrar tu impacto ESG.",

@@ -75,7 +75,16 @@ interface PartnerProductCardProps {
   product: PartnerProduct;
 }
 
+// UUID regex pattern to detect database IDs
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 const getPartnerProductDetailUrl = (productId: string): string => {
+  // If the productId is a UUID, it's from the database - use dynamic route
+  if (UUID_REGEX.test(productId)) {
+    return `/catalog/asset/${productId}`;
+  }
+
+  // Static routes for i18n partner products
   const routes: Record<string, string> = {
     // VDA (Germany)
     "VDA-SUP-SC-01": "/catalog/resiliencia-supply-chain",
@@ -161,8 +170,17 @@ const getPartnerProductDetailUrl = (productId: string): string => {
     "BWN-OPS-TRIAL-03": "/catalog/ensayos-clinicos",
     "BWN-MKT-API-04": "/catalog/precios-apis-farmaceuticos",
     "BWN-RND-GENO-05": "/catalog/genomica-biomarcadores",
+    // VALERDAT (Spain - AI Procurement)
+    "VAL-MKT-01": "/catalog/valerdat/historico-ventas",
+    "VAL-SUP-02": "/catalog/valerdat/rendimiento-proveedores",
+    "VAL-OPS-03": "/catalog/valerdat/logistica-volumetria",
+    "VAL-OPS-04": "/catalog/valerdat/logistica-inversa",
+    "VAL-MKT-05": "/catalog/valerdat/marketing-demanda",
+    "VAL-RND-06": "/catalog/valerdat/bom-explode",
+    "VAL-OPS-07": "/catalog/valerdat/estimacion-stock",
+    "VAL-RND-08": "/catalog/valerdat/ciclo-vida-producto",
   };
-  return routes[productId] || "/auth";
+  return routes[productId] || "/catalog";
 };
 
 export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
@@ -173,8 +191,15 @@ export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
   const detailUrl = getPartnerProductDetailUrl(product.id);
 
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 border-muted/60 overflow-hidden flex flex-col h-full">
+    <Card className="group hover:shadow-xl transition-all duration-300 border-muted/60 overflow-hidden flex flex-col h-full relative">
       <div className={`h-2 ${product.hasGreenBadge ? 'bg-gradient-to-r from-green-500 to-emerald-400' : 'bg-gradient-to-r from-indigo-500 to-purple-400'} group-hover:h-3 transition-all`} />
+
+      {/* Data Nature Badge - Partner products are always synthetic/demo */}
+      <div className="absolute top-3 right-3 z-10">
+        <Badge className="rounded-full border bg-purple-50 text-purple-700 border-purple-300 text-[10px] px-2 py-0.5 font-medium shadow-sm">
+          🧪 Sintético
+        </Badge>
+      </div>
 
       <CardHeader className="pb-3">
         <div className="flex justify-between items-start mb-2 gap-2">
@@ -189,18 +214,7 @@ export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
               {product.category}
             </Badge>
           </div>
-          <div className="flex gap-1">
-            {product.hasGreenBadge && (
-              <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700 px-1.5">
-                <Leaf className="h-3 w-3" />
-              </Badge>
-            )}
-            {product.kybVerified && (
-              <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700 px-1.5">
-                <ShieldCheck className="h-3 w-3" />
-              </Badge>
-            )}
-          </div>
+          <div className="flex gap-1" />
         </div>
 
         <CardTitle className="text-lg line-clamp-2 group-hover:text-primary transition-colors leading-tight">
@@ -208,8 +222,8 @@ export const PartnerProductCard = ({ product }: PartnerProductCardProps) => {
         </CardTitle>
         {product.partnerName && (
           <Badge variant="outline" className="mt-2 text-xs px-2 py-1 border-primary/40 bg-primary/5 w-fit">
-            <Globe className="h-3 w-3 mr-1.5" />
-            <span className="font-medium">{t('badges.publishedBy') || 'Por'}: {product.partnerName}</span>
+            <Globe className="h-3 w-3 mr-1.5 text-primary" />
+            <span className="font-medium">{product.partnerName}</span>
             {product.sector && <span className="text-muted-foreground ml-1">• {product.sector}</span>}
           </Badge>
         )}

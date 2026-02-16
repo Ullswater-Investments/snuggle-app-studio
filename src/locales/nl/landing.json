@@ -13,7 +13,6 @@
   "monetizationModels": "6 Monetisatiemodellen",
   "exploreModels": "Modellen Verkennen",
   "viewWhitepaper": "Whitepaper Bekijken",
-  "viewUne0087": "UNE 0087:2025",
   "demoLinks": {
     "innovationLab": "Innovation Lab",
     "innovationLabDesc": "Meer dan 25 toekomstige businesslijnen",
@@ -77,42 +76,6 @@
     "finance": "FINANCIËN",
     "grid": "GRID"
   },
-  "sectorCompanies": {
-    "industrial": "GigaFactory North",
-    "agro": "OliveTrust Coop",
-    "mobility": "UrbanDeliver BCN",
-    "social": "Alianza Social Hub",
-    "health": "BioMed Hospital",
-    "retail": "GlobalRetail Prime",
-    "energy": "Helios Fields",
-    "aero": "Turbine Chain",
-    "wines": "VinosD.O.E Elite",
-    "pharma": "PharmaCold Logistix",
-    "port": "PortBCN Smart Trade",
-    "gov": "Ethische Gemeente",
-    "mining": "PureLithium Sourcing",
-    "fashion": "FastFashion Trace",
-    "finance": "GreenFinance ESG",
-    "grid": "GridFlex Demand"
-  },
-  "sectorDescriptions": {
-    "industrial": "Industriële homologatie in 24u",
-    "agro": "ESG-traceerbaarheid olijfolie",
-    "mobility": "Scope 3 logistieke rapportage",
-    "social": "Verifieerbare sociale impact SROI",
-    "health": "Predictief onderhoud MRI-apparatuur",
-    "retail": "Ethische audit toeleveringsketen",
-    "energy": "Hernieuwbare energiecertificering",
-    "aero": "Traceerbaarheid luchtvaartcomponenten",
-    "wines": "Digitaal paspoort herkomstbenaming",
-    "pharma": "Gecertificeerde koude keten",
-    "port": "Intelligente douaneafhandeling",
-    "gov": "Verantwoord publiek inkopen",
-    "mining": "Verantwoorde lithiuminkoop",
-    "fashion": "Duurzame textieltraceerbaarheid",
-    "finance": "Groene financiën en ESG-scoring",
-    "grid": "Flexibel energievraagbeheer"
-  },
   "nav": {
     "features": "Functies",
     "businessModels": "Businessmodellen",
@@ -153,23 +116,6 @@
     "partners": "PARTNERS",
     "dataSpaceKit": "DATA SPACE KIT",
     "sectoralNode": "EIGENAAR KNOOPPUNT",
-    "new": "Nieuw",
-    "uneRecommendations": "UNE-aanbevelingen",
-    "glossaryUne": "UNE-glossarium",
-    "transparencyPortal": "Transparantieportaal",
-    "rulebook": "Regelboek"
-  },
-  "kitAyudas": {
-    "title": "SUBSIDIES DATA SPACE KIT",
-    "deadline": "Inschrijving tot 20 maart 2026",
-    "limitedPlaces": "BEPERKT AANTAL PLAATSEN",
-    "mainMessage": "Digitaliseer uw toeleveringsketen met tot {amount} aan niet-terugvorderbare subsidie van RED.ES",
-    "amount": "€ 30.000",
-    "benefit1": "Verwerking inbegrepen in het maandelijkse abonnement",
-    "benefit2": "Subsidie 85-90%",
-    "benefit3": "Zonder kleine lettertjes",
-    "heroCta": "VRAAG SUBSIDIES DATA SPACE KIT AAN",
-    "inscriptionCta": "Inschrijving aanvragen voor €190/maand",
-    "viewConditions": "Voorwaarden bekijken"
+    "new": "Nieuw"
   }
 }

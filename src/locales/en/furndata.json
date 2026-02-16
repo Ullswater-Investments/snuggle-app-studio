@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "login": "Login"
+  },
+  "hero": {
+    "badge": "Gaia-X Federated Catalog",
+    "title": "Automatic Multi-Portal Catalog Synchronization",
+    "subtitle": "A Data Space where each manufacturer maintains their master catalog. eCommerce portals receive real-time updates.",
+    "cta": "Access Portal",
+    "ctaSecondary": "View Success Story"
+  },
+  "problem": {
+    "badge": "The Problem",
+    "title": "Catalog Fragmentation in eCommerce",
+    "items": {
+      "fragmentation": {
+        "title": "50+ Different Portals",
+        "description": "Each portal has different formats. Manual updates consume hours of work."
+      },
+      "errors": {
+        "title": "12% of Listings with Errors",
+        "description": "Manual errors in prices, dimensions, or availability generate returns."
+      },
+      "certifications": {
+        "title": "Outdated Certifications",
+        "description": "Expired FSC, REACH, and fire-retardant warranties remain published on portals."
+      }
+    }
+  },
+  "solution": {
+    "badge": "The Solution",
+    "title": "Gaia-X Federated Data Space",
+    "subtitle": "Publish once, sync across 50+ portals automatically",
+    "dataspace": {
+      "title": "Sovereign Master Catalog",
+      "description": "Each manufacturer maintains full control over their data. eCommerce portals request access through ODRL policies and receive certified real-time updates.",
+      "features": {
+        "1": "Automatic synchronization with Amazon, Wayfair, ManoMano, and more",
+        "2": "Digital Product Passport (DPP) for each SKU",
+        "3": "FSC/PEFC, REACH, fire-retardant certification verification"
+      }
+    }
+  },
+  "benefits": {
+    "title": "Measurable Benefits",
+    "errors": {
+      "label": "Errors Avoided",
+      "description": "Automatic synchronization eliminates manual errors"
+    },
+    "conversion": {
+      "label": "Higher Conversion",
+      "description": "Certified listings generate more trust"
+    },
+    "portals": {
+      "label": "Connected Portals",
+      "description": "Single publishing point for all"
+    },
+    "traceability": {
+      "label": "Traceability",
+      "description": "Each data point linked to verified source"
+    }
+  },
+  "certifications": {
+    "title": "Synchronized Certifications",
+    "subtitle": "All certifications verified and updated automatically",
+    "fsc": "Sustainable wood",
+    "reach": "Chemical safety",
+    "fireproof": "Fire safety regulations",
+    "iso": "Environmental management",
+    "warranties": "Manufacturer warranties"
+  },
+  "techStack": {
+    "title": "Technology Stack",
+    "gaiax": "European data infrastructure",
+    "odrl": "Granular access policies",
+    "dpp": "Digital Product Passport",
+    "api": "Integration with any system"
+  },
+  "cta": {
+    "title": "Join the Furniture Data Space",
+    "subtitle": "Sync your catalog with 50+ portals automatically",
+    "button": "Request Access"
+  },
+  "footer": {
+    "powered": "Powered by PROCUREDATA · Gaia-X Ready"
+  },
+  "members": {
+    "badge": "Members Area",
+    "title": "Federated Catalog Dashboard",
+    "subtitle": "Manage your master catalog and eCommerce portal synchronization",
+    "logout": "Log out",
+    "metrics": {
+      "skus": "Total SKUs",
+      "portals": "Connected Portals",
+      "syncs": "Syncs/Month",
+      "errors": "Error Rate"
+    },
+    "tabs": {
+      "dashboard": "Dashboard",
+      "catalog": "Catalog",
+      "sync": "Synchronization",
+      "compliance": "Compliance"
+    },
+    "dashboard": {
+      "portalStatus": "Portal Status",
+      "portalStatusDesc": "Active marketplace connections",
+      "certStatus": "Certification Status",
+      "certStatusDesc": "Coverage and validity of certifications",
+      "coverage": "coverage",
+      "quickActions": "Quick Actions"
+    },
+    "actions": {
+      "forceSync": "Force Sync",
+      "viewReports": "View Reports",
+      "addPortal": "Add Portal"
+    },
+    "catalog": {
+      "title": "Master Catalog",
+      "description": "Manage your products and technical sheets",
+      "placeholder": "Catalog management module coming soon"
+    },
+    "sync": {
+      "title": "Portal Synchronization",
+      "description": "Sync status with each marketplace",
+      "lastSync": "Last sync"
+    },
+    "compliance": {
+      "title": "Compliance and Certifications",
+      "description": "Status of all product certifications",
+      "verified": "Verified",
+      "pending": "Pending",
+      "expiration": "Expiration"
+    }
+  }
+}

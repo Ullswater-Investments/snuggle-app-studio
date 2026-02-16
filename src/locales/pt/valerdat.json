@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "backToPartners": "Voltar aos Parceiros",
+    "membersArea": "Área de Membros"
+  },
+  "hero": {
+    "badges": {
+      "aiPowered": "IA Avançada",
+      "gaiaX": "Gaia-X Ready",
+      "dataSpace": "Data Space Nativo",
+      "kit": "Kit Espaço de Dados"
+    },
+    "title": "VALERDAT",
+    "subtitle": "Memória de Execução Inteligente para Procurement",
+    "description": "VALERDAT transforma dados históricos de compras em inteligência acionável, permitindo decisões de procurement baseadas em evidências e transparência de preços.",
+    "cta": {
+      "project": "Ver Projeto",
+      "members": "Acesso Membros"
+    }
+  },
+  "stats": {
+    "savings": { "value": "15-25%", "label": "Poupança média em compras" },
+    "accuracy": { "value": "99,2%", "label": "Precisão nas previsões" },
+    "transactions": { "value": "+50M", "label": "Transações analisadas" },
+    "datasets": { "value": "8+", "label": "Datasets IA" },
+    "traceability": { "value": "100%", "label": "Rastreabilidade" },
+    "funding": { "value": "12K€", "label": "Kit Digital" }
+  },
+  "problem": {
+    "badge": "O Problema",
+    "title": "Opacidade nos Preços de Compra",
+    "description": "As organizações carecem de visibilidade sobre o preço justo de mercado, negociando às cegas e perdendo milhões em sobrecustos.",
+    "items": {
+      "visibility": { "title": "Falta de Visibilidade", "description": "Sem acesso a dados de mercado comparáveis para benchmarking." },
+      "fragmentation": { "title": "Dados Fragmentados", "description": "Informação de compras dispersa em múltiplos sistemas não consolidados." },
+      "negotiation": { "title": "Negociação Ineficiente", "description": "Decisões baseadas em intuição em vez de dados objetivos." },
+      "fragmented": { "title": "Dados Fragmentados", "description": "Informação de compras dispersa em múltiplos sistemas ERP sem consolidação." },
+      "predictions": { "title": "Previsões Imprecisas", "description": "Modelos de procura que ignoram sazonalidade, promoções e eventos de mercado." },
+      "blind": { "title": "Negociação às Cegas", "description": "Falta de benchmarks de mercado para negociações com fornecedores." }
+    }
+  },
+  "solution": {
+    "badge": "A Solução",
+    "title": "Inteligência de Preços Soberana",
+    "description": "VALERDAT conecta dados de procurement de múltiplas organizações de forma segura, gerando benchmarks de mercado sem expor informação sensível.",
+    "features": {
+      "privacy": { "title": "Privacidade por Design", "description": "Computação federada que mantém os dados na origem." },
+      "ai": { "title": "IA Preditiva", "description": "Modelos de machine learning para previsão de preços." },
+      "benchmark": { "title": "Benchmarking Anónimo", "description": "Comparativas de mercado sem revelar identidades." },
+      "integration": { "title": "Integração ERP", "description": "Conectores nativos com SAP, Oracle e principais ERPs." }
+    }
+  },
+  "features": {
+    "items": {
+      "ingestion": { "title": "Ingestão de Dados", "description": "Conectores nativos para SAP, Oracle e principais ERPs com transformação automática." },
+      "ai": { "title": "IA Preditiva", "description": "Modelos de machine learning para previsão de procura, preços e riscos de fornecedores." },
+      "sovereignty": { "title": "Soberania Total", "description": "Os seus dados permanecem sob o seu controlo com computação federada compatível com Gaia-X." },
+      "payments": { "title": "Pagamentos EUROe", "description": "Liquidação instantânea de transações de dados com euro digital tokenizado." }
+    }
+  },
+  "useCases": {
+    "badge": "Casos de Uso",
+    "title": "Aplicações Industriais",
+    "description": "Setores que já aproveitam a inteligência VALERDAT.",
+    "items": {
+      "manufacturing": { "title": "Manufatura", "description": "Otimização de custos de matérias-primas e componentes." },
+      "retail": { "title": "Retalho", "description": "Negociação de condições com fornecedores de bens de consumo." },
+      "construction": { "title": "Construção", "description": "Controlo de custos em projetos de infraestrutura." },
+      "healthcare": { "title": "Saúde", "description": "Compras eficientes de fornecimentos médicos." }
+    }
+  },
+  "ecosystem": {
+    "badge": "Ecossistema",
+    "title": "Rede de Dados Colaborativa",
+    "description": "VALERDAT opera como um nó do ecossistema PROCUREDATA, conectando organizações que partilham inteligência de preços de forma segura.",
+    "features": {
+      "sovereignty": "Soberania total sobre os seus dados",
+      "compliance": "Conformidade RGPD e Data Governance Act",
+      "interoperability": "Interoperabilidade com Data Spaces europeus",
+      "trust": "Contratos inteligentes para gestão de consentimento"
+    },
+    "consumer": "Consumidor e processador de dados industriais no ecossistema ProcureData",
+    "provider1": "Fornecedor de dados de transações industriais e preços históricos",
+    "provider2": "Fornecedor de índices de commodities e matérias-primas em tempo real",
+    "provider3": "Fornecedor de análise setorial e benchmarks de mercado"
+  },
+  "techStack": {
+    "badge": "Stack Tecnológico",
+    "title": "Arquitetura Gaia-X",
+    "items": {
+      "gaiax": { "title": "Gaia-X Compliant", "description": "Infraestrutura de dados soberana seguindo padrões europeus de interoperabilidade." },
+      "ml": { "title": "ML Federado", "description": "Modelos treinados sem mover dados sensíveis, preservando a privacidade empresarial." },
+      "euroe": { "title": "Pagamentos EUROe", "description": "Stablecoin europeu para liquidação instantânea de transações de dados." }
+    }
+  },
+  "cta": {
+    "title": "Pronto para conhecer o preço justo?",
+    "description": "Junte-se às organizações que já otimizam as suas compras com inteligência de dados soberana.",
+    "buttons": {
+      "contact": "Solicitar Demo",
+      "members": "Acesso Membros",
+      "catalog": "Ver Catálogo"
+    }
+  }
+}

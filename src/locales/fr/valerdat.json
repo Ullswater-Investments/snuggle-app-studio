@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "backToPartners": "Retour aux Partenaires",
+    "membersArea": "Espace Membres"
+  },
+  "hero": {
+    "badges": {
+      "aiPowered": "IA Avancée",
+      "gaiaX": "Gaia-X Ready",
+      "dataSpace": "Data Space Natif",
+      "kit": "Kit Espace de Données"
+    },
+    "title": "VALERDAT",
+    "subtitle": "Mémoire d'Exécution Intelligente pour le Procurement",
+    "description": "VALERDAT transforme les données d'achats historiques en intelligence actionnable, permettant des décisions de procurement basées sur des preuves et la transparence des prix.",
+    "cta": {
+      "project": "Voir le Projet",
+      "members": "Accès Membres"
+    }
+  },
+  "stats": {
+    "savings": { "value": "15-25%", "label": "Économies moyennes sur les achats" },
+    "accuracy": { "value": "99,2%", "label": "Précision des prédictions" },
+    "transactions": { "value": "+50M", "label": "Transactions analysées" },
+    "datasets": { "value": "8+", "label": "Datasets IA" },
+    "traceability": { "value": "100%", "label": "Traçabilité" },
+    "funding": { "value": "12K€", "label": "Kit Digital" }
+  },
+  "problem": {
+    "badge": "Le Problème",
+    "title": "Opacité des Prix d'Achat",
+    "description": "Les organisations manquent de visibilité sur les prix équitables du marché, négociant à l'aveugle et perdant des millions en surfacturations.",
+    "items": {
+      "visibility": { "title": "Manque de Visibilité", "description": "Pas d'accès aux données de marché comparables pour le benchmarking." },
+      "fragmentation": { "title": "Données Fragmentées", "description": "Informations d'achat dispersées dans plusieurs systèmes non consolidés." },
+      "negotiation": { "title": "Négociation Inefficace", "description": "Décisions basées sur l'intuition plutôt que sur des données objectives." },
+      "fragmented": { "title": "Données Fragmentées", "description": "Informations d'achat dispersées dans plusieurs systèmes ERP sans consolidation." },
+      "predictions": { "title": "Prédictions Inexactes", "description": "Modèles de demande qui ignorent la saisonnalité, les promotions et les événements du marché." },
+      "blind": { "title": "Négociation à l'Aveugle", "description": "Manque de benchmarks de marché pour les négociations avec les fournisseurs." }
+    }
+  },
+  "solution": {
+    "badge": "La Solution",
+    "title": "Intelligence des Prix Souveraine",
+    "description": "VALERDAT connecte de manière sécurisée les données de procurement de plusieurs organisations, générant des benchmarks de marché sans exposer d'informations sensibles.",
+    "features": {
+      "privacy": { "title": "Privacy by Design", "description": "Calcul fédéré qui garde les données à la source." },
+      "ai": { "title": "IA Prédictive", "description": "Modèles de machine learning pour la prédiction des prix." },
+      "benchmark": { "title": "Benchmarking Anonyme", "description": "Comparaisons de marché sans révéler les identités." },
+      "integration": { "title": "Intégration ERP", "description": "Connecteurs natifs avec SAP, Oracle et principaux ERPs." }
+    }
+  },
+  "features": {
+    "items": {
+      "ingestion": { "title": "Ingestion de Données", "description": "Connecteurs natifs pour SAP, Oracle et principaux ERPs avec transformation automatique." },
+      "ai": { "title": "IA Prédictive", "description": "Modèles de machine learning pour la prédiction de la demande, des prix et des risques fournisseurs." },
+      "sovereignty": { "title": "Souveraineté Totale", "description": "Vos données restent sous votre contrôle avec un calcul fédéré conforme Gaia-X." },
+      "payments": { "title": "Paiements EUROe", "description": "Règlement instantané des transactions de données avec l'euro numérique tokenisé." }
+    }
+  },
+  "useCases": {
+    "badge": "Cas d'Usage",
+    "title": "Applications Industrielles",
+    "description": "Secteurs qui exploitent déjà l'intelligence VALERDAT.",
+    "items": {
+      "manufacturing": { "title": "Fabrication", "description": "Optimisation des coûts des matières premières et des composants." },
+      "retail": { "title": "Commerce de Détail", "description": "Négociation des conditions avec les fournisseurs de biens de consommation." },
+      "construction": { "title": "Construction", "description": "Contrôle des coûts dans les projets d'infrastructure." },
+      "healthcare": { "title": "Santé", "description": "Achats efficaces de fournitures médicales." }
+    }
+  },
+  "ecosystem": {
+    "badge": "Écosystème",
+    "title": "Réseau de Données Collaboratif",
+    "description": "VALERDAT opère comme un nœud de l'écosystème PROCUREDATA, connectant des organisations qui partagent l'intelligence des prix de manière sécurisée.",
+    "features": {
+      "sovereignty": "Souveraineté totale sur vos données",
+      "compliance": "Conformité RGPD et Data Governance Act",
+      "interoperability": "Interopérabilité avec les Data Spaces européens",
+      "trust": "Contrats intelligents pour la gestion du consentement"
+    },
+    "consumer": "Consommateur et processeur de données industrielles dans l'écosystème ProcureData",
+    "provider1": "Fournisseur de données de transactions industrielles et de prix historiques",
+    "provider2": "Fournisseur d'indices de matières premières en temps réel",
+    "provider3": "Fournisseur d'analyses sectorielles et de benchmarks de marché"
+  },
+  "techStack": {
+    "badge": "Stack Technologique",
+    "title": "Architecture Gaia-X",
+    "items": {
+      "gaiax": { "title": "Gaia-X Compliant", "description": "Infrastructure de données souveraine suivant les standards européens d'interopérabilité." },
+      "ml": { "title": "ML Fédéré", "description": "Modèles entraînés sans déplacer les données sensibles, préservant la confidentialité des affaires." },
+      "euroe": { "title": "Paiements EUROe", "description": "Stablecoin européen pour le règlement instantané des transactions de données." }
+    }
+  },
+  "cta": {
+    "title": "Prêt à découvrir le juste prix ?",
+    "description": "Rejoignez les organisations qui optimisent déjà leurs achats avec l'intelligence de données souveraine.",
+    "buttons": {
+      "contact": "Demander une Démo",
+      "members": "Accès Membres",
+      "catalog": "Voir le Catalogue"
+    }
+  }
+}

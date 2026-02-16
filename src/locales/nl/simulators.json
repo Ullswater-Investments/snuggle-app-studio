@@ -12,16 +12,16 @@
     "downloadPassport": "Download Digitaal Paspoort",
     "downloadCertificate": "Download Certificaat",
     "pontusX": "Pontus-X",
-    "ariaAnalysis": "AI Analyse",
+    "ariaAnalysis": "ARIA Analyse",
     "realTimeConsulting": "Realtime advies",
     "fteEquivalent": "FTE Equivalent",
     "fteDescription": "Deze besparingen komen overeen met het jaarsalaris van {{count}} FTE-medewerker(s) die uitsluitend administratieve taken uitvoeren die ProcureData automatiseert.",
     "hash": "Hash"
   },
   "aria": {
-    "name": "AI Adviseur",
+    "name": "ARIA",
     "strategicReport": "Gepersonaliseerd Strategisch Rapport",
-    "insight": "AI Insight"
+    "insight": "ARIA Insight"
   },
   "retailEthics": {
     "title": "SA8000 Ethische Audit Dashboard",
@@ -164,7 +164,7 @@
       "smartContract": "Smart Contract"
     },
     "aria": {
-      "name": "AI Adviseur",
+      "name": "ARIA",
       "role": "Windenergie Adviseur",
       "instantTitle": "Directe Afrekening",
       "instantDesc": "Met wind op <strong>{{windSpeed}} m/s</strong> en een PPA-prijs van <strong>{{price}}€/MWh</strong>, genereert je directe afrekening <strong>{{payout}} EUROe</strong> in het huidige blok.",
@@ -195,7 +195,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "AI Adviseur",
+      "name": "ARIA",
       "role": "Groene Waterstof Adviseur",
       "certifHyTitle": "CertifHy Certificering",
       "certifHyIssued": "Door 95% hernieuwbare mix te overschrijden, heb ik het <strong>Digitale Waterstof Paspoort</strong> uitgegeven, waardoor <strong>{{amount}}€</strong> aan EU-fondsen is vrijgegeven.",
@@ -225,7 +225,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "AI Adviseur",
+      "name": "ARIA",
       "role": "Solar Onderhoud Adviseur",
       "recoveryTitle": "Energie Herstel",
       "recoveryDesc": "Door vervuiling te verminderen naar <span>{{days}} dagen</span>, herstel je <span>{{mwh}} MWh</span> dagelijks, wat <span>{{revenue}}€</span> extra genereert.",
@@ -256,7 +256,7 @@
       "events": "gebeurtenissen"
     },
     "aria": {
-      "name": "AI Adviseur",
+      "name": "ARIA",
       "role": "Vraagbeheer Adviseur",
       "monetizationTitle": "Flexibiliteitsmonetisatie",
       "monetizationDesc": "Door je reductie van <span>{{kw}} kW</span> op Pontus-X te notariseren, heb je deze maand <span>{{earnings}} EUROe</span> aan flexibiliteitsstimulansen verdiend.",
@@ -287,7 +287,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "AI Adviseur",
+      "name": "ARIA",
       "role": "Biomassa Adviseur",
       "traceabilityTitle": "RED II Traceerbaarheid",
       "traceabilityNeutral": "De oorsprong is 100% legaal. De blockchain-traceerbaarheid heeft je biomassa gecertificeerd als <strong>Carbon Neutral</strong>, waardoor je verkoopprijs met 12% is verhoogd.",
@@ -317,7 +317,7 @@
       "tonCo2": "tonCO2"
     },
     "aria": {
-      "name": "AI Adviseur",
+      "name": "ARIA",
       "role": "Decarbonisatie Adviseur",
       "auditTitle": "Leveranciersaudit",
       "auditDesc": "Ik heb je <span>{{suppliers}}</span> staalleveranciers geauditeerd. Je CSRD Scope 3-rapport heeft een precisie van <span>{{precision}}%</span>.",
@@ -326,5 +326,34 @@
       "csrdReadyTitle": "CSRD Gereed",
       "csrdReadyDesc": "Je rapport is geldig voor internationale aanbestedingen en voldoet aan de vereisten van de Europese CSRD-richtlijn."
     }
+  },
+  "furndata": {
+    "title": "Gefedereerde Catalogus Simulator",
+    "subtitle": "FurnData Alliance - Multi-Portal Synchronisatie",
+    "badge": "Retail & Meubels",
+    "sliderSKUs": "Aantal SKUs in catalogus",
+    "sliderPortals": "Verbonden eCommerce-portalen",
+    "kpiErrorsAvoided": "Vermeden Fouten",
+    "kpiHoursSaved": "Bespaarde Uren/Jaar",
+    "kpiReturnsAvoided": "Vermeden Retouren",
+    "kpiCertsSynced": "Gesynchroniseerde Certificeringen",
+    "chart": {
+      "before": "Handmatig Proces",
+      "after": "Gefedereerde Dataruimte",
+      "errors": "fouten/jaar"
+    },
+    "aria": {
+      "title": "ARIA Analyse",
+      "role": "Dataruimte Architect",
+      "syncTitle": "Synchronisatie",
+      "syncDesc": "Met <strong>{{skus}} SKUs</strong> op <strong>{{portals}} portalen</strong> wordt elke wijziging bij de bron automatisch doorgevoerd naar alle verkoopkanalen.",
+      "qualityTitle": "Datakwaliteit",
+      "qualityDesc": "Je hebt <strong>{{errors}} jaarlijkse fouten</strong> vermeden die retouren, klachten en reputatieschade zouden hebben veroorzaakt.",
+      "advantageTitle": "Concurrentievoordeel",
+      "advantageDesc": "Kopers vertrouwen gecertificeerde productfiches meer. Conversiepercentage +18% op producten met verifieerbaar Digitaal Paspoort.",
+      "flashBadge": "Premium Inzicht",
+      "flashDesc": "Met meer dan <strong>1000 gesynchroniseerde SKUs</strong> kom je in aanmerking voor het <strong>'Gaia-X Geverifieerde Catalogus'</strong>-badge dat de zichtbaarheid op marktplaatsen vergroot."
+    },
+    "downloadReport": "Download PDF-rapport"
   }
 }

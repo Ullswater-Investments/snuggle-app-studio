@@ -176,10 +176,10 @@
         }
       },
       "aria": {
-        "title": "AI Adviseur",
-        "content": "<p>De <strong>AI Adviseur</strong> is de geïntegreerde intelligente assistent die vragen beantwoordt, processen begeleidt en gepersonaliseerde aanbevelingen biedt op basis van gebruikerscontext.</p>",
+        "title": "ARIA Assistent",
+        "content": "<p><strong>ARIA</strong> is de geïntegreerde AI-assistent die vragen beantwoordt, processen begeleidt en gepersonaliseerde aanbevelingen biedt op basis van gebruikerscontext.</p>",
         "quiz": {
-          "question": "Wat is de AI Adviseur in ProcureData?",
+          "question": "Wat is ARIA in ProcureData?",
           "options": ["Een rapportagemodule", "Een AI-assistent", "Een type certificering", "Een cryptocurrency"],
           "correctIndex": 1
         }
@@ -449,13 +449,13 @@
   },
   "doc13": {
     "title": "Dialoogsimulatie en NLU-Training",
-    "subtitle": "Persoonlijkheid, begripsvaardigheden en continu leren van de AI Adviseur.",
+    "subtitle": "ARIA's persoonlijkheid, begripsvaardigheden en continu leren.",
     "sections": {
       "personalidad": {
-        "title": "Persoonlijkheid van de AI Adviseur",
-        "content": "<p>De AI Adviseur combineert <strong>professionaliteit, duidelijkheid en empathie</strong>. Past de toon aan de context aan: formeel bij compliance, vriendelijk bij support.</p>",
+        "title": "ARIA's Persoonlijkheid",
+        "content": "<p>ARIA combineert <strong>professionaliteit, duidelijkheid en empathie</strong>. Ze past haar toon aan de context aan: formeel bij compliance, vriendelijk bij support.</p>",
         "quiz": {
-          "question": "Welke kenmerken definiëren de persoonlijkheid van de AI Adviseur?",
+          "question": "Welke kenmerken definiëren ARIA's persoonlijkheid?",
           "options": ["Afstandelijk en technisch", "Professionaliteit, duidelijkheid en empathie", "Altijd informeel", "Robotachtig en koud"],
           "correctIndex": 1
         }
@@ -464,7 +464,7 @@
         "title": "Begripsvermogen",
         "content": "<p>Meertalige NLU met <strong>intentie-, entiteit- en sentimentdetectie</strong> voor gecontextualiseerde antwoorden.</p>",
         "quiz": {
-          "question": "Wat detecteert het NLU-systeem van de AI Adviseur?",
+          "question": "Wat detecteert ARIA's NLU-systeem?",
           "options": ["Alleen trefwoorden", "Intentie, entiteiten en sentiment", "Alleen taal", "Niets automatisch"],
           "correctIndex": 1
         }
@@ -473,7 +473,7 @@
         "title": "Continu Leren",
         "content": "<p><strong>Feedback loop</strong>-systeem: gebruikerscorrecties verbeteren toekomstige antwoorden via gesuperviseerde hertraining.</p>",
         "quiz": {
-          "question": "Hoe verbetert de AI Adviseur de antwoorden?",
+          "question": "Hoe verbetert ARIA haar antwoorden?",
           "options": ["Verbetert nooit", "Met gebruikersfeedback", "Alleen handmatige updates", "Willekeurig"],
           "correctIndex": 1
         }
@@ -482,7 +482,7 @@
         "title": "Multimodale Capaciteiten",
         "content": "<p>Ondersteuning voor <strong>tekst, spraak en geüploade documentanalyse</strong>, met automatische extractie van relevante informatie.</p>",
         "quiz": {
-          "question": "Welke inputtypen ondersteunt de AI Adviseur?",
+          "question": "Welke inputtypen ondersteunt ARIA?",
           "options": ["Alleen tekst", "Tekst, spraak en documenten", "Alleen spraak", "Alleen afbeeldingen"],
           "correctIndex": 1
         }

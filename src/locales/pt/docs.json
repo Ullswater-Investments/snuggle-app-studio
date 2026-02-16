@@ -176,10 +176,10 @@
         }
       },
       "aria": {
-        "title": "Consultor IA",
-        "content": "<p>O <strong>Consultor IA</strong> é o assistente inteligente integrado que responde perguntas, guia processos e oferece recomendações personalizadas baseadas no contexto do usuário.</p>",
+        "title": "Assistente ARIA",
+        "content": "<p><strong>ARIA</strong> é o assistente de IA integrado que responde perguntas, guia processos e oferece recomendações personalizadas baseadas no contexto do usuário.</p>",
         "quiz": {
-          "question": "O que é o Consultor IA no ProcureData?",
+          "question": "O que é ARIA no ProcureData?",
           "options": ["Um módulo de reporting", "Um assistente de IA", "Um tipo de certificação", "Uma criptomoeda"],
           "correctIndex": 1
         }
@@ -449,13 +449,13 @@
   },
   "doc13": {
     "title": "Simulação de Diálogos e Treinamento NLU",
-    "subtitle": "Personalidade, capacidades de compreensão e aprendizado contínuo do Consultor IA.",
+    "subtitle": "Personalidade, capacidades de compreensão e aprendizado contínuo do ARIA.",
     "sections": {
       "personalidad": {
-        "title": "Personalidade do Consultor IA",
-        "content": "<p>O Consultor IA combina <strong>profissionalismo, clareza e empatia</strong>. Adapta seu tom conforme o contexto: formal em compliance, amigável em suporte.</p>",
+        "title": "Personalidade do ARIA",
+        "content": "<p>ARIA combina <strong>profissionalismo, clareza e empatia</strong>. Adapta seu tom conforme o contexto: formal em compliance, amigável em suporte.</p>",
         "quiz": {
-          "question": "Quais características definem a personalidade do Consultor IA?",
+          "question": "Quais características definem a personalidade do ARIA?",
           "options": ["Distante e técnica", "Profissionalismo, clareza e empatia", "Sempre informal", "Robótica e fria"],
           "correctIndex": 1
         }
@@ -464,7 +464,7 @@
         "title": "Capacidades de Compreensão",
         "content": "<p>NLU multilíngue com detecção de <strong>intenção, entidades e sentimento</strong> para respostas contextualizadas.</p>",
         "quiz": {
-          "question": "O que o sistema NLU do Consultor IA detecta?",
+          "question": "O que o sistema NLU do ARIA detecta?",
           "options": ["Apenas palavras-chave", "Intenção, entidades e sentimento", "Apenas idioma", "Nada automaticamente"],
           "correctIndex": 1
         }
@@ -473,7 +473,7 @@
         "title": "Aprendizado Contínuo",
         "content": "<p>Sistema de <strong>feedback loop</strong>: as correções dos usuários melhoram as respostas futuras via retreinamento supervisionado.</p>",
         "quiz": {
-          "question": "Como o Consultor IA melhora suas respostas?",
+          "question": "Como o ARIA melhora suas respostas?",
           "options": ["Nunca melhora", "Com feedback dos usuários", "Apenas atualizações manuais", "Aleatoriamente"],
           "correctIndex": 1
         }
@@ -482,7 +482,7 @@
         "title": "Capacidades Multimodais",
         "content": "<p>Suporte para <strong>texto, voz e análise de documentos</strong> carregados, com extração automática de informações relevantes.</p>",
         "quiz": {
-          "question": "Quais tipos de entrada o Consultor IA suporta?",
+          "question": "Quais tipos de entrada o ARIA suporta?",
           "options": ["Apenas texto", "Texto, voz e documentos", "Apenas voz", "Apenas imagens"],
           "correctIndex": 1
         }

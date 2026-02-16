@@ -13,7 +13,6 @@
     "monetizationModels": "6 Monetization Models",
     "exploreModels": "Explore Models",
     "viewWhitepaper": "View Whitepaper",
-    "viewUne0087": "UNE 0087:2025",
     "demoLinks": {
         "innovationLab": "Innovation Lab",
         "innovationLabDesc": "25+ Future Business Lines",
@@ -77,42 +76,6 @@
         "finance": "FINANCE",
         "grid": "GRID"
     },
-    "sectorCompanies": {
-        "industrial": "GigaFactory North",
-        "agro": "OliveTrust Coop",
-        "mobility": "UrbanDeliver BCN",
-        "social": "Alianza Social Hub",
-        "health": "BioMed Hospital",
-        "retail": "GlobalRetail Prime",
-        "energy": "Helios Fields",
-        "aero": "Turbine Chain",
-        "wines": "VinosD.O.E Elite",
-        "pharma": "PharmaCold Logistix",
-        "port": "PortBCN Smart Trade",
-        "gov": "Ethical Municipality",
-        "mining": "PureLithium Sourcing",
-        "fashion": "FastFashion Trace",
-        "finance": "GreenFinance ESG",
-        "grid": "GridFlex Demand"
-    },
-    "sectorDescriptions": {
-        "industrial": "Industrial approval in 24h",
-        "agro": "ESG traceability olive oil",
-        "mobility": "Scope 3 logistics reporting",
-        "social": "Verifiable social impact SROI",
-        "health": "Predictive maintenance MRI equipment",
-        "retail": "Ethical supply chain audit",
-        "energy": "Renewable energy certification",
-        "aero": "Aeronautical component traceability",
-        "wines": "Digital passport origin designation",
-        "pharma": "Certified cold chain",
-        "port": "Smart customs clearance",
-        "gov": "Responsible public procurement",
-        "mining": "Responsible lithium sourcing",
-        "fashion": "Sustainable textile traceability",
-        "finance": "Green finance & ESG scoring",
-        "grid": "Flexible energy demand management"
-    },
     "nav": {
         "features": "Features",
         "businessModels": "Business Models",
@@ -154,23 +117,6 @@
         "partners": "PARTNERS",
         "dataSpaceKit": "DATA SPACE KIT",
         "sectoralNode": "Owner NODE",
-        "new": "New",
-        "uneRecommendations": "UNE Recommendations",
-        "glossaryUne": "UNE Glossary",
-        "transparencyPortal": "Transparency Portal",
-        "rulebook": "Rulebook"
-    },
-    "kitAyudas": {
-        "title": "DATA SPACE KIT GRANTS",
-        "deadline": "Registration until March 20, 2026",
-        "limitedPlaces": "LIMITED PLACES",
-        "mainMessage": "Digitize your supply chain with up to {amount} in non-repayable grants from RED.ES",
-        "amount": "€30,000",
-        "benefit1": "Processing included in the monthly fee",
-        "benefit2": "85-90% subsidy",
-        "benefit3": "No fine print",
-        "heroCta": "APPLY FOR DATA SPACE KIT GRANTS",
-        "inscriptionCta": "Request Registration for €190/month",
-        "viewConditions": "View Conditions"
+        "new": "New"
     }
 }

@@ -3,7 +3,15 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useTranslation } from "react-i18next";
+
+// Transaction status type for catalog intelligence
+interface AssetTransactionStatus {
+  id: string;
+  status: string;
+  asset_id: string;
+}
 
 import { 
   Search, 
@@ -14,13 +22,17 @@ import {
   Star, 
   Database,
   ArrowRight,
-  Heart,
   BarChart3,
   Wallet,
   Zap,
   Award,
   Globe,
-  Users
+  Users,
+  Settings,
+  Gauge,
+  Clock,
+  Download,
+  CheckCircle2
 } from "lucide-react";
 
 // UI Components
@@ -83,6 +95,7 @@ export default function Catalog() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const { activeOrgId, activeOrg } = useOrganizationContext();
   const { t } = useTranslation('catalog');
   const { t: tPartners } = useTranslation('partnerProducts');
   const [searchTerm, setSearchTerm] = useState("");
@@ -93,7 +106,10 @@ export default function Catalog() {
     priceType: 'all',
     partner: 'all',
     country: 'all',
-    category: 'all'
+    category: 'all',
+    onlyAcquired: false,
+    onlyPending: false,
+    dataNature: 'all',
   });
   
   // Estado para comparación
@@ -235,9 +251,12 @@ export default function Catalog() {
             price,
             currency,
             pricing_model,
+            is_visible,
             product:data_products(name, category, description),
             org:organizations!subject_org_id(name)
-          `);
+          `)
+          .eq('is_visible', true)
+          .eq('status', 'active');
         
         // Mapeo manual para simular la estructura del marketplace
         const fallbackData: MarketplaceListing[] = rawAssets?.map(a => ({
@@ -264,6 +283,64 @@ export default function Catalog() {
       return ((data || []) as unknown) as MarketplaceListing[];
     }
   });
+
+  // --- Fetch access policies for visibility filtering ---
+  const { data: accessPolicies } = useQuery({
+    queryKey: ["asset-access-policies"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("data_assets")
+        .select("id, custom_metadata, subject_org_id")
+        .eq("status", "active");
+      return (data ?? []) as { id: string; custom_metadata: any; subject_org_id: string }[];
+    },
+  });
+
+  const accessPolicyMap = useMemo(() => {
+    const map = new Map<string, { allowedWallets: { org_id: string }[]; deniedWallets: { org_id: string }[]; ownerOrgId: string }>();
+    (accessPolicies ?? []).forEach((a) => {
+      const policy = a.custom_metadata?.access_policy;
+      if (!policy) return;
+      const allowed = policy.allowed_wallets || policy.access_list || [];
+      const denied = policy.denied_wallets || [];
+      // Only add to map if there's actual restriction
+      if (allowed.length > 0 || denied.length > 0) {
+        map.set(a.id, {
+          allowedWallets: allowed,
+          deniedWallets: denied,
+          ownerOrgId: a.subject_org_id,
+        });
+      }
+    });
+    return map;
+  }, [accessPolicies]);
+
+  // --- Fetch user's active transactions for catalog intelligence ---
+  const { data: userTransactions } = useQuery({
+    queryKey: ["user-asset-transactions", activeOrgId],
+    queryFn: async () => {
+      if (!activeOrgId) return [];
+      const { data } = await supabase
+        .from("data_transactions")
+        .select("id, status, asset_id")
+        .eq("consumer_org_id", activeOrgId)
+        .in("status", ["initiated", "pending_subject", "pending_holder", "approved", "completed"]);
+      return (data ?? []) as AssetTransactionStatus[];
+    },
+    enabled: !!activeOrgId,
+  });
+
+  const transactionMap = useMemo(() => {
+    const map = new Map<string, AssetTransactionStatus>();
+    (userTransactions ?? []).forEach((tx) => {
+      // Keep the most relevant transaction per asset (completed > pending > initiated)
+      const existing = map.get(tx.asset_id);
+      if (!existing || tx.status === "completed" || (tx.status === "approved" && existing.status !== "completed")) {
+        map.set(tx.asset_id, tx);
+      }
+    });
+    return map;
+  }, [userTransactions]);
 
   // --- Hybrid Logic: Use DB data if available, otherwise use translated synthetic data ---
   const listings = useMemo(() => {
@@ -296,23 +373,71 @@ export default function Catalog() {
     return [];
   }, [dbListings, syntheticAssets]);
 
+  // UUID regex for nature classification
+  const UUID_REGEX_FILTER = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
   // --- Lógica de Filtrado en Cliente ---
   const filteredListings = listings?.filter(item => {
     const matchesSearch = (item.product_name || "").toLowerCase().includes(searchTerm.toLowerCase()) || 
                           (item.provider_name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
                           (item.product_description || "").toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeTab === 'all' || item.category === activeTab;
+    const matchesCategory = activeTab === 'all' || activeTab === 'my-acquisitions' || item.category === activeTab;
+    
+    // "Mis Adquisiciones" filter
+    const matchesAcquisitions = activeTab !== 'my-acquisitions' || transactionMap.has(item.asset_id);
     const matchesGreen = !filters.onlyGreen || item.has_green_badge;
     const matchesVerified = !filters.onlyVerified || item.kyb_verified;
+
+    // Sidebar "Mis Estados" filters - EXCLUSIVE: only show matching assets
+    const txForAsset = transactionMap.get(item.asset_id);
+    const hasStatusFilter = filters.onlyAcquired || filters.onlyPending;
+    let matchesStatus = true;
+    if (hasStatusFilter) {
+      const isAcquired = txForAsset?.status === "completed";
+      const isPending = txForAsset && ["initiated", "pending_subject", "pending_holder", "approved"].includes(txForAsset.status);
+      matchesStatus = (filters.onlyAcquired && isAcquired) || (filters.onlyPending && !!isPending);
+      if (!matchesStatus) return false;
+    }
+
+    // Data nature filter
+    const isProduction = UUID_REGEX_FILTER.test(item.asset_id);
+    let matchesNature = true;
+    if (filters.dataNature === "production") matchesNature = isProduction;
+    if (filters.dataNature === "demo") matchesNature = !isProduction;
+
     const matchesPrice = filters.priceType === 'all' 
       ? true 
       : filters.priceType === 'free' ? (item.price || 0) === 0 : (item.price || 0) > 0;
+    
+    // Cuando hay filtro de partner o país activo, ocultar listings sintéticos
+    const matchesPartner = filters.partner === 'all';
+    const matchesCountry = filters.country === 'all';
 
-    return matchesSearch && matchesCategory && matchesGreen && matchesVerified && matchesPrice;
+    // Access control: Pontus-X priority logic
+    const policy = accessPolicyMap.get(item.asset_id);
+    let matchesAccess = true;
+    if (policy && activeOrgId) {
+      if (policy.ownerOrgId !== activeOrgId) {
+        if (policy.allowedWallets.length > 0) {
+          matchesAccess = policy.allowedWallets.some((entry) => entry.org_id === activeOrgId);
+        } else if (policy.deniedWallets.length > 0) {
+          matchesAccess = !policy.deniedWallets.some((entry) => entry.org_id === activeOrgId);
+        }
+      }
+    } else if (policy && !activeOrgId) {
+      if (policy.allowedWallets.length > 0) matchesAccess = false;
+    }
+
+    return matchesSearch && matchesCategory && matchesAcquisitions && matchesGreen && matchesVerified && matchesPrice && matchesPartner && matchesCountry && matchesAccess && matchesNature;
   });
 
   // --- Filtrado de Partner Products ---
   const filteredPartnerProducts = partnerProducts.filter(item => {
+    // When status filters are active, hide ALL partner products (they have no transactions)
+    if (filters.onlyAcquired || filters.onlyPending) return false;
+    // When production filter is active, hide partner products (they are demo/synthetic)
+    if (filters.dataNature === "production") return false;
+
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           (item.partnerName || "").toLowerCase().includes(searchTerm.toLowerCase());
@@ -341,6 +466,7 @@ export default function Catalog() {
   
   const allCategories = [
     { id: "all", label: t('filters.all'), targetShare: null },
+    ...(activeOrgId ? [{ id: "my-acquisitions", label: "Mis Adquisiciones", targetShare: null }] : []),
     ...dynamicCategories.map(cat => ({
       id: cat!,
       label: cat!,
@@ -375,24 +501,36 @@ export default function Catalog() {
         <div className="absolute top-0 right-0 opacity-10">
           <Database className="h-64 w-64 -mr-16 -mt-16" />
         </div>
-        <div className="relative z-10 max-w-2xl">
-          <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4 border-none">
-            {t('hero.badge')}
-          </Badge>
-          <h1 className="text-4xl font-bold mb-4">{t('hero.title')}</h1>
-          <p className="text-blue-100 text-lg mb-8">
-            {t('hero.description')}
-          </p>
-          
-          <div className="relative max-w-md">
-            <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-            <Input 
-              placeholder={t('hero.searchPlaceholder')} 
-              className="pl-10 h-12 bg-white text-gray-900 border-none shadow-lg focus-visible:ring-0"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="max-w-2xl">
+            <Badge className="bg-white/20 text-white hover:bg-white/30 mb-4 border-none">
+              {t('hero.badge')}
+            </Badge>
+            <h1 className="text-4xl font-bold mb-4">{t('hero.title')}</h1>
+            <p className="text-blue-100 text-lg mb-8">
+              {t('hero.description')}
+            </p>
+            
+            <div className="relative max-w-md">
+              <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <Input 
+                placeholder={t('hero.searchPlaceholder')} 
+                className="pl-10 h-12 bg-white text-gray-900 border-none shadow-lg focus-visible:ring-0"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
           </div>
+          
+          {/* Publish Dataset Button */}
+          <Button 
+            size="lg"
+            onClick={() => navigate("/datos/publicar")}
+            className="bg-white text-blue-600 hover:bg-blue-50 shrink-0 shadow-lg"
+          >
+            <Database className="h-5 w-5 mr-2" />
+            Publicar Dataset
+          </Button>
         </div>
       </div>
 
@@ -454,18 +592,28 @@ export default function Catalog() {
             // Unified Catalog Grid - All Products Together
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {/* Marketplace listings first */}
-              {filteredListings?.map((item) => (
-                <ProductCard 
-                  key={item.asset_id} 
-                  item={item} 
-                  onAction={() => navigate(`/catalog/product/${item.asset_id}`)} 
-                  onWishlistToggle={() => toggleWishlist(item.asset_id)}
-                  isInWishlist={wishlist.has(item.asset_id)}
-                  onCompareToggle={() => toggleCompare(item.asset_id)}
-                  isInCompare={compareList.has(item.asset_id)}
-                  t={t}
-                />
-              ))}
+              {filteredListings?.map((item) => {
+                // UUID regex pattern to detect database IDs
+                const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+                const isDbAsset = UUID_REGEX.test(item.asset_id);
+                const detailUrl = isDbAsset 
+                  ? `/catalog/asset/${item.asset_id}` 
+                  : `/catalog/product/${item.asset_id}`;
+                
+                const txStatus = transactionMap.get(item.asset_id);
+                
+                return (
+                  <ProductCard 
+                    key={item.asset_id} 
+                    item={item} 
+                    onAction={() => navigate(detailUrl)} 
+                    onCompareToggle={() => toggleCompare(item.asset_id)}
+                    isInCompare={compareList.has(item.asset_id)}
+                    transactionStatus={txStatus}
+                    t={t}
+                  />
+                );
+              })}
               
               {/* Partner products after */}
               {filteredPartnerProducts.map((product) => (
@@ -488,7 +636,10 @@ export default function Catalog() {
                       priceType: 'all',
                       partner: 'all',
                       country: 'all',
-                      category: 'all'
+                      category: 'all',
+                      onlyAcquired: false,
+                      onlyPending: false,
+                      dataNature: 'all',
                     });
                     setActiveTab("all");
                   }}>{t('emptyState.clearFilters')}</Button>
@@ -534,7 +685,7 @@ export default function Catalog() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[150px]">{t('compareTable.feature')}</TableHead>
+                  <TableHead className="w-[150px]">Característica</TableHead>
                   {compareProducts.map(p => (
                     <TableHead key={p.asset_id}>{p.product_name}</TableHead>
                   ))}
@@ -542,13 +693,13 @@ export default function Catalog() {
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.provider')}</TableCell>
+                  <TableCell className="font-medium">Proveedor</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>{p.provider_name}</TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.price')}</TableCell>
+                  <TableCell className="font-medium">Precio</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.price === 0 ? (
@@ -565,21 +716,34 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.model')}</TableCell>
+                  <TableCell className="font-medium">Modelo</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id} className="capitalize">
-                      {p.pricing_model}
+                      {p.pricing_model === 'subscription' ? 'Suscripción' : p.pricing_model === 'one_time' ? 'Pago único' : p.pricing_model === 'usage' ? 'Por uso' : 'Gratuito'}
                     </TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.category')}</TableCell>
+                  <TableCell className="font-medium">Categoría</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>{p.category}</TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.reputation')}</TableCell>
+                  <TableCell className="font-medium">Tipo de Datos</TableCell>
+                  {compareProducts.map(p => {
+                    const isProduction = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.asset_id);
+                    return (
+                      <TableCell key={p.asset_id}>
+                        <Badge className={`rounded-full border text-[10px] px-2 py-0.5 font-medium ${isProduction ? 'bg-emerald-50 text-emerald-700 border-emerald-300' : 'bg-purple-50 text-purple-700 border-purple-300'}`}>
+                          {isProduction ? '🏭 Producción' : '🧪 Sintético'}
+                        </Badge>
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">Reputación</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       <StarRating rating={p.reputation_score} count={p.review_count} />
@@ -587,29 +751,29 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.verified')}</TableCell>
+                  <TableCell className="font-medium">Verificado</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.kyb_verified ? (
                         <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700">
-                          <ShieldCheck className="h-3 w-3 mr-1" /> {t('common.yes')}
+                          <ShieldCheck className="h-3 w-3 mr-1" /> Sí
                         </Badge>
                       ) : (
-                        t('common.no')
+                        'No'
                       )}
                     </TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">{t('compareTable.sustainable')}</TableCell>
+                  <TableCell className="font-medium">Sostenible</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.has_green_badge ? (
                         <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700">
-                          <Leaf className="h-3 w-3 mr-1" /> {t('common.yes')}
+                          <Leaf className="h-3 w-3 mr-1" /> Sí
                         </Badge>
                       ) : (
-                        t('common.no')
+                        'No'
                       )}
                     </TableCell>
                   ))}
@@ -630,49 +794,70 @@ export default function Catalog() {
 }
 
 // --- Subcomponente: Tarjeta de Producto ---
+// --- Helper: Category Icon ---
+const getCategoryIcon = (category: string | null) => {
+  switch (category) {
+    case "Compliance": return ShieldCheck;
+    case "ESG": return Leaf;
+    case "Ops": return Gauge;
+    case "Logistics": return Gauge;
+    case "Market": return BarChart3;
+    default: return Database;
+  }
+};
+
+// --- Helper: Category Color ---
+const getCategoryColor = (category: string | null) => {
+  switch (category) {
+    case "Compliance": return "bg-blue-100 text-blue-800 border-blue-200";
+    case "ESG": return "bg-green-100 text-green-800 border-green-200";
+    case "Ops": return "bg-orange-100 text-orange-800 border-orange-200";
+    case "Logistics": return "bg-orange-100 text-orange-800 border-orange-200";
+    case "Market": return "bg-purple-100 text-purple-800 border-purple-200";
+    default: return "bg-slate-100 text-slate-600 border-slate-200";
+  }
+};
+
 function ProductCard({ 
   item, 
   onAction,
-  onWishlistToggle,
-  isInWishlist,
   onCompareToggle,
   isInCompare,
+  transactionStatus,
   t
 }: { 
   item: MarketplaceListing;
   onAction: () => void;
-  onWishlistToggle?: () => void;
-  isInWishlist?: boolean;
   onCompareToggle?: () => void;
   isInCompare?: boolean;
+  transactionStatus?: AssetTransactionStatus;
   t: (key: string) => string;
 }) {
   const navigate = useNavigate();
   const isPaid = (item.price || 0) > 0;
   const isWeb3Asset = item.currency === 'EUROe' || item.currency === 'GX';
+  const CategoryIcon = getCategoryIcon(item.category);
+  const categoryColorClass = getCategoryColor(item.category);
+
+  // Determine data nature based on UUID
+  const isProductionAsset = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(item.asset_id);
 
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 border-muted/60 overflow-hidden flex flex-col h-full relative">
-      <div className="h-2 bg-gradient-to-r from-blue-500 to-cyan-400 group-hover:h-3 transition-all" />
-      
-      {/* Botón de Wishlist en esquina superior derecha */}
-      {onWishlistToggle && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onWishlistToggle();
-          }}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-md transition-all hover:scale-110"
-        >
-          <Heart 
-            className={`h-4 w-4 ${isInWishlist ? 'fill-red-500 text-red-500' : 'text-gray-400'}`}
-          />
-        </button>
-      )}
+      <div className={`h-2 ${item.has_green_badge ? 'bg-gradient-to-r from-green-500 to-emerald-400' : 'bg-gradient-to-r from-indigo-500 to-purple-400'} group-hover:h-3 transition-all`} />
+
+      {/* Data Nature Badge — positioned to avoid overlap with category */}
+      <div className="absolute top-4 right-3 z-10">
+        <Badge className={`rounded-full border text-[10px] px-2 py-0.5 font-medium shadow-sm whitespace-nowrap ${isProductionAsset ? 'bg-emerald-50 text-emerald-700 border-emerald-300' : 'bg-purple-50 text-purple-700 border-purple-300'}`}>
+          {isProductionAsset ? '🏭 Producción' : '🧪 Sintético'}
+        </Badge>
+      </div>
       
       <CardHeader className="pb-3">
-        <div className="flex justify-between items-start mb-2">
-          <Badge variant="secondary" className="uppercase text-[10px] tracking-wider font-semibold bg-slate-100 text-slate-600">
+        <div className="flex justify-between items-start mb-2 gap-2">
+          {/* Category Badge with icon - matching PartnerProductCard style */}
+          <Badge className={`${categoryColorClass} px-2 py-0.5 text-[10px] font-semibold`}>
+            <CategoryIcon className="h-3 w-3 mr-1" />
             {item.category}
           </Badge>
           
@@ -691,25 +876,20 @@ function ProductCard({
                 <Zap className="h-3 w-3" />
               </Badge>
             )}
-            {item.has_green_badge && (
-              <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700 px-1.5" title="Sustainable Data">
-                <Leaf className="h-3 w-3" />
-              </Badge>
-            )}
-            {item.kyb_verified && (
-              <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700 px-1.5" title="Verified Provider">
-                <ShieldCheck className="h-3 w-3" />
-              </Badge>
-            )}
           </div>
         </div>
         
-        <CardTitle className="text-xl line-clamp-1 group-hover:text-blue-600 transition-colors">
+        <CardTitle className="text-lg line-clamp-2 group-hover:text-primary transition-colors leading-tight">
           {item.product_name}
         </CardTitle>
-        <CardDescription className="flex items-center gap-1 text-xs">
-          {t('card.by')} <span className="font-medium text-foreground">{item.provider_name}</span>
-        </CardDescription>
+        
+        {/* Published By Badge - matching PartnerProductCard style */}
+        {item.provider_name && (
+          <Badge variant="outline" className="mt-2 text-xs px-2 py-1 border-primary/40 bg-primary/5 w-fit">
+            <Globe className="h-3 w-3 mr-1.5 text-primary" />
+            <span className="font-medium">{item.provider_name}</span>
+          </Badge>
+        )}
       </CardHeader>
 
       <CardContent className="flex-1 pb-4">
@@ -724,7 +904,7 @@ function ProductCard({
             {isPaid ? (
               <div className="flex flex-col items-end">
                 <div className="flex items-center gap-1">
-                  <span className="text-lg font-bold text-slate-900">
+                  <span className="text-lg font-bold text-foreground">
                     {new Intl.NumberFormat('es-ES', { 
                       style: item.currency === 'EUR' ? 'currency' : 'decimal', 
                       currency: item.currency === 'EUR' ? 'EUR' : undefined 
@@ -749,7 +929,7 @@ function ProductCard({
 
       <Separator />
 
-      <CardFooter className="pt-4 bg-slate-50/50 flex-col gap-2">
+      <CardFooter className="pt-4 bg-muted/30 flex-col gap-2">
         {/* Checkbox de Comparación */}
         {onCompareToggle && (
           <div className="w-full flex items-center gap-2 text-sm mb-2">
@@ -764,50 +944,40 @@ function ProductCard({
           </div>
         )}
         
-        <Button 
-          onClick={() => {
-            // Mapeo de assets sintéticos a sus páginas de detalle
-            const getAssetDetailUrl = (): string => {
-              const name = item.product_name?.toLowerCase() || "";
-              const id = item.asset_id?.toLowerCase() || "";
-              
-              // Mapeo por ID de asset
-              const idRoutes: Record<string, string> = {
-                "asset-001": "/catalog/consumo-electrico-industrial",
-                "asset-002": "/catalog/historico-meteorologico",
-                "asset-003": "/catalog/trazabilidad-aceite-oliva",
-                "asset-004": "/catalog/score-crediticio-b2b",
-                "asset-005": "/catalog/telemetria-flota",
-                "asset-006": "/catalog/huella-hidrica-agricola",
-              };
-              
-              if (item.asset_id && idRoutes[item.asset_id]) {
-                return idRoutes[item.asset_id];
-              }
-              
-              // Fallback por nombre (para datos de BD)
-              if (name.includes('consumo') && name.includes('eléctrico')) 
-                return '/catalog/consumo-electrico-industrial';
-              if (name.includes('meteorológico') || name.includes('aemet')) 
-                return '/catalog/historico-meteorologico';
-              if (name.includes('aceite') && name.includes('oliva')) 
-                return '/catalog/trazabilidad-aceite-oliva';
-              if (name.includes('crediticio') || name.includes('score')) 
-                return '/catalog/score-crediticio-b2b';
-              if (name.includes('telemetr') && name.includes('flota')) 
-                return '/catalog/telemetria-flota';
-              if (name.includes('hídrica') || name.includes('huella')) 
-                return '/catalog/huella-hidrica-agricola';
-              
-              return '/auth'; // fallback
-            };
-            
-            navigate(getAssetDetailUrl());
-          }} 
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white group-hover:translate-x-1 transition-all"
-        >
-          {t('card.viewDetails')} <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+        {transactionStatus ? (
+          transactionStatus.status === "completed" ? (
+            <Button 
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/data/view/${transactionStatus.id}`);
+              }} 
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+            >
+              <CheckCircle2 className="mr-2 h-4 w-4" /> Acceder / Descargar
+            </Button>
+          ) : (
+            <Button 
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/requests/${transactionStatus.id}`);
+              }} 
+              variant="outline"
+              className="w-full"
+            >
+              <Clock className="mr-2 h-4 w-4" /> Solicitud en proceso
+            </Button>
+          )
+        ) : (
+          <Button 
+            onClick={(e) => {
+              e.stopPropagation();
+              onAction();
+            }} 
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+          >
+            Solicitar Acceso <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

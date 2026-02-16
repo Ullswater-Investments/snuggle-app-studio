@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "login": "Entrar"
+  },
+  "hero": {
+    "badge": "Catálogo Federado Gaia-X",
+    "title": "Sincronização Automática de Catálogo Multi-Portal",
+    "subtitle": "Um Espaço de Dados onde cada fabricante mantém seu catálogo mestre. Os portais eCommerce recebem atualizações em tempo real.",
+    "cta": "Acessar Portal",
+    "ctaSecondary": "Ver Caso de Sucesso"
+  },
+  "problem": {
+    "badge": "O Problema",
+    "title": "Fragmentação de Catálogos no eCommerce",
+    "items": {
+      "fragmentation": {
+        "title": "50+ Portais Diferentes",
+        "description": "Cada portal tem formatos diferentes. Atualizações manuais consomem horas de trabalho."
+      },
+      "errors": {
+        "title": "12% das Fichas com Erros",
+        "description": "Erros manuais em preços, dimensões ou disponibilidade geram devoluções."
+      },
+      "certifications": {
+        "title": "Certificações Desatualizadas",
+        "description": "Garantias FSC, REACH e anti-fogo expiradas permanecem publicadas nos portais."
+      }
+    }
+  },
+  "solution": {
+    "badge": "A Solução",
+    "title": "Espaço de Dados Federado Gaia-X",
+    "subtitle": "Publique uma vez, sincronize automaticamente em 50+ portais",
+    "dataspace": {
+      "title": "Catálogo Mestre Soberano",
+      "description": "Cada fabricante mantém controle total sobre seus dados. Os portais eCommerce solicitam acesso através de políticas ODRL e recebem atualizações certificadas em tempo real.",
+      "features": {
+        "1": "Sincronização automática com Amazon, Wayfair, ManoMano e mais",
+        "2": "Passaporte Digital de Produto (DPP) para cada SKU",
+        "3": "Verificação de certificações FSC/PEFC, REACH, anti-fogo"
+      }
+    }
+  },
+  "benefits": {
+    "title": "Benefícios Mensuráveis",
+    "errors": {
+      "label": "Erros Evitados",
+      "description": "A sincronização automática elimina erros manuais"
+    },
+    "conversion": {
+      "label": "Maior Conversão",
+      "description": "Fichas certificadas geram mais confiança"
+    },
+    "portals": {
+      "label": "Portais Conectados",
+      "description": "Ponto único de publicação para todos"
+    },
+    "traceability": {
+      "label": "Rastreabilidade",
+      "description": "Cada dado vinculado a fonte verificada"
+    }
+  },
+  "certifications": {
+    "title": "Certificações Sincronizadas",
+    "subtitle": "Todas as certificações verificadas e atualizadas automaticamente",
+    "fsc": "Madeira sustentável",
+    "reach": "Segurança química",
+    "fireproof": "Regulamentação contra incêndio",
+    "iso": "Gestão ambiental",
+    "warranties": "Garantias do fabricante"
+  },
+  "techStack": {
+    "title": "Stack Tecnológico",
+    "gaiax": "Infraestrutura de dados europeia",
+    "odrl": "Políticas de acesso granulares",
+    "dpp": "Passaporte Digital de Produto",
+    "api": "Integração com qualquer sistema"
+  },
+  "cta": {
+    "title": "Junte-se ao Espaço de Dados de Móveis",
+    "subtitle": "Sincronize seu catálogo com 50+ portais automaticamente",
+    "button": "Solicitar Acesso"
+  },
+  "footer": {
+    "powered": "Powered by PROCUREDATA · Gaia-X Ready"
+  },
+  "members": {
+    "badge": "Área de Membros",
+    "title": "Dashboard de Catálogo Federado",
+    "subtitle": "Gerencie seu catálogo mestre e sincronização de portais eCommerce",
+    "logout": "Sair",
+    "metrics": {
+      "skus": "SKUs Totais",
+      "portals": "Portais Conectados",
+      "syncs": "Syncs/Mês",
+      "errors": "Taxa de Erro"
+    },
+    "tabs": {
+      "dashboard": "Dashboard",
+      "catalog": "Catálogo",
+      "sync": "Sincronização",
+      "compliance": "Conformidade"
+    },
+    "dashboard": {
+      "portalStatus": "Status dos Portais",
+      "portalStatusDesc": "Conexões ativas com marketplaces",
+      "certStatus": "Status das Certificações",
+      "certStatusDesc": "Cobertura e validade das certificações",
+      "coverage": "cobertura",
+      "quickActions": "Ações Rápidas"
+    },
+    "actions": {
+      "forceSync": "Forçar Sync",
+      "viewReports": "Ver Relatórios",
+      "addPortal": "Adicionar Portal"
+    },
+    "catalog": {
+      "title": "Catálogo Mestre",
+      "description": "Gerencie seus produtos e fichas técnicas",
+      "placeholder": "Módulo de gestão de catálogo em breve"
+    },
+    "sync": {
+      "title": "Sincronização de Portais",
+      "description": "Status de sincronização com cada marketplace",
+      "lastSync": "Última sync"
+    },
+    "compliance": {
+      "title": "Conformidade e Certificações",
+      "description": "Status de todas as certificações de produto",
+      "verified": "Verificado",
+      "pending": "Pendente",
+      "expiration": "Expiração"
+    }
+  }
+}

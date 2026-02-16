@@ -494,6 +494,16 @@
       "solution": "Certification intégrée d'origine Km 0 (coordonnées GPS au centre-ville) et énergie renouvelable (compteurs connectés aux panneaux solaires du bâtiment). Passeport digital de chaque lot.",
       "ariaQuote": "Vrai Km 0 certifié : produit, récolté et vendu dans le même quartier. 100% énergie solaire propre. Le restaurant d'à côté scanne le QR et voit que la laitue vient du 5ème étage.",
       "services": ["Certification Km 0", "Vérification Énergie Renouvelable", "Passeport Lot", "Traçabilité Urbaine"]
+    },
+    "furndata-alliance": {
+      "title": "Synchronisation Catalogue Multi-Portal",
+      "sector": "Retail Meubles",
+      "metricLabel": "Erreurs Catalogue",
+      "description": "Espace de données fédéré pour synchroniser les fiches produit vérifiées avec 50+ portails eCommerce.",
+      "challenge": "Les fabricants de meubles envoyaient manuellement des fiches produit à 50+ portails eCommerce (Amazon, Wayfair, portails verticaux). Chaque portail avait des formats différents, les images devenaient obsolètes et les certifications expirées restaient publiées. 12% des fiches contenaient des erreurs causant retours et réclamations.",
+      "solution": "Implémentation d'un Espace de Données Fédéré Gaia-X où chaque fabricant maintient son catalogue maître. Les portails eCommerce demandent l'accès via des politiques ODRL et reçoivent des mises à jour en temps réel. Photos, spécifications techniques et certifications se synchronisent automatiquement avec la source de vérité du fabricant.",
+      "ariaQuote": "Avant, nous envoyions des PDFs par email à 50 portails différents. Maintenant, nous publions une fois dans notre Data Space et les marketplaces se synchronisent automatiquement. Les certifications FSC et REACH sont toujours à jour car liées à la source originale.",
+      "services": ["Data Space Gaia-X", "Synchronisation ODRL", "Passeport Produit Digital", "Certifications Vérifiables", "API Catalogue Multi-Portal"]
     }
   },
   "detail": {
@@ -502,8 +512,6 @@
     "verifiedOn": "Vérifié sur Pontus-X",
     "block": "Bloc",
     "sectorImpactPanel": "Panel d'Impact Sectoriel",
-    "askAgent": "Posez une question à l'Agent IA sur ce cas",
-    "caseArchitecture": "Architecture du Cas",
     "impactSimulator": "Simulateur d'Impact",
     "ctaTitle": "Vous voulez obtenir des résultats similaires?",
     "ctaDescription": "Découvrez comment ProcureData peut transformer vos processus d'achat et démontrer votre impact ESG.",

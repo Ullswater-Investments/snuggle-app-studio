@@ -12,16 +12,16 @@
     "downloadPassport": "Scarica Passaporto Digitale",
     "downloadCertificate": "Scarica Certificato",
     "pontusX": "Pontus-X",
-    "ariaAnalysis": "Analisi IA",
+    "ariaAnalysis": "Analisi ARIA",
     "realTimeConsulting": "Consulenza in tempo reale",
     "fteEquivalent": "Equivalenza FTE",
     "fteDescription": "Questo risparmio equivale allo stipendio annuale di {{count}} dipendente/i FTE dedicato/i esclusivamente a compiti amministrativi che ProcureData automatizza.",
     "hash": "Hash"
   },
   "aria": {
-    "name": "Consulente IA",
+    "name": "ARIA",
     "strategicReport": "Report Strategico Personalizzato",
-    "insight": "AI Insight"
+    "insight": "ARIA Insight"
   },
   "retailEthics": {
     "title": "Dashboard Audit Etico SA8000",
@@ -164,7 +164,7 @@
       "smartContract": "Smart Contract"
     },
     "aria": {
-      "name": "Consulente IA",
+      "name": "ARIA",
       "role": "Consulente di Energia Eolica",
       "instantTitle": "Liquidazione Istantanea",
       "instantDesc": "Con vento a <strong>{{windSpeed}} m/s</strong> e prezzo PPA di <strong>{{price}}€/MWh</strong>, la tua liquidazione istantanea genera <strong>{{payout}} EUROe</strong> nel blocco attuale.",
@@ -195,7 +195,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "Consulente IA",
+      "name": "ARIA",
       "role": "Consulente di Idrogeno Verde",
       "certifHyTitle": "Certificazione CertifHy",
       "certifHyIssued": "Superando il 95% di mix rinnovabile, ho emesso il <strong>Passaporto Digitale dell'Idrogeno</strong>, sbloccando <strong>{{amount}}€</strong> di fondi europei.",
@@ -225,7 +225,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "Consulente IA",
+      "name": "ARIA",
       "role": "Consulente di Manutenzione Solare",
       "recoveryTitle": "Recupero Energia",
       "recoveryDesc": "Riducendo la sporcizia a <span>{{days}} giorni</span>, recuperi <span>{{mwh}} MWh</span> giornalieri, generando <span>{{revenue}}€</span> aggiuntivi.",
@@ -256,7 +256,7 @@
       "events": "eventi"
     },
     "aria": {
-      "name": "Consulente IA",
+      "name": "ARIA",
       "role": "Consulente di Gestione della Domanda",
       "monetizationTitle": "Monetizzazione della Flessibilità",
       "monetizationDesc": "Notarizzando la tua riduzione di <span>{{kw}} kW</span> su Pontus-X, hai guadagnato <span>{{earnings}} EUROe</span> in incentivi di flessibilità questo mese.",
@@ -287,7 +287,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "Consulente IA",
+      "name": "ARIA",
       "role": "Consulente di Biomassa",
       "traceabilityTitle": "Tracciabilità RED II",
       "traceabilityNeutral": "L'origine è 100% legale. La tracciabilità blockchain ha certificato la tua biomassa come <strong>Carbon Neutral</strong>, aumentando il tuo prezzo di vendita del 12%.",
@@ -317,7 +317,7 @@
       "tonCo2": "tonCO2"
     },
     "aria": {
-      "name": "Consulente IA",
+      "name": "ARIA",
       "role": "Consulente di Decarbonizzazione",
       "auditTitle": "Audit dei Fornitori",
       "auditDesc": "Ho auditato i tuoi <span>{{suppliers}}</span> fornitori di acciaio. Il tuo report CSRD di Scope 3 ha una precisione del <span>{{precision}}%</span>.",
@@ -326,5 +326,34 @@
       "csrdReadyTitle": "CSRD Ready",
       "csrdReadyDesc": "Il tuo report è valido per gare internazionali e rispetta i requisiti della direttiva CSRD europea."
     }
+  },
+  "furndata": {
+    "title": "Simulatore di Catalogo Federato",
+    "subtitle": "FurnData Alliance - Sincronizzazione Multi-Portale",
+    "badge": "Retail & Arredamento",
+    "sliderSKUs": "Numero di SKUs nel catalogo",
+    "sliderPortals": "Portali eCommerce connessi",
+    "kpiErrorsAvoided": "Errori Evitati",
+    "kpiHoursSaved": "Ore Risparmiate/Anno",
+    "kpiReturnsAvoided": "Resi Evitati",
+    "kpiCertsSynced": "Certificazioni Sincronizzate",
+    "chart": {
+      "before": "Processo Manuale",
+      "after": "Spazio Dati Federato",
+      "errors": "errori/anno"
+    },
+    "aria": {
+      "title": "Analisi ARIA",
+      "role": "Architetta di Spazi Dati",
+      "syncTitle": "Sincronizzazione",
+      "syncDesc": "Con <strong>{{skus}} SKUs</strong> su <strong>{{portals}} portali</strong>, ogni modifica alla fonte si propaga automaticamente a tutti i canali di vendita.",
+      "qualityTitle": "Qualità dei Dati",
+      "qualityDesc": "Hai evitato <strong>{{errors}} errori annuali</strong> che avrebbero causato resi, reclami e danno reputazionale.",
+      "advantageTitle": "Vantaggio Competitivo",
+      "advantageDesc": "I compratori si fidano di più delle schede prodotto certificate. Tasso di conversione +18% sui prodotti con Passaporto Digitale verificabile.",
+      "flashBadge": "Insight Premium",
+      "flashDesc": "Con più di <strong>1000 SKUs sincronizzati</strong>, sei idoneo al badge <strong>'Catalogo Verificato Gaia-X'</strong> che aumenta la visibilità sui marketplace."
+    },
+    "downloadReport": "Scarica Report PDF"
   }
 }

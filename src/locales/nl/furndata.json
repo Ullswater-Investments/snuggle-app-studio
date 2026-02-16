@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "login": "Inloggen"
+  },
+  "hero": {
+    "badge": "Gaia-X Gefedereerde Catalogus",
+    "title": "Automatische Multi-Portal Catalogus Synchronisatie",
+    "subtitle": "Een Data Space waar elke fabrikant zijn mastercatalogus beheert. E-commerce portals ontvangen real-time updates.",
+    "cta": "Toegang tot Portal",
+    "ctaSecondary": "Bekijk Succesverhaal"
+  },
+  "problem": {
+    "badge": "Het Probleem",
+    "title": "Catalogusfragmentatie in E-commerce",
+    "items": {
+      "fragmentation": {
+        "title": "50+ Verschillende Portals",
+        "description": "Elk portal heeft verschillende formaten. Handmatige updates kosten uren werk."
+      },
+      "errors": {
+        "title": "12% van Listings met Fouten",
+        "description": "Handmatige fouten in prijzen, afmetingen of beschikbaarheid leiden tot retouren."
+      },
+      "certifications": {
+        "title": "Verouderde Certificeringen",
+        "description": "Verlopen FSC, REACH en brandwerende garanties blijven gepubliceerd op portals."
+      }
+    }
+  },
+  "solution": {
+    "badge": "De Oplossing",
+    "title": "Gaia-X Gefedereerde Data Space",
+    "subtitle": "Publiceer eenmaal, synchroniseer automatisch naar 50+ portals",
+    "dataspace": {
+      "title": "Soevereine Mastercatalogus",
+      "description": "Elke fabrikant behoudt volledige controle over zijn data. E-commerce portals vragen toegang aan via ODRL-beleid en ontvangen gecertificeerde real-time updates.",
+      "features": {
+        "1": "Automatische synchronisatie met Amazon, Wayfair, ManoMano en meer",
+        "2": "Digitaal Product Paspoort (DPP) voor elke SKU",
+        "3": "Verificatie van FSC/PEFC, REACH, brandwerende certificering"
+      }
+    }
+  },
+  "benefits": {
+    "title": "Meetbare Voordelen",
+    "errors": {
+      "label": "Vermeden Fouten",
+      "description": "Automatische synchronisatie elimineert handmatige fouten"
+    },
+    "conversion": {
+      "label": "Hogere Conversie",
+      "description": "Gecertificeerde listings genereren meer vertrouwen"
+    },
+    "portals": {
+      "label": "Verbonden Portals",
+      "description": "Enkel publicatiepunt voor allemaal"
+    },
+    "traceability": {
+      "label": "Traceerbaarheid",
+      "description": "Elk datapunt gekoppeld aan geverifieerde bron"
+    }
+  },
+  "certifications": {
+    "title": "Gesynchroniseerde Certificeringen",
+    "subtitle": "Alle certificeringen automatisch geverifieerd en bijgewerkt",
+    "fsc": "Duurzaam hout",
+    "reach": "Chemische veiligheid",
+    "fireproof": "Brandveiligheidsvoorschriften",
+    "iso": "Milieubeheer",
+    "warranties": "Fabrieksgaranties"
+  },
+  "techStack": {
+    "title": "Technologie Stack",
+    "gaiax": "Europese data-infrastructuur",
+    "odrl": "Granulaire toegangsbeleid",
+    "dpp": "Digitaal Product Paspoort",
+    "api": "Integratie met elk systeem"
+  },
+  "cta": {
+    "title": "Word lid van de Meubel Data Space",
+    "subtitle": "Synchroniseer uw catalogus automatisch met 50+ portals",
+    "button": "Toegang Aanvragen"
+  },
+  "footer": {
+    "powered": "Powered by PROCUREDATA · Gaia-X Ready"
+  },
+  "members": {
+    "badge": "Ledenzone",
+    "title": "Gefedereerd Catalogus Dashboard",
+    "subtitle": "Beheer uw mastercatalogus en e-commerce portal synchronisatie",
+    "logout": "Uitloggen",
+    "metrics": {
+      "skus": "Totale SKU's",
+      "portals": "Verbonden Portals",
+      "syncs": "Syncs/Maand",
+      "errors": "Foutpercentage"
+    },
+    "tabs": {
+      "dashboard": "Dashboard",
+      "catalog": "Catalogus",
+      "sync": "Synchronisatie",
+      "compliance": "Compliance"
+    },
+    "dashboard": {
+      "portalStatus": "Portal Status",
+      "portalStatusDesc": "Actieve marketplace verbindingen",
+      "certStatus": "Certificering Status",
+      "certStatusDesc": "Dekking en geldigheid van certificeringen",
+      "coverage": "dekking",
+      "quickActions": "Snelle Acties"
+    },
+    "actions": {
+      "forceSync": "Forceer Sync",
+      "viewReports": "Bekijk Rapporten",
+      "addPortal": "Portal Toevoegen"
+    },
+    "catalog": {
+      "title": "Mastercatalogus",
+      "description": "Beheer uw producten en technische specificaties",
+      "placeholder": "Catalogusbeheer module binnenkort beschikbaar"
+    },
+    "sync": {
+      "title": "Portal Synchronisatie",
+      "description": "Sync status met elke marketplace",
+      "lastSync": "Laatste sync"
+    },
+    "compliance": {
+      "title": "Compliance en Certificeringen",
+      "description": "Status van alle productcertificeringen",
+      "verified": "Geverifieerd",
+      "pending": "In behandeling",
+      "expiration": "Vervaldatum"
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "backToPartners": "Back to Partners",
+    "membersArea": "Members Area"
+  },
+  "hero": {
+    "badges": {
+      "aiPowered": "Advanced AI",
+      "gaiaX": "Gaia-X Ready",
+      "dataSpace": "Native Data Space",
+      "kit": "Data Space Kit"
+    },
+    "title": "VALERDAT",
+    "subtitle": "Intelligent Execution Memory for Procurement",
+    "description": "VALERDAT transforms historical purchasing data into actionable intelligence, enabling evidence-based procurement decisions and price transparency.",
+    "cta": {
+      "project": "View Project",
+      "members": "Members Access"
+    }
+  },
+  "stats": {
+    "savings": { "value": "15-25%", "label": "Average purchasing savings" },
+    "accuracy": { "value": "99.2%", "label": "Prediction accuracy" },
+    "transactions": { "value": "+50M", "label": "Transactions analyzed" },
+    "datasets": { "value": "8+", "label": "AI Datasets" },
+    "traceability": { "value": "100%", "label": "Traceability" },
+    "funding": { "value": "€12K", "label": "Digital Kit" }
+  },
+  "problem": {
+    "badge": "The Problem",
+    "title": "Opacity in Purchase Prices",
+    "description": "Organizations lack visibility into fair market prices, negotiating blindly and losing millions in overcharges.",
+    "items": {
+      "visibility": { "title": "Lack of Visibility", "description": "No access to comparable market data for benchmarking." },
+      "fragmentation": { "title": "Fragmented Data", "description": "Purchasing information scattered across multiple unconsolidated systems." },
+      "negotiation": { "title": "Inefficient Negotiation", "description": "Decisions based on intuition rather than objective data." },
+      "fragmented": { "title": "Fragmented Data", "description": "Purchasing information scattered across multiple ERP systems without consolidation." },
+      "predictions": { "title": "Inaccurate Predictions", "description": "Demand models that ignore seasonality, promotions, and market events." },
+      "blind": { "title": "Blind Negotiation", "description": "Lack of market benchmarks for supplier negotiations." }
+    }
+  },
+  "solution": {
+    "badge": "The Solution",
+    "title": "Sovereign Price Intelligence",
+    "description": "VALERDAT securely connects procurement data from multiple organizations, generating market benchmarks without exposing sensitive information.",
+    "features": {
+      "privacy": { "title": "Privacy by Design", "description": "Federated computing that keeps data at source." },
+      "ai": { "title": "Predictive AI", "description": "Machine learning models for price prediction." },
+      "benchmark": { "title": "Anonymous Benchmarking", "description": "Market comparisons without revealing identities." },
+      "integration": { "title": "ERP Integration", "description": "Native connectors with SAP, Oracle and major ERPs." }
+    }
+  },
+  "features": {
+    "items": {
+      "ingestion": { "title": "Data Ingestion", "description": "Native connectors for SAP, Oracle and major ERPs with automatic transformation." },
+      "ai": { "title": "Predictive AI", "description": "Machine learning models for demand, price, and supplier risk prediction." },
+      "sovereignty": { "title": "Total Sovereignty", "description": "Your data remains under your control with Gaia-X compliant federated computing." },
+      "payments": { "title": "EUROe Payments", "description": "Instant settlement of data transactions with tokenized digital euro." }
+    }
+  },
+  "useCases": {
+    "badge": "Use Cases",
+    "title": "Industrial Applications",
+    "description": "Sectors already leveraging VALERDAT intelligence.",
+    "items": {
+      "manufacturing": { "title": "Manufacturing", "description": "Optimization of raw materials and component costs." },
+      "retail": { "title": "Retail", "description": "Negotiation of terms with consumer goods suppliers." },
+      "construction": { "title": "Construction", "description": "Cost control in infrastructure projects." },
+      "healthcare": { "title": "Healthcare", "description": "Efficient procurement of medical supplies." }
+    }
+  },
+  "ecosystem": {
+    "badge": "Ecosystem",
+    "title": "Collaborative Data Network",
+    "description": "VALERDAT operates as a node in the PROCUREDATA ecosystem, connecting organizations that securely share price intelligence.",
+    "features": {
+      "sovereignty": "Total sovereignty over your data",
+      "compliance": "GDPR and Data Governance Act compliance",
+      "interoperability": "Interoperability with European Data Spaces",
+      "trust": "Smart contracts for consent management"
+    },
+    "consumer": "Consumer and processor of industrial data in the ProcureData ecosystem",
+    "provider1": "Provider of industrial transaction data and historical prices",
+    "provider2": "Provider of real-time commodity and raw material indices",
+    "provider3": "Provider of sectoral analytics and market benchmarks"
+  },
+  "techStack": {
+    "badge": "Tech Stack",
+    "title": "Gaia-X Architecture",
+    "items": {
+      "gaiax": { "title": "Gaia-X Compliant", "description": "Sovereign data infrastructure following European interoperability standards." },
+      "ml": { "title": "Federated ML", "description": "Models trained without moving sensitive data, preserving business privacy." },
+      "euroe": { "title": "EUROe Payments", "description": "European stablecoin for instant settlement of data transactions." }
+    }
+  },
+  "cta": {
+    "title": "Ready to discover the fair price?",
+    "description": "Join organizations already optimizing their purchases with sovereign data intelligence.",
+    "buttons": {
+      "contact": "Request Demo",
+      "members": "Member Access",
+      "catalog": "View Catalog"
+    }
+  }
+}

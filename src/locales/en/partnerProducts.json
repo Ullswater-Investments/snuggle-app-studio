@@ -158,6 +158,134 @@
           "updateFrequency": "Quarterly"
         }
       }
+    },
+    "valerdat": {
+      "name": "VALERDAT",
+      "country": "ES",
+      "sector": "AI Procurement",
+      "flag": "🇪🇸",
+      "products": {
+        "MKT-SALES-01": {
+          "id": "VAL-MKT-01",
+          "name": "Transactional Sales History for AI",
+          "description": "Sales dataset with seasonality, channels and pricing for training demand prediction models.",
+          "category": "Market",
+          "price": 450,
+          "pricingModel": "subscription",
+          "tags": ["Sales", "Demand", "AI", "Forecasting"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.8,
+          "reviewCount": 156,
+          "dataPoints": "+100K transactions",
+          "updateFrequency": "Daily"
+        },
+        "SUP-PERF-02": {
+          "id": "VAL-SUP-02",
+          "name": "Supplier Performance and Lead Time Prediction",
+          "description": "Supplier risk classification and real lead time prediction based on delivery history.",
+          "category": "Compliance",
+          "price": 380,
+          "pricingModel": "subscription",
+          "tags": ["Suppliers", "Lead Time", "Risk", "Prediction"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 134,
+          "dataPoints": "+5,000 suppliers",
+          "updateFrequency": "Weekly"
+        },
+        "OPS-LOG-03": {
+          "id": "VAL-OPS-03",
+          "name": "Logistics: Volume, Constraints and Costs",
+          "description": "Product volumetrics, transport constraints and logistics cost optimization.",
+          "category": "Ops",
+          "price": 320,
+          "pricingModel": "subscription",
+          "tags": ["Logistics", "Transport", "Costs", "Volumetrics"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.6,
+          "reviewCount": 98,
+          "dataPoints": "+50K SKUs",
+          "updateFrequency": "Monthly"
+        },
+        "OPS-RET-04": {
+          "id": "VAL-OPS-04",
+          "name": "Reverse Logistics and Returns Data",
+          "description": "Net demand calculation and stock recovery prediction from returns data.",
+          "category": "Ops",
+          "price": 290,
+          "pricingModel": "subscription",
+          "tags": ["Returns", "Reverse Logistics", "Stock", "Net Demand"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.5,
+          "reviewCount": 87,
+          "dataPoints": "+200K returns",
+          "updateFrequency": "Weekly"
+        },
+        "MKT-PROMO-05": {
+          "id": "VAL-MKT-05",
+          "name": "Marketing and Demand Prediction",
+          "description": "Campaigns, offers and uplift modeling for history cleansing and demand prediction.",
+          "category": "Market",
+          "price": 420,
+          "pricingModel": "subscription",
+          "tags": ["Marketing", "Promotions", "Uplift", "Demand"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 112,
+          "dataPoints": "+10K campaigns",
+          "updateFrequency": "Monthly"
+        },
+        "RND-BOM-06": {
+          "id": "VAL-RND-06",
+          "name": "BOM Explode - Dependent Demand",
+          "description": "Production structure for MRP and supply chain risk management through BOM explosion.",
+          "category": "R&D",
+          "price": 580,
+          "pricingModel": "subscription",
+          "tags": ["BOM", "MRP", "Production", "Supply Chain"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.8,
+          "reviewCount": 76,
+          "dataPoints": "+25K structures",
+          "updateFrequency": "Monthly"
+        },
+        "OPS-STK-07": {
+          "id": "VAL-OPS-07",
+          "name": "Demand and Stock Estimation",
+          "description": "Inventory snapshots for censored demand reconstruction and stockout detection.",
+          "category": "Ops",
+          "price": 350,
+          "pricingModel": "subscription",
+          "tags": ["Stock", "Inventory", "Censored Demand", "Stockouts"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.6,
+          "reviewCount": 145,
+          "dataPoints": "+1M snapshots",
+          "updateFrequency": "Daily"
+        },
+        "RND-PLC-08": {
+          "id": "VAL-RND-08",
+          "name": "Product Lifecycle",
+          "description": "Master data for clustering, similarity-based prediction and obsolescence management.",
+          "category": "R&D",
+          "price": 480,
+          "pricingModel": "subscription",
+          "tags": ["Lifecycle", "PLM", "Obsolescence", "Clustering"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 89,
+          "dataPoints": "+100K products",
+          "updateFrequency": "Monthly"
+        }
+      }
     }
   }
 }

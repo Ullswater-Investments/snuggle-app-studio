@@ -7,8 +7,7 @@
     "features": "Fonctionnalités",
     "businessModels": "Modèles d'Affaires",
     "useCases": "Cas d'Utilisation",
-    "architecture": "Architecture",
-    "startRegistration": "Commencer l'Inscription"
+    "architecture": "Architecture"
   },
   "cta": {
     "accessDemo": "Accéder à la Démo",
@@ -28,13 +27,7 @@
     "successStories": "Cas de Réussite",
     "successStoriesDesc": "47 histoires avec simulateurs",
     "liveDemo": "Démo en Direct",
-    "liveDemoDesc": "Testez la plateforme complète",
-    "catalog": "Catalogue de Données",
-    "catalogDesc": "Marketplace fédéré 10x10",
-    "sustainability": "Hub Durabilité",
-    "sustainabilityDesc": "Rapports ESG et Empreinte Carbone",
-    "services": "Gestion des Services",
-    "servicesDesc": "Algorithmes et Compute-to-Data"
+    "liveDemoDesc": "Testez la plateforme complète"
   },
   "features": {
     "title": "Plateforme Complète de Données",
@@ -54,7 +47,7 @@
       },
       "aiInsights": {
         "title": "Insights IA",
-        "description": "Votre assistant IA pour naviguer dans les données, générer des rapports et optimiser les décisions."
+        "description": "ARIA, votre assistant IA pour naviguer dans les données, générer des rapports et optimiser les décisions."
       },
       "realTimeAnalytics": {
         "title": "Analytique Temps Réel",
@@ -64,33 +57,7 @@
         "title": "Intégration ERP",
         "description": "Connecteurs natifs pour SAP, Oracle, Microsoft Dynamics et systèmes industriels."
       }
-    },
-    "walletWeb3": "Wallet Web3",
-    "walletWeb3Desc": "Connexion native avec MetaMask et visualisation des soldes.",
-    "identitySSI": "Identité SSI",
-    "identitySSIDesc": "DID (did:ethr) générés automatiquement.",
-    "paymentsEUROe": "Paiements EUROe",
-    "paymentsEUROeDesc": "Transactions avec stablecoin régulée sur Pontus-X.",
-    "activityFeed": "Activity Feed",
-    "activityFeedDesc": "Abonnement aux événements de contrat en direct.",
-    "smartAlerts": "Smart Alerts",
-    "smartAlertsDesc": "Notifications push critiques instantanées.",
-    "governanceODRL": "Gouvernance ODRL",
-    "governanceODRLDesc": "Politiques d'accès standardisées.",
-    "multiTenantRLS": "Multi-Tenant RLS",
-    "multiTenantRLSDesc": "Isolation totale des données au niveau ligne.",
-    "auditLogs": "Audit Logs",
-    "auditLogsDesc": "Traçabilité immuable on-chain.",
-    "modelIDSA": "Modèle IDSA",
-    "modelIDSADesc": "Consumer, Subject et Holder différenciés.",
-    "erpConnectors": "Connecteurs ERP",
-    "erpConnectorsDesc": "SAP, Oracle et Dynamics prêts.",
-    "edgeFunctions": "Edge Functions",
-    "edgeFunctionsDesc": "Logique serverless évolutive globalement.",
-    "guidedTour": "Visite Guidée",
-    "guidedTourDesc": "Onboarding interactif pas à pas.",
-    "interactiveDocs": "Docs Interactifs",
-    "interactiveDocsDesc": "Diagrammes d'architecture en direct."
+    }
   },
   "categories": {
     "web3": "Web3 & Blockchain",
@@ -98,9 +65,7 @@
     "ai": "Intelligence Artificielle",
     "compliance": "Conformité",
     "integration": "Intégration",
-    "security": "Sécurité",
-    "integrations": "Intégrations",
-    "ux": "Expérience UX"
+    "security": "Sécurité"
   },
   "useCases": {
     "title": "Cas d'Utilisation par Secteur",
@@ -166,6 +131,37 @@
     "transactions": "Transactions",
     "countries": "Pays"
   },
+  "footer": {
+    "tagline": "Espace de Données pour la Fonction Achats avec technologie Web3.",
+    "platform": "Plateforme",
+    "catalog": "Catalogue de Données",
+    "innovationLab": "Innovation Lab",
+    "sustainabilityHub": "Hub Durabilité",
+    "services": "Services",
+    "resources": "Ressources",
+    "technicalDocs": "Documentation Technique",
+    "architecture": "Architecture",
+    "techWhitepaper": "WHITEPAPER",
+    "ecosystemGuide": "Guide de l'Écosystème",
+    "transparency": "Transparence",
+    "technicalMemory": "Mémoire Technique",
+    "governanceModel": "Modèle de Gouvernance",
+    "userGuide": "Guide Utilisateur",
+    "businessPlan": "Plan d'Affaires",
+    "access": "Accès",
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "copyright": "© 2026 PROCUREDATA. Tous droits réservés.",
+    "poweredBy": "Powered by Pontus-X & Gaia-X",
+    "idsaCompliant": "IDSA Compliant",
+    "viewTechnicalDoc": "Voir Document Technique Complet",
+    "enterpriseCapabilities": "Document Capacités Enterprise",
+    "partners": "PARTENAIRES",
+    "dataSpaceKit": "KIT ESPACE DE DONNÉES",
+    "sectoralNode": "NŒUD Propriétaire",
+    "new": "Nouveau"
+  },
   "heroDescription": "Solution au problème 'nxm' dans l'enregistrement des fournisseurs grâce aux identités partagées. Enregistrement automatique dans votre ERP à partir de données déjà validées.",
   "version": "v3.1 Web3 Enabled",
   "exploreEcosystem": "Explorez l'Écosystème",
@@ -178,7 +174,6 @@
   "monetizationModels": "6 Modèles de Monétisation",
   "exploreModels": "Explorer les Modèles",
   "viewWhitepaper": "Voir Whitepaper",
-  "viewUne0087": "UNE 0087:2025",
   "sectors": {
     "industrial": "INDUSTRIEL",
     "agro": "AGRO",
@@ -197,42 +192,6 @@
     "finance": "FINANCE",
     "grid": "GRID"
   },
-  "sectorCompanies": {
-    "industrial": "GigaFactory North",
-    "agro": "OliveTrust Coop",
-    "mobility": "UrbanDeliver BCN",
-    "social": "Alianza Social Hub",
-    "health": "BioMed Hospital",
-    "retail": "GlobalRetail Prime",
-    "energy": "Helios Fields",
-    "aero": "Turbine Chain",
-    "wines": "VinosD.O.E Elite",
-    "pharma": "PharmaCold Logistix",
-    "port": "PortBCN Smart Trade",
-    "gov": "Municipalité Éthique",
-    "mining": "PureLithium Sourcing",
-    "fashion": "FastFashion Trace",
-    "finance": "GreenFinance ESG",
-    "grid": "GridFlex Demand"
-  },
-  "sectorDescriptions": {
-    "industrial": "Homologation industrielle en 24h",
-    "agro": "Traçabilité ESG huile d'olive",
-    "mobility": "Reporting Scope 3 logistique",
-    "social": "Impact social vérifiable SROI",
-    "health": "Maintenance prédictive équipements IRM",
-    "retail": "Audit éthique chaîne d'approvisionnement",
-    "energy": "Certification énergétique renouvelable",
-    "aero": "Traçabilité composants aéronautiques",
-    "wines": "Passeport numérique appellation d'origine",
-    "pharma": "Chaîne du froid certifiée",
-    "port": "Dédouanement intelligent",
-    "gov": "Achats publics responsables",
-    "mining": "Approvisionnement responsable en lithium",
-    "fashion": "Traçabilité textile durable",
-    "finance": "Finance verte et scoring ESG",
-    "grid": "Gestion flexible de la demande énergétique"
-  },
   "useCasesSection": {
     "badge": "Polyvalence Industrielle",
     "title": "Solutions Réelles pour la Chaîne d'Approvisionnement",
@@ -248,7 +207,7 @@
     "resources": "Ressources",
     "technicalDocs": "Documentation Technique",
     "architecture": "Architecture",
-    "techWhitepaper": "WHITEPAPER",
+    "techWhitepaper": "LIVRE BLANC",
     "ecosystemGuide": "Guide de l'Écosystème",
     "transparency": "Transparence",
     "technicalMemory": "Mémoire Technique",
@@ -267,23 +226,6 @@
     "partners": "PARTENAIRES",
     "dataSpaceKit": "KIT ESPACE DE DONNÉES",
     "sectoralNode": "NŒUD Propriétaire",
-    "new": "Nouveau",
-    "uneRecommendations": "Recommandations UNE",
-    "glossaryUne": "Glossaire UNE",
-    "transparencyPortal": "Portail de Transparence",
-    "rulebook": "Livre de Règles"
-  },
-  "kitAyudas": {
-    "title": "AIDES KIT ESPACE DE DONNÉES",
-    "deadline": "Inscription jusqu'au 20 mars 2026",
-    "limitedPlaces": "PLACES LIMITÉES",
-    "mainMessage": "Numérisez votre chaîne d'approvisionnement avec jusqu'à {amount} de subvention à fonds perdus de RED.ES",
-    "amount": "30 000 €",
-    "benefit1": "Traitement inclus dans la cotisation mensuelle",
-    "benefit2": "Subvention 85-90%",
-    "benefit3": "Sans petits caractères",
-    "heroCta": "DEMANDEZ LES AIDES KIT ESPACE DE DONNÉES",
-    "inscriptionCta": "Demander l'inscription pour 190€/mois",
-    "viewConditions": "Voir les conditions"
+    "new": "Nouveau"
   }
 }

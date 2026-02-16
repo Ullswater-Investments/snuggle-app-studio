@@ -1190,6 +1190,134 @@
           "updateFrequency": "Jaarlijks"
         }
       }
+    },
+    "valerdat": {
+      "name": "VALERDAT",
+      "country": "ES",
+      "sector": "AI Inkoop",
+      "flag": "🇪🇸",
+      "products": {
+        "MKT-SALES-01": {
+          "id": "VAL-MKT-01",
+          "name": "Transactionele Verkoopgeschiedenis voor AI",
+          "description": "Verkoopdataset met seizoensgebondenheid, kanalen en prijzen voor het trainen van vraagvoorspellingsmodellen.",
+          "category": "Market",
+          "price": 450,
+          "pricingModel": "subscription",
+          "tags": ["Verkoop", "Vraag", "AI", "Voorspelling"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.8,
+          "reviewCount": 156,
+          "dataPoints": "+100K transacties",
+          "updateFrequency": "Dagelijks"
+        },
+        "SUP-PERF-02": {
+          "id": "VAL-SUP-02",
+          "name": "Leveranciersprestaties en Levertijdvoorspelling",
+          "description": "Leveranciersrisicoclassificatie en echte levertijdvoorspelling gebaseerd op leveringsgeschiedenis.",
+          "category": "Compliance",
+          "price": 380,
+          "pricingModel": "subscription",
+          "tags": ["Leveranciers", "Levertijd", "Risico", "Voorspelling"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 134,
+          "dataPoints": "+5.000 leveranciers",
+          "updateFrequency": "Wekelijks"
+        },
+        "OPS-LOG-03": {
+          "id": "VAL-OPS-03",
+          "name": "Logistiek: Volume, Beperkingen en Kosten",
+          "description": "Productvolumetrie, transportbeperkingen en logistieke kostenoptimalisatie.",
+          "category": "Ops",
+          "price": 320,
+          "pricingModel": "subscription",
+          "tags": ["Logistiek", "Transport", "Kosten", "Volumetrie"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.6,
+          "reviewCount": 98,
+          "dataPoints": "+50K SKUs",
+          "updateFrequency": "Maandelijks"
+        },
+        "OPS-RET-04": {
+          "id": "VAL-OPS-04",
+          "name": "Reverse Logistiek en Retourgegevens",
+          "description": "Netto vraagberekening en voorraadterugwinningsvoorspelling uit retourgegevens.",
+          "category": "Ops",
+          "price": 290,
+          "pricingModel": "subscription",
+          "tags": ["Retouren", "Reverse Logistiek", "Voorraad", "Netto Vraag"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.5,
+          "reviewCount": 87,
+          "dataPoints": "+200K retouren",
+          "updateFrequency": "Wekelijks"
+        },
+        "MKT-PROMO-05": {
+          "id": "VAL-MKT-05",
+          "name": "Marketing en Vraagvoorspelling",
+          "description": "Campagnes, aanbiedingen en uplift-modellering voor historische opschoning en vraagvoorspelling.",
+          "category": "Market",
+          "price": 420,
+          "pricingModel": "subscription",
+          "tags": ["Marketing", "Promoties", "Uplift", "Vraag"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 112,
+          "dataPoints": "+10K campagnes",
+          "updateFrequency": "Maandelijks"
+        },
+        "RND-BOM-06": {
+          "id": "VAL-RND-06",
+          "name": "Stuklijst Explosie - Afhankelijke Vraag",
+          "description": "Productiestructuur voor MRP en supply chain risicobeheer door stuklijstexplosie.",
+          "category": "R&D",
+          "price": 580,
+          "pricingModel": "subscription",
+          "tags": ["Stuklijst", "MRP", "Productie", "Supply Chain"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.8,
+          "reviewCount": 76,
+          "dataPoints": "+25K structuren",
+          "updateFrequency": "Maandelijks"
+        },
+        "OPS-STK-07": {
+          "id": "VAL-OPS-07",
+          "name": "Vraag- en Voorraadschatting",
+          "description": "Voorraadsnapshots voor gecensureerde vraagherconstructie en voorraadtekortdetectie.",
+          "category": "Ops",
+          "price": 350,
+          "pricingModel": "subscription",
+          "tags": ["Voorraad", "Inventaris", "Gecensureerde Vraag", "Tekorten"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.6,
+          "reviewCount": 145,
+          "dataPoints": "+1M snapshots",
+          "updateFrequency": "Dagelijks"
+        },
+        "RND-PLC-08": {
+          "id": "VAL-RND-08",
+          "name": "Productlevenscyclus",
+          "description": "Masterdata voor clustering, similariteitsgebaseerde voorspelling en verouderingsbeheer.",
+          "category": "R&D",
+          "price": 480,
+          "pricingModel": "subscription",
+          "tags": ["Levenscyclus", "PLM", "Veroudering", "Clustering"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 89,
+          "dataPoints": "+100K producten",
+          "updateFrequency": "Maandelijks"
+        }
+      }
     }
   }
 }

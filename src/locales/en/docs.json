@@ -325,10 +325,10 @@
         }
       },
       "aria": {
-        "title": "AI Assistant",
-        "content": "<p>The <strong>AI Assistant</strong> is the integrated intelligent assistant that answers questions, guides processes and offers personalized recommendations based on user context.</p>",
+        "title": "ARIA Assistant",
+        "content": "<p><strong>ARIA</strong> is the integrated AI assistant that answers questions, guides processes and offers personalized recommendations based on user context.</p>",
         "quiz": {
-          "question": "What is the AI Assistant in ProcureData?",
+          "question": "What is ARIA in ProcureData?",
           "options": ["A reporting module", "An AI assistant", "A type of certification", "A cryptocurrency"],
           "correctIndex": 1
         }
@@ -598,13 +598,13 @@
   },
   "doc13": {
     "title": "Dialogue Simulation and Natural Language Training (NLU)",
-    "subtitle": "The AI Assistant's personality, comprehension capabilities and continuous learning.",
+    "subtitle": "ARIA's personality, comprehension capabilities and continuous learning.",
     "sections": {
       "personalidad": {
-        "title": "AI Assistant Personality",
-        "content": "<p>The AI Assistant combines <strong>professionalism, clarity and empathy</strong>. It adapts its tone according to context: formal in compliance, friendly in support.</p>",
+        "title": "ARIA's Personality",
+        "content": "<p>ARIA combines <strong>professionalism, clarity and empathy</strong>. It adapts its tone according to context: formal in compliance, friendly in support.</p>",
         "quiz": {
-          "question": "What characteristics define the AI Assistant's personality?",
+          "question": "What characteristics define ARIA's personality?",
           "options": ["Distant and technical", "Professionalism, clarity and empathy", "Always informal", "Robotic and cold"],
           "correctIndex": 1
         }
@@ -613,7 +613,7 @@
         "title": "Comprehension Capabilities",
         "content": "<p>Multi-language NLU with <strong>intent, entity and sentiment detection</strong> for contextualized responses.</p>",
         "quiz": {
-          "question": "What does the AI Assistant's NLU system detect?",
+          "question": "What does ARIA's NLU system detect?",
           "options": ["Only keywords", "Intent, entities and sentiment", "Language only", "Nothing automatically"],
           "correctIndex": 1
         }
@@ -622,7 +622,7 @@
         "title": "Continuous Learning",
         "content": "<p><strong>Feedback loop</strong> system: user corrections improve future responses through supervised retraining.</p>",
         "quiz": {
-          "question": "How does the AI Assistant improve its responses?",
+          "question": "How does ARIA improve its responses?",
           "options": ["Never improves", "With user feedback", "Manual updates only", "Randomly"],
           "correctIndex": 1
         }
@@ -631,7 +631,7 @@
         "title": "Multimodal Capabilities",
         "content": "<p>Support for <strong>text, voice and uploaded document analysis</strong>, with automatic extraction of relevant information.</p>",
         "quiz": {
-          "question": "What input types does the AI Assistant support?",
+          "question": "What input types does ARIA support?",
           "options": ["Text only", "Text, voice and documents", "Voice only", "Images only"],
           "correctIndex": 1
         }

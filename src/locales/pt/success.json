@@ -494,6 +494,16 @@
       "solution": "Certificação integrada de origem Km 0 (coordenadas GPS no centro da cidade) e energia renovável (contadores ligados a painéis solares no edifício). Passaporte digital de cada lote.",
       "ariaQuote": "Verdadeiro Km 0 certificado: produzido, colhido e vendido no mesmo bairro. 100% energia solar própria. O restaurante do lado escaneia o QR e vê que a alface veio do 5º andar.",
       "services": ["Certificação Km 0", "Verificação Energia Renovável", "Passaporte de Lote", "Rastreabilidade Urbana"]
+    },
+    "furndata-alliance": {
+      "title": "Sincronização de Catálogo Multi-Portal",
+      "sector": "Retalho de Móveis",
+      "metricLabel": "Erros de Catálogo",
+      "description": "Espaço de dados federado para sincronizar fichas de produto verificadas com 50+ portais eCommerce.",
+      "challenge": "Os fabricantes de móveis enviavam manualmente fichas de produto a 50+ portais eCommerce (Amazon, Wayfair, portais verticais). Cada portal tinha formatos diferentes, as imagens ficavam desatualizadas e as certificações expiradas permaneciam publicadas. 12% das fichas continham erros causando devoluções e reclamações.",
+      "solution": "Implementação de um Espaço de Dados Federado Gaia-X onde cada fabricante mantém o seu catálogo mestre. Os portais eCommerce solicitam acesso via políticas ODRL e recebem atualizações em tempo real. Fotografias, especificações técnicas e certificações sincronizam automaticamente com a fonte de verdade do fabricante.",
+      "ariaQuote": "Antes enviávamos PDFs por email a 50 portais diferentes. Agora publicamos uma vez no nosso Data Space e os marketplaces sincronizam automaticamente. As certificações FSC e REACH estão sempre atualizadas porque estão ligadas à fonte original.",
+      "services": ["Data Space Gaia-X", "Sincronização ODRL", "Passaporte Digital de Produto", "Certificações Verificáveis", "API de Catálogo Multi-Portal"]
     }
   },
   "detail": {
@@ -502,8 +512,6 @@
     "verifiedOn": "Verificado no Pontus-X",
     "block": "Bloco",
     "sectorImpactPanel": "Painel de Impacto Setorial",
-    "askAgent": "Pergunte ao Agente IA sobre este caso",
-    "caseArchitecture": "Arquitetura do Caso",
     "impactSimulator": "Simulador de Impacto",
     "ctaTitle": "Quer alcançar resultados semelhantes?",
     "ctaDescription": "Descubra como a ProcureData pode transformar os seus processos de compras e demonstrar o seu impacto ESG.",

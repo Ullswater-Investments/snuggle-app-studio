@@ -507,6 +507,16 @@
       "solution": "Complete sustainability certification covering renewable LED energy, water recycling, and zero-transport logistics footprint.",
       "ariaQuote": "Our lettuce travels 5km from farm to table. Renewable energy certificates prove our sustainability from seed to supermarket.",
       "services": ["Renewable Energy Certification", "Urban Traceability", "Zero-km Verification", "Sustainability Dashboard"]
+    },
+    "furndata-alliance": {
+      "title": "Multi-Portal Catalog Synchronization",
+      "sector": "Furniture Retail",
+      "metricLabel": "Catalog Errors",
+      "description": "Federated data space to synchronize verified product sheets with 50+ eCommerce portals.",
+      "challenge": "Furniture manufacturers manually sent product sheets to 50+ eCommerce portals (Amazon, Wayfair, vertical portals). Each portal had different formats, images became outdated, and expired certifications remained published. 12% of product sheets contained errors causing returns and complaints.",
+      "solution": "Implementation of a Gaia-X Federated Data Space where each manufacturer maintains their master catalog. eCommerce portals request access via ODRL policies and receive real-time updates. Photos, technical specifications, and certifications sync automatically with the manufacturer's source of truth.",
+      "ariaQuote": "We used to email PDFs to 50 different portals. Now we publish once to our Data Space and marketplaces sync automatically. FSC and REACH certifications are always current because they're linked to the original source.",
+      "services": ["Gaia-X Data Space", "ODRL Synchronization", "Digital Product Passport", "Verifiable Certifications", "Multi-Portal Catalog API"]
     }
   },
   "detail": {
@@ -515,8 +525,6 @@
     "verifiedOn": "Verified on Pontus-X",
     "block": "Block",
     "sectorImpactPanel": "Sector Impact Panel",
-    "askAgent": "Ask the AI Agent about this case",
-    "caseArchitecture": "Case Architecture",
     "impactSimulator": "Impact Simulator",
     "ctaTitle": "Want to achieve similar results?",
     "ctaDescription": "Discover how ProcureData can transform your procurement processes and demonstrate your ESG impact.",

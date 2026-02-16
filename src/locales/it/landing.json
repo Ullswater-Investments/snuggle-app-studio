@@ -13,7 +13,6 @@
   "monetizationModels": "6 Modelli di Monetizzazione",
   "exploreModels": "Esplora Modelli",
   "viewWhitepaper": "Vedi Whitepaper",
-  "viewUne0087": "UNE 0087:2025",
   "demoLinks": {
     "innovationLab": "Innovation Lab",
     "innovationLabDesc": "Oltre 25 linee di business future",
@@ -77,42 +76,6 @@
     "finance": "FINANZA",
     "grid": "GRID"
   },
-  "sectorCompanies": {
-    "industrial": "GigaFactory North",
-    "agro": "OliveTrust Coop",
-    "mobility": "UrbanDeliver BCN",
-    "social": "Alianza Social Hub",
-    "health": "BioMed Hospital",
-    "retail": "GlobalRetail Prime",
-    "energy": "Helios Fields",
-    "aero": "Turbine Chain",
-    "wines": "VinosD.O.E Elite",
-    "pharma": "PharmaCold Logistix",
-    "port": "PortBCN Smart Trade",
-    "gov": "Comune Etico",
-    "mining": "PureLithium Sourcing",
-    "fashion": "FastFashion Trace",
-    "finance": "GreenFinance ESG",
-    "grid": "GridFlex Demand"
-  },
-  "sectorDescriptions": {
-    "industrial": "Omologazione industriale in 24h",
-    "agro": "Tracciabilità ESG olio d'oliva",
-    "mobility": "Reporting Scope 3 logistico",
-    "social": "Impatto sociale verificabile SROI",
-    "health": "Manutenzione predittiva apparecchi RM",
-    "retail": "Audit etico supply chain",
-    "energy": "Certificazione energetica rinnovabile",
-    "aero": "Tracciabilità componenti aeronautici",
-    "wines": "Passaporto digitale denominazione origine",
-    "pharma": "Catena del freddo certificata",
-    "port": "Sdoganamento intelligente",
-    "gov": "Acquisti pubblici responsabili",
-    "mining": "Sourcing responsabile di litio",
-    "fashion": "Tracciabilità tessile sostenibile",
-    "finance": "Finanza verde e scoring ESG",
-    "grid": "Gestione flessibile domanda energetica"
-  },
   "nav": {
     "features": "Funzionalità",
     "businessModels": "Modelli di Business",
@@ -153,23 +116,6 @@
     "partners": "PARTNER",
     "dataSpaceKit": "KIT SPAZIO DATI",
     "sectoralNode": "NODO Proprietario",
-    "new": "Nuovo",
-    "uneRecommendations": "Raccomandazioni UNE",
-    "glossaryUne": "Glossario UNE",
-    "transparencyPortal": "Portale di Trasparenza",
-    "rulebook": "Regolamento"
-  },
-  "kitAyudas": {
-    "title": "CONTRIBUTI KIT SPAZIO DATI",
-    "deadline": "Iscrizione entro il 20 marzo 2026",
-    "limitedPlaces": "POSTI LIMITATI",
-    "mainMessage": "Digitalizza la tua catena di fornitura con fino a {amount} di contributo a fondo perduto da RED.ES",
-    "amount": "30.000 €",
-    "benefit1": "Gestione inclusa nella quota mensile",
-    "benefit2": "Contributo 85-90%",
-    "benefit3": "Senza clausole nascoste",
-    "heroCta": "RICHIEDI I CONTRIBUTI KIT SPAZIO DATI",
-    "inscriptionCta": "Richiedi iscrizione per 190€/mese",
-    "viewConditions": "Vedi condizioni"
+    "new": "Nuovo"
   }
 }

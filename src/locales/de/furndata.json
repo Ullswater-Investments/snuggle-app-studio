@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "login": "Anmelden"
+  },
+  "hero": {
+    "badge": "Gaia-X Föderierter Katalog",
+    "title": "Automatische Multi-Portal-Katalogsynchronisierung",
+    "subtitle": "Ein Datenraum, in dem jeder Hersteller seinen Master-Katalog pflegt. E-Commerce-Portale erhalten Echtzeit-Updates.",
+    "cta": "Portal Zugriff",
+    "ctaSecondary": "Erfolgsgeschichte ansehen"
+  },
+  "problem": {
+    "badge": "Das Problem",
+    "title": "Katalogfragmentierung im E-Commerce",
+    "items": {
+      "fragmentation": {
+        "title": "50+ verschiedene Portale",
+        "description": "Jedes Portal hat unterschiedliche Formate. Manuelle Updates kosten Arbeitsstunden."
+      },
+      "errors": {
+        "title": "12% der Einträge mit Fehlern",
+        "description": "Manuelle Fehler bei Preisen, Maßen oder Verfügbarkeit führen zu Retouren."
+      },
+      "certifications": {
+        "title": "Veraltete Zertifizierungen",
+        "description": "Abgelaufene FSC-, REACH- und Brandschutz-Garantien bleiben auf Portalen veröffentlicht."
+      }
+    }
+  },
+  "solution": {
+    "badge": "Die Lösung",
+    "title": "Gaia-X Föderierter Datenraum",
+    "subtitle": "Einmal veröffentlichen, automatisch auf 50+ Portalen synchronisieren",
+    "dataspace": {
+      "title": "Souveräner Master-Katalog",
+      "description": "Jeder Hersteller behält die volle Kontrolle über seine Daten. E-Commerce-Portale fordern Zugang über ODRL-Richtlinien an und erhalten zertifizierte Echtzeit-Updates.",
+      "features": {
+        "1": "Automatische Synchronisierung mit Amazon, Wayfair, ManoMano und mehr",
+        "2": "Digitaler Produktpass (DPP) für jede SKU",
+        "3": "FSC/PEFC, REACH, Brandschutz-Zertifizierungsprüfung"
+      }
+    }
+  },
+  "benefits": {
+    "title": "Messbare Vorteile",
+    "errors": {
+      "label": "Vermiedene Fehler",
+      "description": "Automatische Synchronisierung eliminiert manuelle Fehler"
+    },
+    "conversion": {
+      "label": "Höhere Conversion",
+      "description": "Zertifizierte Einträge schaffen mehr Vertrauen"
+    },
+    "portals": {
+      "label": "Verbundene Portale",
+      "description": "Einzelner Veröffentlichungspunkt für alle"
+    },
+    "traceability": {
+      "label": "Rückverfolgbarkeit",
+      "description": "Jeder Datenpunkt mit verifizierter Quelle verknüpft"
+    }
+  },
+  "certifications": {
+    "title": "Synchronisierte Zertifizierungen",
+    "subtitle": "Alle Zertifizierungen automatisch verifiziert und aktualisiert",
+    "fsc": "Nachhaltiges Holz",
+    "reach": "Chemische Sicherheit",
+    "fireproof": "Brandschutzvorschriften",
+    "iso": "Umweltmanagement",
+    "warranties": "Herstellergarantien"
+  },
+  "techStack": {
+    "title": "Technologie-Stack",
+    "gaiax": "Europäische Dateninfrastruktur",
+    "odrl": "Granulare Zugriffsrichtlinien",
+    "dpp": "Digitaler Produktpass",
+    "api": "Integration mit jedem System"
+  },
+  "cta": {
+    "title": "Treten Sie dem Möbel-Datenraum bei",
+    "subtitle": "Synchronisieren Sie Ihren Katalog automatisch mit 50+ Portalen",
+    "button": "Zugang anfordern"
+  },
+  "footer": {
+    "powered": "Powered by PROCUREDATA · Gaia-X Ready"
+  },
+  "members": {
+    "badge": "Mitgliederbereich",
+    "title": "Föderiertes Katalog-Dashboard",
+    "subtitle": "Verwalten Sie Ihren Master-Katalog und die E-Commerce-Portal-Synchronisierung",
+    "logout": "Abmelden",
+    "metrics": {
+      "skus": "Gesamt-SKUs",
+      "portals": "Verbundene Portale",
+      "syncs": "Syncs/Monat",
+      "errors": "Fehlerrate"
+    },
+    "tabs": {
+      "dashboard": "Dashboard",
+      "catalog": "Katalog",
+      "sync": "Synchronisierung",
+      "compliance": "Compliance"
+    },
+    "dashboard": {
+      "portalStatus": "Portal-Status",
+      "portalStatusDesc": "Aktive Marktplatz-Verbindungen",
+      "certStatus": "Zertifizierungs-Status",
+      "certStatusDesc": "Abdeckung und Gültigkeit der Zertifizierungen",
+      "coverage": "Abdeckung",
+      "quickActions": "Schnellaktionen"
+    },
+    "actions": {
+      "forceSync": "Sync erzwingen",
+      "viewReports": "Berichte anzeigen",
+      "addPortal": "Portal hinzufügen"
+    },
+    "catalog": {
+      "title": "Master-Katalog",
+      "description": "Verwalten Sie Ihre Produkte und technischen Datenblätter",
+      "placeholder": "Katalogverwaltungsmodul in Kürze verfügbar"
+    },
+    "sync": {
+      "title": "Portal-Synchronisierung",
+      "description": "Sync-Status mit jedem Marktplatz",
+      "lastSync": "Letzte Sync"
+    },
+    "compliance": {
+      "title": "Compliance und Zertifizierungen",
+      "description": "Status aller Produktzertifizierungen",
+      "verified": "Verifiziert",
+      "pending": "Ausstehend",
+      "expiration": "Ablauf"
+    }
+  }
+}

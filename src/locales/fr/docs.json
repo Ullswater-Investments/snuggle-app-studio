@@ -176,10 +176,10 @@
         }
       },
       "aria": {
-        "title": "Assistant IA",
-        "content": "<p>L'<strong>Assistant IA</strong> est l'assistant intelligent intégré qui répond aux questions, guide les processus et offre des recommandations personnalisées basées sur le contexte utilisateur.</p>",
+        "title": "Assistant ARIA",
+        "content": "<p><strong>ARIA</strong> est l'assistant IA intégré qui répond aux questions, guide les processus et offre des recommandations personnalisées basées sur le contexte utilisateur.</p>",
         "quiz": {
-          "question": "Qu'est-ce que l'Assistant IA dans ProcureData?",
+          "question": "Qu'est-ce qu'ARIA dans ProcureData?",
           "options": ["Un module de reporting", "Un assistant IA", "Un type de certification", "Une cryptomonnaie"],
           "correctIndex": 1
         }
@@ -449,13 +449,13 @@
   },
   "doc13": {
     "title": "Simulation de Dialogues et Entraînement NLU",
-    "subtitle": "Personnalité, capacités de compréhension et apprentissage continu de l'Assistant IA.",
+    "subtitle": "Personnalité, capacités de compréhension et apprentissage continu d'ARIA.",
     "sections": {
       "personalidad": {
-        "title": "Personnalité de l'Assistant IA",
-        "content": "<p>L'Assistant IA combine <strong>professionnalisme, clarté et empathie</strong>. Il adapte son ton selon le contexte: formel en conformité, amical en support.</p>",
+        "title": "Personnalité d'ARIA",
+        "content": "<p>ARIA combine <strong>professionnalisme, clarté et empathie</strong>. Elle adapte son ton selon le contexte: formel en conformité, amical en support.</p>",
         "quiz": {
-          "question": "Quelles caractéristiques définissent la personnalité de l'Assistant IA?",
+          "question": "Quelles caractéristiques définissent la personnalité d'ARIA?",
           "options": ["Distante et technique", "Professionnalisme, clarté et empathie", "Toujours informelle", "Robotique et froide"],
           "correctIndex": 1
         }
@@ -464,7 +464,7 @@
         "title": "Capacités de Compréhension",
         "content": "<p>NLU multilingue avec détection d'<strong>intention, entités et sentiment</strong> pour des réponses contextualisées.</p>",
         "quiz": {
-          "question": "Que détecte le système NLU de l'Assistant IA?",
+          "question": "Que détecte le système NLU d'ARIA?",
           "options": ["Mots-clés uniquement", "Intention, entités et sentiment", "Langue uniquement", "Rien automatiquement"],
           "correctIndex": 1
         }
@@ -473,7 +473,7 @@
         "title": "Apprentissage Continu",
         "content": "<p>Système de <strong>feedback loop</strong>: les corrections des utilisateurs améliorent les réponses futures via un réentraînement supervisé.</p>",
         "quiz": {
-          "question": "Comment l'Assistant IA améliore-t-il ses réponses?",
+          "question": "Comment ARIA améliore-t-elle ses réponses?",
           "options": ["N'améliore jamais", "Avec le feedback des utilisateurs", "Mises à jour manuelles uniquement", "Aléatoirement"],
           "correctIndex": 1
         }
@@ -482,7 +482,7 @@
         "title": "Capacités Multimodales",
         "content": "<p>Support pour <strong>texte, voix et analyse de documents</strong> téléchargés, avec extraction automatique des informations pertinentes.</p>",
         "quiz": {
-          "question": "Quels types d'entrée l'Assistant IA supporte-t-il?",
+          "question": "Quels types d'entrée ARIA supporte-t-elle?",
           "options": ["Texte uniquement", "Texte, voix et documents", "Voix uniquement", "Images uniquement"],
           "correctIndex": 1
         }

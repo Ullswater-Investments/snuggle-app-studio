@@ -123,7 +123,7 @@
     "secartys": {
       "description": "Nationale industrie voor elektronica, zonne-energie en domotica. +300 bedrijven in de technologiesector."
     },
-    "valerdata": {
+    "valerdat": {
       "description": "Specialisten in bedrijfsdatawaardering en -monetarisatie. Data Spaces Kit Consumer met AI-modellen voor industriële prijsvoorspelling."
     },
     "bme": {
@@ -311,6 +311,9 @@
     },
     "cdi-agro": {
       "description": "Agri-Food Innovatiecluster dat de digitale transformatie van de Spaanse landbouw stimuleert. Verbindt producenten, coöperaties en technologiebedrijven om de agrifood-waardeketen te optimaliseren."
+    },
+    "delogica": {
+      "description": "Geavanceerde digitale logica- en databeheeroplossingen. Ecosystem Builder gespecialiseerd in soevereine dataruimtes en Gaia-X-technologie voor digitale bedrijfstransformatie."
     }
   }
 }

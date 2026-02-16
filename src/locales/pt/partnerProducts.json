@@ -1190,6 +1190,134 @@
           "updateFrequency": "Anual"
         }
       }
+    },
+    "valerdat": {
+      "name": "VALERDAT",
+      "country": "ES",
+      "sector": "IA Procurement",
+      "flag": "🇪🇸",
+      "products": {
+        "MKT-SALES-01": {
+          "id": "VAL-MKT-01",
+          "name": "Histórico de Vendas Transacional para IA",
+          "description": "Dataset de vendas com sazonalidade, canais e preços para treino de modelos de previsão de procura.",
+          "category": "Market",
+          "price": 450,
+          "pricingModel": "subscription",
+          "tags": ["Vendas", "Procura", "IA", "Previsão"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.8,
+          "reviewCount": 156,
+          "dataPoints": "+100K transações",
+          "updateFrequency": "Diário"
+        },
+        "SUP-PERF-02": {
+          "id": "VAL-SUP-02",
+          "name": "Desempenho de Fornecedores e Previsão Lead Time",
+          "description": "Classificação de risco de fornecedores e previsão de lead time real baseada em histórico de entregas.",
+          "category": "Compliance",
+          "price": 380,
+          "pricingModel": "subscription",
+          "tags": ["Fornecedores", "Lead Time", "Risco", "Previsão"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 134,
+          "dataPoints": "+5.000 fornecedores",
+          "updateFrequency": "Semanal"
+        },
+        "OPS-LOG-03": {
+          "id": "VAL-OPS-03",
+          "name": "Logística: Volume, Restrições e Custos",
+          "description": "Volumetria de produtos, restrições de transporte e otimização de custos logísticos.",
+          "category": "Ops",
+          "price": 320,
+          "pricingModel": "subscription",
+          "tags": ["Logística", "Transporte", "Custos", "Volumetria"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.6,
+          "reviewCount": 98,
+          "dataPoints": "+50K SKUs",
+          "updateFrequency": "Mensal"
+        },
+        "OPS-RET-04": {
+          "id": "VAL-OPS-04",
+          "name": "Logística Inversa e Dados de Devoluções",
+          "description": "Cálculo de procura líquida e previsão de recuperação de stock a partir de devoluções.",
+          "category": "Ops",
+          "price": 290,
+          "pricingModel": "subscription",
+          "tags": ["Devoluções", "Logística Inversa", "Stock", "Procura Líquida"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.5,
+          "reviewCount": 87,
+          "dataPoints": "+200K devoluções",
+          "updateFrequency": "Semanal"
+        },
+        "MKT-PROMO-05": {
+          "id": "VAL-MKT-05",
+          "name": "Marketing e Previsão de Procura",
+          "description": "Campanhas, ofertas e modelagem de uplift para limpeza de histórico e previsão de procura.",
+          "category": "Market",
+          "price": 420,
+          "pricingModel": "subscription",
+          "tags": ["Marketing", "Promoções", "Uplift", "Procura"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 112,
+          "dataPoints": "+10K campanhas",
+          "updateFrequency": "Mensal"
+        },
+        "RND-BOM-06": {
+          "id": "VAL-RND-06",
+          "name": "Explosão BOM - Procura Dependente",
+          "description": "Estrutura de produção para MRP e gestão de riscos em supply chain através de explosão de BOM.",
+          "category": "R&D",
+          "price": 580,
+          "pricingModel": "subscription",
+          "tags": ["BOM", "MRP", "Produção", "Supply Chain"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.8,
+          "reviewCount": 76,
+          "dataPoints": "+25K estruturas",
+          "updateFrequency": "Mensal"
+        },
+        "OPS-STK-07": {
+          "id": "VAL-OPS-07",
+          "name": "Estimativa de Procura e Stock",
+          "description": "Snapshots de inventário para reconstrução de procura censurada e deteção de roturas.",
+          "category": "Ops",
+          "price": 350,
+          "pricingModel": "subscription",
+          "tags": ["Stock", "Inventário", "Procura Censurada", "Roturas"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.6,
+          "reviewCount": 145,
+          "dataPoints": "+1M snapshots",
+          "updateFrequency": "Diário"
+        },
+        "RND-PLC-08": {
+          "id": "VAL-RND-08",
+          "name": "Ciclo de Vida do Produto",
+          "description": "Dados mestres para clustering, previsão por similaridade e gestão de obsolescência.",
+          "category": "R&D",
+          "price": 480,
+          "pricingModel": "subscription",
+          "tags": ["Ciclo de Vida", "PLM", "Obsolescência", "Clustering"],
+          "hasGreenBadge": false,
+          "kybVerified": true,
+          "reputationScore": 4.7,
+          "reviewCount": 89,
+          "dataPoints": "+100K produtos",
+          "updateFrequency": "Mensal"
+        }
+      }
     }
   }
 }

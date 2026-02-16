@@ -364,7 +364,7 @@ export function PartnerProductDetailBase({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Card>
+              <Card id="product-tabs">
                 <CardContent className="p-0">
                   <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                     <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0 h-auto flex-wrap">
@@ -624,11 +624,19 @@ export function PartnerProductDetailBase({
                     </Link>
                   </Button>
                   
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link to="/catalog">
-                      <Download className="h-4 w-4 mr-2" />
-                      Ver Muestra
-                    </Link>
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => {
+                      setActiveTab("sample");
+                      document.getElementById("product-tabs")?.scrollIntoView({ 
+                        behavior: "smooth", 
+                        block: "start" 
+                      });
+                    }}
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Ver Muestra
                   </Button>
                 </CardContent>
               </Card>

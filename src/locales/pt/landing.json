@@ -13,7 +13,6 @@
   "monetizationModels": "6 Modelos de Monetização",
   "exploreModels": "Explorar Modelos",
   "viewWhitepaper": "Ver Whitepaper",
-  "viewUne0087": "UNE 0087:2025",
   "demoLinks": {
     "innovationLab": "Innovation Lab",
     "innovationLabDesc": "Mais de 25 linhas de negócios futuras",
@@ -77,42 +76,6 @@
     "finance": "FINANÇAS",
     "grid": "GRID"
   },
-  "sectorCompanies": {
-    "industrial": "GigaFactory North",
-    "agro": "OliveTrust Coop",
-    "mobility": "UrbanDeliver BCN",
-    "social": "Alianza Social Hub",
-    "health": "BioMed Hospital",
-    "retail": "GlobalRetail Prime",
-    "energy": "Helios Fields",
-    "aero": "Turbine Chain",
-    "wines": "VinosD.O.E Elite",
-    "pharma": "PharmaCold Logistix",
-    "port": "PortBCN Smart Trade",
-    "gov": "Município Ético",
-    "mining": "PureLithium Sourcing",
-    "fashion": "FastFashion Trace",
-    "finance": "GreenFinance ESG",
-    "grid": "GridFlex Demand"
-  },
-  "sectorDescriptions": {
-    "industrial": "Homologação industrial em 24h",
-    "agro": "Rastreabilidade ESG azeite de oliva",
-    "mobility": "Relatório Scope 3 logístico",
-    "social": "Impacto social verificável SROI",
-    "health": "Manutenção preditiva equipamentos RM",
-    "retail": "Auditoria ética supply chain",
-    "energy": "Certificação energética renovável",
-    "aero": "Rastreabilidade componentes aeronáuticos",
-    "wines": "Passaporte digital denominação origem",
-    "pharma": "Cadeia de frio certificada",
-    "port": "Despacho aduaneiro inteligente",
-    "gov": "Compra pública responsável",
-    "mining": "Sourcing responsável de lítio",
-    "fashion": "Rastreabilidade têxtil sustentável",
-    "finance": "Finanças verdes e scoring ESG",
-    "grid": "Gestão flexível demanda energética"
-  },
   "nav": {
     "features": "Funcionalidades",
     "businessModels": "Modelos de Negócio",
@@ -153,23 +116,6 @@
     "partners": "PARCEIROS",
     "dataSpaceKit": "KIT ESPAÇO DE DADOS",
     "sectoralNode": "NÓ Proprietário",
-    "new": "Novo",
-    "uneRecommendations": "Recomendações UNE",
-    "glossaryUne": "Glossário UNE",
-    "transparencyPortal": "Portal de Transparência",
-    "rulebook": "Livro de Regras"
-  },
-  "kitAyudas": {
-    "title": "SUBSÍDIOS KIT ESPAÇO DE DADOS",
-    "deadline": "Inscrição até 20 de março de 2026",
-    "limitedPlaces": "VAGAS LIMITADAS",
-    "mainMessage": "Digitalize sua cadeia de suprimentos com até {amount} de subsídio a fundo perdido da RED.ES",
-    "amount": "30.000 €",
-    "benefit1": "Tramitação incluída na mensalidade",
-    "benefit2": "Subsídio 85-90%",
-    "benefit3": "Sem letras miúdas",
-    "heroCta": "SOLICITE OS SUBSÍDIOS KIT ESPAÇO DE DADOS",
-    "inscriptionCta": "Solicitar inscrição por 190€/mês",
-    "viewConditions": "Ver condições"
+    "new": "Novo"
   }
 }

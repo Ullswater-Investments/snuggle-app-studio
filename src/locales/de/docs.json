@@ -176,10 +176,10 @@
         }
       },
       "aria": {
-        "title": "KI-Berater",
-        "content": "<p>Der <strong>KI-Berater</strong> ist der integrierte intelligente Assistent, der Fragen beantwortet, Prozesse leitet und personalisierte Empfehlungen basierend auf dem Benutzerkontext bietet.</p>",
+        "title": "ARIA-Assistent",
+        "content": "<p><strong>ARIA</strong> ist der integrierte KI-Assistent, der Fragen beantwortet, Prozesse leitet und personalisierte Empfehlungen basierend auf dem Benutzerkontext bietet.</p>",
         "quiz": {
-          "question": "Was ist der KI-Berater in ProcureData?",
+          "question": "Was ist ARIA in ProcureData?",
           "options": ["Ein Reporting-Modul", "Ein KI-Assistent", "Eine Zertifizierungsart", "Eine Kryptowährung"],
           "correctIndex": 1
         }
@@ -449,13 +449,13 @@
   },
   "doc13": {
     "title": "Dialogsimulation und NLU-Training",
-    "subtitle": "Persönlichkeit, Verständnisfähigkeiten und kontinuierliches Lernen des KI-Beraters.",
+    "subtitle": "ARIAs Persönlichkeit, Verständnisfähigkeiten und kontinuierliches Lernen.",
     "sections": {
       "personalidad": {
-        "title": "Persönlichkeit des KI-Beraters",
-        "content": "<p>Der KI-Berater kombiniert <strong>Professionalität, Klarheit und Empathie</strong>. Er passt seinen Ton dem Kontext an: formell bei Compliance, freundlich bei Support.</p>",
+        "title": "ARIAs Persönlichkeit",
+        "content": "<p>ARIA kombiniert <strong>Professionalität, Klarheit und Empathie</strong>. Sie passt ihren Ton dem Kontext an: formell bei Compliance, freundlich bei Support.</p>",
         "quiz": {
-          "question": "Welche Eigenschaften definieren die Persönlichkeit des KI-Beraters?",
+          "question": "Welche Eigenschaften definieren ARIAs Persönlichkeit?",
           "options": ["Distanziert und technisch", "Professionalität, Klarheit und Empathie", "Immer informell", "Roboterhaft und kalt"],
           "correctIndex": 1
         }
@@ -464,7 +464,7 @@
         "title": "Verständnisfähigkeiten",
         "content": "<p>Mehrsprachiges NLU mit <strong>Absichts-, Entitäts- und Stimmungserkennung</strong> für kontextualisierte Antworten.</p>",
         "quiz": {
-          "question": "Was erkennt das NLU-System des KI-Beraters?",
+          "question": "Was erkennt ARIAs NLU-System?",
           "options": ["Nur Schlüsselwörter", "Absicht, Entitäten und Stimmung", "Nur Sprache", "Nichts automatisch"],
           "correctIndex": 1
         }
@@ -473,7 +473,7 @@
         "title": "Kontinuierliches Lernen",
         "content": "<p><strong>Feedback-Loop</strong>-System: Benutzerkorrekturen verbessern zukünftige Antworten durch überwachtes Nachtraining.</p>",
         "quiz": {
-          "question": "Wie verbessert der KI-Berater seine Antworten?",
+          "question": "Wie verbessert ARIA ihre Antworten?",
           "options": ["Verbessert nie", "Mit Benutzer-Feedback", "Nur manuelle Updates", "Zufällig"],
           "correctIndex": 1
         }
@@ -482,7 +482,7 @@
         "title": "Multimodale Fähigkeiten",
         "content": "<p>Unterstützung für <strong>Text, Sprache und hochgeladene Dokumentenanalyse</strong> mit automatischer Extraktion relevanter Informationen.</p>",
         "quiz": {
-          "question": "Welche Eingabetypen unterstützt der KI-Berater?",
+          "question": "Welche Eingabetypen unterstützt ARIA?",
           "options": ["Nur Text", "Text, Sprache und Dokumente", "Nur Sprache", "Nur Bilder"],
           "correctIndex": 1
         }

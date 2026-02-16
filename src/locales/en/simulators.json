@@ -12,7 +12,7 @@
     "downloadPassport": "Download Digital Passport",
     "downloadCertificate": "Download Certificate",
     "pontusX": "Pontus-X",
-    "ariaAnalysis": "AI Analysis",
+    "ariaAnalysis": "ARIA Analysis",
     "realTimeConsulting": "Real-time consulting",
     "fteEquivalent": "FTE Equivalent",
     "fteDescription": "This saving equals the annual salary of {{count}} FTE employee(s) dedicated exclusively to administrative tasks that ProcureData automates.",
@@ -24,9 +24,9 @@
     "month": "month"
   },
   "aria": {
-    "name": "AI Advisor",
+    "name": "ARIA",
     "strategicReport": "Personalized Strategic Report",
-    "insight": "AI Insight"
+    "insight": "ARIA Insight"
   },
   "gigaFactory": {
     "title": "Industrial Onboarding Simulator",
@@ -323,7 +323,7 @@
       "smartContract": "Smart Contract"
     },
     "aria": {
-      "name": "AI Advisor",
+      "name": "ARIA",
       "role": "Wind Energy Advisor",
       "instantTitle": "Instant Settlement",
       "instantDesc": "With wind at <strong>{{windSpeed}} m/s</strong> and PPA price of <strong>{{price}}€/MWh</strong>, your instant settlement generates <strong>{{payout}} EUROe</strong> in the current block.",
@@ -354,7 +354,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "AI Advisor",
+      "name": "ARIA",
       "role": "Green Hydrogen Advisor",
       "certifHyTitle": "CertifHy Certification",
       "certifHyIssued": "By exceeding 95% renewable mix, I have issued the <strong>Digital Hydrogen Passport</strong>, unlocking <strong>{{amount}}€</strong> in European funds.",
@@ -384,7 +384,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "AI Advisor",
+      "name": "ARIA",
       "role": "Solar Maintenance Advisor",
       "recoveryTitle": "Energy Recovery",
       "recoveryDesc": "By reducing dirt to <span>{{days}} days</span>, you recover <span>{{mwh}} MWh</span> daily, generating <span>{{revenue}}€</span> additional.",
@@ -415,7 +415,7 @@
       "events": "events"
     },
     "aria": {
-      "name": "AI Advisor",
+      "name": "ARIA",
       "role": "Demand Management Advisor",
       "monetizationTitle": "Flexibility Monetization",
       "monetizationDesc": "By notarizing your reduction of <span>{{kw}} kW</span> on Pontus-X, you have earned <span>{{earnings}} EUROe</span> in flexibility incentives this month.",
@@ -446,7 +446,7 @@
       "eur": "€"
     },
     "aria": {
-      "name": "AI Advisor",
+      "name": "ARIA",
       "role": "Biomass Advisor",
       "traceabilityTitle": "RED II Traceability",
       "traceabilityNeutral": "Origin is 100% legal. Blockchain traceability has certified your biomass as <strong>Carbon Neutral</strong>, raising your sale price by 12%.",
@@ -476,7 +476,7 @@
       "tonCo2": "tonCO2"
     },
     "aria": {
-      "name": "AI Advisor",
+      "name": "ARIA",
       "role": "Decarbonization Advisor",
       "auditTitle": "Supplier Audit",
       "auditDesc": "I have audited your <span>{{suppliers}}</span> steel suppliers. Your CSRD Scope 3 report has a precision of <span>{{precision}}%</span>.",
@@ -485,5 +485,34 @@
       "csrdReadyTitle": "CSRD Ready",
       "csrdReadyDesc": "Your report is valid for international tenders and meets the requirements of the European CSRD directive."
     }
+  },
+  "furndata": {
+    "title": "Federated Catalog Simulator",
+    "subtitle": "FurnData Alliance - Multi-Portal Sync",
+    "badge": "Retail & Furniture",
+    "sliderSKUs": "Number of SKUs in catalog",
+    "sliderPortals": "Connected eCommerce portals",
+    "kpiErrorsAvoided": "Errors Avoided",
+    "kpiHoursSaved": "Hours Saved/Year",
+    "kpiReturnsAvoided": "Returns Avoided",
+    "kpiCertsSynced": "Certifications Synced",
+    "chart": {
+      "before": "Manual Process",
+      "after": "Federated Data Space",
+      "errors": "errors/year"
+    },
+    "aria": {
+      "title": "ARIA Analysis",
+      "role": "Data Space Architect",
+      "syncTitle": "Synchronization",
+      "syncDesc": "With <strong>{{skus}} SKUs</strong> across <strong>{{portals}} portals</strong>, every change at source propagates automatically to all sales channels.",
+      "qualityTitle": "Data Quality",
+      "qualityDesc": "You've avoided <strong>{{errors}} annual errors</strong> that would have caused returns, complaints, and reputational damage.",
+      "advantageTitle": "Competitive Advantage",
+      "advantageDesc": "Buyers trust certified product sheets more. Conversion rate +18% on products with verifiable Digital Passport.",
+      "flashBadge": "Premium Insight",
+      "flashDesc": "With over <strong>1000 synchronized SKUs</strong>, you qualify for the <strong>'Gaia-X Verified Catalog'</strong> badge that increases marketplace visibility."
+    },
+    "downloadReport": "Download PDF Report"
   }
 }

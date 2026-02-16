@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Filter, Globe, Building2, FolderOpen, Leaf, ShieldCheck, X } from "lucide-react";
+import { Filter, Globe, Building2, FolderOpen, Leaf, ShieldCheck, X, CheckCircle2, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -142,6 +142,9 @@ export interface CatalogFiltersState {
   partner: string;
   country: string;
   category: string;
+  onlyAcquired: boolean;
+  onlyPending: boolean;
+  dataNature: "all" | "demo" | "production";
 }
 
 interface CatalogFiltersProps {
@@ -201,6 +204,9 @@ export function CatalogFilters({
     if (filters.partner !== "all") count++;
     if (filters.country !== "all") count++;
     if (filters.category !== "all") count++;
+    if (filters.onlyAcquired) count++;
+    if (filters.onlyPending) count++;
+    if (filters.dataNature !== "all") count++;
     return count;
   }, [filters]);
 
@@ -212,6 +218,9 @@ export function CatalogFilters({
       partner: "all",
       country: "all",
       category: "all",
+      onlyAcquired: false,
+      onlyPending: false,
+      dataNature: "all",
     });
   };
 
@@ -361,6 +370,82 @@ export function CatalogFilters({
                   />
                   <label htmlFor="price-paid" className="text-sm">
                     {t("filters.premiumPaid")}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* Mis Estados Filter */}
+            <div className="space-y-3">
+              <Label className="flex items-center gap-2 text-sm font-medium">
+                Mis Estados
+              </Label>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="check-acquired"
+                    checked={filters.onlyAcquired}
+                    onCheckedChange={(c) =>
+                      onFiltersChange({ ...filters, onlyAcquired: !!c, onlyPending: false })
+                    }
+                  />
+                  <label
+                    htmlFor="check-acquired"
+                    className="text-sm flex items-center gap-1"
+                  >
+                    <CheckCircle2 className="h-3 w-3 text-green-600" /> Adquiridos
+                  </label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="check-pending"
+                    checked={filters.onlyPending}
+                    onCheckedChange={(c) =>
+                      onFiltersChange({ ...filters, onlyPending: !!c, onlyAcquired: false })
+                    }
+                  />
+                  <label
+                    htmlFor="check-pending"
+                    className="text-sm flex items-center gap-1"
+                  >
+                    <Clock className="h-3 w-3 text-amber-600" /> Pendientes
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* Data Nature Filter */}
+            <div className="space-y-3">
+              <Label className="flex items-center gap-2 text-sm font-medium">
+                Naturaleza del Dato
+              </Label>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="nature-demo"
+                    checked={filters.dataNature === "demo"}
+                    onCheckedChange={(c) =>
+                      onFiltersChange({ ...filters, dataNature: c ? "demo" : "all" })
+                    }
+                  />
+                  <label htmlFor="nature-demo" className="text-sm flex items-center gap-1">
+                    🧪 Demo / Sintéticos
+                  </label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="nature-production"
+                    checked={filters.dataNature === "production"}
+                    onCheckedChange={(c) =>
+                      onFiltersChange({ ...filters, dataNature: c ? "production" : "all" })
+                    }
+                  />
+                  <label htmlFor="nature-production" className="text-sm flex items-center gap-1">
+                    🏭 Producción
                   </label>
                 </div>
               </div>

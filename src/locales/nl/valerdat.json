@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "backToPartners": "Terug naar Partners",
+    "membersArea": "Ledengebied"
+  },
+  "hero": {
+    "badges": {
+      "aiPowered": "Geavanceerde AI",
+      "gaiaX": "Gaia-X Ready",
+      "dataSpace": "Native Data Space",
+      "kit": "Data Space Kit"
+    },
+    "title": "VALERDAT",
+    "subtitle": "Intelligente Uitvoeringsgeheugen voor Procurement",
+    "description": "VALERDAT transformeert historische inkoopgegevens in bruikbare intelligentie, waardoor op bewijs gebaseerde inkoopbeslissingen en prijstransparantie mogelijk worden.",
+    "cta": {
+      "project": "Bekijk Project",
+      "members": "Ledentoegang"
+    }
+  },
+  "stats": {
+    "savings": { "value": "15-25%", "label": "Gemiddelde inkoopbesparingen" },
+    "accuracy": { "value": "99,2%", "label": "Voorspellingsnauwkeurigheid" },
+    "transactions": { "value": "+50M", "label": "Geanalyseerde transacties" },
+    "datasets": { "value": "8+", "label": "AI-datasets" },
+    "traceability": { "value": "100%", "label": "Traceerbaarheid" },
+    "funding": { "value": "€12K", "label": "Digitale Kit" }
+  },
+  "problem": {
+    "badge": "Het Probleem",
+    "title": "Ondoorzichtigheid in Inkoopprijzen",
+    "description": "Organisaties missen zicht op eerlijke marktprijzen, onderhandelen blind en verliezen miljoenen aan te hoge kosten.",
+    "items": {
+      "visibility": { "title": "Gebrek aan Transparantie", "description": "Geen toegang tot vergelijkbare marktgegevens voor benchmarking." },
+      "fragmentation": { "title": "Gefragmenteerde Gegevens", "description": "Inkoopinformatie verspreid over meerdere niet-geconsolideerde systemen." },
+      "negotiation": { "title": "Inefficiënte Onderhandeling", "description": "Beslissingen gebaseerd op intuïtie in plaats van objectieve data." },
+      "fragmented": { "title": "Gefragmenteerde Gegevens", "description": "Inkoopinformatie verspreid over meerdere ERP-systemen zonder consolidatie." },
+      "predictions": { "title": "Onnauwkeurige Voorspellingen", "description": "Vraagmodellen die seizoensgebondenheid, promoties en marktgebeurtenissen negeren." },
+      "blind": { "title": "Blinde Onderhandeling", "description": "Gebrek aan marktbenchmarks voor leveranciersonderhandelingen." }
+    }
+  },
+  "solution": {
+    "badge": "De Oplossing",
+    "title": "Soevereine Prijsintelligentie",
+    "description": "VALERDAT verbindt veilig inkoopgegevens van meerdere organisaties, genereert marktbenchmarks zonder gevoelige informatie bloot te stellen.",
+    "features": {
+      "privacy": { "title": "Privacy by Design", "description": "Gefedereerde computing die gegevens bij de bron houdt." },
+      "ai": { "title": "Voorspellende AI", "description": "Machine learning-modellen voor prijsvoorspelling." },
+      "benchmark": { "title": "Anonieme Benchmarking", "description": "Marktvergelijkingen zonder identiteiten te onthullen." },
+      "integration": { "title": "ERP-integratie", "description": "Native connectors met SAP, Oracle en toonaangevende ERPs." }
+    }
+  },
+  "features": {
+    "items": {
+      "ingestion": { "title": "Data-ingestie", "description": "Native connectors voor SAP, Oracle en toonaangevende ERPs met automatische transformatie." },
+      "ai": { "title": "Voorspellende AI", "description": "Machine learning-modellen voor vraag-, prijs- en leveranciersrisicovoorspelling." },
+      "sovereignty": { "title": "Totale Soevereiniteit", "description": "Uw gegevens blijven onder uw controle met Gaia-X-conforme gefedereerde computing." },
+      "payments": { "title": "EUROe-betalingen", "description": "Directe afwikkeling van datatransacties met getokeniseerde digitale euro." }
+    }
+  },
+  "useCases": {
+    "badge": "Toepassingen",
+    "title": "Industriële Toepassingen",
+    "description": "Sectoren die al profiteren van VALERDAT-intelligentie.",
+    "items": {
+      "manufacturing": { "title": "Productie", "description": "Optimalisatie van grondstoffen- en componentenkosten." },
+      "retail": { "title": "Retail", "description": "Onderhandeling van voorwaarden met leveranciers van consumentengoederen." },
+      "construction": { "title": "Bouw", "description": "Kostenbeheersing in infrastructuurprojecten." },
+      "healthcare": { "title": "Gezondheidszorg", "description": "Efficiënte inkoop van medische benodigdheden." }
+    }
+  },
+  "ecosystem": {
+    "badge": "Ecosysteem",
+    "title": "Collaboratief Datanetwerk",
+    "description": "VALERDAT opereert als een knooppunt in het PROCUREDATA-ecosysteem, waarbij organisaties veilig prijsintelligentie delen.",
+    "features": {
+      "sovereignty": "Volledige soevereiniteit over uw gegevens",
+      "compliance": "AVG en Data Governance Act-compliance",
+      "interoperability": "Interoperabiliteit met Europese Data Spaces",
+      "trust": "Smart contracts voor toestemmingsbeheer"
+    },
+    "consumer": "Consument en verwerker van industriële gegevens in het ProcureData-ecosysteem",
+    "provider1": "Aanbieder van industriële transactiegegevens en historische prijzen",
+    "provider2": "Aanbieder van realtime grondstoffen- en materiaalindices",
+    "provider3": "Aanbieder van sectoranalyses en marktbenchmarks"
+  },
+  "techStack": {
+    "badge": "Technologie Stack",
+    "title": "Gaia-X Architectuur",
+    "items": {
+      "gaiax": { "title": "Gaia-X Compliant", "description": "Soevereine data-infrastructuur volgens Europese interoperabiliteitsnormen." },
+      "ml": { "title": "Gefedereerde ML", "description": "Modellen getraind zonder gevoelige gegevens te verplaatsen, met behoud van zakelijke privacy." },
+      "euroe": { "title": "EUROe-betalingen", "description": "Europese stablecoin voor directe afwikkeling van datatransacties." }
+    }
+  },
+  "cta": {
+    "title": "Klaar om de eerlijke prijs te ontdekken?",
+    "description": "Sluit u aan bij organisaties die hun inkopen al optimaliseren met soevereine data-intelligentie.",
+    "buttons": {
+      "contact": "Demo Aanvragen",
+      "members": "Ledentoegang",
+      "catalog": "Bekijk Catalogus"
+    }
+  }
+}

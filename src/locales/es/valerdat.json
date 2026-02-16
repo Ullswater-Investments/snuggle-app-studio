@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "backToPartners": "Volver a Partners",
+    "membersArea": "Área de Miembros"
+  },
+  "hero": {
+    "badges": {
+      "aiPowered": "IA Avanzada",
+      "gaiaX": "Gaia-X Ready",
+      "dataSpace": "Data Space Nativo",
+      "kit": "Kit Espacio de Datos"
+    },
+    "title": "VALERDAT",
+    "subtitle": "Memoria de Ejecución Inteligente para Procurement",
+    "description": "VALERDAT transforma los datos de compras históricas en inteligencia accionable, permitiendo decisiones de procurement basadas en evidencia y transparencia de precios.",
+    "cta": {
+      "project": "Ver Proyecto",
+      "members": "Acceso Miembros"
+    }
+  },
+  "stats": {
+    "savings": { "value": "15-25%", "label": "Ahorro medio en compras" },
+    "accuracy": { "value": "99.2%", "label": "Precisión en predicciones" },
+    "transactions": { "value": "+50M", "label": "Transacciones analizadas" },
+    "datasets": { "value": "8+", "label": "Datasets IA" },
+    "traceability": { "value": "100%", "label": "Trazabilidad" },
+    "funding": { "value": "12K€", "label": "Kit Digital" }
+  },
+  "problem": {
+    "badge": "El Problema",
+    "title": "Opacidad en los Precios de Compra",
+    "description": "Las organizaciones carecen de visibilidad sobre el precio justo de mercado, negociando a ciegas y perdiendo millones en sobrecostes.",
+    "items": {
+      "visibility": { "title": "Falta de Visibilidad", "description": "Sin acceso a datos de mercado comparables para benchmarking." },
+      "fragmentation": { "title": "Datos Fragmentados", "description": "Información de compras dispersa en múltiples sistemas sin consolidar." },
+      "negotiation": { "title": "Negociación Ineficiente", "description": "Decisiones basadas en intuición en lugar de datos objetivos." },
+      "fragmented": { "title": "Datos Fragmentados", "description": "Información de compras dispersa en múltiples sistemas ERP sin consolidar." },
+      "predictions": { "title": "Predicciones Inexactas", "description": "Modelos de demanda que ignoran estacionalidad, promociones y eventos del mercado." },
+      "blind": { "title": "Negociación a Ciegas", "description": "Falta de benchmarks de mercado para negociar con proveedores." }
+    }
+  },
+  "solution": {
+    "badge": "La Solución",
+    "title": "Inteligencia de Precios Soberana",
+    "description": "VALERDAT conecta datos de procurement de múltiples organizaciones de forma segura, generando benchmarks de mercado sin exponer información sensible.",
+    "features": {
+      "privacy": { "title": "Privacidad por Diseño", "description": "Computación federada que mantiene los datos en origen." },
+      "ai": { "title": "IA Predictiva", "description": "Modelos de machine learning para predicción de precios." },
+      "benchmark": { "title": "Benchmarking Anónimo", "description": "Comparativas de mercado sin revelar identidades." },
+      "integration": { "title": "Integración ERP", "description": "Conectores nativos con SAP, Oracle y principales ERPs." }
+    }
+  },
+  "features": {
+    "items": {
+      "ingestion": { "title": "Ingestión de Datos", "description": "Conectores nativos para SAP, Oracle y principales ERPs con transformación automática." },
+      "ai": { "title": "IA Predictiva", "description": "Modelos de machine learning para predicción de demanda, precios y riesgos de proveedores." },
+      "sovereignty": { "title": "Soberanía Total", "description": "Tus datos permanecen bajo tu control con computación federada Gaia-X compliant." },
+      "payments": { "title": "Pagos EUROe", "description": "Liquidación instantánea de transacciones de datos con euro digital tokenizado." }
+    }
+  },
+  "useCases": {
+    "badge": "Casos de Uso",
+    "title": "Aplicaciones Industriales",
+    "description": "Sectores que ya aprovechan la inteligencia de VALERDAT.",
+    "items": {
+      "manufacturing": { "title": "Manufactura", "description": "Optimización de costes de materias primas y componentes." },
+      "retail": { "title": "Retail", "description": "Negociación de condiciones con proveedores de gran consumo." },
+      "construction": { "title": "Construcción", "description": "Control de costes en proyectos de infraestructura." },
+      "healthcare": { "title": "Sanidad", "description": "Compras eficientes de suministros médicos." }
+    }
+  },
+  "ecosystem": {
+    "badge": "Ecosistema",
+    "title": "Red de Datos Colaborativa",
+    "description": "VALERDAT opera como un nodo del ecosistema PROCUREDATA, conectando organizaciones que comparten inteligencia de precios de forma segura.",
+    "features": {
+      "sovereignty": "Soberanía total sobre tus datos",
+      "compliance": "Cumplimiento RGPD y Data Governance Act",
+      "interoperability": "Interoperabilidad con Data Spaces europeos",
+      "trust": "Contratos inteligentes para gestión de consentimiento"
+    },
+    "consumer": "Consumidor y procesador de datos industriales en el ecosistema ProcureData",
+    "provider1": "Proveedor de datos de transacciones industriales y precios históricos",
+    "provider2": "Proveedor de índices de commodities y materias primas en tiempo real",
+    "provider3": "Proveedor de analítica sectorial y benchmarks de mercado"
+  },
+  "techStack": {
+    "badge": "Stack Tecnológico",
+    "title": "Arquitectura Gaia-X",
+    "items": {
+      "gaiax": { "title": "Gaia-X Compliant", "description": "Infraestructura de datos soberana siguiendo estándares europeos de interoperabilidad." },
+      "ml": { "title": "ML Federado", "description": "Modelos entrenados sin mover datos sensibles, preservando la privacidad empresarial." },
+      "euroe": { "title": "Pagos EUROe", "description": "Stablecoin europeo para liquidación instantánea de transacciones de datos." }
+    }
+  },
+  "cta": {
+    "title": "¿Listo para conocer el precio justo?",
+    "description": "Únete a las organizaciones que ya optimizan sus compras con inteligencia de datos soberana.",
+    "buttons": {
+      "contact": "Solicitar Demo",
+      "members": "Acceso Miembros",
+      "catalog": "Ver Catálogo"
+    }
+  }
+}

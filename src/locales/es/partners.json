@@ -125,7 +125,7 @@
     "secartys": {
       "description": "Industria de la electrónica, energía solar y domótica a nivel nacional. +300 empresas del sector tecnológico."
     },
-    "valerdata": {
+    "valerdat": {
       "description": "Especialistas en valoración y monetización de datos empresariales. Consumer del Kit Espacios de Datos con modelos de IA para predicción de precios industriales."
     },
     "bme": {
@@ -322,6 +322,9 @@
     },
     "cdi-agro": {
       "description": "Cluster de Innovación Agroalimentaria que impulsa la transformación digital del sector agrícola español. Conecta productores, cooperativas y empresas tecnológicas para optimizar la cadena de valor agroalimentaria."
+    },
+    "delogica": {
+      "description": "Soluciones avanzadas de lógica digital y gestión de datos. Ecosystem Builder especializado en espacios de datos soberanos y tecnología Gaia-X para la transformación digital empresarial."
     }
   }
 }
