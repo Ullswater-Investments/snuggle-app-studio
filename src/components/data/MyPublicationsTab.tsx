@@ -52,7 +52,7 @@ export const MyPublicationsTab = () => {
             if (!activeOrgId) return [];
 
             const { data, error } = await supabase
-                .from("data_assets")
+                .from("data_assets" as any)
                 .select(`
           id,
           status,
@@ -72,7 +72,7 @@ export const MyPublicationsTab = () => {
                 .order("created_at", { ascending: false });
 
             if (error) throw error;
-            return (data || []) as PublishedAsset[];
+            return (data || []) as unknown as PublishedAsset[];
         },
         enabled: !!activeOrgId,
     });

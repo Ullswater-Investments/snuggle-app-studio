@@ -1009,6 +1009,7 @@ export type Database = {
           is_read: boolean | null
           link: string | null
           message: string | null
+          organization_id: string | null
           title: string
           type: string
           user_id: string
@@ -1019,6 +1020,7 @@ export type Database = {
           is_read?: boolean | null
           link?: string | null
           message?: string | null
+          organization_id?: string | null
           title: string
           type?: string
           user_id: string
@@ -1029,6 +1031,7 @@ export type Database = {
           is_read?: boolean | null
           link?: string | null
           message?: string | null
+          organization_id?: string | null
           title?: string
           type?: string
           user_id?: string
@@ -1098,6 +1101,7 @@ export type Database = {
           description: string | null
           did: string | null
           id: string
+          is_active: boolean
           is_demo: boolean | null
           kyb_verified: boolean | null
           linkedin_url: string | null
@@ -1122,6 +1126,7 @@ export type Database = {
           description?: string | null
           did?: string | null
           id?: string
+          is_active?: boolean
           is_demo?: boolean | null
           kyb_verified?: boolean | null
           linkedin_url?: string | null
@@ -1146,6 +1151,7 @@ export type Database = {
           description?: string | null
           did?: string | null
           id?: string
+          is_active?: boolean
           is_demo?: boolean | null
           kyb_verified?: boolean | null
           linkedin_url?: string | null
