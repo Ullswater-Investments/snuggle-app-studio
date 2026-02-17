@@ -251,15 +251,13 @@ export default function Catalog() {
             price,
             currency,
             pricing_model,
-            is_visible,
             product:data_products(name, category, description),
             org:organizations!subject_org_id(name)
           `)
-          .eq('is_visible', true)
           .eq('status', 'active');
         
         // Mapeo manual para simular la estructura del marketplace
-        const fallbackData: MarketplaceListing[] = rawAssets?.map(a => ({
+        const fallbackData: MarketplaceListing[] = (rawAssets as any[])?.map((a: any) => ({
           asset_id: a.id,
           product_name: a.product?.name || "Producto Sin Nombre",
           product_description: a.product?.description || "Sin descripción",
