@@ -253,6 +253,22 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
     setIsSubmitting(true);
 
     try {
+      // Check if organization with this tax_id already exists
+      const { data: existingOrg } = await supabase
+        .from('organizations')
+        .select('id, name')
+        .eq('tax_id', data.documentNumber)
+        .maybeSingle();
+
+      if (existingOrg) {
+        toast.error("Organización ya registrada", {
+          description: "Esta organización ya se encuentra registrada en PROCUREDATA. Por favor, inicia sesión o contacta con el administrador.",
+          duration: 8000,
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       const { data: newOrg, error: orgError } = await supabase
         .from('organizations')
         .insert({
