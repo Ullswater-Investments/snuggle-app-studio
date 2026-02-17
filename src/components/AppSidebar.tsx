@@ -17,8 +17,10 @@ import {
   TrendingUp,
   Award,
   Handshake,
+  Shield,
 } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useIsDataSpaceOwner } from "@/hooks/useIsDataSpaceOwner";
 import { SidebarWorkspaceSwitcher } from "@/components/SidebarWorkspaceSwitcher";
 import {
   Sidebar,
@@ -38,6 +40,7 @@ export function AppSidebar() {
   const location = useLocation();
   const { t } = useTranslation('nav');
   const { activeOrg } = useOrganizationContext();
+  const { isOwner } = useIsDataSpaceOwner();
 
   const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
 
@@ -141,6 +144,30 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {isOwner && (
+          <SidebarGroup>
+            <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
+              Administración
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to="/admin/dashboard"
+                      className="flex items-center gap-3 hover:bg-destructive/10 transition-colors text-destructive"
+                      activeClassName="bg-destructive/10 text-destructive font-medium"
+                    >
+                      <Shield className="h-5 w-5 shrink-0" />
+                      {open && <span>Ir al Panel Admin</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
 
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
