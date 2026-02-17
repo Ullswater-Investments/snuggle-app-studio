@@ -14,6 +14,74 @@ export type Database = {
   }
   public: {
     Tables: {
+      access_logs: {
+        Row: {
+          action: string | null
+          asset_id: string | null
+          consumer_org_id: string
+          created_at: string
+          error_message: string | null
+          id: string
+          metadata: Json | null
+          status: string | null
+          transaction_id: string
+          user_id: string | null
+        }
+        Insert: {
+          action?: string | null
+          asset_id?: string | null
+          consumer_org_id: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json | null
+          status?: string | null
+          transaction_id: string
+          user_id?: string | null
+        }
+        Update: {
+          action?: string | null
+          asset_id?: string | null
+          consumer_org_id?: string
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json | null
+          status?: string | null
+          transaction_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "access_logs_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "data_assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_logs_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "marketplace_listings"
+            referencedColumns: ["asset_id"]
+          },
+          {
+            foreignKeyName: "access_logs_consumer_org_id_fkey"
+            columns: ["consumer_org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "access_logs_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "data_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ai_feedback: {
         Row: {
           bot_response: string
@@ -231,6 +299,7 @@ export type Database = {
       }
       data_assets: {
         Row: {
+          admin_notes: string | null
           billing_period: string | null
           created_at: string
           currency: string | null
@@ -238,9 +307,11 @@ export type Database = {
           holder_org_id: string
           id: string
           is_public_marketplace: boolean | null
+          is_visible: boolean
           price: number | null
           pricing_model: string | null
           product_id: string
+          published_at: string | null
           required_assurance_level: string | null
           sample_data: Json | null
           status: string
@@ -248,6 +319,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          admin_notes?: string | null
           billing_period?: string | null
           created_at?: string
           currency?: string | null
@@ -255,9 +327,11 @@ export type Database = {
           holder_org_id: string
           id?: string
           is_public_marketplace?: boolean | null
+          is_visible?: boolean
           price?: number | null
           pricing_model?: string | null
           product_id: string
+          published_at?: string | null
           required_assurance_level?: string | null
           sample_data?: Json | null
           status?: string
@@ -265,6 +339,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          admin_notes?: string | null
           billing_period?: string | null
           created_at?: string
           currency?: string | null
@@ -272,9 +347,11 @@ export type Database = {
           holder_org_id?: string
           id?: string
           is_public_marketplace?: boolean | null
+          is_visible?: boolean
           price?: number | null
           pricing_model?: string | null
           product_id?: string
+          published_at?: string | null
           required_assurance_level?: string | null
           sample_data?: Json | null
           status?: string
@@ -1034,6 +1111,7 @@ export type Database = {
           tax_id: string
           type: Database["public"]["Enums"]["organization_type"]
           updated_at: string
+          verification_source: string | null
           wallet_address: string | null
           website: string | null
         }
@@ -1057,6 +1135,7 @@ export type Database = {
           tax_id: string
           type: Database["public"]["Enums"]["organization_type"]
           updated_at?: string
+          verification_source?: string | null
           wallet_address?: string | null
           website?: string | null
         }
@@ -1080,6 +1159,7 @@ export type Database = {
           tax_id?: string
           type?: Database["public"]["Enums"]["organization_type"]
           updated_at?: string
+          verification_source?: string | null
           wallet_address?: string | null
           website?: string | null
         }
@@ -1937,10 +2017,16 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_data_space_owner: { Args: { _user_id: string }; Returns: boolean }
       revoke_expired_transactions: { Args: never; Returns: number }
     }
     Enums: {
-      app_role: "admin" | "approver" | "viewer" | "api_configurator"
+      app_role:
+        | "admin"
+        | "approver"
+        | "viewer"
+        | "api_configurator"
+        | "data_space_owner"
       approval_action: "pre_approve" | "approve" | "deny" | "cancel"
       auth_method: "bearer" | "api_key" | "oauth" | "basic"
       erp_config_type: "download" | "upload"
@@ -1960,6 +2046,7 @@ export type Database = {
         | "denied_holder"
         | "completed"
         | "cancelled"
+        | "revoked"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2087,7 +2174,13 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "approver", "viewer", "api_configurator"],
+      app_role: [
+        "admin",
+        "approver",
+        "viewer",
+        "api_configurator",
+        "data_space_owner",
+      ],
       approval_action: ["pre_approve", "approve", "deny", "cancel"],
       auth_method: ["bearer", "api_key", "oauth", "basic"],
       erp_config_type: ["download", "upload"],
@@ -2108,6 +2201,7 @@ export const Constants = {
         "denied_holder",
         "completed",
         "cancelled",
+        "revoked",
       ],
     },
   },
