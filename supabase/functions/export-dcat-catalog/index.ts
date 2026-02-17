@@ -79,7 +79,7 @@ Deno.serve(async (req) => {
           "@type": "dcat:Distribution",
           "dcat:accessURL": d.accessURL,
           "dct:format": d.format,
-          ...(d.mediaType && { "dcat:mediaType": d.mediaType }),
+          ...((d as Record<string, unknown>).mediaType ? { "dcat:mediaType": (d as Record<string, unknown>).mediaType } : {}),
         }));
       }
 
