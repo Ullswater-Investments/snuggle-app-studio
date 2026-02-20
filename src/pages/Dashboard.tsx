@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, Legend } from "recharts";
 import { DollarSign, ShoppingCart, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, BarChart3, RefreshCw } from "lucide-react";
 import { useEthWalletBalance } from "@/hooks/useEthWalletBalance";
+import { useBlockchainActivity } from "@/hooks/useBlockchainActivity";
 import { Link } from "react-router-dom";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
@@ -159,6 +160,9 @@ export default function Dashboard() {
 
   // Fetch real ETH wallet balance
   const { data: ethWallet, isLoading: ethWalletLoading, refetch: refetchEthWallet, isFetching: ethWalletFetching } = useEthWalletBalance(activeOrg?.id);
+
+  // Fetch blockchain activity (transaction count, cumulative received)
+  const { data: blockchainActivity, isLoading: blockchainActivityLoading } = useBlockchainActivity(activeOrg?.id);
 
   // Fetch transactions for the last 6 months
   const sixMonthsAgo = subMonths(new Date(), 6).toISOString();
@@ -345,30 +349,35 @@ export default function Dashboard() {
               <DollarSign className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              {isLoading ? (
+              {isLoading && blockchainActivityLoading ? (
                 <Skeleton className="h-8 w-24" />
               ) : (
-                <div className="text-2xl font-bold">
-                  {formatCurrency(isProvider ? revenue : spend)}
-                </div>
-              )}
-              {(prevRevenue > 0 || prevSpend > 0) && (
-                <p className={`text-xs mt-1 flex items-center gap-1 ${(isProvider ? revenueChange : spendChange) >= 0
-                  ? "text-green-600"
-                  : "text-red-600"
-                  }`}>
-                  {(isProvider ? revenueChange : spendChange) >= 0 ? (
-                    <ArrowUpRight className="h-3 w-3" />
+                <>
+                  <div className="text-2xl font-bold">
+                    {formatCurrency(isProvider ? revenue : spend)}
+                  </div>
+                  {blockchainActivity?.cumulativeEuroeReceived ? (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      +{blockchainActivity.cumulativeEuroeReceived.toFixed(2)} EUROe {t('cards.totalClosed', 'acumulados')}
+                    </p>
+                  ) : (prevRevenue > 0 || prevSpend > 0) ? (
+                    <p className={`text-xs mt-1 flex items-center gap-1 ${(isProvider ? revenueChange : spendChange) >= 0
+                      ? "text-green-600"
+                      : "text-red-600"
+                      }`}>
+                      {(isProvider ? revenueChange : spendChange) >= 0 ? (
+                        <ArrowUpRight className="h-3 w-3" />
+                      ) : (
+                        <ArrowDownRight className="h-3 w-3" />
+                      )}
+                      {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% {t('cards.vsPrevMonth')}
+                    </p>
                   ) : (
-                    <ArrowDownRight className="h-3 w-3" />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {t('cards.vsPrevMonth')}
+                    </p>
                   )}
-                  {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% {t('cards.vsPrevMonth')}
-              </p>
-              )}
-              {!(prevRevenue > 0 || prevSpend > 0) && (
-                <p className="text-xs text-muted-foreground mt-1">
-                  {t('cards.vsPrevMonth')}
-                </p>
+                </>
               )}
             </CardContent>
           </Card>
@@ -396,7 +405,7 @@ export default function Dashboard() {
           </Card>
         </StaggerItem>
 
-        {/* Completed Transactions */}
+        {/* Completed Transactions (On-chain) */}
         <StaggerItem>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -406,16 +415,27 @@ export default function Dashboard() {
               <TrendingUp className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              {isLoading ? (
+              {blockchainActivityLoading ? (
                 <Skeleton className="h-8 w-12" />
+              ) : blockchainActivity?.isConfigured ? (
+                <>
+                  <div className="text-2xl font-bold tabular-nums">
+                    {blockchainActivity.transactionCount}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    On-chain · Pontus-X Testnet
+                  </p>
+                </>
               ) : (
-                <div className="text-2xl font-bold">
-                  {transactions?.filter(t => t.status === "completed").length || 0}
-                </div>
+                <>
+                  <div className="text-2xl font-bold">
+                    {transactions?.filter(t => t.status === "completed").length || 0}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {t('cards.totalClosed')}
+                  </p>
+                </>
               )}
-              <p className="text-xs text-muted-foreground mt-1">
-                {t('cards.totalClosed')}
-              </p>
             </CardContent>
           </Card>
         </StaggerItem>
