@@ -305,7 +305,10 @@ export default function Landing() {
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <ProcuredataLogo size="lg" showNavigation={true} />
+            <Link to={user ? "/dashboard" : "/"} className="hover:opacity-80 transition-opacity">
+              <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-8 object-contain dark:hidden" />
+              <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-8 object-contain hidden dark:block" />
+            </Link>
             <Link to="/partners">
               <Badge variant="outline" className="text-xs hover:bg-primary/10 cursor-pointer transition-colors">Partners</Badge>
             </Link>
@@ -323,10 +326,10 @@ export default function Landing() {
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <ThemeToggle />
-{user ? <Button asChild>
-                <Link to="/register">{t('nav.startRegistration')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
+{user ? <Button asChild variant="brand">
+                <Link to="/dashboard">Ir al Dashboard <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button> : <Button asChild variant="hero">
-                <Link to="/auth">{tc('demoAccess')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/auth">{t('nav.startRegistration')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>}
           </div>
         </div>
