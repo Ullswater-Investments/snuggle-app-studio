@@ -2,9 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
-import { DemoBanner } from "@/components/DemoBanner";
 import { DemoTour } from "@/components/DemoTour";
-import { DemoHelpButton } from "@/components/DemoHelpButton";
 
 import { AppSidebar } from "@/components/AppSidebar";
 import { AIConcierge } from "@/components/AIConcierge";
@@ -61,7 +59,7 @@ export const AppLayout = () => {
                 <NotificationsBell />
                 <LanguageSwitcher />
                 <ThemeToggle />
-                <DemoHelpButton />
+                
                 <Button variant="outline" size="sm" onClick={signOut}>
                   {t('logout')}
                 </Button>
@@ -69,7 +67,7 @@ export const AppLayout = () => {
             </div>
           </header>
 
-          <DemoBanner />
+          
 
           <main className="flex-1">
             <Outlet />
