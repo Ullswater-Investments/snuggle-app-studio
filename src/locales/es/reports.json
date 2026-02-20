@@ -79,7 +79,7 @@
     "avgTime": "Tiempo Promedio",
     "fromRequestToApproval": "De solicitud a aprobación",
     "compliance": "Cumplimiento",
-    "odrlPolicies": "Políticas ODRL aplicadas",
+    "odrlPolicies": "Controles de acceso aplicados",
     "days": "días",
     "hours": "horas",
     "volume": "Volumen",
