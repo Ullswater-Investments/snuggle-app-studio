@@ -85,7 +85,13 @@
     "addToCart": "Hinzufügen",
     "freeAccess": "Kostenloser Zugang",
     "verifiedProvider": "Verifizierter Anbieter",
-    "reviews": "Bewertungen"
+    "reviews": "Bewertungen",
+    "by": "von",
+    "free": "KOSTENLOS",
+    "month": "Monat",
+    "year": "Jahr",
+    "compareThis": "Dieses Produkt vergleichen",
+    "noDescription": "Keine Beschreibung verfügbar"
   },
   "pricing": {
     "free": "Kostenlos",
