@@ -3,8 +3,14 @@
   "title": "Libreria Dati",
   "subtitle": "Il tuo Centro di Sviluppo per gli Asset di Dati",
   "hero": {
-    "title": "Centro di Sviluppo Dati",
-    "description": "Esplora, sviluppa e gestisci i tuoi asset di dati con strumenti avanzati di analisi e visualizzazione."
+    "badge": "Centro Dati",
+    "title": "Gestione Dati",
+    "description": "Accedi alla tua libreria di dataset acquisiti e gestisci le tue pubblicazioni nel marketplace.",
+    "publishBtn": "Pubblica Nuovo Dataset"
+  },
+  "tabs": {
+    "library": "La Mia Libreria",
+    "publications": "Le Mie Pubblicazioni"
   },
   "categories": {
     "all": "Tutti",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Totale Asset",
     "categories": "Categorie",
-    "activeSubscriptions": "Abbonamenti Attivi"
+    "activeSubscriptions": "Abbonamenti Attivi",
+    "activeDatasets": "Dataset Attivi",
+    "providers": "Fornitori",
+    "blockchainVerified": "Verificati Blockchain",
+    "published": "Dataset Pubblicati",
+    "listed": "Attivi nel Catalogo",
+    "totalValue": "Valore Totale Listato"
   },
   "filters": {
     "searchPlaceholder": "Cerca asset di dati...",
     "category": "Categoria",
-    "updateFrequency": "Frequenza di Aggiornamento"
+    "updateFrequency": "Frequenza di Aggiornamento",
+    "searchProducts": "Cerca per prodotto o fornitore...",
+    "allSectors": "Tutti i settori",
+    "filterBySector": "Filtra per settore"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "Nessun asset di dati",
-    "description": "Non hai asset di dati registrati. Inizia creando il tuo primo asset."
+    "description": "Non hai asset di dati registrati. Inizia creando il tuo primo asset.",
+    "libraryTitle": "La tua libreria è vuota",
+    "libraryDesc": "Quando completerai una transazione, i dati appariranno qui. Esplora il catalogo per trovare i dataset di cui hai bisogno.",
+    "libraryBtn": "Esplora il Marketplace",
+    "pubTitle": "Nessuna pubblicazione",
+    "pubDesc": "Non hai ancora pubblicato alcun dataset. Condividi i tuoi dati con l'ecosistema e genera entrate.",
+    "pubBtn": "Pubblica Dataset"
+  },
+  "card": {
+    "downloadData": "Scarica Dati",
+    "viewDetails": "Vedi Dettagli",
+    "noDataSource": "Asset senza fonte dati configurata",
+    "blockchainTooltip": "Dati verificati con tracciabilità blockchain",
+    "blockchainAudit": "Audit di Tracciabilità Blockchain",
+    "noName": "Dataset senza nome",
+    "noDesc": "Senza descrizione",
+    "price": "Prezzo",
+    "published": "Pubblicato",
+    "view": "Vedi",
+    "analytics": "Analitica",
+    "inReview": "In revisione",
+    "visibleInCatalog": "Visibile nel Catalogo",
+    "notEditable": "Non modificabile durante la validazione tecnica."
+  },
+  "pricing": {
+    "free": "Gratuito",
+    "subscription": "Abbonamento",
+    "oneTime": "Pagamento Unico",
+    "usage": "Per Utilizzo",
+    "undefined": "Non definito",
+    "perMonth": "/mese"
+  },
+  "pubStatus": {
+    "validation": "In Validazione Tecnica",
+    "available": "Disponibile",
+    "published": "Pubblicato",
+    "rejected": "Rifiutato",
+    "draft": "Bozza",
+    "archived": "Archiviato"
+  },
+  "expiration": {
+    "expired": "Scaduto",
+    "expiresIn": "Scade tra {{days}}g",
+    "active": "Attivo"
+  },
+  "dataType": {
+    "administrative": "Amministrativo",
+    "iot": "IoT",
+    "financial": "Finanziario",
+    "energy": "Energia",
+    "esg": "ESG",
+    "data": "Dati"
+  },
+  "loading": "Caricamento dati...",
+  "loadingPub": "Caricamento pubblicazioni...",
+  "noResults": "Nessun risultato trovato",
+  "clearFilters": "Cancella Filtri",
+  "adjustFilters": "Prova a modificare i filtri di ricerca",
+  "toast": {
+    "visibleOn": "Asset visibile nel catalogo",
+    "visibleOff": "Asset nascosto dal catalogo",
+    "visibilityError": "Errore nel cambio di visibilità",
+    "downloadSuccess": "File scaricato con successo",
+    "downloadError": "Errore di download",
+    "noDataSource": "Questo asset non ha ancora una fonte dati configurata.",
+    "downloading": "Download dei dati tramite il Gateway...",
+    "connectionError": "Errore di Connessione: Il server del fornitore non risponde."
   }
 }

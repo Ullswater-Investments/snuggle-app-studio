@@ -3,8 +3,14 @@
   "title": "Biblioteca de Datos",
   "subtitle": "Tu Centro de Desarrollo para Activos de Datos",
   "hero": {
-    "title": "Centro de Desarrollo de Datos",
-    "description": "Explora, desarrolla y gestiona tus activos de datos con herramientas avanzadas de análisis y visualización."
+    "badge": "Centro de Datos",
+    "title": "Gestión de Datos",
+    "description": "Accede a tu biblioteca de datasets adquiridos y gestiona tus publicaciones en el marketplace.",
+    "publishBtn": "Publicar Nuevo Dataset"
+  },
+  "tabs": {
+    "library": "Mi Biblioteca",
+    "publications": "Mis Publicaciones"
   },
   "categories": {
     "all": "Todos",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Total Activos",
     "categories": "Categorías",
-    "activeSubscriptions": "Suscripciones Activas"
+    "activeSubscriptions": "Suscripciones Activas",
+    "activeDatasets": "Datasets Activos",
+    "providers": "Proveedores",
+    "blockchainVerified": "Verificados Blockchain",
+    "published": "Datasets Publicados",
+    "listed": "Activos en Catálogo",
+    "totalValue": "Valor Total Listado"
   },
   "filters": {
     "searchPlaceholder": "Buscar activos de datos...",
     "category": "Categoría",
-    "updateFrequency": "Frecuencia de Actualización"
+    "updateFrequency": "Frecuencia de Actualización",
+    "searchProducts": "Buscar por producto o proveedor...",
+    "allSectors": "Todos los sectores",
+    "filterBySector": "Filtrar por sector"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "Sin activos de datos",
-    "description": "No tienes activos de datos registrados. Comienza creando tu primer activo."
+    "description": "No tienes activos de datos registrados. Comienza creando tu primer activo.",
+    "libraryTitle": "Tu biblioteca está vacía",
+    "libraryDesc": "Cuando completes una transacción, los datos aparecerán aquí. Explora el catálogo para encontrar datasets que necesites.",
+    "libraryBtn": "Explorar Marketplace",
+    "pubTitle": "Sin publicaciones",
+    "pubDesc": "Aún no has publicado ningún dataset. Comparte tus datos con el ecosistema y genera ingresos.",
+    "pubBtn": "Publicar Dataset"
+  },
+  "card": {
+    "downloadData": "Descargar Datos",
+    "viewDetails": "Ver Detalles",
+    "noDataSource": "Activo sin fuente de datos configurada",
+    "blockchainTooltip": "Datos verificados con trazabilidad blockchain",
+    "blockchainAudit": "Auditoría de Trazabilidad Blockchain",
+    "noName": "Dataset sin nombre",
+    "noDesc": "Sin descripción",
+    "price": "Precio",
+    "published": "Publicado",
+    "view": "Ver",
+    "analytics": "Analytics",
+    "inReview": "En revisión",
+    "visibleInCatalog": "Visible en Catálogo",
+    "notEditable": "No editable mientras está en validación técnica."
+  },
+  "pricing": {
+    "free": "Gratuito",
+    "subscription": "Suscripción",
+    "oneTime": "Pago Único",
+    "usage": "Por Uso",
+    "undefined": "Sin definir",
+    "perMonth": "/mes"
+  },
+  "pubStatus": {
+    "validation": "En Validación Técnica",
+    "available": "Disponible",
+    "published": "Publicado",
+    "rejected": "Rechazado",
+    "draft": "Borrador",
+    "archived": "Archivado"
+  },
+  "expiration": {
+    "expired": "Expirado",
+    "expiresIn": "Expira en {{days}}d",
+    "active": "Activo"
+  },
+  "dataType": {
+    "administrative": "Administrativo",
+    "iot": "IoT",
+    "financial": "Financiero",
+    "energy": "Energía",
+    "esg": "ESG",
+    "data": "Datos"
+  },
+  "loading": "Cargando datos...",
+  "loadingPub": "Cargando publicaciones...",
+  "noResults": "No se encontraron resultados",
+  "clearFilters": "Limpiar Filtros",
+  "adjustFilters": "Prueba ajustando los filtros de búsqueda",
+  "toast": {
+    "visibleOn": "Activo visible en el catálogo",
+    "visibleOff": "Activo oculto del catálogo",
+    "visibilityError": "Error al cambiar la visibilidad",
+    "downloadSuccess": "Archivo descargado correctamente",
+    "downloadError": "Error al descargar",
+    "noDataSource": "Este activo aún no tiene una fuente de datos configurada.",
+    "downloading": "Descargando datos a través del Gateway...",
+    "connectionError": "Error de Conexión: El servidor del proveedor no responde."
   }
 }

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,6 +12,7 @@ import { MyPublicationsTab } from "@/components/data/MyPublicationsTab";
 const Data = () => {
   const navigate = useNavigate();
   const { activeOrg } = useOrganizationContext();
+  const { t } = useTranslation('data');
 
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -20,13 +22,13 @@ const Data = () => {
             <div>
               <Badge variant="secondary" className="mb-4">
                 <Database className="mr-1 h-3 w-3" />
-                Centro de Datos
+                {t('hero.badge')}
               </Badge>
               <h1 className="text-4xl font-bold mb-3">
-                Gestión de Datos
+                {t('hero.title')}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                Accede a tu biblioteca de datasets adquiridos y gestiona tus publicaciones en el marketplace.
+                {t('hero.description')}
               </p>
             </div>
 
@@ -37,7 +39,7 @@ const Data = () => {
               className="shrink-0"
             >
               <Plus className="h-5 w-5 mr-2" />
-              Publicar Nuevo Dataset
+              {t('hero.publishBtn')}
             </Button>
           </div>
         </div>
@@ -48,11 +50,11 @@ const Data = () => {
           <TabsList className="grid w-full max-w-md grid-cols-2">
             <TabsTrigger value="biblioteca" className="flex items-center gap-2">
               <Library className="h-4 w-4" />
-              Mi Biblioteca
+              {t('tabs.library')}
             </TabsTrigger>
             <TabsTrigger value="publicaciones" className="flex items-center gap-2">
               <Upload className="h-4 w-4" />
-              Mis Publicaciones
+              {t('tabs.publications')}
             </TabsTrigger>
           </TabsList>
 
