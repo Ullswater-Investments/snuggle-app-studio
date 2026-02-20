@@ -7,7 +7,8 @@ import { RecentTransactions } from "@/components/RecentTransactions";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, Legend } from "recharts";
-import { DollarSign, ShoppingCart, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, BarChart3 } from "lucide-react";
+import { DollarSign, ShoppingCart, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, BarChart3, RefreshCw } from "lucide-react";
+import { useEthWalletBalance } from "@/hooks/useEthWalletBalance";
 import { Link } from "react-router-dom";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
@@ -140,23 +141,24 @@ export default function Dashboard() {
   const currentLocale = localeMap[i18n.language] || es;
 
 
-  // Fetch wallet balance
+  // Fetch internal wallet balance (legacy)
   const { data: wallet, isLoading: walletLoading } = useQuery({
     queryKey: ["wallet", activeOrg?.id],
     queryFn: async () => {
       if (!activeOrg) return null;
-
       const { data, error } = await supabase
         .from("wallets")
         .select("id, balance, currency")
         .eq("organization_id", activeOrg.id)
         .maybeSingle();
-
       if (error) throw error;
       return data as WalletData | null;
     },
     enabled: !!activeOrg,
   });
+
+  // Fetch real ETH wallet balance
+  const { data: ethWallet, isLoading: ethWalletLoading, refetch: refetchEthWallet, isFetching: ethWalletFetching } = useEthWalletBalance(activeOrg?.id);
 
   // Fetch transactions for the last 6 months
   const sixMonthsAgo = subMonths(new Date(), 6).toISOString();
@@ -292,19 +294,42 @@ export default function Dashboard() {
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 {t('cards.walletBalance')}
               </CardTitle>
-              <Wallet className="h-4 w-4 text-primary" />
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => refetchEthWallet()}
+                  disabled={ethWalletFetching}
+                  className="p-1 rounded-md hover:bg-muted transition-colors disabled:opacity-50"
+                  title="Refrescar saldo"
+                >
+                  <RefreshCw className={`h-3.5 w-3.5 text-muted-foreground ${ethWalletFetching ? 'animate-spin' : ''}`} />
+                </button>
+                <Wallet className="h-4 w-4 text-primary" />
+              </div>
             </CardHeader>
             <CardContent>
-              {isLoading ? (
+              {ethWalletLoading ? (
                 <Skeleton className="h-8 w-24" />
+              ) : ethWallet?.isConfigured ? (
+                <>
+                  <div className="text-2xl font-bold">
+                    {formatCurrency(ethWallet.balanceEur, "EUR")}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {ethWallet.balanceEth.toFixed(6)} ETH · 1 ETH ≈ {formatCurrency(ethWallet.ethPriceEur, "EUR")}
+                  </p>
+                </>
               ) : (
-                <div className="text-2xl font-bold">
-                  {formatCurrency(wallet?.balance || 0, wallet?.currency || "EUR")}
-                </div>
+                <>
+                  <div className="text-2xl font-bold">
+                    {formatCurrency(wallet?.balance || 0, wallet?.currency || "EUR")}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {ethWallet?.walletAddress === null
+                      ? t('cards.walletNotConfigured', 'Wallet no configurada')
+                      : t('cards.walletAvailable')}
+                  </p>
+                </>
               )}
-              <p className="text-xs text-muted-foreground mt-1">
-                {wallet ? t('cards.walletAvailable') : t('cards.walletNotConfigured')}
-              </p>
             </CardContent>
           </Card>
         </StaggerItem>
