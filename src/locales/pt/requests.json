@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Cancelada",
       "tooltip": "Transação cancelada"
+    },
+    "revoked": {
+      "label": "Acesso Revogado",
+      "tooltip": "O fornecedor revogou o acesso"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Fornecedor",
     "createdAt": "Data da Solicitação",
     "accessDuration": "Duração do Acesso",
-    "myRole": "Meu Papel"
+    "myRole": "Meu Papel",
+    "created": "Criada"
   },
   "roles": {
     "consumer": "Consumidor",
@@ -93,17 +98,42 @@
     "viewDetails": "Ver Detalhes",
     "cancel": "Cancelar"
   },
+  "kanban": {
+    "pending": "Pendentes",
+    "negotiation": "Em Negociação",
+    "approved": "Aprovados",
+    "completed": "Concluídos"
+  },
+  "detail": {
+    "requester": "Solicitante",
+    "provider": "Fornecedor",
+    "currentStatus": "Estado Atual",
+    "timeline": "Cronologia de Aprovações",
+    "noHistory": "Sem histórico de aprovações",
+    "policyProvider": "política do fornecedor"
+  },
   "empty": {
     "title": "Sem solicitações ativas",
     "description": "Você não tem solicitações que requerem ação. Novas solicitações aparecerão aqui.",
-    "exploreCatalog": "Explorar Catálogo"
+    "exploreCatalog": "Explorar Catálogo",
+    "noRequests": "Você não fez nenhuma solicitação",
+    "noHistory": "Sem transações históricas",
+    "noHistoryDesc": "Transações concluídas, aprovadas ou negadas aparecerão aqui"
   },
   "loading": "Carregando solicitações...",
   "toast": {
     "success": "Ação concluída com sucesso",
+    "error": "Erro ao realizar a ação",
+    "denied": "Solicitação negada",
     "noData": "Sem dados para exportar",
     "exported": "Relatório baixado com sucesso",
     "exportedDesc": "{{count}} transações exportadas"
+  },
+  "demo": {
+    "tooltip": "Transação sintética de demonstração. Em produção, verá suas solicitações reais."
+  },
+  "csv": {
+    "noProduct": "Sem produto"
   },
   "analytics": {
     "title": "Métricas de Transações",

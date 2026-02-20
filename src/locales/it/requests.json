@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Annullata",
       "tooltip": "Transazione annullata"
+    },
+    "revoked": {
+      "label": "Accesso Revocato",
+      "tooltip": "Il fornitore ha revocato l'accesso"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Fornitore",
     "createdAt": "Data della Richiesta",
     "accessDuration": "Durata dell'Accesso",
-    "myRole": "Il Mio Ruolo"
+    "myRole": "Il Mio Ruolo",
+    "created": "Creata"
   },
   "roles": {
     "consumer": "Consumatore",
@@ -93,17 +98,42 @@
     "viewDetails": "Vedi Dettagli",
     "cancel": "Annullare"
   },
+  "kanban": {
+    "pending": "In sospeso",
+    "negotiation": "In Negoziazione",
+    "approved": "Approvati",
+    "completed": "Completati"
+  },
+  "detail": {
+    "requester": "Richiedente",
+    "provider": "Fornitore",
+    "currentStatus": "Stato Attuale",
+    "timeline": "Cronologia delle Approvazioni",
+    "noHistory": "Nessuna cronologia di approvazione",
+    "policyProvider": "politica del fornitore"
+  },
   "empty": {
     "title": "Nessuna richiesta attiva",
     "description": "Non hai richieste che richiedono azione. Le nuove richieste appariranno qui.",
-    "exploreCatalog": "Esplora Catalogo"
+    "exploreCatalog": "Esplora Catalogo",
+    "noRequests": "Non hai effettuato nessuna richiesta",
+    "noHistory": "Nessuna transazione storica",
+    "noHistoryDesc": "Le transazioni completate, approvate o rifiutate appariranno qui"
   },
   "loading": "Caricamento richieste...",
   "toast": {
     "success": "Azione completata con successo",
+    "error": "Errore nell'esecuzione dell'azione",
+    "denied": "Richiesta rifiutata",
     "noData": "Nessun dato da esportare",
     "exported": "Report scaricato con successo",
     "exportedDesc": "{{count}} transazioni esportate"
+  },
+  "demo": {
+    "tooltip": "Transazione sintetica di dimostrazione. In produzione, vedrai le tue richieste reali."
+  },
+  "csv": {
+    "noProduct": "Senza prodotto"
   },
   "analytics": {
     "title": "Metriche delle Transazioni",

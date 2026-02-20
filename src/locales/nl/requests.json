@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Geannuleerd",
       "tooltip": "Transactie geannuleerd"
+    },
+    "revoked": {
+      "label": "Toegang Ingetrokken",
+      "tooltip": "De aanbieder heeft de toegang ingetrokken"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Aanbieder",
     "createdAt": "Verzoekdatum",
     "accessDuration": "Toegangsduur",
-    "myRole": "Mijn Rol"
+    "myRole": "Mijn Rol",
+    "created": "Aangemaakt"
   },
   "roles": {
     "consumer": "Afnemer",
@@ -93,17 +98,42 @@
     "viewDetails": "Details Bekijken",
     "cancel": "Annuleren"
   },
+  "kanban": {
+    "pending": "In afwachting",
+    "negotiation": "In Onderhandeling",
+    "approved": "Goedgekeurd",
+    "completed": "Voltooid"
+  },
+  "detail": {
+    "requester": "Aanvrager",
+    "provider": "Aanbieder",
+    "currentStatus": "Huidige Status",
+    "timeline": "Goedkeuringstijdlijn",
+    "noHistory": "Nog geen goedkeuringsgeschiedenis",
+    "policyProvider": "aanbiederbeleid"
+  },
   "empty": {
     "title": "Geen actieve verzoeken",
     "description": "U heeft geen verzoeken die actie vereisen. Nieuwe verzoeken verschijnen hier.",
-    "exploreCatalog": "Catalogus Verkennen"
+    "exploreCatalog": "Catalogus Verkennen",
+    "noRequests": "U heeft geen aanvragen ingediend",
+    "noHistory": "Geen historische transacties",
+    "noHistoryDesc": "Voltooide, goedgekeurde of geweigerde transacties verschijnen hier"
   },
   "loading": "Verzoeken laden...",
   "toast": {
     "success": "Actie succesvol voltooid",
+    "error": "Fout bij het uitvoeren van de actie",
+    "denied": "Aanvraag geweigerd",
     "noData": "Geen gegevens om te exporteren",
     "exported": "Rapport succesvol gedownload",
     "exportedDesc": "{{count}} transacties geëxporteerd"
+  },
+  "demo": {
+    "tooltip": "Synthetische demotransactie. In productie ziet u uw echte aanvragen."
+  },
+  "csv": {
+    "noProduct": "Geen product"
   },
   "analytics": {
     "title": "Transactiestatistieken",
