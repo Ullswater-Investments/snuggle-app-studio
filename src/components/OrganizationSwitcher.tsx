@@ -32,7 +32,7 @@ export const OrganizationSwitcher = () => {
     return (
       <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted/50">
         <Building2 className="h-4 w-4 text-muted-foreground" />
-        <div className="flex flex-col">
+        <div className="hidden lg:flex flex-col">
           <span className="text-sm font-medium">{activeOrg?.name}</span>
           <span className="text-xs text-muted-foreground flex items-center gap-1">
             {RoleIcon && <RoleIcon className="h-3 w-3" />}
@@ -46,9 +46,9 @@ export const OrganizationSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2 min-w-[200px]">
+        <Button variant="outline" className="flex items-center gap-2 min-w-0">
           <Building2 className="h-4 w-4" />
-          <div className="flex flex-col items-start flex-1">
+          <div className="hidden lg:flex flex-col items-start flex-1">
             <span className="text-sm font-medium truncate max-w-[150px]">
               {activeOrg?.name || "Seleccionar organización"}
             </span>

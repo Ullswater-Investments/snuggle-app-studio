@@ -6,7 +6,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { NotificationsBell } from "@/components/NotificationsBell";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
-import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
+
 
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -18,17 +18,17 @@ export const UnifiedHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
-      <div className="grid grid-cols-3 h-16 items-center px-4">
-        {/* Columna Izquierda: Logo */}
-        <div className="flex items-center gap-3">
+      <div className="flex h-16 items-center px-4 gap-4">
+        {/* Izquierda: Menu + Marca */}
+        <div className="flex items-center gap-3 flex-shrink-0">
           <SidebarTrigger />
-          <Link to="/dashboard" className="hover:opacity-80 transition-opacity flex-shrink-0">
-            <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-9 object-contain" />
+          <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
+            <span className="text-xl font-bold tracking-tight text-primary">PROCUREDATA</span>
           </Link>
         </div>
         
-        {/* Columna Central: Command Palette Trigger */}
-        <div className="hidden sm:flex justify-center">
+        {/* Central: Command Palette */}
+        <div className="hidden sm:flex flex-1 justify-center">
           <button
             onClick={() => {
               const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true });
@@ -45,7 +45,7 @@ export const UnifiedHeader = () => {
         </div>
         
         {/* Columna Derecha: Controles */}
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-center justify-end gap-2 flex-shrink-0">
           {/* Icono de búsqueda en móvil */}
           <Button variant="ghost" size="icon" className="sm:hidden">
             <Search className="h-4 w-4" />
