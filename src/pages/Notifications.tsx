@@ -66,7 +66,7 @@ interface NotificationGroup {
 }
 
 const Notifications = () => {
-  const { t, i18n } = useTranslation("notifications");
+  const { i18n } = useTranslation();
   const { user } = useAuth();
   const { activeOrgId } = useOrganizationContext();
   const queryClient = useQueryClient();
@@ -123,7 +123,7 @@ const Notifications = () => {
         },
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
-          toast.info(t("toast.newNotification"), {
+          toast.info("Nueva notificación", {
             description: (payload.new as Notification).title,
           });
         }
@@ -164,7 +164,7 @@ const Notifications = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success(t("actions.delete"));
+      toast.success("Notificación eliminada");
     },
     onError: () => {
       toast.error("Error al eliminar la notificación");
@@ -187,7 +187,7 @@ const Notifications = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success(t("toast.allMarkedAsRead"));
+      toast.success("Todas las notificaciones marcadas como leídas");
     },
     onError: () => {
       toast.error("Error");
@@ -280,12 +280,12 @@ const Notifications = () => {
     });
 
     const groups: NotificationGroup[] = [];
-    if (today.length > 0) groups.push({ label: t("groups.today"), notifications: today });
-    if (yesterday.length > 0) groups.push({ label: t("groups.yesterday"), notifications: yesterday });
-    if (older.length > 0) groups.push({ label: t("groups.older"), notifications: older });
+    if (today.length > 0) groups.push({ label: "Hoy", notifications: today });
+    if (yesterday.length > 0) groups.push({ label: "Ayer", notifications: yesterday });
+    if (older.length > 0) groups.push({ label: "Anteriores", notifications: older });
 
     return groups;
-  }, [notifications, t]);
+  }, [notifications]);
 
   const unreadCount = notifications?.filter((n) => !n.is_read).length || 0;
   const priorityCount = notifications?.filter((n) => n.type === "warning" || n.type === "error").length || 0;
@@ -315,15 +315,11 @@ const Notifications = () => {
       <FadeIn>
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-background to-background border border-primary/20 p-8">
           <div className="relative z-10">
-            <Badge variant="secondary" className="mb-4">
-              <Bell className="mr-1 h-3 w-3" />
-              {t("badge")}
-            </Badge>
             <h1 className="text-4xl font-bold mb-3">
-              {t("title")}
+              Centro de Notificaciones
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              {t("subtitle")}
+              Gestiona tus alertas y actividad reciente
             </p>
           </div>
         </div>
@@ -337,14 +333,14 @@ const Notifications = () => {
               onClick={() => setFilter("all")}
               size="sm"
             >
-              {t("filters.all")}
+              Todas
             </Button>
             <Button
               variant={filter === "unread" ? "default" : "outline"}
               onClick={() => setFilter("unread")}
               size="sm"
             >
-              {t("filters.unread")}
+              No leídas
               {unreadCount > 0 && (
                 <Badge variant="secondary" className="ml-2 bg-primary/20">
                   {unreadCount}
@@ -358,7 +354,7 @@ const Notifications = () => {
               className="gap-1"
             >
               <AlertTriangle className="h-4 w-4" />
-              {t("filters.highPriority")}
+              Prioridad Alta
               {priorityCount > 0 && (
                 <Badge variant="secondary" className="ml-1 bg-orange-500/20 text-orange-700 dark:text-orange-400">
                   {priorityCount}
@@ -376,7 +372,7 @@ const Notifications = () => {
               className="gap-2 text-muted-foreground hover:text-foreground"
             >
               <CheckCheck className="h-4 w-4" />
-              {t("actions.markAllRead")}
+              Marcar todo como leído
             </Button>
           )}
         </div>
@@ -400,9 +396,9 @@ const Notifications = () => {
             ) : !notifications || notifications.length === 0 ? (
               <div className="text-center py-12">
                 <Bell className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">{t("empty.title")}</h3>
+                <h3 className="text-lg font-semibold mb-2">Sin notificaciones</h3>
                 <p className="text-sm text-muted-foreground">
-                  {t("empty.description")}
+                  Te avisaremos cuando haya actividad relevante en tus activos.
                 </p>
               </div>
             ) : (
@@ -468,7 +464,7 @@ const Notifications = () => {
                                   onClick={() => handleNotificationClick(notification)}
                                   className="gap-1"
                                 >
-                                  {t("actions.viewDetails")}
+                                  Ver detalles
                                   <ExternalLink className="h-3 w-3" />
                                 </Button>
                               )}
@@ -491,12 +487,12 @@ const Notifications = () => {
                                     {notification.is_read ? (
                                       <>
                                         <Mail className="mr-2 h-4 w-4" />
-                                        {t("actions.markAsRead")}
+                                      Marcar como no leída
                                       </>
                                     ) : (
                                       <>
                                         <MailOpen className="mr-2 h-4 w-4" />
-                                        {t("actions.markAsRead")}
+                                        Marcar como leída
                                       </>
                                     )}
                                   </DropdownMenuItem>
