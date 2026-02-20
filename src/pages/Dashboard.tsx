@@ -2,15 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { ActivityFeed } from "@/components/ActivityFeed";
-import { DashboardStats } from "@/components/DashboardStats";
 import { RecentTransactions } from "@/components/RecentTransactions";
-import { EnhancedWalletCard } from "@/components/EnhancedWalletCard";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, Legend } from "recharts";
-import { DollarSign, ShoppingCart, Package, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, Info } from "lucide-react";
+import { DollarSign, ShoppingCart, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
@@ -142,19 +139,6 @@ export default function Dashboard() {
   const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
   const currentLocale = localeMap[i18n.language] || es;
 
-  // Mock data for when no real data exists - localized
-  const MOCK_CHART_DATA: MonthlyData[] = (() => {
-    const months = [];
-    for (let i = 5; i >= 0; i--) {
-      const date = subMonths(new Date(), i);
-      months.push({
-        name: format(date, "MMM", { locale: currentLocale }),
-        revenue: [4200, 5100, 3800, 6200, 4800, 5500][5 - i],
-        spend: [2800, 3200, 4500, 2900, 3600, 3100][5 - i],
-      });
-    }
-    return months;
-  })();
 
   // Fetch wallet balance
   const { data: wallet, isLoading: walletLoading } = useQuery({
@@ -230,59 +214,14 @@ export default function Dashboard() {
   });
 
   // Process data
-  const realChartData = processTransactionsForChart(transactions, activeOrg?.id, currentLocale);
-  const hasRealData = realChartData.some(d => d.revenue > 0 || d.spend > 0);
-  const chartData = hasRealData ? realChartData : MOCK_CHART_DATA;
+  const chartData = processTransactionsForChart(transactions, activeOrg?.id, currentLocale);
+  const hasRealData = chartData.some(d => d.revenue > 0 || d.spend > 0);
 
   const { revenue, spend, prevRevenue, prevSpend } = calculateCurrentMonthMetrics(transactions, activeOrg?.id);
 
   // Calculate percentage changes
   const revenueChange = prevRevenue > 0 ? ((revenue - prevRevenue) / prevRevenue) * 100 : 0;
   const spendChange = prevSpend > 0 ? ((spend - prevSpend) / prevSpend) * 100 : 0;
-
-  // For demo: calculate display values
-  const displayRevenue = hasRealData ? revenue : 5500;
-  const displaySpend = hasRealData ? spend : 3100;
-  const displayRevenueChange = hasRealData ? revenueChange : 14.6;
-  const displaySpendChange = hasRealData ? spendChange : -13.9;
-
-  // Calculate category breakdown
-  const categoryBreakdown = (() => {
-    const categoryMap: Record<string, number> = {};
-
-    (transactions || []).forEach((tx) => {
-      const isRelevant = isProvider
-        ? tx.subject_org_id === activeOrg?.id
-        : tx.consumer_org_id === activeOrg?.id;
-
-      if (isRelevant && tx.status === "completed") {
-        const category = tx.asset?.product?.category || t('wallet.others');
-        const amount = tx.asset?.price || 0;
-        categoryMap[category] = (categoryMap[category] || 0) + amount;
-      }
-    });
-
-    // If no real data, use mock
-    if (Object.keys(categoryMap).length === 0) {
-      return [
-        { category: "ESG", amount: 680, percentage: 42 },
-        { category: "Logística", amount: 565, percentage: 35 },
-        { category: "IoT", amount: 242, percentage: 15 },
-        { category: t('wallet.others'), amount: 129, percentage: 8 },
-      ];
-    }
-
-    const total = Object.values(categoryMap).reduce((a, b) => a + b, 0);
-
-    return Object.entries(categoryMap)
-      .map(([category, amount]) => ({
-        category,
-        amount,
-        percentage: total > 0 ? Math.round((amount / total) * 100) : 0
-      }))
-      .sort((a, b) => b.amount - a.amount)
-      .slice(0, 4);
-  })();
 
   const isLoading = walletLoading || transactionsLoading;
 
@@ -387,17 +326,24 @@ export default function Dashboard() {
                   {formatCurrency(isProvider ? revenue : spend)}
                 </div>
               )}
-              <p className={`text-xs mt-1 flex items-center gap-1 ${(isProvider ? revenueChange : spendChange) >= 0
-                ? "text-green-600"
-                : "text-red-600"
-                }`}>
-                {(isProvider ? revenueChange : spendChange) >= 0 ? (
-                  <ArrowUpRight className="h-3 w-3" />
-                ) : (
-                  <ArrowDownRight className="h-3 w-3" />
-                )}
-                {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% {t('cards.vsPrevMonth')}
+              {(prevRevenue > 0 || prevSpend > 0) && (
+                <p className={`text-xs mt-1 flex items-center gap-1 ${(isProvider ? revenueChange : spendChange) >= 0
+                  ? "text-green-600"
+                  : "text-red-600"
+                  }`}>
+                  {(isProvider ? revenueChange : spendChange) >= 0 ? (
+                    <ArrowUpRight className="h-3 w-3" />
+                  ) : (
+                    <ArrowDownRight className="h-3 w-3" />
+                  )}
+                  {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% {t('cards.vsPrevMonth')}
               </p>
+              )}
+              {!(prevRevenue > 0 || prevSpend > 0) && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t('cards.vsPrevMonth')}
+                </p>
+              )}
             </CardContent>
           </Card>
         </StaggerItem>
@@ -449,34 +395,23 @@ export default function Dashboard() {
         </StaggerItem>
       </StaggerContainer>
 
-      {/* Stats Cards (existing component) */}
-      <DashboardStats />
-
-      {/* Financial Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        {/* Main Chart */}
-        <Card className="lg:col-span-2 shadow-sm relative">
+      {/* Financial Chart */}
+      <Card className="shadow-sm">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>{t('chart.title')}</CardTitle>
-                <CardDescription>
-                  {t('chart.description')}
-                </CardDescription>
-              </div>
-              {!hasRealData && (
-                <Badge variant="outline" className="bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300">
-                  <Info className="h-3 w-3 mr-1" />
-                  {t('chart.demoData')}
-                </Badge>
-              )}
-            </div>
+            <CardTitle>{t('chart.title')}</CardTitle>
+            <CardDescription>
+              {t('chart.description')}
+            </CardDescription>
           </CardHeader>
           <CardContent className="h-[350px]">
             {isLoading ? (
               <div className="flex items-center justify-center h-full">
                 <Skeleton className="w-full h-full" />
+              </div>
+            ) : !hasRealData ? (
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground gap-2">
+                <BarChart3 className="h-10 w-10" />
+                <p>{t('chart.noData', 'No hay datos históricos disponibles')}</p>
               </div>
             ) : (
               <ChartFadeIn delay={0.2} className="h-full">
@@ -525,24 +460,14 @@ export default function Dashboard() {
               </ChartFadeIn>
             )}
           </CardContent>
-        </Card>
-
-        {/* Enhanced Wallet Card */}
-        <EnhancedWalletCard
-          totalBalance={isProvider ? displayRevenue : displaySpend}
-          change={isProvider ? displayRevenueChange : displaySpendChange}
-          categoryBreakdown={categoryBreakdown}
-          isLoading={isLoading}
-          isProvider={isProvider}
-        />
-      </div>
+      </Card>
 
       {/* Recent Transactions */}
       <RecentTransactions
         transactions={transactions || []}
         activeOrgId={activeOrg?.id}
         isLoading={isLoading}
-        isDemo={!hasRealData}
+        isDemo={false}
       />
 
       {/* Activity Feed */}
