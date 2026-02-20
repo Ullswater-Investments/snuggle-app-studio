@@ -18,7 +18,10 @@
     "activeTransactions": "Transazioni Attive",
     "pendingAction": "In attesa di azione",
     "completed6Months": "Completate (6 mesi)",
-    "totalClosed": "Totale operazioni chiuse"
+    "totalClosed": "Totale operazioni chiuse",
+    "onchainVerified": "Attività verificata on-chain",
+    "secureNetwork": "Connesso alla Rete Dati Sicura",
+    "walletLoading": "Connessione alla rete sicura..."
   },
   "chart": {
     "title": "Evoluzione Finanziaria",
