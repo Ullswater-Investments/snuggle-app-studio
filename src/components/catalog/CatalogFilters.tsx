@@ -380,7 +380,7 @@ export function CatalogFilters({
             {/* Mis Estados Filter */}
             <div className="space-y-3">
               <Label className="flex items-center gap-2 text-sm font-medium">
-                Mis Estados
+                {t("filters.myStatus")}
               </Label>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
@@ -395,7 +395,7 @@ export function CatalogFilters({
                     htmlFor="check-acquired"
                     className="text-sm flex items-center gap-1"
                   >
-                    <CheckCircle2 className="h-3 w-3 text-green-600" /> Adquiridos
+                    <CheckCircle2 className="h-3 w-3 text-green-600" /> {t("filters.acquired")}
                   </label>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -410,7 +410,7 @@ export function CatalogFilters({
                     htmlFor="check-pending"
                     className="text-sm flex items-center gap-1"
                   >
-                    <Clock className="h-3 w-3 text-amber-600" /> Pendientes
+                    <Clock className="h-3 w-3 text-amber-600" /> {t("filters.pending")}
                   </label>
                 </div>
               </div>
@@ -421,7 +421,7 @@ export function CatalogFilters({
             {/* Data Nature Filter */}
             <div className="space-y-3">
               <Label className="flex items-center gap-2 text-sm font-medium">
-                Naturaleza del Dato
+                {t("filters.dataNature")}
               </Label>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2">
@@ -433,7 +433,7 @@ export function CatalogFilters({
                     }
                   />
                   <label htmlFor="nature-demo" className="text-sm flex items-center gap-1">
-                    🧪 Demo / Sintéticos
+                    🧪 {t("filters.demo")}
                   </label>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -445,7 +445,7 @@ export function CatalogFilters({
                     }
                   />
                   <label htmlFor="nature-production" className="text-sm flex items-center gap-1">
-                    🏭 Producción
+                    🏭 {t("filters.production")}
                   </label>
                 </div>
               </div>

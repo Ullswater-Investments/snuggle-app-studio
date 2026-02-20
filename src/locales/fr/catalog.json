@@ -3,7 +3,11 @@
     "badge": "Marketplace Officiel v2.0",
     "title": "Découvrez, Achetez et Intégrez des Données de Confiance",
     "description": "Accédez à des milliers d'actifs de données vérifiés, avec gouvernance intégrée et conformité ODRL automatisée.",
-    "searchPlaceholder": "Rechercher données financières, IoT, climat..."
+    "searchPlaceholder": "Rechercher données financières, IoT, climat...",
+    "publish": "Publier Dataset"
+  },
+  "tabs": {
+    "myAcquisitions": "Mes Acquisitions"
   },
   "filters": {
     "title": "Filtres",
@@ -16,7 +20,38 @@
     "verifiedKYB": "Vérifié (KYB)",
     "partner": "Partenaire",
     "country": "Pays",
-    "category": "Catégorie"
+    "category": "Catégorie",
+    "myStatus": "Mes Statuts",
+    "dataNature": "Nature des Données",
+    "acquired": "Acquis",
+    "pending": "En attente",
+    "demo": "Démo / Synthétiques",
+    "production": "Production"
+  },
+  "nature": {
+    "synthetic": "Synthétique",
+    "production": "Production"
+  },
+  "actions": {
+    "request": "Demander l'Accès",
+    "accessDownload": "Accéder / Télécharger",
+    "requestInProgress": "Demande en cours"
+  },
+  "compareTable": {
+    "feature": "Caractéristique",
+    "provider": "Fournisseur",
+    "price": "Prix",
+    "model": "Modèle",
+    "category": "Catégorie",
+    "dataType": "Type de Données",
+    "reputation": "Réputation",
+    "verified": "Vérifié",
+    "sustainable": "Durable",
+    "yes": "Oui",
+    "subscription": "Abonnement",
+    "oneTime": "Paiement unique",
+    "usage": "Par utilisation",
+    "freeModel": "Gratuit"
   },
   "emptyState": {
     "title": "Aucun résultat trouvé",
