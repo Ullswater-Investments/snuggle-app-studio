@@ -5,7 +5,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { NotificationsBell } from "@/components/NotificationsBell";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
+import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -21,7 +22,10 @@ export const UnifiedHeader = () => {
         {/* Columna Izquierda: Logo */}
         <div className="flex items-center gap-3">
           <SidebarTrigger />
-          <ProcuredataLogo size="md" showNavigation={true} />
+          <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
+            <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-8 object-contain dark:hidden" />
+            <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-8 object-contain hidden dark:block" />
+          </Link>
         </div>
         
         {/* Columna Central: Barra de Búsqueda */}
