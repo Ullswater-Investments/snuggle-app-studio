@@ -423,7 +423,7 @@ export default function Dashboard() {
                     {blockchainActivity.transactionCount}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    On-chain · Pontus-X Testnet
+                    {t('cards.onchainVerified', 'Actividad Verificada On-chain')}
                   </p>
                 </>
               ) : (

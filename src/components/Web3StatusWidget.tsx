@@ -45,7 +45,7 @@ export const Web3StatusWidget = () => {
     setIsSwitching(true);
     try {
       await pontusXService.switchNetwork();
-      toast.success("Red cambiada a Pontus-X Testnet");
+      toast.success("Conectado a la Red de Datos Segura");
     } catch (error) {
       toast.error("No se pudo cambiar de red");
     } finally {
@@ -155,7 +155,7 @@ export const Web3StatusWidget = () => {
             ) : (
               <AlertTriangle className="mr-2 h-4 w-4" />
             )}
-            Cambiar a Pontus-X Testnet
+            Cambiar a Red de Datos Segura
           </Button>
         )}
 

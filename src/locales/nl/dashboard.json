@@ -18,7 +18,10 @@
     "activeTransactions": "Actieve Transacties",
     "pendingAction": "Actie vereist",
     "completed6Months": "Voltooid (6 maanden)",
-    "totalClosed": "Totaal afgesloten operaties"
+    "totalClosed": "Totaal afgesloten operaties",
+    "onchainVerified": "On-chain Geverifieerde Activiteit",
+    "secureNetwork": "Verbonden met beveiligd datanetwerk",
+    "walletLoading": "Verbinden met beveiligd netwerk..."
   },
   "chart": {
     "title": "Financiële Evolutie",

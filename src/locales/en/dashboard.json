@@ -18,7 +18,10 @@
     "activeTransactions": "Active Transactions",
     "pendingAction": "Pending action",
     "completed6Months": "Completed (6 months)",
-    "totalClosed": "Total closed operations"
+    "totalClosed": "Total closed operations",
+    "onchainVerified": "On-chain Verified Activity",
+    "secureNetwork": "Connected to Secure Data Network",
+    "walletLoading": "Connecting to Secure Data Network..."
   },
   "chart": {
     "title": "Financial Evolution",
