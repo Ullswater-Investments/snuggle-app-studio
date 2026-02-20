@@ -22,9 +22,9 @@ export const UnifiedHeader = () => {
         {/* Columna Izquierda: Logo */}
         <div className="flex items-center gap-3">
           <SidebarTrigger />
-          <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
-            <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-8 object-contain dark:hidden" />
-            <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-8 object-contain hidden dark:block" />
+          <Link to="/dashboard" className="hover:opacity-80 transition-opacity flex-shrink-0">
+            <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-9 object-contain dark:hidden" />
+            <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-9 object-contain hidden dark:block" />
           </Link>
         </div>
         
