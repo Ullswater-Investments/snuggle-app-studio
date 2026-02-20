@@ -96,7 +96,7 @@ Moteur de contrats numériques basé sur ODRL 2.0 (W3C) gouvernant chaque accès
 |-------------|-------------|-------------|
 | **Permissions** | ODRL 2.0, JSON-LD | Actions autorisées (read, analyze, aggregate) avec granularité par champ et durée configurable (P90D, P180D, P365D). |
 | **Interdictions** | Smart Contracts, Pontus-X | Redistribution et revente interdites ; les insights dérivés héritent des restrictions. Violations enregistrées sur blockchain. |
-| **Obligations** | EUROe, Smart Settlement | Paiement automatique (1 EUROe pay-per-use ou 100 EUROe/an abonnement) et rapports d'utilisation obligatoires avec audit continu. |
+| **Obligations** | EUROe, Smart Settlement | Paiement automatique (1 EUROe pay-per-use ou 300 EUROe/mois abonnement) et rapports d'utilisation obligatoires avec audit continu. |
 | **Contraintes** | Géographiques, Sectorielles, Temporelles | Traitement exclusif dans l'UE, secteur spécifique selon Self-Description, volume maximum de requêtes par période. |
 
 ### 3.5 Web3 et DIDs
@@ -108,7 +108,7 @@ Couche d'identité décentralisée et de paiements programmables basée sur les 
 | **Identité SSI** | DID (did:ethr), MetaMask, KYB | Identité auto-gérée sans intermédiaires, wallet d'entreprise et vérification KYB via DeltaDAO et Self-Description Gaia-X. |
 | **Credentials Vérifiables** | W3C VC Data Model, Zero-Knowledge | Émission par organisations vérifiées, présentation sélective sans révéler de données sensibles et vérification on-chain instantanée. |
 | **Blockchain** | Data NFTs (ERC-721), DDOs, Smart Contracts | Chaque actif de données est un token unique ; métadonnées DCAT-AP indexées par Aquarius ; exécution automatique des politiques ODRL sur Pontus-X (Chain ID 32460). |
-| **Paiements EUROe** | Pay-per-use, Abonnement, Règlement | Micropaiements automatiques via Smart Contract (1 EUROe/tx ou 100 EUROe/an) ; chaque paiement enregistré sur blockchain avec horodatage immuable. |
+| **Paiements EUROe** | Pay-per-use, Abonnement, Règlement | Micropaiements automatiques via Smart Contract (1 EUROe/tx ou 300 EUROe/mois) ; chaque paiement enregistré sur blockchain avec horodatage immuable. |
 
 ### 3.6 Assistant IA
 

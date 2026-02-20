@@ -96,7 +96,7 @@ ODRL 2.0 (W3C) digital contract engine governing every data access on the platfo
 |----------|-------------|-------------|
 | **Permissions** | ODRL 2.0, JSON-LD | Authorized actions (read, analyze, aggregate) with field-level granularity and configurable duration (P90D, P180D, P365D). |
 | **Prohibitions** | Smart Contracts, Pontus-X | Redistribution and resale prohibited; derived insights inherit restrictions. Violations recorded on blockchain. |
-| **Duties** | EUROe, Smart Settlement | Automatic payment (1 EUROe pay-per-use or 100 EUROe/year subscription) and mandatory usage reports with continuous auditing. |
+| **Duties** | EUROe, Smart Settlement | Automatic payment (1 EUROe pay-per-use or 300 EUROe/month subscription) and mandatory usage reports with continuous auditing. |
 | **Constraints** | Geographic, Sectoral, Temporal | EU-only processing, sector-specific per Self-Description, maximum query volume per period. |
 
 ### 3.5 Web3 and DIDs
@@ -108,7 +108,7 @@ Decentralized identity and programmable payments layer based on W3C standards an
 | **SSI Identity** | DID (did:ethr), MetaMask, KYB | Self-managed identity without intermediaries, corporate wallet and KYB verification via DeltaDAO and Gaia-X Self-Description. |
 | **Verifiable Credentials** | W3C VC Data Model, Zero-Knowledge | Issuance by verified organizations, selective presentation without revealing sensitive data and instant on-chain verification. |
 | **Blockchain** | Data NFTs (ERC-721), DDOs, Smart Contracts | Each data asset is a unique token; DCAT-AP metadata indexed by Aquarius; automatic ODRL policy execution on Pontus-X (Chain ID 32460). |
-| **EUROe Payments** | Pay-per-use, Subscription, Settlement | Automatic micropayments via Smart Contract (1 EUROe/tx or 100 EUROe/year); every payment recorded on blockchain with immutable timestamp. |
+| **EUROe Payments** | Pay-per-use, Subscription, Settlement | Automatic micropayments via Smart Contract (1 EUROe/tx or 300 EUROe/month); every payment recorded on blockchain with immutable timestamp. |
 
 ### 3.6 AI Assistant
 
