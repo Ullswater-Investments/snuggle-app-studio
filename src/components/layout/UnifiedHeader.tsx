@@ -7,7 +7,7 @@ import { NotificationsBell } from "@/components/NotificationsBell";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
 import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
-import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
+
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Search, LogIn, LogOut } from "lucide-react";
@@ -23,8 +23,7 @@ export const UnifiedHeader = () => {
         <div className="flex items-center gap-3">
           <SidebarTrigger />
           <Link to="/dashboard" className="hover:opacity-80 transition-opacity flex-shrink-0">
-            <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-9 object-contain dark:hidden" />
-            <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-9 object-contain hidden dark:block" />
+            <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-9 object-contain" />
           </Link>
         </div>
         
