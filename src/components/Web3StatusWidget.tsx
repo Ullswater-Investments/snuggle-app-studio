@@ -1,14 +1,34 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Wallet, ShieldCheck, Coins, ExternalLink, Loader2, Copy, AlertCircle } from "lucide-react";
+import { Wallet, ShieldCheck, Coins, ExternalLink, Loader2, Copy, AlertCircle, AlertTriangle } from "lucide-react";
 import { useWeb3Wallet } from "@/hooks/useWeb3Wallet";
+import { pontusXService, PONTUSX_NETWORK_CONFIG } from "@/services/pontusX";
 import { toast } from "sonner";
+import { useState, useEffect } from "react";
 
 const EXPLORER_URL = "https://explorer.pontus-x.eu/address/";
+const EXPECTED_CHAIN_ID = PONTUSX_NETWORK_CONFIG.chainId; // '0x7ec9'
 
 export const Web3StatusWidget = () => {
   const { wallet, hasWeb3, isConnecting, connect } = useWeb3Wallet();
+  const [isSwitching, setIsSwitching] = useState(false);
+  const [currentChainId, setCurrentChainId] = useState<string | null>(null);
+
+  // Detect current chain
+  useEffect(() => {
+    const detectChain = async () => {
+      if (window.ethereum && wallet.isConnected) {
+        try {
+          const chainId = await window.ethereum.request({ method: 'eth_chainId' }) as string;
+          setCurrentChainId(chainId);
+        } catch { /* ignore */ }
+      }
+    };
+    detectChain();
+  }, [wallet.isConnected]);
+
+  const isWrongNetwork = wallet.isConnected && currentChainId && currentChainId !== EXPECTED_CHAIN_ID;
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -18,6 +38,18 @@ export const Web3StatusWidget = () => {
   const openExplorer = () => {
     if (wallet.address) {
       window.open(`${EXPLORER_URL}${wallet.address}`, "_blank");
+    }
+  };
+
+  const handleSwitchNetwork = async () => {
+    setIsSwitching(true);
+    try {
+      await pontusXService.switchNetwork();
+      toast.success("Red cambiada a Pontus-X Testnet");
+    } catch (error) {
+      toast.error("No se pudo cambiar de red");
+    } finally {
+      setIsSwitching(false);
     }
   };
 
@@ -109,6 +141,24 @@ export const Web3StatusWidget = () => {
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
+        {/* Wrong network warning */}
+        {isWrongNetwork && (
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full border-yellow-500/50 bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 hover:bg-yellow-500/20"
+            onClick={handleSwitchNetwork}
+            disabled={isSwitching}
+          >
+            {isSwitching ? (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <AlertTriangle className="mr-2 h-4 w-4" />
+            )}
+            Cambiar a Pontus-X Testnet
+          </Button>
+        )}
+
         {/* Balance EUROe */}
         <div className="space-y-1">
           <p className="text-xs text-muted-foreground flex items-center gap-1">
@@ -119,9 +169,9 @@ export const Web3StatusWidget = () => {
           </p>
         </div>
 
-        {/* Balance Gas */}
+        {/* Balance EURAU (nativo) */}
         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">Gas (GX)</span>
+          <span className="text-muted-foreground">EURAU (nativo)</span>
           <span className="font-medium">{wallet.balance || "0.0000"}</span>
         </div>
 

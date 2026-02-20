@@ -2,40 +2,63 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { ethers } from "ethers";
 
-interface EthWalletBalance {
+const DEFAULT_RPC_URL = "https://rpc.test.pontus-x.eu";
+
+// EUROe contract address on Pontus-X Testnet (placeholder – replace with real address)
+const EUROE_CONTRACT_ADDRESS = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48";
+
+const ERC20_BALANCE_ABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function decimals() view returns (uint8)",
+];
+
+interface PontusXWalletBalance {
   walletAddress: string | null;
-  balanceEth: number;
-  balanceEur: number;
-  ethPriceEur: number;
+  balanceNative: number;  // EURAU
+  balanceEur: number;     // = balanceNative (1 EURAU ≈ 1 EUR)
+  euroeBalance: number;   // EUROe ERC-20 token
   isConfigured: boolean;
 }
 
-const ETH_RPC_URL = "https://eth.llamarpc.com";
+async function fetchRpcUrl(): Promise<string> {
+  try {
+    const { data } = await supabase
+      .from("system_settings")
+      .select("value")
+      .eq("key", "blockchain_rpc_url")
+      .maybeSingle();
+    return data?.value || DEFAULT_RPC_URL;
+  } catch {
+    return DEFAULT_RPC_URL;
+  }
+}
 
-async function fetchEthBalance(address: string): Promise<number> {
-  const provider = new ethers.JsonRpcProvider(ETH_RPC_URL);
+async function fetchNativeBalance(provider: ethers.JsonRpcProvider, address: string): Promise<number> {
   const balanceWei = await provider.getBalance(address);
   return parseFloat(ethers.formatEther(balanceWei));
 }
 
-async function fetchEthPriceEur(): Promise<number> {
-  const res = await fetch(
-    "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=eur"
-  );
-  if (!res.ok) throw new Error("Failed to fetch ETH price");
-  const data = await res.json();
-  return data.ethereum?.eur ?? 0;
+async function fetchEuroeBalance(provider: ethers.JsonRpcProvider, address: string): Promise<number> {
+  try {
+    const contract = new ethers.Contract(EUROE_CONTRACT_ADDRESS, ERC20_BALANCE_ABI, provider);
+    const [balance, decimals] = await Promise.all([
+      contract.balanceOf(address),
+      contract.decimals(),
+    ]);
+    return parseFloat(ethers.formatUnits(balance, decimals));
+  } catch {
+    return 0;
+  }
 }
 
 export function useEthWalletBalance(orgId: string | undefined) {
-  return useQuery<EthWalletBalance>({
-    queryKey: ["eth-wallet-balance", orgId],
+  return useQuery<PontusXWalletBalance>({
+    queryKey: ["pontus-wallet-balance", orgId],
     queryFn: async () => {
       if (!orgId) {
-        return { walletAddress: null, balanceEth: 0, balanceEur: 0, ethPriceEur: 0, isConfigured: false };
+        return { walletAddress: null, balanceNative: 0, balanceEur: 0, euroeBalance: 0, isConfigured: false };
       }
 
-      // 1. Get wallet_address from organizations table
       const { data: org, error } = await supabase
         .from("organizations")
         .select("wallet_address")
@@ -47,25 +70,27 @@ export function useEthWalletBalance(orgId: string | undefined) {
       const walletAddress = org?.wallet_address ?? null;
 
       if (!walletAddress || !ethers.isAddress(walletAddress)) {
-        return { walletAddress, balanceEth: 0, balanceEur: 0, ethPriceEur: 0, isConfigured: false };
+        return { walletAddress, balanceNative: 0, balanceEur: 0, euroeBalance: 0, isConfigured: false };
       }
 
-      // 2. Fetch ETH balance and price in parallel
-      const [balanceEth, ethPriceEur] = await Promise.all([
-        fetchEthBalance(walletAddress),
-        fetchEthPriceEur(),
+      const rpcUrl = await fetchRpcUrl();
+      const provider = new ethers.JsonRpcProvider(rpcUrl);
+
+      const [balanceNative, euroeBalance] = await Promise.all([
+        fetchNativeBalance(provider, walletAddress),
+        fetchEuroeBalance(provider, walletAddress),
       ]);
 
       return {
         walletAddress,
-        balanceEth,
-        balanceEur: balanceEth * ethPriceEur,
-        ethPriceEur,
+        balanceNative,
+        balanceEur: balanceNative, // 1 EURAU ≈ 1 EUR
+        euroeBalance,
         isConfigured: true,
       };
     },
     enabled: !!orgId,
-    staleTime: 60_000, // 1 min
+    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 }

@@ -315,7 +315,8 @@ export default function Dashboard() {
                     {formatCurrency(ethWallet.balanceEur, "EUR")}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {ethWallet.balanceEth.toFixed(6)} ETH · 1 ETH ≈ {formatCurrency(ethWallet.ethPriceEur, "EUR")}
+                    {ethWallet.balanceNative.toFixed(4)} EURAU
+                    {ethWallet.euroeBalance > 0 && ` · ${ethWallet.euroeBalance.toFixed(2)} EUROe`}
                   </p>
                 </>
               ) : (

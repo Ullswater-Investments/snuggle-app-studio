@@ -107,7 +107,7 @@ export function EnhancedWalletCard({
                 </p>
               </div>
               <div className="bg-white/5 rounded-lg p-3">
-                <p className="text-xs text-slate-400 mb-1">{t('wallet.gas')} (ETH)</p>
+                <p className="text-xs text-slate-400 mb-1">EURAU</p>
                 <p className="font-semibold text-lg">
                   {wallet.balance ? parseFloat(wallet.balance).toFixed(4) : "0.00"}
                 </p>
