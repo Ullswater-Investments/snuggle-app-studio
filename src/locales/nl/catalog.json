@@ -85,7 +85,13 @@
     "addToCart": "Toevoegen",
     "freeAccess": "Gratis Toegang",
     "verifiedProvider": "Geverifieerde aanbieder",
-    "reviews": "beoordelingen"
+    "reviews": "beoordelingen",
+    "by": "door",
+    "free": "GRATIS",
+    "month": "maand",
+    "year": "jaar",
+    "compareThis": "Dit product vergelijken",
+    "noDescription": "Geen beschrijving beschikbaar"
   },
   "pricing": {
     "free": "Gratis",

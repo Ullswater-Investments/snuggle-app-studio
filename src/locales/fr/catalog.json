@@ -85,7 +85,13 @@
     "addToCart": "Ajouter",
     "freeAccess": "Accès Gratuit",
     "verifiedProvider": "Fournisseur vérifié",
-    "reviews": "avis"
+    "reviews": "avis",
+    "by": "par",
+    "free": "GRATUIT",
+    "month": "mois",
+    "year": "an",
+    "compareThis": "Comparer ce produit",
+    "noDescription": "Aucune description disponible"
   },
   "pricing": {
     "free": "Gratuit",
