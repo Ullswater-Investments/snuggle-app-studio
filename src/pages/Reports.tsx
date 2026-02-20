@@ -430,7 +430,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.totalSpend")}</p>
-                  <p className="text-3xl font-bold">{totalGasto === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? t("charts.noData") : `€ ${totalGasto.toLocaleString(i18n.language)}`}</p>
+                  <p className={totalGasto === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? "text-base text-muted-foreground font-normal" : "text-3xl font-bold"}>{totalGasto === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? t("charts.noData") : `€ ${totalGasto.toLocaleString(i18n.language)}`}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
@@ -449,7 +449,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.revenue")}</p>
-                  <p className="text-3xl font-bold">{totalIngreso === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? t("charts.noData") : `€ ${totalIngreso.toLocaleString(i18n.language)}`}</p>
+                  <p className={totalIngreso === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? "text-base text-muted-foreground font-normal" : "text-3xl font-bold"}>{totalIngreso === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? t("charts.noData") : `€ ${totalIngreso.toLocaleString(i18n.language)}`}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
@@ -468,7 +468,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.activeDatasets")}</p>
-                  <p className="text-3xl font-bold">{datasetsActivos === 0 ? t("charts.noData") : datasetsActivos}</p>
+                  <p className={datasetsActivos === 0 ? "text-base text-muted-foreground font-normal" : "text-3xl font-bold"}>{datasetsActivos === 0 ? t("charts.noData") : datasetsActivos}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
@@ -487,7 +487,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.efficiency")}</p>
-                  <p className="text-3xl font-bold">{(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.compliance_percent}%`}</p>
+                  <p className={(!kpis || kpis.total_volume === 0) ? "text-base text-muted-foreground font-normal" : "text-3xl font-bold"}>{(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.compliance_percent}%`}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
