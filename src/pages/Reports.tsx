@@ -702,7 +702,7 @@ const Reports = () => {
                   <p className="text-sm font-medium text-muted-foreground">
                     {t("metrics.approvalRate")}
                   </p>
-                  <p className="text-2xl font-bold">
+                  <p className={(!kpis || kpis.total_volume === 0) ? "text-base text-muted-foreground font-normal" : "text-2xl font-bold"}>
                     {(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.approval_rate}%`}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
@@ -717,7 +717,7 @@ const Reports = () => {
                   <p className="text-sm font-medium text-muted-foreground">
                     {t("metrics.avgTime")}
                   </p>
-                  <p className="text-2xl font-bold">
+                  <p className={(!kpis || kpis.total_volume === 0 || !kpis.avg_time_hours) ? "text-base text-muted-foreground font-normal" : "text-2xl font-bold"}>
                     {(!kpis || kpis.total_volume === 0) ? t("charts.noData") : 
                       kpis.avg_time_hours ? 
                         kpis.avg_time_hours >= 24 ? 
@@ -737,7 +737,7 @@ const Reports = () => {
                   <p className="text-sm font-medium text-muted-foreground">
                     {t("metrics.compliance")}
                   </p>
-                  <p className="text-2xl font-bold">
+                  <p className={(!kpis || kpis.total_volume === 0) ? "text-base text-muted-foreground font-normal" : "text-2xl font-bold"}>
                     {(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.compliance_percent}%`}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
