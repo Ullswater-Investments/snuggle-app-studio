@@ -3,8 +3,14 @@
   "title": "Datenbibliothek",
   "subtitle": "Ihr Entwicklungszentrum für Datenassets",
   "hero": {
-    "title": "Datenentwicklungszentrum",
-    "description": "Erkunden, entwickeln und verwalten Sie Ihre Datenassets mit fortschrittlichen Analyse- und Visualisierungstools."
+    "badge": "Datenzentrum",
+    "title": "Datenverwaltung",
+    "description": "Greifen Sie auf Ihre Bibliothek erworbener Datasets zu und verwalten Sie Ihre Marketplace-Veröffentlichungen.",
+    "publishBtn": "Neuen Dataset Veröffentlichen"
+  },
+  "tabs": {
+    "library": "Meine Bibliothek",
+    "publications": "Meine Veröffentlichungen"
   },
   "categories": {
     "all": "Alle",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Gesamtassets",
     "categories": "Kategorien",
-    "activeSubscriptions": "Aktive Abonnements"
+    "activeSubscriptions": "Aktive Abonnements",
+    "activeDatasets": "Aktive Datasets",
+    "providers": "Anbieter",
+    "blockchainVerified": "Blockchain-Verifiziert",
+    "published": "Veröffentlichte Datasets",
+    "listed": "Im Katalog Gelistet",
+    "totalValue": "Gesamtlistenwert"
   },
   "filters": {
     "searchPlaceholder": "Datenassets suchen...",
     "category": "Kategorie",
-    "updateFrequency": "Aktualisierungsfrequenz"
+    "updateFrequency": "Aktualisierungsfrequenz",
+    "searchProducts": "Nach Produkt oder Anbieter suchen...",
+    "allSectors": "Alle Sektoren",
+    "filterBySector": "Nach Sektor filtern"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "Keine Datenassets",
-    "description": "Sie haben keine Datenassets registriert. Beginnen Sie mit der Erstellung Ihres ersten Assets."
+    "description": "Sie haben keine Datenassets registriert. Beginnen Sie mit der Erstellung Ihres ersten Assets.",
+    "libraryTitle": "Ihre Bibliothek ist leer",
+    "libraryDesc": "Wenn Sie eine Transaktion abschließen, erscheinen die Daten hier. Durchsuchen Sie den Katalog, um benötigte Datasets zu finden.",
+    "libraryBtn": "Marketplace Durchsuchen",
+    "pubTitle": "Keine Veröffentlichungen",
+    "pubDesc": "Sie haben noch kein Dataset veröffentlicht. Teilen Sie Ihre Daten mit dem Ökosystem und generieren Sie Einnahmen.",
+    "pubBtn": "Dataset Veröffentlichen"
+  },
+  "card": {
+    "downloadData": "Daten Herunterladen",
+    "viewDetails": "Details Anzeigen",
+    "noDataSource": "Asset ohne konfigurierte Datenquelle",
+    "blockchainTooltip": "Daten mit Blockchain-Rückverfolgbarkeit verifiziert",
+    "blockchainAudit": "Blockchain-Rückverfolgbarkeits-Audit",
+    "noName": "Unbenannter Dataset",
+    "noDesc": "Keine Beschreibung",
+    "price": "Preis",
+    "published": "Veröffentlicht",
+    "view": "Ansehen",
+    "analytics": "Analytik",
+    "inReview": "In Prüfung",
+    "visibleInCatalog": "Im Katalog Sichtbar",
+    "notEditable": "Nicht bearbeitbar während der technischen Validierung."
+  },
+  "pricing": {
+    "free": "Kostenlos",
+    "subscription": "Abonnement",
+    "oneTime": "Einmalzahlung",
+    "usage": "Pro Nutzung",
+    "undefined": "Nicht definiert",
+    "perMonth": "/Monat"
+  },
+  "pubStatus": {
+    "validation": "In Technischer Validierung",
+    "available": "Verfügbar",
+    "published": "Veröffentlicht",
+    "rejected": "Abgelehnt",
+    "draft": "Entwurf",
+    "archived": "Archiviert"
+  },
+  "expiration": {
+    "expired": "Abgelaufen",
+    "expiresIn": "Läuft in {{days}}T ab",
+    "active": "Aktiv"
+  },
+  "dataType": {
+    "administrative": "Administrativ",
+    "iot": "IoT",
+    "financial": "Finanziell",
+    "energy": "Energie",
+    "esg": "ESG",
+    "data": "Daten"
+  },
+  "loading": "Daten werden geladen...",
+  "loadingPub": "Veröffentlichungen werden geladen...",
+  "noResults": "Keine Ergebnisse gefunden",
+  "clearFilters": "Filter Löschen",
+  "adjustFilters": "Versuchen Sie die Suchfilter anzupassen",
+  "toast": {
+    "visibleOn": "Asset im Katalog sichtbar",
+    "visibleOff": "Asset aus dem Katalog ausgeblendet",
+    "visibilityError": "Fehler beim Ändern der Sichtbarkeit",
+    "downloadSuccess": "Datei erfolgreich heruntergeladen",
+    "downloadError": "Download-Fehler",
+    "noDataSource": "Dieses Asset hat noch keine konfigurierte Datenquelle.",
+    "downloading": "Daten werden über das Gateway heruntergeladen...",
+    "connectionError": "Verbindungsfehler: Der Anbieterserver antwortet nicht."
   }
 }

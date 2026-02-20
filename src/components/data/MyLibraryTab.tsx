@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,7 @@ import {
 import { toast } from "sonner";
 import { EmptyState } from "@/components/EmptyState";
 
-// Format mapping by category
+// Format mapping by category (use neutral keys)
 const FORMAT_MAP: Record<string, { format: string; icon: typeof FileJson }> = {
     "Logística": { format: "JSON", icon: FileJson },
     "IoT": { format: "JSON-LD", icon: FileJson },
@@ -38,21 +39,21 @@ const FORMAT_MAP: Record<string, { format: string; icon: typeof FileJson }> = {
 };
 
 // Update frequency by category  
-const UPDATE_FREQ_MAP: Record<string, { label: string; frequency: UpdateFrequency }> = {
-    "Logística": { label: "Tiempo Real (15min)", frequency: "hourly" },
-    "IoT": { label: "Tiempo Real", frequency: "realtime" },
-    "ESG": { label: "Mensual", frequency: "monthly" },
-    "Financiero": { label: "Semanal", frequency: "weekly" },
-    "Medio Ambiente": { label: "Mensual", frequency: "monthly" },
-    "Retail": { label: "Diario", frequency: "daily" },
-    "Energía": { label: "Tiempo Real (15min)", frequency: "realtime" },
-    "Agricultura": { label: "Semanal", frequency: "weekly" },
+const UPDATE_FREQ_MAP: Record<string, UpdateFrequency> = {
+    "Logística": "hourly",
+    "IoT": "realtime",
+    "ESG": "monthly",
+    "Financiero": "weekly",
+    "Medio Ambiente": "monthly",
+    "Retail": "daily",
+    "Energía": "realtime",
+    "Agricultura": "weekly",
 };
 
 // Get update frequency for a transaction
 const getUpdateFrequency = (transaction: any): UpdateFrequency => {
     const category = transaction.asset?.product?.category;
-    return UPDATE_FREQ_MAP[category]?.frequency || "monthly";
+    return UPDATE_FREQ_MAP[category] || "monthly";
 };
 
 // Calculate data quality metrics
@@ -68,37 +69,58 @@ const getDataQualityMetrics = (transaction: any) => {
     };
 };
 
-// Get expiration status - prioritizes subscription_expires_at if available
-const getExpirationStatus = (transaction: any) => {
-    const now = new Date();
-    let expiresAt: Date;
-
-    if (transaction.subscription_expires_at) {
-        expiresAt = new Date(transaction.subscription_expires_at);
-    } else {
-        const created = new Date(transaction.created_at);
-        expiresAt = new Date(created);
-        expiresAt.setDate(expiresAt.getDate() + (transaction.access_duration_days || 90));
-    }
-
-    const daysRemaining = Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (daysRemaining < 0) {
-        return { status: "expired", label: "Expirado", daysRemaining: 0, className: "bg-muted text-muted-foreground" };
-    } else if (daysRemaining <= 14) {
-        return { status: "expiring", label: `Expira en ${daysRemaining}d`, daysRemaining, className: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" };
-    }
-    return { status: "active", label: "Activo", daysRemaining, className: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400" };
-};
-
 export const MyLibraryTab = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const { activeOrg, isDemo } = useOrganizationContext();
+    const { t } = useTranslation('data');
     const [searchQuery, setSearchQuery] = useState("");
     const [sectorFilter, setSectorFilter] = useState<string>("all");
     const [lineageTransactionId, setLineageTransactionId] = useState<string | null>(null);
     const [renewalTransaction, setRenewalTransaction] = useState<any>(null);
+
+    // Get expiration status
+    const getExpirationStatus = (transaction: any) => {
+        const now = new Date();
+        let expiresAt: Date;
+
+        if (transaction.subscription_expires_at) {
+            expiresAt = new Date(transaction.subscription_expires_at);
+        } else {
+            const created = new Date(transaction.created_at);
+            expiresAt = new Date(created);
+            expiresAt.setDate(expiresAt.getDate() + (transaction.access_duration_days || 90));
+        }
+
+        const daysRemaining = Math.ceil((expiresAt.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+
+        if (daysRemaining < 0) {
+            return { status: "expired", label: t('expiration.expired'), daysRemaining: 0, className: "bg-muted text-muted-foreground" };
+        } else if (daysRemaining <= 14) {
+            return { status: "expiring", label: t('expiration.expiresIn', { days: daysRemaining }), daysRemaining, className: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" };
+        }
+        return { status: "active", label: t('expiration.active'), daysRemaining, className: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400" };
+    };
+
+    const getDataTypeBadge = (transaction: any) => {
+        const schemaType = transaction.data_payloads?.[0]?.schema_type;
+
+        if (!schemaType) return { label: t('dataType.administrative'), icon: FileText, color: "default" as const };
+
+        switch (schemaType) {
+            case "iot_telemetry":
+                return { label: t('dataType.iot'), icon: Activity, color: "default" as const };
+            case "financial_records":
+                return { label: t('dataType.financial'), icon: DollarSign, color: "default" as const };
+            case "energy_metering":
+                return { label: t('dataType.energy'), icon: Zap, color: "default" as const };
+            case "esg_report":
+            case "supply_chain_trace":
+                return { label: t('dataType.esg'), icon: Leaf, color: "default" as const };
+            default:
+                return { label: t('dataType.data'), icon: Database, color: "default" as const };
+        }
+    };
 
     const { data: transactions, isLoading } = useQuery({
         queryKey: ["completed-transactions", activeOrg?.id, isDemo],
@@ -176,33 +198,12 @@ export const MyLibraryTab = () => {
         });
     }, [transactions, searchQuery, sectorFilter]);
 
-    const getDataTypeBadge = (transaction: any) => {
-        const schemaType = transaction.data_payloads?.[0]?.schema_type;
-
-        if (!schemaType) return { label: "Administrativo", icon: FileText, color: "default" as const };
-
-        switch (schemaType) {
-            case "iot_telemetry":
-                return { label: "IoT", icon: Activity, color: "default" as const };
-            case "financial_records":
-                return { label: "Financiero", icon: DollarSign, color: "default" as const };
-            case "energy_metering":
-                return { label: "Energía", icon: Zap, color: "default" as const };
-            case "esg_report":
-            case "supply_chain_trace":
-                return { label: "ESG", icon: Leaf, color: "default" as const };
-            default:
-                return { label: "Datos", icon: Database, color: "default" as const };
-        }
-    };
-
     const hasBlockchainVerification = (transaction: any) => {
         return transaction.subject_org?.pontus_verified ||
             transaction.metadata?.blockchain_tx_hash ||
             isDemo;
     };
 
-    // Check if asset has a downloadable data source
     const hasDataSource = (transaction: any): boolean => {
         const meta = transaction.asset?.custom_metadata as any;
         const hasApiUrl = !!(meta?.api_url || meta?.endpoint_url);
@@ -211,15 +212,14 @@ export const MyLibraryTab = () => {
         return hasApiUrl || hasSampleData || hasPayload;
     };
 
-    // Gateway download - proxies through edge function
     const handleGatewayDownload = async (transaction: any) => {
         try {
             if (!hasDataSource(transaction)) {
-                toast.warning("Este activo aún no tiene una fuente de datos configurada. Contacta con el proveedor.");
+                toast.warning(t('toast.noDataSource'));
                 return;
             }
 
-            toast.info("Descargando datos a través del Gateway...");
+            toast.info(t('toast.downloading'));
 
             const { data, error } = await supabase.functions.invoke("gateway-download", {
                 body: {
@@ -230,16 +230,13 @@ export const MyLibraryTab = () => {
             });
 
             if (error) {
-                // Log the error to access_logs via the edge function (already handled server-side)
-                throw new Error(error.message || "Error de conexión con el Gateway");
+                throw new Error(error.message || t('toast.connectionError'));
             }
 
-            // Check for error response from edge function
             if (data?.error) {
                 throw new Error(data.error);
             }
 
-            // Create blob and download
             const jsonString = typeof data === "string" ? data : JSON.stringify(data, null, 2);
             const blob = new Blob([jsonString], { type: "application/json" });
             const url = URL.createObjectURL(blob);
@@ -252,17 +249,15 @@ export const MyLibraryTab = () => {
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            toast.success("Archivo descargado correctamente");
+            toast.success(t('toast.downloadSuccess'));
         } catch (err: any) {
             console.error("Gateway download error:", err);
-            const errorMsg = err?.message || "Error desconocido";
+            const errorMsg = err?.message || "";
 
-            if (errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND")) {
-                toast.error("Error de Conexión: El servidor del proveedor no responde. Por favor, contacta con soporte si el problema persiste.");
-            } else if (errorMsg.includes("502") || errorMsg.includes("provider API")) {
-                toast.error("Error de Conexión: El servidor del proveedor no responde. Por favor, contacta con soporte si el problema persiste.");
+            if (errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND") || errorMsg.includes("502") || errorMsg.includes("provider API")) {
+                toast.error(t('toast.connectionError'));
             } else {
-                toast.error(`Error al descargar: ${errorMsg}`);
+                toast.error(`${t('toast.downloadError')}: ${errorMsg}`);
             }
         }
     };
@@ -274,7 +269,7 @@ export const MyLibraryTab = () => {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">
-                            Datasets Activos
+                            {t('stats.activeDatasets')}
                         </CardTitle>
                         <Database className="h-5 w-5 text-primary" />
                     </CardHeader>
@@ -286,7 +281,7 @@ export const MyLibraryTab = () => {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">
-                            Proveedores
+                            {t('stats.providers')}
                         </CardTitle>
                         <FileText className="h-5 w-5 text-primary" />
                     </CardHeader>
@@ -300,7 +295,7 @@ export const MyLibraryTab = () => {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">
-                            Verificados Blockchain
+                            {t('stats.blockchainVerified')}
                         </CardTitle>
                         <ShieldCheck className="h-5 w-5 text-green-600 dark:text-green-400" />
                     </CardHeader>
@@ -329,7 +324,7 @@ export const MyLibraryTab = () => {
                     <div className="flex flex-col sm:flex-row gap-3">
                         <div className="flex-1">
                             <Input
-                                placeholder="Buscar por producto o proveedor..."
+                                placeholder={t('filters.searchProducts')}
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="w-full"
@@ -337,10 +332,10 @@ export const MyLibraryTab = () => {
                         </div>
                         <Select value={sectorFilter} onValueChange={setSectorFilter}>
                             <SelectTrigger className="w-full sm:w-[200px]">
-                                <SelectValue placeholder="Filtrar por sector" />
+                                <SelectValue placeholder={t('filters.filterBySector')} />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="all">Todos los sectores</SelectItem>
+                                <SelectItem value="all">{t('filters.allSectors')}</SelectItem>
                                 {sectors.map(sector => (
                                     <SelectItem key={sector} value={sector}>
                                         {sector}
@@ -355,28 +350,28 @@ export const MyLibraryTab = () => {
             {/* Content */}
             {isLoading ? (
                 <div className="text-center py-12">
-                    <p className="text-muted-foreground">Cargando datos...</p>
+                    <p className="text-muted-foreground">{t('loading')}</p>
                 </div>
             ) : !transactions || transactions.length === 0 ? (
                 <EmptyState
                     icon={Database}
-                    title="Tu biblioteca está vacía"
-                    description="Cuando completes una transacción, los datos aparecerán aquí. Explora el catálogo para encontrar datasets que necesites."
+                    title={t('empty.libraryTitle')}
+                    description={t('empty.libraryDesc')}
                     action={
                         <Button onClick={() => navigate("/catalog")}>
-                            Explorar Marketplace
+                            {t('empty.libraryBtn')}
                         </Button>
                     }
                 />
             ) : filteredTransactions.length === 0 ? (
                 <div className="text-center py-12">
                     <Database className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-semibold mb-2">No se encontraron resultados</h3>
+                    <h3 className="text-lg font-semibold mb-2">{t('noResults')}</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                        Prueba ajustando los filtros de búsqueda
+                        {t('adjustFilters')}
                     </p>
                     <Button variant="outline" onClick={() => { setSearchQuery(""); setSectorFilter("all"); }}>
-                        Limpiar Filtros
+                        {t('clearFilters')}
                     </Button>
                 </div>
             ) : (
@@ -444,7 +439,7 @@ export const MyLibraryTab = () => {
                                                         </Badge>
                                                     </TooltipTrigger>
                                                     <TooltipContent>
-                                                        <p>Datos verificados con trazabilidad blockchain</p>
+                                                        <p>{t('card.blockchainTooltip')}</p>
                                                     </TooltipContent>
                                                 </Tooltip>
                                             </TooltipProvider>
@@ -460,7 +455,7 @@ export const MyLibraryTab = () => {
                                         timeliness={qualityMetrics.timeliness}
                                     />
 
-                                    {/* Freshness Bar - only show for non-static frequencies */}
+                                    {/* Freshness Bar */}
                                     {updateFrequency !== 'static' && (
                                         <FreshnessBar
                                             lastUpdated={new Date(transaction.updated_at || transaction.created_at)}
@@ -468,7 +463,7 @@ export const MyLibraryTab = () => {
                                         />
                                     )}
 
-                                    {/* Actions - Gateway model: Download + Details */}
+                                    {/* Actions */}
                                     <div className="flex gap-2 pt-2">
                                         {(() => {
                                             const isDownloadable = hasDataSource(transaction);
@@ -486,13 +481,13 @@ export const MyLibraryTab = () => {
                                                                     disabled={isExpired || !isDownloadable}
                                                                 >
                                                                     <Download className="h-4 w-4 mr-1" />
-                                                                    Descargar Datos
+                                                                    {t('card.downloadData')}
                                                                 </Button>
                                                             </span>
                                                         </TooltipTrigger>
                                                         {!isDownloadable && (
                                                             <TooltipContent>
-                                                                <p>Activo sin fuente de datos configurada</p>
+                                                                <p>{t('card.noDataSource')}</p>
                                                             </TooltipContent>
                                                         )}
                                                     </Tooltip>
@@ -507,7 +502,7 @@ export const MyLibraryTab = () => {
                                             disabled={expirationStatus.status === "expired"}
                                         >
                                             <Eye className="h-4 w-4 mr-1" />
-                                            Ver Detalles
+                                            {t('card.viewDetails')}
                                         </Button>
                                     </div>
                                 </CardContent>
@@ -536,7 +531,7 @@ export const MyLibraryTab = () => {
                     <DialogHeader>
                         <DialogTitle className="flex items-center gap-2">
                             <ShieldCheck className="h-5 w-5 text-emerald-600" />
-                            Auditoría de Trazabilidad Blockchain
+                            {t('card.blockchainAudit')}
                         </DialogTitle>
                     </DialogHeader>
                     {lineageTransactionId && (

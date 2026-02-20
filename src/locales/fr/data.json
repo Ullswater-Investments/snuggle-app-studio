@@ -3,8 +3,14 @@
   "title": "Bibliothèque de Données",
   "subtitle": "Votre Centre de Développement pour les Actifs de Données",
   "hero": {
-    "title": "Centre de Développement de Données",
-    "description": "Explorez, développez et gérez vos actifs de données avec des outils d'analyse et de visualisation avancés."
+    "badge": "Centre de Données",
+    "title": "Gestion des Données",
+    "description": "Accédez à votre bibliothèque de datasets acquis et gérez vos publications sur le marketplace.",
+    "publishBtn": "Publier un Nouveau Dataset"
+  },
+  "tabs": {
+    "library": "Ma Bibliothèque",
+    "publications": "Mes Publications"
   },
   "categories": {
     "all": "Tous",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Total des Actifs",
     "categories": "Catégories",
-    "activeSubscriptions": "Abonnements Actifs"
+    "activeSubscriptions": "Abonnements Actifs",
+    "activeDatasets": "Datasets Actifs",
+    "providers": "Fournisseurs",
+    "blockchainVerified": "Vérifiés Blockchain",
+    "published": "Datasets Publiés",
+    "listed": "Actifs au Catalogue",
+    "totalValue": "Valeur Totale Listée"
   },
   "filters": {
     "searchPlaceholder": "Rechercher des actifs de données...",
     "category": "Catégorie",
-    "updateFrequency": "Fréquence de Mise à Jour"
+    "updateFrequency": "Fréquence de Mise à Jour",
+    "searchProducts": "Rechercher par produit ou fournisseur...",
+    "allSectors": "Tous les secteurs",
+    "filterBySector": "Filtrer par secteur"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "Aucun actif de données",
-    "description": "Vous n'avez aucun actif de données enregistré. Commencez par créer votre premier actif."
+    "description": "Vous n'avez aucun actif de données enregistré. Commencez par créer votre premier actif.",
+    "libraryTitle": "Votre bibliothèque est vide",
+    "libraryDesc": "Lorsque vous terminerez une transaction, les données apparaîtront ici. Explorez le catalogue pour trouver les datasets dont vous avez besoin.",
+    "libraryBtn": "Explorer le Marketplace",
+    "pubTitle": "Aucune publication",
+    "pubDesc": "Vous n'avez publié aucun dataset. Partagez vos données avec l'écosystème et générez des revenus.",
+    "pubBtn": "Publier un Dataset"
+  },
+  "card": {
+    "downloadData": "Télécharger les Données",
+    "viewDetails": "Voir les Détails",
+    "noDataSource": "Actif sans source de données configurée",
+    "blockchainTooltip": "Données vérifiées avec traçabilité blockchain",
+    "blockchainAudit": "Audit de Traçabilité Blockchain",
+    "noName": "Dataset sans nom",
+    "noDesc": "Sans description",
+    "price": "Prix",
+    "published": "Publié",
+    "view": "Voir",
+    "analytics": "Analytique",
+    "inReview": "En révision",
+    "visibleInCatalog": "Visible dans le Catalogue",
+    "notEditable": "Non modifiable pendant la validation technique."
+  },
+  "pricing": {
+    "free": "Gratuit",
+    "subscription": "Abonnement",
+    "oneTime": "Paiement Unique",
+    "usage": "Par Utilisation",
+    "undefined": "Non défini",
+    "perMonth": "/mois"
+  },
+  "pubStatus": {
+    "validation": "En Validation Technique",
+    "available": "Disponible",
+    "published": "Publié",
+    "rejected": "Rejeté",
+    "draft": "Brouillon",
+    "archived": "Archivé"
+  },
+  "expiration": {
+    "expired": "Expiré",
+    "expiresIn": "Expire dans {{days}}j",
+    "active": "Actif"
+  },
+  "dataType": {
+    "administrative": "Administratif",
+    "iot": "IoT",
+    "financial": "Financier",
+    "energy": "Énergie",
+    "esg": "ESG",
+    "data": "Données"
+  },
+  "loading": "Chargement des données...",
+  "loadingPub": "Chargement des publications...",
+  "noResults": "Aucun résultat trouvé",
+  "clearFilters": "Effacer les Filtres",
+  "adjustFilters": "Essayez d'ajuster les filtres de recherche",
+  "toast": {
+    "visibleOn": "Actif visible dans le catalogue",
+    "visibleOff": "Actif masqué du catalogue",
+    "visibilityError": "Erreur lors du changement de visibilité",
+    "downloadSuccess": "Fichier téléchargé avec succès",
+    "downloadError": "Erreur de téléchargement",
+    "noDataSource": "Cet actif n'a pas encore de source de données configurée.",
+    "downloading": "Téléchargement des données via le Gateway...",
+    "connectionError": "Erreur de Connexion: Le serveur du fournisseur ne répond pas."
   }
 }

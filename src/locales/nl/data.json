@@ -3,8 +3,14 @@
   "title": "Databibliotheek",
   "subtitle": "Uw Ontwikkelingscentrum voor Data-assets",
   "hero": {
-    "title": "Data-ontwikkelingscentrum",
-    "description": "Verken, ontwikkel en beheer uw data-assets met geavanceerde analyse- en visualisatietools."
+    "badge": "Datacentrum",
+    "title": "Databeheer",
+    "description": "Toegang tot uw bibliotheek van verworven datasets en beheer uw marketplace-publicaties.",
+    "publishBtn": "Nieuw Dataset Publiceren"
+  },
+  "tabs": {
+    "library": "Mijn Bibliotheek",
+    "publications": "Mijn Publicaties"
   },
   "categories": {
     "all": "Alle",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Totaal Assets",
     "categories": "Categorieën",
-    "activeSubscriptions": "Actieve Abonnementen"
+    "activeSubscriptions": "Actieve Abonnementen",
+    "activeDatasets": "Actieve Datasets",
+    "providers": "Aanbieders",
+    "blockchainVerified": "Blockchain Geverifieerd",
+    "published": "Gepubliceerde Datasets",
+    "listed": "Actief in Catalogus",
+    "totalValue": "Totale Vermelde Waarde"
   },
   "filters": {
     "searchPlaceholder": "Zoek data-assets...",
     "category": "Categorie",
-    "updateFrequency": "Updatefrequentie"
+    "updateFrequency": "Updatefrequentie",
+    "searchProducts": "Zoeken op product of aanbieder...",
+    "allSectors": "Alle sectoren",
+    "filterBySector": "Filteren op sector"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "Geen data-assets",
-    "description": "U heeft geen data-assets geregistreerd. Begin met het maken van uw eerste asset."
+    "description": "U heeft geen data-assets geregistreerd. Begin met het maken van uw eerste asset.",
+    "libraryTitle": "Uw bibliotheek is leeg",
+    "libraryDesc": "Wanneer u een transactie voltooit, verschijnen de gegevens hier. Verken de catalogus om datasets te vinden die u nodig heeft.",
+    "libraryBtn": "Marketplace Verkennen",
+    "pubTitle": "Geen publicaties",
+    "pubDesc": "U heeft nog geen datasets gepubliceerd. Deel uw gegevens met het ecosysteem en genereer inkomsten.",
+    "pubBtn": "Dataset Publiceren"
+  },
+  "card": {
+    "downloadData": "Gegevens Downloaden",
+    "viewDetails": "Details Bekijken",
+    "noDataSource": "Asset zonder geconfigureerde databron",
+    "blockchainTooltip": "Gegevens geverifieerd met blockchain-traceerbaarheid",
+    "blockchainAudit": "Blockchain Traceerbaarheidsaudit",
+    "noName": "Dataset zonder naam",
+    "noDesc": "Geen beschrijving",
+    "price": "Prijs",
+    "published": "Gepubliceerd",
+    "view": "Bekijken",
+    "analytics": "Analyse",
+    "inReview": "In beoordeling",
+    "visibleInCatalog": "Zichtbaar in Catalogus",
+    "notEditable": "Niet bewerkbaar tijdens technische validatie."
+  },
+  "pricing": {
+    "free": "Gratis",
+    "subscription": "Abonnement",
+    "oneTime": "Eenmalig",
+    "usage": "Per Gebruik",
+    "undefined": "Niet gedefinieerd",
+    "perMonth": "/maand"
+  },
+  "pubStatus": {
+    "validation": "In Technische Validatie",
+    "available": "Beschikbaar",
+    "published": "Gepubliceerd",
+    "rejected": "Afgewezen",
+    "draft": "Concept",
+    "archived": "Gearchiveerd"
+  },
+  "expiration": {
+    "expired": "Verlopen",
+    "expiresIn": "Verloopt over {{days}}d",
+    "active": "Actief"
+  },
+  "dataType": {
+    "administrative": "Administratief",
+    "iot": "IoT",
+    "financial": "Financieel",
+    "energy": "Energie",
+    "esg": "ESG",
+    "data": "Gegevens"
+  },
+  "loading": "Gegevens laden...",
+  "loadingPub": "Publicaties laden...",
+  "noResults": "Geen resultaten gevonden",
+  "clearFilters": "Filters Wissen",
+  "adjustFilters": "Probeer de zoekfilters aan te passen",
+  "toast": {
+    "visibleOn": "Asset zichtbaar in catalogus",
+    "visibleOff": "Asset verborgen uit catalogus",
+    "visibilityError": "Fout bij het wijzigen van zichtbaarheid",
+    "downloadSuccess": "Bestand succesvol gedownload",
+    "downloadError": "Downloadfout",
+    "noDataSource": "Dit asset heeft nog geen geconfigureerde databron.",
+    "downloading": "Gegevens downloaden via de Gateway...",
+    "connectionError": "Verbindingsfout: De server van de aanbieder reageert niet."
   }
 }

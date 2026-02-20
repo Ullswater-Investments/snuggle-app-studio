@@ -3,8 +3,14 @@
   "title": "Biblioteca de Dados",
   "subtitle": "Seu Centro de Desenvolvimento para Ativos de Dados",
   "hero": {
-    "title": "Centro de Desenvolvimento de Dados",
-    "description": "Explore, desenvolva e gerencie seus ativos de dados com ferramentas avançadas de análise e visualização."
+    "badge": "Centro de Dados",
+    "title": "Gestão de Dados",
+    "description": "Acesse sua biblioteca de datasets adquiridos e gerencie suas publicações no marketplace.",
+    "publishBtn": "Publicar Novo Dataset"
+  },
+  "tabs": {
+    "library": "Minha Biblioteca",
+    "publications": "Minhas Publicações"
   },
   "categories": {
     "all": "Todos",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Total de Ativos",
     "categories": "Categorias",
-    "activeSubscriptions": "Assinaturas Ativas"
+    "activeSubscriptions": "Assinaturas Ativas",
+    "activeDatasets": "Datasets Ativos",
+    "providers": "Fornecedores",
+    "blockchainVerified": "Verificados Blockchain",
+    "published": "Datasets Publicados",
+    "listed": "Ativos no Catálogo",
+    "totalValue": "Valor Total Listado"
   },
   "filters": {
     "searchPlaceholder": "Buscar ativos de dados...",
     "category": "Categoria",
-    "updateFrequency": "Frequência de Atualização"
+    "updateFrequency": "Frequência de Atualização",
+    "searchProducts": "Buscar por produto ou fornecedor...",
+    "allSectors": "Todos os setores",
+    "filterBySector": "Filtrar por setor"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "Sem ativos de dados",
-    "description": "Você não tem ativos de dados registrados. Comece criando seu primeiro ativo."
+    "description": "Você não tem ativos de dados registrados. Comece criando seu primeiro ativo.",
+    "libraryTitle": "Sua biblioteca está vazia",
+    "libraryDesc": "Quando concluir uma transação, os dados aparecerão aqui. Explore o catálogo para encontrar os datasets que precisa.",
+    "libraryBtn": "Explorar Marketplace",
+    "pubTitle": "Sem publicações",
+    "pubDesc": "Você ainda não publicou nenhum dataset. Compartilhe seus dados com o ecossistema e gere receita.",
+    "pubBtn": "Publicar Dataset"
+  },
+  "card": {
+    "downloadData": "Baixar Dados",
+    "viewDetails": "Ver Detalhes",
+    "noDataSource": "Ativo sem fonte de dados configurada",
+    "blockchainTooltip": "Dados verificados com rastreabilidade blockchain",
+    "blockchainAudit": "Auditoria de Rastreabilidade Blockchain",
+    "noName": "Dataset sem nome",
+    "noDesc": "Sem descrição",
+    "price": "Preço",
+    "published": "Publicado",
+    "view": "Ver",
+    "analytics": "Analítica",
+    "inReview": "Em revisão",
+    "visibleInCatalog": "Visível no Catálogo",
+    "notEditable": "Não editável durante a validação técnica."
+  },
+  "pricing": {
+    "free": "Gratuito",
+    "subscription": "Assinatura",
+    "oneTime": "Pagamento Único",
+    "usage": "Por Uso",
+    "undefined": "Não definido",
+    "perMonth": "/mês"
+  },
+  "pubStatus": {
+    "validation": "Em Validação Técnica",
+    "available": "Disponível",
+    "published": "Publicado",
+    "rejected": "Rejeitado",
+    "draft": "Rascunho",
+    "archived": "Arquivado"
+  },
+  "expiration": {
+    "expired": "Expirado",
+    "expiresIn": "Expira em {{days}}d",
+    "active": "Ativo"
+  },
+  "dataType": {
+    "administrative": "Administrativo",
+    "iot": "IoT",
+    "financial": "Financeiro",
+    "energy": "Energia",
+    "esg": "ESG",
+    "data": "Dados"
+  },
+  "loading": "Carregando dados...",
+  "loadingPub": "Carregando publicações...",
+  "noResults": "Nenhum resultado encontrado",
+  "clearFilters": "Limpar Filtros",
+  "adjustFilters": "Tente ajustar os filtros de busca",
+  "toast": {
+    "visibleOn": "Ativo visível no catálogo",
+    "visibleOff": "Ativo oculto do catálogo",
+    "visibilityError": "Erro ao alterar a visibilidade",
+    "downloadSuccess": "Arquivo baixado com sucesso",
+    "downloadError": "Erro ao baixar",
+    "noDataSource": "Este ativo ainda não tem uma fonte de dados configurada.",
+    "downloading": "Baixando dados através do Gateway...",
+    "connectionError": "Erro de Conexão: O servidor do fornecedor não responde."
   }
 }
