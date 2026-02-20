@@ -430,7 +430,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.totalSpend")}</p>
-                  <p className="text-3xl font-bold">€ {totalGasto.toLocaleString(i18n.language)}</p>
+                  <p className="text-3xl font-bold">{totalGasto === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? t("charts.noData") : `€ ${totalGasto.toLocaleString(i18n.language)}`}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
@@ -449,7 +449,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.revenue")}</p>
-                  <p className="text-3xl font-bold">€ {totalIngreso.toLocaleString(i18n.language)}</p>
+                  <p className="text-3xl font-bold">{totalIngreso === 0 && (!monthlyTrends || monthlyTrends.length === 0) ? t("charts.noData") : `€ ${totalIngreso.toLocaleString(i18n.language)}`}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
@@ -468,7 +468,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.activeDatasets")}</p>
-                  <p className="text-3xl font-bold">{datasetsActivos}</p>
+                  <p className="text-3xl font-bold">{datasetsActivos === 0 ? t("charts.noData") : datasetsActivos}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
@@ -487,7 +487,7 @@ const Reports = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{t("kpis.efficiency")}</p>
-                  <p className="text-3xl font-bold">{kpis?.compliance_percent ?? 98}%</p>
+                  <p className="text-3xl font-bold">{(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.compliance_percent}%`}</p>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                   <div className="h-10 w-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
@@ -703,7 +703,7 @@ const Reports = () => {
                     {t("metrics.approvalRate")}
                   </p>
                   <p className="text-2xl font-bold">
-                    {kpis?.approval_rate ?? 0}%
+                    {(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.approval_rate}%`}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {kpis?.total_volume ?? 0} {t("metrics.totalTransactions")}
@@ -718,11 +718,12 @@ const Reports = () => {
                     {t("metrics.avgTime")}
                   </p>
                   <p className="text-2xl font-bold">
-                    {kpis?.avg_time_hours ? 
-                      kpis.avg_time_hours >= 24 ? 
-                        `${(kpis.avg_time_hours / 24).toFixed(1)} ${t("metrics.days")}` : 
-                        `${kpis.avg_time_hours.toFixed(1)} ${t("metrics.hours")}`
-                      : '-'}
+                    {(!kpis || kpis.total_volume === 0) ? t("charts.noData") : 
+                      kpis.avg_time_hours ? 
+                        kpis.avg_time_hours >= 24 ? 
+                          `${(kpis.avg_time_hours / 24).toFixed(1)} ${t("metrics.days")}` : 
+                          `${kpis.avg_time_hours.toFixed(1)} ${t("metrics.hours")}`
+                        : t("charts.noData")}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {t("metrics.fromRequestToApproval")}
@@ -737,7 +738,7 @@ const Reports = () => {
                     {t("metrics.compliance")}
                   </p>
                   <p className="text-2xl font-bold">
-                    {kpis?.compliance_percent ?? 0}%
+                    {(!kpis || kpis.total_volume === 0) ? t("charts.noData") : `${kpis.compliance_percent}%`}
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
                     {t("metrics.odrlPolicies")}
