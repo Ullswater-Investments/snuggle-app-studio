@@ -523,6 +523,7 @@ i18n
         rulebook: esRulebook,
         glossaryUne: esGlossaryUne,
         transparency: esTransparency,
+        notifications: esNotifications,
       },
       en: {
         common: enCommon,
@@ -582,6 +583,7 @@ i18n
         rulebook: enRulebook,
         glossaryUne: enGlossaryUne,
         transparency: enTransparency,
+        notifications: enNotifications,
       },
       fr: {
         common: frCommon,
@@ -641,6 +643,7 @@ i18n
         rulebook: frRulebook,
         glossaryUne: frGlossaryUne,
         transparency: frTransparency,
+        notifications: frNotifications,
       },
       pt: {
         common: ptCommon,
@@ -699,6 +702,7 @@ i18n
         rulebook: ptRulebook,
         glossaryUne: ptGlossaryUne,
         transparency: ptTransparency,
+        notifications: ptNotifications,
       },
       de: {
         common: deCommon,
@@ -758,6 +762,7 @@ i18n
         rulebook: deRulebook,
         glossaryUne: deGlossaryUne,
         transparency: deTransparency,
+        notifications: deNotifications,
       },
       it: {
         common: itCommon,
@@ -816,6 +821,7 @@ i18n
         rulebook: itRulebook,
         glossaryUne: itGlossaryUne,
         transparency: itTransparency,
+        notifications: itNotifications,
       },
       nl: {
         common: nlCommon,
@@ -874,11 +880,12 @@ i18n
         rulebook: nlRulebook,
         glossaryUne: nlGlossaryUne,
         transparency: nlTransparency,
+        notifications: nlNotifications,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications'],
     interpolation: {
       escapeValue: false,
     },
