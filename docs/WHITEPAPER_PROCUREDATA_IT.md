@@ -96,7 +96,7 @@ Motore di contratti digitali basato su ODRL 2.0 (W3C) che governa ogni accesso a
 |-------------|------------|-------------|
 | **Permessi** | ODRL 2.0, JSON-LD | Azioni autorizzate (read, analyze, aggregate) con granularità per campo e durata configurabile (P90D, P180D, P365D). |
 | **Divieti** | Smart Contracts, Pontus-X | Redistribuzione e rivendita vietate; gli insights derivati ereditano le restrizioni. Violazioni registrate su blockchain. |
-| **Obblighi** | EUROe, Smart Settlement | Pagamento automatico (1 EUROe pay-per-use o 100 EUROe/anno abbonamento) e report di utilizzo obbligatori con audit continuo. |
+| **Obblighi** | EUROe, Smart Settlement | Pagamento automatico (1 EUROe pay-per-use o 300 EUROe/mese abbonamento) e report di utilizzo obbligatori con audit continuo. |
 | **Vincoli** | Geografici, Settoriali, Temporali | Elaborazione esclusiva nell'UE, settore specifico secondo Self-Description, volume massimo di query per periodo. |
 
 ### 3.5 Web3 e DIDs
@@ -108,7 +108,7 @@ Layer di identità decentralizzata e pagamenti programmabili basato su standard 
 | **Identità SSI** | DID (did:ethr), MetaMask, KYB | Identità autogestita senza intermediari, wallet aziendale e verifica KYB tramite DeltaDAO e Self-Description Gaia-X. |
 | **Credenziali Verificabili** | W3C VC Data Model, Zero-Knowledge | Emissione da organizzazioni verificate, presentazione selettiva senza rivelare dati sensibili e verifica on-chain istantanea. |
 | **Blockchain** | Data NFTs (ERC-721), DDOs, Smart Contracts | Ogni asset di dati è un token unico; metadati DCAT-AP indicizzati da Aquarius; esecuzione automatica delle policy ODRL su Pontus-X (Chain ID 32460). |
-| **Pagamenti EUROe** | Pay-per-use, Abbonamento, Regolamento | Micropagamenti automatici tramite Smart Contract (1 EUROe/tx o 100 EUROe/anno); ogni pagamento registrato su blockchain con timestamp immutabile. |
+| **Pagamenti EUROe** | Pay-per-use, Abbonamento, Regolamento | Micropagamenti automatici tramite Smart Contract (1 EUROe/tx o 300 EUROe/mese); ogni pagamento registrato su blockchain con timestamp immutabile. |
 
 ### 3.6 Assistente IA
 

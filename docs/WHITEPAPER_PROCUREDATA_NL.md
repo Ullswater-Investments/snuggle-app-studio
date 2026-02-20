@@ -96,7 +96,7 @@ ODRL 2.0 (W3C) digitale contractengine die elke datatoegang op het platform rege
 |---------|---------------|--------------|
 | **Toestemmingen** | ODRL 2.0, JSON-LD | Geautoriseerde acties (read, analyze, aggregate) met veldniveau-granulariteit en configureerbare duur (P90D, P180D, P365D). |
 | **Verboden** | Smart Contracts, Pontus-X | Herverdeling en doorverkoop verboden; afgeleide inzichten erven beperkingen. Overtredingen vastgelegd op blockchain. |
-| **Verplichtingen** | EUROe, Smart Settlement | Automatische betaling (1 EUROe pay-per-use of 100 EUROe/jaar abonnement) en verplichte gebruiksrapporten met continue audit. |
+| **Verplichtingen** | EUROe, Smart Settlement | Automatische betaling (1 EUROe pay-per-use of 300 EUROe/maand abonnement) en verplichte gebruiksrapporten met continue audit. |
 | **Beperkingen** | Geografisch, Sectoraal, Temporeel | Uitsluitend EU-verwerking, sectorspecifiek volgens Self-Description, maximaal queryvolume per periode. |
 
 ### 3.5 Web3 en DIDs
@@ -108,7 +108,7 @@ Gedecentraliseerde identiteits- en programmeerbare betalingslaag gebaseerd op W3
 | **SSI-identiteit** | DID (did:ethr), MetaMask, KYB | Zelfbeheerde identiteit zonder tussenpersonen, bedrijfswallet en KYB-verificatie via DeltaDAO en Gaia-X Self-Description. |
 | **Verifieerbare Credentials** | W3C VC Data Model, Zero-Knowledge | Uitgifte door geverifieerde organisaties, selectieve presentatie zonder gevoelige data en directe on-chain verificatie. |
 | **Blockchain** | Data NFTs (ERC-721), DDOs, Smart Contracts | Elk data-asset is een uniek token; DCAT-AP-metadata geïndexeerd door Aquarius; automatische ODRL-beleidsuitvoering op Pontus-X (Chain ID 32460). |
-| **EUROe-betalingen** | Pay-per-use, Abonnement, Afwikkeling | Automatische microbetalingen via Smart Contract (1 EUROe/tx of 100 EUROe/jaar); elke betaling vastgelegd op blockchain met onveranderlijk tijdstempel. |
+| **EUROe-betalingen** | Pay-per-use, Abonnement, Afwikkeling | Automatische microbetalingen via Smart Contract (1 EUROe/tx of 300 EUROe/maand); elke betaling vastgelegd op blockchain met onveranderlijk tijdstempel. |
 
 ### 3.6 AI-assistent
 
