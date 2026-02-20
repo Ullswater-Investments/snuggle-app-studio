@@ -1,11 +1,11 @@
 {
-  "title": "Notificaciones",
-  "subtitle": "Mantente al día con tus operaciones de datos",
+  "title": "Centro de Notificaciones",
+  "subtitle": "Mantente al tanto de la actividad de tus activos y transacciones.",
   "badge": "Notificaciones",
   "filters": {
     "all": "Todas",
     "unread": "No Leídas",
-    "highPriority": "Alta Prioridad",
+    "highPriority": "Prioridad Alta",
     "transactions": "Transacciones",
     "system": "Sistema",
     "marketing": "Marketing"
@@ -36,8 +36,8 @@
     "settings": "Configuración"
   },
   "empty": {
-    "title": "Sin notificaciones",
-    "description": "¡Estás al día! No tienes notificaciones nuevas."
+    "title": "Sin notificaciones nuevas",
+    "description": "Te avisaremos cuando haya actividad relevante en tus activos o solicitudes."
   },
   "toast": {
     "newNotification": "Nueva notificación recibida",
