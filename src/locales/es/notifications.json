@@ -4,7 +4,7 @@
   "badge": "Notificaciones",
   "card": {
     "title": "Actividad Reciente",
-    "description": "Historial de eventos, transacciones y acciones pendientes"
+    "description": "Historial de eventos y transacciones"
   },
   "filters": {
     "all": "Todas",
@@ -42,7 +42,7 @@
   },
   "empty": {
     "title": "Sin notificaciones",
-    "description": "Te avisaremos cuando haya actividad relevante en tus activos."
+    "description": "Te avisaremos cuando haya actividad relevante."
   },
   "toast": {
     "newNotification": "Nueva notificación",
