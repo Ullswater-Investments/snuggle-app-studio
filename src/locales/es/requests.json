@@ -3,8 +3,8 @@
   "title": "Gestiona tus Solicitudes de Datos",
   "subtitle": "Administra las solicitudes de datos según tu rol en cada transacción",
   "buttons": {
-    "showAnalytics": "Ver Métricas",
-    "hideAnalytics": "Ocultar Métricas",
+    "showAnalytics": "Mostrar Analytics",
+    "hideAnalytics": "Ocultar Analytics",
     "exportCSV": "Exportar CSV",
     "newRequest": "Nueva Solicitud"
   },
@@ -14,9 +14,9 @@
     "totalTransactions": "Total Transacciones"
   },
   "tabs": {
-    "requiresAttention": "Requieren Atención",
+    "requiresAttention": "Requiere Atención",
     "myRequests": "Mis Solicitudes",
-    "historical": "Historial",
+    "historical": "Histórico",
     "all": "Todas"
   },
   "status": {
@@ -26,7 +26,7 @@
     },
     "pending_subject": {
       "label": "Confirmando Bloque",
-      "tooltip": "Esperando confirmación del bloque"
+      "tooltip": "Esperando confirmación de bloque en blockchain"
     },
     "pending_holder": {
       "label": "Validando Acceso",
@@ -42,7 +42,7 @@
     },
     "denied_holder": {
       "label": "Acceso Denegado",
-      "tooltip": "El proveedor ha denegado el acceso"
+      "tooltip": "El Provider ha denegado el acceso"
     },
     "completed": {
       "label": "Acceso Activo",
@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Cancelada",
       "tooltip": "Transacción cancelada"
+    },
+    "revoked": {
+      "label": "Acceso Revocado",
+      "tooltip": "El proveedor ha revocado el acceso a estos datos"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Proveedor",
     "createdAt": "Fecha de Solicitud",
     "accessDuration": "Duración de Acceso",
-    "myRole": "Mi Rol"
+    "myRole": "Mi Rol",
+    "created": "Creada"
   },
   "roles": {
     "consumer": "Consumidor",
@@ -89,21 +94,46 @@
   "actions": {
     "preApprove": "Pre-aprobar",
     "approveAndShare": "Aprobar y Compartir",
-    "deny": "Rechazar",
-    "viewDetails": "Ver Detalles",
+    "deny": "Denegar",
+    "viewDetails": "Ver Detalle",
     "cancel": "Cancelar"
+  },
+  "kanban": {
+    "pending": "Pendientes",
+    "negotiation": "En Negociación",
+    "approved": "Aprobados",
+    "completed": "Completados"
+  },
+  "detail": {
+    "requester": "Solicitante",
+    "provider": "Proveedor",
+    "currentStatus": "Estado Actual",
+    "timeline": "Timeline de Aprobaciones",
+    "noHistory": "No hay historial de aprobaciones aún",
+    "policyProvider": "política del proveedor"
   },
   "empty": {
     "title": "Sin solicitudes activas",
-    "description": "No tienes solicitudes que requieran acción. Cuando recibas nuevas solicitudes, aparecerán aquí.",
-    "exploreCatalog": "Explorar Catálogo"
+    "description": "No tienes ninguna solicitud que requiera tu acción en este momento. Cuando recibas nuevas solicitudes, aparecerán aquí.",
+    "exploreCatalog": "Explorar Catálogo",
+    "noRequests": "No has realizado ninguna solicitud",
+    "noHistory": "No hay transacciones históricas",
+    "noHistoryDesc": "Las transacciones completadas, aprobadas o denegadas aparecerán aquí"
   },
   "loading": "Cargando solicitudes...",
   "toast": {
-    "success": "Acción completada correctamente",
+    "success": "Acción realizada exitosamente",
+    "error": "Error al realizar la acción",
+    "denied": "Solicitud denegada",
     "noData": "No hay datos para exportar",
     "exported": "Informe descargado correctamente",
     "exportedDesc": "{{count}} transacciones exportadas"
+  },
+  "demo": {
+    "tooltip": "Transacción sintética de demostración. En producción, verás tus solicitudes reales."
+  },
+  "csv": {
+    "noProduct": "Sin producto"
   },
   "analytics": {
     "title": "Métricas de Transacciones",

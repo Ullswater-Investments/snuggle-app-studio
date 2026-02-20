@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Annulée",
       "tooltip": "Transaction annulée"
+    },
+    "revoked": {
+      "label": "Accès Révoqué",
+      "tooltip": "Le fournisseur a révoqué l'accès"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Fournisseur",
     "createdAt": "Date de Demande",
     "accessDuration": "Durée d'Accès",
-    "myRole": "Mon Rôle"
+    "myRole": "Mon Rôle",
+    "created": "Créée"
   },
   "roles": {
     "consumer": "Consommateur",
@@ -93,17 +98,42 @@
     "viewDetails": "Voir les Détails",
     "cancel": "Annuler"
   },
+  "kanban": {
+    "pending": "En attente",
+    "negotiation": "En Négociation",
+    "approved": "Approuvées",
+    "completed": "Terminées"
+  },
+  "detail": {
+    "requester": "Demandeur",
+    "provider": "Fournisseur",
+    "currentStatus": "Statut Actuel",
+    "timeline": "Chronologie des Approbations",
+    "noHistory": "Aucun historique d'approbation",
+    "policyProvider": "politique du fournisseur"
+  },
   "empty": {
     "title": "Aucune demande active",
     "description": "Vous n'avez aucune demande nécessitant une action. Les nouvelles demandes apparaîtront ici.",
-    "exploreCatalog": "Explorer le Catalogue"
+    "exploreCatalog": "Explorer le Catalogue",
+    "noRequests": "Vous n'avez fait aucune demande",
+    "noHistory": "Aucune transaction historique",
+    "noHistoryDesc": "Les transactions terminées, approuvées ou refusées apparaîtront ici"
   },
   "loading": "Chargement des demandes...",
   "toast": {
     "success": "Action effectuée avec succès",
+    "error": "Erreur lors de l'action",
+    "denied": "Demande refusée",
     "noData": "Aucune donnée à exporter",
     "exported": "Rapport téléchargé avec succès",
     "exportedDesc": "{{count}} transactions exportées"
+  },
+  "demo": {
+    "tooltip": "Transaction synthétique de démonstration. En production, vous verrez vos vraies demandes."
+  },
+  "csv": {
+    "noProduct": "Sans produit"
   },
   "analytics": {
     "title": "Métriques des Transactions",

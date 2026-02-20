@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Storniert",
       "tooltip": "Transaktion storniert"
+    },
+    "revoked": {
+      "label": "Zugang widerrufen",
+      "tooltip": "Der Anbieter hat den Zugang widerrufen"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Anbieter",
     "createdAt": "Anfragedatum",
     "accessDuration": "Zugangsdauer",
-    "myRole": "Meine Rolle"
+    "myRole": "Meine Rolle",
+    "created": "Erstellt"
   },
   "roles": {
     "consumer": "Verbraucher",
@@ -93,17 +98,42 @@
     "viewDetails": "Details anzeigen",
     "cancel": "Abbrechen"
   },
+  "kanban": {
+    "pending": "Ausstehend",
+    "negotiation": "In Verhandlung",
+    "approved": "Genehmigt",
+    "completed": "Abgeschlossen"
+  },
+  "detail": {
+    "requester": "Antragsteller",
+    "provider": "Anbieter",
+    "currentStatus": "Aktueller Status",
+    "timeline": "Genehmigungszeitachse",
+    "noHistory": "Noch keine Genehmigungshistorie",
+    "policyProvider": "Anbieterrichtlinie"
+  },
   "empty": {
     "title": "Keine aktiven Anfragen",
     "description": "Sie haben keine Anfragen, die eine Aktion erfordern. Neue Anfragen werden hier angezeigt.",
-    "exploreCatalog": "Katalog durchsuchen"
+    "exploreCatalog": "Katalog durchsuchen",
+    "noRequests": "Sie haben keine Anfragen gestellt",
+    "noHistory": "Keine historischen Transaktionen",
+    "noHistoryDesc": "Abgeschlossene, genehmigte oder abgelehnte Transaktionen erscheinen hier"
   },
   "loading": "Anfragen werden geladen...",
   "toast": {
     "success": "Aktion erfolgreich abgeschlossen",
+    "error": "Fehler bei der Aktion",
+    "denied": "Anfrage abgelehnt",
     "noData": "Keine Daten zum Exportieren",
     "exported": "Bericht erfolgreich heruntergeladen",
     "exportedDesc": "{{count}} Transaktionen exportiert"
+  },
+  "demo": {
+    "tooltip": "Synthetische Demotransaktion. In der Produktion sehen Sie Ihre echten Anfragen."
+  },
+  "csv": {
+    "noProduct": "Kein Produkt"
   },
   "analytics": {
     "title": "Transaktionsmetriken",

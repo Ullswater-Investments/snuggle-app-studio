@@ -9,7 +9,7 @@
     "newRequest": "New Request"
   },
   "stats": {
-    "pendingAction": "Pending Action",
+    "pendingAction": "Action Required",
     "myRequests": "My Requests",
     "totalTransactions": "Total Transactions"
   },
@@ -51,6 +51,10 @@
     "cancelled": {
       "label": "Cancelled",
       "tooltip": "Transaction cancelled"
+    },
+    "revoked": {
+      "label": "Access Revoked",
+      "tooltip": "Provider has revoked access to this data"
     }
   },
   "filters": {
@@ -79,7 +83,8 @@
     "subject": "Provider",
     "createdAt": "Request Date",
     "accessDuration": "Access Duration",
-    "myRole": "My Role"
+    "myRole": "My Role",
+    "created": "Created"
   },
   "roles": {
     "consumer": "Consumer",
@@ -93,17 +98,42 @@
     "viewDetails": "View Details",
     "cancel": "Cancel"
   },
+  "kanban": {
+    "pending": "Pending",
+    "negotiation": "In Negotiation",
+    "approved": "Approved",
+    "completed": "Completed"
+  },
+  "detail": {
+    "requester": "Requester",
+    "provider": "Provider",
+    "currentStatus": "Current Status",
+    "timeline": "Approval Timeline",
+    "noHistory": "No approval history yet",
+    "policyProvider": "provider policy"
+  },
   "empty": {
     "title": "No active requests",
     "description": "You have no requests requiring action. When you receive new requests, they will appear here.",
-    "exploreCatalog": "Explore Catalog"
+    "exploreCatalog": "Explore Catalog",
+    "noRequests": "You haven't made any requests",
+    "noHistory": "No historical transactions",
+    "noHistoryDesc": "Completed, approved or denied transactions will appear here"
   },
   "loading": "Loading requests...",
   "toast": {
     "success": "Action completed successfully",
+    "error": "Error performing action",
+    "denied": "Request denied",
     "noData": "No data to export",
     "exported": "Report downloaded successfully",
     "exportedDesc": "{{count}} transactions exported"
+  },
+  "demo": {
+    "tooltip": "Synthetic demo transaction. In production, you will see your real requests."
+  },
+  "csv": {
+    "noProduct": "No product"
   },
   "analytics": {
     "title": "Transaction Metrics",
