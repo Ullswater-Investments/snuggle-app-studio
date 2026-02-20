@@ -1,7 +1,11 @@
 {
-  "title": "Meldingen",
-  "subtitle": "Blijf op de hoogte van uw databewerkingen",
+  "title": "Meldingscentrum",
+  "subtitle": "Beheer uw meldingen en recente activiteit",
   "badge": "Meldingen",
+  "card": {
+    "title": "Recente Activiteit",
+    "description": "Gebeurtenissen, transacties en openstaande acties"
+  },
   "filters": {
     "all": "Alle",
     "unread": "Ongelezen",
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Als gelezen markeren",
+    "markAsUnread": "Als ongelezen markeren",
     "markAllRead": "Alles als gelezen markeren",
     "delete": "Verwijderen",
-    "viewDetails": "Details Bekijken",
+    "viewDetails": "Details bekijken",
     "settings": "Instellingen"
   },
   "empty": {
     "title": "Geen meldingen",
-    "description": "U bent helemaal bij! Geen nieuwe meldingen."
+    "description": "We laten het u weten wanneer er relevante activiteit is."
   },
   "toast": {
-    "newNotification": "Nieuwe melding ontvangen",
+    "newNotification": "Nieuwe melding",
     "markedAsRead": "Melding als gelezen gemarkeerd",
-    "allMarkedAsRead": "Alle meldingen als gelezen gemarkeerd"
+    "allMarkedAsRead": "Alle meldingen als gelezen gemarkeerd",
+    "deleted": "Melding verwijderd",
+    "deleteError": "Fout bij verwijderen",
+    "error": "Fout"
+  },
+  "bell": {
+    "title": "Meldingen",
+    "new": "nieuw",
+    "markRead": "Gelezen",
+    "empty": "Geen meldingen"
   },
   "settings": {
     "title": "Meldingsinstellingen",

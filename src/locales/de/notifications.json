@@ -1,7 +1,11 @@
 {
-  "title": "Benachrichtigungen",
-  "subtitle": "Bleiben Sie über Ihre Datenoperationen auf dem Laufenden",
+  "title": "Benachrichtigungszentrum",
+  "subtitle": "Verwalten Sie Ihre Benachrichtigungen und Aktivitäten",
   "badge": "Benachrichtigungen",
+  "card": {
+    "title": "Neueste Aktivität",
+    "description": "Verlauf, Transaktionen und ausstehende Aktionen"
+  },
   "filters": {
     "all": "Alle",
     "unread": "Ungelesen",
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Als gelesen markieren",
+    "markAsUnread": "Als ungelesen markieren",
     "markAllRead": "Alle als gelesen markieren",
     "delete": "Löschen",
-    "viewDetails": "Details Anzeigen",
+    "viewDetails": "Details anzeigen",
     "settings": "Einstellungen"
   },
   "empty": {
     "title": "Keine Benachrichtigungen",
-    "description": "Sie sind auf dem neuesten Stand! Keine neuen Benachrichtigungen."
+    "description": "Wir benachrichtigen Sie, wenn es relevante Aktivitäten gibt."
   },
   "toast": {
-    "newNotification": "Neue Benachrichtigung erhalten",
+    "newNotification": "Neue Benachrichtigung",
     "markedAsRead": "Benachrichtigung als gelesen markiert",
-    "allMarkedAsRead": "Alle Benachrichtigungen als gelesen markiert"
+    "allMarkedAsRead": "Alle Benachrichtigungen als gelesen markiert",
+    "deleted": "Benachrichtigung gelöscht",
+    "deleteError": "Fehler beim Löschen",
+    "error": "Fehler"
+  },
+  "bell": {
+    "title": "Benachrichtigungen",
+    "new": "neue",
+    "markRead": "Als gelesen",
+    "empty": "Keine Benachrichtigungen"
   },
   "settings": {
     "title": "Benachrichtigungseinstellungen",
