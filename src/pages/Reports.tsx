@@ -390,10 +390,6 @@ const Reports = () => {
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-indigo-500/10 via-background to-background border border-indigo-500/20 p-8">
           <div className="relative z-10 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
             <div>
-              <Badge variant="secondary" className="mb-4">
-                <BarChart3 className="mr-1 h-3 w-3" />
-                {t("badge")}
-              </Badge>
               <h1 className="text-4xl font-bold mb-3">
                 {t("hero.title")}
               </h1>

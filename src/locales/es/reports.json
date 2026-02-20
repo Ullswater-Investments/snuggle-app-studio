@@ -3,8 +3,8 @@
   "subtitle": "Análisis detallado de tus operaciones de datos",
   "badge": "Analytics",
   "hero": {
-    "title": "Reportes y Estadísticas",
-    "description": "Analiza el rendimiento del sistema, visualiza tendencias y obtén insights sobre las transacciones de datos."
+    "title": "Analíticas y Reportes",
+    "description": "Visualiza el rendimiento de tus activos y transacciones."
   },
   "dateRange": {
     "30days": "Últimos 30 días",
