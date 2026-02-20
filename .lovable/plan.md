@@ -1,64 +1,61 @@
 
 
-## Activar el Centro de Notificaciones con Datos Reales
+## Unificar Precio de Membresia Pro en Toda la Plataforma
 
-### Estado Actual
+Cambiar **todas** las referencias de "Membresia Anual Pro 100 EUROe/ano" a **"Membresia Pro Mensual 300 EUROe/mes"** en toda la plataforma.
 
-- **Notifications.tsx**: Ya tiene la logica de fetch, realtime, y UI bien implementada. Filtra por `user_id`.
-- **NotificationsBell.tsx**: Funciona correctamente con punto rojo animado para no leidas.
-- **i18n (es)**: Ya tiene textos razonables pero necesitan ajustes segun lo solicitado.
-- **Realtime**: **NO esta habilitado** para la tabla `notifications` en `supabase_realtime`. Las suscripciones no funcionaran hasta que se active.
-- **RLS**: Correcta (SELECT/UPDATE por `user_id`, INSERT abierto para triggers con SECURITY DEFINER).
-- **Triggers**: Ya existen 4 triggers que insertan notificaciones automaticamente (transacciones, activos, descargas, nuevos activos).
+### Inventario Completo de Archivos a Modificar
 
-### Cambios a Implementar
+Se han identificado **21 archivos** con referencias a la membresia Pro anual de 100 EUROe que deben actualizarse:
 
-#### 1. Habilitar Realtime (Migracion SQL)
-
-Ejecutar una migracion para agregar la tabla `notifications` a la publicacion de realtime:
-
-```sql
-ALTER PUBLICATION supabase_realtime ADD TABLE public.notifications;
-```
-
-Sin esto, las suscripciones en `NotificationsBell.tsx` y `Notifications.tsx` no reciben eventos.
-
-#### 2. Actualizar Labels i18n (ES)
-
-Archivo: `src/locales/es/notifications.json`
-
-| Clave | Valor Actual | Nuevo Valor |
-|-------|-------------|-------------|
-| `title` | "Notificaciones" | "Centro de Notificaciones" |
-| `subtitle` | "Mantente al dia con tus operaciones de datos" | "Mantente al tanto de la actividad de tus activos y transacciones." |
-| `empty.title` | "Sin notificaciones" | "Sin notificaciones nuevas" |
-| `empty.description` | "Estas al dia! No tienes notificaciones nuevas." | "Te avisaremos cuando haya actividad relevante en tus activos o solicitudes." |
-
-Los valores de `filters.all`, `filters.unread`, y `filters.highPriority` ya son correctos ("Todas", "No Leidas", "Alta Prioridad").
-
-#### 3. Filtro por organization_id en Notifications.tsx
-
-Actualmente el fetch filtra solo por `user_id`. Agregar un filtro adicional opcional por `organization_id` usando el contexto de organizacion activa (`useOrganizationContext`), para que el usuario solo vea notificaciones relevantes a su organizacion seleccionada.
-
-#### 4. Sin cambios necesarios en NotificationsBell.tsx
-
-El componente ya tiene:
-- Punto rojo animado (`animate-pulse`) cuando hay no leidas
-- Suscripcion realtime (que funcionara una vez habilitado el paso 1)
-- Contador de no leidas
-
-### Archivos a Modificar
+#### A. Constantes del Sistema (2 archivos)
 
 | Archivo | Cambio |
 |---------|--------|
-| Migracion SQL | `ALTER PUBLICATION supabase_realtime ADD TABLE notifications` |
-| `src/locales/es/notifications.json` | Actualizar title, subtitle, empty.title, empty.description |
-| `src/pages/Notifications.tsx` | Agregar filtro por `organization_id` del contexto activo |
+| `src/lib/constants.ts` | `annualMembership: 100` → `monthlyMembership: 300` + comentario actualizado |
+| `src/modules/nodos-sectoriales/lib/constants.ts` | Idem |
 
-### Resultado Esperado
+#### B. Locales i18n (2 archivos)
 
-- Las notificaciones generadas por los triggers (cambios de transaccion, nuevos activos, descargas) apareceran en tiempo real sin refrescar.
-- El punto rojo en la campana del Topbar se activara automaticamente al recibir nuevas notificaciones.
-- Los textos de la pagina mostraran labels profesionales en espanol.
-- Solo se mostraran notificaciones relevantes a la organizacion activa del usuario.
+| Archivo | Cambios |
+|---------|---------|
+| `src/locales/es/docs.json` | `proPrice: "100 EUROe"` → `"300 EUROe"`, `proUnit: "por ano"` → `"por mes"` |
+| `src/locales/en/docs.json` | `proPrice: "100 EUROe"` → `"300 EUROe"`, `proUnit: "per year"` → `"per month"` |
+
+#### C. Paginas UI con texto hardcodeado (4 archivos)
+
+| Archivo | Linea | Cambio |
+|---------|-------|--------|
+| `src/pages/PortalTransparencia.tsx` | 41 | `'100 EUROe/ano'` → `'300 EUROe/mes'` |
+| `src/pages/DocumentoExplicativo2.tsx` | 132-133 | `100 EUROe` + `por ano` → `300 EUROe` + `por mes` |
+| `src/pages/BusinessModels.tsx` | 146 | Comentario: `100 EUROe/ano` → `300 EUROe/mes` |
+| `src/components/politicas-odrl/PoliticasOdrlInfographic.tsx` | 53 | `100 EUROe/ano suscripcion` → `300 EUROe/mes suscripcion` |
+| `src/components/web3-dids/Web3DidsInfographic.tsx` | 69 | `Suscripcion anual: 100 EUROe/ano` → `Suscripcion mensual: 300 EUROe/mes` |
+
+#### D. Edge Functions (4 archivos)
+
+| Archivo | Cambio |
+|---------|--------|
+| `supabase/functions/chat-ai/index.ts` | 2 ocurrencias: tabla de precios + regla de respuesta |
+| `supabase/functions/fundamentos-agent/index.ts` | `100 EUROe/year` → `300 EUROe/month` |
+| `supabase/functions/politicas-odrl-agent/index.ts` | `100 EUROe/ano (suscripcion)` → `300 EUROe/mes` |
+| `supabase/functions/web3-dids-agent/index.ts` | `100 EUROe/ano` → `300 EUROe/mes` |
+| `supabase/functions/flujo-3-actores-agent/index.ts` | `100 EUROe/year subscription` → `300 EUROe/month` |
+
+#### E. Documentacion y Training (7 archivos)
+
+| Archivo | Cambio |
+|---------|--------|
+| `docs/LIBRO_DE_REGLAS_PROCUREDATA.md` | "Membresia anual Pro / 100 EUROe" → "Membresia mensual Pro / 300 EUROe" |
+| `docs/GLOSARIO_UNE_0087.md` | `100 EUROe/ano` → `300 EUROe/mes` |
+| `docs/ai_training_context.md` | 3 ocurrencias (tabla precios, reglas, datos clave) |
+| `docs/synthetic_data.md` | `annualMembership: 100` → `monthlyMembership: 300` |
+| `entrenamientoIA/01_SYSTEM_INSTRUCTIONS.md` | 2 ocurrencias |
+| `entrenamientoIA/02_KNOWLEDGE_BASE.md` | `100 EUROe/ano` → `300 EUROe/mes` |
+| `entrenamientoIA/06_RESPONSE_RULES.md` | 2 ocurrencias (ejemplo de respuesta + datos clave) |
+| `entrenamientoIA/07_CONSTANTS_REFERENCE.md` | Tabla y codigo TypeScript |
+
+### Nota Importante
+
+Los servicios individuales que cuestan 100 EUROe (Anonimizador GDPR, Certificacion Green Partner, Sincronizador ERP) **NO se modifican** -- solo cambia la membresia Pro de suscripcion.
 
