@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { LogIn, Search } from "lucide-react";
 import { GlobalNavigation } from "@/components/GlobalNavigation";
-import { useState } from "react";
 
 interface PublicDemoLayoutProps {
   children?: React.ReactNode;
@@ -24,22 +23,37 @@ interface PublicDemoLayoutProps {
 export const PublicDemoLayout = ({ children }: PublicDemoLayoutProps) => {
   const { t } = useTranslation('common');
   const { user, signOut } = useAuth();
-  
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
         {user && <CommandMenu />}
         <AppSidebar />
-        
+
         <div className="flex-1 flex flex-col w-full">
           <header className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-16 items-center gap-4 px-4">
               <SidebarTrigger />
-              
+
               {user ? (
                 <>
                   <ProcuredataLogo size="md" showNavigation={true} variant="text" />
                   <div className="ml-auto flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="hidden sm:flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                      onClick={() => {
+                        const event = new KeyboardEvent('keydown', { key: 'k', ctrlKey: true });
+                        document.dispatchEvent(event);
+                      }}
+                    >
+                      <Search className="h-4 w-4" />
+                      <span className="text-xs">{t('searchPlaceholder')}</span>
+                      <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+                        <span className="text-xs">⌘</span>K
+                      </kbd>
+                    </Button>
                     <div data-tour="org-switcher">
                       <OrganizationSwitcher />
                     </div>
