@@ -2,8 +2,8 @@
 // Configuración para Ocean Protocol / PONTUS-X
 
 export const oceanConfig = {
-  // Chain ID: 32460 para Pontus-X Testnet, 137 para Polygon Mainnet
-  chainId: parseInt(import.meta.env.VITE_PONTUS_NETWORK_ID || '32460'),
+  // Chain ID: 32457 para Pontus-X Testnet
+  chainId: parseInt(import.meta.env.VITE_PONTUS_NETWORK_ID || '32457'),
   
   // Aquarius: Indexador de metadatos DDO
   aquariusUrl: import.meta.env.VITE_AQUARIUS_URL || 'https://aquarius.pontus-x.eu',
@@ -12,7 +12,7 @@ export const oceanConfig = {
   providerUrl: import.meta.env.VITE_PROVIDER_URL || 'https://provider.pontus-x.eu',
   
   // RPC URL para la red
-  nodeUri: import.meta.env.VITE_NODE_URI || 'https://rpc.dev.pontus-x.eu',
+  nodeUri: import.meta.env.VITE_NODE_URI || 'https://rpc.test.pontus-x.eu',
   
   // Explorer para verificar transacciones
   explorerUrl: 'https://explorer.pontus-x.eu',
