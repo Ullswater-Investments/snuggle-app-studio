@@ -1,36 +1,26 @@
 
 
-## Unificar el header entre /dashboard y /admin/*
+## Usar siempre el logo claro en el header de /admin/* y /dashboard
 
-### Situacion actual
+### Problema
 
-- **`AdminLayout`** ya usa el componente compartido `<UnifiedHeader />` correctamente.
-- **`AppLayout`** (usado en `/dashboard` y rutas de usuario) tiene su **propio header inline** con diferencias: usa `ProcuredataLogo` (texto), un trigger de Command Palette (Cmd+K), y el `OrganizationSwitcher`, pero no tiene la barra de busqueda ni el `DemoHelpButton`.
+Actualmente en `UnifiedHeader.tsx` (lineas 26-27) se alternan dos logos:
+- Modo claro: `procuredata-hero-logo.png` (visible, el de la screenshot)
+- Modo oscuro: `procuredata-logo-dark.png` (version oscura)
 
-Ambos headers son visualmente distintos, lo que rompe la uniformidad.
+El usuario confirma que el logo claro se ve bien en ambos modos y quiere mantenerlo siempre.
 
-### Plan de unificacion
+### Cambio
 
-**Estrategia:** Hacer que `AppLayout` tambien use `<UnifiedHeader />`, e incorporar en `UnifiedHeader` las funcionalidades exclusivas que hoy solo existen en el header inline de `AppLayout`.
+**Archivo: `src/components/layout/UnifiedHeader.tsx`**
 
----
+- Eliminar la linea 27 (la imagen con `hidden dark:block` del logo oscuro)
+- En la linea 26, quitar la clase `dark:hidden` para que el logo claro sea siempre visible
+- Eliminar el import de `procuredataLogoDark` (linea 10) ya que no se usara
 
-### Cambios en `src/components/layout/UnifiedHeader.tsx`
+Resultado: una sola imagen `<img>` con `procuredataHeroLogo` siempre visible, sin alternancia de tema.
 
-- Agregar el `OrganizationSwitcher` en la columna derecha de controles (solo visible cuando el usuario esta autenticado).
-- Convertir la barra de busqueda central en un trigger del Command Palette (Cmd+K), manteniendo el mismo estilo visual pero haciendo que al hacer clic abra el CommandMenu en lugar de ser un input independiente.
+### Nota importante
 
-### Cambios en `src/components/AppLayout.tsx`
+La landing page NO se toca. Este cambio solo afecta al `UnifiedHeader`, que es el componente compartido por `/dashboard/*` y `/admin/*`.
 
-- Eliminar todo el bloque `<header>` inline (lineas 33-68).
-- Importar y usar `<UnifiedHeader />` en su lugar, igual que hace `AdminLayout`.
-- Mantener los componentes `<DemoTour />`, `<CommandMenu />` y `<AIConcierge />` fuera del header (ya estan a nivel de layout).
-
-### Archivos a modificar (2)
-
-1. **`src/components/layout/UnifiedHeader.tsx`** -- agregar `OrganizationSwitcher`, convertir barra de busqueda en trigger de CommandMenu
-2. **`src/components/AppLayout.tsx`** -- reemplazar header inline por `<UnifiedHeader />`
-
-### Resultado esperado
-
-Ambos layouts (`/dashboard/*` y `/admin/*`) compartiran exactamente el mismo componente de header con logo, busqueda, controles de idioma/tema, notificaciones y boton de logout, garantizando uniformidad visual completa.
