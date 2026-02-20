@@ -25,7 +25,8 @@
     "description": "Ingresos y gastos de los últimos 6 meses",
     "demoData": "Datos Demo",
     "revenue": "Ingresos",
-    "expenses": "Gastos"
+    "expenses": "Gastos",
+    "noData": "No hay datos históricos disponibles"
   },
   "activity": {
     "title": "Última Actividad",

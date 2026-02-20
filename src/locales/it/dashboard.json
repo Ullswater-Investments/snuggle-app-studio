@@ -25,7 +25,8 @@
     "description": "Ricavi e spese degli ultimi 6 mesi",
     "demoData": "Dati Demo",
     "revenue": "Ricavi",
-    "expenses": "Spese"
+    "expenses": "Spese",
+    "noData": "Nessun dato storico disponibile"
   },
   "activity": {
     "title": "Attività Recente",

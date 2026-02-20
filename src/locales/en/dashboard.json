@@ -25,7 +25,8 @@
     "description": "Revenue and expenses for the last 6 months",
     "demoData": "Demo Data",
     "revenue": "Revenue",
-    "expenses": "Expenses"
+    "expenses": "Expenses",
+    "noData": "No historical data available"
   },
   "activity": {
     "title": "Recent Activity",

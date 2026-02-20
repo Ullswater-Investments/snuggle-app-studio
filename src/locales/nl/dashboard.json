@@ -25,7 +25,8 @@
     "description": "Inkomsten en uitgaven van de laatste 6 maanden",
     "demoData": "Demo Gegevens",
     "revenue": "Inkomsten",
-    "expenses": "Uitgaven"
+    "expenses": "Uitgaven",
+    "noData": "Geen historische gegevens beschikbaar"
   },
   "activity": {
     "title": "Recente Activiteit",
