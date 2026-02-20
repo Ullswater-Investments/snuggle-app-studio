@@ -132,8 +132,8 @@
         "freeFeatures": ["Pay per use", "Full marketplace access", "No fixed costs"],
         "proTier": "Pro Membership",
         "proPopular": "Popular",
-        "proPrice": "100 EUROe",
-        "proUnit": "per year",
+        "proPrice": "300 EUROe",
+        "proUnit": "per month",
         "proFeatures": ["Unlimited transactions", "Priority support", "Advanced APIs"],
         "premiumNote": "Premium services have specific costs (e.g. Flash Homologation: 150 EUROe)",
         "quiz": {

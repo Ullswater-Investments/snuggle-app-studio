@@ -400,10 +400,10 @@ ProcureData opera con un modelo de precios dual, transparente y predecible:
 | Acceso al catálogo | Gratuito | — |
 | Uso de servicios básicos (búsqueda, filtrado) | Gratuito | — |
 
-#### Plan Pro (Membresía anual)
+#### Plan Pro (Membresía mensual)
 | Concepto | Tarifa | Moneda |
 |----------|--------|--------|
-| Membresía anual Pro | 100 EUROe | EUROe |
+| Membresía mensual Pro | 300 EUROe/mes | EUROe |
 | Incluye | Votaciones de gobernanza, análisis avanzado, soporte prioritario, badge "Pro" | — |
 
 #### Servicios adicionales

@@ -202,7 +202,7 @@ Este glosario mapea cada término definido en la especificación **UNE 0087:2025
 
 **Implementación ProcureData:**
 - **Pay-per-use:** 1 EUROe por transacción de datos
-- **Membresía Pro:** 100 EUROe/año con funcionalidades avanzadas
+- **Membresía Pro:** 300 EUROe/mes con funcionalidades avanzadas
 - **Servicios de valor:** Marketplace de servicios complementarios (`value_services`)
 - **Monetización:** Modelo de revenue sharing para proveedores
 

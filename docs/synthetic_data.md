@@ -29,7 +29,7 @@ OFFICIAL_SECTORS = [
 
 OFFICIAL_PRICING = {
   transactionFee: 1.00,      // EUROe por alta de proveedor
-  annualMembership: 100,     // EUROe/año membresía Pro
+  monthlyMembership: 300,    // EUROe/mes membresía Pro
   currency: "EUROe"
 }
 ```

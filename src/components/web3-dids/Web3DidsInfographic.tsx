@@ -66,7 +66,7 @@ const layers: LayerData[] = [
     ],
     details: [
       "Pay-per-use: 1 EUROe por transacción — micropago automático vía Smart Contract",
-      "Suscripción anual: 100 EUROe/año con acceso ilimitado a activos del mismo proveedor",
+      "Suscripción mensual: 300 EUROe/mes con acceso ilimitado a activos del mismo proveedor",
       "Liquidación automática: Smart Contract ejecuta pago al momento del acceso sin intermediarios",
       "Trazabilidad completa: cada pago registrado en blockchain con sello de tiempo inmutable",
     ],

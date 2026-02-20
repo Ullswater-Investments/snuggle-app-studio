@@ -90,7 +90,7 @@ initiated → pending_subject → pending_holder → approved → completed
 - **ODRL 2.0**: Machine-readable usage policies (Open Digital Rights Language)
 - **Smart Contracts**: Automated policy enforcement and payment processing
 - **Compute-to-Data**: Privacy-preserving computation (algorithm goes to data, not vice versa)
-- **EUROe**: Euro-pegged stablecoin for B2B payments (1 EUROe per transaction or 100 EUROe/year subscription)
+- **EUROe**: Euro-pegged stablecoin for B2B payments (1 EUROe per transaction or 300 EUROe/month subscription)
 
 ## THE 47 SUCCESS STORIES — How the 3-Actor Flow Applies
 

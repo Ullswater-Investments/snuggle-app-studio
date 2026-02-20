@@ -416,7 +416,7 @@ La norma establece que los espacios de datos deben generar valor económico sost
 
 - **Modelo de negocio dual sostenible**:
   - **Pay-per-use**: 1 EUROe por transacción, sin compromisos de volumen.
-  - **Membresía Pro**: 100 EUROe/año con beneficios adicionales (gobernanza, análisis avanzado, prioridad de soporte).
+  - **Membresía Pro**: 300 EUROe/mes con beneficios adicionales (gobernanza, análisis avanzado, prioridad de soporte).
 - **22 servicios de valor añadido** categorizados en: Identidad, Verificación, Transformación, Analítica, Integración, Gobernanza.
 - **47 casos de uso verificados** en 6 sectores industriales con métricas de impacto.
 - **Stablecoin EUROe** para pagos regulados, evitando volatilidad cripto.
