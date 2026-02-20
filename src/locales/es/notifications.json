@@ -1,7 +1,11 @@
 {
   "title": "Centro de Notificaciones",
-  "subtitle": "Mantente al tanto de la actividad de tus activos y transacciones.",
+  "subtitle": "Gestiona tus alertas y actividad reciente",
   "badge": "Notificaciones",
+  "card": {
+    "title": "Actividad Reciente",
+    "description": "Historial de eventos, transacciones y acciones pendientes"
+  },
   "filters": {
     "all": "Todas",
     "unread": "No Leídas",
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Marcar como leída",
-    "markAllRead": "Marcar todas como leídas",
+    "markAsUnread": "Marcar como no leída",
+    "markAllRead": "Marcar todo como leído",
     "delete": "Eliminar",
-    "viewDetails": "Ver Detalles",
+    "viewDetails": "Ver detalles",
     "settings": "Configuración"
   },
   "empty": {
-    "title": "Sin notificaciones nuevas",
-    "description": "Te avisaremos cuando haya actividad relevante en tus activos o solicitudes."
+    "title": "Sin notificaciones",
+    "description": "Te avisaremos cuando haya actividad relevante en tus activos."
   },
   "toast": {
-    "newNotification": "Nueva notificación recibida",
+    "newNotification": "Nueva notificación",
     "markedAsRead": "Notificación marcada como leída",
-    "allMarkedAsRead": "Todas las notificaciones marcadas como leídas"
+    "allMarkedAsRead": "Todas las notificaciones marcadas como leídas",
+    "deleted": "Notificación eliminada",
+    "deleteError": "Error al eliminar la notificación",
+    "error": "Error"
+  },
+  "bell": {
+    "title": "Notificaciones",
+    "new": "nuevas",
+    "markRead": "Marcar leídas",
+    "empty": "No tienes notificaciones"
   },
   "settings": {
     "title": "Configuración de Notificaciones",

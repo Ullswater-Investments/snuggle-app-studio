@@ -1,11 +1,15 @@
 {
-  "title": "Notifications",
-  "subtitle": "Restez informé de vos opérations de données",
+  "title": "Centre de Notifications",
+  "subtitle": "Gérez vos alertes et votre activité récente",
   "badge": "Notifications",
+  "card": {
+    "title": "Activité Récente",
+    "description": "Historique, transactions et actions en attente"
+  },
   "filters": {
     "all": "Toutes",
-    "unread": "Non Lues",
-    "highPriority": "Haute Priorité",
+    "unread": "Non lues",
+    "highPriority": "Priorité Haute",
     "transactions": "Transactions",
     "system": "Système",
     "marketing": "Marketing"
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Marquer comme lue",
-    "markAllRead": "Marquer toutes comme lues",
+    "markAsUnread": "Marquer comme non lue",
+    "markAllRead": "Tout marquer comme lu",
     "delete": "Supprimer",
-    "viewDetails": "Voir les Détails",
+    "viewDetails": "Voir les détails",
     "settings": "Paramètres"
   },
   "empty": {
     "title": "Aucune notification",
-    "description": "Vous êtes à jour ! Pas de nouvelles notifications."
+    "description": "Nous vous avertirons dès qu'il y aura une activité pertinente."
   },
   "toast": {
-    "newNotification": "Nouvelle notification reçue",
+    "newNotification": "Nouvelle notification",
     "markedAsRead": "Notification marquée comme lue",
-    "allMarkedAsRead": "Toutes les notifications marquées comme lues"
+    "allMarkedAsRead": "Toutes les notifications marquées comme lues",
+    "deleted": "Notification supprimée",
+    "deleteError": "Erreur de suppression",
+    "error": "Erreur"
+  },
+  "bell": {
+    "title": "Notifications",
+    "new": "nouvelles",
+    "markRead": "Marquer lues",
+    "empty": "Aucune notification"
   },
   "settings": {
     "title": "Paramètres de Notifications",

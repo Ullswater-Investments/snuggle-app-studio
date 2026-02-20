@@ -32,7 +32,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
-import { formatDistanceToNow, isToday, isYesterday, isBefore, startOfDay, subDays } from "date-fns";
+import { formatDistanceToNow, isToday, isYesterday, subDays } from "date-fns";
 import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +66,7 @@ interface NotificationGroup {
 }
 
 const Notifications = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation("notifications");
   const { user } = useAuth();
   const { activeOrgId } = useOrganizationContext();
   const queryClient = useQueryClient();
@@ -88,7 +88,6 @@ const Notifications = () => {
         .order("created_at", { ascending: false })
         .limit(50);
 
-      // Filtro crítico: solo notificaciones de la organización activa
       if (activeOrgId) {
         query = query.eq("organization_id", activeOrgId);
       }
@@ -100,7 +99,6 @@ const Notifications = () => {
       }
 
       const { data, error } = await query;
-
       if (error) throw error;
       return data || [];
     },
@@ -123,7 +121,7 @@ const Notifications = () => {
         },
         (payload) => {
           queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
-          toast.info("Nueva notificación", {
+          toast.info(t("toast.newNotification"), {
             description: (payload.new as Notification).title,
           });
         }
@@ -133,7 +131,7 @@ const Notifications = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, queryClient]);
+  }, [user, queryClient, t]);
 
   // Mark single notification as read/unread
   const markAsReadMutation = useMutation({
@@ -142,12 +140,11 @@ const Notifications = () => {
         .from("notifications")
         .update({ is_read: isRead })
         .eq("id", id);
-
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
-      queryClient.invalidateQueries({ queryKey: ["notifications"] }); // For NotificationsBell
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
     },
   });
 
@@ -158,16 +155,15 @@ const Notifications = () => {
         .from("notifications")
         .delete()
         .eq("id", id);
-
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success("Notificación eliminada");
+      toast.success(t("toast.deleted"));
     },
     onError: () => {
-      toast.error("Error al eliminar la notificación");
+      toast.error(t("toast.deleteError"));
     },
   });
 
@@ -175,86 +171,50 @@ const Notifications = () => {
   const markAllAsReadMutation = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("No user");
-
       const { error } = await supabase
         .from("notifications")
         .update({ is_read: true })
         .eq("user_id", user.id)
         .eq("is_read", false);
-
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success("Todas las notificaciones marcadas como leídas");
+      toast.success(t("toast.allMarkedAsRead"));
     },
     onError: () => {
-      toast.error("Error");
+      toast.error(t("toast.error"));
     },
   });
 
   // Get icon and styling based on notification type and title
   const getNotificationConfig = (type: string, title: string) => {
-    // Check title for context-specific icons
     const titleLower = title.toLowerCase();
     
     if (titleLower.includes("pago") || titleLower.includes("euroe") || titleLower.includes("wallet")) {
-      return {
-        icon: Coins,
-        bgColor: "bg-green-100 dark:bg-green-900/30",
-        iconColor: "text-green-600 dark:text-green-400",
-      };
+      return { icon: Coins, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
     }
     if (titleLower.includes("smart contract") || titleLower.includes("blockchain") || titleLower.includes("pontus")) {
-      return {
-        icon: Blocks,
-        bgColor: "bg-blue-100 dark:bg-blue-900/30",
-        iconColor: "text-blue-600 dark:text-blue-400",
-      };
+      return { icon: Blocks, bgColor: "bg-blue-100 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" };
     }
     if (titleLower.includes("solicitud") || titleLower.includes("acceso") || titleLower.includes("propuesta")) {
-      return {
-        icon: FileKey,
-        bgColor: "bg-orange-100 dark:bg-orange-900/30",
-        iconColor: "text-orange-600 dark:text-orange-400",
-      };
+      return { icon: FileKey, bgColor: "bg-orange-100 dark:bg-orange-900/30", iconColor: "text-orange-600 dark:text-orange-400" };
     }
     if (titleLower.includes("nuevo") || titleLower.includes("disponible") || titleLower.includes("servicio")) {
-      return {
-        icon: Sparkles,
-        bgColor: "bg-purple-100 dark:bg-purple-900/30",
-        iconColor: "text-purple-600 dark:text-purple-400",
-      };
+      return { icon: Sparkles, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
     }
 
-    // Fallback to type-based icons
     switch (type) {
       case "success":
-        return {
-          icon: CheckCircle,
-          bgColor: "bg-green-100 dark:bg-green-900/30",
-          iconColor: "text-green-600 dark:text-green-400",
-        };
+        return { icon: CheckCircle, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
       case "error":
-        return {
-          icon: XCircle,
-          bgColor: "bg-red-100 dark:bg-red-900/30",
-          iconColor: "text-red-600 dark:text-red-400",
-        };
+        return { icon: XCircle, bgColor: "bg-red-100 dark:bg-red-900/30", iconColor: "text-red-600 dark:text-red-400" };
       case "warning":
-        return {
-          icon: AlertTriangle,
-          bgColor: "bg-yellow-100 dark:bg-yellow-900/30",
-          iconColor: "text-yellow-600 dark:text-yellow-400",
-        };
+        return { icon: AlertTriangle, bgColor: "bg-yellow-100 dark:bg-yellow-900/30", iconColor: "text-yellow-600 dark:text-yellow-400" };
       case "info":
       default:
-        return {
-          icon: Info,
-          bgColor: "bg-slate-100 dark:bg-slate-800/50",
-          iconColor: "text-slate-600 dark:text-slate-400",
-        };
+        return { icon: Info, bgColor: "bg-slate-100 dark:bg-slate-800/50", iconColor: "text-slate-600 dark:text-slate-400" };
     }
   };
 
@@ -265,8 +225,6 @@ const Notifications = () => {
     const today: Notification[] = [];
     const yesterday: Notification[] = [];
     const older: Notification[] = [];
-
-    const yesterdayDate = subDays(new Date(), 1);
 
     notifications.forEach((notification) => {
       const date = new Date(notification.created_at || "");
@@ -280,12 +238,12 @@ const Notifications = () => {
     });
 
     const groups: NotificationGroup[] = [];
-    if (today.length > 0) groups.push({ label: "Hoy", notifications: today });
-    if (yesterday.length > 0) groups.push({ label: "Ayer", notifications: yesterday });
-    if (older.length > 0) groups.push({ label: "Anteriores", notifications: older });
+    if (today.length > 0) groups.push({ label: t("groups.today"), notifications: today });
+    if (yesterday.length > 0) groups.push({ label: t("groups.yesterday"), notifications: yesterday });
+    if (older.length > 0) groups.push({ label: t("groups.older"), notifications: older });
 
     return groups;
-  }, [notifications]);
+  }, [notifications, t]);
 
   const unreadCount = notifications?.filter((n) => !n.is_read).length || 0;
   const priorityCount = notifications?.filter((n) => n.type === "warning" || n.type === "error").length || 0;
@@ -316,10 +274,10 @@ const Notifications = () => {
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-background to-background border border-primary/20 p-8">
           <div className="relative z-10">
             <h1 className="text-4xl font-bold mb-3">
-              Centro de Notificaciones
+              {t("title")}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              Gestiona tus alertas y actividad reciente
+              {t("subtitle")}
             </p>
           </div>
         </div>
@@ -333,14 +291,14 @@ const Notifications = () => {
               onClick={() => setFilter("all")}
               size="sm"
             >
-              Todas
+              {t("filters.all")}
             </Button>
             <Button
               variant={filter === "unread" ? "default" : "outline"}
               onClick={() => setFilter("unread")}
               size="sm"
             >
-              No leídas
+              {t("filters.unread")}
               {unreadCount > 0 && (
                 <Badge variant="secondary" className="ml-2 bg-primary/20">
                   {unreadCount}
@@ -354,7 +312,7 @@ const Notifications = () => {
               className="gap-1"
             >
               <AlertTriangle className="h-4 w-4" />
-              Prioridad Alta
+              {t("filters.highPriority")}
               {priorityCount > 0 && (
                 <Badge variant="secondary" className="ml-1 bg-orange-500/20 text-orange-700 dark:text-orange-400">
                   {priorityCount}
@@ -372,7 +330,7 @@ const Notifications = () => {
               className="gap-2 text-muted-foreground hover:text-foreground"
             >
               <CheckCheck className="h-4 w-4" />
-              Marcar todo como leído
+              {t("actions.markAllRead")}
             </Button>
           )}
         </div>
@@ -381,9 +339,9 @@ const Notifications = () => {
       <FadeIn delay={0.2}>
         <Card>
           <CardHeader>
-            <CardTitle>Actividad Reciente</CardTitle>
+            <CardTitle>{t("card.title")}</CardTitle>
             <CardDescription>
-              Historial de eventos, transacciones y acciones pendientes
+              {t("card.description")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -396,9 +354,9 @@ const Notifications = () => {
             ) : !notifications || notifications.length === 0 ? (
               <div className="text-center py-12">
                 <Bell className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Sin notificaciones</h3>
+                <h3 className="text-lg font-semibold mb-2">{t("empty.title")}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Te avisaremos cuando haya actividad relevante en tus activos.
+                  {t("empty.description")}
                 </p>
               </div>
             ) : (
@@ -423,14 +381,10 @@ const Notifications = () => {
                                 : "hover:bg-muted/50"
                             }`}
                           >
-                            {/* Icon with colored background */}
-                            <div
-                              className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${config.bgColor}`}
-                            >
+                            <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${config.bgColor}`}>
                               <IconComponent className={`h-5 w-5 ${config.iconColor}`} />
                             </div>
 
-                            {/* Content */}
                             <div
                               className="flex-1 min-w-0 cursor-pointer"
                               onClick={() => handleNotificationClick(notification)}
@@ -456,7 +410,6 @@ const Notifications = () => {
                               </p>
                             </div>
 
-                            {/* Actions */}
                             <div className="flex items-center gap-2 flex-shrink-0">
                               {isActionRequired && (
                                 <Button
@@ -464,7 +417,7 @@ const Notifications = () => {
                                   onClick={() => handleNotificationClick(notification)}
                                   className="gap-1"
                                 >
-                                  Ver detalles
+                                  {t("actions.viewDetails")}
                                   <ExternalLink className="h-3 w-3" />
                                 </Button>
                               )}
@@ -487,12 +440,12 @@ const Notifications = () => {
                                     {notification.is_read ? (
                                       <>
                                         <Mail className="mr-2 h-4 w-4" />
-                                      Marcar como no leída
+                                        {t("actions.markAsUnread")}
                                       </>
                                     ) : (
                                       <>
                                         <MailOpen className="mr-2 h-4 w-4" />
-                                        Marcar como leída
+                                        {t("actions.markAsRead")}
                                       </>
                                     )}
                                   </DropdownMenuItem>
@@ -501,7 +454,7 @@ const Notifications = () => {
                                       onClick={() => handleNotificationClick(notification)}
                                     >
                                       <ExternalLink className="mr-2 h-4 w-4" />
-                                      Ver detalles
+                                      {t("actions.viewDetails")}
                                     </DropdownMenuItem>
                                   )}
                                   <DropdownMenuItem
@@ -509,7 +462,7 @@ const Notifications = () => {
                                     className="text-destructive focus:text-destructive"
                                   >
                                     <Trash2 className="mr-2 h-4 w-4" />
-                                    Eliminar
+                                    {t("actions.delete")}
                                   </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>

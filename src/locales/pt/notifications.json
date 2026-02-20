@@ -1,7 +1,11 @@
 {
-  "title": "Notificações",
-  "subtitle": "Mantenha-se atualizado com suas operações de dados",
+  "title": "Centro de Notificações",
+  "subtitle": "Gerencie seus alertas e atividade recente",
   "badge": "Notificações",
+  "card": {
+    "title": "Atividade Recente",
+    "description": "Histórico de eventos, transações e ações pendentes"
+  },
   "filters": {
     "all": "Todas",
     "unread": "Não Lidas",
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Marcar como lida",
-    "markAllRead": "Marcar todas como lidas",
+    "markAsUnread": "Marcar como não lida",
+    "markAllRead": "Marcar tudo como lido",
     "delete": "Excluir",
-    "viewDetails": "Ver Detalhes",
+    "viewDetails": "Ver detalhes",
     "settings": "Configurações"
   },
   "empty": {
     "title": "Sem notificações",
-    "description": "Você está em dia! Nenhuma notificação nova."
+    "description": "Avisaremos quando houver atividade relevante."
   },
   "toast": {
-    "newNotification": "Nova notificação recebida",
+    "newNotification": "Nova notificação",
     "markedAsRead": "Notificação marcada como lida",
-    "allMarkedAsRead": "Todas as notificações marcadas como lidas"
+    "allMarkedAsRead": "Todas as notificações marcadas como lidas",
+    "deleted": "Notificação excluída",
+    "deleteError": "Erro ao excluir",
+    "error": "Erro"
+  },
+  "bell": {
+    "title": "Notificações",
+    "new": "novas",
+    "markRead": "Marcar lidas",
+    "empty": "Sem notificações"
   },
   "settings": {
     "title": "Configurações de Notificações",
