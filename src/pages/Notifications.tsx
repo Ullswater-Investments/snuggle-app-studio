@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -67,6 +68,7 @@ interface NotificationGroup {
 const Notifications = () => {
   const { t, i18n } = useTranslation("notifications");
   const { user } = useAuth();
+  const { activeOrgId } = useOrganizationContext();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [filter, setFilter] = useState<"all" | "unread" | "priority">("all");
@@ -75,7 +77,7 @@ const Notifications = () => {
 
   // Fetch notifications from the notifications table
   const { data: notifications, isLoading } = useQuery({
-    queryKey: ["notifications-page", user?.id, filter],
+    queryKey: ["notifications-page", user?.id, activeOrgId, filter],
     queryFn: async () => {
       if (!user) return [];
 
@@ -85,6 +87,11 @@ const Notifications = () => {
         .eq("user_id", user.id)
         .order("created_at", { ascending: false })
         .limit(50);
+
+      // Filtro crítico: solo notificaciones de la organización activa
+      if (activeOrgId) {
+        query = query.eq("organization_id", activeOrgId);
+      }
 
       if (filter === "unread") {
         query = query.eq("is_read", false);
