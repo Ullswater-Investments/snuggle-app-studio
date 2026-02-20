@@ -1,85 +1,74 @@
 
 
-## Conectar ecosistema a Pontus-X Testnet
+## Precision On-chain y Etiquetas Profesionales del Dashboard
 
 ### Resumen
 
-Migrar de Ethereum Mainnet a Pontus-X Testnet (Chain ID 32457, RPC `https://rpc.test.pontus-x.eu`), con token nativo EURAU (1:1 con EUR). Incluye configuracion admin del RPC, dashboard actualizado y UX de cambio de red.
+Ajustar la lectura on-chain para que refleje exactamente las 95 transacciones, eliminar toda mencion a "Testnet" en la interfaz de usuario, refinar la visualizacion del balance EURAU, y anadir las nuevas etiquetas traducidas a los 7 idiomas.
 
 ---
 
-### 1. Base de datos: tabla `system_settings`
+### 1. Verificar lectura correcta de transacciones
 
-Crear tabla clave-valor para configuraciones globales:
+El hook `useBlockchainActivity` ya lee `wallet_address` de la organizacion activa en la base de datos (no esta hardcodeado). Usa `provider.getTransactionCount(walletAddress)` que devuelve el nonce total. Si el explorador muestra 95 transacciones, el valor deberia coincidir.
 
-```text
-system_settings (id uuid PK, key text UNIQUE, value text, updated_at timestamptz, updated_by uuid)
+**Accion**: Verificar que no hay ningun filtro o cache que altere el resultado. Anadir un `console.log` temporal o revisar que `staleTime` no impida la actualizacion. No se requiere cambio de logica significativo ya que la implementacion es correcta.
+
+---
+
+### 2. Humanizar etiquetas (eliminar "Testnet")
+
+**Archivo: `src/pages/Dashboard.tsx`** (linea ~426)
+
+Cambiar el texto hardcodeado `"On-chain · Pontus-X Testnet"` por una clave i18n:
+
+```
+t('cards.onchainVerified', 'Actividad Verificada On-chain')
 ```
 
-- RLS: SELECT para autenticados, INSERT/UPDATE para admin/data_space_owner
-- Seed: `blockchain_rpc_url` = `https://rpc.test.pontus-x.eu`
+**Archivo: `src/components/Web3StatusWidget.tsx`** (linea ~158)
+
+Cambiar `"Cambiar a Pontus-X Testnet"` por:
+
+```
+"Cambiar a Red de Datos Segura"
+```
+
+Y el toast de exito de `"Red cambiada a Pontus-X Testnet"` por `"Conectado a la Red de Datos Segura"`.
 
 ---
 
-### 2. Actualizar `src/services/pontusX.ts`
+### 3. Refinamiento del Balance
 
-- `chainId`: `0x7ecc` (32460) -> `0x7ec9` (32457)
-- `chainName`: `Pontus-X Testnet`
-- `nativeCurrency.symbol`: `GX` -> `EURAU`
-- `rpcUrls`: `['https://rpc.test.pontus-x.eu']`
+**Archivo: `src/pages/Dashboard.tsx`** (linea ~322-323)
 
----
+Asegurar que el balance nativo muestre exactamente 4 decimales: `27.0882 EURAU`.
 
-### 3. Actualizar `src/lib/oceanConfig.ts`
-
-- `chainId` default: 32460 -> 32457
-- `nodeUri` default: `https://rpc.test.pontus-x.eu`
+Eliminar cualquier referencia residual a "Testnet" en tooltips o textos de carga. En el loading state, usar la clave `t('cards.walletLoading', 'Conectando a la Red de Datos Segura...')`.
 
 ---
 
-### 4. Refactorizar `src/hooks/useEthWalletBalance.ts`
+### 4. Traducciones a 7 idiomas
 
-- Eliminar llamada a CoinGecko (EURAU = 1 EUR directamente)
-- Leer RPC URL desde `system_settings` (fallback al default)
-- Obtener balance nativo (EURAU) via `ethers.JsonRpcProvider`
-- Intentar leer balance EUROe via contrato ERC-20 (con fallback a 0)
-- Renombrar campos: `balanceNative` (EURAU), `euroeBalance`, `balanceEur` (= balanceNative)
+Anadir las siguientes claves al namespace `dashboard` en los 7 archivos de localizacion:
 
----
-
-### 5. Actualizar tarjeta wallet en `src/pages/Dashboard.tsx`
-
-- Mostrar saldo en EUR directamente desde `balanceNative`
-- Desglose: `X.XX EURAU` + `Y.YY EUROe`
-- Eliminar referencias a ETH y precio CoinGecko
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `cards.onchainVerified` | Actividad Verificada On-chain | On-chain Verified Activity | Activite verifiee on-chain | On-chain verifizierte Aktivitat | Attivita verificata on-chain | Atividade Verificada On-chain | On-chain Geverifieerde Activiteit |
+| `cards.secureNetwork` | Conectado a la Red de Datos Segura | Connected to Secure Data Network | Connecte au reseau de donnees securise | Verbunden mit dem sicheren Datennetzwerk | Connesso alla Rete Dati Sicura | Conectado a Rede de Dados Segura | Verbonden met beveiligd datanetwerk |
+| `cards.walletLoading` | Conectando a la Red de Datos Segura... | Connecting to Secure Data Network... | Connexion au reseau securise... | Verbindung zum sicheren Netzwerk... | Connessione alla rete sicura... | Conectando a rede segura... | Verbinden met beveiligd netwerk... |
 
 ---
 
-### 6. Nueva tarjeta en `src/pages/admin/AdminGovernance.tsx`
+### Archivos a modificar (9)
 
-Tarjeta "Configuracion de Red Blockchain" con:
-- Campo de texto editable para RPC URL (leido de `system_settings`)
-- Boton "Guardar" que actualiza la tabla
-- Indicador visual (punto verde/rojo) segun respuesta del RPC
-- Toast de confirmacion
-
----
-
-### 7. Actualizar `src/components/Web3StatusWidget.tsx`
-
-- Detectar si chainId conectado no es `0x7ec9` -> mostrar boton amarillo "Cambiar a Pontus-X Testnet"
-- Llamar a `pontusXService.switchNetwork()` al hacer click
-- Cambiar etiqueta "Gas (GX)" a "EURAU"
-
----
-
-### Archivos a modificar/crear (7)
-
-1. Migracion SQL: crear `system_settings` + seed
-2. `src/services/pontusX.ts`: chainId, symbol, rpcUrls
-3. `src/lib/oceanConfig.ts`: chainId, nodeUri
-4. `src/hooks/useEthWalletBalance.ts`: refactorizar para Pontus-X
-5. `src/pages/Dashboard.tsx`: tarjeta wallet EURAU/EUROe
-6. `src/pages/admin/AdminGovernance.tsx`: tarjeta config red
-7. `src/components/Web3StatusWidget.tsx`: cambio de red + etiquetas EURAU
+1. `src/pages/Dashboard.tsx` -- reemplazar texto hardcodeado por claves i18n, refinar formato balance
+2. `src/components/Web3StatusWidget.tsx` -- humanizar etiquetas de red
+3. `src/locales/es/dashboard.json` -- anadir 3 claves nuevas
+4. `src/locales/en/dashboard.json` -- anadir 3 claves nuevas
+5. `src/locales/fr/dashboard.json` -- anadir 3 claves nuevas
+6. `src/locales/de/dashboard.json` -- anadir 3 claves nuevas
+7. `src/locales/it/dashboard.json` -- anadir 3 claves nuevas
+8. `src/locales/pt/dashboard.json` -- anadir 3 claves nuevas
+9. `src/locales/nl/dashboard.json` -- anadir 3 claves nuevas
 
