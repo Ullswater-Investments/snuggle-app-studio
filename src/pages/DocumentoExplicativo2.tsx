@@ -129,8 +129,8 @@ export default function DocumentoExplicativo2() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold text-primary mb-2">100 EUROe</p>
-                <p className="text-xs text-muted-foreground">por año</p>
+                <p className="text-2xl font-bold text-primary mb-2">300 EUROe</p>
+                <p className="text-xs text-muted-foreground">por mes</p>
                 <ul className="mt-3 text-sm space-y-1 text-muted-foreground">
                   <li>✓ Transacciones ilimitadas</li>
                   <li>✓ Soporte prioritario</li>

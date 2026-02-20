@@ -14,7 +14,7 @@ export const OFFICIAL_SECTORS = [
 // Precios oficiales según Plan de Negocio
 export const OFFICIAL_PRICING = {
   transactionFee: 1.00,        // EUROe por alta de proveedor
-  annualMembership: 100,       // EUROe/año membresía base
+  monthlyMembership: 300,      // EUROe/mes membresía Pro
   currency: "EUROe",
 } as const;
 

@@ -91,7 +91,7 @@ ProcureData is a federated data marketplace aligned with Gaia-X Trust Framework 
 
 ## BUSINESS MODEL
 - **Pay-per-use**: 1 EUROe per verified transaction
-- **Subscription**: 100 EUROe/year for unlimited access
+- **Subscription**: 300 EUROe/month for unlimited access
 - **Marketplace**: Third-party value-added services (analytics, AI, compliance tools)
 
 ## SECTOR DISTRIBUTION (47 Success Stories)

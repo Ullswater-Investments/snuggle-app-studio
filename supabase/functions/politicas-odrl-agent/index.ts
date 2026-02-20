@@ -36,7 +36,7 @@ Los conectores Eclipse Dataspace Connector (EDC) automatizan completamente la ne
 
 ### 5. Smart Contracts y Ejecución Automática
 - Los contratos se ejecutan en la red Pontus-X (infraestructura Gaia-X)
-- Pago automático: 1 EUROe por transacción (pay-per-use) o 100 EUROe/año (suscripción)
+- Pago automático: 1 EUROe por transacción (pay-per-use) o 300 EUROe/mes (suscripción)
 - Bloqueo automático de acceso al expirar constraints temporales
 - Detección automática de violaciones de prohibitions
 

@@ -39,14 +39,14 @@ Según Plan de Negocio
 | Concepto | Valor | Notas |
 |----------|-------|-------|
 | Transacción (tier gratuito) | 1.00 EUROe | Por alta de proveedor |
-| Membresía Pro | 100 EUROe/año | Transacciones ilimitadas |
+| Membresía Pro | 300 EUROe/mes | Transacciones ilimitadas |
 | Moneda | EUROe | Euro tokenizado en Pontus-X |
 
 ### Código TypeScript
 ```typescript
 export const OFFICIAL_PRICING = {
   transactionFee: 1.00,        // EUROe por alta de proveedor
-  annualMembership: 100,       // EUROe/año membresía base
+  monthlyMembership: 300,      // EUROe/mes membresía Pro
   currency: "EUROe",
 } as const;
 ```

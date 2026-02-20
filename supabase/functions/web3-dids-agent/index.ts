@@ -42,7 +42,7 @@ Stablecoin europea para micropagos automáticos en el espacio de datos:
 | Modelo | Precio | Descripción |
 |---|---|---|
 | Pay-per-use | 1 EUROe | Micropago automático por cada transacción individual |
-| Suscripción | 100 EUROe/año | Acceso ilimitado a activos del mismo proveedor |
+| Suscripción | 300 EUROe/mes | Acceso ilimitado a activos del mismo proveedor |
 | Liquidación | Automática | Smart Contract ejecuta pago al momento del acceso |
 - Trazabilidad completa: cada pago registrado en blockchain con sello de tiempo inmutable
 - Sin intermediarios bancarios: liquidación directa entre wallets corporativas

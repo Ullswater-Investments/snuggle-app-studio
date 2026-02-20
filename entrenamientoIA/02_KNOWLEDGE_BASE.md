@@ -179,7 +179,7 @@ PASO 7: Consumer accede a los datos con prueba verificable
 - Funcionalidad completa
 
 ### Membresía Pro
-- **100 EUROe/año**
+- **300 EUROe/mes**
 - Transacciones ilimitadas
 - Soporte prioritario
 - APIs avanzadas
