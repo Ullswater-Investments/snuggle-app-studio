@@ -1,175 +1,194 @@
 
 
-## Localizacion completa de la pagina de Solicitudes (/requests)
+## Localizacion completa de la pagina Gestion de Datos (/data)
 
-### Problema detectado
+### Resumen
 
-El archivo `src/pages/Requests.tsx` (1238 lineas) tiene **~70 textos hardcodeados en espanol** y no importa ni usa `useTranslation`. Los 7 archivos `requests.json` ya existen con claves base, pero faltan algunas claves adicionales necesarias para cubrir todos los textos del componente.
-
----
-
-### 1. Claves nuevas a agregar en los 7 idiomas
-
-Se necesitan agregar las siguientes claves que no existen en ningun `requests.json`:
-
-**Estado "revoked" (falta en los 7 idiomas):**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `status.revoked.label` | Acceso Revocado | Access Revoked | Acces Revoque | Zugang widerrufen | Accesso Revocato | Acesso Revogado | Toegang Ingetrokken |
-| `status.revoked.tooltip` | El proveedor ha revocado el acceso | Provider has revoked access | Le fournisseur a revoque l'acces | Der Anbieter hat den Zugang widerrufen | Il fornitore ha revocato l'accesso | O fornecedor revogou o acesso | De aanbieder heeft de toegang ingetrokken |
-
-**Columnas Kanban:**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `kanban.pending` | Pendientes | Pending | En attente | Ausstehend | In sospeso | Pendentes | In afwachting |
-| `kanban.negotiation` | En Negociacion | In Negotiation | En Negociation | In Verhandlung | In Negoziazione | Em Negociacao | In Onderhandeling |
-| `kanban.approved` | Aprobados | Approved | Approuves | Genehmigt | Approvati | Aprovados | Goedgekeurd |
-| `kanban.completed` | Completados | Completed | Termines | Abgeschlossen | Completati | Concluidos | Voltooid |
-
-**Vista de detalle (TransactionDetailView):**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `detail.requester` | Solicitante | Requester | Demandeur | Antragsteller | Richiedente | Solicitante | Aanvrager |
-| `detail.provider` | Proveedor | Provider | Fournisseur | Anbieter | Fornitore | Fornecedor | Aanbieder |
-| `detail.currentStatus` | Estado Actual | Current Status | Statut Actuel | Aktueller Status | Stato Attuale | Estado Atual | Huidige Status |
-| `detail.timeline` | Timeline de Aprobaciones | Approval Timeline | Chronologie des Approbations | Genehmigungszeitachse | Cronologia delle Approvazioni | Cronologia de Aprovacoes | Goedkeuringstijdlijn |
-| `detail.noHistory` | No hay historial de aprobaciones aun | No approval history yet | Aucun historique d'approbation | Noch keine Genehmigungshistorie | Nessuna cronologia di approvazione | Sem historico de aprovacoes | Nog geen goedkeuringsgeschiedenis |
-| `detail.policyProvider` | politica del proveedor | provider policy | politique du fournisseur | Anbieterrichtlinie | politica del fornitore | politica do fornecedor | aanbiederbeleid |
-
-**Textos adicionales del empty state:**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `empty.noRequests` | No has realizado ninguna solicitud | You haven't made any requests | Vous n'avez fait aucune demande | Sie haben keine Anfragen gestellt | Non hai effettuato nessuna richiesta | Voce nao fez nenhuma solicitacao | U heeft geen aanvragen ingediend |
-| `empty.noHistory` | No hay transacciones historicas | No historical transactions | Aucune transaction historique | Keine historischen Transaktionen | Nessuna transazione storica | Sem transacoes historicas | Geen historische transacties |
-| `empty.noHistoryDesc` | Las transacciones completadas, aprobadas o denegadas apareceran aqui | Completed, approved or denied transactions will appear here | Les transactions terminees, approuvees ou refusees apparaitront ici | Abgeschlossene, genehmigte oder abgelehnte Transaktionen erscheinen hier | Le transazioni completate, approvate o rifiutate appariranno qui | Transacoes concluidas, aprovadas ou negadas aparecerao aqui | Voltooide, goedgekeurde of geweigerde transacties verschijnen hier |
-
-**Demo tooltip:**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `demo.tooltip` | Transaccion sintetica de demostracion. En produccion, veras tus solicitudes reales. | Synthetic demo transaction. In production, you will see your real requests. | Transaction synthetique de demonstration. En production, vous verrez vos vraies demandes. | Synthetische Demotransaktion. In der Produktion sehen Sie Ihre echten Anfragen. | Transazione sintetica di dimostrazione. In produzione, vedrai le tue richieste reali. | Transacao sintetica de demonstracao. Em producao, vera suas solicitacoes reais. | Synthetische demotransactie. In productie ziet u uw echte aanvragen. |
-
-**Toast de error:**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `toast.error` | Error al realizar la accion | Error performing action | Erreur lors de l'action | Fehler bei der Aktion | Errore nell'esecuzione dell'azione | Erro ao realizar a acao | Fout bij het uitvoeren van de actie |
-| `toast.denied` | Solicitud denegada | Request denied | Demande refusee | Anfrage abgelehnt | Richiesta rifiutata | Solicitacao negada | Aanvraag geweigerd |
-
-**CSV headers:**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `csv.noProduct` | Sin producto | No product | Sans produit | Kein Produkt | Senza prodotto | Sem produto | Geen product |
-
-**Fecha/creacion:**
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `fields.created` | Creada | Created | Creee | Erstellt | Creata | Criada | Aangemaakt |
+Se identificaron **~60 textos hardcodeados** en 3 archivos: `Data.tsx` (6 textos), `MyLibraryTab.tsx` (~30 textos) y `MyPublicationsTab.tsx` (~24 textos). Ninguno usa `useTranslation`. Los diccionarios `data.json` existen pero les faltan las claves especificas de esta pagina.
 
 ---
 
-### 2. Sustitucion de textos hardcodeados en Requests.tsx (~70 cambios)
+### 1. Nuevas claves a agregar en los 7 idiomas (`data.json`)
 
-**Importar useTranslation y locale dinamico:**
-- Agregar `import { useTranslation } from 'react-i18next';` 
-- Agregar logica para seleccionar el locale de date-fns segun el idioma activo (es, en, fr, de, it, pt, nl)
-- Reemplazar todas las instancias de `{ locale: es }` por el locale dinamico
+**Cabecera (Data.tsx):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `hero.badge` | Centro de Datos | Data Center | Centre de Donnees | Datenzentrum | Centro Dati | Centro de Dados | Datacentrum |
+| `hero.title` | Gestion de Datos | Data Management | Gestion des Donnees | Datenverwaltung | Gestione Dati | Gestao de Dados | Databeheer |
+| `hero.description` | Accede a tu biblioteca de datasets adquiridos y gestiona tus publicaciones en el marketplace. | Access your library of acquired datasets and manage your marketplace publications. | Accedez a votre bibliotheque de datasets acquis et gerez vos publications sur le marketplace. | Greifen Sie auf Ihre Bibliothek erworbener Datasets zu und verwalten Sie Ihre Marketplace-Veroffentlichungen. | Accedi alla tua libreria di dataset acquisiti e gestisci le tue pubblicazioni nel marketplace. | Acesse sua biblioteca de datasets adquiridos e gerencie suas publicacoes no marketplace. | Toegang tot uw bibliotheek van verworven datasets en beheer uw marketplace-publicaties. |
+| `hero.publishBtn` | Publicar Nuevo Dataset | Publish New Dataset | Publier un Nouveau Dataset | Neuen Dataset Veroffentlichen | Pubblica Nuovo Dataset | Publicar Novo Dataset | Nieuw Dataset Publiceren |
 
-**STATUS_CONFIG -> funcion dinamica:**
-- Convertir `STATUS_CONFIG` de constante estatica a una funcion `getStatusConfig(t)` que retorne las labels y tooltips usando `t('status.initiated.label')`, etc.
-- Incluir el estado `revoked` con sus traducciones
+**Tabs:**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `tabs.library` | Mi Biblioteca | My Library | Ma Bibliotheque | Meine Bibliothek | La Mia Libreria | Minha Biblioteca | Mijn Bibliotheek |
+| `tabs.publications` | Mis Publicaciones | My Publications | Mes Publications | Meine Veroffentlichungen | Le Mie Pubblicazioni | Minhas Publicacoes | Mijn Publicaties |
 
-**Hero section (lineas 275-308):**
-- L277: `Solicitudes` -> `t('badge')`
-- L280: `Gestiona tus Solicitudes de Datos` -> `t('title')`
-- L283: `Administra solicitudes...` -> `t('subtitle')`
-- L293: `Ocultar/Mostrar Analytics` -> `t('buttons.hideAnalytics')` / `t('buttons.showAnalytics')`
-- L300: `Exportar CSV` -> `t('buttons.exportCSV')`
-- L307: `Nueva Solicitud` -> `t('buttons.newRequest')`
+**KPIs Biblioteca (MyLibraryTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `stats.activeDatasets` | Datasets Activos | Active Datasets | Datasets Actifs | Aktive Datasets | Dataset Attivi | Datasets Ativos | Actieve Datasets |
+| `stats.providers` | Proveedores | Providers | Fournisseurs | Anbieter | Fornitori | Fornecedores | Aanbieders |
+| `stats.blockchainVerified` | Verificados Blockchain | Blockchain Verified | Verifies Blockchain | Blockchain-Verifiziert | Verificati Blockchain | Verificados Blockchain | Blockchain Geverifieerd |
 
-**KPI cards (lineas 328-358):**
-- L328: `Pendientes de Accion` -> `t('stats.pendingAction')`
-- L340: `Mis Solicitudes` -> `t('stats.myRequests')`
-- L352: `Total Transacciones` -> `t('stats.totalTransactions')`
+**KPIs Publicaciones (MyPublicationsTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `stats.published` | Datasets Publicados | Published Datasets | Datasets Publies | Veroffentlichte Datasets | Dataset Pubblicati | Datasets Publicados | Gepubliceerde Datasets |
+| `stats.listed` | Activos en Catalogo | Listed in Catalog | Actifs au Catalogue | Im Katalog Gelistet | Attivi nel Catalogo | Ativos no Catalogo | Actief in Catalogus |
+| `stats.totalValue` | Valor Total Listado | Total Listed Value | Valeur Totale Listee | Gesamtlistenwert | Valore Totale Listato | Valor Total Listado | Totale Vermelde Waarde |
 
-**Filtros (lineas 371-386):**
-- L371: placeholder -> `t('filters.searchPlaceholder')`
-- L378: `Prioridad` -> `t('filters.priority')`
-- L381-385: filtros -> `t('filters.all')`, `t('filters.critical')`, etc.
+**Filtros:**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `filters.searchProducts` | Buscar por producto o proveedor... | Search by product or provider... | Rechercher par produit ou fournisseur... | Nach Produkt oder Anbieter suchen... | Cerca per prodotto o fornitore... | Buscar por produto ou fornecedor... | Zoeken op product of aanbieder... |
+| `filters.allSectors` | Todos los sectores | All sectors | Tous les secteurs | Alle Sektoren | Tutti i settori | Todos os setores | Alle sectoren |
+| `filters.filterBySector` | Filtrar por sector | Filter by sector | Filtrer par secteur | Nach Sektor filtern | Filtra per settore | Filtrar por setor | Filteren op sector |
 
-**Tabs (lineas 415-441):**
-- L415: `Requiere Atencion` -> `t('tabs.requiresAttention')`
-- L424: `Mis Solicitudes` -> `t('tabs.myRequests')`
-- L431: `Historico` -> `t('tabs.historical')`
-- L437: `Todas` -> `t('tabs.all')`
+**Estados vacios:**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `empty.libraryTitle` | Tu biblioteca esta vacia | Your library is empty | Votre bibliotheque est vide | Ihre Bibliothek ist leer | La tua libreria e vuota | Sua biblioteca esta vazia | Uw bibliotheek is leeg |
+| `empty.libraryDesc` | Cuando completes una transaccion, los datos apareceran aqui. Explora el catalogo para encontrar datasets que necesites. | When you complete a transaction, data will appear here. Explore the catalog to find datasets you need. | Lorsque vous terminerez une transaction, les donnees apparaitront ici. Explorez le catalogue pour trouver les datasets dont vous avez besoin. | Wenn Sie eine Transaktion abschliessen, erscheinen die Daten hier. Durchsuchen Sie den Katalog, um benotigte Datasets zu finden. | Quando completerai una transazione, i dati appariranno qui. Esplora il catalogo per trovare i dataset di cui hai bisogno. | Quando concluir uma transacao, os dados aparecerao aqui. Explore o catalogo para encontrar os datasets que precisa. | Wanneer u een transactie voltooit, verschijnen de gegevens hier. Verken de catalogus om datasets te vinden die u nodig heeft. |
+| `empty.libraryBtn` | Explorar Marketplace | Explore Marketplace | Explorer le Marketplace | Marketplace Durchsuchen | Esplora il Marketplace | Explorar Marketplace | Marketplace Verkennen |
+| `empty.pubTitle` | Sin publicaciones | No publications | Aucune publication | Keine Veroffentlichungen | Nessuna pubblicazione | Sem publicacoes | Geen publicaties |
+| `empty.pubDesc` | Aun no has publicado ningun dataset. Comparte tus datos con el ecosistema y genera ingresos. | You haven't published any datasets yet. Share your data with the ecosystem and generate revenue. | Vous n'avez publie aucun dataset. Partagez vos donnees avec l'ecosysteme et generez des revenus. | Sie haben noch kein Dataset veroffentlicht. Teilen Sie Ihre Daten mit dem Okosystem und generieren Sie Einnahmen. | Non hai ancora pubblicato alcun dataset. Condividi i tuoi dati con l'ecosistema e genera entrate. | Voce ainda nao publicou nenhum dataset. Compartilhe seus dados com o ecossistema e gere receita. | U heeft nog geen datasets gepubliceerd. Deel uw gegevens met het ecosysteem en genereer inkomsten. |
+| `empty.pubBtn` | Publicar Dataset | Publish Dataset | Publier un Dataset | Dataset Veroffentlichen | Pubblica Dataset | Publicar Dataset | Dataset Publiceren |
 
-**Empty states:**
-- L450-455: titulo y descripcion del empty state -> `t('empty.title')`, `t('empty.description')`, `t('empty.exploreCatalog')`
-- L629-631: `No has realizado ninguna solicitud` -> `t('empty.noRequests')`, boton -> `t('empty.exploreCatalog')`
-- L754-757: historico vacio -> `t('empty.noHistory')`, `t('empty.noHistoryDesc')`
+**Textos de tarjetas (MyLibraryTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `card.downloadData` | Descargar Datos | Download Data | Telecharger les Donnees | Daten Herunterladen | Scarica Dati | Baixar Dados | Gegevens Downloaden |
+| `card.viewDetails` | Ver Detalles | View Details | Voir les Details | Details Anzeigen | Vedi Dettagli | Ver Detalhes | Details Bekijken |
+| `card.noDataSource` | Activo sin fuente de datos configurada | Asset without configured data source | Actif sans source de donnees configuree | Asset ohne konfigurierte Datenquelle | Asset senza fonte dati configurata | Ativo sem fonte de dados configurada | Asset zonder geconfigureerde databron |
+| `card.blockchainTooltip` | Datos verificados con trazabilidad blockchain | Data verified with blockchain traceability | Donnees verifiees avec tracabilite blockchain | Daten mit Blockchain-Ruckverfolgbarkeit verifiziert | Dati verificati con tracciabilita blockchain | Dados verificados com rastreabilidade blockchain | Gegevens geverifieerd met blockchain-traceerbaarheid |
+| `card.blockchainAudit` | Auditoria de Trazabilidad Blockchain | Blockchain Traceability Audit | Audit de Tracabilite Blockchain | Blockchain-Ruckverfolgbarkeits-Audit | Audit di Tracciabilita Blockchain | Auditoria de Rastreabilidade Blockchain | Blockchain Traceerbaarheidsaudit |
 
-**Tarjetas de transaccion (campos repetidos en 4 tabs):**
-- `Solicitado por:` -> `t('fields.requestedBy')`
-- `Proveedor:` -> `t('fields.subject')`
-- `Consumer:` -> `t('fields.consumer')`
-- `Precio` -> `t('fields.price')`
-- `Gratis` -> `t('fields.free')`
-- `Estado de Pago` -> `t('fields.paymentStatus')`
-- `Pagado` -> `t('fields.paid')`
-- `Pendiente` -> `t('fields.pending')`
-- `Duracion` -> `t('fields.duration')`
-- `dias` -> `t('fields.days')`
-- `Proposito` -> `t('fields.purpose')`
-- `Justificacion` -> `t('fields.justification')`
+**Textos de tarjetas (MyPublicationsTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `card.noName` | Dataset sin nombre | Unnamed dataset | Dataset sans nom | Unbenannter Dataset | Dataset senza nome | Dataset sem nome | Dataset zonder naam |
+| `card.noDesc` | Sin descripcion | No description | Sans description | Keine Beschreibung | Senza descrizione | Sem descricao | Geen beschrijving |
+| `card.price` | Precio | Price | Prix | Preis | Prezzo | Preco | Prijs |
+| `card.published` | Publicado | Published | Publie | Veroffentlicht | Pubblicato | Publicado | Gepubliceerd |
+| `card.view` | Ver | View | Voir | Ansehen | Vedi | Ver | Bekijken |
+| `card.analytics` | Analytics | Analytics | Analytique | Analytik | Analitica | Analitica | Analyse |
+| `card.inReview` | En revision | In review | En revision | In Prufung | In revisione | Em revisao | In beoordeling |
+| `card.visibleInCatalog` | Visible en Catalogo | Visible in Catalog | Visible dans le Catalogue | Im Katalog Sichtbar | Visibile nel Catalogo | Visivel no Catalogo | Zichtbaar in Catalogus |
+| `card.notEditable` | No editable mientras esta en validacion tecnica. | Not editable while in technical validation. | Non modifiable pendant la validation technique. | Nicht bearbeitbar wahrend der technischen Validierung. | Non modificabile durante la validazione tecnica. | Nao editavel durante a validacao tecnica. | Niet bewerkbaar tijdens technische validatie. |
 
-**Botones de accion:**
-- `Pre-aprobar` -> `t('actions.preApprove')`
-- `Aprobar y Compartir` -> `t('actions.approveAndShare')`
-- `Denegar` -> `t('actions.deny')`
-- `Ver Detalle` / `Ver Detalles` -> `t('actions.viewDetails')`
+**Modelos de precio (MyPublicationsTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `pricing.free` | Gratuito | Free | Gratuit | Kostenlos | Gratuito | Gratuito | Gratis |
+| `pricing.subscription` | Suscripcion | Subscription | Abonnement | Abonnement | Abbonamento | Assinatura | Abonnement |
+| `pricing.oneTime` | Pago Unico | One-time | Paiement Unique | Einmalzahlung | Pagamento Unico | Pagamento Unico | Eenmalig |
+| `pricing.usage` | Por Uso | Per Use | Par Utilisation | Pro Nutzung | Per Utilizzo | Por Uso | Per Gebruik |
+| `pricing.undefined` | Sin definir | Undefined | Non defini | Nicht definiert | Non definito | Nao definido | Niet gedefinieerd |
+| `pricing.perMonth` | /mes | /month | /mois | /Monat | /mese | /mes | /maand |
 
-**Vista Kanban (lineas 973-1129):**
-- L979: `Pendientes` -> `t('kanban.pending')`
-- L1018: `En Negociacion` -> `t('kanban.negotiation')`
-- L1057: `Aprobados` -> `t('kanban.approved')`
-- L1096: `Completados` -> `t('kanban.completed')`
-- Todas las fechas `toLocaleDateString("es-ES", ...)` -> locale dinamico
+**Status badges (MyPublicationsTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `pubStatus.validation` | En Validacion Tecnica | In Technical Validation | En Validation Technique | In Technischer Validierung | In Validazione Tecnica | Em Validacao Tecnica | In Technische Validatie |
+| `pubStatus.available` | Disponible | Available | Disponible | Verfugbar | Disponibile | Disponivel | Beschikbaar |
+| `pubStatus.published` | Publicado | Published | Publie | Veroffentlicht | Pubblicato | Publicado | Gepubliceerd |
+| `pubStatus.rejected` | Rechazado | Rejected | Rejete | Abgelehnt | Rifiutato | Rejeitado | Afgewezen |
+| `pubStatus.draft` | Borrador | Draft | Brouillon | Entwurf | Bozza | Rascunho | Concept |
+| `pubStatus.archived` | Archivado | Archived | Archive | Archiviert | Archiviato | Arquivado | Gearchiveerd |
 
-**TransactionDetailView (lineas 1137-1236):**
-- L1160: `Solicitante` -> `t('detail.requester')`
-- L1165: `Proveedor` -> `t('detail.provider')`
-- L1171: `Proposito` -> `t('fields.purpose')`
-- L1176: `Justificacion` -> `t('fields.justification')`
-- L1182: `Duracion de Acceso` -> `t('fields.accessDuration')`
-- L1183: `dias (politica del proveedor)` -> con interpolacion
-- L1186: `Estado Actual` -> `t('detail.currentStatus')`
-- L1198: `Timeline de Aprobaciones` -> `t('detail.timeline')`
-- L1231: `No hay historial...` -> `t('detail.noHistory')`
+**Expiracion (MyLibraryTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `expiration.expired` | Expirado | Expired | Expire | Abgelaufen | Scaduto | Expirado | Verlopen |
+| `expiration.expiresIn` | Expira en {{days}}d | Expires in {{days}}d | Expire dans {{days}}j | Lauft in {{days}}T ab | Scade tra {{days}}g | Expira em {{days}}d | Verloopt over {{days}}d |
+| `expiration.active` | Activo | Active | Actif | Aktiv | Attivo | Ativo | Actief |
 
-**CSV export (lineas 220-258):**
-- L222: toast error -> `t('toast.noData')`
-- L226: headers -> usar claves traducidas
-- L231: `Sin producto` -> `t('csv.noProduct')`
-- L256-257: toast success -> `t('toast.exported')`, `t('toast.exportedDesc', { count: ... })`
+**Formato/Tipo (MyLibraryTab):**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `dataType.administrative` | Administrativo | Administrative | Administratif | Administrativ | Amministrativo | Administrativo | Administratief |
+| `dataType.iot` | IoT | IoT | IoT | IoT | IoT | IoT | IoT |
+| `dataType.financial` | Financiero | Financial | Financier | Finanziell | Finanziario | Financeiro | Financieel |
+| `dataType.energy` | Energia | Energy | Energie | Energie | Energia | Energia | Energie |
+| `dataType.esg` | ESG | ESG | ESG | ESG | ESG | ESG | ESG |
+| `dataType.data` | Datos | Data | Donnees | Daten | Dati | Dados | Gegevens |
 
-**Loading state (L264):**
-- `Cargando solicitudes...` -> `t('loading')`
+**Loading y errores:**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `loading` | Cargando datos... | Loading data... | Chargement des donnees... | Daten werden geladen... | Caricamento dati... | Carregando dados... | Gegevens laden... |
+| `loadingPub` | Cargando publicaciones... | Loading publications... | Chargement des publications... | Veroffentlichungen werden geladen... | Caricamento pubblicazioni... | Carregando publicacoes... | Publicaties laden... |
+| `noResults` | No se encontraron resultados | No results found | Aucun resultat trouve | Keine Ergebnisse gefunden | Nessun risultato trovato | Nenhum resultado encontrado | Geen resultaten gevonden |
+| `clearFilters` | Limpiar Filtros | Clear Filters | Effacer les Filtres | Filter Loschen | Cancella Filtri | Limpar Filtros | Filters Wissen |
+| `adjustFilters` | Prueba ajustando los filtros de busqueda | Try adjusting the search filters | Essayez d'ajuster les filtres de recherche | Versuchen Sie die Suchfilter anzupassen | Prova a modificare i filtri di ricerca | Tente ajustar os filtros de busca | Probeer de zoekfilters aan te passen |
 
-**Mutation callbacks (L155-160):**
-- L155: toast success -> `t('toast.success')`
-- L159: toast error -> `t('toast.error')`
-
-**Demo tooltips (multiples):**
-- Texto del tooltip DEMO -> `t('demo.tooltip')`
+**Toasts:**
+| Clave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `toast.visibleOn` | Activo visible en el catalogo | Asset visible in catalog | Actif visible dans le catalogue | Asset im Katalog sichtbar | Asset visibile nel catalogo | Ativo visivel no catalogo | Asset zichtbaar in catalogus |
+| `toast.visibleOff` | Activo oculto del catalogo | Asset hidden from catalog | Actif masque du catalogue | Asset aus dem Katalog ausgeblendet | Asset nascosto dal catalogo | Ativo oculto do catalogo | Asset verborgen uit catalogus |
+| `toast.visibilityError` | Error al cambiar la visibilidad | Error changing visibility | Erreur lors du changement de visibilite | Fehler beim Andern der Sichtbarkeit | Errore nel cambio di visibilita | Erro ao alterar a visibilidade | Fout bij het wijzigen van zichtbaarheid |
+| `toast.downloadSuccess` | Archivo descargado correctamente | File downloaded successfully | Fichier telecharge avec succes | Datei erfolgreich heruntergeladen | File scaricato con successo | Arquivo baixado com sucesso | Bestand succesvol gedownload |
+| `toast.downloadError` | Error al descargar | Download error | Erreur de telechargement | Download-Fehler | Errore di download | Erro ao baixar | Downloadfout |
+| `toast.noDataSource` | Este activo aun no tiene una fuente de datos configurada. | This asset doesn't have a configured data source yet. | Cet actif n'a pas encore de source de donnees configuree. | Dieses Asset hat noch keine konfigurierte Datenquelle. | Questo asset non ha ancora una fonte dati configurata. | Este ativo ainda nao tem uma fonte de dados configurada. | Dit asset heeft nog geen geconfigureerde databron. |
+| `toast.downloading` | Descargando datos a traves del Gateway... | Downloading data through the Gateway... | Telechargement des donnees via le Gateway... | Daten werden uber das Gateway heruntergeladen... | Download dei dati tramite il Gateway... | Baixando dados atraves do Gateway... | Gegevens downloaden via de Gateway... |
+| `toast.connectionError` | Error de Conexion: El servidor del proveedor no responde. | Connection Error: The provider server is not responding. | Erreur de Connexion: Le serveur du fournisseur ne repond pas. | Verbindungsfehler: Der Anbieterserver antwortet nicht. | Errore di Connessione: Il server del fornitore non risponde. | Erro de Conexao: O servidor do fornecedor nao responde. | Verbindingsfout: De server van de aanbieder reageert niet. |
 
 ---
 
-### 3. Archivos a modificar (8 total)
+### 2. Cambios en componentes (3 archivos)
 
-1. `src/pages/Requests.tsx` -- importar useTranslation, convertir STATUS_CONFIG a funcion, reemplazar ~70 textos hardcodeados, locale dinamico para date-fns
-2. `src/locales/es/requests.json` -- agregar claves: revoked, kanban, detail, empty (noRequests, noHistory, noHistoryDesc), demo, toast.error, toast.denied, csv, fields.created
-3. `src/locales/en/requests.json` -- mismas claves nuevas
-4. `src/locales/fr/requests.json` -- mismas claves nuevas
-5. `src/locales/de/requests.json` -- mismas claves nuevas
-6. `src/locales/it/requests.json` -- mismas claves nuevas
-7. `src/locales/pt/requests.json` -- mismas claves nuevas
-8. `src/locales/nl/requests.json` -- mismas claves nuevas
+**`src/pages/Data.tsx` (6 textos):**
+- Importar `useTranslation('data')`
+- `Centro de Datos` -> `t('hero.badge')`
+- `Gestion de Datos` -> `t('hero.title')`
+- `Accede a tu biblioteca...` -> `t('hero.description')`
+- `Publicar Nuevo Dataset` -> `t('hero.publishBtn')`
+- `Mi Biblioteca` -> `t('tabs.library')`
+- `Mis Publicaciones` -> `t('tabs.publications')`
+
+**`src/components/data/MyLibraryTab.tsx` (~30 textos):**
+- Importar `useTranslation('data')` y locales dinamicos de date-fns
+- KPIs: `Datasets Activos`, `Proveedores`, `Verificados Blockchain` -> claves `stats.*`
+- Filtros: placeholder, selector sectores -> claves `filters.*`
+- Empty states: titulo, descripcion, botones -> claves `empty.*`
+- Tarjetas: `Descargar Datos`, `Ver Detalles`, tooltip blockchain -> claves `card.*`
+- Expiracion: `Expirado`, `Activo`, `Expira en Xd` -> claves `expiration.*` con interpolacion
+- Tipo de dato: `Administrativo`, `Financiero`, etc. -> claves `dataType.*`
+- Loading: `Cargando datos...` -> `t('loading')`
+- `No se encontraron resultados` / `Limpiar Filtros` -> `t('noResults')` / `t('clearFilters')`
+- Toasts de descarga -> claves `toast.*`
+- Mapas `FORMAT_MAP` y `UPDATE_FREQ_MAP`: las keys del mapa se cambian de nombres en espanol a keys neutrales (ej: `Logistica` -> `logistics`) y se usa `t('categories.logistics')` para mostrar. Se usa `t('frequency.realtime')` etc. para labels de frecuencia.
+- Dialog blockchain: `Auditoria de Trazabilidad Blockchain` -> `t('card.blockchainAudit')`
+
+**`src/components/data/MyPublicationsTab.tsx` (~24 textos):**
+- Importar `useTranslation('data')` y locales dinamicos de date-fns
+- KPIs: `Datasets Publicados`, `Activos en Catalogo`, `Valor Total Listado` -> claves `stats.*`
+- Status badges: `En Validacion Tecnica`, `Disponible`, `Publicado`, `Rechazado`, `Borrador`, `Archivado` -> claves `pubStatus.*`
+- Pricing labels: `Gratuito`, `Suscripcion`, `Pago Unico`, `Por Uso`, `Sin definir` -> claves `pricing.*`
+- Precio con `/mes` -> `t('pricing.perMonth')`
+- Empty state -> claves `empty.pubTitle`, `empty.pubDesc`, `empty.pubBtn`
+- Tarjeta: `Ver`, `Analytics`, `En revision`, `Visible en Catalogo`, `No editable...` -> claves `card.*`
+- `Publicado {fecha}` -> `t('card.published')` + locale dinamico en date-fns
+- Loading -> `t('loadingPub')`
+- Toasts de visibilidad -> claves `toast.*`
+- Reemplazar `{ locale: es }` por locale dinamico
+
+---
+
+### 3. Archivos a modificar (10 total)
+
+1. `src/locales/es/data.json` -- agregar ~55 claves nuevas
+2. `src/locales/en/data.json` -- agregar ~55 claves nuevas
+3. `src/locales/fr/data.json` -- agregar ~55 claves nuevas
+4. `src/locales/de/data.json` -- agregar ~55 claves nuevas
+5. `src/locales/it/data.json` -- agregar ~55 claves nuevas
+6. `src/locales/pt/data.json` -- agregar ~55 claves nuevas
+7. `src/locales/nl/data.json` -- agregar ~55 claves nuevas
+8. `src/pages/Data.tsx` -- importar useTranslation, reemplazar 6 textos
+9. `src/components/data/MyLibraryTab.tsx` -- importar useTranslation, reemplazar ~30 textos, locale dinamico
+10. `src/components/data/MyPublicationsTab.tsx` -- importar useTranslation, reemplazar ~24 textos, locale dinamico
+
+Nota: La conexion a base de datos ya esta implementada correctamente en ambos tabs (MyLibraryTab consulta `data_transactions` con status `completed`, MyPublicationsTab filtra `data_assets` por `subject_org_id`). Los contadores ya se calculan dinamicamente. Solo falta la internacionalizacion.
 
