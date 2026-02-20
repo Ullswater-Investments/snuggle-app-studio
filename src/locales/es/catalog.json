@@ -3,7 +3,11 @@
     "badge": "Marketplace Oficial v2.0",
     "title": "Descubre, Compra e Integra Datos de Confianza",
     "description": "Accede a miles de activos de datos verificados, con gobernanza integrada y cumplimiento ODRL automatizado.",
-    "searchPlaceholder": "Buscar datos financieros, IoT, clima..."
+    "searchPlaceholder": "Buscar datos financieros, IoT, clima...",
+    "publish": "Publicar Dataset"
+  },
+  "tabs": {
+    "myAcquisitions": "Mis Adquisiciones"
   },
   "filters": {
     "title": "Filtros",
@@ -16,7 +20,38 @@
     "verifiedKYB": "Verificado (KYB)",
     "partner": "Partner",
     "country": "País",
-    "category": "Categoría"
+    "category": "Categoría",
+    "myStatus": "Mis Estados",
+    "dataNature": "Naturaleza del Dato",
+    "acquired": "Adquiridos",
+    "pending": "Pendientes",
+    "demo": "Demo / Sintéticos",
+    "production": "Producción"
+  },
+  "nature": {
+    "synthetic": "Sintético",
+    "production": "Producción"
+  },
+  "actions": {
+    "request": "Solicitar Acceso",
+    "accessDownload": "Acceder / Descargar",
+    "requestInProgress": "Solicitud en proceso"
+  },
+  "compareTable": {
+    "feature": "Característica",
+    "provider": "Proveedor",
+    "price": "Precio",
+    "model": "Modelo",
+    "category": "Categoría",
+    "dataType": "Tipo de Datos",
+    "reputation": "Reputación",
+    "verified": "Verificado",
+    "sustainable": "Sostenible",
+    "yes": "Sí",
+    "subscription": "Suscripción",
+    "oneTime": "Pago único",
+    "usage": "Por uso",
+    "freeModel": "Gratuito"
   },
   "emptyState": {
     "title": "No se encontraron resultados",

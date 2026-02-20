@@ -3,7 +3,11 @@
     "badge": "Officiële Marktplaats v2.0",
     "title": "Ontdek, Koop en Integreer Betrouwbare Data",
     "description": "Krijg toegang tot duizenden geverifieerde data-assets, met geïntegreerde governance en geautomatiseerde ODRL-compliance.",
-    "searchPlaceholder": "Zoek financiële data, IoT, klimaat..."
+    "searchPlaceholder": "Zoek financiële data, IoT, klimaat...",
+    "publish": "Dataset Publiceren"
+  },
+  "tabs": {
+    "myAcquisitions": "Mijn Acquisities"
   },
   "filters": {
     "title": "Filters",
@@ -16,7 +20,38 @@
     "verifiedKYB": "Geverifieerd (KYB)",
     "partner": "Partner",
     "country": "Land",
-    "category": "Categorie"
+    "category": "Categorie",
+    "myStatus": "Mijn Statussen",
+    "dataNature": "Datatype",
+    "acquired": "Verworven",
+    "pending": "In afwachting",
+    "demo": "Demo / Synthetisch",
+    "production": "Productie"
+  },
+  "nature": {
+    "synthetic": "Synthetisch",
+    "production": "Productie"
+  },
+  "actions": {
+    "request": "Toegang Aanvragen",
+    "accessDownload": "Openen / Downloaden",
+    "requestInProgress": "Aanvraag in behandeling"
+  },
+  "compareTable": {
+    "feature": "Kenmerk",
+    "provider": "Aanbieder",
+    "price": "Prijs",
+    "model": "Model",
+    "category": "Categorie",
+    "dataType": "Datatype",
+    "reputation": "Reputatie",
+    "verified": "Geverifieerd",
+    "sustainable": "Duurzaam",
+    "yes": "Ja",
+    "subscription": "Abonnement",
+    "oneTime": "Eenmalig",
+    "usage": "Per gebruik",
+    "freeModel": "Gratis"
   },
   "emptyState": {
     "title": "Geen resultaten gevonden",
