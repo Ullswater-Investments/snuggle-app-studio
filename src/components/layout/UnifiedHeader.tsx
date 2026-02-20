@@ -23,7 +23,7 @@ export const UnifiedHeader = () => {
         <div className="flex items-center gap-3 flex-shrink-0">
           <SidebarTrigger />
           <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
-            <span className="text-xl font-bold tracking-tight text-primary">PROCUREDATA</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">PROCUREDATA</span>
           </Link>
         </div>
         
