@@ -6,12 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
-  Fingerprint,
-  Globe,
-  Database,
   Activity,
-  Copy,
-  ExternalLink,
   Shield,
   Server,
   RefreshCw,
@@ -29,7 +24,7 @@ import {
 import { toast } from "sonner";
 import { useState, useEffect, useCallback } from "react";
 import { PONTUSX_NETWORK_CONFIG } from "@/services/pontusX";
-import { oceanConfig, oceanContracts } from "@/lib/oceanConfig";
+import { oceanConfig } from "@/lib/oceanConfig";
 import { supabase } from "@/integrations/supabase/client";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -59,11 +54,6 @@ const NETWORK_PRESETS: Record<string, { rpc: string; chainId: string; label: str
 };
 
 // --- Helpers ---
-const truncate = (s: string) => `${s.slice(0, 14)}…${s.slice(-10)}`;
-const copy = (text: string, label: string) => {
-  navigator.clipboard.writeText(text);
-  toast.success("Copiado", { description: `${label} copiado al portapapeles` });
-};
 
 const StatusDot = ({ status }: { status: ServiceStatus["status"] }) => {
   if (status === "checking") return <Clock className="h-4 w-4 text-muted-foreground animate-spin" />;
@@ -71,7 +61,7 @@ const StatusDot = ({ status }: { status: ServiceStatus["status"] }) => {
   return <XCircle className="h-4 w-4 text-destructive" />;
 };
 
-const DID = "did:web:procuredata.eu";
+
 
 // --- Real health check with timeout ---
 async function checkService(url: string, isRpc: boolean): Promise<"online" | "offline"> {
@@ -392,7 +382,7 @@ const AdminGovernance = () => {
     fetchLogs();
   }, [fetchLogs]);
 
-  const explorerBase = PONTUSX_NETWORK_CONFIG.blockExplorerUrls?.[0] || "https://explorer.pontus-x.eu/";
+  
 
   return (
     <div className="min-h-screen bg-muted/40">
@@ -684,174 +674,48 @@ const AdminGovernance = () => {
         </CardContent>
       </Card>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader className="pb-3">
+      {/* Estado del Ecosistema — full width */}
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Fingerprint className="h-5 w-5 text-primary" />
-              <CardTitle className="text-base">Identidad del Espacio (DID)</CardTitle>
+              <Activity className="h-5 w-5 text-primary" />
+              <CardTitle className="text-base">Estado del Ecosistema</CardTitle>
             </div>
-            <CardDescription>
-              Identificador Descentralizado que representa a PROCUREDATA ante la red federada
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <code className="text-sm font-mono break-all">{DID}</code>
-              <Button variant="ghost" size="icon" className="shrink-0 ml-2" onClick={() => copy(DID, "DID")}>
-                <Copy className="h-4 w-4" />
-              </Button>
-            </div>
-            <div className="flex items-center gap-2">
-              <Badge variant="outline" className="bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30">
-                <Shield className="h-3 w-3 mr-1" /> Verificado GAIA-X
-              </Badge>
-              <Badge variant="outline">Nivel 2</Badge>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              La identidad está registrada en el Trust Framework de GAIA-X y es verificable públicamente por cualquier participante del ecosistema Pontus-X.
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Block 2: Protocolo Pontus-X */}
-        <Card>
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <Globe className="h-5 w-5 text-primary" />
-              <CardTitle className="text-base">Protocolo Pontus-X</CardTitle>
-            </div>
-            <CardDescription>Red blockchain, RPC y contratos de gobernanza</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-3">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">Red</span>
-                <span className="font-medium">{PONTUSX_NETWORK_CONFIG.chainName}</span>
-              </div>
-              <Separator />
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">Chain ID</span>
-                <code className="text-xs font-mono bg-muted px-2 py-0.5 rounded">{chainId}</code>
-              </div>
-              <Separator />
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">RPC</span>
-                <code className="text-xs font-mono bg-muted px-2 py-0.5 rounded truncate max-w-[200px]">{rpcUrl || oceanConfig.nodeUri}</code>
-              </div>
-              <Separator />
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-muted-foreground">Token nativo</span>
-                <span>{PONTUSX_NETWORK_CONFIG.nativeCurrency.symbol}</span>
-              </div>
-            </div>
-
-            <div className="pt-2 space-y-2">
-              <p className="text-xs font-medium text-muted-foreground">Contratos de Gobernanza</p>
-              {[
-                { label: "NFT Factory", addr: oceanContracts.nftFactory },
-                { label: "Fixed Rate Exchange", addr: oceanContracts.fixedRateExchange },
-                { label: "Dispenser", addr: oceanContracts.dispenser },
-              ].map((c) => (
-                <div key={c.label} className="flex items-center justify-between text-xs">
-                  <span>{c.label}</span>
-                  <div className="flex items-center gap-1">
-                    <code className="font-mono bg-muted px-1.5 py-0.5 rounded">{truncate(c.addr)}</code>
-                    <a
-                      href={`${explorerBase}address/${c.addr}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
+            <Button variant="outline" size="sm" onClick={runHealthCheck}>
+              <RefreshCw className="h-3.5 w-3.5 mr-1.5" /> Verificar
+            </Button>
+          </div>
+          <CardDescription>Disponibilidad de los servicios federados</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {services.map((svc) => (
+              <div key={svc.name} className="flex items-center justify-between p-2.5 rounded-lg border bg-card">
+                <div className="flex items-center gap-3">
+                  <StatusDot status={svc.status} />
+                  <div>
+                    <p className="text-sm font-medium">{svc.name}</p>
+                    <p className="text-xs text-muted-foreground truncate max-w-[200px]">{svc.url}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Row 2 — Data Services + Health */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Block 3: Servicios de Datos */}
-        <Card>
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <Database className="h-5 w-5 text-primary" />
-              <CardTitle className="text-base">Servicios de Datos</CardTitle>
-            </div>
-            <CardDescription>Provider, indexador y almacenamiento del ecosistema</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {[
-              { label: "Provider (Ocean)", url: oceanConfig.providerUrl, desc: "Componente que sirve los datos bajo control de acceso tokenizado." },
-              { label: "Aquarius (Indexador)", url: oceanConfig.aquariusUrl, desc: "Indexa metadatos DDO de todos los activos publicados." },
-              { label: "Explorer", url: oceanConfig.explorerUrl, desc: "Explorador de bloques para verificación de transacciones on-chain." },
-            ].map((svc) => (
-              <div key={svc.label} className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">{svc.label}</span>
-                  <a
-                    href={svc.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-primary hover:underline flex items-center gap-1"
-                  >
-                    {svc.url.replace(/https?:\/\//, "").slice(0, 30)}
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                </div>
-                <p className="text-xs text-muted-foreground">{svc.desc}</p>
-                {svc.label !== "Explorer" && <Separator />}
+                <Badge
+                  variant="outline"
+                  className={
+                    svc.status === "online"
+                      ? "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30"
+                      : svc.status === "offline"
+                      ? "bg-destructive/10 text-destructive border-destructive/30"
+                      : "bg-muted text-muted-foreground"
+                  }
+                >
+                  {svc.status === "online" ? "Operativo" : svc.status === "offline" ? "Caído" : "Verificando…"}
+                </Badge>
               </div>
             ))}
-          </CardContent>
-        </Card>
-
-        {/* Block 4: Health Check */}
-        <Card>
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Activity className="h-5 w-5 text-primary" />
-                <CardTitle className="text-base">Estado del Ecosistema</CardTitle>
-              </div>
-              <Button variant="outline" size="sm" onClick={runHealthCheck}>
-                <RefreshCw className="h-3.5 w-3.5 mr-1.5" /> Verificar
-              </Button>
-            </div>
-            <CardDescription>Disponibilidad de los servicios federados</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {services.map((svc) => (
-                <div key={svc.name} className="flex items-center justify-between p-2.5 rounded-lg border bg-card">
-                  <div className="flex items-center gap-3">
-                    <StatusDot status={svc.status} />
-                    <div>
-                      <p className="text-sm font-medium">{svc.name}</p>
-                      <p className="text-xs text-muted-foreground truncate max-w-[200px]">{svc.url}</p>
-                    </div>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className={
-                      svc.status === "online"
-                        ? "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30"
-                        : svc.status === "offline"
-                        ? "bg-destructive/10 text-destructive border-destructive/30"
-                        : "bg-muted text-muted-foreground"
-                    }
-                  >
-                    {svc.status === "online" ? "Operativo" : svc.status === "offline" ? "Caído" : "Verificando…"}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </CardContent>
+      </Card>
       </div>
 
       {/* Row 3 — Dynamic Ecosystem Event Log */}
