@@ -1,69 +1,48 @@
 
-## Unificacion visual del portal de usuario
+## Ajustes de seguridad y branding en el flujo inicial
 
-### Resumen
+### 1. Validacion de mayoria de edad en Auth.tsx
 
-Se unificara la experiencia visual consolidando el header y las rutas operativas bajo `AppLayout`, sin tocar `DocumentLayout` ni las paginas informativas/legales.
+**Archivo:** `src/pages/Auth.tsx`
 
----
+**Cambios en el schema Zod (linea 43):**
+- Anadir `.refine()` al campo `birthDate` para verificar que la fecha corresponde a 18 anos o mas respecto a `new Date()`
+- Mensaje de error: "Debes ser mayor de 18 anos para registrarte en la plataforma"
 
-### 1. Actualizar UnifiedHeader.tsx
+**Cambios en el Calendar (linea 521-532):**
+- Modificar la funcion `disabled` del componente `Calendar` para que el rango maximo sea `toYear={new Date().getFullYear() - 18}` y la fecha maxima seleccionable sea hace 18 anos exactos
+- Calcular `maxDate = new Date()` restando 18 anos al ano, manteniendo mes y dia actuales
+- Esto hace imposible seleccionar una fecha que no cumpla el requisito
 
-**Zona izquierda** (branding + navegacion):
-- Mantener `SidebarTrigger`
-- Texto "PROCUREDATA" con color azul corporativo (`text-[#4CABFF]`) en lugar de `text-foreground`
-- Anadir botones de navegacion historica `< >` (atras/adelante) justo despues del texto, reutilizando la logica de `GlobalNavigation` (con `useNavigate(-1)` y `useNavigate(1)`) pero sin el boton Home
-- Importar `ChevronLeft`, `ChevronRight` de lucide-react y `useNavigate` de react-router-dom
-
-**Zona central** (buscador): Sin cambios, ya esta centrado con `flex-1 justify-center`
-
-**Zona derecha** (acciones): Sin cambios funcionales. Mantiene OrganizationSwitcher, NotificationsBell, LanguageSwitcher, ThemeToggle, DemoHelpButton y boton logout/login.
+**Logica combinada:** La validacion Zod actua como red de seguridad (server-side validation) mientras que el `disabled` del calendar previene la seleccion visual (UX).
 
 ---
 
-### 2. Consolidar rutas en App.tsx
+### 2. Gradiente premium en el titulo de WelcomeScreen
 
-Mover las rutas del catalogo y paginas operativas publicas desde el bloque `PublicDemoLayout` al bloque `AppLayout` (protegido con `ProtectedRoute`):
+**Archivo:** `src/components/WelcomeScreen.tsx`
 
-**Rutas a mover al bloque AppLayout:**
-- `/catalog` (pagina principal del catalogo)
-- Todas las rutas `/catalog/*` de detalle de producto (telemetria-flota, consumo-electrico, etc.)
-- `/sustainability`
-- `/services` y `/services/:id`
-- `/innovation`
-- `/success-stories` y `/success-stories/:id`
-- `/partners` (listado)
-
-**Rutas que permanecen en PublicDemoLayout** (accesibles sin autenticacion):
-- Ninguna operativa - se eliminara el bloque `PublicDemoLayout` de App.tsx ya que todas sus rutas se mueven a AppLayout
-
-**Nota:** Esto significa que el catalogo requerira autenticacion. Las paginas de documentos, landing, auth, register, guide, etc. siguen siendo publicas sin layout wrapper.
+- En el `<h1>` del titulo "Bienvenido a PROCUREDATA" (linea ~40), envolver "PROCUREDATA" en un `<span>` con la clase `procuredata-gradient font-bold tracking-tight` para que use el degradado oficial ya definido en `index.css`
+- El resto del texto ("Bienvenido a") mantiene su estilo normal
 
 ---
 
-### 3. Ajustar margenes en AppLayout.tsx
+### 3. Gradiente premium en RequestInvite
 
-- En el `<main>`, mantener `flex-1` sin padding adicional. Actualmente no tiene margenes extra, lo cual es correcto.
-- El header ya tiene `h-16` fijo y `sticky top-0`. La transicion entre rutas sera imperceptible porque todas comparten el mismo layout.
+**Archivo:** `src/pages/onboarding/RequestInvite.tsx`
+
+- En el `<CardTitle>` "Solicitar Invitacion", no hay texto PROCUREDATA que cambiar
+- El logo ya usa `<ProcuredataLogo>` con el logo oficial (circulo azul con socket). No se necesita cambio de logo aqui
+- Si el usuario quiere anadir el texto con gradiente debajo del logo, se puede anadir un subtitulo con `procuredata-gradient`
+
+**Nota:** Ambas paginas ya usan `<ProcuredataLogo>` que muestra el logo oficial (circulo azul). No hay "icono naranja" visible en estas pantallas - el logo ya es correcto. El cambio principal es aplicar el gradiente al texto "PROCUREDATA" en el titulo de bienvenida.
 
 ---
 
-### 4. Eliminar PublicDemoLayout.tsx (opcional)
-
-Si tras mover todas las rutas el componente queda sin uso, se eliminara el archivo y su import en App.tsx. Tambien se puede eliminar `PublicDemoBanner` si ya no se referencia.
-
----
-
-### Archivos a modificar
+### Resumen de archivos
 
 | Archivo | Cambio |
 |---|---|
-| `src/components/layout/UnifiedHeader.tsx` | Anadir botones atras/adelante, cambiar color de PROCUREDATA a azul corporativo |
-| `src/App.tsx` | Mover rutas de catalogo/servicios/partners de PublicDemoLayout a AppLayout |
-| `src/components/PublicDemoLayout.tsx` | Eliminar si queda sin rutas |
-
-### Archivos NO modificados
-
-- `src/components/DocumentLayout.tsx` - sin cambios
-- `src/components/AppLayout.tsx` - sin cambios necesarios (la estructura ya es correcta)
-- Todas las paginas de documentos explicativos, legal, landing - sin cambios
+| `src/pages/Auth.tsx` | Validacion Zod de 18+ anos y restriccion en Calendar picker |
+| `src/components/WelcomeScreen.tsx` | Gradiente en texto "PROCUREDATA" del titulo |
+| `src/pages/onboarding/RequestInvite.tsx` | Sin cambios necesarios (logo ya es correcto) |
