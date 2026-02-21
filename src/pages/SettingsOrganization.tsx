@@ -17,6 +17,7 @@ import { Save, Upload, Globe, Linkedin, Building2, CheckCircle2, AlertCircle } f
 import { FadeIn } from "@/components/AnimatedSection";
 import { AssuranceLevelBadge } from "@/components/AssuranceLevelBadge";
 import { VerifiableCredentialsPanel } from "@/components/VerifiableCredentialsPanel";
+import { EmptyState } from "@/components/EmptyState";
 
 export default function SettingsOrganization() {
   const { activeOrg } = useOrganizationContext();
@@ -56,7 +57,25 @@ export default function SettingsOrganization() {
     return Math.round((completed / fields.length) * 100);
   }, [activeOrg]);
 
-  if (!activeOrg) return null;
+  if (!activeOrg) {
+    return (
+      <div className="container py-8 fade-in">
+        <FadeIn>
+          <EmptyState
+            icon={Building2}
+            title="Sin organización asociada"
+            description="No tienes ninguna organización registrada o asociada a tu cuenta."
+            action={
+              <Button onClick={() => window.location.href = "/onboarding/create-organization"} className="gap-2">
+                <Building2 className="h-4 w-4" />
+                Configurar mi Organización
+              </Button>
+            }
+          />
+        </FadeIn>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-8 fade-in">
