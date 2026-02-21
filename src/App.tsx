@@ -756,6 +756,7 @@ const App = () => (
                       <Route path="/requests/new" element={<RequestWizard />} />
                       <Route path="/request-wizard" element={<RequestWizard />} />
                       <Route path="/dashboard/publish" element={<PublishDataset />} />
+                      <Route path="/datos/publicar" element={<PublishDataset />} />
                       <Route path="/data" element={<Data />} />
                       <Route path="/data/view/:id" element={<DataView />} />
                       <Route path="/opportunities" element={<Opportunities />} />
