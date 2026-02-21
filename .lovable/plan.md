@@ -1,107 +1,92 @@
 
 
-## Gobernanza del Ecosistema Funcional
+## Controles de Identidad Interactivos en Gobernanza
 
 ### Resumen
 
-Convertir la pagina `/admin/governance` de un panel semi-estatico a uno completamente funcional con: tabla de logs dinamica, selector de red Devnet/Testnet, health checks reales, y DID con copia al portapapeles.
+Agregar 3 interruptores de verificacion (Email, KYC, KYB) a la pagina de Gobernanza, persistidos en `system_settings`, y una restriccion real que deshabilite el boton "Publicar Dataset" cuando `require_kyb` este activo y la organizacion del usuario no tenga `kyb_verified`.
 
 ---
 
-### 1. Nueva tabla `governance_logs` en la base de datos
+### 1. Base de datos: nuevas claves en `system_settings`
 
-Crear una tabla para registrar eventos del ecosistema:
+No se necesitan nuevas tablas ni columnas. Se usara `system_settings` (key/value) para almacenar 4 nuevas claves:
 
 ```text
-governance_logs
-  id          uuid  PK  default gen_random_uuid()
-  level       text  NOT NULL  ('info' | 'warn' | 'error')
-  category    text  NOT NULL  ('user_registration' | 'asset_verification' | 'config_change' | 'system')
-  message     text  NOT NULL
-  actor_id    uuid  NULLABLE  (quien ejecuto la accion)
-  metadata    jsonb NULLABLE  (datos adicionales)
-  created_at  timestamptz  default now()
+require_email_verification  ->  "true" / "false"
+require_kyc                 ->  "true" / "false"
+require_kyb                 ->  "true" / "false"
+ecosystem_status            ->  "active" / "maintenance"
 ```
 
-**RLS**: SELECT para usuarios con rol `admin` o `data_space_owner`. INSERT restringido a funciones SECURITY DEFINER (sistema).
+**Migracion SQL**: INSERT de las 4 claves con valores por defecto (`false`, `false`, `false`, `active`) usando `ON CONFLICT DO NOTHING`.
 
-**Seed data**: Insertar unos 5-7 registros iniciales representativos (registro de usuario, verificacion de activo, cambio de configuracion).
-
----
-
-### 2. Selector de Red Blockchain (Devnet / Testnet)
-
-Modificar la tarjeta "Configuracion de Red Blockchain" en `AdminGovernance.tsx`:
-
-- Anadir un dropdown/Select con dos opciones predefinidas:
-  - **Pontus-X Testnet**: RPC `https://rpc.test.pontus-x.eu`, Chain ID `32457`
-  - **Pontus-X Devnet**: RPC `https://rpc.dev.pontus-x.eu`, Chain ID `32456`
-- Al seleccionar una opcion, se auto-rellena el campo RPC URL.
-- Al pulsar "Guardar", se actualizan dos claves en `system_settings`:
-  - `blockchain_rpc_url` con la nueva URL
-  - `blockchain_chain_id` con el nuevo Chain ID (nueva clave a insertar)
-- Actualizar los hooks `useEthWalletBalance` y `useBlockchainActivity` para leer tambien `blockchain_chain_id` de `system_settings`.
+Las RLS existentes de `system_settings` ya permiten SELECT para todos los autenticados y UPDATE para admins/DSO, por lo que no se necesitan nuevas politicas.
 
 ---
 
-### 3. Health Checks reales
+### 2. UI: Card de "Configuracion de Identidad" con Switches
 
-Reemplazar la simulacion aleatoria de `runHealthCheck()` con llamadas reales:
+Modificar `AdminGovernance.tsx`:
 
-- **Blockchain**: `fetch(rpcUrl, { method: 'POST', body: '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' })` - si devuelve `result`, esta online.
-- **Aquarius**: `fetch(aquariusUrl)` - si responde 200, esta online.
-- **Provider**: `fetch(providerUrl)` - si responde 200, esta online.
-- **Identity Provider**: `fetch("https://identity.pontus-x.eu")` - si responde, esta online.
-
-Cada check tendra un timeout de 5 segundos. Si falla o excede el timeout, se marca como "Caido".
-
----
-
-### 4. Registro de Eventos dinamico
-
-Reemplazar el array hardcoded `ecosystemEvents` con una consulta a `governance_logs`:
-
-- Consultar los ultimos 50 registros ordenados por `created_at DESC`.
-- Mantener los colores de severidad: info (azul/muted), warn (amarillo), error (rojo).
-- Anadir un boton "Refrescar" en la cabecera del panel.
+- Agregar una nueva Card entre la seccion de DID y la de Protocolo (o como primera card en Row 1).
+- Titulo: "Configuracion de Identidad" con icono Shield.
+- 3 interruptores usando el componente `Switch` existente:
+  - **Verificacion de Email**: "Exigir correo validado para publicar"
+  - **KYC (Persona Fisica)**: "Activar validacion de identidad para usuarios"
+  - **KYB (Empresa)**: "Exigir validacion registral de la organizacion"
+- Un cuarto switch o selector para **Estado del Ecosistema**: "active" / "maintenance".
+- Al cambiar cada switch, se actualiza inmediatamente `system_settings` via `supabase.from("system_settings").update(...)`.
+- Se muestra toast de confirmacion tras cada cambio.
+- Los valores iniciales se cargan al montar el componente.
 
 ---
 
-### 5. Logging automatico de cambios de configuracion
+### 3. Hook reutilizable: `useGovernanceSettings`
 
-Cuando el admin guarda el RPC URL (funcion `saveRpcUrl`), insertar automaticamente un registro en `governance_logs`:
+Crear un hook `src/hooks/useGovernanceSettings.ts` que:
 
+- Consulte las 4 claves de `system_settings` al montar.
+- Exponga `requireKyb`, `requireKyc`, `requireEmail`, `ecosystemStatus` como booleanos/string.
+- Use `@tanstack/react-query` para cache y revalidacion.
+- Sea consumible desde cualquier pagina (Catalog, Data, PublishDataset).
+
+---
+
+### 4. Restriccion KYB en botones de publicacion
+
+Modificar 3 archivos donde aparece el boton "Publicar Dataset":
+
+1. **`src/pages/Catalog.tsx`** (linea ~524): importar `useGovernanceSettings` y `useOrganizationContext`. Si `requireKyb` es true y la organizacion activa no tiene `kyb_verified`, deshabilitar el boton y mostrar un tooltip: "Se requiere validacion KYB de tu organizacion".
+
+2. **`src/pages/Data.tsx`** (linea ~36): misma logica de deshabilitacion.
+
+3. **`src/components/data/MyPublicationsTab.tsx`** (linea ~195): misma logica en el boton del estado vacio.
+
+La verificacion sera:
+```text
+disabled = requireKyb && !activeOrg?.kyb_verified
 ```
+
+---
+
+### 5. Logging automatico
+
+Cada cambio de switch insertara un registro en `governance_logs`:
+```text
 level: 'info'
-category: 'config_change'  
-message: 'URL del RPC actualizada a [URL]'
+category: 'config_change'
+message: 'Verificacion KYB activada/desactivada'
 ```
 
 ---
 
-### 6. DID con copia al portapapeles
+### Archivos a crear/modificar
 
-La funcionalidad de copia ya existe en el codigo actual (boton Copy junto al DID, funcion `copy()`). Solo verificar que funciona correctamente y que el badge "Verificado GAIA-X" se muestra. No se requieren cambios aqui.
-
----
-
-### Secuencia tecnica
-
-**Paso 1 - Migracion SQL**: Crear tabla `governance_logs` + RLS + seed data + insertar clave `blockchain_chain_id` en `system_settings`.
-
-**Paso 2 - AdminGovernance.tsx**: 
-- Anadir Select de red (Devnet/Testnet) que auto-rellena RPC y Chain ID
-- Reemplazar health check simulado por llamadas reales con timeout
-- Reemplazar eventos mock por consulta a `governance_logs`
-- Insertar log al guardar configuracion
-
-**Paso 3 - Actualizar hooks** (si se decide persistir chain_id): Opcional, ya que el RPC URL es el valor principal que usan los hooks.
-
----
-
-### Archivos a modificar/crear (2-3)
-
-1. **Nueva migracion SQL** -- crear tabla `governance_logs`, seed data, nueva clave `blockchain_chain_id`
-2. **`src/pages/admin/AdminGovernance.tsx`** -- selector de red, health checks reales, logs dinamicos, logging automatico
-3. **`src/integrations/supabase/types.ts`** -- se actualizara automaticamente tras la migracion
+1. **Nueva migracion SQL** -- insertar 4 claves en `system_settings`
+2. **`src/hooks/useGovernanceSettings.ts`** -- nuevo hook
+3. **`src/pages/admin/AdminGovernance.tsx`** -- nueva card con switches
+4. **`src/pages/Catalog.tsx`** -- restriccion KYB en boton publicar
+5. **`src/pages/Data.tsx`** -- restriccion KYB en boton publicar
+6. **`src/components/data/MyPublicationsTab.tsx`** -- restriccion KYB en boton publicar
 
