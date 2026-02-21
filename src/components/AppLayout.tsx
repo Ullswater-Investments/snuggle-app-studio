@@ -10,7 +10,7 @@ import { MaintenanceBanner } from "@/components/MaintenanceBanner";
 export const AppLayout = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
+      <div className="min-h-screen flex w-full bg-background overflow-hidden">
         <DemoTour />
         <CommandMenu />
         <AppSidebar />

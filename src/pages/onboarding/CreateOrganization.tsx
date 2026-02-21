@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 import { OnboardingStepper } from "@/components/onboarding/OnboardingStepper";
 import { WalletGenerationStep } from "@/components/onboarding/WalletGenerationStep";
 import { OrganizationRegistrationStep } from "@/components/onboarding/OrganizationRegistrationStep";
@@ -56,7 +56,7 @@ export default function CreateOrganization() {
             <ArrowLeft className="h-4 w-4" />
             <span className="hidden sm:inline">{t('onboarding.back', 'Volver')}</span>
           </Button>
-          <ProcuredataLogo size="sm" showNavigation={false} />
+          <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-10 sm:h-12 object-contain" />
         </div>
 
         {/* Title */}
