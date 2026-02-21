@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 
 export const WelcomeScreen = () => {
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const WelcomeScreen = () => {
                 {/* Header */}
                 <div className="text-center space-y-4">
                     <div className="flex justify-center mb-6">
-                        <ProcuredataLogo size="lg" showNavigation={false} />
+                        <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-20 md:h-28 object-contain" />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
                         {t('welcome.titlePrefix', 'Bienvenido a ')}<span className="procuredata-gradient font-bold tracking-tight">PROCUREDATA</span>

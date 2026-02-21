@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 
 export default function RequestInvite() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function RequestInvite() {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex flex-col items-center justify-center p-4">
       <div className="max-w-2xl w-full space-y-6">
         <div className="flex justify-center mb-6">
-          <ProcuredataLogo size="md" showNavigation={false} />
+          <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-16 md:h-20 object-contain" />
         </div>
 
         <Card className="border-2 shadow-xl">
