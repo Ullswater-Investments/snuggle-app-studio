@@ -54,7 +54,6 @@ const NETWORK_PRESETS: Record<string, { rpc: string; chainId: string; label: str
 };
 
 // --- Helpers ---
-
 const StatusDot = ({ status }: { status: ServiceStatus["status"] }) => {
   if (status === "checking") return <Clock className="h-4 w-4 text-muted-foreground animate-spin" />;
   if (status === "online") return <CheckCircle2 className="h-4 w-4 text-green-500" />;
@@ -716,7 +715,6 @@ const AdminGovernance = () => {
           </div>
         </CardContent>
       </Card>
-      </div>
 
       {/* Row 3 — Dynamic Ecosystem Event Log */}
       <Card>
