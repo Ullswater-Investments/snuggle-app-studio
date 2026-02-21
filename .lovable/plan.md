@@ -1,48 +1,79 @@
 
-## Ajustes de seguridad y branding en el flujo inicial
+## Correccion de la proteccion de rutas por organizacion
 
-### 1. Validacion de mayoria de edad en Auth.tsx
+### Problema raiz identificado
 
-**Archivo:** `src/pages/Auth.tsx`
+El `OrganizationGuard` no funciona correctamente porque:
 
-**Cambios en el schema Zod (linea 43):**
-- Anadir `.refine()` al campo `birthDate` para verificar que la fecha corresponde a 18 anos o mas respecto a `new Date()`
-- Mensaje de error: "Debes ser mayor de 18 anos para registrarte en la plataforma"
-
-**Cambios en el Calendar (linea 521-532):**
-- Modificar la funcion `disabled` del componente `Calendar` para que el rango maximo sea `toYear={new Date().getFullYear() - 18}` y la fecha maxima seleccionable sea hace 18 anos exactos
-- Calcular `maxDate = new Date()` restando 18 anos al ano, manteniendo mes y dia actuales
-- Esto hace imposible seleccionar una fecha que no cumpla el requisito
-
-**Logica combinada:** La validacion Zod actua como red de seguridad (server-side validation) mientras que el `disabled` del calendar previene la seleccion visual (UX).
+1. **Valor obsoleto en sessionStorage**: `activeOrgId` se inicializa desde `sessionStorage` (linea 35-37 de `useOrganizationContext.tsx`). Si un usuario tuvo una org anteriormente, ese ID persiste incluso si ya no tiene acceso a ninguna organizacion.
+2. **Sin validacion cruzada**: El guard solo verifica si `activeOrgId` existe, pero no confirma que ese ID corresponda a una organizacion real en `availableOrgs`.
+3. **Timing incorrecto**: `loading` solo refleja el estado del query, pero `activeOrgId` ya tiene un valor de sessionStorage antes de que el query termine, asi que el guard ve un ID valido y deja pasar.
 
 ---
 
-### 2. Gradiente premium en el titulo de WelcomeScreen
+### Cambios planificados
 
-**Archivo:** `src/components/WelcomeScreen.tsx`
+#### 1. Corregir `useOrganizationContext.tsx` - Validacion cruzada
 
-- En el `<h1>` del titulo "Bienvenido a PROCUREDATA" (linea ~40), envolver "PROCUREDATA" en un `<span>` con la clase `procuredata-gradient font-bold tracking-tight` para que use el degradado oficial ya definido en `index.css`
-- El resto del texto ("Bienvenido a") mantiene su estilo normal
+- Despues de que `availableOrgs` cargue, verificar que `activeOrgId` realmente existe en la lista de organizaciones disponibles.
+- Si `activeOrgId` de sessionStorage no esta en `availableOrgs`, limpiarlo (ponerlo a `null` y eliminar de sessionStorage).
+- Cambiar el valor de `loading` para que sea `true` mientras el query no ha terminado Y mientras no se haya validado el `activeOrgId` contra `availableOrgs`.
+
+Esto es el cambio critico que resuelve el problema de raiz.
+
+#### 2. Reforzar `OrganizationGuard.tsx`
+
+- Cambiar la ruta de redireccion de `/dashboard` a `/dashboard` (el dashboard ya muestra el WelcomeScreen cuando no hay org, asi que esto es correcto).
+- Agregar `console.log("OrganizationGuard - activeOrgId:", activeOrgId, "loading:", loading)` para depuracion.
+- Asegurar que la validacion sea estricta: solo pasar si `activeOrgId` no es null/undefined Y `loading` es false.
+
+#### 3. Validacion interna en `PublishDataset.tsx`
+
+- Al inicio del componente, agregar una verificacion de seguridad: si `activeOrgId` es null/undefined y no esta cargando, mostrar `<Navigate to="/dashboard" replace />`.
+- Importar `Navigate` de react-router-dom y `useOrganizationContext` (ya importado).
+
+#### 4. Validacion interna en `RequestWizard.tsx`
+
+- Misma logica de seguridad adicional: importar `useOrganizationContext` y `Navigate`.
+- Al inicio del componente, si no hay org activa y no esta cargando, redirigir a `/dashboard`.
+
+#### 5. Mejorar `SettingsOrganization.tsx` - Estado vacio con hero logo
+
+- Sustituir el icono `Building2` del `EmptyState` actual por el asset `procuredata-hero-logo.png`.
+- Cambiar el texto del boton a "Registrar u Unirse a Organizacion".
+- Hacer el boton mas grande y prominente.
+- Redirigir al `/dashboard` (que muestra el WelcomeScreen con las opciones de registrar o unirse).
 
 ---
 
-### 3. Gradiente premium en RequestInvite
-
-**Archivo:** `src/pages/onboarding/RequestInvite.tsx`
-
-- En el `<CardTitle>` "Solicitar Invitacion", no hay texto PROCUREDATA que cambiar
-- El logo ya usa `<ProcuredataLogo>` con el logo oficial (circulo azul con socket). No se necesita cambio de logo aqui
-- Si el usuario quiere anadir el texto con gradiente debajo del logo, se puede anadir un subtitulo con `procuredata-gradient`
-
-**Nota:** Ambas paginas ya usan `<ProcuredataLogo>` que muestra el logo oficial (circulo azul). No hay "icono naranja" visible en estas pantallas - el logo ya es correcto. El cambio principal es aplicar el gradiente al texto "PROCUREDATA" en el titulo de bienvenida.
-
----
-
-### Resumen de archivos
+### Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/pages/Auth.tsx` | Validacion Zod de 18+ anos y restriccion en Calendar picker |
-| `src/components/WelcomeScreen.tsx` | Gradiente en texto "PROCUREDATA" del titulo |
-| `src/pages/onboarding/RequestInvite.tsx` | Sin cambios necesarios (logo ya es correcto) |
+| `src/hooks/useOrganizationContext.tsx` | Validar activeOrgId contra availableOrgs, limpiar valores obsoletos de sessionStorage |
+| `src/components/OrganizationGuard.tsx` | Agregar console.log de depuracion, mantener redireccion a /dashboard |
+| `src/pages/dashboard/PublishDataset.tsx` | Agregar validacion interna de seguridad con Navigate |
+| `src/pages/RequestWizard.tsx` | Agregar validacion interna de seguridad con Navigate |
+| `src/pages/SettingsOrganization.tsx` | Hero logo en estado vacio, boton "Registrar u Unirse a Organizacion" |
+
+---
+
+### Detalle tecnico clave
+
+El cambio mas importante es en `useOrganizationContext.tsx`. Actualmente el useEffect (lineas 90-96) auto-selecciona la primera org si no hay activeOrgId. Pero falta el caso inverso: si `activeOrgId` tiene un valor de sessionStorage que NO esta en `availableOrgs` (porque el usuario ya no pertenece a esa org), hay que limpiarlo. Se anadira:
+
+```text
+useEffect(() => {
+  if (!isLoading && availableOrgs.length === 0) {
+    // Usuario sin organizaciones: limpiar cualquier valor obsoleto
+    setActiveOrgId(null);
+    sessionStorage.removeItem('activeOrgId');
+  } else if (!isLoading && activeOrgId && !availableOrgs.find(o => o.id === activeOrgId)) {
+    // activeOrgId obsoleto: no existe en las orgs disponibles
+    setActiveOrgId(null);
+    sessionStorage.removeItem('activeOrgId');
+  }
+}, [isLoading, availableOrgs, activeOrgId]);
+```
+
+Esto garantiza que el guard nunca vera un `activeOrgId` falso, resolviendo el problema de raiz.
