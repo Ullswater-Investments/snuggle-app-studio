@@ -1,92 +1,90 @@
 
 
-## Controles de Identidad Interactivos en Gobernanza
+## Control de Activos del Marketplace en Gobernanza
 
 ### Resumen
 
-Agregar 3 interruptores de verificacion (Email, KYC, KYB) a la pagina de Gobernanza, persistidos en `system_settings`, y una restriccion real que deshabilite el boton "Publicar Dataset" cuando `require_kyb` este activo y la organizacion del usuario no tenga `kyb_verified`.
+Agregar 2 nuevas variables de sistema (`auto_approve_assets`, `catalog_visibility`) con controles interactivos en la pagina de Gobernanza, e integrar su logica en el flujo de publicacion y en la visibilidad del catalogo.
 
 ---
 
 ### 1. Base de datos: nuevas claves en `system_settings`
 
-No se necesitan nuevas tablas ni columnas. Se usara `system_settings` (key/value) para almacenar 4 nuevas claves:
+INSERT de 2 claves con valores por defecto usando `ON CONFLICT DO NOTHING`:
 
 ```text
-require_email_verification  ->  "true" / "false"
-require_kyc                 ->  "true" / "false"
-require_kyb                 ->  "true" / "false"
-ecosystem_status            ->  "active" / "maintenance"
+auto_approve_assets   ->  "true"    (comportamiento actual: publicacion directa)
+catalog_visibility    ->  "public"  (valores posibles: "public" / "private")
 ```
 
-**Migracion SQL**: INSERT de las 4 claves con valores por defecto (`false`, `false`, `false`, `active`) usando `ON CONFLICT DO NOTHING`.
-
-Las RLS existentes de `system_settings` ya permiten SELECT para todos los autenticados y UPDATE para admins/DSO, por lo que no se necesitan nuevas politicas.
+No se necesitan nuevas tablas, columnas ni politicas RLS. Las politicas existentes de `system_settings` ya cubren lectura para autenticados y escritura para admins/DSO.
 
 ---
 
-### 2. UI: Card de "Configuracion de Identidad" con Switches
+### 2. Actualizar `useGovernanceSettings` hook
 
-Modificar `AdminGovernance.tsx`:
+Ampliar el hook existente para incluir las 2 nuevas claves:
 
-- Agregar una nueva Card entre la seccion de DID y la de Protocolo (o como primera card en Row 1).
-- Titulo: "Configuracion de Identidad" con icono Shield.
-- 3 interruptores usando el componente `Switch` existente:
-  - **Verificacion de Email**: "Exigir correo validado para publicar"
-  - **KYC (Persona Fisica)**: "Activar validacion de identidad para usuarios"
-  - **KYB (Empresa)**: "Exigir validacion registral de la organizacion"
-- Un cuarto switch o selector para **Estado del Ecosistema**: "active" / "maintenance".
-- Al cambiar cada switch, se actualiza inmediatamente `system_settings` via `supabase.from("system_settings").update(...)`.
-- Se muestra toast de confirmacion tras cada cambio.
-- Los valores iniciales se cargan al montar el componente.
+- Agregar `"auto_approve_assets"` y `"catalog_visibility"` al array `GOVERNANCE_KEYS`.
+- Exponer `autoApproveAssets: boolean` y `catalogVisibility: "public" | "private"` en el retorno.
 
 ---
 
-### 3. Hook reutilizable: `useGovernanceSettings`
+### 3. UI: Card de "Politicas de Activos" en AdminGovernance
 
-Crear un hook `src/hooks/useGovernanceSettings.ts` que:
+Agregar una nueva Card debajo de "Configuracion de Identidad" con:
 
-- Consulte las 4 claves de `system_settings` al montar.
-- Exponga `requireKyb`, `requireKyc`, `requireEmail`, `ecosystemStatus` como booleanos/string.
-- Use `@tanstack/react-query` para cache y revalidacion.
-- Sea consumible desde cualquier pagina (Catalog, Data, PublishDataset).
-
----
-
-### 4. Restriccion KYB en botones de publicacion
-
-Modificar 3 archivos donde aparece el boton "Publicar Dataset":
-
-1. **`src/pages/Catalog.tsx`** (linea ~524): importar `useGovernanceSettings` y `useOrganizationContext`. Si `requireKyb` es true y la organizacion activa no tiene `kyb_verified`, deshabilitar el boton y mostrar un tooltip: "Se requiere validacion KYB de tu organizacion".
-
-2. **`src/pages/Data.tsx`** (linea ~36): misma logica de deshabilitacion.
-
-3. **`src/components/data/MyPublicationsTab.tsx`** (linea ~195): misma logica en el boton del estado vacio.
-
-La verificacion sera:
-```text
-disabled = requireKyb && !activeOrg?.kyb_verified
-```
+- Icono `Package` y titulo "Politicas de Activos".
+- **Switch "Aprobacion Automatica"**: "Publicar activos instantaneamente sin revision". Persiste `auto_approve_assets` en `system_settings`.
+- **Select "Visibilidad del Catalogo"**: Opciones "Publico (Visible para todos)" y "Privado (Solo usuarios registrados)". Persiste `catalog_visibility`.
+- Cada cambio registra un log en `governance_logs` (reutilizando la funcion `toggleGovSetting` ya existente).
+- Toast de confirmacion tras cada cambio.
 
 ---
 
-### 5. Logging automatico
+### 4. Integracion con el flujo de publicacion (PublishDataset.tsx)
 
-Cada cambio de switch insertara un registro en `governance_logs`:
+Modificar la `publishMutation` en `src/pages/dashboard/PublishDataset.tsx`:
+
+- Importar `useGovernanceSettings`.
+- Si `autoApproveAssets` es `false`, el asset se crea con `status: "pending_review"` en lugar de `"pending_validation"`.
+- Si `autoApproveAssets` es `true`, el asset se crea con `status: "active"` (publicacion directa).
+- Ajustar el mensaje de exito segun el caso:
+  - Auto-approve ON: "Dataset publicado exitosamente en el catalogo."
+  - Auto-approve OFF: "Solicitud enviada. Un administrador revisara el activo antes de publicarlo."
+
+---
+
+### 5. Integracion con visibilidad del catalogo (Catalog.tsx)
+
+Modificar `src/pages/Catalog.tsx`:
+
+- Ya importa `useGovernanceSettings` y `useAuth`.
+- Si `catalogVisibility === "private"` y `!user` (no autenticado):
+  - No realizar la consulta a `marketplace_listings`.
+  - Mostrar un banner informativo con el componente `PublicDemoBanner` y un mensaje: "El catalogo es privado. Inicia sesion para ver los activos disponibles."
+  - Opcionalmente, redirigir a `/auth` o a la landing.
+
+---
+
+### 6. Logging automatico
+
+Cada cambio de switch/selector insertara un registro en `governance_logs` con:
 ```text
 level: 'info'
 category: 'config_change'
-message: 'Verificacion KYB activada/desactivada'
+message: 'Aprobacion Automatica activada/desactivada' o 'Visibilidad del Catalogo cambiada a PRIVADO'
 ```
+
+Esto ya es manejado por la funcion `toggleGovSetting` existente en `AdminGovernance.tsx`; solo se necesita agregar las etiquetas de los nuevos keys al mapa `labels`.
 
 ---
 
 ### Archivos a crear/modificar
 
-1. **Nueva migracion SQL** -- insertar 4 claves en `system_settings`
-2. **`src/hooks/useGovernanceSettings.ts`** -- nuevo hook
-3. **`src/pages/admin/AdminGovernance.tsx`** -- nueva card con switches
-4. **`src/pages/Catalog.tsx`** -- restriccion KYB en boton publicar
-5. **`src/pages/Data.tsx`** -- restriccion KYB en boton publicar
-6. **`src/components/data/MyPublicationsTab.tsx`** -- restriccion KYB en boton publicar
+1. **Nueva migracion SQL** -- insertar 2 claves en `system_settings`
+2. **`src/hooks/useGovernanceSettings.ts`** -- agregar 2 nuevas claves
+3. **`src/pages/admin/AdminGovernance.tsx`** -- nueva card "Politicas de Activos"
+4. **`src/pages/dashboard/PublishDataset.tsx`** -- logica condicional de status segun `autoApproveAssets`
+5. **`src/pages/Catalog.tsx`** -- restriccion de visibilidad segun `catalogVisibility`
 
