@@ -20,8 +20,15 @@ import {
     TrendingUp,
     DollarSign,
     Calendar,
-    Clock
+    Clock,
+    AlertCircle,
 } from "lucide-react";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { EmptyState } from "@/components/EmptyState";
 import { format } from "date-fns";
 import { es, fr, pt, de, it, nl, enUS } from "date-fns/locale";
@@ -37,6 +44,7 @@ interface PublishedAsset {
     currency: string | null;
     created_at: string;
     is_visible: boolean;
+    admin_notes: string | null;
     product: {
         id: string;
         name: string;
@@ -69,6 +77,7 @@ export const MyPublicationsTab = () => {
           currency,
           created_at,
           is_visible,
+          admin_notes,
           product:data_products (
             id,
             name,
@@ -133,7 +142,7 @@ export const MyPublicationsTab = () => {
             case "active":
                 return <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">{t('pubStatus.published')}</Badge>;
             case "rejected":
-                return <Badge variant="destructive">{t('pubStatus.rejected')}</Badge>;
+                return <Badge variant="destructive"><AlertCircle className="h-3 w-3 mr-1" />{t('pubStatus.rejected')}</Badge>;
             case "draft":
                 return <Badge variant="secondary">{t('pubStatus.draft')}</Badge>;
             case "archived":
@@ -225,7 +234,21 @@ export const MyPublicationsTab = () => {
 
                                 {/* Badges Row */}
                                 <div className="flex flex-wrap gap-1.5 mt-2">
-                                    {getStatusBadge(publication.status)}
+                                    {publication.status === "rejected" && publication.admin_notes ? (
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    {getStatusBadge(publication.status)}
+                                                </TooltipTrigger>
+                                                <TooltipContent className="max-w-xs">
+                                                    <p className="text-xs font-medium mb-1">Motivo del rechazo:</p>
+                                                    <p className="text-xs">{publication.admin_notes}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                    ) : (
+                                        getStatusBadge(publication.status)
+                                    )}
                                     {publication.product?.category && (
                                         <Badge variant="outline" className="text-xs">
                                             {publication.product.category}
