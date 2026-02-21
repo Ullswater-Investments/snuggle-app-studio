@@ -65,6 +65,7 @@ import esUneRecommendations from './locales/es/uneRecommendations.json';
 import esRulebook from './locales/es/rulebook.json';
 import esGlossaryUne from './locales/es/glossaryUne.json';
 import esTransparency from './locales/es/transparency.json';
+import esAdmin from './locales/es/admin.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -128,6 +129,7 @@ import frUneRecommendations from './locales/fr/uneRecommendations.json';
 import frRulebook from './locales/fr/rulebook.json';
 import frGlossaryUne from './locales/fr/glossaryUne.json';
 import frTransparency from './locales/fr/transparency.json';
+import frAdmin from './locales/fr/admin.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -190,6 +192,7 @@ import ptUneRecommendations from './locales/pt/uneRecommendations.json';
 import ptRulebook from './locales/pt/rulebook.json';
 import ptGlossaryUne from './locales/pt/glossaryUne.json';
 import ptTransparency from './locales/pt/transparency.json';
+import ptAdmin from './locales/pt/admin.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -253,6 +256,7 @@ import deUneRecommendations from './locales/de/uneRecommendations.json';
 import deRulebook from './locales/de/rulebook.json';
 import deGlossaryUne from './locales/de/glossaryUne.json';
 import deTransparency from './locales/de/transparency.json';
+import deAdmin from './locales/de/admin.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -316,6 +320,7 @@ import itUneRecommendations from './locales/it/uneRecommendations.json';
 import itRulebook from './locales/it/rulebook.json';
 import itGlossaryUne from './locales/it/glossaryUne.json';
 import itTransparency from './locales/it/transparency.json';
+import itAdmin from './locales/it/admin.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -379,6 +384,7 @@ import nlUneRecommendations from './locales/nl/uneRecommendations.json';
 import nlRulebook from './locales/nl/rulebook.json';
 import nlGlossaryUne from './locales/nl/glossaryUne.json';
 import nlTransparency from './locales/nl/transparency.json';
+import nlAdmin from './locales/nl/admin.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -443,6 +449,7 @@ import enUneRecommendations from './locales/en/uneRecommendations.json';
 import enRulebook from './locales/en/rulebook.json';
 import enGlossaryUne from './locales/en/glossaryUne.json';
 import enTransparency from './locales/en/transparency.json';
+import enAdmin from './locales/en/admin.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -528,6 +535,7 @@ i18n
         data: esData,
         requests: esRequests,
         analytics: esAnalytics,
+        admin: esAdmin,
       },
       en: {
         common: enCommon,
@@ -592,6 +600,7 @@ i18n
         data: enData,
         requests: enRequests,
         analytics: enAnalytics,
+        admin: enAdmin,
       },
       fr: {
         common: frCommon,
@@ -656,6 +665,7 @@ i18n
         data: frData,
         requests: frRequests,
         analytics: frAnalytics,
+        admin: frAdmin,
       },
       pt: {
         common: ptCommon,
@@ -719,6 +729,7 @@ i18n
         data: ptData,
         requests: ptRequests,
         analytics: ptAnalytics,
+        admin: ptAdmin,
       },
       de: {
         common: deCommon,
@@ -783,6 +794,7 @@ i18n
         data: deData,
         requests: deRequests,
         analytics: deAnalytics,
+        admin: deAdmin,
       },
       it: {
         common: itCommon,
@@ -846,6 +858,7 @@ i18n
         data: itData,
         requests: itRequests,
         analytics: itAnalytics,
+        admin: itAdmin,
       },
       nl: {
         common: nlCommon,
@@ -909,11 +922,12 @@ i18n
         data: nlData,
         requests: nlRequests,
         analytics: nlAnalytics,
+        admin: nlAdmin,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications', 'reports', 'data', 'requests', 'analytics'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications', 'reports', 'data', 'requests', 'analytics', 'admin'],
     interpolation: {
       escapeValue: false,
     },

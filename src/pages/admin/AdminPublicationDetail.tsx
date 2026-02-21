@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,22 +17,23 @@ import {
   ArrowLeft, Building2, FileText, Tag, Globe, Lock, Copy, Check,
   CheckCircle2, XCircle, Clock, DollarSign, Shield, Database, Key,
 } from "lucide-react";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import { formatDate } from "@/lib/i18nFormatters";
 
-const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline"; icon: any }> = {
-  pending_validation: { label: "Pendiente de Validación", variant: "secondary", icon: Clock },
-  available: { label: "Pendiente de Validación", variant: "secondary", icon: Clock },
-  active: { label: "Publicado en Pontus-X", variant: "default", icon: CheckCircle2 },
-  published: { label: "Publicado en Pontus-X", variant: "default", icon: CheckCircle2 },
-  rejected: { label: "Rechazado", variant: "destructive", icon: XCircle },
-  draft: { label: "Borrador", variant: "outline", icon: Clock },
-};
+const getStatusConfig = (t: (key: string) => string) => ({
+  pending_validation: { label: t('status.pendingValidation'), variant: "secondary" as const, icon: Clock },
+  available: { label: t('status.pendingValidation'), variant: "secondary" as const, icon: Clock },
+  pending: { label: t('status.pendingValidation'), variant: "secondary" as const, icon: Clock },
+  active: { label: t('status.published'), variant: "default" as const, icon: CheckCircle2 },
+  published: { label: t('status.published'), variant: "default" as const, icon: CheckCircle2 },
+  rejected: { label: t('status.rejected'), variant: "destructive" as const, icon: XCircle },
+  draft: { label: t('status.draft'), variant: "outline" as const, icon: Clock },
+});
 
 const AdminPublicationDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t, i18n } = useTranslation('admin');
   const [rejectionNote, setRejectionNote] = useState("");
   const [showRejectForm, setShowRejectForm] = useState(false);
 
@@ -87,7 +89,7 @@ const AdminPublicationDetail = () => {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Activo marcado como publicado en Pontus-X");
+      toast.success(t('assets.publishSuccess'));
       logGovernanceEvent({
         level: "info",
         category: "publications",
@@ -98,7 +100,7 @@ const AdminPublicationDetail = () => {
       queryClient.invalidateQueries({ queryKey: ["admin-all-assets"] });
       navigate("/admin/publications");
     },
-    onError: () => toast.error("Error al publicar el activo"),
+    onError: () => toast.error(t('assets.publishError')),
   });
 
   const rejectMutation = useMutation({
@@ -110,7 +112,7 @@ const AdminPublicationDetail = () => {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Activo rechazado. El proveedor será notificado.");
+      toast.success(t('assets.rejectSuccess'));
       logGovernanceEvent({
         level: "warn",
         category: "publications",
@@ -123,13 +125,13 @@ const AdminPublicationDetail = () => {
       queryClient.invalidateQueries({ queryKey: ["admin-all-assets"] });
       navigate("/admin/publications");
     },
-    onError: () => toast.error("Error al rechazar el activo"),
+    onError: () => toast.error(t('assets.rejectError')),
   });
 
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 md:px-8 py-6">
-        <p className="text-muted-foreground">Cargando activo...</p>
+        <p className="text-muted-foreground">{t('assets.loading')}</p>
       </div>
     );
   }
@@ -137,9 +139,9 @@ const AdminPublicationDetail = () => {
   if (!asset) {
     return (
       <div className="container mx-auto px-4 md:px-8 py-6 space-y-4">
-        <p className="text-muted-foreground">Activo no encontrado</p>
+        <p className="text-muted-foreground">{t('assets.notFound')}</p>
         <Button variant="outline" onClick={() => navigate("/admin/publications")}>
-          <ArrowLeft className="h-4 w-4 mr-2" /> Volver
+          <ArrowLeft className="h-4 w-4 mr-2" /> {t('assets.back')}
         </Button>
       </div>
     );
@@ -147,9 +149,11 @@ const AdminPublicationDetail = () => {
 
   const product = asset.data_products as any;
   const customMeta = asset.custom_metadata as any;
-  const cfg = statusConfig[asset.status] ?? { label: asset.status, variant: "outline" as const, icon: Clock };
+  const statusCfg = getStatusConfig(t);
+  const cfg = statusCfg[asset.status as keyof typeof statusCfg] ?? { label: asset.status, variant: "outline" as const, icon: Clock };
   const StatusIcon = cfg.icon;
   const isPending = asset.status === "available" || asset.status === "pending_validation" || asset.status === "pending";
+  const lang = i18n.language;
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-6 space-y-6">
@@ -159,7 +163,7 @@ const AdminPublicationDetail = () => {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold">{product?.name ?? "Activo"}</h1>
+          <h1 className="text-2xl font-bold">{product?.name ?? t('assets.asset')}</h1>
           <p className="text-sm text-muted-foreground font-mono">ID: {asset.id.slice(0, 12)}...</p>
         </div>
         <Badge variant={cfg.variant} className="text-sm px-3 py-1">
@@ -173,12 +177,12 @@ const AdminPublicationDetail = () => {
         <Card className="border-primary/30 bg-primary/5">
           <CardHeader className="pb-2">
             <CardTitle className="text-base flex items-center gap-2">
-              <Shield className="h-4 w-4" /> Acciones de Validación
+              <Shield className="h-4 w-4" /> {t('assets.validationActions')}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-5 pt-0">
             <p className="text-sm text-muted-foreground mb-4">
-              Valida este activo antes de publicarlo en la red Pontus-X.
+              {t('assets.validateBeforePublish')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Button
@@ -187,7 +191,7 @@ const AdminPublicationDetail = () => {
                 disabled={publishMutation.isPending}
               >
                 <CheckCircle2 className="h-4 w-4 mr-1.5" />
-                Aprobar y Publicar en Pontus-X
+                {t('assets.approveAction')}
               </Button>
               <Button
                 variant="destructive"
@@ -195,7 +199,7 @@ const AdminPublicationDetail = () => {
                 onClick={() => setShowRejectForm(true)}
               >
                 <XCircle className="h-4 w-4 mr-1.5" />
-                Rechazar Publicación
+                {t('assets.rejectAction')}
               </Button>
             </div>
           </CardContent>
@@ -206,27 +210,27 @@ const AdminPublicationDetail = () => {
       <Dialog open={showRejectForm} onOpenChange={setShowRejectForm}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Rechazar Publicación</DialogTitle>
+            <DialogTitle>{t('assets.rejectTitle')}</DialogTitle>
             <DialogDescription>
-              Introduce el motivo del rechazo. Este será visible para el proveedor del dataset.
+              {t('assets.rejectDescription')}
             </DialogDescription>
           </DialogHeader>
           <Textarea
-            placeholder="Motivo del rechazo o cambios solicitados al proveedor..."
+            placeholder={t('assets.rejectPlaceholder')}
             value={rejectionNote}
             onChange={(e) => setRejectionNote(e.target.value)}
             rows={4}
           />
           <DialogFooter>
             <Button variant="outline" onClick={() => { setShowRejectForm(false); setRejectionNote(""); }}>
-              Cancelar
+              {t('assets.cancel')}
             </Button>
             <Button
               variant="destructive"
               disabled={!rejectionNote.trim() || rejectMutation.isPending}
               onClick={() => rejectMutation.mutate(rejectionNote.trim())}
             >
-              Confirmar Rechazo
+              {t('assets.confirmReject')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -236,7 +240,7 @@ const AdminPublicationDetail = () => {
       {(asset as any).admin_notes && (
         <Card className="border-destructive/30 bg-destructive/5">
           <CardContent className="p-5">
-            <p className="text-sm font-medium text-destructive mb-1">Motivo del Rechazo:</p>
+            <p className="text-sm font-medium text-destructive mb-1">{t('assets.rejectionReason')}:</p>
             <p className="text-sm">{(asset as any).admin_notes}</p>
           </CardContent>
         </Card>
@@ -249,19 +253,19 @@ const AdminPublicationDetail = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">
-                <FileText className="h-4 w-4" /> Metadatos del Activo
+                <FileText className="h-4 w-4" /> {t('assets.metadata')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <CopyField label="Título" value={product?.name} />
-              <CopyField label="Descripción" value={product?.description} />
+              <CopyField label={t('assets.title')} value={product?.name} copyTitle={t('assets.copyToClipboard')} />
+              <CopyField label={t('assets.description')} value={product?.description} copyTitle={t('assets.copyToClipboard')} />
               <div className="grid grid-cols-2 gap-4">
-                <CopyField label="Categoría" value={product?.category} />
-                <CopyField label="Versión" value={product?.version} />
+                <CopyField label={t('assets.category')} value={product?.category ? t(`categories.${product.category}`, { defaultValue: product.category }) : undefined} copyTitle={t('assets.copyToClipboard')} />
+                <CopyField label={t('assets.version')} value={product?.version} copyTitle={t('assets.copyToClipboard')} />
               </div>
               {catalogMeta?.tags && catalogMeta.tags.length > 0 && (
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-1.5">Etiquetas</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-1.5">{t('assets.tags')}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {catalogMeta.tags.map((tag: string, i: number) => (
                       <Badge key={i} variant="outline" className="text-xs">
@@ -278,19 +282,19 @@ const AdminPublicationDetail = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">
-                <Database className="h-4 w-4" /> Acceso Técnico
+                <Database className="h-4 w-4" /> {t('assets.technicalAccess')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <CopyField label="URL de la API / Fuente de Datos" value={customMeta?.api_url || customMeta?.endpoint_url || customMeta?.source_url || "No configurada"} />
+              <CopyField label={t('assets.apiUrl')} value={customMeta?.api_url || customMeta?.endpoint_url || customMeta?.source_url || t('assets.notConfigured')} copyTitle={t('assets.copyToClipboard')} />
               
               {/* Custom Headers */}
               {customMeta?.headers && Object.keys(customMeta.headers).length > 0 && (
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-2">Custom Headers</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">{t('assets.customHeaders')}</p>
                   <div className="space-y-2 bg-muted/30 rounded-lg p-3">
                     {Object.entries(customMeta.headers).map(([key, value]: [string, any]) => (
-                      <CopyField key={key} label={key} value={String(value)} mono />
+                      <CopyField key={key} label={key} value={String(value)} mono copyTitle={t('assets.copyToClipboard')} />
                     ))}
                   </div>
                 </div>
@@ -299,9 +303,9 @@ const AdminPublicationDetail = () => {
               {/* Schema Definition */}
               {product?.schema_definition && (
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-2">Esquema Técnico</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">{t('assets.technicalSchema')}</p>
                   <div className="bg-muted/30 rounded-lg p-3 max-h-[300px] overflow-auto">
-                    <CopyField label="Schema JSON" value={JSON.stringify(product.schema_definition, null, 2)} mono />
+                    <CopyField label={t('assets.schemaJson')} value={JSON.stringify(product.schema_definition, null, 2)} mono copyTitle={t('assets.copyToClipboard')} />
                   </div>
                 </div>
               )}
@@ -312,33 +316,32 @@ const AdminPublicationDetail = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">
-                <Shield className="h-4 w-4" /> Gobernanza y Pricing
+                <Shield className="h-4 w-4" /> {t('assets.governance')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <CopyField label="Modelo de Pricing" value={asset.pricing_model ?? "Gratuito"} />
-                <CopyField label="Precio" value={asset.price != null && asset.price > 0 ? `${asset.price} ${asset.currency ?? "EUR"}` : "Gratis"} />
-                <CopyField label="Periodo de Facturación" value={asset.billing_period ?? "N/A"} />
-                <CopyField label="Marketplace Público" value={asset.is_public_marketplace ? "Sí" : "No"} />
+                <CopyField label={t('assets.pricingModel')} value={asset.pricing_model ?? t('assets.free')} copyTitle={t('assets.copyToClipboard')} />
+                <CopyField label={t('assets.price')} value={asset.price != null && asset.price > 0 ? `${asset.price} ${asset.currency ?? "EUR"}` : t('assets.freePrice')} copyTitle={t('assets.copyToClipboard')} />
+                <CopyField label={t('assets.billingPeriod')} value={asset.billing_period ?? "N/A"} copyTitle={t('assets.copyToClipboard')} />
+                <CopyField label={t('assets.publicMarketplace')} value={asset.is_public_marketplace ? t('assets.yes') : t('assets.no')} copyTitle={t('assets.copyToClipboard')} />
               </div>
 
               {/* Access Policy from custom_metadata */}
               {customMeta?.access_policy && (
                 <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-2">Políticas de Uso</p>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">{t('assets.usagePolicies')}</p>
                   <div className="bg-muted/30 rounded-lg p-3 max-h-[200px] overflow-auto">
-                    <CopyField label="Certificación de Gobernanza" value={JSON.stringify(customMeta.access_policy, null, 2)} mono />
+                    <CopyField label={t('assets.governanceCert')} value={JSON.stringify(customMeta.access_policy, null, 2)} mono copyTitle={t('assets.copyToClipboard')} />
                   </div>
 
                   {/* Access Control — Pontus-X */}
                   <div className="mt-3 space-y-4">
-                    {/* Determine effective mode */}
                     {(() => {
                       const allowed = customMeta.access_policy.allowed_wallets || customMeta.access_policy.access_list || [];
                       const denied = customMeta.access_policy.denied_wallets || [];
-                      const mode = allowed.length > 0 ? "PRIVADO (Whitelist activa)" : denied.length > 0 ? "PÚBLICO con Blacklist" : "PÚBLICO Total";
-                      return <CopyField label="Modo de Control de Acceso" value={mode} />;
+                      const mode = allowed.length > 0 ? t('assets.privateWhitelist') : denied.length > 0 ? t('assets.publicBlacklist') : t('assets.publicTotal');
+                      return <CopyField label={t('assets.accessControlMode')} value={mode} copyTitle={t('assets.copyToClipboard')} />;
                     })()}
 
                     {/* Allowed Wallets */}
@@ -349,19 +352,19 @@ const AdminPublicationDetail = () => {
                         <div>
                           <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400 mb-1.5 flex items-center gap-1">
                             <CheckCircle2 className="h-3.5 w-3.5" />
-                            Organizaciones Permitidas ({allowed.length})
+                            {t('assets.allowedOrgs')} ({allowed.length})
                           </p>
                           <div className="space-y-1">
                             {allowed.map((org: any, i: number) => (
                               <div key={i} className="text-sm flex items-center justify-between bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800 px-3 py-1.5 rounded">
                                 <span className="font-medium">{org.org_name}</span>
                                 <div className="flex items-center gap-1.5">
-                                  <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || "Sin wallet"}</code>
+                                  <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || t('assets.noWallet')}</code>
                                   {org.wallet_address && (
                                     <button
                                       type="button"
                                       className="text-muted-foreground hover:text-foreground"
-                                      onClick={() => { navigator.clipboard.writeText(org.wallet_address); toast.success("Wallet copiada"); }}
+                                      onClick={() => { navigator.clipboard.writeText(org.wallet_address); toast.success(t('assets.walletCopied')); }}
                                     >
                                       <Copy className="h-3 w-3" />
                                     </button>
@@ -382,19 +385,19 @@ const AdminPublicationDetail = () => {
                         <div>
                           <p className="text-xs font-medium text-red-700 dark:text-red-400 mb-1.5 flex items-center gap-1">
                             <XCircle className="h-3.5 w-3.5" />
-                            Organizaciones Denegadas ({denied.length})
+                            {t('assets.deniedOrgs')} ({denied.length})
                           </p>
                           <div className="space-y-1">
                             {denied.map((org: any, i: number) => (
                               <div key={i} className="text-sm flex items-center justify-between bg-red-50/50 dark:bg-red-950/20 border border-red-200 dark:border-red-800 px-3 py-1.5 rounded">
                                 <span className="font-medium">{org.org_name}</span>
                                 <div className="flex items-center gap-1.5">
-                                  <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || "Sin wallet"}</code>
+                                  <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || t('assets.noWallet')}</code>
                                   {org.wallet_address && (
                                     <button
                                       type="button"
                                       className="text-muted-foreground hover:text-foreground"
-                                      onClick={() => { navigator.clipboard.writeText(org.wallet_address); toast.success("Wallet copiada"); }}
+                                      onClick={() => { navigator.clipboard.writeText(org.wallet_address); toast.success(t('assets.walletCopied')); }}
                                     >
                                       <Copy className="h-3 w-3" />
                                     </button>
@@ -408,7 +411,7 @@ const AdminPublicationDetail = () => {
                     })()}
 
                     {customMeta.access_policy.access_timeout_days && (
-                      <CopyField label="Timeout de Acceso" value={`${customMeta.access_policy.access_timeout_days} días`} />
+                      <CopyField label={t('assets.accessTimeout')} value={`${customMeta.access_policy.access_timeout_days} ${t('assets.days')}`} copyTitle={t('assets.copyToClipboard')} />
                     )}
                   </div>
                 </div>
@@ -422,7 +425,7 @@ const AdminPublicationDetail = () => {
           {/* Provider */}
           <Card>
             <CardContent className="p-4">
-              <p className="text-xs font-medium text-muted-foreground mb-2">Proveedor</p>
+              <p className="text-xs font-medium text-muted-foreground mb-2">{t('assets.provider')}</p>
               <div className="flex items-center gap-2">
                 <div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center">
                   <Building2 className="h-4 w-4 text-muted-foreground" />
@@ -439,15 +442,15 @@ const AdminPublicationDetail = () => {
           {/* Dates */}
           <Card>
             <CardContent className="p-4 space-y-3">
-              <p className="text-xs font-medium text-muted-foreground">Fechas</p>
+              <p className="text-xs font-medium text-muted-foreground">{t('assets.dates')}</p>
               <div>
-                <p className="text-xs text-muted-foreground">Solicitud</p>
-                <p className="text-sm">{format(new Date(asset.created_at), "dd MMM yyyy HH:mm", { locale: es })}</p>
+                <p className="text-xs text-muted-foreground">{t('assets.requestDate')}</p>
+                <p className="text-sm">{formatDate(new Date(asset.created_at), "dd MMM yyyy HH:mm", lang)}</p>
               </div>
               {(asset as any).published_at && (
                 <div>
-                  <p className="text-xs text-muted-foreground">Publicación</p>
-                  <p className="text-sm">{format(new Date((asset as any).published_at), "dd MMM yyyy HH:mm", { locale: es })}</p>
+                  <p className="text-xs text-muted-foreground">{t('assets.publishDate')}</p>
+                  <p className="text-sm">{formatDate(new Date((asset as any).published_at), "dd MMM yyyy HH:mm", lang)}</p>
                 </div>
               )}
             </CardContent>
@@ -456,17 +459,17 @@ const AdminPublicationDetail = () => {
           {/* Visibility */}
           <Card>
             <CardContent className="p-4 space-y-2">
-              <p className="text-xs font-medium text-muted-foreground">Visibilidad</p>
+              <p className="text-xs font-medium text-muted-foreground">{t('assets.visibility')}</p>
               <div className="flex items-center gap-2">
                 {asset.is_public_marketplace ? (
-                  <><Globe className="h-4 w-4 text-primary" /><span className="text-sm">Marketplace Público</span></>
+                  <><Globe className="h-4 w-4 text-primary" /><span className="text-sm">{t('assets.publicMkt')}</span></>
                 ) : (
-                  <><Lock className="h-4 w-4 text-muted-foreground" /><span className="text-sm">Solo Red Privada</span></>
+                  <><Lock className="h-4 w-4 text-muted-foreground" /><span className="text-sm">{t('assets.privateOnly')}</span></>
                 )}
               </div>
               <div className="flex items-center gap-2">
                 <Badge variant={(asset as any).is_visible ? "default" : "outline"} className="text-xs">
-                  {(asset as any).is_visible ? "Visible" : "Oculto"}
+                  {(asset as any).is_visible ? t('assets.visible') : t('assets.hidden')}
                 </Badge>
               </div>
             </CardContent>
@@ -475,9 +478,9 @@ const AdminPublicationDetail = () => {
           {/* Asset ID */}
           <Card>
             <CardContent className="p-4">
-              <CopyField label="Asset ID" value={asset.id} mono />
+              <CopyField label="Asset ID" value={asset.id} mono copyTitle={t('assets.copyToClipboard')} />
               <div className="mt-2">
-                <CopyField label="Product ID" value={asset.product_id} mono />
+                <CopyField label="Product ID" value={asset.product_id} mono copyTitle={t('assets.copyToClipboard')} />
               </div>
             </CardContent>
           </Card>
@@ -487,7 +490,7 @@ const AdminPublicationDetail = () => {
   );
 };
 
-const CopyField = ({ label, value, mono }: { label: string; value?: string | null; mono?: boolean }) => {
+const CopyField = ({ label, value, mono, copyTitle }: { label: string; value?: string | null; mono?: boolean; copyTitle?: string }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -508,7 +511,7 @@ const CopyField = ({ label, value, mono }: { label: string; value?: string | nul
           <button
             onClick={handleCopy}
             className="shrink-0 p-1 rounded hover:bg-muted opacity-0 group-hover:opacity-100 transition-opacity"
-            title="Copiar al portapapeles"
+            title={copyTitle}
           >
             {copied ? (
               <Check className="h-3.5 w-3.5 text-primary" />
