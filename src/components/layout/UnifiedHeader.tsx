@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -10,21 +10,54 @@ import { DemoHelpButton } from "@/components/DemoHelpButton";
 
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Search, LogIn, LogOut } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Search, LogIn, LogOut, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const UnifiedHeader = () => {
   const { t } = useTranslation('common');
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const { t: tNav } = useTranslation('nav');
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center px-4 gap-4">
-        {/* Izquierda: Menu + Marca */}
+        {/* Izquierda: Menu + Marca + Navegación */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <SidebarTrigger />
           <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
-            <span className="text-xl font-bold tracking-tight text-foreground">PROCUREDATA</span>
+            <span className="text-xl font-bold tracking-tight text-[hsl(210,100%,65%)]">PROCUREDATA</span>
           </Link>
+          <div className="flex items-center gap-0.5">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate(-1)}
+                  className="h-7 w-7 p-0"
+                  aria-label={tNav('back')}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{tNav('back')}</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate(1)}
+                  className="h-7 w-7 p-0"
+                  aria-label={tNav('forward')}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{tNav('forward')}</TooltipContent>
+            </Tooltip>
+          </div>
         </div>
         
         {/* Central: Command Palette */}
