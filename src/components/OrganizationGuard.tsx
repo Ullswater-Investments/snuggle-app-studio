@@ -10,7 +10,7 @@ interface OrganizationGuardProps {
 export const OrganizationGuard = ({ children }: OrganizationGuardProps) => {
   const { activeOrgId, loading } = useOrganizationContext();
 
-  console.log("OrganizationGuard - activeOrgId:", activeOrgId, "loading:", loading);
+  
 
   useEffect(() => {
     if (!loading && !activeOrgId) {
