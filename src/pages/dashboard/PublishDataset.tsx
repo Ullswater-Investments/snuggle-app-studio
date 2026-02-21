@@ -506,7 +506,7 @@ export default function PublishDataset() {
           product_id: productId,
           subject_org_id: activeOrgId,
           holder_org_id: activeOrgId,
-          status: autoApproveAssets ? "active" : "pending_review",
+          status: autoApproveAssets ? "active" : "pending",
           pricing_model: step4Data.pricingModel,
           price: step4Data.pricingModel === "free" ? 0 : step4Data.price,
           currency: "EUR",
@@ -535,7 +535,7 @@ export default function PublishDataset() {
     onSuccess: (assetId) => {
       const msg = autoApproveAssets
         ? "Dataset publicado exitosamente en el catálogo."
-        : "Solicitud enviada. Un administrador revisará el activo antes de publicarlo.";
+        : "Dataset enviado a revisión técnica. Se le notificará cuando esté disponible en el catálogo.";
       toast.success(msg, { duration: 6000 });
       navigate("/datos");
     },

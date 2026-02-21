@@ -19,6 +19,7 @@ import { es } from "date-fns/locale";
 
 const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
   pending_validation: { label: "En Validación", variant: "secondary" },
+  pending: { label: "Pendiente de Revisión", variant: "secondary" },
   available: { label: "Pendiente", variant: "secondary" },
   active: { label: "Publicado", variant: "default" },
   published: { label: "Publicado", variant: "default" },
@@ -83,7 +84,7 @@ const AdminPublications = () => {
     });
   }, [assets, statusFilter, orgFilter, search, orgsMap]);
 
-  const pendingCount = assets.filter((a: any) => a.status === "available" || a.status === "pending_validation").length;
+  const pendingCount = assets.filter((a: any) => ["available", "pending_validation", "pending"].includes(a.status)).length;
   const publishedCount = assets.filter((a: any) => ["active", "published"].includes(a.status)).length;
   const rejectedCount = assets.filter((a: any) => a.status === "rejected").length;
 
@@ -157,6 +158,7 @@ const AdminPublications = () => {
           <SelectContent>
              <SelectItem value="all">Todos los estados</SelectItem>
             <SelectItem value="pending_validation">En Validación</SelectItem>
+            <SelectItem value="pending">Pendiente de Revisión</SelectItem>
             <SelectItem value="available">Pendiente</SelectItem>
             <SelectItem value="active">Publicado</SelectItem>
             <SelectItem value="rejected">Rechazado</SelectItem>
