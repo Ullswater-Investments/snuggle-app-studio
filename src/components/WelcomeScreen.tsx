@@ -27,7 +27,7 @@ export const WelcomeScreen = () => {
                         <ProcuredataLogo size="lg" showNavigation={false} />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-                        {t('welcome.title', 'Bienvenido a PROCUREDATA')}
+                        {t('welcome.titlePrefix', 'Bienvenido a ')}<span className="procuredata-gradient font-bold tracking-tight">PROCUREDATA</span>
                     </h1>
                     <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                         {t('welcome.subtitle', 'Para comenzar a operar, necesitas asociar tu cuenta a una entidad legal.')}

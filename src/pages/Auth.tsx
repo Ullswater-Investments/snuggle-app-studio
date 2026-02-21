@@ -41,6 +41,11 @@ const registerSchema = z.object({
   postalCode: z.string().trim().min(1, "El código postal es obligatorio").max(20, "Código postal demasiado largo"),
   phone: z.string().trim().min(1, "El teléfono es obligatorio").max(20, "Teléfono demasiado largo"),
   birthDate: z.date({ required_error: "La fecha de nacimiento es obligatoria" })
+    .refine((date) => {
+      const today = new Date();
+      const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+      return date <= eighteenYearsAgo;
+    }, { message: "Debes ser mayor de 18 años para registrarte en la plataforma" })
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Las contraseñas no coinciden",
   path: ["confirmPassword"],
@@ -522,13 +527,16 @@ const Auth = () => {
                                 mode="single"
                                 selected={field.value}
                                 onSelect={field.onChange}
-                                disabled={(date) =>
-                                  date > new Date() || date < new Date("1900-01-01")
-                                }
+                                disabled={(date) => {
+                                  const today = new Date();
+                                  const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+                                  return date > maxDate || date < new Date("1900-01-01");
+                                }}
                                 initialFocus
                                 captionLayout="dropdown-buttons"
                                 fromYear={1900}
-                                toYear={new Date().getFullYear()}
+                                toYear={new Date().getFullYear() - 18}
+                                className={cn("p-3 pointer-events-auto")}
                               />
                             </PopoverContent>
                           </Popover>
