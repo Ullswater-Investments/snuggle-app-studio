@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation, Navigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useNotifications } from "@/hooks/useNotifications";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,6 +38,7 @@ const RequestWizard = () => {
   const location = useLocation();
   const assetId = searchParams.get("asset") || (location.state as any)?.preselectedAssetId;
   const { user, signOut } = useAuth();
+  const { activeOrgId, loading: orgLoading } = useOrganizationContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -347,6 +349,11 @@ const RequestWizard = () => {
   const externalTermsUrl = accessPolicy?.terms_url || accessPolicy?.external_policy_url;
 
   const progress = (step / 5) * 100;
+
+  // Validación interna de seguridad: redirigir si no hay org activa
+  if (!orgLoading && !activeOrgId) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-background">

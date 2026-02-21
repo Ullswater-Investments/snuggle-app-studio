@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
@@ -589,6 +589,11 @@ export default function PublishDataset() {
     step4Data.language &&
     step4Data.acceptedTerms &&
     step4Data.acceptedDataPolicy;
+
+  // Validación interna de seguridad: redirigir si no hay org activa
+  if (!activeOrgId) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
