@@ -21,6 +21,7 @@ import {
   Save,
   Loader2,
   Network,
+  Package,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useEffect, useCallback } from "react";
@@ -104,6 +105,8 @@ const AdminGovernance = () => {
     require_kyc: false,
     require_kyb: false,
     ecosystem_status: "active" as "active" | "maintenance",
+    auto_approve_assets: true,
+    catalog_visibility: "public" as "public" | "private",
   });
   const [govLoading, setGovLoading] = useState(true);
 
@@ -112,7 +115,7 @@ const AdminGovernance = () => {
       const { data } = await supabase
         .from("system_settings")
         .select("key, value")
-        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status"]);
+        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status", "auto_approve_assets", "catalog_visibility"]);
       if (data) {
         const map: Record<string, string> = {};
         for (const r of data) map[r.key] = r.value;
@@ -121,6 +124,8 @@ const AdminGovernance = () => {
           require_kyc: map.require_kyc === "true",
           require_kyb: map.require_kyb === "true",
           ecosystem_status: (map.ecosystem_status as "active" | "maintenance") ?? "active",
+          auto_approve_assets: map.auto_approve_assets !== "false",
+          catalog_visibility: (map.catalog_visibility as "public" | "private") ?? "public",
         });
       }
       setGovLoading(false);
@@ -152,6 +157,8 @@ const AdminGovernance = () => {
       require_kyc: "KYC (Persona Física)",
       require_kyb: "KYB (Empresa)",
       ecosystem_status: "Estado del Ecosistema",
+      auto_approve_assets: "Aprobación Automática de Activos",
+      catalog_visibility: "Visibilidad del Catálogo",
     };
     await (supabase as any).from("governance_logs").insert({
       level: "info",
@@ -446,9 +453,61 @@ const AdminGovernance = () => {
         </CardContent>
       </Card>
 
+      {/* Asset Policies Card */}
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Package className="h-5 w-5 text-primary" />
+            <CardTitle className="text-base">Políticas de Activos</CardTitle>
+          </div>
+          <CardDescription>
+            Control de publicación y visibilidad de activos en el marketplace
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          {govLoading ? (
+            <div className="flex items-center justify-center py-4 text-muted-foreground text-sm">
+              <Loader2 className="h-4 w-4 animate-spin mr-2" /> Cargando configuración…
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sw-auto-approve" className="text-sm font-medium">Aprobación Automática</Label>
+                  <p className="text-xs text-muted-foreground">Publicar activos instantáneamente sin revisión</p>
+                </div>
+                <Switch
+                  id="sw-auto-approve"
+                  checked={govSettings.auto_approve_assets}
+                  onCheckedChange={(v) => toggleGovSetting("auto_approve_assets", v)}
+                />
+              </div>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sel-catalog-vis" className="text-sm font-medium">Visibilidad del Catálogo</Label>
+                  <p className="text-xs text-muted-foreground">Quién puede ver los activos del marketplace</p>
+                </div>
+                <Select
+                  value={govSettings.catalog_visibility}
+                  onValueChange={(v) => toggleGovSetting("catalog_visibility", v)}
+                >
+                  <SelectTrigger className="w-[220px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="public">Público (Visible para todos)</SelectItem>
+                    <SelectItem value="private">Privado (Solo registrados)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
+
       {/* Row 1 — Identity + Protocol */}
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Block 1: Identidad del Espacio */}
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">

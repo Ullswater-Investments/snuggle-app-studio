@@ -6,6 +6,8 @@ const GOVERNANCE_KEYS = [
   "require_kyc",
   "require_kyb",
   "ecosystem_status",
+  "auto_approve_assets",
+  "catalog_visibility",
 ] as const;
 
 interface GovernanceSettings {
@@ -13,6 +15,8 @@ interface GovernanceSettings {
   requireKyc: boolean;
   requireKyb: boolean;
   ecosystemStatus: "active" | "maintenance";
+  autoApproveAssets: boolean;
+  catalogVisibility: "public" | "private";
   isLoading: boolean;
 }
 
@@ -41,6 +45,8 @@ export function useGovernanceSettings(): GovernanceSettings {
     requireKyc: data?.require_kyc === "true",
     requireKyb: data?.require_kyb === "true",
     ecosystemStatus: (data?.ecosystem_status as "active" | "maintenance") ?? "active",
+    autoApproveAssets: data?.auto_approve_assets !== "false",
+    catalogVisibility: (data?.catalog_visibility as "public" | "private") ?? "public",
     isLoading,
   };
 }

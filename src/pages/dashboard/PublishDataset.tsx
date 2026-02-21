@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useGovernanceSettings } from "@/hooks/useGovernanceSettings";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -188,6 +189,7 @@ export default function PublishDataset() {
   const navigate = useNavigate();
   const { activeOrg, activeOrgId } = useOrganizationContext();
   const { user } = useAuth();
+  const { autoApproveAssets } = useGovernanceSettings();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -504,7 +506,7 @@ export default function PublishDataset() {
           product_id: productId,
           subject_org_id: activeOrgId,
           holder_org_id: activeOrgId,
-          status: "pending_validation",
+          status: autoApproveAssets ? "active" : "pending_review",
           pricing_model: step4Data.pricingModel,
           price: step4Data.pricingModel === "free" ? 0 : step4Data.price,
           currency: "EUR",
@@ -531,9 +533,10 @@ export default function PublishDataset() {
       return asset.id;
     },
     onSuccess: (assetId) => {
-      toast.success("Solicitud enviada. Un administrador de AGILE validará los datos antes de publicarlos en el catálogo.", {
-        duration: 6000,
-      });
+      const msg = autoApproveAssets
+        ? "Dataset publicado exitosamente en el catálogo."
+        : "Solicitud enviada. Un administrador revisará el activo antes de publicarlo.";
+      toast.success(msg, { duration: 6000 });
       navigate("/datos");
     },
     onError: (error: Error) => {
