@@ -12,7 +12,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { AdminProtectedRoute } from "@/components/admin/AdminProtectedRoute";
-import { PublicDemoLayout } from "@/components/PublicDemoLayout";
+// PublicDemoLayout removed - all operational routes now use AppLayout
 import { ScrollToTop } from "@/components/ScrollToTop";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
@@ -401,125 +401,8 @@ const App = () => (
                     <Route path="/motor/tour-guiado" element={<TourGuiado />} />
                     <Route path="/motor/docs-interactivos" element={<DocsInteractivos />} />
 
-                    {/* Public Demo Routes - Accessible without authentication */}
-                    <Route element={<PublicDemoLayout />}>
-                      <Route path="/catalog" element={<Catalog />} />
-                      <Route path="/catalog/telemetria-flota" element={<TelemetriaFlotaDetail />} />
-                      <Route path="/catalog/consumo-electrico-industrial" element={<ConsumoElectricoDetail />} />
-                      <Route path="/catalog/historico-meteorologico" element={<HistoricoMeteorologicoDetail />} />
-                      <Route path="/catalog/trazabilidad-aceite-oliva" element={<TrazabilidadAceiteDetail />} />
-                      <Route path="/catalog/score-crediticio-b2b" element={<ScoreCrediticioDetail />} />
-                      <Route path="/catalog/huella-hidrica-agricola" element={<HuellaHidricaDetail />} />
-                      <Route path="/catalog/resiliencia-supply-chain" element={<ResilienciaSupplyChainDetail />} />
-                      <Route path="/catalog/huella-carbono-automotriz" element={<HuellaCarbonAutomotrizDetail />} />
-                      <Route path="/catalog/capacidad-productiva-automotriz" element={<CapacidadProductivaDetail />} />
-                      <Route path="/catalog/benchmarking-precios-componentes" element={<BenchmarkingPreciosDetail />} />
-                      <Route path="/catalog/telemetria-ia-automotriz" element={<TelemetriaIAAutomotrizDetail />} />
-                      <Route path="/catalog/certificaciones-aeronauticas" element={<CertificacionesAeronauticasDetail />} />
-                      <Route path="/catalog/combustibles-saf-aviacion" element={<CombustiblesSAFDetail />} />
-                      <Route path="/catalog/disponibilidad-mro-aeronautico" element={<DisponibilidadMRODetail />} />
-                      <Route path="/catalog/precios-aleaciones-aeronauticas" element={<PreciosAleacionesDetail />} />
-                      <Route path="/catalog/tolerancia-termica-aleaciones" element={<ToleranciaTérmicaDetail />} />
-                      <Route path="/catalog/proveedores-premium-automotrices" element={<ProveedoresPremiumDetail />} />
-                      <Route path="/catalog/energia-limpia-motor-valley" element={<EnergiaLimpiaMotorValleyDetail />} />
-                      <Route path="/catalog/produccion-artesanal-automotriz" element={<ProduccionArtesanalDetail />} />
-                      <Route path="/catalog/precios-componentes-superdeportivos" element={<PreciosComponentesSuperdeportivosDetail />} />
-                      <Route path="/catalog/telemetria-alto-desempeno" element={<TelemetriaAltoDesempenoDetail />} />
-                      <Route path="/catalog/certificaciones-semiconductores" element={<CertificacionesSemiconductoresDetail />} />
-                      <Route path="/catalog/impacto-ambiental-chips" element={<ImpactoAmbientalChipsDetail />} />
-                      <Route path="/catalog/capacidad-sala-limpia" element={<CapacidadSalaLimpiaDetail />} />
-                      <Route path="/catalog/precios-componentes-electronicos" element={<PreciosComponentesElectronicosDetail />} />
-                      <Route path="/catalog/caracterizacion-nanomateriales" element={<CaracterizacionNanomaterialesDetail />} />
-                      <Route path="/catalog/madurez-digital-tic" element={<MadurezDigitalTICDetail />} />
-                      <Route path="/catalog/economia-circular-tic" element={<EconomiaCircularTICDetail />} />
-                      <Route path="/catalog/capacidad-desarrollo-software" element={<CapacidadDesarrolloSoftwareDetail />} />
-                      <Route path="/catalog/scoring-financiero-digital" element={<ScoringFinancieroDigitalDetail />} />
-                      <Route path="/catalog/operadores-red-energetica" element={<OperadoresRedEnergeticaDetail />} />
-                      <Route path="/catalog/mix-energetico-alemania" element={<MixEnergeticoAlemaniaDetail />} />
-                      <Route path="/catalog/flexibilidad-energetica" element={<FlexibilidadEnergeticaDetail />} />
-                      <Route path="/catalog/precios-mayoristas-energia" element={<PreciosMayoristasEnergiaDetail />} />
-                      <Route path="/catalog/smart-grid-contadores" element={<SmartGridContadoresDetail />} />
-                      <Route path="/catalog/empresas-tecnologicas-belgas" element={<EmpresasTecnologicasBelgasDetail />} />
-                      {/* Green Procurement Catalog Routes */}
-                      <Route path="/catalog/factores-emision-materiales" element={<FactoresEmisionDetail />} />
-                      <Route path="/catalog/intensidad-carbono-red" element={<IntensidadCarbonoRedDetail />} />
-                      <Route path="/catalog/emisiones-logisticas-modal" element={<EmisionesLogisticasDetail />} />
-                      <Route path="/catalog/emisiones-scope3-cloud" element={<EmisionesScope3CloudDetail />} />
-                      <Route path="/catalog/precios-materiales-reciclados" element={<PreciosMaterialesRecicladosDetail />} />
-                      <Route path="/catalog/inventario-bioplasticos" element={<InventarioBioplasticosDetail />} />
-                      <Route path="/catalog/riesgo-hidrico-proveedores" element={<RiesgoHidricoDetail />} />
-                      <Route path="/catalog/minerales-conflicto-3tg" element={<MineralesConflictoDetail />} />
-                      <Route path="/catalog/registro-ecolabels" element={<RegistroEcolabelsDetail />} />
-                      <Route path="/catalog/sustancias-reach-rohs" element={<SustanciasReachRohsDetail />} />
-                      <Route path="/catalog/deforestacion-eudr" element={<DeforestacionEudrDetail />} />
-                      <Route path="/catalog/epd-construccion" element={<EpdConstruccionDetail />} />
-                      <Route path="/catalog/scoring-esg-proveedores" element={<ScoringEsgDetail />} />
-                      <Route path="/catalog/violaciones-laborales" element={<ViolacionesLaboralesDetail />} />
-                      <Route path="/catalog/indice-reparabilidad" element={<IndiceReparabilidadDetail />} />
-                      <Route path="/catalog/diversidad-proveedores" element={<DiversidadProveedoresDetail />} />
-                      <Route path="/catalog/garantias-origen-renovable" element={<GarantiasOrigenDetail />} />
-                      <Route path="/catalog/tco-vehiculos-ev-ice" element={<TcoVehiculosDetail />} />
-                      <Route path="/catalog/creditos-carbono-voluntarios" element={<CreditosCarbonoDetail />} />
-                      <Route path="/catalog/eficiencia-maquinaria-industrial" element={<EficienciaMaquinariaDetail />} />
-                      {/* Partner Product Detail Routes - GAIA */}
-                      <Route path="/catalog/telemetria-industrial-iot" element={<TelemetriaIotDetail />} />
-                      {/* Partner Product Detail Routes - FEIQUE */}
-                      <Route path="/catalog/cumplimiento-reach-clp" element={<CumplimientoReachDetail />} />
-                      <Route path="/catalog/huella-ambiental-quimica" element={<HuellaQuimicaDetail />} />
-                      <Route path="/catalog/capacidad-produccion-quimica" element={<CapacidadQuimicaDetail />} />
-                      <Route path="/catalog/precios-productos-quimicos" element={<PreciosQuimicosDetail />} />
-                      <Route path="/catalog/analisis-laboratorio-quimico" element={<AnalisisLaboratorioDetail />} />
-                      {/* Partner Product Detail Routes - Agoria */}
-                      <Route path="/catalog/sostenibilidad-industria-belga" element={<SostenibilidadIndustrialDetail />} />
-                      <Route path="/catalog/integracion-robotica" element={<IntegracionRoboticaDetail />} />
-                      <Route path="/catalog/precios-automatizacion" element={<PreciosAutomatizacionDetail />} />
-                      <Route path="/catalog/telemetria-cobots" element={<TelemetriaCobotDetail />} />
-                      {/* Partner Product Detail Routes - ANFIA */}
-                      <Route path="/catalog/proveedores-automotrices-italianos" element={<ProveedoresAutomotricesItalianosDet />} />
-                      <Route path="/catalog/transicion-ev-italia" element={<TransicionEvItaliaDetail />} />
-                      <Route path="/catalog/estampacion-fundicion" element={<EstampacionFundicionDetail />} />
-                      <Route path="/catalog/precios-recambios-automotrices" element={<PreciosRecambiosDetail />} />
-                      <Route path="/catalog/ensayos-seguridad-vehicular" element={<EnsayosSeguridadDetail />} />
-                      {/* Partner Product Detail Routes - FNSEA */}
-                      <Route path="/catalog/explotaciones-agricolas-francesas" element={<ExplotacionesAgricolasDetail />} />
-                      <Route path="/catalog/sostenibilidad-agricola" element={<SostenibilidadAgricolaDetail />} />
-                      <Route path="/catalog/capacidad-cosecha" element={<CapacidadCosechaDetail />} />
-                      <Route path="/catalog/precios-commodities-agricolas" element={<PreciosCommoditiesDetail />} />
-                      <Route path="/catalog/agricultura-precision" element={<AgriculturaPrecisionDetail />} />
-                      {/* Partner Product Detail Routes - NEVI */}
-                      <Route path="/catalog/profesionales-compras" element={<ProfesionalesComprasDetail />} />
-                      <Route path="/catalog/compras-sostenibles" element={<ComprasSosteniblesDetail />} />
-                      <Route path="/catalog/proveedores-precualificados" element={<ProveedoresPrecualificadosDetail />} />
-                      <Route path="/catalog/analisis-gasto-categoria" element={<AnalisisGastoDetail />} />
-                      <Route path="/catalog/riesgo-supply-chain" element={<RiesgoSupplyChainDetail />} />
-                      {/* Partner Product Detail Routes - AIP */}
-                      <Route path="/catalog/directorio-industrial-portugues" element={<DirectorioIndustrialDetail />} />
-                      <Route path="/catalog/sostenibilidad-portugal" element={<SostenibilidadPortugalDetail />} />
-                      <Route path="/catalog/fabricacion-subcontratacion" element={<FabricacionSubcontratacionDetail />} />
-                      <Route path="/catalog/costes-industriales-portugal" element={<CostesIndustrialesDetail />} />
-                      <Route path="/catalog/fabricacion-moldes" element={<FabricacionMoldesDetail />} />
-                      {/* Partner Product Detail Routes - Food Valley */}
-                      <Route path="/catalog/empresas-agroalimentarias" element={<EmpresasAgroalimentariasDetail />} />
-                      <Route path="/catalog/nutricion-sostenible" element={<NutricionSostenibleDetail />} />
-                      <Route path="/catalog/procesamiento-alimentario" element={<ProcesamientoAlimentarioDetail />} />
-                      <Route path="/catalog/precios-ingredientes" element={<PreciosIngredientesDetail />} />
-                      <Route path="/catalog/analisis-sensorial" element={<AnalisisSensorialDetail />} />
-                      {/* Partner Product Detail Routes - BioWin */}
-                      <Route path="/catalog/empresas-biotecnologicas" element={<EmpresasBiotechDetail />} />
-                      <Route path="/catalog/sostenibilidad-farmaceutica" element={<SostenibilidadFarmaDetail />} />
-                      <Route path="/catalog/ensayos-clinicos" element={<EnsayosClinicosDetail />} />
-                      <Route path="/catalog/precios-apis-farmaceuticos" element={<PreciosApiDetail />} />
-                      <Route path="/catalog/genomica-biomarcadores" element={<GenomicaBiomarcadoresDetail />} />
-                      <Route path="/sustainability" element={<Sustainability />} />
-                      <Route path="/services" element={<Services />} />
-                      <Route path="/services/:id" element={<ServiceDetail />} />
-                      <Route path="/innovation" element={<InnovationLab />} />
-                      <Route path="/success-stories" element={<SuccessStories />} />
-                      <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
-                      <Route path="/partners" element={<Partners />} />
-                      {/* Admin export page - public access for marketing downloads */}
-                      <Route path="/admin/export-success-cases" element={<ExportSuccessCasesPage />} />
-                    </Route>
+                    {/* Admin export page - public access for marketing downloads */}
+                    <Route path="/admin/export-success-cases" element={<ExportSuccessCasesPage />} />
 
                     {/* Premium Partners */}
                     <Route path="/partners/premium" element={<PremiumPartners />} />
@@ -750,7 +633,122 @@ const App = () => (
                       </ProtectedRoute>
                     }>
                       <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/catalog" element={<Catalog />} />
                       <Route path="/catalog/product/:id" element={<ProductDetail />} />
+                      <Route path="/catalog/telemetria-flota" element={<TelemetriaFlotaDetail />} />
+                      <Route path="/catalog/consumo-electrico-industrial" element={<ConsumoElectricoDetail />} />
+                      <Route path="/catalog/historico-meteorologico" element={<HistoricoMeteorologicoDetail />} />
+                      <Route path="/catalog/trazabilidad-aceite-oliva" element={<TrazabilidadAceiteDetail />} />
+                      <Route path="/catalog/score-crediticio-b2b" element={<ScoreCrediticioDetail />} />
+                      <Route path="/catalog/huella-hidrica-agricola" element={<HuellaHidricaDetail />} />
+                      <Route path="/catalog/resiliencia-supply-chain" element={<ResilienciaSupplyChainDetail />} />
+                      <Route path="/catalog/huella-carbono-automotriz" element={<HuellaCarbonAutomotrizDetail />} />
+                      <Route path="/catalog/capacidad-productiva-automotriz" element={<CapacidadProductivaDetail />} />
+                      <Route path="/catalog/benchmarking-precios-componentes" element={<BenchmarkingPreciosDetail />} />
+                      <Route path="/catalog/telemetria-ia-automotriz" element={<TelemetriaIAAutomotrizDetail />} />
+                      <Route path="/catalog/certificaciones-aeronauticas" element={<CertificacionesAeronauticasDetail />} />
+                      <Route path="/catalog/combustibles-saf-aviacion" element={<CombustiblesSAFDetail />} />
+                      <Route path="/catalog/disponibilidad-mro-aeronautico" element={<DisponibilidadMRODetail />} />
+                      <Route path="/catalog/precios-aleaciones-aeronauticas" element={<PreciosAleacionesDetail />} />
+                      <Route path="/catalog/tolerancia-termica-aleaciones" element={<ToleranciaTérmicaDetail />} />
+                      <Route path="/catalog/proveedores-premium-automotrices" element={<ProveedoresPremiumDetail />} />
+                      <Route path="/catalog/energia-limpia-motor-valley" element={<EnergiaLimpiaMotorValleyDetail />} />
+                      <Route path="/catalog/produccion-artesanal-automotriz" element={<ProduccionArtesanalDetail />} />
+                      <Route path="/catalog/precios-componentes-superdeportivos" element={<PreciosComponentesSuperdeportivosDetail />} />
+                      <Route path="/catalog/telemetria-alto-desempeno" element={<TelemetriaAltoDesempenoDetail />} />
+                      <Route path="/catalog/certificaciones-semiconductores" element={<CertificacionesSemiconductoresDetail />} />
+                      <Route path="/catalog/impacto-ambiental-chips" element={<ImpactoAmbientalChipsDetail />} />
+                      <Route path="/catalog/capacidad-sala-limpia" element={<CapacidadSalaLimpiaDetail />} />
+                      <Route path="/catalog/precios-componentes-electronicos" element={<PreciosComponentesElectronicosDetail />} />
+                      <Route path="/catalog/caracterizacion-nanomateriales" element={<CaracterizacionNanomaterialesDetail />} />
+                      <Route path="/catalog/madurez-digital-tic" element={<MadurezDigitalTICDetail />} />
+                      <Route path="/catalog/economia-circular-tic" element={<EconomiaCircularTICDetail />} />
+                      <Route path="/catalog/capacidad-desarrollo-software" element={<CapacidadDesarrolloSoftwareDetail />} />
+                      <Route path="/catalog/scoring-financiero-digital" element={<ScoringFinancieroDigitalDetail />} />
+                      <Route path="/catalog/operadores-red-energetica" element={<OperadoresRedEnergeticaDetail />} />
+                      <Route path="/catalog/mix-energetico-alemania" element={<MixEnergeticoAlemaniaDetail />} />
+                      <Route path="/catalog/flexibilidad-energetica" element={<FlexibilidadEnergeticaDetail />} />
+                      <Route path="/catalog/precios-mayoristas-energia" element={<PreciosMayoristasEnergiaDetail />} />
+                      <Route path="/catalog/smart-grid-contadores" element={<SmartGridContadoresDetail />} />
+                      <Route path="/catalog/empresas-tecnologicas-belgas" element={<EmpresasTecnologicasBelgasDetail />} />
+                      {/* Green Procurement Catalog Routes */}
+                      <Route path="/catalog/factores-emision-materiales" element={<FactoresEmisionDetail />} />
+                      <Route path="/catalog/intensidad-carbono-red" element={<IntensidadCarbonoRedDetail />} />
+                      <Route path="/catalog/emisiones-logisticas-modal" element={<EmisionesLogisticasDetail />} />
+                      <Route path="/catalog/emisiones-scope3-cloud" element={<EmisionesScope3CloudDetail />} />
+                      <Route path="/catalog/precios-materiales-reciclados" element={<PreciosMaterialesRecicladosDetail />} />
+                      <Route path="/catalog/inventario-bioplasticos" element={<InventarioBioplasticosDetail />} />
+                      <Route path="/catalog/riesgo-hidrico-proveedores" element={<RiesgoHidricoDetail />} />
+                      <Route path="/catalog/minerales-conflicto-3tg" element={<MineralesConflictoDetail />} />
+                      <Route path="/catalog/registro-ecolabels" element={<RegistroEcolabelsDetail />} />
+                      <Route path="/catalog/sustancias-reach-rohs" element={<SustanciasReachRohsDetail />} />
+                      <Route path="/catalog/deforestacion-eudr" element={<DeforestacionEudrDetail />} />
+                      <Route path="/catalog/epd-construccion" element={<EpdConstruccionDetail />} />
+                      <Route path="/catalog/scoring-esg-proveedores" element={<ScoringEsgDetail />} />
+                      <Route path="/catalog/violaciones-laborales" element={<ViolacionesLaboralesDetail />} />
+                      <Route path="/catalog/indice-reparabilidad" element={<IndiceReparabilidadDetail />} />
+                      <Route path="/catalog/diversidad-proveedores" element={<DiversidadProveedoresDetail />} />
+                      <Route path="/catalog/garantias-origen-renovable" element={<GarantiasOrigenDetail />} />
+                      <Route path="/catalog/tco-vehiculos-ev-ice" element={<TcoVehiculosDetail />} />
+                      <Route path="/catalog/creditos-carbono-voluntarios" element={<CreditosCarbonoDetail />} />
+                      <Route path="/catalog/eficiencia-maquinaria-industrial" element={<EficienciaMaquinariaDetail />} />
+                      {/* Partner Product Detail Routes - GAIA */}
+                      <Route path="/catalog/telemetria-industrial-iot" element={<TelemetriaIotDetail />} />
+                      {/* Partner Product Detail Routes - FEIQUE */}
+                      <Route path="/catalog/cumplimiento-reach-clp" element={<CumplimientoReachDetail />} />
+                      <Route path="/catalog/huella-ambiental-quimica" element={<HuellaQuimicaDetail />} />
+                      <Route path="/catalog/capacidad-produccion-quimica" element={<CapacidadQuimicaDetail />} />
+                      <Route path="/catalog/precios-productos-quimicos" element={<PreciosQuimicosDetail />} />
+                      <Route path="/catalog/analisis-laboratorio-quimico" element={<AnalisisLaboratorioDetail />} />
+                      {/* Partner Product Detail Routes - Agoria */}
+                      <Route path="/catalog/sostenibilidad-industria-belga" element={<SostenibilidadIndustrialDetail />} />
+                      <Route path="/catalog/integracion-robotica" element={<IntegracionRoboticaDetail />} />
+                      <Route path="/catalog/precios-automatizacion" element={<PreciosAutomatizacionDetail />} />
+                      <Route path="/catalog/telemetria-cobots" element={<TelemetriaCobotDetail />} />
+                      {/* Partner Product Detail Routes - ANFIA */}
+                      <Route path="/catalog/proveedores-automotrices-italianos" element={<ProveedoresAutomotricesItalianosDet />} />
+                      <Route path="/catalog/transicion-ev-italia" element={<TransicionEvItaliaDetail />} />
+                      <Route path="/catalog/estampacion-fundicion" element={<EstampacionFundicionDetail />} />
+                      <Route path="/catalog/precios-recambios-automotrices" element={<PreciosRecambiosDetail />} />
+                      <Route path="/catalog/ensayos-seguridad-vehicular" element={<EnsayosSeguridadDetail />} />
+                      {/* Partner Product Detail Routes - FNSEA */}
+                      <Route path="/catalog/explotaciones-agricolas-francesas" element={<ExplotacionesAgricolasDetail />} />
+                      <Route path="/catalog/sostenibilidad-agricola" element={<SostenibilidadAgricolaDetail />} />
+                      <Route path="/catalog/capacidad-cosecha" element={<CapacidadCosechaDetail />} />
+                      <Route path="/catalog/precios-commodities-agricolas" element={<PreciosCommoditiesDetail />} />
+                      <Route path="/catalog/agricultura-precision" element={<AgriculturaPrecisionDetail />} />
+                      {/* Partner Product Detail Routes - NEVI */}
+                      <Route path="/catalog/profesionales-compras" element={<ProfesionalesComprasDetail />} />
+                      <Route path="/catalog/compras-sostenibles" element={<ComprasSosteniblesDetail />} />
+                      <Route path="/catalog/proveedores-precualificados" element={<ProveedoresPrecualificadosDetail />} />
+                      <Route path="/catalog/analisis-gasto-categoria" element={<AnalisisGastoDetail />} />
+                      <Route path="/catalog/riesgo-supply-chain" element={<RiesgoSupplyChainDetail />} />
+                      {/* Partner Product Detail Routes - AIP */}
+                      <Route path="/catalog/directorio-industrial-portugues" element={<DirectorioIndustrialDetail />} />
+                      <Route path="/catalog/sostenibilidad-portugal" element={<SostenibilidadPortugalDetail />} />
+                      <Route path="/catalog/fabricacion-subcontratacion" element={<FabricacionSubcontratacionDetail />} />
+                      <Route path="/catalog/costes-industriales-portugal" element={<CostesIndustrialesDetail />} />
+                      <Route path="/catalog/fabricacion-moldes" element={<FabricacionMoldesDetail />} />
+                      {/* Partner Product Detail Routes - Food Valley */}
+                      <Route path="/catalog/empresas-agroalimentarias" element={<EmpresasAgroalimentariasDetail />} />
+                      <Route path="/catalog/nutricion-sostenible" element={<NutricionSostenibleDetail />} />
+                      <Route path="/catalog/procesamiento-alimentario" element={<ProcesamientoAlimentarioDetail />} />
+                      <Route path="/catalog/precios-ingredientes" element={<PreciosIngredientesDetail />} />
+                      <Route path="/catalog/analisis-sensorial" element={<AnalisisSensorialDetail />} />
+                      {/* Partner Product Detail Routes - BioWin */}
+                      <Route path="/catalog/empresas-biotecnologicas" element={<EmpresasBiotechDetail />} />
+                      <Route path="/catalog/sostenibilidad-farmaceutica" element={<SostenibilidadFarmaDetail />} />
+                      <Route path="/catalog/ensayos-clinicos" element={<EnsayosClinicosDetail />} />
+                      <Route path="/catalog/precios-apis-farmaceuticos" element={<PreciosApiDetail />} />
+                      <Route path="/catalog/genomica-biomarcadores" element={<GenomicaBiomarcadoresDetail />} />
+                      {/* Operational routes */}
+                      <Route path="/sustainability" element={<Sustainability />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/services/:id" element={<ServiceDetail />} />
+                      <Route path="/innovation" element={<InnovationLab />} />
+                      <Route path="/success-stories" element={<SuccessStories />} />
+                      <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
+                      <Route path="/partners" element={<Partners />} />
                       <Route path="/requests" element={<Requests />} />
                       <Route path="/requests/:requestId" element={<RequestDetailPage />} />
                       <Route path="/requests/new" element={<RequestWizard />} />
