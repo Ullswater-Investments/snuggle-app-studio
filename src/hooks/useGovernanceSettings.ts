@@ -8,6 +8,7 @@ const GOVERNANCE_KEYS = [
   "ecosystem_status",
   "auto_approve_assets",
   "catalog_visibility",
+  "ecosystem_fee_percentage",
 ] as const;
 
 interface GovernanceSettings {
@@ -17,6 +18,7 @@ interface GovernanceSettings {
   ecosystemStatus: "active" | "maintenance";
   autoApproveAssets: boolean;
   catalogVisibility: "public" | "private";
+  ecosystemFeePercentage: number;
   isLoading: boolean;
 }
 
@@ -47,6 +49,7 @@ export function useGovernanceSettings(): GovernanceSettings {
     ecosystemStatus: (data?.ecosystem_status as "active" | "maintenance") ?? "active",
     autoApproveAssets: data?.auto_approve_assets !== "false",
     catalogVisibility: (data?.catalog_visibility as "public" | "private") ?? "public",
+    ecosystemFeePercentage: parseFloat(data?.ecosystem_fee_percentage ?? "2.5"),
     isLoading,
   };
 }
