@@ -739,6 +739,36 @@ export type Database = {
           },
         ]
       }
+      governance_logs: {
+        Row: {
+          actor_id: string | null
+          category: string
+          created_at: string
+          id: string
+          level: string
+          message: string
+          metadata: Json | null
+        }
+        Insert: {
+          actor_id?: string | null
+          category: string
+          created_at?: string
+          id?: string
+          level: string
+          message: string
+          metadata?: Json | null
+        }
+        Update: {
+          actor_id?: string | null
+          category?: string
+          created_at?: string
+          id?: string
+          level?: string
+          message?: string
+          metadata?: Json | null
+        }
+        Relationships: []
+      }
       innovation_lab_concepts: {
         Row: {
           business_impact: string
