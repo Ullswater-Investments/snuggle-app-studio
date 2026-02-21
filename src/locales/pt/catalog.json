@@ -3,7 +3,11 @@
     "badge": "Marketplace Oficial v2.0",
     "title": "Descubra, Compre e Integre Dados de Confiança",
     "description": "Acesse milhares de ativos de dados verificados, com governança integrada e conformidade ODRL automatizada.",
-    "searchPlaceholder": "Pesquisar dados financeiros, IoT, clima..."
+    "searchPlaceholder": "Pesquisar dados financeiros, IoT, clima...",
+    "publish": "Publicar Dataset"
+  },
+  "tabs": {
+    "myAcquisitions": "Minhas Aquisições"
   },
   "filters": {
     "title": "Filtros",
@@ -16,7 +20,38 @@
     "verifiedKYB": "Verificado (KYB)",
     "partner": "Parceiro",
     "country": "País",
-    "category": "Categoria"
+    "category": "Categoria",
+    "myStatus": "Meus Estados",
+    "dataNature": "Natureza do Dado",
+    "acquired": "Adquiridos",
+    "pending": "Pendentes",
+    "demo": "Demo / Sintéticos",
+    "production": "Produção"
+  },
+  "nature": {
+    "synthetic": "Sintético",
+    "production": "Produção"
+  },
+  "actions": {
+    "request": "Solicitar Acesso",
+    "accessDownload": "Aceder / Descarregar",
+    "requestInProgress": "Solicitação em curso"
+  },
+  "compareTable": {
+    "feature": "Característica",
+    "provider": "Fornecedor",
+    "price": "Preço",
+    "model": "Modelo",
+    "category": "Categoria",
+    "dataType": "Tipo de Dados",
+    "reputation": "Reputação",
+    "verified": "Verificado",
+    "sustainable": "Sustentável",
+    "yes": "Sim",
+    "subscription": "Assinatura",
+    "oneTime": "Pagamento único",
+    "usage": "Por uso",
+    "freeModel": "Gratuito"
   },
   "emptyState": {
     "title": "Nenhum resultado encontrado",
@@ -50,7 +85,13 @@
     "addToCart": "Adicionar",
     "freeAccess": "Acesso Gratuito",
     "verifiedProvider": "Fornecedor verificado",
-    "reviews": "avaliações"
+    "reviews": "avaliações",
+    "by": "por",
+    "free": "GRATIS",
+    "month": "mês",
+    "year": "ano",
+    "compareThis": "Comparar este produto",
+    "noDescription": "Sem descrição disponível"
   },
   "pricing": {
     "free": "Grátis",

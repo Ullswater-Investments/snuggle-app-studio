@@ -3,8 +3,14 @@
   "title": "Data Library",
   "subtitle": "Your Development Center for Data Assets",
   "hero": {
-    "title": "Data Development Center",
-    "description": "Explore, develop and manage your data assets with advanced analysis and visualization tools."
+    "badge": "Data Center",
+    "title": "Data Management",
+    "description": "Access your library of acquired datasets and manage your marketplace publications.",
+    "publishBtn": "Publish New Dataset"
+  },
+  "tabs": {
+    "library": "My Library",
+    "publications": "My Publications"
   },
   "categories": {
     "all": "All",
@@ -27,12 +33,21 @@
   "stats": {
     "totalAssets": "Total Assets",
     "categories": "Categories",
-    "activeSubscriptions": "Active Subscriptions"
+    "activeSubscriptions": "Active Subscriptions",
+    "activeDatasets": "Active Datasets",
+    "providers": "Providers",
+    "blockchainVerified": "Blockchain Verified",
+    "published": "Published Datasets",
+    "listed": "Listed in Catalog",
+    "totalValue": "Total Listed Value"
   },
   "filters": {
     "searchPlaceholder": "Search data assets...",
     "category": "Category",
-    "updateFrequency": "Update Frequency"
+    "updateFrequency": "Update Frequency",
+    "searchProducts": "Search by product or provider...",
+    "allSectors": "All sectors",
+    "filterBySector": "Filter by sector"
   },
   "table": {
     "columns": {
@@ -59,6 +74,72 @@
   },
   "empty": {
     "title": "No data assets",
-    "description": "You don't have any data assets registered. Start by creating your first asset."
+    "description": "You don't have any data assets registered. Start by creating your first asset.",
+    "libraryTitle": "Your library is empty",
+    "libraryDesc": "When you complete a transaction, data will appear here. Explore the catalog to find datasets you need.",
+    "libraryBtn": "Explore Marketplace",
+    "pubTitle": "No publications",
+    "pubDesc": "You haven't published any datasets yet. Share your data with the ecosystem and generate revenue.",
+    "pubBtn": "Publish Dataset"
+  },
+  "card": {
+    "downloadData": "Download Data",
+    "viewDetails": "View Details",
+    "noDataSource": "Asset without configured data source",
+    "blockchainTooltip": "Data verified with blockchain traceability",
+    "blockchainAudit": "Blockchain Traceability Audit",
+    "noName": "Unnamed dataset",
+    "noDesc": "No description",
+    "price": "Price",
+    "published": "Published",
+    "view": "View",
+    "analytics": "Analytics",
+    "inReview": "In review",
+    "visibleInCatalog": "Visible in Catalog",
+    "notEditable": "Not editable while in technical validation."
+  },
+  "pricing": {
+    "free": "Free",
+    "subscription": "Subscription",
+    "oneTime": "One-time",
+    "usage": "Per Use",
+    "undefined": "Undefined",
+    "perMonth": "/month"
+  },
+  "pubStatus": {
+    "validation": "In Technical Validation",
+    "available": "Available",
+    "published": "Published",
+    "rejected": "Rejected",
+    "draft": "Draft",
+    "archived": "Archived"
+  },
+  "expiration": {
+    "expired": "Expired",
+    "expiresIn": "Expires in {{days}}d",
+    "active": "Active"
+  },
+  "dataType": {
+    "administrative": "Administrative",
+    "iot": "IoT",
+    "financial": "Financial",
+    "energy": "Energy",
+    "esg": "ESG",
+    "data": "Data"
+  },
+  "loading": "Loading data...",
+  "loadingPub": "Loading publications...",
+  "noResults": "No results found",
+  "clearFilters": "Clear Filters",
+  "adjustFilters": "Try adjusting the search filters",
+  "toast": {
+    "visibleOn": "Asset visible in catalog",
+    "visibleOff": "Asset hidden from catalog",
+    "visibilityError": "Error changing visibility",
+    "downloadSuccess": "File downloaded successfully",
+    "downloadError": "Download error",
+    "noDataSource": "This asset doesn't have a configured data source yet.",
+    "downloading": "Downloading data through the Gateway...",
+    "connectionError": "Connection Error: The provider server is not responding."
   }
 }

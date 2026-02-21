@@ -1,11 +1,15 @@
 {
-  "title": "Notificaciones",
-  "subtitle": "Mantente al día con tus operaciones de datos",
+  "title": "Centro de Notificaciones",
+  "subtitle": "Gestiona tus alertas y actividad reciente",
   "badge": "Notificaciones",
+  "card": {
+    "title": "Actividad Reciente",
+    "description": "Historial de eventos y transacciones"
+  },
   "filters": {
     "all": "Todas",
     "unread": "No Leídas",
-    "highPriority": "Alta Prioridad",
+    "highPriority": "Prioridad Alta",
     "transactions": "Transacciones",
     "system": "Sistema",
     "marketing": "Marketing"
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Marcar como leída",
-    "markAllRead": "Marcar todas como leídas",
+    "markAsUnread": "Marcar como no leída",
+    "markAllRead": "Marcar todo como leído",
     "delete": "Eliminar",
-    "viewDetails": "Ver Detalles",
+    "viewDetails": "Ver detalles",
     "settings": "Configuración"
   },
   "empty": {
     "title": "Sin notificaciones",
-    "description": "¡Estás al día! No tienes notificaciones nuevas."
+    "description": "Te avisaremos cuando haya actividad relevante."
   },
   "toast": {
-    "newNotification": "Nueva notificación recibida",
+    "newNotification": "Nueva notificación",
     "markedAsRead": "Notificación marcada como leída",
-    "allMarkedAsRead": "Todas las notificaciones marcadas como leídas"
+    "allMarkedAsRead": "Todas las notificaciones marcadas como leídas",
+    "deleted": "Notificación eliminada",
+    "deleteError": "Error al eliminar la notificación",
+    "error": "Error"
+  },
+  "bell": {
+    "title": "Notificaciones",
+    "new": "nuevas",
+    "markRead": "Marcar leídas",
+    "empty": "No tienes notificaciones"
   },
   "settings": {
     "title": "Configuración de Notificaciones",

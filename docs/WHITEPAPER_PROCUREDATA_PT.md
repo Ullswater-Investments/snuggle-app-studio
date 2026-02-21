@@ -96,7 +96,7 @@ Motor de contratos digitais baseado em ODRL 2.0 (W3C) que governa cada acesso a 
 |-----------|-------------|-----------|
 | **Permissões** | ODRL 2.0, JSON-LD | Ações autorizadas (read, analyze, aggregate) com granularidade por campo e duração configurável (P90D, P180D, P365D). |
 | **Proibições** | Smart Contracts, Pontus-X | Redistribuição e revenda proibidas; insights derivados herdam restrições. Violações registadas em blockchain. |
-| **Obrigações** | EUROe, Smart Settlement | Pagamento automático (1 EUROe pay-per-use ou 100 EUROe/ano subscrição) e relatórios de uso obrigatórios com auditoria contínua. |
+| **Obrigações** | EUROe, Smart Settlement | Pagamento automático (1 EUROe pay-per-use ou 300 EUROe/mês subscrição) e relatórios de uso obrigatórios com auditoria contínua. |
 | **Restrições** | Geográficas, Setoriais, Temporais | Processamento exclusivo na UE, setor específico segundo Self-Description, volume máximo de consultas por período. |
 
 ### 3.5 Web3 e DIDs
@@ -108,7 +108,7 @@ Camada de identidade descentralizada e pagamentos programáveis baseada em padr�
 | **Identidade SSI** | DID (did:ethr), MetaMask, KYB | Identidade autogerida sem intermediários, wallet corporativa e verificação KYB via DeltaDAO e Self-Description Gaia-X. |
 | **Credenciais Verificáveis** | W3C VC Data Model, Zero-Knowledge | Emissão por organizações verificadas, apresentação seletiva sem revelar dados sensíveis e verificação on-chain instantânea. |
 | **Blockchain** | Data NFTs (ERC-721), DDOs, Smart Contracts | Cada ativo de dados é um token único; metadados DCAT-AP indexados pelo Aquarius; execução automática de políticas ODRL no Pontus-X (Chain ID 32460). |
-| **Pagamentos EUROe** | Pay-per-use, Subscrição, Liquidação | Micropagamentos automáticos via Smart Contract (1 EUROe/tx ou 100 EUROe/ano); cada pagamento registado em blockchain com selo temporal imutável. |
+| **Pagamentos EUROe** | Pay-per-use, Subscrição, Liquidação | Micropagamentos automáticos via Smart Contract (1 EUROe/tx ou 300 EUROe/mês); cada pagamento registado em blockchain com selo temporal imutável. |
 
 ### 3.6 Assistente IA
 

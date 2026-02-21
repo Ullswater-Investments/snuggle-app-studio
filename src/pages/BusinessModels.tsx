@@ -143,7 +143,7 @@ const cardVariants = {
 
 // Precios alineados con Memoria Técnica oficial
 // - Alta de Proveedor: ~1.00 EUROe/transacción
-// - Membresía Base: ~100 EUROe/año
+// - Membresía Pro: ~300 EUROe/mes
 const PRICING_TIERS = [
   {
     id: "basico",

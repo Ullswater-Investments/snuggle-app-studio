@@ -196,7 +196,7 @@ El "Pasaporte de Proveedor" es un paquete de datos verificados que incluye:
 | Modelo | Precio | Ideal para | Características |
 |--------|--------|------------|-----------------|
 | **Free Tier** | 1 EUROe/transacción | Empresas pequeñas, pruebas | Pago por uso, sin compromiso |
-| **Membresía Pro** | 100 EUROe/año | Empresas con +100 altas/año | Transacciones ilimitadas, soporte prioritario |
+| **Membresía Pro** | 300 EUROe/mes | Empresas con +100 altas/año | Transacciones ilimitadas, soporte prioritario |
 
 > **Nota**: EUROe es el euro tokenizado usado en la blockchain Pontus-X para trazabilidad de pagos.
 
@@ -466,7 +466,7 @@ Seguridad: Firma HMAC-SHA256 en header \`X-Signature\`
 ### Regla 5: Precios
 > "Ofrecemos flexibilidad total:
 > - **Tier Gratuito**: 1 EUROe/transacción para uso ocasional
-> - **Membresía Pro**: 100 EUROe/año con transacciones ilimitadas"
+> - **Membresía Pro**: 300 EUROe/mes con transacciones ilimitadas"
 
 ### Regla 6: ODRL y Contratos
 > "Los contratos ODRL tienen 4 componentes: **permisos** (qué puedes hacer), **prohibiciones** (qué no puedes), **deberes** (obligaciones como pagar) y **restricciones** (límites temporales o geográficos)."

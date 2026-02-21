@@ -38,7 +38,7 @@ export default function PortalTransparencia() {
 
   const fees = [
     { concept: t('fees.payPerUse'), price: '1 EUROe', detail: t('fees.payPerUseDetail') },
-    { concept: t('fees.proMembership'), price: '100 EUROe/año', detail: t('fees.proMembershipDetail') },
+    { concept: t('fees.proMembership'), price: '300 EUROe/mes', detail: t('fees.proMembershipDetail') },
     { concept: t('fees.registration'), price: t('fees.free'), detail: t('fees.registrationDetail') },
     { concept: t('fees.additionalServices'), price: t('fees.variable'), detail: t('fees.additionalServicesDetail') },
   ];

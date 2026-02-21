@@ -3,7 +3,11 @@
     "badge": "Marketplace Ufficiale v2.0",
     "title": "Scopri, Acquista e Integra Dati Affidabili",
     "description": "Accedi a migliaia di asset di dati verificati, con governance integrata e conformità ODRL automatizzata.",
-    "searchPlaceholder": "Cerca dati finanziari, IoT, clima..."
+    "searchPlaceholder": "Cerca dati finanziari, IoT, clima...",
+    "publish": "Pubblica Dataset"
+  },
+  "tabs": {
+    "myAcquisitions": "Le Mie Acquisizioni"
   },
   "filters": {
     "title": "Filtri",
@@ -16,7 +20,38 @@
     "verifiedKYB": "Verificato (KYB)",
     "partner": "Partner",
     "country": "Paese",
-    "category": "Categoria"
+    "category": "Categoria",
+    "myStatus": "I Miei Stati",
+    "dataNature": "Natura del Dato",
+    "acquired": "Acquisiti",
+    "pending": "In sospeso",
+    "demo": "Demo / Sintetici",
+    "production": "Produzione"
+  },
+  "nature": {
+    "synthetic": "Sintetico",
+    "production": "Produzione"
+  },
+  "actions": {
+    "request": "Richiedi Accesso",
+    "accessDownload": "Accedi / Scarica",
+    "requestInProgress": "Richiesta in corso"
+  },
+  "compareTable": {
+    "feature": "Caratteristica",
+    "provider": "Fornitore",
+    "price": "Prezzo",
+    "model": "Modello",
+    "category": "Categoria",
+    "dataType": "Tipo di Dati",
+    "reputation": "Reputazione",
+    "verified": "Verificato",
+    "sustainable": "Sostenibile",
+    "yes": "Sì",
+    "subscription": "Abbonamento",
+    "oneTime": "Pagamento unico",
+    "usage": "Per utilizzo",
+    "freeModel": "Gratuito"
   },
   "emptyState": {
     "title": "Nessun risultato trovato",
@@ -50,7 +85,13 @@
     "addToCart": "Aggiungi",
     "freeAccess": "Accesso Gratuito",
     "verifiedProvider": "Fornitore verificato",
-    "reviews": "recensioni"
+    "reviews": "recensioni",
+    "by": "di",
+    "free": "GRATIS",
+    "month": "mese",
+    "year": "anno",
+    "compareThis": "Confronta questo prodotto",
+    "noDescription": "Nessuna descrizione disponibile"
   },
   "pricing": {
     "free": "Gratuito",

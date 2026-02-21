@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,7 +32,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
-import { formatDistanceToNow, isToday, isYesterday, isBefore, startOfDay, subDays } from "date-fns";
+import { formatDistanceToNow, isToday, isYesterday, subDays } from "date-fns";
 import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -67,6 +68,7 @@ interface NotificationGroup {
 const Notifications = () => {
   const { t, i18n } = useTranslation("notifications");
   const { user } = useAuth();
+  const { activeOrgId } = useOrganizationContext();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [filter, setFilter] = useState<"all" | "unread" | "priority">("all");
@@ -75,7 +77,7 @@ const Notifications = () => {
 
   // Fetch notifications from the notifications table
   const { data: notifications, isLoading } = useQuery({
-    queryKey: ["notifications-page", user?.id, filter],
+    queryKey: ["notifications-page", user?.id, activeOrgId, filter],
     queryFn: async () => {
       if (!user) return [];
 
@@ -86,6 +88,10 @@ const Notifications = () => {
         .order("created_at", { ascending: false })
         .limit(50);
 
+      if (activeOrgId) {
+        query = query.eq("organization_id", activeOrgId);
+      }
+
       if (filter === "unread") {
         query = query.eq("is_read", false);
       } else if (filter === "priority") {
@@ -93,7 +99,6 @@ const Notifications = () => {
       }
 
       const { data, error } = await query;
-
       if (error) throw error;
       return data || [];
     },
@@ -126,7 +131,7 @@ const Notifications = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, queryClient]);
+  }, [user, queryClient, t]);
 
   // Mark single notification as read/unread
   const markAsReadMutation = useMutation({
@@ -135,12 +140,11 @@ const Notifications = () => {
         .from("notifications")
         .update({ is_read: isRead })
         .eq("id", id);
-
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
-      queryClient.invalidateQueries({ queryKey: ["notifications"] }); // For NotificationsBell
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
     },
   });
 
@@ -151,16 +155,15 @@ const Notifications = () => {
         .from("notifications")
         .delete()
         .eq("id", id);
-
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications-page"] });
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
-      toast.success(t("actions.delete"));
+      toast.success(t("toast.deleted"));
     },
     onError: () => {
-      toast.error("Error al eliminar la notificación");
+      toast.error(t("toast.deleteError"));
     },
   });
 
@@ -168,13 +171,11 @@ const Notifications = () => {
   const markAllAsReadMutation = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("No user");
-
       const { error } = await supabase
         .from("notifications")
         .update({ is_read: true })
         .eq("user_id", user.id)
         .eq("is_read", false);
-
       if (error) throw error;
     },
     onSuccess: () => {
@@ -183,71 +184,37 @@ const Notifications = () => {
       toast.success(t("toast.allMarkedAsRead"));
     },
     onError: () => {
-      toast.error("Error");
+      toast.error(t("toast.error"));
     },
   });
 
   // Get icon and styling based on notification type and title
   const getNotificationConfig = (type: string, title: string) => {
-    // Check title for context-specific icons
     const titleLower = title.toLowerCase();
     
     if (titleLower.includes("pago") || titleLower.includes("euroe") || titleLower.includes("wallet")) {
-      return {
-        icon: Coins,
-        bgColor: "bg-green-100 dark:bg-green-900/30",
-        iconColor: "text-green-600 dark:text-green-400",
-      };
+      return { icon: Coins, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
     }
     if (titleLower.includes("smart contract") || titleLower.includes("blockchain") || titleLower.includes("pontus")) {
-      return {
-        icon: Blocks,
-        bgColor: "bg-blue-100 dark:bg-blue-900/30",
-        iconColor: "text-blue-600 dark:text-blue-400",
-      };
+      return { icon: Blocks, bgColor: "bg-blue-100 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" };
     }
     if (titleLower.includes("solicitud") || titleLower.includes("acceso") || titleLower.includes("propuesta")) {
-      return {
-        icon: FileKey,
-        bgColor: "bg-orange-100 dark:bg-orange-900/30",
-        iconColor: "text-orange-600 dark:text-orange-400",
-      };
+      return { icon: FileKey, bgColor: "bg-orange-100 dark:bg-orange-900/30", iconColor: "text-orange-600 dark:text-orange-400" };
     }
     if (titleLower.includes("nuevo") || titleLower.includes("disponible") || titleLower.includes("servicio")) {
-      return {
-        icon: Sparkles,
-        bgColor: "bg-purple-100 dark:bg-purple-900/30",
-        iconColor: "text-purple-600 dark:text-purple-400",
-      };
+      return { icon: Sparkles, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
     }
 
-    // Fallback to type-based icons
     switch (type) {
       case "success":
-        return {
-          icon: CheckCircle,
-          bgColor: "bg-green-100 dark:bg-green-900/30",
-          iconColor: "text-green-600 dark:text-green-400",
-        };
+        return { icon: CheckCircle, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
       case "error":
-        return {
-          icon: XCircle,
-          bgColor: "bg-red-100 dark:bg-red-900/30",
-          iconColor: "text-red-600 dark:text-red-400",
-        };
+        return { icon: XCircle, bgColor: "bg-red-100 dark:bg-red-900/30", iconColor: "text-red-600 dark:text-red-400" };
       case "warning":
-        return {
-          icon: AlertTriangle,
-          bgColor: "bg-yellow-100 dark:bg-yellow-900/30",
-          iconColor: "text-yellow-600 dark:text-yellow-400",
-        };
+        return { icon: AlertTriangle, bgColor: "bg-yellow-100 dark:bg-yellow-900/30", iconColor: "text-yellow-600 dark:text-yellow-400" };
       case "info":
       default:
-        return {
-          icon: Info,
-          bgColor: "bg-slate-100 dark:bg-slate-800/50",
-          iconColor: "text-slate-600 dark:text-slate-400",
-        };
+        return { icon: Info, bgColor: "bg-slate-100 dark:bg-slate-800/50", iconColor: "text-slate-600 dark:text-slate-400" };
     }
   };
 
@@ -258,8 +225,6 @@ const Notifications = () => {
     const today: Notification[] = [];
     const yesterday: Notification[] = [];
     const older: Notification[] = [];
-
-    const yesterdayDate = subDays(new Date(), 1);
 
     notifications.forEach((notification) => {
       const date = new Date(notification.created_at || "");
@@ -308,10 +273,6 @@ const Notifications = () => {
       <FadeIn>
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-primary/10 via-background to-background border border-primary/20 p-8">
           <div className="relative z-10">
-            <Badge variant="secondary" className="mb-4">
-              <Bell className="mr-1 h-3 w-3" />
-              {t("badge")}
-            </Badge>
             <h1 className="text-4xl font-bold mb-3">
               {t("title")}
             </h1>
@@ -378,9 +339,9 @@ const Notifications = () => {
       <FadeIn delay={0.2}>
         <Card>
           <CardHeader>
-            <CardTitle>Actividad Reciente</CardTitle>
+            <CardTitle>{t("card.title")}</CardTitle>
             <CardDescription>
-              Historial de eventos, transacciones y acciones pendientes
+              {t("card.description")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -420,14 +381,10 @@ const Notifications = () => {
                                 : "hover:bg-muted/50"
                             }`}
                           >
-                            {/* Icon with colored background */}
-                            <div
-                              className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${config.bgColor}`}
-                            >
+                            <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${config.bgColor}`}>
                               <IconComponent className={`h-5 w-5 ${config.iconColor}`} />
                             </div>
 
-                            {/* Content */}
                             <div
                               className="flex-1 min-w-0 cursor-pointer"
                               onClick={() => handleNotificationClick(notification)}
@@ -453,7 +410,6 @@ const Notifications = () => {
                               </p>
                             </div>
 
-                            {/* Actions */}
                             <div className="flex items-center gap-2 flex-shrink-0">
                               {isActionRequired && (
                                 <Button
@@ -484,7 +440,7 @@ const Notifications = () => {
                                     {notification.is_read ? (
                                       <>
                                         <Mail className="mr-2 h-4 w-4" />
-                                        {t("actions.markAsRead")}
+                                        {t("actions.markAsUnread")}
                                       </>
                                     ) : (
                                       <>
@@ -498,7 +454,7 @@ const Notifications = () => {
                                       onClick={() => handleNotificationClick(notification)}
                                     >
                                       <ExternalLink className="mr-2 h-4 w-4" />
-                                      Ver detalles
+                                      {t("actions.viewDetails")}
                                     </DropdownMenuItem>
                                   )}
                                   <DropdownMenuItem
@@ -506,7 +462,7 @@ const Notifications = () => {
                                     className="text-destructive focus:text-destructive"
                                   >
                                     <Trash2 className="mr-2 h-4 w-4" />
-                                    Eliminar
+                                    {t("actions.delete")}
                                   </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>

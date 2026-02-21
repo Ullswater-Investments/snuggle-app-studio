@@ -96,7 +96,7 @@ ODRL 2.0 (W3C) digitale Vertragsengine, die jeden Datenzugriff auf der Plattform
 |-------------|-------------|--------------|
 | **Berechtigungen** | ODRL 2.0, JSON-LD | Autorisierte Aktionen (read, analyze, aggregate) mit Feldgranularität und konfigurierbarer Dauer (P90D, P180D, P365D). |
 | **Verbote** | Smart Contracts, Pontus-X | Weiterverteilung und Weiterverkauf verboten; abgeleitete Insights erben Beschränkungen. Verstöße werden auf der Blockchain aufgezeichnet. |
-| **Pflichten** | EUROe, Smart Settlement | Automatische Zahlung (1 EUROe Pay-per-use oder 100 EUROe/Jahr Abonnement) und obligatorische Nutzungsberichte mit kontinuierlicher Prüfung. |
+| **Pflichten** | EUROe, Smart Settlement | Automatische Zahlung (1 EUROe Pay-per-use oder 300 EUROe/Monat Abonnement) und obligatorische Nutzungsberichte mit kontinuierlicher Prüfung. |
 | **Einschränkungen** | Geographisch, Sektoral, Zeitlich | Ausschließliche EU-Verarbeitung, sektorspezifisch gemäß Self-Description, maximales Abfragevolumen pro Zeitraum. |
 
 ### 3.5 Web3 und DIDs
@@ -108,7 +108,7 @@ Dezentrale Identitäts- und programmierbare Zahlungsschicht basierend auf W3C-St
 | **SSI-Identität** | DID (did:ethr), MetaMask, KYB | Selbstverwaltete Identität ohne Vermittler, Unternehmens-Wallet und KYB-Verifizierung über DeltaDAO und Gaia-X Self-Description. |
 | **Verifizierbare Credentials** | W3C VC Data Model, Zero-Knowledge | Ausstellung durch verifizierte Organisationen, selektive Präsentation ohne sensible Daten und sofortige On-Chain-Verifizierung. |
 | **Blockchain** | Data NFTs (ERC-721), DDOs, Smart Contracts | Jedes Daten-Asset ist ein einzigartiger Token; DCAT-AP-Metadaten durch Aquarius indexiert; automatische ODRL-Richtlinienausführung auf Pontus-X (Chain ID 32460). |
-| **EUROe-Zahlungen** | Pay-per-use, Abonnement, Abwicklung | Automatische Mikrozahlungen via Smart Contract (1 EUROe/tx oder 100 EUROe/Jahr); jede Zahlung auf Blockchain mit unveränderlichem Zeitstempel erfasst. |
+| **EUROe-Zahlungen** | Pay-per-use, Abonnement, Abwicklung | Automatische Mikrozahlungen via Smart Contract (1 EUROe/tx oder 300 EUROe/Monat); jede Zahlung auf Blockchain mit unveränderlichem Zeitstempel erfasst. |
 
 ### 3.6 KI-Assistent
 

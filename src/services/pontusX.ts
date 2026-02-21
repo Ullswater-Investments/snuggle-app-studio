@@ -5,14 +5,14 @@ import type { WalletState } from '@/types/web3.types';
 
 // --- Configuración de la Red Pontus-X (Devnet/Testnet) ---
 export const PONTUSX_NETWORK_CONFIG = {
-  chainId: '0x7ecc', // 32460 en Decimal
+  chainId: '0x7ec9', // 32457 en Decimal
   chainName: 'Pontus-X Testnet',
   nativeCurrency: {
-    name: 'Pontus-X Token',
-    symbol: 'GX',
+    name: 'EUROe Utility Asset Unit',
+    symbol: 'EURAU',
     decimals: 18,
   },
-  rpcUrls: ['https://rpc.dev.pontus-x.eu'],
+  rpcUrls: ['https://rpc.test.pontus-x.eu'],
   blockExplorerUrls: ['https://explorer.pontus-x.eu/'],
 };
 

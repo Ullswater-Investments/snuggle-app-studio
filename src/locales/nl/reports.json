@@ -79,7 +79,7 @@
     "avgTime": "Gemiddelde Tijd",
     "fromRequestToApproval": "Van aanvraag tot goedkeuring",
     "compliance": "Naleving",
-    "odrlPolicies": "Toegepaste ODRL-beleid",
+    "odrlPolicies": "Toegepaste toegangscontroles",
     "days": "dagen",
     "hours": "uren",
     "volume": "Volume",

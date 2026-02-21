@@ -1,7 +1,11 @@
 {
-  "title": "Notifications",
-  "subtitle": "Stay updated with your data operations",
+  "title": "Notification Center",
+  "subtitle": "Manage your alerts and recent activity",
   "badge": "Notifications",
+  "card": {
+    "title": "Recent Activity",
+    "description": "Event history, transactions and pending actions"
+  },
   "filters": {
     "all": "All",
     "unread": "Unread",
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Mark as read",
+    "markAsUnread": "Mark as unread",
     "markAllRead": "Mark all as read",
     "delete": "Delete",
-    "viewDetails": "View Details",
+    "viewDetails": "View details",
     "settings": "Settings"
   },
   "empty": {
     "title": "No notifications",
-    "description": "You're all caught up! No new notifications."
+    "description": "We'll notify you when there is relevant activity."
   },
   "toast": {
-    "newNotification": "New notification received",
+    "newNotification": "New notification",
     "markedAsRead": "Notification marked as read",
-    "allMarkedAsRead": "All notifications marked as read"
+    "allMarkedAsRead": "All notifications marked as read",
+    "deleted": "Notification deleted",
+    "deleteError": "Error deleting notification",
+    "error": "Error"
+  },
+  "bell": {
+    "title": "Notifications",
+    "new": "new",
+    "markRead": "Mark read",
+    "empty": "No notifications"
   },
   "settings": {
     "title": "Notification Settings",

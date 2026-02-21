@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Input } from "@/components/ui/input";
 import {
   Fingerprint,
   Globe,
@@ -17,11 +18,15 @@ import {
   CheckCircle2,
   XCircle,
   Clock,
+  Save,
+  Loader2,
+  Network,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { PONTUSX_NETWORK_CONFIG } from "@/services/pontusX";
 import { oceanConfig, oceanContracts } from "@/lib/oceanConfig";
+import { supabase } from "@/integrations/supabase/client";
 
 // --- Types ---
 interface ServiceStatus {
@@ -81,6 +86,56 @@ const AdminGovernance = () => {
     runHealthCheck();
   }, []);
 
+  // --- Blockchain RPC Config ---
+  const [rpcUrl, setRpcUrl] = useState("");
+  const [rpcLoading, setRpcLoading] = useState(true);
+  const [rpcSaving, setRpcSaving] = useState(false);
+  const [rpcStatus, setRpcStatus] = useState<"online" | "offline" | "checking">("checking");
+
+  useEffect(() => {
+    const loadRpc = async () => {
+      const { data } = await supabase
+        .from("system_settings")
+        .select("value")
+        .eq("key", "blockchain_rpc_url")
+        .maybeSingle();
+      setRpcUrl(data?.value || "https://rpc.test.pontus-x.eu");
+      setRpcLoading(false);
+    };
+    loadRpc();
+  }, []);
+
+  // Check RPC health when URL changes
+  useEffect(() => {
+    if (!rpcUrl || rpcLoading) return;
+    setRpcStatus("checking");
+    const controller = new AbortController();
+    fetch(rpcUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", method: "eth_blockNumber", params: [], id: 1 }),
+      signal: controller.signal,
+    })
+      .then((r) => r.json())
+      .then((d) => setRpcStatus(d.result ? "online" : "offline"))
+      .catch(() => setRpcStatus("offline"));
+    return () => controller.abort();
+  }, [rpcUrl, rpcLoading]);
+
+  const saveRpcUrl = async () => {
+    setRpcSaving(true);
+    const { error } = await supabase
+      .from("system_settings")
+      .update({ value: rpcUrl, updated_at: new Date().toISOString() })
+      .eq("key", "blockchain_rpc_url");
+    setRpcSaving(false);
+    if (error) {
+      toast.error("Error guardando RPC URL");
+    } else {
+      toast.success("RPC URL actualizado correctamente");
+    }
+  };
+
   const explorerBase = PONTUSX_NETWORK_CONFIG.blockExplorerUrls?.[0] || "https://explorer.pontus-x.eu/";
 
   return (
@@ -92,6 +147,59 @@ const AdminGovernance = () => {
           Configuración de identidad, protocolos y servicios de la red PROCUREDATA
         </p>
       </div>
+
+      {/* Blockchain RPC Config Card */}
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Network className="h-5 w-5 text-primary" />
+            <CardTitle className="text-base">Configuración de Red Blockchain</CardTitle>
+          </div>
+          <CardDescription>
+            URL del nodo RPC que utiliza toda la plataforma para conectarse a Pontus-X
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
+              <Input
+                value={rpcUrl}
+                onChange={(e) => setRpcUrl(e.target.value)}
+                placeholder="https://rpc.test.pontus-x.eu"
+                disabled={rpcLoading}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <StatusDot status={rpcStatus} />
+              <Badge
+                variant="outline"
+                className={
+                  rpcStatus === "online"
+                    ? "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30"
+                    : rpcStatus === "offline"
+                    ? "bg-destructive/10 text-destructive border-destructive/30"
+                    : "bg-muted text-muted-foreground"
+                }
+              >
+                {rpcStatus === "online" ? "Conectado" : rpcStatus === "offline" ? "Sin conexión" : "Verificando…"}
+              </Badge>
+            </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-muted-foreground">
+              Chain ID: {PONTUSX_NETWORK_CONFIG.chainId} · Token: {PONTUSX_NETWORK_CONFIG.nativeCurrency.symbol}
+            </p>
+            <Button size="sm" onClick={saveRpcUrl} disabled={rpcSaving || rpcLoading}>
+              {rpcSaving ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Save className="mr-2 h-4 w-4" />
+              )}
+              Guardar
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Row 1 — Identity + Protocol */}
       <div className="grid gap-6 md:grid-cols-2">

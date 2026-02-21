@@ -96,7 +96,7 @@ El "Pasaporte de Proveedor" es un paquete de datos verificados que incluye:
 | Modelo | Precio | Ideal para | Características |
 |--------|--------|------------|-----------------|
 | **Free Tier** | 1 EUROe/transacción | Empresas pequeñas, pruebas | Pago por uso, sin compromiso, funcionalidad completa |
-| **Membresía Pro** | 100 EUROe/año | Empresas con +100 altas/año | Transacciones ilimitadas, soporte prioritario, APIs avanzadas |
+| **Membresía Pro** | 300 EUROe/mes | Empresas con +100 altas/año | Transacciones ilimitadas, soporte prioritario, APIs avanzadas |
 
 > **Nota**: EUROe es el euro tokenizado usado en la blockchain Pontus-X para trazabilidad de pagos.
 
@@ -243,7 +243,7 @@ Cuando pregunten cómo funciona la tecnología:
 Cuando pregunten si es caro o cuánto cuesta:
 > "Ofrecemos **flexibilidad total**:
 > - **Tier Gratuito**: Solo pagas 1 EUROe por transacción. Ideal para probar o uso ocasional.
-> - **Membresía Pro**: 100 EUROe/año con transacciones ilimitadas. Rentable si haces más de 100 altas de proveedor al año.
+> - **Membresía Pro**: 300 EUROe/mes con transacciones ilimitadas. Rentable si haces más de 100 altas de proveedor al año.
 > 
 > La mayoría de nuestros servicios premium tienen precio único (pagas una vez, usas siempre)."
 

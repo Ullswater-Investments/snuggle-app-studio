@@ -50,7 +50,7 @@ const layers: LayerData[] = [
       { icon: Bell, label: "Auditoría" },
     ],
     details: [
-      "Pago automático vía Smart Contract: 1 EUROe pay-per-use o 100 EUROe/año suscripción",
+      "Pago automático vía Smart Contract: 1 EUROe pay-per-use o 300 EUROe/mes suscripción",
       "Generación obligatoria de reportes de uso con frecuencia mensual o por acceso",
       "Notificación automática al proveedor en cada acceso a sus datos",
       "Auditoría continua con trazabilidad completa en el ledger de Pontus-X",

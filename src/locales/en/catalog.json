@@ -3,7 +3,11 @@
     "badge": "Official Marketplace v2.0",
     "title": "Discover, Buy and Integrate Trusted Data",
     "description": "Access thousands of verified data assets, with integrated governance and automated ODRL compliance.",
-    "searchPlaceholder": "Search financial data, IoT, climate..."
+    "searchPlaceholder": "Search financial data, IoT, climate...",
+    "publish": "Publish Dataset"
+  },
+  "tabs": {
+    "myAcquisitions": "My Acquisitions"
   },
   "filters": {
     "title": "Filters",
@@ -16,7 +20,22 @@
     "verifiedKYB": "Verified (KYB)",
     "partner": "Partner",
     "country": "Country",
-    "category": "Category"
+    "category": "Category",
+    "myStatus": "My Status",
+    "dataNature": "Data Nature",
+    "acquired": "Acquired",
+    "pending": "Pending",
+    "demo": "Demo / Synthetic",
+    "production": "Production"
+  },
+  "nature": {
+    "synthetic": "Synthetic",
+    "production": "Production"
+  },
+  "actions": {
+    "request": "Request Access",
+    "accessDownload": "Access / Download",
+    "requestInProgress": "Request in progress"
   },
   "emptyState": {
     "title": "No results found",
@@ -37,9 +56,15 @@
     "price": "Price",
     "model": "Model",
     "category": "Category",
+    "dataType": "Data Type",
     "reputation": "Reputation",
     "verified": "Verified",
-    "sustainable": "Sustainable"
+    "sustainable": "Sustainable",
+    "yes": "Yes",
+    "subscription": "Subscription",
+    "oneTime": "One-time",
+    "usage": "Per use",
+    "freeModel": "Free"
   },
   "table": {
     "product": "Product",

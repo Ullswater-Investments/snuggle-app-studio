@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Bell } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -11,13 +12,25 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import type { Notification } from "@/types/database.extensions";
 
+const LOCALE_MAP: Record<string, string> = {
+  es: "es-ES",
+  en: "en-GB",
+  fr: "fr-FR",
+  de: "de-DE",
+  it: "it-IT",
+  pt: "pt-PT",
+  nl: "nl-NL",
+};
+
 export function NotificationsBell() {
+  const { t, i18n } = useTranslation("notifications");
   const { user } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
 
-  // 1. Fetch inicial
+  const dateLocale = LOCALE_MAP[i18n.language] || "es-ES";
+
   const { data: notifications } = useQuery({
     queryKey: ["notifications", user?.id],
     queryFn: async () => {
@@ -36,7 +49,6 @@ export function NotificationsBell() {
 
   const unreadCount = notifications?.filter(n => !n.is_read).length || 0;
 
-  // 2. Realtime Subscription
   useEffect(() => {
     if (!user) return;
 
@@ -56,7 +68,6 @@ export function NotificationsBell() {
     return () => { supabase.removeChannel(channel); };
   }, [user, queryClient]);
 
-  // 3. Mark as Read Handler
   const handleRead = async (id: string, link?: string | null) => {
     await supabase.from("notifications").update({ is_read: true }).eq("id", id);
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
@@ -66,12 +77,11 @@ export function NotificationsBell() {
     }
   };
 
-  // 4. Mark All as Read
   const handleMarkAllRead = async () => {
     if (!user) return;
     await supabase.from("notifications").update({ is_read: true }).eq("user_id", user.id).eq("is_read", false);
     queryClient.invalidateQueries({ queryKey: ["notifications"] });
-    toast.success("Todas las notificaciones marcadas como leídas");
+    toast.success(t("toast.allMarkedAsRead"));
   };
 
   return (
@@ -87,8 +97,8 @@ export function NotificationsBell() {
       <PopoverContent className="w-80 p-0" align="end">
         <div className="flex items-center justify-between p-4 border-b bg-muted/20">
           <div className="flex items-center gap-2">
-            <h4 className="font-semibold text-sm">Notificaciones</h4>
-            {unreadCount > 0 && <Badge variant="secondary" className="text-xs">{unreadCount} nuevas</Badge>}
+            <h4 className="font-semibold text-sm">{t("bell.title")}</h4>
+            {unreadCount > 0 && <Badge variant="secondary" className="text-xs">{unreadCount} {t("bell.new")}</Badge>}
           </div>
           {unreadCount > 0 && (
             <Button 
@@ -100,14 +110,14 @@ export function NotificationsBell() {
                 handleMarkAllRead();
               }}
             >
-              Marcar leídas
+              {t("bell.markRead")}
             </Button>
           )}
         </div>
         <ScrollArea className="h-[300px]">
           {!notifications || notifications.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground text-xs">
-              No tienes notificaciones
+              {t("bell.empty")}
             </div>
           ) : (
             <div className="grid">
@@ -122,7 +132,7 @@ export function NotificationsBell() {
                     <p className="text-sm font-medium leading-none">{n.title}</p>
                     {n.message && <p className="text-xs text-muted-foreground line-clamp-2">{n.message}</p>}
                     <p className="text-[10px] text-muted-foreground/70">
-                      {new Date(n.created_at).toLocaleTimeString('es-ES', { 
+                      {new Date(n.created_at).toLocaleTimeString(dateLocale, { 
                         hour: '2-digit', 
                         minute: '2-digit',
                         day: '2-digit',

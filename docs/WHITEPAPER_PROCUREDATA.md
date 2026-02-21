@@ -117,7 +117,7 @@ Motor de contratos digitales basado en ODRL 2.0 (W3C).
 |---------|-------------|-------------|
 | **Permisos** | ODRL 2.0, JSON-LD | Acciones autorizadas (read, analyze, aggregate) con granularidad por campo y duración configurable. |
 | **Prohibiciones** | Smart Contracts, Pontus-X | Redistribución y reventa vetadas; violaciones registradas en blockchain. |
-| **Obligaciones** | EUROe, Smart Settlement | Pago automático (1 EUROe pay-per-use o 100 EUROe/año suscripción). |
+| **Obligaciones** | EUROe, Smart Settlement | Pago automático (1 EUROe pay-per-use o 300 EUROe/mes suscripción). |
 | **Restricciones** | Geográficas, Sectoriales, Temporales | Procesamiento solo en UE, sector específico, volumen máximo. |
 
 **Casos validadores**: PureLithium Sourcing (ODRL para uso ético de minerales), Polígono Eco-Link (gobernanza ODRL para energía P2P), Raw-Market (ODRL uso final de residuos).

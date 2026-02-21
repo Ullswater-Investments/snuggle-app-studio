@@ -1,7 +1,11 @@
 {
-  "title": "Notifiche",
-  "subtitle": "Rimani aggiornato sulle tue operazioni sui dati",
+  "title": "Centro Notifiche",
+  "subtitle": "Gestisci le tue notifiche e attività recente",
   "badge": "Notifiche",
+  "card": {
+    "title": "Attività Recente",
+    "description": "Cronologia eventi, transazioni e azioni in sospeso"
+  },
   "filters": {
     "all": "Tutte",
     "unread": "Non Lette",
@@ -30,19 +34,29 @@
   },
   "actions": {
     "markAsRead": "Segna come letta",
-    "markAllRead": "Segna tutte come lette",
+    "markAsUnread": "Segna come non letta",
+    "markAllRead": "Segna tutto come letto",
     "delete": "Elimina",
-    "viewDetails": "Vedi Dettagli",
+    "viewDetails": "Vedi dettagli",
     "settings": "Impostazioni"
   },
   "empty": {
     "title": "Nessuna notifica",
-    "description": "Sei in pari! Nessuna nuova notifica."
+    "description": "Ti avviseremo quando ci sarà attività rilevante."
   },
   "toast": {
-    "newNotification": "Nuova notifica ricevuta",
+    "newNotification": "Nuova notifica",
     "markedAsRead": "Notifica segnata come letta",
-    "allMarkedAsRead": "Tutte le notifiche segnate come lette"
+    "allMarkedAsRead": "Tutte le notifiche segnate come lette",
+    "deleted": "Notifica eliminata",
+    "deleteError": "Errore durante l'eliminazione",
+    "error": "Errore"
+  },
+  "bell": {
+    "title": "Notifiche",
+    "new": "nuove",
+    "markRead": "Segna lette",
+    "empty": "Nessuna notifica"
   },
   "settings": {
     "title": "Impostazioni Notifiche",

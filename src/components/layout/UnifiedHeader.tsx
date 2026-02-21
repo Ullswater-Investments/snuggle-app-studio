@@ -4,10 +4,11 @@ import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { NotificationsBell } from "@/components/NotificationsBell";
+import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+
+
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Search, LogIn, LogOut } from "lucide-react";
 
@@ -17,27 +18,34 @@ export const UnifiedHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
-      <div className="grid grid-cols-3 h-16 items-center px-4">
-        {/* Columna Izquierda: Logo */}
-        <div className="flex items-center gap-3">
+      <div className="flex h-16 items-center px-4 gap-4">
+        {/* Izquierda: Menu + Marca */}
+        <div className="flex items-center gap-3 flex-shrink-0">
           <SidebarTrigger />
-          <ProcuredataLogo size="md" showNavigation={true} />
+          <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
+            <span className="text-xl font-bold tracking-tight text-foreground">PROCUREDATA</span>
+          </Link>
         </div>
         
-        {/* Columna Central: Barra de Búsqueda */}
-        <div className="hidden sm:flex justify-center">
-          <div className="relative w-full max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Buscar datasets, proveedores o servicios..."
-              className="w-full pl-10 pr-4 rounded-full bg-muted/50 border-transparent focus:border-primary/30 focus:bg-background transition-colors"
-            />
-          </div>
+        {/* Central: Command Palette */}
+        <div className="hidden sm:flex flex-1 justify-center">
+          <button
+            onClick={() => {
+              const event = new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true });
+              document.dispatchEvent(event);
+            }}
+            className="relative w-full max-w-md flex items-center gap-2 px-4 py-2 rounded-full bg-muted/50 border border-transparent hover:border-primary/30 hover:bg-background transition-colors cursor-pointer text-left"
+          >
+            <Search className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+            <span className="text-sm text-muted-foreground flex-1">{t('searchPlaceholder')}</span>
+            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          </button>
         </div>
         
         {/* Columna Derecha: Controles */}
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-center justify-end gap-2 flex-shrink-0">
           {/* Icono de búsqueda en móvil */}
           <Button variant="ghost" size="icon" className="sm:hidden">
             <Search className="h-4 w-4" />
@@ -45,6 +53,9 @@ export const UnifiedHeader = () => {
 
           {user ? (
             <>
+              <div data-tour="org-switcher">
+                <OrganizationSwitcher />
+              </div>
               <NotificationsBell />
               <LanguageSwitcher />
               <ThemeToggle />

@@ -77,13 +77,13 @@
 **Respuesta modelo**:
 > "Ofrecemos **flexibilidad total**:
 > - **Tier Gratuito**: Solo pagas 1 EUROe por transacción. Ideal para probar o uso ocasional.
-> - **Membresía Pro**: 100 EUROe/año con transacciones ilimitadas. Rentable si haces más de 100 altas de proveedor al año.
+> - **Membresía Pro**: 300 EUROe/mes con transacciones ilimitadas. Rentable si haces más de 100 altas de proveedor al año.
 > 
 > La mayoría de nuestros servicios premium tienen precio único (pagas una vez, usas siempre)."
 
 **Datos clave**:
 - 1 EUROe/transacción (tier gratuito)
-- 100 EUROe/año (membresía pro)
+- 300 EUROe/mes (membresía pro)
 - EUROe = euro tokenizado en Pontus-X
 
 ---

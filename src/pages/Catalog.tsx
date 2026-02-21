@@ -464,7 +464,7 @@ export default function Catalog() {
   
   const allCategories = [
     { id: "all", label: t('filters.all'), targetShare: null },
-    ...(activeOrgId ? [{ id: "my-acquisitions", label: "Mis Adquisiciones", targetShare: null }] : []),
+    ...(activeOrgId ? [{ id: "my-acquisitions", label: t('tabs.myAcquisitions'), targetShare: null }] : []),
     ...dynamicCategories.map(cat => ({
       id: cat!,
       label: cat!,
@@ -527,7 +527,7 @@ export default function Catalog() {
             className="bg-white text-blue-600 hover:bg-blue-50 shrink-0 shadow-lg"
           >
             <Database className="h-5 w-5 mr-2" />
-            Publicar Dataset
+            {t('hero.publish')}
           </Button>
         </div>
       </div>
@@ -683,7 +683,7 @@ export default function Catalog() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[150px]">Característica</TableHead>
+                  <TableHead className="w-[150px]">{t('compareTable.feature')}</TableHead>
                   {compareProducts.map(p => (
                     <TableHead key={p.asset_id}>{p.product_name}</TableHead>
                   ))}
@@ -691,13 +691,13 @@ export default function Catalog() {
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium">Proveedor</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.provider')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>{p.provider_name}</TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Precio</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.price')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.price === 0 ? (
@@ -714,34 +714,34 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Modelo</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.model')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id} className="capitalize">
-                      {p.pricing_model === 'subscription' ? 'Suscripción' : p.pricing_model === 'one_time' ? 'Pago único' : p.pricing_model === 'usage' ? 'Por uso' : 'Gratuito'}
+                      {p.pricing_model === 'subscription' ? t('compareTable.subscription') : p.pricing_model === 'one_time' ? t('compareTable.oneTime') : p.pricing_model === 'usage' ? t('compareTable.usage') : t('compareTable.freeModel')}
                     </TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Categoría</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.category')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>{p.category}</TableCell>
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Tipo de Datos</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.dataType')}</TableCell>
                   {compareProducts.map(p => {
                     const isProduction = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.asset_id);
                     return (
                       <TableCell key={p.asset_id}>
                         <Badge className={`rounded-full border text-[10px] px-2 py-0.5 font-medium ${isProduction ? 'bg-emerald-50 text-emerald-700 border-emerald-300' : 'bg-purple-50 text-purple-700 border-purple-300'}`}>
-                          {isProduction ? '🏭 Producción' : '🧪 Sintético'}
+                          {isProduction ? `🏭 ${t('nature.production')}` : `🧪 ${t('nature.synthetic')}`}
                         </Badge>
                       </TableCell>
                     );
                   })}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Reputación</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.reputation')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       <StarRating rating={p.reputation_score} count={p.review_count} />
@@ -749,12 +749,12 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Verificado</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.verified')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.kyb_verified ? (
                         <Badge variant="outline" className="border-blue-200 bg-blue-50 text-blue-700">
-                          <ShieldCheck className="h-3 w-3 mr-1" /> Sí
+                          <ShieldCheck className="h-3 w-3 mr-1" /> {t('compareTable.yes')}
                         </Badge>
                       ) : (
                         'No'
@@ -763,12 +763,12 @@ export default function Catalog() {
                   ))}
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Sostenible</TableCell>
+                  <TableCell className="font-medium">{t('compareTable.sustainable')}</TableCell>
                   {compareProducts.map(p => (
                     <TableCell key={p.asset_id}>
                       {p.has_green_badge ? (
                         <Badge variant="outline" className="border-green-200 bg-green-50 text-green-700">
-                          <Leaf className="h-3 w-3 mr-1" /> Sí
+                          <Leaf className="h-3 w-3 mr-1" /> {t('compareTable.yes')}
                         </Badge>
                       ) : (
                         'No'
@@ -847,7 +847,7 @@ function ProductCard({
       {/* Data Nature Badge — positioned to avoid overlap with category */}
       <div className="absolute top-4 right-3 z-10">
         <Badge className={`rounded-full border text-[10px] px-2 py-0.5 font-medium shadow-sm whitespace-nowrap ${isProductionAsset ? 'bg-emerald-50 text-emerald-700 border-emerald-300' : 'bg-purple-50 text-purple-700 border-purple-300'}`}>
-          {isProductionAsset ? '🏭 Producción' : '🧪 Sintético'}
+          {isProductionAsset ? `🏭 ${t('nature.production')}` : `🧪 ${t('nature.synthetic')}`}
         </Badge>
       </div>
       
@@ -951,7 +951,7 @@ function ProductCard({
               }} 
               className="w-full bg-green-600 hover:bg-green-700 text-white"
             >
-              <CheckCircle2 className="mr-2 h-4 w-4" /> Acceder / Descargar
+              <CheckCircle2 className="mr-2 h-4 w-4" /> {t('actions.accessDownload')}
             </Button>
           ) : (
             <Button 
@@ -962,7 +962,7 @@ function ProductCard({
               variant="outline"
               className="w-full"
             >
-              <Clock className="mr-2 h-4 w-4" /> Solicitud en proceso
+              <Clock className="mr-2 h-4 w-4" /> {t('actions.requestInProgress')}
             </Button>
           )
         ) : (
@@ -973,7 +973,7 @@ function ProductCard({
             }} 
             className="w-full bg-orange-500 hover:bg-orange-600 text-white"
           >
-            Solicitar Acceso <ArrowRight className="ml-2 h-4 w-4" />
+            {t('actions.request')} <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         )}
       </CardFooter>

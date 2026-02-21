@@ -79,7 +79,7 @@
     "avgTime": "Average Time",
     "fromRequestToApproval": "From request to approval",
     "compliance": "Compliance",
-    "odrlPolicies": "ODRL policies applied",
+    "odrlPolicies": "Access controls applied",
     "days": "days",
     "hours": "hours",
     "volume": "Volume",

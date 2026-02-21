@@ -18,14 +18,18 @@
     "activeTransactions": "Transacciones Activas",
     "pendingAction": "Pendientes de acción",
     "completed6Months": "Completadas (6 meses)",
-    "totalClosed": "Total de operaciones cerradas"
+    "totalClosed": "Total de operaciones cerradas",
+    "onchainVerified": "Actividad Verificada On-chain",
+    "secureNetwork": "Conectado a la Red de Datos Segura",
+    "walletLoading": "Conectando a la Red de Datos Segura..."
   },
   "chart": {
     "title": "Evolución Financiera",
     "description": "Ingresos y gastos de los últimos 6 meses",
     "demoData": "Datos Demo",
     "revenue": "Ingresos",
-    "expenses": "Gastos"
+    "expenses": "Gastos",
+    "noData": "No hay datos históricos disponibles"
   },
   "activity": {
     "title": "Última Actividad",

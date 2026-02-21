@@ -18,14 +18,18 @@
     "activeTransactions": "Active Transactions",
     "pendingAction": "Pending action",
     "completed6Months": "Completed (6 months)",
-    "totalClosed": "Total closed operations"
+    "totalClosed": "Total closed operations",
+    "onchainVerified": "On-chain Verified Activity",
+    "secureNetwork": "Connected to Secure Data Network",
+    "walletLoading": "Connecting to Secure Data Network..."
   },
   "chart": {
     "title": "Financial Evolution",
     "description": "Revenue and expenses for the last 6 months",
     "demoData": "Demo Data",
     "revenue": "Revenue",
-    "expenses": "Expenses"
+    "expenses": "Expenses",
+    "noData": "No historical data available"
   },
   "activity": {
     "title": "Recent Activity",

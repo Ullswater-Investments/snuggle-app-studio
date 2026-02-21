@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -23,22 +23,26 @@ import { toast } from "sonner";
 import { FadeIn } from "@/components/AnimatedSection";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { formatDistanceToNow, format } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, fr, de, it, pt, nl } from "date-fns/locale";
 import { EmptyState } from "@/components/EmptyState";
+import { useTranslation } from "react-i18next";
 
-const STATUS_CONFIG: Record<string, { label: string; icon: any; color: string; tooltip: string }> = {
-  initiated: { label: "Iniciada", icon: Clock, color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400", tooltip: "Transacción iniciada en blockchain" },
-  pending_subject: { label: "Confirmando Bloque", icon: Clock, color: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400", tooltip: "Esperando confirmación de bloque en blockchain" },
-  pending_holder: { label: "Validando Acceso", icon: Lock, color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400", tooltip: "Ocean Provider validando datatoken" },
-  approved: { label: "Aprobada", icon: CheckCircle, color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400", tooltip: "Transacción confirmada, lista para acceder" },
-  denied_subject: { label: "Rechazada", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "Transacción rechazada por el proveedor" },
-  denied_holder: { label: "Acceso Denegado", icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: "El Provider ha denegado el acceso" },
-  completed: { label: "Acceso Activo", icon: Unlock, color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400", tooltip: "Puedes descargar el dataset vía Ocean Provider" },
-  cancelled: { label: "Cancelada", icon: XCircle, color: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400", tooltip: "Transacción cancelada" },
-  revoked: { label: "Acceso Revocado", icon: ShieldAlert, color: "bg-red-200 text-red-900 dark:bg-red-900/40 dark:text-red-300", tooltip: "El proveedor ha revocado el acceso a estos datos" },
-};
+const DATE_LOCALES: Record<string, typeof es> = { es, en: enUS, fr, de, it, pt, nl };
+
+const getStatusConfig = (t: (key: string) => string) => ({
+  initiated: { label: t('status.initiated.label'), icon: Clock, color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400", tooltip: t('status.initiated.tooltip') },
+  pending_subject: { label: t('status.pending_subject.label'), icon: Clock, color: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400", tooltip: t('status.pending_subject.tooltip') },
+  pending_holder: { label: t('status.pending_holder.label'), icon: Lock, color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400", tooltip: t('status.pending_holder.tooltip') },
+  approved: { label: t('status.approved.label'), icon: CheckCircle, color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400", tooltip: t('status.approved.tooltip') },
+  denied_subject: { label: t('status.denied_subject.label'), icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: t('status.denied_subject.tooltip') },
+  denied_holder: { label: t('status.denied_holder.label'), icon: XCircle, color: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400", tooltip: t('status.denied_holder.tooltip') },
+  completed: { label: t('status.completed.label'), icon: Unlock, color: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400", tooltip: t('status.completed.tooltip') },
+  cancelled: { label: t('status.cancelled.label'), icon: XCircle, color: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400", tooltip: t('status.cancelled.tooltip') },
+  revoked: { label: t('status.revoked.label'), icon: ShieldAlert, color: "bg-red-200 text-red-900 dark:bg-red-900/40 dark:text-red-300", tooltip: t('status.revoked.tooltip') },
+});
 
 const Requests = () => {
+  const { t, i18n } = useTranslation('requests');
   const { user } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -50,6 +54,9 @@ const Requests = () => {
   const [viewMode, setViewMode] = useState<"list" | "kanban">("list");
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [showAnalytics, setShowAnalytics] = useState(true);
+
+  const dateLocale = DATE_LOCALES[i18n.language] || DATE_LOCALES.en;
+  const STATUS_CONFIG = useMemo(() => getStatusConfig(t), [t]);
 
   // Obtener organización del usuario
   const { data: userProfile } = useQuery({
@@ -109,7 +116,6 @@ const Requests = () => {
       const transaction = transactions?.find(t => t.id === transactionId);
       if (!transaction) throw new Error("Transaction not found");
 
-      // Determinar nuevo estado basado en el rol y acción
       let newStatus = transaction.status;
       let notificationEvent: "pre_approved" | "approved" | "denied" | "completed" | null = null;
       
@@ -124,7 +130,6 @@ const Requests = () => {
         notificationEvent = "denied";
       }
 
-      // Actualizar estado de transacción
       const { error: updateError } = await supabase
         .from("data_transactions")
         .update({ status: newStatus })
@@ -132,7 +137,6 @@ const Requests = () => {
 
       if (updateError) throw updateError;
 
-      // Registrar en historial
       const { error: historyError } = await supabase
         .from("approval_history")
         .insert([{
@@ -145,19 +149,18 @@ const Requests = () => {
 
       if (historyError) throw historyError;
 
-      // Enviar notificación
       if (notificationEvent) {
         await sendNotification(transactionId, notificationEvent);
       }
     },
     onSuccess: () => {
       setProcessingId(null);
-      toast.success("Acción realizada exitosamente");
+      toast.success(t('toast.success'));
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (error: any) => {
       setProcessingId(null);
-      toast.error(error.message || "Error al realizar la acción");
+      toast.error(error.message || t('toast.error'));
     },
   });
 
@@ -169,7 +172,7 @@ const Requests = () => {
 
   const handleDeny = (transactionId: string) => {
     setProcessingId(transactionId);
-    approveMutation.mutate({ transactionId, action: "deny", notes: "Solicitud denegada" });
+    approveMutation.mutate({ transactionId, action: "deny", notes: t('toast.denied') });
   };
 
   const getRoleInTransaction = (transaction: any) => {
@@ -179,7 +182,6 @@ const Requests = () => {
     return null;
   };
 
-  // Filtrar por búsqueda y prioridad
   const applyFilters = (transactionsToFilter: any[]) => {
     return transactionsToFilter.filter((t) => {
       const searchLower = searchQuery.toLowerCase();
@@ -216,23 +218,22 @@ const Requests = () => {
 
   const allTransactions = applyFilters(filteredTransactions);
 
-  // --- Función de exportación CSV ---
   const handleExportCSV = () => {
     if (!allTransactions || allTransactions.length === 0) {
-      toast.error("No hay datos para exportar");
+      toast.error(t('toast.noData'));
       return;
     }
 
-    const headers = ["ID", "Fecha", "Producto", "Consumidor", "Proveedor", "Estado", "Propósito"];
+    const headers = ["ID", t('table.columns.date'), t('table.columns.product'), t('table.columns.consumer'), t('table.columns.subject'), t('table.columns.status'), t('table.columns.purpose')];
     
-    const rows = allTransactions.map((t) => [
-      t.id,
-      format(new Date(t.created_at), "yyyy-MM-dd HH:mm", { locale: es }),
-      t.asset?.product?.name || "Sin producto",
-      t.consumer_org?.name || "—",
-      t.subject_org?.name || "—",
-      STATUS_CONFIG[t.status]?.label || t.status,
-      `"${(t.purpose || "").replace(/"/g, '""')}"` // Escape quotes
+    const rows = allTransactions.map((tx) => [
+      tx.id,
+      format(new Date(tx.created_at), "yyyy-MM-dd HH:mm", { locale: dateLocale }),
+      tx.asset?.product?.name || t('csv.noProduct'),
+      tx.consumer_org?.name || "—",
+      tx.subject_org?.name || "—",
+      STATUS_CONFIG[tx.status as keyof typeof STATUS_CONFIG]?.label || tx.status,
+      `"${(tx.purpose || "").replace(/"/g, '""')}"`
     ]);
 
     const csvContent = [
@@ -253,18 +254,38 @@ const Requests = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    toast.success("Informe descargado correctamente", {
-      description: `${allTransactions.length} transacciones exportadas`,
+    toast.success(t('toast.exported'), {
+      description: t('toast.exportedDesc', { count: allTransactions.length }),
     });
   };
 
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-muted-foreground">Cargando solicitudes...</p>
+        <p className="text-lg text-muted-foreground">{t('loading')}</p>
       </div>
     );
   }
+
+  const formatLocalDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString(i18n.language === 'en' ? 'en-GB' : `${i18n.language}-${i18n.language.toUpperCase()}`, { day: 'numeric', month: 'short' });
+  };
+
+  const DemoTooltip = () => isDemo ? (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>
+          <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
+            <Info className="h-3 w-3 mr-1" />
+            DEMO
+          </Badge>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="text-xs max-w-xs">{t('demo.tooltip')}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  ) : null;
 
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -274,13 +295,13 @@ const Requests = () => {
             <div className="flex-1">
               <Badge variant="secondary" className="mb-4">
                 <ClipboardList className="mr-1 h-3 w-3" />
-                Solicitudes
+                {t('badge')}
               </Badge>
               <h1 className="text-4xl font-bold mb-3">
-                Gestiona tus Solicitudes de Datos
+                {t('title')}
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl">
-                Administra solicitudes de datos según tu rol en cada transacción
+                {t('subtitle')}
               </p>
             </div>
             <div className="flex gap-2">
@@ -289,7 +310,7 @@ const Requests = () => {
                 onClick={() => setShowAnalytics(!showAnalytics)}
               >
                 <BarChart3 className="mr-2 h-4 w-4" />
-                {showAnalytics ? "Ocultar" : "Mostrar"} Analytics
+                {showAnalytics ? t('buttons.hideAnalytics') : t('buttons.showAnalytics')}
               </Button>
               <Button 
                 variant="outline"
@@ -297,14 +318,14 @@ const Requests = () => {
                 disabled={allTransactions.length === 0}
               >
                 <Download className="mr-2 h-4 w-4" />
-                Exportar CSV
+                {t('buttons.exportCSV')}
               </Button>
               <Button 
                 size="lg"
                 onClick={() => navigate("/requests/new")}
               >
                 <Plus className="mr-2 h-5 w-5" />
-                Nueva Solicitud
+                {t('buttons.newRequest')}
               </Button>
             </div>
           </div>
@@ -325,7 +346,7 @@ const Requests = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                Pendientes de Acción
+                {t('stats.pendingAction')}
               </CardTitle>
               <Clock className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             </CardHeader>
@@ -337,7 +358,7 @@ const Requests = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                Mis Solicitudes
+                {t('stats.myRequests')}
               </CardTitle>
               <ClipboardList className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             </CardHeader>
@@ -349,7 +370,7 @@ const Requests = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                Total Transacciones
+                {t('stats.totalTransactions')}
               </CardTitle>
               <CheckCircle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
             </CardHeader>
@@ -367,7 +388,7 @@ const Requests = () => {
               <div className="relative flex-1 w-full">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Buscar por propósito, producto u organización..."
+                  placeholder={t('filters.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10"
@@ -375,14 +396,14 @@ const Requests = () => {
               </div>
               <Select value={priorityFilter} onValueChange={setPriorityFilter}>
                 <SelectTrigger className="w-full sm:w-[180px]">
-                  <SelectValue placeholder="Prioridad" />
+                  <SelectValue placeholder={t('filters.priority')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Todas</SelectItem>
-                  <SelectItem value="crítica">Crítica</SelectItem>
-                  <SelectItem value="alta">Alta</SelectItem>
-                  <SelectItem value="media">Media</SelectItem>
-                  <SelectItem value="baja">Baja</SelectItem>
+                  <SelectItem value="all">{t('filters.all')}</SelectItem>
+                  <SelectItem value="crítica">{t('filters.critical')}</SelectItem>
+                  <SelectItem value="alta">{t('filters.high')}</SelectItem>
+                  <SelectItem value="media">{t('filters.medium')}</SelectItem>
+                  <SelectItem value="baja">{t('filters.low')}</SelectItem>
                 </SelectContent>
               </Select>
               <div className="flex gap-1 border rounded-md p-1">
@@ -412,7 +433,7 @@ const Requests = () => {
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="pending" className="relative">
               <AlertCircle className="mr-2 h-4 w-4" />
-              Requiere Atención
+              {t('tabs.requiresAttention')}
               {pendingForMe.length > 0 && (
                 <Badge className="ml-2 bg-red-500 text-white hover:bg-red-600" variant="destructive">
                   {pendingForMe.length}
@@ -421,20 +442,20 @@ const Requests = () => {
             </TabsTrigger>
             <TabsTrigger value="my-requests">
               <ClipboardList className="mr-2 h-4 w-4" />
-              Mis Solicitudes
+              {t('tabs.myRequests')}
               <Badge className="ml-2" variant="secondary">
                 {myRequests.length}
               </Badge>
             </TabsTrigger>
             <TabsTrigger value="historical">
               <History className="mr-2 h-4 w-4" />
-              Histórico
+              {t('tabs.historical')}
               <Badge className="ml-2" variant="outline">
                 {historicalTransactions.length}
               </Badge>
             </TabsTrigger>
             <TabsTrigger value="all">
-              Todas
+              {t('tabs.all')}
               <Badge className="ml-2" variant="outline">
                 {allTransactions.length}
               </Badge>
@@ -447,11 +468,11 @@ const Requests = () => {
                 <CardContent>
                   <EmptyState
                     icon={Clock}
-                    title="Sin solicitudes activas"
-                    description="No tienes ninguna solicitud que requiera tu acción en este momento. Cuando recibas nuevas solicitudes, aparecerán aquí."
+                    title={t('empty.title')}
+                    description={t('empty.description')}
                     action={
                       <Button onClick={() => navigate("/catalog")}>
-                        Explorar Catálogo
+                        {t('empty.exploreCatalog')}
                       </Button>
                     }
                   />
@@ -492,7 +513,7 @@ const Requests = () => {
                             <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                           )}
                           <CardDescription>
-                            Solicitado por: {transaction.consumer_org.name}
+                            {t('fields.requestedBy')}: {transaction.consumer_org.name}
                           </CardDescription>
                           {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
                             <div className="flex flex-wrap gap-1 mt-2">
@@ -508,59 +529,43 @@ const Requests = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
-                                <Badge className={STATUS_CONFIG[transaction.status].color}>
-                                  {React.createElement(STATUS_CONFIG[transaction.status].icon, {
+                                <Badge className={STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.color}>
+                                  {React.createElement(STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.icon, {
                                     className: "mr-1 h-3 w-3"
                                   })}
-                                  {STATUS_CONFIG[transaction.status].label}
+                                  {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                                 </Badge>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p className="text-xs">{STATUS_CONFIG[transaction.status].tooltip}</p>
+                                <p className="text-xs">{STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.tooltip}</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
-                          {isDemo && (
-                            <TooltipProvider>
-                              <Tooltip>
-                                <TooltipTrigger>
-                                  <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
-                                    <Info className="h-3 w-3 mr-1" />
-                                    DEMO
-                                  </Badge>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p className="text-xs max-w-xs">
-                                    Transacción sintética de demostración. En producción, verás tus solicitudes reales.
-                                  </p>
-                                </TooltipContent>
-                              </Tooltip>
-                            </TooltipProvider>
-                          )}
+                          <DemoTooltip />
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="grid gap-4 sm:grid-cols-3">
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground">Precio</p>
+                          <p className="text-sm font-medium text-muted-foreground">{t('fields.price')}</p>
                           <p className="text-sm font-bold">
-                            {transaction.metadata?.price ? `${transaction.metadata.price} €` : "Gratis"}
+                            {transaction.metadata?.price ? `${transaction.metadata.price} €` : t('fields.free')}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground">Estado de Pago</p>
+                          <p className="text-sm font-medium text-muted-foreground">{t('fields.paymentStatus')}</p>
                           <div className="mt-1">
                             {transaction.payment_status === 'paid' && (
                               <Badge className="bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-400">
                                 <CheckCircle className="h-3 w-3 mr-1" />
-                                Pagado
+                                {t('fields.paid')}
                               </Badge>
                             )}
                             {transaction.payment_status === 'pending' && (
                               <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-400">
                                 <Clock className="h-3 w-3 mr-1" />
-                                Pendiente
+                                {t('fields.pending')}
                               </Badge>
                             )}
                             {(!transaction.payment_status || transaction.payment_status === 'na') && (
@@ -571,16 +576,16 @@ const Requests = () => {
                           </div>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-muted-foreground">Duración</p>
-                          <p className="text-sm">{transaction.access_duration_days} días (proveedor)</p>
+                          <p className="text-sm font-medium text-muted-foreground">{t('fields.duration')}</p>
+                          <p className="text-sm">{transaction.access_duration_days} {t('fields.days')}</p>
                         </div>
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-muted-foreground">Propósito</p>
+                        <p className="text-sm font-medium text-muted-foreground">{t('fields.purpose')}</p>
                         <p className="text-sm">{transaction.purpose}</p>
                       </div>
                       <div>
-                        <p className="text-sm font-medium text-muted-foreground">Justificación</p>
+                        <p className="text-sm font-medium text-muted-foreground">{t('fields.justification')}</p>
                         <p className="text-sm">{transaction.justification}</p>
                       </div>
                       <div className="flex gap-2">
@@ -593,7 +598,7 @@ const Requests = () => {
                           ) : (
                             <CheckCircle className="mr-2 h-4 w-4" />
                           )}
-                          {isSubject ? "Pre-aprobar" : "Aprobar y Compartir"}
+                          {isSubject ? t('actions.preApprove') : t('actions.approveAndShare')}
                         </Button>
                         <Button
                           variant="destructive"
@@ -605,13 +610,13 @@ const Requests = () => {
                           ) : (
                             <XCircle className="mr-2 h-4 w-4" />
                           )}
-                          Denegar
+                          {t('actions.deny')}
                         </Button>
                         <Button
                           variant="outline"
                           onClick={() => navigate(`/requests/${transaction.id}`)}
                         >
-                          Ver Detalle
+                          {t('actions.viewDetails')}
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       </div>
@@ -626,9 +631,9 @@ const Requests = () => {
             {myRequests.length === 0 ? (
               <Card>
                 <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">No has realizado ninguna solicitud</p>
+                  <p className="text-muted-foreground">{t('empty.noRequests')}</p>
                   <Button className="mt-4" onClick={() => navigate("/catalog")}>
-                    Explorar Catálogo
+                    {t('empty.exploreCatalog')}
                   </Button>
                 </CardContent>
               </Card>
@@ -663,7 +668,7 @@ const Requests = () => {
                           <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                         )}
                         <CardDescription>
-                          Proveedor: {transaction.subject_org.name}
+                          {t('fields.subject')}: {transaction.subject_org.name}
                         </CardDescription>
                         {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
                           <div className="flex flex-wrap gap-1 mt-2">
@@ -679,35 +684,19 @@ const Requests = () => {
                          <TooltipProvider>
                            <Tooltip>
                              <TooltipTrigger>
-                               <Badge className={STATUS_CONFIG[transaction.status].color}>
-                                 {React.createElement(STATUS_CONFIG[transaction.status].icon, {
+                               <Badge className={STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.color}>
+                                 {React.createElement(STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.icon, {
                                    className: "mr-1 h-3 w-3"
                                  })}
-                                 {STATUS_CONFIG[transaction.status].label}
+                                 {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                                </Badge>
                              </TooltipTrigger>
                              <TooltipContent>
-                               <p className="text-xs">{STATUS_CONFIG[transaction.status].tooltip}</p>
+                               <p className="text-xs">{STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.tooltip}</p>
                              </TooltipContent>
                            </Tooltip>
                          </TooltipProvider>
-                        {isDemo && (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
-                                  <Info className="h-3 w-3 mr-1" />
-                                  DEMO
-                                </Badge>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p className="text-xs max-w-xs">
-                                  Transacción sintética de demostración. En producción, verás tus solicitudes reales.
-                                </p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        )}
+                        <DemoTooltip />
                       </div>
                     </div>
                   </CardHeader>
@@ -715,10 +704,10 @@ const Requests = () => {
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
                         <p className="text-sm text-muted-foreground">
-                          Propósito: {transaction.purpose}
+                          {t('fields.purpose')}: {transaction.purpose}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Creada: {new Date(transaction.created_at).toLocaleDateString("es-ES")}
+                          {t('fields.created')}: {formatLocalDate(transaction.created_at)}
                         </p>
                       </div>
                       <div className="flex gap-2">
@@ -735,7 +724,7 @@ const Requests = () => {
                           variant="outline"
                           onClick={() => navigate(`/requests/${transaction.id}`)}
                         >
-                          Ver Detalles
+                          {t('actions.viewDetails')}
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Button>
                       </div>
@@ -751,9 +740,9 @@ const Requests = () => {
               <Card>
                 <CardContent className="py-12 text-center">
                   <History className="mx-auto h-12 w-12 text-muted-foreground" />
-                  <h3 className="mt-4 text-lg font-semibold">No hay transacciones históricas</h3>
+                  <h3 className="mt-4 text-lg font-semibold">{t('empty.noHistory')}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">
-                    Las transacciones completadas, aprobadas o denegadas aparecerán aquí
+                    {t('empty.noHistoryDesc')}
                   </p>
                 </CardContent>
               </Card>
@@ -792,9 +781,9 @@ const Requests = () => {
                             <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                           )}
                           <CardDescription>
-                            {role === "consumer" && `Proveedor: ${transaction.subject_org.name}`}
-                            {role === "subject" && `Solicitado por: ${transaction.consumer_org.name}`}
-                            {role === "holder" && `Consumer: ${transaction.consumer_org.name}`}
+                            {role === "consumer" && `${t('fields.subject')}: ${transaction.subject_org.name}`}
+                            {role === "subject" && `${t('fields.requestedBy')}: ${transaction.consumer_org.name}`}
+                            {role === "holder" && `${t('fields.consumer')}: ${transaction.consumer_org.name}`}
                           </CardDescription>
                           {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
                             <div className="flex flex-wrap gap-1 mt-2">
@@ -810,15 +799,15 @@ const Requests = () => {
                           <TooltipProvider>
                             <Tooltip>
                               <TooltipTrigger>
-                                <Badge className={STATUS_CONFIG[transaction.status].color}>
-                                  {React.createElement(STATUS_CONFIG[transaction.status].icon, {
+                                <Badge className={STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.color}>
+                                  {React.createElement(STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.icon, {
                                     className: "mr-1 h-3 w-3"
                                   })}
-                                  {STATUS_CONFIG[transaction.status].label}
+                                  {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                                 </Badge>
                               </TooltipTrigger>
                               <TooltipContent>
-                                <p className="text-xs">{STATUS_CONFIG[transaction.status].tooltip}</p>
+                                <p className="text-xs">{STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.tooltip}</p>
                               </TooltipContent>
                             </Tooltip>
                           </TooltipProvider>
@@ -828,7 +817,7 @@ const Requests = () => {
                     <CardContent>
                       <div className="flex items-center justify-between">
                         <p className="text-xs text-muted-foreground">
-                          {formatDistanceToNow(new Date(transaction.created_at), { addSuffix: true, locale: es })}
+                          {formatDistanceToNow(new Date(transaction.created_at), { addSuffix: true, locale: dateLocale })}
                         </p>
                         <div className="flex gap-2">
                           {transaction.status === "completed" && (role === "subject" || role === "holder") && (
@@ -844,7 +833,7 @@ const Requests = () => {
                             size="sm"
                             onClick={() => navigate(`/requests/${transaction.id}`)}
                           >
-                            Ver Detalle
+                            {t('actions.viewDetails')}
                           </Button>
                         </div>
                       </div>
@@ -889,9 +878,9 @@ const Requests = () => {
                           <p className="text-xs text-muted-foreground font-mono mb-1">ID: {transaction.metadata.ticket_id}</p>
                         )}
                         <CardDescription>
-                          {role === "consumer" && `Proveedor: ${transaction.subject_org.name}`}
-                          {role === "subject" && `Solicitado por: ${transaction.consumer_org.name}`}
-                          {role === "holder" && `Consumer: ${transaction.consumer_org.name}, Subject: ${transaction.subject_org.name}`}
+                          {role === "consumer" && `${t('fields.subject')}: ${transaction.subject_org.name}`}
+                          {role === "subject" && `${t('fields.requestedBy')}: ${transaction.consumer_org.name}`}
+                          {role === "holder" && `${t('fields.consumer')}: ${transaction.consumer_org.name}, ${t('fields.subject')}: ${transaction.subject_org.name}`}
                         </CardDescription>
                         {transaction.metadata?.tags && Array.isArray(transaction.metadata.tags) && (
                           <div className="flex flex-wrap gap-1 mt-2">
@@ -908,42 +897,26 @@ const Requests = () => {
                          <TooltipProvider>
                            <Tooltip>
                              <TooltipTrigger>
-                               <Badge className={STATUS_CONFIG[transaction.status].color}>
-                                 {React.createElement(STATUS_CONFIG[transaction.status].icon, {
+                               <Badge className={STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.color}>
+                                 {React.createElement(STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.icon, {
                                    className: "mr-1 h-3 w-3"
                                  })}
-                                 {STATUS_CONFIG[transaction.status].label}
+                                 {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                                </Badge>
                              </TooltipTrigger>
                              <TooltipContent>
-                               <p className="text-xs">{STATUS_CONFIG[transaction.status].tooltip}</p>
+                               <p className="text-xs">{STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.tooltip}</p>
                              </TooltipContent>
                            </Tooltip>
                          </TooltipProvider>
-                        {isDemo && (
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Badge variant="outline" className="bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700">
-                                  <Info className="h-3 w-3 mr-1" />
-                                  DEMO
-                                </Badge>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p className="text-xs max-w-xs">
-                                  Transacción sintética de demostración. En producción, verás tus solicitudes reales.
-                                </p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        )}
+                        <DemoTooltip />
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
                       <p className="text-sm text-muted-foreground">
-                        Creada: {new Date(transaction.created_at).toLocaleDateString("es-ES")}
+                        {t('fields.created')}: {formatLocalDate(transaction.created_at)}
                       </p>
                       <div className="flex gap-2">
                         {transaction.status === "completed" && (role === "subject" || role === "holder") && (
@@ -958,7 +931,7 @@ const Requests = () => {
                           variant="outline"
                           onClick={() => navigate(`/requests/${transaction.id}`)}
                         >
-                          Ver Detalle
+                          {t('actions.viewDetails')}
                         </Button>
                       </div>
                     </div>
@@ -976,7 +949,7 @@ const Requests = () => {
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Clock className="h-4 w-4 text-amber-600" />
-                  Pendientes
+                  {t('kanban.pending')}
                   <Badge variant="secondary" className="ml-auto">{allTransactions.filter(t => ['initiated', 'pending_subject'].includes(t.status)).length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -996,12 +969,12 @@ const Requests = () => {
                         </div>
                       </div>
                       <Badge variant="secondary" className="text-xs">
-                        {STATUS_CONFIG[transaction.status].label}
+                        {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                       </Badge>
                       <div className="flex items-center gap-1 mt-2">
                         <Calendar className="h-3 w-3 text-muted-foreground" />
                         <span className="text-xs text-muted-foreground">
-                          {new Date(transaction.created_at).toLocaleDateString("es-ES", { day: 'numeric', month: 'short' })}
+                          {formatLocalDate(transaction.created_at)}
                         </span>
                       </div>
                     </CardContent>
@@ -1015,7 +988,7 @@ const Requests = () => {
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Lock className="h-4 w-4 text-purple-600" />
-                  En Negociación
+                  {t('kanban.negotiation')}
                   <Badge variant="secondary" className="ml-auto">{allTransactions.filter(t => t.status === 'pending_holder').length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -1035,12 +1008,12 @@ const Requests = () => {
                         </div>
                       </div>
                       <Badge variant="secondary" className="text-xs">
-                        {STATUS_CONFIG[transaction.status].label}
+                        {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                       </Badge>
                       <div className="flex items-center gap-1 mt-2">
                         <Calendar className="h-3 w-3 text-muted-foreground" />
                         <span className="text-xs text-muted-foreground">
-                          {new Date(transaction.created_at).toLocaleDateString("es-ES", { day: 'numeric', month: 'short' })}
+                          {formatLocalDate(transaction.created_at)}
                         </span>
                       </div>
                     </CardContent>
@@ -1054,7 +1027,7 @@ const Requests = () => {
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-green-600" />
-                  Aprobados
+                  {t('kanban.approved')}
                   <Badge variant="secondary" className="ml-auto">{allTransactions.filter(t => t.status === 'approved').length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -1074,12 +1047,12 @@ const Requests = () => {
                         </div>
                       </div>
                       <Badge variant="secondary" className="text-xs bg-green-100 text-green-800">
-                        {STATUS_CONFIG[transaction.status].label}
+                        {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                       </Badge>
                       <div className="flex items-center gap-1 mt-2">
                         <Calendar className="h-3 w-3 text-muted-foreground" />
                         <span className="text-xs text-muted-foreground">
-                          {new Date(transaction.created_at).toLocaleDateString("es-ES", { day: 'numeric', month: 'short' })}
+                          {formatLocalDate(transaction.created_at)}
                         </span>
                       </div>
                     </CardContent>
@@ -1093,7 +1066,7 @@ const Requests = () => {
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Rocket className="h-4 w-4 text-emerald-600" />
-                  Completados
+                  {t('kanban.completed')}
                   <Badge variant="secondary" className="ml-auto">{allTransactions.filter(t => t.status === 'completed').length}</Badge>
                 </CardTitle>
               </CardHeader>
@@ -1113,12 +1086,12 @@ const Requests = () => {
                         </div>
                       </div>
                       <Badge variant="secondary" className="text-xs bg-emerald-100 text-emerald-800">
-                        {STATUS_CONFIG[transaction.status].label}
+                        {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
                       </Badge>
                       <div className="flex items-center gap-1 mt-2">
                         <Calendar className="h-3 w-3 text-muted-foreground" />
                         <span className="text-xs text-muted-foreground">
-                          {new Date(transaction.created_at).toLocaleDateString("es-ES", { day: 'numeric', month: 'short' })}
+                          {formatLocalDate(transaction.created_at)}
                         </span>
                       </div>
                     </CardContent>
@@ -1135,6 +1108,10 @@ const Requests = () => {
 
 // Componente auxiliar para mostrar detalles de transacción en Sheet
 const TransactionDetailView = ({ transaction, role }: { transaction: any; role: string | null }) => {
+  const { t, i18n } = useTranslation('requests');
+  const dateLocale = DATE_LOCALES[i18n.language] || DATE_LOCALES.en;
+  const STATUS_CONFIG = useMemo(() => getStatusConfig(t), [t]);
+
   const { data: approvalHistory } = useQuery({
     queryKey: ["approval-history", transaction.id],
     queryFn: async () => {
@@ -1157,45 +1134,45 @@ const TransactionDetailView = ({ transaction, role }: { transaction: any; role: 
       <div className="flex items-center gap-4">
         <div className="flex-1 text-center">
           <div className="text-sm font-medium">{transaction.consumer_org.name}</div>
-          <div className="text-xs text-muted-foreground">Solicitante</div>
+          <div className="text-xs text-muted-foreground">{t('detail.requester')}</div>
         </div>
         <ArrowRight className="h-6 w-6 text-muted-foreground" />
         <div className="flex-1 text-center">
           <div className="text-sm font-medium">{transaction.subject_org.name}</div>
-          <div className="text-xs text-muted-foreground">Proveedor</div>
+          <div className="text-xs text-muted-foreground">{t('detail.provider')}</div>
         </div>
       </div>
 
       <div className="space-y-4">
         <div>
-          <h4 className="text-sm font-semibold mb-2">Propósito</h4>
+          <h4 className="text-sm font-semibold mb-2">{t('fields.purpose')}</h4>
           <p className="text-sm text-muted-foreground">{transaction.purpose}</p>
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold mb-2">Justificación</h4>
+          <h4 className="text-sm font-semibold mb-2">{t('fields.justification')}</h4>
           <p className="text-sm text-muted-foreground">{transaction.justification}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <h4 className="text-sm font-semibold mb-1">Duración de Acceso</h4>
-            <p className="text-sm text-muted-foreground">{transaction.access_duration_days} días (política del proveedor)</p>
+            <h4 className="text-sm font-semibold mb-1">{t('fields.accessDuration')}</h4>
+            <p className="text-sm text-muted-foreground">{transaction.access_duration_days} {t('fields.days')} ({t('detail.policyProvider')})</p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold mb-1">Estado Actual</h4>
-            <Badge className={STATUS_CONFIG[transaction.status].color}>
-              {React.createElement(STATUS_CONFIG[transaction.status].icon, {
+            <h4 className="text-sm font-semibold mb-1">{t('detail.currentStatus')}</h4>
+            <Badge className={STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.color}>
+              {React.createElement(STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.icon, {
                 className: "mr-1 h-3 w-3"
               })}
-              {STATUS_CONFIG[transaction.status].label}
+              {STATUS_CONFIG[transaction.status as keyof typeof STATUS_CONFIG]?.label}
             </Badge>
           </div>
         </div>
       </div>
 
       <div>
-        <h4 className="text-sm font-semibold mb-4">Timeline de Aprobaciones</h4>
+        <h4 className="text-sm font-semibold mb-4">{t('detail.timeline')}</h4>
         {approvalHistory && approvalHistory.length > 0 ? (
           <div className="space-y-4">
             {approvalHistory.map((event, index) => (
@@ -1221,14 +1198,14 @@ const TransactionDetailView = ({ transaction, role }: { transaction: any; role: 
                     <p className="text-xs text-muted-foreground mt-1 italic">"{event.notes}"</p>
                   )}
                   <div className="text-xs text-muted-foreground mt-1">
-                    {formatDistanceToNow(new Date(event.created_at), { addSuffix: true, locale: es })}
+                    {formatDistanceToNow(new Date(event.created_at), { addSuffix: true, locale: dateLocale })}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-sm text-muted-foreground">No hay historial de aprobaciones aún</p>
+          <p className="text-sm text-muted-foreground">{t('detail.noHistory')}</p>
         )}
       </div>
     </div>

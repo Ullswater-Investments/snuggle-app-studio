@@ -3,7 +3,11 @@
     "badge": "Offizieller Marktplatz v2.0",
     "title": "Entdecken, Kaufen und Integrieren Sie Vertrauenswürdige Daten",
     "description": "Greifen Sie auf Tausende verifizierter Datenbestände mit integrierter Governance und automatisierter ODRL-Compliance zu.",
-    "searchPlaceholder": "Finanzdaten, IoT, Klima suchen..."
+    "searchPlaceholder": "Finanzdaten, IoT, Klima suchen...",
+    "publish": "Dataset veröffentlichen"
+  },
+  "tabs": {
+    "myAcquisitions": "Meine Erwerbungen"
   },
   "filters": {
     "title": "Filter",
@@ -16,7 +20,38 @@
     "verifiedKYB": "Verifiziert (KYB)",
     "partner": "Partner",
     "country": "Land",
-    "category": "Kategorie"
+    "category": "Kategorie",
+    "myStatus": "Meine Status",
+    "dataNature": "Datennatur",
+    "acquired": "Erworben",
+    "pending": "Ausstehend",
+    "demo": "Demo / Synthetisch",
+    "production": "Produktion"
+  },
+  "nature": {
+    "synthetic": "Synthetisch",
+    "production": "Produktion"
+  },
+  "actions": {
+    "request": "Zugang anfordern",
+    "accessDownload": "Zugreifen / Herunterladen",
+    "requestInProgress": "Anfrage in Bearbeitung"
+  },
+  "compareTable": {
+    "feature": "Eigenschaft",
+    "provider": "Anbieter",
+    "price": "Preis",
+    "model": "Modell",
+    "category": "Kategorie",
+    "dataType": "Datentyp",
+    "reputation": "Reputation",
+    "verified": "Verifiziert",
+    "sustainable": "Nachhaltig",
+    "yes": "Ja",
+    "subscription": "Abonnement",
+    "oneTime": "Einmalzahlung",
+    "usage": "Pro Nutzung",
+    "freeModel": "Kostenlos"
   },
   "emptyState": {
     "title": "Keine Ergebnisse gefunden",
@@ -50,7 +85,13 @@
     "addToCart": "Hinzufügen",
     "freeAccess": "Kostenloser Zugang",
     "verifiedProvider": "Verifizierter Anbieter",
-    "reviews": "Bewertungen"
+    "reviews": "Bewertungen",
+    "by": "von",
+    "free": "KOSTENLOS",
+    "month": "Monat",
+    "year": "Jahr",
+    "compareThis": "Dieses Produkt vergleichen",
+    "noDescription": "Keine Beschreibung verfügbar"
   },
   "pricing": {
     "free": "Kostenlos",
