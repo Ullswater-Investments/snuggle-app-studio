@@ -1,36 +1,40 @@
 
 
-## Correccion del Banner de Mantenimiento y Restriccion de Publicacion
+## Limpieza de la pagina de Gobernanza: eliminar tarjetas estaticas y reorganizar layout
 
-### Problema
+### Cambios a realizar
 
-1. **Banner ausente**: Las rutas bajo `PublicDemoLayout` (catalogo, sostenibilidad, servicios, innovation lab, casos de exito, directorio/partners) no muestran el banner de mantenimiento porque ese layout no lo incluye.
-2. **Publicacion sin restriccion**: Las rutas `/dashboard/publish` y `/datos/publicar` siguen accesibles durante el modo mantenimiento. No hay logica que bloquee la accion.
+**Archivo:** `src/pages/admin/AdminGovernance.tsx`
 
----
+#### 1. Eliminar tarjetas estaticas
 
-### Solucion
+Se removeran por completo estas tres tarjetas:
 
-#### 1. Agregar MaintenanceBanner a PublicDemoLayout
+- **Identidad del Espacio (DID)** (lineas 688-715) - Solo muestra el DID estatico y badges GAIA-X
+- **Protocolo Pontus-X** (lineas 717-773) - Solo muestra direcciones de contratos y datos de red
+- **Servicios de Datos** (lineas 778-811) - Solo muestra enlaces a Provider, Aquarius y Explorer
 
-Modificar `src/components/PublicDemoLayout.tsx` para importar y renderizar `MaintenanceBanner` justo debajo del `<header>` y antes del `PublicDemoBanner`, de la misma forma que ya se hace en `AppLayout` y `AdminLayout`.
+Tambien se eliminara el wrapper `grid md:grid-cols-2` que contenia las dos primeras (lineas 687, 774) y el segundo wrapper grid que contenia Servicios de Datos y Estado del Ecosistema (lineas 777, 855).
 
-#### 2. Bloquear publicacion en modo mantenimiento
+#### 2. Limpiar imports no utilizados
 
-Modificar `src/pages/dashboard/PublishDataset.tsx`:
+Se removeran los imports que solo usaban estas tarjetas: `Fingerprint`, `Globe`, `Database`, `Copy`, `ExternalLink`, y las referencias a `oceanContracts`, `explorerBase`, `truncate`, `copy` y la constante `DID`.
 
-- Importar `useGovernanceSettings` (si no esta ya importado) y leer `maintenanceMode`.
-- Si `maintenanceMode === true`:
-  - Deshabilitar el boton de publicar (atributo `disabled`).
-  - Mostrar un aviso visible indicando que la publicacion esta desactivada temporalmente por mantenimiento.
-  - Opcionalmente, impedir el envio de la mutacion como segunda capa de seguridad.
+#### 3. Reorganizar layout
 
----
+El orden final de las tarjetas sera:
 
-### Archivos a modificar
+1. **Operaciones de Emergencia** (ya esta arriba, se mantiene)
+2. **Configuracion de Red Blockchain** (se mantiene en su posicion)
+3. **Grid de 2 columnas:**
+   - Configuracion de Identidad (switches KYC/KYB)
+   - Politicas de Activos (toggles aprobacion/visibilidad)
+4. **Gobernanza Economica** (comision del ecosistema)
+5. **Estado del Ecosistema** (health check, ahora fuera del grid eliminado, ocupa ancho completo)
+6. **Registro de Eventos** (logs, se mantiene al final)
 
-| Archivo | Cambio |
-|---|---|
-| `src/components/PublicDemoLayout.tsx` | Importar y renderizar `MaintenanceBanner` debajo del header |
-| `src/pages/dashboard/PublishDataset.tsx` | Leer `maintenanceMode` y deshabilitar el formulario de publicacion cuando este activo |
+#### 4. Ajuste de grilla
+
+- Las tarjetas de Identidad y Politicas de Activos se agruparan en un `grid gap-6 md:grid-cols-2` para que se adapten a 1 o 2 columnas segun el ancho de pantalla.
+- Estado del Ecosistema pasara a ocupar ancho completo ya que su companion (Servicios de Datos) se elimina.
 
