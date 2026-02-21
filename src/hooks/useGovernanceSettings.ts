@@ -5,6 +5,7 @@ const GOVERNANCE_KEYS = [
   "require_email_verification",
   "require_kyc",
   "require_kyb",
+  "require_deltadao_onboarding",
   "ecosystem_status",
   "auto_approve_assets",
   "catalog_visibility",
@@ -17,6 +18,7 @@ interface GovernanceSettings {
   requireEmail: boolean;
   requireKyc: boolean;
   requireKyb: boolean;
+  requireDeltadaoOnboarding: boolean;
   ecosystemStatus: "active" | "maintenance";
   autoApproveAssets: boolean;
   catalogVisibility: "public" | "private";
@@ -50,6 +52,7 @@ export function useGovernanceSettings(): GovernanceSettings {
     requireEmail: data?.require_email_verification === "true",
     requireKyc: data?.require_kyc === "true",
     requireKyb: data?.require_kyb === "true",
+    requireDeltadaoOnboarding: data?.require_deltadao_onboarding !== "false",
     ecosystemStatus: (data?.ecosystem_status as "active" | "maintenance") ?? "active",
     autoApproveAssets: data?.auto_approve_assets !== "false",
     catalogVisibility: (data?.catalog_visibility as "public" | "private") ?? "public",

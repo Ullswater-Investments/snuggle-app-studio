@@ -39,6 +39,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useQueryClient } from "@tanstack/react-query";
+import { useGovernanceSettings } from "@/hooks/useGovernanceSettings";
 
 const COUNTRIES = [
   "España", "Portugal", "Francia", "Alemania", "Italia", "Reino Unido",
@@ -112,6 +113,7 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
   const { user } = useAuth();
   const { switchOrganization } = useOrganizationContext();
   const queryClient = useQueryClient();
+  const { requireDeltadaoOnboarding, isLoading: govLoading } = useGovernanceSettings();
   const [walletInput, setWalletInput] = useState(walletAddress || "");
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -240,7 +242,8 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
   };
 
   const onSubmit = async (data: OrganizationFormData) => {
-    if (!isVerified) {
+    // Only require wallet verification when DeltaDAO onboarding is active
+    if (requireDeltadaoOnboarding && !isVerified) {
       toast.error("Debes verificar tu wallet antes de continuar");
       return;
     }
@@ -273,24 +276,26 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
         return;
       }
 
-      // Check if organization with this wallet_address already exists
-      const { data: existingOrgByWallet } = await supabase
-        .from('organizations')
-        .select('id, name')
-        .eq('wallet_address', walletInput)
-        .maybeSingle();
+      // Check if organization with this wallet_address already exists (only if wallet provided)
+      if (walletInput) {
+        const { data: existingOrgByWallet } = await supabase
+          .from('organizations')
+          .select('id, name')
+          .eq('wallet_address', walletInput)
+          .maybeSingle();
 
-      if (existingOrgByWallet) {
-        toast.error("Esta organización ya se encuentra registrada en el ecosistema PROCUREDATA", {
-          description: "Si eres un nuevo miembro, por favor solicita una invitación al administrador actual de tu organización.",
-          duration: 10000,
-          action: {
-            label: "Solicitar invitación",
-            onClick: () => navigate('/onboarding/request-invite'),
-          },
-        });
-        setIsSubmitting(false);
-        return;
+        if (existingOrgByWallet) {
+          toast.error("Esta organización ya está registrada en PROCUREDATA", {
+            description: "Si eres un nuevo miembro, por favor solicita una invitación al administrador actual de tu organización.",
+            duration: 10000,
+            action: {
+              label: "Solicitar invitación",
+              onClick: () => navigate('/onboarding/request-invite'),
+            },
+          });
+          setIsSubmitting(false);
+          return;
+        }
       }
 
       const { data: newOrg, error: orgError } = await supabase
@@ -300,12 +305,12 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
           tax_id: data.documentNumber,
           type: 'provider' as const,
           sector: data.sector,
-          kyb_verified: true,
-          wallet_address: walletInput,
+          kyb_verified: requireDeltadaoOnboarding ? true : false,
+          wallet_address: walletInput || null,
           description: `${data.address}, ${data.country}`,
           is_demo: false,
           did: verificationData?.did || null,
-          verification_source: verificationData?.verificationSource || null,
+          verification_source: requireDeltadaoOnboarding ? (verificationData?.verificationSource || "DeltaDAO") : "local",
         })
         .select('id')
         .single();
@@ -387,7 +392,8 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {/* DeltaDAO Verification Section */}
+        {/* DeltaDAO Verification Section - only when governance requires it */}
+        {requireDeltadaoOnboarding && (
         <div className={`p-5 rounded-xl border-2 transition-all ${isVerified
             ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800'
             : verificationError
@@ -413,7 +419,6 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                 setVerificationError(null);
                 setVerificationData(null);
                 setLockedFields(new Set());
-                // Reset form fields that were auto-filled
                 form.reset();
               }}
               className="font-mono text-sm"
@@ -453,7 +458,7 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
             <div className="mt-3 space-y-2">
               <div className="flex items-start gap-2 text-red-700 dark:text-red-400">
                 <XCircle className="h-4 w-4 mt-0.5 shrink-0" />
-                <span className="text-sm font-medium">{verificationError}</span>
+                <span className="text-sm font-medium">No se encontró un registro válido en DeltaDAO para esta organización</span>
               </div>
               <a
                 href="https://onboarding.delta-dao.com/signup"
@@ -467,9 +472,10 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
             </div>
           )}
         </div>
+        )}
 
         {/* Organization Form */}
-        <div className={`transition-all duration-300 ${!isVerified ? 'opacity-50 pointer-events-none' : ''}`}>
+        <div className={`transition-all duration-300 ${(requireDeltadaoOnboarding && !isVerified) ? 'opacity-50 pointer-events-none' : ''}`}>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               {/* Company Name */}
@@ -766,7 +772,7 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                   type="submit"
                   variant="brand"
                   className="flex-1 gap-2"
-                  disabled={!isVerified || isSubmitting}
+                  disabled={(requireDeltadaoOnboarding && !isVerified) || isSubmitting}
                 >
                   {isSubmitting ? (
                     <>
