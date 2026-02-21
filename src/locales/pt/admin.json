@@ -62,11 +62,52 @@
     "rejectSuccess": "Ativo rejeitado. O fornecedor será notificado.",
     "rejectError": "Erro ao rejeitar o ativo"
   },
+  "sidebar": {
+    "title": "AGILE Admin",
+    "subtitle": "Painel de controlo",
+    "administration": "Administração",
+    "navigation": "Navegação",
+    "backToPortal": "Voltar ao portal",
+    "globalOverview": "Visão geral",
+    "orgManagement": "Gestão de organizações",
+    "userManagement": "Gestão de utilizadores",
+    "assetValidation": "Validação de ativos",
+    "transactionMonitoring": "Monitorização de transações",
+    "ecosystemGovernance": "Governança do ecossistema"
+  },
+  "publications": {
+    "title": "Validação de ativos",
+    "subtitle": "{{count}} ativos no espaço de dados",
+    "pendingValidation": "Validação pendente",
+    "publishedPontus": "Publicados no Pontus-X",
+    "rejected": "Rejeitados",
+    "searchPlaceholder": "Pesquisar por nome de ativo ou fornecedor...",
+    "allStatuses": "Todos os estados",
+    "inValidation": "Em validação",
+    "pendingReview": "Revisão pendente",
+    "pending": "Pendente",
+    "published": "Publicado",
+    "allProviders": "Todos os fornecedores",
+    "statusPlaceholder": "Estado",
+    "providerPlaceholder": "Fornecedor",
+    "tableAsset": "Ativo",
+    "tableProvider": "Fornecedor",
+    "tableCategory": "Categoria",
+    "tableDate": "Data do pedido",
+    "tablePrice": "Preço",
+    "tableStatus": "Estado",
+    "loading": "A carregar ativos...",
+    "noResults": "Nenhum ativo encontrado",
+    "freePrice": "Grátis"
+  },
   "status": {
     "pendingValidation": "Validação pendente",
     "published": "Publicado no Pontus-X",
     "rejected": "Rejeitado",
-    "draft": "Rascunho"
+    "draft": "Rascunho",
+    "inValidation": "Em validação",
+    "pendingReview": "Revisão pendente",
+    "pending": "Pendente"
   },
   "categories": {
     "Market": "Mercado",

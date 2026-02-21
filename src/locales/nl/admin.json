@@ -62,11 +62,52 @@
     "rejectSuccess": "Asset afgewezen. De aanbieder wordt op de hoogte gesteld.",
     "rejectError": "Fout bij het afwijzen van het asset"
   },
+  "sidebar": {
+    "title": "AGILE Admin",
+    "subtitle": "Configuratiescherm",
+    "administration": "Beheer",
+    "navigation": "Navigatie",
+    "backToPortal": "Terug naar portaal",
+    "globalOverview": "Globaal overzicht",
+    "orgManagement": "Organisatiebeheer",
+    "userManagement": "Gebruikersbeheer",
+    "assetValidation": "Asset-validatie",
+    "transactionMonitoring": "Transactiemonitoring",
+    "ecosystemGovernance": "Ecosysteem-governance"
+  },
+  "publications": {
+    "title": "Asset-validatie",
+    "subtitle": "{{count}} assets in de dataruimte",
+    "pendingValidation": "Validatie in afwachting",
+    "publishedPontus": "Gepubliceerd op Pontus-X",
+    "rejected": "Afgewezen",
+    "searchPlaceholder": "Zoeken op assetnaam of aanbieder...",
+    "allStatuses": "Alle statussen",
+    "inValidation": "In validatie",
+    "pendingReview": "In afwachting van beoordeling",
+    "pending": "In afwachting",
+    "published": "Gepubliceerd",
+    "allProviders": "Alle aanbieders",
+    "statusPlaceholder": "Status",
+    "providerPlaceholder": "Aanbieder",
+    "tableAsset": "Asset",
+    "tableProvider": "Aanbieder",
+    "tableCategory": "Categorie",
+    "tableDate": "Aanvraagdatum",
+    "tablePrice": "Prijs",
+    "tableStatus": "Status",
+    "loading": "Assets laden...",
+    "noResults": "Geen assets gevonden",
+    "freePrice": "Gratis"
+  },
   "status": {
     "pendingValidation": "Validatie in afwachting",
     "published": "Gepubliceerd op Pontus-X",
     "rejected": "Afgewezen",
-    "draft": "Concept"
+    "draft": "Concept",
+    "inValidation": "In validatie",
+    "pendingReview": "In afwachting van beoordeling",
+    "pending": "In afwachting"
   },
   "categories": {
     "Market": "Markt",

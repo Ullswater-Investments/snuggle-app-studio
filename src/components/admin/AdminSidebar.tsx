@@ -1,5 +1,6 @@
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   Building2,
@@ -23,18 +24,21 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const adminMenuItems = [
-  { title: "Resumen Global", url: "/admin/dashboard", icon: LayoutDashboard },
-  { title: "Gestión de Organizaciones", url: "/admin/organizations", icon: Building2 },
-  { title: "Gestión de Usuarios", url: "/admin/users", icon: Users },
-  { title: "Validación de Activos", url: "/admin/publications", icon: PackageCheck },
-  { title: "Monitorización de Transacciones", url: "/admin/transactions", icon: Activity },
-  { title: "Gobernanza del Ecosistema", url: "/admin/governance", icon: Shield },
+const getAdminMenuItems = (t: (key: string) => string) => [
+  { title: t('sidebar.globalOverview'), url: "/admin/dashboard", icon: LayoutDashboard },
+  { title: t('sidebar.orgManagement'), url: "/admin/organizations", icon: Building2 },
+  { title: t('sidebar.userManagement'), url: "/admin/users", icon: Users },
+  { title: t('sidebar.assetValidation'), url: "/admin/publications", icon: PackageCheck },
+  { title: t('sidebar.transactionMonitoring'), url: "/admin/transactions", icon: Activity },
+  { title: t('sidebar.ecosystemGovernance'), url: "/admin/governance", icon: Shield },
 ];
 
 export function AdminSidebar() {
   const { open } = useSidebar();
   const location = useLocation();
+  const { t } = useTranslation('admin');
+
+  const adminMenuItems = getAdminMenuItems(t);
 
   return (
     <Sidebar collapsible="icon" className="border-r z-40" data-sidebar="nav">
@@ -45,8 +49,8 @@ export function AdminSidebar() {
           </div>
           {open && (
             <div className="flex flex-col">
-              <span className="text-sm font-semibold">AGILE Admin</span>
-              <span className="text-xs text-muted-foreground">Panel de Control</span>
+              <span className="text-sm font-semibold">{t('sidebar.title')}</span>
+              <span className="text-xs text-muted-foreground">{t('sidebar.subtitle')}</span>
             </div>
           )}
         </div>
@@ -55,7 +59,7 @@ export function AdminSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            Administración
+            {t('sidebar.administration')}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -80,7 +84,7 @@ export function AdminSidebar() {
 
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            Navegación
+            {t('sidebar.navigation')}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -92,7 +96,7 @@ export function AdminSidebar() {
                     activeClassName=""
                   >
                     <ArrowLeft className="h-5 w-5 shrink-0" />
-                    {open && <span>Volver al Portal</span>}
+                    {open && <span>{t('sidebar.backToPortal')}</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>

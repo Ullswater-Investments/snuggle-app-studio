@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,24 +15,26 @@ import {
 import {
   Search, Package, Clock, CheckCircle2, XCircle, ArrowRight,
 } from "lucide-react";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import { formatDate } from "@/lib/i18nFormatters";
 
-const statusConfig: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  pending_validation: { label: "En Validación", variant: "secondary" },
-  pending: { label: "Pendiente de Revisión", variant: "secondary" },
-  available: { label: "Pendiente", variant: "secondary" },
-  active: { label: "Publicado", variant: "default" },
-  published: { label: "Publicado", variant: "default" },
-  rejected: { label: "Rechazado", variant: "destructive" },
-  draft: { label: "Borrador", variant: "outline" },
-};
+const getStatusConfig = (t: (key: string) => string): Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> => ({
+  pending_validation: { label: t('publications.inValidation'), variant: "secondary" },
+  pending: { label: t('publications.pendingReview'), variant: "secondary" },
+  available: { label: t('publications.pending'), variant: "secondary" },
+  active: { label: t('publications.published'), variant: "default" },
+  published: { label: t('publications.published'), variant: "default" },
+  rejected: { label: t('publications.rejected'), variant: "destructive" },
+  draft: { label: t('status.draft'), variant: "outline" },
+});
 
 const AdminPublications = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation('admin');
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [orgFilter, setOrgFilter] = useState("all");
+
+  const statusConfig = useMemo(() => getStatusConfig(t), [t]);
 
   const { data: assets = [], isLoading } = useQuery({
     queryKey: ["admin-all-assets"],
@@ -91,9 +94,9 @@ const AdminPublications = () => {
   return (
     <div className="container mx-auto px-4 md:px-8 py-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Validación de Activos</h1>
+        <h1 className="text-2xl font-bold">{t('publications.title')}</h1>
         <p className="text-muted-foreground">
-          {assets.length} activos en el espacio de datos
+          {t('publications.subtitle', { count: assets.length })}
         </p>
       </div>
 
@@ -106,7 +109,7 @@ const AdminPublications = () => {
                 <Clock className="h-5 w-5 text-muted-foreground" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Pendientes de Validación</p>
+                <p className="text-sm text-muted-foreground">{t('publications.pendingValidation')}</p>
                 <p className="text-2xl font-bold">{pendingCount}</p>
               </div>
             </div>
@@ -119,7 +122,7 @@ const AdminPublications = () => {
                 <CheckCircle2 className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Publicados en Pontus-X</p>
+                <p className="text-sm text-muted-foreground">{t('publications.publishedPontus')}</p>
                 <p className="text-2xl font-bold">{publishedCount}</p>
               </div>
             </div>
@@ -132,7 +135,7 @@ const AdminPublications = () => {
                 <XCircle className="h-5 w-5 text-destructive" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Rechazados</p>
+                <p className="text-sm text-muted-foreground">{t('publications.rejected')}</p>
                 <p className="text-2xl font-bold">{rejectedCount}</p>
               </div>
             </div>
@@ -145,7 +148,7 @@ const AdminPublications = () => {
         <div className="relative flex-1 min-w-[200px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Buscar por nombre de activo o proveedor..."
+            placeholder={t('publications.searchPlaceholder')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-10"
@@ -153,23 +156,23 @@ const AdminPublications = () => {
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-[190px]">
-            <SelectValue placeholder="Estado" />
+            <SelectValue placeholder={t('publications.statusPlaceholder')} />
           </SelectTrigger>
           <SelectContent>
-             <SelectItem value="all">Todos los estados</SelectItem>
-            <SelectItem value="pending_validation">En Validación</SelectItem>
-            <SelectItem value="pending">Pendiente de Revisión</SelectItem>
-            <SelectItem value="available">Pendiente</SelectItem>
-            <SelectItem value="active">Publicado</SelectItem>
-            <SelectItem value="rejected">Rechazado</SelectItem>
+            <SelectItem value="all">{t('publications.allStatuses')}</SelectItem>
+            <SelectItem value="pending_validation">{t('publications.inValidation')}</SelectItem>
+            <SelectItem value="pending">{t('publications.pendingReview')}</SelectItem>
+            <SelectItem value="available">{t('publications.pending')}</SelectItem>
+            <SelectItem value="active">{t('publications.published')}</SelectItem>
+            <SelectItem value="rejected">{t('publications.rejected')}</SelectItem>
           </SelectContent>
         </Select>
         <Select value={orgFilter} onValueChange={setOrgFilter}>
           <SelectTrigger className="w-[220px]">
-            <SelectValue placeholder="Proveedor" />
+            <SelectValue placeholder={t('publications.providerPlaceholder')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos los proveedores</SelectItem>
+            <SelectItem value="all">{t('publications.allProviders')}</SelectItem>
             {uniqueOrgs.map((o) => (
               <SelectItem key={o.id} value={o.id}>{o.name}</SelectItem>
             ))}
@@ -183,12 +186,12 @@ const AdminPublications = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Activo</TableHead>
-                <TableHead>Proveedor</TableHead>
-                <TableHead>Categoría</TableHead>
-                <TableHead>Fecha Solicitud</TableHead>
-                <TableHead className="text-right">Precio</TableHead>
-                <TableHead>Estado</TableHead>
+                <TableHead>{t('publications.tableAsset')}</TableHead>
+                <TableHead>{t('publications.tableProvider')}</TableHead>
+                <TableHead>{t('publications.tableCategory')}</TableHead>
+                <TableHead>{t('publications.tableDate')}</TableHead>
+                <TableHead className="text-right">{t('publications.tablePrice')}</TableHead>
+                <TableHead>{t('publications.tableStatus')}</TableHead>
                 <TableHead className="w-10"></TableHead>
               </TableRow>
             </TableHeader>
@@ -196,13 +199,13 @@ const AdminPublications = () => {
               {isLoading ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                    Cargando activos...
+                    {t('publications.loading')}
                   </TableCell>
                 </TableRow>
               ) : filtered.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                    No se encontraron activos
+                    {t('publications.noResults')}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -225,15 +228,15 @@ const AdminPublications = () => {
                         {orgsMap[asset.subject_org_id] ?? "—"}
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground">
-                        {product?.category ?? "—"}
+                        {product?.category ? t(`categories.${product.category}`, { defaultValue: product.category }) : "—"}
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground whitespace-nowrap">
-                        {format(new Date(asset.created_at), "dd MMM yyyy", { locale: es })}
+                        {formatDate(new Date(asset.created_at), "dd MMM yyyy", i18n.language)}
                       </TableCell>
                       <TableCell className="text-right text-sm font-mono">
                         {asset.price != null && asset.price > 0
-                          ? `${Number(asset.price).toLocaleString("es-ES")} €`
-                          : "Gratis"}
+                          ? `${Number(asset.price).toLocaleString(i18n.language)} €`
+                          : t('publications.freePrice')}
                       </TableCell>
                       <TableCell>
                         <Badge variant={cfg.variant} className="text-xs whitespace-nowrap">

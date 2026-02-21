@@ -62,11 +62,52 @@
     "rejectSuccess": "Asset rejected. The provider will be notified.",
     "rejectError": "Error rejecting asset"
   },
+  "sidebar": {
+    "title": "AGILE Admin",
+    "subtitle": "Control Panel",
+    "administration": "Administration",
+    "navigation": "Navigation",
+    "backToPortal": "Back to Portal",
+    "globalOverview": "Global Overview",
+    "orgManagement": "Organization Management",
+    "userManagement": "User Management",
+    "assetValidation": "Asset Validation",
+    "transactionMonitoring": "Transaction Monitoring",
+    "ecosystemGovernance": "Ecosystem Governance"
+  },
+  "publications": {
+    "title": "Asset Validation",
+    "subtitle": "{{count}} assets in the data space",
+    "pendingValidation": "Pending Validation",
+    "publishedPontus": "Published on Pontus-X",
+    "rejected": "Rejected",
+    "searchPlaceholder": "Search by asset name or provider...",
+    "allStatuses": "All statuses",
+    "inValidation": "In Validation",
+    "pendingReview": "Pending Review",
+    "pending": "Pending",
+    "published": "Published",
+    "allProviders": "All providers",
+    "statusPlaceholder": "Status",
+    "providerPlaceholder": "Provider",
+    "tableAsset": "Asset",
+    "tableProvider": "Provider",
+    "tableCategory": "Category",
+    "tableDate": "Request Date",
+    "tablePrice": "Price",
+    "tableStatus": "Status",
+    "loading": "Loading assets...",
+    "noResults": "No assets found",
+    "freePrice": "Free"
+  },
   "status": {
     "pendingValidation": "Pending Validation",
     "published": "Published on Pontus-X",
     "rejected": "Rejected",
-    "draft": "Draft"
+    "draft": "Draft",
+    "inValidation": "In Validation",
+    "pendingReview": "Pending Review",
+    "pending": "Pending"
   },
   "categories": {
     "Market": "Market",
