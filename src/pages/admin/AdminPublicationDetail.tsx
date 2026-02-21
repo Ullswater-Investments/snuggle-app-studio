@@ -10,6 +10,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { logGovernanceEvent } from "@/utils/governanceLogger";
 import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from "@/components/ui/dialog";
+import {
   ArrowLeft, Building2, FileText, Tag, Globe, Lock, Copy, Check,
   CheckCircle2, XCircle, Clock, DollarSign, Shield, Database, Key,
 } from "lucide-react";
@@ -88,11 +91,12 @@ const AdminPublicationDetail = () => {
       logGovernanceEvent({
         level: "info",
         category: "publications",
-        message: `Dataset ${id!.slice(0, 8)} verificado y publicado en el marketplace`,
+        message: `INFO: Dataset ${id} verificado y publicado por el administrador`,
         metadata: { asset_id: id },
       });
       queryClient.invalidateQueries({ queryKey: ["admin-asset-detail", id] });
       queryClient.invalidateQueries({ queryKey: ["admin-all-assets"] });
+      navigate("/admin/publications");
     },
     onError: () => toast.error("Error al publicar el activo"),
   });
@@ -110,13 +114,14 @@ const AdminPublicationDetail = () => {
       logGovernanceEvent({
         level: "warn",
         category: "publications",
-        message: `Publicación del dataset ${id!.slice(0, 8)} denegada`,
+        message: `WARN: Dataset ${id} rechazado. Motivo: ${rejectionNote}`,
         metadata: { asset_id: id, rejection_note: rejectionNote },
       });
       setShowRejectForm(false);
       setRejectionNote("");
       queryClient.invalidateQueries({ queryKey: ["admin-asset-detail", id] });
       queryClient.invalidateQueries({ queryKey: ["admin-all-assets"] });
+      navigate("/admin/publications");
     },
     onError: () => toast.error("Error al rechazar el activo"),
   });
@@ -144,7 +149,7 @@ const AdminPublicationDetail = () => {
   const customMeta = asset.custom_metadata as any;
   const cfg = statusConfig[asset.status] ?? { label: asset.status, variant: "outline" as const, icon: Clock };
   const StatusIcon = cfg.icon;
-  const isPending = asset.status === "available" || asset.status === "pending_validation";
+  const isPending = asset.status === "available" || asset.status === "pending_validation" || asset.status === "pending";
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-6 space-y-6">
@@ -163,52 +168,69 @@ const AdminPublicationDetail = () => {
         </Badge>
       </div>
 
-      {/* Operator Actions */}
+      {/* Validation Actions Sidebar Card */}
       {isPending && (
         <Card className="border-primary/30 bg-primary/5">
-          <CardContent className="p-5">
-            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
-              <div>
-                <p className="font-semibold">Acciones de Operador</p>
-                <p className="text-sm text-muted-foreground">Valida este activo antes de publicarlo en la red Pontus-X.</p>
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  onClick={() => publishMutation.mutate()}
-                  disabled={publishMutation.isPending}
-                >
-                  <CheckCircle2 className="h-4 w-4 mr-1.5" />
-                  ✅ Marcar como Publicado en Pontus-X
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={() => setShowRejectForm(!showRejectForm)}
-                >
-                  <XCircle className="h-4 w-4 mr-1.5" />
-                  ❌ Rechazar
-                </Button>
-              </div>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base flex items-center gap-2">
+              <Shield className="h-4 w-4" /> Acciones de Validación
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-5 pt-0">
+            <p className="text-sm text-muted-foreground mb-4">
+              Valida este activo antes de publicarlo en la red Pontus-X.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white"
+                onClick={() => publishMutation.mutate()}
+                disabled={publishMutation.isPending}
+              >
+                <CheckCircle2 className="h-4 w-4 mr-1.5" />
+                Aprobar y Publicar en Pontus-X
+              </Button>
+              <Button
+                variant="destructive"
+                className="flex-1"
+                onClick={() => setShowRejectForm(true)}
+              >
+                <XCircle className="h-4 w-4 mr-1.5" />
+                Rechazar Publicación
+              </Button>
             </div>
-            {showRejectForm && (
-              <div className="mt-4 space-y-3">
-                <Textarea
-                  placeholder="Motivo del rechazo o cambios solicitados al proveedor..."
-                  value={rejectionNote}
-                  onChange={(e) => setRejectionNote(e.target.value)}
-                  rows={3}
-                />
-                <Button
-                  variant="destructive"
-                  disabled={!rejectionNote.trim() || rejectMutation.isPending}
-                  onClick={() => rejectMutation.mutate(rejectionNote.trim())}
-                >
-                  Confirmar Rechazo
-                </Button>
-              </div>
-            )}
           </CardContent>
         </Card>
       )}
+
+      {/* Reject Modal Dialog */}
+      <Dialog open={showRejectForm} onOpenChange={setShowRejectForm}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Rechazar Publicación</DialogTitle>
+            <DialogDescription>
+              Introduce el motivo del rechazo. Este será visible para el proveedor del dataset.
+            </DialogDescription>
+          </DialogHeader>
+          <Textarea
+            placeholder="Motivo del rechazo o cambios solicitados al proveedor..."
+            value={rejectionNote}
+            onChange={(e) => setRejectionNote(e.target.value)}
+            rows={4}
+          />
+          <DialogFooter>
+            <Button variant="outline" onClick={() => { setShowRejectForm(false); setRejectionNote(""); }}>
+              Cancelar
+            </Button>
+            <Button
+              variant="destructive"
+              disabled={!rejectionNote.trim() || rejectMutation.isPending}
+              onClick={() => rejectMutation.mutate(rejectionNote.trim())}
+            >
+              Confirmar Rechazo
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Admin Notes (if rejected) */}
       {(asset as any).admin_notes && (
