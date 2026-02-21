@@ -20,6 +20,7 @@ import {
   ShoppingCart, 
   Leaf, 
   ShieldCheck, 
+  Shield,
   Star, 
   Database,
   ArrowRight,
@@ -98,7 +99,8 @@ export default function Catalog() {
   const queryClient = useQueryClient();
   const { activeOrgId, activeOrg } = useOrganizationContext();
   const { t } = useTranslation('catalog');
-  const { requireKyb } = useGovernanceSettings();
+  const { requireKyb, catalogVisibility } = useGovernanceSettings();
+  const isPrivateCatalog = catalogVisibility === "private" && !user;
   const kybDisabled = requireKyb && !(activeOrg as any)?.kyb_verified;
   const { t: tPartners } = useTranslation('partnerProducts');
   const [searchTerm, setSearchTerm] = useState("");
@@ -240,12 +242,11 @@ export default function Catalog() {
     queryFn: async () => {
       // Intentamos leer de la vista nueva
       const { data, error } = await supabase
-        .from('marketplace_listings' as any) // Cast as any si los tipos no se han regenerado aún
+        .from('marketplace_listings' as any)
         .select('*');
       
       if (error) {
         console.warn("Vista marketplace_listings no encontrada, usando fallback...");
-        // Fallback a data_assets normal si la migración no se ha corrido
         const { data: rawAssets } = await supabase
           .from('data_assets')
           .select(`
@@ -259,7 +260,6 @@ export default function Catalog() {
           `)
           .eq('status', 'active');
         
-        // Mapeo manual para simular la estructura del marketplace
         const fallbackData: MarketplaceListing[] = (rawAssets as any[])?.map((a: any) => ({
           asset_id: a.id,
           product_name: a.product?.name || "Producto Sin Nombre",
@@ -282,7 +282,8 @@ export default function Catalog() {
       }
       
       return ((data || []) as unknown) as MarketplaceListing[];
-    }
+    },
+    enabled: !isPrivateCatalog,
   });
 
   // --- Fetch access policies for visibility filtering ---
@@ -493,6 +494,23 @@ export default function Catalog() {
   };
 
   const compareProducts = listings?.filter(l => compareList.has(l.asset_id)) || [];
+
+  if (isPrivateCatalog) {
+    return (
+      <div className="container py-8 space-y-8 fade-in bg-muted/10 min-h-screen">
+        <div className="flex flex-col items-center justify-center py-20 space-y-6">
+          <Shield className="h-16 w-16 text-muted-foreground" />
+          <h2 className="text-2xl font-bold text-foreground">Catálogo Privado</h2>
+          <p className="text-muted-foreground text-center max-w-md">
+            El catálogo es privado. Inicia sesión para ver los activos disponibles.
+          </p>
+          <Button onClick={() => navigate("/auth")} size="lg">
+            Iniciar Sesión
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-8 space-y-8 fade-in bg-muted/10 min-h-screen">
