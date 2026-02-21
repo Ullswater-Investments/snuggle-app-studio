@@ -96,6 +96,7 @@ const AdminGovernance = () => {
     require_email_verification: false,
     require_kyc: false,
     require_kyb: false,
+    require_deltadao_onboarding: true,
     ecosystem_status: "active" as "active" | "maintenance",
     auto_approve_assets: true,
     catalog_visibility: "public" as "public" | "private",
@@ -113,7 +114,7 @@ const AdminGovernance = () => {
       const { data } = await supabase
         .from("system_settings")
         .select("key, value")
-        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status", "auto_approve_assets", "catalog_visibility", "ecosystem_fee_percentage", "maintenance_mode", "log_verbosity"]);
+        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "require_deltadao_onboarding", "ecosystem_status", "auto_approve_assets", "catalog_visibility", "ecosystem_fee_percentage", "maintenance_mode", "log_verbosity"]);
       if (data) {
         const map: Record<string, string> = {};
         for (const r of data) map[r.key] = r.value;
@@ -121,6 +122,7 @@ const AdminGovernance = () => {
           require_email_verification: map.require_email_verification === "true",
           require_kyc: map.require_kyc === "true",
           require_kyb: map.require_kyb === "true",
+          require_deltadao_onboarding: map.require_deltadao_onboarding !== "false",
           ecosystem_status: (map.ecosystem_status as "active" | "maintenance") ?? "active",
           auto_approve_assets: map.auto_approve_assets !== "false",
           catalog_visibility: (map.catalog_visibility as "public" | "private") ?? "public",
@@ -157,6 +159,7 @@ const AdminGovernance = () => {
       require_email_verification: "Verificación de Email",
       require_kyc: "KYC (Persona Física)",
       require_kyb: "KYB (Empresa)",
+      require_deltadao_onboarding: "Requisito de Onboarding DeltaDAO",
       ecosystem_status: "Estado del Ecosistema",
       auto_approve_assets: "Aprobación Automática de Activos",
       catalog_visibility: "Visibilidad del Catálogo",
@@ -547,6 +550,18 @@ const AdminGovernance = () => {
                   id="sw-kyb"
                   checked={govSettings.require_kyb}
                   onCheckedChange={(v) => toggleGovSetting("require_kyb", v)}
+                />
+              </div>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sw-deltadao" className="text-sm font-medium">Onboarding DeltaDAO</Label>
+                  <p className="text-xs text-muted-foreground">Exigir registro verificado en el portal de DeltaDAO para dar de alta la organización</p>
+                </div>
+                <Switch
+                  id="sw-deltadao"
+                  checked={govSettings.require_deltadao_onboarding}
+                  onCheckedChange={(v) => toggleGovSetting("require_deltadao_onboarding", v)}
                 />
               </div>
               <Separator />
