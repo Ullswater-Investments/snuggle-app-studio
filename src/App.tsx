@@ -8,6 +8,7 @@ import { TokenWalletProvider } from "@/contexts/TokenWalletContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import { OrganizationProvider } from "@/hooks/useOrganizationContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { OrganizationGuard } from "@/components/OrganizationGuard";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
 import { AdminLayout } from "@/components/admin/AdminLayout";
@@ -751,10 +752,10 @@ const App = () => (
                       <Route path="/partners" element={<Partners />} />
                       <Route path="/requests" element={<Requests />} />
                       <Route path="/requests/:requestId" element={<RequestDetailPage />} />
-                      <Route path="/requests/new" element={<RequestWizard />} />
-                      <Route path="/request-wizard" element={<RequestWizard />} />
-                      <Route path="/dashboard/publish" element={<PublishDataset />} />
-                      <Route path="/datos/publicar" element={<PublishDataset />} />
+                      <Route path="/requests/new" element={<OrganizationGuard><RequestWizard /></OrganizationGuard>} />
+                      <Route path="/request-wizard" element={<OrganizationGuard><RequestWizard /></OrganizationGuard>} />
+                      <Route path="/dashboard/publish" element={<OrganizationGuard><PublishDataset /></OrganizationGuard>} />
+                      <Route path="/datos/publicar" element={<OrganizationGuard><PublishDataset /></OrganizationGuard>} />
                       <Route path="/data" element={<Data />} />
                       <Route path="/data/view/:id" element={<DataView />} />
                       <Route path="/opportunities" element={<Opportunities />} />
