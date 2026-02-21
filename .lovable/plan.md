@@ -1,48 +1,50 @@
 
-## Correccion de la proteccion de rutas por organizacion
+## Nuevo control de Onboarding DeltaDAO en Gobernanza
 
-### Problema raiz identificado
+### Resumen
 
-El `OrganizationGuard` no funciona correctamente porque:
-
-1. **Valor obsoleto en sessionStorage**: `activeOrgId` se inicializa desde `sessionStorage` (linea 35-37 de `useOrganizationContext.tsx`). Si un usuario tuvo una org anteriormente, ese ID persiste incluso si ya no tiene acceso a ninguna organizacion.
-2. **Sin validacion cruzada**: El guard solo verifica si `activeOrgId` existe, pero no confirma que ese ID corresponda a una organizacion real en `availableOrgs`.
-3. **Timing incorrecto**: `loading` solo refleja el estado del query, pero `activeOrgId` ya tiene un valor de sessionStorage antes de que el query termine, asi que el guard ve un ID valido y deja pasar.
+Se anade un nuevo interruptor en la tarjeta de "Configuracion de Identidad" del panel de Gobernanza que permite activar/desactivar la exigencia de verificacion en DeltaDAO para registrar organizaciones. Cuando esta desactivado, el registro omite la llamada al endpoint externo y solo valida duplicados locales.
 
 ---
 
 ### Cambios planificados
 
-#### 1. Corregir `useOrganizationContext.tsx` - Validacion cruzada
+#### 1. Insertar nueva configuracion en `system_settings` (Data insert)
 
-- Despues de que `availableOrgs` cargue, verificar que `activeOrgId` realmente existe en la lista de organizaciones disponibles.
-- Si `activeOrgId` de sessionStorage no esta en `availableOrgs`, limpiarlo (ponerlo a `null` y eliminar de sessionStorage).
-- Cambiar el valor de `loading` para que sea `true` mientras el query no ha terminado Y mientras no se haya validado el `activeOrgId` contra `availableOrgs`.
+Insertar una fila con `key = "require_deltadao_onboarding"` y `value = "true"` (activado por defecto, ya que es el comportamiento actual).
 
-Esto es el cambio critico que resuelve el problema de raiz.
+No se necesita migracion de esquema: la tabla `system_settings` ya usa pares clave-valor.
 
-#### 2. Reforzar `OrganizationGuard.tsx`
+#### 2. Modificar `src/pages/admin/AdminGovernance.tsx`
 
-- Cambiar la ruta de redireccion de `/dashboard` a `/dashboard` (el dashboard ya muestra el WelcomeScreen cuando no hay org, asi que esto es correcto).
-- Agregar `console.log("OrganizationGuard - activeOrgId:", activeOrgId, "loading:", loading)` para depuracion.
-- Asegurar que la validacion sea estricta: solo pasar si `activeOrgId` no es null/undefined Y `loading` es false.
+- Anadir `require_deltadao_onboarding` al estado `govSettings` y a la query de carga (linea 116).
+- Anadir un cuarto Switch en la tarjeta de "Configuracion de Identidad" (despues del Switch de KYB, antes del separador con "Estado del Ecosistema"):
+  - Label: "Onboarding DeltaDAO"
+  - Descripcion: "Exigir registro verificado en el portal de DeltaDAO para dar de alta la organizacion"
+  - Conectado a `toggleGovSetting("require_deltadao_onboarding", v)`.
+- Anadir la etiqueta en el mapa `labels` de `toggleGovSetting` para que el log diga "Requisito de Onboarding DeltaDAO activado/desactivado".
 
-#### 3. Validacion interna en `PublishDataset.tsx`
+#### 3. Modificar `src/hooks/useGovernanceSettings.ts`
 
-- Al inicio del componente, agregar una verificacion de seguridad: si `activeOrgId` es null/undefined y no esta cargando, mostrar `<Navigate to="/dashboard" replace />`.
-- Importar `Navigate` de react-router-dom y `useOrganizationContext` (ya importado).
+- Anadir `"require_deltadao_onboarding"` a `GOVERNANCE_KEYS`.
+- Anadir `requireDeltadaoOnboarding: boolean` al tipo `GovernanceSettings`.
+- Mapear: `requireDeltadaoOnboarding: data?.require_deltadao_onboarding !== "false"` (true por defecto).
 
-#### 4. Validacion interna en `RequestWizard.tsx`
+#### 4. Modificar `src/components/onboarding/OrganizationRegistrationStep.tsx`
 
-- Misma logica de seguridad adicional: importar `useOrganizationContext` y `Navigate`.
-- Al inicio del componente, si no hay org activa y no esta cargando, redirigir a `/dashboard`.
+- Importar `useGovernanceSettings`.
+- Al inicio del componente, obtener `requireDeltadaoOnboarding` del hook.
+- **Caso ACTIVO (true)**: Comportamiento actual sin cambios. La verificacion DeltaDAO es obligatoria. Si falla, mostrar: "No se encontro un registro valido en DeltaDAO para esta organizacion".
+- **Caso INACTIVO (false)**:
+  - Ocultar/deshabilitar la seccion de "Verificacion DeltaDAO" (el bloque de wallet verification).
+  - Marcar `isVerified = true` automaticamente (skip verification).
+  - En `onSubmit`, omitir la validacion de DeltaDAO y pasar directamente a verificar duplicados locales (tax_id y wallet_address).
+  - Si la wallet ya existe localmente, mostrar: "Esta organizacion ya esta registrada en PROCUREDATA".
+  - Permitir que el formulario se envie sin wallet si DeltaDAO esta desactivado (hacer wallet opcional).
 
-#### 5. Mejorar `SettingsOrganization.tsx` - Estado vacio con hero logo
+#### 5. Trazabilidad de gobernanza
 
-- Sustituir el icono `Building2` del `EmptyState` actual por el asset `procuredata-hero-logo.png`.
-- Cambiar el texto del boton a "Registrar u Unirse a Organizacion".
-- Hacer el boton mas grande y prominente.
-- Redirigir al `/dashboard` (que muestra el WelcomeScreen con las opciones de registrar o unirse).
+Ya esta cubierta por la funcion `toggleGovSetting` existente, que inserta en `governance_logs` automaticamente con el formato: "Requisito de Onboarding DeltaDAO activado/desactivado".
 
 ---
 
@@ -50,30 +52,28 @@ Esto es el cambio critico que resuelve el problema de raiz.
 
 | Archivo | Cambio |
 |---|---|
-| `src/hooks/useOrganizationContext.tsx` | Validar activeOrgId contra availableOrgs, limpiar valores obsoletos de sessionStorage |
-| `src/components/OrganizationGuard.tsx` | Agregar console.log de depuracion, mantener redireccion a /dashboard |
-| `src/pages/dashboard/PublishDataset.tsx` | Agregar validacion interna de seguridad con Navigate |
-| `src/pages/RequestWizard.tsx` | Agregar validacion interna de seguridad con Navigate |
-| `src/pages/SettingsOrganization.tsx` | Hero logo en estado vacio, boton "Registrar u Unirse a Organizacion" |
+| Base de datos (insert) | Insertar fila `require_deltadao_onboarding = "true"` en `system_settings` |
+| `src/pages/admin/AdminGovernance.tsx` | Nuevo Switch en tarjeta de Identidad, estado local, label para logs |
+| `src/hooks/useGovernanceSettings.ts` | Nueva key y propiedad `requireDeltadaoOnboarding` |
+| `src/components/onboarding/OrganizationRegistrationStep.tsx` | Logica condicional basada en el setting para omitir/exigir verificacion DeltaDAO |
 
 ---
 
-### Detalle tecnico clave
-
-El cambio mas importante es en `useOrganizationContext.tsx`. Actualmente el useEffect (lineas 90-96) auto-selecciona la primera org si no hay activeOrgId. Pero falta el caso inverso: si `activeOrgId` tiene un valor de sessionStorage que NO esta en `availableOrgs` (porque el usuario ya no pertenece a esa org), hay que limpiarlo. Se anadira:
+### Detalle tecnico del flujo condicional en registro
 
 ```text
-useEffect(() => {
-  if (!isLoading && availableOrgs.length === 0) {
-    // Usuario sin organizaciones: limpiar cualquier valor obsoleto
-    setActiveOrgId(null);
-    sessionStorage.removeItem('activeOrgId');
-  } else if (!isLoading && activeOrgId && !availableOrgs.find(o => o.id === activeOrgId)) {
-    // activeOrgId obsoleto: no existe en las orgs disponibles
-    setActiveOrgId(null);
-    sessionStorage.removeItem('activeOrgId');
-  }
-}, [isLoading, availableOrgs, activeOrgId]);
+Usuario entra a /onboarding/create-organization
+  |
+  v
+Consulta useGovernanceSettings().requireDeltadaoOnboarding
+  |
+  +-- true --> Mostrar seccion DeltaDAO, exigir verificacion wallet
+  |              Si falla: "No se encontro un registro valido en DeltaDAO"
+  |              Si OK: verificar duplicados locales (tax_id, wallet) -> registrar
+  |
+  +-- false --> Ocultar seccion DeltaDAO
+                 Wallet es opcional (campo visible pero no obligatorio)
+                 Verificar duplicados locales (tax_id, y wallet si se proporciono)
+                 Si duplicado: "Esta organizacion ya esta registrada en PROCUREDATA"
+                 Si OK: registrar organizacion directamente
 ```
-
-Esto garantiza que el guard nunca vera un `activeOrgId` falso, resolviendo el problema de raiz.
