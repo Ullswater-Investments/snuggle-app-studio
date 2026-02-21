@@ -189,7 +189,7 @@ export default function PublishDataset() {
   const navigate = useNavigate();
   const { activeOrg, activeOrgId } = useOrganizationContext();
   const { user } = useAuth();
-  const { autoApproveAssets } = useGovernanceSettings();
+  const { autoApproveAssets, maintenanceMode } = useGovernanceSettings();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -558,6 +558,10 @@ export default function PublishDataset() {
   };
 
   const handlePublish = () => {
+    if (maintenanceMode) {
+      toast.error("Sistema en mantenimiento. La publicación está temporalmente desactivada.");
+      return;
+    }
     if (!step4Data.publicName.trim()) {
       toast.error("El nombre público es obligatorio");
       return;
@@ -589,7 +593,14 @@ export default function PublishDataset() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-3xl">
-        {/* Header */}
+        {maintenanceMode && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertDescription className="flex items-center gap-2">
+              <Lock className="h-4 w-4 shrink-0" />
+              Sistema en mantenimiento programado. La publicación de datasets está temporalmente desactivada.
+            </AlertDescription>
+          </Alert>
+        )}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

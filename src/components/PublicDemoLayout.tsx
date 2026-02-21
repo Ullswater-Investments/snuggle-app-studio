@@ -11,6 +11,7 @@ import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { NotificationsBell } from "@/components/NotificationsBell";
 import { CommandMenu } from "@/components/CommandMenu";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { MaintenanceBanner } from "@/components/MaintenanceBanner";
 import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { LogIn, Search } from "lucide-react";
@@ -86,6 +87,7 @@ export const PublicDemoLayout = ({ children }: PublicDemoLayoutProps) => {
             </div>
           </header>
 
+          <MaintenanceBanner />
           {!user && <PublicDemoBanner />}
 
           <main className="flex-1">
