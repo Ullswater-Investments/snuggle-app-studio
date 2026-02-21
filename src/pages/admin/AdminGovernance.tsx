@@ -220,7 +220,8 @@ const AdminGovernance = () => {
   const explorerBase = PONTUSX_NETWORK_CONFIG.blockExplorerUrls?.[0] || "https://explorer.pontus-x.eu/";
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="min-h-screen bg-muted/40">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 animate-fade-in">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Gobernanza del Ecosistema</h1>
@@ -530,6 +531,7 @@ const AdminGovernance = () => {
           </ScrollArea>
         </CardContent>
       </Card>
+    </div>
     </div>
   );
 };
