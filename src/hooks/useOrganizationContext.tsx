@@ -86,14 +86,27 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
   // Obtener la organización activa
   const activeOrg = availableOrgs.find(org => org.id === activeOrgId) || null;
 
-  // Si no hay organización activa pero hay organizaciones disponibles, seleccionar la primera
+  // Validación cruzada: limpiar activeOrgId obsoleto de sessionStorage
   useEffect(() => {
-    if (!activeOrgId && availableOrgs.length > 0) {
+    if (!isLoading && availableOrgs.length === 0) {
+      // Usuario sin organizaciones: limpiar cualquier valor obsoleto
+      if (activeOrgId) {
+        console.log("useOrganizationContext: Clearing stale activeOrgId (no orgs available):", activeOrgId);
+        setActiveOrgId(null);
+        sessionStorage.removeItem('activeOrgId');
+      }
+    } else if (!isLoading && activeOrgId && !availableOrgs.find(o => o.id === activeOrgId)) {
+      // activeOrgId obsoleto: no existe en las orgs disponibles
+      console.log("useOrganizationContext: Clearing stale activeOrgId (not in availableOrgs):", activeOrgId);
+      setActiveOrgId(null);
+      sessionStorage.removeItem('activeOrgId');
+    } else if (!isLoading && !activeOrgId && availableOrgs.length > 0) {
+      // Sin org activa pero hay disponibles: seleccionar la primera
       const firstOrg = availableOrgs[0];
       setActiveOrgId(firstOrg.id);
       sessionStorage.setItem('activeOrgId', firstOrg.id);
     }
-  }, [activeOrgId, availableOrgs]);
+  }, [isLoading, availableOrgs, activeOrgId]);
 
   const switchOrganization = (orgId: string) => {
     const org = availableOrgs.find(o => o.id === orgId);
@@ -123,7 +136,7 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
         availableOrgs,
         switchOrganization,
         isDemo,
-        loading: isLoading,
+        loading: isLoading || (!!sessionStorage.getItem('activeOrgId') && !isLoading && activeOrgId !== null && !activeOrg),
       }}
     >
       {children}

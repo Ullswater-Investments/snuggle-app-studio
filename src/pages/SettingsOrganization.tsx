@@ -61,17 +61,29 @@ export default function SettingsOrganization() {
     return (
       <div className="container py-8 fade-in">
         <FadeIn>
-          <EmptyState
-            icon={Building2}
-            title="Sin organización asociada"
-            description="No tienes ninguna organización registrada o asociada a tu cuenta."
-            action={
-              <Button onClick={() => window.location.href = "/onboarding/create-organization"} className="gap-2">
-                <Building2 className="h-4 w-4" />
-                Configurar mi Organización
-              </Button>
-            }
-          />
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <img 
+              src="/src/assets/procuredata-hero-logo.png" 
+              alt="ProcureData" 
+              className="h-24 w-auto mb-6 opacity-80"
+              onError={(e) => {
+                // Fallback to icon if image not found
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+            <h3 className="text-xl font-semibold mb-2">Sin organización asociada</h3>
+            <p className="text-muted-foreground max-w-md mb-6">
+              No tienes ninguna organización registrada o asociada a tu cuenta.
+            </p>
+            <Button 
+              size="lg"
+              onClick={() => window.location.href = "/dashboard"} 
+              className="gap-2 text-base px-8 py-3"
+            >
+              <Building2 className="h-5 w-5" />
+              Registrar u Unirse a Organización
+            </Button>
+          </div>
         </FadeIn>
       </div>
     );

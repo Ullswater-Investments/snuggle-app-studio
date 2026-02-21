@@ -10,6 +10,8 @@ interface OrganizationGuardProps {
 export const OrganizationGuard = ({ children }: OrganizationGuardProps) => {
   const { activeOrgId, loading } = useOrganizationContext();
 
+  console.log("OrganizationGuard - activeOrgId:", activeOrgId, "loading:", loading);
+
   useEffect(() => {
     if (!loading && !activeOrgId) {
       toast.warning("Para publicar o solicitar datos, primero debes registrar o unirte a una organización.");
