@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   Fingerprint,
   Globe,
@@ -13,7 +14,6 @@ import {
   ExternalLink,
   Shield,
   Server,
-  Link2,
   RefreshCw,
   CheckCircle2,
   XCircle,
@@ -23,7 +23,7 @@ import {
   Network,
 } from "lucide-react";
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { PONTUSX_NETWORK_CONFIG } from "@/services/pontusX";
 import { oceanConfig, oceanContracts } from "@/lib/oceanConfig";
 import { supabase } from "@/integrations/supabase/client";
@@ -34,6 +34,22 @@ interface ServiceStatus {
   url: string;
   status: "online" | "offline" | "checking";
 }
+
+interface GovernanceLog {
+  id: string;
+  level: string;
+  category: string;
+  message: string;
+  actor_id: string | null;
+  metadata: Record<string, unknown> | null;
+  created_at: string;
+}
+
+// --- Network presets ---
+const NETWORK_PRESETS: Record<string, { rpc: string; chainId: string; label: string }> = {
+  testnet: { rpc: "https://rpc.test.pontus-x.eu", chainId: "32457", label: "Pontus-X Testnet" },
+  devnet: { rpc: "https://rpc.dev.pontus-x.eu", chainId: "32456", label: "Pontus-X Devnet" },
+};
 
 // --- Helpers ---
 const truncate = (s: string) => `${s.slice(0, 14)}…${s.slice(-10)}`;
@@ -48,20 +64,36 @@ const StatusDot = ({ status }: { status: ServiceStatus["status"] }) => {
   return <XCircle className="h-4 w-4 text-destructive" />;
 };
 
-// --- Mock ecosystem event log ---
-const ecosystemEvents = [
-  { ts: "2026-02-09 21:30:12", level: "info", message: "Blockchain heartbeat OK — bloque #4.812.331" },
-  { ts: "2026-02-09 21:28:45", level: "info", message: "API Gateway respondió en 42 ms" },
-  { ts: "2026-02-09 21:25:00", level: "warn", message: "Identity Provider: latencia elevada (320 ms)" },
-  { ts: "2026-02-09 21:20:10", level: "info", message: "Provider endpoint healthy" },
-  { ts: "2026-02-09 21:15:33", level: "info", message: "Aquarius metadata index sync completado" },
-  { ts: "2026-02-09 21:10:01", level: "error", message: "Dispenser contract sin fondos — recargar" },
-  { ts: "2026-02-09 21:05:22", level: "info", message: "Smart contract FixedRateExchange operativo" },
-];
-
 const DID = "did:web:procuredata.eu";
 
+// --- Real health check with timeout ---
+async function checkService(url: string, isRpc: boolean): Promise<"online" | "offline"> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+  try {
+    if (isRpc) {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", method: "eth_blockNumber", params: [], id: 1 }),
+        signal: controller.signal,
+      });
+      const data = await res.json();
+      return data.result ? "online" : "offline";
+    } else {
+      const res = await fetch(url, { method: "HEAD", signal: controller.signal, mode: "no-cors" });
+      // no-cors returns opaque response (status 0) which still means the server responded
+      return "online";
+    }
+  } catch {
+    return "offline";
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 const AdminGovernance = () => {
+  // --- Services health ---
   const [services, setServices] = useState<ServiceStatus[]>([
     { name: "Blockchain (Pontus-X)", url: oceanConfig.nodeUri, status: "checking" },
     { name: "API Gateway (Aquarius)", url: oceanConfig.aquariusUrl, status: "checking" },
@@ -69,37 +101,43 @@ const AdminGovernance = () => {
     { name: "Identity Provider", url: "https://identity.pontus-x.eu", status: "checking" },
   ]);
 
-  const runHealthCheck = () => {
+  const runHealthCheck = useCallback(async () => {
     setServices((prev) => prev.map((s) => ({ ...s, status: "checking" as const })));
-    // Simulate async health check
-    setTimeout(() => {
-      setServices((prev) =>
-        prev.map((s) => ({
-          ...s,
-          status: Math.random() > 0.15 ? ("online" as const) : ("offline" as const),
-        }))
-      );
-    }, 1200);
-  };
+    const urls = [
+      { url: oceanConfig.nodeUri, isRpc: true },
+      { url: oceanConfig.aquariusUrl, isRpc: false },
+      { url: oceanConfig.providerUrl, isRpc: false },
+      { url: "https://identity.pontus-x.eu", isRpc: false },
+    ];
+    const results = await Promise.all(urls.map((u) => checkService(u.url, u.isRpc)));
+    setServices((prev) => prev.map((s, i) => ({ ...s, status: results[i] })));
+  }, []);
 
   useEffect(() => {
     runHealthCheck();
-  }, []);
+  }, [runHealthCheck]);
 
   // --- Blockchain RPC Config ---
   const [rpcUrl, setRpcUrl] = useState("");
+  const [chainId, setChainId] = useState("32457");
+  const [selectedNetwork, setSelectedNetwork] = useState<string>("testnet");
   const [rpcLoading, setRpcLoading] = useState(true);
   const [rpcSaving, setRpcSaving] = useState(false);
   const [rpcStatus, setRpcStatus] = useState<"online" | "offline" | "checking">("checking");
 
   useEffect(() => {
     const loadRpc = async () => {
-      const { data } = await supabase
-        .from("system_settings")
-        .select("value")
-        .eq("key", "blockchain_rpc_url")
-        .maybeSingle();
-      setRpcUrl(data?.value || "https://rpc.test.pontus-x.eu");
+      const [rpcRes, chainRes] = await Promise.all([
+        supabase.from("system_settings").select("value").eq("key", "blockchain_rpc_url").maybeSingle(),
+        supabase.from("system_settings").select("value").eq("key", "blockchain_chain_id").maybeSingle(),
+      ]);
+      const loadedRpc = rpcRes.data?.value || "https://rpc.test.pontus-x.eu";
+      const loadedChain = chainRes.data?.value || "32457";
+      setRpcUrl(loadedRpc);
+      setChainId(loadedChain);
+      // Detect which preset matches
+      const match = Object.entries(NETWORK_PRESETS).find(([, v]) => v.rpc === loadedRpc);
+      setSelectedNetwork(match ? match[0] : "custom");
       setRpcLoading(false);
     };
     loadRpc();
@@ -122,19 +160,62 @@ const AdminGovernance = () => {
     return () => controller.abort();
   }, [rpcUrl, rpcLoading]);
 
-  const saveRpcUrl = async () => {
-    setRpcSaving(true);
-    const { error } = await supabase
-      .from("system_settings")
-      .update({ value: rpcUrl, updated_at: new Date().toISOString() })
-      .eq("key", "blockchain_rpc_url");
-    setRpcSaving(false);
-    if (error) {
-      toast.error("Error guardando RPC URL");
-    } else {
-      toast.success("RPC URL actualizado correctamente");
+  const handleNetworkChange = (value: string) => {
+    setSelectedNetwork(value);
+    const preset = NETWORK_PRESETS[value];
+    if (preset) {
+      setRpcUrl(preset.rpc);
+      setChainId(preset.chainId);
     }
   };
+
+  const saveRpcUrl = async () => {
+    setRpcSaving(true);
+    const now = new Date().toISOString();
+
+    // Upsert both settings
+    const [rpcRes, chainRes] = await Promise.all([
+      supabase.from("system_settings").update({ value: rpcUrl, updated_at: now }).eq("key", "blockchain_rpc_url"),
+      supabase.from("system_settings").update({ value: chainId, updated_at: now }).eq("key", "blockchain_chain_id"),
+    ]);
+
+    // Log the config change
+    await (supabase as any).from("governance_logs").insert({
+      level: "info",
+      category: "config_change",
+      message: `URL del RPC actualizada a ${rpcUrl} (Chain ID: ${chainId})`,
+    });
+
+    setRpcSaving(false);
+    if (rpcRes.error || chainRes.error) {
+      toast.error("Error guardando configuración de red");
+    } else {
+      toast.success("Configuración de red actualizada correctamente");
+      // Refresh logs
+      fetchLogs();
+    }
+  };
+
+  // --- Governance Logs ---
+  const [logs, setLogs] = useState<GovernanceLog[]>([]);
+  const [logsLoading, setLogsLoading] = useState(true);
+
+  const fetchLogs = useCallback(async () => {
+    setLogsLoading(true);
+    const { data, error } = await (supabase as any)
+      .from("governance_logs")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (!error && data) {
+      setLogs(data);
+    }
+    setLogsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchLogs();
+  }, [fetchLogs]);
 
   const explorerBase = PONTUSX_NETWORK_CONFIG.blockExplorerUrls?.[0] || "https://explorer.pontus-x.eu/";
 
@@ -160,11 +241,26 @@ const AdminGovernance = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Network selector */}
           <div className="flex items-center gap-3">
+            <div className="w-[220px]">
+              <Select value={selectedNetwork} onValueChange={handleNetworkChange} disabled={rpcLoading}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Seleccionar red" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="testnet">Pontus-X Testnet</SelectItem>
+                  <SelectItem value="devnet">Pontus-X Devnet</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <div className="flex-1">
               <Input
                 value={rpcUrl}
-                onChange={(e) => setRpcUrl(e.target.value)}
+                onChange={(e) => {
+                  setRpcUrl(e.target.value);
+                  setSelectedNetwork("custom");
+                }}
                 placeholder="https://rpc.test.pontus-x.eu"
                 disabled={rpcLoading}
               />
@@ -187,7 +283,7 @@ const AdminGovernance = () => {
           </div>
           <div className="flex items-center justify-between">
             <p className="text-xs text-muted-foreground">
-              Chain ID: {PONTUSX_NETWORK_CONFIG.chainId} · Token: {PONTUSX_NETWORK_CONFIG.nativeCurrency.symbol}
+              Chain ID: {chainId} · Token: {PONTUSX_NETWORK_CONFIG.nativeCurrency.symbol}
             </p>
             <Button size="sm" onClick={saveRpcUrl} disabled={rpcSaving || rpcLoading}>
               {rpcSaving ? (
@@ -251,12 +347,12 @@ const AdminGovernance = () => {
               <Separator />
               <div className="flex justify-between items-center text-sm">
                 <span className="text-muted-foreground">Chain ID</span>
-                <code className="text-xs font-mono bg-muted px-2 py-0.5 rounded">{oceanConfig.chainId}</code>
+                <code className="text-xs font-mono bg-muted px-2 py-0.5 rounded">{chainId}</code>
               </div>
               <Separator />
               <div className="flex justify-between items-center text-sm">
                 <span className="text-muted-foreground">RPC</span>
-                <code className="text-xs font-mono bg-muted px-2 py-0.5 rounded truncate max-w-[200px]">{oceanConfig.nodeUri}</code>
+                <code className="text-xs font-mono bg-muted px-2 py-0.5 rounded truncate max-w-[200px]">{rpcUrl || oceanConfig.nodeUri}</code>
               </div>
               <Separator />
               <div className="flex justify-between items-center text-sm">
@@ -373,40 +469,64 @@ const AdminGovernance = () => {
         </Card>
       </div>
 
-      {/* Row 3 — Ecosystem Event Log */}
+      {/* Row 3 — Dynamic Ecosystem Event Log */}
       <Card>
         <CardHeader className="pb-3">
-          <div className="flex items-center gap-2">
-            <Server className="h-5 w-5 text-primary" />
-            <CardTitle className="text-base">Registro de Eventos del Ecosistema</CardTitle>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Server className="h-5 w-5 text-primary" />
+              <CardTitle className="text-base">Registro de Eventos del Ecosistema</CardTitle>
+            </div>
+            <Button variant="outline" size="sm" onClick={fetchLogs} disabled={logsLoading}>
+              <RefreshCw className={`h-3.5 w-3.5 mr-1.5 ${logsLoading ? "animate-spin" : ""}`} /> Refrescar
+            </Button>
           </div>
           <CardDescription>Últimos eventos de los servicios de red federados</CardDescription>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-[260px]">
-            <div className="space-y-1 font-mono text-xs">
-              {ecosystemEvents.map((evt, i) => (
-                <div
-                  key={i}
-                  className={`flex gap-3 px-2 py-1.5 rounded ${
-                    evt.level === "error"
-                      ? "bg-destructive/10 text-destructive"
-                      : evt.level === "warn"
-                      ? "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  <span className="shrink-0 tabular-nums">{evt.ts}</span>
-                  <Badge
-                    variant="outline"
-                    className="h-5 text-[10px] uppercase shrink-0"
+            {logsLoading && logs.length === 0 ? (
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                <Loader2 className="h-4 w-4 animate-spin mr-2" /> Cargando registros…
+              </div>
+            ) : logs.length === 0 ? (
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                No hay registros de eventos
+              </div>
+            ) : (
+              <div className="space-y-1 font-mono text-xs">
+                {logs.map((evt) => (
+                  <div
+                    key={evt.id}
+                    className={`flex gap-3 px-2 py-1.5 rounded ${
+                      evt.level === "error"
+                        ? "bg-destructive/10 text-destructive"
+                        : evt.level === "warn"
+                        ? "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400"
+                        : "text-muted-foreground"
+                    }`}
                   >
-                    {evt.level}
-                  </Badge>
-                  <span className="break-all">{evt.message}</span>
-                </div>
-              ))}
-            </div>
+                    <span className="shrink-0 tabular-nums">
+                      {new Date(evt.created_at).toLocaleString("es-ES", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                      })}
+                    </span>
+                    <Badge
+                      variant="outline"
+                      className="h-5 text-[10px] uppercase shrink-0"
+                    >
+                      {evt.level}
+                    </Badge>
+                    <span className="break-all">{evt.message}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </ScrollArea>
         </CardContent>
       </Card>
