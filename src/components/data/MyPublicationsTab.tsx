@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useGovernanceSettings } from "@/hooks/useGovernanceSettings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -49,6 +50,8 @@ export const MyPublicationsTab = () => {
     const { activeOrgId, activeOrg } = useOrganizationContext();
     const queryClient = useQueryClient();
     const { t, i18n } = useTranslation('data');
+    const { requireKyb } = useGovernanceSettings();
+    const kybDisabled = requireKyb && !(activeOrg as any)?.kyb_verified;
     const dateLocale = DATE_LOCALES[i18n.language] || DATE_LOCALES.en;
 
     const { data: publications, isLoading } = useQuery({
@@ -192,7 +195,11 @@ export const MyPublicationsTab = () => {
                     title={t('empty.pubTitle')}
                     description={t('empty.pubDesc')}
                     action={
-                        <Button onClick={() => navigate("/datos/publicar")}>
+                        <Button
+                            onClick={() => navigate("/datos/publicar")}
+                            disabled={kybDisabled}
+                            title={kybDisabled ? "Se requiere validación KYB de tu organización" : undefined}
+                        >
                             <Plus className="h-4 w-4 mr-2" />
                             {t('empty.pubBtn')}
                         </Button>

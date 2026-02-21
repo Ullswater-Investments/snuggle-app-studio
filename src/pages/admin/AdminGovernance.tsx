@@ -27,6 +27,9 @@ import { useState, useEffect, useCallback } from "react";
 import { PONTUSX_NETWORK_CONFIG } from "@/services/pontusX";
 import { oceanConfig, oceanContracts } from "@/lib/oceanConfig";
 import { supabase } from "@/integrations/supabase/client";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { useQueryClient } from "@tanstack/react-query";
 
 // --- Types ---
 interface ServiceStatus {
@@ -93,6 +96,74 @@ async function checkService(url: string, isRpc: boolean): Promise<"online" | "of
 }
 
 const AdminGovernance = () => {
+  const queryClient = useQueryClient();
+
+  // --- Identity / Governance switches ---
+  const [govSettings, setGovSettings] = useState({
+    require_email_verification: false,
+    require_kyc: false,
+    require_kyb: false,
+    ecosystem_status: "active" as "active" | "maintenance",
+  });
+  const [govLoading, setGovLoading] = useState(true);
+
+  useEffect(() => {
+    const load = async () => {
+      const { data } = await supabase
+        .from("system_settings")
+        .select("key, value")
+        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status"]);
+      if (data) {
+        const map: Record<string, string> = {};
+        for (const r of data) map[r.key] = r.value;
+        setGovSettings({
+          require_email_verification: map.require_email_verification === "true",
+          require_kyc: map.require_kyc === "true",
+          require_kyb: map.require_kyb === "true",
+          ecosystem_status: (map.ecosystem_status as "active" | "maintenance") ?? "active",
+        });
+      }
+      setGovLoading(false);
+    };
+    load();
+  }, []);
+
+  const toggleGovSetting = async (key: string, newValue: boolean | string) => {
+    const strValue = typeof newValue === "boolean" ? (newValue ? "true" : "false") : newValue;
+    const { error } = await supabase
+      .from("system_settings")
+      .update({ value: strValue, updated_at: new Date().toISOString() })
+      .eq("key", key);
+
+    if (error) {
+      toast.error("Error actualizando configuración");
+      return;
+    }
+
+    // Update local state
+    setGovSettings((prev) => ({
+      ...prev,
+      [key]: typeof newValue === "boolean" ? newValue : newValue,
+    }));
+
+    // Log the change
+    const labels: Record<string, string> = {
+      require_email_verification: "Verificación de Email",
+      require_kyc: "KYC (Persona Física)",
+      require_kyb: "KYB (Empresa)",
+      ecosystem_status: "Estado del Ecosistema",
+    };
+    await (supabase as any).from("governance_logs").insert({
+      level: "info",
+      category: "config_change",
+      message: `${labels[key] ?? key} ${typeof newValue === "boolean" ? (newValue ? "activado" : "desactivado") : `cambiado a "${newValue}"`}`,
+    });
+
+    // Invalidate governance-settings cache so other pages pick up changes
+    queryClient.invalidateQueries({ queryKey: ["governance-settings"] });
+    toast.success(`${labels[key]} actualizado`);
+    fetchLogs();
+  };
   // --- Services health ---
   const [services, setServices] = useState<ServiceStatus[]>([
     { name: "Blockchain (Pontus-X)", url: oceanConfig.nodeUri, status: "checking" },
@@ -295,6 +366,83 @@ const AdminGovernance = () => {
               Guardar
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Identity Configuration Card */}
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Shield className="h-5 w-5 text-primary" />
+            <CardTitle className="text-base">Configuración de Identidad</CardTitle>
+          </div>
+          <CardDescription>
+            Controles de verificación exigidos a los participantes del ecosistema
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          {govLoading ? (
+            <div className="flex items-center justify-center py-4 text-muted-foreground text-sm">
+              <Loader2 className="h-4 w-4 animate-spin mr-2" /> Cargando configuración…
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sw-email" className="text-sm font-medium">Verificación de Email</Label>
+                  <p className="text-xs text-muted-foreground">Exigir correo validado para publicar</p>
+                </div>
+                <Switch
+                  id="sw-email"
+                  checked={govSettings.require_email_verification}
+                  onCheckedChange={(v) => toggleGovSetting("require_email_verification", v)}
+                />
+              </div>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sw-kyc" className="text-sm font-medium">KYC (Persona Física)</Label>
+                  <p className="text-xs text-muted-foreground">Activar validación de identidad para usuarios</p>
+                </div>
+                <Switch
+                  id="sw-kyc"
+                  checked={govSettings.require_kyc}
+                  onCheckedChange={(v) => toggleGovSetting("require_kyc", v)}
+                />
+              </div>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sw-kyb" className="text-sm font-medium">KYB (Empresa)</Label>
+                  <p className="text-xs text-muted-foreground">Exigir validación registral de la organización</p>
+                </div>
+                <Switch
+                  id="sw-kyb"
+                  checked={govSettings.require_kyb}
+                  onCheckedChange={(v) => toggleGovSetting("require_kyb", v)}
+                />
+              </div>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sw-ecosystem" className="text-sm font-medium">Estado del Ecosistema</Label>
+                  <p className="text-xs text-muted-foreground">Modo de operación de la plataforma</p>
+                </div>
+                <Select
+                  value={govSettings.ecosystem_status}
+                  onValueChange={(v) => toggleGovSetting("ecosystem_status", v)}
+                >
+                  <SelectTrigger className="w-[160px]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="active">Activo</SelectItem>
+                    <SelectItem value="maintenance">Mantenimiento</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
 

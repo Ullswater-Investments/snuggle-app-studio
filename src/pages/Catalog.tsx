@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { useGovernanceSettings } from "@/hooks/useGovernanceSettings";
 import { useTranslation } from "react-i18next";
 
 // Transaction status type for catalog intelligence
@@ -97,6 +98,8 @@ export default function Catalog() {
   const queryClient = useQueryClient();
   const { activeOrgId, activeOrg } = useOrganizationContext();
   const { t } = useTranslation('catalog');
+  const { requireKyb } = useGovernanceSettings();
+  const kybDisabled = requireKyb && !(activeOrg as any)?.kyb_verified;
   const { t: tPartners } = useTranslation('partnerProducts');
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
@@ -525,6 +528,8 @@ export default function Catalog() {
             size="lg"
             onClick={() => navigate("/datos/publicar")}
             className="bg-white text-blue-600 hover:bg-blue-50 shrink-0 shadow-lg"
+            disabled={kybDisabled}
+            title={kybDisabled ? "Se requiere validación KYB de tu organización" : undefined}
           >
             <Database className="h-5 w-5 mr-2" />
             {t('hero.publish')}
