@@ -1,74 +1,107 @@
 
 
-## Precision On-chain y Etiquetas Profesionales del Dashboard
+## Gobernanza del Ecosistema Funcional
 
 ### Resumen
 
-Ajustar la lectura on-chain para que refleje exactamente las 95 transacciones, eliminar toda mencion a "Testnet" en la interfaz de usuario, refinar la visualizacion del balance EURAU, y anadir las nuevas etiquetas traducidas a los 7 idiomas.
+Convertir la pagina `/admin/governance` de un panel semi-estatico a uno completamente funcional con: tabla de logs dinamica, selector de red Devnet/Testnet, health checks reales, y DID con copia al portapapeles.
 
 ---
 
-### 1. Verificar lectura correcta de transacciones
+### 1. Nueva tabla `governance_logs` en la base de datos
 
-El hook `useBlockchainActivity` ya lee `wallet_address` de la organizacion activa en la base de datos (no esta hardcodeado). Usa `provider.getTransactionCount(walletAddress)` que devuelve el nonce total. Si el explorador muestra 95 transacciones, el valor deberia coincidir.
+Crear una tabla para registrar eventos del ecosistema:
 
-**Accion**: Verificar que no hay ningun filtro o cache que altere el resultado. Anadir un `console.log` temporal o revisar que `staleTime` no impida la actualizacion. No se requiere cambio de logica significativo ya que la implementacion es correcta.
-
----
-
-### 2. Humanizar etiquetas (eliminar "Testnet")
-
-**Archivo: `src/pages/Dashboard.tsx`** (linea ~426)
-
-Cambiar el texto hardcodeado `"On-chain · Pontus-X Testnet"` por una clave i18n:
-
-```
-t('cards.onchainVerified', 'Actividad Verificada On-chain')
+```text
+governance_logs
+  id          uuid  PK  default gen_random_uuid()
+  level       text  NOT NULL  ('info' | 'warn' | 'error')
+  category    text  NOT NULL  ('user_registration' | 'asset_verification' | 'config_change' | 'system')
+  message     text  NOT NULL
+  actor_id    uuid  NULLABLE  (quien ejecuto la accion)
+  metadata    jsonb NULLABLE  (datos adicionales)
+  created_at  timestamptz  default now()
 ```
 
-**Archivo: `src/components/Web3StatusWidget.tsx`** (linea ~158)
+**RLS**: SELECT para usuarios con rol `admin` o `data_space_owner`. INSERT restringido a funciones SECURITY DEFINER (sistema).
 
-Cambiar `"Cambiar a Pontus-X Testnet"` por:
+**Seed data**: Insertar unos 5-7 registros iniciales representativos (registro de usuario, verificacion de activo, cambio de configuracion).
+
+---
+
+### 2. Selector de Red Blockchain (Devnet / Testnet)
+
+Modificar la tarjeta "Configuracion de Red Blockchain" en `AdminGovernance.tsx`:
+
+- Anadir un dropdown/Select con dos opciones predefinidas:
+  - **Pontus-X Testnet**: RPC `https://rpc.test.pontus-x.eu`, Chain ID `32457`
+  - **Pontus-X Devnet**: RPC `https://rpc.dev.pontus-x.eu`, Chain ID `32456`
+- Al seleccionar una opcion, se auto-rellena el campo RPC URL.
+- Al pulsar "Guardar", se actualizan dos claves en `system_settings`:
+  - `blockchain_rpc_url` con la nueva URL
+  - `blockchain_chain_id` con el nuevo Chain ID (nueva clave a insertar)
+- Actualizar los hooks `useEthWalletBalance` y `useBlockchainActivity` para leer tambien `blockchain_chain_id` de `system_settings`.
+
+---
+
+### 3. Health Checks reales
+
+Reemplazar la simulacion aleatoria de `runHealthCheck()` con llamadas reales:
+
+- **Blockchain**: `fetch(rpcUrl, { method: 'POST', body: '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' })` - si devuelve `result`, esta online.
+- **Aquarius**: `fetch(aquariusUrl)` - si responde 200, esta online.
+- **Provider**: `fetch(providerUrl)` - si responde 200, esta online.
+- **Identity Provider**: `fetch("https://identity.pontus-x.eu")` - si responde, esta online.
+
+Cada check tendra un timeout de 5 segundos. Si falla o excede el timeout, se marca como "Caido".
+
+---
+
+### 4. Registro de Eventos dinamico
+
+Reemplazar el array hardcoded `ecosystemEvents` con una consulta a `governance_logs`:
+
+- Consultar los ultimos 50 registros ordenados por `created_at DESC`.
+- Mantener los colores de severidad: info (azul/muted), warn (amarillo), error (rojo).
+- Anadir un boton "Refrescar" en la cabecera del panel.
+
+---
+
+### 5. Logging automatico de cambios de configuracion
+
+Cuando el admin guarda el RPC URL (funcion `saveRpcUrl`), insertar automaticamente un registro en `governance_logs`:
 
 ```
-"Cambiar a Red de Datos Segura"
+level: 'info'
+category: 'config_change'  
+message: 'URL del RPC actualizada a [URL]'
 ```
 
-Y el toast de exito de `"Red cambiada a Pontus-X Testnet"` por `"Conectado a la Red de Datos Segura"`.
+---
+
+### 6. DID con copia al portapapeles
+
+La funcionalidad de copia ya existe en el codigo actual (boton Copy junto al DID, funcion `copy()`). Solo verificar que funciona correctamente y que el badge "Verificado GAIA-X" se muestra. No se requieren cambios aqui.
 
 ---
 
-### 3. Refinamiento del Balance
+### Secuencia tecnica
 
-**Archivo: `src/pages/Dashboard.tsx`** (linea ~322-323)
+**Paso 1 - Migracion SQL**: Crear tabla `governance_logs` + RLS + seed data + insertar clave `blockchain_chain_id` en `system_settings`.
 
-Asegurar que el balance nativo muestre exactamente 4 decimales: `27.0882 EURAU`.
+**Paso 2 - AdminGovernance.tsx**: 
+- Anadir Select de red (Devnet/Testnet) que auto-rellena RPC y Chain ID
+- Reemplazar health check simulado por llamadas reales con timeout
+- Reemplazar eventos mock por consulta a `governance_logs`
+- Insertar log al guardar configuracion
 
-Eliminar cualquier referencia residual a "Testnet" en tooltips o textos de carga. En el loading state, usar la clave `t('cards.walletLoading', 'Conectando a la Red de Datos Segura...')`.
-
----
-
-### 4. Traducciones a 7 idiomas
-
-Anadir las siguientes claves al namespace `dashboard` en los 7 archivos de localizacion:
-
-| Clave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `cards.onchainVerified` | Actividad Verificada On-chain | On-chain Verified Activity | Activite verifiee on-chain | On-chain verifizierte Aktivitat | Attivita verificata on-chain | Atividade Verificada On-chain | On-chain Geverifieerde Activiteit |
-| `cards.secureNetwork` | Conectado a la Red de Datos Segura | Connected to Secure Data Network | Connecte au reseau de donnees securise | Verbunden mit dem sicheren Datennetzwerk | Connesso alla Rete Dati Sicura | Conectado a Rede de Dados Segura | Verbonden met beveiligd datanetwerk |
-| `cards.walletLoading` | Conectando a la Red de Datos Segura... | Connecting to Secure Data Network... | Connexion au reseau securise... | Verbindung zum sicheren Netzwerk... | Connessione alla rete sicura... | Conectando a rede segura... | Verbinden met beveiligd netwerk... |
+**Paso 3 - Actualizar hooks** (si se decide persistir chain_id): Opcional, ya que el RPC URL es el valor principal que usan los hooks.
 
 ---
 
-### Archivos a modificar (9)
+### Archivos a modificar/crear (2-3)
 
-1. `src/pages/Dashboard.tsx` -- reemplazar texto hardcodeado por claves i18n, refinar formato balance
-2. `src/components/Web3StatusWidget.tsx` -- humanizar etiquetas de red
-3. `src/locales/es/dashboard.json` -- anadir 3 claves nuevas
-4. `src/locales/en/dashboard.json` -- anadir 3 claves nuevas
-5. `src/locales/fr/dashboard.json` -- anadir 3 claves nuevas
-6. `src/locales/de/dashboard.json` -- anadir 3 claves nuevas
-7. `src/locales/it/dashboard.json` -- anadir 3 claves nuevas
-8. `src/locales/pt/dashboard.json` -- anadir 3 claves nuevas
-9. `src/locales/nl/dashboard.json` -- anadir 3 claves nuevas
+1. **Nueva migracion SQL** -- crear tabla `governance_logs`, seed data, nueva clave `blockchain_chain_id`
+2. **`src/pages/admin/AdminGovernance.tsx`** -- selector de red, health checks reales, logs dinamicos, logging automatico
+3. **`src/integrations/supabase/types.ts`** -- se actualizara automaticamente tras la migracion
 
