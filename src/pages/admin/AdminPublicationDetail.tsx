@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { logGovernanceEvent } from "@/utils/governanceLogger";
 import {
   ArrowLeft, Building2, FileText, Tag, Globe, Lock, Copy, Check,
   CheckCircle2, XCircle, Clock, DollarSign, Shield, Database, Key,
@@ -84,6 +85,12 @@ const AdminPublicationDetail = () => {
     },
     onSuccess: () => {
       toast.success("Activo marcado como publicado en Pontus-X");
+      logGovernanceEvent({
+        level: "info",
+        category: "publications",
+        message: `Dataset ${id!.slice(0, 8)} verificado y publicado en el marketplace`,
+        metadata: { asset_id: id },
+      });
       queryClient.invalidateQueries({ queryKey: ["admin-asset-detail", id] });
       queryClient.invalidateQueries({ queryKey: ["admin-all-assets"] });
     },
@@ -100,6 +107,12 @@ const AdminPublicationDetail = () => {
     },
     onSuccess: () => {
       toast.success("Activo rechazado. El proveedor será notificado.");
+      logGovernanceEvent({
+        level: "warn",
+        category: "publications",
+        message: `Publicación del dataset ${id!.slice(0, 8)} denegada`,
+        metadata: { asset_id: id, rejection_note: rejectionNote },
+      });
       setShowRejectForm(false);
       setRejectionNote("");
       queryClient.invalidateQueries({ queryKey: ["admin-asset-detail", id] });

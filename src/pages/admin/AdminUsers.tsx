@@ -51,6 +51,7 @@ import {
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { toast } from "sonner";
+import { logGovernanceEvent } from "@/utils/governanceLogger";
 
 interface UserOrg {
   id: string;
@@ -301,6 +302,12 @@ const UserDetailPanel = ({
     },
     onSuccess: () => {
       toast.success("Usuario eliminado correctamente");
+      logGovernanceEvent({
+        level: "info",
+        category: "users",
+        message: `Usuario ${user.email} removido de la plataforma`,
+        metadata: { user_id: user.id, email: user.email },
+      });
       queryClient.invalidateQueries({ queryKey: ["admin-all-users"] });
       onUserDeleted();
     },

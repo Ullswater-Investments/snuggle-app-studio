@@ -55,6 +55,7 @@ import {
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { toast } from "sonner";
+import { logGovernanceEvent } from "@/utils/governanceLogger";
 
 interface OrgRow {
   id: string;
@@ -387,6 +388,12 @@ const OrgDetailPanel = ({ org, activity, onClose, onOrgUpdated }: OrgDetailPanel
     },
     onSuccess: () => {
       toast.success(`"${org.name}" ha sido deshabilitada`);
+      logGovernanceEvent({
+        level: "info",
+        category: "organizations",
+        message: `Organización "${org.name}" deshabilitada por el administrador`,
+        metadata: { organization_id: org.id, organization_name: org.name },
+      });
       onOrgUpdated();
     },
     onError: () => toast.error("Error al deshabilitar la organización"),
@@ -425,6 +432,12 @@ const OrgDetailPanel = ({ org, activity, onClose, onOrgUpdated }: OrgDetailPanel
     },
     onSuccess: () => {
       toast.success(`"${org.name}" ha sido eliminada permanentemente`);
+      logGovernanceEvent({
+        level: "info",
+        category: "organizations",
+        message: `Organización "${org.name}" eliminada permanentemente por el administrador`,
+        metadata: { organization_id: org.id, organization_name: org.name, tax_id: org.tax_id },
+      });
       onOrgUpdated();
     },
     onError: (err: any) => {
