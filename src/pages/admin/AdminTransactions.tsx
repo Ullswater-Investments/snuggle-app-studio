@@ -47,7 +47,7 @@ const AdminTransactions = () => {
           id, status, purpose, created_at, payment_status,
           consumer_org_id, subject_org_id, holder_org_id,
           asset_id,
-          data_assets!inner(price, currency, data_products(name))
+          data_assets(price, currency, data_products(name))
         `)
         .order("created_at", { ascending: false });
       if (error) throw error;
@@ -105,7 +105,7 @@ const AdminTransactions = () => {
   // Summary cards
   const totalVolume = useMemo(() => {
     return transactions
-      .filter((t: any) => t.status === "completed")
+      .filter((t: any) => t.status === "completed" || t.status === "approved")
       .reduce((sum: number, t: any) => sum + ((t.data_assets as any)?.price ?? 0), 0);
   }, [transactions]);
 
