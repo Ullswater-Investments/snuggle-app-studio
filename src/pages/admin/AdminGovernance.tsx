@@ -22,6 +22,7 @@ import {
   Loader2,
   Network,
   Package,
+  Coins,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useEffect, useCallback } from "react";
@@ -108,6 +109,9 @@ const AdminGovernance = () => {
     auto_approve_assets: true,
     catalog_visibility: "public" as "public" | "private",
   });
+  // --- Ecosystem fee ---
+  const [ecosystemFee, setEcosystemFee] = useState("2.5");
+  const [feeSaving, setFeeSaving] = useState(false);
   const [govLoading, setGovLoading] = useState(true);
 
   useEffect(() => {
@@ -115,7 +119,7 @@ const AdminGovernance = () => {
       const { data } = await supabase
         .from("system_settings")
         .select("key, value")
-        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status", "auto_approve_assets", "catalog_visibility"]);
+        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status", "auto_approve_assets", "catalog_visibility", "ecosystem_fee_percentage"]);
       if (data) {
         const map: Record<string, string> = {};
         for (const r of data) map[r.key] = r.value;
@@ -127,6 +131,7 @@ const AdminGovernance = () => {
           auto_approve_assets: map.auto_approve_assets !== "false",
           catalog_visibility: (map.catalog_visibility as "public" | "private") ?? "public",
         });
+        if (map.ecosystem_fee_percentage) setEcosystemFee(map.ecosystem_fee_percentage);
       }
       setGovLoading(false);
     };
@@ -171,6 +176,42 @@ const AdminGovernance = () => {
     toast.success(`${labels[key]} actualizado`);
     fetchLogs();
   };
+
+  // --- Ecosystem Fee save ---
+  const saveEcosystemFee = async () => {
+    const numVal = parseFloat(ecosystemFee);
+    if (isNaN(numVal) || numVal < 0 || numVal > 100) {
+      toast.error("El porcentaje debe estar entre 0 y 100");
+      return;
+    }
+    setFeeSaving(true);
+    const { error } = await supabase
+      .from("system_settings")
+      .update({ value: numVal.toString(), updated_at: new Date().toISOString() })
+      .eq("key", "ecosystem_fee_percentage");
+    if (error) {
+      toast.error("Error guardando comisión");
+    } else {
+      await (supabase as any).from("governance_logs").insert({
+        level: "info",
+        category: "config_change",
+        message: `Comisión del Ecosistema actualizada a ${numVal}%`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["governance-settings"] });
+      toast.success("Comisión del ecosistema actualizada");
+      fetchLogs();
+    }
+    setFeeSaving(false);
+  };
+
+  // --- Blockchain RPC Config ---
+  const [rpcUrl, setRpcUrl] = useState("");
+  const [chainId, setChainId] = useState("32457");
+  const [selectedNetwork, setSelectedNetwork] = useState<string>("testnet");
+  const [rpcLoading, setRpcLoading] = useState(true);
+  const [rpcSaving, setRpcSaving] = useState(false);
+  const [rpcStatus, setRpcStatus] = useState<"online" | "offline" | "checking">("checking");
+
   // --- Services health ---
   const [services, setServices] = useState<ServiceStatus[]>([
     { name: "Blockchain (Pontus-X)", url: oceanConfig.nodeUri, status: "checking" },
@@ -180,28 +221,26 @@ const AdminGovernance = () => {
   ]);
 
   const runHealthCheck = useCallback(async () => {
-    setServices((prev) => prev.map((s) => ({ ...s, status: "checking" as const })));
+    const currentRpc = rpcUrl || oceanConfig.nodeUri;
+    setServices([
+      { name: "Blockchain (Pontus-X)", url: currentRpc, status: "checking" },
+      { name: "API Gateway (Aquarius)", url: oceanConfig.aquariusUrl, status: "checking" },
+      { name: "Provider de Datos", url: oceanConfig.providerUrl, status: "checking" },
+      { name: "Identity Provider", url: "https://identity.pontus-x.eu", status: "checking" },
+    ]);
     const urls = [
-      { url: oceanConfig.nodeUri, isRpc: true },
+      { url: currentRpc, isRpc: true },
       { url: oceanConfig.aquariusUrl, isRpc: false },
       { url: oceanConfig.providerUrl, isRpc: false },
       { url: "https://identity.pontus-x.eu", isRpc: false },
     ];
     const results = await Promise.all(urls.map((u) => checkService(u.url, u.isRpc)));
     setServices((prev) => prev.map((s, i) => ({ ...s, status: results[i] })));
-  }, []);
+  }, [rpcUrl]);
 
   useEffect(() => {
     runHealthCheck();
   }, [runHealthCheck]);
-
-  // --- Blockchain RPC Config ---
-  const [rpcUrl, setRpcUrl] = useState("");
-  const [chainId, setChainId] = useState("32457");
-  const [selectedNetwork, setSelectedNetwork] = useState<string>("testnet");
-  const [rpcLoading, setRpcLoading] = useState(true);
-  const [rpcSaving, setRpcSaving] = useState(false);
-  const [rpcStatus, setRpcStatus] = useState<"online" | "offline" | "checking">("checking");
 
   useEffect(() => {
     const loadRpc = async () => {
@@ -268,8 +307,10 @@ const AdminGovernance = () => {
     if (rpcRes.error || chainRes.error) {
       toast.error("Error guardando configuración de red");
     } else {
+      // Invalidate balance queries so Dashboard picks up new RPC
+      queryClient.invalidateQueries({ queryKey: ["pontus-wallet-balance"] });
+      queryClient.invalidateQueries({ queryKey: ["blockchain-activity"] });
       toast.success("Configuración de red actualizada correctamente");
-      // Refresh logs
       fetchLogs();
     }
   };
@@ -506,7 +547,53 @@ const AdminGovernance = () => {
         </CardContent>
       </Card>
 
-      {/* Row 1 — Identity + Protocol */}
+      {/* Gobernanza Económica Card */}
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Coins className="h-5 w-5 text-primary" />
+            <CardTitle className="text-base">Gobernanza Económica</CardTitle>
+          </div>
+          <CardDescription>
+            Configuración de comisiones y parámetros económicos del ecosistema
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between gap-4">
+            <div className="space-y-0.5 flex-1">
+              <Label htmlFor="ecosystem-fee" className="text-sm font-medium">Comisión del Ecosistema (%)</Label>
+              <p className="text-xs text-muted-foreground">
+                Porcentaje aplicado a cada transacción del marketplace para el mantenimiento del ecosistema
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Input
+                id="ecosystem-fee"
+                type="number"
+                min="0"
+                max="100"
+                step="0.1"
+                value={ecosystemFee}
+                onChange={(e) => setEcosystemFee(e.target.value)}
+                className="w-[100px] text-right"
+              />
+              <span className="text-sm text-muted-foreground">%</span>
+              <Button size="sm" onClick={saveEcosystemFee} disabled={feeSaving}>
+                {feeSaving ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Save className="mr-2 h-4 w-4" />
+                )}
+                Guardar
+              </Button>
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground border-l-2 border-primary/30 pl-3">
+            Este valor se aplicará en el cálculo del coste total en el carrito de compra y en las liquidaciones a proveedores.
+          </p>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader className="pb-3">
