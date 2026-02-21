@@ -62,11 +62,52 @@
     "rejectSuccess": "Actif rejeté. Le fournisseur sera notifié.",
     "rejectError": "Erreur lors du rejet de l'actif"
   },
+  "sidebar": {
+    "title": "AGILE Admin",
+    "subtitle": "Panneau de contrôle",
+    "administration": "Administration",
+    "navigation": "Navigation",
+    "backToPortal": "Retour au portail",
+    "globalOverview": "Vue d'ensemble",
+    "orgManagement": "Gestion des organisations",
+    "userManagement": "Gestion des utilisateurs",
+    "assetValidation": "Validation des actifs",
+    "transactionMonitoring": "Suivi des transactions",
+    "ecosystemGovernance": "Gouvernance de l'écosystème"
+  },
+  "publications": {
+    "title": "Validation des actifs",
+    "subtitle": "{{count}} actifs dans l'espace de données",
+    "pendingValidation": "En attente de validation",
+    "publishedPontus": "Publiés sur Pontus-X",
+    "rejected": "Rejetés",
+    "searchPlaceholder": "Rechercher par nom d'actif ou fournisseur...",
+    "allStatuses": "Tous les statuts",
+    "inValidation": "En validation",
+    "pendingReview": "En attente de révision",
+    "pending": "En attente",
+    "published": "Publié",
+    "allProviders": "Tous les fournisseurs",
+    "statusPlaceholder": "Statut",
+    "providerPlaceholder": "Fournisseur",
+    "tableAsset": "Actif",
+    "tableProvider": "Fournisseur",
+    "tableCategory": "Catégorie",
+    "tableDate": "Date de demande",
+    "tablePrice": "Prix",
+    "tableStatus": "Statut",
+    "loading": "Chargement des actifs...",
+    "noResults": "Aucun actif trouvé",
+    "freePrice": "Gratuit"
+  },
   "status": {
     "pendingValidation": "En attente de validation",
     "published": "Publié sur Pontus-X",
     "rejected": "Rejeté",
-    "draft": "Brouillon"
+    "draft": "Brouillon",
+    "inValidation": "En validation",
+    "pendingReview": "En attente de révision",
+    "pending": "En attente"
   },
   "categories": {
     "Market": "Marché",

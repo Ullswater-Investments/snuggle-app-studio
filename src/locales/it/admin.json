@@ -62,11 +62,52 @@
     "rejectSuccess": "Asset rifiutato. Il fornitore sarà notificato.",
     "rejectError": "Errore nel rifiuto dell'asset"
   },
+  "sidebar": {
+    "title": "AGILE Admin",
+    "subtitle": "Pannello di controllo",
+    "administration": "Amministrazione",
+    "navigation": "Navigazione",
+    "backToPortal": "Torna al portale",
+    "globalOverview": "Panoramica globale",
+    "orgManagement": "Gestione organizzazioni",
+    "userManagement": "Gestione utenti",
+    "assetValidation": "Validazione asset",
+    "transactionMonitoring": "Monitoraggio transazioni",
+    "ecosystemGovernance": "Governance dell'ecosistema"
+  },
+  "publications": {
+    "title": "Validazione asset",
+    "subtitle": "{{count}} asset nello spazio dati",
+    "pendingValidation": "In attesa di validazione",
+    "publishedPontus": "Pubblicati su Pontus-X",
+    "rejected": "Rifiutati",
+    "searchPlaceholder": "Cerca per nome asset o fornitore...",
+    "allStatuses": "Tutti gli stati",
+    "inValidation": "In validazione",
+    "pendingReview": "In attesa di revisione",
+    "pending": "In attesa",
+    "published": "Pubblicato",
+    "allProviders": "Tutti i fornitori",
+    "statusPlaceholder": "Stato",
+    "providerPlaceholder": "Fornitore",
+    "tableAsset": "Asset",
+    "tableProvider": "Fornitore",
+    "tableCategory": "Categoria",
+    "tableDate": "Data richiesta",
+    "tablePrice": "Prezzo",
+    "tableStatus": "Stato",
+    "loading": "Caricamento asset...",
+    "noResults": "Nessun asset trovato",
+    "freePrice": "Gratuito"
+  },
   "status": {
     "pendingValidation": "In attesa di validazione",
     "published": "Pubblicato su Pontus-X",
     "rejected": "Rifiutato",
-    "draft": "Bozza"
+    "draft": "Bozza",
+    "inValidation": "In validazione",
+    "pendingReview": "In attesa di revisione",
+    "pending": "In attesa"
   },
   "categories": {
     "Market": "Mercato",
