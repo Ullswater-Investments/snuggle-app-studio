@@ -1,61 +1,71 @@
 
 
-## Flexibilizar el origen de la Wallet en el registro
+## Correccion del constraint `data_assets_status_check` y sincronizacion del flujo
 
-### Problema actual
+### Problema
 
-Cuando el control "Onboarding DeltaDAO" esta **desactivado**, la seccion de verificacion de wallet se oculta completamente (lineas 396-475 de `OrganizationRegistrationStep.tsx`). Esto significa que:
-- No hay campo visible para que el usuario introduzca o modifique su wallet.
-- Se usa silenciosamente la wallet del Paso 1 (via prop `walletAddress` o `localStorage`), sin que el usuario pueda confirmarla o cambiarla.
-
-Cuando esta **activado**, el campo de wallet existe dentro del bloque de verificacion DeltaDAO, pero esta bloqueado (`disabled`) una vez verificado.
-
-### Cambios planificados
-
-#### 1. Anadir campo de Wallet Address visible siempre en el Paso 2
-
-En `src/components/onboarding/OrganizationRegistrationStep.tsx`:
-
-- **Caso DeltaDAO INACTIVO**: Mostrar un campo de texto editable "Wallet Address (opcional)" fuera del bloque de verificacion DeltaDAO. El usuario puede:
-  - Dejarlo con la wallet pre-rellenada del Paso 1.
-  - Modificarla libremente.
-  - Dejarlo vacio (wallet opcional).
-- **Caso DeltaDAO ACTIVO**: Sin cambios visuales. El campo de wallet ya existe dentro del bloque de verificacion. La wallet verificada es la que se usa.
-
-#### 2. Asegurar que `onSubmit` use el valor actual de `walletInput`
-
-Ya funciona asi (linea 309: `wallet_address: walletInput || null`), pero verificaremos que:
-- Si DeltaDAO esta activo, solo se permite enviar si `isVerified === true` (ya implementado).
-- Si DeltaDAO esta inactivo, se toma el valor actual de `walletInput` (editado o no por el usuario) y se verifica duplicados locales antes de guardar.
-
-#### 3. Posicion del nuevo campo en el formulario
-
-El campo de wallet se colocara justo antes de la seccion de "Consentimientos legales", despues del grid de Sector/Tamano, con:
-- Label: "Wallet Address"
-- Placeholder: "0x... (opcional)"
-- Texto de ayuda: "Introduce la direccion de wallet que deseas asociar a tu organizacion. Si generaste una en el paso anterior, ya esta pre-rellenada."
+La restriccion actual en la tabla `data_assets` solo permite: `'available', 'unavailable', 'pending'`. El codigo envia `'active'` (auto-aprobacion ON) y `'pending_review'` (auto-aprobacion OFF), ambos valores invalidos.
 
 ---
 
-### Archivo a modificar
+### Cambios planificados
+
+#### 1. Migracion SQL: Actualizar el CHECK constraint
+
+Eliminar el constraint existente y recrearlo con los valores que realmente usa la aplicacion:
+
+```sql
+ALTER TABLE data_assets DROP CONSTRAINT data_assets_status_check;
+ALTER TABLE data_assets ADD CONSTRAINT data_assets_status_check
+  CHECK (status = ANY (ARRAY['active', 'inactive', 'pending', 'rejected', 'available', 'unavailable']));
+```
+
+Se mantienen `available` y `unavailable` por compatibilidad con datos existentes (seeds). Se anaden `active`, `inactive`, `pending` y `rejected` que son los que usa el frontend y el panel admin.
+
+#### 2. Ajuste en `src/pages/dashboard/PublishDataset.tsx`
+
+Cambiar `"pending_review"` a `"pending"` en la linea 509:
+
+```typescript
+status: autoApproveAssets ? "active" : "pending",
+```
+
+Actualizar el mensaje de exito (linea 538) cuando `autoApproveAssets` es false:
+
+```typescript
+: "Dataset enviado a revision tecnica. Se le notificara cuando este disponible en el catalogo."
+```
+
+#### 3. Sincronizacion del panel Admin (`src/pages/admin/AdminPublications.tsx`)
+
+Anadir `"pending"` al mapa `statusConfig` (actualmente solo tiene `pending_validation` y `available` como estados "pendientes"):
+
+```typescript
+pending: { label: "Pendiente de Revision", variant: "secondary" },
+```
+
+Esto asegura que los datasets enviados con `status = 'pending'` aparezcan correctamente en la lista de publicaciones del admin con la etiqueta "Pendiente de Revision".
+
+---
+
+### Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/components/onboarding/OrganizationRegistrationStep.tsx` | Anadir campo de wallet editable cuando DeltaDAO esta inactivo, posicionado antes de consentimientos legales |
+| Migracion SQL | DROP + ADD constraint con valores ampliados |
+| `src/pages/dashboard/PublishDataset.tsx` | `"pending_review"` a `"pending"`, mensaje de exito actualizado |
+| `src/pages/admin/AdminPublications.tsx` | Anadir `pending` a `statusConfig` |
+
+---
 
 ### Detalle tecnico
 
-El campo nuevo solo se renderiza cuando `!requireDeltadaoOnboarding`. Cuando DeltaDAO esta activo, el campo ya existe dentro del bloque de verificacion (lineas 412-426). No se duplica.
-
 ```text
-Formulario Paso 2:
-  [Verificacion DeltaDAO]  <-- solo si requireDeltadaoOnboarding === true
-  [Nombre legal]
-  [Tipo doc / Numero doc]
-  [Pais]
-  [Direccion]
-  [Sector / Tamano]
-  [Wallet Address]         <-- NUEVO, solo si requireDeltadaoOnboarding === false
-  [Consentimientos]
-  [Botones]
+Valores del constraint actualizado:
+  active       - Publicado y visible
+  inactive     - Desactivado por el propietario
+  pending      - Enviado, esperando revision admin
+  rejected     - Rechazado por admin
+  available    - Legacy (seeds existentes)
+  unavailable  - Legacy (seeds existentes)
 ```
