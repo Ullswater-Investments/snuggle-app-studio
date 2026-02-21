@@ -23,6 +23,8 @@ import {
   Network,
   Package,
   Coins,
+  AlertTriangle,
+  Download,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useEffect, useCallback } from "react";
@@ -108,10 +110,13 @@ const AdminGovernance = () => {
     ecosystem_status: "active" as "active" | "maintenance",
     auto_approve_assets: true,
     catalog_visibility: "public" as "public" | "private",
+    maintenance_mode: false,
   });
   // --- Ecosystem fee ---
   const [ecosystemFee, setEcosystemFee] = useState("2.5");
   const [feeSaving, setFeeSaving] = useState(false);
+  // --- Log verbosity ---
+  const [logVerbosity, setLogVerbosity] = useState<string>("operational");
   const [govLoading, setGovLoading] = useState(true);
 
   useEffect(() => {
@@ -119,7 +124,7 @@ const AdminGovernance = () => {
       const { data } = await supabase
         .from("system_settings")
         .select("key, value")
-        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status", "auto_approve_assets", "catalog_visibility", "ecosystem_fee_percentage"]);
+        .in("key", ["require_email_verification", "require_kyc", "require_kyb", "ecosystem_status", "auto_approve_assets", "catalog_visibility", "ecosystem_fee_percentage", "maintenance_mode", "log_verbosity"]);
       if (data) {
         const map: Record<string, string> = {};
         for (const r of data) map[r.key] = r.value;
@@ -130,8 +135,10 @@ const AdminGovernance = () => {
           ecosystem_status: (map.ecosystem_status as "active" | "maintenance") ?? "active",
           auto_approve_assets: map.auto_approve_assets !== "false",
           catalog_visibility: (map.catalog_visibility as "public" | "private") ?? "public",
+          maintenance_mode: map.maintenance_mode === "true",
         });
         if (map.ecosystem_fee_percentage) setEcosystemFee(map.ecosystem_fee_percentage);
+        if (map.log_verbosity) setLogVerbosity(map.log_verbosity);
       }
       setGovLoading(false);
     };
@@ -164,6 +171,7 @@ const AdminGovernance = () => {
       ecosystem_status: "Estado del Ecosistema",
       auto_approve_assets: "Aprobación Automática de Activos",
       catalog_visibility: "Visibilidad del Catálogo",
+      maintenance_mode: "Modo Mantenimiento Global",
     };
     await (supabase as any).from("governance_logs").insert({
       level: "info",
@@ -204,7 +212,55 @@ const AdminGovernance = () => {
     setFeeSaving(false);
   };
 
-  // --- Blockchain RPC Config ---
+  // --- Log Verbosity save ---
+  const saveLogVerbosity = async (newLevel: string) => {
+    setLogVerbosity(newLevel);
+    const { error } = await supabase
+      .from("system_settings")
+      .update({ value: newLevel, updated_at: new Date().toISOString() })
+      .eq("key", "log_verbosity");
+    if (!error) {
+      await (supabase as any).from("governance_logs").insert({
+        level: "info",
+        category: "config_change",
+        message: `Nivel de detalle de logs cambiado a "${newLevel}"`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["governance-settings"] });
+      toast.success("Nivel de detalle actualizado");
+      fetchLogs();
+    } else {
+      toast.error("Error guardando nivel de detalle");
+    }
+  };
+
+  // --- Export logs ---
+  const exportLogs = async () => {
+    const { data, error } = await (supabase as any)
+      .from("governance_logs")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(1000);
+    if (error || !data || data.length === 0) {
+      toast.error("No hay registros para exportar");
+      return;
+    }
+    const header = "Fecha,Nivel,Categoría,Mensaje\n";
+    const rows = data.map((r: GovernanceLog) => {
+      const date = new Date(r.created_at).toLocaleString("es-ES");
+      const msg = r.message.replace(/"/g, '""');
+      return `"${date}","${r.level.toUpperCase()}","${r.category}","${msg}"`;
+    }).join("\n");
+    const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `governance_logs_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Logs exportados correctamente");
+  };
+
+
   const [rpcUrl, setRpcUrl] = useState("");
   const [chainId, setChainId] = useState("32457");
   const [selectedNetwork, setSelectedNetwork] = useState<string>("testnet");
@@ -348,6 +404,40 @@ const AdminGovernance = () => {
           Configuración de identidad, protocolos y servicios de la red PROCUREDATA
         </p>
       </div>
+
+      {/* Emergency Operations Card */}
+      <Card className="border-destructive/40">
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-5 w-5 text-destructive" />
+            <CardTitle className="text-base">Operaciones de Emergencia</CardTitle>
+          </div>
+          <CardDescription>
+            Controles críticos que afectan a toda la plataforma
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {govLoading ? (
+            <div className="flex items-center justify-center py-4 text-muted-foreground text-sm">
+              <Loader2 className="h-4 w-4 animate-spin mr-2" /> Cargando…
+            </div>
+          ) : (
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label htmlFor="sw-maintenance" className="text-sm font-medium">Modo Mantenimiento Global</Label>
+                <p className="text-xs text-muted-foreground">
+                  Desactiva publicaciones y transacciones. Muestra un banner persistente en toda la aplicación.
+                </p>
+              </div>
+              <Switch
+                id="sw-maintenance"
+                checked={govSettings.maintenance_mode}
+                onCheckedChange={(v) => toggleGovSetting("maintenance_mode", v)}
+              />
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Blockchain RPC Config Card */}
       <Card>
@@ -772,11 +862,31 @@ const AdminGovernance = () => {
               <Server className="h-5 w-5 text-primary" />
               <CardTitle className="text-base">Registro de Eventos del Ecosistema</CardTitle>
             </div>
-            <Button variant="outline" size="sm" onClick={fetchLogs} disabled={logsLoading}>
-              <RefreshCw className={`h-3.5 w-3.5 mr-1.5 ${logsLoading ? "animate-spin" : ""}`} /> Refrescar
-            </Button>
+            <div className="flex items-center gap-2">
+              <Select value={logVerbosity} onValueChange={saveLogVerbosity}>
+                <SelectTrigger className="w-[140px] h-8 text-xs">
+                  <SelectValue placeholder="Nivel" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="basic">Básico</SelectItem>
+                  <SelectItem value="operational">Operativo</SelectItem>
+                  <SelectItem value="debug">Debug</SelectItem>
+                </SelectContent>
+              </Select>
+              <Button variant="outline" size="sm" onClick={exportLogs}>
+                <Download className="h-3.5 w-3.5 mr-1.5" /> Exportar
+              </Button>
+              <Button variant="outline" size="sm" onClick={fetchLogs} disabled={logsLoading}>
+                <RefreshCw className={`h-3.5 w-3.5 mr-1.5 ${logsLoading ? "animate-spin" : ""}`} /> Refrescar
+              </Button>
+            </div>
           </div>
-          <CardDescription>Últimos eventos de los servicios de red federados</CardDescription>
+          <CardDescription>
+            Últimos eventos de los servicios de red federados
+            {logVerbosity === "basic" && " · Solo errores críticos"}
+            {logVerbosity === "operational" && " · Errores + Registros"}
+            {logVerbosity === "debug" && " · Todo el rastro del sistema"}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-[260px]">
@@ -790,7 +900,13 @@ const AdminGovernance = () => {
               </div>
             ) : (
               <div className="space-y-1 font-mono text-xs">
-                {logs.map((evt) => (
+                {logs
+                  .filter((evt) => {
+                    if (logVerbosity === "debug") return true;
+                    if (logVerbosity === "operational") return evt.level !== "debug";
+                    return evt.level === "error";
+                  })
+                  .map((evt) => (
                   <div
                     key={evt.id}
                     className={`flex gap-3 px-2 py-1.5 rounded ${
