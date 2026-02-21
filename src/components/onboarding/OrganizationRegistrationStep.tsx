@@ -674,6 +674,24 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
                 </div>
               )}
 
+              {/* Wallet Address field - only when DeltaDAO is inactive */}
+              {!requireDeltadaoOnboarding && (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium leading-none">
+                    Wallet Address
+                  </label>
+                  <Input
+                    placeholder="0x... (opcional)"
+                    value={walletInput}
+                    onChange={(e) => setWalletInput(e.target.value)}
+                    className="font-mono text-sm"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Introduce la dirección de wallet que deseas asociar a tu organización. Si generaste una en el paso anterior, ya está pre-rellenada.
+                  </p>
+                </div>
+              )}
+
               {/* Legal Consents */}
               <div className="space-y-4 pt-4 border-t">
                 <h4 className="font-semibold text-sm flex items-center gap-2">
