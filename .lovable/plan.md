@@ -1,76 +1,69 @@
 
-
-## Logging centralizado en governance_logs para acciones administrativas
+## Unificacion visual del portal de usuario
 
 ### Resumen
 
-Se creara una funcion utilitaria `logGovernanceEvent` y se integrara en los 4 paneles de administracion para registrar automaticamente cada accion critica en la tabla `governance_logs`.
+Se unificara la experiencia visual consolidando el header y las rutas operativas bajo `AppLayout`, sin tocar `DocumentLayout` ni las paginas informativas/legales.
 
 ---
 
-### 1. Crear funcion utilitaria centralizada
+### 1. Actualizar UnifiedHeader.tsx
 
-**Archivo nuevo:** `src/utils/governanceLogger.ts`
+**Zona izquierda** (branding + navegacion):
+- Mantener `SidebarTrigger`
+- Texto "PROCUREDATA" con color azul corporativo (`text-[#4CABFF]`) en lugar de `text-foreground`
+- Anadir botones de navegacion historica `< >` (atras/adelante) justo despues del texto, reutilizando la logica de `GlobalNavigation` (con `useNavigate(-1)` y `useNavigate(1)`) pero sin el boton Home
+- Importar `ChevronLeft`, `ChevronRight` de lucide-react y `useNavigate` de react-router-dom
 
-Una funcion reutilizable que inserta un registro en `governance_logs`:
+**Zona central** (buscador): Sin cambios, ya esta centrado con `flex-1 justify-center`
 
-```text
-logGovernanceEvent({
-  level: "info" | "warn" | "error",
-  category: string,
-  message: string,
-  metadata?: object   // detalles adicionales (IDs, nombres, etc.)
-})
-```
-
-Internamente usara `supabase.from("governance_logs").insert(...)` con el `actor_id` del usuario autenticado actual (via `supabase.auth.getUser()`).
+**Zona derecha** (acciones): Sin cambios funcionales. Mantiene OrganizationSwitcher, NotificationsBell, LanguageSwitcher, ThemeToggle, DemoHelpButton y boton logout/login.
 
 ---
 
-### 2. Integracion por panel
+### 2. Consolidar rutas en App.tsx
 
-#### A. Gestion de Organizaciones (`AdminOrganizations.tsx`)
+Mover las rutas del catalogo y paginas operativas publicas desde el bloque `PublicDemoLayout` al bloque `AppLayout` (protegido con `ProtectedRoute`):
 
-| Accion | Nivel | Mensaje |
-|---|---|---|
-| Eliminar organizacion | info | "Organizacion [Nombre] eliminada permanentemente por el administrador" |
-| Deshabilitar organizacion | info | "Organizacion [Nombre] deshabilitada por el administrador" |
+**Rutas a mover al bloque AppLayout:**
+- `/catalog` (pagina principal del catalogo)
+- Todas las rutas `/catalog/*` de detalle de producto (telemetria-flota, consumo-electrico, etc.)
+- `/sustainability`
+- `/services` y `/services/:id`
+- `/innovation`
+- `/success-stories` y `/success-stories/:id`
+- `/partners` (listado)
 
-Se anadira la llamada a `logGovernanceEvent` en los callbacks `onSuccess` de `deleteMutation` y `disableMutation` (lineas ~389 y ~427).
+**Rutas que permanecen en PublicDemoLayout** (accesibles sin autenticacion):
+- Ninguna operativa - se eliminara el bloque `PublicDemoLayout` de App.tsx ya que todas sus rutas se mueven a AppLayout
 
-#### B. Gestion de Usuarios (`AdminUsers.tsx`)
-
-| Accion | Nivel | Mensaje |
-|---|---|---|
-| Eliminar usuario | info | "Usuario [Email] removido de la plataforma" |
-
-Se anadira en el `onSuccess` del `deleteMutation` (linea ~303).
-
-#### C. Validacion de Activos (`AdminPublicationDetail.tsx`)
-
-| Accion | Nivel | Mensaje |
-|---|---|---|
-| Aprobar publicacion | info | "Dataset [ID corto] verificado y publicado en el marketplace" |
-| Rechazar publicacion | warn | "Publicacion del dataset [ID corto] denegada" |
-
-Se anadira en los `onSuccess` de `publishMutation` (linea ~85) y `rejectMutation` (linea ~101).
-
-#### D. Monitorizacion de Transacciones (`AdminTransactionDetail.tsx`)
-
-Actualmente esta pagina es de solo lectura. No tiene acciones de intervencion (revocar/cancelar). Por ahora no se anade logging aqui, pero la infraestructura queda lista para cuando se implemente la funcionalidad de revocacion manual.
+**Nota:** Esto significa que el catalogo requerira autenticacion. Las paginas de documentos, landing, auth, register, guide, etc. siguen siendo publicas sin layout wrapper.
 
 ---
 
-### 3. Archivos a modificar
+### 3. Ajustar margenes en AppLayout.tsx
+
+- En el `<main>`, mantener `flex-1` sin padding adicional. Actualmente no tiene margenes extra, lo cual es correcto.
+- El header ya tiene `h-16` fijo y `sticky top-0`. La transicion entre rutas sera imperceptible porque todas comparten el mismo layout.
+
+---
+
+### 4. Eliminar PublicDemoLayout.tsx (opcional)
+
+Si tras mover todas las rutas el componente queda sin uso, se eliminara el archivo y su import en App.tsx. Tambien se puede eliminar `PublicDemoBanner` si ya no se referencia.
+
+---
+
+### Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/utils/governanceLogger.ts` | **Nuevo**: funcion `logGovernanceEvent` |
-| `src/pages/admin/AdminOrganizations.tsx` | Anadir logs en `onSuccess` de delete y disable |
-| `src/pages/admin/AdminUsers.tsx` | Anadir log en `onSuccess` de delete |
-| `src/pages/admin/AdminPublicationDetail.tsx` | Anadir logs en `onSuccess` de publish y reject |
+| `src/components/layout/UnifiedHeader.tsx` | Anadir botones atras/adelante, cambiar color de PROCUREDATA a azul corporativo |
+| `src/App.tsx` | Mover rutas de catalogo/servicios/partners de PublicDemoLayout a AppLayout |
+| `src/components/PublicDemoLayout.tsx` | Eliminar si queda sin rutas |
 
-### 4. Nota sobre permisos
+### Archivos NO modificados
 
-La tabla `governance_logs` ya tiene una politica RLS que permite INSERT a usuarios con rol `admin` o `data_space_owner`. No se necesitan cambios en la base de datos.
-
+- `src/components/DocumentLayout.tsx` - sin cambios
+- `src/components/AppLayout.tsx` - sin cambios necesarios (la estructura ya es correcta)
+- Todas las paginas de documentos explicativos, legal, landing - sin cambios
