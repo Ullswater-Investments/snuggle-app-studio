@@ -254,16 +254,40 @@ export function OrganizationRegistrationStep({ walletAddress, onBack }: Organiza
 
     try {
       // Check if organization with this tax_id already exists
-      const { data: existingOrg } = await supabase
+      const { data: existingOrgByTaxId } = await supabase
         .from('organizations')
         .select('id, name')
         .eq('tax_id', data.documentNumber)
         .maybeSingle();
 
-      if (existingOrg) {
-        toast.error("Organización ya registrada", {
-          description: "Esta organización ya se encuentra registrada en PROCUREDATA. Por favor, inicia sesión o contacta con el administrador.",
-          duration: 8000,
+      if (existingOrgByTaxId) {
+        toast.error("Esta organización ya se encuentra registrada en el ecosistema PROCUREDATA", {
+          description: "Si eres un nuevo miembro, por favor solicita una invitación al administrador actual de tu organización.",
+          duration: 10000,
+          action: {
+            label: "Solicitar invitación",
+            onClick: () => navigate('/onboarding/request-invite'),
+          },
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Check if organization with this wallet_address already exists
+      const { data: existingOrgByWallet } = await supabase
+        .from('organizations')
+        .select('id, name')
+        .eq('wallet_address', walletInput)
+        .maybeSingle();
+
+      if (existingOrgByWallet) {
+        toast.error("Esta organización ya se encuentra registrada en el ecosistema PROCUREDATA", {
+          description: "Si eres un nuevo miembro, por favor solicita una invitación al administrador actual de tu organización.",
+          duration: 10000,
+          action: {
+            label: "Solicitar invitación",
+            onClick: () => navigate('/onboarding/request-invite'),
+          },
         });
         setIsSubmitting(false);
         return;
