@@ -126,6 +126,8 @@ export const MyPublicationsTab = () => {
         switch (status) {
             case "pending_validation":
                 return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">🔍 {t('pubStatus.validation')}</Badge>;
+            case "pending":
+                return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">⏳ Pendiente de Revisión</Badge>;
             case "available":
                 return <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">{t('pubStatus.available')}</Badge>;
             case "active":
@@ -235,7 +237,7 @@ export const MyPublicationsTab = () => {
                                 </div>
 
                                 {/* Visibility Toggle - disabled during validation */}
-                                {publication.status === "pending_validation" ? (
+                                {publication.status === "pending_validation" || publication.status === "pending" ? (
                                     <div className="mt-3 pt-3 border-t">
                                         <p className="text-xs text-muted-foreground italic">
                                             {t('card.notEditable')}
@@ -277,23 +279,23 @@ export const MyPublicationsTab = () => {
 
                                 {/* Actions */}
                                 <div className="flex gap-2 pt-2">
-                                    {publication.status !== "pending_validation" && (
+                                    {publication.status !== "pending_validation" && publication.status !== "pending" && (
                                         <Button
                                             variant="outline"
                                             size="sm"
                                             className="flex-1"
-                                            onClick={() => navigate(`/catalog/asset/${publication.id}`)}
+                                            onClick={() => navigate(`/catalog/product/${publication.id}`)}
                                         >
                                             <Eye className="h-4 w-4 mr-1" />
                                             {t('card.view')}
                                         </Button>
                                     )}
-                                    {publication.status === "pending_validation" ? (
+                                    {publication.status === "pending_validation" || publication.status === "pending" ? (
                                         <Button
                                             variant="outline"
                                             size="sm"
                                             className="flex-1"
-                                            disabled
+                                            onClick={() => navigate(`/catalog/product/${publication.id}`)}
                                         >
                                             <Clock className="h-4 w-4 mr-1" />
                                             {t('card.inReview')}

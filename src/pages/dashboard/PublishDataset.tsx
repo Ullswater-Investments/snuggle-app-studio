@@ -537,7 +537,7 @@ export default function PublishDataset() {
         ? "Dataset publicado exitosamente en el catálogo."
         : "Dataset enviado a revisión técnica. Se le notificará cuando esté disponible en el catálogo.";
       toast.success(msg, { duration: 6000 });
-      navigate("/datos");
+      navigate("/data");
     },
     onError: (error: Error) => {
       console.error("Error publishing dataset:", error);

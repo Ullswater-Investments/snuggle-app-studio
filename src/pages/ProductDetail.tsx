@@ -17,7 +17,8 @@ import {
   Eye,
   Wallet,
   Scale,
-  Bot
+  Bot,
+  Clock
 } from "lucide-react";
 
 // UI Components
@@ -50,6 +51,7 @@ interface MarketplaceListing {
   has_green_badge: boolean;
   reputation_score: number;
   review_count: number;
+  status?: string;
 }
 
 export default function ProductDetail() {
@@ -78,6 +80,7 @@ export default function ProductDetail() {
         .from('data_assets')
         .select(`
           id,
+          status,
           pricing_model,
           price,
           currency,
@@ -109,13 +112,37 @@ export default function ProductDetail() {
         billing_period: asset.billing_period || 'monthly',
         has_green_badge: true,
         reputation_score: 4.8,
-        review_count: 24
+        review_count: 24,
+        status: asset.status
       };
     }
   });
 
   if (isLoading) return <ProductSkeleton />;
   if (!product) return <div className="container py-20 text-center">Producto no encontrado</div>;
+
+  // Pending validation screen
+  if (product.status === "pending") {
+    return (
+      <div className="container py-8 fade-in min-h-screen bg-muted/10">
+        <Button variant="ghost" className="mb-6 pl-0 hover:bg-transparent hover:underline" onClick={() => navigate(-1)}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+        </Button>
+        <div className="flex flex-col items-center justify-center py-20 space-y-6">
+          <div className="h-20 w-20 rounded-full bg-secondary flex items-center justify-center">
+            <ShieldCheck className="h-10 w-10 text-primary" />
+          </div>
+          <h1 className="text-2xl font-bold text-center">Activo en proceso de validación técnica</h1>
+          <p className="text-muted-foreground text-center max-w-md">
+            Un administrador del ecosistema está verificando la calidad y conectividad de este activo. Se le notificará una vez esté disponible.
+          </p>
+          <Badge variant="secondary" className="text-sm px-4 py-1">
+            <Clock className="h-4 w-4 mr-2" /> Pendiente de revisión
+          </Badge>
+        </div>
+      </div>
+    );
+  }
 
   const isPaid = product.price > 0;
 
