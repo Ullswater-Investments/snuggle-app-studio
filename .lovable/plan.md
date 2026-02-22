@@ -1,41 +1,77 @@
 
 
-## Añadir llaves de traducción `detail.askAgent` y `detail.caseArchitecture` en 7 idiomas
+## Implementacion del Modo Demostracion Global
 
-### Situación actual
+### Situacion actual
 
-- **ES, EN, FR, PT**: Tienen sección `detail` pero les faltan las llaves `askAgent` y `caseArchitecture`.
-- **DE, IT, NL**: No tienen sección `detail` en absoluto (ni `navigation` ni `narrative`). Estas secciones también se añadirán para completar la paridad.
-
-El componente `SuccessStoryDetail.tsx` ya usa `t('detail.askAgent', { ns: 'success' })` y `t('detail.caseArchitecture', { ns: 'success' })`, pero al no existir las llaves, se muestran las claves técnicas en la UI.
+- Ya existe un `isDemo` en `useOrganizationContext` basado en el flag `is_demo` de la organizacion o el email `demo@procuredata.app`.
+- Existe un `DemoBanner` que muestra un aviso cuando `isDemo` es true.
+- El boton "Acceder a Version Demo" en Auth.tsx usa las credenciales demo@procuredata.app.
+- No hay restricciones funcionales asociadas al modo demo (catalogo, publicacion, onboarding, etc.).
 
 ---
 
-### Cambios
+### Cambios planificados
 
-**Archivos a modificar (4):**
+**1. Banner global en AppLayout (actualizar DemoBanner)**
 
-1. `src/locales/es/success.json` -- añadir 2 llaves dentro de `detail`
-2. `src/locales/en/success.json` -- añadir 2 llaves dentro de `detail`
-3. `src/locales/fr/success.json` -- añadir 2 llaves dentro de `detail`
-4. `src/locales/pt/success.json` -- añadir 2 llaves dentro de `detail`
+- Archivo: `src/components/DemoBanner.tsx`
+- Cambiar el texto y estilo del banner existente para que diga: "Estas en Modo Demostracion. Algunas funciones de registro y publicacion estan limitadas".
+- Mantener el banner visible en la parte superior cuando `isDemo` es true (ya esta en uso via `useOrganizationContext`).
+- Verificar que `DemoBanner` se renderice en `AppLayout.tsx` (actualmente NO se renderiza ahi, solo en otros layouts). Anadir `<DemoBanner />` despues de `<UnifiedHeader />` en `AppLayout.tsx`.
 
-**Archivos a modificar (3) -- secciones completas nuevas:**
+**2. Restricciones en Catalogo (/catalog y /catalog/:id)**
 
-5. `src/locales/de/success.json` -- añadir secciones `detail`, `navigation` y `narrative` completas (incluyendo `askAgent` y `caseArchitecture`)
-6. `src/locales/it/success.json` -- igual que DE
-7. `src/locales/nl/success.json` -- igual que DE
+- Archivo: `src/pages/Catalog.tsx`
+  - Importar `useOrganizationContext` (ya importado).
+  - Extraer `isDemo` del contexto.
+  - Cuando `isDemo` es true, filtrar los listings para mostrar solo activos sinteticos (synthetic assets que ya existen en el codigo, linea 237) y excluir los datos reales de la BD. Si hay datos de BD, filtrarlos por organizaciones demo (`is_demo = true` en organizations).
 
-### Traducciones
+- Archivo: `src/pages/ProductDetail.tsx`
+  - Importar `useOrganizationContext`.
+  - Si `isDemo` es true y el producto no pertenece a una organizacion demo, redirigir a `/catalog` con un toast de aviso.
+  - Deshabilitar el boton "Solicitar Acceso" / "Comprar Ahora" cuando `isDemo` es true, mostrando "Solicitudes no disponibles en demo" como texto del boton.
 
-| Llave | ES | EN | FR | DE | IT | PT | NL |
-|---|---|---|---|---|---|---|---|
-| `detail.askAgent` | Preguntar al Agente ARIA | Ask ARIA Agent | Demander a l'Agent ARIA | ARIA-Agent fragen | Chiedi all'Agente ARIA | Perguntar ao Agente ARIA | Vraag aan ARIA Agent |
-| `detail.caseArchitecture` | Arquitectura del Caso | Case Architecture | Architecture du Cas | Fallarchitektur | Architettura del Caso | Arquitetura do Caso | Case Architectuur |
+**3. Bloqueo de Publicacion y Onboarding**
 
-Para DE, IT y NL tambien se añadiran las llaves existentes de `detail` (`notFound`, `backToStories`, `verifiedOn`, `block`, `sectorImpactPanel`, `impactSimulator`, `ctaTitle`, `ctaDescription`, `exploreCatalog`, `viewServices`) y las secciones `navigation` y `narrative` para mantener la paridad completa.
+- Archivo: `src/pages/dashboard/PublishDataset.tsx`
+  - Importar `isDemo` de `useOrganizationContext`.
+  - Si `isDemo` es true, mostrar un mensaje de bloqueo en lugar del formulario: "La publicacion de activos no esta disponible en modo demostracion".
 
-### Sin cambios en componentes
+- Archivo: `src/pages/RequestWizard.tsx`
+  - Importar `isDemo` de `useOrganizationContext`.
+  - Si `isDemo` es true, mostrar un mensaje de bloqueo similar.
 
-El componente `SuccessStoryDetail.tsx` ya usa las llamadas correctas a `t()` con el namespace `success`, por lo que no necesita ninguna modificación.
+- Archivo: `src/components/WelcomeScreen.tsx`
+  - Importar `isDemo` de `useOrganizationContext`.
+  - Si `isDemo` es true, ocultar las tarjetas de "Registrar Organizacion" e "Invitar", y mostrar un mensaje indicando que se esta en modo demo.
+
+**4. Bloqueo de Gestion de Organizaciones**
+
+- Archivo: `src/pages/onboarding/CreateOrganization.tsx`
+  - Importar `isDemo` de `useOrganizationContext`.
+  - Si `isDemo` es true, redirigir a `/dashboard` con un toast: "Creacion de organizaciones no disponible en modo demo".
+
+- Archivo: `src/pages/onboarding/RequestInvite.tsx`
+  - Igual: redirigir con aviso si `isDemo` es true.
+
+---
+
+### Resumen de archivos modificados
+
+1. `src/components/DemoBanner.tsx` -- actualizar texto y estilo del banner
+2. `src/components/AppLayout.tsx` -- anadir `<DemoBanner />` despues de `<UnifiedHeader />`
+3. `src/pages/Catalog.tsx` -- filtrar por activos sinteticos/demo en modo demo
+4. `src/pages/ProductDetail.tsx` -- redireccion y bloqueo de boton de solicitud
+5. `src/pages/dashboard/PublishDataset.tsx` -- pantalla de bloqueo en modo demo
+6. `src/pages/RequestWizard.tsx` -- pantalla de bloqueo en modo demo
+7. `src/components/WelcomeScreen.tsx` -- ocultar tarjetas de registro en modo demo
+8. `src/pages/onboarding/CreateOrganization.tsx` -- redireccion en modo demo
+9. `src/pages/onboarding/RequestInvite.tsx` -- redireccion en modo demo
+
+### Notas tecnicas
+
+- No se necesita crear un nuevo estado global; el `isDemo` ya existente en `useOrganizationContext` es suficiente y esta basado en datos reales (flag `is_demo` de la organizacion o email del usuario demo).
+- No se requieren cambios en la base de datos.
+- Las restricciones son puramente de UI; la seguridad real se mantiene via RLS policies existentes.
 
