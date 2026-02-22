@@ -198,12 +198,8 @@ export default function ProductDetail() {
   const isPaid = product.price > 0;
   const schemaColumns = product.schema_definition && Array.isArray((product.schema_definition as any).columns)
     ? (product.schema_definition as any).columns
-    : null;
-  const schemaFieldCount = schemaColumns
-    ? schemaColumns.length
-    : product.schema_definition 
-      ? Object.keys(product.schema_definition).length 
-      : 8;
+    : [];
+  const schemaFieldCount = schemaColumns.length;
 
   const sanitizeFileName = (name: string): string => {
     return name
@@ -231,7 +227,7 @@ export default function ProductDetail() {
         idioma: customMeta.language || null,
       },
       esquema_tecnico: {
-        campos: schemaColumns || product.schema_definition || [],
+        campos: schemaColumns,
         numero_de_campos: schemaFieldCount,
         formato: "JSON / API",
       },
@@ -440,7 +436,7 @@ export default function ProductDetail() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {schemaColumns && schemaColumns.length > 0 ? (
+                  {schemaColumns.length > 0 ? (
                     <Table>
                       <TableHeader>
                         <TableRow>
@@ -451,8 +447,8 @@ export default function ProductDetail() {
                       </TableHeader>
                       <TableBody>
                         {schemaColumns.map((col: any, i: number) => (
-                          <TableRow key={col.name || i}>
-                            <TableCell className="font-mono text-sm font-medium">{col.name || '—'}</TableCell>
+                          <TableRow key={col.field || col.name || i}>
+                            <TableCell className="font-mono text-sm font-medium text-foreground">{col.field || col.name || '—'}</TableCell>
                             <TableCell>
                               <Badge variant="secondary" className="text-xs">
                                 {col.type || 'unknown'}
@@ -465,34 +461,6 @@ export default function ProductDetail() {
                         ))}
                       </TableBody>
                     </Table>
-                  ) : product.schema_definition && typeof product.schema_definition === 'object' && Object.keys(product.schema_definition).length > 0 ? (
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Campo</TableHead>
-                          <TableHead>Tipo</TableHead>
-                          <TableHead>Descripción</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {Object.entries(product.schema_definition).map(([field, def]) => {
-                          const fieldDef = typeof def === 'object' && def !== null ? def as Record<string, any> : {};
-                          return (
-                            <TableRow key={field}>
-                              <TableCell className="font-mono text-sm font-medium">{field}</TableCell>
-                              <TableCell>
-                                <Badge variant="secondary" className="text-xs">
-                                  {fieldDef.type || typeof def}
-                                </Badge>
-                              </TableCell>
-                              <TableCell className="text-sm text-muted-foreground">
-                                {fieldDef.description || '—'}
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
                   ) : (
                     <div className="flex flex-col items-center justify-center py-12 text-center">
                       <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted/30">
@@ -500,7 +468,7 @@ export default function ProductDetail() {
                       </div>
                       <h3 className="text-base font-semibold mb-1">Esquema no disponible</h3>
                       <p className="text-sm text-muted-foreground max-w-sm">
-                        La definición técnica de campos será visible una vez el proveedor complete la configuración del activo.
+                        Este activo no tiene un esquema técnico definido.
                       </p>
                     </div>
                   )}
