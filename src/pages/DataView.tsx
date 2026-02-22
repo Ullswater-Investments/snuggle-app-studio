@@ -335,8 +335,8 @@ const DataView = () => {
 
       queryClient.invalidateQueries({ queryKey: ["access-logs"] });
       
-      if (errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND") || errorMsg.includes("502") || errorMsg.includes("504") || errorMsg.includes("provider API")) {
-        toast.error("Error de Conexión: El servidor del proveedor no responde. Por favor, contacta con soporte si el problema persiste.");
+      if (errorMsg.includes("Failed to send") || errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND") || errorMsg.includes("502") || errorMsg.includes("504") || errorMsg.includes("provider API")) {
+        toast.error("No se pudo conectar con el servidor del proveedor. Inténtelo de nuevo en unos minutos.");
       } else {
         toast.error(`Error al descargar: ${errorMsg}`);
       }
