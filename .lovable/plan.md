@@ -1,77 +1,83 @@
 
 
-## Fix Notification Duplication and Add Role-Based Messages
+## Refactorizacion del Sistema de Alertas: Mensajes Contextuales y Guia de Iconos
 
-### Problem Root Cause
+### Resumen
 
-When an action occurs (e.g., deny a request), two separate systems both insert into the `notifications` table:
-
-1. **Edge function** (`notification-handler`): Called explicitly via `sendNotification()` -- inserts notification rows
-2. **Database trigger** (`notify_on_transaction_change`): Fires automatically on any `data_transactions` UPDATE -- also inserts notification rows
-
-This causes **2 notifications in the bell** for the same event.
-
-### Solution
-
-**Disable the DB trigger** for transaction status changes and let the edge function be the **single source of truth** for all transaction notifications. The edge function already has richer context (product name, org names) and can implement role-based messaging.
+Actualizar los mensajes de notificacion en el Edge Function para usar emojis y texto contextual segun rol, y refinar el mapeo de iconos en el Centro de Notificaciones para que coincida con la nueva guia visual.
 
 ---
 
-### 1. Database Migration: Drop the duplicate trigger
+### 1. Actualizar Edge Function (`supabase/functions/notification-handler/index.ts`)
 
-Remove the `notify_on_transaction_change` trigger from `data_transactions`. The function can remain but the trigger that fires it will be dropped.
+Reemplazar el mapa `ROLE_MESSAGES` con los mensajes exactos solicitados:
+
+| Evento | Rol | Titulo | Mensaje |
+|---|---|---|---|
+| `created` | Consumer | `[Activo]: Solicitud enviada` | Tu peticion para [Activo] esta en manos del proveedor |
+| `created` | Provider | `[Activo]: Nueva solicitud` | Has recibido una peticion de acceso para [Activo] |
+| `pre_approved` | Consumer | `[Activo]: Pre-aprobada` | Tu solicitud para [Activo] ha sido pre-aprobada. Pendiente de aprobacion final |
+| `approved` | Consumer | `[Activo]: Acceso concedido` | Ya puedes explorar los datos de [Activo] |
+| `approved` | Provider | `[Activo]: Operacion completada` | Has autorizado el acceso a [Activo] |
+| `denied` | Consumer | `[Activo]: Solicitud denegada` | Tu peticion para [Activo] no ha sido aceptada |
+| `denied` | Provider | `[Activo]: Solicitud denegada` | Has denegado la solicitud de acceso para [Activo] |
+| `completed` | Shared | `[Activo]: Intercambio completado` | El intercambio de datos de [Activo] se ha completado |
+
+Ademas, ajustar el campo `type` para los registros de notificacion:
+- `created` -> `"info"`
+- `pre_approved` -> `"info"` 
+- `approved` -> `"success"`
+- `denied` -> `"warning"`
+- `completed` -> `"success"`
+
+---
+
+### 2. Actualizar Trigger de Activos (Migracion SQL)
+
+El trigger `notify_on_asset_status_change` ya existe en la DB. Proponer una migracion para actualizar el mensaje cuando un activo pasa a `active`:
 
 ```sql
-DROP TRIGGER IF EXISTS on_transaction_status_change ON public.data_transactions;
+-- Cambiar el titulo a incluir el emoji de estrellas
+WHEN 'active' THEN
+  _title := '✨ ' || _product_name || ': ¡Activo Publicado!';
+  _msg := '¡Enhorabuena! ' || _product_name || ' ya es visible para todo el ecosistema.';
+  _type := 'success';
 ```
 
-(If the trigger name differs, we will identify and drop the correct one.)
+---
+
+### 3. Actualizar Mapeo de Iconos en `src/pages/Notifications.tsx`
+
+Refinar la funcion `getNotificationConfig` para seguir la guia de iconos:
+
+| Patron en titulo | Icono Lucide | Color fondo | Color icono |
+|---|---|---|---|
+| "Solicitud enviada" / "Nueva solicitud" | `FileOutput` (documento con flecha) | Naranja | Naranja |
+| "Acceso concedido" / "Aprobada" / "✅" | `ShieldCheck` | Verde | Verde |
+| "Pre-aprobada" / "🔑" | `KeyRound` | Azul | Azul |
+| "Denegada" / "❌" | `ShieldX` | Rojo | Rojo |
+| "Activo Publicado" / "✨" / "🚀" | `Rocket` | Esmeralda | Esmeralda |
+| "Intercambio completado" | `Zap` | Purpura | Purpura |
+
+Importar `FileOutput` y `KeyRound` de lucide-react (reemplazar `FileKey` por `FileOutput` para el icono de documento con flecha).
 
 ---
 
-### 2. Update Edge Function: Role-based messages
+### 4. Actualizar `NotificationsBell.tsx`
 
-Modify `supabase/functions/notification-handler/index.ts` to send **different messages per role**:
-
-- Replace the single `STATUS_LABELS` map with a role-aware structure:
-
-| Event | Consumer (requester) gets | Provider (subject) gets |
-|---|---|---|
-| `created` | "Tu solicitud para [Activo] ha sido enviada para aprobacion" | "Has recibido una nueva solicitud de acceso para [Activo]" |
-| `pre_approved` | "Tu solicitud para [Activo] ha sido pre-aprobada" | (not notified) |
-| `approved` | "Tu solicitud para [Activo] ha sido aprobada" | (not notified) |
-| `denied` | "Tu solicitud para [Activo] ha sido denegada" | "Has denegado la solicitud de acceso para [Activo]" |
-| `completed` | "El intercambio de datos de [Activo] se ha completado" | "El intercambio de datos de [Activo] se ha completado" |
-
-- The function will build separate notification rows per org role instead of a single generic message.
-- All notification titles will use the format: `[Nombre_Activo]: [Accion legible]`.
-- Each notification links to `/requests/[id]`.
+Sin cambios funcionales necesarios -- la campana ya lee de la misma tabla `notifications` que el centro. La sincronizacion esta garantizada por usar una unica fuente de datos (el Edge Function).
 
 ---
 
-### 3. Clean Up Redundant Toasts
+### Archivos a Modificar
 
-In `RequestWizard.tsx` (line 261), the `onSuccess` toast says "Solicitud creada exitosamente". This is the only toast kept -- no "Transaccion actualizada" will appear since the trigger is removed.
-
-In `RequestDetailPage.tsx` (lines 183-187), the `onSuccess` toasts are already contextual and will remain as-is.
-
----
-
-### 4. Synchronization Guarantee
-
-With only the edge function writing to `notifications`:
-- The bell counter and the Notification Center (`/notifications`) will reflect identical records (same DB table, same query).
-- No technical status names will appear -- only human-readable Spanish labels.
-
----
-
-### Technical Summary
-
-| Aspect | Detail |
+| Archivo | Cambio |
 |---|---|
-| DB migration | Drop trigger `on_transaction_status_change` from `data_transactions` |
-| Edge function | Role-aware messages per org in `notification-handler` |
-| Files modified | `supabase/functions/notification-handler/index.ts` |
-| Files unchanged | `NotificationsBell.tsx`, `Notifications.tsx`, `RequestWizard.tsx`, `RequestDetailPage.tsx` |
-| New dependencies | None |
+| `supabase/functions/notification-handler/index.ts` | Nuevos mensajes contextuales por rol |
+| `src/pages/Notifications.tsx` | Mapeo de iconos actualizado con guia visual |
+| Migracion SQL | Actualizar trigger `notify_on_asset_status_change` para el mensaje de publicacion |
+
+### Sin Nuevas Dependencias
+
+Todos los iconos (`FileOutput`, `KeyRound`, `ShieldCheck`, `ShieldX`, `Rocket`, `Zap`) ya estan disponibles en `lucide-react`.
 
