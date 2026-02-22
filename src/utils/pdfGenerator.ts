@@ -1,9 +1,6 @@
 import { jsPDF } from "jspdf";
 
-// PROCUREDATA logo as base64 (small PNG version for PDF embedding)
-const PROCUREDATA_LOGO_BASE64 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAA8CAYAAADc3MbIAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF0WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPjwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+";
-
-// Default ODRL policies (same as DataView.tsx)
+// Default ODRL policies
 const DEFAULT_PERMISSIONS = [
   "Uso comercial dentro de la organización",
   "Análisis e integración en sistemas internos",
@@ -20,30 +17,6 @@ const DEFAULT_OBLIGATIONS = [
   "Cumplimiento GDPR para datos personales",
 ];
 
-/**
- * Generate a deterministic SHA-256 hash from contract data
- */
-async function generateContractHash(data: string): Promise<string> {
-  const encoder = new TextEncoder();
-  const buffer = await crypto.subtle.digest("SHA-256", encoder.encode(data));
-  return Array.from(new Uint8Array(buffer))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-}
-
-/**
- * Helper: check if we need a page break and add one if necessary.
- * Returns the new Y position.
- */
-function checkPageBreak(doc: jsPDF, yPos: number, requiredSpace: number, margin: number): number {
-  const pageHeight = doc.internal.pageSize.getHeight();
-  if (yPos + requiredSpace > pageHeight - margin) {
-    doc.addPage();
-    return margin;
-  }
-  return yPos;
-}
-
 // Typography constants
 const MARGIN = 25; // 25mm = 2.5cm
 const FONT_BODY = 10;
@@ -52,13 +25,95 @@ const FONT_MAIN_TITLE = 14;
 const LINE_HEIGHT = FONT_BODY * 0.3528 * 1.13; // pt to mm * 1.13 interlineado
 const PARAGRAPH_SPACING = 6 * 0.3528; // 6pt in mm
 const PAGE_WIDTH = 210; // A4
+const PAGE_HEIGHT = 297;
 const CONTENT_WIDTH = PAGE_WIDTH - MARGIN * 2;
+const HEADER_HEIGHT = 20; // reserved for header
+const FOOTER_HEIGHT = 25; // reserved for footer
+const CONTENT_TOP = MARGIN + HEADER_HEIGHT;
+const CONTENT_BOTTOM = PAGE_HEIGHT - MARGIN - FOOTER_HEIGHT;
+
+interface OrgInfo {
+  name: string;
+  tax_id?: string;
+  sector?: string;
+  description?: string;
+}
+
+async function generateContractHash(data: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const buffer = await crypto.subtle.digest("SHA-256", encoder.encode(data));
+  return Array.from(new Uint8Array(buffer))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function checkPageBreak(doc: jsPDF, yPos: number, requiredSpace: number): number {
+  if (yPos + requiredSpace > CONTENT_BOTTOM) {
+    doc.addPage();
+    return CONTENT_TOP;
+  }
+  return yPos;
+}
+
+function drawHeadersAndFooters(doc: jsPDF, contractHash: string) {
+  const totalPages = doc.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+
+    // ─── HEADER ───
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(37, 99, 235);
+    doc.text("PROCUREDATA", MARGIN, MARGIN + 6);
+
+    doc.setDrawColor(37, 99, 235);
+    doc.setLineWidth(0.8);
+    doc.line(MARGIN, MARGIN + 10, PAGE_WIDTH - MARGIN, MARGIN + 10);
+
+    // ─── FOOTER ───
+    const footerY = PAGE_HEIGHT - MARGIN;
+
+    // Separator
+    doc.setDrawColor(37, 99, 235);
+    doc.setLineWidth(0.4);
+    doc.line(MARGIN, footerY - FOOTER_HEIGHT + 2, PAGE_WIDTH - MARGIN, footerY - FOOTER_HEIGHT + 2);
+
+    // Hash
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(6);
+    doc.setTextColor(37, 99, 235);
+    doc.text("SELLO DE INTEGRIDAD BLOCKCHAIN", MARGIN, footerY - FOOTER_HEIGHT + 7);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(5.5);
+    doc.setTextColor(80);
+    doc.text(`SHA-256: ${contractHash}`, MARGIN, footerY - FOOTER_HEIGHT + 11);
+
+    // Notary text
+    doc.setFontSize(5.5);
+    doc.setTextColor(100);
+    doc.text(
+      "Documento generado automáticamente por el nodo notario de PROCUREDATA.",
+      MARGIN,
+      footerY - FOOTER_HEIGHT + 15
+    );
+
+    // Page counter
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7);
+    doc.setTextColor(120);
+    const pageText = `Página ${i} | ${totalPages}`;
+    const pageTextWidth = doc.getTextWidth(pageText);
+    doc.text(pageText, PAGE_WIDTH - MARGIN - pageTextWidth, footerY - FOOTER_HEIGHT + 7);
+  }
+}
 
 export const generateLicensePDF = async (
   transaction: any,
   assetName: string,
-  providerName: string,
-  consumerName: string
+  providerOrg: OrgInfo,
+  consumerOrg: OrgInfo,
+  approvalDate?: string
 ) => {
   const doc = new jsPDF();
 
@@ -68,38 +123,31 @@ export const generateLicensePDF = async (
   const prohibitions = accessPolicy?.prohibitions?.length ? accessPolicy.prohibitions : DEFAULT_PROHIBITIONS;
   const obligations = accessPolicy?.obligations?.length ? accessPolicy.obligations : DEFAULT_OBLIGATIONS;
 
-  const contractDate = new Date(transaction.created_at).toLocaleDateString("es-ES", {
+  // Terms and conditions
+  const customMeta = transaction?.asset?.custom_metadata;
+  const termsAndConditions = customMeta?.terms_and_conditions || customMeta?.termsAndConditions || null;
+
+  // Date: use approval date, fallback to updated_at, then created_at
+  const dateStr = approvalDate || transaction.updated_at || transaction.created_at;
+  const contractDate = new Date(dateStr).toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  let y = MARGIN;
+  // Product info
+  const productData = transaction?.asset?.product;
+  const version = productData?.version || "1.0";
+  const category = productData?.category || "General";
 
-  // ─── 1. HEADER WITH LOGO ───
+  let y = CONTENT_TOP;
+
+  // ─── TITLE ───
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(18);
-  doc.setTextColor(37, 99, 235);
-  doc.text("PROCUREDATA", MARGIN, y + 6);
-  
-  doc.setDrawColor(37, 99, 235);
-  doc.setLineWidth(0.8);
-  doc.line(MARGIN, y + 10, PAGE_WIDTH - MARGIN, y + 10);
-
-  y += 18;
-
-  // Title
   doc.setFontSize(FONT_MAIN_TITLE);
   doc.setTextColor(0, 0, 0);
-  doc.setFont("helvetica", "bold");
-  const title = "CONTRATO DE LICENCIA DE USO DE DATOS";
-  const subtitle = "ECOSISTEMA PONTUS-X";
-  doc.text(title, PAGE_WIDTH / 2, y, { align: "center" });
-  y += 6;
-  doc.setFontSize(11);
-  doc.setTextColor(80, 80, 80);
-  doc.text(subtitle, PAGE_WIDTH / 2, y, { align: "center" });
-  y += 10;
+  doc.text("CONTRATO DE LICENCIA DE USO DE DATOS", PAGE_WIDTH / 2, y, { align: "center" });
+  y += 8;
 
   // Thin separator
   doc.setDrawColor(180);
@@ -107,7 +155,7 @@ export const generateLicensePDF = async (
   doc.line(MARGIN, y, PAGE_WIDTH - MARGIN, y);
   y += 8;
 
-  // ─── 2. CONTRACT IDENTIFICATION ───
+  // ─── CONTRACT IDENTIFICATION ───
   doc.setFont("helvetica", "normal");
   doc.setFontSize(FONT_BODY);
   doc.setTextColor(0);
@@ -116,7 +164,7 @@ export const generateLicensePDF = async (
   doc.text(`Fecha de emisión: ${contractDate}`, MARGIN, y);
   y += LINE_HEIGHT + PARAGRAPH_SPACING + 4;
 
-  // ─── 3. COMPARECIENTES ───
+  // ─── COMPARECIENTES ───
   doc.setFont("helvetica", "bold");
   doc.setFontSize(FONT_CLAUSE_TITLE);
   doc.text("COMPARECIENTES", MARGIN, y);
@@ -125,37 +173,89 @@ export const generateLicensePDF = async (
   doc.setFont("helvetica", "normal");
   doc.setFontSize(FONT_BODY);
 
-  const party1 = `De una parte, ${providerName}, en adelante "EL LICENCIANTE", en su calidad de titular de los datos objeto del presente contrato.`;
-  const party1Lines = doc.splitTextToSize(party1, CONTENT_WIDTH);
-  doc.text(party1Lines, MARGIN, y);
-  y += party1Lines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 2;
+  // Helper to render a party block
+  const renderParty = (label: string, org: OrgInfo) => {
+    y = checkPageBreak(doc, y, 25);
+    const mainText = `${label}, ${org.name}, en adelante "${label === "EL LICENCIANTE" ? "EL LICENCIANTE" : "EL LICENCIATARIO"}".`;
+    const mainLines = doc.splitTextToSize(mainText, CONTENT_WIDTH);
+    doc.setFont("helvetica", "normal");
+    doc.text(mainLines, MARGIN, y);
+    y += mainLines.length * LINE_HEIGHT + 1;
 
-  const party2 = `De otra parte, ${consumerName}, en adelante "EL LICENCIATARIO", como entidad solicitante del acceso a los datos bajo las condiciones aquí estipuladas.`;
-  const party2Lines = doc.splitTextToSize(party2, CONTENT_WIDTH);
-  doc.text(party2Lines, MARGIN, y);
-  y += party2Lines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 2;
+    // Details
+    doc.setFontSize(9);
+    doc.setTextColor(60);
+    if (org.tax_id) {
+      doc.text(`CIF/VAT: ${org.tax_id}`, MARGIN + 5, y);
+      y += LINE_HEIGHT;
+    }
+    const country = org.sector ? extractCountry(org.sector) : "España";
+    doc.text(`País: ${country}`, MARGIN + 5, y);
+    y += LINE_HEIGHT;
+    if (org.description) {
+      const addrLines = doc.splitTextToSize(`Domicilio social: ${org.description}`, CONTENT_WIDTH - 10);
+      doc.text(addrLines, MARGIN + 5, y);
+      y += addrLines.length * LINE_HEIGHT;
+    }
+    doc.setFontSize(FONT_BODY);
+    doc.setTextColor(0);
+    y += PARAGRAPH_SPACING + 2;
+  };
 
+  renderParty("EL LICENCIANTE", providerOrg);
+  renderParty("EL LICENCIATARIO", consumerOrg);
+
+  // Intro text
+  y = checkPageBreak(doc, y, 15);
   const intro = `Ambas partes, reconociéndose mutuamente capacidad legal suficiente para contratar y obligarse, acuerdan formalizar el presente contrato de licencia de uso de datos con arreglo a las siguientes cláusulas:`;
   const introLines = doc.splitTextToSize(intro, CONTENT_WIDTH);
   doc.text(introLines, MARGIN, y);
   y += introLines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 6;
 
-  // ─── 4. CLÁUSULAS ODRL ───
+  // ─── ASSET IDENTIFICATION ───
+  y = checkPageBreak(doc, y, 30);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(FONT_CLAUSE_TITLE);
+  doc.text("IDENTIFICACIÓN DEL ACTIVO DE DATOS", MARGIN, y);
+  y += LINE_HEIGHT + 3;
 
-  // Helper to render a clause
-  const renderClause = (clauseNum: number, title: string, items: string[]) => {
-    y = checkPageBreak(doc, y, 30, MARGIN);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(FONT_BODY);
+  const assetDetails = [
+    `Nombre: ${assetName}`,
+    `Versión: ${version}`,
+    `Categoría: ${category}`,
+    `UUID de Transacción: ${transaction.id}`,
+  ];
+  assetDetails.forEach((line) => {
+    doc.text(line, MARGIN, y);
+    y += LINE_HEIGHT + 1;
+  });
+  y += PARAGRAPH_SPACING + 4;
+
+  // ─── CLAUSES ───
+
+  // Helper to render a clause with narrative intro
+  const renderClause = (clauseNum: number, title: string, narrativeIntro: string, items: string[]) => {
+    y = checkPageBreak(doc, y, 35);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(FONT_CLAUSE_TITLE);
     doc.text(`Cláusula ${clauseNum} — ${title}`, MARGIN, y);
     y += LINE_HEIGHT + 3;
 
+    // Narrative intro
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(FONT_BODY);
+    const introLines = doc.splitTextToSize(narrativeIntro, CONTENT_WIDTH);
+    doc.text(introLines, MARGIN, y);
+    y += introLines.length * LINE_HEIGHT + PARAGRAPH_SPACING;
+
     doc.setFont("helvetica", "normal");
     doc.setFontSize(FONT_BODY);
 
     items.forEach((item, idx) => {
-      y = checkPageBreak(doc, y, 10, MARGIN);
+      y = checkPageBreak(doc, y, 10);
       const text = `${idx + 1}. ${item}`;
       const lines = doc.splitTextToSize(text, CONTENT_WIDTH - 5);
       doc.text(lines, MARGIN + 5, y);
@@ -165,12 +265,29 @@ export const generateLicensePDF = async (
     y += PARAGRAPH_SPACING + 2;
   };
 
-  renderClause(1, "Permisos", permissions);
-  renderClause(2, "Prohibiciones", prohibitions);
-  renderClause(3, "Obligaciones", obligations);
+  renderClause(
+    1,
+    "Permisos",
+    "Define las acciones y derechos de explotación técnica autorizados sobre el activo.",
+    permissions
+  );
+
+  renderClause(
+    2,
+    "Prohibiciones",
+    "Establece las limitaciones de uso para salvaguardar la propiedad industrial y confidencialidad.",
+    prohibitions
+  );
+
+  renderClause(
+    3,
+    "Obligaciones",
+    "Determina los requisitos imperativos que el LICENCIATARIO debe cumplir para mantener la vigencia de esta licencia.",
+    obligations
+  );
 
   // Cláusula 4 — Duración
-  y = checkPageBreak(doc, y, 25, MARGIN);
+  y = checkPageBreak(doc, y, 25);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(FONT_CLAUSE_TITLE);
   doc.text("Cláusula 4 — Duración del Acceso", MARGIN, y);
@@ -184,7 +301,7 @@ export const generateLicensePDF = async (
   y += durationLines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 4;
 
   // Cláusula 5 — Propósito
-  y = checkPageBreak(doc, y, 25, MARGIN);
+  y = checkPageBreak(doc, y, 25);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(FONT_CLAUSE_TITLE);
   doc.text("Cláusula 5 — Propósito de Uso", MARGIN, y);
@@ -195,10 +312,10 @@ export const generateLicensePDF = async (
   const purposeText = `El LICENCIATARIO declara que el uso de los datos objeto de este contrato se realizará exclusivamente para el siguiente propósito: "${transaction.purpose}". Cualquier uso fuera del ámbito declarado requerirá una nueva autorización por parte del LICENCIANTE.`;
   const purposeLines = doc.splitTextToSize(purposeText, CONTENT_WIDTH);
   doc.text(purposeLines, MARGIN, y);
-  y += purposeLines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 6;
+  y += purposeLines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 4;
 
-  // ─── 5. COMPROMISO NORMATIVO ───
-  y = checkPageBreak(doc, y, 40, MARGIN);
+  // Cláusula 6 — Compromiso Normativo
+  y = checkPageBreak(doc, y, 40);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(FONT_CLAUSE_TITLE);
   doc.text("Cláusula 6 — Compromiso Normativo", MARGIN, y);
@@ -213,29 +330,45 @@ export const generateLicensePDF = async (
 
   const gdprText2 = `En particular, el LICENCIATARIO se obliga a implementar las medidas técnicas y organizativas apropiadas para garantizar un nivel de seguridad adecuado al riesgo del tratamiento, conforme al artículo 32 del RGPD, y a respetar los principios de portabilidad y acceso justo establecidos en el Data Act.`;
   const gdprLines2 = doc.splitTextToSize(gdprText2, CONTENT_WIDTH);
-  y = checkPageBreak(doc, y, gdprLines2.length * LINE_HEIGHT + 10, MARGIN);
+  y = checkPageBreak(doc, y, gdprLines2.length * LINE_HEIGHT + 10);
   doc.text(gdprLines2, MARGIN, y);
   y += gdprLines2.length * LINE_HEIGHT + PARAGRAPH_SPACING + 4;
 
-  // ─── 6. ACTIVO DE DATOS ───
-  y = checkPageBreak(doc, y, 20, MARGIN);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(FONT_CLAUSE_TITLE);
-  doc.text("Activo de Datos Objeto del Contrato", MARGIN, y);
-  y += LINE_HEIGHT + 3;
+  // Cláusula 7 — Términos y Condiciones Particulares (conditional)
+  if (termsAndConditions) {
+    y = checkPageBreak(doc, y, 35);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(FONT_CLAUSE_TITLE);
+    doc.text("Cláusula 7 — Términos y Condiciones Particulares", MARGIN, y);
+    y += LINE_HEIGHT + 3;
 
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(FONT_BODY);
-  doc.text(`Nombre: ${assetName}`, MARGIN, y);
-  y += LINE_HEIGHT + PARAGRAPH_SPACING + 8;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(FONT_BODY);
+    const tcText = `El LICENCIATARIO declara conocer y se compromete a cumplir íntegramente los Términos y Condiciones Particulares proporcionados por el LICENCIANTE para el activo de datos objeto de este contrato. El incumplimiento de dichos términos constituirá causa suficiente para la resolución inmediata de la presente licencia, sin perjuicio de las acciones legales que pudieran corresponder.`;
+    const tcLines = doc.splitTextToSize(tcText, CONTENT_WIDTH);
+    doc.text(tcLines, MARGIN, y);
+    y += tcLines.length * LINE_HEIGHT + PARAGRAPH_SPACING + 2;
 
-  // ─── 7. BLOCKCHAIN VALIDATION FOOTER ───
-  // Generate deterministic hash
+    // If terms_and_conditions is a string, include a summary
+    if (typeof termsAndConditions === "string" && termsAndConditions.length > 0) {
+      y = checkPageBreak(doc, y, 15);
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(9);
+      doc.setTextColor(60);
+      const tcSummary = doc.splitTextToSize(`Referencia: ${termsAndConditions}`, CONTENT_WIDTH - 10);
+      doc.text(tcSummary, MARGIN + 5, y);
+      y += tcSummary.length * LINE_HEIGHT + PARAGRAPH_SPACING;
+      doc.setTextColor(0);
+      doc.setFontSize(FONT_BODY);
+    }
+  }
+
+  // ─── GENERATE HASH AND DRAW HEADERS/FOOTERS ───
   const hashInput = [
     transaction.id,
     transaction.created_at,
-    providerName,
-    consumerName,
+    providerOrg.name,
+    consumerOrg.name,
     assetName,
     transaction.purpose,
     transaction.access_duration_days,
@@ -243,30 +376,20 @@ export const generateLicensePDF = async (
 
   const contractHash = await generateContractHash(hashInput);
 
-  // Draw footer on the last page
-  const footerY = doc.internal.pageSize.getHeight() - MARGIN - 5;
-
-  // Separator line
-  doc.setDrawColor(37, 99, 235);
-  doc.setLineWidth(0.5);
-  doc.line(MARGIN, footerY - 15, PAGE_WIDTH - MARGIN, footerY - 15);
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(7);
-  doc.setTextColor(37, 99, 235);
-  doc.text("SELLO DE INTEGRIDAD BLOCKCHAIN", MARGIN, footerY - 10);
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(7);
-  doc.setTextColor(60);
-  doc.text(`SHA-256: ${contractHash}`, MARGIN, footerY - 6);
-
-  doc.setFontSize(6.5);
-  doc.setTextColor(100);
-  const footerText = "Documento generado automáticamente por el nodo notario de PROCUREDATA. Este contrato tiene validez jurídica mediante evidencia en red blockchain privada.";
-  const footerLines = doc.splitTextToSize(footerText, CONTENT_WIDTH);
-  doc.text(footerLines, MARGIN, footerY - 1);
+  // Draw header and footer on ALL pages
+  drawHeadersAndFooters(doc, contractHash);
 
   // Save
   doc.save(`Licencia_PROCUREDATA_${transaction.id.substring(0, 8)}.pdf`);
 };
+
+/** Extract country hint from sector string, default to España */
+function extractCountry(sector: string): string {
+  const s = sector.toLowerCase();
+  if (s.includes("uk") || s.includes("united kingdom")) return "Reino Unido";
+  if (s.includes("france") || s.includes("francia")) return "Francia";
+  if (s.includes("germany") || s.includes("alemania")) return "Alemania";
+  if (s.includes("portugal")) return "Portugal";
+  if (s.includes("italy") || s.includes("italia")) return "Italia";
+  return "España";
+}
