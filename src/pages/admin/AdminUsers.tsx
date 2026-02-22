@@ -1,96 +1,34 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import {
-  Search,
-  User,
-  Shield,
-  Trash2,
-  Building2,
-  ArrowLeftRight,
-  History,
-  AlertTriangle,
-} from "lucide-react";
+import { Search, User, Shield, Trash2, Building2, ArrowLeftRight, History, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
-import { es } from "date-fns/locale";
 import { toast } from "sonner";
 import { logGovernanceEvent } from "@/utils/governanceLogger";
+import { formatDate } from "@/lib/i18nFormatters";
 
-interface UserOrg {
-  id: string;
-  name: string;
-  role: string;
-}
-
-interface ApprovalEntry {
-  transaction_id: string;
-  action: string;
-  notes: string | null;
-  created_at: string;
-}
-
-interface TransactionEntry {
-  id: string;
-  status: string;
-  purpose: string;
-  created_at: string;
-  consumer_org_id: string;
-  holder_org_id: string;
-  subject_org_id: string;
-}
-
+interface UserOrg { id: string; name: string; role: string; }
+interface ApprovalEntry { transaction_id: string; action: string; notes: string | null; created_at: string; }
+interface TransactionEntry { id: string; status: string; purpose: string; created_at: string; consumer_org_id: string; holder_org_id: string; subject_org_id: string; }
 interface AdminUser {
-  id: string;
-  email: string;
-  fullName: string | null;
-  createdAt: string;
-  lastSignIn: string | null;
-  organizations: UserOrg[];
-  isDataSpaceOwner: boolean;
-  hasOrganizations: boolean;
-  transactionCount: number;
-  approvalHistory: ApprovalEntry[];
-  recentTransactions: TransactionEntry[];
+  id: string; email: string; fullName: string | null; createdAt: string; lastSignIn: string | null;
+  organizations: UserOrg[]; isDataSpaceOwner: boolean; hasOrganizations: boolean;
+  transactionCount: number; approvalHistory: ApprovalEntry[]; recentTransactions: TransactionEntry[];
 }
 
 const AdminUsers = () => {
+  const { t, i18n } = useTranslation("admin");
   const [search, setSearch] = useState("");
   const [orgFilter, setOrgFilter] = useState<string>("all");
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
@@ -101,15 +39,8 @@ const AdminUsers = () => {
       const { data: session } = await supabase.auth.getSession();
       const token = session?.session?.access_token;
       if (!token) throw new Error("Not authenticated");
-
       const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-users`;
-      const resp = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-        },
-      });
+      const resp = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}`, apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY } });
       if (!resp.ok) throw new Error("Failed to fetch users");
       const json = await resp.json();
       return (json.users ?? []) as AdminUser[];
@@ -117,119 +48,71 @@ const AdminUsers = () => {
   });
 
   const filtered = users.filter((u) => {
-    const matchesSearch =
-      (u.email ?? "").toLowerCase().includes(search.toLowerCase()) ||
-      (u.fullName ?? "").toLowerCase().includes(search.toLowerCase());
-    const matchesOrg =
-      orgFilter === "all" ||
-      (orgFilter === "orphan" && !u.hasOrganizations) ||
-      (orgFilter === "with-org" && u.hasOrganizations);
+    const matchesSearch = (u.email ?? "").toLowerCase().includes(search.toLowerCase()) || (u.fullName ?? "").toLowerCase().includes(search.toLowerCase());
+    const matchesOrg = orgFilter === "all" || (orgFilter === "orphan" && !u.hasOrganizations) || (orgFilter === "with-org" && u.hasOrganizations);
     return matchesSearch && matchesOrg;
   });
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Gestión de Usuarios</h1>
-        <p className="text-muted-foreground">
-          {users.length} usuarios registrados · {users.filter((u) => !u.hasOrganizations).length} sin organización
-        </p>
+        <h1 className="text-2xl font-bold">{t("users.title")}</h1>
+        <p className="text-muted-foreground">{t("users.subtitle", { count: users.length, orphan: users.filter((u) => !u.hasOrganizations).length })}</p>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Buscar por email o nombre..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-10"
-          />
+          <Input placeholder={t("users.searchPlaceholder")} value={search} onChange={(e) => setSearch(e.target.value)} className="pl-10" />
         </div>
         <Select value={orgFilter} onValueChange={setOrgFilter}>
-          <SelectTrigger className="w-[240px]">
-            <SelectValue placeholder="Filtrar usuarios" />
-          </SelectTrigger>
+          <SelectTrigger className="w-[240px]"><SelectValue placeholder={t("users.filterPlaceholder")} /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">Todos los usuarios</SelectItem>
-            <SelectItem value="with-org">Con organización</SelectItem>
-            <SelectItem value="orphan">Sin organización (huérfanos)</SelectItem>
+            <SelectItem value="all">{t("users.filterAll")}</SelectItem>
+            <SelectItem value="with-org">{t("users.filterWithOrg")}</SelectItem>
+            <SelectItem value="orphan">{t("users.filterOrphan")}</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      {/* Table */}
       <Card>
         <CardContent className="p-0">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Usuario</TableHead>
-                <TableHead>Organizaciones</TableHead>
-                <TableHead>Rol Global</TableHead>
-                <TableHead>Registro</TableHead>
+                <TableHead>{t("users.tableUser")}</TableHead>
+                <TableHead>{t("users.tableOrgs")}</TableHead>
+                <TableHead>{t("users.tableRole")}</TableHead>
+                <TableHead>{t("users.tableRegistered")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {isLoading ? (
-                <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                    Cargando usuarios...
-                  </TableCell>
-                </TableRow>
+                <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground">{t("users.loading")}</TableCell></TableRow>
               ) : filtered.length === 0 ? (
-                <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                    No se encontraron usuarios
-                  </TableCell>
-                </TableRow>
+                <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground">{t("users.noResults")}</TableCell></TableRow>
               ) : (
                 filtered.map((user) => (
-                  <TableRow
-                    key={user.id}
-                    className="cursor-pointer"
-                    onClick={() => setSelectedUser(user)}
-                  >
-                    <TableCell>
-                      <div>
-                        <p className="text-sm font-medium">{user.fullName || "—"}</p>
-                        <p className="text-xs text-muted-foreground">{user.email}</p>
-                      </div>
-                    </TableCell>
+                  <TableRow key={user.id} className="cursor-pointer" onClick={() => setSelectedUser(user)}>
+                    <TableCell><div><p className="text-sm font-medium">{user.fullName || "—"}</p><p className="text-xs text-muted-foreground">{user.email}</p></div></TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-1 max-w-[250px]">
                         {user.organizations.length === 0 ? (
-                          <Badge variant="outline" className="text-xs text-muted-foreground">
-                            Sin organización
-                          </Badge>
+                          <Badge variant="outline" className="text-xs text-muted-foreground">{t("users.noOrg")}</Badge>
                         ) : (
-                          user.organizations.slice(0, 3).map((org) => (
-                            <Badge key={org.id} variant="secondary" className="text-xs">
-                              {org.name}
-                            </Badge>
-                          ))
+                          user.organizations.slice(0, 3).map((org) => (<Badge key={org.id} variant="secondary" className="text-xs">{org.name}</Badge>))
                         )}
-                        {user.organizations.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{user.organizations.length - 3}
-                          </Badge>
-                        )}
+                        {user.organizations.length > 3 && <Badge variant="outline" className="text-xs">+{user.organizations.length - 3}</Badge>}
                       </div>
                     </TableCell>
                     <TableCell>
                       {user.isDataSpaceOwner ? (
-                        <Badge className="bg-primary/10 text-primary border-0">
-                          <Shield className="h-3 w-3 mr-1" />
-                          Data Space Owner
-                        </Badge>
+                        <Badge className="bg-primary/10 text-primary border-0"><Shield className="h-3 w-3 mr-1" />{t("users.dataSpaceOwner")}</Badge>
                       ) : (
-                        <span className="text-sm text-muted-foreground">Usuario Estándar</span>
+                        <span className="text-sm text-muted-foreground">{t("users.standardUser")}</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {format(new Date(user.createdAt), "dd MMM yyyy", { locale: es })}
-                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">{formatDate(user.createdAt, "dd MMM yyyy", i18n.language)}</TableCell>
                   </TableRow>
                 ))
               )}
@@ -238,123 +121,67 @@ const AdminUsers = () => {
         </CardContent>
       </Card>
 
-      {/* Detail Sheet */}
       <Sheet open={!!selectedUser} onOpenChange={(open) => !open && setSelectedUser(null)}>
         <SheetContent className="sm:max-w-xl overflow-y-auto">
-          {selectedUser && (
-            <UserDetailPanel
-              user={selectedUser}
-              onClose={() => setSelectedUser(null)}
-              onUserDeleted={() => {
-                setSelectedUser(null);
-              }}
-            />
-          )}
+          {selectedUser && <UserDetailPanel user={selectedUser} onClose={() => setSelectedUser(null)} onUserDeleted={() => setSelectedUser(null)} t={t} lang={i18n.language} />}
         </SheetContent>
       </Sheet>
     </div>
   );
 };
 
-// ---- User Detail Panel ----
-
-const UserDetailPanel = ({
-  user,
-  onClose,
-  onUserDeleted,
-}: {
-  user: AdminUser;
-  onClose: () => void;
-  onUserDeleted: () => void;
-}) => {
+const UserDetailPanel = ({ user, onClose, onUserDeleted, t, lang }: { user: AdminUser; onClose: () => void; onUserDeleted: () => void; t: (key: string, opts?: any) => string; lang: string }) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const queryClient = useQueryClient();
 
   const canDelete = !user.hasOrganizations && user.transactionCount === 0 && !user.isDataSpaceOwner;
-  const deleteReason = user.isDataSpaceOwner
-    ? "Es un Data Space Owner"
-    : user.hasOrganizations
-    ? "Pertenece a organizaciones activas"
-    : user.transactionCount > 0
-    ? "Tiene transacciones vinculadas"
-    : null;
+  const deleteReason = user.isDataSpaceOwner ? t("users.deleteReasonDSO") : user.hasOrganizations ? t("users.deleteReasonOrgs") : user.transactionCount > 0 ? t("users.deleteReasonTx") : null;
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
       const { data: session } = await supabase.auth.getSession();
       const token = session?.session?.access_token;
       if (!token) throw new Error("Not authenticated");
-
       const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-users?action=delete`;
-      const resp = await fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user.id }),
-      });
-      if (!resp.ok) {
-        const err = await resp.json();
-        throw new Error(err.error || "Error al eliminar");
-      }
+      const resp = await fetch(url, { method: "POST", headers: { Authorization: `Bearer ${token}`, apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY, "Content-Type": "application/json" }, body: JSON.stringify({ userId: user.id }) });
+      if (!resp.ok) { const err = await resp.json(); throw new Error(err.error || "Error"); }
     },
     onSuccess: () => {
-      toast.success("Usuario eliminado correctamente");
-      logGovernanceEvent({
-        level: "info",
-        category: "users",
-        message: `Usuario ${user.email} removido de la plataforma`,
-        metadata: { user_id: user.id, email: user.email },
-      });
+      toast.success(t("users.deleteSuccess"));
+      logGovernanceEvent({ level: "info", category: "users", message: `Usuario ${user.email} removido de la plataforma`, metadata: { user_id: user.id, email: user.email } });
       queryClient.invalidateQueries({ queryKey: ["admin-all-users"] });
       onUserDeleted();
     },
     onError: (err: Error) => toast.error(err.message),
   });
 
+  const actionLabels: Record<string, string> = {
+    approve: t("users.actionApproved"), deny: t("users.actionDenied"),
+    pre_approve: t("users.actionPreApproved"), cancel: t("users.actionCancelled"),
+  };
+
   return (
     <div className="space-y-6">
       <SheetHeader>
-        <SheetTitle className="flex items-center gap-2">
-          <User className="h-5 w-5" />
-          {user.fullName || user.email}
-        </SheetTitle>
+        <SheetTitle className="flex items-center gap-2"><User className="h-5 w-5" />{user.fullName || user.email}</SheetTitle>
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-sm text-muted-foreground">{user.email}</span>
-          {user.isDataSpaceOwner && (
-            <Badge className="bg-primary/10 text-primary border-0">
-              <Shield className="h-3 w-3 mr-1" />
-              Data Space Owner
-            </Badge>
-          )}
+          {user.isDataSpaceOwner && <Badge className="bg-primary/10 text-primary border-0"><Shield className="h-3 w-3 mr-1" />{t("users.dataSpaceOwner")}</Badge>}
         </div>
         <div className="text-xs text-muted-foreground space-y-0.5 mt-1">
-          <p>Registrado: {format(new Date(user.createdAt), "dd MMM yyyy HH:mm", { locale: es })}</p>
-          {user.lastSignIn && (
-            <p>Último acceso: {format(new Date(user.lastSignIn), "dd MMM yyyy HH:mm", { locale: es })}</p>
-          )}
+          <p>{t("users.registered")}: {formatDate(user.createdAt, "dd MMM yyyy HH:mm", lang)}</p>
+          {user.lastSignIn && <p>{t("users.lastAccess")}: {formatDate(user.lastSignIn, "dd MMM yyyy HH:mm", lang)}</p>}
         </div>
       </SheetHeader>
 
-      {/* Organizations */}
       <div>
-        <h4 className="text-sm font-semibold flex items-center gap-2 mb-2">
-          <Building2 className="h-4 w-4 text-muted-foreground" />
-          Organizaciones ({user.organizations.length})
-        </h4>
+        <h4 className="text-sm font-semibold flex items-center gap-2 mb-2"><Building2 className="h-4 w-4 text-muted-foreground" />{t("users.organizations")} ({user.organizations.length})</h4>
         {user.organizations.length === 0 ? (
-          <p className="text-sm text-muted-foreground italic">Sin organización asignada</p>
+          <p className="text-sm text-muted-foreground italic">{t("users.noOrgAssigned")}</p>
         ) : (
           <div className="space-y-2">
             {user.organizations.map((org) => (
-              <Card key={org.id}>
-                <CardContent className="p-3 flex items-center justify-between">
-                  <span className="text-sm font-medium">{org.name}</span>
-                  <Badge variant="secondary" className="text-xs">{org.role}</Badge>
-                </CardContent>
-              </Card>
+              <Card key={org.id}><CardContent className="p-3 flex items-center justify-between"><span className="text-sm font-medium">{org.name}</span><Badge variant="secondary" className="text-xs">{org.role}</Badge></CardContent></Card>
             ))}
           </div>
         )}
@@ -364,129 +191,68 @@ const UserDetailPanel = ({
 
       <Tabs defaultValue="transactions" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="transactions">
-            <ArrowLeftRight className="h-3.5 w-3.5 mr-1.5" />
-            Transacciones
-          </TabsTrigger>
-          <TabsTrigger value="audit">
-            <History className="h-3.5 w-3.5 mr-1.5" />
-            Linaje de Acciones
-          </TabsTrigger>
+          <TabsTrigger value="transactions"><ArrowLeftRight className="h-3.5 w-3.5 mr-1.5" />{t("users.tabTransactions")}</TabsTrigger>
+          <TabsTrigger value="audit"><History className="h-3.5 w-3.5 mr-1.5" />{t("users.tabAudit")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="transactions" className="space-y-3 mt-4">
-          <p className="text-sm text-muted-foreground">
-            {user.recentTransactions.length} transacciones recientes
-          </p>
+          <p className="text-sm text-muted-foreground">{t("users.recentTx", { count: user.recentTransactions.length })}</p>
           {user.recentTransactions.length === 0 ? (
-            <p className="text-sm text-muted-foreground italic">Sin transacciones</p>
+            <p className="text-sm text-muted-foreground italic">{t("users.noTx")}</p>
           ) : (
             <div className="space-y-2">
               {user.recentTransactions.map((tx) => (
-                <Card key={tx.id}>
-                  <CardContent className="p-3 space-y-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium truncate max-w-[250px]">{tx.purpose}</span>
-                      <Badge variant="outline" className="text-xs">{tx.status}</Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {format(new Date(tx.created_at), "dd/MM/yyyy HH:mm")}
-                    </p>
-                  </CardContent>
-                </Card>
+                <Card key={tx.id}><CardContent className="p-3 space-y-1"><div className="flex items-center justify-between"><span className="text-sm font-medium truncate max-w-[250px]">{tx.purpose}</span><Badge variant="outline" className="text-xs">{tx.status}</Badge></div><p className="text-xs text-muted-foreground">{format(new Date(tx.created_at), "dd/MM/yyyy HH:mm")}</p></CardContent></Card>
               ))}
             </div>
           )}
         </TabsContent>
 
         <TabsContent value="audit" className="space-y-3 mt-4">
-          <p className="text-sm text-muted-foreground">
-            {user.approvalHistory.length} acciones registradas
-          </p>
+          <p className="text-sm text-muted-foreground">{t("users.actionsRecorded", { count: user.approvalHistory.length })}</p>
           {user.approvalHistory.length === 0 ? (
-            <p className="text-sm text-muted-foreground italic">Sin actividad de aprobación</p>
+            <p className="text-sm text-muted-foreground italic">{t("users.noApprovalActivity")}</p>
           ) : (
             <div className="space-y-2">
               {user.approvalHistory.map((entry, i) => (
-                <Card key={i}>
-                  <CardContent className="p-3 space-y-1">
-                    <div className="flex items-center justify-between">
-                      <Badge
-                        variant={
-                          entry.action === "approve"
-                            ? "default"
-                            : entry.action === "deny"
-                            ? "destructive"
-                            : "secondary"
-                        }
-                        className="text-xs"
-                      >
-                        {entry.action === "approve"
-                          ? "Aprobó"
-                          : entry.action === "deny"
-                          ? "Denegó"
-                          : entry.action === "pre_approve"
-                          ? "Pre-aprobó"
-                          : entry.action === "cancel"
-                          ? "Canceló"
-                          : entry.action}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        {format(new Date(entry.created_at), "dd/MM/yyyy HH:mm")}
-                      </span>
-                    </div>
-                    {entry.notes && (
-                      <p className="text-xs text-muted-foreground italic">"{entry.notes}"</p>
-                    )}
-                    <p className="text-xs font-mono text-muted-foreground truncate">
-                      TX: {entry.transaction_id.slice(0, 8)}...
-                    </p>
-                  </CardContent>
-                </Card>
+                <Card key={i}><CardContent className="p-3 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <Badge variant={entry.action === "approve" ? "default" : entry.action === "deny" ? "destructive" : "secondary"} className="text-xs">{actionLabels[entry.action] || entry.action}</Badge>
+                    <span className="text-xs text-muted-foreground">{format(new Date(entry.created_at), "dd/MM/yyyy HH:mm")}</span>
+                  </div>
+                  {entry.notes && <p className="text-xs text-muted-foreground italic">"{entry.notes}"</p>}
+                  <p className="text-xs font-mono text-muted-foreground truncate">TX: {entry.transaction_id.slice(0, 8)}...</p>
+                </CardContent></Card>
               ))}
             </div>
           )}
         </TabsContent>
       </Tabs>
 
-      {/* Delete Section */}
       <Separator />
       <div className="pt-2 space-y-2">
         {!canDelete && deleteReason && (
           <div className="flex items-start gap-2 text-xs text-muted-foreground bg-muted/50 rounded-lg p-3">
             <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-500" />
-            <span>No se puede eliminar: {deleteReason}</span>
+            <span>{t("users.cannotDelete")}: {deleteReason}</span>
           </div>
         )}
-        <Button
-          variant="destructive"
-          className="w-full"
-          disabled={!canDelete || deleteMutation.isPending}
-          onClick={() => setShowDeleteDialog(true)}
-        >
-          <Trash2 className="h-4 w-4 mr-2" />
-          Eliminar Usuario
+        <Button variant="destructive" className="w-full" disabled={!canDelete || deleteMutation.isPending} onClick={() => setShowDeleteDialog(true)}>
+          <Trash2 className="h-4 w-4 mr-2" />{t("users.deleteUser")}
         </Button>
       </div>
 
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Eliminar usuario</AlertDialogTitle>
+            <AlertDialogTitle>{t("users.deleteTitle")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Se eliminará permanentemente la cuenta de <strong>{user.email}</strong>.
-              Este usuario no tiene organizaciones ni transacciones vinculadas.{" "}
-              <strong>Esta acción no se puede deshacer.</strong>
+              {t("users.deleteDescription")} <strong>{user.email}</strong>. {t("users.deleteNoActivity")} <strong>{t("users.deleteIrreversible")}</strong>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={() => deleteMutation.mutate()}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              Eliminar permanentemente
-            </AlertDialogAction>
+            <AlertDialogCancel>{t("users.cancel")}</AlertDialogCancel>
+            <AlertDialogAction onClick={() => deleteMutation.mutate()} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">{t("users.deletePermanently")}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
