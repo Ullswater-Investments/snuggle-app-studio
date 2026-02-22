@@ -185,7 +185,9 @@ serve(async (req) => {
     }
 
     const productName = transaction.asset?.product?.name || "Dataset";
-    const link = `/requests/${transactionId}`;
+    const assetId = transaction.asset_id;
+    // For approved events, link directly to the data view; otherwise to the request detail
+    const link = eventType === "approved" ? `/data/view/${assetId}` : `/requests/${transactionId}`;
 
     // ──────────────────────────────────────────────
     // 1. Persist in-app notifications to DB
