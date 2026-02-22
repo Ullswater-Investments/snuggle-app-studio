@@ -1,88 +1,105 @@
 
-## Implementacion de DataView.tsx con Diseño de Catalogo
+
+## Ajustes de UX en DataView.tsx
 
 ### Resumen
 
-Reemplazar completamente `src/pages/DataView.tsx` (782 lineas) con el blueprint proporcionado (1103 lineas), que introduce el diseño de 3 bloques coherente con el catalogo, gateway download, historial de accesos, y visualizaciones especializadas.
+Aplicar 5 correcciones de texto, iconografia y visibilidad en `src/pages/DataView.tsx` para eliminar ruido visual y alinear la terminologia con el ecosistema Pontus-X.
 
 ---
 
-### Cambios Principales
+### 1. Eliminar boton "Volver a solicitudes"
 
-**Archivo a modificar:** `src/pages/DataView.tsx`
-
-El nuevo archivo incorpora:
-
-1. **Bloque 1 - Cabecera**: Card con gradiente superior, badges (proveedor, categoria, KYB Verified, "Acceso Concedido"), titulo y descripcion del producto.
-
-2. **Bloque 2 - Panel de Metricas**: Card con fondo degradado de marca (`bg-gradient-to-br from-primary to-primary/80`) mostrando Version, Actualizacion, N. Campos (dinamico desde schema), y Formato.
-
-3. **Bloque 3 - Tabs de Exploracion**: Descripcion, Esquema, Muestra, Calidad, Politicas de Acceso (ODRL).
-
-4. **Area de Datos**: Tabs para payload (ESG/IoT/timeseries/generico), supplier data legacy, y auditoria blockchain.
-
-5. **Acciones**: Boton "Descargar via Gateway" (`handleGatewayDownload`), Exportar CSV, Licencia PDF, Ficha Tecnica JSON.
-
-6. **AccessHistoryTable**: Al final de la pagina, con animacion motion.
+**Lineas 341-346**: Eliminar el bloque completo del boton con `ArrowLeft` y `navigate("/requests")`. Mantener unicamente el `RevokeAccessButton` alineado a la derecha cuando corresponda. Tambien eliminar el boton "Volver a solicitudes" del estado de error (linea 299).
 
 ---
 
-### Logica de Negocio y Seguridad (sin cambios respecto al blueprint)
+### 2. Renombrar "Politicas de Acceso" (eliminar ODRL)
 
-- Query de transaccion con verificacion `hasAccess` (consumer/subject/holder)
-- PayloadData solo se carga si `status === "completed"`
-- SupplierData solo se carga si `status === "completed"`
-- Gateway download valida `consumerOrgId`
-- RevokeAccessButton solo visible para subject org
+**Linea 464-467**: La tab ya dice "Politicas de Acceso" sin ODRL. Sin embargo, revisar el aviso legal al final (linea 662) que menciona "PROCUREDATA y la red Pontus-X" -- mantener esa referencia ya que es correcta en contexto.
 
----
+**Linea 605**: El titulo `h3` dentro de la tab dice "Politicas de Acceso" -- correcto, sin cambios.
 
-### Elementos Eliminados del Actual
-
-- `EnvironmentalImpactCard` (sidebar) -- eliminado segun el blueprint
-- `CodeIntegrationModal` -- eliminado del sidebar (ya no se muestra)
-- Layout de sidebar 4 columnas -- reemplazado por full-width
-- Header con barra de navegacion propia -- eliminado (usa layout global)
+No hay referencias a "ODRL" en este archivo, asi que este punto ya esta cubierto.
 
 ---
 
-### Elementos Nuevos del Blueprint
+### 3. Ocultar tab "Calidad"
 
-- `useState("description")` para `activeTab`
-- `motion.div` animaciones (framer-motion, ya instalado)
-- `ScrollArea` para tablas de esquema y muestra
-- `Tooltip` para badge KYB
-- Iconos adicionales: `Globe`, `Star`, `CheckCircle2`, `XCircle`, `AlertCircle`, `Scale`, `Clock`, `Database`, `FileJson`, `Key`, `Copy`, `ExternalLink`
-- `Separator` entre secciones
-- Gateway download con panel diferenciado Consumer vs Provider/Holder (API details con Copy)
+**Lineas 461-463**: Eliminar el `TabsTrigger` de "Calidad" y su contenido `TabsContent` (lineas 574-601) para que no aparezca hasta que existan metricas registradas.
 
 ---
 
-### Componentes Existentes Verificados
+### 4. Mejorar empty state de "Muestra"
 
-Todos los componentes importados ya existen en el proyecto:
-- `ESGDataView`, `IoTDataView`, `GenericJSONView`, `ArrayDataView` -- OK
-- `DataLineage`, `DataLineageBlockchain` -- OK
-- `RevokeAccessButton` -- OK (usa `transactionId` prop, no `resourceId`)
-- `AccessHistoryTable` -- OK
-- `generateLicensePDF` -- OK
-- `Progress`, `ScrollArea`, `Tooltip` -- OK (UI primitives)
+**Lineas 563-569**: Reemplazar el empty state actual con el patron del catalogo (`ProductDetail.tsx`): circulo con icono `Eye`, titulo "Muestra no disponible", y mensaje profesional similar al del catalogo.
+
+```text
+Antes:
+  <Database icon> "Sin muestras disponibles"
+  "El proveedor no ha proporcionado datos de ejemplo..."
+
+Despues:
+  <Eye icon dentro de circulo muted>
+  "Muestra no disponible"
+  "El proveedor no ha proporcionado una muestra de datos para este activo.
+   Puede solicitar mas informacion tecnica contactando con el proveedor."
+```
 
 ---
 
-### Ajuste Necesario
+### 5. Traducir etiquetas tecnicas a texto legible
 
-La prop de `RevokeAccessButton` en el blueprint usa `transactionId` + `actorOrgId` (formato correcto actual), no el `resourceId` del archivo actual. Esto ya esta corregido en el blueprint.
+| Ubicacion | Antes | Despues |
+|---|---|---|
+| Linea 489 (Estado en tab Descripcion) | `{transaction.status}` | Mapa: `completed` -> "Completado", `approved` -> "Aprobado", `pending` -> "Pendiente", `denied` -> "Denegado", `pre_approved` -> "Pre-aprobado", `revoked` -> "Revocado" |
+| Linea 683 (Estado actual en "datos no disponibles") | `{transaction.status}` | Mismo mapa de traduccion |
+
+Crear un mapa `STATUS_LABELS` al inicio del componente:
+
+```typescript
+const STATUS_LABELS: Record<string, string> = {
+  created: "Creada",
+  pending: "Pendiente",
+  pre_approved: "Pre-aprobada",
+  approved: "Aprobada",
+  completed: "Completado",
+  denied: "Denegada",
+  revoked: "Revocado",
+};
+```
 
 ---
 
-### Resumen Tecnico
+### 6. Reescribir seccion "Acceso al Activo" (Gateway)
 
-| Aspecto | Detalle |
+**Lineas 706-718**: Reemplazar la descripcion del panel de Gateway para consumidores. Eliminar la referencia a "Gateway seguro de PROCUREDATA" y usar terminologia del ecosistema Pontus-X (Access Controller):
+
+```text
+Antes:
+  Titulo: "Acceso al Activo"
+  Desc: "Este activo se consume a traves del Gateway seguro de PROCUREDATA..."
+  Texto: "Al descargar, el Gateway se conecta de forma segura al proveedor..."
+
+Despues:
+  Titulo: "Acceso al Activo"
+  Desc: "Este activo se consume a traves del Access Controller del espacio de datos.
+         Los datos se obtienen en tiempo real desde la fuente del proveedor,
+         garantizando la privacidad y seguridad del intercambio."
+  Texto: "Al descargar, el Access Controller verifica tus permisos y se conecta
+          de forma segura al proveedor, entregandote los datos actualizados
+          sin exponer credenciales tecnicas."
+```
+
+---
+
+### Archivos a Modificar
+
+| Archivo | Cambio |
 |---|---|
-| Archivo modificado | `src/pages/DataView.tsx` |
-| Lineas antes | 782 |
-| Lineas despues | ~1103 |
-| Nuevas dependencias | Ninguna |
-| Componentes nuevos | Ninguno |
-| Riesgo | Bajo -- reemplazo directo con misma estructura de queries |
+| `src/pages/DataView.tsx` | Todos los cambios descritos arriba |
+
+### Sin Nuevas Dependencias
+
+El icono `Eye` de `lucide-react` necesita ser importado (actualmente no esta en las importaciones del archivo).
+
