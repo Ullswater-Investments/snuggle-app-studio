@@ -312,181 +312,155 @@ export default function ProductDetail() {
         {/* --- LEFT COLUMN: CONTENT --- */}
         <div className="lg:col-span-2 space-y-6">
           
-          {/* Header */}
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Badge variant="secondary" className="uppercase">{product.category}</Badge>
-              {product.status && (
-                <Badge variant="outline">{product.status}</Badge>
-              )}
-              {product.has_green_badge && (
-                <Badge variant="outline" className="border-green-600 text-green-700 bg-green-50 gap-1">
-                  <Leaf className="h-3 w-3" /> Sustainable Data
-                </Badge>
-              )}
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight mb-2">{product.asset_name}</h1>
-            <p className="text-muted-foreground leading-relaxed">
-              {product.asset_description || "Este dataset proporciona información crítica para la toma de decisiones en tiempo real."}
-            </p>
-          </div>
-
-          {/* Provider Card Mini */}
-          <Card className="bg-background/50">
-            <CardContent className="p-4 flex items-center gap-4">
-              <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
-                <AvatarFallback className="bg-primary/10 text-primary font-bold">
-                  {product.provider_name.substring(0, 2).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
+          {/* ═══ BLOQUE 1: Identidad Comercial ═══ */}
+          <Card className="border bg-card">
+            <CardContent className="p-6 space-y-4">
+              <div className="flex items-center gap-2 flex-wrap">
+                <Badge variant="secondary" className="uppercase">{product.category}</Badge>
+                {product.status && (
+                  <Badge variant="outline">{product.status}</Badge>
+                )}
+                {product.has_green_badge && (
+                  <Badge variant="outline" className="border-green-600 text-green-700 bg-green-50 gap-1">
+                    <Leaf className="h-3 w-3" /> Sustainable Data
+                  </Badge>
+                )}
+              </div>
               <div>
-                <p className="text-sm font-medium text-muted-foreground">Vendido y operado por</p>
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-lg">{product.provider_name}</span>
-                  {product.kyb_verified && (
-                    <span title="Verificado KYB">
-                      <ShieldCheck className="h-4 w-4 text-blue-500" />
-                    </span>
-                  )}
+                <h1 className="text-3xl font-bold tracking-tight mb-2">{product.asset_name}</h1>
+                <p className="text-muted-foreground leading-relaxed">
+                  {product.asset_description || "Este dataset proporciona información crítica para la toma de decisiones en tiempo real."}
+                </p>
+              </div>
+              <Separator />
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border-2 border-background shadow-sm">
+                  <AvatarFallback className="bg-primary/10 text-primary font-bold">
+                    {product.provider_name.substring(0, 2).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Vendido y operado por</p>
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-lg">{product.provider_name}</span>
+                    {product.kyb_verified && (
+                      <span title="Verificado KYB">
+                        <ShieldCheck className="h-4 w-4 text-blue-500" />
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Card className="bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900">
-              <CardContent className="p-4 flex flex-col items-center text-center">
-                <Layers className="h-5 w-5 text-amber-600 mb-1" />
-                <span className="text-xs text-muted-foreground uppercase">Versión</span>
-                <span className="text-lg font-bold">{product.version || '1.0'}</span>
-              </CardContent>
-            </Card>
-            <Card className="bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900">
-              <CardContent className="p-4 flex flex-col items-center text-center">
-                <RefreshCw className="h-5 w-5 text-amber-600 mb-1" />
-                <span className="text-xs text-muted-foreground uppercase">Frecuencia</span>
-                <span className="text-lg font-bold">Tiempo Real</span>
-              </CardContent>
-            </Card>
-            <Card className="bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900">
-              <CardContent className="p-4 flex flex-col items-center text-center">
-                <Hash className="h-5 w-5 text-amber-600 mb-1" />
-                <span className="text-xs text-muted-foreground uppercase">N.º Campos</span>
-                <span className="text-lg font-bold">{schemaFieldCount}</span>
-              </CardContent>
-            </Card>
-            <Card className="bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900">
-              <CardContent className="p-4 flex flex-col items-center text-center">
-                <Code2 className="h-5 w-5 text-amber-600 mb-1" />
-                <span className="text-xs text-muted-foreground uppercase">Formato</span>
-                <span className="text-lg font-bold">JSON / API</span>
-              </CardContent>
-            </Card>
-          </div>
+          {/* ═══ BLOQUE 2: Panel de Métricas Técnicas ═══ */}
+          <Card className="border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/20 overflow-hidden">
+            <CardContent className="p-0">
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-amber-200 dark:divide-amber-900">
+                <div className="p-4 flex flex-col items-center text-center">
+                  <Layers className="h-5 w-5 text-amber-600 mb-1" />
+                  <span className="text-xs text-muted-foreground uppercase">Versión</span>
+                  <span className="text-lg font-bold">{product.version || '1.0'}</span>
+                </div>
+                <div className="p-4 flex flex-col items-center text-center">
+                  <RefreshCw className="h-5 w-5 text-amber-600 mb-1" />
+                  <span className="text-xs text-muted-foreground uppercase">Frecuencia</span>
+                  <span className="text-lg font-bold">Tiempo Real</span>
+                </div>
+                <div className="p-4 flex flex-col items-center text-center">
+                  <Hash className="h-5 w-5 text-amber-600 mb-1" />
+                  <span className="text-xs text-muted-foreground uppercase">N.º Campos</span>
+                  <span className="text-lg font-bold">{schemaFieldCount}</span>
+                </div>
+                <div className="p-4 flex flex-col items-center text-center">
+                  <Code2 className="h-5 w-5 text-amber-600 mb-1" />
+                  <span className="text-xs text-muted-foreground uppercase">Formato</span>
+                  <span className="text-lg font-bold">JSON / API</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Info Tabs */}
-          <Tabs defaultValue="description" className="w-full">
-            <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="description">Descripción</TabsTrigger>
-              <TabsTrigger value="schema">Esquema</TabsTrigger>
-              <TabsTrigger value="policies" className="gap-1">
-                <Shield className="h-3 w-3" />
-                Políticas
-              </TabsTrigger>
-              <TabsTrigger value="sample" className="gap-1">
-                <Eye className="h-3 w-3" />
-                Muestra
-              </TabsTrigger>
-              <TabsTrigger value="chat" className="gap-1">
-                <Bot className="h-3 w-3" />
-                Asistente IA
-              </TabsTrigger>
-              <TabsTrigger value="reviews">Reseñas</TabsTrigger>
-            </TabsList>
-            
-            {/* Tab: Descripción */}
-            <TabsContent value="description" className="space-y-4 mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Sobre este activo de datos</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <h3 className="font-semibold text-foreground">Casos de Uso Comunes:</h3>
-                  <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-                    <li>Entrenamiento de modelos predictivos (Machine Learning).</li>
-                    <li>Análisis de tendencias de mercado y benchmarking.</li>
-                    <li>Optimización de cadena de suministro.</li>
-                    <li>Compliance y auditoría regulatoria.</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
+          {/* ═══ BLOQUE 3: Centro de Exploración ═══ */}
+          <Card className="border bg-card overflow-hidden">
+            <Tabs defaultValue="schema" className="w-full">
+              <div className="border-b px-6 pt-4">
+                <TabsList className="grid w-full grid-cols-5 bg-transparent h-auto p-0 gap-0">
+                  <TabsTrigger value="schema" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3">Esquema</TabsTrigger>
+                  <TabsTrigger value="policies" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
+                    <Shield className="h-3 w-3" />
+                    Políticas
+                  </TabsTrigger>
+                  <TabsTrigger value="sample" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
+                    <Eye className="h-3 w-3" />
+                    Muestra
+                  </TabsTrigger>
+                  <TabsTrigger value="chat" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
+                    <Bot className="h-3 w-3" />
+                    Asistente IA
+                  </TabsTrigger>
+                  <TabsTrigger value="reviews" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3">Reseñas</TabsTrigger>
+                </TabsList>
+              </div>
 
-            {/* Tab: Esquema */}
-            <TabsContent value="schema" className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+              {/* Tab: Esquema */}
+              <TabsContent value="schema" className="m-0 p-6">
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold flex items-center gap-2">
                     <Code2 className="h-5 w-5" />
                     Definición del Esquema
-                  </CardTitle>
-                  <CardDescription>
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">
                     Estructura de datos del producto ({schemaFieldCount} campos)
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  {schemaColumns.length > 0 ? (
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Campo</TableHead>
-                          <TableHead>Tipo</TableHead>
-                          <TableHead>Descripción</TableHead>
+                  </p>
+                </div>
+                {schemaColumns.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Campo</TableHead>
+                        <TableHead>Tipo</TableHead>
+                        <TableHead>Descripción</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {schemaColumns.map((col: any, i: number) => (
+                        <TableRow key={col.field || col.name || i}>
+                          <TableCell className="font-mono text-sm font-medium text-foreground">{col.field || col.name || '—'}</TableCell>
+                          <TableCell>
+                            <Badge variant="secondary" className="text-xs">
+                              {col.type || 'unknown'}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="text-sm text-muted-foreground">
+                            {col.description || '—'}
+                          </TableCell>
                         </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {schemaColumns.map((col: any, i: number) => (
-                          <TableRow key={col.field || col.name || i}>
-                            <TableCell className="font-mono text-sm font-medium text-foreground">{col.field || col.name || '—'}</TableCell>
-                            <TableCell>
-                              <Badge variant="secondary" className="text-xs">
-                                {col.type || 'unknown'}
-                              </Badge>
-                            </TableCell>
-                            <TableCell className="text-sm text-muted-foreground">
-                              {col.description || '—'}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-12 text-center">
-                      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted/30">
-                        <Code2 className="h-8 w-8 text-muted-foreground" />
-                      </div>
-                      <h3 className="text-base font-semibold mb-1">Esquema no disponible</h3>
-                      <p className="text-sm text-muted-foreground max-w-sm">
-                        Este activo no tiene un esquema técnico definido.
-                      </p>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted/30">
+                      <Code2 className="h-8 w-8 text-muted-foreground" />
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            </TabsContent>
+                    <h3 className="text-base font-semibold mb-1">Esquema no disponible</h3>
+                    <p className="text-sm text-muted-foreground max-w-sm">
+                      Este activo no tiene un esquema técnico definido.
+                    </p>
+                  </div>
+                )}
+              </TabsContent>
 
-            {/* Tab: Políticas de Uso */}
-            <TabsContent value="policies" className="mt-6 space-y-4">
-              {/* Permisos (Verde) */}
-              <Card className="border-green-200 dark:border-green-900">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400 text-base">
+              {/* Tab: Políticas de Uso */}
+              <TabsContent value="policies" className="m-0 p-6 space-y-4">
+                {/* Permisos (Verde) */}
+                <div className="rounded-lg border border-green-200 dark:border-green-900 p-4">
+                  <h4 className="flex items-center gap-2 text-green-700 dark:text-green-400 text-base font-semibold mb-3">
                     <CheckCircle2 className="h-5 w-5" />
                     Permisos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                  </h4>
                   <ul className="space-y-2">
                     {(accessPolicy?.permissions as string[] || ["Uso comercial permitido", "Análisis interno"]).map((item: string, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-sm">
@@ -495,18 +469,14 @@ export default function ProductDetail() {
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
+                </div>
 
-              {/* Prohibiciones (Rojo) */}
-              <Card className="border-red-200 dark:border-red-900">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-red-700 dark:text-red-400 text-base">
+                {/* Prohibiciones (Rojo) */}
+                <div className="rounded-lg border border-red-200 dark:border-red-900 p-4">
+                  <h4 className="flex items-center gap-2 text-red-700 dark:text-red-400 text-base font-semibold mb-3">
                     <XCircle className="h-5 w-5" />
                     Prohibiciones
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                  </h4>
                   <ul className="space-y-2">
                     {(accessPolicy?.prohibitions as string[] || ["Redistribución a terceros", "Uso para training IA sin consentimiento"]).map((item: string, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-sm">
@@ -515,18 +485,14 @@ export default function ProductDetail() {
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
+                </div>
 
-              {/* Obligaciones (Azul) */}
-              <Card className="border-blue-200 dark:border-blue-900">
-                <CardHeader className="pb-3">
-                  <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-base">
+                {/* Obligaciones (Azul) */}
+                <div className="rounded-lg border border-blue-200 dark:border-blue-900 p-4">
+                  <h4 className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-base font-semibold mb-3">
                     <AlertCircle className="h-5 w-5" />
                     Obligaciones
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
+                  </h4>
                   <ul className="space-y-2">
                     {(accessPolicy?.obligations as string[] || ["Conformidad RGPD", "Notificación de brechas en 72h"]).map((item: string, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-sm">
@@ -535,13 +501,11 @@ export default function ProductDetail() {
                       </li>
                     ))}
                   </ul>
-                </CardContent>
-              </Card>
+                </div>
 
-              {/* Términos y Condiciones */}
-              {accessPolicy?.terms_url && (
-                <Card className="border-muted">
-                  <CardContent className="p-4 flex items-center gap-3">
+                {/* Términos y Condiciones */}
+                {accessPolicy?.terms_url && (
+                  <div className="rounded-lg border border-muted p-4 flex items-center gap-3">
                     <ExternalLink className="h-5 w-5 text-muted-foreground shrink-0" />
                     <div>
                       <p className="text-sm font-medium">Términos y Condiciones</p>
@@ -554,40 +518,34 @@ export default function ProductDetail() {
                         Consultar documento completo
                       </a>
                     </div>
-                  </CardContent>
-                </Card>
-              )}
-            </TabsContent>
+                  </div>
+                )}
+              </TabsContent>
 
-            {/* Tab: Muestra */}
-            <TabsContent value="sample" className="mt-6">
-              <Alert className="mb-4 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
-                <Activity className="h-4 w-4 text-yellow-600" />
-                <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ MUESTRA DE DATOS</AlertTitle>
-                <AlertDescription className="text-yellow-700 dark:text-yellow-300">
-                  Estos registros están anonimizados y contienen ruido estadístico añadido por seguridad. Los datos reales pueden variar en formato y contenido.
-                </AlertDescription>
-              </Alert>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+              {/* Tab: Muestra */}
+              <TabsContent value="sample" className="m-0 p-6">
+                <Alert className="mb-4 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
+                  <Activity className="h-4 w-4 text-yellow-600" />
+                  <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ MUESTRA DE DATOS</AlertTitle>
+                  <AlertDescription className="text-yellow-700 dark:text-yellow-300">
+                    Estos registros están anonimizados y contienen ruido estadístico añadido por seguridad. Los datos reales pueden variar en formato y contenido.
+                  </AlertDescription>
+                </Alert>
+                
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold flex items-center gap-2">
                     <Eye className="h-5 w-5" />
                     Data Sandbox - Vista Previa
-                  </CardTitle>
-                  <CardDescription>
+                  </h3>
+                  <p className="text-sm text-muted-foreground mt-1">
                     Explora una muestra de {sampleData.length} registros para evaluar la estructura y calidad del dataset.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ArrayDataView data={sampleData} schemaType="sample_data" />
-                </CardContent>
-              </Card>
-            </TabsContent>
+                  </p>
+                </div>
+                <ArrayDataView data={sampleData} schemaType="sample_data" />
+              </TabsContent>
 
-            {/* Tab: Asistente IA */}
-            <TabsContent value="chat" className="mt-6">
-              <Card className="overflow-hidden">
+              {/* Tab: Asistente IA */}
+              <TabsContent value="chat" className="m-0">
                 <div className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 dark:from-primary/10 dark:via-primary/20 dark:to-primary/10">
                   <div className="flex flex-col items-center justify-center py-16 text-center space-y-5 px-6">
                     <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center animate-pulse">
@@ -600,29 +558,25 @@ export default function ProductDetail() {
                     <Badge variant="secondary" className="text-xs">En desarrollo</Badge>
                   </div>
                 </div>
-              </Card>
-            </TabsContent>
+              </TabsContent>
 
-            {/* Tab: Reseñas */}
-            <TabsContent value="reviews" className="mt-6">
-              <Card>
-                <CardContent className="py-16">
-                  <div className="flex flex-col items-center justify-center text-center space-y-4">
-                    <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
-                      <Star className="h-8 w-8 text-muted-foreground" />
-                    </div>
-                    <h3 className="text-lg font-semibold">Aún no hay reseñas verificadas</h3>
-                    <p className="text-sm text-muted-foreground max-w-md">
-                      Solo las organizaciones que han completado una transacción verificada mediante Smart Contract pueden publicar reseñas. Este sistema garantiza la autenticidad de cada valoración.
-                    </p>
+              {/* Tab: Reseñas */}
+              <TabsContent value="reviews" className="m-0 p-6">
+                <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+                  <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
+                    <Star className="h-8 w-8 text-muted-foreground" />
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                  <h3 className="text-lg font-semibold">Aún no hay reseñas verificadas</h3>
+                  <p className="text-sm text-muted-foreground max-w-md">
+                    Solo las organizaciones que han completado una transacción verificada mediante Smart Contract pueden publicar reseñas. Este sistema garantiza la autenticidad de cada valoración.
+                  </p>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </Card>
         </div>
 
-        {/* --- RIGHT COLUMN: BUY BOX (STICKY) --- */}
+        {/* --- RIGHT COLUMN: SIDEBAR DE CONFIANZA (STICKY) --- */}
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-4">
             <Card className="border-t-4 border-t-primary shadow-lg">
