@@ -1,105 +1,76 @@
 
 
-## Ajustes de UX en DataView.tsx
+## Correcciones de Descarga Gateway y Etiquetas en DataView
 
-### Resumen
+### Problema Principal
 
-Aplicar 5 correcciones de texto, iconografia y visibilidad en `src/pages/DataView.tsx` para eliminar ruido visual y alinear la terminologia con el ecosistema Pontus-X.
-
----
-
-### 1. Eliminar boton "Volver a solicitudes"
-
-**Lineas 341-346**: Eliminar el bloque completo del boton con `ArrowLeft` y `navigate("/requests")`. Mantener unicamente el `RevokeAccessButton` alineado a la derecha cuando corresponda. Tambien eliminar el boton "Volver a solicitudes" del estado de error (linea 299).
+La Edge Function `gateway-download` **no existe** en el proyecto. El boton intenta invocarla pero falla porque nunca fue creada. Ademas, la tabla de historial muestra textos tecnicos sin traducir.
 
 ---
 
-### 2. Renombrar "Politicas de Acceso" (eliminar ODRL)
+### Cambios a Realizar
 
-**Linea 464-467**: La tab ya dice "Politicas de Acceso" sin ODRL. Sin embargo, revisar el aviso legal al final (linea 662) que menciona "PROCUREDATA y la red Pontus-X" -- mantener esa referencia ya que es correcta en contexto.
+#### 1. Crear Edge Function `gateway-download`
 
-**Linea 605**: El titulo `h3` dentro de la tab dice "Politicas de Acceso" -- correcto, sin cambios.
+**Archivo nuevo:** `supabase/functions/gateway-download/index.ts`
 
-No hay referencias a "ODRL" en este archivo, asi que este punto ya esta cubierto.
+Dado que no hay un gateway externo conectado actualmente, la funcion hara lo siguiente:
+- Recibir `transactionId` y `consumerOrgId`
+- Verificar que la transaccion exista y este en estado `completed`
+- Verificar que el `consumerOrgId` coincida con el consumer de la transaccion
+- Obtener los datos del `data_payloads` y/o `supplier_data` asociados
+- Devolver el contenido como JSON
+
+La funcion usara `SUPABASE_SERVICE_ROLE_KEY` para acceder a los datos sin restricciones de RLS, pero validara manualmente los permisos.
+
+#### 2. Registrar la funcion en `supabase/config.toml`
+
+Anadir entrada `[functions.gateway-download]` con `verify_jwt = false` (la validacion se hara en codigo).
+
+#### 3. Traduccion de etiquetas en `AccessHistoryTable.tsx`
+
+Anadir `download_gateway` al mapa `actionLabels`:
+
+```
+download_gateway -> "Descarga de datos (Access Controller)"
+view_data -> "Visualizacion de activo"
+api_access -> "Acceso via API"
+```
+
+#### 4. Mejora de feedback de errores en `DataView.tsx`
+
+Ajustar el bloque `catch` de `handleGatewayDownload` para detectar el error especifico "Failed to send a request to the Edge Function" y mostrar un mensaje profesional:
+
+```
+"No se pudo conectar con el servidor del proveedor. Intentelo de nuevo en unos minutos."
+```
 
 ---
 
-### 3. Ocultar tab "Calidad"
-
-**Lineas 461-463**: Eliminar el `TabsTrigger` de "Calidad" y su contenido `TabsContent` (lineas 574-601) para que no aparezca hasta que existan metricas registradas.
-
----
-
-### 4. Mejorar empty state de "Muestra"
-
-**Lineas 563-569**: Reemplazar el empty state actual con el patron del catalogo (`ProductDetail.tsx`): circulo con icono `Eye`, titulo "Muestra no disponible", y mensaje profesional similar al del catalogo.
+### Detalle Tecnico de la Edge Function
 
 ```text
-Antes:
-  <Database icon> "Sin muestras disponibles"
-  "El proveedor no ha proporcionado datos de ejemplo..."
+POST /gateway-download
+Body: { transactionId, consumerOrgId, format? }
 
-Despues:
-  <Eye icon dentro de circulo muted>
-  "Muestra no disponible"
-  "El proveedor no ha proporcionado una muestra de datos para este activo.
-   Puede solicitar mas informacion tecnica contactando con el proveedor."
+Flujo:
+1. Validar CORS
+2. Leer transactionId y consumerOrgId del body
+3. Consultar data_transactions con service role
+4. Verificar status === "completed" y consumer_org_id === consumerOrgId
+5. Consultar data_payloads por transaction_id
+6. Si no hay payload, consultar supplier_data
+7. Devolver JSON con los datos encontrados
+8. Si no hay datos, devolver error 404
 ```
 
 ---
 
-### 5. Traducir etiquetas tecnicas a texto legible
+### Archivos Modificados/Creados
 
-| Ubicacion | Antes | Despues |
-|---|---|---|
-| Linea 489 (Estado en tab Descripcion) | `{transaction.status}` | Mapa: `completed` -> "Completado", `approved` -> "Aprobado", `pending` -> "Pendiente", `denied` -> "Denegado", `pre_approved` -> "Pre-aprobado", `revoked` -> "Revocado" |
-| Linea 683 (Estado actual en "datos no disponibles") | `{transaction.status}` | Mismo mapa de traduccion |
-
-Crear un mapa `STATUS_LABELS` al inicio del componente:
-
-```typescript
-const STATUS_LABELS: Record<string, string> = {
-  created: "Creada",
-  pending: "Pendiente",
-  pre_approved: "Pre-aprobada",
-  approved: "Aprobada",
-  completed: "Completado",
-  denied: "Denegada",
-  revoked: "Revocado",
-};
-```
-
----
-
-### 6. Reescribir seccion "Acceso al Activo" (Gateway)
-
-**Lineas 706-718**: Reemplazar la descripcion del panel de Gateway para consumidores. Eliminar la referencia a "Gateway seguro de PROCUREDATA" y usar terminologia del ecosistema Pontus-X (Access Controller):
-
-```text
-Antes:
-  Titulo: "Acceso al Activo"
-  Desc: "Este activo se consume a traves del Gateway seguro de PROCUREDATA..."
-  Texto: "Al descargar, el Gateway se conecta de forma segura al proveedor..."
-
-Despues:
-  Titulo: "Acceso al Activo"
-  Desc: "Este activo se consume a traves del Access Controller del espacio de datos.
-         Los datos se obtienen en tiempo real desde la fuente del proveedor,
-         garantizando la privacidad y seguridad del intercambio."
-  Texto: "Al descargar, el Access Controller verifica tus permisos y se conecta
-          de forma segura al proveedor, entregandote los datos actualizados
-          sin exponer credenciales tecnicas."
-```
-
----
-
-### Archivos a Modificar
-
-| Archivo | Cambio |
+| Archivo | Accion |
 |---|---|
-| `src/pages/DataView.tsx` | Todos los cambios descritos arriba |
-
-### Sin Nuevas Dependencias
-
-El icono `Eye` de `lucide-react` necesita ser importado (actualmente no esta en las importaciones del archivo).
+| `supabase/functions/gateway-download/index.ts` | Crear |
+| `src/components/AccessHistoryTable.tsx` | Editar (anadir etiqueta `download_gateway`) |
+| `src/pages/DataView.tsx` | Editar (mejorar error handling) |
 
