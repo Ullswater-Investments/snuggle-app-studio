@@ -526,6 +526,30 @@
       "services": ["Gaia-X Datenraum", "ODRL-Synchronisation", "Digitaler Produktpass", "Verifizierbare Zertifizierungen", "Multi-Portal Katalog-API"]
     }
   },
+  "detail": {
+    "notFound": "Fall nicht gefunden",
+    "backToStories": "Zurück zu Erfolgsgeschichten",
+    "verifiedOn": "Verifiziert auf Pontus-X",
+    "block": "Block",
+    "sectorImpactPanel": "Sektorales Impact-Panel",
+    "impactSimulator": "Impact-Simulator",
+    "ctaTitle": "Möchten Sie ähnliche Ergebnisse erzielen?",
+    "ctaDescription": "Entdecken Sie, wie ProcureData Ihre Einkaufsprozesse transformieren und Ihren ESG-Impact nachweisen kann.",
+    "exploreCatalog": "Katalog erkunden",
+    "viewServices": "Services ansehen",
+    "askAgent": "ARIA-Agent fragen",
+    "caseArchitecture": "Fallarchitektur"
+  },
+  "navigation": {
+    "previousCase": "Vorheriger Fall",
+    "allCases": "Alle Fälle",
+    "nextCase": "Nächster Fall"
+  },
+  "narrative": {
+    "theChallenge": "Die Herausforderung",
+    "theSolution": "Die Lösung",
+    "servicesUsed": "Verwendete Services"
+  },
   "blockchain": {
     "hashCopied": "Hash in Zwischenablage kopiert",
     "verifiedOn": "Verifiziert auf {{network}}",
