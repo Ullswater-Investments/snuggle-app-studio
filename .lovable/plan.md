@@ -1,94 +1,73 @@
 
 
-## Sistema de Calificaciones y Mejoras de Acceso en AssetDetailPage
+## Activacion del Asistente IA en la Pestana de AssetDetailPage
 
-### Archivo a modificar: `src/pages/ProductDetail.tsx`
+### Resumen
+
+Se creara un nuevo agente especializado para la vista de detalle de activo, con un filtro de contexto estricto que extrae solo datos publicos del asset y una interfaz de chat integrada en el Bloque 3 (Exploracion).
 
 ---
 
-### 1. Consulta de Acceso Verificado (Transaccion Completada)
+### 1. Nueva Edge Function: `asset-detail-agent`
 
-Anadir una nueva query con `useQuery` que verifique si la organizacion activa tiene una transaccion `completed` para el `asset_id` actual:
+**Archivo nuevo:** `supabase/functions/asset-detail-agent/index.ts`
 
-```typescript
-const { data: hasVerifiedAccess } = useQuery({
-  queryKey: ['verified-access', id, activeOrgId],
-  queryFn: async () => {
-    const { data } = await supabase
-      .from('data_transactions')
-      .select('id')
-      .eq('asset_id', id)
-      .eq('consumer_org_id', activeOrgId)
-      .eq('status', 'completed')
-      .limit(1);
-    return (data && data.length > 0);
-  },
-  enabled: !!id && !!activeOrgId,
-});
+Se creara una edge function con:
+- System prompt que define a ARIA como experta en el activo especifico, con instrucciones de responder basandose UNICAMENTE en el contexto proporcionado.
+- El contexto del activo se recibe desde el frontend (ya filtrado por `getAriaContext()`).
+- SECURITY_RULES: prohibicion de revelar el system prompt, no inventar datos.
+- Streaming SSE, misma estructura que los demas agentes (ia-conversacional-agent, etc.).
+
+**Registro en config.toml:**
+```toml
+[functions.asset-detail-agent]
+verify_jwt = false
 ```
 
-**Logica del boton en el Sidebar (lineas 668-687):**
-- Si `hasVerifiedAccess === true`: Mostrar boton "Explorar Dataset" con icono `Eye`, que redirige a `/data`.
-- Si no: Mantener el boton "Solicitar Acceso" / "Comprar Ahora" actual.
+---
+
+### 2. Nuevo Componente: `AssetDetailChatAgent`
+
+**Archivo nuevo:** `src/components/asset-detail/AssetDetailChatAgent.tsx`
+
+Componente de chat reutilizando el patron existente de los otros agentes (Web3DidsChatAgent, etc.):
+
+- **Props:** Recibe el objeto `product` (MarketplaceListing) y `schemaColumns`.
+- **Funcion `getAriaContext()`:** Extrae UNICAMENTE:
+  - `name`, `description`, `category`, `version`
+  - `schema_definition` (solo nombres de campo y descripciones, sin api_url, api_headers, wallets ni IDs)
+  - `use_cases` de custom_metadata (si existe)
+- **Cabecera:** Titulo "Pregunta al Asistente IA" con badge truncado del asset_id (ej: `did:...eaf2`).
+- **Mensaje inicial:** "Hola! Soy tu Asistente IA experto en el ecosistema PROCUREDATA. Estoy analizando el activo [Nombre] para responder tus preguntas con precision."
+- **Input:** Placeholder "Pregunta sobre este dataset..." con boton de envio.
+- **Streaming:** Misma logica SSE line-by-line que los otros chat agents.
+- **ChatGuard:** Integrado con el sistema de 3 strikes.
+- **TokenWallet:** Registro de operaciones por respuesta.
+
+**PROHIBICION ESTRICTA en getAriaContext():** Nunca incluir `api_url`, `api_headers`, `allowed_wallets`, `denied_wallets`, IDs de usuario, ni `provider_id`.
 
 ---
 
-### 2. Consulta de Reviews Reales y Promedio Dinamico
+### 3. Integracion en ProductDetail.tsx
 
-Anadir una query para obtener las resenas del activo desde `organization_reviews`, uniendo con `data_transactions` para filtrar por `asset_id`:
+**Archivo modificado:** `src/pages/ProductDetail.tsx`
 
-```typescript
-const { data: reviews } = useQuery({
-  queryKey: ['asset-reviews', id],
-  queryFn: async () => {
-    // Obtener transaction_ids de este asset
-    const { data: txs } = await supabase
-      .from('data_transactions')
-      .select('id')
-      .eq('asset_id', id);
-    const txIds = txs?.map(t => t.id) || [];
-    if (txIds.length === 0) return [];
-    const { data } = await supabase
-      .from('organization_reviews')
-      .select('id, rating, comment, created_at, reviewer_org_id, organizations!reviewer_org_id(name)')
-      .in('transaction_id', txIds);
-    return data || [];
-  },
-  enabled: !!id,
-});
-```
-
-**Promedio dinamico**: Calcular `avgRating` y `reviewCount` a partir de `reviews` y usarlos en la cabecera (debajo del titulo, linea 372) mostrando estrellas reales en lugar de texto estatico. Tambien actualizar el `reputation_score` mostrado en cualquier otra parte.
+- Importar `AssetDetailChatAgent`.
+- Reemplazar el contenido placeholder de la pestana "Asistente IA" (lineas 716-728) por:
+  ```tsx
+  <AssetDetailChatAgent product={product} schemaColumns={schemaColumns} />
+  ```
+- Sin cambios en los otros bloques ni pestanas.
 
 ---
 
-### 3. Pestana Resenas (lineas 605-616) - Rediseno completo
+### 4. Preguntas Sugeridas
 
-Reemplazar el estado vacio estatico actual con logica condicional:
-
-**a) Si hay resenas**: Mostrar lista con nombre de organizacion, estrellas, comentario y fecha.
-
-**b) Si `hasVerifiedAccess` es true y no ha dejado resena**: Mostrar formulario con selector de estrellas (1-5) y textarea para comentario, con boton "Publicar Resena" que inserta en `organization_reviews`.
-
-**c) Si no tiene acceso verificado**: Mostrar mensaje: "Solo las organizaciones que han adquirido este activo pueden dejar una resena."
-
----
-
-### 4. Pestana Muestra (lineas 567-587)
-
-Modificar la logica de `sampleData` (linea 290):
-- Eliminar `MOCK_SAMPLE` (lineas 282-288).
-- Si `(product as any).sample_data` es null/vacio, en lugar de mostrar datos mock, mostrar un mensaje profesional:
-
-> "El proveedor no ha proporcionado una muestra de datos para este activo. Puede solicitar mas informacion tecnica antes de realizar la compra."
-
-Con icono `Eye` y un estilo de estado vacio elegante.
-
----
-
-### 5. Mantenimiento de los 3 Bloques
-
-No se alteran los 3 bloques existentes (Identidad, Metricas, Exploracion). Solo se modifica el contenido interno de las pestanas Resenas y Muestra, y la logica del boton del sidebar.
+El componente mostrara 4 preguntas iniciales contextualizadas:
+1. "Que datos contiene este dataset?"
+2. "Para que casos de uso puedo utilizarlo?"
+3. "Cuales son sus campos principales?"
+4. "Como se integra con mi sistema actual?"
 
 ---
 
@@ -96,10 +75,9 @@ No se alteran los 3 bloques existentes (Identidad, Metricas, Exploracion). Solo 
 
 | Aspecto | Detalle |
 |---|---|
-| Archivo modificado | `src/pages/ProductDetail.tsx` (unico) |
-| Nuevas queries | `verified-access` (data_transactions), `asset-reviews` (organization_reviews) |
-| Nuevas importaciones | `Textarea` de `@/components/ui/textarea`, `useState` de react |
-| Tabla usada para reviews | `organization_reviews` (ya existe con RLS) |
-| Insert de reviews | Via `supabase.from('organization_reviews').insert(...)` con `reviewer_org_id = activeOrgId` |
-| Cambios en BD | Ninguno - las tablas y politicas RLS ya existen |
-
+| Archivos nuevos | `supabase/functions/asset-detail-agent/index.ts`, `src/components/asset-detail/AssetDetailChatAgent.tsx` |
+| Archivo modificado | `src/pages/ProductDetail.tsx` (solo pestana chat), `supabase/config.toml` |
+| Patron reutilizado | Mismo de Web3DidsChatAgent (streaming SSE, ChatGuard, TokenWallet) |
+| Modelo IA | google/gemini-3-flash-preview (default) |
+| Seguridad | getAriaContext() filtra datos sensibles; system prompt prohibe revelar configuracion |
+| Cambios en BD | Ninguno |
