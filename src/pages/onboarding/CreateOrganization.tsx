@@ -3,6 +3,8 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { toast } from "sonner";
 import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 import { OnboardingStepper } from "@/components/onboarding/OnboardingStepper";
 import { WalletGenerationStep } from "@/components/onboarding/WalletGenerationStep";
@@ -16,8 +18,17 @@ const ONBOARDING_STEPS = [
 export default function CreateOrganization() {
   const navigate = useNavigate();
   const { t } = useTranslation('common');
+  const { isDemo } = useOrganizationContext();
   const [currentStep, setCurrentStep] = useState(1);
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
+
+  // Block demo users
+  useEffect(() => {
+    if (isDemo) {
+      toast.error("Creación de organizaciones no disponible en modo demo");
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isDemo, navigate]);
 
   // Check for existing wallet address in localStorage on mount
   useEffect(() => {
@@ -35,6 +46,8 @@ export default function CreateOrganization() {
   const handleBackToWallet = () => {
     setCurrentStep(1);
   };
+
+  if (isDemo) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">

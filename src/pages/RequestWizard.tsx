@@ -38,7 +38,7 @@ const RequestWizard = () => {
   const location = useLocation();
   const assetId = searchParams.get("asset") || (location.state as any)?.preselectedAssetId;
   const { user, signOut } = useAuth();
-  const { activeOrgId, loading: orgLoading } = useOrganizationContext();
+  const { activeOrgId, loading: orgLoading, isDemo } = useOrganizationContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -353,6 +353,30 @@ const RequestWizard = () => {
   // Validación interna de seguridad: redirigir si no hay org activa
   if (!orgLoading && !activeOrgId) {
     return <Navigate to="/dashboard" replace />;
+  }
+
+  // Demo mode: show blocking message
+  if (isDemo) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card>
+          <CardHeader className="text-center">
+            <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-950/30 flex items-center justify-center mx-auto mb-4">
+              <Ban className="h-8 w-8 text-amber-600 dark:text-amber-400" />
+            </div>
+            <CardTitle>Función no disponible</CardTitle>
+            <CardDescription>
+              Las solicitudes de datos no están disponibles en modo demostración.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button className="w-full" onClick={() => navigate("/catalog")}>
+              Volver al Catálogo
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   return (

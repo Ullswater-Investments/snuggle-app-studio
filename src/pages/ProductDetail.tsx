@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { toast } from "sonner";
 import { 
   ArrowLeft, 
@@ -58,6 +59,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isWeb3Connected, connectWallet, user } = useAuth();
+  const { isDemo } = useOrganizationContext();
 
   // --- Fetch Data (Marketplace View) ---
   const { data: product, isLoading } = useQuery<MarketplaceListing>({
@@ -457,8 +459,17 @@ export default function ProductDetail() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button size="lg" className="w-full text-base font-semibold" onClick={handleAction}>
-                  {isPaid ? (
+                <Button 
+                  size="lg" 
+                  className="w-full text-base font-semibold" 
+                  onClick={handleAction}
+                  disabled={isDemo}
+                >
+                  {isDemo ? (
+                    <>
+                      <Lock className="mr-2 h-5 w-5" /> Solicitudes no disponibles en demo
+                    </>
+                  ) : isPaid ? (
                     <>
                       <ShoppingCart className="mr-2 h-5 w-5" /> Comprar Ahora
                     </>

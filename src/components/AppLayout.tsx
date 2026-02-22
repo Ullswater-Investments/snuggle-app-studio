@@ -6,6 +6,7 @@ import { CommandMenu } from "@/components/CommandMenu";
 import { UnifiedHeader } from "@/components/layout/UnifiedHeader";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { MaintenanceBanner } from "@/components/MaintenanceBanner";
+import { DemoBanner } from "@/components/DemoBanner";
 
 export const AppLayout = () => {
   return (
@@ -17,6 +18,7 @@ export const AppLayout = () => {
 
         <div className="flex-1 flex flex-col w-full">
           <UnifiedHeader />
+          <DemoBanner />
           <MaintenanceBanner />
 
           <main className="flex-1">
