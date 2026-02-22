@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
@@ -28,7 +28,8 @@ import {
   Download,
   XCircle,
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  MessageSquare
 } from "lucide-react";
 
 // UI Components
@@ -42,6 +43,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrayDataView } from "@/components/ArrayDataView";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Textarea } from "@/components/ui/textarea";
 
 interface MarketplaceListing {
   asset_id: string;
@@ -66,11 +68,39 @@ interface MarketplaceListing {
   custom_metadata?: Record<string, any> | null;
 }
 
+// Star rating component
+function StarRating({ rating, size = 16, interactive = false, onRate }: { 
+  rating: number; 
+  size?: number; 
+  interactive?: boolean; 
+  onRate?: (r: number) => void;
+}) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((s) => (
+        <Star
+          key={s}
+          className={`${interactive ? 'cursor-pointer hover:scale-110 transition-transform' : ''}`}
+          style={{ width: size, height: size }}
+          fill={s <= rating ? 'hsl(var(--primary))' : 'none'}
+          stroke={s <= rating ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))'}
+          onClick={() => interactive && onRate?.(s)}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { isWeb3Connected, connectWallet, user } = useAuth();
   const { isDemo, activeOrgId } = useOrganizationContext();
+
+  // Review form state
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewComment, setReviewComment] = useState("");
 
   // --- Fetch Data (Marketplace View) ---
   const { data: product, isLoading } = useQuery<MarketplaceListing>({
@@ -84,7 +114,6 @@ export default function ProductDetail() {
         .maybeSingle();
 
       if (!error && data) {
-        // Also fetch extended data from data_assets for schema_definition and custom_metadata
         const { data: assetExtra } = await supabase
           .from('data_assets')
           .select(`
@@ -112,7 +141,7 @@ export default function ProductDetail() {
           currency: listing.currency || 'EUR',
           billing_period: listing.billing_period,
           has_green_badge: listing.has_green_badge ?? false,
-          reputation_score: listing.reputation_score || 4.8,
+          reputation_score: listing.reputation_score || 0,
           review_count: listing.review_count || 0,
           version: listing.version || (assetExtra?.product as any)?.version || '1.0',
           schema_definition: (assetExtra?.product as any)?.schema_definition || null,
@@ -121,28 +150,19 @@ export default function ProductDetail() {
         } as MarketplaceListing;
       }
 
-      // Fallback robusto si la vista no está lista
+      // Fallback
       console.warn("Usando fallback para detalle de producto");
       const { data: asset, error: assetError } = await supabase
         .from('data_assets')
         .select(`
-          id,
-          status,
-          pricing_model,
-          price,
-          currency,
-          billing_period,
-          custom_metadata,
-          sample_data,
+          id, status, pricing_model, price, currency, billing_period, custom_metadata, sample_data,
           product:data_products(name, description, category, schema_definition, version),
           org:organizations!subject_org_id(id, name)
         `)
         .eq('id', id)
         .single();
       
-      if (assetError || !asset) {
-        throw new Error("Producto no encontrado");
-      }
+      if (assetError || !asset) throw new Error("Producto no encontrado");
 
       return {
         asset_id: asset.id,
@@ -159,8 +179,8 @@ export default function ProductDetail() {
         currency: asset.currency || 'EUR',
         billing_period: asset.billing_period || 'monthly',
         has_green_badge: true,
-        reputation_score: 4.8,
-        review_count: 24,
+        reputation_score: 0,
+        review_count: 0,
         status: asset.status,
         version: (asset.product as any)?.version || '1.0',
         schema_definition: (asset.product as any)?.schema_definition || null,
@@ -170,10 +190,107 @@ export default function ProductDetail() {
     }
   });
 
-  // === GUARDIA DE SEGURIDAD: Bloqueo Demo / Sin Organización ===
-  const shouldBlockAccess = isDemo || !activeOrgId;
+  // === QUERY: Verified Access (completed transaction) ===
+  const { data: hasVerifiedAccess } = useQuery({
+    queryKey: ['verified-access', id, activeOrgId],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from('data_transactions')
+        .select('id')
+        .eq('asset_id', id!)
+        .eq('consumer_org_id', activeOrgId!)
+        .eq('status', 'completed')
+        .limit(1);
+      return (data && data.length > 0);
+    },
+    enabled: !!id && !!activeOrgId,
+  });
 
-  // Access policy - computed early for hooks
+  // === QUERY: Asset Reviews ===
+  const { data: reviews = [] } = useQuery({
+    queryKey: ['asset-reviews', id],
+    queryFn: async () => {
+      const { data: txs } = await supabase
+        .from('data_transactions')
+        .select('id')
+        .eq('asset_id', id!);
+      const txIds = txs?.map(t => t.id) || [];
+      if (txIds.length === 0) return [];
+      const { data } = await supabase
+        .from('organization_reviews')
+        .select('id, rating, comment, created_at, reviewer_org_id, target_org_id')
+        .in('transaction_id', txIds);
+      
+      if (!data || data.length === 0) return [];
+
+      // Fetch reviewer org names
+      const reviewerIds = [...new Set(data.map(r => r.reviewer_org_id))];
+      const { data: orgs } = await supabase
+        .from('organizations')
+        .select('id, name')
+        .in('id', reviewerIds);
+      const orgMap = new Map((orgs || []).map(o => [o.id, o.name]));
+
+      return data.map(r => ({
+        ...r,
+        reviewer_name: orgMap.get(r.reviewer_org_id) || 'Organización',
+      }));
+    },
+    enabled: !!id,
+  });
+
+  // Dynamic rating calculations
+  const { avgRating, reviewCount } = useMemo(() => {
+    if (!reviews || reviews.length === 0) return { avgRating: 0, reviewCount: 0 };
+    const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+    return { avgRating: Math.round((sum / reviews.length) * 10) / 10, reviewCount: reviews.length };
+  }, [reviews]);
+
+  // Check if current org already left a review
+  const hasLeftReview = useMemo(() => {
+    return reviews.some(r => r.reviewer_org_id === activeOrgId);
+  }, [reviews, activeOrgId]);
+
+  // === MUTATION: Submit Review ===
+  const submitReview = useMutation({
+    mutationFn: async () => {
+      // Get a completed transaction for this asset by this org
+      const { data: tx } = await supabase
+        .from('data_transactions')
+        .select('id, holder_org_id')
+        .eq('asset_id', id!)
+        .eq('consumer_org_id', activeOrgId!)
+        .eq('status', 'completed')
+        .limit(1)
+        .single();
+      
+      if (!tx) throw new Error('No transaction found');
+
+      const { error } = await supabase
+        .from('organization_reviews')
+        .insert({
+          transaction_id: tx.id,
+          reviewer_org_id: activeOrgId!,
+          target_org_id: tx.holder_org_id,
+          rating: reviewRating,
+          comment: reviewComment || null,
+        });
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Reseña publicada correctamente");
+      setReviewRating(0);
+      setReviewComment("");
+      queryClient.invalidateQueries({ queryKey: ['asset-reviews', id] });
+    },
+    onError: () => {
+      toast.error("Error al publicar la reseña");
+    },
+  });
+
+  // === GUARDIA DE SEGURIDAD ===
+  const shouldBlockAccess = isDemo || !activeOrgId;
   const accessPolicyRaw = product?.custom_metadata?.access_policy as Record<string, any> | undefined;
   const allowedWallets = accessPolicyRaw?.allowed_wallets;
   const deniedWallets = accessPolicyRaw?.denied_wallets;
@@ -238,7 +355,7 @@ export default function ProductDetail() {
 
   const handleDownloadSheet = () => {
     const customMeta = product.custom_metadata || {} as any;
-    const accessPolicy = customMeta.access_policy || {};
+    const accessPolicyData = customMeta.access_policy || {};
 
     const sheet = {
       informacion_general: {
@@ -259,10 +376,10 @@ export default function ProductDetail() {
         formato: "JSON / API",
       },
       politicas_de_gobernanza: {
-        permisos: accessPolicy.permissions || [],
-        prohibiciones: accessPolicy.prohibitions || [],
-        obligaciones: accessPolicy.obligations || [],
-        terminos_url: accessPolicy.terms_url || null,
+        permisos: accessPolicyData.permissions || [],
+        prohibiciones: accessPolicyData.prohibitions || [],
+        obligaciones: accessPolicyData.obligations || [],
+        terminos_url: accessPolicyData.terms_url || null,
       },
       metricas_de_calidad: customMeta.quality_metrics || {},
     };
@@ -278,25 +395,15 @@ export default function ProductDetail() {
     toast.success("Ficha técnica descargada");
   };
 
-  // Datos mock para la muestra
-  const MOCK_SAMPLE = [
-    { id: 1, timestamp: "2024-03-10T10:00:00Z", sensor_id: "S-01", value: 45.2, status: "OK" },
-    { id: 2, timestamp: "2024-03-10T10:05:00Z", sensor_id: "S-01", value: 46.1, status: "OK" },
-    { id: 3, timestamp: "2024-03-10T10:10:00Z", sensor_id: "S-01", value: 48.5, status: "WARNING" },
-    { id: 4, timestamp: "2024-03-10T10:15:00Z", sensor_id: "S-01", value: 44.9, status: "OK" },
-    { id: 5, timestamp: "2024-03-10T10:20:00Z", sensor_id: "S-01", value: 45.5, status: "OK" }
-  ];
-
-  const sampleData = (product as any).sample_data || MOCK_SAMPLE;
+  // Sample data: use real data or show empty state
+  const sampleData = (product as any).sample_data;
+  const hasSampleData = sampleData && (Array.isArray(sampleData) ? sampleData.length > 0 : Object.keys(sampleData).length > 0);
 
   const handleAction = async () => {
     if (!user) {
       toast.error("Inicia sesión para continuar", {
         description: "Necesitas una cuenta para adquirir datasets",
-        action: {
-          label: "Ir a Login",
-          onClick: () => navigate("/auth")
-        }
+        action: { label: "Ir a Login", onClick: () => navigate("/auth") }
       });
       return;
     }
@@ -309,9 +416,7 @@ export default function ProductDetail() {
           onClick: async () => {
             try {
               await connectWallet();
-              toast.success("Wallet conectada", {
-                description: "Ahora puedes continuar con la compra"
-              });
+              toast.success("Wallet conectada", { description: "Ahora puedes continuar con la compra" });
             } catch (error) {
               toast.error("Error al conectar wallet");
             }
@@ -324,7 +429,6 @@ export default function ProductDetail() {
     navigate(`/requests/new?asset=${product.asset_id}`);
   };
 
-  // Use pre-computed accessPolicy for rendering
   const accessPolicy = accessPolicyRaw;
 
   if (isDenylistBlocked) {
@@ -370,6 +474,12 @@ export default function ProductDetail() {
               </div>
               <div>
                 <h1 className="text-3xl font-bold tracking-tight mb-2">{product.asset_name}</h1>
+                {/* Dynamic star rating */}
+                <div className="flex items-center gap-2 mb-3">
+                  <StarRating rating={Math.round(avgRating)} size={18} />
+                  <span className="text-sm font-medium text-foreground">{avgRating > 0 ? avgRating.toFixed(1) : '—'}</span>
+                  <span className="text-sm text-muted-foreground">({reviewCount} {reviewCount === 1 ? 'reseña' : 'reseñas'})</span>
+                </div>
                 <p className="text-muted-foreground leading-relaxed">
                   {product.asset_description || "Este dataset proporciona información crítica para la toma de decisiones en tiempo real."}
                 </p>
@@ -442,7 +552,10 @@ export default function ProductDetail() {
                     <Bot className="h-3 w-3" />
                     Asistente IA
                   </TabsTrigger>
-                  <TabsTrigger value="reviews" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3">Reseñas</TabsTrigger>
+                  <TabsTrigger value="reviews" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
+                    <Star className="h-3 w-3" />
+                    Reseñas
+                  </TabsTrigger>
                 </TabsList>
               </div>
 
@@ -566,24 +679,37 @@ export default function ProductDetail() {
 
               {/* Tab: Muestra */}
               <TabsContent value="sample" className="m-0 p-6">
-                <Alert className="mb-4 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
-                  <Activity className="h-4 w-4 text-yellow-600" />
-                  <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ MUESTRA DE DATOS</AlertTitle>
-                  <AlertDescription className="text-yellow-700 dark:text-yellow-300">
-                    Estos registros están anonimizados y contienen ruido estadístico añadido por seguridad. Los datos reales pueden variar en formato y contenido.
-                  </AlertDescription>
-                </Alert>
-                
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold flex items-center gap-2">
-                    <Eye className="h-5 w-5" />
-                    Data Sandbox - Vista Previa
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Explora una muestra de {sampleData.length} registros para evaluar la estructura y calidad del dataset.
-                  </p>
-                </div>
-                <ArrayDataView data={sampleData} schemaType="sample_data" />
+                {hasSampleData ? (
+                  <>
+                    <Alert className="mb-4 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
+                      <Activity className="h-4 w-4 text-yellow-600" />
+                      <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ MUESTRA DE DATOS</AlertTitle>
+                      <AlertDescription className="text-yellow-700 dark:text-yellow-300">
+                        Estos registros están anonimizados y contienen ruido estadístico añadido por seguridad. Los datos reales pueden variar en formato y contenido.
+                      </AlertDescription>
+                    </Alert>
+                    <div className="mb-4">
+                      <h3 className="text-lg font-semibold flex items-center gap-2">
+                        <Eye className="h-5 w-5" />
+                        Data Sandbox - Vista Previa
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Explora una muestra de {Array.isArray(sampleData) ? sampleData.length : 1} registros para evaluar la estructura y calidad del dataset.
+                      </p>
+                    </div>
+                    <ArrayDataView data={sampleData} schemaType="sample_data" />
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-16 text-center space-y-4">
+                    <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
+                      <Eye className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-base font-semibold">Muestra no disponible</h3>
+                    <p className="text-sm text-muted-foreground max-w-md">
+                      El proveedor no ha proporcionado una muestra de datos para este activo. Puede solicitar más información técnica antes de realizar la compra.
+                    </p>
+                  </div>
+                )}
               </TabsContent>
 
               {/* Tab: Asistente IA */}
@@ -603,16 +729,90 @@ export default function ProductDetail() {
               </TabsContent>
 
               {/* Tab: Reseñas */}
-              <TabsContent value="reviews" className="m-0 p-6">
-                <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
-                  <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
-                    <Star className="h-8 w-8 text-muted-foreground" />
+              <TabsContent value="reviews" className="m-0 p-6 space-y-6">
+                {/* Existing reviews */}
+                {reviews.length > 0 && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <MessageSquare className="h-5 w-5" />
+                      Reseñas verificadas ({reviewCount})
+                    </h3>
+                    <div className="space-y-3">
+                      {reviews.map((review) => (
+                        <div key={review.id} className="rounded-lg border p-4 space-y-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <Avatar className="h-8 w-8">
+                                <AvatarFallback className="text-xs bg-primary/10 text-primary font-bold">
+                                  {(review.reviewer_name || 'O').substring(0, 2).toUpperCase()}
+                                </AvatarFallback>
+                              </Avatar>
+                              <span className="text-sm font-medium">{review.reviewer_name}</span>
+                            </div>
+                            <span className="text-xs text-muted-foreground">
+                              {new Date(review.created_at).toLocaleDateString('es-ES')}
+                            </span>
+                          </div>
+                          <StarRating rating={review.rating} size={14} />
+                          {review.comment && (
+                            <p className="text-sm text-muted-foreground">{review.comment}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="text-lg font-semibold">Aún no hay reseñas verificadas</h3>
-                  <p className="text-sm text-muted-foreground max-w-md">
-                    Solo las organizaciones que han completado una transacción verificada mediante Smart Contract pueden publicar reseñas. Este sistema garantiza la autenticidad de cada valoración.
-                  </p>
-                </div>
+                )}
+
+                {/* Review form or access message */}
+                {hasVerifiedAccess && !hasLeftReview ? (
+                  <div className="rounded-lg border border-primary/20 bg-primary/5 p-5 space-y-4">
+                    <h4 className="text-sm font-semibold">Deja tu reseña</h4>
+                    <div className="space-y-1">
+                      <label className="text-xs text-muted-foreground">Puntuación</label>
+                      <StarRating rating={reviewRating} size={24} interactive onRate={setReviewRating} />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs text-muted-foreground">Comentario (opcional)</label>
+                      <Textarea
+                        placeholder="Describe tu experiencia con este dataset..."
+                        value={reviewComment}
+                        onChange={(e) => setReviewComment(e.target.value)}
+                        className="resize-none"
+                        rows={3}
+                      />
+                    </div>
+                    <Button
+                      size="sm"
+                      onClick={() => submitReview.mutate()}
+                      disabled={reviewRating === 0 || submitReview.isPending}
+                    >
+                      {submitReview.isPending ? "Publicando..." : "Publicar Reseña"}
+                    </Button>
+                  </div>
+                ) : hasVerifiedAccess && hasLeftReview ? (
+                  <div className="text-center py-4">
+                    <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-green-500" />
+                      Ya has publicado tu reseña para este activo.
+                    </p>
+                  </div>
+                ) : reviews.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+                    <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
+                      <Star className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-lg font-semibold">Aún no hay reseñas</h3>
+                    <p className="text-sm text-muted-foreground max-w-md">
+                      Solo las organizaciones que han adquirido este activo pueden dejar una reseña.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="text-center py-4 border-t">
+                    <p className="text-xs text-muted-foreground">
+                      Solo las organizaciones que han adquirido este activo pueden dejar una reseña.
+                    </p>
+                  </div>
+                )}
               </TabsContent>
             </Tabs>
           </Card>
@@ -647,7 +847,6 @@ export default function ProductDetail() {
                   <span className="leading-relaxed">Transacción segura vía Smart Contract y auditada en Blockchain privada.</span>
                 </div>
 
-                {/* Wallet Status Indicator for paid products */}
                 {isPaid && (
                   <div className={`p-3 rounded text-xs flex items-center gap-2 ${
                     isWeb3Connected 
@@ -665,26 +864,36 @@ export default function ProductDetail() {
                 )}
               </CardContent>
               <CardFooter className="flex flex-col gap-2">
-                <Button 
-                  size="lg" 
-                  className="w-full text-base font-semibold" 
-                  onClick={handleAction}
-                  disabled={isDemo}
-                >
-                  {isDemo ? (
-                    <>
-                      <Lock className="mr-2 h-5 w-5" /> Solicitudes no disponibles en demo
-                    </>
-                  ) : isPaid ? (
-                    <>
-                      <ShoppingCart className="mr-2 h-5 w-5" /> Comprar Ahora
-                    </>
-                  ) : (
-                    <>
-                      <FileText className="mr-2 h-5 w-5" /> Solicitar Acceso
-                    </>
-                  )}
-                </Button>
+                {hasVerifiedAccess ? (
+                  <Button 
+                    size="lg" 
+                    className="w-full text-base font-semibold" 
+                    onClick={() => navigate('/data')}
+                  >
+                    <Eye className="mr-2 h-5 w-5" /> Explorar Dataset
+                  </Button>
+                ) : (
+                  <Button 
+                    size="lg" 
+                    className="w-full text-base font-semibold" 
+                    onClick={handleAction}
+                    disabled={isDemo}
+                  >
+                    {isDemo ? (
+                      <>
+                        <Lock className="mr-2 h-5 w-5" /> Solicitudes no disponibles en demo
+                      </>
+                    ) : isPaid ? (
+                      <>
+                        <ShoppingCart className="mr-2 h-5 w-5" /> Comprar Ahora
+                      </>
+                    ) : (
+                      <>
+                        <FileText className="mr-2 h-5 w-5" /> Solicitar Acceso
+                      </>
+                    )}
+                  </Button>
+                )}
                 <Button variant="outline" className="w-full" size="lg" onClick={handleDownloadSheet}>
                   <Download className="mr-2 h-4 w-4" /> Descargar Ficha Técnica
                 </Button>
