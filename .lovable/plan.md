@@ -1,37 +1,55 @@
 
 
-## Ajustes Finales en la Vista de Detalle del Activo
+## Reestructuracion Final de AssetDetailPage con Guardia de Seguridad
 
-### Archivo unico a modificar: `src/pages/ProductDetail.tsx`
-
----
-
-### 1. Correccion Visual del Esquema (lineas 442-477)
-
-La tabla actual usa `Object.entries(product.schema_definition)` para iterar, pero la funcion de descarga usa `schemaColumns` (que extrae `schema_definition.columns` si es un array). Hay una inconsistencia.
-
-**Cambio**: Reemplazar la logica de renderizado de la tabla para que:
-- Si `schemaColumns` existe (array de objetos con `name`, `type`, `description`), iterar sobre el y mostrar cada columna con campo en fuente mono, tipo en badge y descripcion.
-- Si no existe `schemaColumns` pero hay `schema_definition` como objeto plano, usar `Object.entries` (logica actual).
-- Si no hay esquema en absoluto, mostrar un estado vacio elegante con icono `Code2`, titulo "Esquema no disponible" y subtexto, en lugar del bloque `<pre>` con JSON crudo.
+### Archivo a modificar: `src/pages/ProductDetail.tsx`
 
 ---
 
-### 2. Rediseno del Sidebar - Action Card (lineas 651-690)
+### 1. Proteccion de Acceso (Guardia de Seguridad)
 
-**Eliminar**: La lista de beneficios genericos (lineas 652-665): "Acceso Inmediato (API)", "SLA Garantizado 99.9%", "Soporte Tecnico 24/7" y el `<Separator />` que les sigue.
+Se anadira logica de seguridad al inicio del componente, despues de cargar los datos:
 
-**Mantener**: El indicador de wallet para productos de pago (lineas 670-684).
+**a) Bloqueo Demo/Sin Organizacion:**
+- Extraer `activeOrgId` e `isDemo` de `useOrganizationContext()` (ya se importa `isDemo`, falta `activeOrgId`).
+- Si `isDemo === true` o `!activeOrgId`, redirigir a `/catalog` con toast: "Detalle de activos solo disponible para organizaciones registradas."
+- Implementado con `useEffect` + `navigate` para evitar render del contenido.
 
-**Promover**: El bloque de seguridad existente (lineas 686-689) que ya tiene el icono de candado y el texto sobre Smart Contract. Convertirlo de `bg-muted/50` a un estilo de alerta suave mas destacado con `bg-blue-50 border border-blue-200` y texto en `text-blue-800`.
-
-**Resultado**: La card quedara con: Precio -> Alerta de seguridad blockchain -> Indicador wallet (si aplica) -> Botones.
+**b) Validacion de Listas Pontus-X (allowed/denied wallets):**
+- Antes de renderizar los 3 bloques, verificar `custom_metadata.access_policy`:
+  - Si `allowed_wallets` existe y es un array no vacio, y la organizacion actual (`activeOrgId`) NO esta incluida, redirigir fuera con toast de acceso denegado.
+  - Si `denied_wallets` existe y contiene `activeOrgId`, mostrar una pantalla de "Acceso Denegado" con icono de escudo en lugar del contenido normal.
 
 ---
 
-### 3. Verificacion de Privacidad en Descarga
+### 2. Reorganizacion en 3 Bloques Visuales
 
-La funcion `handleDownloadSheet` (lineas 216-256) ya esta correctamente sanitizada con los 4 bloques (`informacion_general`, `esquema_tecnico`, `politicas_de_gobernanza`, `metricas_de_calidad`). No incluye `api_url`, `api_headers`, `published_by`, wallets ni IDs internos. No requiere cambios adicionales.
+Los 3 bloques ya existen en el codigo actual y se mantienen con mejoras menores:
+
+- **Bloque 1 (Identidad)**: Card superior con Badge, Titulo, Descripcion, y "Vendido y operado por". Sin cambios estructurales, ya esta correcto.
+- **Bloque 2 (Especificaciones)**: Panel ambar con Version, Frecuencia, N. Campos (dinamico via `schemaFieldCount`), Formato. Ya esta correcto.
+- **Bloque 3 (Exploracion)**: Tabs integrados en una sola Card. Ya esta correcto.
+
+---
+
+### 3. Eliminacion del boton "Volver al Catalogo"
+
+Se eliminara el boton `<Button variant="ghost">` con texto "Volver al Catalogo" (lineas 306-308) para liberar espacio visual. La navegacion de retorno se delega al breadcrumb del navegador o la barra de navegacion principal.
+
+---
+
+### 4. Logica de Pestanas y Ficha Tecnica
+
+Sin cambios. Ya estan correctamente implementados:
+- Pestana Politicas: 3 bloques coloreados + T&C link.
+- Pestana Esquema: Usa `col.field` con fuente mono.
+- Descarga: JSON sanitizado en 4 bloques sin datos sensibles.
+
+---
+
+### 5. Sidebar de Transaccion
+
+Sin cambios estructurales. Ya incluye precio dinamico, mensaje de seguridad blockchain con candado, y botones de accion.
 
 ---
 
@@ -40,7 +58,7 @@ La funcion `handleDownloadSheet` (lineas 216-256) ya esta correctamente sanitiza
 | Aspecto | Detalle |
 |---|---|
 | Archivo modificado | `src/pages/ProductDetail.tsx` (unico) |
-| Secciones afectadas | Tabla de esquema (lineas 442-477), Sidebar benefits (lineas 651-690) |
-| Nuevas importaciones | Ninguna |
+| Nuevas importaciones | `activeOrgId` de `useOrganizationContext` |
+| Cambios principales | Guardia de seguridad (demo + wallets), eliminacion boton "Volver" |
 | Cambios en BD | Ninguno |
 
