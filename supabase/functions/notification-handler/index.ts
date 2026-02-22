@@ -13,6 +13,29 @@ interface NotificationRequest {
   eventType: "created" | "pre_approved" | "approved" | "denied" | "completed";
 }
 
+const STATUS_LABELS: Record<string, { title: (name: string) => string; message: string }> = {
+  created: {
+    title: (name) => `${name}: Solicitud enviada`,
+    message: "Tu solicitud de acceso ha sido enviada al proveedor para su aprobación.",
+  },
+  pre_approved: {
+    title: (name) => `${name}: Pre-aprobada por proveedor`,
+    message: "El proveedor ha pre-aprobado la solicitud. Pendiente de aprobación final por el poseedor de datos.",
+  },
+  approved: {
+    title: (name) => `${name}: Solicitud aprobada`,
+    message: "La solicitud de datos ha sido aprobada. Los datos están disponibles para su consulta.",
+  },
+  denied: {
+    title: (name) => `${name}: Solicitud denegada`,
+    message: "La solicitud de acceso a datos ha sido denegada.",
+  },
+  completed: {
+    title: (name) => `${name}: Transacción completada`,
+    message: "El intercambio de datos se ha completado exitosamente.",
+  },
+};
+
 const EMAIL_TEMPLATES = {
   created: {
     subject: "Nueva Solicitud de Datos - PROCUREDATA",
@@ -69,7 +92,6 @@ const EMAIL_TEMPLATES = {
       <ul>
         <li><strong>Producto:</strong> ${data.product_name}</li>
         <li><strong>Proveedor:</strong> ${data.subject_name}</li>
-        <li><strong>Estado:</strong> ${data.status}</li>
       </ul>
       <p>Puedes revisar los detalles en tu dashboard o contactar con el proveedor para más información.</p>
     `,
@@ -91,7 +113,6 @@ const EMAIL_TEMPLATES = {
 };
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -107,16 +128,13 @@ serve(async (req) => {
     if (!transactionId || !eventType) {
       return new Response(
         JSON.stringify({ error: "transactionId and eventType are required" }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
     console.log(`Processing ${eventType} notification for transaction:`, transactionId);
 
-    // Obtener datos de la transacción con información completa
+    // Fetch full transaction data
     const { data: transaction, error: txError } = await supabaseClient
       .from("data_transactions")
       .select(`
@@ -135,73 +153,108 @@ serve(async (req) => {
       console.error("Transaction fetch error:", txError);
       return new Response(
         JSON.stringify({ error: "Transaction not found" }),
-        {
-          status: 404,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Obtener email del solicitante
+    const productName = transaction.asset?.product?.name || "Dataset";
+    const link = `/requests/${transactionId}`;
+
+    // ──────────────────────────────────────────────
+    // 1. Persist in-app notifications to DB
+    // ──────────────────────────────────────────────
+    const label = STATUS_LABELS[eventType];
+    if (label) {
+      // Determine which org users to notify
+      let targetOrgIds: string[] = [];
+
+      if (eventType === "created") {
+        // Notify subject org (provider)
+        targetOrgIds = [transaction.subject_org_id];
+      } else if (eventType === "pre_approved") {
+        // Notify holder org
+        targetOrgIds = [transaction.holder_org_id];
+      } else {
+        // approved / denied / completed → notify consumer
+        targetOrgIds = [transaction.consumer_org_id];
+      }
+
+      // Get user IDs from target orgs
+      const { data: profiles } = await supabaseClient
+        .from("user_profiles")
+        .select("user_id, organization_id")
+        .in("organization_id", targetOrgIds);
+
+      if (profiles && profiles.length > 0) {
+        const notifRows = profiles.map((p: any) => ({
+          user_id: p.user_id,
+          organization_id: p.organization_id,
+          title: label.title(productName),
+          message: label.message,
+          type: eventType === "denied" ? "warning" : "info",
+          link,
+        }));
+
+        const { error: insertErr } = await supabaseClient
+          .from("notifications")
+          .insert(notifRows);
+
+        if (insertErr) {
+          console.error("Error persisting in-app notifications:", insertErr);
+        } else {
+          console.log(`Persisted ${notifRows.length} in-app notifications`);
+        }
+      }
+    }
+
+    // ──────────────────────────────────────────────
+    // 2. Send emails via Resend
+    // ──────────────────────────────────────────────
     const { data: requesterData } = await supabaseClient.auth.admin.getUserById(
       transaction.requested_by
     );
     const requesterEmail = requesterData?.user?.email;
 
-    // Determinar destinatarios según el evento
     const recipients: string[] = [];
-    
+
     if (eventType === "created") {
-      // Notificar al Subject - obtener usuarios de esa organización
       const { data: subjectProfiles } = await supabaseClient
         .from("user_profiles")
         .select("user_id")
         .eq("organization_id", transaction.subject_org_id);
-      
-      if (subjectProfiles && subjectProfiles.length > 0) {
+
+      if (subjectProfiles) {
         for (const profile of subjectProfiles) {
           const { data: userData } = await supabaseClient.auth.admin.getUserById(profile.user_id);
-          if (userData?.user?.email) {
-            recipients.push(userData.user.email);
-          }
+          if (userData?.user?.email) recipients.push(userData.user.email);
         }
       }
     } else if (eventType === "pre_approved") {
-      // Notificar al Holder
       const { data: holderProfiles } = await supabaseClient
         .from("user_profiles")
         .select("user_id")
         .eq("organization_id", transaction.holder_org_id);
-      
-      if (holderProfiles && holderProfiles.length > 0) {
+
+      if (holderProfiles) {
         for (const profile of holderProfiles) {
           const { data: userData } = await supabaseClient.auth.admin.getUserById(profile.user_id);
-          if (userData?.user?.email) {
-            recipients.push(userData.user.email);
-          }
+          if (userData?.user?.email) recipients.push(userData.user.email);
         }
       }
-    } else if (eventType === "approved" || eventType === "denied" || eventType === "completed") {
-      // Notificar al Consumer (solicitante)
-      if (requesterEmail) {
-        recipients.push(requesterEmail);
-      }
+    } else if (requesterEmail) {
+      recipients.push(requesterEmail);
     }
 
     if (recipients.length === 0) {
-      console.warn("No recipients found for notification");
+      console.warn("No email recipients found");
       return new Response(
-        JSON.stringify({ success: true, message: "No recipients found" }),
-        {
-          status: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        JSON.stringify({ success: true, message: "Notifications persisted, no email recipients" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Preparar datos para el template
     const templateData = {
-      product_name: transaction.asset?.product?.name || "N/A",
+      product_name: productName,
       consumer_name: transaction.consumer_org?.name || "N/A",
       subject_name: transaction.subject_org?.name || "N/A",
       holder_name: transaction.holder_org?.name || "N/A",
@@ -212,16 +265,13 @@ serve(async (req) => {
     };
 
     const template = EMAIL_TEMPLATES[eventType];
-    
-    console.log(`Sending ${eventType} notification to:`, recipients);
 
-    // Enviar emails usando Resend API directamente
     const emailPromises = recipients.map((email) =>
       fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${RESEND_API_KEY}`,
+          Authorization: `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
           from: "PROCUREDATA <onboarding@resend.dev>",
@@ -229,15 +279,14 @@ serve(async (req) => {
           subject: template.subject,
           html: template.getBody(templateData),
         }),
-      }).then(res => res.json())
+      }).then((res) => res.json())
     );
 
     const results = await Promise.allSettled(emailPromises);
-    
     const successCount = results.filter((r) => r.status === "fulfilled").length;
     const failedCount = results.filter((r) => r.status === "rejected").length;
 
-    console.log(`Notification results: ${successCount} sent, ${failedCount} failed`);
+    console.log(`Email results: ${successCount} sent, ${failedCount} failed`);
 
     return new Response(
       JSON.stringify({
@@ -247,22 +296,13 @@ serve(async (req) => {
         sent: successCount,
         failed: failedCount,
       }),
-      {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error: any) {
     console.error("Error in notification-handler:", error);
     return new Response(
-      JSON.stringify({ 
-        error: error.message || "Internal server error",
-        details: error.toString() 
-      }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      JSON.stringify({ error: error.message || "Internal server error" }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
