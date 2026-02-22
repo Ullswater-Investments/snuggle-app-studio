@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { 
   ArrowLeft, 
   ShieldCheck, 
@@ -98,6 +99,7 @@ export default function ProductDetail() {
   const queryClient = useQueryClient();
   const { isWeb3Connected, connectWallet, user } = useAuth();
   const { isDemo, activeOrgId } = useOrganizationContext();
+  const { t, i18n } = useTranslation('catalogDetails');
 
   // Review form state
   const [reviewRating, setReviewRating] = useState(0);
@@ -255,7 +257,6 @@ export default function ProductDetail() {
   // === MUTATION: Submit Review ===
   const submitReview = useMutation({
     mutationFn: async () => {
-      // Get a completed transaction for this asset by this org
       const { data: tx } = await supabase
         .from('data_transactions')
         .select('id, holder_org_id')
@@ -280,13 +281,13 @@ export default function ProductDetail() {
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success("Reseña publicada correctamente");
+      toast.success(t('common.assetDetail.toastReviewSuccess'));
       setReviewRating(0);
       setReviewComment("");
       queryClient.invalidateQueries({ queryKey: ['asset-reviews', id] });
     },
     onError: () => {
-      toast.error("Error al publicar la reseña");
+      toast.error(t('common.assetDetail.toastReviewError'));
     },
   });
 
@@ -300,20 +301,20 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (!isLoading && shouldBlockAccess) {
-      toast.warning("Detalle de activos solo disponible para organizaciones registradas.");
+      toast.warning(t('common.assetDetail.toastDemoOnly'));
       navigate("/catalog", { replace: true });
     }
-  }, [isLoading, shouldBlockAccess, navigate]);
+  }, [isLoading, shouldBlockAccess, navigate, t]);
 
   useEffect(() => {
     if (!isLoading && product && isAllowlistBlocked) {
-      toast.error("Acceso denegado: tu organización no tiene permisos para ver este activo.");
+      toast.error(t('common.assetDetail.toastAccessDenied'));
       navigate("/catalog", { replace: true });
     }
-  }, [isLoading, product, isAllowlistBlocked, navigate]);
+  }, [isLoading, product, isAllowlistBlocked, navigate, t]);
 
   if (isLoading) return <ProductSkeleton />;
-  if (!product) return <div className="container py-20 text-center">Producto no encontrado</div>;
+  if (!product) return <div className="container py-20 text-center">{t('common.assetDetail.notFound')}</div>;
   if (shouldBlockAccess) return <ProductSkeleton />;
   if (isAllowlistBlocked) return <ProductSkeleton />;
 
@@ -322,18 +323,18 @@ export default function ProductDetail() {
     return (
       <div className="container py-8 fade-in min-h-screen bg-muted/10">
         <Button variant="ghost" className="mb-6 pl-0 hover:bg-transparent hover:underline" onClick={() => navigate(-1)}>
-          <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+          <ArrowLeft className="mr-2 h-4 w-4" /> {t('common.assetDetail.back')}
         </Button>
         <div className="flex flex-col items-center justify-center py-20 space-y-6">
           <div className="h-20 w-20 rounded-full bg-secondary flex items-center justify-center">
             <ShieldCheck className="h-10 w-10 text-primary" />
           </div>
-          <h1 className="text-2xl font-bold text-center">Activo en proceso de validación técnica</h1>
+          <h1 className="text-2xl font-bold text-center">{t('common.assetDetail.pendingValidation')}</h1>
           <p className="text-muted-foreground text-center max-w-md">
-            Un administrador del ecosistema está verificando la calidad y conectividad de este activo. Se le notificará una vez esté disponible.
+            {t('common.assetDetail.pendingValidationDesc')}
           </p>
           <Badge variant="secondary" className="text-sm px-4 py-1">
-            <Clock className="h-4 w-4 mr-2" /> Pendiente de revisión
+            <Clock className="h-4 w-4 mr-2" /> {t('common.assetDetail.pendingReview')}
           </Badge>
         </div>
       </div>
@@ -393,7 +394,7 @@ export default function ProductDetail() {
     a.download = `${cleanName}_Ficha_Tecnica.json`;
     a.click();
     URL.revokeObjectURL(url);
-    toast.success("Ficha técnica descargada");
+    toast.success(t('common.assetDetail.toastSheetDownloaded'));
   };
 
   // Sample data: use real data or show empty state
@@ -402,24 +403,24 @@ export default function ProductDetail() {
 
   const handleAction = async () => {
     if (!user) {
-      toast.error("Inicia sesión para continuar", {
-        description: "Necesitas una cuenta para adquirir datasets",
-        action: { label: "Ir a Login", onClick: () => navigate("/auth") }
+      toast.error(t('common.assetDetail.toastLoginRequired'), {
+        description: t('common.assetDetail.toastLoginDesc'),
+        action: { label: t('common.assetDetail.toastGoToLogin'), onClick: () => navigate("/auth") }
       });
       return;
     }
 
     if (isPaid && !isWeb3Connected) {
-      toast.error("Conecta tu wallet para comprar", {
-        description: "Los productos de pago requieren una wallet Web3 para completar la transacción con EUROe",
+      toast.error(t('common.assetDetail.toastConnectWallet'), {
+        description: t('common.assetDetail.toastConnectWalletDesc'),
         action: {
-          label: "Conectar Wallet",
+          label: t('common.assetDetail.toastConnectWalletBtn'),
           onClick: async () => {
             try {
               await connectWallet();
-              toast.success("Wallet conectada", { description: "Ahora puedes continuar con la compra" });
+              toast.success(t('common.assetDetail.toastWalletConnected'), { description: t('common.assetDetail.toastWalletConnectedDesc') });
             } catch (error) {
-              toast.error("Error al conectar wallet");
+              toast.error(t('common.assetDetail.toastWalletError'));
             }
           }
         }
@@ -439,12 +440,12 @@ export default function ProductDetail() {
           <div className="h-20 w-20 rounded-full bg-destructive/10 flex items-center justify-center">
             <Shield className="h-10 w-10 text-destructive" />
           </div>
-          <h1 className="text-2xl font-bold text-center">🛡️ Acceso Denegado</h1>
+          <h1 className="text-2xl font-bold text-center">🛡️ {t('common.assetDetail.accessDenied')}</h1>
           <p className="text-muted-foreground text-center max-w-md">
-            Tu organización se encuentra en la lista de exclusión de este activo. Si consideras que es un error, contacta al proveedor.
+            {t('common.assetDetail.accessDeniedDesc')}
           </p>
           <Button variant="outline" onClick={() => navigate("/catalog")}>
-            Volver al Catálogo
+            {t('common.assetDetail.backToCatalog')}
           </Button>
         </div>
       </div>
@@ -469,7 +470,7 @@ export default function ProductDetail() {
                 )}
                 {product.has_green_badge && (
                   <Badge variant="outline" className="border-green-600 text-green-700 bg-green-50 gap-1">
-                    <Leaf className="h-3 w-3" /> Sustainable Data
+                    <Leaf className="h-3 w-3" /> {t('common.assetDetail.sustainableData')}
                   </Badge>
                 )}
               </div>
@@ -478,11 +479,11 @@ export default function ProductDetail() {
                 {/* Dynamic star rating */}
                 <div className="flex items-center gap-2 mb-3">
                   <StarRating rating={Math.round(avgRating)} size={18} />
-                  <span className="text-sm font-medium text-foreground">{avgRating > 0 ? avgRating.toFixed(1) : '—'}</span>
-                  <span className="text-sm text-muted-foreground">({reviewCount} {reviewCount === 1 ? 'reseña' : 'reseñas'})</span>
+                  <span className="text-sm font-medium text-foreground">{avgRating > 0 ? avgRating.toFixed(1) : t('common.assetDetail.noRating')}</span>
+                  <span className="text-sm text-muted-foreground">({reviewCount} {reviewCount === 1 ? t('common.assetDetail.review') : t('common.assetDetail.reviews')})</span>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  {product.asset_description || "Este dataset proporciona información crítica para la toma de decisiones en tiempo real."}
+                  {product.asset_description || t('common.assetDetail.defaultDescription')}
                 </p>
               </div>
               <Separator />
@@ -493,11 +494,11 @@ export default function ProductDetail() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Vendido y operado por</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t('common.assetDetail.soldAndOperatedBy')}</p>
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-lg">{product.provider_name}</span>
                     {product.kyb_verified && (
-                      <span title="Verificado KYB">
+                      <span title={t('common.assetDetail.verifiedKYB')}>
                         <ShieldCheck className="h-4 w-4 text-blue-500" />
                       </span>
                     )}
@@ -513,22 +514,22 @@ export default function ProductDetail() {
               <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-amber-200 dark:divide-amber-900">
                 <div className="p-4 flex flex-col items-center text-center">
                   <Layers className="h-5 w-5 text-amber-600 mb-1" />
-                  <span className="text-xs text-muted-foreground uppercase">Versión</span>
+                  <span className="text-xs text-muted-foreground uppercase">{t('common.assetDetail.metrics.version')}</span>
                   <span className="text-lg font-bold">{product.version || '1.0'}</span>
                 </div>
                 <div className="p-4 flex flex-col items-center text-center">
                   <RefreshCw className="h-5 w-5 text-amber-600 mb-1" />
-                  <span className="text-xs text-muted-foreground uppercase">Frecuencia</span>
-                  <span className="text-lg font-bold">Tiempo Real</span>
+                  <span className="text-xs text-muted-foreground uppercase">{t('common.assetDetail.metrics.frequency')}</span>
+                  <span className="text-lg font-bold">{t('common.assetDetail.metrics.realTime')}</span>
                 </div>
                 <div className="p-4 flex flex-col items-center text-center">
                   <Hash className="h-5 w-5 text-amber-600 mb-1" />
-                  <span className="text-xs text-muted-foreground uppercase">N.º Campos</span>
+                  <span className="text-xs text-muted-foreground uppercase">{t('common.assetDetail.metrics.fields')}</span>
                   <span className="text-lg font-bold">{schemaFieldCount}</span>
                 </div>
                 <div className="p-4 flex flex-col items-center text-center">
                   <Code2 className="h-5 w-5 text-amber-600 mb-1" />
-                  <span className="text-xs text-muted-foreground uppercase">Formato</span>
+                  <span className="text-xs text-muted-foreground uppercase">{t('common.assetDetail.metrics.format')}</span>
                   <span className="text-lg font-bold">JSON / API</span>
                 </div>
               </div>
@@ -540,22 +541,22 @@ export default function ProductDetail() {
             <Tabs defaultValue="schema" className="w-full">
               <div className="border-b px-6 pt-4">
                 <TabsList className="grid w-full grid-cols-5 bg-transparent h-auto p-0 gap-0">
-                  <TabsTrigger value="schema" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3">Esquema</TabsTrigger>
+                  <TabsTrigger value="schema" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3">{t('common.assetDetail.tabs.schema')}</TabsTrigger>
                   <TabsTrigger value="policies" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
                     <Shield className="h-3 w-3" />
-                    Políticas
+                    {t('common.assetDetail.tabs.policies')}
                   </TabsTrigger>
                   <TabsTrigger value="sample" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
                     <Eye className="h-3 w-3" />
-                    Muestra
+                    {t('common.assetDetail.tabs.sample')}
                   </TabsTrigger>
                   <TabsTrigger value="chat" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
                     <Bot className="h-3 w-3" />
-                    Asistente IA
+                    {t('common.assetDetail.tabs.aiAssistant')}
                   </TabsTrigger>
                   <TabsTrigger value="reviews" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none pb-3 gap-1">
                     <Star className="h-3 w-3" />
-                    Reseñas
+                    {t('common.assetDetail.tabs.reviews')}
                   </TabsTrigger>
                 </TabsList>
               </div>
@@ -565,19 +566,19 @@ export default function ProductDetail() {
                 <div className="mb-4">
                   <h3 className="text-lg font-semibold flex items-center gap-2">
                     <Code2 className="h-5 w-5" />
-                    Definición del Esquema
+                    {t('common.assetDetail.schemaDefinition')}
                   </h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Estructura de datos del producto ({schemaFieldCount} campos)
+                    {t('common.assetDetail.dataStructure', { count: schemaFieldCount })}
                   </p>
                 </div>
                 {schemaColumns.length > 0 ? (
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Campo</TableHead>
-                        <TableHead>Tipo</TableHead>
-                        <TableHead>Descripción</TableHead>
+                        <TableHead>{t('common.assetDetail.schemaField')}</TableHead>
+                        <TableHead>{t('common.assetDetail.schemaType')}</TableHead>
+                        <TableHead>{t('common.assetDetail.schemaDescription')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -601,9 +602,9 @@ export default function ProductDetail() {
                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted/30">
                       <Code2 className="h-8 w-8 text-muted-foreground" />
                     </div>
-                    <h3 className="text-base font-semibold mb-1">Esquema no disponible</h3>
+                    <h3 className="text-base font-semibold mb-1">{t('common.assetDetail.schemaNotAvailable')}</h3>
                     <p className="text-sm text-muted-foreground max-w-sm">
-                      Este activo no tiene un esquema técnico definido.
+                      {t('common.assetDetail.schemaNotAvailableDesc')}
                     </p>
                   </div>
                 )}
@@ -615,7 +616,7 @@ export default function ProductDetail() {
                 <div className="rounded-lg border border-green-200 dark:border-green-900 p-4">
                   <h4 className="flex items-center gap-2 text-green-700 dark:text-green-400 text-base font-semibold mb-3">
                     <CheckCircle2 className="h-5 w-5" />
-                    Permisos
+                    {t('common.assetDetail.permissions')}
                   </h4>
                   <ul className="space-y-2">
                     {(accessPolicy?.permissions as string[] || ["Uso comercial permitido", "Análisis interno"]).map((item: string, i: number) => (
@@ -631,7 +632,7 @@ export default function ProductDetail() {
                 <div className="rounded-lg border border-red-200 dark:border-red-900 p-4">
                   <h4 className="flex items-center gap-2 text-red-700 dark:text-red-400 text-base font-semibold mb-3">
                     <XCircle className="h-5 w-5" />
-                    Prohibiciones
+                    {t('common.assetDetail.prohibitions')}
                   </h4>
                   <ul className="space-y-2">
                     {(accessPolicy?.prohibitions as string[] || ["Redistribución a terceros", "Uso para training IA sin consentimiento"]).map((item: string, i: number) => (
@@ -647,7 +648,7 @@ export default function ProductDetail() {
                 <div className="rounded-lg border border-blue-200 dark:border-blue-900 p-4">
                   <h4 className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-base font-semibold mb-3">
                     <AlertCircle className="h-5 w-5" />
-                    Obligaciones
+                    {t('common.assetDetail.obligations')}
                   </h4>
                   <ul className="space-y-2">
                     {(accessPolicy?.obligations as string[] || ["Conformidad RGPD", "Notificación de brechas en 72h"]).map((item: string, i: number) => (
@@ -664,14 +665,14 @@ export default function ProductDetail() {
                   <div className="rounded-lg border border-muted p-4 flex items-center gap-3">
                     <ExternalLink className="h-5 w-5 text-muted-foreground shrink-0" />
                     <div>
-                      <p className="text-sm font-medium">Términos y Condiciones</p>
+                      <p className="text-sm font-medium">{t('common.assetDetail.termsAndConditions')}</p>
                       <a 
                         href={String(accessPolicy.terms_url)} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-sm text-primary hover:underline"
                       >
-                        Consultar documento completo
+                        {t('common.assetDetail.viewFullDocument')}
                       </a>
                     </div>
                   </div>
@@ -684,18 +685,18 @@ export default function ProductDetail() {
                   <>
                     <Alert className="mb-4 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
                       <Activity className="h-4 w-4 text-yellow-600" />
-                      <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ MUESTRA DE DATOS</AlertTitle>
+                      <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ {t('common.assetDetail.sampleWarningTitle')}</AlertTitle>
                       <AlertDescription className="text-yellow-700 dark:text-yellow-300">
-                        Estos registros están anonimizados y contienen ruido estadístico añadido por seguridad. Los datos reales pueden variar en formato y contenido.
+                        {t('common.assetDetail.sampleWarningDesc')}
                       </AlertDescription>
                     </Alert>
                     <div className="mb-4">
                       <h3 className="text-lg font-semibold flex items-center gap-2">
                         <Eye className="h-5 w-5" />
-                        Data Sandbox - Vista Previa
+                        {t('common.assetDetail.dataSandbox')}
                       </h3>
                       <p className="text-sm text-muted-foreground mt-1">
-                        Explora una muestra de {Array.isArray(sampleData) ? sampleData.length : 1} registros para evaluar la estructura y calidad del dataset.
+                        {t('common.assetDetail.sampleExplore', { count: Array.isArray(sampleData) ? sampleData.length : 1 })}
                       </p>
                     </div>
                     <ArrayDataView data={sampleData} schemaType="sample_data" />
@@ -705,9 +706,9 @@ export default function ProductDetail() {
                     <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
                       <Eye className="h-8 w-8 text-muted-foreground" />
                     </div>
-                    <h3 className="text-base font-semibold">Muestra no disponible</h3>
+                    <h3 className="text-base font-semibold">{t('common.assetDetail.sampleNotAvailable')}</h3>
                     <p className="text-sm text-muted-foreground max-w-md">
-                      El proveedor no ha proporcionado una muestra de datos para este activo. Puede solicitar más información técnica antes de realizar la compra.
+                      {t('common.assetDetail.sampleNotAvailableDesc')}
                     </p>
                   </div>
                 )}
@@ -725,7 +726,7 @@ export default function ProductDetail() {
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold flex items-center gap-2">
                       <MessageSquare className="h-5 w-5" />
-                      Reseñas verificadas ({reviewCount})
+                      {t('common.assetDetail.verifiedReviews', { count: reviewCount })}
                     </h3>
                     <div className="space-y-3">
                       {reviews.map((review) => (
@@ -740,7 +741,7 @@ export default function ProductDetail() {
                               <span className="text-sm font-medium">{review.reviewer_name}</span>
                             </div>
                             <span className="text-xs text-muted-foreground">
-                              {new Date(review.created_at).toLocaleDateString('es-ES')}
+                              {new Date(review.created_at).toLocaleDateString(i18n.language)}
                             </span>
                           </div>
                           <StarRating rating={review.rating} size={14} />
@@ -756,15 +757,15 @@ export default function ProductDetail() {
                 {/* Review form or access message */}
                 {hasVerifiedAccess && !hasLeftReview ? (
                   <div className="rounded-lg border border-primary/20 bg-primary/5 p-5 space-y-4">
-                    <h4 className="text-sm font-semibold">Deja tu reseña</h4>
+                    <h4 className="text-sm font-semibold">{t('common.assetDetail.leaveReview')}</h4>
                     <div className="space-y-1">
-                      <label className="text-xs text-muted-foreground">Puntuación</label>
+                      <label className="text-xs text-muted-foreground">{t('common.assetDetail.ratingLabel')}</label>
                       <StarRating rating={reviewRating} size={24} interactive onRate={setReviewRating} />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs text-muted-foreground">Comentario (opcional)</label>
+                      <label className="text-xs text-muted-foreground">{t('common.assetDetail.commentLabel')}</label>
                       <Textarea
-                        placeholder="Describe tu experiencia con este dataset..."
+                        placeholder={t('common.assetDetail.commentPlaceholder')}
                         value={reviewComment}
                         onChange={(e) => setReviewComment(e.target.value)}
                         className="resize-none"
@@ -776,14 +777,14 @@ export default function ProductDetail() {
                       onClick={() => submitReview.mutate()}
                       disabled={reviewRating === 0 || submitReview.isPending}
                     >
-                      {submitReview.isPending ? "Publicando..." : "Publicar Reseña"}
+                      {submitReview.isPending ? t('common.assetDetail.publishing') : t('common.assetDetail.publishReview')}
                     </Button>
                   </div>
                 ) : hasVerifiedAccess && hasLeftReview ? (
                   <div className="text-center py-4">
                     <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-500" />
-                      Ya has publicado tu reseña para este activo.
+                      {t('common.assetDetail.alreadyReviewed')}
                     </p>
                   </div>
                 ) : reviews.length === 0 ? (
@@ -791,15 +792,15 @@ export default function ProductDetail() {
                     <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
                       <Star className="h-8 w-8 text-muted-foreground" />
                     </div>
-                    <h3 className="text-lg font-semibold">Aún no hay reseñas</h3>
+                    <h3 className="text-lg font-semibold">{t('common.assetDetail.noReviewsYet')}</h3>
                     <p className="text-sm text-muted-foreground max-w-md">
-                      Solo las organizaciones que han adquirido este activo pueden dejar una reseña.
+                      {t('common.assetDetail.onlyVerifiedOrgs')}
                     </p>
                   </div>
                 ) : (
                   <div className="text-center py-4 border-t">
                     <p className="text-xs text-muted-foreground">
-                      Solo las organizaciones que han adquirido este activo pueden dejar una reseña.
+                      {t('common.assetDetail.onlyVerifiedOrgs')}
                     </p>
                   </div>
                 )}
@@ -813,28 +814,28 @@ export default function ProductDetail() {
           <div className="sticky top-24 space-y-4">
             <Card className="border-t-4 border-t-primary shadow-lg">
               <CardHeader className="pb-4">
-                <CardDescription>Licencia de uso comercial</CardDescription>
+                <CardDescription>{t('common.assetDetail.commercialLicense')}</CardDescription>
                 <div className="flex items-baseline gap-1 mt-2">
                   {isPaid ? (
                     <>
                       <span className="text-3xl font-bold">
-                        {new Intl.NumberFormat('es-ES', { style: 'currency', currency: product.currency }).format(product.price)}
+                        {new Intl.NumberFormat(i18n.language, { style: 'currency', currency: product.currency }).format(product.price)}
                       </span>
                       {product.pricing_model === 'subscription' && (
                         <span className="text-sm text-muted-foreground font-medium">
-                          / {product.billing_period === 'monthly' ? 'mes' : 'año'}
+                          / {product.billing_period === 'monthly' ? t('common.assetDetail.perMonth') : t('common.assetDetail.perYear')}
                         </span>
                       )}
                     </>
                   ) : (
-                    <span className="text-3xl font-bold text-green-600">Gratis</span>
+                    <span className="text-3xl font-bold text-green-600">{t('common.assetDetail.free')}</span>
                   )}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4 pb-4">
                 <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 text-blue-800 dark:text-blue-300 text-xs flex items-start gap-2">
                   <Lock className="h-4 w-4 shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">Transacción segura vía Smart Contract y auditada en Blockchain privada.</span>
+                  <span className="leading-relaxed">{t('common.assetDetail.secureTransaction')}</span>
                 </div>
 
                 {isPaid && (
@@ -846,8 +847,8 @@ export default function ProductDetail() {
                     <Wallet className="h-4 w-4 shrink-0" />
                     <span>
                       {isWeb3Connected 
-                        ? "Wallet conectada - Listo para pagar con EUROe"
-                        : "Conecta tu wallet para pagar con EUROe"
+                        ? t('common.assetDetail.walletConnected')
+                        : t('common.assetDetail.connectWallet')
                       }
                     </span>
                   </div>
@@ -860,7 +861,7 @@ export default function ProductDetail() {
                     className="w-full text-base font-semibold" 
                     onClick={() => navigate('/data')}
                   >
-                    <Eye className="mr-2 h-5 w-5" /> Explorar Dataset
+                    <Eye className="mr-2 h-5 w-5" /> {t('common.assetDetail.exploreDataset')}
                   </Button>
                 ) : (
                   <Button 
@@ -871,21 +872,21 @@ export default function ProductDetail() {
                   >
                     {isDemo ? (
                       <>
-                        <Lock className="mr-2 h-5 w-5" /> Solicitudes no disponibles en demo
+                        <Lock className="mr-2 h-5 w-5" /> {t('common.assetDetail.requestsNotAvailable')}
                       </>
                     ) : isPaid ? (
                       <>
-                        <ShoppingCart className="mr-2 h-5 w-5" /> Comprar Ahora
+                        <ShoppingCart className="mr-2 h-5 w-5" /> {t('common.assetDetail.buyNow')}
                       </>
                     ) : (
                       <>
-                        <FileText className="mr-2 h-5 w-5" /> Solicitar Acceso
+                        <FileText className="mr-2 h-5 w-5" /> {t('common.assetDetail.requestAccess')}
                       </>
                     )}
                   </Button>
                 )}
                 <Button variant="outline" className="w-full" size="lg" onClick={handleDownloadSheet}>
-                  <Download className="mr-2 h-4 w-4" /> Descargar Ficha Técnica
+                  <Download className="mr-2 h-4 w-4" /> {t('common.assetDetail.downloadTechSheet')}
                 </Button>
               </CardFooter>
             </Card>
@@ -896,17 +897,17 @@ export default function ProductDetail() {
                 <Table>
                   <TableBody>
                     <TableRow>
-                      <TableCell className="font-medium text-muted-foreground text-sm py-2">Proveedor</TableCell>
+                      <TableCell className="font-medium text-muted-foreground text-sm py-2">{t('common.assetDetail.provider')}</TableCell>
                       <TableCell className="text-sm py-2 text-right font-medium">{product.provider_name}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className="font-medium text-muted-foreground text-sm py-2">Versión</TableCell>
+                      <TableCell className="font-medium text-muted-foreground text-sm py-2">{t('common.assetDetail.version')}</TableCell>
                       <TableCell className="text-sm py-2 text-right font-medium">{product.version || '1.0'}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className="font-medium text-muted-foreground text-sm py-2">Estado</TableCell>
+                      <TableCell className="font-medium text-muted-foreground text-sm py-2">{t('common.assetDetail.status')}</TableCell>
                       <TableCell className="text-sm py-2 text-right">
-                        <Badge variant="secondary" className="text-xs">{product.status || 'Disponible'}</Badge>
+                        <Badge variant="secondary" className="text-xs">{product.status || t('common.assetDetail.available')}</Badge>
                       </TableCell>
                     </TableRow>
                   </TableBody>
@@ -917,7 +918,7 @@ export default function ProductDetail() {
             {/* Support Box */}
             <div className="text-center">
               <Button variant="link" className="text-muted-foreground text-xs">
-                ¿Necesitas una licencia personalizada? Contactar ventas
+                {t('common.assetDetail.customLicense')}
               </Button>
             </div>
           </div>
