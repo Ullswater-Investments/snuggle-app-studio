@@ -22,9 +22,12 @@ interface AccessHistoryTableProps {
 const actionLabels: Record<string, { label: string; icon: typeof Download }> = {
   download_file: { label: "Descarga de activo", icon: Download },
   download: { label: "Descarga de activo", icon: Download },
-  gateway_download: { label: "Descarga de activo", icon: Download },
+  gateway_download: { label: "Descarga de datos (Access Controller)", icon: Download },
+  download_gateway: { label: "Descarga de datos (Access Controller)", icon: Download },
   api_access_attempt: { label: "Acceso vía API", icon: Globe },
+  api_access: { label: "Acceso vía API", icon: Globe },
   view_details: { label: "Consulta de ficha técnica", icon: Activity },
+  view_data: { label: "Visualización de activo", icon: Activity },
 };
 
 export const AccessHistoryTable = ({

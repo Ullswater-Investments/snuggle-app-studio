@@ -47,3 +47,6 @@ verify_jwt = false
 
 [functions.asset-detail-agent]
 verify_jwt = false
+
+[functions.gateway-download]
+verify_jwt = false
