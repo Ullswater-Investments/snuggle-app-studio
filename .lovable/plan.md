@@ -1,76 +1,51 @@
 
 
-## Correcciones de Descarga Gateway y Etiquetas en DataView
+## Descarga directa desde la API del activo
 
-### Problema Principal
+### Problema actual
 
-La Edge Function `gateway-download` **no existe** en el proyecto. El boton intenta invocarla pero falla porque nunca fue creada. Ademas, la tabla de historial muestra textos tecnicos sin traducir.
+La Edge Function `gateway-download` busca datos en tablas internas (`data_payloads`, `supplier_data`). El usuario quiere que haga un GET a la `api_url` almacenada en `data_assets.custom_metadata.api_url` y devuelva ese contenido directamente.
 
----
+### Cambio principal: `supabase/functions/gateway-download/index.ts`
 
-### Cambios a Realizar
+Reescribir la logica principal para:
 
-#### 1. Crear Edge Function `gateway-download`
-
-**Archivo nuevo:** `supabase/functions/gateway-download/index.ts`
-
-Dado que no hay un gateway externo conectado actualmente, la funcion hara lo siguiente:
-- Recibir `transactionId` y `consumerOrgId`
-- Verificar que la transaccion exista y este en estado `completed`
-- Verificar que el `consumerOrgId` coincida con el consumer de la transaccion
-- Obtener los datos del `data_payloads` y/o `supplier_data` asociados
-- Devolver el contenido como JSON
-
-La funcion usara `SUPABASE_SERVICE_ROLE_KEY` para acceder a los datos sin restricciones de RLS, pero validara manualmente los permisos.
-
-#### 2. Registrar la funcion en `supabase/config.toml`
-
-Anadir entrada `[functions.gateway-download]` con `verify_jwt = false` (la validacion se hara en codigo).
-
-#### 3. Traduccion de etiquetas en `AccessHistoryTable.tsx`
-
-Anadir `download_gateway` al mapa `actionLabels`:
-
-```
-download_gateway -> "Descarga de datos (Access Controller)"
-view_data -> "Visualizacion de activo"
-api_access -> "Acceso via API"
-```
-
-#### 4. Mejora de feedback de errores en `DataView.tsx`
-
-Ajustar el bloque `catch` de `handleGatewayDownload` para detectar el error especifico "Failed to send a request to the Edge Function" y mostrar un mensaje profesional:
-
-```
-"No se pudo conectar con el servidor del proveedor. Intentelo de nuevo en unos minutos."
-```
-
----
-
-### Detalle Tecnico de la Edge Function
+1. Validar `transactionId` y `consumerOrgId` (sin cambios)
+2. Verificar que la transaccion existe, esta `completed`, y el consumer coincide (sin cambios)
+3. **Nuevo**: Extraer `api_url` y `api_headers` del `custom_metadata` del activo asociado
+4. **Nuevo**: Hacer `fetch(api_url, { headers: api_headers })` para obtener los datos reales
+5. Devolver el contenido obtenido como JSON al frontend
+6. Si el fetch falla (timeout, 502, 404, etc.), devolver un error con status 502 y mensaje descriptivo
 
 ```text
-POST /gateway-download
-Body: { transactionId, consumerOrgId, format? }
+Flujo simplificado:
 
-Flujo:
-1. Validar CORS
-2. Leer transactionId y consumerOrgId del body
-3. Consultar data_transactions con service role
-4. Verificar status === "completed" y consumer_org_id === consumerOrgId
-5. Consultar data_payloads por transaction_id
-6. Si no hay payload, consultar supplier_data
-7. Devolver JSON con los datos encontrados
-8. Si no hay datos, devolver error 404
+transactionId + consumerOrgId
+        |
+        v
+Verificar transaccion (status=completed, consumer=ok)
+        |
+        v
+Obtener api_url de data_assets.custom_metadata
+        |
+        v
+fetch(api_url) --> respuesta
+        |
+        v
+Devolver contenido al frontend
 ```
 
----
+Si `api_url` no existe en el activo, devolver error 400 indicando que el activo no tiene una fuente de datos configurada.
 
-### Archivos Modificados/Creados
+Si el fetch a la API externa falla, devolver error 502 con mensaje claro para que el frontend muestre el toast apropiado y se registre en los logs.
+
+### Sin cambios en el frontend
+
+`DataView.tsx` y `AccessHistoryTable.tsx` no necesitan modificaciones. El frontend ya maneja errores y descarga el JSON que reciba.
+
+### Archivos a modificar
 
 | Archivo | Accion |
 |---|---|
-| `supabase/functions/gateway-download/index.ts` | Crear |
-| `src/components/AccessHistoryTable.tsx` | Editar (anadir etiqueta `download_gateway`) |
-| `src/pages/DataView.tsx` | Editar (mejorar error handling) |
+| `supabase/functions/gateway-download/index.ts` | Reescribir logica para fetch directo a API |
 
