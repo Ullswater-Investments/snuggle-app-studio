@@ -30,6 +30,10 @@ import {
   Blocks,
   Sparkles,
   ExternalLink,
+  Rocket,
+  ShieldCheck,
+  ShieldX,
+  Zap,
 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { formatDistanceToNow, isToday, isYesterday, subDays } from "date-fns";
@@ -192,16 +196,40 @@ const Notifications = () => {
   const getNotificationConfig = (type: string, title: string) => {
     const titleLower = title.toLowerCase();
     
+    // Asset validated / approved (🚀 rocket in title)
+    if (titleLower.includes("🚀") || titleLower.includes("validado")) {
+      return { icon: Rocket, bgColor: "bg-emerald-100 dark:bg-emerald-900/30", iconColor: "text-emerald-600 dark:text-emerald-400" };
+    }
+    // Asset available (✅ in title)
+    if (titleLower.includes("✅") || (titleLower.includes("disponible") && !titleLower.includes("no disponible"))) {
+      return { icon: ShieldCheck, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
+    }
+    // Asset rejected / denied / revoked
+    if (titleLower.includes("denegad") || titleLower.includes("no aprobad") || titleLower.includes("revocad")) {
+      return { icon: ShieldX, bgColor: "bg-red-100 dark:bg-red-900/30", iconColor: "text-red-600 dark:text-red-400" };
+    }
+    // Payment / wallet
     if (titleLower.includes("pago") || titleLower.includes("euroe") || titleLower.includes("wallet")) {
       return { icon: Coins, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
     }
+    // Blockchain / smart contracts
     if (titleLower.includes("smart contract") || titleLower.includes("blockchain") || titleLower.includes("pontus")) {
       return { icon: Blocks, bgColor: "bg-blue-100 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" };
     }
-    if (titleLower.includes("solicitud") || titleLower.includes("acceso") || titleLower.includes("propuesta")) {
+    // Transaction approved
+    if (titleLower.includes("aprobad") && type === "success") {
+      return { icon: CheckCircle, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
+    }
+    // Transaction completed
+    if (titleLower.includes("completad")) {
+      return { icon: Zap, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
+    }
+    // Data access requests
+    if (titleLower.includes("solicitud") || titleLower.includes("acceso") || titleLower.includes("pendiente")) {
       return { icon: FileKey, bgColor: "bg-orange-100 dark:bg-orange-900/30", iconColor: "text-orange-600 dark:text-orange-400" };
     }
-    if (titleLower.includes("nuevo") || titleLower.includes("disponible") || titleLower.includes("servicio")) {
+    // New assets / services
+    if (titleLower.includes("nuevo") || titleLower.includes("servicio")) {
       return { icon: Sparkles, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
     }
 
