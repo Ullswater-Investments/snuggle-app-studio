@@ -10,7 +10,7 @@ const corsHeaders = {
 
 interface NotificationRequest {
   transactionId: string;
-  eventType: "created" | "pre_approved" | "approved" | "denied" | "completed";
+  eventType: "created" | "pre_approved" | "approved" | "denied" | "completed" | "download";
 }
 
 // Role-aware notification messages per event type
@@ -59,6 +59,16 @@ const ROLE_MESSAGES: Record<string, {
     shared: {
       title: (name) => `${name}: Intercambio completado`,
       message: (name) => `El intercambio de datos de ${name} se ha completado`,
+    },
+  },
+  download: {
+    consumer: {
+      title: (name) => `📥 Descarga completada: ${name}`,
+      message: (name) => `Has obtenido una copia actualizada de ${name}`,
+    },
+    provider: {
+      title: (name) => `📊 Uso de datos: ${name}`,
+      message: (_name) => `Un consumidor ha descargado el activo ${_name}`,
     },
   },
 };
@@ -187,7 +197,9 @@ serve(async (req) => {
     const productName = transaction.asset?.product?.name || "Dataset";
     const assetId = transaction.asset_id;
     // For approved events, link directly to the data view; otherwise to the request detail
-    const link = eventType === "approved" ? `/data/view/${assetId}` : `/requests/${transactionId}`;
+    const link = eventType === "approved" ? `/data/view/${assetId}` 
+      : eventType === "download" ? `/data/view/${transactionId}`
+      : `/requests/${transactionId}`;
 
     // ──────────────────────────────────────────────
     // 1. Persist in-app notifications to DB
@@ -223,12 +235,17 @@ serve(async (req) => {
       // Provider (subject) notifications
       if (roleMessages.provider) {
         const userIds = await getUsersForOrg(transaction.subject_org_id);
+        const consumerName = transaction.consumer_org?.name || "Un consumidor";
         for (const uid of userIds) {
+          // For download events, enrich provider message with consumer org name
+          const providerMessage = eventType === "download"
+            ? `La organización ${consumerName} ha descargado el activo ${productName}`
+            : roleMessages.provider.message(productName);
           notifRows.push({
             user_id: uid,
             organization_id: transaction.subject_org_id,
             title: roleMessages.provider.title(productName),
-            message: roleMessages.provider.message(productName),
+            message: providerMessage,
             type: eventType === "approved" ? "success" : eventType === "denied" ? "warning" : "info",
             link,
           });
