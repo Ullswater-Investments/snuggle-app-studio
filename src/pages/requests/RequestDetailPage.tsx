@@ -141,10 +141,10 @@ const RequestDetailPage = () => {
         notificationEvent = "pre_approved";
       } else if (action === "approve" && transaction.status === "pending_holder") {
         newStatus = "completed";
-        notificationEvent = "completed";
+        notificationEvent = "approved";
       } else if (action === "complete" && transaction.status === "pending_holder") {
         newStatus = "completed";
-        notificationEvent = "completed";
+        notificationEvent = "approved";
       } else if (action === "deny") {
         newStatus = transaction.status === "pending_subject" ? "denied_subject" : "denied_holder";
         notificationEvent = "denied";
