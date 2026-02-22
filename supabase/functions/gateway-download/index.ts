@@ -29,7 +29,14 @@ Deno.serve(async (req) => {
     // 1. Verify transaction exists and consumer matches
     const { data: tx, error: txErr } = await supabaseAdmin
       .from("data_transactions")
-      .select("id, status, consumer_org_id, asset_id")
+      .select(`id, status, consumer_org_id, asset_id,
+        asset:data_assets (
+          id, custom_metadata,
+          product:data_products (name, description, category, version)
+        ),
+        consumer_org:organizations!data_transactions_consumer_org_id_fkey (name),
+        subject_org:organizations!data_transactions_subject_org_id_fkey (name)
+      `)
       .eq("id", transactionId)
       .single();
 
@@ -91,10 +98,28 @@ Deno.serve(async (req) => {
       );
     }
 
-    // 4. No data found
+    // 4. No payload/supplier data — return transaction metadata as fallback
+    const product = (tx as any).asset?.product;
+    const fallbackData = {
+      transaction_id: tx.id,
+      asset_name: product?.name || "Dataset",
+      category: product?.category || "General",
+      description: product?.description || "",
+      version: product?.version || "1.0",
+      consumer: (tx as any).consumer_org?.name || "",
+      provider: (tx as any).subject_org?.name || "",
+      status: tx.status,
+      note: "No se han cargado datos específicos para esta transacción. Este archivo contiene los metadatos del activo.",
+    };
+
     return new Response(
-      JSON.stringify({ error: "No se encontraron datos asociados a esta transacción" }),
-      { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      JSON.stringify({
+        source: "transaction_metadata",
+        schema_type: "metadata",
+        data: fallbackData,
+        downloaded_at: new Date().toISOString(),
+      }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
     console.error("gateway-download error:", err);
