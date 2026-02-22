@@ -125,7 +125,7 @@ export const generateLicensePDF = async (
 
   // Terms and conditions
   const customMeta = transaction?.asset?.custom_metadata;
-  const termsAndConditions = customMeta?.terms_and_conditions || customMeta?.termsAndConditions || null;
+  const termsAndConditions = customMeta?.terms_and_conditions || customMeta?.termsAndConditions || customMeta?.access_policy?.terms_url || customMeta?.terms_url || null;
 
   // Date: use approval date, fallback to updated_at, then created_at
   const dateStr = approvalDate || transaction.updated_at || transaction.created_at;
