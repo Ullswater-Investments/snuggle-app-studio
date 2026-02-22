@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { z } from "zod";
 import { OrderSummary } from "@/components/OrderSummary";
-import { PaymentGateway } from "@/components/PaymentGateway";
+import { ConfirmRequestModal } from "@/components/ConfirmRequestModal";
 
 const requestSchema = z.object({
   purpose: z.string().min(10, "El propósito debe tener al menos 10 caracteres").max(500),
@@ -716,11 +716,12 @@ const RequestWizard = () => {
         </div>
       </main>
 
-      <PaymentGateway 
+      <ConfirmRequestModal
         open={isPaymentOpen}
         onClose={() => setIsPaymentOpen(false)}
         onConfirm={handlePaymentConfirm}
         asset={asset}
+        isPending={createTransactionMutation.isPending}
       />
     </div>
   );
