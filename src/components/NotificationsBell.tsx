@@ -10,17 +10,11 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { formatDistanceToNow } from "date-fns";
+import { es, enUS, de, fr, pt, it, nl, type Locale } from "date-fns/locale";
 import type { Notification } from "@/types/database.extensions";
 
-const LOCALE_MAP: Record<string, string> = {
-  es: "es-ES",
-  en: "en-GB",
-  fr: "fr-FR",
-  de: "de-DE",
-  it: "it-IT",
-  pt: "pt-PT",
-  nl: "nl-NL",
-};
+const DATE_LOCALE_MAP: Record<string, Locale> = { es, en: enUS, de, fr, pt, it, nl };
 
 export function NotificationsBell() {
   const { t, i18n } = useTranslation("notifications");
@@ -29,7 +23,7 @@ export function NotificationsBell() {
   const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
 
-  const dateLocale = LOCALE_MAP[i18n.language] || "es-ES";
+  const currentLocale = DATE_LOCALE_MAP[i18n.language] || es;
 
   const { data: notifications } = useQuery({
     queryKey: ["notifications", user?.id],
@@ -128,15 +122,13 @@ export function NotificationsBell() {
                   onClick={() => handleRead(n.id, n.link)}
                 >
                   <div className={`mt-1 h-2 w-2 rounded-full shrink-0 ${!n.is_read ? 'bg-blue-600' : 'bg-transparent'}`} />
-                  <div className="space-y-1 flex-1">
-                    <p className="text-sm font-medium leading-none">{n.title}</p>
+                  <div className="space-y-1 flex-1 min-w-0">
+                    <p className="text-sm font-medium leading-tight truncate">{n.title}</p>
                     {n.message && <p className="text-xs text-muted-foreground line-clamp-2">{n.message}</p>}
                     <p className="text-[10px] text-muted-foreground/70">
-                      {new Date(n.created_at).toLocaleTimeString(dateLocale, { 
-                        hour: '2-digit', 
-                        minute: '2-digit',
-                        day: '2-digit',
-                        month: 'short'
+                      {formatDistanceToNow(new Date(n.created_at), {
+                        addSuffix: true,
+                        locale: currentLocale,
                       })}
                     </p>
                   </div>
