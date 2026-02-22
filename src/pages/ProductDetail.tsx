@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -69,7 +70,7 @@ export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isWeb3Connected, connectWallet, user } = useAuth();
-  const { isDemo } = useOrganizationContext();
+  const { isDemo, activeOrgId } = useOrganizationContext();
 
   // --- Fetch Data (Marketplace View) ---
   const { data: product, isLoading } = useQuery<MarketplaceListing>({
@@ -169,8 +170,34 @@ export default function ProductDetail() {
     }
   });
 
+  // === GUARDIA DE SEGURIDAD: Bloqueo Demo / Sin Organización ===
+  const shouldBlockAccess = isDemo || !activeOrgId;
+
+  // Access policy - computed early for hooks
+  const accessPolicyRaw = product?.custom_metadata?.access_policy as Record<string, any> | undefined;
+  const allowedWallets = accessPolicyRaw?.allowed_wallets;
+  const deniedWallets = accessPolicyRaw?.denied_wallets;
+  const isAllowlistBlocked = Array.isArray(allowedWallets) && allowedWallets.length > 0 && !allowedWallets.includes(activeOrgId);
+  const isDenylistBlocked = Array.isArray(deniedWallets) && deniedWallets.includes(activeOrgId);
+
+  useEffect(() => {
+    if (!isLoading && shouldBlockAccess) {
+      toast.warning("Detalle de activos solo disponible para organizaciones registradas.");
+      navigate("/catalog", { replace: true });
+    }
+  }, [isLoading, shouldBlockAccess, navigate]);
+
+  useEffect(() => {
+    if (!isLoading && product && isAllowlistBlocked) {
+      toast.error("Acceso denegado: tu organización no tiene permisos para ver este activo.");
+      navigate("/catalog", { replace: true });
+    }
+  }, [isLoading, product, isAllowlistBlocked, navigate]);
+
   if (isLoading) return <ProductSkeleton />;
   if (!product) return <div className="container py-20 text-center">Producto no encontrado</div>;
+  if (shouldBlockAccess) return <ProductSkeleton />;
+  if (isAllowlistBlocked) return <ProductSkeleton />;
 
   // Pending validation screen
   if (product.status === "pending") {
@@ -297,15 +324,30 @@ export default function ProductDetail() {
     navigate(`/requests/new?asset=${product.asset_id}`);
   };
 
-  // Access policy from custom_metadata
-  const accessPolicy = product.custom_metadata?.access_policy as Record<string, any> | undefined;
+  // Use pre-computed accessPolicy for rendering
+  const accessPolicy = accessPolicyRaw;
+
+  if (isDenylistBlocked) {
+    return (
+      <div className="container py-8 fade-in min-h-screen bg-muted/10">
+        <div className="flex flex-col items-center justify-center py-20 space-y-6">
+          <div className="h-20 w-20 rounded-full bg-destructive/10 flex items-center justify-center">
+            <Shield className="h-10 w-10 text-destructive" />
+          </div>
+          <h1 className="text-2xl font-bold text-center">🛡️ Acceso Denegado</h1>
+          <p className="text-muted-foreground text-center max-w-md">
+            Tu organización se encuentra en la lista de exclusión de este activo. Si consideras que es un error, contacta al proveedor.
+          </p>
+          <Button variant="outline" onClick={() => navigate("/catalog")}>
+            Volver al Catálogo
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-8 fade-in min-h-screen bg-muted/10">
-      {/* Breadcrumb / Back */}
-      <Button variant="ghost" className="mb-6 pl-0 hover:bg-transparent hover:underline" onClick={() => navigate(-1)}>
-        <ArrowLeft className="mr-2 h-4 w-4" /> Volver al Catálogo
-      </Button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
