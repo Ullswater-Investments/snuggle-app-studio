@@ -13,26 +13,49 @@ interface NotificationRequest {
   eventType: "created" | "pre_approved" | "approved" | "denied" | "completed";
 }
 
-const STATUS_LABELS: Record<string, { title: (name: string) => string; message: string }> = {
+// Role-aware notification messages per event type
+const ROLE_MESSAGES: Record<string, {
+  consumer?: { title: (name: string) => string; message: (name: string) => string };
+  provider?: { title: (name: string) => string; message: (name: string) => string };
+  shared?: { title: (name: string) => string; message: (name: string) => string };
+}> = {
   created: {
-    title: (name) => `${name}: Solicitud enviada`,
-    message: "Tu solicitud de acceso ha sido enviada al proveedor para su aprobación.",
+    consumer: {
+      title: (name) => `${name}: Solicitud enviada`,
+      message: (name) => `Tu solicitud para ${name} ha sido enviada para aprobación.`,
+    },
+    provider: {
+      title: (name) => `${name}: Nueva solicitud recibida`,
+      message: (name) => `Has recibido una nueva solicitud de acceso para ${name}.`,
+    },
   },
   pre_approved: {
-    title: (name) => `${name}: Pre-aprobada por proveedor`,
-    message: "El proveedor ha pre-aprobado la solicitud. Pendiente de aprobación final por el poseedor de datos.",
+    consumer: {
+      title: (name) => `${name}: Pre-aprobada`,
+      message: (name) => `Tu solicitud para ${name} ha sido pre-aprobada por el proveedor.`,
+    },
   },
   approved: {
-    title: (name) => `${name}: Solicitud aprobada`,
-    message: "La solicitud de datos ha sido aprobada. Los datos están disponibles para su consulta.",
+    consumer: {
+      title: (name) => `${name}: Solicitud aprobada`,
+      message: (name) => `Tu solicitud para ${name} ha sido aprobada. Los datos están disponibles.`,
+    },
   },
   denied: {
-    title: (name) => `${name}: Solicitud denegada`,
-    message: "La solicitud de acceso a datos ha sido denegada.",
+    consumer: {
+      title: (name) => `${name}: Solicitud denegada`,
+      message: (name) => `Tu solicitud para ${name} ha sido denegada.`,
+    },
+    provider: {
+      title: (name) => `${name}: Solicitud denegada`,
+      message: (name) => `Has denegado la solicitud de acceso para ${name}.`,
+    },
   },
   completed: {
-    title: (name) => `${name}: Transacción completada`,
-    message: "El intercambio de datos se ha completado exitosamente.",
+    shared: {
+      title: (name) => `${name}: Intercambio completado`,
+      message: (name) => `El intercambio de datos de ${name} se ha completado exitosamente.`,
+    },
   },
 };
 
@@ -163,38 +186,67 @@ serve(async (req) => {
     // ──────────────────────────────────────────────
     // 1. Persist in-app notifications to DB
     // ──────────────────────────────────────────────
-    const label = STATUS_LABELS[eventType];
-    if (label) {
-      // Determine which org users to notify
-      let targetOrgIds: string[] = [];
+    const roleMessages = ROLE_MESSAGES[eventType];
+    if (roleMessages) {
+      const notifRows: any[] = [];
 
-      if (eventType === "created") {
-        // Notify subject org (provider)
-        targetOrgIds = [transaction.subject_org_id];
-      } else if (eventType === "pre_approved") {
-        // Notify holder org
-        targetOrgIds = [transaction.holder_org_id];
-      } else {
-        // approved / denied / completed → notify consumer
-        targetOrgIds = [transaction.consumer_org_id];
+      // Helper to fetch user IDs for an org
+      const getUsersForOrg = async (orgId: string) => {
+        const { data } = await supabaseClient
+          .from("user_profiles")
+          .select("user_id")
+          .eq("organization_id", orgId);
+        return (data || []).map((p: any) => p.user_id);
+      };
+
+      // Consumer notifications
+      if (roleMessages.consumer) {
+        const userIds = await getUsersForOrg(transaction.consumer_org_id);
+        for (const uid of userIds) {
+          notifRows.push({
+            user_id: uid,
+            organization_id: transaction.consumer_org_id,
+            title: roleMessages.consumer.title(productName),
+            message: roleMessages.consumer.message(productName),
+            type: eventType === "denied" ? "warning" : "info",
+            link,
+          });
+        }
       }
 
-      // Get user IDs from target orgs
-      const { data: profiles } = await supabaseClient
-        .from("user_profiles")
-        .select("user_id, organization_id")
-        .in("organization_id", targetOrgIds);
+      // Provider (subject) notifications
+      if (roleMessages.provider) {
+        const userIds = await getUsersForOrg(transaction.subject_org_id);
+        for (const uid of userIds) {
+          notifRows.push({
+            user_id: uid,
+            organization_id: transaction.subject_org_id,
+            title: roleMessages.provider.title(productName),
+            message: roleMessages.provider.message(productName),
+            type: eventType === "denied" ? "warning" : "info",
+            link,
+          });
+        }
+      }
 
-      if (profiles && profiles.length > 0) {
-        const notifRows = profiles.map((p: any) => ({
-          user_id: p.user_id,
-          organization_id: p.organization_id,
-          title: label.title(productName),
-          message: label.message,
-          type: eventType === "denied" ? "warning" : "info",
-          link,
-        }));
+      // Shared notifications (e.g. completed → both consumer and provider)
+      if (roleMessages.shared) {
+        const consumerUsers = await getUsersForOrg(transaction.consumer_org_id);
+        const providerUsers = await getUsersForOrg(transaction.subject_org_id);
+        const allUsers = [...new Set([...consumerUsers, ...providerUsers])];
+        for (const uid of allUsers) {
+          notifRows.push({
+            user_id: uid,
+            organization_id: null,
+            title: roleMessages.shared.title(productName),
+            message: roleMessages.shared.message(productName),
+            type: "info",
+            link,
+          });
+        }
+      }
 
+      if (notifRows.length > 0) {
         const { error: insertErr } = await supabaseClient
           .from("notifications")
           .insert(notifRows);
@@ -202,7 +254,7 @@ serve(async (req) => {
         if (insertErr) {
           console.error("Error persisting in-app notifications:", insertErr);
         } else {
-          console.log(`Persisted ${notifRows.length} in-app notifications`);
+          console.log(`Persisted ${notifRows.length} role-based notifications`);
         }
       }
     }
@@ -298,7 +350,7 @@ serve(async (req) => {
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error in notification-handler:", error);
     return new Response(
       JSON.stringify({ error: error.message || "Internal server error" }),

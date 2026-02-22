@@ -1,0 +1,1 @@
+DROP TRIGGER IF EXISTS on_transaction_change ON public.data_transactions;
