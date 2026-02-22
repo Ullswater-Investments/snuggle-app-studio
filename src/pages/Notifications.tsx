@@ -26,13 +26,14 @@ import {
   MoreVertical,
   Trash2,
   Coins,
-  FileKey,
+  FileOutput,
   Blocks,
   Sparkles,
   ExternalLink,
   Rocket,
   ShieldCheck,
   ShieldX,
+  KeyRound,
   Zap,
 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
@@ -195,18 +196,30 @@ const Notifications = () => {
   // Get icon and styling based on notification type and title
   const getNotificationConfig = (type: string, title: string) => {
     const titleLower = title.toLowerCase();
-    
-    // Asset validated / approved (🚀 rocket in title)
-    if (titleLower.includes("🚀") || titleLower.includes("validado")) {
+
+    // Solicitud enviada / Nueva solicitud → FileOutput naranja
+    if (titleLower.includes("solicitud enviada") || titleLower.includes("nueva solicitud")) {
+      return { icon: FileOutput, bgColor: "bg-orange-100 dark:bg-orange-900/30", iconColor: "text-orange-600 dark:text-orange-400" };
+    }
+    // Activo Publicado / ✨ / 🚀
+    if (titleLower.includes("activo publicado") || titleLower.includes("✨") || titleLower.includes("🚀")) {
       return { icon: Rocket, bgColor: "bg-emerald-100 dark:bg-emerald-900/30", iconColor: "text-emerald-600 dark:text-emerald-400" };
     }
-    // Asset available (✅ in title)
-    if (titleLower.includes("✅") || (titleLower.includes("disponible") && !titleLower.includes("no disponible"))) {
+    // Acceso concedido / Aprobada / Operación completada / ✅
+    if (titleLower.includes("acceso concedido") || titleLower.includes("aprobada") || titleLower.includes("operación completada") || titleLower.includes("✅")) {
       return { icon: ShieldCheck, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
     }
-    // Asset rejected / denied / revoked
-    if (titleLower.includes("denegad") || titleLower.includes("no aprobad") || titleLower.includes("revocad")) {
+    // Pre-aprobada / 🔑
+    if (titleLower.includes("pre-aprobada") || titleLower.includes("🔑")) {
+      return { icon: KeyRound, bgColor: "bg-blue-100 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" };
+    }
+    // Denegada / ❌
+    if (titleLower.includes("denegad") || titleLower.includes("❌")) {
       return { icon: ShieldX, bgColor: "bg-red-100 dark:bg-red-900/30", iconColor: "text-red-600 dark:text-red-400" };
+    }
+    // Intercambio completado
+    if (titleLower.includes("intercambio completado")) {
+      return { icon: Zap, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
     }
     // Payment / wallet
     if (titleLower.includes("pago") || titleLower.includes("euroe") || titleLower.includes("wallet")) {
@@ -216,21 +229,9 @@ const Notifications = () => {
     if (titleLower.includes("smart contract") || titleLower.includes("blockchain") || titleLower.includes("pontus")) {
       return { icon: Blocks, bgColor: "bg-blue-100 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" };
     }
-    // Transaction approved
-    if (titleLower.includes("aprobad") && type === "success") {
-      return { icon: CheckCircle, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
-    }
-    // Transaction completed
-    if (titleLower.includes("completad")) {
-      return { icon: Zap, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
-    }
-    // Data access requests
-    if (titleLower.includes("solicitud") || titleLower.includes("acceso") || titleLower.includes("pendiente")) {
-      return { icon: FileKey, bgColor: "bg-orange-100 dark:bg-orange-900/30", iconColor: "text-orange-600 dark:text-orange-400" };
-    }
-    // New assets / services
-    if (titleLower.includes("nuevo") || titleLower.includes("servicio")) {
-      return { icon: Sparkles, bgColor: "bg-purple-100 dark:bg-purple-900/30", iconColor: "text-purple-600 dark:text-purple-400" };
+    // Disponible (asset)
+    if (titleLower.includes("disponible") && !titleLower.includes("no disponible")) {
+      return { icon: ShieldCheck, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
     }
 
     switch (type) {
