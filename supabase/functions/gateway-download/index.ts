@@ -26,17 +26,10 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // 1. Verify transaction exists and consumer matches
+    // 1. Verify transaction exists, is completed, and consumer matches
     const { data: tx, error: txErr } = await supabaseAdmin
       .from("data_transactions")
-      .select(`id, status, consumer_org_id, asset_id,
-        asset:data_assets (
-          id, custom_metadata,
-          product:data_products (name, description, category, version)
-        ),
-        consumer_org:organizations!data_transactions_consumer_org_id_fkey (name),
-        subject_org:organizations!data_transactions_subject_org_id_fkey (name)
-      `)
+      .select("id, status, consumer_org_id, asset_id")
       .eq("id", transactionId)
       .single();
 
@@ -61,66 +54,66 @@ Deno.serve(async (req) => {
       );
     }
 
-    // 2. Try data_payloads first
-    const { data: payload } = await supabaseAdmin
-      .from("data_payloads")
-      .select("data_content, schema_type")
-      .eq("transaction_id", transactionId)
-      .maybeSingle();
+    // 2. Get api_url from asset's custom_metadata
+    const { data: asset, error: assetErr } = await supabaseAdmin
+      .from("data_assets")
+      .select("custom_metadata")
+      .eq("id", tx.asset_id)
+      .single();
 
-    if (payload?.data_content) {
+    if (assetErr || !asset) {
       return new Response(
-        JSON.stringify({
-          source: "data_payloads",
-          schema_type: payload.schema_type,
-          data: payload.data_content,
-          downloaded_at: new Date().toISOString(),
-        }),
-        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({ error: "Activo no encontrado" }),
+        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // 3. Fallback to supplier_data
-    const { data: suppliers } = await supabaseAdmin
-      .from("supplier_data")
-      .select("*")
-      .eq("transaction_id", transactionId);
+    const metadata = asset.custom_metadata as Record<string, any> | null;
+    const apiUrl = metadata?.api_url;
 
-    if (suppliers && suppliers.length > 0) {
+    if (!apiUrl) {
       return new Response(
-        JSON.stringify({
-          source: "supplier_data",
-          schema_type: "supplier",
-          data: suppliers,
-          downloaded_at: new Date().toISOString(),
-        }),
-        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({ error: "Este activo no tiene una fuente de datos (api_url) configurada" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // 4. No payload/supplier data — return transaction metadata as fallback
-    const product = (tx as any).asset?.product;
-    const fallbackData = {
-      transaction_id: tx.id,
-      asset_name: product?.name || "Dataset",
-      category: product?.category || "General",
-      description: product?.description || "",
-      version: product?.version || "1.0",
-      consumer: (tx as any).consumer_org?.name || "",
-      provider: (tx as any).subject_org?.name || "",
-      status: tx.status,
-      note: "No se han cargado datos específicos para esta transacción. Este archivo contiene los metadatos del activo.",
-    };
+    // 3. Fetch data from external API
+    const apiHeaders = (metadata?.api_headers as Record<string, string>) || {};
 
-    return new Response(
-      JSON.stringify({
-        source: "transaction_metadata",
-        schema_type: "metadata",
-        data: fallbackData,
-        downloaded_at: new Date().toISOString(),
-      }),
-      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    );
+    console.log(`Fetching data from external API: ${apiUrl}`);
+
+    let externalRes: Response;
+    try {
+      externalRes = await fetch(apiUrl, {
+        method: "GET",
+        headers: apiHeaders,
+      });
+    } catch (fetchErr) {
+      console.error("External API fetch failed:", fetchErr);
+      return new Response(
+        JSON.stringify({ error: `No se pudo conectar con la API del proveedor: ${(fetchErr as Error).message}` }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!externalRes.ok) {
+      const errorBody = await externalRes.text().catch(() => "");
+      console.error(`External API returned ${externalRes.status}: ${errorBody}`);
+      return new Response(
+        JSON.stringify({ error: `La API del proveedor respondió con error ${externalRes.status}` }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // 4. Return the external content to the frontend
+    const content = await externalRes.text();
+    const contentType = externalRes.headers.get("content-type") || "application/json";
+
+    return new Response(content, {
+      status: 200,
+      headers: { ...corsHeaders, "Content-Type": contentType },
+    });
   } catch (err) {
     console.error("gateway-download error:", err);
     return new Response(
