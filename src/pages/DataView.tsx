@@ -29,6 +29,7 @@ import { motion } from "framer-motion";
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, Legend, ResponsiveContainer } from "recharts";
 import { generateLicensePDF } from "@/utils/pdfGenerator";
 import { AccessHistoryTable } from "@/components/AccessHistoryTable";
+import { useNotifications } from "@/hooks/useNotifications";
 
 // EnvironmentalImpactCard removed – no longer displayed in sidebar
 
@@ -55,6 +56,8 @@ const DataView = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("description");
+  const [isDownloading, setIsDownloading] = useState(false);
+  const { sendNotification } = useNotifications();
 
   // Obtener transacción y datos con verificación de acceso
   const { data: transaction, isLoading: loadingTransaction } = useQuery({
@@ -248,10 +251,12 @@ const DataView = () => {
     },
   });
 
-  // Gateway download for consumers
   const handleGatewayDownload = async () => {
+    if (isDownloading) return;
+    setIsDownloading(true);
+    
     try {
-      toast.info("Descargando datos a través del Gateway...");
+      toast.info("Descargando datos a través del Access Controller...");
       
       const { data, error } = await supabase.functions.invoke("gateway-download", {
         body: {
@@ -262,10 +267,9 @@ const DataView = () => {
       });
 
       if (error) {
-        throw new Error(error.message || "Error de conexión con el Gateway");
+        throw new Error(error.message || "Error de conexión con el Access Controller");
       }
 
-      // Check for error response from edge function
       if (data?.error) {
         throw new Error(data.error);
       }
@@ -282,18 +286,62 @@ const DataView = () => {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
+      // Log de acceso en access_logs para trazabilidad
+      try {
+        await supabase.from("access_logs").insert({
+          transaction_id: id!,
+          consumer_org_id: activeOrg!.id,
+          user_id: user?.id,
+          asset_id: transaction?.asset_id,
+          action: "download_gateway",
+          status: "success",
+          metadata: {
+            format: "json",
+            file_name: `${fileName}_data.json`,
+            downloaded_at: new Date().toISOString(),
+          },
+        });
+      } catch (logErr) {
+        console.error("Error logging access:", logErr);
+      }
+
+      // Notificaciones bilaterales
+      try {
+        await sendNotification(id!, "download");
+      } catch (notifErr) {
+        console.error("Error sending download notifications:", notifErr);
+      }
+
       toast.success("Archivo descargado correctamente");
       queryClient.invalidateQueries({ queryKey: ["access-logs"] });
     } catch (err: any) {
       console.error("Gateway download error:", err);
       const errorMsg = err?.message || "Error desconocido";
+      
+      // Log de error en access_logs
+      try {
+        await supabase.from("access_logs").insert({
+          transaction_id: id!,
+          consumer_org_id: activeOrg!.id,
+          user_id: user?.id,
+          asset_id: transaction?.asset_id,
+          action: "download_gateway",
+          status: "error",
+          error_message: errorMsg,
+        });
+      } catch (logErr) {
+        console.error("Error logging failed access:", logErr);
+      }
+
       queryClient.invalidateQueries({ queryKey: ["access-logs"] });
       
-      if (errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND") || errorMsg.includes("502") || errorMsg.includes("provider API")) {
+      if (errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND") || errorMsg.includes("502") || errorMsg.includes("504") || errorMsg.includes("provider API")) {
         toast.error("Error de Conexión: El servidor del proveedor no responde. Por favor, contacta con soporte si el problema persiste.");
       } else {
         toast.error(`Error al descargar: ${errorMsg}`);
       }
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -698,9 +746,18 @@ const DataView = () => {
                           de forma segura al proveedor, entregándote los datos actualizados
                           sin exponer credenciales técnicas.
                         </p>
-                        <Button onClick={handleGatewayDownload} className="w-full">
-                          <Download className="mr-2 h-4 w-4" />
-                          Descargar Archivo Actualizado
+                        <Button onClick={handleGatewayDownload} className="w-full" disabled={isDownloading}>
+                          {isDownloading ? (
+                            <>
+                              <Activity className="mr-2 h-4 w-4 animate-spin" />
+                              Descargando...
+                            </>
+                          ) : (
+                            <>
+                              <Download className="mr-2 h-4 w-4" />
+                              Descargar Archivo Actualizado
+                            </>
+                          )}
                         </Button>
                         <div className="grid grid-cols-2 gap-3">
                           <Button 

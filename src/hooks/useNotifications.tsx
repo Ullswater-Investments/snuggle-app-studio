@@ -1,6 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 
-type NotificationEvent = "created" | "pre_approved" | "approved" | "denied" | "completed";
+type NotificationEvent = "created" | "pre_approved" | "approved" | "denied" | "completed" | "download";
 
 export const useNotifications = () => {
   const sendNotification = async (transactionId: string, eventType: NotificationEvent) => {
