@@ -17,9 +17,14 @@ import {
   Globe,
   Eye,
   Wallet,
-  Scale,
   Bot,
-  Clock
+  Clock,
+  Layers,
+  RefreshCw,
+  Hash,
+  Code2,
+  Shield,
+  Download
 } from "lucide-react";
 
 // UI Components
@@ -32,8 +37,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrayDataView } from "@/components/ArrayDataView";
-import { GovernancePanel } from "@/components/GovernancePanel";
-import { AssetChatInterface } from "@/components/AssetChatInterface";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface MarketplaceListing {
   asset_id: string;
@@ -53,6 +57,9 @@ interface MarketplaceListing {
   reputation_score: number;
   review_count: number;
   status?: string;
+  version?: string;
+  schema_definition?: Record<string, any> | null;
+  custom_metadata?: Record<string, any> | null;
 }
 
 export default function ProductDetail() {
@@ -73,7 +80,41 @@ export default function ProductDetail() {
         .maybeSingle();
 
       if (!error && data) {
-        return data as unknown as MarketplaceListing;
+        // Also fetch extended data from data_assets for schema_definition and custom_metadata
+        const { data: assetExtra } = await supabase
+          .from('data_assets')
+          .select(`
+            custom_metadata,
+            sample_data,
+            product:data_products(schema_definition, version, description)
+          `)
+          .eq('id', id)
+          .maybeSingle();
+
+        const listing = data as any;
+        return {
+          ...listing,
+          asset_id: listing.asset_id,
+          asset_name: listing.product_name || 'Dataset',
+          asset_description: listing.product_description || (assetExtra?.product as any)?.description,
+          product_name: listing.product_name,
+          category: listing.category || "General",
+          provider_id: listing.provider_id,
+          provider_name: listing.provider_name || 'Proveedor',
+          seller_category: listing.seller_category || "Enterprise",
+          kyb_verified: listing.kyb_verified ?? true,
+          pricing_model: listing.pricing_model || 'subscription',
+          price: listing.price || 0,
+          currency: listing.currency || 'EUR',
+          billing_period: listing.billing_period,
+          has_green_badge: listing.has_green_badge ?? false,
+          reputation_score: listing.reputation_score || 4.8,
+          review_count: listing.review_count || 0,
+          version: listing.version || (assetExtra?.product as any)?.version || '1.0',
+          schema_definition: (assetExtra?.product as any)?.schema_definition || null,
+          custom_metadata: assetExtra?.custom_metadata as any || null,
+          sample_data: (assetExtra as any)?.sample_data || null,
+        } as MarketplaceListing;
       }
 
       // Fallback robusto si la vista no está lista
@@ -87,7 +128,9 @@ export default function ProductDetail() {
           price,
           currency,
           billing_period,
-          product:data_products(name, description, category),
+          custom_metadata,
+          sample_data,
+          product:data_products(name, description, category, schema_definition, version),
           org:organizations!subject_org_id(id, name)
         `)
         .eq('id', id)
@@ -97,7 +140,6 @@ export default function ProductDetail() {
         throw new Error("Producto no encontrado");
       }
 
-      // Mapeo a estructura comercial
       return {
         asset_id: asset.id,
         asset_name: (asset.product as any)?.name || 'Dataset',
@@ -109,14 +151,18 @@ export default function ProductDetail() {
         seller_category: "Enterprise",
         kyb_verified: true,
         pricing_model: asset.pricing_model || 'subscription',
-        price: asset.price || 450,
+        price: asset.price || 0,
         currency: asset.currency || 'EUR',
         billing_period: asset.billing_period || 'monthly',
         has_green_badge: true,
         reputation_score: 4.8,
         review_count: 24,
-        status: asset.status
-      };
+        status: asset.status,
+        version: (asset.product as any)?.version || '1.0',
+        schema_definition: (asset.product as any)?.schema_definition || null,
+        custom_metadata: asset.custom_metadata as any || null,
+        sample_data: (asset as any).sample_data || null,
+      } as MarketplaceListing;
     }
   });
 
@@ -147,8 +193,11 @@ export default function ProductDetail() {
   }
 
   const isPaid = product.price > 0;
+  const schemaFieldCount = product.schema_definition 
+    ? Object.keys(product.schema_definition).length 
+    : 8;
 
-  // Datos mock para la vista previa (sandbox)
+  // Datos mock para la muestra
   const MOCK_SAMPLE = [
     { id: 1, timestamp: "2024-03-10T10:00:00Z", sensor_id: "S-01", value: 45.2, status: "OK" },
     { id: 2, timestamp: "2024-03-10T10:05:00Z", sensor_id: "S-01", value: 46.1, status: "OK" },
@@ -160,7 +209,6 @@ export default function ProductDetail() {
   const sampleData = (product as any).sample_data || MOCK_SAMPLE;
 
   const handleAction = async () => {
-    // Check if user is authenticated
     if (!user) {
       toast.error("Inicia sesión para continuar", {
         description: "Necesitas una cuenta para adquirir datasets",
@@ -172,7 +220,6 @@ export default function ProductDetail() {
       return;
     }
 
-    // For paid products, verify wallet is connected
     if (isPaid && !isWeb3Connected) {
       toast.error("Conecta tu wallet para comprar", {
         description: "Los productos de pago requieren una wallet Web3 para completar la transacción con EUROe",
@@ -193,9 +240,11 @@ export default function ProductDetail() {
       return;
     }
 
-    // Proceed to request wizard with preselected asset
-    navigate("/requests/new", { state: { preselectedAssetId: product.asset_id } });
+    navigate(`/requests/new?asset=${product.asset_id}`);
   };
+
+  // Access policy from custom_metadata
+  const accessPolicy = product.custom_metadata?.access_policy as Record<string, any> | undefined;
 
   return (
     <div className="container py-8 fade-in min-h-screen bg-muted/10">
@@ -213,6 +262,9 @@ export default function ProductDetail() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <Badge variant="secondary" className="uppercase">{product.category}</Badge>
+              {product.status && (
+                <Badge variant="outline">{product.status}</Badge>
+              )}
               {product.has_green_badge && (
                 <Badge variant="outline" className="border-green-600 text-green-700 bg-green-50 gap-1">
                   <Leaf className="h-3 w-3" /> Sustainable Data
@@ -220,18 +272,9 @@ export default function ProductDetail() {
               )}
             </div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">{product.asset_name}</h1>
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <span className="font-medium text-foreground">{product.reputation_score}</span>
-                <span>({product.review_count} reseñas)</span>
-              </div>
-              <span>•</span>
-              <div className="flex items-center gap-1">
-                <Globe className="h-4 w-4" />
-                <span>Versión 2.1 (Live)</span>
-              </div>
-            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              {product.asset_description || "Este dataset proporciona información crítica para la toma de decisiones en tiempo real."}
+            </p>
           </div>
 
           {/* Provider Card Mini */}
@@ -256,18 +299,50 @@ export default function ProductDetail() {
             </CardContent>
           </Card>
 
+          {/* Quick Metrics Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <Card className="bg-primary/5 border-primary/10">
+              <CardContent className="p-4 flex flex-col items-center text-center">
+                <Layers className="h-5 w-5 text-primary mb-1" />
+                <span className="text-xs text-muted-foreground uppercase">Versión</span>
+                <span className="text-lg font-bold">{product.version || '1.0'}</span>
+              </CardContent>
+            </Card>
+            <Card className="bg-primary/5 border-primary/10">
+              <CardContent className="p-4 flex flex-col items-center text-center">
+                <RefreshCw className="h-5 w-5 text-primary mb-1" />
+                <span className="text-xs text-muted-foreground uppercase">Frecuencia</span>
+                <span className="text-lg font-bold">Tiempo Real</span>
+              </CardContent>
+            </Card>
+            <Card className="bg-primary/5 border-primary/10">
+              <CardContent className="p-4 flex flex-col items-center text-center">
+                <Hash className="h-5 w-5 text-primary mb-1" />
+                <span className="text-xs text-muted-foreground uppercase">N.º Campos</span>
+                <span className="text-lg font-bold">{schemaFieldCount}</span>
+              </CardContent>
+            </Card>
+            <Card className="bg-primary/5 border-primary/10">
+              <CardContent className="p-4 flex flex-col items-center text-center">
+                <Code2 className="h-5 w-5 text-primary mb-1" />
+                <span className="text-xs text-muted-foreground uppercase">Formato</span>
+                <span className="text-lg font-bold">JSON / API</span>
+              </CardContent>
+            </Card>
+          </div>
+
           {/* Info Tabs */}
-          <Tabs defaultValue="overview" className="w-full">
+          <Tabs defaultValue="description" className="w-full">
             <TabsList className="grid w-full grid-cols-6">
-              <TabsTrigger value="overview">Descripción</TabsTrigger>
-              <TabsTrigger value="specs">Especificaciones</TabsTrigger>
-              <TabsTrigger value="preview" className="gap-1">
-                <Eye className="h-3 w-3" />
-                Vista Previa
+              <TabsTrigger value="description">Descripción</TabsTrigger>
+              <TabsTrigger value="schema">Esquema</TabsTrigger>
+              <TabsTrigger value="policies" className="gap-1">
+                <Shield className="h-3 w-3" />
+                Políticas
               </TabsTrigger>
-              <TabsTrigger value="governance" className="gap-1">
-                <Scale className="h-3 w-3" />
-                Gobernanza
+              <TabsTrigger value="sample" className="gap-1">
+                <Eye className="h-3 w-3" />
+                Muestra
               </TabsTrigger>
               <TabsTrigger value="chat" className="gap-1">
                 <Bot className="h-3 w-3" />
@@ -276,7 +351,8 @@ export default function ProductDetail() {
               <TabsTrigger value="reviews">Reseñas</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="overview" className="space-y-4 mt-6">
+            {/* Tab: Descripción */}
+            <TabsContent value="description" className="space-y-4 mt-6">
               <Card>
                 <CardHeader>
                   <CardTitle>Sobre este activo de datos</CardTitle>
@@ -297,32 +373,114 @@ export default function ProductDetail() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="specs" className="mt-6">
+            {/* Tab: Esquema */}
+            <TabsContent value="schema" className="mt-6">
               <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <span className="text-xs text-muted-foreground uppercase font-bold">Formato</span>
-                      <p className="font-medium">JSON / CSV (API Rest)</p>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Code2 className="h-5 w-5" />
+                    Definición del Esquema
+                  </CardTitle>
+                  <CardDescription>
+                    Estructura de datos del producto ({schemaFieldCount} campos)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {product.schema_definition && Object.keys(product.schema_definition).length > 0 ? (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Campo</TableHead>
+                          <TableHead>Tipo</TableHead>
+                          <TableHead>Descripción</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {Object.entries(product.schema_definition).map(([field, def]) => {
+                          const fieldDef = typeof def === 'object' && def !== null ? def as Record<string, any> : {};
+                          return (
+                            <TableRow key={field}>
+                              <TableCell className="font-mono text-sm font-medium">{field}</TableCell>
+                              <TableCell>
+                                <Badge variant="secondary" className="text-xs">
+                                  {fieldDef.type || typeof def}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="text-sm text-muted-foreground">
+                                {fieldDef.description || '—'}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  ) : (
+                    <div className="rounded-lg border bg-muted/50">
+                      <pre className="p-4 text-xs overflow-x-auto">
+                        {JSON.stringify(product.schema_definition || { info: "Esquema no disponible" }, null, 2)}
+                      </pre>
                     </div>
-                    <div className="space-y-1">
-                      <span className="text-xs text-muted-foreground uppercase font-bold">Frecuencia</span>
-                      <p className="font-medium">Tiempo Real (Webhook)</p>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-xs text-muted-foreground uppercase font-bold">Protocolo</span>
-                      <p className="font-medium">HTTPS / Ocean Provider</p>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-xs text-muted-foreground uppercase font-bold">Cobertura</span>
-                      <p className="font-medium">Global (Multi-región)</p>
-                    </div>
-                  </div>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
 
-            <TabsContent value="preview" className="mt-6">
+            {/* Tab: Políticas de Uso */}
+            <TabsContent value="policies" className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="h-5 w-5" />
+                    Políticas de Uso y Acceso
+                  </CardTitle>
+                  <CardDescription>
+                    Permisos y restricciones aplicables a este activo
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {accessPolicy ? (
+                    <div className="space-y-4">
+                      {Object.entries(accessPolicy).map(([key, value]) => (
+                        <div key={key} className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                          <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                          <div>
+                            <span className="font-medium text-sm capitalize">{key.replace(/_/g, ' ')}</span>
+                            <p className="text-sm text-muted-foreground">{String(value)}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                        <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-medium text-sm">Uso comercial permitido</span>
+                          <p className="text-sm text-muted-foreground">Los datos pueden usarse con fines comerciales dentro del ámbito de la licencia.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                        <Lock className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-medium text-sm">Redistribución restringida</span>
+                          <p className="text-sm text-muted-foreground">No se permite la redistribución de datos a terceros sin autorización expresa.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/50">
+                        <Shield className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <div>
+                          <span className="font-medium text-sm">Conformidad RGPD</span>
+                          <p className="text-sm text-muted-foreground">Todos los datos cumplen con la normativa europea de protección de datos.</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Tab: Muestra */}
+            <TabsContent value="sample" className="mt-6">
               <Alert className="mb-4 border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20 dark:border-yellow-900">
                 <Activity className="h-4 w-4 text-yellow-600" />
                 <AlertTitle className="text-yellow-800 dark:text-yellow-200">⚠️ MUESTRA DE DATOS</AlertTitle>
@@ -338,7 +496,7 @@ export default function ProductDetail() {
                     Data Sandbox - Vista Previa
                   </CardTitle>
                   <CardDescription>
-                    Explora una muestra de {sampleData.length} registros para evaluar la estructura y calidad del dataset antes de comprarlo.
+                    Explora una muestra de {sampleData.length} registros para evaluar la estructura y calidad del dataset.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -347,22 +505,28 @@ export default function ProductDetail() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="governance" className="mt-6">
-              <GovernancePanel 
-                did={`did:op:${product.asset_id}`}
-                nftAddress={`0x${product.asset_id?.slice(0, 40) || '1234567890abcdef1234567890abcdef12345678'}`}
-                datatokenAddress={`0x${product.provider_id?.slice(0, 40) || 'abcdef1234567890abcdef1234567890abcdef12'}`}
-                complianceLevel="Level 1"
-              />
-            </TabsContent>
-
+            {/* Tab: Asistente IA */}
             <TabsContent value="chat" className="mt-6">
-              <AssetChatInterface 
-                did={`did:op:${product.asset_id}`}
-                assetName={product.asset_name || product.product_name || 'Dataset'}
-              />
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Bot className="h-5 w-5" />
+                    Asistente IA
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+                    <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                      <Bot className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <p className="text-muted-foreground">El asistente se implementará próximamente.</p>
+                    <p className="text-xs text-muted-foreground">Podrás consultar información del activo, generar queries de ejemplo y obtener recomendaciones de uso.</p>
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
 
+            {/* Tab: Reseñas */}
             <TabsContent value="reviews" className="mt-6">
               <Alert>
                 <Activity className="h-4 w-4" />
@@ -371,7 +535,6 @@ export default function ProductDetail() {
                   Solo las organizaciones que han completado una transacción mediante Smart Contract pueden dejar una reseña.
                 </AlertDescription>
               </Alert>
-              {/* Placeholder para reviews */}
               <div className="mt-4 space-y-4">
                 {[1, 2].map((i) => (
                   <Card key={i}>
@@ -379,11 +542,9 @@ export default function ProductDetail() {
                       <div className="flex justify-between mb-2">
                         <div className="font-semibold text-sm">Consumer Corp {i}</div>
                         <div className="flex">
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                          <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          {Array.from({ length: 5 }).map((_, idx) => (
+                            <Star key={idx} className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          ))}
                         </div>
                       </div>
                       <p className="text-sm text-muted-foreground">"Excelente calidad de datos, integración muy rápida gracias a la documentación ODRL."</p>
@@ -458,7 +619,7 @@ export default function ProductDetail() {
                   <span>Transacción segura vía Smart Contract y auditada en Blockchain privada.</span>
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex flex-col gap-2">
                 <Button 
                   size="lg" 
                   className="w-full text-base font-semibold" 
@@ -479,7 +640,34 @@ export default function ProductDetail() {
                     </>
                   )}
                 </Button>
+                <Button variant="outline" className="w-full" size="lg">
+                  <Download className="mr-2 h-4 w-4" /> Descargar Ficha Técnica
+                </Button>
               </CardFooter>
+            </Card>
+
+            {/* Summary Table */}
+            <Card>
+              <CardContent className="p-4">
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium text-muted-foreground text-sm py-2">Proveedor</TableCell>
+                      <TableCell className="text-sm py-2 text-right font-medium">{product.provider_name}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-muted-foreground text-sm py-2">Versión</TableCell>
+                      <TableCell className="text-sm py-2 text-right font-medium">{product.version || '1.0'}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium text-muted-foreground text-sm py-2">Estado</TableCell>
+                      <TableCell className="text-sm py-2 text-right">
+                        <Badge variant="secondary" className="text-xs">{product.status || 'Disponible'}</Badge>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
             </Card>
 
             {/* Support Box */}
@@ -503,6 +691,7 @@ function ProductSkeleton() {
         <Skeleton className="h-8 w-1/3" />
         <Skeleton className="h-4 w-1/4" />
         <Skeleton className="h-24 w-full" />
+        <Skeleton className="h-12 w-full" />
         <Skeleton className="h-64 w-full" />
       </div>
       <div className="lg:col-span-1">
