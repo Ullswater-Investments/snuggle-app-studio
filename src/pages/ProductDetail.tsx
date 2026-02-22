@@ -440,7 +440,32 @@ export default function ProductDetail() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {product.schema_definition && Object.keys(product.schema_definition).length > 0 ? (
+                  {schemaColumns && schemaColumns.length > 0 ? (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Campo</TableHead>
+                          <TableHead>Tipo</TableHead>
+                          <TableHead>Descripción</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {schemaColumns.map((col: any, i: number) => (
+                          <TableRow key={col.name || i}>
+                            <TableCell className="font-mono text-sm font-medium">{col.name || '—'}</TableCell>
+                            <TableCell>
+                              <Badge variant="secondary" className="text-xs">
+                                {col.type || 'unknown'}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-sm text-muted-foreground">
+                              {col.description || '—'}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  ) : product.schema_definition && typeof product.schema_definition === 'object' && Object.keys(product.schema_definition).length > 0 ? (
                     <Table>
                       <TableHeader>
                         <TableRow>
@@ -469,10 +494,14 @@ export default function ProductDetail() {
                       </TableBody>
                     </Table>
                   ) : (
-                    <div className="rounded-lg border bg-muted/50">
-                      <pre className="p-4 text-xs overflow-x-auto">
-                        {JSON.stringify(product.schema_definition || { info: "Esquema no disponible" }, null, 2)}
-                      </pre>
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted/30">
+                        <Code2 className="h-8 w-8 text-muted-foreground" />
+                      </div>
+                      <h3 className="text-base font-semibold mb-1">Esquema no disponible</h3>
+                      <p className="text-sm text-muted-foreground max-w-sm">
+                        La definición técnica de campos será visible una vez el proveedor complete la configuración del activo.
+                      </p>
                     </div>
                   )}
                 </CardContent>
@@ -649,22 +678,10 @@ export default function ProductDetail() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4 pb-4">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    <span>Acceso Inmediato (API)</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    <span>SLA Garantizado 99.9%</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    <span>Soporte Técnico 24/7</span>
-                  </div>
+                <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900 text-blue-800 dark:text-blue-300 text-xs flex items-start gap-2">
+                  <Lock className="h-4 w-4 shrink-0 mt-0.5" />
+                  <span className="leading-relaxed">Transacción segura vía Smart Contract y auditada en Blockchain privada.</span>
                 </div>
-                
-                <Separator />
 
                 {/* Wallet Status Indicator for paid products */}
                 {isPaid && (
@@ -682,11 +699,6 @@ export default function ProductDetail() {
                     </span>
                   </div>
                 )}
-                
-                <div className="bg-muted/50 p-3 rounded text-xs text-muted-foreground flex gap-2">
-                  <Lock className="h-4 w-4 shrink-0" />
-                  <span>Transacción segura vía Smart Contract y auditada en Blockchain privada.</span>
-                </div>
               </CardContent>
               <CardFooter className="flex flex-col gap-2">
                 <Button 
