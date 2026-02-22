@@ -167,8 +167,19 @@ const OrgDetailPanel = ({ org, activity, onClose, onOrgUpdated, t, lang }: OrgDe
   const hasActivity = (activity?.assetCount ?? 0) > 0 || (activity?.txCount ?? 0) > 0;
 
   const { data: assets = [] } = useQuery({ queryKey: ["admin-org-assets", org.id], queryFn: async () => { const { data } = await supabase.from("data_assets").select("id, status, product_id, data_products(name)").or(`holder_org_id.eq.${org.id},subject_org_id.eq.${org.id}`); return data ?? []; } });
-  const { data: team = [] } = useQuery({ queryKey: ["admin-org-team", org.id], queryFn: async () => { const { data } = await supabase.from("user_profiles").select("user_id, full_name").eq("organization_id", org.id); return data ?? []; } });
-  const { data: userEmails = [] } = useQuery({ queryKey: ["admin-org-emails", org.id], queryFn: async () => { const { data: roles } = await supabase.from("user_roles").select("user_id, role").eq("organization_id", org.id); if (!roles || roles.length === 0) return []; return roles.map((r) => ({ userId: r.user_id, role: r.role })); } });
+  const { data: teamMembers = [], isLoading: teamLoading } = useQuery({
+    queryKey: ["admin-org-members", org.id],
+    queryFn: async () => {
+      const { data: session } = await supabase.auth.getSession();
+      const token = session?.session?.access_token;
+      if (!token) return [];
+      const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-users?orgId=${org.id}`;
+      const resp = await fetch(url, { method: "GET", headers: { Authorization: `Bearer ${token}`, apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY } });
+      if (!resp.ok) return [];
+      const json = await resp.json();
+      return (json.members ?? []) as { id: string; email: string | null; fullName: string | null; role: string }[];
+    },
+  });
   const { data: transactions = [] } = useQuery({ queryKey: ["admin-org-transactions", org.id], queryFn: async () => { const { data } = await supabase.from("data_transactions").select("id, status, purpose, created_at, consumer_org_id, holder_org_id").or(`consumer_org_id.eq.${org.id},holder_org_id.eq.${org.id}`).order("created_at", { ascending: false }).limit(20); return data ?? []; } });
 
   const disableMutation = useMutation({
@@ -251,9 +262,25 @@ const OrgDetailPanel = ({ org, activity, onClose, onOrgUpdated, t, lang }: OrgDe
         </TabsContent>
 
         <TabsContent value="team" className="space-y-3 mt-4">
-          <p className="text-sm text-muted-foreground">{t("organizations.linkedUsers", { count: userEmails.length })}</p>
-          {userEmails.length === 0 ? (<p className="text-sm text-muted-foreground italic">{t("organizations.noUsers")}</p>) : (
-            <div className="space-y-2">{userEmails.map((u, i) => { const profile = team.find((tp: any) => tp.user_id === u.userId); return (<Card key={i}><CardContent className="p-3 flex items-center justify-between"><div><p className="text-sm font-medium">{(profile as any)?.full_name || t("organizations.noName")}</p><p className="text-xs font-mono text-muted-foreground truncate max-w-[200px]">{u.userId}</p></div><Badge variant="secondary" className="text-xs">{u.role}</Badge></CardContent></Card>); })}</div>
+          <p className="text-sm text-muted-foreground">{t("organizations.linkedUsers", { count: teamMembers.length })}</p>
+          {teamLoading ? (
+            <p className="text-sm text-muted-foreground italic">{t("organizations.loading")}</p>
+          ) : teamMembers.length === 0 ? (
+            <p className="text-sm text-muted-foreground italic">{t("organizations.noUsers")}</p>
+          ) : (
+            <div className="space-y-2">
+              {teamMembers.map((m) => (
+                <Card key={m.id}>
+                  <CardContent className="p-3 flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium">{m.fullName || t("organizations.noName")}</p>
+                      <p className="text-xs text-muted-foreground">{m.email || m.id}</p>
+                    </div>
+                    <Badge variant="secondary" className="text-xs">{m.role}</Badge>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           )}
         </TabsContent>
 

@@ -205,7 +205,9 @@
     "deleteIrreversible": "Deze actie kan niet ongedaan worden gemaakt.",
     "cancel": "Annuleren",
     "deletePermanently": "Permanent verwijderen",
-    "deleteSuccess": "Gebruiker succesvol verwijderd"
+    "deleteSuccess": "Gebruiker succesvol verwijderd",
+    "noActions": "Deze gebruiker heeft nog geen registreerbare acties in het systeem uitgevoerd",
+    "governanceAction": "Governance-actie"
   },
   "organizations": {
     "title": "Organisatiebeheer",

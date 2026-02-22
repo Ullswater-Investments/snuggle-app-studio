@@ -139,26 +139,62 @@ Deno.serve(async (req) => {
       });
     }
 
-    // ========== GET: list users ==========
+    // ========== GET: check for orgId param ==========
+    const url = new URL(req.url);
+    const orgId = url.searchParams.get("orgId");
+
+    if (orgId) {
+      // Return members of a specific organization with emails from auth
+      const [profilesRes, rolesRes] = await Promise.all([
+        adminClient.from("user_profiles").select("user_id, full_name").eq("organization_id", orgId),
+        adminClient.from("user_roles").select("user_id, role").eq("organization_id", orgId),
+      ]);
+      const orgProfiles = profilesRes.data ?? [];
+      const orgRoles = rolesRes.data ?? [];
+      const userIds = [...new Set([
+        ...orgProfiles.map((p: any) => p.user_id),
+        ...orgRoles.map((r: any) => r.user_id),
+      ])];
+
+      const members = await Promise.all(userIds.map(async (uid: string) => {
+        const { data } = await adminClient.auth.admin.getUserById(uid);
+        const role = orgRoles.find((r: any) => r.user_id === uid);
+        const profile = orgProfiles.find((p: any) => p.user_id === uid);
+        return {
+          id: uid,
+          email: data.user?.email ?? null,
+          fullName: profile?.full_name ?? data.user?.user_metadata?.full_name ?? null,
+          role: role?.role ?? "viewer",
+        };
+      }));
+
+      return new Response(JSON.stringify({ members }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // ========== GET: list all users ==========
     const {
       data: { users: authUsers },
       error: listError,
     } = await adminClient.auth.admin.listUsers({ perPage: 1000 });
     if (listError) throw listError;
 
-    // Fetch profiles, roles, transaction counts, approval history in parallel
-    const [profilesRes, rolesRes, txCountsRes, approvalsRes] =
+    // Fetch profiles, roles, transaction counts, approval history, governance logs in parallel
+    const [profilesRes, rolesRes, txCountsRes, approvalsRes, govLogsRes] =
       await Promise.all([
         adminClient.from("user_profiles").select("user_id, full_name, organization_id, organizations(id, name)"),
         adminClient.from("user_roles").select("user_id, role, organization_id"),
         adminClient.from("data_transactions").select("requested_by"),
         adminClient.from("approval_history").select("actor_user_id, transaction_id, action, notes, created_at").order("created_at", { ascending: false }),
+        adminClient.from("governance_logs").select("actor_id, category, level, message, created_at").order("created_at", { ascending: false }),
       ]);
 
     const profiles = profilesRes.data ?? [];
     const roles = rolesRes.data ?? [];
     const allTx = txCountsRes.data ?? [];
     const allApprovals = approvalsRes.data ?? [];
+    const allGovLogs = govLogsRes.data ?? [];
 
     // Also fetch recent transactions per user
     const txRes = await adminClient
@@ -204,6 +240,10 @@ Deno.serve(async (req) => {
         .filter((a: any) => a.actor_user_id === uid)
         .slice(0, 20);
 
+      const governanceLogs = allGovLogs
+        .filter((g: any) => g.actor_id === uid)
+        .slice(0, 20);
+
       const userRecentTx = recentTx
         .filter((t: any) => t.requested_by === uid)
         .slice(0, 10);
@@ -225,6 +265,7 @@ Deno.serve(async (req) => {
         hasOrganizations: uniqueOrgs.length > 0,
         transactionCount: txCount,
         approvalHistory,
+        governanceLogs,
         recentTransactions: userRecentTx,
       };
     });

@@ -205,7 +205,9 @@
     "deleteIrreversible": "Esta acción no se puede deshacer.",
     "cancel": "Cancelar",
     "deletePermanently": "Eliminar permanentemente",
-    "deleteSuccess": "Usuario eliminado correctamente"
+    "deleteSuccess": "Usuario eliminado correctamente",
+    "noActions": "Este usuario aún no ha realizado acciones registrables en el sistema",
+    "governanceAction": "Acción de Gobernanza"
   },
   "organizations": {
     "title": "Gestión de Organizaciones",
