@@ -1,67 +1,67 @@
 
 
-## Rediseno de la Vista de Detalle del Activo (ProductDetail.tsx)
+## Refactorizacion de "Descargar Ficha Tecnica" y Limpieza de Metadata
 
-### Cambios en un unico archivo: `src/pages/ProductDetail.tsx`
-
----
-
-### 1. Metricas Hero con fondo ambar/naranja
-
-**Estado actual**: Las 4 tarjetas de metricas usan `bg-primary/5` (azulado sutil).
-**Cambio**: Reemplazar el fondo por `bg-amber-50 border-amber-200` (naranja/ambar como en la referencia). Actualizar los iconos a color ambar (`text-amber-600`). Ajustar el conteo de campos para que use `schema_definition.columns` si existe como array, o las keys del objeto si no.
-
-**Eliminar la descripcion repetida** en la pestana "Descripcion" (linea 362 repite `product.asset_description`). La descripcion solo aparecera en la cabecera superior (linea 276).
+### Archivo unico a modificar: `src/pages/ProductDetail.tsx`
 
 ---
 
-### 2. Pestana de Politicas de Uso - Diseno PONTUS-X con 3 bloques
+### 1. Sanitizacion del JSON (handleDownloadSheet - lineas 208-231)
 
-**Estado actual**: Muestra un listado generico de items con el mismo icono/color.
-**Cambio**: Reemplazar el contenido de la pestana "Politicas" (lineas 429-480) por un diseno de 3 bloques diferenciados:
+Reemplazar la funcion actual por una version que construya un objeto estructurado en 4 bloques limpios, excluyendo datos sensibles:
 
-- **Permisos (Verde)**: Card con borde verde, icono `CheckCircle2` verde, titulo "Permisos". Lista `access_policy.permissions` como items. Si no existen, mostrar placeholders estaticos ("Uso comercial permitido", "Analisis interno").
-- **Prohibiciones (Rojo)**: Card con borde rojo, icono `XCircle` rojo, titulo "Prohibiciones". Lista `access_policy.prohibitions`. Placeholders: "Redistribucion a terceros", "Uso para training IA sin consentimiento".
-- **Obligaciones (Azul)**: Card con borde azul, icono `AlertCircle` azul, titulo "Obligaciones". Lista `access_policy.obligations`. Placeholders: "Conformidad RGPD", "Notificacion de brechas en 72h".
-- **Terminos y Condiciones**: Si `access_policy.terms_url` existe, mostrar una Card con icono `ExternalLink` y un enlace clicable al documento.
+**Campos EXCLUIDOS**: `api_url`, `api_headers`, `published_by`, `denied_wallets`, `allowed_wallets`, `asset_id`, `product_id`, y cualquier valor que sea una direccion hexadecimal (patron `0x...`).
 
-Importaciones nuevas necesarias: `XCircle`, `AlertCircle`, `ExternalLink` de lucide-react.
+**Estructura final del JSON**:
 
----
+```text
+{
+  informacion_general: {
+    nombre, descripcion, categoria, proveedor (nombre comercial),
+    version, precio, moneda, modelo_precio,
+    fecha_publicacion (de custom_metadata.published_at),
+    idioma (de custom_metadata.language)
+  },
+  esquema_tecnico: {
+    campos: [...schema_definition],
+    numero_de_campos: N,
+    formato: "JSON / API"
+  },
+  politicas_de_gobernanza: {
+    permisos: [...],
+    prohibiciones: [...],
+    obligaciones: [...],
+    terminos_url: "..." (si existe)
+  },
+  metricas_de_calidad: {
+    ...quality_metrics (objeto completo de custom_metadata.quality_metrics)
+  }
+}
+```
 
-### 3. Pestana de Esquema - Sin cambios estructurales
+El proveedor aparecera solo como `product.provider_name` (nombre comercial), nunca por ID o wallet.
 
-La tabla actual (Campo, Tipo en badge, Descripcion) ya coincide con el diseno de referencia. Solo se ajustara el conteo de campos en la cabecera para que use `schema_definition.columns.length` si el esquema tiene formato de array en `columns`.
+### 2. Nombre del archivo optimizado (linea 227)
 
----
+Cambiar de `ficha-tecnica-${product.asset_id}.json` a `[Nombre_del_Activo]_Ficha_Tecnica.json`.
 
-### 4. Panel Lateral - Descarga de Ficha Tecnica funcional
+Se aplicara una funcion de limpieza que:
+- Reemplace espacios por guiones bajos
+- Elimine caracteres especiales (acentos, simbolos)
+- Limite la longitud a 50 caracteres
 
-**Estado actual**: El boton "Descargar Ficha Tecnica" no tiene funcionalidad (linea 643).
-**Cambio**: Implementar la funcion `handleDownloadSheet` que:
-1. Construye un objeto JSON con toda la metadata del activo (info general, esquema, politicas).
-2. Crea un Blob y lo descarga como archivo `.json` con nombre `ficha-tecnica-[asset_id].json`.
+Ejemplo: `Datos_Energeticos_Renovables_Ficha_Tecnica.json`
 
-El boton principal "Solicitar Acceso" ya navega correctamente a `/requests/new?asset=ID` (linea 243), no requiere cambios.
+### 3. Limpieza de UI - Sin columnas "metadata" visibles
 
----
+Revision del archivo: actualmente no hay ninguna columna o fila llamada "metadata" expuesta directamente en la UI. El campo `custom_metadata` solo se usa internamente para extraer `access_policy`, `published_at`, `language` y `quality_metrics`. No se requieren cambios de UI adicionales en este punto, ya que no hay datos sensibles mostrados.
 
-### 5. Placeholders elegantes para Asistente IA y Resenas
-
-**Estado actual**: El placeholder de Asistente IA es basico (lineas 508-527). Las resenas muestran datos mock (lineas 529-555).
-**Cambio**:
-- **Asistente IA**: Redisenar el estado vacio con un gradiente sutil de fondo, un icono mas grande con animacion pulse, y texto descriptivo mas elaborado sobre las capacidades futuras.
-- **Resenas**: Reemplazar los mocks por un estado vacio elegante con icono de `Star`, mensaje "Aun no hay resenas verificadas" y subtexto explicando el sistema de verificacion via Smart Contract.
-
----
-
-### Resumen tecnico
+### 4. Resumen tecnico
 
 | Aspecto | Detalle |
 |---|---|
 | Archivo modificado | `src/pages/ProductDetail.tsx` (unico) |
-| Importaciones nuevas | `XCircle`, `AlertCircle`, `ExternalLink` de lucide-react |
+| Lineas afectadas | 208-231 (handleDownloadSheet) |
+| Nuevas importaciones | Ninguna |
 | Cambios en BD | Ninguno |
-| Nuevos componentes | Ninguno (todo inline) |
-| Compatibilidad | Se mantiene demo mode, wallet y autenticacion existente |
 
