@@ -1,77 +1,67 @@
 
 
-## Implementacion del Modo Demostracion Global
+## Refactorizacion de la Vista de Detalle del Activo (ProductDetail.tsx)
 
-### Situacion actual
+### Objetivo
 
-- Ya existe un `isDemo` en `useOrganizationContext` basado en el flag `is_demo` de la organizacion o el email `demo@procuredata.app`.
-- Existe un `DemoBanner` que muestra un aviso cuando `isDemo` es true.
-- El boton "Acceder a Version Demo" en Auth.tsx usa las credenciales demo@procuredata.app.
-- No hay restricciones funcionales asociadas al modo demo (catalogo, publicacion, onboarding, etc.).
+Redisenar `src/pages/ProductDetail.tsx` para que tenga un layout profesional con metricas destacadas, pestanas completas y un panel de accion sticky conectado al flujo de solicitud.
 
 ---
 
-### Cambios planificados
+### Cambios en un unico archivo: `src/pages/ProductDetail.tsx`
 
-**1. Banner global en AppLayout (actualizar DemoBanner)**
+**1. Consulta mejorada a Base de Datos**
 
-- Archivo: `src/components/DemoBanner.tsx`
-- Cambiar el texto y estilo del banner existente para que diga: "Estas en Modo Demostracion. Algunas funciones de registro y publicacion estan limitadas".
-- Mantener el banner visible en la parte superior cuando `isDemo` es true (ya esta en uso via `useOrganizationContext`).
-- Verificar que `DemoBanner` se renderice en `AppLayout.tsx` (actualmente NO se renderiza ahi, solo en otros layouts). Anadir `<DemoBanner />` despues de `<UnifiedHeader />` en `AppLayout.tsx`.
+- Mantener la consulta actual pero ampliarla para traer tambien `schema_definition` del producto y `custom_metadata` del activo.
+- En el fallback (cuando marketplace_listings no devuelve datos), incluir estos campos adicionales en el select:
+  ```
+  product:data_products(name, description, category, schema_definition, version),
+  org:organizations!subject_org_id(id, name)
+  ```
+- Ampliar la interfaz `MarketplaceListing` para incluir `version`, `schema_definition`, `custom_metadata` y `description` (del producto).
 
-**2. Restricciones en Catalogo (/catalog y /catalog/:id)**
+**2. Layout Principal - Cabecera (sin cambios estructurales)**
 
-- Archivo: `src/pages/Catalog.tsx`
-  - Importar `useOrganizationContext` (ya importado).
-  - Extraer `isDemo` del contexto.
-  - Cuando `isDemo` es true, filtrar los listings para mostrar solo activos sinteticos (synthetic assets que ya existen en el codigo, linea 237) y excluir los datos reales de la BD. Si hay datos de BD, filtrarlos por organizaciones demo (`is_demo = true` en organizations).
+- Mantener las badges de Categoria y Estado.
+- Mantener el titulo `product.asset_name` y descripcion.
+- Mover la mini-card del proveedor debajo de la descripcion (ya existe).
 
-- Archivo: `src/pages/ProductDetail.tsx`
-  - Importar `useOrganizationContext`.
-  - Si `isDemo` es true y el producto no pertenece a una organizacion demo, redirigir a `/catalog` con un toast de aviso.
-  - Deshabilitar el boton "Solicitar Acceso" / "Comprar Ahora" cuando `isDemo` es true, mostrando "Solicitudes no disponibles en demo" como texto del boton.
+**3. Metricas Rapidas (NUEVO - entre cabecera y tabs)**
 
-**3. Bloqueo de Publicacion y Onboarding**
+- Insertar una cuadricula de 4 mini-cards con fondo tematico (usando `bg-primary/10` o `bg-amber-50`):
+  - **Version**: Muestra `product.version` o "2.1".
+  - **Frecuencia**: "Tiempo Real" (estatico o de metadata).
+  - **N. de Campos**: Cuenta las keys del `schema_definition` si existe, o muestra un valor por defecto.
+  - **Formato**: "JSON / API" (estatico o de metadata).
+- Cada card tendra un icono, etiqueta superior en texto pequeno y el valor en negrita.
 
-- Archivo: `src/pages/dashboard/PublishDataset.tsx`
-  - Importar `isDemo` de `useOrganizationContext`.
-  - Si `isDemo` es true, mostrar un mensaje de bloqueo en lugar del formulario: "La publicacion de activos no esta disponible en modo demostracion".
+**4. Sistema de Pestanas (refactorizar las existentes)**
 
-- Archivo: `src/pages/RequestWizard.tsx`
-  - Importar `isDemo` de `useOrganizationContext`.
-  - Si `isDemo` es true, mostrar un mensaje de bloqueo similar.
+Reemplazar las 6 pestanas actuales por estas 6:
 
-- Archivo: `src/components/WelcomeScreen.tsx`
-  - Importar `isDemo` de `useOrganizationContext`.
-  - Si `isDemo` es true, ocultar las tarjetas de "Registrar Organizacion" e "Invitar", y mostrar un mensaje indicando que se esta en modo demo.
+| Pestana actual | Nueva pestana | Cambio |
+|---|---|---|
+| Descripcion (overview) | Descripcion | Mantener contenido, agregar casos de uso |
+| Especificaciones (specs) | Esquema | Renderizar `schema_definition` como tabla con columnas: Campo, Tipo, Descripcion. Si no hay esquema, mostrar JSON raw |
+| Vista Previa (preview) | Politicas de Uso | Mostrar permisos/restricciones desde `custom_metadata.access_policy` o un placeholder estatico |
+| Gobernanza (governance) | Muestra | Mover aqui el contenido de Vista Previa (sample data con ArrayDataView) |
+| Asistente IA (chat) | Asistente IA | Mantener con placeholder "El asistente se implementara proximamente" si no hay AssetChatInterface, o mantener el componente existente |
+| Resenas (reviews) | Resenas | Mantener el placeholder estatico existente |
 
-**4. Bloqueo de Gestion de Organizaciones**
+**5. Panel de Accion Sticky (refactorizar el existente)**
 
-- Archivo: `src/pages/onboarding/CreateOrganization.tsx`
-  - Importar `isDemo` de `useOrganizationContext`.
-  - Si `isDemo` es true, redirigir a `/dashboard` con un toast: "Creacion de organizaciones no disponible en modo demo".
-
-- Archivo: `src/pages/onboarding/RequestInvite.tsx`
-  - Igual: redirigir con aviso si `isDemo` es true.
+- Mantener la estructura actual de la card sticky (ya existe con precio, checkmarks, boton).
+- Cambios:
+  - **Boton principal**: Cambiar la navegacion de `navigate("/requests/new", { state: ... })` a `navigate("/requests/new?asset=" + product.asset_id)` para pasar el asset por query param.
+  - **Boton secundario** (NUEVO): Anadir un `Button variant="outline"` debajo con texto "Descargar Ficha Tecnica" y un icono `FileText`.
+  - **Resumen inferior** (NUEVO): Anadir una tabla pequena debajo de los botones con 3 filas: Proveedor (nombre), Version y Estado del activo.
 
 ---
 
-### Resumen de archivos modificados
+### Resumen tecnico
 
-1. `src/components/DemoBanner.tsx` -- actualizar texto y estilo del banner
-2. `src/components/AppLayout.tsx` -- anadir `<DemoBanner />` despues de `<UnifiedHeader />`
-3. `src/pages/Catalog.tsx` -- filtrar por activos sinteticos/demo en modo demo
-4. `src/pages/ProductDetail.tsx` -- redireccion y bloqueo de boton de solicitud
-5. `src/pages/dashboard/PublishDataset.tsx` -- pantalla de bloqueo en modo demo
-6. `src/pages/RequestWizard.tsx` -- pantalla de bloqueo en modo demo
-7. `src/components/WelcomeScreen.tsx` -- ocultar tarjetas de registro en modo demo
-8. `src/pages/onboarding/CreateOrganization.tsx` -- redireccion en modo demo
-9. `src/pages/onboarding/RequestInvite.tsx` -- redireccion en modo demo
-
-### Notas tecnicas
-
-- No se necesita crear un nuevo estado global; el `isDemo` ya existente en `useOrganizationContext` es suficiente y esta basado en datos reales (flag `is_demo` de la organizacion o email del usuario demo).
-- No se requieren cambios en la base de datos.
-- Las restricciones son puramente de UI; la seguridad real se mantiene via RLS policies existentes.
+- **Archivo modificado**: `src/pages/ProductDetail.tsx` (unico archivo)
+- **Sin cambios en BD**: No se requieren migraciones
+- **Sin nuevos componentes**: Todo se implementa inline en el mismo archivo
+- **Compatibilidad**: Se mantiene la logica de demo mode, wallet y autenticacion existente
 
