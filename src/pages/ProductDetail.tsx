@@ -205,26 +205,51 @@ export default function ProductDetail() {
       ? Object.keys(product.schema_definition).length 
       : 8;
 
+  const sanitizeFileName = (name: string): string => {
+    return name
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9_ ]/g, '')
+      .replace(/\s+/g, '_')
+      .substring(0, 50);
+  };
+
   const handleDownloadSheet = () => {
+    const customMeta = product.custom_metadata || {} as any;
+    const accessPolicy = customMeta.access_policy || {};
+
     const sheet = {
-      id: product.asset_id,
-      nombre: product.asset_name,
-      descripcion: product.asset_description,
-      categoria: product.category,
-      proveedor: product.provider_name,
-      version: product.version,
-      precio: product.price,
-      moneda: product.currency,
-      modelo_precio: product.pricing_model,
-      esquema: product.schema_definition,
-      politicas: product.custom_metadata?.access_policy || null,
-      metadata: product.custom_metadata,
+      informacion_general: {
+        nombre: product.asset_name,
+        descripcion: product.asset_description,
+        categoria: product.category,
+        proveedor: product.provider_name,
+        version: product.version,
+        precio: product.price,
+        moneda: product.currency,
+        modelo_precio: product.pricing_model,
+        fecha_publicacion: customMeta.published_at || null,
+        idioma: customMeta.language || null,
+      },
+      esquema_tecnico: {
+        campos: schemaColumns || product.schema_definition || [],
+        numero_de_campos: schemaFieldCount,
+        formato: "JSON / API",
+      },
+      politicas_de_gobernanza: {
+        permisos: accessPolicy.permissions || [],
+        prohibiciones: accessPolicy.prohibitions || [],
+        obligaciones: accessPolicy.obligations || [],
+        terminos_url: accessPolicy.terms_url || null,
+      },
+      metricas_de_calidad: customMeta.quality_metrics || {},
     };
+
     const blob = new Blob([JSON.stringify(sheet, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `ficha-tecnica-${product.asset_id}.json`;
+    const cleanName = sanitizeFileName(product.asset_name || 'Activo');
+    a.download = `${cleanName}_Ficha_Tecnica.json`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("Ficha técnica descargada");
