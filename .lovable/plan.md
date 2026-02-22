@@ -1,83 +1,206 @@
 
 
-## Activacion del Asistente IA en la Pestana de AssetDetailPage
+## Internacionalizacion de la pagina AssetDetailPage (/catalog/asset/:id)
 
 ### Resumen
 
-Se creara un nuevo agente especializado para la vista de detalle de activo, con un filtro de contexto estricto que extrae solo datos publicos del asset y una interfaz de chat integrada en el Bloque 3 (Exploracion).
+Se identifican ~60 cadenas de texto estatico hardcodeadas en `src/pages/ProductDetail.tsx` y `src/components/asset-detail/AssetDetailChatAgent.tsx`. Se agregara una nueva seccion `assetDetail` al namespace `catalogDetails` existente (ya registrado en `i18n.ts`) en los 7 idiomas (ES, EN, FR, DE, IT, PT, NL).
+
+Los datos que provienen de la BD (nombre del activo, descripcion, proveedor, esquema, politicas, etc.) se mantienen tal cual.
 
 ---
 
-### 1. Nueva Edge Function: `asset-detail-agent`
+### 1. Nueva seccion `assetDetail` en `catalogDetails.json`
 
-**Archivo nuevo:** `supabase/functions/asset-detail-agent/index.ts`
+Se anadira al objeto `common` de cada idioma las siguientes claves:
 
-Se creara una edge function con:
-- System prompt que define a ARIA como experta en el activo especifico, con instrucciones de responder basandose UNICAMENTE en el contexto proporcionado.
-- El contexto del activo se recibe desde el frontend (ya filtrado por `getAriaContext()`).
-- SECURITY_RULES: prohibicion de revelar el system prompt, no inventar datos.
-- Streaming SSE, misma estructura que los demas agentes (ia-conversacional-agent, etc.).
+```text
+common.assetDetail.sustainableData          -> "Sustainable Data" / "Datos Sostenibles" ...
+common.assetDetail.review                   -> "reseña" (singular)
+common.assetDetail.reviews                  -> "reseñas" (plural)
+common.assetDetail.noRating                 -> "—"
+common.assetDetail.defaultDescription       -> "Este dataset proporciona informacion critica..."
+common.assetDetail.soldAndOperatedBy        -> "Vendido y operado por"
+common.assetDetail.verifiedKYB              -> "Verificado KYB"
 
-**Registro en config.toml:**
-```toml
-[functions.asset-detail-agent]
-verify_jwt = false
+-- Bloque 2: Metricas
+common.assetDetail.metrics.version          -> "Version"
+common.assetDetail.metrics.frequency        -> "Frecuencia"
+common.assetDetail.metrics.realTime         -> "Tiempo Real"
+common.assetDetail.metrics.fields           -> "N.º Campos"
+common.assetDetail.metrics.format           -> "Formato"
+
+-- Bloque 3: Tabs
+common.assetDetail.tabs.schema              -> "Esquema"
+common.assetDetail.tabs.policies            -> "Politicas"
+common.assetDetail.tabs.sample              -> "Muestra"
+common.assetDetail.tabs.aiAssistant         -> "Asistente IA"
+common.assetDetail.tabs.reviews             -> "Resenas"
+
+-- Tab Esquema
+common.assetDetail.schemaDefinition         -> "Definicion del Esquema"
+common.assetDetail.dataStructure            -> "Estructura de datos del producto ({{count}} campos)"
+common.assetDetail.schemaNotAvailable       -> "Esquema no disponible"
+common.assetDetail.schemaNotAvailableDesc   -> "Este activo no tiene un esquema tecnico definido."
+
+-- Tab Politicas
+common.assetDetail.permissions              -> "Permisos"
+common.assetDetail.prohibitions             -> "Prohibiciones"
+common.assetDetail.obligations              -> "Obligaciones"
+common.assetDetail.termsAndConditions       -> "Terminos y Condiciones"
+common.assetDetail.viewFullDocument         -> "Consultar documento completo"
+
+-- Tab Muestra
+common.assetDetail.sampleWarningTitle       -> "MUESTRA DE DATOS"
+common.assetDetail.sampleWarningDesc        -> "Estos registros estan anonimizados..."
+common.assetDetail.dataSandbox              -> "Data Sandbox - Vista Previa"
+common.assetDetail.sampleExplore            -> "Explora una muestra de {{count}} registros..."
+common.assetDetail.sampleNotAvailable       -> "Muestra no disponible"
+common.assetDetail.sampleNotAvailableDesc   -> "El proveedor no ha proporcionado una muestra..."
+
+-- Tab Resenas
+common.assetDetail.verifiedReviews          -> "Resenas verificadas ({{count}})"
+common.assetDetail.leaveReview              -> "Deja tu resena"
+common.assetDetail.ratingLabel              -> "Puntuacion"
+common.assetDetail.commentLabel             -> "Comentario (opcional)"
+common.assetDetail.commentPlaceholder       -> "Describe tu experiencia con este dataset..."
+common.assetDetail.publishReview            -> "Publicar Resena"
+common.assetDetail.publishing               -> "Publicando..."
+common.assetDetail.alreadyReviewed          -> "Ya has publicado tu resena para este activo."
+common.assetDetail.noReviewsYet             -> "Aun no hay resenas"
+common.assetDetail.onlyVerifiedOrgs         -> "Solo las organizaciones que han adquirido..."
+
+-- Sidebar
+common.assetDetail.commercialLicense        -> "Licencia de uso comercial"
+common.assetDetail.free                     -> "Gratis"
+common.assetDetail.perMonth                 -> "mes"
+common.assetDetail.perYear                  -> "ano"
+common.assetDetail.secureTransaction        -> "Transaccion segura via Smart Contract..."
+common.assetDetail.walletConnected          -> "Wallet conectada - Listo para pagar con EUROe"
+common.assetDetail.connectWallet            -> "Conecta tu wallet para pagar con EUROe"
+common.assetDetail.exploreDataset           -> "Explorar Dataset"
+common.assetDetail.requestsNotAvailable     -> "Solicitudes no disponibles en demo"
+common.assetDetail.buyNow                   -> "Comprar Ahora"
+common.assetDetail.requestAccess            -> "Solicitar Acceso"
+common.assetDetail.downloadTechSheet        -> "Descargar Ficha Tecnica"
+common.assetDetail.provider                 -> "Proveedor"
+common.assetDetail.version                  -> "Version"
+common.assetDetail.status                   -> "Estado"
+common.assetDetail.available                -> "Disponible"
+common.assetDetail.customLicense            -> "Necesitas una licencia personalizada? Contactar ventas"
+
+-- Pantallas de estado
+common.assetDetail.pendingValidation        -> "Activo en proceso de validacion tecnica"
+common.assetDetail.pendingValidationDesc    -> "Un administrador del ecosistema esta verificando..."
+common.assetDetail.pendingReview            -> "Pendiente de revision"
+common.assetDetail.accessDenied             -> "Acceso Denegado"
+common.assetDetail.accessDeniedDesc         -> "Tu organizacion se encuentra en la lista de exclusion..."
+common.assetDetail.backToCatalog            -> "Volver al Catalogo"
+common.assetDetail.notFound                 -> "Producto no encontrado"
+
+-- Toasts
+common.assetDetail.toastDemoOnly            -> "Detalle de activos solo disponible para organizaciones registradas."
+common.assetDetail.toastAccessDenied        -> "Acceso denegado: tu organizacion no tiene permisos..."
+common.assetDetail.toastLoginRequired       -> "Inicia sesion para continuar"
+common.assetDetail.toastLoginDesc           -> "Necesitas una cuenta para adquirir datasets"
+common.assetDetail.toastGoToLogin           -> "Ir a Login"
+common.assetDetail.toastConnectWallet       -> "Conecta tu wallet para comprar"
+common.assetDetail.toastConnectWalletDesc   -> "Los productos de pago requieren una wallet Web3..."
+common.assetDetail.toastConnectWalletBtn    -> "Conectar Wallet"
+common.assetDetail.toastWalletConnected     -> "Wallet conectada"
+common.assetDetail.toastWalletConnectedDesc -> "Ahora puedes continuar con la compra"
+common.assetDetail.toastWalletError         -> "Error al conectar wallet"
+common.assetDetail.toastReviewSuccess       -> "Resena publicada correctamente"
+common.assetDetail.toastReviewError         -> "Error al publicar la resena"
+common.assetDetail.toastSheetDownloaded     -> "Ficha tecnica descargada"
 ```
 
 ---
 
-### 2. Nuevo Componente: `AssetDetailChatAgent`
+### 2. Archivos a modificar
 
-**Archivo nuevo:** `src/components/asset-detail/AssetDetailChatAgent.tsx`
-
-Componente de chat reutilizando el patron existente de los otros agentes (Web3DidsChatAgent, etc.):
-
-- **Props:** Recibe el objeto `product` (MarketplaceListing) y `schemaColumns`.
-- **Funcion `getAriaContext()`:** Extrae UNICAMENTE:
-  - `name`, `description`, `category`, `version`
-  - `schema_definition` (solo nombres de campo y descripciones, sin api_url, api_headers, wallets ni IDs)
-  - `use_cases` de custom_metadata (si existe)
-- **Cabecera:** Titulo "Pregunta al Asistente IA" con badge truncado del asset_id (ej: `did:...eaf2`).
-- **Mensaje inicial:** "Hola! Soy tu Asistente IA experto en el ecosistema PROCUREDATA. Estoy analizando el activo [Nombre] para responder tus preguntas con precision."
-- **Input:** Placeholder "Pregunta sobre este dataset..." con boton de envio.
-- **Streaming:** Misma logica SSE line-by-line que los otros chat agents.
-- **ChatGuard:** Integrado con el sistema de 3 strikes.
-- **TokenWallet:** Registro de operaciones por respuesta.
-
-**PROHIBICION ESTRICTA en getAriaContext():** Nunca incluir `api_url`, `api_headers`, `allowed_wallets`, `denied_wallets`, IDs de usuario, ni `provider_id`.
+| Archivo | Accion |
+|---|---|
+| `src/locales/es/catalogDetails.json` | Agregar seccion `common.assetDetail` en espanol |
+| `src/locales/en/catalogDetails.json` | Agregar seccion `common.assetDetail` en ingles |
+| `src/locales/fr/catalogDetails.json` | Agregar seccion `common.assetDetail` en frances |
+| `src/locales/de/catalogDetails.json` | Agregar seccion `common.assetDetail` en aleman |
+| `src/locales/it/catalogDetails.json` | Agregar seccion `common.assetDetail` en italiano |
+| `src/locales/pt/catalogDetails.json` | Agregar seccion `common.assetDetail` en portugues |
+| `src/locales/nl/catalogDetails.json` | Agregar seccion `common.assetDetail` en neerlandes |
+| `src/pages/ProductDetail.tsx` | Importar `useTranslation`, reemplazar ~60 cadenas hardcodeadas por `t('catalogDetails:common.assetDetail.xxx')` |
+| `src/components/asset-detail/AssetDetailChatAgent.tsx` | Internacionalizar labels estaticos del componente de chat (placeholder, titulo, sugerencias) |
 
 ---
 
-### 3. Integracion en ProductDetail.tsx
+### 3. Cambios en ProductDetail.tsx
 
-**Archivo modificado:** `src/pages/ProductDetail.tsx`
+Al inicio del componente:
+```typescript
+import { useTranslation } from "react-i18next";
+// ...
+const { t, i18n } = useTranslation('catalogDetails');
+```
 
-- Importar `AssetDetailChatAgent`.
-- Reemplazar el contenido placeholder de la pestana "Asistente IA" (lineas 716-728) por:
-  ```tsx
-  <AssetDetailChatAgent product={product} schemaColumns={schemaColumns} />
-  ```
-- Sin cambios en los otros bloques ni pestanas.
+Ejemplos de reemplazo (no exhaustivo):
+
+| Linea actual | Reemplazo |
+|---|---|
+| `Sustainable Data` (linea 472) | `t('common.assetDetail.sustainableData')` |
+| `'reseña' : 'reseñas'` (linea 482) | `t('common.assetDetail.review')` / `t('common.assetDetail.reviews')` |
+| `"Vendido y operado por"` (linea 496) | `t('common.assetDetail.soldAndOperatedBy')` |
+| `"Version"` (linea 516) | `t('common.assetDetail.metrics.version')` |
+| `"Frecuencia"` (linea 521) | `t('common.assetDetail.metrics.frequency')` |
+| `"Tiempo Real"` (linea 522) | `t('common.assetDetail.metrics.realTime')` |
+| `"N.º Campos"` (linea 526) | `t('common.assetDetail.metrics.fields')` |
+| `"Formato"` (linea 531) | `t('common.assetDetail.metrics.format')` |
+| Tab labels (lineas 543-559) | `t('common.assetDetail.tabs.schema')`, etc. |
+| `"Esquema no disponible"` (linea 604) | `t('common.assetDetail.schemaNotAvailable')` |
+| `"Permisos"` / `"Prohibiciones"` / `"Obligaciones"` | `t('common.assetDetail.permissions')`, etc. |
+| `"Gratis"` (linea 830) | `t('common.assetDetail.free')` |
+| `"Comprar Ahora"` (linea 879) | `t('common.assetDetail.buyNow')` |
+| `"Solicitar Acceso"` (linea 882) | `t('common.assetDetail.requestAccess')` |
+| Todos los `toast()` con texto en espanol | Reemplazar con claves `t()` correspondientes |
+| `toLocaleDateString('es-ES')` (linea 743) | `toLocaleDateString(i18n.language)` |
+| `Intl.NumberFormat('es-ES', ...)` (linea 821) | `Intl.NumberFormat(i18n.language, ...)` |
 
 ---
 
-### 4. Preguntas Sugeridas
+### 4. Cambios en AssetDetailChatAgent.tsx
 
-El componente mostrara 4 preguntas iniciales contextualizadas:
-1. "Que datos contiene este dataset?"
-2. "Para que casos de uso puedo utilizarlo?"
-3. "Cuales son sus campos principales?"
-4. "Como se integra con mi sistema actual?"
+Labels a internacionalizar:
+- Titulo "Pregunta al Asistente IA" 
+- Badge con DID truncado (label "Activo")
+- Placeholder "Pregunta sobre este dataset..."
+- Mensaje inicial de ARIA
+- Las 4 preguntas sugeridas
+- Warnings del ChatGuard
+
+Se anadiran claves adicionales bajo `common.assetDetail.chat`:
+```text
+common.assetDetail.chat.title            -> "Pregunta al Asistente IA"
+common.assetDetail.chat.placeholder      -> "Pregunta sobre este dataset..."
+common.assetDetail.chat.greeting         -> "Hola! Soy tu Asistente IA experto..."
+common.assetDetail.chat.q1 / q2 / q3 / q4 -> Las 4 preguntas sugeridas
+```
 
 ---
 
-### Resumen tecnico
+### 5. Formato de fechas y numeros
+
+- `toLocaleDateString('es-ES')` se reemplazara por `toLocaleDateString(i18n.language)` para que las fechas se adapten al idioma activo.
+- `Intl.NumberFormat('es-ES', ...)` se reemplazara por `Intl.NumberFormat(i18n.language, ...)`.
+
+---
+
+### 6. Resumen tecnico
 
 | Aspecto | Detalle |
 |---|---|
-| Archivos nuevos | `supabase/functions/asset-detail-agent/index.ts`, `src/components/asset-detail/AssetDetailChatAgent.tsx` |
-| Archivo modificado | `src/pages/ProductDetail.tsx` (solo pestana chat), `supabase/config.toml` |
-| Patron reutilizado | Mismo de Web3DidsChatAgent (streaming SSE, ChatGuard, TokenWallet) |
-| Modelo IA | google/gemini-3-flash-preview (default) |
-| Seguridad | getAriaContext() filtra datos sensibles; system prompt prohibe revelar configuracion |
+| Archivos de locales modificados | 7 (uno por idioma) |
+| Archivos de componentes modificados | 2 (`ProductDetail.tsx`, `AssetDetailChatAgent.tsx`) |
+| Namespace utilizado | `catalogDetails` (ya registrado en `i18n.ts`) |
 | Cambios en BD | Ninguno |
+| Nuevas dependencias | Ninguna |
+| Texto de BD | Se mantiene sin traducir (viene dinamico del backend) |
+
