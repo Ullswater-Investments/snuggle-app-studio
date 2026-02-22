@@ -516,7 +516,9 @@
     "ctaTitle": "Vous voulez obtenir des résultats similaires?",
     "ctaDescription": "Découvrez comment ProcureData peut transformer vos processus d'achat et démontrer votre impact ESG.",
     "exploreCatalog": "Explorer le Catalogue",
-    "viewServices": "Voir les Services"
+    "viewServices": "Voir les Services",
+    "askAgent": "Demander à l'Agent ARIA",
+    "caseArchitecture": "Architecture du Cas"
   },
   "navigation": {
     "previousCase": "Cas Précédent",

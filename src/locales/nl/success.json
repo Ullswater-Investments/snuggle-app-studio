@@ -605,5 +605,29 @@
       "ariaQuote": "Vroeger stuurden we PDF's per email naar 50 verschillende portalen. Nu publiceren we één keer naar ons Data Space en marktplaatsen synchroniseren automatisch. FSC- en REACH-certificeringen zijn altijd actueel omdat ze gekoppeld zijn aan de oorspronkelijke bron.",
       "services": ["Gaia-X Dataruimte", "ODRL-Synchronisatie", "Digitaal Productpaspoort", "Verifieerbare Certificeringen", "Multi-Portal Catalogus-API"]
     }
+  },
+  "detail": {
+    "notFound": "Case niet gevonden",
+    "backToStories": "Terug naar Succesverhalen",
+    "verifiedOn": "Geverifieerd op Pontus-X",
+    "block": "Blok",
+    "sectorImpactPanel": "Sectoraal Impactpaneel",
+    "impactSimulator": "Impactsimulator",
+    "ctaTitle": "Wilt u vergelijkbare resultaten bereiken?",
+    "ctaDescription": "Ontdek hoe ProcureData uw inkoopprocessen kan transformeren en uw ESG-impact kan aantonen.",
+    "exploreCatalog": "Catalogus verkennen",
+    "viewServices": "Services bekijken",
+    "askAgent": "Vraag aan ARIA Agent",
+    "caseArchitecture": "Case Architectuur"
+  },
+  "navigation": {
+    "previousCase": "Vorig Verhaal",
+    "allCases": "Alle Verhalen",
+    "nextCase": "Volgend Verhaal"
+  },
+  "narrative": {
+    "theChallenge": "De Uitdaging",
+    "theSolution": "De Oplossing",
+    "servicesUsed": "Gebruikte Services"
   }
 }

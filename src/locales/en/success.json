@@ -529,7 +529,9 @@
     "ctaTitle": "Want to achieve similar results?",
     "ctaDescription": "Discover how ProcureData can transform your procurement processes and demonstrate your ESG impact.",
     "exploreCatalog": "Explore Catalog",
-    "viewServices": "View Services"
+    "viewServices": "View Services",
+    "askAgent": "Ask ARIA Agent",
+    "caseArchitecture": "Case Architecture"
   },
   "navigation": {
     "previousCase": "Previous Case",
