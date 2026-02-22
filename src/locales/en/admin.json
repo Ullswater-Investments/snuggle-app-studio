@@ -205,7 +205,9 @@
     "deleteIrreversible": "This action cannot be undone.",
     "cancel": "Cancel",
     "deletePermanently": "Delete permanently",
-    "deleteSuccess": "User deleted successfully"
+    "deleteSuccess": "User deleted successfully",
+    "noActions": "This user has not yet performed any recordable actions in the system",
+    "governanceAction": "Governance Action"
   },
   "organizations": {
     "title": "Organization Management",

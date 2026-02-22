@@ -205,7 +205,9 @@
     "deleteIrreversible": "Diese Aktion kann nicht rückgängig gemacht werden.",
     "cancel": "Abbrechen",
     "deletePermanently": "Dauerhaft löschen",
-    "deleteSuccess": "Benutzer erfolgreich gelöscht"
+    "deleteSuccess": "Benutzer erfolgreich gelöscht",
+    "noActions": "Dieser Benutzer hat noch keine registrierbaren Aktionen im System durchgeführt",
+    "governanceAction": "Governance-Aktion"
   },
   "organizations": {
     "title": "Organisationsverwaltung",

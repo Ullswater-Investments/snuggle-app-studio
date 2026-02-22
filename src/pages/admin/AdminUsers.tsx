@@ -12,7 +12,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sh
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
-import { Search, User, Shield, Trash2, Building2, ArrowLeftRight, History, AlertTriangle } from "lucide-react";
+import { Search, User, Shield, Trash2, Building2, ArrowLeftRight, History, AlertTriangle, Settings } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { logGovernanceEvent } from "@/utils/governanceLogger";
@@ -20,11 +20,12 @@ import { formatDate } from "@/lib/i18nFormatters";
 
 interface UserOrg { id: string; name: string; role: string; }
 interface ApprovalEntry { transaction_id: string; action: string; notes: string | null; created_at: string; }
+interface GovernanceLogEntry { category: string; level: string; message: string; created_at: string; }
 interface TransactionEntry { id: string; status: string; purpose: string; created_at: string; consumer_org_id: string; holder_org_id: string; subject_org_id: string; }
 interface AdminUser {
   id: string; email: string; fullName: string | null; createdAt: string; lastSignIn: string | null;
   organizations: UserOrg[]; isDataSpaceOwner: boolean; hasOrganizations: boolean;
-  transactionCount: number; approvalHistory: ApprovalEntry[]; recentTransactions: TransactionEntry[];
+  transactionCount: number; approvalHistory: ApprovalEntry[]; governanceLogs: GovernanceLogEntry[]; recentTransactions: TransactionEntry[];
 }
 
 const AdminUsers = () => {
@@ -160,6 +161,25 @@ const UserDetailPanel = ({ user, onClose, onUserDeleted, t, lang }: { user: Admi
     pre_approve: t("users.actionPreApproved"), cancel: t("users.actionCancelled"),
   };
 
+  // Build unified action timeline from approvalHistory + governanceLogs
+  const allActions = [
+    ...(user.approvalHistory ?? []).map((a) => ({
+      type: "approval" as const,
+      date: a.created_at,
+      description: actionLabels[a.action] || a.action,
+      notes: a.notes,
+      transactionId: a.transaction_id,
+      action: a.action,
+    })),
+    ...(user.governanceLogs ?? []).map((g) => ({
+      type: "governance" as const,
+      date: g.created_at,
+      description: g.message,
+      category: g.category,
+      level: g.level,
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   return (
     <div className="space-y-6">
       <SheetHeader>
@@ -209,19 +229,36 @@ const UserDetailPanel = ({ user, onClose, onUserDeleted, t, lang }: { user: Admi
         </TabsContent>
 
         <TabsContent value="audit" className="space-y-3 mt-4">
-          <p className="text-sm text-muted-foreground">{t("users.actionsRecorded", { count: user.approvalHistory.length })}</p>
-          {user.approvalHistory.length === 0 ? (
-            <p className="text-sm text-muted-foreground italic">{t("users.noApprovalActivity")}</p>
+          <p className="text-sm text-muted-foreground">{t("users.actionsRecorded", { count: allActions.length })}</p>
+          {allActions.length === 0 ? (
+            <p className="text-sm text-muted-foreground italic">{t("users.noActions")}</p>
           ) : (
             <div className="space-y-2">
-              {user.approvalHistory.map((entry, i) => (
+              {allActions.map((entry, i) => (
                 <Card key={i}><CardContent className="p-3 space-y-1">
                   <div className="flex items-center justify-between">
-                    <Badge variant={entry.action === "approve" ? "default" : entry.action === "deny" ? "destructive" : "secondary"} className="text-xs">{actionLabels[entry.action] || entry.action}</Badge>
-                    <span className="text-xs text-muted-foreground">{format(new Date(entry.created_at), "dd/MM/yyyy HH:mm")}</span>
+                    {entry.type === "approval" ? (
+                      <Badge variant={(entry as any).action === "approve" ? "default" : (entry as any).action === "deny" ? "destructive" : "secondary"} className="text-xs">{entry.description}</Badge>
+                    ) : (
+                      <Badge variant="outline" className="text-xs flex items-center gap-1">
+                        <Settings className="h-3 w-3" />
+                        {t("users.governanceAction")}
+                      </Badge>
+                    )}
+                    <span className="text-xs text-muted-foreground">{formatDate(entry.date, "dd/MM/yyyy HH:mm", lang)}</span>
                   </div>
-                  {entry.notes && <p className="text-xs text-muted-foreground italic">"{entry.notes}"</p>}
-                  <p className="text-xs font-mono text-muted-foreground truncate">TX: {entry.transaction_id.slice(0, 8)}...</p>
+                  {entry.type === "governance" && (
+                    <p className="text-xs text-foreground">{entry.description}</p>
+                  )}
+                  {entry.type === "approval" && (entry as any).notes && (
+                    <p className="text-xs text-muted-foreground italic">"{(entry as any).notes}"</p>
+                  )}
+                  {entry.type === "approval" && (
+                    <p className="text-xs font-mono text-muted-foreground truncate">TX: {(entry as any).transactionId?.slice(0, 8)}...</p>
+                  )}
+                  {entry.type === "governance" && (entry as any).category && (
+                    <p className="text-xs text-muted-foreground">{(entry as any).category} · {(entry as any).level}</p>
+                  )}
                 </CardContent></Card>
               ))}
             </div>
