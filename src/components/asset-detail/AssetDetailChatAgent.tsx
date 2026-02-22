@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, AlertTriangle, Sparkles } from "lucide-react";
 import { AgentAvatar } from "@/components/ai/AgentAvatar";
@@ -62,6 +63,7 @@ function getAriaContext(product: AssetDetailChatAgentProps["product"], schemaCol
 }
 
 export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChatAgentProps) => {
+  const { t } = useTranslation('catalogDetails');
   const { recordOperation } = useTokenWallet();
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -76,16 +78,27 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
     return aid.length > 12 ? `did:...${aid.slice(-4)}` : aid;
   }, [product.asset_id]);
 
-  const suggestedQuestions = [
-    "¿Qué datos contiene este dataset?",
-    "¿Para qué casos de uso puedo utilizarlo?",
-    "¿Cuáles son sus campos principales?",
-    "¿Cómo se integra con mi sistema actual?",
-  ];
+  const suggestedQuestions = useMemo(() => [
+    t('common.assetDetail.chat.q1'),
+    t('common.assetDetail.chat.q2'),
+    t('common.assetDetail.chat.q3'),
+    t('common.assetDetail.chat.q4'),
+  ], [t]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
+
+  const getGuardText = useCallback((key: string): string => {
+    const map: Record<string, string> = {
+      "guard.warning1": t('common.assetDetail.chat.guardWarning1'),
+      "guard.warning2": t('common.assetDetail.chat.guardWarning2'),
+      "guard.blocked": t('common.assetDetail.chat.guardBlocked'),
+      "guard.tooLong": t('common.assetDetail.chat.guardTooLong'),
+      "guard.invalidContent": t('common.assetDetail.chat.guardInvalid'),
+    };
+    return map[key] || t('common.assetDetail.chat.guardDefault');
+  }, [t]);
 
   const sendMessage = useCallback(async (text: string) => {
     if (!text.trim() || isLoading || isBlocked()) return;
@@ -126,9 +139,9 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
         body: JSON.stringify({ messages: allMessages, assetContext }),
       });
 
-      if (resp.status === 429) { upsert("⚠️ Demasiadas solicitudes. Por favor, espera un momento."); setIsLoading(false); return; }
-      if (resp.status === 402) { upsert("⚠️ Créditos insuficientes."); setIsLoading(false); return; }
-      if (!resp.ok || !resp.body) { upsert("⚠️ Error al conectar con el asistente. Intenta de nuevo."); setIsLoading(false); return; }
+      if (resp.status === 429) { upsert(t('common.assetDetail.chat.tooManyRequests')); setIsLoading(false); return; }
+      if (resp.status === 402) { upsert(t('common.assetDetail.chat.insufficientCredits')); setIsLoading(false); return; }
+      if (!resp.ok || !resp.body) { upsert(t('common.assetDetail.chat.connectionError')); setIsLoading(false); return; }
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
@@ -158,11 +171,11 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
       const tokensUsed = Math.max(50, Math.round(assistantSoFar.length * 1.3));
       recordOperation({ agent: "federated", caseLabel: "Asset Detail", question: text, tokensConsumed: tokensUsed });
     } catch {
-      upsert("⚠️ Error de conexión. Comprueba tu conexión a internet.");
+      upsert(t('common.assetDetail.chat.networkError'));
     } finally {
       setIsLoading(false);
     }
-  }, [messages, isLoading, recordOperation, assetContext]);
+  }, [messages, isLoading, recordOperation, assetContext, t, getGuardText]);
 
   return (
     <div className="rounded-xl border bg-card overflow-hidden">
@@ -173,13 +186,13 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold text-foreground flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-primary" /> Pregunta al Asistente IA
+                <Sparkles className="w-3 h-3 text-primary" /> {t('common.assetDetail.chat.title')}
               </span>
               <Badge variant="outline" className="text-[9px] px-1.5 py-0 font-mono">
                 {truncatedDid}
               </Badge>
             </div>
-            <p className="text-[10px] text-muted-foreground">Experto en el activo {product.asset_name}</p>
+            <p className="text-[10px] text-muted-foreground">{t('common.assetDetail.chat.expertIn')} {product.asset_name}</p>
           </div>
         </div>
         <TokenWalletBadge />
@@ -192,7 +205,7 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
             <div className="flex gap-2">
               <AgentAvatar state="idle" size={28} />
               <div className="max-w-[85%] px-3 py-2 rounded-xl bg-muted/50 text-xs">
-                <p>¡Hola! 👋 Soy tu <strong>Asistente IA</strong> experto en el ecosistema PROCUREDATA. Estoy analizando el activo <strong>{product.asset_name}</strong> para responder tus preguntas con precisión.</p>
+                <p dangerouslySetInnerHTML={{ __html: t('common.assetDetail.chat.greeting', { name: product.asset_name }) }} />
               </div>
             </div>
             <div className="flex flex-wrap gap-2 justify-center pt-2">
@@ -254,7 +267,7 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
 
       {/* Input */}
       <form onSubmit={(e) => { e.preventDefault(); sendMessage(input); }} className="flex items-center gap-2 px-4 py-3 border-t">
-        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Pregunta sobre este dataset..." className="flex-1 bg-transparent text-xs outline-none placeholder:text-muted-foreground" disabled={isLoading || isBlocked()} />
+        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder={t('common.assetDetail.chat.placeholder')} className="flex-1 bg-transparent text-xs outline-none placeholder:text-muted-foreground" disabled={isLoading || isBlocked()} />
         <button type="submit" disabled={!input.trim() || isLoading || isBlocked()} className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-opacity">
           <Send className="w-3.5 h-3.5" />
         </button>
@@ -262,14 +275,3 @@ export const AssetDetailChatAgent = ({ product, schemaColumns }: AssetDetailChat
     </div>
   );
 };
-
-function getGuardText(key: string): string {
-  const map: Record<string, string> = {
-    "guard.warning1": "⚠️ Advertencia 1/3: Contenido no permitido detectado.",
-    "guard.warning2": "⚠️ Advertencia 2/3: Último aviso antes del bloqueo.",
-    "guard.blocked": "🚫 Chat bloqueado por uso inadecuado.",
-    "guard.tooLong": "El mensaje es demasiado largo. Máximo 2000 caracteres.",
-    "guard.invalidContent": "Contenido no válido.",
-  };
-  return map[key] || "Contenido no permitido.";
-}
