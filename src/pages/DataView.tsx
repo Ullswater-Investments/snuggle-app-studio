@@ -796,14 +796,19 @@ const DataView = () => {
                           <Button 
                             variant="outline" 
                             className="w-full"
-                            onClick={() => {
-                              generateLicensePDF(
-                                transaction, 
-                                transaction.asset.product.name,
-                                transaction.holder_org.name,
-                                transaction.consumer_org.name
-                              );
-                              toast.success("Licencia descargada correctamente");
+                            onClick={async () => {
+                              try {
+                                await generateLicensePDF(
+                                  transaction, 
+                                  transaction.asset.product.name,
+                                  transaction.holder_org.name,
+                                  transaction.consumer_org.name
+                                );
+                                toast.success("Licencia descargada correctamente");
+                              } catch (e) {
+                                console.error("Error generating PDF:", e);
+                                toast.error("Error al generar la licencia");
+                              }
                             }}
                           >
                             <FileText className="mr-2 h-4 w-4" />
