@@ -36,10 +36,10 @@ export function SuccessStoryNavigator({ compact = false }: SuccessStoryNavigator
   const currentId = location.pathname.split("/").pop();
 
   return (
-    <div className="overflow-x-auto scrollbar-hide">
+    <div className="overflow-x-auto scrollbar-hide max-w-full">
       <div className={cn(
-        "flex gap-2 min-w-max pb-2",
-        compact ? "justify-start" : "justify-center flex-wrap"
+        "flex gap-2 pb-2",
+        compact ? "min-w-max justify-start" : "justify-center flex-wrap"
       )}>
         {cases.map((c) => {
           const Icon = c.icon;
