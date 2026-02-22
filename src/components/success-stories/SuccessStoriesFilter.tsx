@@ -37,7 +37,7 @@ export function SuccessStoriesFilter({
   };
 
   return (
-    <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b py-4 mb-8">
+    <div className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm border-b py-4 mb-8 max-w-full overflow-hidden">
       <div className="flex flex-col gap-4">
         {/* Green Procurement Strategic Toggle */}
         <div className="flex items-center justify-center md:justify-start">
@@ -68,8 +68,8 @@ export function SuccessStoriesFilter({
         </div>
 
         {/* Super-Categories Row */}
-        <div className="overflow-x-auto scrollbar-hide">
-          <div className="flex gap-2 min-w-max px-1">
+        <div className="w-full">
+          <div className="flex flex-wrap gap-2 px-1">
             {superCategories.map((superCat) => {
               const isActive = activeSuperCategory === superCat.id;
               const Icon = superCat.icon;
