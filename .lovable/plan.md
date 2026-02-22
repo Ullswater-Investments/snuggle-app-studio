@@ -1,17 +1,41 @@
 
 
-## Volver a 3 cards por línea en /success-stories
+## Añadir llaves de traducción `detail.askAgent` y `detail.caseArchitecture` en 7 idiomas
 
-### Cambio
+### Situación actual
 
-En `src/pages/SuccessStories.tsx` (línea 901), revertir la grilla de 4 columnas máximo a 3:
+- **ES, EN, FR, PT**: Tienen sección `detail` pero les faltan las llaves `askAgent` y `caseArchitecture`.
+- **DE, IT, NL**: No tienen sección `detail` en absoluto (ni `navigation` ni `narrative`). Estas secciones también se añadirán para completar la paridad.
 
-- De: `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6`
-- A: `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6`
+El componente `SuccessStoryDetail.tsx` ya usa `t('detail.askAgent', { ns: 'success' })` y `t('detail.caseArchitecture', { ns: 'success' })`, pero al no existir las llaves, se muestran las claves técnicas en la UI.
 
-Esto eliminará el breakpoint `xl:grid-cols-4` y mantendrá un máximo de 3 cards por línea, dando más espacio y respiración visual a cada tarjeta.
+---
 
-### Archivo modificado
+### Cambios
 
-- `src/pages/SuccessStories.tsx` (1 línea)
+**Archivos a modificar (4):**
+
+1. `src/locales/es/success.json` -- añadir 2 llaves dentro de `detail`
+2. `src/locales/en/success.json` -- añadir 2 llaves dentro de `detail`
+3. `src/locales/fr/success.json` -- añadir 2 llaves dentro de `detail`
+4. `src/locales/pt/success.json` -- añadir 2 llaves dentro de `detail`
+
+**Archivos a modificar (3) -- secciones completas nuevas:**
+
+5. `src/locales/de/success.json` -- añadir secciones `detail`, `navigation` y `narrative` completas (incluyendo `askAgent` y `caseArchitecture`)
+6. `src/locales/it/success.json` -- igual que DE
+7. `src/locales/nl/success.json` -- igual que DE
+
+### Traducciones
+
+| Llave | ES | EN | FR | DE | IT | PT | NL |
+|---|---|---|---|---|---|---|---|
+| `detail.askAgent` | Preguntar al Agente ARIA | Ask ARIA Agent | Demander a l'Agent ARIA | ARIA-Agent fragen | Chiedi all'Agente ARIA | Perguntar ao Agente ARIA | Vraag aan ARIA Agent |
+| `detail.caseArchitecture` | Arquitectura del Caso | Case Architecture | Architecture du Cas | Fallarchitektur | Architettura del Caso | Arquitetura do Caso | Case Architectuur |
+
+Para DE, IT y NL tambien se añadiran las llaves existentes de `detail` (`notFound`, `backToStories`, `verifiedOn`, `block`, `sectorImpactPanel`, `impactSimulator`, `ctaTitle`, `ctaDescription`, `exploreCatalog`, `viewServices`) y las secciones `navigation` y `narrative` para mantener la paridad completa.
+
+### Sin cambios en componentes
+
+El componente `SuccessStoryDetail.tsx` ya usa las llamadas correctas a `t()` con el namespace `success`, por lo que no necesita ninguna modificación.
 
