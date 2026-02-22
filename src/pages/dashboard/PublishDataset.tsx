@@ -187,7 +187,7 @@ const STEPS = [
 
 export default function PublishDataset() {
   const navigate = useNavigate();
-  const { activeOrg, activeOrgId } = useOrganizationContext();
+  const { activeOrg, activeOrgId, isDemo } = useOrganizationContext();
   const { user } = useAuth();
   const { autoApproveAssets, maintenanceMode } = useGovernanceSettings();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -593,6 +593,30 @@ export default function PublishDataset() {
   // Validación interna de seguridad: redirigir si no hay org activa
   if (!activeOrgId) {
     return <Navigate to="/dashboard" replace />;
+  }
+
+  // Demo mode: show blocking message
+  if (isDemo) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="max-w-md w-full">
+          <CardHeader className="text-center">
+            <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-950/30 flex items-center justify-center mx-auto mb-4">
+              <Lock className="h-8 w-8 text-amber-600 dark:text-amber-400" />
+            </div>
+            <CardTitle>Función no disponible</CardTitle>
+            <CardDescription>
+              La publicación de activos no está disponible en modo demostración.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button className="w-full" onClick={() => navigate("/dashboard")}>
+              Volver al Dashboard
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   return (

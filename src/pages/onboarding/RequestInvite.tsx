@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Users, ArrowLeft, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -5,11 +6,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
+import { toast } from "sonner";
 import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 
 export default function RequestInvite() {
   const navigate = useNavigate();
   const { t } = useTranslation('common');
+  const { isDemo } = useOrganizationContext();
+
+  // Block demo users
+  useEffect(() => {
+    if (isDemo) {
+      toast.error("Solicitud de invitación no disponible en modo demo");
+      navigate('/dashboard', { replace: true });
+    }
+  }, [isDemo, navigate]);
+
+  if (isDemo) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex flex-col items-center justify-center p-4">

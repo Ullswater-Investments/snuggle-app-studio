@@ -1,13 +1,16 @@
-import { Building2, Users, ArrowRight, Plus, UserPlus } from "lucide-react";
+import { Building2, Users, ArrowRight, Plus, UserPlus, Info } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
 
 export const WelcomeScreen = () => {
     const navigate = useNavigate();
     const { t } = useTranslation('common');
+    const { isDemo } = useOrganizationContext();
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -30,66 +33,88 @@ export const WelcomeScreen = () => {
                         {t('welcome.titlePrefix', 'Bienvenido a ')}<span className="procuredata-gradient font-bold tracking-tight">PROCUREDATA</span>
                     </h1>
                     <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                        {t('welcome.subtitle', 'Para comenzar a operar, necesitas asociar tu cuenta a una entidad legal.')}
+                        {isDemo 
+                            ? 'Estás explorando en Modo Demostración. Navega por el catálogo y descubre el potencial de la plataforma.'
+                            : t('welcome.subtitle', 'Para comenzar a operar, necesitas asociar tu cuenta a una entidad legal.')}
                     </p>
                 </div>
 
-                {/* Cards */}
-                <div className="grid md:grid-cols-2 gap-6 mt-12">
-                    {/* Card A: Register New Organization */}
-                    <Card className="group relative overflow-hidden border-2 border-transparent hover:border-primary/30 transition-all duration-300 hover:shadow-xl cursor-pointer bg-card/80 backdrop-blur-sm">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <CardHeader className="relative z-10 pb-2">
-                            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                                <Building2 className="h-8 w-8 text-primary" />
-                            </div>
-                            <CardTitle className="text-2xl font-bold">
-                                {t('welcome.registerOrg.title', 'Registrar Nueva Organización')}
-                            </CardTitle>
-                            <CardDescription className="text-base leading-relaxed">
-                                {t('welcome.registerOrg.description', 'Soy el representante legal o administrador. Quiero dar de alta mi empresa y verificarla en la red.')}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="relative z-10 pt-4">
-                            <Button
-                                variant="brand"
-                                className="w-full gap-2 text-base py-6 group-hover:shadow-lg transition-all"
-                                onClick={() => navigate('/onboarding/create-organization')}
-                            >
-                                <Plus className="h-5 w-5" />
-                                {t('welcome.registerOrg.button', 'Comenzar Registro')}
-                                <ArrowRight className="h-4 w-4 ml-auto group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                        </CardContent>
-                    </Card>
+                {isDemo ? (
+                    /* Demo mode: show info + catalog CTA */
+                    <div className="max-w-lg mx-auto space-y-6 mt-12">
+                        <Alert className="border-amber-500 bg-amber-50 dark:bg-amber-950/20">
+                            <Info className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                            <AlertDescription className="text-amber-900 dark:text-amber-100">
+                                En modo demostración, el registro de organizaciones y las invitaciones están deshabilitados.
+                            </AlertDescription>
+                        </Alert>
+                        <Button
+                            variant="brand"
+                            className="w-full gap-2 text-base py-6"
+                            onClick={() => navigate('/catalog')}
+                        >
+                            Explorar Catálogo de Datos
+                            <ArrowRight className="h-4 w-4 ml-auto" />
+                        </Button>
+                    </div>
+                ) : (
+                    /* Normal mode: registration cards */
+                    <div className="grid md:grid-cols-2 gap-6 mt-12">
+                        {/* Card A: Register New Organization */}
+                        <Card className="group relative overflow-hidden border-2 border-transparent hover:border-primary/30 transition-all duration-300 hover:shadow-xl cursor-pointer bg-card/80 backdrop-blur-sm">
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <CardHeader className="relative z-10 pb-2">
+                                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                                    <Building2 className="h-8 w-8 text-primary" />
+                                </div>
+                                <CardTitle className="text-2xl font-bold">
+                                    {t('welcome.registerOrg.title', 'Registrar Nueva Organización')}
+                                </CardTitle>
+                                <CardDescription className="text-base leading-relaxed">
+                                    {t('welcome.registerOrg.description', 'Soy el representante legal o administrador. Quiero dar de alta mi empresa y verificarla en la red.')}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="relative z-10 pt-4">
+                                <Button
+                                    variant="brand"
+                                    className="w-full gap-2 text-base py-6 group-hover:shadow-lg transition-all"
+                                    onClick={() => navigate('/onboarding/create-organization')}
+                                >
+                                    <Plus className="h-5 w-5" />
+                                    {t('welcome.registerOrg.button', 'Comenzar Registro')}
+                                    <ArrowRight className="h-4 w-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </CardContent>
+                        </Card>
 
-                    {/* Card B: Request to Join Existing */}
-                    <Card className="group relative overflow-hidden border-2 border-transparent hover:border-secondary/30 transition-all duration-300 hover:shadow-xl cursor-pointer bg-card/80 backdrop-blur-sm">
-                        <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <CardHeader className="relative z-10 pb-2">
-                            <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors">
-                                <Users className="h-8 w-8 text-secondary-foreground" />
-                            </div>
-                            <CardTitle className="text-2xl font-bold">
-                                {t('welcome.joinOrg.title', 'Solicitar Unirse a una Existente')}
-                            </CardTitle>
-                            <CardDescription className="text-base leading-relaxed">
-                                {t('welcome.joinOrg.description', 'Mi empresa ya utiliza ProcureData. Quiero solicitar acceso al administrador.')}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent className="relative z-10 pt-4">
-                            <Button
-                                variant="outline"
-                                className="w-full gap-2 text-base py-6 group-hover:shadow-lg transition-all border-2"
-                                onClick={() => navigate('/onboarding/request-invite')}
-                            >
-                                <UserPlus className="h-5 w-5" />
-                                {t('welcome.joinOrg.button', 'Solicitar Invitación')}
-                                <ArrowRight className="h-4 w-4 ml-auto group-hover:translate-x-1 transition-transform" />
-                            </Button>
-                        </CardContent>
-                    </Card>
-                </div>
+                        {/* Card B: Request to Join Existing */}
+                        <Card className="group relative overflow-hidden border-2 border-transparent hover:border-secondary/30 transition-all duration-300 hover:shadow-xl cursor-pointer bg-card/80 backdrop-blur-sm">
+                            <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <CardHeader className="relative z-10 pb-2">
+                                <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-4 group-hover:bg-secondary/20 transition-colors">
+                                    <Users className="h-8 w-8 text-secondary-foreground" />
+                                </div>
+                                <CardTitle className="text-2xl font-bold">
+                                    {t('welcome.joinOrg.title', 'Solicitar Unirse a una Existente')}
+                                </CardTitle>
+                                <CardDescription className="text-base leading-relaxed">
+                                    {t('welcome.joinOrg.description', 'Mi empresa ya utiliza ProcureData. Quiero solicitar acceso al administrador.')}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent className="relative z-10 pt-4">
+                                <Button
+                                    variant="outline"
+                                    className="w-full gap-2 text-base py-6 group-hover:shadow-lg transition-all border-2"
+                                    onClick={() => navigate('/onboarding/request-invite')}
+                                >
+                                    <UserPlus className="h-5 w-5" />
+                                    {t('welcome.joinOrg.button', 'Solicitar Invitación')}
+                                    <ArrowRight className="h-4 w-4 ml-auto group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </div>
+                )}
 
                 {/* Footer info */}
                 <p className="text-center text-sm text-muted-foreground mt-8">
