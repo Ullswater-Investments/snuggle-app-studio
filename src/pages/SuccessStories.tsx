@@ -841,12 +841,12 @@ const SuccessStories = () => {
 
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background w-full overflow-x-hidden">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border-b">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="container mx-auto px-4 py-16 md:py-24 relative">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative">
+          <div className="max-w-5xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
               <Award className="w-4 h-4" />
               {t('casesCount')}
@@ -865,7 +865,7 @@ const SuccessStories = () => {
       </div>
 
       {/* Search */}
-      <div className="container mx-auto px-4 py-6">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="relative w-full md:w-80 mx-auto md:mx-0">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
@@ -878,7 +878,7 @@ const SuccessStories = () => {
       </div>
 
       {/* Super-Category Filter */}
-      <div className="container mx-auto px-4">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <SuccessStoriesFilter 
           activeSuperCategory={activeSuperCategory}
           onSuperCategoryChange={setActiveSuperCategory}
@@ -890,15 +890,15 @@ const SuccessStories = () => {
       </div>
 
       {/* Navigator */}
-      <div className="container mx-auto px-4 pb-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-8">
         <SuccessStoryNavigator />
       </div>
 
       {/* Cases Grid */}
-      <div className="container mx-auto px-4 pb-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <AnimatePresence mode="popLayout">
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
             layout
           >
             {filteredCases.map((caseItem, index) => (
