@@ -1,67 +1,67 @@
 
 
-## Refactorizacion de la Vista de Detalle del Activo (ProductDetail.tsx)
-
-### Objetivo
-
-Redisenar `src/pages/ProductDetail.tsx` para que tenga un layout profesional con metricas destacadas, pestanas completas y un panel de accion sticky conectado al flujo de solicitud.
-
----
+## Rediseno de la Vista de Detalle del Activo (ProductDetail.tsx)
 
 ### Cambios en un unico archivo: `src/pages/ProductDetail.tsx`
 
-**1. Consulta mejorada a Base de Datos**
+---
 
-- Mantener la consulta actual pero ampliarla para traer tambien `schema_definition` del producto y `custom_metadata` del activo.
-- En el fallback (cuando marketplace_listings no devuelve datos), incluir estos campos adicionales en el select:
-  ```
-  product:data_products(name, description, category, schema_definition, version),
-  org:organizations!subject_org_id(id, name)
-  ```
-- Ampliar la interfaz `MarketplaceListing` para incluir `version`, `schema_definition`, `custom_metadata` y `description` (del producto).
+### 1. Metricas Hero con fondo ambar/naranja
 
-**2. Layout Principal - Cabecera (sin cambios estructurales)**
+**Estado actual**: Las 4 tarjetas de metricas usan `bg-primary/5` (azulado sutil).
+**Cambio**: Reemplazar el fondo por `bg-amber-50 border-amber-200` (naranja/ambar como en la referencia). Actualizar los iconos a color ambar (`text-amber-600`). Ajustar el conteo de campos para que use `schema_definition.columns` si existe como array, o las keys del objeto si no.
 
-- Mantener las badges de Categoria y Estado.
-- Mantener el titulo `product.asset_name` y descripcion.
-- Mover la mini-card del proveedor debajo de la descripcion (ya existe).
+**Eliminar la descripcion repetida** en la pestana "Descripcion" (linea 362 repite `product.asset_description`). La descripcion solo aparecera en la cabecera superior (linea 276).
 
-**3. Metricas Rapidas (NUEVO - entre cabecera y tabs)**
+---
 
-- Insertar una cuadricula de 4 mini-cards con fondo tematico (usando `bg-primary/10` o `bg-amber-50`):
-  - **Version**: Muestra `product.version` o "2.1".
-  - **Frecuencia**: "Tiempo Real" (estatico o de metadata).
-  - **N. de Campos**: Cuenta las keys del `schema_definition` si existe, o muestra un valor por defecto.
-  - **Formato**: "JSON / API" (estatico o de metadata).
-- Cada card tendra un icono, etiqueta superior en texto pequeno y el valor en negrita.
+### 2. Pestana de Politicas de Uso - Diseno PONTUS-X con 3 bloques
 
-**4. Sistema de Pestanas (refactorizar las existentes)**
+**Estado actual**: Muestra un listado generico de items con el mismo icono/color.
+**Cambio**: Reemplazar el contenido de la pestana "Politicas" (lineas 429-480) por un diseno de 3 bloques diferenciados:
 
-Reemplazar las 6 pestanas actuales por estas 6:
+- **Permisos (Verde)**: Card con borde verde, icono `CheckCircle2` verde, titulo "Permisos". Lista `access_policy.permissions` como items. Si no existen, mostrar placeholders estaticos ("Uso comercial permitido", "Analisis interno").
+- **Prohibiciones (Rojo)**: Card con borde rojo, icono `XCircle` rojo, titulo "Prohibiciones". Lista `access_policy.prohibitions`. Placeholders: "Redistribucion a terceros", "Uso para training IA sin consentimiento".
+- **Obligaciones (Azul)**: Card con borde azul, icono `AlertCircle` azul, titulo "Obligaciones". Lista `access_policy.obligations`. Placeholders: "Conformidad RGPD", "Notificacion de brechas en 72h".
+- **Terminos y Condiciones**: Si `access_policy.terms_url` existe, mostrar una Card con icono `ExternalLink` y un enlace clicable al documento.
 
-| Pestana actual | Nueva pestana | Cambio |
-|---|---|---|
-| Descripcion (overview) | Descripcion | Mantener contenido, agregar casos de uso |
-| Especificaciones (specs) | Esquema | Renderizar `schema_definition` como tabla con columnas: Campo, Tipo, Descripcion. Si no hay esquema, mostrar JSON raw |
-| Vista Previa (preview) | Politicas de Uso | Mostrar permisos/restricciones desde `custom_metadata.access_policy` o un placeholder estatico |
-| Gobernanza (governance) | Muestra | Mover aqui el contenido de Vista Previa (sample data con ArrayDataView) |
-| Asistente IA (chat) | Asistente IA | Mantener con placeholder "El asistente se implementara proximamente" si no hay AssetChatInterface, o mantener el componente existente |
-| Resenas (reviews) | Resenas | Mantener el placeholder estatico existente |
+Importaciones nuevas necesarias: `XCircle`, `AlertCircle`, `ExternalLink` de lucide-react.
 
-**5. Panel de Accion Sticky (refactorizar el existente)**
+---
 
-- Mantener la estructura actual de la card sticky (ya existe con precio, checkmarks, boton).
-- Cambios:
-  - **Boton principal**: Cambiar la navegacion de `navigate("/requests/new", { state: ... })` a `navigate("/requests/new?asset=" + product.asset_id)` para pasar el asset por query param.
-  - **Boton secundario** (NUEVO): Anadir un `Button variant="outline"` debajo con texto "Descargar Ficha Tecnica" y un icono `FileText`.
-  - **Resumen inferior** (NUEVO): Anadir una tabla pequena debajo de los botones con 3 filas: Proveedor (nombre), Version y Estado del activo.
+### 3. Pestana de Esquema - Sin cambios estructurales
+
+La tabla actual (Campo, Tipo en badge, Descripcion) ya coincide con el diseno de referencia. Solo se ajustara el conteo de campos en la cabecera para que use `schema_definition.columns.length` si el esquema tiene formato de array en `columns`.
+
+---
+
+### 4. Panel Lateral - Descarga de Ficha Tecnica funcional
+
+**Estado actual**: El boton "Descargar Ficha Tecnica" no tiene funcionalidad (linea 643).
+**Cambio**: Implementar la funcion `handleDownloadSheet` que:
+1. Construye un objeto JSON con toda la metadata del activo (info general, esquema, politicas).
+2. Crea un Blob y lo descarga como archivo `.json` con nombre `ficha-tecnica-[asset_id].json`.
+
+El boton principal "Solicitar Acceso" ya navega correctamente a `/requests/new?asset=ID` (linea 243), no requiere cambios.
+
+---
+
+### 5. Placeholders elegantes para Asistente IA y Resenas
+
+**Estado actual**: El placeholder de Asistente IA es basico (lineas 508-527). Las resenas muestran datos mock (lineas 529-555).
+**Cambio**:
+- **Asistente IA**: Redisenar el estado vacio con un gradiente sutil de fondo, un icono mas grande con animacion pulse, y texto descriptivo mas elaborado sobre las capacidades futuras.
+- **Resenas**: Reemplazar los mocks por un estado vacio elegante con icono de `Star`, mensaje "Aun no hay resenas verificadas" y subtexto explicando el sistema de verificacion via Smart Contract.
 
 ---
 
 ### Resumen tecnico
 
-- **Archivo modificado**: `src/pages/ProductDetail.tsx` (unico archivo)
-- **Sin cambios en BD**: No se requieren migraciones
-- **Sin nuevos componentes**: Todo se implementa inline en el mismo archivo
-- **Compatibilidad**: Se mantiene la logica de demo mode, wallet y autenticacion existente
+| Aspecto | Detalle |
+|---|---|
+| Archivo modificado | `src/pages/ProductDetail.tsx` (unico) |
+| Importaciones nuevas | `XCircle`, `AlertCircle`, `ExternalLink` de lucide-react |
+| Cambios en BD | Ninguno |
+| Nuevos componentes | Ninguno (todo inline) |
+| Compatibilidad | Se mantiene demo mode, wallet y autenticacion existente |
 
