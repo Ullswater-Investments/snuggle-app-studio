@@ -44,6 +44,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ArrayDataView } from "@/components/ArrayDataView";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
+import { AssetDetailChatAgent } from "@/components/asset-detail/AssetDetailChatAgent";
 
 interface MarketplaceListing {
   asset_id: string;
@@ -714,18 +715,7 @@ export default function ProductDetail() {
 
               {/* Tab: Asistente IA */}
               <TabsContent value="chat" className="m-0">
-                <div className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 dark:from-primary/10 dark:via-primary/20 dark:to-primary/10">
-                  <div className="flex flex-col items-center justify-center py-16 text-center space-y-5 px-6">
-                    <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center animate-pulse">
-                      <Bot className="h-10 w-10 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold">Asistente IA — Próximamente</h3>
-                    <p className="text-sm text-muted-foreground max-w-md">
-                      Podrás interactuar con un asistente inteligente que te ayudará a explorar el esquema, generar queries SQL de ejemplo, evaluar la calidad del dataset y obtener recomendaciones de uso personalizadas.
-                    </p>
-                    <Badge variant="secondary" className="text-xs">En desarrollo</Badge>
-                  </div>
-                </div>
+                <AssetDetailChatAgent product={product} schemaColumns={schemaColumns} />
               </TabsContent>
 
               {/* Tab: Reseñas */}
