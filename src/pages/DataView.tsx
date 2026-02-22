@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ArrowLeft, Download, Send, FileText, Building2, Info, Activity, TrendingUp, ShieldCheck, Award, Zap, Copy, Key, ExternalLink, Database, Clock, FileJson, Globe, Star, CheckCircle2, XCircle, AlertCircle, Scale } from "lucide-react";
+import { Download, Send, FileText, Building2, Info, Activity, TrendingUp, ShieldCheck, Award, Zap, Copy, Key, ExternalLink, Database, Clock, FileJson, Globe, Star, CheckCircle2, XCircle, AlertCircle, Scale, Eye } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { ESGDataView } from "@/components/ESGDataView";
@@ -31,6 +31,22 @@ import { generateLicensePDF } from "@/utils/pdfGenerator";
 import { AccessHistoryTable } from "@/components/AccessHistoryTable";
 
 // EnvironmentalImpactCard removed – no longer displayed in sidebar
+
+const STATUS_LABELS: Record<string, string> = {
+  created: "Creada",
+  initiated: "Iniciada",
+  pending: "Pendiente",
+  pending_subject: "Pendiente (Proveedor)",
+  pending_holder: "Pendiente (Custodio)",
+  pre_approved: "Pre-aprobada",
+  approved: "Aprobada",
+  completed: "Completado",
+  denied: "Denegada",
+  denied_subject: "Denegada (Proveedor)",
+  denied_holder: "Denegada (Custodio)",
+  cancelled: "Cancelada",
+  revoked: "Revocado",
+};
 
 const DataView = () => {
   const { id } = useParams<{ id: string }>();
@@ -295,9 +311,6 @@ const DataView = () => {
         <Card>
           <CardContent className="pt-6">
             <p className="text-center">Transacción no encontrada</p>
-            <Button className="mt-4" onClick={() => navigate("/requests")}>
-              Volver a solicitudes
-            </Button>
           </CardContent>
         </Card>
       </div>
@@ -338,12 +351,7 @@ const DataView = () => {
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto p-6">
-        <div className="flex items-center justify-between mb-6">
-          <Button variant="ghost" onClick={() => navigate("/requests")}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Volver a solicitudes
-          </Button>
-          
+        <div className="flex items-center justify-end mb-6">
           {canViewData && activeOrg?.id === transaction.subject_org_id && (
             <RevokeAccessButton 
               transactionId={id || ""} 
@@ -458,9 +466,6 @@ const DataView = () => {
                    <TabsTrigger value="sample" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
                      Muestra
                    </TabsTrigger>
-                   <TabsTrigger value="quality" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
-                     Calidad
-                   </TabsTrigger>
                    <TabsTrigger value="policies" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
                      <Scale className="h-4 w-4 mr-1.5" />
                      Políticas de Acceso
@@ -486,9 +491,9 @@ const DataView = () => {
                        </div>
                        <div>
                          <p className="text-sm text-muted-foreground">Estado</p>
-                         <Badge variant={transaction.status === "completed" ? "default" : "secondary"}>
-                           {transaction.status}
-                         </Badge>
+                          <Badge variant={transaction.status === "completed" ? "default" : "secondary"}>
+                            {STATUS_LABELS[transaction.status] || transaction.status}
+                          </Badge>
                        </div>
                      </div>
                    </div>
@@ -560,41 +565,14 @@ const DataView = () => {
                       </ScrollArea>
                     </>
                   ) : (
-                    <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
-                      <Database className="h-10 w-10 mb-3 opacity-40" />
-                      <p className="font-medium text-foreground">Sin muestras disponibles</p>
-                      <p className="text-sm text-center max-w-md mt-1">
-                        El proveedor no ha proporcionado datos de ejemplo para este activo todavía.
-                      </p>
-                    </div>
-                  )}
-                </TabsContent>
-
-                {/* Quality Tab */}
-                <TabsContent value="quality" className="p-6 space-y-6">
-                  {qualityMetrics ? (
-                    <>
-                      <h3 className="font-semibold text-lg mb-4">Métricas de Calidad</h3>
-                      <div className="grid md:grid-cols-2 gap-6">
-                        {Object.entries(qualityMetrics).map(([key, value]) => (
-                          <div key={key} className="space-y-2">
-                            <div className="flex justify-between items-center">
-                              <span className="capitalize font-medium">
-                                {key === "completeness" ? "Completitud" : key === "accuracy" ? "Precisión" : key === "timeliness" ? "Actualización" : "Consistencia"}
-                              </span>
-                              <span className="text-lg font-bold text-primary">{value as number}%</span>
-                            </div>
-                            <Progress value={value as number} className="h-2" />
-                          </div>
-                        ))}
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-muted/30">
+                        <Eye className="h-10 w-10 text-muted-foreground" />
                       </div>
-                    </>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
-                      <AlertCircle className="h-10 w-10 mb-3 opacity-40" />
-                      <p className="font-medium text-foreground">Sin métricas de calidad</p>
-                      <p className="text-sm text-center max-w-md mt-1">
-                        El proveedor no ha proporcionado métricas de calidad para este activo todavía.
+                      <h3 className="text-lg font-semibold mb-2">Muestra no disponible</h3>
+                      <p className="text-sm text-muted-foreground max-w-md">
+                        El proveedor no ha proporcionado una muestra de datos para este activo.
+                        Puede solicitar más información técnica contactando con el proveedor.
                       </p>
                     </div>
                   )}
@@ -680,7 +658,7 @@ const DataView = () => {
                   Los datos solo están disponibles cuando la transacción está completada.
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Estado actual: <Badge variant="secondary">{transaction.status}</Badge>
+                  Estado actual: <Badge variant="secondary">{STATUS_LABELS[transaction.status] || transaction.status}</Badge>
                 </p>
               </CardContent>
             </Card>
@@ -708,13 +686,17 @@ const DataView = () => {
                           <ShieldCheck className="h-5 w-5 text-primary" />
                           Acceso al Activo
                         </CardTitle>
-                        <CardDescription>
-                          Este activo se consume a través del Gateway seguro de PROCUREDATA. Los datos se obtienen en tiempo real desde la fuente del proveedor.
+                       <CardDescription>
+                          Este activo se consume a través del Access Controller del espacio de datos.
+                          Los datos se obtienen en tiempo real desde la fuente del proveedor,
+                          garantizando la privacidad y seguridad del intercambio.
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <p className="text-sm text-muted-foreground">
-                          Al descargar, el Gateway se conecta de forma segura al proveedor y te entrega los datos actualizados sin exponer credenciales técnicas.
+                          Al descargar, el Access Controller verifica tus permisos y se conecta
+                          de forma segura al proveedor, entregándote los datos actualizados
+                          sin exponer credenciales técnicas.
                         </p>
                         <Button onClick={handleGatewayDownload} className="w-full">
                           <Download className="mr-2 h-4 w-4" />
