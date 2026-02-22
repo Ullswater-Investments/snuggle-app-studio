@@ -22,39 +22,43 @@ const ROLE_MESSAGES: Record<string, {
   created: {
     consumer: {
       title: (name) => `${name}: Solicitud enviada`,
-      message: (name) => `Tu solicitud para ${name} ha sido enviada para aprobación.`,
+      message: (name) => `Tu petición para ${name} está en manos del proveedor`,
     },
     provider: {
-      title: (name) => `${name}: Nueva solicitud recibida`,
-      message: (name) => `Has recibido una nueva solicitud de acceso para ${name}.`,
+      title: (name) => `${name}: Nueva solicitud`,
+      message: (name) => `Has recibido una petición de acceso para ${name}`,
     },
   },
   pre_approved: {
     consumer: {
       title: (name) => `${name}: Pre-aprobada`,
-      message: (name) => `Tu solicitud para ${name} ha sido pre-aprobada por el proveedor.`,
+      message: (name) => `Tu solicitud para ${name} ha sido pre-aprobada. Pendiente de aprobación final`,
     },
   },
   approved: {
     consumer: {
-      title: (name) => `${name}: Solicitud aprobada`,
-      message: (name) => `Tu solicitud para ${name} ha sido aprobada. Los datos están disponibles.`,
+      title: (name) => `${name}: Acceso concedido`,
+      message: (name) => `Ya puedes explorar los datos de ${name}`,
+    },
+    provider: {
+      title: (name) => `${name}: Operación completada`,
+      message: (name) => `Has autorizado el acceso a ${name}`,
     },
   },
   denied: {
     consumer: {
       title: (name) => `${name}: Solicitud denegada`,
-      message: (name) => `Tu solicitud para ${name} ha sido denegada.`,
+      message: (name) => `Tu petición para ${name} no ha sido aceptada`,
     },
     provider: {
       title: (name) => `${name}: Solicitud denegada`,
-      message: (name) => `Has denegado la solicitud de acceso para ${name}.`,
+      message: (name) => `Has denegado la solicitud de acceso para ${name}`,
     },
   },
   completed: {
     shared: {
       title: (name) => `${name}: Intercambio completado`,
-      message: (name) => `El intercambio de datos de ${name} se ha completado exitosamente.`,
+      message: (name) => `El intercambio de datos de ${name} se ha completado`,
     },
   },
 };
@@ -208,7 +212,7 @@ serve(async (req) => {
             organization_id: transaction.consumer_org_id,
             title: roleMessages.consumer.title(productName),
             message: roleMessages.consumer.message(productName),
-            type: eventType === "denied" ? "warning" : "info",
+            type: eventType === "approved" ? "success" : eventType === "denied" ? "warning" : "info",
             link,
           });
         }
@@ -223,7 +227,7 @@ serve(async (req) => {
             organization_id: transaction.subject_org_id,
             title: roleMessages.provider.title(productName),
             message: roleMessages.provider.message(productName),
-            type: eventType === "denied" ? "warning" : "info",
+            type: eventType === "approved" ? "success" : eventType === "denied" ? "warning" : "info",
             link,
           });
         }
@@ -240,7 +244,7 @@ serve(async (req) => {
             organization_id: null,
             title: roleMessages.shared.title(productName),
             message: roleMessages.shared.message(productName),
-            type: "info",
+            type: "success",
             link,
           });
         }
