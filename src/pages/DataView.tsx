@@ -75,9 +75,9 @@ const DataView = () => {
             sample_data,
             product:data_products (name, description, category, version, schema_definition)
           ),
-          consumer_org:organizations!data_transactions_consumer_org_id_fkey (name, kyb_verified),
-          subject_org:organizations!data_transactions_subject_org_id_fkey (name, kyb_verified),
-          holder_org:organizations!data_transactions_holder_org_id_fkey (name)
+          consumer_org:organizations!data_transactions_consumer_org_id_fkey (name, kyb_verified, tax_id, sector, description),
+          subject_org:organizations!data_transactions_subject_org_id_fkey (name, kyb_verified, tax_id, sector, description),
+          holder_org:organizations!data_transactions_holder_org_id_fkey (name, tax_id, sector, description)
         `)
         .eq("id", id)
         .single();
@@ -798,11 +798,32 @@ const DataView = () => {
                             className="w-full"
                             onClick={async () => {
                               try {
+                                // Fetch approval date
+                                const { data: approvalRecord } = await supabase
+                                  .from("approval_history")
+                                  .select("created_at")
+                                  .eq("transaction_id", transaction.id)
+                                  .eq("action", "approve")
+                                  .order("created_at", { ascending: false })
+                                  .limit(1)
+                                  .maybeSingle();
+
                                 await generateLicensePDF(
                                   transaction, 
                                   transaction.asset.product.name,
-                                  transaction.holder_org.name,
-                                  transaction.consumer_org.name
+                                  {
+                                    name: transaction.holder_org.name,
+                                    tax_id: transaction.holder_org.tax_id,
+                                    sector: transaction.holder_org.sector,
+                                    description: transaction.holder_org.description,
+                                  },
+                                  {
+                                    name: transaction.consumer_org.name,
+                                    tax_id: transaction.consumer_org.tax_id,
+                                    sector: transaction.consumer_org.sector,
+                                    description: transaction.consumer_org.description,
+                                  },
+                                  approvalRecord?.created_at || undefined
                                 );
                                 toast.success("Licencia descargada correctamente");
                               } catch (e) {
