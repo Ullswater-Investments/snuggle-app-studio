@@ -33,7 +33,8 @@
     "description": "Descripción",
     "schema": "Esquema",
     "sample": "Muestra",
-    "policies": "Políticas de Acceso"
+    "policies": "Políticas de Acceso",
+    "aiAssistant": "Asistente IA"
   },
   "description": {
     "generalInfo": "Información General",
@@ -95,7 +96,7 @@
     "downloading": "Descargando...",
     "downloadUpdated": "Descargar Archivo Actualizado",
     "downloadTechSheet": "Descargar Ficha Técnica",
-    "downloadLicensePDF": "Descargar Licencia PDF",
+    "downloadLicensePDF": "Descargar Contrato Digital de Gobernanza",
     "noDataForOrg": "No hay datos completados para <strong>{{org}}</strong>.",
     "providerNoData": "Los proveedores no reciben datos, solo los envían.",
     "holderNoData": "Los holders custodian datos pero no los consumen directamente.",
@@ -159,8 +160,8 @@
     "gatewayProviderError": "No se pudo conectar con el servidor del proveedor. Inténtelo de nuevo en unos minutos.",
     "gatewayError": "Error al descargar: {{error}}",
     "techSheetSuccess": "Ficha técnica descargada",
-    "licenseSuccess": "Licencia descargada correctamente",
-    "licenseError": "Error al generar la licencia",
+    "licenseSuccess": "Contrato de Gobernanza descargado",
+    "licenseError": "Error al generar el Contrato de Gobernanza",
     "copied": "Copiado al portapapeles"
   }
 }

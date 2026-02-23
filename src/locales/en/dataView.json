@@ -33,7 +33,8 @@
     "description": "Description",
     "schema": "Schema",
     "sample": "Sample",
-    "policies": "Access Policies"
+    "policies": "Access Policies",
+    "aiAssistant": "AI Assistant"
   },
   "description": {
     "generalInfo": "General Information",
@@ -95,7 +96,7 @@
     "downloading": "Downloading...",
     "downloadUpdated": "Download Updated File",
     "downloadTechSheet": "Download Technical Sheet",
-    "downloadLicensePDF": "Download License PDF",
+    "downloadLicensePDF": "Download Digital Governance Contract",
     "noDataForOrg": "No completed data for <strong>{{org}}</strong>.",
     "providerNoData": "Providers do not receive data, they only send it.",
     "holderNoData": "Holders custody data but do not consume it directly.",
@@ -159,8 +160,8 @@
     "gatewayProviderError": "Could not connect to the provider's server. Please try again in a few minutes.",
     "gatewayError": "Download error: {{error}}",
     "techSheetSuccess": "Technical sheet downloaded",
-    "licenseSuccess": "License downloaded successfully",
-    "licenseError": "Error generating the license",
+    "licenseSuccess": "Governance Contract downloaded",
+    "licenseError": "Error generating the Governance Contract",
     "copied": "Copied to clipboard"
   }
 }

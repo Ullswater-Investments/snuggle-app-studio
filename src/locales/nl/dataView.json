@@ -33,7 +33,8 @@
     "description": "Beschrijving",
     "schema": "Schema",
     "sample": "Voorbeeld",
-    "policies": "Toegangsbeleid"
+    "policies": "Toegangsbeleid",
+    "aiAssistant": "AI-Assistent"
   },
   "description": {
     "generalInfo": "Algemene Informatie",
@@ -95,7 +96,7 @@
     "downloading": "Downloaden...",
     "downloadUpdated": "Bijgewerkt Bestand Downloaden",
     "downloadTechSheet": "Technisch Blad Downloaden",
-    "downloadLicensePDF": "Licentie PDF Downloaden",
+    "downloadLicensePDF": "Digitaal Governance-Contract Downloaden",
     "noDataForOrg": "Geen voltooide gegevens voor <strong>{{org}}</strong>.",
     "providerNoData": "Aanbieders ontvangen geen gegevens, ze verzenden ze alleen.",
     "holderNoData": "Bewaarders beheren gegevens maar consumeren ze niet direct.",
@@ -159,8 +160,8 @@
     "gatewayProviderError": "Kan geen verbinding maken met de server van de aanbieder. Probeer het over een paar minuten opnieuw.",
     "gatewayError": "Downloadfout: {{error}}",
     "techSheetSuccess": "Technisch blad gedownload",
-    "licenseSuccess": "Licentie succesvol gedownload",
-    "licenseError": "Fout bij het genereren van de licentie",
+    "licenseSuccess": "Governance-Contract gedownload",
+    "licenseError": "Fout bij het genereren van het Governance-Contract",
     "copied": "Gekopieerd naar klembord"
   }
 }

@@ -33,7 +33,8 @@
     "description": "Beschreibung",
     "schema": "Schema",
     "sample": "Beispieldaten",
-    "policies": "Zugriffsrichtlinien"
+    "policies": "Zugriffsrichtlinien",
+    "aiAssistant": "KI-Assistent"
   },
   "description": {
     "generalInfo": "Allgemeine Informationen",
@@ -95,7 +96,7 @@
     "downloading": "Wird heruntergeladen...",
     "downloadUpdated": "Aktualisierte Datei herunterladen",
     "downloadTechSheet": "Technisches Datenblatt herunterladen",
-    "downloadLicensePDF": "Lizenz-PDF herunterladen",
+    "downloadLicensePDF": "Digitalen Governance-Vertrag herunterladen",
     "noDataForOrg": "Keine abgeschlossenen Daten für <strong>{{org}}</strong>.",
     "providerNoData": "Anbieter empfangen keine Daten, sie senden sie nur.",
     "holderNoData": "Verwahrer verwahren Daten, konsumieren sie aber nicht direkt.",
@@ -159,8 +160,8 @@
     "gatewayProviderError": "Verbindung zum Server des Anbieters konnte nicht hergestellt werden. Bitte versuchen Sie es in einigen Minuten erneut.",
     "gatewayError": "Download-Fehler: {{error}}",
     "techSheetSuccess": "Technisches Datenblatt heruntergeladen",
-    "licenseSuccess": "Lizenz erfolgreich heruntergeladen",
-    "licenseError": "Fehler beim Erstellen der Lizenz",
+    "licenseSuccess": "Governance-Vertrag heruntergeladen",
+    "licenseError": "Fehler beim Erstellen des Governance-Vertrags",
     "copied": "In die Zwischenablage kopiert"
   }
 }
