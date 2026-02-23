@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
-import { Bell } from "lucide-react";
+import { Bell, Download } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -123,7 +123,12 @@ export function NotificationsBell() {
                 >
                   <div className={`mt-1 h-2 w-2 rounded-full shrink-0 ${!n.is_read ? 'bg-blue-600' : 'bg-transparent'}`} />
                   <div className="space-y-1 flex-1 min-w-0">
-                    <p className="text-sm font-medium leading-tight truncate">{n.title}</p>
+                    <p className="text-sm font-medium leading-tight truncate flex items-center gap-1.5">
+                      {n.title.toLowerCase().includes("descarga") && (
+                        <Download className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                      )}
+                      {n.title}
+                    </p>
                     {n.message && <p className="text-xs text-muted-foreground line-clamp-2">{n.message}</p>}
                     <p className="text-[10px] text-muted-foreground/70">
                       {formatDistanceToNow(new Date(n.created_at), {

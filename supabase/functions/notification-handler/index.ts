@@ -63,12 +63,12 @@ const ROLE_MESSAGES: Record<string, {
   },
   download: {
     consumer: {
-      title: (name) => `📥 Descarga completada: ${name}`,
+      title: (name) => `Descarga completada: ${name}`,
       message: (name) => `Has obtenido una copia actualizada de ${name}`,
     },
     provider: {
-      title: (name) => `📊 Uso de datos: ${name}`,
-      message: (_name) => `Un consumidor ha descargado el activo ${_name}`,
+      title: (name) => `Descarga de activo: ${name}`,
+      message: (_name) => `La organización {consumerName} ha obtenido una copia actualizada de los datos`,
     },
   },
 };
@@ -239,7 +239,7 @@ serve(async (req) => {
         for (const uid of userIds) {
           // For download events, enrich provider message with consumer org name
           const providerMessage = eventType === "download"
-            ? `La organización ${consumerName} ha descargado el activo ${productName}`
+            ? `La organización ${consumerName} ha obtenido una copia actualizada de los datos`
             : roleMessages.provider.message(productName);
           notifRows.push({
             user_id: uid,
