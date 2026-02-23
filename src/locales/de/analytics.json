@@ -10,10 +10,17 @@
   "kpis": {
     "totalSales": "Gesamtverkäufe",
     "activeSubscriptions": "Aktive Abonnements",
-    "revenue": "Einnahmen",
+    "revenue": "Gesamteinnahmen",
     "views": "Produktansichten",
     "conversionRate": "Konversionsrate",
-    "avgOrderValue": "Durchschnittlicher Bestellwert"
+    "avgOrderValue": "Durchschnittlicher Bestellwert",
+    "vsPreviousMonth": "vs Vormonat",
+    "completedSales": "Abgeschlossene Verkäufe",
+    "last6Months": "Letzte 6 Monate",
+    "uniqueCustomers": "Einzigartige Kunden",
+    "activeBuyers": "Aktive Käufer",
+    "averageRating": "Durchschnittliche Bewertung",
+    "basedOnReviews": "Basierend auf {{count}} Bewertungen"
   },
   "tabs": {
     "overview": "Übersicht",
@@ -25,7 +32,26 @@
     "salesOverTime": "Verkäufe im Zeitverlauf",
     "revenueByProduct": "Einnahmen nach Produkt",
     "customerAcquisition": "Kundenakquise",
-    "topProducts": "Top-Produkte"
+    "topProducts": "Top-Produkte nach Einnahmen",
+    "monthlyRevenueSales": "Monatliche Einnahmen & Verkäufe",
+    "last6MonthsEvolution": "Entwicklung der letzten 6 Monate.",
+    "sales": "Verkäufe",
+    "revenueEur": "Einnahmen (€)",
+    "revenueLabel": "Einnahmen",
+    "noSalesData": "Noch keine Verkaufsdaten",
+    "topProductsDescription": "Leistung Ihrer meistverkauften Assets.",
+    "noProductsSold": "Noch keine Produkte verkauft",
+    "unknownProduct": "Unbekanntes Produkt"
+  },
+  "customers": {
+    "top5": "Top 5 Kunden",
+    "description": "Ihre besten Käufer nach Transaktionsvolumen.",
+    "purchase": "Kauf",
+    "purchases": "Käufe",
+    "totalVolume": "Gesamtvolumen",
+    "noCustomers": "Sie haben noch keine Kunden.",
+    "salesWillAppear": "Abgeschlossene Verkäufe erscheinen hier.",
+    "unknownCustomer": "Unbekannter Kunde"
   },
   "filters": {
     "period": "Zeitraum",

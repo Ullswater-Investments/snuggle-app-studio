@@ -7,9 +7,23 @@ import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMemo } from "react";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, fr, pt, de, it, nl, enUS } from "date-fns/locale";
+import { Locale } from "date-fns";
 import { CHART_COLORS, CHART_TOOLTIP_STYLE, CHART_GRID_STYLE, CHART_ANIMATION_CONFIG } from "@/lib/chartTheme";
 import { StaggerContainer, StaggerItem, ChartFadeIn } from "@/components/AnimatedSection";
+import { useTranslation } from "react-i18next";
+
+const dateFnsLocales: Record<string, Locale> = { es, fr, pt, de, it, nl, en: enUS };
+
+const intlLocaleMap: Record<string, string> = {
+  es: 'es-ES',
+  en: 'en-US',
+  fr: 'fr-FR',
+  pt: 'pt-PT',
+  de: 'de-DE',
+  it: 'it-IT',
+  nl: 'nl-NL',
+};
 
 interface TransactionWithDetails {
   id: string;
@@ -43,6 +57,11 @@ interface MonthlyData {
 
 export default function SellerAnalytics() {
   const { activeOrg, isDemo } = useOrganizationContext();
+  const { t, i18n } = useTranslation('analytics');
+
+  const lang = i18n.language?.split('-')[0] || 'es';
+  const dfLocale = dateFnsLocales[lang] || dateFnsLocales.es;
+  const intlLocale = intlLocaleMap[lang] || 'es-ES';
 
   // Fetch completed transactions where org is the seller (subject_org_id)
   const { data: transactions, isLoading: loadingTransactions } = useQuery({
@@ -118,15 +137,15 @@ export default function SellerAnalytics() {
     // Initialize last 6 months
     for (let i = 5; i >= 0; i--) {
       const monthDate = subMonths(now, i);
-      const monthKey = format(monthDate, 'MMM', { locale: es });
+      const monthKey = format(monthDate, 'MMM', { locale: dfLocale });
       monthlyMap.set(monthKey, { revenue: 0, sales: 0 });
     }
 
-    transactions.forEach(t => {
-      const monthKey = format(new Date(t.created_at), 'MMM', { locale: es });
+    transactions.forEach(tx => {
+      const monthKey = format(new Date(tx.created_at), 'MMM', { locale: dfLocale });
       const existing = monthlyMap.get(monthKey) || { revenue: 0, sales: 0 };
       monthlyMap.set(monthKey, {
-        revenue: existing.revenue + (t.asset?.price || 0),
+        revenue: existing.revenue + (tx.asset?.price || 0),
         sales: existing.sales + 1,
       });
     });
@@ -139,11 +158,11 @@ export default function SellerAnalytics() {
 
     // Product performance
     const productMap = new Map<string, { revenue: number; sales: number }>();
-    transactions.forEach(t => {
-      const productName = t.asset?.product?.name || 'Producto Desconocido';
+    transactions.forEach(tx => {
+      const productName = tx.asset?.product?.name || t('charts.unknownProduct');
       const existing = productMap.get(productName) || { revenue: 0, sales: 0 };
       productMap.set(productName, {
-        revenue: existing.revenue + (t.asset?.price || 0),
+        revenue: existing.revenue + (tx.asset?.price || 0),
         sales: existing.sales + 1,
       });
     });
@@ -155,11 +174,11 @@ export default function SellerAnalytics() {
 
     // Top customers
     const customerMap = new Map<string, { volume: number; purchases: number }>();
-    transactions.forEach(t => {
-      const customerName = t.consumer_org?.name || 'Cliente Desconocido';
+    transactions.forEach(tx => {
+      const customerName = tx.consumer_org?.name || t('customers.unknownCustomer');
       const existing = customerMap.get(customerName) || { volume: 0, purchases: 0 };
       customerMap.set(customerName, {
-        volume: existing.volume + (t.asset?.price || 0),
+        volume: existing.volume + (tx.asset?.price || 0),
         purchases: existing.purchases + 1,
       });
     });
@@ -176,18 +195,18 @@ export default function SellerAnalytics() {
     const previousMonthEnd = endOfMonth(subMonths(now, 1));
 
     const currentMonthRevenue = transactions
-      .filter(t => {
-        const date = new Date(t.created_at);
+      .filter(tx => {
+        const date = new Date(tx.created_at);
         return date >= currentMonthStart && date <= currentMonthEnd;
       })
-      .reduce((sum, t) => sum + (t.asset?.price || 0), 0);
+      .reduce((sum, tx) => sum + (tx.asset?.price || 0), 0);
 
     const previousMonthRevenue = transactions
-      .filter(t => {
-        const date = new Date(t.created_at);
+      .filter(tx => {
+        const date = new Date(tx.created_at);
         return date >= previousMonthStart && date <= previousMonthEnd;
       })
-      .reduce((sum, t) => sum + (t.asset?.price || 0), 0);
+      .reduce((sum, tx) => sum + (tx.asset?.price || 0), 0);
 
     return {
       totalRevenue,
@@ -198,7 +217,7 @@ export default function SellerAnalytics() {
       currentMonthRevenue,
       previousMonthRevenue,
     };
-  }, [transactions]);
+  }, [transactions, dfLocale, t]);
 
   // Calculate rating
   const averageRating = useMemo(() => {
@@ -216,22 +235,22 @@ export default function SellerAnalytics() {
     return (
       <div className="container py-16 text-center space-y-4">
         <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground opacity-50" />
-        <h2 className="text-2xl font-semibold">Acceso Restringido</h2>
+        <h2 className="text-2xl font-semibold">{t('restricted.title')}</h2>
         <p className="text-muted-foreground">
-          Esta sección está reservada para Vendedores de Datos y Data Holders.
+          {t('restricted.description')}
         </p>
       </div>
     );
   }
 
   const formatCurrency = (value: number) => 
-    new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(value);
+    new Intl.NumberFormat(intlLocale, { style: 'currency', currency: 'EUR' }).format(value);
 
   return (
     <div className="container py-8 space-y-8 fade-in">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Seller Studio</h2>
-        <p className="text-muted-foreground">Analítica de rendimiento de tus activos de datos.</p>
+        <h2 className="text-3xl font-bold tracking-tight">{t('title')}</h2>
+        <p className="text-muted-foreground">{t('subtitle')}</p>
       </div>
 
       {/* KPI Cards */}
@@ -239,7 +258,7 @@ export default function SellerAnalytics() {
         <StaggerItem>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Ingresos Totales</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('kpis.revenue')}</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -249,7 +268,7 @@ export default function SellerAnalytics() {
               <>
                 <div className="text-2xl font-bold">{formatCurrency(analytics.totalRevenue)}</div>
                 <p className="text-xs text-muted-foreground">
-                  {Number(revenueChange) >= 0 ? '+' : ''}{revenueChange}% vs mes anterior
+                  {Number(revenueChange) >= 0 ? '+' : ''}{revenueChange}% {t('kpis.vsPreviousMonth')}
                 </p>
               </>
             )}
@@ -259,7 +278,7 @@ export default function SellerAnalytics() {
         <StaggerItem>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Ventas Completadas</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('kpis.completedSales')}</CardTitle>
             <ShoppingBag className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -268,7 +287,7 @@ export default function SellerAnalytics() {
             ) : (
               <>
                 <div className="text-2xl font-bold">{analytics.totalSales}</div>
-                <p className="text-xs text-muted-foreground">Últimos 6 meses</p>
+                <p className="text-xs text-muted-foreground">{t('kpis.last6Months')}</p>
               </>
             )}
           </CardContent>
@@ -277,7 +296,7 @@ export default function SellerAnalytics() {
         <StaggerItem>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Clientes Únicos</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('kpis.uniqueCustomers')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -286,7 +305,7 @@ export default function SellerAnalytics() {
             ) : (
               <>
                 <div className="text-2xl font-bold">{analytics.topCustomers.length}</div>
-                <p className="text-xs text-muted-foreground">Compradores activos</p>
+                <p className="text-xs text-muted-foreground">{t('kpis.activeBuyers')}</p>
               </>
             )}
           </CardContent>
@@ -295,7 +314,7 @@ export default function SellerAnalytics() {
         <StaggerItem>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Rating Promedio</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('kpis.averageRating')}</CardTitle>
             <Star className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -307,7 +326,7 @@ export default function SellerAnalytics() {
                   {averageRating > 0 ? `${averageRating.toFixed(1)}/5.0` : 'N/A'}
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Basado en {reviews?.length || 0} reseñas
+                  {t('kpis.basedOnReviews', { count: reviews?.length || 0 })}
                 </p>
               </>
             )}
@@ -321,8 +340,8 @@ export default function SellerAnalytics() {
         {/* Monthly Revenue & Sales Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Ingresos y Ventas Mensuales</CardTitle>
-            <CardDescription>Evolución de los últimos 6 meses.</CardDescription>
+            <CardTitle>{t('charts.monthlyRevenueSales')}</CardTitle>
+            <CardDescription>{t('charts.last6MonthsEvolution')}</CardDescription>
           </CardHeader>
           <CardContent className="h-[300px]">
             {loadingTransactions ? (
@@ -338,7 +357,7 @@ export default function SellerAnalytics() {
                   <Tooltip 
                     formatter={(value: number, name: string) => [
                       name === 'revenue' ? formatCurrency(value) : value,
-                      name === 'revenue' ? 'Ingresos' : 'Ventas'
+                      name === 'revenue' ? t('charts.revenueLabel') : t('charts.sales')
                     ]}
                     {...CHART_TOOLTIP_STYLE}
                   />
@@ -349,7 +368,7 @@ export default function SellerAnalytics() {
                     dataKey="revenue" 
                     stroke={CHART_COLORS.primary} 
                     strokeWidth={2} 
-                    name="Ingresos (€)" 
+                    name={t('charts.revenueEur')}
                     dot={{ fill: CHART_COLORS.primary }}
                     animationDuration={CHART_ANIMATION_CONFIG.line.animationDuration}
                     animationEasing={CHART_ANIMATION_CONFIG.line.animationEasing}
@@ -360,7 +379,7 @@ export default function SellerAnalytics() {
                     dataKey="sales" 
                     stroke={CHART_COLORS.secondary} 
                     strokeWidth={2} 
-                    name="Ventas" 
+                    name={t('charts.sales')}
                     dot={{ fill: CHART_COLORS.secondary }}
                     animationDuration={CHART_ANIMATION_CONFIG.line.animationDuration}
                     animationEasing={CHART_ANIMATION_CONFIG.line.animationEasing}
@@ -370,7 +389,7 @@ export default function SellerAnalytics() {
               </ChartFadeIn>
             ) : (
               <div className="h-full flex items-center justify-center text-muted-foreground">
-                Sin datos de ventas aún
+                {t('charts.noSalesData')}
               </div>
             )}
           </CardContent>
@@ -379,8 +398,8 @@ export default function SellerAnalytics() {
         {/* Product Performance Chart */}
         <Card>
           <CardHeader>
-            <CardTitle>Top Productos por Ingresos</CardTitle>
-            <CardDescription>Rendimiento de tus activos más vendidos.</CardDescription>
+            <CardTitle>{t('charts.topProducts')}</CardTitle>
+            <CardDescription>{t('charts.topProductsDescription')}</CardDescription>
           </CardHeader>
           <CardContent className="h-[300px]">
             {loadingTransactions ? (
@@ -393,7 +412,7 @@ export default function SellerAnalytics() {
                   <XAxis type="number" className="text-xs" tickFormatter={(v) => `€${v}`} />
                   <YAxis dataKey="name" type="category" width={120} className="text-xs" />
                   <Tooltip 
-                    formatter={(value: number) => [formatCurrency(value), 'Ingresos']}
+                    formatter={(value: number) => [formatCurrency(value), t('charts.revenueLabel')]}
                     {...CHART_TOOLTIP_STYLE}
                     cursor={{ fill: 'hsl(var(--muted))' }}
                   />
@@ -402,7 +421,7 @@ export default function SellerAnalytics() {
                     fill={CHART_COLORS.primary} 
                     radius={[0, 4, 4, 0]} 
                     barSize={30}
-                    name="Ingresos"
+                    name={t('charts.revenueLabel')}
                     animationDuration={CHART_ANIMATION_CONFIG.bar.animationDuration}
                     animationBegin={CHART_ANIMATION_CONFIG.bar.animationBegin}
                     animationEasing={CHART_ANIMATION_CONFIG.bar.animationEasing}
@@ -412,7 +431,7 @@ export default function SellerAnalytics() {
               </ChartFadeIn>
             ) : (
               <div className="h-full flex items-center justify-center text-muted-foreground">
-                Sin productos vendidos aún
+                {t('charts.noProductsSold')}
               </div>
             )}
           </CardContent>
@@ -424,9 +443,9 @@ export default function SellerAnalytics() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="h-5 w-5" />
-            Top 5 Clientes
+            {t('customers.top5')}
           </CardTitle>
-          <CardDescription>Tus mejores compradores por volumen de transacciones.</CardDescription>
+          <CardDescription>{t('customers.description')}</CardDescription>
         </CardHeader>
         <CardContent>
           {loadingTransactions ? (
@@ -452,13 +471,13 @@ export default function SellerAnalytics() {
                     <div>
                       <p className="font-medium">{customer.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {customer.purchases} {customer.purchases === 1 ? 'compra' : 'compras'}
+                        {customer.purchases} {customer.purchases === 1 ? t('customers.purchase') : t('customers.purchases')}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="font-semibold text-primary">{formatCurrency(customer.volume)}</p>
-                    <p className="text-xs text-muted-foreground">Volumen total</p>
+                    <p className="text-xs text-muted-foreground">{t('customers.totalVolume')}</p>
                   </div>
                 </div>
               ))}
@@ -466,8 +485,8 @@ export default function SellerAnalytics() {
           ) : (
             <div className="py-8 text-center text-muted-foreground">
               <Users className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>Aún no tienes clientes registrados.</p>
-              <p className="text-sm">Las ventas completadas aparecerán aquí.</p>
+              <p>{t('customers.noCustomers')}</p>
+              <p className="text-sm">{t('customers.salesWillAppear')}</p>
             </div>
           )}
         </CardContent>

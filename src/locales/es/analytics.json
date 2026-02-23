@@ -1,19 +1,26 @@
 {
   "title": "Seller Studio",
-  "subtitle": "Analiza el rendimiento de tus productos de datos",
+  "subtitle": "Analítica de rendimiento de tus activos de datos.",
   "badge": "Analytics",
   "restricted": {
     "title": "Acceso Restringido",
-    "description": "Esta sección está reservada para Vendedores de Datos y Custodios de Datos.",
+    "description": "Esta sección está reservada para Vendedores de Datos y Data Holders.",
     "contactAdmin": "Contacta a tu administrador para obtener acceso."
   },
   "kpis": {
     "totalSales": "Ventas Totales",
     "activeSubscriptions": "Suscripciones Activas",
-    "revenue": "Ingresos",
+    "revenue": "Ingresos Totales",
     "views": "Vistas de Productos",
     "conversionRate": "Tasa de Conversión",
-    "avgOrderValue": "Valor Medio del Pedido"
+    "avgOrderValue": "Valor Medio del Pedido",
+    "vsPreviousMonth": "vs mes anterior",
+    "completedSales": "Ventas Completadas",
+    "last6Months": "Últimos 6 meses",
+    "uniqueCustomers": "Clientes Únicos",
+    "activeBuyers": "Compradores activos",
+    "averageRating": "Rating Promedio",
+    "basedOnReviews": "Basado en {{count}} reseñas"
   },
   "tabs": {
     "overview": "Resumen",
@@ -25,7 +32,26 @@
     "salesOverTime": "Ventas a lo Largo del Tiempo",
     "revenueByProduct": "Ingresos por Producto",
     "customerAcquisition": "Adquisición de Clientes",
-    "topProducts": "Productos Más Vendidos"
+    "topProducts": "Top Productos por Ingresos",
+    "monthlyRevenueSales": "Ingresos y Ventas Mensuales",
+    "last6MonthsEvolution": "Evolución de los últimos 6 meses.",
+    "sales": "Ventas",
+    "revenueEur": "Ingresos (€)",
+    "revenueLabel": "Ingresos",
+    "noSalesData": "Sin datos de ventas aún",
+    "topProductsDescription": "Rendimiento de tus activos más vendidos.",
+    "noProductsSold": "Sin productos vendidos aún",
+    "unknownProduct": "Producto Desconocido"
+  },
+  "customers": {
+    "top5": "Top 5 Clientes",
+    "description": "Tus mejores compradores por volumen de transacciones.",
+    "purchase": "compra",
+    "purchases": "compras",
+    "totalVolume": "Volumen total",
+    "noCustomers": "Aún no tienes clientes registrados.",
+    "salesWillAppear": "Las ventas completadas aparecerán aquí.",
+    "unknownCustomer": "Cliente Desconocido"
   },
   "filters": {
     "period": "Período",

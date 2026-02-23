@@ -10,10 +10,17 @@
   "kpis": {
     "totalSales": "Totale Verkopen",
     "activeSubscriptions": "Actieve Abonnementen",
-    "revenue": "Inkomsten",
+    "revenue": "Totale Inkomsten",
     "views": "Productweergaven",
     "conversionRate": "Conversiepercentage",
-    "avgOrderValue": "Gemiddelde Orderwaarde"
+    "avgOrderValue": "Gemiddelde Orderwaarde",
+    "vsPreviousMonth": "vs vorige maand",
+    "completedSales": "Afgeronde Verkopen",
+    "last6Months": "Laatste 6 maanden",
+    "uniqueCustomers": "Unieke Klanten",
+    "activeBuyers": "Actieve kopers",
+    "averageRating": "Gemiddelde Beoordeling",
+    "basedOnReviews": "Gebaseerd op {{count}} beoordelingen"
   },
   "tabs": {
     "overview": "Overzicht",
@@ -25,7 +32,26 @@
     "salesOverTime": "Verkopen in de Tijd",
     "revenueByProduct": "Inkomsten per Product",
     "customerAcquisition": "Klantenwerving",
-    "topProducts": "Topproducten"
+    "topProducts": "Topproducten op Inkomsten",
+    "monthlyRevenueSales": "Maandelijkse Inkomsten & Verkopen",
+    "last6MonthsEvolution": "Ontwikkeling van de laatste 6 maanden.",
+    "sales": "Verkopen",
+    "revenueEur": "Inkomsten (€)",
+    "revenueLabel": "Inkomsten",
+    "noSalesData": "Nog geen verkoopgegevens",
+    "topProductsDescription": "Prestaties van uw best verkochte assets.",
+    "noProductsSold": "Nog geen producten verkocht",
+    "unknownProduct": "Onbekend Product"
+  },
+  "customers": {
+    "top5": "Top 5 Klanten",
+    "description": "Uw beste kopers op transactievolume.",
+    "purchase": "aankoop",
+    "purchases": "aankopen",
+    "totalVolume": "Totaal volume",
+    "noCustomers": "U heeft nog geen klanten.",
+    "salesWillAppear": "Afgeronde verkopen verschijnen hier.",
+    "unknownCustomer": "Onbekende Klant"
   },
   "filters": {
     "period": "Periode",

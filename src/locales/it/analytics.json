@@ -10,10 +10,17 @@
   "kpis": {
     "totalSales": "Vendite Totali",
     "activeSubscriptions": "Abbonamenti Attivi",
-    "revenue": "Ricavi",
+    "revenue": "Ricavi Totali",
     "views": "Visualizzazioni Prodotti",
     "conversionRate": "Tasso di Conversione",
-    "avgOrderValue": "Valore Medio Ordine"
+    "avgOrderValue": "Valore Medio Ordine",
+    "vsPreviousMonth": "vs mese precedente",
+    "completedSales": "Vendite Completate",
+    "last6Months": "Ultimi 6 mesi",
+    "uniqueCustomers": "Clienti Unici",
+    "activeBuyers": "Acquirenti attivi",
+    "averageRating": "Valutazione Media",
+    "basedOnReviews": "Basato su {{count}} recensioni"
   },
   "tabs": {
     "overview": "Panoramica",
@@ -25,7 +32,26 @@
     "salesOverTime": "Vendite nel Tempo",
     "revenueByProduct": "Ricavi per Prodotto",
     "customerAcquisition": "Acquisizione Clienti",
-    "topProducts": "Prodotti Più Venduti"
+    "topProducts": "Top Prodotti per Ricavi",
+    "monthlyRevenueSales": "Ricavi e Vendite Mensili",
+    "last6MonthsEvolution": "Evoluzione degli ultimi 6 mesi.",
+    "sales": "Vendite",
+    "revenueEur": "Ricavi (€)",
+    "revenueLabel": "Ricavi",
+    "noSalesData": "Nessun dato di vendita",
+    "topProductsDescription": "Prestazioni dei tuoi asset più venduti.",
+    "noProductsSold": "Nessun prodotto venduto",
+    "unknownProduct": "Prodotto Sconosciuto"
+  },
+  "customers": {
+    "top5": "Top 5 Clienti",
+    "description": "I tuoi migliori acquirenti per volume di transazioni.",
+    "purchase": "acquisto",
+    "purchases": "acquisti",
+    "totalVolume": "Volume totale",
+    "noCustomers": "Non hai ancora clienti.",
+    "salesWillAppear": "Le vendite completate appariranno qui.",
+    "unknownCustomer": "Cliente Sconosciuto"
   },
   "filters": {
     "period": "Periodo",

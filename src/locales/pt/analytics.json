@@ -10,10 +10,17 @@
   "kpis": {
     "totalSales": "Vendas Totais",
     "activeSubscriptions": "Assinaturas Ativas",
-    "revenue": "Receita",
+    "revenue": "Receita Total",
     "views": "Visualizações de Produtos",
     "conversionRate": "Taxa de Conversão",
-    "avgOrderValue": "Valor Médio do Pedido"
+    "avgOrderValue": "Valor Médio do Pedido",
+    "vsPreviousMonth": "vs mês anterior",
+    "completedSales": "Vendas Concluídas",
+    "last6Months": "Últimos 6 meses",
+    "uniqueCustomers": "Clientes Únicos",
+    "activeBuyers": "Compradores ativos",
+    "averageRating": "Avaliação Média",
+    "basedOnReviews": "Baseado em {{count}} avaliações"
   },
   "tabs": {
     "overview": "Visão Geral",
@@ -25,7 +32,26 @@
     "salesOverTime": "Vendas ao Longo do Tempo",
     "revenueByProduct": "Receita por Produto",
     "customerAcquisition": "Aquisição de Clientes",
-    "topProducts": "Produtos Mais Vendidos"
+    "topProducts": "Top Produtos por Receita",
+    "monthlyRevenueSales": "Receita e Vendas Mensais",
+    "last6MonthsEvolution": "Evolução dos últimos 6 meses.",
+    "sales": "Vendas",
+    "revenueEur": "Receita (€)",
+    "revenueLabel": "Receita",
+    "noSalesData": "Sem dados de vendas",
+    "topProductsDescription": "Desempenho dos seus ativos mais vendidos.",
+    "noProductsSold": "Nenhum produto vendido",
+    "unknownProduct": "Produto Desconhecido"
+  },
+  "customers": {
+    "top5": "Top 5 Clientes",
+    "description": "Seus melhores compradores por volume de transações.",
+    "purchase": "compra",
+    "purchases": "compras",
+    "totalVolume": "Volume total",
+    "noCustomers": "Você ainda não tem clientes.",
+    "salesWillAppear": "As vendas concluídas aparecerão aqui.",
+    "unknownCustomer": "Cliente Desconhecido"
   },
   "filters": {
     "period": "Período",
