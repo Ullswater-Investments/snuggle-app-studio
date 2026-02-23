@@ -35,6 +35,7 @@ import {
   ShieldX,
   KeyRound,
   Zap,
+  Download,
 } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { formatDistanceToNow, isToday, isYesterday, subDays } from "date-fns";
@@ -232,6 +233,10 @@ const Notifications = () => {
     // Disponible (asset)
     if (titleLower.includes("disponible") && !titleLower.includes("no disponible")) {
       return { icon: ShieldCheck, bgColor: "bg-green-100 dark:bg-green-900/30", iconColor: "text-green-600 dark:text-green-400" };
+    }
+    // Descarga de activo / Descarga completada
+    if (titleLower.includes("descarga")) {
+      return { icon: Download, bgColor: "bg-blue-100 dark:bg-blue-900/30", iconColor: "text-blue-600 dark:text-blue-400" };
     }
 
     switch (type) {
