@@ -10,10 +10,17 @@
   "kpis": {
     "totalSales": "Total Sales",
     "activeSubscriptions": "Active Subscriptions",
-    "revenue": "Revenue",
+    "revenue": "Total Revenue",
     "views": "Product Views",
     "conversionRate": "Conversion Rate",
-    "avgOrderValue": "Average Order Value"
+    "avgOrderValue": "Average Order Value",
+    "vsPreviousMonth": "vs previous month",
+    "completedSales": "Completed Sales",
+    "last6Months": "Last 6 months",
+    "uniqueCustomers": "Unique Customers",
+    "activeBuyers": "Active buyers",
+    "averageRating": "Average Rating",
+    "basedOnReviews": "Based on {{count}} reviews"
   },
   "tabs": {
     "overview": "Overview",
@@ -25,7 +32,26 @@
     "salesOverTime": "Sales Over Time",
     "revenueByProduct": "Revenue by Product",
     "customerAcquisition": "Customer Acquisition",
-    "topProducts": "Top Products"
+    "topProducts": "Top Products by Revenue",
+    "monthlyRevenueSales": "Monthly Revenue & Sales",
+    "last6MonthsEvolution": "Last 6 months evolution.",
+    "sales": "Sales",
+    "revenueEur": "Revenue (€)",
+    "revenueLabel": "Revenue",
+    "noSalesData": "No sales data yet",
+    "topProductsDescription": "Performance of your best-selling assets.",
+    "noProductsSold": "No products sold yet",
+    "unknownProduct": "Unknown Product"
+  },
+  "customers": {
+    "top5": "Top 5 Customers",
+    "description": "Your top buyers by transaction volume.",
+    "purchase": "purchase",
+    "purchases": "purchases",
+    "totalVolume": "Total volume",
+    "noCustomers": "You don't have any customers yet.",
+    "salesWillAppear": "Completed sales will appear here.",
+    "unknownCustomer": "Unknown Customer"
   },
   "filters": {
     "period": "Period",
