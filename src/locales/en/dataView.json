@@ -1,0 +1,166 @@
+{
+  "loading": "Loading transaction...",
+  "notFound": "Transaction not found",
+  "noDescription": "No description available",
+  "statusLabels": {
+    "created": "Created",
+    "initiated": "Initiated",
+    "pending": "Pending",
+    "pending_subject": "Pending (Provider)",
+    "pending_holder": "Pending (Holder)",
+    "pre_approved": "Pre-approved",
+    "approved": "Approved",
+    "completed": "Completed",
+    "denied": "Denied",
+    "denied_subject": "Denied (Provider)",
+    "denied_holder": "Denied (Holder)",
+    "cancelled": "Cancelled",
+    "revoked": "Revoked"
+  },
+  "header": {
+    "accessGranted": "Access Granted",
+    "kybVerified": "Provider verified through Know Your Business process"
+  },
+  "metrics": {
+    "version": "Version",
+    "onDemand": "On demand",
+    "update": "Update",
+    "fields": "fields",
+    "schema": "Schema",
+    "format": "Format"
+  },
+  "tabs": {
+    "description": "Description",
+    "schema": "Schema",
+    "sample": "Sample",
+    "policies": "Access Policies"
+  },
+  "description": {
+    "generalInfo": "General Information",
+    "category": "Category",
+    "provider": "Provider",
+    "custodian": "Custodian",
+    "status": "Status",
+    "accessDurationTitle": "Access Duration",
+    "accessDurationText": "Access to this data has a maximum duration of <strong>{{days}} days</strong> from the approval date."
+  },
+  "schema": {
+    "title": "Data Structure",
+    "field": "Field",
+    "type": "Type",
+    "description": "Description",
+    "defaults": {
+      "id": "Unique identifier",
+      "data": "Record data",
+      "created_at": "Creation date"
+    }
+  },
+  "sample": {
+    "title": "Data Sample",
+    "records": "sample records",
+    "notAvailable": "Sample not available",
+    "notAvailableDesc": "The provider has not provided a data sample for this asset. You can request more technical information by contacting the provider."
+  },
+  "policies": {
+    "title": "Access Policies",
+    "permitted": "Permitted",
+    "prohibited": "Prohibited",
+    "obligations": "Obligations",
+    "viewTerms": "View Full Terms and Conditions",
+    "legalNotice": "<strong>Legal Notice:</strong> By accessing this data, the consumer declares full knowledge and acceptance of the usage policies described above, committing to compliance under the PROCUREDATA governance framework and the Pontus-X network.",
+    "defaultPermissions": [
+      "Commercial use within the organization",
+      "Analysis and integration into internal systems",
+      "Generation of derived reports"
+    ],
+    "defaultProhibitions": [
+      "Redistribution to third parties without authorization",
+      "Reverse engineering of individual data",
+      "Use for illegal or discriminatory purposes"
+    ],
+    "defaultObligations": [
+      "Attribution to the data provider",
+      "License renewal according to pricing model",
+      "GDPR compliance for personal data"
+    ]
+  },
+  "data": {
+    "notAvailableTitle": "Data not available",
+    "notAvailableDesc": "Data is only available when the transaction is completed.",
+    "currentStatus": "Current status:",
+    "loadingData": "Loading data...",
+    "assetAccess": "Asset Access",
+    "assetAccessDesc": "This asset is consumed through the Data Space Access Controller. Data is obtained in real time from the provider's source, ensuring the privacy and security of the exchange.",
+    "downloadExplain": "When downloading, the Access Controller verifies your permissions and securely connects to the provider, delivering updated data without exposing technical credentials.",
+    "downloading": "Downloading...",
+    "downloadUpdated": "Download Updated File",
+    "downloadTechSheet": "Download Technical Sheet",
+    "downloadLicensePDF": "Download License PDF",
+    "noDataForOrg": "No completed data for <strong>{{org}}</strong>.",
+    "providerNoData": "Providers do not receive data, they only send it.",
+    "holderNoData": "Holders custody data but do not consume it directly.",
+    "switchConsumer": "Try switching to a Consumer organization from the top selector.",
+    "noDataAvailable": "No data available",
+    "noDataShared": "No data has been shared for this transaction yet."
+  },
+  "provider": {
+    "title": "Provider Data",
+    "recordsFound": "{{count}} record(s) found",
+    "companyName": "Company Name",
+    "taxId": "Tax ID",
+    "legalName": "Legal Name",
+    "contact": "Contact",
+    "email": "Email",
+    "fullDetails": "Full Details",
+    "fiscalAddress": "Fiscal Address",
+    "legalAddress": "Legal Address"
+  },
+  "api": {
+    "title": "API Connection Details",
+    "description": "Technical configuration of the data source.",
+    "parameter": "Parameter"
+  },
+  "payloads": {
+    "esg_report": "Sustainability Report (ESG)",
+    "iot_telemetry": "IoT Telemetry",
+    "financial_records": "Financial Records",
+    "energy_metering": "Energy Metering",
+    "supply_chain_trace": "Supply Chain Traceability",
+    "administrative_list": "Administrative List",
+    "generic_timeseries": "Historical Data",
+    "default": "Payload Data",
+    "schemaType": "Schema type:",
+    "esgData": "ESG Data",
+    "iotData": "IoT Data",
+    "flexibleData": "Flexible Data",
+    "supplierData": "Supplier Data",
+    "currentValue": "Current Value",
+    "quality": "Quality",
+    "trend": "Trend",
+    "dataPoints": "Data Points",
+    "temporalEvolution": "Temporal Evolution",
+    "sectorData": "Sector data:"
+  },
+  "blockchain": {
+    "title": "Blockchain Audit"
+  },
+  "accessHistory": {
+    "title": "Access History",
+    "description": "Record of your downloads and accesses to this asset."
+  },
+  "toast": {
+    "csvSuccess": "CSV file downloaded successfully",
+    "noExportData": "No data to export",
+    "erpSuccess": "Data sent to ERP successfully",
+    "erpNoData": "No data to send",
+    "erpError": "Error sending data to ERP",
+    "gatewayDownloading": "Downloading data through the Access Controller...",
+    "gatewaySuccess": "File downloaded successfully",
+    "gatewayProviderError": "Could not connect to the provider's server. Please try again in a few minutes.",
+    "gatewayError": "Download error: {{error}}",
+    "techSheetSuccess": "Technical sheet downloaded",
+    "licenseSuccess": "License downloaded successfully",
+    "licenseError": "Error generating the license",
+    "copied": "Copied to clipboard"
+  }
+}

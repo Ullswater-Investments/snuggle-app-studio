@@ -1,0 +1,166 @@
+{
+  "loading": "Chargement de la transaction...",
+  "notFound": "Transaction introuvable",
+  "noDescription": "Aucune description disponible",
+  "statusLabels": {
+    "created": "Créée",
+    "initiated": "Initiée",
+    "pending": "En attente",
+    "pending_subject": "En attente (Fournisseur)",
+    "pending_holder": "En attente (Dépositaire)",
+    "pre_approved": "Pré-approuvée",
+    "approved": "Approuvée",
+    "completed": "Terminée",
+    "denied": "Refusée",
+    "denied_subject": "Refusée (Fournisseur)",
+    "denied_holder": "Refusée (Dépositaire)",
+    "cancelled": "Annulée",
+    "revoked": "Révoquée"
+  },
+  "header": {
+    "accessGranted": "Accès Accordé",
+    "kybVerified": "Fournisseur vérifié par le processus Know Your Business"
+  },
+  "metrics": {
+    "version": "Version",
+    "onDemand": "À la demande",
+    "update": "Mise à jour",
+    "fields": "champs",
+    "schema": "Schéma",
+    "format": "Format"
+  },
+  "tabs": {
+    "description": "Description",
+    "schema": "Schéma",
+    "sample": "Échantillon",
+    "policies": "Politiques d'Accès"
+  },
+  "description": {
+    "generalInfo": "Informations Générales",
+    "category": "Catégorie",
+    "provider": "Fournisseur",
+    "custodian": "Dépositaire",
+    "status": "Statut",
+    "accessDurationTitle": "Durée d'Accès",
+    "accessDurationText": "L'accès à ces données a une durée maximale de <strong>{{days}} jours</strong> à compter de la date d'approbation."
+  },
+  "schema": {
+    "title": "Structure des Données",
+    "field": "Champ",
+    "type": "Type",
+    "description": "Description",
+    "defaults": {
+      "id": "Identifiant unique",
+      "data": "Données de l'enregistrement",
+      "created_at": "Date de création"
+    }
+  },
+  "sample": {
+    "title": "Échantillon de Données",
+    "records": "enregistrements d'exemple",
+    "notAvailable": "Échantillon non disponible",
+    "notAvailableDesc": "Le fournisseur n'a pas fourni d'échantillon de données pour cet actif. Vous pouvez demander plus d'informations techniques en contactant le fournisseur."
+  },
+  "policies": {
+    "title": "Politiques d'Accès",
+    "permitted": "Autorisé",
+    "prohibited": "Interdit",
+    "obligations": "Obligations",
+    "viewTerms": "Consulter les Conditions Générales Complètes",
+    "legalNotice": "<strong>Avis Juridique :</strong> En accédant à ces données, le consommateur déclare connaître et accepter intégralement les politiques d'utilisation décrites ci-dessus, s'engageant à les respecter dans le cadre de gouvernance de PROCUREDATA et du réseau Pontus-X.",
+    "defaultPermissions": [
+      "Usage commercial au sein de l'organisation",
+      "Analyse et intégration dans les systèmes internes",
+      "Génération de rapports dérivés"
+    ],
+    "defaultProhibitions": [
+      "Redistribution à des tiers sans autorisation",
+      "Ingénierie inverse de données individuelles",
+      "Utilisation à des fins illégales ou discriminatoires"
+    ],
+    "defaultObligations": [
+      "Attribution au fournisseur de données",
+      "Renouvellement de licence selon le modèle de tarification",
+      "Conformité RGPD pour les données personnelles"
+    ]
+  },
+  "data": {
+    "notAvailableTitle": "Données non disponibles",
+    "notAvailableDesc": "Les données ne sont disponibles que lorsque la transaction est terminée.",
+    "currentStatus": "Statut actuel :",
+    "loadingData": "Chargement des données...",
+    "assetAccess": "Accès à l'Actif",
+    "assetAccessDesc": "Cet actif est consommé via le Access Controller de l'espace de données. Les données sont obtenues en temps réel depuis la source du fournisseur, garantissant la confidentialité et la sécurité de l'échange.",
+    "downloadExplain": "Lors du téléchargement, le Access Controller vérifie vos permissions et se connecte de manière sécurisée au fournisseur, vous livrant les données mises à jour sans exposer les identifiants techniques.",
+    "downloading": "Téléchargement...",
+    "downloadUpdated": "Télécharger le Fichier Mis à Jour",
+    "downloadTechSheet": "Télécharger la Fiche Technique",
+    "downloadLicensePDF": "Télécharger la Licence PDF",
+    "noDataForOrg": "Aucune donnée complétée pour <strong>{{org}}</strong>.",
+    "providerNoData": "Les fournisseurs ne reçoivent pas de données, ils les envoient uniquement.",
+    "holderNoData": "Les dépositaires gardent les données mais ne les consomment pas directement.",
+    "switchConsumer": "Essayez de passer à une organisation Consommateur depuis le sélecteur supérieur.",
+    "noDataAvailable": "Aucune donnée disponible",
+    "noDataShared": "Aucune donnée n'a encore été partagée pour cette transaction."
+  },
+  "provider": {
+    "title": "Données du Fournisseur",
+    "recordsFound": "{{count}} enregistrement(s) trouvé(s)",
+    "companyName": "Raison Sociale",
+    "taxId": "SIRET/SIREN",
+    "legalName": "Nom Légal",
+    "contact": "Contact",
+    "email": "Email",
+    "fullDetails": "Détails Complets",
+    "fiscalAddress": "Adresse Fiscale",
+    "legalAddress": "Adresse Légale"
+  },
+  "api": {
+    "title": "Détails de Connexion API",
+    "description": "Configuration technique de la source de données.",
+    "parameter": "Paramètre"
+  },
+  "payloads": {
+    "esg_report": "Rapport de Durabilité (ESG)",
+    "iot_telemetry": "Télémétrie IoT",
+    "financial_records": "Registres Financiers",
+    "energy_metering": "Comptage Énergétique",
+    "supply_chain_trace": "Traçabilité de la Chaîne d'Approvisionnement",
+    "administrative_list": "Liste Administrative",
+    "generic_timeseries": "Données Historiques",
+    "default": "Données du Payload",
+    "schemaType": "Type de schéma :",
+    "esgData": "Données ESG",
+    "iotData": "Données IoT",
+    "flexibleData": "Données Flexibles",
+    "supplierData": "Données du Fournisseur",
+    "currentValue": "Valeur Actuelle",
+    "quality": "Qualité",
+    "trend": "Tendance",
+    "dataPoints": "Points de Données",
+    "temporalEvolution": "Évolution Temporelle",
+    "sectorData": "Données sectorielles :"
+  },
+  "blockchain": {
+    "title": "Audit Blockchain"
+  },
+  "accessHistory": {
+    "title": "Historique des Accès",
+    "description": "Registre de vos téléchargements et accès à cet actif."
+  },
+  "toast": {
+    "csvSuccess": "Fichier CSV téléchargé avec succès",
+    "noExportData": "Aucune donnée à exporter",
+    "erpSuccess": "Données envoyées à l'ERP avec succès",
+    "erpNoData": "Aucune donnée à envoyer",
+    "erpError": "Erreur lors de l'envoi des données à l'ERP",
+    "gatewayDownloading": "Téléchargement des données via le Access Controller...",
+    "gatewaySuccess": "Fichier téléchargé avec succès",
+    "gatewayProviderError": "Impossible de se connecter au serveur du fournisseur. Veuillez réessayer dans quelques minutes.",
+    "gatewayError": "Erreur de téléchargement : {{error}}",
+    "techSheetSuccess": "Fiche technique téléchargée",
+    "licenseSuccess": "Licence téléchargée avec succès",
+    "licenseError": "Erreur lors de la génération de la licence",
+    "copied": "Copié dans le presse-papiers"
+  }
+}

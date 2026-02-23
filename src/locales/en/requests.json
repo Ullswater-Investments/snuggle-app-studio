@@ -152,5 +152,27 @@
       "date": "Date",
       "actions": "Actions"
     }
+  },
+  "realtime": {
+    "title": "Real-Time Analytics",
+    "subtitle": "Performance metrics for the last 30 days",
+    "live": "Live",
+    "avgTime": "Average Time",
+    "untilApproval": "until approval",
+    "approvalRate": "Approval Rate",
+    "approvedRequests": "approved requests",
+    "thisWeek": "This Week",
+    "vsPrevious": "vs previous",
+    "pending": "Pending",
+    "requireAction": "require action",
+    "dailyVolume": "Daily Volume (last 14 days)",
+    "approvalSpeed": "Approval Speed (hours)",
+    "goal": "Goal",
+    "average": "Average",
+    "noApprovalData": "No approval data",
+    "statusDistribution": "Status Distribution",
+    "weeklyTrend": "Weekly Trend",
+    "transactions": "transactions",
+    "volume": "volume"
   }
 }

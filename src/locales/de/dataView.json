@@ -1,0 +1,166 @@
+{
+  "loading": "Transaktion wird geladen...",
+  "notFound": "Transaktion nicht gefunden",
+  "noDescription": "Keine Beschreibung verfügbar",
+  "statusLabels": {
+    "created": "Erstellt",
+    "initiated": "Initiiert",
+    "pending": "Ausstehend",
+    "pending_subject": "Ausstehend (Anbieter)",
+    "pending_holder": "Ausstehend (Verwahrer)",
+    "pre_approved": "Vorgenehmigt",
+    "approved": "Genehmigt",
+    "completed": "Abgeschlossen",
+    "denied": "Abgelehnt",
+    "denied_subject": "Abgelehnt (Anbieter)",
+    "denied_holder": "Abgelehnt (Verwahrer)",
+    "cancelled": "Storniert",
+    "revoked": "Widerrufen"
+  },
+  "header": {
+    "accessGranted": "Zugang Gewährt",
+    "kybVerified": "Anbieter durch Know Your Business-Prozess verifiziert"
+  },
+  "metrics": {
+    "version": "Version",
+    "onDemand": "Auf Abruf",
+    "update": "Aktualisierung",
+    "fields": "Felder",
+    "schema": "Schema",
+    "format": "Format"
+  },
+  "tabs": {
+    "description": "Beschreibung",
+    "schema": "Schema",
+    "sample": "Beispieldaten",
+    "policies": "Zugriffsrichtlinien"
+  },
+  "description": {
+    "generalInfo": "Allgemeine Informationen",
+    "category": "Kategorie",
+    "provider": "Anbieter",
+    "custodian": "Verwahrer",
+    "status": "Status",
+    "accessDurationTitle": "Zugriffsdauer",
+    "accessDurationText": "Der Zugriff auf diese Daten hat eine maximale Dauer von <strong>{{days}} Tagen</strong> ab dem Genehmigungsdatum."
+  },
+  "schema": {
+    "title": "Datenstruktur",
+    "field": "Feld",
+    "type": "Typ",
+    "description": "Beschreibung",
+    "defaults": {
+      "id": "Eindeutiger Bezeichner",
+      "data": "Datensatzdaten",
+      "created_at": "Erstellungsdatum"
+    }
+  },
+  "sample": {
+    "title": "Datenbeispiel",
+    "records": "Beispieldatensätze",
+    "notAvailable": "Beispiel nicht verfügbar",
+    "notAvailableDesc": "Der Anbieter hat kein Datenbeispiel für diesen Vermögenswert bereitgestellt. Sie können weitere technische Informationen beim Anbieter anfordern."
+  },
+  "policies": {
+    "title": "Zugriffsrichtlinien",
+    "permitted": "Erlaubt",
+    "prohibited": "Verboten",
+    "obligations": "Pflichten",
+    "viewTerms": "Vollständige Geschäftsbedingungen einsehen",
+    "legalNotice": "<strong>Rechtlicher Hinweis:</strong> Durch den Zugriff auf diese Daten erklärt der Verbraucher, die oben beschriebenen Nutzungsrichtlinien vollständig zu kennen und zu akzeptieren und sich zur Einhaltung im Rahmen des PROCUREDATA-Governance-Rahmens und des Pontus-X-Netzwerks zu verpflichten.",
+    "defaultPermissions": [
+      "Kommerzielle Nutzung innerhalb der Organisation",
+      "Analyse und Integration in interne Systeme",
+      "Erstellung abgeleiteter Berichte"
+    ],
+    "defaultProhibitions": [
+      "Weiterverteilung an Dritte ohne Genehmigung",
+      "Reverse Engineering einzelner Daten",
+      "Verwendung für illegale oder diskriminierende Zwecke"
+    ],
+    "defaultObligations": [
+      "Zuordnung zum Datenanbieter",
+      "Lizenzerneuerung gemäß Preismodell",
+      "DSGVO-Konformität für personenbezogene Daten"
+    ]
+  },
+  "data": {
+    "notAvailableTitle": "Daten nicht verfügbar",
+    "notAvailableDesc": "Daten sind nur verfügbar, wenn die Transaktion abgeschlossen ist.",
+    "currentStatus": "Aktueller Status:",
+    "loadingData": "Daten werden geladen...",
+    "assetAccess": "Vermögenswert-Zugriff",
+    "assetAccessDesc": "Dieser Vermögenswert wird über den Access Controller des Datenraums konsumiert. Die Daten werden in Echtzeit von der Quelle des Anbieters bezogen, um die Privatsphäre und Sicherheit des Austauschs zu gewährleisten.",
+    "downloadExplain": "Beim Herunterladen überprüft der Access Controller Ihre Berechtigungen und stellt eine sichere Verbindung zum Anbieter her, um Ihnen aktualisierte Daten zu liefern, ohne technische Zugangsdaten preiszugeben.",
+    "downloading": "Wird heruntergeladen...",
+    "downloadUpdated": "Aktualisierte Datei herunterladen",
+    "downloadTechSheet": "Technisches Datenblatt herunterladen",
+    "downloadLicensePDF": "Lizenz-PDF herunterladen",
+    "noDataForOrg": "Keine abgeschlossenen Daten für <strong>{{org}}</strong>.",
+    "providerNoData": "Anbieter empfangen keine Daten, sie senden sie nur.",
+    "holderNoData": "Verwahrer verwahren Daten, konsumieren sie aber nicht direkt.",
+    "switchConsumer": "Versuchen Sie, über den oberen Selektor zu einer Verbraucher-Organisation zu wechseln.",
+    "noDataAvailable": "Keine Daten verfügbar",
+    "noDataShared": "Für diese Transaktion wurden noch keine Daten geteilt."
+  },
+  "provider": {
+    "title": "Anbieterdaten",
+    "recordsFound": "{{count}} Datensatz/Datensätze gefunden",
+    "companyName": "Firmenname",
+    "taxId": "Steuernummer",
+    "legalName": "Rechtlicher Name",
+    "contact": "Kontakt",
+    "email": "E-Mail",
+    "fullDetails": "Vollständige Details",
+    "fiscalAddress": "Steueradresse",
+    "legalAddress": "Rechtsadresse"
+  },
+  "api": {
+    "title": "API-Verbindungsdetails",
+    "description": "Technische Konfiguration der Datenquelle.",
+    "parameter": "Parameter"
+  },
+  "payloads": {
+    "esg_report": "Nachhaltigkeitsbericht (ESG)",
+    "iot_telemetry": "IoT-Telemetrie",
+    "financial_records": "Finanzunterlagen",
+    "energy_metering": "Energiemessung",
+    "supply_chain_trace": "Lieferketten-Rückverfolgbarkeit",
+    "administrative_list": "Verwaltungsliste",
+    "generic_timeseries": "Historische Daten",
+    "default": "Payload-Daten",
+    "schemaType": "Schematyp:",
+    "esgData": "ESG-Daten",
+    "iotData": "IoT-Daten",
+    "flexibleData": "Flexible Daten",
+    "supplierData": "Lieferantendaten",
+    "currentValue": "Aktueller Wert",
+    "quality": "Qualität",
+    "trend": "Trend",
+    "dataPoints": "Datenpunkte",
+    "temporalEvolution": "Zeitliche Entwicklung",
+    "sectorData": "Sektordaten:"
+  },
+  "blockchain": {
+    "title": "Blockchain-Audit"
+  },
+  "accessHistory": {
+    "title": "Zugriffshistorie",
+    "description": "Protokoll Ihrer Downloads und Zugriffe auf diesen Vermögenswert."
+  },
+  "toast": {
+    "csvSuccess": "CSV-Datei erfolgreich heruntergeladen",
+    "noExportData": "Keine Daten zum Exportieren",
+    "erpSuccess": "Daten erfolgreich an ERP gesendet",
+    "erpNoData": "Keine Daten zum Senden",
+    "erpError": "Fehler beim Senden der Daten an ERP",
+    "gatewayDownloading": "Daten werden über den Access Controller heruntergeladen...",
+    "gatewaySuccess": "Datei erfolgreich heruntergeladen",
+    "gatewayProviderError": "Verbindung zum Server des Anbieters konnte nicht hergestellt werden. Bitte versuchen Sie es in einigen Minuten erneut.",
+    "gatewayError": "Download-Fehler: {{error}}",
+    "techSheetSuccess": "Technisches Datenblatt heruntergeladen",
+    "licenseSuccess": "Lizenz erfolgreich heruntergeladen",
+    "licenseError": "Fehler beim Erstellen der Lizenz",
+    "copied": "In die Zwischenablage kopiert"
+  }
+}

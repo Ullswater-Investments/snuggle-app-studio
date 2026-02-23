@@ -152,5 +152,27 @@
       "date": "Datum",
       "actions": "Aktionen"
     }
+  },
+  "realtime": {
+    "title": "Echtzeit-Analytik",
+    "subtitle": "Leistungskennzahlen der letzten 30 Tage",
+    "live": "Live",
+    "avgTime": "Durchschnittliche Zeit",
+    "untilApproval": "bis zur Genehmigung",
+    "approvalRate": "Genehmigungsrate",
+    "approvedRequests": "genehmigte Anfragen",
+    "thisWeek": "Diese Woche",
+    "vsPrevious": "vs vorherige",
+    "pending": "Ausstehend",
+    "requireAction": "erfordern Aktion",
+    "dailyVolume": "Tägliches Volumen (letzte 14 Tage)",
+    "approvalSpeed": "Genehmigungsgeschwindigkeit (Stunden)",
+    "goal": "Ziel",
+    "average": "Durchschnitt",
+    "noApprovalData": "Keine Genehmigungsdaten",
+    "statusDistribution": "Verteilung nach Status",
+    "weeklyTrend": "Wöchentlicher Trend",
+    "transactions": "Transaktionen",
+    "volume": "Volumen"
   }
 }

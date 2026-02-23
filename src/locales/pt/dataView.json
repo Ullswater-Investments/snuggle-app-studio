@@ -1,0 +1,166 @@
+{
+  "loading": "Carregando transação...",
+  "notFound": "Transação não encontrada",
+  "noDescription": "Sem descrição disponível",
+  "statusLabels": {
+    "created": "Criada",
+    "initiated": "Iniciada",
+    "pending": "Pendente",
+    "pending_subject": "Pendente (Fornecedor)",
+    "pending_holder": "Pendente (Custodiante)",
+    "pre_approved": "Pré-aprovada",
+    "approved": "Aprovada",
+    "completed": "Concluída",
+    "denied": "Negada",
+    "denied_subject": "Negada (Fornecedor)",
+    "denied_holder": "Negada (Custodiante)",
+    "cancelled": "Cancelada",
+    "revoked": "Revogada"
+  },
+  "header": {
+    "accessGranted": "Acesso Concedido",
+    "kybVerified": "Fornecedor verificado pelo processo Know Your Business"
+  },
+  "metrics": {
+    "version": "Versão",
+    "onDemand": "Sob demanda",
+    "update": "Atualização",
+    "fields": "campos",
+    "schema": "Esquema",
+    "format": "Formato"
+  },
+  "tabs": {
+    "description": "Descrição",
+    "schema": "Esquema",
+    "sample": "Amostra",
+    "policies": "Políticas de Acesso"
+  },
+  "description": {
+    "generalInfo": "Informações Gerais",
+    "category": "Categoria",
+    "provider": "Fornecedor",
+    "custodian": "Custodiante",
+    "status": "Status",
+    "accessDurationTitle": "Duração do Acesso",
+    "accessDurationText": "O acesso a estes dados tem uma duração máxima de <strong>{{days}} dias</strong> a partir da data de aprovação."
+  },
+  "schema": {
+    "title": "Estrutura de Dados",
+    "field": "Campo",
+    "type": "Tipo",
+    "description": "Descrição",
+    "defaults": {
+      "id": "Identificador único",
+      "data": "Dados do registro",
+      "created_at": "Data de criação"
+    }
+  },
+  "sample": {
+    "title": "Amostra de Dados",
+    "records": "registros de exemplo",
+    "notAvailable": "Amostra não disponível",
+    "notAvailableDesc": "O fornecedor não disponibilizou uma amostra de dados para este ativo. Você pode solicitar mais informações técnicas entrando em contato com o fornecedor."
+  },
+  "policies": {
+    "title": "Políticas de Acesso",
+    "permitted": "Permitido",
+    "prohibited": "Proibido",
+    "obligations": "Obrigações",
+    "viewTerms": "Consultar Termos e Condições Completos",
+    "legalNotice": "<strong>Aviso Legal:</strong> Ao acessar estes dados, o consumidor declara conhecer e aceitar integralmente as políticas de uso descritas acima, comprometendo-se ao seu cumprimento sob o quadro de governança da PROCUREDATA e da rede Pontus-X.",
+    "defaultPermissions": [
+      "Uso comercial dentro da organização",
+      "Análise e integração em sistemas internos",
+      "Geração de relatórios derivados"
+    ],
+    "defaultProhibitions": [
+      "Redistribuição a terceiros sem autorização",
+      "Engenharia reversa de dados individuais",
+      "Uso para fins ilegais ou discriminatórios"
+    ],
+    "defaultObligations": [
+      "Atribuição ao fornecedor de dados",
+      "Renovação de licença conforme modelo de preços",
+      "Conformidade RGPD para dados pessoais"
+    ]
+  },
+  "data": {
+    "notAvailableTitle": "Dados não disponíveis",
+    "notAvailableDesc": "Os dados só estão disponíveis quando a transação está concluída.",
+    "currentStatus": "Status atual:",
+    "loadingData": "Carregando dados...",
+    "assetAccess": "Acesso ao Ativo",
+    "assetAccessDesc": "Este ativo é consumido através do Access Controller do espaço de dados. Os dados são obtidos em tempo real a partir da fonte do fornecedor, garantindo a privacidade e segurança da troca.",
+    "downloadExplain": "Ao baixar, o Access Controller verifica suas permissões e se conecta de forma segura ao fornecedor, entregando os dados atualizados sem expor credenciais técnicas.",
+    "downloading": "Baixando...",
+    "downloadUpdated": "Baixar Arquivo Atualizado",
+    "downloadTechSheet": "Baixar Ficha Técnica",
+    "downloadLicensePDF": "Baixar Licença PDF",
+    "noDataForOrg": "Sem dados completos para <strong>{{org}}</strong>.",
+    "providerNoData": "Os fornecedores não recebem dados, apenas os enviam.",
+    "holderNoData": "Os custodiantes guardam dados, mas não os consomem diretamente.",
+    "switchConsumer": "Tente mudar para uma organização Consumidor no seletor superior.",
+    "noDataAvailable": "Sem dados disponíveis",
+    "noDataShared": "Ainda não foram compartilhados dados para esta transação."
+  },
+  "provider": {
+    "title": "Dados do Fornecedor",
+    "recordsFound": "{{count}} registro(s) encontrado(s)",
+    "companyName": "Razão Social",
+    "taxId": "NIF/NIPC",
+    "legalName": "Nome Legal",
+    "contact": "Contacto",
+    "email": "Email",
+    "fullDetails": "Detalhes Completos",
+    "fiscalAddress": "Morada Fiscal",
+    "legalAddress": "Morada Legal"
+  },
+  "api": {
+    "title": "Detalhes de Conexão API",
+    "description": "Configuração técnica da fonte de dados.",
+    "parameter": "Parâmetro"
+  },
+  "payloads": {
+    "esg_report": "Relatório de Sustentabilidade (ESG)",
+    "iot_telemetry": "Telemetria IoT",
+    "financial_records": "Registros Financeiros",
+    "energy_metering": "Medição Energética",
+    "supply_chain_trace": "Rastreabilidade da Cadeia de Suprimentos",
+    "administrative_list": "Lista Administrativa",
+    "generic_timeseries": "Dados Históricos",
+    "default": "Dados do Payload",
+    "schemaType": "Tipo de esquema:",
+    "esgData": "Dados ESG",
+    "iotData": "Dados IoT",
+    "flexibleData": "Dados Flexíveis",
+    "supplierData": "Dados do Fornecedor",
+    "currentValue": "Valor Atual",
+    "quality": "Qualidade",
+    "trend": "Tendência",
+    "dataPoints": "Pontos de Dados",
+    "temporalEvolution": "Evolução Temporal",
+    "sectorData": "Dados setoriais:"
+  },
+  "blockchain": {
+    "title": "Auditoria Blockchain"
+  },
+  "accessHistory": {
+    "title": "Histórico de Acessos",
+    "description": "Registro de seus downloads e acessos a este ativo."
+  },
+  "toast": {
+    "csvSuccess": "Arquivo CSV baixado com sucesso",
+    "noExportData": "Sem dados para exportar",
+    "erpSuccess": "Dados enviados ao ERP com sucesso",
+    "erpNoData": "Sem dados para enviar",
+    "erpError": "Erro ao enviar dados ao ERP",
+    "gatewayDownloading": "Baixando dados através do Access Controller...",
+    "gatewaySuccess": "Arquivo baixado com sucesso",
+    "gatewayProviderError": "Não foi possível conectar ao servidor do fornecedor. Tente novamente em alguns minutos.",
+    "gatewayError": "Erro ao baixar: {{error}}",
+    "techSheetSuccess": "Ficha técnica baixada",
+    "licenseSuccess": "Licença baixada com sucesso",
+    "licenseError": "Erro ao gerar a licença",
+    "copied": "Copiado para a área de transferência"
+  }
+}

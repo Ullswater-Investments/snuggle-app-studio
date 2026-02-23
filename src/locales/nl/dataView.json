@@ -1,0 +1,166 @@
+{
+  "loading": "Transactie laden...",
+  "notFound": "Transactie niet gevonden",
+  "noDescription": "Geen beschrijving beschikbaar",
+  "statusLabels": {
+    "created": "Aangemaakt",
+    "initiated": "Gestart",
+    "pending": "In afwachting",
+    "pending_subject": "In afwachting (Aanbieder)",
+    "pending_holder": "In afwachting (Bewaarder)",
+    "pre_approved": "Vooraf goedgekeurd",
+    "approved": "Goedgekeurd",
+    "completed": "Voltooid",
+    "denied": "Geweigerd",
+    "denied_subject": "Geweigerd (Aanbieder)",
+    "denied_holder": "Geweigerd (Bewaarder)",
+    "cancelled": "Geannuleerd",
+    "revoked": "Ingetrokken"
+  },
+  "header": {
+    "accessGranted": "Toegang Verleend",
+    "kybVerified": "Aanbieder geverifieerd via het Know Your Business-proces"
+  },
+  "metrics": {
+    "version": "Versie",
+    "onDemand": "Op aanvraag",
+    "update": "Update",
+    "fields": "velden",
+    "schema": "Schema",
+    "format": "Formaat"
+  },
+  "tabs": {
+    "description": "Beschrijving",
+    "schema": "Schema",
+    "sample": "Voorbeeld",
+    "policies": "Toegangsbeleid"
+  },
+  "description": {
+    "generalInfo": "Algemene Informatie",
+    "category": "Categorie",
+    "provider": "Aanbieder",
+    "custodian": "Bewaarder",
+    "status": "Status",
+    "accessDurationTitle": "Toegangsduur",
+    "accessDurationText": "De toegang tot deze gegevens heeft een maximale duur van <strong>{{days}} dagen</strong> vanaf de goedkeuringsdatum."
+  },
+  "schema": {
+    "title": "Gegevensstructuur",
+    "field": "Veld",
+    "type": "Type",
+    "description": "Beschrijving",
+    "defaults": {
+      "id": "Unieke identificatie",
+      "data": "Recordgegevens",
+      "created_at": "Aanmaakdatum"
+    }
+  },
+  "sample": {
+    "title": "Gegevensvoorbeeld",
+    "records": "voorbeeldrecords",
+    "notAvailable": "Voorbeeld niet beschikbaar",
+    "notAvailableDesc": "De aanbieder heeft geen gegevensvoorbeeld voor dit asset verstrekt. U kunt meer technische informatie opvragen door contact op te nemen met de aanbieder."
+  },
+  "policies": {
+    "title": "Toegangsbeleid",
+    "permitted": "Toegestaan",
+    "prohibited": "Verboden",
+    "obligations": "Verplichtingen",
+    "viewTerms": "Volledige Algemene Voorwaarden Bekijken",
+    "legalNotice": "<strong>Juridische Kennisgeving:</strong> Door toegang tot deze gegevens verklaart de afnemer het hierboven beschreven gebruiksbeleid volledig te kennen en te aanvaarden, en zich te verbinden tot naleving onder het governance-kader van PROCUREDATA en het Pontus-X-netwerk.",
+    "defaultPermissions": [
+      "Commercieel gebruik binnen de organisatie",
+      "Analyse en integratie in interne systemen",
+      "Generatie van afgeleide rapporten"
+    ],
+    "defaultProhibitions": [
+      "Herverdeling aan derden zonder toestemming",
+      "Reverse engineering van individuele gegevens",
+      "Gebruik voor illegale of discriminerende doeleinden"
+    ],
+    "defaultObligations": [
+      "Toeschrijving aan de gegevensaanbieder",
+      "Licentievernieuwing volgens het prijsmodel",
+      "AVG-naleving voor persoonsgegevens"
+    ]
+  },
+  "data": {
+    "notAvailableTitle": "Gegevens niet beschikbaar",
+    "notAvailableDesc": "Gegevens zijn alleen beschikbaar wanneer de transactie is voltooid.",
+    "currentStatus": "Huidige status:",
+    "loadingData": "Gegevens laden...",
+    "assetAccess": "Asset Toegang",
+    "assetAccessDesc": "Dit asset wordt geconsumeerd via de Access Controller van de dataruimte. De gegevens worden in realtime verkregen van de bron van de aanbieder, waardoor de privacy en veiligheid van de uitwisseling worden gegarandeerd.",
+    "downloadExplain": "Bij het downloaden controleert de Access Controller uw machtigingen en maakt een veilige verbinding met de aanbieder, waardoor u bijgewerkte gegevens ontvangt zonder technische inloggegevens bloot te stellen.",
+    "downloading": "Downloaden...",
+    "downloadUpdated": "Bijgewerkt Bestand Downloaden",
+    "downloadTechSheet": "Technisch Blad Downloaden",
+    "downloadLicensePDF": "Licentie PDF Downloaden",
+    "noDataForOrg": "Geen voltooide gegevens voor <strong>{{org}}</strong>.",
+    "providerNoData": "Aanbieders ontvangen geen gegevens, ze verzenden ze alleen.",
+    "holderNoData": "Bewaarders beheren gegevens maar consumeren ze niet direct.",
+    "switchConsumer": "Probeer over te schakelen naar een Afnemer-organisatie via de bovenste selector.",
+    "noDataAvailable": "Geen gegevens beschikbaar",
+    "noDataShared": "Er zijn nog geen gegevens gedeeld voor deze transactie."
+  },
+  "provider": {
+    "title": "Aanbiedergegevens",
+    "recordsFound": "{{count}} record(s) gevonden",
+    "companyName": "Bedrijfsnaam",
+    "taxId": "BTW-nummer",
+    "legalName": "Juridische Naam",
+    "contact": "Contact",
+    "email": "E-mail",
+    "fullDetails": "Volledige Details",
+    "fiscalAddress": "Fiscaal Adres",
+    "legalAddress": "Juridisch Adres"
+  },
+  "api": {
+    "title": "API-verbindingsdetails",
+    "description": "Technische configuratie van de gegevensbron.",
+    "parameter": "Parameter"
+  },
+  "payloads": {
+    "esg_report": "Duurzaamheidsrapport (ESG)",
+    "iot_telemetry": "IoT-telemetrie",
+    "financial_records": "Financiële Gegevens",
+    "energy_metering": "Energiemeting",
+    "supply_chain_trace": "Traceerbaarheid Toeleveringsketen",
+    "administrative_list": "Administratieve Lijst",
+    "generic_timeseries": "Historische Gegevens",
+    "default": "Payload Gegevens",
+    "schemaType": "Schematype:",
+    "esgData": "ESG-gegevens",
+    "iotData": "IoT-gegevens",
+    "flexibleData": "Flexibele Gegevens",
+    "supplierData": "Leveranciersgegevens",
+    "currentValue": "Huidige Waarde",
+    "quality": "Kwaliteit",
+    "trend": "Trend",
+    "dataPoints": "Datapunten",
+    "temporalEvolution": "Temporele Evolutie",
+    "sectorData": "Sectorgegevens:"
+  },
+  "blockchain": {
+    "title": "Blockchain Audit"
+  },
+  "accessHistory": {
+    "title": "Toegangsgeschiedenis",
+    "description": "Overzicht van uw downloads en toegangen tot dit asset."
+  },
+  "toast": {
+    "csvSuccess": "CSV-bestand succesvol gedownload",
+    "noExportData": "Geen gegevens om te exporteren",
+    "erpSuccess": "Gegevens succesvol naar ERP verzonden",
+    "erpNoData": "Geen gegevens om te verzenden",
+    "erpError": "Fout bij het verzenden van gegevens naar ERP",
+    "gatewayDownloading": "Gegevens downloaden via de Access Controller...",
+    "gatewaySuccess": "Bestand succesvol gedownload",
+    "gatewayProviderError": "Kan geen verbinding maken met de server van de aanbieder. Probeer het over een paar minuten opnieuw.",
+    "gatewayError": "Downloadfout: {{error}}",
+    "techSheetSuccess": "Technisch blad gedownload",
+    "licenseSuccess": "Licentie succesvol gedownload",
+    "licenseError": "Fout bij het genereren van de licentie",
+    "copied": "Gekopieerd naar klembord"
+  }
+}

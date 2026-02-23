@@ -152,5 +152,27 @@
       "date": "Data",
       "actions": "Ações"
     }
+  },
+  "realtime": {
+    "title": "Analytics em Tempo Real",
+    "subtitle": "Métricas de desempenho dos últimos 30 dias",
+    "live": "Ao vivo",
+    "avgTime": "Tempo Médio",
+    "untilApproval": "até aprovação",
+    "approvalRate": "Taxa de Aprovação",
+    "approvedRequests": "solicitações aprovadas",
+    "thisWeek": "Esta Semana",
+    "vsPrevious": "vs anterior",
+    "pending": "Pendentes",
+    "requireAction": "requerem ação",
+    "dailyVolume": "Volume Diário (últimos 14 dias)",
+    "approvalSpeed": "Velocidade de Aprovação (horas)",
+    "goal": "Meta",
+    "average": "Média",
+    "noApprovalData": "Sem dados de aprovação",
+    "statusDistribution": "Distribuição por Status",
+    "weeklyTrend": "Tendência Semanal",
+    "transactions": "transações",
+    "volume": "volume"
   }
 }
