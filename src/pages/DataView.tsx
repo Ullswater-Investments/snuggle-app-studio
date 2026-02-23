@@ -35,15 +35,6 @@ import { useTranslation } from "react-i18next";
 // EnvironmentalImpactCard removed – no longer displayed in sidebar
 
 const DataView = () => {
-  const { t } = useTranslation('dataView');
-
-  const getStatusLabel = (status: string) => {
-    const key = `statusLabels.${status}`;
-    const translated = t(key);
-    return translated !== key ? translated : status;
-  };
-
-const DataView = () => {
   const { id } = useParams<{ id: string }>();
   const { user, signOut } = useAuth();
   const { activeOrg } = useOrganizationContext();
@@ -52,6 +43,13 @@ const DataView = () => {
   const [activeTab, setActiveTab] = useState("description");
   const [isDownloading, setIsDownloading] = useState(false);
   const { sendNotification } = useNotifications();
+  const { t } = useTranslation('dataView');
+
+  const getStatusLabel = (status: string) => {
+    const key = `statusLabels.${status}`;
+    const translated = t(key);
+    return translated !== key ? translated : status;
+  };
 
   // Obtener transacción y datos con verificación de acceso
   const { data: transaction, isLoading: loadingTransaction } = useQuery({
@@ -191,7 +189,7 @@ const DataView = () => {
       
       fileName = `supplier_data_${id}.csv`;
     } else {
-      toast.error("No hay datos para exportar");
+      toast.error(t('toast.noExportData'));
       return;
     }
 
@@ -215,13 +213,13 @@ const DataView = () => {
       user_id: user?.id
     });
 
-    toast.success("Archivo CSV descargado exitosamente");
+    toast.success(t('toast.csvSuccess'));
   };
 
   const sendToERPMutation = useMutation({
     mutationFn: async (erpConfigId: string) => {
       if (!supplierData || supplierData.length === 0) {
-        throw new Error("No hay datos para enviar");
+        throw new Error(t('toast.erpNoData'));
       }
 
       const { data, error } = await supabase.functions.invoke("erp-data-uploader", {
@@ -237,11 +235,11 @@ const DataView = () => {
       return data;
     },
     onSuccess: () => {
-      toast.success("Datos enviados a ERP exitosamente");
+      toast.success(t('toast.erpSuccess'));
       queryClient.invalidateQueries({ queryKey: ["export-logs"] });
     },
     onError: (error: any) => {
-      toast.error(error.message || "Error al enviar datos a ERP");
+      toast.error(error.message || t('toast.erpError'));
     },
   });
 
@@ -250,7 +248,7 @@ const DataView = () => {
     setIsDownloading(true);
     
     try {
-      toast.info("Descargando datos a través del Access Controller...");
+      toast.info(t('toast.gatewayDownloading'));
       
       const { data, error } = await supabase.functions.invoke("gateway-download", {
         body: {
@@ -306,7 +304,7 @@ const DataView = () => {
         console.error("Error sending download notifications:", notifErr);
       }
 
-      toast.success("Archivo descargado correctamente");
+      toast.success(t('toast.gatewaySuccess'));
       queryClient.invalidateQueries({ queryKey: ["access-logs"] });
     } catch (err: any) {
       console.error("Gateway download error:", err);
@@ -330,9 +328,9 @@ const DataView = () => {
       queryClient.invalidateQueries({ queryKey: ["access-logs"] });
       
       if (errorMsg.includes("Failed to send") || errorMsg.includes("Failed to fetch") || errorMsg.includes("NetworkError") || errorMsg.includes("ENOTFOUND") || errorMsg.includes("502") || errorMsg.includes("504") || errorMsg.includes("provider API")) {
-        toast.error("No se pudo conectar con el servidor del proveedor. Inténtelo de nuevo en unos minutos.");
+        toast.error(t('toast.gatewayProviderError'));
       } else {
-        toast.error(`Error al descargar: ${errorMsg}`);
+        toast.error(t('toast.gatewayError', { error: errorMsg }));
       }
     } finally {
       setIsDownloading(false);
@@ -900,19 +898,19 @@ const DataView = () => {
                       <Alert>
                         <Info className="h-4 w-4" />
                         <AlertDescription>
-                          No hay datos completados para <strong>{activeOrg?.name}</strong>. 
-                          {activeOrg?.type === 'provider' && ' Los proveedores no reciben datos, solo los envían.'}
-                          {activeOrg?.type === 'data_holder' && ' Los holders custodian datos pero no los consumen directamente.'}
-                          {' '}Prueba a cambiar a una organización Consumer desde el selector superior.
+                          <span dangerouslySetInnerHTML={{ __html: t('data.noDataForOrg', { org: activeOrg?.name }) }} />
+                           {activeOrg?.type === 'provider' && ` ${t('data.providerNoData')}`}
+                           {activeOrg?.type === 'data_holder' && ` ${t('data.holderNoData')}`}
+                           {' '}{t('data.switchConsumer')}
                         </AlertDescription>
                       </Alert>
                     )}
                     <Card>
                       <CardContent className="py-12 text-center">
                         <Building2 className="mx-auto h-12 w-12 text-muted-foreground" />
-                        <h3 className="mt-4 text-lg font-semibold">Sin datos disponibles</h3>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                          Aún no se han compartido datos para esta transacción.
+                         <h3 className="mt-4 text-lg font-semibold">{t('data.noDataAvailable')}</h3>
+                         <p className="mt-2 text-sm text-muted-foreground">
+                           {t('data.noDataShared')}
                         </p>
                       </CardContent>
                     </Card>
@@ -924,18 +922,18 @@ const DataView = () => {
             <Tabs defaultValue={payloadData ? "payload" : "supplier"} className="w-full">
               <TabsList>
                 {payloadData && (
-                  <TabsTrigger value="payload">
-                    {payloadData.schema_type === "esg_report" ? "Datos ESG" : 
-                     payloadData.schema_type === "iot_telemetry" ? "Datos IoT" : 
-                     "Datos Flexibles"}
+                   <TabsTrigger value="payload">
+                     {payloadData.schema_type === "esg_report" ? t('payloads.esgData') : 
+                      payloadData.schema_type === "iot_telemetry" ? t('payloads.iotData') : 
+                      t('payloads.flexibleData')}
                   </TabsTrigger>
                 )}
                 {supplierData && supplierData.length > 0 && (
-                  <TabsTrigger value="supplier">Datos de Proveedor</TabsTrigger>
+                  <TabsTrigger value="supplier">{t('payloads.supplierData')}</TabsTrigger>
                 )}
                 <TabsTrigger value="blockchain">
                   <ShieldCheck className="h-4 w-4 mr-1" />
-                  Auditoría Blockchain
+                   {t('blockchain.title')}
                 </TabsTrigger>
               </TabsList>
 
@@ -944,18 +942,11 @@ const DataView = () => {
                 <TabsContent value="payload">
                   <Card>
                     <CardHeader>
-                      <CardTitle>
-                        {payloadData.schema_type === "esg_report" ? "Reporte de Sostenibilidad (ESG)" :
-                         payloadData.schema_type === "iot_telemetry" ? "Telemetría IoT" :
-                         payloadData.schema_type === "financial_records" ? "Registros Financieros" :
-                         payloadData.schema_type === "energy_metering" ? "Medición Energética" :
-                         payloadData.schema_type === "supply_chain_trace" ? "Trazabilidad de Cadena de Suministro" :
-                         payloadData.schema_type === "administrative_list" ? "Listado Administrativo" :
-                         payloadData.schema_type === "generic_timeseries" ? "Datos Históricos" :
-                         "Datos del Payload"}
-                      </CardTitle>
-                      <CardDescription>
-                        Tipo de esquema: <Badge variant="outline">{payloadData.schema_type}</Badge>
+                       <CardTitle>
+                         {t(`payloads.${payloadData.schema_type}`, { defaultValue: t('payloads.default') })}
+                       </CardTitle>
+                       <CardDescription>
+                         {t('payloads.schemaType')} <Badge variant="outline">{payloadData.schema_type}</Badge>
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -972,24 +963,24 @@ const DataView = () => {
                           {(payloadData.data_content as any).current_value !== undefined && (
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                               <div className="p-4 rounded-lg border bg-card">
-                                <p className="text-sm text-muted-foreground mb-1">Valor Actual</p>
+                                <p className="text-sm text-muted-foreground mb-1">{t('payloads.currentValue')}</p>
                                 <p className="text-2xl font-bold">{(payloadData.data_content as any).current_value}</p>
                               </div>
                               {(payloadData.data_content as any).quality_score !== undefined && (
                                 <div className="p-4 rounded-lg border bg-card">
-                                  <p className="text-sm text-muted-foreground mb-1">Calidad</p>
+                                  <p className="text-sm text-muted-foreground mb-1">{t('payloads.quality')}</p>
                                   <p className="text-2xl font-bold">{(payloadData.data_content as any).quality_score}%</p>
                                 </div>
                               )}
                               {(payloadData.data_content as any).trend !== undefined && (
                                 <div className="p-4 rounded-lg border bg-card">
-                                  <p className="text-sm text-muted-foreground mb-1">Tendencia</p>
+                                  <p className="text-sm text-muted-foreground mb-1">{t('payloads.trend')}</p>
                                   <p className="text-2xl font-bold capitalize">{(payloadData.data_content as any).trend}</p>
                                 </div>
                               )}
                               {(payloadData.data_content as any).data_points !== undefined && (
                                 <div className="p-4 rounded-lg border bg-card">
-                                  <p className="text-sm text-muted-foreground mb-1">Puntos de Datos</p>
+                                  <p className="text-sm text-muted-foreground mb-1">{t('payloads.dataPoints')}</p>
                                   <p className="text-2xl font-bold">{(payloadData.data_content as any).data_points?.toLocaleString()}</p>
                                 </div>
                               )}
@@ -999,7 +990,7 @@ const DataView = () => {
                           {/* Gráfico de Serie Temporal */}
                           {(payloadData.data_content as any).history && Array.isArray((payloadData.data_content as any).history) && (
                             <div className="mt-6">
-                              <h4 className="font-semibold mb-4">Evolución Temporal</h4>
+                              <h4 className="font-semibold mb-4">{t('payloads.temporalEvolution')}</h4>
                               <ResponsiveContainer width="100%" height={300}>
                                 <AreaChart data={(payloadData.data_content as any).history}>
                                   <defs>
@@ -1041,8 +1032,8 @@ const DataView = () => {
                           {/* Sector Info */}
                           {(payloadData.data_content as any).sector && (
                             <div className="mt-4 p-4 rounded-lg bg-muted/30">
-                              <p className="text-sm text-muted-foreground">
-                                Datos sectoriales: <Badge variant="secondary">{(payloadData.data_content as any).sector}</Badge>
+                               <p className="text-sm text-muted-foreground">
+                                 {t('payloads.sectorData')} <Badge variant="secondary">{(payloadData.data_content as any).sector}</Badge>
                               </p>
                             </div>
                           )}
@@ -1063,9 +1054,9 @@ const DataView = () => {
                 <TabsContent value="supplier">
                   <Card>
                     <CardHeader>
-                      <CardTitle>Datos del Proveedor</CardTitle>
-                      <CardDescription>
-                        {supplierData.length} registro(s) encontrado(s)
+                       <CardTitle>{t('provider.title')}</CardTitle>
+                       <CardDescription>
+                         {t('provider.recordsFound', { count: supplierData.length })}
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -1073,11 +1064,11 @@ const DataView = () => {
                         <Table>
                           <TableHeader>
                             <TableRow>
-                              <TableHead>Razón Social</TableHead>
-                              <TableHead>CIF/NIF</TableHead>
-                              <TableHead>Nombre Legal</TableHead>
-                              <TableHead>Contacto</TableHead>
-                              <TableHead>Email</TableHead>
+                               <TableHead>{t('provider.companyName')}</TableHead>
+                               <TableHead>{t('provider.taxId')}</TableHead>
+                               <TableHead>{t('provider.legalName')}</TableHead>
+                               <TableHead>{t('provider.contact')}</TableHead>
+                               <TableHead>{t('provider.email')}</TableHead>
                             </TableRow>
                           </TableHeader>
                           <TableBody>
@@ -1097,17 +1088,17 @@ const DataView = () => {
                       {/* Detalles expandidos del primer registro */}
                       {supplierData.length > 0 && (
                         <div className="mt-6 space-y-4">
-                          <h4 className="font-semibold">Detalles Completos</h4>
+                          <h4 className="font-semibold">{t('provider.fullDetails')}</h4>
                           <div className="grid gap-4 sm:grid-cols-2">
                             <div>
-                              <p className="text-sm font-medium text-muted-foreground">Dirección Fiscal</p>
+                              <p className="text-sm font-medium text-muted-foreground">{t('provider.fiscalAddress')}</p>
                               <pre className="mt-1 rounded-md bg-muted p-2 text-xs">
                                 {JSON.stringify(supplierData[0].fiscal_address, null, 2)}
                               </pre>
                             </div>
                             {supplierData[0].legal_address && (
                               <div>
-                                <p className="text-sm font-medium text-muted-foreground">Dirección Legal</p>
+                                <p className="text-sm font-medium text-muted-foreground">{t('provider.legalAddress')}</p>
                                 <pre className="mt-1 rounded-md bg-muted p-2 text-xs">
                                   {JSON.stringify(supplierData[0].legal_address, null, 2)}
                                 </pre>
@@ -1140,8 +1131,8 @@ const DataView = () => {
               transactionId={id}
               assetId={transaction.asset?.id}
               consumerOrgId={activeOrg?.id === transaction.consumer_org_id ? activeOrg.id : undefined}
-              title="Historial de Accesos"
-              description="Registro de tus descargas y accesos a este activo."
+               title={t('accessHistory.title')}
+               description={t('accessHistory.description')}
             />
           </motion.div>
         )}
