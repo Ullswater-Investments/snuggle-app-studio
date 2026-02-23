@@ -33,7 +33,8 @@
     "description": "Descrizione",
     "schema": "Schema",
     "sample": "Campione",
-    "policies": "Politiche di Accesso"
+    "policies": "Politiche di Accesso",
+    "aiAssistant": "Assistente IA"
   },
   "description": {
     "generalInfo": "Informazioni Generali",
@@ -95,7 +96,7 @@
     "downloading": "Download in corso...",
     "downloadUpdated": "Scarica File Aggiornato",
     "downloadTechSheet": "Scarica Scheda Tecnica",
-    "downloadLicensePDF": "Scarica Licenza PDF",
+    "downloadLicensePDF": "Scarica Contratto Digitale di Governance",
     "noDataForOrg": "Nessun dato completato per <strong>{{org}}</strong>.",
     "providerNoData": "I fornitori non ricevono dati, li inviano solamente.",
     "holderNoData": "I depositari custodiscono i dati ma non li consumano direttamente.",
@@ -159,8 +160,8 @@
     "gatewayProviderError": "Impossibile connettersi al server del fornitore. Riprovare tra qualche minuto.",
     "gatewayError": "Errore di download: {{error}}",
     "techSheetSuccess": "Scheda tecnica scaricata",
-    "licenseSuccess": "Licenza scaricata con successo",
-    "licenseError": "Errore nella generazione della licenza",
+    "licenseSuccess": "Contratto di Governance scaricato",
+    "licenseError": "Errore nella generazione del Contratto di Governance",
     "copied": "Copiato negli appunti"
   }
 }

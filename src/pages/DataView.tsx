@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Download, Send, FileText, Building2, Info, Activity, TrendingUp, ShieldCheck, Award, Zap, Copy, Key, ExternalLink, Database, Clock, FileJson, Globe, Star, CheckCircle2, XCircle, AlertCircle, Scale, Eye } from "lucide-react";
+import { Download, Send, FileText, Building2, Info, Activity, TrendingUp, ShieldCheck, Award, Zap, Copy, Key, ExternalLink, Database, Clock, FileJson, Globe, Star, CheckCircle2, XCircle, AlertCircle, Scale, Eye, Sparkles } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import { ESGDataView } from "@/components/ESGDataView";
@@ -31,6 +31,7 @@ import { generateLicensePDF } from "@/utils/pdfGenerator";
 import { AccessHistoryTable } from "@/components/AccessHistoryTable";
 import { useNotifications } from "@/hooks/useNotifications";
 import { useTranslation } from "react-i18next";
+import { AssetDetailChatAgent } from "@/components/asset-detail/AssetDetailChatAgent";
 
 // EnvironmentalImpactCard removed – no longer displayed in sidebar
 
@@ -510,6 +511,10 @@ const DataView = () => {
                       <Scale className="h-4 w-4 mr-1.5" />
                       {t('tabs.policies')}
                     </TabsTrigger>
+                    <TabsTrigger value="ai" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
+                      <Sparkles className="h-4 w-4 mr-1.5" />
+                      {t('tabs.aiAssistant')}
+                    </TabsTrigger>
                  </TabsList>
 
                  {/* Description Tab */}
@@ -676,6 +681,27 @@ const DataView = () => {
                       <AlertDescription className="text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t('policies.legalNotice') }} />
                     </Alert>
                   )}
+                </TabsContent>
+
+                {/* AI Assistant Tab */}
+                <TabsContent value="ai" className="p-6">
+                  <AssetDetailChatAgent
+                    product={{
+                      asset_id: transaction.asset?.id || "",
+                      asset_name: productData?.name || "",
+                      asset_description: productData?.description || undefined,
+                      category: productData?.category || "General",
+                      version: productData?.version || undefined,
+                      schema_definition: productData?.schema_definition as Record<string, any> | null,
+                      custom_metadata: (() => {
+                        const meta = transaction.asset?.custom_metadata as Record<string, any> | null;
+                        if (!meta) return null;
+                        const { api_url, api_headers, allowed_wallets, denied_wallets, provider_id, ...safeMeta } = meta;
+                        return safeMeta;
+                      })(),
+                    }}
+                    schemaColumns={schema}
+                  />
                 </TabsContent>
               </Tabs>
             </CardContent>
@@ -1126,6 +1152,7 @@ const DataView = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-6"
           >
             <AccessHistoryTable
               transactionId={id}
