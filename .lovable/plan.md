@@ -1,79 +1,88 @@
 
 
-## Correccion de error de compilacion e internacionalizacion restante de DataView.tsx
+## Ajustes finales de DataView.tsx: Spacing, Naming, Asistente IA y Notificaciones
 
-### 1. Correccion del error de compilacion (linea 37-46)
+### 1. Spacing entre "Acceso al Activo" y "Historial de Accesos"
 
-El archivo tiene una declaracion duplicada de `const DataView = () => {`. La estructura actual es:
+Actualmente el bloque `<div className="space-y-6">` (linea 686) contiene las Cards de datos, pero el `AccessHistoryTable` (linea 1124) esta fuera de ese `div`, dentro de un `motion.div` sin margen superior. Se anadira `className="mt-6"` al `motion.div` del AccessHistoryTable para crear la separacion visual.
+
+**Archivo:** `src/pages/DataView.tsx` (linea ~1125)
+
+---
+
+### 2. Renombrar "Contrato ODRL / Licencia ODRL" a "Contrato Digital de Gobernanza"
+
+Las referencias dentro del scope de DataView se encuentran en:
+
+- **`src/utils/pdfGenerator.ts`**: El titulo del PDF dice `"CONTRATO DE LICENCIA DE USO DE DATOS"` -- se mantiene porque es el titulo legal del PDF, no menciona ODRL
+- **`src/locales/*/catalogDetails.json`**: La pestana `"rights": "Derechos (ODRL)"` -- esto afecta al catalogo, no a DataView
+- **`src/pages/DataView.tsx`**: La pestana de "Politicas de Acceso" (linea 509-512) no menciona ODRL directamente
+- **`src/locales/*/dataView.json`**: Los archivos de i18n para DataView usan `downloadLicensePDF` con texto como "Descargar Licencia PDF"
+
+Cambios concretos en los 7 archivos `dataView.json`:
+- `data.downloadLicensePDF`: Cambiar de "Descargar Licencia PDF" a "Descargar Contrato Digital de Gobernanza" (y equivalentes en cada idioma)
+- `toast.licenseSuccess`: Cambiar de "Licencia descargada correctamente" a "Contrato de Gobernanza descargado" (y equivalentes)
+- `toast.licenseError`: Cambiar de "Error al generar la licencia" a "Error al generar el Contrato de Gobernanza" (y equivalentes)
+
+Cambios en `pdfGenerator.ts`:
+- Nombre del archivo generado: de `Licencia_PROCUREDATA_...` a `Contrato_Gobernanza_PROCUREDATA_...`
+- Comentarios internos de ODRL -> Gobernanza (solo limpieza)
+
+---
+
+### 3. Integracion del Asistente IA (ARIA) en DataView
+
+Se reutilizara el componente `AssetDetailChatAgent` ya existente en `src/components/asset-detail/AssetDetailChatAgent.tsx`. Este componente:
+- Ya implementa la funcion `getAriaContext()` que extrae SOLO metadatos publicos (nombre, descripcion, categoria, version, esquema, casos de uso)
+- Ya BLOQUEA explicitamente: `api_url`, `api_headers`, `allowed_wallets`, `denied_wallets`, IDs internos
+- Ya incluye ChatGuard (3 strikes), TokenWallet, streaming SSE y preguntas sugeridas
+- Ya usa el namespace `catalogDetails` con traducciones en 7 idiomas
+
+**Cambios en DataView.tsx:**
+
+1. Importar `AssetDetailChatAgent`
+2. Anadir una nueva pestana `"ai"` en el TabsList (linea ~513), con icono Sparkles y texto `t('tabs.aiAssistant')`
+3. Anadir el `TabsContent value="ai"` con el componente `AssetDetailChatAgent`, pasandole:
+   - `product.asset_id`: `transaction.asset?.id`
+   - `product.asset_name`: `productData?.name`
+   - `product.asset_description`: `productData?.description`
+   - `product.category`: `productData?.category`
+   - `product.version`: `productData?.version`
+   - `product.schema_definition`: `productData?.schema_definition`
+   - `product.custom_metadata`: (objeto limpio sin api_url/api_headers/wallets)
+   - `schemaColumns`: el array `schema` ya existente
+
+4. Anadir clave `tabs.aiAssistant` en los 7 archivos `dataView.json`
+
+**Seguridad:** El contexto se filtra a traves de `getAriaContext()` del propio componente, que ya excluye api_url, api_headers, allowed_wallets, denied_wallets e IDs de sistema. Ademas, al pasar `custom_metadata`, se creara un objeto sanitizado que excluya explicitamente esos campos sensibles.
+
+---
+
+### 4. Verificacion de Notificaciones de "Aprobacion Final"
+
+La funcion de base de datos `notify_on_transaction_change` ya gestiona correctamente el estado `approved`:
 
 ```text
-L37: const DataView = () => {          // <-- DUPLICADO (debe eliminarse)
-L38:   const { t } = useTranslation('dataView');
-L39-44: getStatusLabel function
-L45: (cierre implicito faltante)
-L46: const DataView = () => {          // <-- REAL
-L47:   const { id } = useParams...
+WHEN 'approved' THEN
+  _title := _product_name || ': Solicitud aprobada';
+  _msg := 'La solicitud de datos ha sido aprobada...';
 ```
 
-**Solucion:** Eliminar la declaracion duplicada (lineas 37-45) y mover `useTranslation` y `getStatusLabel` dentro del componente real (despues de linea 46).
+Esta funcion inserta registros en la tabla `notifications` para todos los usuarios de las organizaciones involucradas. No se requieren cambios adicionales -- las notificaciones de aprobacion final ya se guardan correctamente en la base de datos y apareceran en `/notifications`.
 
 ---
 
-### 2. Cadenas hardcodeadas pendientes de internacionalizar
+### Resumen de archivos a modificar
 
-Se reemplazaran todas las cadenas restantes usando las claves ya existentes en los archivos `dataView.json` de los 7 idiomas:
-
-| Seccion | Cadenas hardcodeadas | Clave i18n |
-|---|---|---|
-| **Toast CSV** (L194) | `"No hay datos para exportar"` | `t('toast.noExportData')` |
-| **Toast CSV** (L218) | `"Archivo CSV descargado exitosamente"` | `t('toast.csvSuccess')` |
-| **Toast ERP** (L224) | `"No hay datos para enviar"` | `t('toast.erpNoData')` |
-| **Toast ERP** (L240) | `"Datos enviados a ERP exitosamente"` | `t('toast.erpSuccess')` |
-| **Toast ERP** (L244) | `"Error al enviar datos a ERP"` | `t('toast.erpError')` |
-| **Toast Gateway** (L253) | `"Descargando datos a traves del Access Controller..."` | `t('toast.gatewayDownloading')` |
-| **Toast Gateway** (L309) | `"Archivo descargado correctamente"` | `t('toast.gatewaySuccess')` |
-| **Toast Gateway** (L333) | `"No se pudo conectar con el servidor..."` | `t('toast.gatewayProviderError')` |
-| **Toast Gateway** (L335) | `` `Error al descargar: ${errorMsg}` `` | `t('toast.gatewayError', { error: errorMsg })` |
-| **No data org** (L903) | `"No hay datos completados para..."` | `t('data.noDataForOrg', { org: activeOrg?.name })` con HTML |
-| **No data provider** (L904) | `"Los proveedores no reciben datos..."` | `t('data.providerNoData')` |
-| **No data holder** (L905) | `"Los holders custodian datos..."` | `t('data.holderNoData')` |
-| **No data switch** (L906) | `"Prueba a cambiar a una organizacion Consumer..."` | `t('data.switchConsumer')` |
-| **No data title** (L913) | `"Sin datos disponibles"` | `t('data.noDataAvailable')` |
-| **No data desc** (L915) | `"Aun no se han compartido datos..."` | `t('data.noDataShared')` |
-| **Payload tabs** (L928-931) | `"Datos ESG"`, `"Datos IoT"`, `"Datos Flexibles"` | `t('payloads.esgData')`, `t('payloads.iotData')`, `t('payloads.flexibleData')` |
-| **Payload tab supplier** (L934) | `"Datos de Proveedor"` | `t('payloads.supplierData')` |
-| **Blockchain tab** (L938) | `"Auditoria Blockchain"` | `t('blockchain.title')` |
-| **Payload titles** (L948-955) | Nombres de esquemas (ESG, IoT, etc.) | `t('payloads.esg_report')`, etc. |
-| **Schema type** (L958) | `"Tipo de esquema:"` | `t('payloads.schemaType')` |
-| **KPIs timeseries** (L975-992) | `"Valor Actual"`, `"Calidad"`, `"Tendencia"`, `"Puntos de Datos"` | `t('payloads.currentValue')`, etc. |
-| **Chart title** (L1002) | `"Evolucion Temporal"` | `t('payloads.temporalEvolution')` |
-| **Sector** (L1044-1045) | `"Datos sectoriales:"` | `t('payloads.sectorData')` |
-| **Provider title** (L1066) | `"Datos del Proveedor"` | `t('provider.title')` |
-| **Provider count** (L1068) | `"registro(s) encontrado(s)"` | `t('provider.recordsFound', { count: supplierData.length })` |
-| **Provider headers** (L1076-1080) | `"Razon Social"`, `"CIF/NIF"`, etc. | `t('provider.companyName')`, `t('provider.taxId')`, etc. |
-| **Full details** (L1100) | `"Detalles Completos"` | `t('provider.fullDetails')` |
-| **Fiscal address** (L1103) | `"Direccion Fiscal"` | `t('provider.fiscalAddress')` |
-| **Legal address** (L1110) | `"Direccion Legal"` | `t('provider.legalAddress')` |
-| **Access history** (L1143-1144) | `"Historial de Accesos"`, `"Registro de tus descargas..."` | `t('accessHistory.title')`, `t('accessHistory.description')` |
-
----
-
-### 3. Problema del `useTranslation` fuera de scope
-
-El hook `useTranslation` solo puede usarse dentro del componente React. Actualmente las funciones `exportToCSV`, `sendToERPMutation` y `handleGatewayDownload` estan dentro del componente, asi que tendran acceso a `t()` una vez movido correctamente.
-
----
-
-### Detalle tecnico
-
-**Archivo a modificar:** `src/pages/DataView.tsx`
-
-No se necesitan cambios en los archivos JSON de traducciones porque todas las claves ya existen en los 7 idiomas.
-
-**Cambios concretos:**
-
-1. Eliminar lineas 37-45 (declaracion duplicada de `DataView`)
-2. Insertar `const { t } = useTranslation('dataView');` y `getStatusLabel` justo despues de la linea 54 (`useNotifications`)
-3. Reemplazar ~35 cadenas hardcodeadas en espanol por llamadas `t()` usando las claves de la tabla anterior
-4. Para la alerta con HTML dinamico (L903), usar `dangerouslySetInnerHTML` con `t('data.noDataForOrg', { org: activeOrg?.name })`
+| Archivo | Cambio |
+|---|---|
+| `src/pages/DataView.tsx` | Spacing AccessHistory, nueva pestana AI, import del chat agent |
+| `src/utils/pdfGenerator.ts` | Renombrar archivo de salida del PDF |
+| `src/locales/es/dataView.json` | Nuevas claves: `tabs.aiAssistant`, renaming licencia->contrato gobernanza |
+| `src/locales/en/dataView.json` | Idem |
+| `src/locales/fr/dataView.json` | Idem |
+| `src/locales/de/dataView.json` | Idem |
+| `src/locales/it/dataView.json` | Idem |
+| `src/locales/pt/dataView.json` | Idem |
+| `src/locales/nl/dataView.json` | Idem |
 
