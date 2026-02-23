@@ -1,64 +1,68 @@
 
 
-## Eliminar duplicidad de notificaciones de descarga y mejorar iconografia
+## Internacionalizar /analytics (SellerAnalytics)
 
-### Problema identificado
+El componente `src/pages/SellerAnalytics.tsx` tiene aproximadamente 30 cadenas hardcodeadas en espanol. Ya existe el namespace `analytics` con algunas claves, pero faltan muchas que el componente necesita. Ademas, el formateo de fechas usa `es` fijo de date-fns en lugar de adaptarse al idioma activo.
 
-Hay **dos fuentes** de notificaciones para el mismo evento de descarga:
+### Cadenas a internacionalizar
 
-1. **Trigger de BD** `notify_provider_on_download` (se activa al insertar en `access_logs`) -- genera un mensaje generico: "Descarga de activo" / "Un consumidor ha descargado datos de tu activo."
-2. **Edge Function** `notification-handler` con `eventType: "download"` -- genera mensajes detallados con nombre del activo y organizacion consumidora.
+| Cadena actual | Clave i18n |
+|---|---|
+| "Seller Studio" | `title` (ya existe) |
+| "Analitica de rendimiento de tus activos de datos." | `subtitle` (ya existe, ajustar valor ES) |
+| "Acceso Restringido" | `restricted.title` (ya existe) |
+| "Esta seccion esta reservada para Vendedores de Datos y Data Holders." | `restricted.description` (ya existe) |
+| "Ingresos Totales" | `kpis.revenue` (ya existe) |
+| "vs mes anterior" | **nuevo** `kpis.vsPreviousMonth` |
+| "Ventas Completadas" | **nuevo** `kpis.completedSales` |
+| "Ultimos 6 meses" | **nuevo** `kpis.last6Months` |
+| "Clientes Unicos" | **nuevo** `kpis.uniqueCustomers` |
+| "Compradores activos" | **nuevo** `kpis.activeBuyers` |
+| "Rating Promedio" | **nuevo** `kpis.averageRating` |
+| "Basado en X resenas" | **nuevo** `kpis.basedOnReviews` (interpolacion `{{count}}`) |
+| "Ingresos y Ventas Mensuales" | **nuevo** `charts.monthlyRevenueSales` |
+| "Evolucion de los ultimos 6 meses." | **nuevo** `charts.last6MonthsEvolution` |
+| "Ingresos" (tooltip/legend) | `kpis.revenue` reutilizado |
+| "Ventas" (tooltip/legend) | `kpis.totalSales` reutilizado o **nuevo** `charts.sales` |
+| "Ingresos (EUR)" (legend name) | **nuevo** `charts.revenueEur` |
+| "Sin datos de ventas aun" | `empty.title` / **nuevo** `charts.noSalesData` |
+| "Top Productos por Ingresos" | `charts.topProducts` (ya existe, ajustar) |
+| "Rendimiento de tus activos mas vendidos." | **nuevo** `charts.topProductsDescription` |
+| "Sin productos vendidos aun" | **nuevo** `charts.noProductsSold` |
+| "Top 5 Clientes" | **nuevo** `customers.top5` |
+| "Tus mejores compradores por volumen de transacciones." | **nuevo** `customers.description` |
+| "compra" / "compras" | **nuevo** `customers.purchase` / `customers.purchases` |
+| "Volumen total" | **nuevo** `customers.totalVolume` |
+| "Aun no tienes clientes registrados." | **nuevo** `customers.noCustomers` |
+| "Las ventas completadas apareceran aqui." | **nuevo** `customers.salesWillAppear` |
+| "Producto Desconocido" | **nuevo** `charts.unknownProduct` |
+| "Cliente Desconocido" | **nuevo** `customers.unknownCustomer` |
 
-Ambos se disparan durante el flujo de gateway download en `DataView.tsx`, causando entradas duplicadas.
+### Cambio de locale en date-fns
 
----
+Actualmente usa `import { es } from "date-fns/locale"` fijo. Se cambiara a un mapeo dinamico basado en `i18n.language` para que los nombres de mes se adapten al idioma activo.
 
-### Cambios a realizar
+### Cambio de formateo de moneda
 
-#### 1. Eliminar el trigger duplicado (migracion SQL)
-
-Se eliminara el trigger `on_download_access_log` y la funcion `notify_provider_on_download` de la base de datos, dejando unicamente la Edge Function como fuente de notificaciones de descarga.
-
-```sql
-DROP TRIGGER IF EXISTS on_download_access_log ON public.access_logs;
-DROP FUNCTION IF EXISTS public.notify_provider_on_download();
-```
-
-#### 2. Mejorar los mensajes de la Edge Function
-
-En `supabase/functions/notification-handler/index.ts`, actualizar la seccion `download` de `ROLE_MESSAGES`:
-
-| Rol | Campo | Valor actual | Valor nuevo |
-|---|---|---|---|
-| Provider | title | `"📊 Uso de datos: {name}"` | `"Descarga de activo: {name}"` |
-| Provider | message | `"Un consumidor ha descargado el activo {name}"` | `"La organizacion {consumerName} ha obtenido una copia actualizada de los datos"` |
-| Consumer | title | `"📥 Descarga completada: {name}"` | `"Descarga completada: {name}"` |
-| Consumer | message | Sin cambio | Sin cambio |
-
-Se eliminaran los emojis de los titulos para que la iconografia se gestione exclusivamente desde el frontend.
-
-#### 3. Anadir regla de iconografia para descargas en Notifications.tsx
-
-En la funcion `getNotificationConfig` de `src/pages/Notifications.tsx`, anadir una nueva regla ANTES del switch final:
-
-```text
-Si el titulo contiene "descarga" -> icono Download, fondo bg-blue-100, color text-blue-600
-```
-
-Esto aplicara tanto a la pagina `/notifications` como al dropdown de la campana (que ya usa un estilo simplificado sin iconos personalizados).
-
-#### 4. Anadir icono de descarga en el dropdown de la campana
-
-En `src/components/NotificationsBell.tsx`, se anadira deteccion basica del tipo "descarga" para mostrar un mini-icono `Download` junto al titulo, usando el mismo patron de color azul suave.
-
----
+`new Intl.NumberFormat('es-ES', ...)` se cambiara a `new Intl.NumberFormat(i18n.language, ...)`.
 
 ### Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| Nueva migracion SQL | DROP trigger + funcion duplicada |
-| `supabase/functions/notification-handler/index.ts` | Actualizar mensajes download, eliminar emojis |
-| `src/pages/Notifications.tsx` | Anadir regla de icono Download en `getNotificationConfig` |
-| `src/components/NotificationsBell.tsx` | Anadir icono Download para notificaciones de descarga |
+| `src/pages/SellerAnalytics.tsx` | Anadir `useTranslation('analytics')`, reemplazar ~30 strings, locale dinamico en date-fns, locale dinamico en NumberFormat |
+| `src/locales/es/analytics.json` | Anadir ~18 claves nuevas (kpis, charts, customers) |
+| `src/locales/en/analytics.json` | Idem en ingles |
+| `src/locales/fr/analytics.json` | Idem en frances |
+| `src/locales/de/analytics.json` | Idem en aleman |
+| `src/locales/it/analytics.json` | Idem en italiano |
+| `src/locales/pt/analytics.json` | Idem en portugues |
+| `src/locales/nl/analytics.json` | Idem en neerlandes |
+
+### Detalles tecnicos
+
+- Se usara `useTranslation('analytics')` ya que el namespace esta registrado en `src/i18n.ts`.
+- Para date-fns se importaran los locales necesarios y se creara un mapa: `{ es, en: enUS, fr, de, it, pt, nl }`.
+- La interpolacion para "Basado en X resenas" sera: `t('kpis.basedOnReviews', { count: reviews?.length || 0 })`.
+- Para "compra/compras" se usara logica condicional: `t(count === 1 ? 'customers.purchase' : 'customers.purchases')`.
 
