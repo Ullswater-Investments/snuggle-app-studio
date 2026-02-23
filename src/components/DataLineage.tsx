@@ -1,42 +1,45 @@
 import { Building, Database, FileSignature, User, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 
 interface DataLineageProps {
   transaction: any;
 }
 
 export function DataLineage({ transaction }: DataLineageProps) {
+  const { t } = useTranslation('dataView');
+
   const steps = [
     {
       icon: Database,
-      label: "Fuente Original",
-      value: transaction.asset?.product?.name || "Dataset",
-      description: "Origen de los datos",
+      label: t('lineage.source'),
+      value: transaction.asset?.product?.name || t('lineage.datasetFallback'),
+      description: t('lineage.sourceDescription'),
       color: "text-blue-600 dark:text-blue-400",
       bgColor: "bg-blue-100 dark:bg-blue-900/30"
     },
     {
       icon: Building,
-      label: "Proveedor",
-      value: transaction.subject_org?.name || "Organización Proveedora",
-      description: "Titular de los datos",
+      label: t('lineage.provider'),
+      value: transaction.subject_org?.name || t('lineage.providerFallback'),
+      description: t('lineage.providerDescription'),
       color: "text-purple-600 dark:text-purple-400",
       bgColor: "bg-purple-100 dark:bg-purple-900/30"
     },
     {
       icon: FileSignature,
-      label: "Contrato ODRL",
-      value: "Licencia Inteligente",
-      description: `${transaction.access_duration_days} días de acceso`,
+      label: t('lineage.contract'),
+      value: t('lineage.smartLicense'),
+      description: t('lineage.daysAccess', { days: transaction.access_duration_days }),
       color: "text-amber-600 dark:text-amber-400",
       bgColor: "bg-amber-100 dark:bg-amber-900/30"
     },
     {
       icon: User,
-      label: "Consumidor",
-      value: transaction.consumer_org?.name || "Tu Organización",
-      description: "Receptor autorizado",
+      label: t('lineage.consumer'),
+      value: transaction.consumer_org?.name || t('lineage.consumerFallback'),
+      description: t('lineage.consumerDescription'),
       color: "text-green-600 dark:text-green-400",
       bgColor: "bg-green-100 dark:bg-green-900/30"
     }
@@ -47,10 +50,10 @@ export function DataLineage({ transaction }: DataLineageProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Database className="h-5 w-5 text-primary" />
-          Linaje de Datos
+          {t('lineage.title')}
         </CardTitle>
         <CardDescription>
-          Trazabilidad completa desde el origen hasta el destino
+          {t('lineage.subtitle')}
         </CardDescription>
       </CardHeader>
       <CardContent>

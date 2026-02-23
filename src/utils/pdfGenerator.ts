@@ -380,7 +380,7 @@ export const generateLicensePDF = async (
   drawHeadersAndFooters(doc, contractHash);
 
   // Save
-  doc.save(`Contrato_Gobernanza_PROCUREDATA_${transaction.id.substring(0, 8)}.pdf`);
+  doc.save(`Licencia_Uso_PROCUREDATA_${transaction.id.substring(0, 8)}.pdf`);
 };
 
 /** Extract country hint from sector string, default to España */

@@ -36,6 +36,22 @@
     "policies": "Zugriffsrichtlinien",
     "aiAssistant": "KI-Assistent"
   },
+  "lineage": {
+    "title": "Datenherkunft",
+    "subtitle": "Vollständige Rückverfolgbarkeit vom Ursprung bis zum Ziel",
+    "source": "Originalquelle",
+    "datasetFallback": "Datensatz",
+    "sourceDescription": "Datenursprung",
+    "provider": "Anbieter",
+    "providerFallback": "Anbieterorganisation",
+    "providerDescription": "Dateninhaber",
+    "contract": "Nutzungslizenz",
+    "smartLicense": "Intelligente Lizenz",
+    "daysAccess": "{{days}} Tage Zugang",
+    "consumer": "Verbraucher",
+    "consumerFallback": "Ihre Organisation",
+    "consumerDescription": "Autorisierter Empfänger"
+  },
   "description": {
     "generalInfo": "Allgemeine Informationen",
     "category": "Kategorie",
@@ -96,7 +112,7 @@
     "downloading": "Wird heruntergeladen...",
     "downloadUpdated": "Aktualisierte Datei herunterladen",
     "downloadTechSheet": "Technisches Datenblatt herunterladen",
-    "downloadLicensePDF": "Digitalen Governance-Vertrag herunterladen",
+    "downloadLicensePDF": "Datennutzungslizenz herunterladen",
     "noDataForOrg": "Keine abgeschlossenen Daten für <strong>{{org}}</strong>.",
     "providerNoData": "Anbieter empfangen keine Daten, sie senden sie nur.",
     "holderNoData": "Verwahrer verwahren Daten, konsumieren sie aber nicht direkt.",
@@ -160,8 +176,8 @@
     "gatewayProviderError": "Verbindung zum Server des Anbieters konnte nicht hergestellt werden. Bitte versuchen Sie es in einigen Minuten erneut.",
     "gatewayError": "Download-Fehler: {{error}}",
     "techSheetSuccess": "Technisches Datenblatt heruntergeladen",
-    "licenseSuccess": "Governance-Vertrag heruntergeladen",
-    "licenseError": "Fehler beim Erstellen des Governance-Vertrags",
+    "licenseSuccess": "Nutzungslizenz heruntergeladen",
+    "licenseError": "Fehler beim Generieren der Nutzungslizenz",
     "copied": "In die Zwischenablage kopiert"
   }
 }

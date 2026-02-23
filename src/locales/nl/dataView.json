@@ -36,6 +36,22 @@
     "policies": "Toegangsbeleid",
     "aiAssistant": "AI-Assistent"
   },
+  "lineage": {
+    "title": "Gegevensherkomst",
+    "subtitle": "Volledige traceerbaarheid van oorsprong tot bestemming",
+    "source": "Oorspronkelijke Bron",
+    "datasetFallback": "Dataset",
+    "sourceDescription": "Gegevensoorsprong",
+    "provider": "Aanbieder",
+    "providerFallback": "Aanbiederorganisatie",
+    "providerDescription": "Gegevenshouder",
+    "contract": "Gebruikslicentie",
+    "smartLicense": "Intelligente Licentie",
+    "daysAccess": "{{days}} dagen toegang",
+    "consumer": "Afnemer",
+    "consumerFallback": "Uw Organisatie",
+    "consumerDescription": "Geautoriseerde ontvanger"
+  },
   "description": {
     "generalInfo": "Algemene Informatie",
     "category": "Categorie",
@@ -96,7 +112,7 @@
     "downloading": "Downloaden...",
     "downloadUpdated": "Bijgewerkt Bestand Downloaden",
     "downloadTechSheet": "Technisch Blad Downloaden",
-    "downloadLicensePDF": "Digitaal Governance-Contract Downloaden",
+    "downloadLicensePDF": "Gebruikslicentie Downloaden",
     "noDataForOrg": "Geen voltooide gegevens voor <strong>{{org}}</strong>.",
     "providerNoData": "Aanbieders ontvangen geen gegevens, ze verzenden ze alleen.",
     "holderNoData": "Bewaarders beheren gegevens maar consumeren ze niet direct.",
@@ -160,8 +176,8 @@
     "gatewayProviderError": "Kan geen verbinding maken met de server van de aanbieder. Probeer het over een paar minuten opnieuw.",
     "gatewayError": "Downloadfout: {{error}}",
     "techSheetSuccess": "Technisch blad gedownload",
-    "licenseSuccess": "Governance-Contract gedownload",
-    "licenseError": "Fout bij het genereren van het Governance-Contract",
+    "licenseSuccess": "Gebruikslicentie gedownload",
+    "licenseError": "Fout bij het genereren van de Gebruikslicentie",
     "copied": "Gekopieerd naar klembord"
   }
 }

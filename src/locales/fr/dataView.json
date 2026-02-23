@@ -36,6 +36,22 @@
     "policies": "Politiques d'Accès",
     "aiAssistant": "Assistant IA"
   },
+  "lineage": {
+    "title": "Lignage des Données",
+    "subtitle": "Traçabilité complète de l'origine à la destination",
+    "source": "Source Originale",
+    "datasetFallback": "Dataset",
+    "sourceDescription": "Origine des données",
+    "provider": "Fournisseur",
+    "providerFallback": "Organisation Fournisseur",
+    "providerDescription": "Titulaire des données",
+    "contract": "Licence d'Utilisation",
+    "smartLicense": "Licence Intelligente",
+    "daysAccess": "{{days}} jours d'accès",
+    "consumer": "Consommateur",
+    "consumerFallback": "Votre Organisation",
+    "consumerDescription": "Récepteur autorisé"
+  },
   "description": {
     "generalInfo": "Informations Générales",
     "category": "Catégorie",
@@ -96,7 +112,7 @@
     "downloading": "Téléchargement...",
     "downloadUpdated": "Télécharger le Fichier Mis à Jour",
     "downloadTechSheet": "Télécharger la Fiche Technique",
-    "downloadLicensePDF": "Télécharger le Contrat Numérique de Gouvernance",
+    "downloadLicensePDF": "Télécharger la Licence d'Utilisation",
     "noDataForOrg": "Aucune donnée complétée pour <strong>{{org}}</strong>.",
     "providerNoData": "Les fournisseurs ne reçoivent pas de données, ils les envoient uniquement.",
     "holderNoData": "Les dépositaires gardent les données mais ne les consomment pas directement.",
@@ -160,8 +176,8 @@
     "gatewayProviderError": "Impossible de se connecter au serveur du fournisseur. Veuillez réessayer dans quelques minutes.",
     "gatewayError": "Erreur de téléchargement : {{error}}",
     "techSheetSuccess": "Fiche technique téléchargée",
-    "licenseSuccess": "Contrat de Gouvernance téléchargé",
-    "licenseError": "Erreur lors de la génération du Contrat de Gouvernance",
+    "licenseSuccess": "Licence d'Utilisation téléchargée",
+    "licenseError": "Erreur lors de la génération de la Licence d'Utilisation",
     "copied": "Copié dans le presse-papiers"
   }
 }

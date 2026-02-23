@@ -36,6 +36,22 @@
     "policies": "Políticas de Acceso",
     "aiAssistant": "Asistente IA"
   },
+  "lineage": {
+    "title": "Linaje de Datos",
+    "subtitle": "Trazabilidad completa desde el origen hasta el destino",
+    "source": "Fuente Original",
+    "datasetFallback": "Dataset",
+    "sourceDescription": "Origen de los datos",
+    "provider": "Proveedor",
+    "providerFallback": "Organización Proveedora",
+    "providerDescription": "Titular de los datos",
+    "contract": "Licencia de Uso",
+    "smartLicense": "Licencia Inteligente",
+    "daysAccess": "{{days}} días de acceso",
+    "consumer": "Consumidor",
+    "consumerFallback": "Tu Organización",
+    "consumerDescription": "Receptor autorizado"
+  },
   "description": {
     "generalInfo": "Información General",
     "category": "Categoría",
@@ -96,7 +112,7 @@
     "downloading": "Descargando...",
     "downloadUpdated": "Descargar Archivo Actualizado",
     "downloadTechSheet": "Descargar Ficha Técnica",
-    "downloadLicensePDF": "Descargar Contrato Digital de Gobernanza",
+    "downloadLicensePDF": "Descargar Licencia de Uso",
     "noDataForOrg": "No hay datos completados para <strong>{{org}}</strong>.",
     "providerNoData": "Los proveedores no reciben datos, solo los envían.",
     "holderNoData": "Los holders custodian datos pero no los consumen directamente.",
@@ -160,8 +176,8 @@
     "gatewayProviderError": "No se pudo conectar con el servidor del proveedor. Inténtelo de nuevo en unos minutos.",
     "gatewayError": "Error al descargar: {{error}}",
     "techSheetSuccess": "Ficha técnica descargada",
-    "licenseSuccess": "Contrato de Gobernanza descargado",
-    "licenseError": "Error al generar el Contrato de Gobernanza",
+    "licenseSuccess": "Licencia de Uso descargada",
+    "licenseError": "Error al generar la Licencia de Uso",
     "copied": "Copiado al portapapeles"
   }
 }

@@ -36,6 +36,22 @@
     "policies": "Access Policies",
     "aiAssistant": "AI Assistant"
   },
+  "lineage": {
+    "title": "Data Lineage",
+    "subtitle": "Complete traceability from origin to destination",
+    "source": "Original Source",
+    "datasetFallback": "Dataset",
+    "sourceDescription": "Data origin",
+    "provider": "Provider",
+    "providerFallback": "Provider Organization",
+    "providerDescription": "Data holder",
+    "contract": "Usage License",
+    "smartLicense": "Smart License",
+    "daysAccess": "{{days}} days of access",
+    "consumer": "Consumer",
+    "consumerFallback": "Your Organization",
+    "consumerDescription": "Authorized recipient"
+  },
   "description": {
     "generalInfo": "General Information",
     "category": "Category",
@@ -96,7 +112,7 @@
     "downloading": "Downloading...",
     "downloadUpdated": "Download Updated File",
     "downloadTechSheet": "Download Technical Sheet",
-    "downloadLicensePDF": "Download Digital Governance Contract",
+    "downloadLicensePDF": "Download Data License",
     "noDataForOrg": "No completed data for <strong>{{org}}</strong>.",
     "providerNoData": "Providers do not receive data, they only send it.",
     "holderNoData": "Holders custody data but do not consume it directly.",
@@ -160,8 +176,8 @@
     "gatewayProviderError": "Could not connect to the provider's server. Please try again in a few minutes.",
     "gatewayError": "Download error: {{error}}",
     "techSheetSuccess": "Technical sheet downloaded",
-    "licenseSuccess": "Governance Contract downloaded",
-    "licenseError": "Error generating the Governance Contract",
+    "licenseSuccess": "Data License downloaded",
+    "licenseError": "Error generating Data License",
     "copied": "Copied to clipboard"
   }
 }
