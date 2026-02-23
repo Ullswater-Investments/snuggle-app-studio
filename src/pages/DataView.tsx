@@ -30,24 +30,18 @@ import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip 
 import { generateLicensePDF } from "@/utils/pdfGenerator";
 import { AccessHistoryTable } from "@/components/AccessHistoryTable";
 import { useNotifications } from "@/hooks/useNotifications";
+import { useTranslation } from "react-i18next";
 
 // EnvironmentalImpactCard removed – no longer displayed in sidebar
 
-const STATUS_LABELS: Record<string, string> = {
-  created: "Creada",
-  initiated: "Iniciada",
-  pending: "Pendiente",
-  pending_subject: "Pendiente (Proveedor)",
-  pending_holder: "Pendiente (Custodio)",
-  pre_approved: "Pre-aprobada",
-  approved: "Aprobada",
-  completed: "Completado",
-  denied: "Denegada",
-  denied_subject: "Denegada (Proveedor)",
-  denied_holder: "Denegada (Custodio)",
-  cancelled: "Cancelada",
-  revoked: "Revocado",
-};
+const DataView = () => {
+  const { t } = useTranslation('dataView');
+
+  const getStatusLabel = (status: string) => {
+    const key = `statusLabels.${status}`;
+    const translated = t(key);
+    return translated !== key ? translated : status;
+  };
 
 const DataView = () => {
   const { id } = useParams<{ id: string }>();
@@ -348,7 +342,7 @@ const DataView = () => {
   if (loadingTransaction) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-muted-foreground">Cargando transacción...</p>
+        <p className="text-lg text-muted-foreground">{t('loading')}</p>
       </div>
     );
   }
@@ -358,7 +352,7 @@ const DataView = () => {
       <div className="flex min-h-screen items-center justify-center">
         <Card>
           <CardContent className="pt-6">
-            <p className="text-center">Transacción no encontrada</p>
+            <p className="text-center">{t('notFound')}</p>
           </CardContent>
         </Card>
       </div>
@@ -443,17 +437,17 @@ const DataView = () => {
                         KYB Verified
                       </Badge>
                     </TooltipTrigger>
-                    <TooltipContent>Proveedor verificado mediante proceso Know Your Business</TooltipContent>
+                    <TooltipContent>{t('header.kybVerified')}</TooltipContent>
                   </Tooltip>
                 )}
                 <Badge variant="success" className="gap-1">
                   <CheckCircle2 className="h-3 w-3" />
-                  Acceso Concedido
+                  {t('header.accessGranted')}
                 </Badge>
               </div>
               <CardTitle className="text-3xl font-bold">{productData?.name}</CardTitle>
               <CardDescription className="text-base mt-2">
-                {productData?.description || "Sin descripción disponible"}
+                {productData?.description || t('noDescription')}
               </CardDescription>
             </CardHeader>
           </Card>
@@ -472,22 +466,22 @@ const DataView = () => {
                 <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                   <Database className="h-8 w-8 mb-2" />
                   <span className="text-lg font-bold">v{productData?.version || "1.0"}</span>
-                  <span className="text-sm opacity-80">Versión</span>
+                  <span className="text-sm opacity-80">{t('metrics.version')}</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                   <Clock className="h-8 w-8 mb-2" />
-                  <span className="text-lg font-bold">Bajo demanda</span>
-                  <span className="text-sm opacity-80">Actualización</span>
+                  <span className="text-lg font-bold">{t('metrics.onDemand')}</span>
+                  <span className="text-sm opacity-80">{t('metrics.update')}</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                   <FileJson className="h-8 w-8 mb-2" />
-                  <span className="text-lg font-bold">{schema.length} campos</span>
-                  <span className="text-sm opacity-80">Esquema</span>
+                  <span className="text-lg font-bold">{schema.length} {t('metrics.fields')}</span>
+                  <span className="text-sm opacity-80">{t('metrics.schema')}</span>
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 bg-white/10 rounded-xl">
                   <Globe className="h-8 w-8 mb-2" />
                   <span className="text-lg font-bold">JSON/CSV</span>
-                  <span className="text-sm opacity-80">Formato</span>
+                  <span className="text-sm opacity-80">{t('metrics.format')}</span>
                 </div>
               </div>
             </CardContent>
@@ -506,68 +500,66 @@ const DataView = () => {
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                 <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0 h-auto">
                    <TabsTrigger value="description" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
-                     Descripción
-                   </TabsTrigger>
-                   <TabsTrigger value="schema" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
-                     Esquema
-                   </TabsTrigger>
-                   <TabsTrigger value="sample" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
-                     Muestra
-                   </TabsTrigger>
-                   <TabsTrigger value="policies" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
-                     <Scale className="h-4 w-4 mr-1.5" />
-                     Políticas de Acceso
-                   </TabsTrigger>
+                     {t('tabs.description')}
+                    </TabsTrigger>
+                    <TabsTrigger value="schema" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
+                      {t('tabs.schema')}
+                    </TabsTrigger>
+                    <TabsTrigger value="sample" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
+                      {t('tabs.sample')}
+                    </TabsTrigger>
+                    <TabsTrigger value="policies" className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-6 py-3">
+                      <Scale className="h-4 w-4 mr-1.5" />
+                      {t('tabs.policies')}
+                    </TabsTrigger>
                  </TabsList>
 
                  {/* Description Tab */}
                  <TabsContent value="description" className="p-6 space-y-6">
                    <div>
-                     <h3 className="font-semibold text-lg mb-3">Información General</h3>
-                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                       <div>
-                         <p className="text-sm text-muted-foreground">Categoría</p>
-                         <p className="font-medium">{productData?.category || "General"}</p>
-                       </div>
-                       <div>
-                         <p className="text-sm text-muted-foreground">Proveedor</p>
-                         <p className="font-medium">{transaction.subject_org.name}</p>
-                       </div>
-                       <div>
-                         <p className="text-sm text-muted-foreground">Custodio</p>
-                         <p className="font-medium">{transaction.holder_org.name}</p>
-                       </div>
-                       <div>
-                         <p className="text-sm text-muted-foreground">Estado</p>
-                          <Badge variant={transaction.status === "completed" ? "default" : "secondary"}>
-                            {STATUS_LABELS[transaction.status] || transaction.status}
-                          </Badge>
-                       </div>
-                     </div>
+                      <h3 className="font-semibold text-lg mb-3">{t('description.generalInfo')}</h3>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                          <p className="text-sm text-muted-foreground">{t('description.category')}</p>
+                          <p className="font-medium">{productData?.category || "General"}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">{t('description.provider')}</p>
+                          <p className="font-medium">{transaction.subject_org.name}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">{t('description.custodian')}</p>
+                          <p className="font-medium">{transaction.holder_org.name}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">{t('description.status')}</p>
+                           <Badge variant={transaction.status === "completed" ? "default" : "secondary"}>
+                             {getStatusLabel(transaction.status)}
+                           </Badge>
+                        </div>
+                      </div>
                    </div>
                    {accessPolicy?.access_timeout_days && (
                      <>
                        <Separator />
-                       <div>
-                         <h3 className="font-semibold text-lg mb-3">Duración del Acceso</h3>
-                         <p className="text-sm text-muted-foreground">
-                           El acceso a estos datos tiene una duración máxima de <span className="font-semibold text-foreground">{accessPolicy.access_timeout_days} días</span> desde la fecha de aprobación.
-                         </p>
-                       </div>
+                        <div>
+                          <h3 className="font-semibold text-lg mb-3">{t('description.accessDurationTitle')}</h3>
+                          <p className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: t('description.accessDurationText', { days: accessPolicy.access_timeout_days }) }} />
+                        </div>
                      </>
                    )}
                 </TabsContent>
 
                 {/* Schema Tab */}
-                <TabsContent value="schema" className="p-6">
-                  <h3 className="font-semibold text-lg mb-4">Estructura de Datos</h3>
-                  <ScrollArea className="h-[300px]">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead>Campo</TableHead>
-                          <TableHead>Tipo</TableHead>
-                          <TableHead>Descripción</TableHead>
+                 <TabsContent value="schema" className="p-6">
+                   <h3 className="font-semibold text-lg mb-4">{t('schema.title')}</h3>
+                   <ScrollArea className="h-[300px]">
+                     <Table>
+                       <TableHeader>
+                         <TableRow>
+                           <TableHead>{t('schema.field')}</TableHead>
+                           <TableHead>{t('schema.type')}</TableHead>
+                           <TableHead>{t('schema.description')}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -586,10 +578,10 @@ const DataView = () => {
                 {/* Sample Tab */}
                 <TabsContent value="sample" className="p-6">
                   {sampleData && Array.isArray(sampleData) && sampleData.length > 0 ? (
-                    <>
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-semibold text-lg">Muestra de Datos</h3>
-                        <Badge variant="secondary">{sampleData.length} registros de ejemplo</Badge>
+                     <>
+                       <div className="flex items-center justify-between mb-4">
+                         <h3 className="font-semibold text-lg">{t('sample.title')}</h3>
+                         <Badge variant="secondary">{sampleData.length} {t('sample.records')}</Badge>
                       </div>
                       <ScrollArea className="h-[300px]">
                         <Table>
@@ -617,47 +609,46 @@ const DataView = () => {
                       <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-muted/30">
                         <Eye className="h-10 w-10 text-muted-foreground" />
                       </div>
-                      <h3 className="text-lg font-semibold mb-2">Muestra no disponible</h3>
-                      <p className="text-sm text-muted-foreground max-w-md">
-                        El proveedor no ha proporcionado una muestra de datos para este activo.
-                        Puede solicitar más información técnica contactando con el proveedor.
-                      </p>
+                       <h3 className="text-lg font-semibold mb-2">{t('sample.notAvailable')}</h3>
+                       <p className="text-sm text-muted-foreground max-w-md">
+                         {t('sample.notAvailableDesc')}
+                       </p>
                     </div>
                   )}
                 </TabsContent>
 
                 {/* Policies Tab */}
-                <TabsContent value="policies" className="p-6 space-y-6">
-                  <h3 className="font-semibold text-lg mb-4">Políticas de Acceso</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-sm flex items-center gap-2 text-green-600 dark:text-green-400">
-                        <CheckCircle2 className="h-4 w-4" /> Permitido
-                      </p>
-                      <ul className="space-y-1.5">
-                        {odrlPermissions.permitted.map((item: string, idx: number) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-green-500 mt-0.5 shrink-0" />{item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="font-semibold text-sm flex items-center gap-2 text-red-600 dark:text-red-400">
-                        <XCircle className="h-4 w-4" /> Prohibido
-                      </p>
-                      <ul className="space-y-1.5">
-                        {odrlPermissions.prohibited.map((item: string, idx: number) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <XCircle className="h-3.5 w-3.5 text-red-500 mt-0.5 shrink-0" />{item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="font-semibold text-sm flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                        <ShieldCheck className="h-4 w-4" /> Obligaciones
-                      </p>
+                 <TabsContent value="policies" className="p-6 space-y-6">
+                   <h3 className="font-semibold text-lg mb-4">{t('policies.title')}</h3>
+                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                     <div className="space-y-2">
+                       <p className="font-semibold text-sm flex items-center gap-2 text-green-600 dark:text-green-400">
+                         <CheckCircle2 className="h-4 w-4" /> {t('policies.permitted')}
+                       </p>
+                       <ul className="space-y-1.5">
+                         {odrlPermissions.permitted.map((item: string, idx: number) => (
+                           <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                             <CheckCircle2 className="h-3.5 w-3.5 text-green-500 mt-0.5 shrink-0" />{item}
+                           </li>
+                         ))}
+                       </ul>
+                     </div>
+                     <div className="space-y-2">
+                       <p className="font-semibold text-sm flex items-center gap-2 text-red-600 dark:text-red-400">
+                         <XCircle className="h-4 w-4" /> {t('policies.prohibited')}
+                       </p>
+                       <ul className="space-y-1.5">
+                         {odrlPermissions.prohibited.map((item: string, idx: number) => (
+                           <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                             <XCircle className="h-3.5 w-3.5 text-red-500 mt-0.5 shrink-0" />{item}
+                           </li>
+                         ))}
+                       </ul>
+                     </div>
+                     <div className="space-y-2">
+                       <p className="font-semibold text-sm flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                         <ShieldCheck className="h-4 w-4" /> {t('policies.obligations')}
+                       </p>
                       <ul className="space-y-1.5">
                         {odrlPermissions.obligations.map((item: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -677,16 +668,14 @@ const DataView = () => {
                         className="gap-2 border-primary/30 text-primary hover:bg-primary/5"
                         onClick={() => window.open(accessPolicy.terms_url, "_blank")}
                       >
-                        <ExternalLink className="h-4 w-4" />
-                        Consultar Términos y Condiciones Completos
-                      </Button>
+                       <ExternalLink className="h-4 w-4" />
+                         {t('policies.viewTerms')}
+                       </Button>
                     </div>
                   ) : (
                     <Alert className="border-muted">
                       <Scale className="h-4 w-4" />
-                      <AlertDescription className="text-sm text-muted-foreground leading-relaxed">
-                        <strong>Aviso Legal:</strong> Al acceder a estos datos, el consumidor declara conocer y aceptar íntegramente las políticas de uso descritas anteriormente, comprometiéndose a su cumplimiento bajo el marco de gobernanza de PROCUREDATA y la red Pontus-X.
-                      </AlertDescription>
+                      <AlertDescription className="text-sm text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: t('policies.legalNotice') }} />
                     </Alert>
                   )}
                 </TabsContent>
@@ -698,22 +687,22 @@ const DataView = () => {
         {/* ===== MAIN DATA AREA (full width) ===== */}
         <div className="space-y-6">
           {!canViewData ? (
-            <Card>
-              <CardContent className="py-12 text-center">
-                <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
-                <h3 className="mt-4 text-lg font-semibold">Datos no disponibles</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Los datos solo están disponibles cuando la transacción está completada.
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Estado actual: <Badge variant="secondary">{STATUS_LABELS[transaction.status] || transaction.status}</Badge>
-                </p>
+             <Card>
+               <CardContent className="py-12 text-center">
+                 <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
+                 <h3 className="mt-4 text-lg font-semibold">{t('data.notAvailableTitle')}</h3>
+                 <p className="mt-2 text-sm text-muted-foreground">
+                   {t('data.notAvailableDesc')}
+                 </p>
+                 <p className="mt-1 text-sm text-muted-foreground">
+                   {t('data.currentStatus')} <Badge variant="secondary">{getStatusLabel(transaction.status)}</Badge>
+                 </p>
               </CardContent>
             </Card>
           ) : loadingData || loadingPayload ? (
-            <Card>
-              <CardContent className="py-12 text-center">
-                <p className="text-muted-foreground">Cargando datos...</p>
+             <Card>
+               <CardContent className="py-12 text-center">
+                 <p className="text-muted-foreground">{t('data.loadingData')}</p>
               </CardContent>
             </Card>
           ) : !supplierData || supplierData.length === 0 && !payloadData ? (
@@ -728,34 +717,30 @@ const DataView = () => {
                 
                 if (isConsumer) {
                   return (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <ShieldCheck className="h-5 w-5 text-primary" />
-                          Acceso al Activo
-                        </CardTitle>
-                       <CardDescription>
-                          Este activo se consume a través del Access Controller del espacio de datos.
-                          Los datos se obtienen en tiempo real desde la fuente del proveedor,
-                          garantizando la privacidad y seguridad del intercambio.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <p className="text-sm text-muted-foreground">
-                          Al descargar, el Access Controller verifica tus permisos y se conecta
-                          de forma segura al proveedor, entregándote los datos actualizados
-                          sin exponer credenciales técnicas.
-                        </p>
-                        <Button onClick={handleGatewayDownload} className="w-full" disabled={isDownloading}>
-                          {isDownloading ? (
-                            <>
-                              <Activity className="mr-2 h-4 w-4 animate-spin" />
-                              Descargando...
-                            </>
-                          ) : (
-                            <>
-                              <Download className="mr-2 h-4 w-4" />
-                              Descargar Archivo Actualizado
+                     <Card>
+                       <CardHeader>
+                         <CardTitle className="flex items-center gap-2">
+                           <ShieldCheck className="h-5 w-5 text-primary" />
+                           {t('data.assetAccess')}
+                         </CardTitle>
+                        <CardDescription>
+                           {t('data.assetAccessDesc')}
+                         </CardDescription>
+                       </CardHeader>
+                       <CardContent className="space-y-4">
+                         <p className="text-sm text-muted-foreground">
+                           {t('data.downloadExplain')}
+                         </p>
+                         <Button onClick={handleGatewayDownload} className="w-full" disabled={isDownloading}>
+                           {isDownloading ? (
+                             <>
+                               <Activity className="mr-2 h-4 w-4 animate-spin" />
+                               {t('data.downloading')}
+                             </>
+                           ) : (
+                             <>
+                               <Download className="mr-2 h-4 w-4" />
+                               {t('data.downloadUpdated')}
                             </>
                           )}
                         </Button>
@@ -787,12 +772,12 @@ const DataView = () => {
                               a.click();
                               document.body.removeChild(a);
                               URL.revokeObjectURL(url);
-                              toast.success("Ficha técnica descargada");
-                            }}
-                          >
-                            <FileJson className="mr-2 h-4 w-4" />
-                            Descargar Ficha Técnica
-                          </Button>
+                               toast.success(t('toast.techSheetSuccess'));
+                             }}
+                           >
+                             <FileJson className="mr-2 h-4 w-4" />
+                             {t('data.downloadTechSheet')}
+                           </Button>
                           <Button 
                             variant="outline" 
                             className="w-full"
@@ -825,15 +810,15 @@ const DataView = () => {
                                   },
                                   approvalRecord?.created_at || undefined
                                 );
-                                toast.success("Licencia descargada correctamente");
-                              } catch (e) {
-                                console.error("Error generating PDF:", e);
-                                toast.error("Error al generar la licencia");
-                              }
-                            }}
-                          >
-                            <FileText className="mr-2 h-4 w-4" />
-                            Descargar Licencia PDF
+                                 toast.success(t('toast.licenseSuccess'));
+                               } catch (e) {
+                                 console.error("Error generating PDF:", e);
+                                 toast.error(t('toast.licenseError'));
+                               }
+                             }}
+                           >
+                             <FileText className="mr-2 h-4 w-4" />
+                             {t('data.downloadLicensePDF')}
                           </Button>
                         </div>
                       </CardContent>
@@ -849,28 +834,28 @@ const DataView = () => {
                   });
                 }
                 const copyToClipboard = (text: string) => {
-                  navigator.clipboard.writeText(text);
-                  toast.success("Copiado al portapapeles");
+                   navigator.clipboard.writeText(text);
+                   toast.success(t('toast.copied'));
                 };
                 
                 return (
                   <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Key className="h-5 w-5 text-primary" />
-                        Detalles de Conexión API
-                      </CardTitle>
-                      <CardDescription>
-                        Configuración técnica de la fuente de datos.
-                      </CardDescription>
+                     <CardHeader>
+                       <CardTitle className="flex items-center gap-2">
+                         <Key className="h-5 w-5 text-primary" />
+                         {t('api.title')}
+                       </CardTitle>
+                       <CardDescription>
+                         {t('api.description')}
+                       </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="rounded-md border overflow-x-auto">
                         <Table className="table-fixed w-full">
                           <TableHeader>
-                            <TableRow>
-                              <TableHead className="w-[140px]">Parámetro</TableHead>
-                              <TableHead>Valor</TableHead>
+                             <TableRow>
+                               <TableHead className="w-[140px]">{t('api.parameter')}</TableHead>
+                               <TableHead>{t('schema.description') === 'schema.description' ? 'Value' : ''}</TableHead>
                               <TableHead className="w-[50px]" />
                             </TableRow>
                           </TableHeader>

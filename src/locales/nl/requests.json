@@ -152,5 +152,27 @@
       "date": "Datum",
       "actions": "Acties"
     }
+  },
+  "realtime": {
+    "title": "Realtime Analytics",
+    "subtitle": "Prestatiestatistieken van de afgelopen 30 dagen",
+    "live": "Live",
+    "avgTime": "Gemiddelde Tijd",
+    "untilApproval": "tot goedkeuring",
+    "approvalRate": "Goedkeuringspercentage",
+    "approvedRequests": "goedgekeurde verzoeken",
+    "thisWeek": "Deze Week",
+    "vsPrevious": "vs vorige",
+    "pending": "In afwachting",
+    "requireAction": "vereisen actie",
+    "dailyVolume": "Dagelijks Volume (laatste 14 dagen)",
+    "approvalSpeed": "Goedkeuringssnelheid (uren)",
+    "goal": "Doel",
+    "average": "Gemiddelde",
+    "noApprovalData": "Geen goedkeuringsgegevens",
+    "statusDistribution": "Verdeling per Status",
+    "weeklyTrend": "Wekelijkse Trend",
+    "transactions": "transacties",
+    "volume": "volume"
   }
 }

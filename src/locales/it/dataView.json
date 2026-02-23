@@ -1,0 +1,166 @@
+{
+  "loading": "Caricamento transazione...",
+  "notFound": "Transazione non trovata",
+  "noDescription": "Nessuna descrizione disponibile",
+  "statusLabels": {
+    "created": "Creata",
+    "initiated": "Avviata",
+    "pending": "In sospeso",
+    "pending_subject": "In sospeso (Fornitore)",
+    "pending_holder": "In sospeso (Depositario)",
+    "pre_approved": "Pre-approvata",
+    "approved": "Approvata",
+    "completed": "Completata",
+    "denied": "Rifiutata",
+    "denied_subject": "Rifiutata (Fornitore)",
+    "denied_holder": "Rifiutata (Depositario)",
+    "cancelled": "Annullata",
+    "revoked": "Revocata"
+  },
+  "header": {
+    "accessGranted": "Accesso Concesso",
+    "kybVerified": "Fornitore verificato tramite il processo Know Your Business"
+  },
+  "metrics": {
+    "version": "Versione",
+    "onDemand": "Su richiesta",
+    "update": "Aggiornamento",
+    "fields": "campi",
+    "schema": "Schema",
+    "format": "Formato"
+  },
+  "tabs": {
+    "description": "Descrizione",
+    "schema": "Schema",
+    "sample": "Campione",
+    "policies": "Politiche di Accesso"
+  },
+  "description": {
+    "generalInfo": "Informazioni Generali",
+    "category": "Categoria",
+    "provider": "Fornitore",
+    "custodian": "Depositario",
+    "status": "Stato",
+    "accessDurationTitle": "Durata dell'Accesso",
+    "accessDurationText": "L'accesso a questi dati ha una durata massima di <strong>{{days}} giorni</strong> dalla data di approvazione."
+  },
+  "schema": {
+    "title": "Struttura dei Dati",
+    "field": "Campo",
+    "type": "Tipo",
+    "description": "Descrizione",
+    "defaults": {
+      "id": "Identificatore unico",
+      "data": "Dati del record",
+      "created_at": "Data di creazione"
+    }
+  },
+  "sample": {
+    "title": "Campione di Dati",
+    "records": "record di esempio",
+    "notAvailable": "Campione non disponibile",
+    "notAvailableDesc": "Il fornitore non ha fornito un campione di dati per questo asset. È possibile richiedere maggiori informazioni tecniche contattando il fornitore."
+  },
+  "policies": {
+    "title": "Politiche di Accesso",
+    "permitted": "Consentito",
+    "prohibited": "Vietato",
+    "obligations": "Obblighi",
+    "viewTerms": "Consulta i Termini e Condizioni Completi",
+    "legalNotice": "<strong>Avviso Legale:</strong> Accedendo a questi dati, il consumatore dichiara di conoscere e accettare integralmente le politiche di utilizzo sopra descritte, impegnandosi al loro rispetto nell'ambito del quadro di governance di PROCUREDATA e della rete Pontus-X.",
+    "defaultPermissions": [
+      "Uso commerciale all'interno dell'organizzazione",
+      "Analisi e integrazione nei sistemi interni",
+      "Generazione di report derivati"
+    ],
+    "defaultProhibitions": [
+      "Ridistribuzione a terzi senza autorizzazione",
+      "Reverse engineering di dati individuali",
+      "Uso per scopi illegali o discriminatori"
+    ],
+    "defaultObligations": [
+      "Attribuzione al fornitore di dati",
+      "Rinnovo della licenza secondo il modello di prezzo",
+      "Conformità GDPR per i dati personali"
+    ]
+  },
+  "data": {
+    "notAvailableTitle": "Dati non disponibili",
+    "notAvailableDesc": "I dati sono disponibili solo quando la transazione è completata.",
+    "currentStatus": "Stato attuale:",
+    "loadingData": "Caricamento dati...",
+    "assetAccess": "Accesso all'Asset",
+    "assetAccessDesc": "Questo asset viene consumato attraverso l'Access Controller dello spazio dati. I dati vengono ottenuti in tempo reale dalla fonte del fornitore, garantendo la privacy e la sicurezza dello scambio.",
+    "downloadExplain": "Durante il download, l'Access Controller verifica i tuoi permessi e si collega in modo sicuro al fornitore, consegnandoti i dati aggiornati senza esporre le credenziali tecniche.",
+    "downloading": "Download in corso...",
+    "downloadUpdated": "Scarica File Aggiornato",
+    "downloadTechSheet": "Scarica Scheda Tecnica",
+    "downloadLicensePDF": "Scarica Licenza PDF",
+    "noDataForOrg": "Nessun dato completato per <strong>{{org}}</strong>.",
+    "providerNoData": "I fornitori non ricevono dati, li inviano solamente.",
+    "holderNoData": "I depositari custodiscono i dati ma non li consumano direttamente.",
+    "switchConsumer": "Prova a passare a un'organizzazione Consumatore dal selettore superiore.",
+    "noDataAvailable": "Nessun dato disponibile",
+    "noDataShared": "Non sono ancora stati condivisi dati per questa transazione."
+  },
+  "provider": {
+    "title": "Dati del Fornitore",
+    "recordsFound": "{{count}} record trovato/i",
+    "companyName": "Ragione Sociale",
+    "taxId": "Partita IVA",
+    "legalName": "Nome Legale",
+    "contact": "Contatto",
+    "email": "Email",
+    "fullDetails": "Dettagli Completi",
+    "fiscalAddress": "Indirizzo Fiscale",
+    "legalAddress": "Indirizzo Legale"
+  },
+  "api": {
+    "title": "Dettagli Connessione API",
+    "description": "Configurazione tecnica della fonte dati.",
+    "parameter": "Parametro"
+  },
+  "payloads": {
+    "esg_report": "Report di Sostenibilità (ESG)",
+    "iot_telemetry": "Telemetria IoT",
+    "financial_records": "Registri Finanziari",
+    "energy_metering": "Misurazione Energetica",
+    "supply_chain_trace": "Tracciabilità della Catena di Fornitura",
+    "administrative_list": "Elenco Amministrativo",
+    "generic_timeseries": "Dati Storici",
+    "default": "Dati del Payload",
+    "schemaType": "Tipo di schema:",
+    "esgData": "Dati ESG",
+    "iotData": "Dati IoT",
+    "flexibleData": "Dati Flessibili",
+    "supplierData": "Dati del Fornitore",
+    "currentValue": "Valore Attuale",
+    "quality": "Qualità",
+    "trend": "Tendenza",
+    "dataPoints": "Punti Dati",
+    "temporalEvolution": "Evoluzione Temporale",
+    "sectorData": "Dati settoriali:"
+  },
+  "blockchain": {
+    "title": "Audit Blockchain"
+  },
+  "accessHistory": {
+    "title": "Cronologia degli Accessi",
+    "description": "Registro dei tuoi download e accessi a questo asset."
+  },
+  "toast": {
+    "csvSuccess": "File CSV scaricato con successo",
+    "noExportData": "Nessun dato da esportare",
+    "erpSuccess": "Dati inviati all'ERP con successo",
+    "erpNoData": "Nessun dato da inviare",
+    "erpError": "Errore nell'invio dei dati all'ERP",
+    "gatewayDownloading": "Download dei dati tramite l'Access Controller...",
+    "gatewaySuccess": "File scaricato con successo",
+    "gatewayProviderError": "Impossibile connettersi al server del fornitore. Riprovare tra qualche minuto.",
+    "gatewayError": "Errore di download: {{error}}",
+    "techSheetSuccess": "Scheda tecnica scaricata",
+    "licenseSuccess": "Licenza scaricata con successo",
+    "licenseError": "Errore nella generazione della licenza",
+    "copied": "Copiato negli appunti"
+  }
+}

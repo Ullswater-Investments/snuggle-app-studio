@@ -23,9 +23,12 @@ import {
 } from "recharts";
 import { CHART_COLORS, CHART_TOOLTIP_STYLE, CHART_GRID_STYLE } from "@/lib/chartTheme";
 import { subDays, format, differenceInHours, startOfWeek, eachDayOfInterval, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, enUS, fr, de, it, pt, nl } from "date-fns/locale";
 import { TrendingUp, TrendingDown, Clock, Zap, Activity, PieChartIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslation } from "react-i18next";
+
+const DATE_LOCALES: Record<string, typeof es> = { es, en: enUS, fr, de, it, pt, nl };
 
 interface Transaction {
   id: string;
@@ -52,19 +55,16 @@ const STATUS_COLORS: Record<string, string> = {
   cancelled: "hsl(0, 0%, 45%)",
 };
 
-const STATUS_LABELS: Record<string, string> = {
-  initiated: "Iniciadas",
-  pending_subject: "Pend. Proveedor",
-  pending_holder: "Pend. Custodio",
-  approved: "Aprobadas",
-  completed: "Completadas",
-  denied_subject: "Denegadas",
-  denied_holder: "Denegadas",
-  cancelled: "Canceladas",
-};
-
 export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: RequestsAnalyticsDashboardProps) {
+  const { t, i18n } = useTranslation('requests');
   const queryClient = useQueryClient();
+  const dateLocale = DATE_LOCALES[i18n.language] || es;
+
+  const getStatusLabel = (status: string) => {
+    const key = `status.${status}.label`;
+    const translated = t(key);
+    return translated !== key ? translated : status;
+  };
 
   // Fetch approval history for speed calculations
   const { data: approvalHistory, isLoading: loadingHistory } = useQuery({
@@ -123,12 +123,12 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
       }).length;
 
       return {
-        date: format(day, "dd MMM", { locale: es }),
+        date: format(day, "dd MMM", { locale: dateLocale }),
         fullDate: dayStr,
-        transacciones: count,
+        [t('realtime.transactions')]: count,
       };
     });
-  }, [transactions]);
+  }, [transactions, dateLocale, t]);
 
   // Calculate approval speed trend
   const approvalSpeedData = useMemo(() => {
@@ -154,7 +154,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
 
     transactionMap.forEach((value) => {
       if (value.approved) {
-        const weekStart = format(startOfWeek(value.created, { locale: es }), "dd MMM", { locale: es });
+        const weekStart = format(startOfWeek(value.created, { locale: dateLocale }), "dd MMM", { locale: dateLocale });
         const hours = differenceInHours(value.approved, value.created);
         if (!weeklyData[weekStart]) weeklyData[weekStart] = [];
         weeklyData[weekStart].push(hours);
@@ -167,7 +167,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
         semana: week,
         horasPromedio: Math.round((hours.reduce((a, b) => a + b, 0) / hours.length) * 10) / 10,
       }));
-  }, [transactions, approvalHistory]);
+  }, [transactions, approvalHistory, dateLocale]);
 
   // Calculate average approval time
   const avgApprovalTime = useMemo(() => {
@@ -184,18 +184,18 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
     });
 
     return Object.entries(counts).map(([status, count]) => ({
-      name: STATUS_LABELS[status] || status,
+      name: getStatusLabel(status),
       value: count,
       status,
     }));
-  }, [transactions]);
+  }, [transactions, i18n.language]);
 
   // Weekly trend (area chart)
   const weeklyTrend = useMemo(() => {
     const weeks: Record<string, number> = {};
 
     transactions.forEach((t) => {
-      const weekStart = format(startOfWeek(parseISO(t.created_at), { locale: es }), "dd MMM", { locale: es });
+      const weekStart = format(startOfWeek(parseISO(t.created_at), { locale: dateLocale }), "dd MMM", { locale: dateLocale });
       weeks[weekStart] = (weeks[weekStart] || 0) + 1;
     });
 
@@ -203,14 +203,14 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
       .slice(-12)
       .map(([semana, count]) => ({
         semana,
-        volumen: count,
+        [t('realtime.volume')]: count,
       }));
-  }, [transactions]);
+  }, [transactions, dateLocale, t]);
 
   // Calculate week-over-week change
   const weeklyChange = useMemo(() => {
     const now = new Date();
-    const thisWeekStart = startOfWeek(now, { locale: es });
+    const thisWeekStart = startOfWeek(now, { locale: dateLocale });
     const lastWeekStart = subDays(thisWeekStart, 7);
 
     const thisWeek = transactions.filter((t) => parseISO(t.created_at) >= thisWeekStart).length;
@@ -221,7 +221,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
 
     if (lastWeek === 0) return thisWeek > 0 ? 100 : 0;
     return Math.round(((thisWeek - lastWeek) / lastWeek) * 100);
-  }, [transactions]);
+  }, [transactions, dateLocale]);
 
   // Approval rate
   const approvalRate = useMemo(() => {
@@ -244,13 +244,13 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
           <div>
             <CardTitle className="flex items-center gap-2">
               <Activity className="h-5 w-5 text-primary" />
-              Analytics en Tiempo Real
+              {t('realtime.title')}
             </CardTitle>
-            <CardDescription>Métricas de rendimiento de los últimos 30 días</CardDescription>
+            <CardDescription>{t('realtime.subtitle')}</CardDescription>
           </div>
           <Badge variant="outline" className="text-xs">
             <span className="mr-1.5 h-2 w-2 rounded-full bg-green-500 animate-pulse inline-block" />
-            En vivo
+            {t('realtime.live')}
           </Badge>
         </div>
       </CardHeader>
@@ -260,7 +260,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
           <div className="bg-muted/50 rounded-lg p-4">
             <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <Clock className="h-4 w-4" />
-              Tiempo Promedio
+              {t('realtime.avgTime')}
             </div>
             <div className="text-2xl font-bold">
               {loadingHistory ? (
@@ -271,25 +271,25 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
                 "—"
               )}
             </div>
-            <p className="text-xs text-muted-foreground">hasta aprobación</p>
+            <p className="text-xs text-muted-foreground">{t('realtime.untilApproval')}</p>
           </div>
 
           <div className="bg-muted/50 rounded-lg p-4">
             <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <Zap className="h-4 w-4" />
-              Tasa de Aprobación
+              {t('realtime.approvalRate')}
             </div>
             <div className="text-2xl font-bold text-green-600 dark:text-green-400">{approvalRate}%</div>
-            <p className="text-xs text-muted-foreground">solicitudes aprobadas</p>
+            <p className="text-xs text-muted-foreground">{t('realtime.approvedRequests')}</p>
           </div>
 
           <div className="bg-muted/50 rounded-lg p-4">
             <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <Activity className="h-4 w-4" />
-              Esta Semana
+              {t('realtime.thisWeek')}
             </div>
             <div className="text-2xl font-bold">
-              {transactions.filter((t) => parseISO(t.created_at) >= startOfWeek(new Date(), { locale: es })).length}
+              {transactions.filter((t) => parseISO(t.created_at) >= startOfWeek(new Date(), { locale: dateLocale })).length}
             </div>
             <div className="flex items-center gap-1 text-xs">
               {weeklyChange >= 0 ? (
@@ -301,19 +301,19 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
                 {weeklyChange >= 0 ? "+" : ""}
                 {weeklyChange}%
               </span>
-              <span className="text-muted-foreground">vs anterior</span>
+              <span className="text-muted-foreground">{t('realtime.vsPrevious')}</span>
             </div>
           </div>
 
           <div className="bg-muted/50 rounded-lg p-4">
             <div className="flex items-center gap-2 text-muted-foreground text-sm mb-1">
               <PieChartIcon className="h-4 w-4" />
-              Pendientes
+              {t('realtime.pending')}
             </div>
             <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
               {transactions.filter((t) => ["pending_subject", "pending_holder", "initiated"].includes(t.status)).length}
             </div>
-            <p className="text-xs text-muted-foreground">requieren acción</p>
+            <p className="text-xs text-muted-foreground">{t('realtime.requireAction')}</p>
           </div>
         </div>
 
@@ -321,7 +321,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
         <div className="grid md:grid-cols-2 gap-6">
           {/* Daily Volume Bar Chart */}
           <div className="space-y-2">
-            <h4 className="font-medium text-sm">Volumen Diario (últimos 14 días)</h4>
+            <h4 className="font-medium text-sm">{t('realtime.dailyVolume')}</h4>
             <div className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={dailyVolumeData}>
@@ -333,7 +333,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
                     labelStyle={CHART_TOOLTIP_STYLE.labelStyle}
                   />
                   <Bar
-                    dataKey="transacciones"
+                    dataKey={t('realtime.transactions')}
                     fill={CHART_COLORS.primary}
                     radius={[4, 4, 0, 0]}
                     animationDuration={800}
@@ -345,7 +345,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
 
           {/* Approval Speed Line Chart */}
           <div className="space-y-2">
-            <h4 className="font-medium text-sm">Velocidad de Aprobación (horas)</h4>
+            <h4 className="font-medium text-sm">{t('realtime.approvalSpeed')}</h4>
             <div className="h-[200px]">
               {loadingHistory ? (
                 <div className="flex items-center justify-center h-full">
@@ -360,9 +360,9 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
                     <Tooltip
                       contentStyle={CHART_TOOLTIP_STYLE.contentStyle}
                       labelStyle={CHART_TOOLTIP_STYLE.labelStyle}
-                      formatter={(value: number) => [`${value}h`, "Promedio"]}
+                      formatter={(value: number) => [`${value}h`, t('realtime.average')]}
                     />
-                    <ReferenceLine y={4} stroke="hsl(var(--muted-foreground))" strokeDasharray="5 5" label={{ value: "Meta 4h", fontSize: 10, fill: "hsl(var(--muted-foreground))" }} />
+                    <ReferenceLine y={4} stroke="hsl(var(--muted-foreground))" strokeDasharray="5 5" label={{ value: `${t('realtime.goal')} 4h`, fontSize: 10, fill: "hsl(var(--muted-foreground))" }} />
                     <Line
                       type="monotone"
                       dataKey="horasPromedio"
@@ -375,7 +375,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
                 </ResponsiveContainer>
               ) : (
                 <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-                  Sin datos de aprobación
+                  {t('realtime.noApprovalData')}
                 </div>
               )}
             </div>
@@ -383,7 +383,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
 
           {/* Status Distribution Pie Chart */}
           <div className="space-y-2">
-            <h4 className="font-medium text-sm">Distribución por Estado</h4>
+            <h4 className="font-medium text-sm">{t('realtime.statusDistribution')}</h4>
             <div className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -419,7 +419,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
 
           {/* Weekly Trend Area Chart */}
           <div className="space-y-2">
-            <h4 className="font-medium text-sm">Tendencia Semanal</h4>
+            <h4 className="font-medium text-sm">{t('realtime.weeklyTrend')}</h4>
             <div className="h-[200px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={weeklyTrend}>
@@ -438,7 +438,7 @@ export function RequestsAnalyticsDashboard({ transactions, activeOrgId }: Reques
                   />
                   <Area
                     type="monotone"
-                    dataKey="volumen"
+                    dataKey={t('realtime.volume')}
                     stroke={CHART_COLORS.primary}
                     fill="url(#volumeGradient)"
                     animationDuration={1200}
