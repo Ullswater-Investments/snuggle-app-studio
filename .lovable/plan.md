@@ -1,63 +1,64 @@
 
 
-## Internacionalización de DataLineage y renaming "Contrato Digital de Gobernanza" a "Licencia de Uso"
+## Eliminar duplicidad de notificaciones de descarga y mejorar iconografia
 
-### 1. Internacionalización de DataLineage.tsx
+### Problema identificado
 
-El componente tiene 8 cadenas hardcodeadas en español que deben internacionalizarse. Se añadirá una sección `lineage` al namespace `dataView` en los 7 idiomas.
+Hay **dos fuentes** de notificaciones para el mismo evento de descarga:
 
-**Cadenas a internacionalizar (excluyendo datos de BD):**
+1. **Trigger de BD** `notify_provider_on_download` (se activa al insertar en `access_logs`) -- genera un mensaje generico: "Descarga de activo" / "Un consumidor ha descargado datos de tu activo."
+2. **Edge Function** `notification-handler` con `eventType: "download"` -- genera mensajes detallados con nombre del activo y organizacion consumidora.
 
-| Cadena actual | Clave i18n |
-|---|---|
-| "Linaje de Datos" | `lineage.title` |
-| "Trazabilidad completa desde el origen hasta el destino" | `lineage.subtitle` |
-| "Fuente Original" | `lineage.source` |
-| "Dataset" (fallback) | `lineage.datasetFallback` |
-| "Origen de los datos" | `lineage.sourceDescription` |
-| "Proveedor" | `lineage.provider` |
-| "Organización Proveedora" (fallback) | `lineage.providerFallback` |
-| "Titular de los datos" | `lineage.providerDescription` |
-| "Contrato ODRL" | Se reemplaza por `lineage.contract` = "Licencia de Uso" |
-| "Licencia Inteligente" | `lineage.smartLicense` |
-| "días de acceso" | `lineage.daysAccess` (con interpolación `{{days}}`) |
-| "Consumidor" | `lineage.consumer` |
-| "Tu Organización" (fallback) | `lineage.consumerFallback` |
-| "Receptor autorizado" | `lineage.consumerDescription` |
+Ambos se disparan durante el flujo de gateway download en `DataView.tsx`, causando entradas duplicadas.
 
-**Valores de BD que NO se tocan:** `transaction.asset?.product?.name`, `transaction.subject_org?.name`, `transaction.consumer_org?.name`, `transaction.access_duration_days`.
+---
 
-### 2. Renaming "Contrato Digital de Gobernanza" a "Licencia de Uso"
+### Cambios a realizar
 
-Se actualizarán 3 claves en los 7 archivos `dataView.json` + el nombre del archivo PDF:
+#### 1. Eliminar el trigger duplicado (migracion SQL)
 
-| Archivo | Clave | Valor anterior (ES) | Valor nuevo (ES) |
+Se eliminara el trigger `on_download_access_log` y la funcion `notify_provider_on_download` de la base de datos, dejando unicamente la Edge Function como fuente de notificaciones de descarga.
+
+```sql
+DROP TRIGGER IF EXISTS on_download_access_log ON public.access_logs;
+DROP FUNCTION IF EXISTS public.notify_provider_on_download();
+```
+
+#### 2. Mejorar los mensajes de la Edge Function
+
+En `supabase/functions/notification-handler/index.ts`, actualizar la seccion `download` de `ROLE_MESSAGES`:
+
+| Rol | Campo | Valor actual | Valor nuevo |
 |---|---|---|---|
-| `dataView.json` | `data.downloadLicensePDF` | "Descargar Contrato Digital de Gobernanza" | "Descargar Licencia de Uso" |
-| `dataView.json` | `toast.licenseSuccess` | "Contrato de Gobernanza descargado" | "Licencia de Uso descargada" |
-| `dataView.json` | `toast.licenseError` | "Error al generar el Contrato de Gobernanza" | "Error al generar la Licencia de Uso" |
-| `pdfGenerator.ts` | filename | `Contrato_Gobernanza_PROCUREDATA_...` | `Licencia_Uso_PROCUREDATA_...` |
+| Provider | title | `"📊 Uso de datos: {name}"` | `"Descarga de activo: {name}"` |
+| Provider | message | `"Un consumidor ha descargado el activo {name}"` | `"La organizacion {consumerName} ha obtenido una copia actualizada de los datos"` |
+| Consumer | title | `"📥 Descarga completada: {name}"` | `"Descarga completada: {name}"` |
+| Consumer | message | Sin cambio | Sin cambio |
 
-**Traducciones del renaming en cada idioma:**
+Se eliminaran los emojis de los titulos para que la iconografia se gestione exclusivamente desde el frontend.
 
-- **EN**: "Download Data License" / "Data License downloaded" / "Error generating Data License"
-- **FR**: "Télécharger la Licence d'Utilisation" / "Licence d'Utilisation téléchargée" / "Erreur lors de la génération de la Licence"
-- **DE**: "Datennutzungslizenz herunterladen" / "Nutzungslizenz heruntergeladen" / "Fehler beim Generieren der Nutzungslizenz"
-- **IT**: "Scarica Licenza d'Uso" / "Licenza d'Uso scaricata" / "Errore nella generazione della Licenza d'Uso"
-- **PT**: "Baixar Licença de Uso" / "Licença de Uso baixada" / "Erro ao gerar a Licença de Uso"
-- **NL**: "Gebruikslicentie Downloaden" / "Gebruikslicentie gedownload" / "Fout bij het genereren van de Gebruikslicentie"
+#### 3. Anadir regla de iconografia para descargas en Notifications.tsx
+
+En la funcion `getNotificationConfig` de `src/pages/Notifications.tsx`, anadir una nueva regla ANTES del switch final:
+
+```text
+Si el titulo contiene "descarga" -> icono Download, fondo bg-blue-100, color text-blue-600
+```
+
+Esto aplicara tanto a la pagina `/notifications` como al dropdown de la campana (que ya usa un estilo simplificado sin iconos personalizados).
+
+#### 4. Anadir icono de descarga en el dropdown de la campana
+
+En `src/components/NotificationsBell.tsx`, se anadira deteccion basica del tipo "descarga" para mostrar un mini-icono `Download` junto al titulo, usando el mismo patron de color azul suave.
+
+---
 
 ### Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/components/DataLineage.tsx` | Añadir `useTranslation('dataView')`, reemplazar 12 strings por `t()` |
-| `src/locales/es/dataView.json` | Añadir sección `lineage`, actualizar 3 claves de renaming |
-| `src/locales/en/dataView.json` | Idem |
-| `src/locales/fr/dataView.json` | Idem |
-| `src/locales/de/dataView.json` | Idem |
-| `src/locales/it/dataView.json` | Idem |
-| `src/locales/pt/dataView.json` | Idem |
-| `src/locales/nl/dataView.json` | Idem |
-| `src/utils/pdfGenerator.ts` | Renombrar nombre de archivo de salida |
+| Nueva migracion SQL | DROP trigger + funcion duplicada |
+| `supabase/functions/notification-handler/index.ts` | Actualizar mensajes download, eliminar emojis |
+| `src/pages/Notifications.tsx` | Anadir regla de icono Download en `getNotificationConfig` |
+| `src/components/NotificationsBell.tsx` | Anadir icono Download para notificaciones de descarga |
 
