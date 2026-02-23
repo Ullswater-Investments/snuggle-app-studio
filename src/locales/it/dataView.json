@@ -36,6 +36,22 @@
     "policies": "Politiche di Accesso",
     "aiAssistant": "Assistente IA"
   },
+  "lineage": {
+    "title": "Lignaggio dei Dati",
+    "subtitle": "Tracciabilità completa dall'origine alla destinazione",
+    "source": "Fonte Originale",
+    "datasetFallback": "Dataset",
+    "sourceDescription": "Origine dei dati",
+    "provider": "Fornitore",
+    "providerFallback": "Organizzazione Fornitrice",
+    "providerDescription": "Titolare dei dati",
+    "contract": "Licenza d'Uso",
+    "smartLicense": "Licenza Intelligente",
+    "daysAccess": "{{days}} giorni di accesso",
+    "consumer": "Consumatore",
+    "consumerFallback": "La Tua Organizzazione",
+    "consumerDescription": "Destinatario autorizzato"
+  },
   "description": {
     "generalInfo": "Informazioni Generali",
     "category": "Categoria",
@@ -96,7 +112,7 @@
     "downloading": "Download in corso...",
     "downloadUpdated": "Scarica File Aggiornato",
     "downloadTechSheet": "Scarica Scheda Tecnica",
-    "downloadLicensePDF": "Scarica Contratto Digitale di Governance",
+    "downloadLicensePDF": "Scarica Licenza d'Uso",
     "noDataForOrg": "Nessun dato completato per <strong>{{org}}</strong>.",
     "providerNoData": "I fornitori non ricevono dati, li inviano solamente.",
     "holderNoData": "I depositari custodiscono i dati ma non li consumano direttamente.",
@@ -160,8 +176,8 @@
     "gatewayProviderError": "Impossibile connettersi al server del fornitore. Riprovare tra qualche minuto.",
     "gatewayError": "Errore di download: {{error}}",
     "techSheetSuccess": "Scheda tecnica scaricata",
-    "licenseSuccess": "Contratto di Governance scaricato",
-    "licenseError": "Errore nella generazione del Contratto di Governance",
+    "licenseSuccess": "Licenza d'Uso scaricata",
+    "licenseError": "Errore nella generazione della Licenza d'Uso",
     "copied": "Copiato negli appunti"
   }
 }
