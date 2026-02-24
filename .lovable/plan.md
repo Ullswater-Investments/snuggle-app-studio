@@ -1,131 +1,71 @@
 
 
-## Rediseno de /architecture: Alineacion con Memoria Tecnica y Gaia-X
+## Ajustes Esteticos y Coherencia Visual en Landing Page
 
-### Objetivo
+### 1. Unificacion del Logo: Usar `procuredata-hero-logo.png` en todas partes
 
-Transformar la pagina de Arquitectura de una vista tecnica interna (que expone React, PostgreSQL, Tailwind, etc.) a una presentacion corporativa de alto nivel alineada con los estandares Gaia-X y la Memoria Tecnica oficial. El foco se desplaza a **Soberania del Dato**, **Seguridad B2B** y **Cumplimiento Normativo**.
+**Problema**: El componente `ProcuredataLogo.tsx` usa `procuredata-logo.png` (version antigua). La version oficial es `procuredata-hero-logo.png`.
 
----
+**Cambio en `src/components/ProcuredataLogo.tsx`**:
+- Reemplazar `import procuredataLogo from "@/assets/procuredata-logo.png"` por `import procuredataLogo from "@/assets/procuredata-hero-logo.png"`
+- Esto automaticamente actualiza el logo en: la cabecera de la Landing, el `UnifiedHeader`, y cualquier otro lugar que use `<ProcuredataLogo />`.
 
-### Cambios detallados
+**Tambien en `src/modules/nodos-sectoriales/components/ProcuredataLogo.tsx`**: Mismo cambio de import.
 
-#### 1. Rediseno del bloque "Arquitectura de Alto Nivel" (Tab Overview)
+### 2. Actualizacion de CTAs: "Probar Demo" -> "Acceder"
 
-**Eliminar**: El diagrama Mermaid actual (`getOverviewDiagram`) que muestra "Frontend React + Vite", "shadcn UI", "TanStack Query", etc.
+Se actualizan las claves `tryDemo` en todos los namespaces y los 7 idiomas para que digan "Acceder" en lugar de "Probar Demo":
 
-**Reemplazar por**: Una representacion visual con 3 bloques horizontales conectados por flechas animadas:
-
-```text
-+---------------------------+     +-------------------------------+     +---------------------------+
-|  PROVEEDOR DE DATOS       | --> |  TRUST FRAMEWORK (Pontus-X)   | --> |  CONSUMIDOR DE DATOS      |
-|                           |     |                               |     |                           |
-|  [Database] [API]         |     |  - Gestion de Identidades     |     |  [Server] [BarChart]      |
-|  Fuentes de Datos Locales |     |    (DID)                      |     |  Access Controller        |
-|  Conector de Publicacion  |     |  - Controles de Acceso        |     |  Sistemas ERP / Analisis  |
-|                           |     |  - Registro Inmutable         |     |                           |
-+---------------------------+     |    (Blockchain)               |     +---------------------------+
-                                  +-------------------------------+
-```
-
-- Los bloques se construyen con `Card` + iconos Lucide (`Database`, `FileInput`, `Shield`, `Lock`, `Blocks`, `Server`, `BarChart3`)
-- Las flechas intermedias usan `ArrowRight` con animacion CSS (pulse o slide)
-- Responsive: en movil se apilan verticalmente con `ArrowDown`
-
-**Eliminar las 3 tarjetas inferiores** que dicen "Frontend SPA" (con "React 18 + TypeScript", "49 shadcn/ui components"), "Backend Cloud AI" (con "PostgreSQL 15 + RLS", "Edge Functions (Deno)"), y "Web3 Layer" (con "Pontus-X Testnet"). Estas exponen tecnologias internas.
-
-#### 2. Rediseno de "Componentes del Data Space Europeo"
-
-**Eliminar** los 4 componentes actuales (EDC, IDS Protocol, Keycloak, Gaia-X Trust Framework) que son demasiado tecnicos.
-
-**Reemplazar por 4 pilares conceptuales** con tarjetas elegantes:
-
-| Pilar | Icono | Descripcion |
+| Namespace | Archivos afectados | Clave |
 |---|---|---|
-| Identidad Federada y Confianza (Trust Framework) | `ShieldCheck` | Utilizacion de Identificadores Descentralizados (DID) y Credenciales Verificables para autenticar a los participantes (KYB) sin depender de un directorio central. |
-| Intercambio Soberano (Access Controller) | `Network` | Los datos no se almacenan en un lago central. El intercambio se realiza punto a punto (P2P) mediante pasarelas seguras que verifican las politicas de acceso antes de autorizar la transferencia. |
-| Catalogo y Trazabilidad (Clearing House) | `Blocks` | Registro inmutable de todas las transacciones de datos mediante Smart Contracts en la red Pontus-X, garantizando una pista de auditoria perfecta y no repudiable. |
-| Interoperabilidad Semantica | `DatabaseZap` | Estandarizacion de vocabularios y esquemas de datos para asegurar que la informacion compartida sea comprensible y procesable automaticamente por los sistemas del ecosistema. |
+| `motor` | 7 archivos (common.tryDemo) | "Acceder" / "Access" / "Acceder" / "Zugang" / "Accedere" / "Acessar" / "Toegang" |
+| `architecture` | 7 archivos (tryDemo) | Idem |
+| `whitepaper` | 7 archivos (tryDemo) | Idem |
+| `docs` | 7 archivos (technicalDoc.tryDemo) | Idem |
 
-Cada tarjeta tendra un fondo con gradiente sutil azul/ambar, icono grande, titulo en negrita y descripcion corporativa.
+Valores por idioma:
+- ES: "Acceder"
+- EN: "Access"
+- FR: "Acceder"
+- DE: "Zugang"
+- IT: "Accedere"
+- PT: "Acessar"
+- NL: "Toegang"
 
-#### 3. Limpieza del Tab "Tech Stack"
+(Estos valores ya existen como `demoAccess` en `common.json`, se reutiliza la misma traduccion.)
 
-**Eliminar completamente** el tab "Tech Stack" (tab id `stack`) ya que expone tecnologias internas (React, Tailwind, shadcn, Vite, TanStack, etc.), lo cual contradice directamente el requisito de no mencionar el stack interno.
+### 3. Espaciado y Bordes
 
-Actualizar el array `TABS` para quitar `{ id: "stack", ... }` y la constante `TECH_STACK`.
+El espaciado (`gap-4 md:gap-8`), padding (`p-4 md:p-5`) y bordes (`rounded-2xl`) de las tarjetas de sectores y features ya fueron aplicados en la iteracion anterior. Se verificara que no haya cards restantes con `rounded-lg` o `rounded-xl` en `Landing.tsx`.
 
-#### 4. Limpieza de hardcoded en Overview
-
-Eliminar las listas hardcodeadas en las tarjetas inferiores (lineas 356-401):
-- "React 18 + TypeScript"
-- "49 shadcn/ui components"
-- "Framer Motion animations"
-- "PostgreSQL 15 + RLS"
-- "Edge Functions (Deno)"
-- "Pontus-X Testnet"
-
-#### 5. Actualizacion de traducciones (7 idiomas)
-
-Anadir nuevas claves al namespace `architecture` en los 7 archivos de idiomas:
-
-**Nuevas claves:**
-
-| Clave | ES | EN |
-|---|---|---|
-| `overview.providerBlock` | Proveedor de Datos | Data Provider |
-| `overview.providerLocalSources` | Fuentes de Datos Locales | Local Data Sources |
-| `overview.providerConnector` | Conector de Publicacion | Publication Connector |
-| `overview.trustFramework` | Marco de Confianza (Pontus-X) | Trust Framework (Pontus-X) |
-| `overview.trustIdentity` | Gestion de Identidades (DID) | Identity Management (DID) |
-| `overview.trustAccess` | Controles de Acceso | Access Controls |
-| `overview.trustLedger` | Registro Inmutable (Blockchain) | Immutable Ledger (Blockchain) |
-| `overview.consumerBlock` | Consumidor de Datos | Data Consumer |
-| `overview.consumerGateway` | Access Controller | Access Controller |
-| `overview.consumerSystems` | Sistemas ERP / Analisis | ERP Systems / Analytics |
-| `overview.secureDataFlow` | Flujo de datos seguro y verificado | Secure and verified data flow |
-| `overview.pillar1Title` | Identidad Federada y Confianza | Federated Identity and Trust |
-| `overview.pillar1Desc` | Utilizacion de Identificadores Descentralizados (DID) y Credenciales Verificables para autenticar a los participantes (KYB) sin depender de un directorio central. | Use of Decentralized Identifiers (DID) and Verifiable Credentials to authenticate participants (KYB) without relying on a central directory. |
-| `overview.pillar2Title` | Intercambio Soberano | Sovereign Exchange |
-| `overview.pillar2Desc` | Los datos no se almacenan en un lago central. El intercambio se realiza punto a punto (P2P) mediante pasarelas seguras que verifican las politicas de acceso antes de autorizar la transferencia. | Data is not stored in a central lake. Exchange is performed peer-to-peer (P2P) through secure gateways that verify access policies before authorizing the transfer. |
-| `overview.pillar3Title` | Catalogo y Trazabilidad | Catalog and Traceability |
-| `overview.pillar3Desc` | Registro inmutable de todas las transacciones de datos mediante Smart Contracts en la red Pontus-X, garantizando una pista de auditoria perfecta y no repudiable. | Immutable record of all data transactions via Smart Contracts on the Pontus-X network, ensuring a perfect, non-repudiable audit trail. |
-| `overview.pillar4Title` | Interoperabilidad Semantica | Semantic Interoperability |
-| `overview.pillar4Desc` | Estandarizacion de vocabularios y esquemas de datos para asegurar que la informacion compartida sea comprensible y procesable automaticamente por los sistemas del ecosistema. | Standardization of vocabularies and data schemas to ensure shared information is understandable and automatically processable by ecosystem systems. |
-
-Se traduciran las mismas claves a FR, DE, IT, PT y NL.
-
-**Claves a eliminar** (ya no se usan): `overview.frontendSpa`, `overview.backendCloud`, `overview.web3Layer`, `overview.edc`, `overview.edcDesc`, `overview.idsProtocol`, `overview.idsDesc`, `overview.keycloak`, `overview.keycloakDesc`, `overview.gaiaX`, `overview.gaiaXDesc`, `overview.active`, todas las claves de `techStack.*` y `techItems.*`.
-
-#### 6. Estilo visual
-
-- Seccion del Trust Framework central: fondo con gradiente `bg-gradient-to-br from-[#1C2B40] to-[#233144]` con texto claro
-- Tarjetas laterales (Proveedor/Consumidor): bordes sutiles con `border-primary/30`
-- Pilares: Cards con `bg-gradient-to-br from-slate-900 to-slate-800 text-white` en modo oscuro, con acento ambar en el icono
-- Flechas animadas: `animate-pulse` en los iconos `ArrowRight`/`ArrowDown`
-
----
-
-### Archivos a modificar
+### 4. Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/pages/Architecture.tsx` | Redisenar Tab Overview (eliminar Mermaid + 3 cards + 4 componentes, construir 3 bloques + 4 pilares). Eliminar Tab Stack y constante TECH_STACK. |
-| `src/utils/architectureDiagrams.ts` | Eliminar `getOverviewDiagram` (ya no se usa) |
-| `src/locales/es/architecture.json` | Anadir ~20 claves nuevas, eliminar claves de techStack/techItems/overview obsoletas |
-| `src/locales/en/architecture.json` | Idem en ingles |
-| `src/locales/fr/architecture.json` | Idem en frances |
-| `src/locales/de/architecture.json` | Idem en aleman |
-| `src/locales/it/architecture.json` | Idem en italiano |
-| `src/locales/pt/architecture.json` | Idem en portugues |
-| `src/locales/nl/architecture.json` | Idem en neerlandes |
+| `src/components/ProcuredataLogo.tsx` | Cambiar import de `procuredata-logo.png` a `procuredata-hero-logo.png` |
+| `src/modules/nodos-sectoriales/components/ProcuredataLogo.tsx` | Idem |
+| `src/locales/es/motor.json` | `common.tryDemo`: "Acceder" |
+| `src/locales/en/motor.json` | `common.tryDemo`: "Access" |
+| `src/locales/fr/motor.json` | `common.tryDemo`: "Accéder" |
+| `src/locales/de/motor.json` | `common.tryDemo`: "Zugang" |
+| `src/locales/it/motor.json` | `common.tryDemo`: "Accedere" |
+| `src/locales/pt/motor.json` | `common.tryDemo`: "Acessar" |
+| `src/locales/nl/motor.json` | `common.tryDemo`: "Toegang" |
+| `src/locales/es/architecture.json` | `tryDemo`: "Acceder" |
+| `src/locales/en/architecture.json` | `tryDemo`: "Access" |
+| `src/locales/fr/architecture.json` | `tryDemo`: "Accéder" |
+| `src/locales/de/architecture.json` | `tryDemo`: "Zugang" |
+| `src/locales/it/architecture.json` | `tryDemo`: "Accedere" |
+| `src/locales/pt/architecture.json` | `tryDemo`: "Acessar" |
+| `src/locales/nl/architecture.json` | `tryDemo`: "Toegang" |
+| `src/locales/es/whitepaper.json` | `tryDemo`: "Acceder" |
+| `src/locales/en/whitepaper.json` | `tryDemo`: "Access" |
+| `src/locales/fr/whitepaper.json` | `tryDemo`: "Accéder" |
+| `src/locales/de/whitepaper.json` | `tryDemo`: "Zugang" |
+| `src/locales/it/whitepaper.json` | `tryDemo`: "Accedere" |
+| `src/locales/pt/whitepaper.json` | `tryDemo`: "Acessar" |
+| `src/locales/nl/whitepaper.json` | `tryDemo`: "Toegang" |
+| `src/locales/{7 idiomas}/docs.json` | `technicalDoc.tryDemo`: Mismos valores |
 
----
-
-### Lo que NO cambia
-
-- Tabs de Database, Security, Web3, y Flows permanecen intactos (contienen informacion tecnica legitima para audiencia tecnica)
-- Header, Hero y FundingFooter no se modifican
-- Los diagramas Mermaid de los demas tabs (ER, RLS, Web3, States, Sequence) se mantienen
-- La descripcion del Hero se actualizara para quitar "PostgreSQL (31 tablas) + RLS" y usar lenguaje de alto nivel
+Total: ~30 archivos con cambios menores (1-2 lineas cada uno).
 
