@@ -21,7 +21,6 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
-  getRlsDiagram,
   getWeb3Diagram,
   getStatesDiagram,
   getSequenceDiagram,
@@ -58,12 +57,14 @@ export default function Architecture() {
 
   // DB_CATEGORIES removed - replaced by sovereign data conceptual view
 
-  // RLS Policies - localized
-  const RLS_POLICIES = useMemo(() => [
-    { role: t('rlsPolicies.consumer.role'), access: t('rlsPolicies.consumer.access'), color: "bg-blue-500" },
-    { role: t('rlsPolicies.provider.role'), access: t('rlsPolicies.provider.access'), color: "bg-green-500" },
-    { role: t('rlsPolicies.holder.role'), access: t('rlsPolicies.holder.access'), color: "bg-purple-500" },
-    { role: t('rlsPolicies.admin.role'), access: t('rlsPolicies.admin.access'), color: "bg-red-500" }
+  // Security pillars for Defense in Depth
+  const SECURITY_PILLARS = useMemo(() => [
+    { icon: Wallet, title: t('security.pillar1Title'), desc: t('security.pillar1Desc'), color: "text-amber-500" },
+    { icon: Layers, title: t('security.pillar2Title'), desc: t('security.pillar2Desc'), color: "text-blue-500" },
+    { icon: Lock, title: t('security.pillar3Title'), desc: t('security.pillar3Desc'), color: "text-emerald-500" },
+    { icon: Cpu, title: t('security.pillar4Title'), desc: t('security.pillar4Desc'), color: "text-purple-500" },
+    { icon: ShieldCheck, title: t('security.pillar5Title'), desc: t('security.pillar5Desc'), color: "text-red-500" },
+    { icon: FileText, title: t('security.pillar6Title'), desc: t('security.pillar6Desc'), color: "text-cyan-500" }
   ], [t]);
 
   // Flow timeline steps - localized
@@ -354,80 +355,73 @@ export default function Architecture() {
               </motion.div>
             </TabsContent>
 
-            {/* TAB 3: SECURITY */}
+            {/* TAB 3: SECURITY & PRIVACY - Defense in Depth */}
             <TabsContent value="security" className="space-y-6">
               <motion.div {...fadeInUp} key="security">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-red-500" />
-                      {t('security.rlsFlow')}
-                    </CardTitle>
-                    <CardDescription>
-                      {t('security.rlsDesc')}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <MermaidDiagram chart={getRlsDiagram(t)} scale={0.9} mobileScale={0.55} />
+                {/* Hero */}
+                <Card className="overflow-hidden border-0 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+                  <CardContent className="p-8 md:p-10">
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <Shield className="h-7 w-7 text-amber-400" />
+                      {t('security.heroTitle')}
+                    </h3>
+                    <p className="text-slate-200 leading-relaxed text-base max-w-4xl">
+                      {t('security.heroDesc')}
+                    </p>
                   </CardContent>
                 </Card>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg flex items-center gap-2">
-                        <Lock className="h-4 w-4" />
-                        {t('security.policiesByRole')}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      {RLS_POLICIES.map((policy) => (
-                        <div key={policy.role} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
-                          <div className={`w-3 h-3 rounded-full ${policy.color} mt-1`} />
+                {/* 6 Pillars Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {SECURITY_PILLARS.map((pillar) => (
+                    <motion.div key={pillar.title} variants={fadeInUp}>
+                      <Card className="h-full rounded-2xl border border-border/60 hover:shadow-lg transition-shadow">
+                        <CardHeader className="pb-3">
+                          <div className="h-12 w-12 rounded-xl bg-muted flex items-center justify-center mb-2">
+                            <pillar.icon className={`h-6 w-6 ${pillar.color}`} />
+                          </div>
+                          <CardTitle className="text-base font-bold">{pillar.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* IPFS Section */}
+                <Card className="rounded-2xl border-2 border-transparent bg-gradient-to-r from-amber-500/10 to-purple-500/10 relative overflow-hidden">
+                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-amber-500/30 to-purple-500/30 pointer-events-none" style={{ mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', maskComposite: 'exclude', padding: '2px', borderRadius: 'inherit' }} />
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <Database className="h-6 w-6 text-amber-500" />
+                      {t('security.ipfsTitle')}
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {t('security.ipfsDesc')}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid md:grid-cols-3 gap-5">
+                      {[
+                        { num: "1", title: t('security.ipfsStep1Title'), desc: t('security.ipfsStep1Desc'), color: "bg-amber-500" },
+                        { num: "2", title: t('security.ipfsStep2Title'), desc: t('security.ipfsStep2Desc'), color: "bg-purple-500" },
+                        { num: "3", title: t('security.ipfsStep3Title'), desc: t('security.ipfsStep3Desc'), color: "bg-emerald-500" }
+                      ].map((step) => (
+                        <div key={step.num} className="flex items-start gap-3">
+                          <span className={`${step.color} text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold flex-shrink-0`}>
+                            {step.num}
+                          </span>
                           <div>
-                            <p className="font-medium">{policy.role}</p>
-                            <p className="text-sm text-muted-foreground">{policy.access}</p>
+                            <h4 className="font-semibold text-sm mb-1">{step.title}</h4>
+                            <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
                           </div>
                         </div>
                       ))}
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg flex items-center gap-2">
-                        <FileText className="h-4 w-4" />
-                        {t('security.policyExample')}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <pre className="text-xs bg-muted p-4 rounded-lg overflow-x-auto">
-                        {`-- Policy for data_transactions
-CREATE POLICY "Users view own org transactions"
-ON data_transactions FOR SELECT
-USING (
-  consumer_org_id = get_user_organization(auth.uid())
-  OR subject_org_id = get_user_organization(auth.uid())
-  OR holder_org_id = get_user_organization(auth.uid())
-);`}
-                      </pre>
-                      <div className="mt-4 space-y-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <CheckCircle2 className="h-4 w-4 text-green-500" />
-                          <span>{t('security.rlsActive')}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <CheckCircle2 className="h-4 w-4 text-green-500" />
-                          <span>{t('security.securityDefiner')}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <CheckCircle2 className="h-4 w-4 text-green-500" />
-                          <span>{t('security.auditAuto')}</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             </TabsContent>
 

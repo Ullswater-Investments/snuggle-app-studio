@@ -11,7 +11,7 @@
   "tabs": {
     "overview": "Overview",
     "sovereignData": "Sovereign Data",
-    "security": "Security & RLS",
+    "security": "Security & Privacy",
     "web3": "Web3 Integration",
     "flows": "Data Flows"
   },
@@ -55,19 +55,28 @@
     "bridgeNote": "PROCUREDATA: Validation only, no data storage"
   },
   "security": {
-    "rlsFlow": "Row Level Security Flow",
-    "rlsDesc": "Each query is intercepted and filtered according to the user's role",
-    "policiesByRole": "Policies by Role",
-    "policyExample": "Policy Example",
-    "rlsActive": "RLS active on all sensitive tables",
-    "securityDefiner": "SECURITY DEFINER functions with search_path",
-    "auditAuto": "Automatic access auditing"
-  },
-  "rlsPolicies": {
-    "consumer": { "role": "Consumer", "access": "Only their own initiated transactions" },
-    "provider": { "role": "Provider (Subject)", "access": "Requests where they own the data" },
-    "holder": { "role": "Holder", "access": "Transactions pending release" },
-    "admin": { "role": "Admin", "access": "Full access to their organization" }
+    "heroTitle": "Security and Privacy: Defense in Depth",
+    "heroDesc": "Unlike centralized platforms, PROCUREDATA distributes trust through the Pontus-X network and Sovereign Digital Identities. Privacy is not just a legal policy, but a technical impossibility of non-consented access.",
+    "pillar1Title": "Sovereign Identity (SSI)",
+    "pillar1Desc": "Armored access through corporate Wallets and public key cryptography. Mandatory digital signature for non-repudiation.",
+    "pillar2Title": "Multi-Tenant Isolation (RLS)",
+    "pillar2Desc": "Row Level Security (RLS) policies directly in the database engine to ensure each organization only accesses its own information silo.",
+    "pillar3Title": "End-to-End Encryption",
+    "pillar3Desc": "Communications secured under TLS 1.3 and symmetric encryption of data at rest, with keys linked to Smart Contract logic.",
+    "pillar4Title": "Compute-to-Data (C2D)",
+    "pillar4Desc": "Maximum industrial privacy: allows processing algorithms on data at its original location without transferring files, protecting trade secrets.",
+    "pillar5Title": "GDPR & Data Act Compliance",
+    "pillar5Desc": "Data minimization and right to be forgotten through pointer management, allowing revocation of access to sensitive data without altering the blockchain record.",
+    "pillar6Title": "Immutable Audit",
+    "pillar6Desc": "Real-time forensic traceability. Every security interaction is immutably recorded in system logs.",
+    "ipfsTitle": "Decoupled Persistence: Private IPFS",
+    "ipfsDesc": "For static files, we guarantee Irreversible Storage Sovereignty through a three-tier architecture:",
+    "ipfsStep1Title": "Integrity via CIDs",
+    "ipfsStep1Desc": "Cryptographic hashing (SHA-256) acting as the asset's digital fingerprint.",
+    "ipfsStep2Title": "Decoupling",
+    "ipfsStep2Desc": "Physical and logical separation between corporate identity and technical content.",
+    "ipfsStep3Title": "Private Gateways",
+    "ipfsStep3Desc": "Full control through cryptographic keys managed by the data owner."
   },
   "web3": {
     "pontusIntegration": "Pontus-X Integration",

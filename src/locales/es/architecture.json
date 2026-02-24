@@ -11,7 +11,7 @@
   "tabs": {
     "overview": "Visión General",
     "sovereignData": "Datos Soberanos",
-    "security": "Seguridad & RLS",
+    "security": "Seguridad & Privacidad",
     "web3": "Integración Web3",
     "flows": "Flujos de Datos"
   },
@@ -55,19 +55,28 @@
     "bridgeNote": "PROCUREDATA: Solo validación, sin almacenamiento de datos"
   },
   "security": {
-    "rlsFlow": "Flujo de Row Level Security",
-    "rlsDesc": "Cada query es interceptada y filtrada según el rol del usuario",
-    "policiesByRole": "Políticas por Rol",
-    "policyExample": "Ejemplo de Política",
-    "rlsActive": "RLS activo en todas las tablas sensibles",
-    "securityDefiner": "Funciones SECURITY DEFINER con search_path",
-    "auditAuto": "Auditoría automática de accesos"
-  },
-  "rlsPolicies": {
-    "consumer": { "role": "Consumer", "access": "Solo sus propias transacciones iniciadas" },
-    "provider": { "role": "Provider (Subject)", "access": "Solicitudes donde es el dueño del dato" },
-    "holder": { "role": "Holder", "access": "Transacciones pendientes de liberación" },
-    "admin": { "role": "Admin", "access": "Acceso completo a su organización" }
+    "heroTitle": "Seguridad y Privacidad: Defensa en Profundidad",
+    "heroDesc": "A diferencia de las plataformas centralizadas, PROCUREDATA distribuye la confianza a través de la red Pontus-X y las Identidades Digitales Soberanas. La privacidad no es solo una política legal, sino una imposibilidad técnica de acceso no consentido.",
+    "pillar1Title": "Identidad Soberana (SSI)",
+    "pillar1Desc": "Acceso blindado mediante Wallets corporativas y criptografía de clave pública. Firma digital obligatoria para el no repudio.",
+    "pillar2Title": "Aislamiento Multi-Tenant (RLS)",
+    "pillar2Desc": "Políticas de Row Level Security (RLS) directamente en el motor de base de datos para garantizar que cada organización solo acceda a su silo de información.",
+    "pillar3Title": "Cifrado Extremo a Extremo",
+    "pillar3Desc": "Comunicaciones blindadas bajo TLS 1.3 y cifrado simétrico de datos en reposo, con llaves vinculadas a la lógica de Smart Contracts.",
+    "pillar4Title": "Compute-to-Data (C2D)",
+    "pillar4Desc": "Privacidad industrial máxima: permite procesar algoritmos sobre el dato en su ubicación original sin transferir archivos, protegiendo el secreto comercial.",
+    "pillar5Title": "Cumplimiento RGPD & Data Act",
+    "pillar5Desc": "Minimización de datos y derecho al olvido mediante gestión de punteros, permitiendo la revocación del acceso a datos sensibles sin alterar el registro blockchain.",
+    "pillar6Title": "Auditoría Inmutable",
+    "pillar6Desc": "Trazabilidad forense en tiempo real. Cada interacción de seguridad queda registrada inalterablemente en los logs del sistema.",
+    "ipfsTitle": "Persistencia Desacoplada: IPFS Privado",
+    "ipfsDesc": "Para archivos estáticos, garantizamos una Soberanía de Almacenamiento Irreversible mediante una arquitectura de tres niveles:",
+    "ipfsStep1Title": "Integridad por CIDs",
+    "ipfsStep1Desc": "Hashing criptográfico (SHA-256) que actúa como huella digital del activo.",
+    "ipfsStep2Title": "Desacoplamiento",
+    "ipfsStep2Desc": "Separación física y lógica entre la identidad corporativa y el contenido técnico.",
+    "ipfsStep3Title": "Gateways Privados",
+    "ipfsStep3Desc": "Control total mediante llaves criptográficas administradas por el propietario del dato."
   },
   "web3": {
     "pontusIntegration": "Integración Pontus-X",
