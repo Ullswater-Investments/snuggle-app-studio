@@ -3,14 +3,17 @@ import { motion } from "framer-motion";
 import { Euro, CheckCircle2, ArrowRight, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 import logoKitEspacioDatos from "@/assets/logo-kit-espacio-datos.jpg";
 import logoGobiernoRedEs from "@/assets/logo-gobierno-red-es.jpg";
 
 export function KitDatosCampaignBanner() {
+  const { t } = useTranslation("landing");
+
   const benefits = [
-    "Tramitación incluida en la cuota mensual",
-    "Subvención 85-90%",
-    "Sin letra pequeña",
+    t("campaign.benefit1"),
+    t("campaign.benefit2"),
+    t("campaign.benefit3"),
   ];
 
   return (
@@ -26,7 +29,7 @@ export function KitDatosCampaignBanner() {
               <Euro className="h-8 w-8 text-primary" />
             </div>
             <h2 className="text-2xl md:text-3xl font-black tracking-tight text-foreground mb-4">
-              AYUDAS KIT ESPACIO DE DATOS
+              {t("campaign.title")}
             </h2>
 
             <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
@@ -36,7 +39,7 @@ export function KitDatosCampaignBanner() {
               >
                 <Badge className="bg-amber-500 text-white hover:bg-amber-500 text-sm px-4 py-1.5">
                   <Clock className="h-3.5 w-3.5 mr-1.5" />
-                  Inscripción hasta 20 de Marzo del 2026
+                  {t("campaign.deadline")}
                 </Badge>
               </motion.div>
               <motion.div
@@ -44,7 +47,7 @@ export function KitDatosCampaignBanner() {
                 transition={{ repeat: Infinity, duration: 2 }}
               >
                 <Badge variant="destructive" className="text-sm px-4 py-1.5">
-                  PLAZAS LIMITADAS
+                  {t("campaign.limitedSlots")}
                 </Badge>
               </motion.div>
             </div>
@@ -52,15 +55,15 @@ export function KitDatosCampaignBanner() {
 
           {/* Main message */}
           <p className="text-center text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Digitaliza tu cadena de suministro con hasta{" "}
+            {t("campaign.mainMessage", { amount: "30.000 €" })}{" "}
             <span className="font-bold text-foreground text-2xl">30.000 €</span>{" "}
-            de Subvención a fondo perdido de RED.ES
+            {t("campaign.grantSource")}
           </p>
 
           {/* Benefits */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
-            {benefits.map((benefit) => (
-              <div key={benefit} className="flex items-center gap-2 text-sm md:text-base">
+            {benefits.map((benefit, idx) => (
+              <div key={idx} className="flex items-center gap-2 text-sm md:text-base">
                 <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0" />
                 <span className="text-foreground font-medium">{benefit}</span>
               </div>
@@ -77,7 +80,7 @@ export function KitDatosCampaignBanner() {
               >
                 <Link to="/condiciones-kit-espacio-datos">
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700" />
-                  SOLICITA LAS AYUDAS KIT ESPACIO DE DATOS
+                  {t("campaign.ctaMain")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -88,12 +91,12 @@ export function KitDatosCampaignBanner() {
           <div className="flex flex-col sm:flex-row justify-center gap-3 mb-10">
             <Button asChild>
               <Link to="/inscripcion-kit-espacio-datos">
-                Solicitar Inscripción por 190€ al mes
+                {t("campaign.ctaEnroll")}
               </Link>
             </Button>
             <Button asChild variant="outline">
               <Link to="/condiciones-kit-espacio-datos">
-                Ver Condiciones
+                {t("campaign.ctaConditions")}
               </Link>
             </Button>
           </div>

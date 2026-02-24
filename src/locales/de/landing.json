@@ -126,5 +126,19 @@
     "glossaryUne": "UNE-Glossar",
     "rulebook": "Regelwerk"
   },
-  "complianceBadge": "UNE 0087:2025 · 90%"
+  "complianceBadge": "UNE 0087:2025 · 90%",
+  "viewUne0087": "UNE 0087:2025 ansehen",
+  "campaign": {
+    "title": "FÖRDERPROGRAMM DATENRAUM-KIT",
+    "deadline": "Anmeldung bis 20. März 2026",
+    "limitedSlots": "BEGRENZTE PLÄTZE",
+    "mainMessage": "Digitalisieren Sie Ihre Lieferkette mit bis zu",
+    "grantSource": "nicht rückzahlbarer Zuschuss von RED.ES",
+    "benefit1": "Abwicklung in der Monatsgebühr enthalten",
+    "benefit2": "Subvention 85-90%",
+    "benefit3": "Ohne Kleingedrucktes",
+    "ctaMain": "FÖRDERPROGRAMM DATENRAUM-KIT BEANTRAGEN",
+    "ctaEnroll": "Anmeldung für 190€/Monat",
+    "ctaConditions": "Bedingungen ansehen"
+  }
 }

@@ -229,5 +229,19 @@
     "partners": "Partenaires",
     "goToDashboard": "Aller au Tableau de Bord"
   },
-  "complianceBadge": "UNE 0087:2025 · 90%"
+  "complianceBadge": "UNE 0087:2025 · 90%",
+  "viewUne0087": "Voir UNE 0087:2025",
+  "campaign": {
+    "title": "AIDES KIT ESPACE DE DONNÉES",
+    "deadline": "Inscription jusqu'au 20 mars 2026",
+    "limitedSlots": "PLACES LIMITÉES",
+    "mainMessage": "Digitalisez votre chaîne d'approvisionnement avec jusqu'à",
+    "grantSource": "de subvention à fonds perdus de RED.ES",
+    "benefit1": "Traitement inclus dans la cotisation mensuelle",
+    "benefit2": "Subvention 85-90%",
+    "benefit3": "Sans petits caractères",
+    "ctaMain": "DEMANDEZ LES AIDES KIT ESPACE DE DONNÉES",
+    "ctaEnroll": "S'inscrire pour 190€/mois",
+    "ctaConditions": "Voir les Conditions"
+  }
 }
