@@ -7,23 +7,7 @@ import { TFunction } from 'i18next';
 
 // getOverviewDiagram removed - replaced by visual Card layout in Architecture.tsx
 
-export const getErDiagram = (t: TFunction): string => `erDiagram
-    organizations ||--o{ user_profiles : "${t('diagrams.er.has')}"
-    organizations ||--o{ user_roles : "${t('diagrams.er.has')}"
-    organizations ||--o{ data_assets : "${t('diagrams.er.owns')}"
-    organizations ||--o{ wallets : "${t('diagrams.er.has')}"
-    organizations ||--o{ audit_logs : "${t('diagrams.er.logs')}"
-    
-    data_products ||--o{ data_assets : "${t('diagrams.er.generates')}"
-    data_assets ||--o{ catalog_metadata : "${t('diagrams.er.has')}"
-    data_assets ||--o{ data_transactions : "${t('diagrams.er.contains')}"
-    
-    data_transactions ||--o{ approval_history : "${t('diagrams.er.has')}"
-    data_transactions ||--o{ data_payloads : "${t('diagrams.er.contains')}"
-    data_transactions ||--o{ data_policies : "${t('diagrams.er.generates')}"
-    data_transactions ||--o{ transaction_messages : "${t('diagrams.er.has')}"
-    
-    wallets ||--o{ wallet_transactions : "${t('diagrams.er.pays')}"`;
+// getErDiagram removed - replaced by sovereign data conceptual view in Architecture.tsx
 
 export const getRlsDiagram = (t: TFunction): string => `sequenceDiagram
     participant C as Client

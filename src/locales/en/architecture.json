@@ -10,7 +10,7 @@
   "whitepaper": "Whitepaper",
   "tabs": {
     "overview": "Overview",
-    "database": "Database",
+    "sovereignData": "Sovereign Data",
     "security": "Security & RLS",
     "web3": "Web3 Integration",
     "flows": "Data Flows"
@@ -40,37 +40,19 @@
     "pillar4Title": "Semantic Interoperability",
     "pillar4Desc": "Standardization of vocabularies and data schemas to ensure shared information is understandable and automatically processable by ecosystem systems."
   },
-  "database": {
-    "erDiagram": "Entity-Relationship Diagram",
-    "erDesc": "31 PostgreSQL tables with relationships and Row Level Security",
-    "tablesByCategory": "Tables by Category"
-  },
-  "dbCategories": {
-    "orgsUsers": "Organizations and Users",
-    "dataCatalog": "Data Catalog",
-    "transactions": "Transactions",
-    "payments": "Finance and Payments",
-    "security": "System and Security"
-  },
-  "dbTables": {
-    "organizations": { "description": "Participating entities (Consumer/Provider/Holder)", "fields": "id, name, type, tax_id, did, wallet_address, kyb_verified" },
-    "user_profiles": { "description": "User profiles linked to organizations", "fields": "user_id, organization_id, full_name, position" },
-    "user_roles": { "description": "Roles per organization (admin, approver, viewer)", "fields": "user_id, organization_id, role" },
-    "privacy_preferences": { "description": "Privacy preferences per user", "fields": "user_id, profile_visible, access_alerts" },
-    "data_products": { "description": "Data product definitions", "fields": "id, name, category, schema_definition, version" },
-    "data_assets": { "description": "Concrete product instances", "fields": "id, product_id, holder_org_id, subject_org_id, price, status" },
-    "catalog_metadata": { "description": "Metadata for marketplace search", "fields": "asset_id, tags, categories, visibility" },
-    "data_transactions": { "description": "System core - state machine", "fields": "id, consumer_org_id, subject_org_id, holder_org_id, status, purpose" },
-    "approval_history": { "description": "Approval/rejection history", "fields": "transaction_id, actor_org_id, action, notes" },
-    "data_payloads": { "description": "Delivered data (ESG, IoT, supplier)", "fields": "transaction_id, schema_type, data_content (JSONB)" },
-    "data_policies": { "description": "Generated ODRL policies", "fields": "transaction_id, odrl_policy_json" },
-    "transaction_messages": { "description": "Negotiation chat", "fields": "transaction_id, sender_org_id, content" },
-    "wallets": { "description": "EUROe wallets per organization", "fields": "organization_id, address, balance, currency" },
-    "wallet_transactions": { "description": "Fund movements", "fields": "from_wallet_id, to_wallet_id, amount, status" },
-    "audit_logs": { "description": "Immutable audit log", "fields": "organization_id, action, actor_id, details, ip_address" },
-    "login_attempts": { "description": "Login attempts for rate limiting", "fields": "email, ip_address, success, attempted_at" },
-    "erp_configurations": { "description": "ERP integration configurations", "fields": "organization_id, endpoint_url, auth_method, field_mapping" },
-    "notifications": { "description": "Notification system", "fields": "user_id, title, type, is_read, link" }
+  "sovereignData": {
+    "title": "Sovereign Data Architecture",
+    "heroText": "PROCUREDATA acts as the Data Space Operator and trust orchestrator. True to Gaia-X principles, we DO NOT store transacted data. Information travels encrypted and directly (Peer-to-Peer) from the Provider's infrastructure to the Consumer.",
+    "pillar1Title": "Storage at Source",
+    "pillar1Desc": "Original data (Payloads) remains in the provider's systems and databases. It is only exposed to the ecosystem when a Smart Contract validates the consumer's access permissions.",
+    "pillar2Title": "Peer-to-Peer Exchange (P2P)",
+    "pillar2Desc": "Information transfer is performed through secure gateways (Access Controllers). PROCUREDATA facilitates the communication channel without inspecting or retaining the content of shared assets.",
+    "pillar3Title": "Metadata Separation",
+    "pillar3Desc": "Our technical infrastructure exclusively manages the Federated Catalog (descriptions, technical schemas, ODRL rules) and the Clearing House (traceability and audit logs), ensuring absolute privacy by design.",
+    "providerInfra": "Provider Infrastructure",
+    "validationBridge": "Identity and Rules Verification",
+    "consumerInfra": "Consumer Infrastructure",
+    "bridgeNote": "PROCUREDATA: Validation only, no data storage"
   },
   "security": {
     "rlsFlow": "Row Level Security Flow",
@@ -133,7 +115,6 @@
     "fe": { "title": "Frontend React + Vite", "ui": "shadcn UI", "query": "TanStack Query", "router": "React Router", "hooks": "Custom Hooks" },
     "be": { "title": "Backend Cloud AI", "auth": "JWT Auth", "db": "PostgreSQL 31 Tables", "rls": "Row Level Security", "edge": "Edge Functions", "realtime": "Realtime WS" },
     "bc": { "title": "Pontus-X Blockchain", "did": "DID:ethr", "euroe": "EUROe Stablecoin", "notarization": "Notarization" },
-    "er": { "has": "has", "owns": "owns", "generates": "generates", "holds": "holds", "pays": "pays", "logs": "logs", "receives": "receives", "contains": "contains" },
     "rls": { "query": "Query", "checkRls": "Check RLS", "getOrgId": "Get org_id", "filterRows": "Filter rows", "denied": "DENIED", "returnFiltered": "Return filtered", "result": "Result" },
     "web3": { "user": "User", "app": "Application", "pontusx": "Pontus-X", "connectWallet": "Connect Wallet", "signMessage": "Sign Message", "getDid": "Get DID", "checkBalance": "Check Balance", "notarize": "Notarize Hash", "txConfirm": "TX Confirm" },
     "states": { "initiated": "initiated", "pendingSubject": "pending_subject", "pendingHolder": "pending_holder", "approved": "approved", "completed": "completed", "deniedSubject": "denied_subject", "deniedHolder": "denied_holder", "cancelled": "cancelled", "consumerRequests": "Consumer requests", "send": "send", "cancel": "cancel", "subjectApproves": "Subject approves", "subjectDenies": "Subject denies", "holderReleases": "Holder releases", "holderDenies": "Holder denies", "payAndDeliver": "Pay + Deliver" },

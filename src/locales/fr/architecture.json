@@ -10,7 +10,7 @@
   "whitepaper": "Livre Blanc",
   "tabs": {
     "overview": "Vue d'Ensemble",
-    "database": "Base de Données",
+    "sovereignData": "Données Souveraines",
     "security": "Sécurité & RLS",
     "web3": "Intégration Web3",
     "flows": "Flux de Données"
@@ -40,31 +40,19 @@
     "pillar4Title": "Interopérabilité Sémantique",
     "pillar4Desc": "Standardisation des vocabulaires et schémas de données pour assurer que l'information partagée soit compréhensible et traitable automatiquement par les systèmes de l'écosystème."
   },
-  "database": {
-    "erDiagram": "Diagramme Entité-Relation",
-    "erDesc": "31 tables PostgreSQL avec relations et Row Level Security",
-    "tablesByCategory": "Tables par Catégorie"
-  },
-  "dbCategories": { "orgsUsers": "Organisations et Utilisateurs", "dataCatalog": "Catalogue de Données", "transactions": "Transactions", "payments": "Finances et Paiements", "security": "Système et Sécurité" },
-  "dbTables": {
-    "organizations": { "description": "Entités participantes (Consumer/Provider/Holder)", "fields": "id, name, type, tax_id, did, wallet_address, kyb_verified" },
-    "user_profiles": { "description": "Profils utilisateurs liés aux organisations", "fields": "user_id, organization_id, full_name, position" },
-    "user_roles": { "description": "Rôles par organisation (admin, approver, viewer)", "fields": "user_id, organization_id, role" },
-    "privacy_preferences": { "description": "Préférences de confidentialité par utilisateur", "fields": "user_id, profile_visible, access_alerts" },
-    "data_products": { "description": "Définition des produits de données", "fields": "id, name, category, schema_definition, version" },
-    "data_assets": { "description": "Instances concrètes de produits", "fields": "id, product_id, holder_org_id, subject_org_id, price, status" },
-    "catalog_metadata": { "description": "Métadonnées pour recherche marketplace", "fields": "asset_id, tags, categories, visibility" },
-    "data_transactions": { "description": "Cœur du système - machine à états", "fields": "id, consumer_org_id, subject_org_id, holder_org_id, status, purpose" },
-    "approval_history": { "description": "Historique des approbations/rejets", "fields": "transaction_id, actor_org_id, action, notes" },
-    "data_payloads": { "description": "Données livrées (ESG, IoT, fournisseur)", "fields": "transaction_id, schema_type, data_content (JSONB)" },
-    "data_policies": { "description": "Politiques ODRL générées", "fields": "transaction_id, odrl_policy_json" },
-    "transaction_messages": { "description": "Chat de négociation", "fields": "transaction_id, sender_org_id, content" },
-    "wallets": { "description": "Portefeuilles EUROe par organisation", "fields": "organization_id, address, balance, currency" },
-    "wallet_transactions": { "description": "Mouvements de fonds", "fields": "from_wallet_id, to_wallet_id, amount, status" },
-    "audit_logs": { "description": "Journal d'audit immuable", "fields": "organization_id, action, actor_id, details, ip_address" },
-    "login_attempts": { "description": "Tentatives de connexion pour rate limiting", "fields": "email, ip_address, success, attempted_at" },
-    "erp_configurations": { "description": "Configurations d'intégration ERP", "fields": "organization_id, endpoint_url, auth_method, field_mapping" },
-    "notifications": { "description": "Système de notifications", "fields": "user_id, title, type, is_read, link" }
+  "sovereignData": {
+    "title": "Architecture de Données Souveraines",
+    "heroText": "PROCUREDATA agit en tant qu'Opérateur de l'Espace de Données et orchestrateur de confiance. Fidèles aux principes Gaia-X, nous NE stockons PAS les données transactées. L'information voyage de manière chiffrée et directe (Pair à Pair) depuis l'infrastructure du Fournisseur jusqu'au Consommateur.",
+    "pillar1Title": "Stockage à la Source",
+    "pillar1Desc": "Les données originales (Payloads) restent dans les systèmes et bases de données du fournisseur. Elles ne sont exposées à l'écosystème que lorsqu'un Smart Contract valide les permissions d'accès du consommateur.",
+    "pillar2Title": "Échange Pair à Pair (P2P)",
+    "pillar2Desc": "Le transfert d'informations s'effectue via des passerelles sécurisées (Access Controllers). PROCUREDATA facilite le canal de communication sans inspecter ni conserver le contenu des actifs partagés.",
+    "pillar3Title": "Séparation des Métadonnées",
+    "pillar3Desc": "Notre infrastructure technique gère exclusivement le Catalogue Fédéré (descriptions, schémas techniques, règles ODRL) et le Clearing House (traçabilité et journaux d'audit), garantissant une confidentialité absolue par conception.",
+    "providerInfra": "Infrastructure du Fournisseur",
+    "validationBridge": "Vérification d'Identité et de Règles",
+    "consumerInfra": "Infrastructure du Consommateur",
+    "bridgeNote": "PROCUREDATA : Validation uniquement, sans stockage de données"
   },
   "security": { "rlsFlow": "Flux Row Level Security", "rlsDesc": "Chaque requête est interceptée et filtrée selon le rôle de l'utilisateur", "policiesByRole": "Politiques par Rôle", "policyExample": "Exemple de Politique", "rlsActive": "RLS actif sur toutes les tables sensibles", "securityDefiner": "Fonctions SECURITY DEFINER avec search_path", "auditAuto": "Audit automatique des accès" },
   "rlsPolicies": {
@@ -80,7 +68,6 @@
     "fe": { "title": "Frontend React + Vite", "ui": "shadcn UI", "query": "TanStack Query", "router": "React Router", "hooks": "Custom Hooks" },
     "be": { "title": "Backend Cloud AI", "auth": "JWT Auth", "db": "PostgreSQL 31 Tables", "rls": "Row Level Security", "edge": "Edge Functions", "realtime": "Realtime WS" },
     "bc": { "title": "Blockchain Pontus-X", "did": "DID:ethr", "euroe": "Stablecoin EUROe", "notarization": "Notarisation" },
-    "er": { "has": "a", "owns": "possède", "generates": "génère", "holds": "détient", "pays": "paie", "logs": "enregistre", "receives": "reçoit", "contains": "contient" },
     "rls": { "query": "Requête", "checkRls": "Vérifier RLS", "getOrgId": "Obtenir org_id", "filterRows": "Filtrer lignes", "denied": "REFUSÉ", "returnFiltered": "Retourner filtré", "result": "Résultat" },
     "web3": { "user": "Utilisateur", "app": "Application", "pontusx": "Pontus-X", "connectWallet": "Connecter Wallet", "signMessage": "Signer Message", "getDid": "Obtenir DID", "checkBalance": "Vérifier Solde", "notarize": "Notariser Hash", "txConfirm": "Confirmation TX" },
     "states": { "initiated": "initié", "pendingSubject": "pending_subject", "pendingHolder": "pending_holder", "approved": "approuvé", "completed": "complété", "deniedSubject": "refusé_subject", "deniedHolder": "refusé_holder", "cancelled": "annulé", "consumerRequests": "Consumer demande", "send": "envoyer", "cancel": "annuler", "subjectApproves": "Subject approuve", "subjectDenies": "Subject refuse", "holderReleases": "Holder libère", "holderDenies": "Holder refuse", "payAndDeliver": "Payer + Livrer" },
