@@ -1,76 +1,131 @@
 
 
-## Correccion de i18n y Contraste en Landing Page
+## Rediseno de /architecture: Alineacion con Memoria Tecnica y Gaia-X
 
-### 1. Claves faltantes: `sectorCompanies.*` y `sectorDescriptions.*` (16 sectores x 7 idiomas)
+### Objetivo
 
-El componente `Landing.tsx` (lineas 174-302) referencia `t('sectorCompanies.industrial')`, `t('sectorDescriptions.industrial')`, etc. para 16 sectores. Estas claves **no existen** en ningun archivo `landing.json`, lo que causa que se muestren las claves tecnicas en la cuadricula de sectores.
+Transformar la pagina de Arquitectura de una vista tecnica interna (que expone React, PostgreSQL, Tailwind, etc.) a una presentacion corporativa de alto nivel alineada con los estandares Gaia-X y la Memoria Tecnica oficial. El foco se desplaza a **Soberania del Dato**, **Seguridad B2B** y **Cumplimiento Normativo**.
 
-Se anadiran 32 claves nuevas (16 `sectorCompanies` + 16 `sectorDescriptions`) a cada uno de los 7 archivos `landing.json`:
+---
 
-| Sector | sectorCompanies (ES) | sectorDescriptions (ES) |
+### Cambios detallados
+
+#### 1. Rediseno del bloque "Arquitectura de Alto Nivel" (Tab Overview)
+
+**Eliminar**: El diagrama Mermaid actual (`getOverviewDiagram`) que muestra "Frontend React + Vite", "shadcn UI", "TanStack Query", etc.
+
+**Reemplazar por**: Una representacion visual con 3 bloques horizontales conectados por flechas animadas:
+
+```text
++---------------------------+     +-------------------------------+     +---------------------------+
+|  PROVEEDOR DE DATOS       | --> |  TRUST FRAMEWORK (Pontus-X)   | --> |  CONSUMIDOR DE DATOS      |
+|                           |     |                               |     |                           |
+|  [Database] [API]         |     |  - Gestion de Identidades     |     |  [Server] [BarChart]      |
+|  Fuentes de Datos Locales |     |    (DID)                      |     |  Access Controller        |
+|  Conector de Publicacion  |     |  - Controles de Acceso        |     |  Sistemas ERP / Analisis  |
+|                           |     |  - Registro Inmutable         |     |                           |
++---------------------------+     |    (Blockchain)               |     +---------------------------+
+                                  +-------------------------------+
+```
+
+- Los bloques se construyen con `Card` + iconos Lucide (`Database`, `FileInput`, `Shield`, `Lock`, `Blocks`, `Server`, `BarChart3`)
+- Las flechas intermedias usan `ArrowRight` con animacion CSS (pulse o slide)
+- Responsive: en movil se apilan verticalmente con `ArrowDown`
+
+**Eliminar las 3 tarjetas inferiores** que dicen "Frontend SPA" (con "React 18 + TypeScript", "49 shadcn/ui components"), "Backend Cloud AI" (con "PostgreSQL 15 + RLS", "Edge Functions (Deno)"), y "Web3 Layer" (con "Pontus-X Testnet"). Estas exponen tecnologias internas.
+
+#### 2. Rediseno de "Componentes del Data Space Europeo"
+
+**Eliminar** los 4 componentes actuales (EDC, IDS Protocol, Keycloak, Gaia-X Trust Framework) que son demasiado tecnicos.
+
+**Reemplazar por 4 pilares conceptuales** con tarjetas elegantes:
+
+| Pilar | Icono | Descripcion |
 |---|---|---|
-| industrial | GigaFactory North | Homologacion industrial en 24h |
-| agro | OliveTrust Coop | Trazabilidad del campo a la mesa |
-| mobility | UrbanDeliver BCN | Logistica urbana de ultima milla |
-| social | Alianza Social Hub | Inclusion social con datos verificados |
-| health | BioMed Hospital | Interoperabilidad de datos clinicos |
-| retail | GlobalRetail Prime | Cadena de suministro omnicanal |
-| energy | Helios Fields | Certificados de energia renovable |
-| aero | Turbine Chain | Trazabilidad de componentes aeronauticos |
-| wines | VinosDOE Elite | Denominacion de origen con blockchain |
-| pharma | PharmaCold Logistix | Cadena de frio certificada |
-| port | PortBCN Smart Trade | Comercio portuario inteligente |
-| gov | Ayuntamiento Etico | Contratacion publica transparente |
-| mining | PureLithium Sourcing | Abastecimiento responsable de minerales |
-| fashion | FastFashion Trace | Trazabilidad textil sostenible |
-| finance | GreenFinance ESG | Scoring ESG para financiacion verde |
-| grid | GridFlex Demand | Gestion inteligente de la demanda |
+| Identidad Federada y Confianza (Trust Framework) | `ShieldCheck` | Utilizacion de Identificadores Descentralizados (DID) y Credenciales Verificables para autenticar a los participantes (KYB) sin depender de un directorio central. |
+| Intercambio Soberano (Access Controller) | `Network` | Los datos no se almacenan en un lago central. El intercambio se realiza punto a punto (P2P) mediante pasarelas seguras que verifican las politicas de acceso antes de autorizar la transferencia. |
+| Catalogo y Trazabilidad (Clearing House) | `Blocks` | Registro inmutable de todas las transacciones de datos mediante Smart Contracts en la red Pontus-X, garantizando una pista de auditoria perfecta y no repudiable. |
+| Interoperabilidad Semantica | `DatabaseZap` | Estandarizacion de vocabularios y esquemas de datos para asegurar que la informacion compartida sea comprensible y procesable automaticamente por los sistemas del ecosistema. |
 
-Se traduciran a EN, FR, DE, IT, PT y NL.
+Cada tarjeta tendra un fondo con gradiente sutil azul/ambar, icono grande, titulo en negrita y descripcion corporativa.
 
-### 2. Clave faltante: `nav.startRegistration` en DE, IT, PT, NL
+#### 3. Limpieza del Tab "Tech Stack"
 
-Los archivos `landing.json` de aleman, italiano, portugues y neerlandes no tienen `nav.startRegistration`. Se anadira:
+**Eliminar completamente** el tab "Tech Stack" (tab id `stack`) ya que expone tecnologias internas (React, Tailwind, shadcn, Vite, TanStack, etc.), lo cual contradice directamente el requisito de no mencionar el stack interno.
 
-| Idioma | Valor |
-|---|---|
-| DE | Registrierung starten |
-| IT | Inizia Registrazione |
-| PT | Iniciar Registo |
-| NL | Start Registratie |
+Actualizar el array `TABS` para quitar `{ id: "stack", ... }` y la constante `TECH_STACK`.
 
-### 3. Contraste en seccion "Ecosistema de Valor Web3" (modo oscuro)
+#### 4. Limpieza de hardcoded en Overview
 
-Linea 446 de `Landing.tsx`: la seccion usa `bg-gradient-to-b from-background to-slate-50`. En modo oscuro, `to-slate-50` genera un fondo claro incoherente.
+Eliminar las listas hardcodeadas en las tarjetas inferiores (lineas 356-401):
+- "React 18 + TypeScript"
+- "49 shadcn/ui components"
+- "Framer Motion animations"
+- "PostgreSQL 15 + RLS"
+- "Edge Functions (Deno)"
+- "Pontus-X Testnet"
 
-**Cambio**: Anadir `dark:to-slate-900` para que en modo oscuro el gradiente sea oscuro y el texto tenga contraste adecuado. Tambien cambiar el texto descriptivo (linea 453-454) de `text-muted-foreground` a `text-muted-foreground dark:text-slate-300` para mejorar legibilidad.
+#### 5. Actualizacion de traducciones (7 idiomas)
 
-### 4. Revision del footer (ya resuelto)
+Anadir nuevas claves al namespace `architecture` en los 7 archivos de idiomas:
 
-Las 4 claves del footer (`transparencyPortal`, `uneRecommendations`, `glossaryUne`, `rulebook`) ya existen correctamente en los 7 idiomas desde la iteracion anterior. No requieren cambios.
+**Nuevas claves:**
 
-### 5. ARIA - idioma ya integrado
+| Clave | ES | EN |
+|---|---|---|
+| `overview.providerBlock` | Proveedor de Datos | Data Provider |
+| `overview.providerLocalSources` | Fuentes de Datos Locales | Local Data Sources |
+| `overview.providerConnector` | Conector de Publicacion | Publication Connector |
+| `overview.trustFramework` | Marco de Confianza (Pontus-X) | Trust Framework (Pontus-X) |
+| `overview.trustIdentity` | Gestion de Identidades (DID) | Identity Management (DID) |
+| `overview.trustAccess` | Controles de Acceso | Access Controls |
+| `overview.trustLedger` | Registro Inmutable (Blockchain) | Immutable Ledger (Blockchain) |
+| `overview.consumerBlock` | Consumidor de Datos | Data Consumer |
+| `overview.consumerGateway` | Access Controller | Access Controller |
+| `overview.consumerSystems` | Sistemas ERP / Analisis | ERP Systems / Analytics |
+| `overview.secureDataFlow` | Flujo de datos seguro y verificado | Secure and verified data flow |
+| `overview.pillar1Title` | Identidad Federada y Confianza | Federated Identity and Trust |
+| `overview.pillar1Desc` | Utilizacion de Identificadores Descentralizados (DID) y Credenciales Verificables para autenticar a los participantes (KYB) sin depender de un directorio central. | Use of Decentralized Identifiers (DID) and Verifiable Credentials to authenticate participants (KYB) without relying on a central directory. |
+| `overview.pillar2Title` | Intercambio Soberano | Sovereign Exchange |
+| `overview.pillar2Desc` | Los datos no se almacenan en un lago central. El intercambio se realiza punto a punto (P2P) mediante pasarelas seguras que verifican las politicas de acceso antes de autorizar la transferencia. | Data is not stored in a central lake. Exchange is performed peer-to-peer (P2P) through secure gateways that verify access policies before authorizing the transfer. |
+| `overview.pillar3Title` | Catalogo y Trazabilidad | Catalog and Traceability |
+| `overview.pillar3Desc` | Registro inmutable de todas las transacciones de datos mediante Smart Contracts en la red Pontus-X, garantizando una pista de auditoria perfecta y no repudiable. | Immutable record of all data transactions via Smart Contracts on the Pontus-X network, ensuring a perfect, non-repudiable audit trail. |
+| `overview.pillar4Title` | Interoperabilidad Semantica | Semantic Interoperability |
+| `overview.pillar4Desc` | Estandarizacion de vocabularios y esquemas de datos para asegurar que la informacion compartida sea comprensible y procesable automaticamente por los sistemas del ecosistema. | Standardization of vocabularies and data schemas to ensure shared information is understandable and automatically processable by ecosystem systems. |
 
-El paso de `i18n.language` al Agente ARIA ya se implemento en la iteracion anterior (tanto en `AIConcierge.tsx` como en `chat-ai/index.ts`). No requiere cambios adicionales.
+Se traduciran las mismas claves a FR, DE, IT, PT y NL.
+
+**Claves a eliminar** (ya no se usan): `overview.frontendSpa`, `overview.backendCloud`, `overview.web3Layer`, `overview.edc`, `overview.edcDesc`, `overview.idsProtocol`, `overview.idsDesc`, `overview.keycloak`, `overview.keycloakDesc`, `overview.gaiaX`, `overview.gaiaXDesc`, `overview.active`, todas las claves de `techStack.*` y `techItems.*`.
+
+#### 6. Estilo visual
+
+- Seccion del Trust Framework central: fondo con gradiente `bg-gradient-to-br from-[#1C2B40] to-[#233144]` con texto claro
+- Tarjetas laterales (Proveedor/Consumidor): bordes sutiles con `border-primary/30`
+- Pilares: Cards con `bg-gradient-to-br from-slate-900 to-slate-800 text-white` en modo oscuro, con acento ambar en el icono
+- Flechas animadas: `animate-pulse` en los iconos `ArrowRight`/`ArrowDown`
+
+---
 
 ### Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/locales/es/landing.json` | Anadir `sectorCompanies` (16) + `sectorDescriptions` (16) |
-| `src/locales/en/landing.json` | Idem en ingles |
-| `src/locales/fr/landing.json` | Idem en frances |
-| `src/locales/de/landing.json` | Idem en aleman + `nav.startRegistration` |
-| `src/locales/it/landing.json` | Idem en italiano + `nav.startRegistration` |
-| `src/locales/pt/landing.json` | Idem en portugues + `nav.startRegistration` |
-| `src/locales/nl/landing.json` | Idem en neerlandes + `nav.startRegistration` |
-| `src/pages/Landing.tsx` | Corregir gradiente dark mode en seccion Web3 (linea 446) y mejorar contraste texto (linea 453) |
+| `src/pages/Architecture.tsx` | Redisenar Tab Overview (eliminar Mermaid + 3 cards + 4 componentes, construir 3 bloques + 4 pilares). Eliminar Tab Stack y constante TECH_STACK. |
+| `src/utils/architectureDiagrams.ts` | Eliminar `getOverviewDiagram` (ya no se usa) |
+| `src/locales/es/architecture.json` | Anadir ~20 claves nuevas, eliminar claves de techStack/techItems/overview obsoletas |
+| `src/locales/en/architecture.json` | Idem en ingles |
+| `src/locales/fr/architecture.json` | Idem en frances |
+| `src/locales/de/architecture.json` | Idem en aleman |
+| `src/locales/it/architecture.json` | Idem en italiano |
+| `src/locales/pt/architecture.json` | Idem en portugues |
+| `src/locales/nl/architecture.json` | Idem en neerlandes |
 
-### Detalles tecnicos
+---
 
-- Las 32 claves nuevas por idioma se anaden como bloques `sectorCompanies` y `sectorDescriptions` al nivel raiz de cada `landing.json`.
-- El gradiente se corrige con: `bg-gradient-to-b from-background to-slate-50 dark:to-slate-900`.
-- El texto descriptivo se refuerza con: `text-muted-foreground dark:text-slate-300`.
-- No se tocan claves existentes ni se modifican otros componentes.
+### Lo que NO cambia
+
+- Tabs de Database, Security, Web3, y Flows permanecen intactos (contienen informacion tecnica legitima para audiencia tecnica)
+- Header, Hero y FundingFooter no se modifican
+- Los diagramas Mermaid de los demas tabs (ER, RLS, Web3, States, Sequence) se mantienen
+- La descripcion del Hero se actualizara para quitar "PostgreSQL (31 tablas) + RLS" y usar lenguaje de alto nivel
 
