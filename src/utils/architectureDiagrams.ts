@@ -11,22 +11,7 @@ import { TFunction } from 'i18next';
 
 // getRlsDiagram removed - replaced by Defense in Depth visual layout in Architecture.tsx
 
-export const getWeb3Diagram = (t: TFunction): string => `sequenceDiagram
-    participant U as ${t('diagrams.web3.user')}
-    participant A as ${t('diagrams.web3.app')}
-    participant P as ${t('diagrams.web3.pontusx')}
-
-    U->>A: ${t('diagrams.web3.connectWallet')}
-    A->>P: ${t('diagrams.web3.signMessage')}
-    P-->>A: ${t('diagrams.web3.getDid')}
-    
-    U->>A: ${t('diagrams.web3.checkBalance')}
-    A->>P: balanceOf(address)
-    P-->>A: EUROe balance
-    
-    U->>A: ${t('diagrams.web3.notarize')}
-    A->>P: storeHash(txId, hash)
-    P-->>A: ${t('diagrams.web3.txConfirm')}`;
+// getWeb3Diagram removed - replaced by visual Card layout in Architecture.tsx
 
 export const getStatesDiagram = (t: TFunction): string => `stateDiagram-v2
     [*] --> ${t('diagrams.states.initiated')}: ${t('diagrams.states.consumerRequests')}

@@ -16,12 +16,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
-import DataLineageBlockchain from "@/components/DataLineageBlockchain";
+
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
-  getWeb3Diagram,
   getStatesDiagram,
   getSequenceDiagram,
   getRegistrationDiagram
@@ -425,99 +424,82 @@ export default function Architecture() {
               </motion.div>
             </TabsContent>
 
-            {/* TAB 4: WEB3 */}
+            {/* TAB 4: WEB3 & CLEARING HOUSE */}
             <TabsContent value="web3" className="space-y-6">
               <motion.div {...fadeInUp} key="web3">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Wallet className="h-5 w-5 text-purple-500" />
-                      {t('web3.pontusIntegration')}
-                    </CardTitle>
-                    <CardDescription>
-                      {t('web3.pontusDesc')}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <MermaidDiagram chart={getWeb3Diagram(t)} scale={0.9} mobileScale={0.55} />
+                {/* Hero */}
+                <Card className="overflow-hidden border-0 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+                  <CardContent className="p-8 md:p-10">
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <Wallet className="h-7 w-7 text-purple-400" />
+                      {t('web3.heroTitle')}
+                    </h3>
+                    <p className="text-slate-200 leading-relaxed text-base max-w-4xl">
+                      {t('web3.heroDesc')}
+                    </p>
                   </CardContent>
                 </Card>
 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{t('web3.networkConfig')}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div className="flex justify-between p-3 bg-muted/50 rounded-lg">
-                          <span className="text-muted-foreground">{t('web3.network')}</span>
-                          <span className="font-mono">Pontus-X Testnet</span>
-                        </div>
-                        <div className="flex justify-between p-3 bg-muted/50 rounded-lg">
-                          <span className="text-muted-foreground">{t('web3.chainId')}</span>
-                          <span className="font-mono">32457</span>
-                        </div>
-                        <div className="flex justify-between p-3 bg-muted/50 rounded-lg">
-                          <span className="text-muted-foreground">{t('web3.rpcUrl')}</span>
-                          <span className="font-mono text-xs">rpc.test.pontus-x.eu</span>
-                        </div>
-                        <div className="flex justify-between p-3 bg-muted/50 rounded-lg">
-                          <span className="text-muted-foreground">{t('web3.currency')}</span>
-                          <span className="font-mono">EUROe (ERC-20)</span>
-                        </div>
-                        <Button variant="outline" className="w-full mt-2" asChild>
-                          <a href="https://explorer.pontus-x.eu" target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            {t('web3.viewExplorer')}
-                          </a>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{t('web3.web3Features')}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="p-3 border rounded-lg">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Badge variant="outline">DID:ethr</Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {t('web3.didDesc')}
-                        </p>
-                      </div>
-                      <div className="p-3 border rounded-lg">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Badge variant="outline">EUROe</Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {t('web3.euroeDesc')}
-                        </p>
-                      </div>
-                      <div className="p-3 border rounded-lg">
-                        <div className="flex items-center gap-2 mb-1">
-                          <Badge variant="outline">Notarization</Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {t('web3.notarizationDesc')}
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
+                {/* 3 Core Cards */}
+                <div className="grid md:grid-cols-3 gap-6">
+                  {[
+                    { icon: Wallet, title: t('web3.card1Title'), desc: t('web3.card1Desc'), color: "text-amber-500" },
+                    { icon: CreditCard, title: t('web3.card2Title'), desc: t('web3.card2Desc'), color: "text-blue-500" },
+                    { icon: ShieldCheck, title: t('web3.card3Title'), desc: t('web3.card3Desc'), color: "text-emerald-500" }
+                  ].map((card) => (
+                    <motion.div key={card.title} variants={fadeInUp}>
+                      <Card className="h-full rounded-2xl border border-border/60 hover:shadow-lg transition-shadow">
+                        <CardHeader>
+                          <div className="h-12 w-12 rounded-xl bg-muted flex items-center justify-center mb-2">
+                            <card.icon className={`h-6 w-6 ${card.color}`} />
+                          </div>
+                          <CardTitle className="text-lg">{card.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
                 </div>
 
-                <Card>
+                {/* Smart Contract Lifecycle Flow */}
+                <Card className="rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
                   <CardHeader>
-                    <CardTitle className="text-lg">{t('web3.dataLineage')}</CardTitle>
-                    <CardDescription>
-                      {t('web3.dataLineageDesc')}
-                    </CardDescription>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <Code className="h-6 w-6 text-primary" />
+                      {t('web3.flowTitle')}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <DataLineageBlockchain />
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                      {/* Step 1 */}
+                      <Card className="p-5 border-primary/30 bg-gradient-to-br from-background to-muted/50 text-center min-w-[200px]">
+                        <Wallet className="h-8 w-8 text-amber-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('web3.flowStep1')}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t('web3.flowStep1Sub')}</p>
+                      </Card>
+
+                      <ArrowRight className="h-8 w-8 text-primary animate-pulse hidden md:block flex-shrink-0" />
+                      <ArrowDown className="h-8 w-8 text-primary animate-pulse md:hidden flex-shrink-0" />
+
+                      {/* Step 2 - Central highlighted */}
+                      <Card className="p-5 bg-gradient-to-br from-[hsl(213,37%,18%)] to-[hsl(210,32%,20%)] text-white border-primary/40 text-center min-w-[240px] shadow-[0_0_20px_hsl(var(--primary)/0.15)]">
+                        <Code className="h-8 w-8 text-primary mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('web3.flowStep2')}</p>
+                        <p className="text-xs text-slate-300 mt-1">{t('web3.flowStep2Sub')}</p>
+                      </Card>
+
+                      <ArrowRight className="h-8 w-8 text-primary animate-pulse hidden md:block flex-shrink-0" />
+                      <ArrowDown className="h-8 w-8 text-primary animate-pulse md:hidden flex-shrink-0" />
+
+                      {/* Step 3 */}
+                      <Card className="p-5 border-primary/30 bg-gradient-to-br from-background to-muted/50 text-center min-w-[200px]">
+                        <ShieldCheck className="h-8 w-8 text-emerald-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('web3.flowStep3')}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t('web3.flowStep3Sub')}</p>
+                      </Card>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>

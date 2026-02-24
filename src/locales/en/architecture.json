@@ -12,7 +12,7 @@
     "overview": "Overview",
     "sovereignData": "Sovereign Data",
     "security": "Security & Privacy",
-    "web3": "Web3 Integration",
+    "web3": "Web3 & Clearing House",
     "flows": "Data Flows"
   },
   "overview": {
@@ -79,20 +79,21 @@
     "ipfsStep3Desc": "Full control through cryptographic keys managed by the data owner."
   },
   "web3": {
-    "pontusIntegration": "Pontus-X Integration",
-    "pontusDesc": "Connection to Gaia-X compatible network for decentralized identity and payments",
-    "networkConfig": "Network Configuration",
-    "network": "Network",
-    "chainId": "Chain ID",
-    "rpcUrl": "RPC URL",
-    "currency": "Currency",
-    "viewExplorer": "View Block Explorer",
-    "web3Features": "Web3 Features",
-    "didDesc": "Decentralized identity derived from wallet address. Format: did:ethr:pontusx:0x...",
-    "euroeDesc": "EUR stablecoin for micropayments. Real-time balance query.",
-    "notarizationDesc": "Transaction hash registered on-chain for immutable audit.",
-    "dataLineage": "Data Lineage Blockchain",
-    "dataLineageDesc": "Example of on-chain traceability for a data transaction"
+    "heroTitle": "Web3 Infrastructure and Clearing House",
+    "heroDesc": "PROCUREDATA operates on the Pontus-X network, a Web3 ecosystem specifically designed for the data economy under Gaia-X standards. We use DLT (Distributed Ledger Technology) not to store data, but to decentralize trust and generate immutable audits.",
+    "card1Title": "Sovereign Identity and Signature (SSI)",
+    "card1Desc": "Authentication and digital signatures through corporate Wallets. Every data request or approval requires a cryptographic signature, ensuring non-repudiation of institutional operations.",
+    "card2Title": "Asset Tokenization (Ocean Protocol)",
+    "card2Desc": "Conversion of data assets into smart contracts. Data NFTs represent the provider's intellectual property, while Datatokens act as temporary access licenses for consumers.",
+    "card3Title": "Clearing House (Digital Notary)",
+    "card3Desc": "Immutable transaction record. The system acts as a decentralized Clearing House: every time access is granted or data is downloaded, the event is sealed on the blockchain, creating a perfect audit trail for legal inspections.",
+    "flowTitle": "Smart Contract Lifecycle",
+    "flowStep1": "Request Signature",
+    "flowStep1Sub": "Consumer",
+    "flowStep2": "Policy Validation",
+    "flowStep2Sub": "Smart Contract",
+    "flowStep3": "Receipt Issuance",
+    "flowStep3Sub": "Clearing House"
   },
   "flows": {
     "stateMachine": "State Machine",
@@ -125,7 +126,7 @@
     "be": { "title": "Backend Cloud AI", "auth": "JWT Auth", "db": "PostgreSQL 31 Tables", "rls": "Row Level Security", "edge": "Edge Functions", "realtime": "Realtime WS" },
     "bc": { "title": "Pontus-X Blockchain", "did": "DID:ethr", "euroe": "EUROe Stablecoin", "notarization": "Notarization" },
     "rls": { "query": "Query", "checkRls": "Check RLS", "getOrgId": "Get org_id", "filterRows": "Filter rows", "denied": "DENIED", "returnFiltered": "Return filtered", "result": "Result" },
-    "web3": { "user": "User", "app": "Application", "pontusx": "Pontus-X", "connectWallet": "Connect Wallet", "signMessage": "Sign Message", "getDid": "Get DID", "checkBalance": "Check Balance", "notarize": "Notarize Hash", "txConfirm": "TX Confirm" },
+    "web3": {},
     "states": { "initiated": "initiated", "pendingSubject": "pending_subject", "pendingHolder": "pending_holder", "approved": "approved", "completed": "completed", "deniedSubject": "denied_subject", "deniedHolder": "denied_holder", "cancelled": "cancelled", "consumerRequests": "Consumer requests", "send": "send", "cancel": "cancel", "subjectApproves": "Subject approves", "subjectDenies": "Subject denies", "holderReleases": "Holder releases", "holderDenies": "Holder denies", "payAndDeliver": "Pay + Deliver" },
     "sequence": { "consumer": "Consumer", "subject": "Subject", "holder": "Holder", "blockchain": "Blockchain", "requestAccess": "Request access to asset", "validatePurpose": "Validate purpose", "preApprove": "Pre-approve", "releaseData": "Release data", "deliverPayload": "Deliver payload", "processPayment": "Process EUROe payment", "notarizeHash": "Notarize TX hash", "confirmBlock": "Block confirmation" },
     "registration": { "entity": "Entity", "platform": "Platform", "admin": "Admin", "submitForm": "Submit registration form", "validateTaxId": "Validate tax_id", "createPending": "Create pending request", "notifyAdmin": "Notify admin", "reviewKyb": "Review KYB", "approveReject": "Approve/Reject", "createOrg": "Create organization", "assignRole": "Assign admin role", "sendCredentials": "Send credentials" }
