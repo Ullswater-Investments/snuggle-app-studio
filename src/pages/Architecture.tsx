@@ -5,7 +5,7 @@ import {
   GitBranch, ExternalLink, CheckCircle2, XCircle, Users, FileText,
   CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen, UserPlus,
   ArrowRight, ArrowDown, ShieldCheck, Network, Blocks, DatabaseZap,
-  FileInput, BarChart3
+  FileInput, BarChart3, ServerCog, Tags
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,7 +21,6 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
-  getErDiagram,
   getRlsDiagram,
   getWeb3Diagram,
   getStatesDiagram,
@@ -51,68 +50,13 @@ export default function Architecture() {
   // Tab definitions - localized (removed "stack" tab)
   const TABS = useMemo(() => [
     { id: "overview", label: t('tabs.overview'), icon: Layers },
-    { id: "database", label: t('tabs.database'), icon: Database },
+    { id: "database", label: t('tabs.sovereignData'), icon: Shield },
     { id: "security", label: t('tabs.security'), icon: Shield },
     { id: "web3", label: t('tabs.web3'), icon: Wallet },
     { id: "flows", label: t('tabs.flows'), icon: GitBranch }
   ], [t]);
 
-  // Database table categories - localized
-  const DB_CATEGORIES = useMemo(() => [
-    {
-      name: t('dbCategories.orgsUsers'),
-      icon: Users,
-      color: "text-blue-500",
-      tables: [
-        { name: "organizations", description: t('dbTables.organizations.description'), fields: t('dbTables.organizations.fields') },
-        { name: "user_profiles", description: t('dbTables.user_profiles.description'), fields: t('dbTables.user_profiles.fields') },
-        { name: "user_roles", description: t('dbTables.user_roles.description'), fields: t('dbTables.user_roles.fields') },
-        { name: "privacy_preferences", description: t('dbTables.privacy_preferences.description'), fields: t('dbTables.privacy_preferences.fields') }
-      ]
-    },
-    {
-      name: t('dbCategories.dataCatalog'),
-      icon: Box,
-      color: "text-green-500",
-      tables: [
-        { name: "data_products", description: t('dbTables.data_products.description'), fields: t('dbTables.data_products.fields') },
-        { name: "data_assets", description: t('dbTables.data_assets.description'), fields: t('dbTables.data_assets.fields') },
-        { name: "catalog_metadata", description: t('dbTables.catalog_metadata.description'), fields: t('dbTables.catalog_metadata.fields') }
-      ]
-    },
-    {
-      name: t('dbCategories.transactions'),
-      icon: GitBranch,
-      color: "text-purple-500",
-      tables: [
-        { name: "data_transactions", description: t('dbTables.data_transactions.description'), fields: t('dbTables.data_transactions.fields') },
-        { name: "approval_history", description: t('dbTables.approval_history.description'), fields: t('dbTables.approval_history.fields') },
-        { name: "data_payloads", description: t('dbTables.data_payloads.description'), fields: t('dbTables.data_payloads.fields') },
-        { name: "data_policies", description: t('dbTables.data_policies.description'), fields: t('dbTables.data_policies.fields') },
-        { name: "transaction_messages", description: t('dbTables.transaction_messages.description'), fields: t('dbTables.transaction_messages.fields') }
-      ]
-    },
-    {
-      name: t('dbCategories.payments'),
-      icon: CreditCard,
-      color: "text-yellow-500",
-      tables: [
-        { name: "wallets", description: t('dbTables.wallets.description'), fields: t('dbTables.wallets.fields') },
-        { name: "wallet_transactions", description: t('dbTables.wallet_transactions.description'), fields: t('dbTables.wallet_transactions.fields') }
-      ]
-    },
-    {
-      name: t('dbCategories.security'),
-      icon: Settings,
-      color: "text-red-500",
-      tables: [
-        { name: "audit_logs", description: t('dbTables.audit_logs.description'), fields: t('dbTables.audit_logs.fields') },
-        { name: "login_attempts", description: t('dbTables.login_attempts.description'), fields: t('dbTables.login_attempts.fields') },
-        { name: "erp_configurations", description: t('dbTables.erp_configurations.description'), fields: t('dbTables.erp_configurations.fields') },
-        { name: "notifications", description: t('dbTables.notifications.description'), fields: t('dbTables.notifications.fields') }
-      ]
-    }
-  ], [t]);
+  // DB_CATEGORIES removed - replaced by sovereign data conceptual view
 
   // RLS Policies - localized
   const RLS_POLICIES = useMemo(() => [
@@ -337,59 +281,74 @@ export default function Architecture() {
               </motion.div>
             </TabsContent>
 
-            {/* TAB 2: DATABASE */}
+            {/* TAB 2: SOVEREIGN DATA */}
             <TabsContent value="database" className="space-y-6">
               <motion.div {...fadeInUp} key="database">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Database className="h-5 w-5 text-blue-500" />
-                      {t('database.erDiagram')}
-                    </CardTitle>
-                    <CardDescription>
-                      {t('database.erDesc')}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <MermaidDiagram chart={getErDiagram(t)} scale={0.85} mobileScale={0.5} />
+                {/* Hero Section */}
+                <Card className="overflow-hidden border-0 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+                  <CardContent className="p-8 md:p-10">
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <Shield className="h-7 w-7 text-amber-400" />
+                      {t('sovereignData.title')}
+                    </h3>
+                    <p className="text-slate-200 leading-relaxed text-base max-w-4xl">
+                      {t('sovereignData.heroText')}
+                    </p>
                   </CardContent>
                 </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('database.tablesByCategory')}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Accordion type="multiple" className="w-full">
-                      {DB_CATEGORIES.map((category) => (
-                        <AccordionItem key={category.name} value={category.name}>
-                          <AccordionTrigger className="hover:no-underline">
-                            <div className="flex items-center gap-3">
-                              <category.icon className={`h-5 w-5 ${category.color}`} />
-                              <span>{category.name}</span>
-                              <Badge variant="secondary" className="ml-2">{category.tables.length}</Badge>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-3 pt-2">
-                              {category.tables.map((table) => (
-                                <div key={table.name} className="p-3 bg-muted/50 rounded-lg">
-                                  <div className="flex items-start justify-between">
-                                    <div>
-                                      <code className="font-mono text-sm font-bold text-primary">{table.name}</code>
-                                      <p className="text-sm text-muted-foreground mt-1">{table.description}</p>
-                                    </div>
-                                  </div>
-                                  <code className="text-xs bg-background p-2 rounded block mt-2 overflow-x-auto">
-                                    {table.fields}
-                                  </code>
-                                </div>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
+                {/* 3 Pillars */}
+                <div className="grid md:grid-cols-3 gap-6">
+                  {[
+                    { icon: ServerCog, title: t('sovereignData.pillar1Title'), desc: t('sovereignData.pillar1Desc'), color: "text-blue-500" },
+                    { icon: Network, title: t('sovereignData.pillar2Title'), desc: t('sovereignData.pillar2Desc'), color: "text-emerald-500" },
+                    { icon: Tags, title: t('sovereignData.pillar3Title'), desc: t('sovereignData.pillar3Desc'), color: "text-purple-500" }
+                  ].map((pillar) => (
+                    <motion.div key={pillar.title} variants={fadeInUp}>
+                      <Card className="h-full rounded-2xl">
+                        <CardHeader>
+                          <div className="h-12 w-12 rounded-xl bg-muted flex items-center justify-center mb-2">
+                            <pillar.icon className={`h-6 w-6 ${pillar.color}`} />
+                          </div>
+                          <CardTitle className="text-lg">{pillar.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{pillar.desc}</p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Conceptual Flow */}
+                <Card className="rounded-2xl">
+                  <CardContent className="py-8">
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                      {/* Provider */}
+                      <Card className="p-5 border-primary/30 bg-gradient-to-br from-background to-muted/50 text-center min-w-[200px]">
+                        <Database className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('sovereignData.providerInfra')}</p>
+                      </Card>
+
+                      <ArrowRight className="h-8 w-8 text-muted-foreground hidden md:block flex-shrink-0" />
+                      <ArrowDown className="h-8 w-8 text-muted-foreground md:hidden flex-shrink-0" />
+
+                      {/* PROCUREDATA Bridge */}
+                      <Card className="p-5 bg-slate-100 dark:bg-slate-800 border-dashed border-2 border-muted-foreground/30 text-center min-w-[240px]">
+                        <Shield className="h-8 w-8 text-amber-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('sovereignData.validationBridge')}</p>
+                        <p className="text-xs text-muted-foreground mt-2 italic">{t('sovereignData.bridgeNote')}</p>
+                      </Card>
+
+                      <ArrowRight className="h-8 w-8 text-muted-foreground hidden md:block flex-shrink-0" />
+                      <ArrowDown className="h-8 w-8 text-muted-foreground md:hidden flex-shrink-0" />
+
+                      {/* Consumer */}
+                      <Card className="p-5 border-primary/30 bg-gradient-to-br from-background to-muted/50 text-center min-w-[200px]">
+                        <Server className="h-8 w-8 text-green-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('sovereignData.consumerInfra')}</p>
+                      </Card>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
