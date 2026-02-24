@@ -443,14 +443,14 @@ export default function Landing() {
         <KitDatosCampaignBanner />
 
         {/* MODELOS DE NEGOCIO TEASER */}
-        <section id="models" className="py-20 bg-gradient-to-b from-background to-slate-50">
+        <section id="models" className="py-20 bg-gradient-to-b from-background to-slate-50 dark:to-slate-900">
           <div className="container mx-auto px-4 text-center">
             <Badge className="mb-4" variant="secondary">
               <Sparkles className="h-3 w-3 mr-1" />
               {t('monetizationModels')}
             </Badge>
             <h2 className="text-3xl font-bold mb-4">{t('web3Ecosystem')}</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground dark:text-slate-300 mb-8 max-w-2xl mx-auto">
               {t('web3EcosystemDesc')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
