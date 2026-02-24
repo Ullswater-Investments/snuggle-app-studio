@@ -21,7 +21,9 @@
         "sustainability": "Sustainability Hub",
         "sustainabilityDesc": "ESG Reports & Carbon Footprint",
         "services": "Service Management",
-        "servicesDesc": "Algorithms & Compute-to-Data"
+        "servicesDesc": "Algorithms & Compute-to-Data",
+        "dataSpaceKitTitle": "DATA SPACE KIT",
+        "dataSpaceKitDesc": "Modular components for your Data Space"
     },
     "categories": {
         "web3": "Web3 & Blockchain",
@@ -81,7 +83,9 @@
         "businessModels": "Business Models",
         "useCases": "Use Cases",
         "architecture": "Technical Architecture",
-        "startRegistration": "Start Registration"
+        "startRegistration": "Start Registration",
+        "partners": "Partners",
+        "goToDashboard": "Go to Dashboard"
     },
     "useCasesSection": {
         "badge": "Industrial Versatility",
@@ -117,6 +121,11 @@
         "partners": "PARTNERS",
         "dataSpaceKit": "DATA SPACE KIT",
         "sectoralNode": "Owner NODE",
-        "new": "New"
-    }
+        "new": "New",
+        "transparencyPortal": "Transparency Portal",
+        "uneRecommendations": "UNE Recommendations",
+        "glossaryUne": "UNE Glossary",
+        "rulebook": "Rulebook"
+    },
+    "complianceBadge": "UNE 0087:2025 · 90%"
 }

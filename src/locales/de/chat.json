@@ -31,7 +31,18 @@
     "you": "SIE",
     "minimize": "Minimieren",
     "maximize": "Maximieren",
-    "close": "Schließen"
+    "close": "Schließen",
+    "widgets": {
+      "openRoiCalc": "ROI-Rechner öffnen",
+      "viewEsgGauge": "ESG-Gauge anzeigen",
+      "viewMaturityRadar": "Reifegrad-Radar anzeigen",
+      "simulateContract": "Vertrag simulieren",
+      "goToServices": "Zu Diensten",
+      "goToInnovation": "Zum Innovation Lab",
+      "viewSustainability": "Nachhaltigkeit anzeigen",
+      "viewSocialImpact": "Sozialwirkung-Dashboard anzeigen",
+      "viewCase": "{{company}} anzeigen"
+    }
   },
   "federated": {
     "badge": "Föderierter KI-Agent",

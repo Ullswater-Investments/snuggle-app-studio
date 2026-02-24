@@ -73,10 +73,10 @@ export default function Landing() {
     desc: t('demoLinks.sustainabilityDesc'),
     color: "text-green-500"
   }, {
-    title: "KIT ESPACIO DE DATOS",
+    title: t('demoLinks.dataSpaceKitTitle'),
     icon: Layers,
     url: "/kit-espacio-datos",
-    desc: "Componentes modulares para tu Data Space",
+    desc: t('demoLinks.dataSpaceKitDesc'),
     color: "text-purple-500"
   }];
   const FEATURES_DATA = {
@@ -310,7 +310,7 @@ export default function Landing() {
               <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-8 object-contain hidden dark:block" />
             </Link>
             <Link to="/partners">
-              <Badge variant="outline" className="text-xs hover:bg-primary/10 cursor-pointer transition-colors">Partners</Badge>
+              <Badge variant="outline" className="text-xs hover:bg-primary/10 cursor-pointer transition-colors">{t('nav.partners')}</Badge>
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -327,7 +327,7 @@ export default function Landing() {
             <LanguageSwitcher />
             <ThemeToggle />
 {user ? <Button asChild variant="brand">
-                <Link to="/dashboard">Ir al Dashboard <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                <Link to="/dashboard">{t('nav.goToDashboard')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button> : <Button asChild variant="hero">
                 <Link to="/auth">{t('nav.startRegistration')} <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>}
@@ -375,7 +375,7 @@ export default function Landing() {
                 ))}
                 <Link to="/recomendaciones-une" className="px-2.5 py-1 rounded-full text-[10px] font-semibold border bg-card text-muted-foreground hover:border-primary hover:text-primary transition-colors flex items-center gap-1">
                   <Scale className="h-3 w-3" />
-                  UNE 0087:2025 · 90%
+                  {t('complianceBadge')}
                 </Link>
               </div>
             </div>
