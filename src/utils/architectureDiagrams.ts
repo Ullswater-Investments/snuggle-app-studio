@@ -5,37 +5,7 @@ import { TFunction } from 'i18next';
  * These functions use translation keys to generate diagrams in any language.
  */
 
-export const getOverviewDiagram = (t: TFunction): string => `graph TB
-    subgraph FE["${t('diagrams.fe.title')}"]
-        UI[${t('diagrams.fe.ui')}]
-        Query[${t('diagrams.fe.query')}]
-        Router[${t('diagrams.fe.router')}]
-        Hooks[${t('diagrams.fe.hooks')}]
-    end
-    
-    subgraph BE["${t('diagrams.be.title')}"]
-        Auth[${t('diagrams.be.auth')}]
-        DB[(${t('diagrams.be.db')})]
-        RLS[${t('diagrams.be.rls')}]
-        Edge[${t('diagrams.be.edge')}]
-        RT[${t('diagrams.be.realtime')}]
-    end
-    
-    subgraph BC["${t('diagrams.bc.title')}"]
-        DID[${t('diagrams.bc.did')}]
-        Token[${t('diagrams.bc.euroe')}]
-        Notary[${t('diagrams.bc.notarization')}]
-    end
-    
-    UI --> Query
-    Query --> Auth
-    Auth --> DB
-    DB --> RLS
-    Edge --> DB
-    RT --> DB
-    Auth --> DID
-    Edge --> Token
-    Edge --> Notary`;
+// getOverviewDiagram removed - replaced by visual Card layout in Architecture.tsx
 
 export const getErDiagram = (t: TFunction): string => `erDiagram
     organizations ||--o{ user_profiles : "${t('diagrams.er.has')}"
