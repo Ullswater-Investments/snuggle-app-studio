@@ -1,90 +1,102 @@
 
 
-## Rediseno de la Pestana "Integracion Web3" -> "Infraestructura Web3 y Clearing House"
+## Rediseno de la Pestana "Flujos de Datos" en /architecture
 
 ### Objetivo
 
-Reemplazar el contenido tecnico de bajo nivel (RPC URLs, Chain IDs, diagrama Mermaid de secuencia, DataLineageBlockchain generico) por una presentacion corporativa enfocada en el valor de auditoria y soberania.
+Reemplazar los diagramas Mermaid (State Machine, Sequence) y la timeline generica de 4 pasos por un diseno UI completo con componentes Tailwind y Lucide Icons: un diagrama de flujo conceptual de 3 actores y una timeline de gobernanza de 5 pasos.
 
 ---
 
 ### Cambios en `src/pages/Architecture.tsx`
 
-#### A. Eliminar contenido actual del tab Web3 (lineas 428-524)
+#### A. Eliminar contenido actual del tab Flows (lineas 508-561)
 
 Se elimina:
-- Diagrama Mermaid de secuencia (`getWeb3Diagram`)
-- Card de "Configuracion de Red" (RPC URL, Chain ID, Testnet, etc.)
-- Card de "Funcionalidades Web3" (badges DID/EUROe/Notarization)
-- Card de "Data Lineage Blockchain" con componente `DataLineageBlockchain`
-- Import de `DataLineageBlockchain`
-- Import de `getWeb3Diagram` desde architectureDiagrams
+- Card con MermaidDiagram de State Machine (`getStatesDiagram`)
+- Card con MermaidDiagram de Sequence Diagram (`getSequenceDiagram`)
+- Card con timeline de 4 pasos (`FLOW_TIMELINE`)
+- La constante `FLOW_TIMELINE` (lineas 70-75)
+- Imports de `getStatesDiagram`, `getSequenceDiagram`, `getRegistrationDiagram` desde architectureDiagrams
+- Import de `MermaidDiagram` (ya no se usa en ninguna tab)
 
-#### B. Nuevo contenido del tab Web3
+#### B. Nuevo contenido del tab Flows
 
-**1. Hero de seccion** - Card oscura con gradiente (mismo estilo que Security y Sovereign Data):
-- Titulo: "Infraestructura Web3 y Clearing House"
-- Descripcion: "PROCUREDATA opera sobre la red Pontus-X, un ecosistema Web3 disenado especificamente para la economia del dato bajo los estandares de Gaia-X. Utilizamos tecnologia DLT (Distributed Ledger Technology) no para almacenar datos, sino para descentralizar la confianza y generar auditorias inmutables."
+**1. Hero de seccion** - Card oscura con gradiente (mismo estilo que los demas tabs):
+- Titulo: "Flujo de Datos y Gobernanza"
+- Descripcion: Texto introductorio sobre el ciclo de vida real de una transaccion en PROCUREDATA
 
-**2. Grid de 3 Tarjetas Core** (3 columnas desktop, 1 movil):
+**2. Diagrama de Flujo Conceptual** - 3 bloques conectados por flechas animadas:
 
-| Tarjeta | Icono | Titulo |
-|---|---|---|
-| 1 | `Wallet` | Identidad Soberana y Firma (SSI) |
-| 2 | `CreditCard` | Tokenizacion de Activos (Ocean Protocol) |
-| 3 | `ShieldCheck` | Clearing House (Notaria Digital) |
+| Bloque | Icono | Titulo | Descripcion |
+|---|---|---|---|
+| 1 | `Building` | Consumidor | Envia peticion de acceso |
+| 2 | `Shield` | Operador PROCUREDATA / Clearing House | Valida politicas y registra en blockchain |
+| 3 | `Database` | Proveedor / Access Controller | Libera los datos punto a punto |
 
-Cada tarjeta tendra icono con fondo sutil de color, titulo en negrita, y descripcion corporativa. Estilo `rounded-2xl`.
+Bloques laterales con estilo normal y bloque central con gradiente oscuro (misma estetica que los flujos de Web3 y Sovereign Data).
 
-**3. Flujo Visual de Smart Contract** - Card con aspecto tecnologico:
-- 3 bloques horizontales conectados por flechas con bordes brillantes sutiles
-- `[Firma de Solicitud (Consumidor)]` -> `[Validacion de Politicas (Smart Contract)]` -> `[Emision de Recibo (Clearing House)]`
-- Colores de acento de la marca, bloque central con borde glow sutil
+**3. Timeline de Gobernanza** - Stepper vertical con 5 pasos, linea conectora, iconos con colores segun estado:
 
-#### C. Actualizar tab label
+| Paso | Icono | Color | Titulo |
+|---|---|---|---|
+| 1 | `FileText` | Azul/Gris | Solicitud de Acceso (Initiated) |
+| 2 | `UserCheck` | Ambar | Pre-aprobacion (Subject Review) |
+| 3 | `CheckCircle` | Verde | Aprobacion y Firma (Smart Contract) |
+| 4 | `DownloadCloud` | Azul primario | Consumo Seguro (Data Gateway) |
+| 5 | `ShieldAlert` | Rojo/Purpura | Revocacion / Expiracion (Timeout) |
 
-Cambiar de "Integracion Web3" a "Web3 & Clearing House" en el array TABS.
+Cada paso tendra: icono con fondo sutil de color, titulo en negrita, badge con estado, y descripcion corporativa. Diseno tipo stepper con linea vertical conectando los circulos.
 
-#### D. Limpiar imports
+#### C. Nuevos imports
 
-- Eliminar import de `DataLineageBlockchain`
-- Eliminar import de `getWeb3Diagram`
-- Eliminar import de `MermaidDiagram` si ya no se usa en ningun tab (verificar Flows - aun usa MermaidDiagram, asi que se mantiene)
+- Anadir `Building`, `UserCheck`, `DownloadCloud`, `ShieldAlert`, `Clock` desde lucide-react
+- Eliminar import de `MermaidDiagram`
+- Eliminar imports de `getStatesDiagram`, `getSequenceDiagram`, `getRegistrationDiagram`
 
 ---
 
 ### Cambios en `src/utils/architectureDiagrams.ts`
 
-Eliminar la funcion `getWeb3Diagram` ya que no se usara mas.
+Eliminar TODAS las funciones restantes (`getStatesDiagram`, `getSequenceDiagram`, `getRegistrationDiagram`, `getDataLineageDiagram`) ya que el archivo quedara vacio. Se puede dejar el archivo con solo comentarios o eliminarlo por completo si no hay otros imports.
 
 ---
 
 ### Cambios en traducciones (7 idiomas)
 
-**Nuevas claves** (reemplazan las existentes en `web3.*`):
+**Nuevas claves** (reemplazan las existentes en `flows.*`):
 
 | Clave | ES | EN |
 |---|---|---|
-| `tabs.web3` | Web3 & Clearing House | Web3 & Clearing House |
-| `web3.heroTitle` | Infraestructura Web3 y Clearing House | Web3 Infrastructure and Clearing House |
-| `web3.heroDesc` | PROCUREDATA opera sobre la red Pontus-X, un ecosistema Web3 disenado especificamente para la economia del dato bajo los estandares de Gaia-X. Utilizamos tecnologia DLT (Distributed Ledger Technology) no para almacenar datos, sino para descentralizar la confianza y generar auditorias inmutables. | PROCUREDATA operates on the Pontus-X network, a Web3 ecosystem specifically designed for the data economy under Gaia-X standards. We use DLT (Distributed Ledger Technology) not to store data, but to decentralize trust and generate immutable audits. |
-| `web3.card1Title` | Identidad Soberana y Firma (SSI) | Sovereign Identity and Signature (SSI) |
-| `web3.card1Desc` | Autenticacion y firmas digitales mediante Wallets corporativas. Cada solicitud o aprobacion de datos requiere una firma criptografica, garantizando el no repudio de las operaciones institucionales. | Authentication and digital signatures through corporate Wallets. Every data request or approval requires a cryptographic signature, ensuring non-repudiation of institutional operations. |
-| `web3.card2Title` | Tokenizacion de Activos (Ocean Protocol) | Asset Tokenization (Ocean Protocol) |
-| `web3.card2Desc` | Conversion de activos de datos en contratos inteligentes. Los Data NFTs representan la propiedad intelectual del proveedor, mientras que los Datatokens actuan como licencias de acceso temporal para los consumidores. | Conversion of data assets into smart contracts. Data NFTs represent the provider's intellectual property, while Datatokens act as temporary access licenses for consumers. |
-| `web3.card3Title` | Clearing House (Notaria Digital) | Clearing House (Digital Notary) |
-| `web3.card3Desc` | Registro inmutable de transacciones. El sistema actua como un Clearing House descentralizado: cada vez que se concede un acceso o se descarga un dato, el evento queda sellado en la blockchain, creando un audit trail perfecto para inspecciones legales. | Immutable transaction record. The system acts as a decentralized Clearing House: every time access is granted or data is downloaded, the event is sealed on the blockchain, creating a perfect audit trail for legal inspections. |
-| `web3.flowTitle` | Ciclo de Vida del Smart Contract | Smart Contract Lifecycle |
-| `web3.flowStep1` | Firma de Solicitud | Request Signature |
-| `web3.flowStep1Sub` | Consumidor | Consumer |
-| `web3.flowStep2` | Validacion de Politicas | Policy Validation |
-| `web3.flowStep2Sub` | Smart Contract | Smart Contract |
-| `web3.flowStep3` | Emision de Recibo | Receipt Issuance |
-| `web3.flowStep3Sub` | Clearing House | Clearing House |
+| `flows.heroTitle` | Flujo de Datos y Gobernanza | Data Flow and Governance |
+| `flows.heroDesc` | Ciclo de vida completo de una transaccion de datos en PROCUREDATA. Desde la solicitud inicial hasta la revocacion automatica, cada paso queda trazado y auditado en la infraestructura del Espacio de Datos Europeo. | Complete lifecycle of a data transaction in PROCUREDATA. From the initial request to automatic revocation, every step is traced and audited in the European Data Space infrastructure. |
+| `flows.diagramTitle` | Flujo Conceptual de Transaccion | Conceptual Transaction Flow |
+| `flows.actor1Title` | Consumidor | Consumer |
+| `flows.actor1Desc` | Envia peticion de acceso | Sends access request |
+| `flows.actor2Title` | Operador PROCUREDATA / Clearing House | PROCUREDATA Operator / Clearing House |
+| `flows.actor2Desc` | Valida politicas y registra en blockchain | Validates policies and records on blockchain |
+| `flows.actor3Title` | Proveedor / Access Controller | Provider / Access Controller |
+| `flows.actor3Desc` | Libera los datos punto a punto | Releases data peer-to-peer |
+| `flows.timelineTitle` | Timeline de Gobernanza: Ciclo de Vida del Dato | Governance Timeline: Data Lifecycle |
+| `flows.step1Title` | Solicitud de Acceso | Access Request |
+| `flows.step1Status` | Initiated | Initiated |
+| `flows.step1Desc` | El consumidor solicita acceso a un activo de datos, especificando el proposito comercial y aceptando preliminarmente las politicas ODRL. | The consumer requests access to a data asset, specifying the commercial purpose and preliminarily accepting ODRL policies. |
+| `flows.step2Title` | Pre-aprobacion | Pre-approval |
+| `flows.step2Status` | Subject Review | Subject Review |
+| `flows.step2Desc` | El proveedor del dato revisa la solicitud y valida que el consumidor y su proposito se ajusten a su estrategia comercial. | The data provider reviews the request and validates that the consumer and their purpose align with their commercial strategy. |
+| `flows.step3Title` | Aprobacion y Firma | Approval and Signature |
+| `flows.step3Status` | Smart Contract | Smart Contract |
+| `flows.step3Desc` | Se firma digitalmente el acuerdo. El Clearing House registra la transaccion en la red Pontus-X, generando la Licencia de Uso inmutable. | The agreement is digitally signed. The Clearing House records the transaction on the Pontus-X network, generating the immutable Usage License. |
+| `flows.step4Title` | Consumo Seguro | Secure Consumption |
+| `flows.step4Status` | Data Gateway | Data Gateway |
+| `flows.step4Desc` | El consumidor descarga los datos a traves del Access Controller, sin exponer credenciales tecnicas. El uso queda registrado en los logs de auditoria. | The consumer downloads data through the Access Controller without exposing technical credentials. Usage is recorded in audit logs. |
+| `flows.step5Title` | Revocacion / Expiracion | Revocation / Expiration |
+| `flows.step5Status` | Timeout | Timeout |
+| `flows.step5Desc` | Al cumplirse el plazo acordado o por decision del proveedor, el acceso se revoca automaticamente, rompiendo el vinculo de la pasarela. | When the agreed deadline is met or by the provider's decision, access is automatically revoked, breaking the gateway link. |
 
 Traducciones analogas para FR, DE, IT, PT, NL.
 
-**Claves a eliminar**: `web3.pontusIntegration`, `web3.pontusDesc`, `web3.networkConfig`, `web3.network`, `web3.chainId`, `web3.rpcUrl`, `web3.currency`, `web3.viewExplorer`, `web3.web3Features`, `web3.didDesc`, `web3.euroeDesc`, `web3.notarizationDesc`, `web3.dataLineage`, `web3.dataLineageDesc`, y `diagrams.web3.*`.
+**Claves a eliminar**: `flows.stateMachine`, `flows.stateDesc`, `flows.fullFlow`, `flows.flowDesc`, `flows.timeline` (se renombra a `flows.timelineTitle`), las antiguas `flows.step*` con sus status tecnicos, y toda la seccion `diagrams.states.*`, `diagrams.sequence.*`, `diagrams.registration.*`.
 
 ---
 
@@ -92,9 +104,9 @@ Traducciones analogas para FR, DE, IT, PT, NL.
 
 | Archivo | Cambio |
 |---|---|
-| `src/pages/Architecture.tsx` | Eliminar imports de DataLineageBlockchain y getWeb3Diagram. Reescribir tab web3 con hero + 3 cards + flujo visual. Actualizar tab label. |
-| `src/utils/architectureDiagrams.ts` | Eliminar funcion `getWeb3Diagram` |
-| `src/locales/es/architecture.json` | Reemplazar web3.* por nuevas claves |
+| `src/pages/Architecture.tsx` | Eliminar FLOW_TIMELINE, MermaidDiagram import, diagram imports. Reescribir tab flows con hero + diagrama 3 actores + timeline 5 pasos. |
+| `src/utils/architectureDiagrams.ts` | Eliminar todas las funciones restantes (archivo queda vacio o se elimina) |
+| `src/locales/es/architecture.json` | Reemplazar flows.* y diagrams.states/sequence/registration por nuevas claves |
 | `src/locales/en/architecture.json` | Idem en ingles |
 | `src/locales/fr/architecture.json` | Idem en frances |
 | `src/locales/de/architecture.json` | Idem en aleman |
@@ -104,8 +116,7 @@ Traducciones analogas para FR, DE, IT, PT, NL.
 
 ### Lo que NO cambia
 
-- Tabs Overview, Sovereign Data, Security y Flows permanecen intactos
+- Tabs Overview, Sovereign Data, Security y Web3 permanecen intactos
 - Header, Hero y FundingFooter no se modifican
-- Los diagramas Mermaid de Flows (State Machine, Sequence) se mantienen
-- El componente MermaidDiagram sigue importado para uso en Flows
+- Claves de `diagrams.fe`, `diagrams.be`, `diagrams.bc`, `diagrams.rls` se mantienen (usadas en otros contextos)
 
