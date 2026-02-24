@@ -126,5 +126,19 @@
     "glossaryUne": "Glossario UNE",
     "rulebook": "Libro delle Regole"
   },
-  "complianceBadge": "UNE 0087:2025 · 90%"
+  "complianceBadge": "UNE 0087:2025 · 90%",
+  "viewUne0087": "Vedi UNE 0087:2025",
+  "campaign": {
+    "title": "AIUTI KIT SPAZIO DATI",
+    "deadline": "Iscrizione entro il 20 marzo 2026",
+    "limitedSlots": "POSTI LIMITATI",
+    "mainMessage": "Digitalizza la tua catena di fornitura con fino a",
+    "grantSource": "di sovvenzione a fondo perduto di RED.ES",
+    "benefit1": "Gestione inclusa nella quota mensile",
+    "benefit2": "Sovvenzione 85-90%",
+    "benefit3": "Senza clausole nascoste",
+    "ctaMain": "RICHIEDI GLI AIUTI KIT SPAZIO DATI",
+    "ctaEnroll": "Iscriviti per 190€/mese",
+    "ctaConditions": "Vedi Condizioni"
+  }
 }

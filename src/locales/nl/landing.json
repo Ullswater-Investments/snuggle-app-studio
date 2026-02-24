@@ -126,5 +126,19 @@
     "glossaryUne": "UNE-Woordenlijst",
     "rulebook": "Regelboek"
   },
-  "complianceBadge": "UNE 0087:2025 · 90%"
+  "complianceBadge": "UNE 0087:2025 · 90%",
+  "viewUne0087": "UNE 0087:2025 bekijken",
+  "campaign": {
+    "title": "SUBSIDIES DATARUIMTE-KIT",
+    "deadline": "Inschrijving tot 20 maart 2026",
+    "limitedSlots": "BEPERKTE PLAATSEN",
+    "mainMessage": "Digitaliseer uw toeleveringsketen met tot",
+    "grantSource": "niet-terugvorderbare subsidie van RED.ES",
+    "benefit1": "Verwerking inbegrepen in het maandelijks abonnement",
+    "benefit2": "Subsidie 85-90%",
+    "benefit3": "Zonder kleine lettertjes",
+    "ctaMain": "VRAAG SUBSIDIES DATARUIMTE-KIT AAN",
+    "ctaEnroll": "Inschrijven voor 190€/maand",
+    "ctaConditions": "Voorwaarden bekijken"
+  }
 }
