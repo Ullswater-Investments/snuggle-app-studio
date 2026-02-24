@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { generateODRLPolicy } from "@/utils/odrlGenerator";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -524,6 +525,11 @@ export default function PublishDataset() {
             language: step4Data.language,
             connection_type: "api_gateway",
             access_policy: accessPolicy,
+            odrl_policy: generateODRLPolicy(
+              step3Data.permissions.map((r) => r.label),
+              step3Data.prohibitions.map((r) => r.label),
+              step3Data.obligations.map((r) => r.label)
+            ),
           },
         } as any)
         .select("id")
