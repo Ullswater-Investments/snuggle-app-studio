@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import {
   ArrowLeft, Building2, FileText, Tag, Globe, Lock, Copy, Check,
-  CheckCircle2, XCircle, Clock, DollarSign, Shield, Database, Key,
+  CheckCircle2, XCircle, Clock, DollarSign, Shield, Database, Key, FileJson,
 } from "lucide-react";
 import { formatDate } from "@/lib/i18nFormatters";
 
@@ -413,6 +413,20 @@ const AdminPublicationDetail = () => {
                     {customMeta.access_policy.access_timeout_days && (
                       <CopyField label={t('assets.accessTimeout')} value={`${customMeta.access_policy.access_timeout_days} ${t('assets.days')}`} copyTitle={t('assets.copyToClipboard')} />
                     )}
+                  </div>
+                </div>
+              )}
+
+              {/* ODRL 2.0 Policy — UNE 0087 */}
+              {customMeta?.odrl_policy && (
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileJson className="h-4 w-4 text-emerald-600" />
+                    <p className="text-xs font-medium text-muted-foreground">Política ODRL 2.0 (UNE 0087)</p>
+                    <Badge variant="success" className="text-[10px]">W3C ODRL 2.0</Badge>
+                  </div>
+                  <div className="bg-muted/30 rounded-lg p-3 max-h-[300px] overflow-auto">
+                    <CopyField label="ODRL JSON-LD" value={JSON.stringify(customMeta.odrl_policy, null, 2)} mono copyTitle={t('assets.copyToClipboard')} />
                   </div>
                 </div>
               )}
