@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -22,6 +23,7 @@ const MOCK_EVENTS = [
 ];
 
 export default function ActivityFeed() {
+  const { t: tc } = useTranslation('common');
   const [events, setEvents] = useState(MOCK_EVENTS.slice(0, 5));
   const [newEventIndex, setNewEventIndex] = useState(5);
 
@@ -197,7 +199,7 @@ export default function ActivityFeed() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{tc('demoAccess')}</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
                 <Link to="/architecture">Ver Arquitectura</Link>

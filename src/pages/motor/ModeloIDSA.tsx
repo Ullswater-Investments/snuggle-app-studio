@@ -9,8 +9,10 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTranslation } from "react-i18next";
 
 export default function ModeloIDSA() {
+  const { t: tc } = useTranslation('common');
   const roles = [
     { 
       name: "Consumer", 
@@ -243,7 +245,7 @@ export default function ModeloIDSA() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{tc('demoAccess')}</Link>
               </Button>
               <Button asChild className="flex-1">
                 <Link to="/architecture">Ver Arquitectura</Link>

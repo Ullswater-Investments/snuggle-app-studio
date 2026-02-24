@@ -9,8 +9,10 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTranslation } from "react-i18next";
 
 export default function ConectoresERP() {
+  const { t: tc } = useTranslation('common');
   const connectors = [
     { name: "SAP S/4HANA", status: "Certificado", logo: "SAP", color: "bg-blue-500" },
     { name: "Oracle Cloud", status: "Certificado", logo: "ORC", color: "bg-red-500" },
@@ -248,7 +250,7 @@ export default function ConectoresERP() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{tc('demoAccess')}</Link>
               </Button>
               <Button asChild className="flex-1">
                 <Link to="/architecture">Ver Arquitectura</Link>

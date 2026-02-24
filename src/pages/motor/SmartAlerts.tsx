@@ -9,8 +9,10 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTranslation } from "react-i18next";
 
 export default function SmartAlerts() {
+  const { t: tc } = useTranslation('common');
   const alerts = [
     { 
       level: "critical", 
@@ -230,7 +232,7 @@ export default function SmartAlerts() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1 border-border dark:border-white/20 hover:bg-accent dark:hover:bg-white/10">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{tc('demoAccess')}</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
                 <Link to="/architecture">Ver Arquitectura</Link>

@@ -305,10 +305,7 @@ export default function Landing() {
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link to={user ? "/dashboard" : "/"} className="hover:opacity-80 transition-opacity">
-              <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-8 object-contain dark:hidden" />
-              <img src={procuredataLogoDark} alt="PROCUREDATA" className="h-8 object-contain hidden dark:block" />
-            </Link>
+            <ProcuredataLogo size="md" linkToHome variant="auto" />
             <Link to="/partners">
               <Badge variant="outline" className="text-xs hover:bg-primary/10 cursor-pointer transition-colors">{t('nav.partners')}</Badge>
             </Link>
@@ -382,7 +379,7 @@ export default function Landing() {
 
             {/* Main: Chat + Diagram */}
             <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-8 items-start">
-              <Card className="shadow-xl border-2">
+              <Card className="shadow-xl border-2 rounded-2xl">
                 <CardContent className="pt-6 pb-4">
                   <FederatedHeroChat onProcessingChange={setIsAgentProcessing} onHighlightedNodesChange={setHighlightedNodes} />
                 </CardContent>
@@ -414,11 +411,11 @@ export default function Landing() {
         <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-5">{t('successCases')}</h2>
-            <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}>
+            <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 md:gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05 } } }}>
               {sectors.map(sector => (
                 <motion.div key={sector.caseId} variants={{ hidden: { opacity: 0, y: 20, scale: 0.9 }, visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 20 } } }}>
                   <Link to={`/success-stories/${sector.caseId}`} className="group block h-full">
-                    <div className={cn("flex flex-col items-center p-3 md:p-4 rounded-xl transition-all duration-300 border border-border/50 shadow-sm hover:shadow-md hover:-translate-y-1 h-full", sector.bgColor)}>
+                    <div className={cn("flex flex-col items-center p-4 md:p-5 rounded-2xl transition-all duration-300 border border-border/50 shadow-sm hover:shadow-md hover:-translate-y-1 h-full", sector.bgColor)}>
                       <div className="p-3 rounded-lg bg-card shadow-sm mb-2 transition-transform group-hover:scale-110">
                         <sector.icon className={cn("w-6 h-6", sector.color)} />
                       </div>
@@ -489,10 +486,10 @@ export default function Landing() {
               </TabsList>
               
               {Object.entries(FEATURES_DATA).map(([category, items]) => <TabsContent key={category} value={category}>
-                  <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" variants={containerVariants} initial="hidden" animate="visible" key={category}>
+                    <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={containerVariants} initial="hidden" animate="visible" key={category}>
                     {items.map((feature, i) => <motion.div key={i} variants={cardVariants}>
                         <Link to={feature.path}>
-                          <Card className="h-full bg-card dark:bg-white/5 border-border dark:border-white/10 hover:bg-accent dark:hover:bg-white/10 hover:border-primary/50 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer group">
+                          <Card className="h-full bg-card dark:bg-white/5 border-border dark:border-white/10 hover:bg-accent dark:hover:bg-white/10 hover:border-primary/50 transition-all hover:shadow-lg hover:-translate-y-1 cursor-pointer group rounded-2xl">
                             <CardHeader>
                               <div className="flex items-center gap-3">
                                 <div className="h-10 w-10 bg-muted dark:bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
