@@ -1,89 +1,90 @@
 
 
-## Rediseno de la Pestana "Seguridad y Privacidad" en /architecture
+## Rediseno de la Pestana "Integracion Web3" -> "Infraestructura Web3 y Clearing House"
 
 ### Objetivo
 
-Reemplazar el contenido tecnico actual (diagrama RLS Mermaid, politicas por rol, ejemplo SQL) por una presentacion corporativa de "Defensa en Profundidad" alineada con la Memoria Tecnica y los principios Gaia-X.
+Reemplazar el contenido tecnico de bajo nivel (RPC URLs, Chain IDs, diagrama Mermaid de secuencia, DataLineageBlockchain generico) por una presentacion corporativa enfocada en el valor de auditoria y soberania.
 
 ---
 
 ### Cambios en `src/pages/Architecture.tsx`
 
-#### A. Eliminar el contenido actual del tab Security (lineas 357-432)
+#### A. Eliminar contenido actual del tab Web3 (lineas 428-524)
 
 Se elimina:
-- El diagrama Mermaid de RLS (`getRlsDiagram`)
-- Las tarjetas de "Politicas por Rol" y "Ejemplo de Politica" (con codigo SQL)
-- La constante `RLS_POLICIES` (lineas 62-67)
-- El import de `getRlsDiagram`
+- Diagrama Mermaid de secuencia (`getWeb3Diagram`)
+- Card de "Configuracion de Red" (RPC URL, Chain ID, Testnet, etc.)
+- Card de "Funcionalidades Web3" (badges DID/EUROe/Notarization)
+- Card de "Data Lineage Blockchain" con componente `DataLineageBlockchain`
+- Import de `DataLineageBlockchain`
+- Import de `getWeb3Diagram` desde architectureDiagrams
 
-#### B. Nuevo contenido del tab Security
+#### B. Nuevo contenido del tab Web3
 
-**1. Hero de la seccion** - Card oscura con gradiente:
-- Titulo: "Seguridad y Privacidad: Defensa en Profundidad"
-- Descripcion: Texto sobre la distribucion de confianza via Pontus-X e Identidades Digitales Soberanas
+**1. Hero de seccion** - Card oscura con gradiente (mismo estilo que Security y Sovereign Data):
+- Titulo: "Infraestructura Web3 y Clearing House"
+- Descripcion: "PROCUREDATA opera sobre la red Pontus-X, un ecosistema Web3 disenado especificamente para la economia del dato bajo los estandares de Gaia-X. Utilizamos tecnologia DLT (Distributed Ledger Technology) no para almacenar datos, sino para descentralizar la confianza y generar auditorias inmutables."
 
-**2. Grid de 6 Pilares** (3 columnas desktop, 2 tablet, 1 movil):
+**2. Grid de 3 Tarjetas Core** (3 columnas desktop, 1 movil):
 
-| Pilar | Icono | Titulo |
+| Tarjeta | Icono | Titulo |
 |---|---|---|
-| 1 | `Wallet` | Identidad Soberana (SSI) |
-| 2 | `Layers` | Aislamiento Multi-Tenant (RLS) |
-| 3 | `Lock` | Cifrado Extremo a Extremo |
-| 4 | `Cpu` | Compute-to-Data (C2D) |
-| 5 | `ShieldCheck` | Cumplimiento RGPD & Data Act |
-| 6 | `FileText` | Auditoria Inmutable |
+| 1 | `Wallet` | Identidad Soberana y Firma (SSI) |
+| 2 | `CreditCard` | Tokenizacion de Activos (Ocean Protocol) |
+| 3 | `ShieldCheck` | Clearing House (Notaria Digital) |
 
-Cada tarjeta tendra icono con fondo sutil, titulo en negrita y descripcion corporativa. Estilo `rounded-2xl` con bordes suaves.
+Cada tarjeta tendra icono con fondo sutil de color, titulo en negrita, y descripcion corporativa. Estilo `rounded-2xl`.
 
-**3. Seccion destacada "IPFS Privado"** - Card con borde degradado y fondo distinto (`bg-gradient-to-r from-amber-500/10 to-purple-500/10`):
-- Titulo: "Persistencia Desacoplada: IPFS Privado"
-- Descripcion introductoria sobre soberania de almacenamiento
-- 3 pasos visuales con iconos numerados:
-  1. Integridad por CIDs (SHA-256)
-  2. Desacoplamiento identidad/contenido
-  3. Gateways Privados con llaves criptograficas
+**3. Flujo Visual de Smart Contract** - Card con aspecto tecnologico:
+- 3 bloques horizontales conectados por flechas con bordes brillantes sutiles
+- `[Firma de Solicitud (Consumidor)]` -> `[Validacion de Politicas (Smart Contract)]` -> `[Emision de Recibo (Clearing House)]`
+- Colores de acento de la marca, bloque central con borde glow sutil
 
 #### C. Actualizar tab label
 
-Cambiar de "Seguridad & RLS" a "Seguridad & Privacidad" en el array `TABS`.
+Cambiar de "Integracion Web3" a "Web3 & Clearing House" en el array TABS.
+
+#### D. Limpiar imports
+
+- Eliminar import de `DataLineageBlockchain`
+- Eliminar import de `getWeb3Diagram`
+- Eliminar import de `MermaidDiagram` si ya no se usa en ningun tab (verificar Flows - aun usa MermaidDiagram, asi que se mantiene)
+
+---
+
+### Cambios en `src/utils/architectureDiagrams.ts`
+
+Eliminar la funcion `getWeb3Diagram` ya que no se usara mas.
 
 ---
 
 ### Cambios en traducciones (7 idiomas)
 
-**Nuevas claves** (reemplazan las existentes en `security.*`):
+**Nuevas claves** (reemplazan las existentes en `web3.*`):
 
 | Clave | ES | EN |
 |---|---|---|
-| `tabs.security` | Seguridad & Privacidad | Security & Privacy |
-| `security.heroTitle` | Seguridad y Privacidad: Defensa en Profundidad | Security and Privacy: Defense in Depth |
-| `security.heroDesc` | A diferencia de las plataformas centralizadas, PROCUREDATA distribuye la confianza a traves de la red Pontus-X y las Identidades Digitales Soberanas. La privacidad no es solo una politica legal, sino una imposibilidad tecnica de acceso no consentido. | Unlike centralized platforms, PROCUREDATA distributes trust through the Pontus-X network and Sovereign Digital Identities. Privacy is not just a legal policy, but a technical impossibility of non-consented access. |
-| `security.pillar1Title` | Identidad Soberana (SSI) | Sovereign Identity (SSI) |
-| `security.pillar1Desc` | Acceso blindado mediante Wallets corporativas y criptografia de clave publica. Firma digital obligatoria para el no repudio. | Armored access through corporate Wallets and public key cryptography. Mandatory digital signature for non-repudiation. |
-| `security.pillar2Title` | Aislamiento Multi-Tenant (RLS) | Multi-Tenant Isolation (RLS) |
-| `security.pillar2Desc` | Politicas de Row Level Security (RLS) directamente en el motor de base de datos para garantizar que cada organizacion solo acceda a su silo de informacion. | Row Level Security (RLS) policies directly in the database engine to ensure each organization only accesses its own information silo. |
-| `security.pillar3Title` | Cifrado Extremo a Extremo | End-to-End Encryption |
-| `security.pillar3Desc` | Comunicaciones blindadas bajo TLS 1.3 y cifrado simetrico de datos en reposo, con llaves vinculadas a la logica de Smart Contracts. | Communications secured under TLS 1.3 and symmetric encryption of data at rest, with keys linked to Smart Contract logic. |
-| `security.pillar4Title` | Compute-to-Data (C2D) | Compute-to-Data (C2D) |
-| `security.pillar4Desc` | Privacidad industrial maxima: permite procesar algoritmos sobre el dato en su ubicacion original sin transferir archivos, protegiendo el secreto comercial. | Maximum industrial privacy: allows processing algorithms on data at its original location without transferring files, protecting trade secrets. |
-| `security.pillar5Title` | Cumplimiento RGPD & Data Act | GDPR & Data Act Compliance |
-| `security.pillar5Desc` | Minimizacion de datos y derecho al olvido mediante gestion de punteros, permitiendo la revocacion del acceso a datos sensibles sin alterar el registro blockchain. | Data minimization and right to be forgotten through pointer management, allowing revocation of access to sensitive data without altering the blockchain record. |
-| `security.pillar6Title` | Auditoria Inmutable | Immutable Audit |
-| `security.pillar6Desc` | Trazabilidad forense en tiempo real. Cada interaccion de seguridad queda registrada inalterablemente en los logs del sistema. | Real-time forensic traceability. Every security interaction is immutably recorded in system logs. |
-| `security.ipfsTitle` | Persistencia Desacoplada: IPFS Privado | Decoupled Persistence: Private IPFS |
-| `security.ipfsDesc` | Para archivos estaticos, garantizamos una Soberania de Almacenamiento Irreversible mediante una arquitectura de tres niveles: | For static files, we guarantee Irreversible Storage Sovereignty through a three-tier architecture: |
-| `security.ipfsStep1Title` | Integridad por CIDs | Integrity via CIDs |
-| `security.ipfsStep1Desc` | Hashing criptografico (SHA-256) que actua como huella digital del activo. | Cryptographic hashing (SHA-256) acting as the asset's digital fingerprint. |
-| `security.ipfsStep2Title` | Desacoplamiento | Decoupling |
-| `security.ipfsStep2Desc` | Separacion fisica y logica entre la identidad corporativa y el contenido tecnico. | Physical and logical separation between corporate identity and technical content. |
-| `security.ipfsStep3Title` | Gateways Privados | Private Gateways |
-| `security.ipfsStep3Desc` | Control total mediante llaves criptograficas administradas por el propietario del dato. | Full control through cryptographic keys managed by the data owner. |
+| `tabs.web3` | Web3 & Clearing House | Web3 & Clearing House |
+| `web3.heroTitle` | Infraestructura Web3 y Clearing House | Web3 Infrastructure and Clearing House |
+| `web3.heroDesc` | PROCUREDATA opera sobre la red Pontus-X, un ecosistema Web3 disenado especificamente para la economia del dato bajo los estandares de Gaia-X. Utilizamos tecnologia DLT (Distributed Ledger Technology) no para almacenar datos, sino para descentralizar la confianza y generar auditorias inmutables. | PROCUREDATA operates on the Pontus-X network, a Web3 ecosystem specifically designed for the data economy under Gaia-X standards. We use DLT (Distributed Ledger Technology) not to store data, but to decentralize trust and generate immutable audits. |
+| `web3.card1Title` | Identidad Soberana y Firma (SSI) | Sovereign Identity and Signature (SSI) |
+| `web3.card1Desc` | Autenticacion y firmas digitales mediante Wallets corporativas. Cada solicitud o aprobacion de datos requiere una firma criptografica, garantizando el no repudio de las operaciones institucionales. | Authentication and digital signatures through corporate Wallets. Every data request or approval requires a cryptographic signature, ensuring non-repudiation of institutional operations. |
+| `web3.card2Title` | Tokenizacion de Activos (Ocean Protocol) | Asset Tokenization (Ocean Protocol) |
+| `web3.card2Desc` | Conversion de activos de datos en contratos inteligentes. Los Data NFTs representan la propiedad intelectual del proveedor, mientras que los Datatokens actuan como licencias de acceso temporal para los consumidores. | Conversion of data assets into smart contracts. Data NFTs represent the provider's intellectual property, while Datatokens act as temporary access licenses for consumers. |
+| `web3.card3Title` | Clearing House (Notaria Digital) | Clearing House (Digital Notary) |
+| `web3.card3Desc` | Registro inmutable de transacciones. El sistema actua como un Clearing House descentralizado: cada vez que se concede un acceso o se descarga un dato, el evento queda sellado en la blockchain, creando un audit trail perfecto para inspecciones legales. | Immutable transaction record. The system acts as a decentralized Clearing House: every time access is granted or data is downloaded, the event is sealed on the blockchain, creating a perfect audit trail for legal inspections. |
+| `web3.flowTitle` | Ciclo de Vida del Smart Contract | Smart Contract Lifecycle |
+| `web3.flowStep1` | Firma de Solicitud | Request Signature |
+| `web3.flowStep1Sub` | Consumidor | Consumer |
+| `web3.flowStep2` | Validacion de Politicas | Policy Validation |
+| `web3.flowStep2Sub` | Smart Contract | Smart Contract |
+| `web3.flowStep3` | Emision de Recibo | Receipt Issuance |
+| `web3.flowStep3Sub` | Clearing House | Clearing House |
 
-Se traduciran las mismas claves a FR, DE, IT, PT y NL.
+Traducciones analogas para FR, DE, IT, PT, NL.
 
-**Claves a eliminar**: `security.rlsFlow`, `security.rlsDesc`, `security.policiesByRole`, `security.policyExample`, `security.rlsActive`, `security.securityDefiner`, `security.auditAuto`, y toda la seccion `rlsPolicies.*`.
+**Claves a eliminar**: `web3.pontusIntegration`, `web3.pontusDesc`, `web3.networkConfig`, `web3.network`, `web3.chainId`, `web3.rpcUrl`, `web3.currency`, `web3.viewExplorer`, `web3.web3Features`, `web3.didDesc`, `web3.euroeDesc`, `web3.notarizationDesc`, `web3.dataLineage`, `web3.dataLineageDesc`, y `diagrams.web3.*`.
 
 ---
 
@@ -91,9 +92,9 @@ Se traduciran las mismas claves a FR, DE, IT, PT y NL.
 
 | Archivo | Cambio |
 |---|---|
-| `src/pages/Architecture.tsx` | Eliminar RLS_POLICIES y import getRlsDiagram. Reescribir tab security con hero + 6 pilares + seccion IPFS. |
-| `src/utils/architectureDiagrams.ts` | Eliminar funcion `getRlsDiagram` (ya no se usa) |
-| `src/locales/es/architecture.json` | Reemplazar security.* y rlsPolicies.* por nuevas claves |
+| `src/pages/Architecture.tsx` | Eliminar imports de DataLineageBlockchain y getWeb3Diagram. Reescribir tab web3 con hero + 3 cards + flujo visual. Actualizar tab label. |
+| `src/utils/architectureDiagrams.ts` | Eliminar funcion `getWeb3Diagram` |
+| `src/locales/es/architecture.json` | Reemplazar web3.* por nuevas claves |
 | `src/locales/en/architecture.json` | Idem en ingles |
 | `src/locales/fr/architecture.json` | Idem en frances |
 | `src/locales/de/architecture.json` | Idem en aleman |
@@ -103,7 +104,8 @@ Se traduciran las mismas claves a FR, DE, IT, PT y NL.
 
 ### Lo que NO cambia
 
-- Tabs Overview, Sovereign Data, Web3 y Flows permanecen intactos
+- Tabs Overview, Sovereign Data, Security y Flows permanecen intactos
 - Header, Hero y FundingFooter no se modifican
-- Los diagramas Mermaid de Web3 y Flows se mantienen
+- Los diagramas Mermaid de Flows (State Machine, Sequence) se mantienen
+- El componente MermaidDiagram sigue importado para uso en Flows
 
