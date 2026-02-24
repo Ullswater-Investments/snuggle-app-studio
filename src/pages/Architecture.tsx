@@ -5,7 +5,8 @@ import {
   GitBranch, ExternalLink, CheckCircle2, XCircle, Users, FileText,
   CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen, UserPlus,
   ArrowRight, ArrowDown, ShieldCheck, Network, Blocks, DatabaseZap,
-  FileInput, BarChart3, ServerCog, Tags
+  FileInput, BarChart3, ServerCog, Tags, Building, UserCheck,
+  DownloadCloud, ShieldAlert, CheckCircle
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,16 +16,10 @@ import { FundingFooter } from "@/components/FundingFooter";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import {
-  getStatesDiagram,
-  getSequenceDiagram,
-  getRegistrationDiagram
-} from "@/utils/architectureDiagrams";
 
 // Animation variants
 const fadeInUp = {
@@ -66,12 +61,13 @@ export default function Architecture() {
     { icon: FileText, title: t('security.pillar6Title'), desc: t('security.pillar6Desc'), color: "text-cyan-500" }
   ], [t]);
 
-  // Flow timeline steps - localized
-  const FLOW_TIMELINE = useMemo(() => [
-    { step: 1, title: t('flows.step1Title'), status: t('flows.step1Status'), desc: t('flows.step1Desc'), color: "bg-blue-500" },
-    { step: 2, title: t('flows.step2Title'), status: t('flows.step2Status'), desc: t('flows.step2Desc'), color: "bg-green-500" },
-    { step: 3, title: t('flows.step3Title'), status: t('flows.step3Status'), desc: t('flows.step3Desc'), color: "bg-purple-500" },
-    { step: 4, title: t('flows.step4Title'), status: t('flows.step4Status'), desc: t('flows.step4Desc'), color: "bg-primary" }
+  // Governance timeline steps - 5-step lifecycle
+  const GOVERNANCE_STEPS = useMemo(() => [
+    { step: 1, icon: FileText, title: t('flows.step1Title'), status: t('flows.step1Status'), desc: t('flows.step1Desc'), color: "text-blue-500", bg: "bg-blue-500/10" },
+    { step: 2, icon: UserCheck, title: t('flows.step2Title'), status: t('flows.step2Status'), desc: t('flows.step2Desc'), color: "text-amber-500", bg: "bg-amber-500/10" },
+    { step: 3, icon: CheckCircle, title: t('flows.step3Title'), status: t('flows.step3Status'), desc: t('flows.step3Desc'), color: "text-emerald-500", bg: "bg-emerald-500/10" },
+    { step: 4, icon: DownloadCloud, title: t('flows.step4Title'), status: t('flows.step4Status'), desc: t('flows.step4Desc'), color: "text-blue-600", bg: "bg-blue-600/10" },
+    { step: 5, icon: ShieldAlert, title: t('flows.step5Title'), status: t('flows.step5Status'), desc: t('flows.step5Desc'), color: "text-purple-500", bg: "bg-purple-500/10" }
   ], [t]);
 
   // 4 Pillars of the European Data Space
@@ -505,54 +501,96 @@ export default function Architecture() {
               </motion.div>
             </TabsContent>
 
-            {/* TAB 5: FLOWS */}
+            {/* TAB 5: FLOWS - Data Flow & Governance */}
             <TabsContent value="flows" className="space-y-6">
               <motion.div {...fadeInUp} key="flows">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <GitBranch className="h-5 w-5 text-orange-500" />
-                      {t('flows.stateMachine')}
-                    </CardTitle>
-                    <CardDescription>
-                      {t('flows.stateDesc')}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <MermaidDiagram chart={getStatesDiagram(t)} scale={0.85} mobileScale={0.5} />
+                {/* Hero */}
+                <Card className="overflow-hidden border-0 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+                  <CardContent className="p-8 md:p-10">
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <GitBranch className="h-7 w-7 text-blue-400" />
+                      {t('flows.heroTitle')}
+                    </h3>
+                    <p className="text-slate-200 leading-relaxed text-base max-w-4xl">
+                      {t('flows.heroDesc')}
+                    </p>
                   </CardContent>
                 </Card>
 
-                <Card>
+                {/* Conceptual Flow Diagram - 3 Actors */}
+                <Card className="rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Server className="h-5 w-5 text-blue-500" />
-                      {t('flows.fullFlow')}
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <Network className="h-6 w-6 text-primary" />
+                      {t('flows.diagramTitle')}
                     </CardTitle>
-                    <CardDescription>
-                      {t('flows.flowDesc')}
-                    </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={getSequenceDiagram(t)} scale={0.9} mobileScale={0.55} />
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+                      {/* Actor 1: Consumer */}
+                      <Card className="p-5 border-primary/30 bg-gradient-to-br from-background to-muted/50 text-center min-w-[200px]">
+                        <Building className="h-8 w-8 text-blue-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('flows.actor1Title')}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t('flows.actor1Desc')}</p>
+                      </Card>
+
+                      <ArrowRight className="h-8 w-8 text-primary animate-pulse hidden md:block flex-shrink-0" />
+                      <ArrowDown className="h-8 w-8 text-primary animate-pulse md:hidden flex-shrink-0" />
+
+                      {/* Actor 2: Clearing House (Central highlighted) */}
+                      <Card className="p-5 bg-gradient-to-br from-[hsl(213,37%,18%)] to-[hsl(210,32%,20%)] text-white border-primary/40 text-center min-w-[240px] shadow-[0_0_20px_hsl(var(--primary)/0.15)]">
+                        <Shield className="h-8 w-8 text-amber-400 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('flows.actor2Title')}</p>
+                        <p className="text-xs text-slate-300 mt-1">{t('flows.actor2Desc')}</p>
+                      </Card>
+
+                      <ArrowRight className="h-8 w-8 text-primary animate-pulse hidden md:block flex-shrink-0" />
+                      <ArrowDown className="h-8 w-8 text-primary animate-pulse md:hidden flex-shrink-0" />
+
+                      {/* Actor 3: Provider */}
+                      <Card className="p-5 border-primary/30 bg-gradient-to-br from-background to-muted/50 text-center min-w-[200px]">
+                        <Database className="h-8 w-8 text-emerald-500 mx-auto mb-2" />
+                        <p className="font-semibold text-sm">{t('flows.actor3Title')}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{t('flows.actor3Desc')}</p>
+                      </Card>
+                    </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                {/* Governance Timeline - 5-step Stepper */}
+                <Card className="rounded-2xl">
                   <CardHeader>
-                    <CardTitle className="text-lg">{t('flows.timeline')}</CardTitle>
+                    <CardTitle className="flex items-center gap-2 text-xl">
+                      <Layers className="h-6 w-6 text-primary" />
+                      {t('flows.timelineTitle')}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="relative border-l-2 border-primary/20 ml-4 space-y-8 pl-8 py-4">
-                      {FLOW_TIMELINE.map((item) => (
-                        <div key={item.step} className="relative">
-                          <span className={`absolute -left-[41px] ${item.color} text-primary-foreground rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold`}>
-                            {item.step}
-                          </span>
-                          <h4 className="font-bold">{item.title}</h4>
-                          <Badge variant="outline" className="my-1 font-mono text-xs">{item.status}</Badge>
-                          <p className="text-sm text-muted-foreground">{item.desc}</p>
-                        </div>
+                    <div className="relative ml-4 space-y-8 pl-8 py-4">
+                      {/* Vertical connector line */}
+                      <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-500 via-emerald-500 to-purple-500 opacity-30" />
+
+                      {GOVERNANCE_STEPS.map((item) => (
+                        <motion.div
+                          key={item.step}
+                          className="relative flex items-start gap-4"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: item.step * 0.1 }}
+                        >
+                          {/* Icon circle */}
+                          <div className={`absolute -left-[40px] ${item.bg} rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0 border-2 border-background shadow-sm`}>
+                            <item.icon className={`h-5 w-5 ${item.color}`} />
+                          </div>
+
+                          <div className="flex-1">
+                            <h4 className="font-bold text-base">{item.title}</h4>
+                            <Badge variant="outline" className={`my-1.5 font-mono text-xs ${item.color}`}>
+                              {item.status}
+                            </Badge>
+                            <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                          </div>
+                        </motion.div>
                       ))}
                     </div>
                   </CardContent>

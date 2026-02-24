@@ -95,16 +95,38 @@
     "flowStep3": "Émission de Reçu",
     "flowStep3Sub": "Clearing House"
   },
-  "flows": { "stateMachine": "Machine à États", "stateDesc": "États possibles d'une transaction de données", "fullFlow": "Flux de Transaction Complet", "flowDesc": "Diagramme de séquence du cycle de vie des données", "timeline": "Chronologie du Flux", "step1Title": "Demande (Consumer)", "step1Status": "initiated → pending_subject", "step1Desc": "Le consommateur recherche dans le catalogue et demande l'accès à un actif de données.", "step2Title": "Validation (Subject/Provider)", "step2Status": "pending_subject → pending_holder", "step2Desc": "Le propriétaire des données valide l'objectif et la justification de la demande.", "step3Title": "Libération (Holder)", "step3Status": "pending_holder → approved", "step3Desc": "Le dépositaire technique active l'accès et prépare le payload.", "step4Title": "Échange + Paiement", "step4Status": "approved → completed", "step4Desc": "Le paiement est traité, les données sont livrées et notariées sur blockchain." },
+  "flows": {
+    "heroTitle": "Flux de Données et Gouvernance",
+    "heroDesc": "Cycle de vie complet d'une transaction de données dans PROCUREDATA. De la demande initiale à la révocation automatique, chaque étape est tracée et auditée dans l'infrastructure de l'Espace de Données Européen.",
+    "diagramTitle": "Flux Conceptuel de Transaction",
+    "actor1Title": "Consommateur",
+    "actor1Desc": "Envoie une demande d'accès",
+    "actor2Title": "Opérateur PROCUREDATA / Clearing House",
+    "actor2Desc": "Valide les politiques et enregistre sur la blockchain",
+    "actor3Title": "Fournisseur / Access Controller",
+    "actor3Desc": "Libère les données en pair à pair",
+    "timelineTitle": "Timeline de Gouvernance : Cycle de Vie de la Donnée",
+    "step1Title": "Demande d'Accès",
+    "step1Status": "Initiated",
+    "step1Desc": "Le consommateur demande l'accès à un actif de données, en spécifiant l'objectif commercial et en acceptant préliminairement les politiques ODRL.",
+    "step2Title": "Pré-approbation",
+    "step2Status": "Subject Review",
+    "step2Desc": "Le fournisseur de données examine la demande et valide que le consommateur et son objectif correspondent à sa stratégie commerciale.",
+    "step3Title": "Approbation et Signature",
+    "step3Status": "Smart Contract",
+    "step3Desc": "L'accord est signé numériquement. Le Clearing House enregistre la transaction sur le réseau Pontus-X, générant la Licence d'Utilisation immuable.",
+    "step4Title": "Consommation Sécurisée",
+    "step4Status": "Data Gateway",
+    "step4Desc": "Le consommateur télécharge les données via l'Access Controller, sans exposer de credentials techniques. L'utilisation est enregistrée dans les journaux d'audit.",
+    "step5Title": "Révocation / Expiration",
+    "step5Status": "Timeout",
+    "step5Desc": "À l'échéance du délai convenu ou par décision du fournisseur, l'accès est automatiquement révoqué, rompant le lien de la passerelle."
+  },
   "cta": { "exploreCode": "Voulez-vous explorer le code?", "ctaDesc": "Consultez la documentation technique complète ou essayez la démo", "viewDocs": "Voir Documentation" },
   "diagrams": {
     "fe": { "title": "Frontend React + Vite", "ui": "shadcn UI", "query": "TanStack Query", "router": "React Router", "hooks": "Custom Hooks" },
     "be": { "title": "Backend Cloud AI", "auth": "JWT Auth", "db": "PostgreSQL 31 Tables", "rls": "Row Level Security", "edge": "Edge Functions", "realtime": "Realtime WS" },
     "bc": { "title": "Blockchain Pontus-X", "did": "DID:ethr", "euroe": "Stablecoin EUROe", "notarization": "Notarisation" },
-    "rls": { "query": "Requête", "checkRls": "Vérifier RLS", "getOrgId": "Obtenir org_id", "filterRows": "Filtrer lignes", "denied": "REFUSÉ", "returnFiltered": "Retourner filtré", "result": "Résultat" },
-    "web3": { "user": "Utilisateur", "app": "Application", "pontusx": "Pontus-X", "connectWallet": "Connecter Wallet", "signMessage": "Signer Message", "getDid": "Obtenir DID", "checkBalance": "Vérifier Solde", "notarize": "Notariser Hash", "txConfirm": "Confirmation TX" },
-    "states": { "initiated": "initié", "pendingSubject": "pending_subject", "pendingHolder": "pending_holder", "approved": "approuvé", "completed": "complété", "deniedSubject": "refusé_subject", "deniedHolder": "refusé_holder", "cancelled": "annulé", "consumerRequests": "Consumer demande", "send": "envoyer", "cancel": "annuler", "subjectApproves": "Subject approuve", "subjectDenies": "Subject refuse", "holderReleases": "Holder libère", "holderDenies": "Holder refuse", "payAndDeliver": "Payer + Livrer" },
-    "sequence": { "consumer": "Consumer", "subject": "Subject", "holder": "Holder", "blockchain": "Blockchain", "requestAccess": "Demander accès à l'asset", "validatePurpose": "Valider objectif", "preApprove": "Pré-approuver", "releaseData": "Libérer données", "deliverPayload": "Livrer payload", "processPayment": "Traiter paiement EUROe", "notarizeHash": "Notariser hash TX", "confirmBlock": "Confirmation de bloc" },
-    "registration": { "entity": "Entité", "platform": "Plateforme", "admin": "Admin", "submitForm": "Soumettre formulaire d'inscription", "validateTaxId": "Valider SIRET", "createPending": "Créer demande en attente", "notifyAdmin": "Notifier admin", "reviewKyb": "Examiner KYB", "approveReject": "Approuver/Rejeter", "createOrg": "Créer organisation", "assignRole": "Attribuer rôle admin", "sendCredentials": "Envoyer identifiants" }
+    "rls": { "query": "Requête", "checkRls": "Vérifier RLS", "getOrgId": "Obtenir org_id", "filterRows": "Filtrer lignes", "denied": "REFUSÉ", "returnFiltered": "Retourner filtré", "result": "Résultat" }
   }
 }
