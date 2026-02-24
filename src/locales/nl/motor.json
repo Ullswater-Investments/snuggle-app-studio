@@ -1,5 +1,5 @@
 {
-  "common": { "tryDemo": "Demo Proberen", "viewArchitecture": "Architectuur Bekijken", "whyItMatters": "Waarom is dit belangrijk?", "howItWorks": "Hoe het werkt", "technicalSpecs": "Technische Specificaties", "businessBenefit": "Zakelijk Voordeel" },
+  "common": { "tryDemo": "Toegang", "viewArchitecture": "Architectuur Bekijken", "whyItMatters": "Waarom is dit belangrijk?", "howItWorks": "Hoe het werkt", "technicalSpecs": "Technische Specificaties", "businessBenefit": "Zakelijk Voordeel" },
   "wallet": {
     "title": "Web3 Wallet",
     "subtitle": "Beheer van Soevereine Activa via zakelijke digitale handtekening",

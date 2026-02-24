@@ -1,5 +1,5 @@
 {
-  "common": { "tryDemo": "Essayer la Démo", "viewArchitecture": "Voir l'Architecture", "whyItMatters": "Pourquoi c'est important?", "howItWorks": "Comment ça fonctionne", "technicalSpecs": "Spécifications Techniques", "businessBenefit": "Avantage Commercial" },
+  "common": { "tryDemo": "Accéder", "viewArchitecture": "Voir l'Architecture", "whyItMatters": "Pourquoi c'est important?", "howItWorks": "Comment ça fonctionne", "technicalSpecs": "Spécifications Techniques", "businessBenefit": "Avantage Commercial" },
   "wallet": {
     "title": "Wallet Web3",
     "subtitle": "Gestion des Actifs Souverains via signature numérique d'entreprise",

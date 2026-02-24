@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import procuredataLogo from "@/assets/procuredata-logo.png";
+import procuredataLogo from "@/assets/procuredata-hero-logo.png";
 import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
 import procuredataLogoFull from "@/assets/procuredata-logo-full.png";
 
