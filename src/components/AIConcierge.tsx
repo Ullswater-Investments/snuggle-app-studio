@@ -37,30 +37,30 @@ const DEFAULT_WIDTH = 600;
 const DEFAULT_HEIGHT = 450;
 
 // Detect widget triggers in AI response
-function detectWidgets(content: string): WidgetAction[] {
+function detectWidgets(content: string, t: (key: string, opts?: Record<string, string>) => string): WidgetAction[] {
   const widgets: WidgetAction[] = [];
   const lowerContent = content.toLowerCase();
 
-  if (lowerContent.includes("calculadora roi") || lowerContent.includes("[widget_roi]") || lowerContent.includes("simulador de roi")) {
-    widgets.push({ label: "Abrir Calculadora ROI", path: "/services", icon: <Calculator className="h-3 w-3" /> });
+  if (lowerContent.includes("calculadora roi") || lowerContent.includes("[widget_roi]") || lowerContent.includes("simulador de roi") || lowerContent.includes("roi calculator")) {
+    widgets.push({ label: t("concierge.widgets.openRoiCalc"), path: "/services", icon: <Calculator className="h-3 w-3" /> });
   }
-  if (lowerContent.includes("gauge esg") || lowerContent.includes("[impactgauge]") || lowerContent.includes("impact gauge") || lowerContent.includes("sostenibilidad")) {
-    widgets.push({ label: "Ver Gauge ESG", path: "/services", icon: <Gauge className="h-3 w-3" /> });
+  if (lowerContent.includes("gauge esg") || lowerContent.includes("[impactgauge]") || lowerContent.includes("impact gauge") || lowerContent.includes("sostenibilidad") || lowerContent.includes("sustainability")) {
+    widgets.push({ label: t("concierge.widgets.viewEsgGauge"), path: "/services", icon: <Gauge className="h-3 w-3" /> });
   }
-  if (lowerContent.includes("radar de madurez") || lowerContent.includes("[widget_radar]") || lowerContent.includes("innovation lab")) {
-    widgets.push({ label: "Ver Radar Madurez", path: "/innovation", icon: <Activity className="h-3 w-3" /> });
+  if (lowerContent.includes("radar de madurez") || lowerContent.includes("[widget_radar]") || lowerContent.includes("innovation lab") || lowerContent.includes("maturity radar")) {
+    widgets.push({ label: t("concierge.widgets.viewMaturityRadar"), path: "/innovation", icon: <Activity className="h-3 w-3" /> });
   }
   if (lowerContent.includes("smart contract") || lowerContent.includes("[widget_contract]") || lowerContent.includes("contrato inteligente")) {
-    widgets.push({ label: "Simular Contrato", path: "/innovation", icon: <FileCheck className="h-3 w-3" /> });
+    widgets.push({ label: t("concierge.widgets.simulateContract"), path: "/innovation", icon: <FileCheck className="h-3 w-3" /> });
   }
   if (lowerContent.includes("/services") && !widgets.some(w => w.path === "/services")) {
-    widgets.push({ label: "Ir a Servicios", path: "/services", icon: <ExternalLink className="h-3 w-3" /> });
+    widgets.push({ label: t("concierge.widgets.goToServices"), path: "/services", icon: <ExternalLink className="h-3 w-3" /> });
   }
   if (lowerContent.includes("/innovation") && !widgets.some(w => w.path === "/innovation")) {
-    widgets.push({ label: "Ir a Innovation Lab", path: "/innovation", icon: <ExternalLink className="h-3 w-3" /> });
+    widgets.push({ label: t("concierge.widgets.goToInnovation"), path: "/innovation", icon: <ExternalLink className="h-3 w-3" /> });
   }
   if (lowerContent.includes("/sustainability") || lowerContent.includes("/sostenibilidad")) {
-    widgets.push({ label: "Ver Sostenibilidad", path: "/sustainability", icon: <Gauge className="h-3 w-3" /> });
+    widgets.push({ label: t("concierge.widgets.viewSustainability"), path: "/sustainability", icon: <Gauge className="h-3 w-3" /> });
   }
   
   // Social Economy detection
@@ -69,7 +69,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("ético") || lowerContent.includes("inserción") ||
       lowerContent.includes("discapacidad") || lowerContent.includes("economía social")) {
     widgets.push({ 
-      label: "Ver Dashboard Impacto Social", 
+      label: t("concierge.widgets.viewSocialImpact"), 
       path: "/success-stories/alianza-social-hub", 
       icon: <Heart className="h-3 w-3" /> 
     });
@@ -80,7 +80,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("resonancia") || lowerContent.includes("mantenimiento predictivo") ||
       lowerContent.includes("salud") || lowerContent.includes("gdpr")) {
     widgets.push({ 
-      label: "Ver Caso BioMed Hospital", 
+      label: t("concierge.widgets.viewCase", { company: "BioMed Hospital" }), 
       path: "/success-stories/biomed-hospital", 
       icon: <HeartPulse className="h-3 w-3" /> 
     });
@@ -91,7 +91,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("sa8000") || lowerContent.includes("trabajo justo") ||
       lowerContent.includes("ética") || lowerContent.includes("csddd")) {
     widgets.push({ 
-      label: "Ver Caso GlobalRetail Prime", 
+      label: t("concierge.widgets.viewCase", { company: "GlobalRetail Prime" }), 
       path: "/success-stories/globalretail-prime", 
       icon: <ShoppingBag className="h-3 w-3" /> 
     });
@@ -102,7 +102,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("certificado de origen") || lowerContent.includes("carbon neutral") ||
       lowerContent.includes("smart contract") || lowerContent.includes("euroe")) {
     widgets.push({ 
-      label: "Ver Caso EcoVolt Manufacturing", 
+      label: t("concierge.widgets.viewCase", { company: "EcoVolt Manufacturing" }), 
       path: "/success-stories/ecovolt-manufacturing", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -115,7 +115,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("aviación") || lowerContent.includes("aeroespacial") ||
       lowerContent.includes("piezas críticas")) {
     widgets.push({ 
-      label: "Ver SkyAero Systems", 
+      label: t("concierge.widgets.viewCase", { company: "SkyAero Systems" }), 
       path: "/success-stories/sky-aero-systems", 
       icon: <Plane className="h-3 w-3" /> 
     });
@@ -126,7 +126,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("bodega") || lowerContent.includes("exportación asia") ||
       lowerContent.includes("falsificación etiqueta")) {
     widgets.push({ 
-      label: "Ver VinosD.O. Elite", 
+      label: t("concierge.widgets.viewCase", { company: "VinosD.O. Elite" }), 
       path: "/success-stories/vinosdoe-elite", 
       icon: <Wine className="h-3 w-3" /> 
     });
@@ -137,7 +137,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("termolábil") || lowerContent.includes("pharma") ||
       lowerContent.includes("viales") || lowerContent.includes("temperatura")) {
     widgets.push({ 
-      label: "Ver PharmaCold Logistix", 
+      label: t("concierge.widgets.viewCase", { company: "PharmaCold Logistix" }), 
       path: "/success-stories/pharmacold-logistix", 
       icon: <Thermometer className="h-3 w-3" /> 
     });
@@ -148,7 +148,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("despacho") || lowerContent.includes("kyb") ||
       lowerContent.includes("contenedor") || lowerContent.includes("comercio internacional")) {
     widgets.push({ 
-      label: "Ver PortBCN Smart-Trade", 
+      label: t("concierge.widgets.viewCase", { company: "PortBCN Smart-Trade" }), 
       path: "/success-stories/portbcn-smart-trade", 
       icon: <Ship className="h-3 w-3" /> 
     });
@@ -159,7 +159,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("cuota discapacidad") || lowerContent.includes("ayuntamiento") ||
       lowerContent.includes("transparencia pública")) {
     widgets.push({ 
-      label: "Ver Ayuntamiento Ético", 
+      label: t("concierge.widgets.viewCase", { company: "Ayuntamiento Ético" }), 
       path: "/success-stories/ayuntamiento-etico", 
       icon: <Building2 className="h-3 w-3" /> 
     });
@@ -170,7 +170,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("minerales") || lowerContent.includes("conflicto") ||
       lowerContent.includes("b-corp") || lowerContent.includes("tier 3")) {
     widgets.push({ 
-      label: "Ver PureLithium Sourcing", 
+      label: t("concierge.widgets.viewCase", { company: "PureLithium Sourcing" }), 
       path: "/success-stories/purelithium-sourcing", 
       icon: <Mountain className="h-3 w-3" /> 
     });
@@ -180,7 +180,7 @@ function detectWidgets(content: string): WidgetAction[] {
   if (lowerContent.includes("moda circular") || lowerContent.includes("fibra reciclada") || 
       lowerContent.includes("greenwashing") || lowerContent.includes("etiquetado textil")) {
     widgets.push({ 
-      label: "Ver FastFashion Trace", 
+      label: t("concierge.widgets.viewCase", { company: "FastFashion Trace" }), 
       path: "/success-stories/fastfashion-trace", 
       icon: <Shirt className="h-3 w-3" /> 
     });
@@ -191,7 +191,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("adelanto factura") || lowerContent.includes("score crediticio") ||
       lowerContent.includes("trade finance")) {
     widgets.push({ 
-      label: "Ver InvoiceTrust", 
+      label: t("concierge.widgets.viewCase", { company: "InvoiceTrust" }), 
       path: "/success-stories/invoicetrust-b2b", 
       icon: <Receipt className="h-3 w-3" /> 
     });
@@ -202,7 +202,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("autoconsumo") || lowerContent.includes("micro-pago") ||
       lowerContent.includes("polígono industrial")) {
     widgets.push({ 
-      label: "Ver GridFlow Energy", 
+      label: t("concierge.widgets.viewCase", { company: "GridFlow Energy" }), 
       path: "/success-stories/gridflow-energy", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -213,7 +213,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("dataset") || lowerContent.includes("machine learning") ||
       lowerContent.includes("privacidad ia") || lowerContent.includes("fidelidad estadística")) {
     widgets.push({ 
-      label: "Ver AI-Labs Research", 
+      label: t("concierge.widgets.viewCase", { company: "AI-Labs Research" }), 
       path: "/success-stories/ailabs-research", 
       icon: <Cpu className="h-3 w-3" /> 
     });
@@ -226,7 +226,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("paneles") || lowerContent.includes("helios") ||
       lowerContent.includes("parque solar") || lowerContent.includes("inversores")) {
     widgets.push({ 
-      label: "Ver Helios Fields", 
+      label: t("concierge.widgets.viewCase", { company: "Helios Fields" }), 
       path: "/success-stories/helios-fields", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -237,7 +237,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("ppa") || lowerContent.includes("aeolus") ||
       lowerContent.includes("parque eólico") || lowerContent.includes("viento")) {
     widgets.push({ 
-      label: "Ver Aeolus Wind", 
+      label: t("concierge.widgets.viewCase", { company: "Aeolus Wind" }), 
       path: "/success-stories/aeolus-wind", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -248,7 +248,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("electrólisis") || lowerContent.includes("h2-pure") ||
       lowerContent.includes("subvención h2")) {
     widgets.push({ 
-      label: "Ver H2-Pure", 
+      label: t("concierge.widgets.viewCase", { company: "H2-Pure" }), 
       path: "/success-stories/h2-pure", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -258,7 +258,7 @@ function detectWidgets(content: string): WidgetAction[] {
   if (lowerContent.includes("polígono eco") || lowerContent.includes("autoconsumo colectivo") || 
       lowerContent.includes("marketplace energía") || lowerContent.includes("vecinos industriales")) {
     widgets.push({ 
-      label: "Ver Polígono Eco-Link", 
+      label: t("concierge.widgets.viewCase", { company: "Polígono Eco-Link" }), 
       path: "/success-stories/poligono-eco-link", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -269,7 +269,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("gridflex") || lowerContent.includes("sobrecarga red") ||
       lowerContent.includes("certificado flexibilidad")) {
     widgets.push({ 
-      label: "Ver GridFlex Demand", 
+      label: t("concierge.widgets.viewCase", { company: "GridFlex Demand" }), 
       path: "/success-stories/gridflex-demand", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -280,7 +280,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("arbitraje") || lowerContent.includes("bess") ||
       lowerContent.includes("bateria-hub")) {
     widgets.push({ 
-      label: "Ver Batería-Hub", 
+      label: t("concierge.widgets.viewCase", { company: "Batería-Hub" }), 
       path: "/success-stories/bateria-hub", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -291,7 +291,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("bioheat") || lowerContent.includes("red ii") ||
       lowerContent.includes("residuos forestales")) {
     widgets.push({ 
-      label: "Ver BioHeat District", 
+      label: t("concierge.widgets.viewCase", { company: "BioHeat District" }), 
       path: "/success-stories/bioheat-district", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -301,7 +301,7 @@ function detectWidgets(content: string): WidgetAction[] {
   if (lowerContent.includes("turbine-chain") || lowerContent.includes("acero verde") || 
       lowerContent.includes("fabricación aerogenerador") || lowerContent.includes("scope 3 csrd")) {
     widgets.push({ 
-      label: "Ver Turbine-Chain", 
+      label: t("concierge.widgets.viewCase", { company: "Turbine-Chain" }), 
       path: "/success-stories/turbine-chain", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -312,7 +312,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("aquapower") || lowerContent.includes("nexo agua") ||
       lowerContent.includes("confederación hidrográfica")) {
     widgets.push({ 
-      label: "Ver AquaPower Nexus", 
+      label: t("concierge.widgets.viewCase", { company: "AquaPower Nexus" }), 
       path: "/success-stories/aquapower-nexus", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -323,7 +323,7 @@ function detectWidgets(content: string): WidgetAction[] {
       lowerContent.includes("smartcharge") || lowerContent.includes("movilidad eléctrica verde") ||
       lowerContent.includes("garantía origen ev")) {
     widgets.push({ 
-      label: "Ver Smart-Charge EV", 
+      label: t("concierge.widgets.viewCase", { company: "Smart-Charge EV" }), 
       path: "/success-stories/smartcharge-ev", 
       icon: <Zap className="h-3 w-3" /> 
     });
@@ -333,7 +333,7 @@ function detectWidgets(content: string): WidgetAction[] {
 }
 
 export function AIConcierge() {
-  const { t } = useTranslation("chat");
+  const { t, i18n } = useTranslation("chat");
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [chatSize, setChatSize] = useState({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
@@ -510,7 +510,8 @@ export function AIConcierge() {
           body: JSON.stringify({
             message: currentInput,
             history,
-            did: currentDid, // Pass DID if on product page
+            did: currentDid,
+            language: i18n.language,
             context: {
               currentPage: location.pathname,
               userSector: sector || undefined,
@@ -852,7 +853,7 @@ export function AIConcierge() {
                       >
                         <div className="space-y-4">
                           {messages.map((message) => {
-                            const widgets = message.role === "assistant" ? detectWidgets(message.content) : [];
+                            const widgets = message.role === "assistant" ? detectWidgets(message.content, t) : [];
                             const displayText = getDisplayedText(message);
                             const isCurrentlyTyping = isTypingMessage(message);
                             

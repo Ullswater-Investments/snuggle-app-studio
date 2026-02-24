@@ -31,7 +31,18 @@
     "you": "JIJ",
     "minimize": "Minimaliseren",
     "maximize": "Maximaliseren",
-    "close": "Sluiten"
+    "close": "Sluiten",
+    "widgets": {
+      "openRoiCalc": "ROI-Calculator openen",
+      "viewEsgGauge": "ESG-Gauge bekijken",
+      "viewMaturityRadar": "Volwassenheidsradar bekijken",
+      "simulateContract": "Contract simuleren",
+      "goToServices": "Naar Diensten",
+      "goToInnovation": "Naar Innovation Lab",
+      "viewSustainability": "Duurzaamheid bekijken",
+      "viewSocialImpact": "Sociale Impact Dashboard bekijken",
+      "viewCase": "{{company}} bekijken"
+    }
   },
   "federated": {
     "badge": "Gefedereerde AI Agent",

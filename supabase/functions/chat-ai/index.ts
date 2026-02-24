@@ -848,7 +848,7 @@ serve(async (req) => {
   }
 
   try {
-    const { message, history = [], context = {}, did = null } = await req.json();
+    const { message, history = [], context = {}, did = null, language = null } = await req.json();
 
     // Input validation
     if (typeof message === "string" && message.length > 2000) {
@@ -865,7 +865,14 @@ serve(async (req) => {
     }
 
     // Enrich system instructions with context - prepend Language Bridge
-    let enrichedInstructions = SECURITY_RULES + LANGUAGE_BRIDGE + SYSTEM_INSTRUCTIONS;
+    let enrichedInstructions = SECURITY_RULES + LANGUAGE_BRIDGE;
+    
+    // Inject explicit language from portal UI
+    if (language) {
+      enrichedInstructions += `\n**IDIOMA DEL PORTAL**: El idioma seleccionado por el usuario en la interfaz es: "${language}". RESPONDE OBLIGATORIAMENTE en ese idioma, independientemente del idioma del mensaje.\n\n`;
+    }
+    
+    enrichedInstructions += SYSTEM_INSTRUCTIONS;
     
     // If DID provided, fetch DDO context from Aquarius (PONTUS-X)
     if (did) {

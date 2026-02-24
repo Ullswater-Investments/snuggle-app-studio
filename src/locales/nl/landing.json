@@ -21,7 +21,9 @@
     "sustainability": "Duurzaamheids-Hub",
     "sustainabilityDesc": "ESG-rapporten en CO2-voetafdruk",
     "services": "Servicebeheer",
-    "servicesDesc": "Algoritmen en Compute-to-Data"
+    "servicesDesc": "Algoritmen en Compute-to-Data",
+    "dataSpaceKitTitle": "DATARUIMTE-KIT",
+    "dataSpaceKitDesc": "Modulaire componenten voor uw Data Space"
   },
   "categories": {
     "web3": "Web3 & Blockchain",
@@ -80,7 +82,9 @@
     "features": "Functies",
     "businessModels": "Businessmodellen",
     "useCases": "Toepassingen",
-    "architecture": "Technische Architectuur"
+    "architecture": "Technische Architectuur",
+    "partners": "Partners",
+    "goToDashboard": "Naar Dashboard"
   },
   "useCasesSection": {
     "badge": "Industriële Veelzijdigheid",
@@ -116,6 +120,11 @@
     "partners": "PARTNERS",
     "dataSpaceKit": "DATA SPACE KIT",
     "sectoralNode": "EIGENAAR KNOOPPUNT",
-    "new": "Nieuw"
-  }
+    "new": "Nieuw",
+    "transparencyPortal": "Transparantieportaal",
+    "uneRecommendations": "UNE-Aanbevelingen",
+    "glossaryUne": "UNE-Woordenlijst",
+    "rulebook": "Regelboek"
+  },
+  "complianceBadge": "UNE 0087:2025 · 90%"
 }

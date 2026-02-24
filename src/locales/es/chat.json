@@ -31,7 +31,18 @@
     "you": "TÚ",
     "minimize": "Minimizar",
     "maximize": "Maximizar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "widgets": {
+      "openRoiCalc": "Abrir Calculadora ROI",
+      "viewEsgGauge": "Ver Gauge ESG",
+      "viewMaturityRadar": "Ver Radar Madurez",
+      "simulateContract": "Simular Contrato",
+      "goToServices": "Ir a Servicios",
+      "goToInnovation": "Ir a Innovation Lab",
+      "viewSustainability": "Ver Sostenibilidad",
+      "viewSocialImpact": "Ver Dashboard Impacto Social",
+      "viewCase": "Ver {{company}}"
+    }
   },
   "federated": {
     "badge": "Agente IA Federado",
