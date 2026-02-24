@@ -95,16 +95,38 @@
     "flowStep3": "Ontvangstuitgifte",
     "flowStep3Sub": "Clearing House"
   },
-  "flows": { "stateMachine": "State Machine", "stateDesc": "Mogelijke toestanden van een datatransactie", "fullFlow": "Volledige Transactiestroom", "flowDesc": "Sequentiediagram van de datalevenscyclus", "timeline": "Stroomtijdlijn", "step1Title": "Aanvraag (Consumer)", "step1Status": "initiated → pending_subject", "step1Desc": "De consument zoekt in de catalogus en vraagt toegang tot een data-asset.", "step2Title": "Validatie (Subject/Provider)", "step2Status": "pending_subject → pending_holder", "step2Desc": "De data-eigenaar valideert het doel en de rechtvaardiging van de aanvraag.", "step3Title": "Vrijgave (Holder)", "step3Status": "pending_holder → approved", "step3Desc": "De technische beheerder activeert toegang en bereidt de payload voor.", "step4Title": "Uitwisseling + Betaling", "step4Status": "approved → completed", "step4Desc": "Betaling wordt verwerkt, gegevens worden geleverd en genotariseerd op blockchain." },
+  "flows": {
+    "heroTitle": "Datastroom en Governance",
+    "heroDesc": "Volledige levenscyclus van een datatransactie in PROCUREDATA. Van het eerste verzoek tot automatische intrekking wordt elke stap getraceerd en geaudit in de Europese Dataruimte-infrastructuur.",
+    "diagramTitle": "Conceptuele Transactiestroom",
+    "actor1Title": "Consument",
+    "actor1Desc": "Verzendt toegangsverzoek",
+    "actor2Title": "PROCUREDATA-Operator / Clearing House",
+    "actor2Desc": "Valideert beleid en registreert op de blockchain",
+    "actor3Title": "Aanbieder / Access Controller",
+    "actor3Desc": "Geeft gegevens peer-to-peer vrij",
+    "timelineTitle": "Governance-Timeline: Datalevenscyclus",
+    "step1Title": "Toegangsverzoek",
+    "step1Status": "Initiated",
+    "step1Desc": "De consument vraagt toegang tot een data-asset, specificeert het commerciële doel en accepteert voorlopig het ODRL-beleid.",
+    "step2Title": "Voorafgaande Goedkeuring",
+    "step2Status": "Subject Review",
+    "step2Desc": "De dataprovider beoordeelt het verzoek en valideert dat de consument en het doel aansluiten bij de commerciële strategie.",
+    "step3Title": "Goedkeuring en Ondertekening",
+    "step3Status": "Smart Contract",
+    "step3Desc": "De overeenkomst wordt digitaal ondertekend. Het Clearing House registreert de transactie op het Pontus-X-netwerk en genereert de onveranderlijke Gebruikslicentie.",
+    "step4Title": "Veilig Verbruik",
+    "step4Status": "Data Gateway",
+    "step4Desc": "De consument downloadt de gegevens via de Access Controller zonder technische credentials bloot te stellen. Het gebruik wordt vastgelegd in auditlogs.",
+    "step5Title": "Intrekking / Vervaldatum",
+    "step5Status": "Timeout",
+    "step5Desc": "Bij het bereiken van de overeengekomen deadline of op besluit van de aanbieder wordt de toegang automatisch ingetrokken, waardoor de gateway-verbinding wordt verbroken."
+  },
   "cta": { "exploreCode": "Wilt u de code verkennen?", "ctaDesc": "Bekijk de volledige technische documentatie of test de demo", "viewDocs": "Bekijk Documentatie" },
   "diagrams": {
     "fe": { "title": "Frontend React + Vite", "ui": "shadcn UI", "query": "TanStack Query", "router": "React Router", "hooks": "Custom Hooks" },
     "be": { "title": "Backend Cloud AI", "auth": "JWT Auth", "db": "PostgreSQL 31 Tabellen", "rls": "Row Level Security", "edge": "Edge Functions", "realtime": "Realtime WS" },
     "bc": { "title": "Blockchain Pontus-X", "did": "DID:ethr", "euroe": "Stablecoin EUROe", "notarization": "Notarisatie" },
-    "rls": { "query": "Query", "checkRls": "Controleer RLS", "getOrgId": "Haal org_id op", "filterRows": "Filter rijen", "denied": "GEWEIGERD", "returnFiltered": "Gefilterd retourneren", "result": "Resultaat" },
-    "web3": { "user": "Gebruiker", "app": "Applicatie", "pontusx": "Pontus-X", "connectWallet": "Verbind Wallet", "signMessage": "Onderteken Bericht", "getDid": "Verkrijg DID", "checkBalance": "Controleer Saldo", "notarize": "Notariseer Hash", "txConfirm": "TX Bevestiging" },
-    "states": { "initiated": "geïnitieerd", "pendingSubject": "pending_subject", "pendingHolder": "pending_holder", "approved": "goedgekeurd", "completed": "voltooid", "deniedSubject": "geweigerd_subject", "deniedHolder": "geweigerd_holder", "cancelled": "geannuleerd", "consumerRequests": "Consumer vraagt aan", "send": "verzend", "cancel": "annuleer", "subjectApproves": "Subject keurt goed", "subjectDenies": "Subject weigert", "holderReleases": "Holder geeft vrij", "holderDenies": "Holder weigert", "payAndDeliver": "Betaal + Lever" },
-    "sequence": { "consumer": "Consumer", "subject": "Subject", "holder": "Holder", "blockchain": "Blockchain", "requestAccess": "Vraag toegang tot asset", "validatePurpose": "Valideer doel", "preApprove": "Pre-goedkeuren", "releaseData": "Gegevens vrijgeven", "deliverPayload": "Lever payload", "processPayment": "Verwerk EUROe-betaling", "notarizeHash": "Notariseer TX-hash", "confirmBlock": "Blokbevestiging" },
-    "registration": { "entity": "Entiteit", "platform": "Platform", "admin": "Admin", "submitForm": "Registratieformulier indienen", "validateTaxId": "Valideer BTW-nr", "createPending": "Maak wachtend verzoek aan", "notifyAdmin": "Informeer admin", "reviewKyb": "Beoordeel KYB", "approveReject": "Goedkeuren/Afwijzen", "createOrg": "Maak organisatie aan", "assignRole": "Wijs admin-rol toe", "sendCredentials": "Verstuur inloggegevens" }
+    "rls": { "query": "Query", "checkRls": "Controleer RLS", "getOrgId": "Haal org_id op", "filterRows": "Filter rijen", "denied": "GEWEIGERD", "returnFiltered": "Gefilterd retourneren", "result": "Resultaat" }
   }
 }
