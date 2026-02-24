@@ -1,5 +1,5 @@
 {
-  "common": { "tryDemo": "Prova Demo", "viewArchitecture": "Vedi Architettura", "whyItMatters": "Perché è importante?", "howItWorks": "Come Funziona", "technicalSpecs": "Specifiche Tecniche", "businessBenefit": "Beneficio Aziendale" },
+  "common": { "tryDemo": "Accedere", "viewArchitecture": "Vedi Architettura", "whyItMatters": "Perché è importante?", "howItWorks": "Come Funziona", "technicalSpecs": "Specifiche Tecniche", "businessBenefit": "Beneficio Aziendale" },
   "wallet": {
     "title": "Wallet Web3",
     "subtitle": "Gestione degli Asset Sovrani tramite firma digitale aziendale",

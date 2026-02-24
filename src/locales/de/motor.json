@@ -1,5 +1,5 @@
 {
-  "common": { "tryDemo": "Demo testen", "viewArchitecture": "Architektur ansehen", "whyItMatters": "Warum ist das wichtig?", "howItWorks": "So funktioniert es", "technicalSpecs": "Technische Spezifikationen", "businessBenefit": "Geschäftlicher Nutzen" },
+  "common": { "tryDemo": "Zugang", "viewArchitecture": "Architektur ansehen", "whyItMatters": "Warum ist das wichtig?", "howItWorks": "So funktioniert es", "technicalSpecs": "Technische Spezifikationen", "businessBenefit": "Geschäftlicher Nutzen" },
   "wallet": {
     "title": "Web3 Wallet",
     "subtitle": "Verwaltung souveräner Vermögenswerte durch digitale Unternehmensunterschrift",
