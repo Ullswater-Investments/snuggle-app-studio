@@ -12,7 +12,7 @@
     "overview": "Panoramica",
     "sovereignData": "Dati Sovrani",
     "security": "Sicurezza & Privacy",
-    "web3": "Integrazione Web3",
+    "web3": "Web3 & Clearing House",
     "flows": "Flussi Dati"
   },
   "overview": {
@@ -78,7 +78,23 @@
     "ipfsStep3Title": "Gateway Privati",
     "ipfsStep3Desc": "Controllo totale tramite chiavi crittografiche gestite dal proprietario dei dati."
   },
-  "web3": { "pontusIntegration": "Integrazione Pontus-X", "pontusDesc": "Connessione alla rete compatibile Gaia-X per identità decentralizzata e pagamenti", "networkConfig": "Configurazione Rete", "network": "Rete", "chainId": "Chain ID", "rpcUrl": "URL RPC", "currency": "Valuta", "viewExplorer": "Vedi Block Explorer", "web3Features": "Funzionalità Web3", "didDesc": "Identità decentralizzata derivata dall'indirizzo wallet. Formato: did:ethr:pontusx:0x...", "euroeDesc": "Stablecoin EUR per micropagamenti. Saldo consultabile in tempo reale.", "notarizationDesc": "Hash transazioni registrato on-chain per audit immutabile.", "dataLineage": "Data Lineage Blockchain", "dataLineageDesc": "Esempio di tracciabilità on-chain per una transazione dati" },
+  "web3": {
+    "heroTitle": "Infrastruttura Web3 e Clearing House",
+    "heroDesc": "PROCUREDATA opera sulla rete Pontus-X, un ecosistema Web3 progettato specificamente per l'economia del dato secondo gli standard Gaia-X. Utilizziamo la tecnologia DLT (Distributed Ledger Technology) non per archiviare dati, ma per decentralizzare la fiducia e generare audit immutabili.",
+    "card1Title": "Identità Sovrana e Firma (SSI)",
+    "card1Desc": "Autenticazione e firme digitali tramite Wallet aziendali. Ogni richiesta o approvazione di dati richiede una firma crittografica, garantendo il non ripudio delle operazioni istituzionali.",
+    "card2Title": "Tokenizzazione di Asset (Ocean Protocol)",
+    "card2Desc": "Conversione di asset di dati in contratti intelligenti. I Data NFT rappresentano la proprietà intellettuale del fornitore, mentre i Datatoken fungono da licenze di accesso temporaneo per i consumatori.",
+    "card3Title": "Clearing House (Notaio Digitale)",
+    "card3Desc": "Registrazione immutabile delle transazioni. Il sistema agisce come un Clearing House decentralizzato: ogni volta che viene concesso un accesso o scaricato un dato, l'evento viene sigillato sulla blockchain, creando una traccia di audit perfetta per le ispezioni legali.",
+    "flowTitle": "Ciclo di Vita dello Smart Contract",
+    "flowStep1": "Firma della Richiesta",
+    "flowStep1Sub": "Consumatore",
+    "flowStep2": "Validazione delle Policy",
+    "flowStep2Sub": "Smart Contract",
+    "flowStep3": "Emissione della Ricevuta",
+    "flowStep3Sub": "Clearing House"
+  },
   "flows": { "stateMachine": "Macchina a Stati", "stateDesc": "Stati possibili di una transazione dati", "fullFlow": "Flusso Completo Transazione", "flowDesc": "Diagramma di sequenza del ciclo di vita dei dati", "timeline": "Timeline del Flusso", "step1Title": "Richiesta (Consumer)", "step1Status": "initiated → pending_subject", "step1Desc": "Il consumatore cerca nel catalogo e richiede accesso a un asset dati.", "step2Title": "Validazione (Subject/Provider)", "step2Status": "pending_subject → pending_holder", "step2Desc": "Il proprietario dei dati valida lo scopo e la giustificazione della richiesta.", "step3Title": "Rilascio (Holder)", "step3Status": "pending_holder → approved", "step3Desc": "Il custode tecnico abilita l'accesso e prepara il payload.", "step4Title": "Scambio + Pagamento", "step4Status": "approved → completed", "step4Desc": "Pagamento elaborato, dati consegnati e notarizzati su blockchain." },
   "cta": { "exploreCode": "Vuoi esplorare il codice?", "ctaDesc": "Consulta la documentazione tecnica completa o prova la demo", "viewDocs": "Vedi Documentazione" },
   "diagrams": {

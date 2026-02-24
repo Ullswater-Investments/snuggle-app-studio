@@ -12,7 +12,7 @@
     "overview": "Overzicht",
     "sovereignData": "Soevereine Data",
     "security": "Beveiliging & Privacy",
-    "web3": "Web3-Integratie",
+    "web3": "Web3 & Clearing House",
     "flows": "Datastromen"
   },
   "overview": {
@@ -78,7 +78,23 @@
     "ipfsStep3Title": "Private Gateways",
     "ipfsStep3Desc": "Volledige controle via cryptografische sleutels beheerd door de data-eigenaar."
   },
-  "web3": { "pontusIntegration": "Pontus-X Integratie", "pontusDesc": "Verbinding met Gaia-X-compatibel netwerk voor gedecentraliseerde identiteit en betalingen", "networkConfig": "Netwerkconfiguratie", "network": "Netwerk", "chainId": "Chain ID", "rpcUrl": "RPC URL", "currency": "Valuta", "viewExplorer": "Bekijk Block Explorer", "web3Features": "Web3-Functionaliteiten", "didDesc": "Gedecentraliseerde identiteit afgeleid van wallet-adres. Formaat: did:ethr:pontusx:0x...", "euroeDesc": "EUR-stablecoin voor microbetalingen. Realtime saldo-opvraag.", "notarizationDesc": "Transactie-hash on-chain geregistreerd voor onveranderlijke audit.", "dataLineage": "Data Lineage Blockchain", "dataLineageDesc": "Voorbeeld van on-chain traceerbaarheid voor een datatransactie" },
+  "web3": {
+    "heroTitle": "Web3-Infrastructuur en Clearing House",
+    "heroDesc": "PROCUREDATA opereert op het Pontus-X-netwerk, een Web3-ecosysteem dat specifiek is ontworpen voor de data-economie volgens Gaia-X-standaarden. We gebruiken DLT (Distributed Ledger Technology) niet om gegevens op te slaan, maar om vertrouwen te decentraliseren en onveranderlijke audits te genereren.",
+    "card1Title": "Soevereine Identiteit en Handtekening (SSI)",
+    "card1Desc": "Authenticatie en digitale handtekeningen via bedrijfswallets. Elk dataverzoek of elke goedkeuring vereist een cryptografische handtekening, waardoor de onweerlegbaarheid van institutionele operaties wordt gegarandeerd.",
+    "card2Title": "Asset-Tokenisatie (Ocean Protocol)",
+    "card2Desc": "Conversie van data-assets naar slimme contracten. Data NFT's vertegenwoordigen het intellectueel eigendom van de aanbieder, terwijl Datatokens fungeren als tijdelijke toegangslicenties voor consumenten.",
+    "card3Title": "Clearing House (Digitale Notaris)",
+    "card3Desc": "Onveranderlijke transactieregistratie. Het systeem fungeert als een gedecentraliseerd Clearing House: elke keer dat toegang wordt verleend of gegevens worden gedownload, wordt het evenement verzegeld op de blockchain, waardoor een perfecte audit-trail wordt gecreëerd voor juridische inspecties.",
+    "flowTitle": "Levenscyclus van het Smart Contract",
+    "flowStep1": "Verzoekhandtekening",
+    "flowStep1Sub": "Consument",
+    "flowStep2": "Beleidsvalidatie",
+    "flowStep2Sub": "Smart Contract",
+    "flowStep3": "Ontvangstuitgifte",
+    "flowStep3Sub": "Clearing House"
+  },
   "flows": { "stateMachine": "State Machine", "stateDesc": "Mogelijke toestanden van een datatransactie", "fullFlow": "Volledige Transactiestroom", "flowDesc": "Sequentiediagram van de datalevenscyclus", "timeline": "Stroomtijdlijn", "step1Title": "Aanvraag (Consumer)", "step1Status": "initiated → pending_subject", "step1Desc": "De consument zoekt in de catalogus en vraagt toegang tot een data-asset.", "step2Title": "Validatie (Subject/Provider)", "step2Status": "pending_subject → pending_holder", "step2Desc": "De data-eigenaar valideert het doel en de rechtvaardiging van de aanvraag.", "step3Title": "Vrijgave (Holder)", "step3Status": "pending_holder → approved", "step3Desc": "De technische beheerder activeert toegang en bereidt de payload voor.", "step4Title": "Uitwisseling + Betaling", "step4Status": "approved → completed", "step4Desc": "Betaling wordt verwerkt, gegevens worden geleverd en genotariseerd op blockchain." },
   "cta": { "exploreCode": "Wilt u de code verkennen?", "ctaDesc": "Bekijk de volledige technische documentatie of test de demo", "viewDocs": "Bekijk Documentatie" },
   "diagrams": {
