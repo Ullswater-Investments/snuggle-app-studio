@@ -9,23 +9,7 @@ import { TFunction } from 'i18next';
 
 // getErDiagram removed - replaced by sovereign data conceptual view in Architecture.tsx
 
-export const getRlsDiagram = (t: TFunction): string => `sequenceDiagram
-    participant C as Client
-    participant A as Auth
-    participant P as Policy
-    participant D as Database
-
-    C->>A: ${t('diagrams.rls.query')}
-    A->>A: ${t('diagrams.rls.checkRls')}
-    A->>P: ${t('diagrams.rls.getOrgId')}
-    P->>D: ${t('diagrams.rls.filterRows')}
-    
-    alt No permission
-        D-->>C: ${t('diagrams.rls.denied')}
-    else Has permission
-        D-->>P: ${t('diagrams.rls.returnFiltered')}
-        P-->>C: ${t('diagrams.rls.result')}
-    end`;
+// getRlsDiagram removed - replaced by Defense in Depth visual layout in Architecture.tsx
 
 export const getWeb3Diagram = (t: TFunction): string => `sequenceDiagram
     participant U as ${t('diagrams.web3.user')}

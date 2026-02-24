@@ -11,7 +11,7 @@
   "tabs": {
     "overview": "Vue d'Ensemble",
     "sovereignData": "Données Souveraines",
-    "security": "Sécurité & RLS",
+    "security": "Sécurité & Confidentialité",
     "web3": "Intégration Web3",
     "flows": "Flux de Données"
   },
@@ -54,12 +54,29 @@
     "consumerInfra": "Infrastructure du Consommateur",
     "bridgeNote": "PROCUREDATA : Validation uniquement, sans stockage de données"
   },
-  "security": { "rlsFlow": "Flux Row Level Security", "rlsDesc": "Chaque requête est interceptée et filtrée selon le rôle de l'utilisateur", "policiesByRole": "Politiques par Rôle", "policyExample": "Exemple de Politique", "rlsActive": "RLS actif sur toutes les tables sensibles", "securityDefiner": "Fonctions SECURITY DEFINER avec search_path", "auditAuto": "Audit automatique des accès" },
-  "rlsPolicies": {
-    "consumer": { "role": "Consumer", "access": "Uniquement ses propres transactions initiées" },
-    "provider": { "role": "Provider (Subject)", "access": "Demandes où il est propriétaire des données" },
-    "holder": { "role": "Holder", "access": "Transactions en attente de libération" },
-    "admin": { "role": "Admin", "access": "Accès complet à son organisation" }
+  "security": {
+    "heroTitle": "Sécurité et Confidentialité : Défense en Profondeur",
+    "heroDesc": "Contrairement aux plateformes centralisées, PROCUREDATA distribue la confiance à travers le réseau Pontus-X et les Identités Numériques Souveraines. La confidentialité n'est pas seulement une politique légale, mais une impossibilité technique d'accès non consenti.",
+    "pillar1Title": "Identité Souveraine (SSI)",
+    "pillar1Desc": "Accès blindé via des Wallets d'entreprise et la cryptographie à clé publique. Signature numérique obligatoire pour la non-répudiation.",
+    "pillar2Title": "Isolation Multi-Tenant (RLS)",
+    "pillar2Desc": "Politiques de Row Level Security (RLS) directement dans le moteur de base de données pour garantir que chaque organisation n'accède qu'à son silo d'information.",
+    "pillar3Title": "Chiffrement de Bout en Bout",
+    "pillar3Desc": "Communications blindées sous TLS 1.3 et chiffrement symétrique des données au repos, avec des clés liées à la logique des Smart Contracts.",
+    "pillar4Title": "Compute-to-Data (C2D)",
+    "pillar4Desc": "Confidentialité industrielle maximale : permet de traiter des algorithmes sur les données à leur emplacement d'origine sans transférer de fichiers, protégeant le secret commercial.",
+    "pillar5Title": "Conformité RGPD & Data Act",
+    "pillar5Desc": "Minimisation des données et droit à l'oubli via la gestion de pointeurs, permettant la révocation de l'accès aux données sensibles sans altérer l'enregistrement blockchain.",
+    "pillar6Title": "Audit Immuable",
+    "pillar6Desc": "Traçabilité forensique en temps réel. Chaque interaction de sécurité est enregistrée de manière inaltérable dans les logs du système.",
+    "ipfsTitle": "Persistance Découplée : IPFS Privé",
+    "ipfsDesc": "Pour les fichiers statiques, nous garantissons une Souveraineté de Stockage Irréversible via une architecture à trois niveaux :",
+    "ipfsStep1Title": "Intégrité par CIDs",
+    "ipfsStep1Desc": "Hachage cryptographique (SHA-256) agissant comme empreinte numérique de l'actif.",
+    "ipfsStep2Title": "Découplage",
+    "ipfsStep2Desc": "Séparation physique et logique entre l'identité d'entreprise et le contenu technique.",
+    "ipfsStep3Title": "Passerelles Privées",
+    "ipfsStep3Desc": "Contrôle total via des clés cryptographiques administrées par le propriétaire des données."
   },
   "web3": { "pontusIntegration": "Intégration Pontus-X", "pontusDesc": "Connexion au réseau compatible Gaia-X pour identité décentralisée et paiements", "networkConfig": "Configuration Réseau", "network": "Réseau", "chainId": "Chain ID", "rpcUrl": "URL RPC", "currency": "Devise", "viewExplorer": "Voir Block Explorer", "web3Features": "Fonctionnalités Web3", "didDesc": "Identité décentralisée dérivée de l'adresse wallet. Format: did:ethr:pontusx:0x...", "euroeDesc": "Stablecoin EUR pour micropaiements. Solde consultable en temps réel.", "notarizationDesc": "Hash des transactions enregistré on-chain pour audit immuable.", "dataLineage": "Data Lineage Blockchain", "dataLineageDesc": "Exemple de traçabilité on-chain pour une transaction de données" },
   "flows": { "stateMachine": "Machine à États", "stateDesc": "États possibles d'une transaction de données", "fullFlow": "Flux de Transaction Complet", "flowDesc": "Diagramme de séquence du cycle de vie des données", "timeline": "Chronologie du Flux", "step1Title": "Demande (Consumer)", "step1Status": "initiated → pending_subject", "step1Desc": "Le consommateur recherche dans le catalogue et demande l'accès à un actif de données.", "step2Title": "Validation (Subject/Provider)", "step2Status": "pending_subject → pending_holder", "step2Desc": "Le propriétaire des données valide l'objectif et la justification de la demande.", "step3Title": "Libération (Holder)", "step3Status": "pending_holder → approved", "step3Desc": "Le dépositaire technique active l'accès et prépare le payload.", "step4Title": "Échange + Paiement", "step4Status": "approved → completed", "step4Desc": "Le paiement est traité, les données sont livrées et notariées sur blockchain." },
