@@ -4,7 +4,7 @@
   "docs": "Docs",
   "tryDemo": "Essayer la Démo",
   "heroTitle": "PROCUREDATA v3.2",
-  "heroDescription": "Architecture hybride Web2/Web3 pour l'échange souverain de données d'entreprise. PostgreSQL (31 tables) + RLS + Blockchain Pontus-X.",
+  "heroDescription": "Architecture hybride Web2/Web3 pour l'échange souverain de données d'entreprise, alignée sur les standards Gaia-X et le cadre de confiance Pontus-X.",
   "viewUseCases": "Voir Cas d'Usage",
   "businessModels": "Modèles d'Affaires",
   "whitepaper": "Livre Blanc",
@@ -13,311 +13,78 @@
     "database": "Base de Données",
     "security": "Sécurité & RLS",
     "web3": "Intégration Web3",
-    "flows": "Flux de Données",
-    "stack": "Tech Stack"
+    "flows": "Flux de Données"
   },
   "overview": {
     "highLevelArch": "Architecture de Haut Niveau",
-    "highLevelDesc": "Sistema híbrido con tres capas: Frontend React, Backend Cloud AI, y Blockchain Pontus-X",
-    "dataSpaceComponents": "Composants du Data Space Européen",
-    "dataSpaceDesc": "Standards et connecteurs actifs selon la spécification technique officielle",
-    "active": "Actif",
-    "edc": "Eclipse Dataspace Connector (EDC)",
-    "edcDesc": "Connecteur officiel du Data Space européen",
-    "idsProtocol": "IDS Dataspace Protocol",
-    "idsDesc": "Protocole d'interopérabilité IDSA",
-    "keycloak": "Keycloak (Identité Fédérée)",
-    "keycloakDesc": "Gestion des identités fédérées",
-    "gaiaX": "Gaia-X Trust Framework",
-    "gaiaXDesc": "Cadre de confiance européen",
-    "frontendSpa": "Frontend SPA",
-    "backendCloud": "Backend Cloud AI",
-    "web3Layer": "Couche Web3"
+    "highLevelDesc": "Flux de données souverain entre fournisseurs et consommateurs via le Cadre de Confiance Pontus-X",
+    "dataSpaceComponents": "Piliers du Data Space Européen",
+    "dataSpaceDesc": "Fondements conceptuels alignés avec Gaia-X pour la souveraineté des données et la conformité réglementaire",
+    "providerBlock": "Fournisseur de Données",
+    "providerLocalSources": "Sources de Données Locales",
+    "providerConnector": "Connecteur de Publication",
+    "trustFramework": "Cadre de Confiance (Pontus-X)",
+    "trustIdentity": "Gestion des Identités (DID)",
+    "trustAccess": "Contrôles d'Accès",
+    "trustLedger": "Registre Immuable (Blockchain)",
+    "consumerBlock": "Consommateur de Données",
+    "consumerGateway": "Access Controller",
+    "consumerSystems": "Systèmes ERP / Analyse",
+    "secureDataFlow": "Flux de données sécurisé et vérifié",
+    "pillar1Title": "Identité Fédérée et Confiance",
+    "pillar1Desc": "Utilisation d'Identifiants Décentralisés (DID) et de Credentials Vérifiables pour authentifier les participants (KYB) sans dépendre d'un annuaire central.",
+    "pillar2Title": "Échange Souverain",
+    "pillar2Desc": "Les données ne sont pas stockées dans un lac central. L'échange se fait de pair à pair (P2P) via des passerelles sécurisées qui vérifient les politiques d'accès avant d'autoriser le transfert.",
+    "pillar3Title": "Catalogue et Traçabilité",
+    "pillar3Desc": "Enregistrement immuable de toutes les transactions de données via Smart Contracts sur le réseau Pontus-X, garantissant une piste d'audit parfaite et non répudiable.",
+    "pillar4Title": "Interopérabilité Sémantique",
+    "pillar4Desc": "Standardisation des vocabulaires et schémas de données pour assurer que l'information partagée soit compréhensible et traitable automatiquement par les systèmes de l'écosystème."
   },
   "database": {
     "erDiagram": "Diagramme Entité-Relation",
     "erDesc": "31 tables PostgreSQL avec relations et Row Level Security",
     "tablesByCategory": "Tables par Catégorie"
   },
-  "dbCategories": {
-    "orgsUsers": "Organisations et Utilisateurs",
-    "dataCatalog": "Catalogue de Données",
-    "transactions": "Transactions",
-    "payments": "Finances et Paiements",
-    "security": "Système et Sécurité"
-  },
+  "dbCategories": { "orgsUsers": "Organisations et Utilisateurs", "dataCatalog": "Catalogue de Données", "transactions": "Transactions", "payments": "Finances et Paiements", "security": "Système et Sécurité" },
   "dbTables": {
-    "organizations": {
-      "description": "Entités participantes (Consumer/Provider/Holder)",
-      "fields": "id, name, type, tax_id, did, wallet_address, kyb_verified"
-    },
-    "user_profiles": {
-      "description": "Profils utilisateurs liés aux organisations",
-      "fields": "user_id, organization_id, full_name, position"
-    },
-    "user_roles": {
-      "description": "Rôles par organisation (admin, approver, viewer)",
-      "fields": "user_id, organization_id, role"
-    },
-    "privacy_preferences": {
-      "description": "Préférences de confidentialité par utilisateur",
-      "fields": "user_id, profile_visible, access_alerts"
-    },
-    "data_products": {
-      "description": "Définition des produits de données",
-      "fields": "id, name, category, schema_definition, version"
-    },
-    "data_assets": {
-      "description": "Instances concrètes de produits",
-      "fields": "id, product_id, holder_org_id, subject_org_id, price, status"
-    },
-    "catalog_metadata": {
-      "description": "Métadonnées pour recherche marketplace",
-      "fields": "asset_id, tags, categories, visibility"
-    },
-    "data_transactions": {
-      "description": "Cœur du système - machine à états",
-      "fields": "id, consumer_org_id, subject_org_id, holder_org_id, status, purpose"
-    },
-    "approval_history": {
-      "description": "Historique des approbations/rejets",
-      "fields": "transaction_id, actor_org_id, action, notes"
-    },
-    "data_payloads": {
-      "description": "Données livrées (ESG, IoT, fournisseur)",
-      "fields": "transaction_id, schema_type, data_content (JSONB)"
-    },
-    "data_policies": {
-      "description": "Politiques ODRL générées",
-      "fields": "transaction_id, odrl_policy_json"
-    },
-    "transaction_messages": {
-      "description": "Chat de négociation",
-      "fields": "transaction_id, sender_org_id, content"
-    },
-    "wallets": {
-      "description": "Portefeuilles EUROe par organisation",
-      "fields": "organization_id, address, balance, currency"
-    },
-    "wallet_transactions": {
-      "description": "Mouvements de fonds",
-      "fields": "from_wallet_id, to_wallet_id, amount, status"
-    },
-    "audit_logs": {
-      "description": "Journal d'audit immuable",
-      "fields": "organization_id, action, actor_id, details, ip_address"
-    },
-    "login_attempts": {
-      "description": "Tentatives de connexion pour rate limiting",
-      "fields": "email, ip_address, success, attempted_at"
-    },
-    "erp_configurations": {
-      "description": "Configurations d'intégration ERP",
-      "fields": "organization_id, endpoint_url, auth_method, field_mapping"
-    },
-    "notifications": {
-      "description": "Système de notifications",
-      "fields": "user_id, title, type, is_read, link"
-    }
+    "organizations": { "description": "Entités participantes (Consumer/Provider/Holder)", "fields": "id, name, type, tax_id, did, wallet_address, kyb_verified" },
+    "user_profiles": { "description": "Profils utilisateurs liés aux organisations", "fields": "user_id, organization_id, full_name, position" },
+    "user_roles": { "description": "Rôles par organisation (admin, approver, viewer)", "fields": "user_id, organization_id, role" },
+    "privacy_preferences": { "description": "Préférences de confidentialité par utilisateur", "fields": "user_id, profile_visible, access_alerts" },
+    "data_products": { "description": "Définition des produits de données", "fields": "id, name, category, schema_definition, version" },
+    "data_assets": { "description": "Instances concrètes de produits", "fields": "id, product_id, holder_org_id, subject_org_id, price, status" },
+    "catalog_metadata": { "description": "Métadonnées pour recherche marketplace", "fields": "asset_id, tags, categories, visibility" },
+    "data_transactions": { "description": "Cœur du système - machine à états", "fields": "id, consumer_org_id, subject_org_id, holder_org_id, status, purpose" },
+    "approval_history": { "description": "Historique des approbations/rejets", "fields": "transaction_id, actor_org_id, action, notes" },
+    "data_payloads": { "description": "Données livrées (ESG, IoT, fournisseur)", "fields": "transaction_id, schema_type, data_content (JSONB)" },
+    "data_policies": { "description": "Politiques ODRL générées", "fields": "transaction_id, odrl_policy_json" },
+    "transaction_messages": { "description": "Chat de négociation", "fields": "transaction_id, sender_org_id, content" },
+    "wallets": { "description": "Portefeuilles EUROe par organisation", "fields": "organization_id, address, balance, currency" },
+    "wallet_transactions": { "description": "Mouvements de fonds", "fields": "from_wallet_id, to_wallet_id, amount, status" },
+    "audit_logs": { "description": "Journal d'audit immuable", "fields": "organization_id, action, actor_id, details, ip_address" },
+    "login_attempts": { "description": "Tentatives de connexion pour rate limiting", "fields": "email, ip_address, success, attempted_at" },
+    "erp_configurations": { "description": "Configurations d'intégration ERP", "fields": "organization_id, endpoint_url, auth_method, field_mapping" },
+    "notifications": { "description": "Système de notifications", "fields": "user_id, title, type, is_read, link" }
   },
-  "security": {
-    "rlsFlow": "Flux Row Level Security",
-    "rlsDesc": "Chaque requête est interceptée et filtrée selon le rôle de l'utilisateur",
-    "policiesByRole": "Politiques par Rôle",
-    "policyExample": "Exemple de Politique",
-    "rlsActive": "RLS actif sur toutes les tables sensibles",
-    "securityDefiner": "Fonctions SECURITY DEFINER avec search_path",
-    "auditAuto": "Audit automatique des accès"
-  },
+  "security": { "rlsFlow": "Flux Row Level Security", "rlsDesc": "Chaque requête est interceptée et filtrée selon le rôle de l'utilisateur", "policiesByRole": "Politiques par Rôle", "policyExample": "Exemple de Politique", "rlsActive": "RLS actif sur toutes les tables sensibles", "securityDefiner": "Fonctions SECURITY DEFINER avec search_path", "auditAuto": "Audit automatique des accès" },
   "rlsPolicies": {
-    "consumer": {
-      "role": "Consumer",
-      "access": "Uniquement ses propres transactions initiées"
-    },
-    "provider": {
-      "role": "Provider (Subject)",
-      "access": "Demandes où il est propriétaire des données"
-    },
-    "holder": {
-      "role": "Holder",
-      "access": "Transactions en attente de libération"
-    },
-    "admin": {
-      "role": "Admin",
-      "access": "Accès complet à son organisation"
-    }
+    "consumer": { "role": "Consumer", "access": "Uniquement ses propres transactions initiées" },
+    "provider": { "role": "Provider (Subject)", "access": "Demandes où il est propriétaire des données" },
+    "holder": { "role": "Holder", "access": "Transactions en attente de libération" },
+    "admin": { "role": "Admin", "access": "Accès complet à son organisation" }
   },
-  "web3": {
-    "pontusIntegration": "Intégration Pontus-X",
-    "pontusDesc": "Connexion au réseau compatible Gaia-X pour identité décentralisée et paiements",
-    "networkConfig": "Configuration Réseau",
-    "network": "Réseau",
-    "chainId": "Chain ID",
-    "rpcUrl": "URL RPC",
-    "currency": "Devise",
-    "viewExplorer": "Voir Block Explorer",
-    "web3Features": "Fonctionnalités Web3",
-    "didDesc": "Identité décentralisée dérivée de l'adresse wallet. Format: did:ethr:pontusx:0x...",
-    "euroeDesc": "Stablecoin EUR pour micropaiements. Solde consultable en temps réel.",
-    "notarizationDesc": "Hash des transactions enregistré on-chain pour audit immuable.",
-    "dataLineage": "Data Lineage Blockchain",
-    "dataLineageDesc": "Exemple de traçabilité on-chain pour une transaction de données"
-  },
-  "flows": {
-    "stateMachine": "Machine à États",
-    "stateDesc": "États possibles d'une transaction de données",
-    "fullFlow": "Flux de Transaction Complet",
-    "flowDesc": "Diagramme de séquence du cycle de vie des données",
-    "timeline": "Chronologie du Flux",
-    "step1Title": "Demande (Consumer)",
-    "step1Status": "initiated → pending_subject",
-    "step1Desc": "Le consommateur recherche dans le catalogue et demande l'accès à un actif de données.",
-    "step2Title": "Validation (Subject/Provider)",
-    "step2Status": "pending_subject → pending_holder",
-    "step2Desc": "Le propriétaire des données valide l'objectif et la justification de la demande.",
-    "step3Title": "Libération (Holder)",
-    "step3Status": "pending_holder → approved",
-    "step3Desc": "Le dépositaire technique active l'accès et prépare le payload.",
-    "step4Title": "Échange + Paiement",
-    "step4Status": "approved → completed",
-    "step4Desc": "Le paiement est traité, les données sont livrées et notariées sur blockchain."
-  },
-  "techStack": {
-    "frontend": "Frontend",
-    "uiux": "UI/UX",
-    "stateData": "État et Données",
-    "backend": "Backend (Cloud AI)",
-    "web3": "Web3",
-    "utilities": "Utilitaires"
-  },
-  "techItems": {
-    "react": "Bibliothèque UI avec hooks",
-    "vite": "Outil de build ultra-rapide",
-    "typescript": "Typage statique",
-    "reactRouter": "Navigation SPA",
-    "tailwind": "CSS utility-first",
-    "shadcn": "49 composants Radix",
-    "framer": "Animations déclaratives",
-    "lucide": "Icônes SVG",
-    "tanstack": "Gestion état serveur",
-    "hookForm": "Formulaires performants",
-    "zod": "Validation de schémas",
-    "recharts": "Graphiques React",
-    "postgresql": "Base de données principale",
-    "edgeFunctions": "Logique serverless Deno",
-    "realtime": "Subscriptions WebSocket",
-    "auth": "Authentification intégrée",
-    "ethers": "Interaction blockchain",
-    "pontusX": "Réseau compatible Gaia-X",
-    "euroe": "Stablecoin EUR",
-    "didEthr": "Identité décentralisée",
-    "dateFns": "Manipulation de dates",
-    "jspdf": "Génération PDF",
-    "mermaid": "Diagrammes en code",
-    "reactMarkdown": "Rendu MD"
-  },
-  "cta": {
-    "exploreCode": "Voulez-vous explorer le code?",
-    "ctaDesc": "Consultez la documentation technique complète ou essayez la démo",
-    "viewDocs": "Voir Documentation"
-  },
+  "web3": { "pontusIntegration": "Intégration Pontus-X", "pontusDesc": "Connexion au réseau compatible Gaia-X pour identité décentralisée et paiements", "networkConfig": "Configuration Réseau", "network": "Réseau", "chainId": "Chain ID", "rpcUrl": "URL RPC", "currency": "Devise", "viewExplorer": "Voir Block Explorer", "web3Features": "Fonctionnalités Web3", "didDesc": "Identité décentralisée dérivée de l'adresse wallet. Format: did:ethr:pontusx:0x...", "euroeDesc": "Stablecoin EUR pour micropaiements. Solde consultable en temps réel.", "notarizationDesc": "Hash des transactions enregistré on-chain pour audit immuable.", "dataLineage": "Data Lineage Blockchain", "dataLineageDesc": "Exemple de traçabilité on-chain pour une transaction de données" },
+  "flows": { "stateMachine": "Machine à États", "stateDesc": "États possibles d'une transaction de données", "fullFlow": "Flux de Transaction Complet", "flowDesc": "Diagramme de séquence du cycle de vie des données", "timeline": "Chronologie du Flux", "step1Title": "Demande (Consumer)", "step1Status": "initiated → pending_subject", "step1Desc": "Le consommateur recherche dans le catalogue et demande l'accès à un actif de données.", "step2Title": "Validation (Subject/Provider)", "step2Status": "pending_subject → pending_holder", "step2Desc": "Le propriétaire des données valide l'objectif et la justification de la demande.", "step3Title": "Libération (Holder)", "step3Status": "pending_holder → approved", "step3Desc": "Le dépositaire technique active l'accès et prépare le payload.", "step4Title": "Échange + Paiement", "step4Status": "approved → completed", "step4Desc": "Le paiement est traité, les données sont livrées et notariées sur blockchain." },
+  "cta": { "exploreCode": "Voulez-vous explorer le code?", "ctaDesc": "Consultez la documentation technique complète ou essayez la démo", "viewDocs": "Voir Documentation" },
   "diagrams": {
-    "fe": {
-      "title": "Frontend React + Vite",
-      "ui": "shadcn UI",
-      "query": "TanStack Query",
-      "router": "React Router",
-      "hooks": "Custom Hooks"
-    },
-    "be": {
-      "title": "Backend Cloud AI",
-      "auth": "JWT Auth",
-      "db": "PostgreSQL 31 Tables",
-      "rls": "Row Level Security",
-      "edge": "Edge Functions",
-      "realtime": "Realtime WS"
-    },
-    "bc": {
-      "title": "Blockchain Pontus-X",
-      "did": "DID:ethr",
-      "euroe": "Stablecoin EUROe",
-      "notarization": "Notarisation"
-    },
-    "er": {
-      "has": "a",
-      "owns": "possède",
-      "generates": "génère",
-      "holds": "détient",
-      "pays": "paie",
-      "logs": "enregistre",
-      "receives": "reçoit",
-      "contains": "contient"
-    },
-    "rls": {
-      "query": "Requête",
-      "checkRls": "Vérifier RLS",
-      "getOrgId": "Obtenir org_id",
-      "filterRows": "Filtrer lignes",
-      "denied": "REFUSÉ",
-      "returnFiltered": "Retourner filtré",
-      "result": "Résultat"
-    },
-    "web3": {
-      "user": "Utilisateur",
-      "app": "Application",
-      "pontusx": "Pontus-X",
-      "connectWallet": "Connecter Wallet",
-      "signMessage": "Signer Message",
-      "getDid": "Obtenir DID",
-      "checkBalance": "Vérifier Solde",
-      "notarize": "Notariser Hash",
-      "txConfirm": "Confirmation TX"
-    },
-    "states": {
-      "initiated": "initié",
-      "pendingSubject": "pending_subject",
-      "pendingHolder": "pending_holder",
-      "approved": "approuvé",
-      "completed": "complété",
-      "deniedSubject": "refusé_subject",
-      "deniedHolder": "refusé_holder",
-      "cancelled": "annulé",
-      "consumerRequests": "Consumer demande",
-      "send": "envoyer",
-      "cancel": "annuler",
-      "subjectApproves": "Subject approuve",
-      "subjectDenies": "Subject refuse",
-      "holderReleases": "Holder libère",
-      "holderDenies": "Holder refuse",
-      "payAndDeliver": "Payer + Livrer"
-    },
-    "sequence": {
-      "consumer": "Consumer",
-      "subject": "Subject",
-      "holder": "Holder",
-      "blockchain": "Blockchain",
-      "requestAccess": "Demander accès à l'asset",
-      "validatePurpose": "Valider objectif",
-      "preApprove": "Pré-approuver",
-      "releaseData": "Libérer données",
-      "deliverPayload": "Livrer payload",
-      "processPayment": "Traiter paiement EUROe",
-      "notarizeHash": "Notariser hash TX",
-      "confirmBlock": "Confirmation de bloc"
-    },
-    "registration": {
-      "entity": "Entité",
-      "platform": "Plateforme",
-      "admin": "Admin",
-      "submitForm": "Soumettre formulaire d'inscription",
-      "validateTaxId": "Valider SIRET",
-      "createPending": "Créer demande en attente",
-      "notifyAdmin": "Notifier admin",
-      "reviewKyb": "Examiner KYB",
-      "approveReject": "Approuver/Rejeter",
-      "createOrg": "Créer organisation",
-      "assignRole": "Attribuer rôle admin",
-      "sendCredentials": "Envoyer identifiants"
-    }
+    "fe": { "title": "Frontend React + Vite", "ui": "shadcn UI", "query": "TanStack Query", "router": "React Router", "hooks": "Custom Hooks" },
+    "be": { "title": "Backend Cloud AI", "auth": "JWT Auth", "db": "PostgreSQL 31 Tables", "rls": "Row Level Security", "edge": "Edge Functions", "realtime": "Realtime WS" },
+    "bc": { "title": "Blockchain Pontus-X", "did": "DID:ethr", "euroe": "Stablecoin EUROe", "notarization": "Notarisation" },
+    "er": { "has": "a", "owns": "possède", "generates": "génère", "holds": "détient", "pays": "paie", "logs": "enregistre", "receives": "reçoit", "contains": "contient" },
+    "rls": { "query": "Requête", "checkRls": "Vérifier RLS", "getOrgId": "Obtenir org_id", "filterRows": "Filtrer lignes", "denied": "REFUSÉ", "returnFiltered": "Retourner filtré", "result": "Résultat" },
+    "web3": { "user": "Utilisateur", "app": "Application", "pontusx": "Pontus-X", "connectWallet": "Connecter Wallet", "signMessage": "Signer Message", "getDid": "Obtenir DID", "checkBalance": "Vérifier Solde", "notarize": "Notariser Hash", "txConfirm": "Confirmation TX" },
+    "states": { "initiated": "initié", "pendingSubject": "pending_subject", "pendingHolder": "pending_holder", "approved": "approuvé", "completed": "complété", "deniedSubject": "refusé_subject", "deniedHolder": "refusé_holder", "cancelled": "annulé", "consumerRequests": "Consumer demande", "send": "envoyer", "cancel": "annuler", "subjectApproves": "Subject approuve", "subjectDenies": "Subject refuse", "holderReleases": "Holder libère", "holderDenies": "Holder refuse", "payAndDeliver": "Payer + Livrer" },
+    "sequence": { "consumer": "Consumer", "subject": "Subject", "holder": "Holder", "blockchain": "Blockchain", "requestAccess": "Demander accès à l'asset", "validatePurpose": "Valider objectif", "preApprove": "Pré-approuver", "releaseData": "Libérer données", "deliverPayload": "Livrer payload", "processPayment": "Traiter paiement EUROe", "notarizeHash": "Notariser hash TX", "confirmBlock": "Confirmation de bloc" },
+    "registration": { "entity": "Entité", "platform": "Plateforme", "admin": "Admin", "submitForm": "Soumettre formulaire d'inscription", "validateTaxId": "Valider SIRET", "createPending": "Créer demande en attente", "notifyAdmin": "Notifier admin", "reviewKyb": "Examiner KYB", "approveReject": "Approuver/Rejeter", "createOrg": "Créer organisation", "assignRole": "Attribuer rôle admin", "sendCredentials": "Envoyer identifiants" }
   }
 }

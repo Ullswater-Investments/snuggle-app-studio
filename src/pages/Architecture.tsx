@@ -3,7 +3,9 @@ import { useTranslation } from "react-i18next";
 import {
   Home, Database, Shield, Server, Lock, Code, Layers, Wallet,
   GitBranch, ExternalLink, CheckCircle2, XCircle, Users, FileText,
-  CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen, UserPlus
+  CreditCard, Settings, Zap, Globe, Box, Cpu, Link2, BookOpen, UserPlus,
+  ArrowRight, ArrowDown, ShieldCheck, Network, Blocks, DatabaseZap,
+  FileInput, BarChart3
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -19,7 +21,6 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import {
-  getOverviewDiagram,
   getErDiagram,
   getRlsDiagram,
   getWeb3Diagram,
@@ -47,14 +48,13 @@ export default function Architecture() {
   const { t } = useTranslation('architecture');
   const [activeTab, setActiveTab] = useState("overview");
 
-  // Tab definitions - localized
+  // Tab definitions - localized (removed "stack" tab)
   const TABS = useMemo(() => [
     { id: "overview", label: t('tabs.overview'), icon: Layers },
     { id: "database", label: t('tabs.database'), icon: Database },
     { id: "security", label: t('tabs.security'), icon: Shield },
     { id: "web3", label: t('tabs.web3'), icon: Wallet },
-    { id: "flows", label: t('tabs.flows'), icon: GitBranch },
-    { id: "stack", label: t('tabs.stack'), icon: Code }
+    { id: "flows", label: t('tabs.flows'), icon: GitBranch }
   ], [t]);
 
   // Database table categories - localized
@@ -122,64 +122,6 @@ export default function Architecture() {
     { role: t('rlsPolicies.admin.role'), access: t('rlsPolicies.admin.access'), color: "bg-red-500" }
   ], [t]);
 
-  // Tech stack categories - localized
-  const TECH_STACK = useMemo(() => [
-    {
-      category: t('techStack.frontend'),
-      items: [
-        { name: "React 18.3", description: t('techItems.react'), url: "https://react.dev" },
-        { name: "Vite 5.4", description: t('techItems.vite'), url: "https://vitejs.dev" },
-        { name: "TypeScript 5.6", description: t('techItems.typescript'), url: "https://www.typescriptlang.org" },
-        { name: "React Router 6", description: t('techItems.reactRouter'), url: "https://reactrouter.com" }
-      ]
-    },
-    {
-      category: t('techStack.uiux'),
-      items: [
-        { name: "Tailwind CSS 3.4", description: t('techItems.tailwind'), url: "https://tailwindcss.com" },
-        { name: "shadcn/ui", description: t('techItems.shadcn'), url: "https://ui.shadcn.com" },
-        { name: "Framer Motion", description: t('techItems.framer'), url: "https://www.framer.com/motion" },
-        { name: "Lucide Icons", description: t('techItems.lucide'), url: "https://lucide.dev" }
-      ]
-    },
-    {
-      category: t('techStack.stateData'),
-      items: [
-        { name: "TanStack Query 5", description: t('techItems.tanstack'), url: "https://tanstack.com/query" },
-        { name: "React Hook Form", description: t('techItems.hookForm'), url: "https://react-hook-form.com" },
-        { name: "Zod", description: t('techItems.zod'), url: "https://zod.dev" },
-        { name: "Recharts", description: t('techItems.recharts'), url: "https://recharts.org" }
-      ]
-    },
-    {
-      category: t('techStack.backend'),
-      items: [
-        { name: "PostgreSQL 15", description: t('techItems.postgresql'), url: "https://www.postgresql.org" },
-        { name: "Edge Functions", description: t('techItems.edgeFunctions'), url: "https://deno.land" },
-        { name: "Realtime", description: t('techItems.realtime'), url: "#" },
-        { name: "Auth", description: t('techItems.auth'), url: "#" }
-      ]
-    },
-    {
-      category: t('techStack.web3'),
-      items: [
-        { name: "Ethers.js 6", description: t('techItems.ethers'), url: "https://docs.ethers.org" },
-        { name: "Pontus-X", description: t('techItems.pontusX'), url: "https://pontus-x.eu" },
-        { name: "EUROe", description: t('techItems.euroe'), url: "https://www.euroe.com" },
-        { name: "DID:ethr", description: t('techItems.didEthr'), url: "https://github.com/decentralized-identity/ethr-did-resolver" }
-      ]
-    },
-    {
-      category: t('techStack.utilities'),
-      items: [
-        { name: "date-fns", description: t('techItems.dateFns'), url: "https://date-fns.org" },
-        { name: "jsPDF", description: t('techItems.jspdf'), url: "https://github.com/parallax/jsPDF" },
-        { name: "Mermaid", description: t('techItems.mermaid'), url: "https://mermaid.js.org" },
-        { name: "React Markdown", description: t('techItems.reactMarkdown'), url: "https://github.com/remarkjs/react-markdown" }
-      ]
-    }
-  ], [t]);
-
   // Flow timeline steps - localized
   const FLOW_TIMELINE = useMemo(() => [
     { step: 1, title: t('flows.step1Title'), status: t('flows.step1Status'), desc: t('flows.step1Desc'), color: "bg-blue-500" },
@@ -188,8 +130,13 @@ export default function Architecture() {
     { step: 4, title: t('flows.step4Title'), status: t('flows.step4Status'), desc: t('flows.step4Desc'), color: "bg-primary" }
   ], [t]);
 
-  // Count total tables
-  const totalTables = DB_CATEGORIES.reduce((acc, cat) => acc + cat.tables.length, 0);
+  // 4 Pillars of the European Data Space
+  const PILLARS = useMemo(() => [
+    { icon: ShieldCheck, title: t('overview.pillar1Title'), desc: t('overview.pillar1Desc'), color: "text-amber-500" },
+    { icon: Network, title: t('overview.pillar2Title'), desc: t('overview.pillar2Desc'), color: "text-blue-400" },
+    { icon: Blocks, title: t('overview.pillar3Title'), desc: t('overview.pillar3Desc'), color: "text-emerald-400" },
+    { icon: DatabaseZap, title: t('overview.pillar4Title'), desc: t('overview.pillar4Desc'), color: "text-purple-400" }
+  ], [t]);
 
   return (
     <div className="min-h-screen bg-muted/20">
@@ -239,7 +186,7 @@ export default function Architecture() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto gap-1 bg-muted/50 p-1">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 h-auto gap-1 bg-muted/50 p-1">
             {TABS.map((tab) => (
               <TabsTrigger
                 key={tab.id}
@@ -253,10 +200,11 @@ export default function Architecture() {
           </TabsList>
 
           <AnimatePresence mode="wait">
-            {/* TAB 1: OVERVIEW */}
-            <TabsContent value="overview" className="space-y-6">
+            {/* TAB 1: OVERVIEW - Redesigned for Gaia-X alignment */}
+            <TabsContent value="overview" className="space-y-8">
               <motion.div {...fadeInUp} key="overview">
-                <Card>
+                {/* High-Level Architecture: 3-column data flow */}
+                <Card className="overflow-hidden">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Layers className="h-5 w-5 text-primary" />
@@ -267,11 +215,93 @@ export default function Architecture() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <MermaidDiagram chart={getOverviewDiagram(t)} scale={0.9} mobileScale={0.55} />
+                    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-stretch">
+                      {/* Provider Block */}
+                      <Card className="border-primary/30 bg-gradient-to-br from-background to-muted/50">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-base flex items-center gap-2">
+                            <Database className="h-5 w-5 text-blue-500" />
+                            <FileInput className="h-5 w-5 text-blue-500" />
+                            {t('overview.providerBlock')}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2 text-sm text-muted-foreground">
+                          <p className="flex items-center gap-2">
+                            <Database className="h-4 w-4 text-blue-400" />
+                            {t('overview.providerLocalSources')}
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <FileInput className="h-4 w-4 text-blue-400" />
+                            {t('overview.providerConnector')}
+                          </p>
+                        </CardContent>
+                      </Card>
+
+                      {/* Arrow 1 */}
+                      <div className="flex items-center justify-center">
+                        <ArrowRight className="h-8 w-8 text-primary animate-pulse hidden md:block" />
+                        <ArrowDown className="h-8 w-8 text-primary animate-pulse md:hidden" />
+                      </div>
+
+                      {/* Trust Framework Block (Central) */}
+                      <Card className="bg-gradient-to-br from-[hsl(213,37%,18%)] to-[hsl(210,32%,20%)] text-white border-primary/40">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-base flex items-center gap-2 text-white">
+                            <Shield className="h-5 w-5 text-amber-400" />
+                            {t('overview.trustFramework')}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2 text-sm text-slate-200">
+                          <p className="flex items-center gap-2">
+                            <Lock className="h-4 w-4 text-amber-400" />
+                            {t('overview.trustIdentity')}
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <ShieldCheck className="h-4 w-4 text-amber-400" />
+                            {t('overview.trustAccess')}
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <Blocks className="h-4 w-4 text-amber-400" />
+                            {t('overview.trustLedger')}
+                          </p>
+                        </CardContent>
+                      </Card>
+
+                      {/* Arrow 2 */}
+                      <div className="flex items-center justify-center">
+                        <ArrowRight className="h-8 w-8 text-primary animate-pulse hidden md:block" />
+                        <ArrowDown className="h-8 w-8 text-primary animate-pulse md:hidden" />
+                      </div>
+
+                      {/* Consumer Block */}
+                      <Card className="border-primary/30 bg-gradient-to-br from-background to-muted/50">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-base flex items-center gap-2">
+                            <Server className="h-5 w-5 text-green-500" />
+                            <BarChart3 className="h-5 w-5 text-green-500" />
+                            {t('overview.consumerBlock')}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2 text-sm text-muted-foreground">
+                          <p className="flex items-center gap-2">
+                            <Server className="h-4 w-4 text-green-400" />
+                            {t('overview.consumerGateway')}
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <BarChart3 className="h-4 w-4 text-green-400" />
+                            {t('overview.consumerSystems')}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    <p className="text-center text-sm text-muted-foreground mt-4 italic">
+                      {t('overview.secureDataFlow')}
+                    </p>
                   </CardContent>
                 </Card>
 
-                {/* Data Space Components */}
+                {/* 4 Pillars of the European Data Space */}
                 <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -284,123 +314,26 @@ export default function Architecture() {
                   </CardHeader>
                   <CardContent>
                     <div className="grid md:grid-cols-2 gap-4">
-                      <motion.div
-                        variants={fadeInUp}
-                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
-                      >
-                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Link2 className="h-5 w-5 text-green-500" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm">{t('overview.edc')}</p>
-                          <p className="text-xs text-muted-foreground">{t('overview.edcDesc')}</p>
-                        </div>
-                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">{t('overview.active')}</Badge>
-                      </motion.div>
-
-                      <motion.div
-                        variants={fadeInUp}
-                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
-                      >
-                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Shield className="h-5 w-5 text-green-500" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm">{t('overview.idsProtocol')}</p>
-                          <p className="text-xs text-muted-foreground">{t('overview.idsDesc')}</p>
-                        </div>
-                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">{t('overview.active')}</Badge>
-                      </motion.div>
-
-                      <motion.div
-                        variants={fadeInUp}
-                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
-                      >
-                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <Lock className="h-5 w-5 text-green-500" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm">{t('overview.keycloak')}</p>
-                          <p className="text-xs text-muted-foreground">{t('overview.keycloakDesc')}</p>
-                        </div>
-                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">{t('overview.active')}</Badge>
-                      </motion.div>
-
-                      <motion.div
-                        variants={fadeInUp}
-                        className="flex items-center gap-3 p-4 bg-background rounded-lg border"
-                      >
-                        <div className="h-10 w-10 bg-green-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <CheckCircle2 className="h-5 w-5 text-green-500" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm">{t('overview.gaiaX')}</p>
-                          <p className="text-xs text-muted-foreground">{t('overview.gaiaXDesc')}</p>
-                        </div>
-                        <Badge variant="outline" className="text-green-600 border-green-300 flex-shrink-0">{t('overview.active')}</Badge>
-                      </motion.div>
+                      {PILLARS.map((pillar) => (
+                        <motion.div
+                          key={pillar.title}
+                          variants={fadeInUp}
+                          className="p-5 rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-slate-700"
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
+                              <pillar.icon className={`h-6 w-6 ${pillar.color}`} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-sm mb-1">{pillar.title}</h4>
+                              <p className="text-xs text-slate-300 leading-relaxed">{pillar.desc}</p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
-
-                <div className="grid md:grid-cols-3 gap-4">
-                  <motion.div variants={fadeInUp}>
-                    <Card className="h-full hover:shadow-lg transition-shadow">
-                      <CardHeader className="pb-3">
-                        <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center mb-2">
-                          <Globe className="h-5 w-5 text-blue-500" />
-                        </div>
-                        <CardTitle className="text-lg">{t('overview.frontendSpa')}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="text-sm text-muted-foreground">
-                        <ul className="space-y-1">
-                          <li>• React 18 + TypeScript</li>
-                          <li>• 49 shadcn/ui components</li>
-                          <li>• Framer Motion animations</li>
-                          <li>• i18n: 7 languages</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp}>
-                    <Card className="h-full hover:shadow-lg transition-shadow">
-                      <CardHeader className="pb-3">
-                        <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center mb-2">
-                          <Server className="h-5 w-5 text-green-500" />
-                        </div>
-                        <CardTitle className="text-lg">{t('overview.backendCloud')}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="text-sm text-muted-foreground">
-                        <ul className="space-y-1">
-                          <li>• PostgreSQL 15 + RLS</li>
-                          <li>• {totalTables} tables v3.2</li>
-                          <li>• Edge Functions (Deno)</li>
-                          <li>• Resend emails</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-
-                  <motion.div variants={fadeInUp}>
-                    <Card className="h-full hover:shadow-lg transition-shadow">
-                      <CardHeader className="pb-3">
-                        <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center mb-2">
-                          <Link2 className="h-5 w-5 text-purple-500" />
-                        </div>
-                        <CardTitle className="text-lg">{t('overview.web3Layer')}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="text-sm text-muted-foreground">
-                        <ul className="space-y-1">
-                          <li>• Pontus-X Testnet</li>
-                          <li>• DID:ethr Identity</li>
-                          <li>• EUROe Payments</li>
-                          <li>• On-chain notarization</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </div>
               </motion.div>
             </TabsContent>
 
@@ -686,59 +619,6 @@ USING (
                           <p className="text-sm text-muted-foreground">{item.desc}</p>
                         </div>
                       ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </TabsContent>
-
-            {/* TAB 6: TECH STACK */}
-            <TabsContent value="stack" className="space-y-6">
-              <motion.div {...fadeInUp} key="stack" variants={stagger}>
-                {TECH_STACK.map((category) => (
-                  <Card key={category.category}>
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg">{category.category}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        {category.items.map((item) => (
-                          <a
-                            key={item.name}
-                            href={item.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
-                          >
-                            <div className="flex items-center justify-between">
-                              <h4 className="font-medium text-sm">{item.name}</h4>
-                              <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </div>
-                            <p className="text-xs text-muted-foreground mt-1">{item.description}</p>
-                          </a>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="pt-6">
-                    <div className="flex items-center justify-between flex-wrap gap-4">
-                      <div>
-                        <h3 className="font-bold">{t('cta.exploreCode')}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          {t('cta.ctaDesc')}
-                        </p>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" asChild>
-                          <Link to="/docs/tecnico">{t('cta.viewDocs')}</Link>
-                        </Button>
-                        <Button asChild>
-                          <Link to="/auth">{t('tryDemo')}</Link>
-                        </Button>
-                      </div>
                     </div>
                   </CardContent>
                 </Card>
