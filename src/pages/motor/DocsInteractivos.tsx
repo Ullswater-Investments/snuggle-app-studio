@@ -10,8 +10,10 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { FundingFooter } from "@/components/FundingFooter";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useTranslation } from "react-i18next";
 
 export default function DocsInteractivos() {
+  const { t: tc } = useTranslation('common');
   const [apiResponse, setApiResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -253,7 +255,7 @@ export default function DocsInteractivos() {
             {/* CTA */}
             <div className="flex gap-4">
               <Button asChild variant="outline" className="flex-1 border-white/20 hover:bg-white/10">
-                <Link to="/auth">Probar Demo</Link>
+                <Link to="/auth">{tc('demoAccess')}</Link>
               </Button>
               <Button asChild className="flex-1 bg-primary hover:bg-primary/90">
                 <Link to="/architecture">Ver Arquitectura</Link>
