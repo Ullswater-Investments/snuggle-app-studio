@@ -1,71 +1,89 @@
 
 
-## Rediseno de la Pestana "Base de Datos" -> "Arquitectura de Datos Soberana"
+## Rediseno de la Pestana "Seguridad y Privacidad" en /architecture
 
 ### Objetivo
 
-Reemplazar completamente el contenido tecnico interno (tablas PostgreSQL, diagrama ER, campos de base de datos) por una presentacion conceptual alineada con los principios Gaia-X: el operador NO almacena datos de los participantes.
+Reemplazar el contenido tecnico actual (diagrama RLS Mermaid, politicas por rol, ejemplo SQL) por una presentacion corporativa de "Defensa en Profundidad" alineada con la Memoria Tecnica y los principios Gaia-X.
 
 ---
 
 ### Cambios en `src/pages/Architecture.tsx`
 
-#### A. Eliminar codigo del tab Database (lineas 340-396)
+#### A. Eliminar el contenido actual del tab Security (lineas 357-432)
 
 Se elimina:
-- El diagrama ER Mermaid (`getErDiagram`)
-- El accordion de categorias de tablas (`DB_CATEGORIES`)
-- Las constantes `DB_CATEGORIES` (lineas 61-115)
+- El diagrama Mermaid de RLS (`getRlsDiagram`)
+- Las tarjetas de "Politicas por Rol" y "Ejemplo de Politica" (con codigo SQL)
+- La constante `RLS_POLICIES` (lineas 62-67)
+- El import de `getRlsDiagram`
 
-#### B. Nuevo contenido del tab Database
+#### B. Nuevo contenido del tab Security
 
-1. **Hero de seccion**: Texto destacado sobre fondo gradiente oscuro explicando que PROCUREDATA no almacena datos transaccionados.
+**1. Hero de la seccion** - Card oscura con gradiente:
+- Titulo: "Seguridad y Privacidad: Defensa en Profundidad"
+- Descripcion: Texto sobre la distribucion de confianza via Pontus-X e Identidades Digitales Soberanas
 
-2. **3 Cards de Pilares**:
+**2. Grid de 6 Pilares** (3 columnas desktop, 2 tablet, 1 movil):
 
-| Card | Icono | Titulo | Descripcion |
-|---|---|---|---|
-| 1 | `ServerCog` (servidor+candado) | Almacenamiento en Origen | Los datos originales (Payloads) permanecen en los sistemas del proveedor. Solo se exponen cuando un Smart Contract valida los permisos. |
-| 2 | `Network` (nodos P2P) | Intercambio Punto a Punto (P2P) | La transferencia se realiza mediante pasarelas seguras (Access Controllers). PROCUREDATA facilita el canal sin inspeccionar ni retener contenido. |
-| 3 | `Tags` (metadatos) | Separacion de Metadatos | La infraestructura gestiona exclusivamente el Catalogo Federado (descripciones, esquemas, reglas ODRL) y el Clearing House (trazabilidad y logs). |
+| Pilar | Icono | Titulo |
+|---|---|---|
+| 1 | `Wallet` | Identidad Soberana (SSI) |
+| 2 | `Layers` | Aislamiento Multi-Tenant (RLS) |
+| 3 | `Lock` | Cifrado Extremo a Extremo |
+| 4 | `Cpu` | Compute-to-Data (C2D) |
+| 5 | `ShieldCheck` | Cumplimiento RGPD & Data Act |
+| 6 | `FileText` | Auditoria Inmutable |
 
-3. **Flujo visual conceptual**: 3 bloques horizontales conectados por flechas:
-- `[Infraestructura del Proveedor]` --> `(Verificacion de Identidad y Reglas - PROCUREDATA)` --> `[Infraestructura del Consumidor]`
-- El bloque central PROCUREDATA en gris/slate para indicar que es un validador, no un contenedor.
+Cada tarjeta tendra icono con fondo sutil, titulo en negrita y descripcion corporativa. Estilo `rounded-2xl` con bordes suaves.
+
+**3. Seccion destacada "IPFS Privado"** - Card con borde degradado y fondo distinto (`bg-gradient-to-r from-amber-500/10 to-purple-500/10`):
+- Titulo: "Persistencia Desacoplada: IPFS Privado"
+- Descripcion introductoria sobre soberania de almacenamiento
+- 3 pasos visuales con iconos numerados:
+  1. Integridad por CIDs (SHA-256)
+  2. Desacoplamiento identidad/contenido
+  3. Gateways Privados con llaves criptograficas
 
 #### C. Actualizar tab label
 
-Cambiar el tab de "Base de Datos" a "Datos Soberanos" en el array `TABS`.
-
-#### D. Eliminar import de `getErDiagram`
-
-Ya no se usa en este tab.
+Cambiar de "Seguridad & RLS" a "Seguridad & Privacidad" en el array `TABS`.
 
 ---
 
 ### Cambios en traducciones (7 idiomas)
 
-**Nuevas claves** (bajo `database.*` renombrado a `sovereignData.*`):
+**Nuevas claves** (reemplazan las existentes en `security.*`):
 
 | Clave | ES | EN |
 |---|---|---|
-| `tabs.database` | Datos Soberanos | Sovereign Data |
-| `sovereignData.title` | Arquitectura de Datos Soberana | Sovereign Data Architecture |
-| `sovereignData.heroText` | PROCUREDATA actua como Operador del Espacio de Datos y orquestador de confianza. Fieles a los principios de Gaia-X, NO almacenamos los datos transaccionados. La informacion viaja de forma cifrada y directa (Punto a Punto) desde la infraestructura del Proveedor hasta el Consumidor. | PROCUREDATA acts as the Data Space Operator and trust orchestrator. True to Gaia-X principles, we DO NOT store transacted data. Information travels encrypted and directly (Peer-to-Peer) from the Provider's infrastructure to the Consumer. |
-| `sovereignData.pillar1Title` | Almacenamiento en Origen | Storage at Source |
-| `sovereignData.pillar1Desc` | Los datos originales (Payloads) permanecen en los sistemas y bases de datos del proveedor. Solo se exponen al ecosistema cuando un Smart Contract valida los permisos de acceso del consumidor. | Original data (Payloads) remains in the provider's systems and databases. It is only exposed to the ecosystem when a Smart Contract validates the consumer's access permissions. |
-| `sovereignData.pillar2Title` | Intercambio Punto a Punto (P2P) | Peer-to-Peer Exchange (P2P) |
-| `sovereignData.pillar2Desc` | La transferencia de informacion se realiza mediante pasarelas seguras (Access Controllers). PROCUREDATA facilita el canal de comunicacion sin inspeccionar ni retener el contenido de los activos compartidos. | Information transfer is performed through secure gateways (Access Controllers). PROCUREDATA facilitates the communication channel without inspecting or retaining the content of shared assets. |
-| `sovereignData.pillar3Title` | Separacion de Metadatos | Metadata Separation |
-| `sovereignData.pillar3Desc` | Nuestra infraestructura tecnica gestiona exclusivamente el Catalogo Federado (descripciones, esquemas tecnicos, reglas ODRL) y el Clearing House (trazabilidad y logs de auditoria), garantizando privacidad absoluta por diseno. | Our technical infrastructure exclusively manages the Federated Catalog (descriptions, technical schemas, ODRL rules) and the Clearing House (traceability and audit logs), ensuring absolute privacy by design. |
-| `sovereignData.providerInfra` | Infraestructura del Proveedor | Provider Infrastructure |
-| `sovereignData.validationBridge` | Verificacion de Identidad y Reglas | Identity and Rules Verification |
-| `sovereignData.consumerInfra` | Infraestructura del Consumidor | Consumer Infrastructure |
-| `sovereignData.bridgeNote` | PROCUREDATA: Solo validacion, sin almacenamiento de datos | PROCUREDATA: Validation only, no data storage |
+| `tabs.security` | Seguridad & Privacidad | Security & Privacy |
+| `security.heroTitle` | Seguridad y Privacidad: Defensa en Profundidad | Security and Privacy: Defense in Depth |
+| `security.heroDesc` | A diferencia de las plataformas centralizadas, PROCUREDATA distribuye la confianza a traves de la red Pontus-X y las Identidades Digitales Soberanas. La privacidad no es solo una politica legal, sino una imposibilidad tecnica de acceso no consentido. | Unlike centralized platforms, PROCUREDATA distributes trust through the Pontus-X network and Sovereign Digital Identities. Privacy is not just a legal policy, but a technical impossibility of non-consented access. |
+| `security.pillar1Title` | Identidad Soberana (SSI) | Sovereign Identity (SSI) |
+| `security.pillar1Desc` | Acceso blindado mediante Wallets corporativas y criptografia de clave publica. Firma digital obligatoria para el no repudio. | Armored access through corporate Wallets and public key cryptography. Mandatory digital signature for non-repudiation. |
+| `security.pillar2Title` | Aislamiento Multi-Tenant (RLS) | Multi-Tenant Isolation (RLS) |
+| `security.pillar2Desc` | Politicas de Row Level Security (RLS) directamente en el motor de base de datos para garantizar que cada organizacion solo acceda a su silo de informacion. | Row Level Security (RLS) policies directly in the database engine to ensure each organization only accesses its own information silo. |
+| `security.pillar3Title` | Cifrado Extremo a Extremo | End-to-End Encryption |
+| `security.pillar3Desc` | Comunicaciones blindadas bajo TLS 1.3 y cifrado simetrico de datos en reposo, con llaves vinculadas a la logica de Smart Contracts. | Communications secured under TLS 1.3 and symmetric encryption of data at rest, with keys linked to Smart Contract logic. |
+| `security.pillar4Title` | Compute-to-Data (C2D) | Compute-to-Data (C2D) |
+| `security.pillar4Desc` | Privacidad industrial maxima: permite procesar algoritmos sobre el dato en su ubicacion original sin transferir archivos, protegiendo el secreto comercial. | Maximum industrial privacy: allows processing algorithms on data at its original location without transferring files, protecting trade secrets. |
+| `security.pillar5Title` | Cumplimiento RGPD & Data Act | GDPR & Data Act Compliance |
+| `security.pillar5Desc` | Minimizacion de datos y derecho al olvido mediante gestion de punteros, permitiendo la revocacion del acceso a datos sensibles sin alterar el registro blockchain. | Data minimization and right to be forgotten through pointer management, allowing revocation of access to sensitive data without altering the blockchain record. |
+| `security.pillar6Title` | Auditoria Inmutable | Immutable Audit |
+| `security.pillar6Desc` | Trazabilidad forense en tiempo real. Cada interaccion de seguridad queda registrada inalterablemente en los logs del sistema. | Real-time forensic traceability. Every security interaction is immutably recorded in system logs. |
+| `security.ipfsTitle` | Persistencia Desacoplada: IPFS Privado | Decoupled Persistence: Private IPFS |
+| `security.ipfsDesc` | Para archivos estaticos, garantizamos una Soberania de Almacenamiento Irreversible mediante una arquitectura de tres niveles: | For static files, we guarantee Irreversible Storage Sovereignty through a three-tier architecture: |
+| `security.ipfsStep1Title` | Integridad por CIDs | Integrity via CIDs |
+| `security.ipfsStep1Desc` | Hashing criptografico (SHA-256) que actua como huella digital del activo. | Cryptographic hashing (SHA-256) acting as the asset's digital fingerprint. |
+| `security.ipfsStep2Title` | Desacoplamiento | Decoupling |
+| `security.ipfsStep2Desc` | Separacion fisica y logica entre la identidad corporativa y el contenido tecnico. | Physical and logical separation between corporate identity and technical content. |
+| `security.ipfsStep3Title` | Gateways Privados | Private Gateways |
+| `security.ipfsStep3Desc` | Control total mediante llaves criptograficas administradas por el propietario del dato. | Full control through cryptographic keys managed by the data owner. |
 
-Se traduciran a FR, DE, IT, PT y NL.
+Se traduciran las mismas claves a FR, DE, IT, PT y NL.
 
-**Claves a eliminar**: `database.*`, `dbCategories.*`, `dbTables.*` (ya no se usan), y `diagrams.er.*`.
+**Claves a eliminar**: `security.rlsFlow`, `security.rlsDesc`, `security.policiesByRole`, `security.policyExample`, `security.rlsActive`, `security.securityDefiner`, `security.auditAuto`, y toda la seccion `rlsPolicies.*`.
 
 ---
 
@@ -73,9 +91,9 @@ Se traduciran a FR, DE, IT, PT y NL.
 
 | Archivo | Cambio |
 |---|---|
-| `src/pages/Architecture.tsx` | Eliminar DB_CATEGORIES, reescribir tab database con hero + 3 cards + flujo visual. Eliminar import getErDiagram. |
-| `src/utils/architectureDiagrams.ts` | Eliminar funcion `getErDiagram` (ya no se usa) |
-| `src/locales/es/architecture.json` | Reemplazar claves database/dbCategories/dbTables por sovereignData.* |
+| `src/pages/Architecture.tsx` | Eliminar RLS_POLICIES y import getRlsDiagram. Reescribir tab security con hero + 6 pilares + seccion IPFS. |
+| `src/utils/architectureDiagrams.ts` | Eliminar funcion `getRlsDiagram` (ya no se usa) |
+| `src/locales/es/architecture.json` | Reemplazar security.* y rlsPolicies.* por nuevas claves |
 | `src/locales/en/architecture.json` | Idem en ingles |
 | `src/locales/fr/architecture.json` | Idem en frances |
 | `src/locales/de/architecture.json` | Idem en aleman |
@@ -85,7 +103,7 @@ Se traduciran a FR, DE, IT, PT y NL.
 
 ### Lo que NO cambia
 
-- Tabs Overview, Security, Web3 y Flows permanecen intactos
+- Tabs Overview, Sovereign Data, Web3 y Flows permanecen intactos
 - Header, Hero y FundingFooter no se modifican
-- Los diagramas Mermaid de Security (RLS), Web3 y Flows se mantienen
+- Los diagramas Mermaid de Web3 y Flows se mantienen
 
