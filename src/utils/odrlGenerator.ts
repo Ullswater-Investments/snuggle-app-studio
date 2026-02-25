@@ -24,15 +24,21 @@ const ODRL_DUTIES: Record<string, string> = {
 };
 
 interface OdrlRule {
+  target: string;
+  assigner: string;
   action: string;
   description: string;
 }
 
 function mapLabels(
   labels: string[],
-  dictionary: Record<string, string>
+  dictionary: Record<string, string>,
+  target: string,
+  assigner: string
 ): OdrlRule[] {
   return labels.map((label) => ({
+    target,
+    assigner,
     action: dictionary[label] ?? "use",
     description: label,
   }));
@@ -57,11 +63,9 @@ export function generateODRLPolicy(
     type: "Offer",
     uid: `urn:uuid:${crypto.randomUUID()}`,
     profile: "http://www.w3.org/ns/odrl/2/",
-    assigner,
-    target,
-    permission: mapLabels(permissions, ODRL_PERMISSIONS),
-    prohibition: mapLabels(prohibitions, ODRL_PROHIBITIONS),
-    duty: mapLabels(obligations, ODRL_DUTIES),
+    permission: mapLabels(permissions, ODRL_PERMISSIONS, target, assigner),
+    prohibition: mapLabels(prohibitions, ODRL_PROHIBITIONS, target, assigner),
+    duty: mapLabels(obligations, ODRL_DUTIES, target, assigner),
   };
 
   if (termsUrl) {
