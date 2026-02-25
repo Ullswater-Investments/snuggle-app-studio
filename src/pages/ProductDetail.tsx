@@ -100,7 +100,7 @@ export default function ProductDetail() {
   const queryClient = useQueryClient();
   const { isWeb3Connected, connectWallet, user } = useAuth();
   const { isDemo, activeOrgId } = useOrganizationContext();
-  const { t, i18n } = useTranslation('catalogDetails');
+  const { t, i18n } = useTranslation(['catalogDetails', 'publish']);
 
   // Review form state
   const [reviewRating, setReviewRating] = useState(0);
@@ -518,9 +518,11 @@ export default function ProductDetail() {
                   <span className="text-sm font-medium text-foreground">{avgRating > 0 ? avgRating.toFixed(1) : t('common.assetDetail.noRating')}</span>
                   <span className="text-sm text-muted-foreground">({reviewCount} {reviewCount === 1 ? t('common.assetDetail.review') : t('common.assetDetail.reviews')})</span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {product.asset_description || t('common.assetDetail.defaultDescription')}
-                </p>
+                {product.asset_description ? (
+                  <p className="text-muted-foreground leading-relaxed">{product.asset_description}</p>
+                ) : (
+                  <p className="text-muted-foreground italic">{t('common.assetDetail.noDescription')}</p>
+                )}
               </div>
               <Separator />
               <div className="flex items-center gap-4">
@@ -648,53 +650,79 @@ export default function ProductDetail() {
 
               {/* Tab: Políticas de Uso */}
               <TabsContent value="policies" className="m-0 p-6 space-y-4">
-                {/* Permisos (Verde) */}
-                <div className="rounded-lg border border-green-200 dark:border-green-900 p-4">
-                  <h4 className="flex items-center gap-2 text-green-700 dark:text-green-400 text-base font-semibold mb-3">
-                    <CheckCircle2 className="h-5 w-5" />
-                    {t('common.assetDetail.permissions')}
-                  </h4>
-                  <ul className="space-y-2">
-                    {(accessPolicy?.permissions as string[] || ["Uso comercial permitido", "Análisis interno"]).map((item: string, i: number) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-green-500 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {accessPolicy && (Array.isArray(accessPolicy.permissions) && accessPolicy.permissions.length > 0 || Array.isArray(accessPolicy.prohibitions) && accessPolicy.prohibitions.length > 0 || Array.isArray(accessPolicy.obligations) && accessPolicy.obligations.length > 0) ? (
+                  <>
+                    {/* Permisos (Verde) */}
+                    {Array.isArray(accessPolicy.permissions) && accessPolicy.permissions.length > 0 && (
+                      <div className="rounded-lg border border-green-200 dark:border-green-900 p-4">
+                        <h4 className="flex items-center gap-2 text-green-700 dark:text-green-400 text-base font-semibold mb-3">
+                          <CheckCircle2 className="h-5 w-5" />
+                          {t('common.assetDetail.permissions')}
+                        </h4>
+                        <ul className="space-y-2">
+                          {(accessPolicy.permissions as string[]).map((item: string, i: number) => {
+                            const translated = t(`publish:step3.permissions.${item}`, { defaultValue: '' });
+                            return (
+                              <li key={i} className="flex items-center gap-2 text-sm">
+                                <CheckCircle2 className="h-3.5 w-3.5 text-green-500 shrink-0" />
+                                <span>{translated || item}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
 
-                {/* Prohibiciones (Rojo) */}
-                <div className="rounded-lg border border-red-200 dark:border-red-900 p-4">
-                  <h4 className="flex items-center gap-2 text-red-700 dark:text-red-400 text-base font-semibold mb-3">
-                    <XCircle className="h-5 w-5" />
-                    {t('common.assetDetail.prohibitions')}
-                  </h4>
-                  <ul className="space-y-2">
-                    {(accessPolicy?.prohibitions as string[] || ["Redistribución a terceros", "Uso para training IA sin consentimiento"]).map((item: string, i: number) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <XCircle className="h-3.5 w-3.5 text-red-500 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    {/* Prohibiciones (Rojo) */}
+                    {Array.isArray(accessPolicy.prohibitions) && accessPolicy.prohibitions.length > 0 && (
+                      <div className="rounded-lg border border-red-200 dark:border-red-900 p-4">
+                        <h4 className="flex items-center gap-2 text-red-700 dark:text-red-400 text-base font-semibold mb-3">
+                          <XCircle className="h-5 w-5" />
+                          {t('common.assetDetail.prohibitions')}
+                        </h4>
+                        <ul className="space-y-2">
+                          {(accessPolicy.prohibitions as string[]).map((item: string, i: number) => {
+                            const translated = t(`publish:step3.prohibitions.${item}`, { defaultValue: '' });
+                            return (
+                              <li key={i} className="flex items-center gap-2 text-sm">
+                                <XCircle className="h-3.5 w-3.5 text-red-500 shrink-0" />
+                                <span>{translated || item}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
 
-                {/* Obligaciones (Azul) */}
-                <div className="rounded-lg border border-blue-200 dark:border-blue-900 p-4">
-                  <h4 className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-base font-semibold mb-3">
-                    <AlertCircle className="h-5 w-5" />
-                    {t('common.assetDetail.obligations')}
-                  </h4>
-                  <ul className="space-y-2">
-                    {(accessPolicy?.obligations as string[] || ["Conformidad RGPD", "Notificación de brechas en 72h"]).map((item: string, i: number) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <AlertCircle className="h-3.5 w-3.5 text-blue-500 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    {/* Obligaciones (Azul) */}
+                    {Array.isArray(accessPolicy.obligations) && accessPolicy.obligations.length > 0 && (
+                      <div className="rounded-lg border border-blue-200 dark:border-blue-900 p-4">
+                        <h4 className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-base font-semibold mb-3">
+                          <AlertCircle className="h-5 w-5" />
+                          {t('common.assetDetail.obligations')}
+                        </h4>
+                        <ul className="space-y-2">
+                          {(accessPolicy.obligations as string[]).map((item: string, i: number) => {
+                            const translated = t(`publish:step3.obligations.${item}`, { defaultValue: '' });
+                            return (
+                              <li key={i} className="flex items-center gap-2 text-sm">
+                                <AlertCircle className="h-3.5 w-3.5 text-blue-500 shrink-0" />
+                                <span>{translated || item}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-12 text-center space-y-4">
+                    <div className="h-16 w-16 rounded-full bg-muted/30 flex items-center justify-center">
+                      <Shield className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <h3 className="text-base font-semibold">{t('common.assetDetail.noPoliciesDefined')}</h3>
+                  </div>
+                )}
 
                 {/* Términos y Condiciones */}
                 {accessPolicy?.terms_url && (
@@ -891,39 +919,51 @@ export default function ProductDetail() {
                 )}
               </CardContent>
               <CardFooter className="flex flex-col gap-2">
-                {hasVerifiedAccess ? (
+                {isOwnerOfRejected ? (
                   <Button 
                     size="lg" 
                     className="w-full text-base font-semibold" 
-                    onClick={() => navigate('/data')}
+                    onClick={() => navigate(`/datos/publicar?edit=${product.asset_id}`)}
                   >
-                    <Eye className="mr-2 h-5 w-5" /> {t('common.assetDetail.exploreDataset')}
+                    <FileText className="mr-2 h-5 w-5" /> {t('common.assetDetail.editPublication')}
                   </Button>
                 ) : (
-                  <Button 
-                    size="lg" 
-                    className="w-full text-base font-semibold" 
-                    onClick={handleAction}
-                    disabled={isDemo}
-                  >
-                    {isDemo ? (
-                      <>
-                        <Lock className="mr-2 h-5 w-5" /> {t('common.assetDetail.requestsNotAvailable')}
-                      </>
-                    ) : isPaid ? (
-                      <>
-                        <ShoppingCart className="mr-2 h-5 w-5" /> {t('common.assetDetail.buyNow')}
-                      </>
+                  <>
+                    {hasVerifiedAccess ? (
+                      <Button 
+                        size="lg" 
+                        className="w-full text-base font-semibold" 
+                        onClick={() => navigate('/data')}
+                      >
+                        <Eye className="mr-2 h-5 w-5" /> {t('common.assetDetail.exploreDataset')}
+                      </Button>
                     ) : (
-                      <>
-                        <FileText className="mr-2 h-5 w-5" /> {t('common.assetDetail.requestAccess')}
-                      </>
+                      <Button 
+                        size="lg" 
+                        className="w-full text-base font-semibold" 
+                        onClick={handleAction}
+                        disabled={isDemo}
+                      >
+                        {isDemo ? (
+                          <>
+                            <Lock className="mr-2 h-5 w-5" /> {t('common.assetDetail.requestsNotAvailable')}
+                          </>
+                        ) : isPaid ? (
+                          <>
+                            <ShoppingCart className="mr-2 h-5 w-5" /> {t('common.assetDetail.buyNow')}
+                          </>
+                        ) : (
+                          <>
+                            <FileText className="mr-2 h-5 w-5" /> {t('common.assetDetail.requestAccess')}
+                          </>
+                        )}
+                      </Button>
                     )}
-                  </Button>
+                    <Button variant="outline" className="w-full" size="lg" onClick={handleDownloadSheet}>
+                      <Download className="mr-2 h-4 w-4" /> {t('common.assetDetail.downloadTechSheet')}
+                    </Button>
+                  </>
                 )}
-                <Button variant="outline" className="w-full" size="lg" onClick={handleDownloadSheet}>
-                  <Download className="mr-2 h-4 w-4" /> {t('common.assetDetail.downloadTechSheet')}
-                </Button>
               </CardFooter>
             </Card>
 
