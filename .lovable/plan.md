@@ -1,128 +1,60 @@
 
 
-## Generacion de ODRL 2.0 JSON-LD en el Wizard de Publicacion
+## Correccion de Validacion ODRL 2.0: Inyeccion de `assigner` y `target`
 
-### Objetivo
+### Problema
 
-Implementar un traductor silencioso que convierta las selecciones amigables del usuario (checkboxes en espanol) en un JSON-LD valido segun el estandar ODRL 2.0 de la W3C, y mostrar el resultado en el panel de administracion.
+El validador `odrlapi` rechaza la politica generada con el error **"Rule in offer without assigner"** porque cada regla (permission, prohibition, duty) carece de los campos obligatorios `target` y `assigner`. Ademas, cuando varias opciones mapean a la misma accion (ej. "use"), se pierde contexto del texto original.
 
 ---
 
-### 1. Nuevo archivo de utilidades: `src/utils/odrlGenerator.ts`
+### Cambios
 
-Contendra:
+#### 1. `src/utils/odrlGenerator.ts`
 
-**Diccionarios de mapeo** (label en espanol -> accion ODRL oficial):
+**Ampliar la firma de `generateODRLPolicy`** para recibir `providerId` y `assetId`:
 
 ```text
-ODRL_PERMISSIONS:
-  "Uso comercial"                    -> "commercialize"
-  "Analisis interno"                 -> "use"
-  "Generar informes derivados"       -> "derive"
-  "Integracion en sistemas internos" -> "execute"
-  "Uso en investigacion"             -> "use"
-
-ODRL_PROHIBITIONS:
-  "No redistribucion"       -> "distribute"
-  "No ingenieria inversa"   -> "reverseEngineer"
-  "No reventa a terceros"   -> "sell"
-  "No divulgacion publica"  -> "display"
-
-ODRL_DUTIES:
-  "Atribucion requerida"        -> "attribute"
-  "Cumplimiento GDPR"           -> "ensureExclusivity"
-  "Notificar uso a proveedor"   -> "inform"
+generateODRLPolicy(permissions, prohibitions, obligations, providerId, assetId)
 ```
 
-**Funcion `generateODRLPolicy`**:
-- Recibe 3 arrays de strings (permissions, prohibitions, obligations)
-- Para cada elemento, busca en el diccionario correspondiente
-- Si no encuentra match, usa accion generica `"use"` con propiedad `"description": "texto_personalizado"`
-- Genera un UUID con `crypto.randomUUID()`
-- Retorna el JSON-LD completo con `@context`, `@type: "Offer"`, `uid`, `profile`, `permission`, `prohibition`, `duty`
+- Si `assetId` es falsy, usar `urn:uuid:pending-asset` como placeholder
+- Formatear ambos IDs como URIs: `urn:uuid:<id>`
 
----
+**Modificar `mapLabels`** para recibir `target` y `assigner` e inyectarlos en cada regla:
 
-### 2. Modificacion de `src/pages/dashboard/PublishDataset.tsx`
-
-En la funcion `publishMutation` (lineas 484-528), se mantiene el `accessPolicy` actual para whitelist/blacklist/timeout (Smart Contract), y se anade un campo nuevo:
-
-**Separacion de responsabilidades en `custom_metadata`:**
-
-| Campo | Contenido | Uso |
-|---|---|---|
-| `custom_metadata.access_policy` | Whitelist, Blacklist, Timeout | Smart Contract / Pontus-X |
-| `custom_metadata.odrl_policy` | JSON-LD ODRL 2.0 completo | Semantica / UNE 0087 |
-
-Cambios concretos:
-- Importar `generateODRLPolicy` desde `@/utils/odrlGenerator`
-- Antes de construir el objeto `custom_metadata`, llamar a `generateODRLPolicy()` con los labels de permissions, prohibitions y obligations
-- Inyectar el resultado en `custom_metadata.odrl_policy`
-- El `access_policy` existente se mantiene exactamente igual (no se rompe nada)
-
-Ejemplo del objeto `custom_metadata` resultante:
+Cada objeto del array resultante tendra esta estructura:
 
 ```text
-custom_metadata: {
-  api_url: "...",
-  access_policy: {
-    permissions: ["Uso comercial", ...],    // labels amigables (legacy)
-    prohibitions: [...],
-    obligations: [...],
-    allowed_wallets: [...],                  // Smart Contract
-    denied_wallets: [...],                   // Smart Contract
-    access_timeout_days: 90                  // Smart Contract
-  },
-  odrl_policy: {
-    "@context": "http://www.w3.org/ns/odrl.jsonld",
-    "@type": "Offer",
-    "uid": "urn:uuid:...",
-    "profile": "http://www.w3.org/ns/odrl/2/",
-    "permission": [{ "action": "commercialize" }],
-    "prohibition": [{ "action": "distribute" }],
-    "duty": [{ "action": "attribute" }]
-  }
+{
+  "target": "urn:uuid:<assetId>",
+  "assigner": "urn:uuid:<providerId>",
+  "action": "<accion_mapeada>",
+  "source_label": "<texto_original_del_checkbox>"
 }
 ```
 
----
+- `source_label` siempre se incluye para preservar el texto original de la interfaz
+- Si la accion no se encuentra en el diccionario, se mantiene `"action": "use"` con el `source_label` como unico diferenciador
 
-### 3. Modificacion de `src/pages/admin/AdminPublicationDetail.tsx`
+#### 2. `src/pages/dashboard/PublishDataset.tsx`
 
-En la seccion de Gobernanza (Card con icono Shield, linea 315), despues del bloque de `access_policy`, anadir una nueva subseccion:
+**Actualizar la llamada** a `generateODRLPolicy` (linea 528) para pasar los dos nuevos parametros:
 
-**Bloque "Politica ODRL 2.0":**
-- Solo se muestra si `customMeta?.odrl_policy` existe
-- Icono `FileJson` con titulo "Politica ODRL 2.0 (UNE 0087)"
-- Muestra el JSON-LD formateado con `JSON.stringify(odrl, null, 2)` usando el componente `CopyField` con `mono`
-- Badge `"W3C ODRL 2.0"` en verde para indicar conformidad
+- `providerId`: `activeOrgId` (ya disponible en scope)
+- `assetId`: No existe aun en el momento de la insercion, asi que se pasara como `undefined` (el generador usara el placeholder `urn:uuid:pending-asset`)
 
 ---
 
-### 4. Impacto en la UI del usuario
+### Archivos a modificar
 
-**Cero cambios visuales** en el wizard de publicacion. El usuario sigue viendo:
-- Checkboxes con textos en espanol
-- Campos de whitelist/blacklist/timeout
-- Todo funciona exactamente igual
-
-La generacion ODRL ocurre transparentemente al hacer clic en "Publicar".
-
----
-
-### Archivos a modificar/crear
-
-| Archivo | Accion |
+| Archivo | Cambio |
 |---|---|
-| `src/utils/odrlGenerator.ts` | **Crear** - Diccionarios + funcion generadora |
-| `src/pages/dashboard/PublishDataset.tsx` | **Modificar** - Importar generador, inyectar `odrl_policy` en `custom_metadata` |
-| `src/pages/admin/AdminPublicationDetail.tsx` | **Modificar** - Anadir bloque visual de ODRL en seccion Gobernanza |
+| `src/utils/odrlGenerator.ts` | Ampliar firma, inyectar `target`/`assigner` en cada regla, anadir `source_label` |
+| `src/pages/dashboard/PublishDataset.tsx` | Pasar `activeOrgId` y `undefined` como nuevos parametros |
 
 ### Lo que NO cambia
 
-- La interfaz del Step 3 del wizard (checkboxes, inputs, listas)
-- El campo `access_policy` existente (whitelist, blacklist, timeout)
-- Las traducciones existentes
-- La logica de aprobacion/rechazo del admin
-- Ningun otro archivo del proyecto
-
+- La interfaz del usuario (checkboxes, textos)
+- El campo `access_policy` existente
+- La visualizacion en `AdminPublicationDetail.tsx` (ya muestra el JSON completo, los nuevos campos apareceran automaticamente)
