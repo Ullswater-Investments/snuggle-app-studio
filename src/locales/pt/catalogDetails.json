@@ -157,6 +157,11 @@
       "toastReviewSuccess": "Avaliação publicada com sucesso",
       "toastReviewError": "Erro ao publicar a avaliação",
       "toastSheetDownloaded": "Ficha técnica descarregada",
+      "rejectedBannerTitle": "Ativo Rejeitado",
+      "rejectedBannerDesc": "Este ativo foi rejeitado para publicação. Motivo: {{reason}}",
+      "notFoundTitle": "Produto não encontrado",
+      "notFoundDesc": "Este produto não existe ou não tem acesso a ele.",
+      "notFoundBack": "Voltar ao Catálogo",
       "chat": {
         "title": "Pergunte ao Assistente IA",
         "expertIn": "Especialista no ativo",

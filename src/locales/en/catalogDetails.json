@@ -238,6 +238,11 @@
       "toastReviewSuccess": "Review published successfully",
       "toastReviewError": "Error publishing review",
       "toastSheetDownloaded": "Tech sheet downloaded",
+      "rejectedBannerTitle": "Asset Rejected",
+      "rejectedBannerDesc": "This asset was rejected for publication. Reason: {{reason}}",
+      "notFoundTitle": "Product not found",
+      "notFoundDesc": "This product does not exist or you do not have access to it.",
+      "notFoundBack": "Back to Catalog",
       "chat": {
         "title": "Ask the AI Assistant",
         "expertIn": "Expert on asset",

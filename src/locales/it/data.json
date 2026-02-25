@@ -141,5 +141,20 @@
     "noDataSource": "Questo asset non ha ancora una fonte dati configurata.",
     "downloading": "Download dei dati tramite il Gateway...",
     "connectionError": "Errore di Connessione: Il server del fornitore non risponde."
+  },
+  "pubTabs": {
+    "published": "Pubblicati",
+    "pending": "In attesa",
+    "rejected": "Rifiutati"
+  },
+  "rejectedCard": {
+    "reason": "Motivo",
+    "viewAndEdit": "Vedi Motivo e Modifica",
+    "emptyTitle": "Nessun asset rifiutato",
+    "emptyDesc": "Non hai asset rifiutati. Gli asset che non superano la validazione tecnica appariranno qui."
+  },
+  "pendingEmpty": {
+    "title": "Nessun asset in attesa",
+    "desc": "Non hai asset in revisione al momento."
   }
 }

@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
     Database,
     Plus,
@@ -22,6 +23,7 @@ import {
     Calendar,
     Clock,
     AlertCircle,
+    XCircle,
 } from "lucide-react";
 import {
     Tooltip,
@@ -111,15 +113,29 @@ export const MyPublicationsTab = () => {
         },
     });
 
+    // Filtered lists
+    const publishedList = useMemo(() => 
+        (publications || []).filter(p => ['active', 'available'].includes(p.status)), 
+        [publications]
+    );
+    const pendingList = useMemo(() => 
+        (publications || []).filter(p => ['pending', 'pending_validation'].includes(p.status)), 
+        [publications]
+    );
+    const rejectedList = useMemo(() => 
+        (publications || []).filter(p => p.status === 'rejected'), 
+        [publications]
+    );
+
     const stats = useMemo(() => {
         if (!publications) return { total: 0, active: 0, totalRevenue: 0 };
 
         return {
             total: publications.length,
-            active: publications.filter(p => p.status === "available").length,
+            active: publishedList.length,
             totalRevenue: publications.reduce((acc, p) => acc + (p.price || 0), 0),
         };
-    }, [publications]);
+    }, [publications, publishedList]);
 
     const getPricingLabel = (model: string | null) => {
         switch (model) {
@@ -136,7 +152,7 @@ export const MyPublicationsTab = () => {
             case "pending_validation":
                 return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">🔍 {t('pubStatus.validation')}</Badge>;
             case "pending":
-                return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">⏳ Pendiente de Revisión</Badge>;
+                return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">⏳ {t('pubStatus.validation')}</Badge>;
             case "available":
                 return <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">{t('pubStatus.available')}</Badge>;
             case "active":
@@ -151,6 +167,169 @@ export const MyPublicationsTab = () => {
                 return <Badge variant="outline">{status}</Badge>;
         }
     };
+
+    const renderCard = (publication: PublishedAsset) => {
+        const isRejected = publication.status === 'rejected';
+        const isPending = publication.status === 'pending_validation' || publication.status === 'pending';
+
+        return (
+            <Card 
+                key={publication.id} 
+                className={`group hover:shadow-lg transition-all duration-300 ${
+                    isRejected 
+                        ? 'border-destructive/50 hover:border-destructive' 
+                        : 'hover:border-primary'
+                }`}
+            >
+                <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between mb-2">
+                        <div className="flex-1 min-w-0">
+                            <CardTitle className={`text-base mb-1 transition-colors truncate ${
+                                isRejected ? 'group-hover:text-destructive' : 'group-hover:text-primary'
+                            }`}>
+                                {publication.product?.name || t('card.noName')}
+                            </CardTitle>
+                            <CardDescription className="text-sm line-clamp-2">
+                                {publication.product?.description || t('card.noDesc')}
+                            </CardDescription>
+                        </div>
+                    </div>
+
+                    {/* Rejection reason inline */}
+                    {isRejected && publication.admin_notes && (
+                        <div className="flex items-start gap-2 mt-2 p-2 rounded-md bg-destructive/5 border border-destructive/20">
+                            <XCircle className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
+                            <p className="text-xs text-destructive line-clamp-2">
+                                <span className="font-semibold">{t('rejectedCard.reason')}:</span> {publication.admin_notes}
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Badges Row */}
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                        {isRejected && publication.admin_notes ? (
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        {getStatusBadge(publication.status)}
+                                    </TooltipTrigger>
+                                    <TooltipContent className="max-w-xs">
+                                        <p className="text-xs font-medium mb-1">{t('rejectedCard.reason')}:</p>
+                                        <p className="text-xs">{publication.admin_notes}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        ) : (
+                            getStatusBadge(publication.status)
+                        )}
+                        {publication.product?.category && (
+                            <Badge variant="outline" className="text-xs">
+                                {publication.product.category}
+                            </Badge>
+                        )}
+                        <Badge variant="secondary" className="text-xs">
+                            {getPricingLabel(publication.pricing_model)}
+                        </Badge>
+                    </div>
+
+                    {/* Visibility Toggle - hidden for rejected and pending */}
+                    {isPending || isRejected ? (
+                        !isRejected && (
+                            <div className="mt-3 pt-3 border-t">
+                                <p className="text-xs text-muted-foreground italic">
+                                    {t('card.notEditable')}
+                                </p>
+                            </div>
+                        )
+                    ) : (
+                        <div className="flex items-center justify-between mt-3 pt-3 border-t">
+                            <Label htmlFor={`visible-${publication.id}`} className="text-xs text-muted-foreground cursor-pointer">
+                                {t('card.visibleInCatalog')}
+                            </Label>
+                            <Switch
+                                id={`visible-${publication.id}`}
+                                checked={publication.is_visible !== false}
+                                onCheckedChange={(checked) =>
+                                    toggleVisibilityMutation.mutate({ assetId: publication.id, isVisible: checked })
+                                }
+                            />
+                        </div>
+                    )}
+                </CardHeader>
+
+                <CardContent className="space-y-4">
+                    {/* Price */}
+                    <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">{t('card.price')}:</span>
+                        <span className="font-semibold">
+                            {publication.pricing_model === "free"
+                                ? t('pricing.free')
+                                : `€${publication.price?.toLocaleString() || 0}${publication.pricing_model === "subscription" ? t('pricing.perMonth') : ""}`
+                            }
+                        </span>
+                    </div>
+
+                    {/* Published Date */}
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Calendar className="h-3 w-3" />
+                        {t('card.published')} {format(new Date(publication.created_at), "d MMMM, yyyy", { locale: dateLocale })}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-2 pt-2">
+                        {isRejected ? (
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="flex-1 border-destructive/30 text-destructive hover:bg-destructive/5"
+                                onClick={() => navigate(`/catalog/product/${publication.id}`)}
+                            >
+                                <Edit className="h-4 w-4 mr-1" />
+                                {t('rejectedCard.viewAndEdit')}
+                            </Button>
+                        ) : isPending ? (
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="flex-1"
+                                onClick={() => navigate(`/catalog/product/${publication.id}`)}
+                            >
+                                <Clock className="h-4 w-4 mr-1" />
+                                {t('card.inReview')}
+                            </Button>
+                        ) : (
+                            <>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="flex-1"
+                                    onClick={() => navigate(`/catalog/product/${publication.id}`)}
+                                >
+                                    <Eye className="h-4 w-4 mr-1" />
+                                    {t('card.view')}
+                                </Button>
+                                <Button
+                                    variant="default"
+                                    size="sm"
+                                    className="flex-1"
+                                    onClick={() => navigate("/analytics")}
+                                >
+                                    <BarChart3 className="h-4 w-4 mr-1" />
+                                    {t('card.analytics')}
+                                </Button>
+                            </>
+                        )}
+                    </div>
+                </CardContent>
+            </Card>
+        );
+    };
+
+    const renderGrid = (items: PublishedAsset[]) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {items.map(renderCard)}
+        </div>
+    );
 
     return (
         <div className="space-y-6">
@@ -195,7 +374,7 @@ export const MyPublicationsTab = () => {
                 </Card>
             </div>
 
-            {/* Publications List */}
+            {/* Publications with Tabs */}
             {isLoading ? (
                 <div className="text-center py-12">
                     <p className="text-muted-foreground">{t('loadingPub')}</p>
@@ -217,128 +396,58 @@ export const MyPublicationsTab = () => {
                     }
                 />
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {publications.map((publication) => (
-                        <Card key={publication.id} className="group hover:shadow-lg transition-all duration-300 hover:border-primary">
-                            <CardHeader className="pb-3">
-                                <div className="flex items-start justify-between mb-2">
-                                    <div className="flex-1 min-w-0">
-                                        <CardTitle className="text-base mb-1 group-hover:text-primary transition-colors truncate">
-                                            {publication.product?.name || t('card.noName')}
-                                        </CardTitle>
-                                        <CardDescription className="text-sm line-clamp-2">
-                                            {publication.product?.description || t('card.noDesc')}
-                                        </CardDescription>
-                                    </div>
-                                </div>
+                <Tabs defaultValue="published" className="w-full">
+                    <TabsList className="mb-4">
+                        <TabsTrigger value="published">
+                            {t('pubTabs.published')} ({publishedList.length})
+                        </TabsTrigger>
+                        <TabsTrigger value="pending">
+                            {t('pubTabs.pending')} ({pendingList.length})
+                        </TabsTrigger>
+                        <TabsTrigger value="rejected">
+                            {t('pubTabs.rejected')} ({rejectedList.length})
+                        </TabsTrigger>
+                    </TabsList>
 
-                                {/* Badges Row */}
-                                <div className="flex flex-wrap gap-1.5 mt-2">
-                                    {publication.status === "rejected" && publication.admin_notes ? (
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    {getStatusBadge(publication.status)}
-                                                </TooltipTrigger>
-                                                <TooltipContent className="max-w-xs">
-                                                    <p className="text-xs font-medium mb-1">Motivo del rechazo:</p>
-                                                    <p className="text-xs">{publication.admin_notes}</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                    ) : (
-                                        getStatusBadge(publication.status)
-                                    )}
-                                    {publication.product?.category && (
-                                        <Badge variant="outline" className="text-xs">
-                                            {publication.product.category}
-                                        </Badge>
-                                    )}
-                                    <Badge variant="secondary" className="text-xs">
-                                        {getPricingLabel(publication.pricing_model)}
-                                    </Badge>
-                                </div>
+                    <TabsContent value="published">
+                        {publishedList.length === 0 ? (
+                            <EmptyState
+                                icon={Package}
+                                title={t('empty.pubTitle')}
+                                description={t('empty.pubDesc')}
+                                action={
+                                    <Button
+                                        onClick={() => navigate("/datos/publicar")}
+                                        disabled={kybDisabled}
+                                    >
+                                        <Plus className="h-4 w-4 mr-2" />
+                                        {t('empty.pubBtn')}
+                                    </Button>
+                                }
+                            />
+                        ) : renderGrid(publishedList)}
+                    </TabsContent>
 
-                                {/* Visibility Toggle - disabled during validation */}
-                                {publication.status === "pending_validation" || publication.status === "pending" ? (
-                                    <div className="mt-3 pt-3 border-t">
-                                        <p className="text-xs text-muted-foreground italic">
-                                            {t('card.notEditable')}
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center justify-between mt-3 pt-3 border-t">
-                                        <Label htmlFor={`visible-${publication.id}`} className="text-xs text-muted-foreground cursor-pointer">
-                                            {t('card.visibleInCatalog')}
-                                        </Label>
-                                        <Switch
-                                            id={`visible-${publication.id}`}
-                                            checked={publication.is_visible !== false}
-                                            onCheckedChange={(checked) =>
-                                                toggleVisibilityMutation.mutate({ assetId: publication.id, isVisible: checked })
-                                            }
-                                        />
-                                    </div>
-                                )}
-                            </CardHeader>
+                    <TabsContent value="pending">
+                        {pendingList.length === 0 ? (
+                            <EmptyState
+                                icon={Clock}
+                                title={t('pendingEmpty.title')}
+                                description={t('pendingEmpty.desc')}
+                            />
+                        ) : renderGrid(pendingList)}
+                    </TabsContent>
 
-                            <CardContent className="space-y-4">
-                                {/* Price */}
-                                <div className="flex items-center justify-between text-sm">
-                                    <span className="text-muted-foreground">{t('card.price')}:</span>
-                                    <span className="font-semibold">
-                                        {publication.pricing_model === "free"
-                                            ? t('pricing.free')
-                                            : `€${publication.price?.toLocaleString() || 0}${publication.pricing_model === "subscription" ? t('pricing.perMonth') : ""}`
-                                        }
-                                    </span>
-                                </div>
-
-                                {/* Published Date */}
-                                <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <Calendar className="h-3 w-3" />
-                                    {t('card.published')} {format(new Date(publication.created_at), "d MMMM, yyyy", { locale: dateLocale })}
-                                </div>
-
-                                {/* Actions */}
-                                <div className="flex gap-2 pt-2">
-                                    {publication.status !== "pending_validation" && publication.status !== "pending" && (
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            className="flex-1"
-                                            onClick={() => navigate(`/catalog/product/${publication.id}`)}
-                                        >
-                                            <Eye className="h-4 w-4 mr-1" />
-                                            {t('card.view')}
-                                        </Button>
-                                    )}
-                                    {publication.status === "pending_validation" || publication.status === "pending" ? (
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            className="flex-1"
-                                            onClick={() => navigate(`/catalog/product/${publication.id}`)}
-                                        >
-                                            <Clock className="h-4 w-4 mr-1" />
-                                            {t('card.inReview')}
-                                        </Button>
-                                    ) : (
-                                        <Button
-                                            variant="default"
-                                            size="sm"
-                                            className="flex-1"
-                                            onClick={() => navigate("/analytics")}
-                                        >
-                                            <BarChart3 className="h-4 w-4 mr-1" />
-                                            {t('card.analytics')}
-                                        </Button>
-                                    )}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
+                    <TabsContent value="rejected">
+                        {rejectedList.length === 0 ? (
+                            <EmptyState
+                                icon={XCircle}
+                                title={t('rejectedCard.emptyTitle')}
+                                description={t('rejectedCard.emptyDesc')}
+                            />
+                        ) : renderGrid(rejectedList)}
+                    </TabsContent>
+                </Tabs>
             )}
         </div>
     );

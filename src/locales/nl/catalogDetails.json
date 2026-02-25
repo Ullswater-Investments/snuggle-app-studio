@@ -89,6 +89,11 @@
       "toastReviewSuccess": "Beoordeling succesvol gepubliceerd",
       "toastReviewError": "Fout bij publiceren van beoordeling",
       "toastSheetDownloaded": "Technisch datablad gedownload",
+      "rejectedBannerTitle": "Asset Afgewezen",
+      "rejectedBannerDesc": "Dit asset is afgewezen voor publicatie. Reden: {{reason}}",
+      "notFoundTitle": "Product niet gevonden",
+      "notFoundDesc": "Dit product bestaat niet of u heeft er geen toegang toe.",
+      "notFoundBack": "Terug naar Catalogus",
       "chat": {
         "title": "Vraag de AI-Assistent",
         "expertIn": "Expert over asset",

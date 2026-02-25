@@ -141,5 +141,20 @@
     "noDataSource": "Este ativo ainda não tem uma fonte de dados configurada.",
     "downloading": "Baixando dados através do Gateway...",
     "connectionError": "Erro de Conexão: O servidor do fornecedor não responde."
+  },
+  "pubTabs": {
+    "published": "Publicados",
+    "pending": "Pendentes",
+    "rejected": "Rejeitados"
+  },
+  "rejectedCard": {
+    "reason": "Motivo",
+    "viewAndEdit": "Ver Motivo e Editar",
+    "emptyTitle": "Sem ativos rejeitados",
+    "emptyDesc": "Não tem ativos rejeitados. Os ativos que não passarem na validação técnica aparecerão aqui."
+  },
+  "pendingEmpty": {
+    "title": "Sem ativos pendentes",
+    "desc": "Não tem ativos em revisão atualmente."
   }
 }

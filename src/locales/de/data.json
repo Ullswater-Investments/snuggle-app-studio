@@ -141,5 +141,20 @@
     "noDataSource": "Dieses Asset hat noch keine konfigurierte Datenquelle.",
     "downloading": "Daten werden über das Gateway heruntergeladen...",
     "connectionError": "Verbindungsfehler: Der Anbieterserver antwortet nicht."
+  },
+  "pubTabs": {
+    "published": "Veröffentlicht",
+    "pending": "Ausstehend",
+    "rejected": "Abgelehnt"
+  },
+  "rejectedCard": {
+    "reason": "Grund",
+    "viewAndEdit": "Grund ansehen & Bearbeiten",
+    "emptyTitle": "Keine abgelehnten Assets",
+    "emptyDesc": "Sie haben keine abgelehnten Assets. Assets, die die technische Validierung nicht bestehen, werden hier angezeigt."
+  },
+  "pendingEmpty": {
+    "title": "Keine ausstehenden Assets",
+    "desc": "Sie haben derzeit keine Assets in der Überprüfung."
   }
 }
