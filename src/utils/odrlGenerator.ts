@@ -48,11 +48,11 @@ export function generateODRLPolicy(
   permissions: string[],
   prohibitions: string[],
   obligations: string[],
-  providerId: string,
+  providerWallet: string,
   assetId: string
 ) {
   const target = `urn:uuid:${assetId}`;
-  const assigner = `urn:uuid:${providerId}`;
+  const assigner = `did:ethr:${providerWallet || "unknown"}`;
 
   return {
     "@context": "http://www.w3.org/ns/odrl.jsonld",

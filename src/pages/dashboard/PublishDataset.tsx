@@ -541,12 +541,20 @@ export default function PublishDataset() {
 
       if (error) throw error;
 
-      // --- Fase 2: Generar ODRL con ID real ---
+      // --- Fase 2: Generar ODRL con ID real + wallet DID ---
+      const { data: orgData } = await supabase
+        .from("organizations")
+        .select("wallet_address")
+        .eq("id", activeOrgId)
+        .single();
+
+      const providerWallet = orgData?.wallet_address || "";
+
       const odrlPolicy = generateODRLPolicy(
         step3Data.permissions.map((r) => r.label),
         step3Data.prohibitions.map((r) => r.label),
         step3Data.obligations.map((r) => r.label),
-        activeOrgId,
+        providerWallet,
         asset.id
       );
 
