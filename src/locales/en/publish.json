@@ -1,4 +1,53 @@
 {
+  "header": {
+    "backToData": "Back to My Data",
+    "title": "Publish Dataset",
+    "subtitle": "Connect your API to the ProcureData ecosystem"
+  },
+  "alerts": {
+    "maintenance": "Scheduled maintenance in progress. Dataset publishing is temporarily disabled.",
+    "publishingAs": "Publishing as:",
+    "orgTypes": {
+      "consumer": "Consumer",
+      "provider": "Provider",
+      "holder": "Data Holder"
+    },
+    "securityNote": "ProcureData does not store your data. We only facilitate the secure connection between your API and the authorised consumer."
+  },
+  "demo": {
+    "title": "Feature not available",
+    "description": "Asset publishing is not available in demo mode.",
+    "backButton": "Back to Dashboard"
+  },
+  "stepper": {
+    "step1": { "title": "Data Source", "description": "API Connection" },
+    "step2": { "title": "Schema", "description": "Technical structure" },
+    "step3": { "title": "Policies", "description": "Pontus-X" },
+    "step4": { "title": "Publication", "description": "Marketplace" }
+  },
+  "step1": {
+    "title": "Step 1: Data Source (API)",
+    "description": "Define the endpoint and authentication of your data source",
+    "originName": { "label": "Source Name *", "placeholder": "E.g.: ERP API - Inventory 2024", "hint": "Internal identifier for your reference" },
+    "originDescription": { "label": "Source Description", "placeholder": "Briefly describe the source of this data..." },
+    "apiUrl": { "label": "API URL *", "placeholder": "https://api.example.com/v1/data", "hint": "GET endpoint from which authorised consumers will receive the data" },
+    "headers": { "label": "Custom Headers", "addButton": "Add Header", "keyPlaceholder": "Key (e.g.: Authorization)", "valuePlaceholder": "Value (e.g.: Bearer token...)", "hint": "Headers are stored securely and sent only during authorised calls" },
+    "saving": "Saving...",
+    "continue": "Continue",
+    "validation": { "nameRequired": "Source name is required", "urlRequired": "API URL is required" },
+    "success": "Source configuration saved successfully",
+    "error": "Error saving source"
+  },
+  "step2": {
+    "title": "Step 2: Technical Data Schema",
+    "description": "Define the structure consumers will see when querying your API",
+    "assistant": { "label": "Schema Assistant", "description": "Upload a sample JSON or CSV file and we'll detect the fields automatically. You can also define them manually.", "uploadButton": "Load JSON / CSV" },
+    "fields": { "label": "Field Definition", "fieldHeader": "Field *", "typeHeader": "Type *", "descHeader": "Description", "fieldPlaceholder": "field_name", "descPlaceholder": "Field description...", "addButton": "Add Field" },
+    "fieldTypes": { "Texto": "Text", "Numero": "Number", "Fecha": "Date", "Booleano": "Boolean", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Timestamp", "Decimal": "Decimal", "Entero": "Integer" },
+    "validation": { "minOneField": "Define at least one field in the schema" },
+    "fileErrors": { "parseError": "Could not process the file. Please check the format.", "noFields": "No fields detected in the file." },
+    "fieldsDetected": "{{count}} fields detected automatically"
+  },
   "step3": {
     "title": "Step 3: Pontus-X Access Policies",
     "description": "Define governance rules and usage conditions for your dataset",
@@ -41,5 +90,63 @@
       "blacklistHint": "These organisations will not be able to view or request the asset.",
       "searchPlaceholder": "Search organisation by name..."
     }
+  },
+  "step4": {
+    "title": "Step 4: Marketplace Publication",
+    "description": "Define how your dataset will appear in the catalogue",
+    "publicName": { "label": "Commercial Name *", "placeholder": "E.g.: Industrial Price Index Q1 2024" },
+    "descriptionField": { "label": "Description", "placeholder": "Describe the content, sources and utility of the data..." },
+    "category": { "label": "Category *", "placeholder": "Select a category" },
+    "language": { "label": "Dataset Language *", "placeholder": "Select the language" },
+    "categories": { "Compliance": "Compliance", "ESG": "ESG / Sustainability", "Ops": "Operations", "Market": "Market / Pricing", "R&D": "R&D / Innovation", "Logistics": "Logistics", "Finance": "Finance", "HR": "Human Resources", "IoT": "IoT / Telemetry", "Otros": "Other" },
+    "languages": { "es": "Spanish", "en": "English", "de": "German", "fr": "French", "pt": "Portuguese", "it": "Italian" },
+    "pricing": {
+      "title": "Pricing Model",
+      "description": "Define how you want to monetise your data",
+      "models": {
+        "free": { "label": "Free", "description": "No cost for consumers" },
+        "subscription": { "label": "Subscription", "description": "Monthly recurring payment" },
+        "one_time": { "label": "One-time Payment", "description": "Perpetual licence" },
+        "usage": { "label": "Pay-per-Use", "description": "Based on API consumption" }
+      },
+      "priceLabel": "Price (€)",
+      "perMonth": "/month"
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "description": "Accept the conditions to publish on the marketplace",
+      "acceptTerms": "I accept ProcureData's Terms and Conditions",
+      "acceptTermsDesc": "Including the obligations as a data provider and the marketplace usage policies.",
+      "acceptDataPolicy": "I confirm that I have the right to share this data",
+      "acceptDataPolicyDesc": "I declare that the data complies with GDPR and does not contain personal information without consent."
+    },
+    "submit": "Submit for Technical Validation",
+    "submitting": "Submitting...",
+    "validation": {
+      "nameRequired": "Public name is required",
+      "categoryRequired": "Select a category",
+      "languageRequired": "Select the dataset language",
+      "termsRequired": "You must accept the terms and data policy",
+      "maintenanceMode": "System under maintenance. Publishing is temporarily disabled."
+    },
+    "successAutoApprove": "Dataset successfully published in the catalogue.",
+    "successReview": "Dataset submitted for technical review. You will be notified when it is available in the catalogue.",
+    "errorPublish": "Error publishing"
+  },
+  "navigation": { "back": "Back", "continue": "Continue" },
+  "accessTimeout": {
+    "title": "Service Expiry (Timeout)",
+    "description": "Define how long the consumer can access the data before their licence expires.",
+    "unit": "days",
+    "defaultHint": "Default value: 90 days. Consumers will see this period in the usage licence."
+  },
+  "accessControl": {
+    "whitelistHintLong": "If you add organisations here, the asset becomes PRIVATE. Only they will be able to view and request it. The denied list will be automatically ignored.",
+    "blacklistHintLong": "Only effective if the allowed list is empty. The asset will be PUBLIC for everyone, except for the organisations listed here.",
+    "blacklistDisabledWarning": "The whitelist takes priority. This section is ignored while there are organisations in the allowed list.",
+    "noWallet": "No wallet",
+    "emptyWhitelist": "No organisations added — the asset will not be private by whitelist.",
+    "emptyBlacklist": "No organisations denied — full public access.",
+    "termsUrlError": "The T&C URL is not valid"
   }
 }
