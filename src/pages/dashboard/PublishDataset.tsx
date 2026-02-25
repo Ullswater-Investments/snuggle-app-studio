@@ -528,7 +528,9 @@ export default function PublishDataset() {
             odrl_policy: generateODRLPolicy(
               step3Data.permissions.map((r) => r.label),
               step3Data.prohibitions.map((r) => r.label),
-              step3Data.obligations.map((r) => r.label)
+              step3Data.obligations.map((r) => r.label),
+              activeOrgId,
+              undefined
             ),
           },
         } as any)

@@ -22,31 +22,44 @@ const ODRL_DUTIES: Record<string, string> = {
   "Notificar uso a proveedor": "inform",
 };
 
-interface OdrlAction {
+interface OdrlRule {
+  target: string;
+  assigner: string;
   action: string;
-  description?: string;
+  source_label: string;
 }
 
-function mapLabels(labels: string[], dictionary: Record<string, string>): OdrlAction[] {
-  return labels.map((label) => {
-    const action = dictionary[label];
-    if (action) return { action };
-    return { action: "use", description: label };
-  });
+function mapLabels(
+  labels: string[],
+  dictionary: Record<string, string>,
+  target: string,
+  assigner: string
+): OdrlRule[] {
+  return labels.map((label) => ({
+    target,
+    assigner,
+    action: dictionary[label] ?? "use",
+    source_label: label,
+  }));
 }
 
 export function generateODRLPolicy(
   permissions: string[],
   prohibitions: string[],
-  obligations: string[]
+  obligations: string[],
+  providerId: string,
+  assetId?: string
 ) {
+  const target = `urn:uuid:${assetId || "pending-asset"}`;
+  const assigner = `urn:uuid:${providerId}`;
+
   return {
     "@context": "http://www.w3.org/ns/odrl.jsonld",
     "@type": "Offer",
     uid: `urn:uuid:${crypto.randomUUID()}`,
     profile: "http://www.w3.org/ns/odrl/2/",
-    permission: mapLabels(permissions, ODRL_PERMISSIONS),
-    prohibition: mapLabels(prohibitions, ODRL_PROHIBITIONS),
-    duty: mapLabels(obligations, ODRL_DUTIES),
+    permission: mapLabels(permissions, ODRL_PERMISSIONS, target, assigner),
+    prohibition: mapLabels(prohibitions, ODRL_PROHIBITIONS, target, assigner),
+    duty: mapLabels(obligations, ODRL_DUTIES, target, assigner),
   };
 }
