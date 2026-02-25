@@ -1,130 +1,74 @@
 
-## DID-based ODRL Assigner + DDO Viewer Button
 
-### Overview
+## Refactorizacion ODRL a Politica Compacta (W3C Best Practices 3.3.1)
 
-Three changes: (1) use the org's Ethereum wallet as `assigner` in DID format, (2) add a "Ver DDO (Operador)" button in the admin detail view, and (3) open a modal showing an assembled DDO JSON with copy functionality.
+### Objetivo
+
+Alinear `generateODRLPolicy` con el patron de "Compact Policies" de la W3C ODRL 2.2, moviendo `target` y `assigner` a la raiz y simplificando las reglas internas.
 
 ---
 
-### 1. `src/utils/odrlGenerator.ts` -- DID-based assigner
+### Cambios
 
-**Change the `assigner` format** from `urn:uuid:<orgId>` to `did:ethr:<walletAddress>`.
+#### 1. `src/utils/odrlGenerator.ts`
 
-- Add a new parameter `providerWallet: string` to `generateODRLPolicy` (replacing `providerId`)
-- Format: `"assigner": "did:ethr:<walletAddress>"`
-- Keep `target` as `urn:uuid:<assetId>` (unchanged)
-- If wallet is empty/falsy, fall back to `"did:ethr:unknown"`
+**Simplificar la interfaz `OdrlRule`** para que solo contenga `action` y `description` (eliminar `target` y `assigner`).
 
-Updated signature:
-```text
-generateODRLPolicy(permissions, prohibitions, obligations, providerWallet, assetId)
-```
+**Simplificar `mapLabels`** para que no reciba `target` ni `assigner`, y devuelva solo `{ action, description }`.
 
-### 2. `src/pages/dashboard/PublishDataset.tsx` -- Fetch wallet for ODRL
+**Actualizar `generateODRLPolicy`:**
 
-In Phase 2 of the publish mutation (after INSERT), before calling `generateODRLPolicy`:
+- Anadir parametro opcional `termsUrl?: string`
+- Mover `target` y `assigner` a la raiz del objeto
+- Cambiar `@context` a un array con Dublin Core Terms: `["http://www.w3.org/ns/odrl.jsonld", { "dcterms": "http://purl.org/dc/terms/" }]`
+- Usar `"type": "Offer"` (sin @)
+- Si `termsUrl` tiene valor, incluir `"dcterms:references": termsUrl` en la raiz
+- Si no tiene valor, omitir la propiedad completamente
 
-- Query `organizations` table for the `wallet_address` of `activeOrgId`
-- Pass this wallet address (instead of `activeOrgId`) to `generateODRLPolicy`
-
-```text
-// After Phase 1 INSERT
-const { data: orgData } = await supabase
-  .from("organizations")
-  .select("wallet_address")
-  .eq("id", activeOrgId)
-  .single();
-
-const providerWallet = orgData?.wallet_address || "";
-
-const odrlPolicy = generateODRLPolicy(
-  ..., providerWallet, asset.id
-);
-```
-
-### 3. `src/pages/admin/AdminPublicationDetail.tsx` -- DDO Button + Modal
-
-#### 3a. Expand org query to include `wallet_address`
-
-Change the org query (line 74) from:
-```text
-.select("name, type, sector")
-```
-to:
-```text
-.select("name, type, sector, wallet_address")
-```
-
-#### 3b. Add state for DDO modal
-
-Add new state variables:
-- `showDDOModal: boolean` (default false)
-- `ddoCopied: boolean` (default false)
-
-#### 3c. Add "Ver DDO (Operador)" button
-
-Below the Asset ID / Product ID card (after line 503), add a button:
-
-```text
-<Button
-  variant="outline"
-  className="w-full mt-3"
-  onClick={() => setShowDDOModal(true)}
->
-  <FileJson className="h-4 w-4 mr-2" />
-  Ver DDO (Operador)
-</Button>
-```
-
-#### 3d. Assemble DDO object
-
-When the modal opens (or computed inline), build the DDO from existing data:
+Estructura resultante:
 
 ```text
 {
-  "@context": ["https://w3id.org/did/v1"],
-  "id": `did:op:${asset.id}`,
-  "metadata": {
-    "name": product?.name,
-    "description": product?.description,
-    "author": orgName?.name,
-    "type": "dataset",
-    "additionalInformation": {
-      "odrlPolicy": customMeta?.additionalInformation?.odrlPolicy || customMeta?.odrl_policy || null
-    }
-  },
-  "services": [{
-    "type": "access",
-    "timeout": (accessTimeoutDays || 90) * 86400  // days to seconds
-  }],
-  "credentials": {
-    "allow": allowedWallets.map(w => ({
-      "type": "address", "values": [w.wallet_address]
-    })),
-    "deny": deniedWallets.map(w => ({
-      "type": "address", "values": [w.wallet_address]
-    }))
-  }
+  "@context": ["http://www.w3.org/ns/odrl.jsonld", { "dcterms": "http://purl.org/dc/terms/" }],
+  "type": "Offer",
+  "uid": "urn:uuid:<uuid>",
+  "profile": "http://www.w3.org/ns/odrl/2/",
+  "assigner": "did:ethr:<wallet>",
+  "target": "urn:uuid:<assetId>",
+  "dcterms:references": "<terms_url>",   // solo si existe
+  "permission": [{ "action": "...", "description": "..." }],
+  "prohibition": [{ "action": "...", "description": "..." }],
+  "duty": [{ "action": "...", "description": "..." }]
 }
 ```
 
-Where `accessTimeoutDays` and wallet lists are read from `customMeta.access_control` (with fallback to `customMeta.access_policy`).
+#### 2. `src/pages/dashboard/PublishDataset.tsx` (linea 553)
 
-#### 3e. DDO Modal
+Pasar `termsUrl` como sexto argumento a `generateODRLPolicy`:
 
-Add a Dialog component:
-- Title: "DDO Generado para Pontus-X"
-- Body: `<pre>` block inside a ScrollArea showing `JSON.stringify(ddo, null, 2)`
-- Footer: "Copiar JSON" button that copies to clipboard and shows toast "DDO Copiado correctamente"
-- Max width: `max-w-2xl` for readability
+```text
+const odrlPolicy = generateODRLPolicy(
+  step3Data.permissions.map((r) => r.label),
+  step3Data.prohibitions.map((r) => r.label),
+  step3Data.obligations.map((r) => r.label),
+  providerWallet,
+  asset.id,
+  step3Data.termsUrl?.trim() || undefined
+);
+```
 
 ---
 
-### Files to modify
+### Archivos a modificar
 
-| File | Change |
+| Archivo | Cambio |
 |---|---|
-| `src/utils/odrlGenerator.ts` | Change `providerId` to `providerWallet`, format as `did:ethr:<wallet>` |
-| `src/pages/dashboard/PublishDataset.tsx` | Fetch org wallet_address before ODRL generation, pass to generator |
-| `src/pages/admin/AdminPublicationDetail.tsx` | Add wallet_address to org query, DDO button, DDO modal with copy |
+| `src/utils/odrlGenerator.ts` | Compact Policy: target/assigner en raiz, reglas simplificadas, dcterms:references condicional |
+| `src/pages/dashboard/PublishDataset.tsx` | Pasar termsUrl a generateODRLPolicy |
+
+### Lo que NO cambia
+
+- La interfaz del usuario (wizard, checkboxes, pasos)
+- La vista admin (`AdminPublicationDetail.tsx`)
+- El flujo de guardado en dos pasos (INSERT, generar, UPDATE)
+- Los bloques `access_policy` y `access_control`
