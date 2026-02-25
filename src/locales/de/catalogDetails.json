@@ -20,6 +20,8 @@
       "noDescription": "Für dieses Asset wurde keine Beschreibung bereitgestellt.",
       "editPublication": "Veröffentlichung bearbeiten",
       "noPoliciesDefined": "Für dieses Asset wurden keine Richtlinien definiert.",
+      "editComingSoonTitle": "Bearbeitung in Entwicklung",
+      "editComingSoonDesc": "Wir arbeiten an dieser Funktion. Sehr bald können Sie Ihre Asset-Daten ändern und erneut zur Überprüfung einreichen, ohne von Grund auf neu veröffentlichen zu müssen.",
       "soldAndOperatedBy": "Verkauft und betrieben von",
       "verifiedKYB": "KYB Verifiziert",
       "back": "Zurück",

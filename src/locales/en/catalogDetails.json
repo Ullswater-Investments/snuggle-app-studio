@@ -157,6 +157,8 @@
       "noDescription": "No description has been provided for this asset.",
       "editPublication": "Edit Publication",
       "noPoliciesDefined": "No policies have been defined for this asset.",
+      "editComingSoonTitle": "Editing coming soon",
+      "editComingSoonDesc": "We are working on this feature. Very soon you will be able to modify your asset data and resubmit it for review without having to publish from scratch.",
       "soldAndOperatedBy": "Sold and operated by",
       "verifiedKYB": "KYB Verified",
       "back": "Back",

@@ -88,6 +88,8 @@
       "noDescription": "Não foi fornecida uma descrição para este ativo.",
       "editPublication": "Editar publicação",
       "noPoliciesDefined": "Não foram definidas políticas para este ativo.",
+      "editComingSoonTitle": "Edição em desenvolvimento",
+      "editComingSoonDesc": "Estamos a trabalhar nesta funcionalidade. Em breve poderá modificar os dados do seu ativo e reenviá-lo para revisão sem ter de publicar de raiz.",
       "soldAndOperatedBy": "Vendido e operado por",
       "verifiedKYB": "KYB Verificado",
       "back": "Voltar",

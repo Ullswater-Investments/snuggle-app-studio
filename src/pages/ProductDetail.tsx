@@ -30,7 +30,8 @@ import {
   XCircle,
   AlertCircle,
   ExternalLink,
-  MessageSquare
+  MessageSquare,
+  Wrench
 } from "lucide-react";
 
 // UI Components
@@ -42,6 +43,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { ArrayDataView } from "@/components/ArrayDataView";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
@@ -105,6 +107,7 @@ export default function ProductDetail() {
   // Review form state
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewComment, setReviewComment] = useState("");
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // --- Fetch Data (Marketplace View) ---
   const { data: product, isLoading } = useQuery<MarketplaceListing>({
@@ -920,13 +923,33 @@ export default function ProductDetail() {
               </CardContent>
               <CardFooter className="flex flex-col gap-2">
                 {isOwnerOfRejected ? (
-                  <Button 
-                    size="lg" 
-                    className="w-full text-base font-semibold" 
-                    onClick={() => navigate(`/datos/publicar?edit=${product.asset_id}`)}
-                  >
-                    <FileText className="mr-2 h-5 w-5" /> {t('common.assetDetail.editPublication')}
-                  </Button>
+                  <>
+                    <Button 
+                      size="lg" 
+                      className="w-full text-base font-semibold" 
+                      onClick={() => setIsEditModalOpen(true)}
+                    >
+                      <FileText className="mr-2 h-5 w-5" /> {t('common.assetDetail.editPublication')}
+                    </Button>
+                    <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+                      <DialogContent className="sm:max-w-md">
+                        <DialogHeader className="flex flex-col items-center text-center gap-3">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950/40">
+                            <Wrench className="h-7 w-7 text-amber-600 dark:text-amber-400" />
+                          </div>
+                          <DialogTitle>{t('common.assetDetail.editComingSoonTitle')}</DialogTitle>
+                          <DialogDescription className="text-center leading-relaxed">
+                            {t('common.assetDetail.editComingSoonDesc')}
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter className="sm:justify-center">
+                          <Button onClick={() => setIsEditModalOpen(false)}>
+                            {t('common:close')}
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </>
                 ) : (
                   <>
                     {hasVerifiedAccess ? (
