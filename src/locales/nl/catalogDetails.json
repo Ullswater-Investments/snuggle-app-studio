@@ -20,6 +20,8 @@
       "noDescription": "Er is geen beschrijving verstrekt voor dit asset.",
       "editPublication": "Publicatie bewerken",
       "noPoliciesDefined": "Er zijn geen beleidsregels gedefinieerd voor dit asset.",
+      "editComingSoonTitle": "Bewerking in ontwikkeling",
+      "editComingSoonDesc": "We werken aan deze functionaliteit. Binnenkort kunt u de gegevens van uw asset wijzigen en opnieuw ter beoordeling indienen zonder opnieuw te hoeven publiceren.",
       "soldAndOperatedBy": "Verkocht en beheerd door",
       "verifiedKYB": "KYB Geverifieerd",
       "back": "Terug",

@@ -20,6 +20,8 @@
       "noDescription": "Non è stata fornita una descrizione per questo asset.",
       "editPublication": "Modifica pubblicazione",
       "noPoliciesDefined": "Non sono state definite politiche per questo asset.",
+      "editComingSoonTitle": "Modifica in fase di sviluppo",
+      "editComingSoonDesc": "Stiamo lavorando a questa funzionalità. Molto presto potrai modificare i dati del tuo asset e reinviarlo per la revisione senza doverlo pubblicare da zero.",
       "soldAndOperatedBy": "Venduto e gestito da",
       "verifiedKYB": "KYB Verificato",
       "back": "Indietro",

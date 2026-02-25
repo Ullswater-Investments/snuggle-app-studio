@@ -157,6 +157,8 @@
       "noDescription": "Aucune description n'a été fournie pour cet actif.",
       "editPublication": "Modifier la publication",
       "noPoliciesDefined": "Aucune politique n'a été définie pour cet actif.",
+      "editComingSoonTitle": "Édition en cours de développement",
+      "editComingSoonDesc": "Nous travaillons sur cette fonctionnalité. Très bientôt, vous pourrez modifier les données de votre actif et le soumettre à nouveau sans avoir à le publier de zéro.",
       "soldAndOperatedBy": "Vendu et opéré par",
       "verifiedKYB": "KYB Vérifié",
       "back": "Retour",
