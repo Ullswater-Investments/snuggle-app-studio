@@ -20,13 +20,14 @@ const ODRL_DUTIES: Record<string, string> = {
   "Atribución requerida": "attribute",
   "Cumplimiento GDPR": "ensureExclusivity",
   "Notificar uso a proveedor": "inform",
+  "Renovación de licencia": "use",
 };
 
 interface OdrlRule {
   target: string;
   assigner: string;
   action: string;
-  source_label: string;
+  description: string;
 }
 
 function mapLabels(
@@ -39,7 +40,7 @@ function mapLabels(
     target,
     assigner,
     action: dictionary[label] ?? "use",
-    source_label: label,
+    description: label,
   }));
 }
 
@@ -55,7 +56,7 @@ export function generateODRLPolicy(
 
   return {
     "@context": "http://www.w3.org/ns/odrl.jsonld",
-    "@type": "Offer",
+    "type": "Offer",
     uid: `urn:uuid:${crypto.randomUUID()}`,
     profile: "http://www.w3.org/ns/odrl/2/",
     permission: mapLabels(permissions, ODRL_PERMISSIONS, target, assigner),
