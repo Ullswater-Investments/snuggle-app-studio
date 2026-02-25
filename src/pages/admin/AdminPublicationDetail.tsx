@@ -36,6 +36,7 @@ const AdminPublicationDetail = () => {
   const { t, i18n } = useTranslation('admin');
   const [rejectionNote, setRejectionNote] = useState("");
   const [showRejectForm, setShowRejectForm] = useState(false);
+  const [showDDOModal, setShowDDOModal] = useState(false);
 
   const { data: asset, isLoading } = useQuery({
     queryKey: ["admin-asset-detail", id],
@@ -72,7 +73,7 @@ const AdminPublicationDetail = () => {
     queryFn: async () => {
       const { data } = await supabase
         .from("organizations")
-        .select("name, type, sector")
+        .select("name, type, sector, wallet_address")
         .eq("id", asset!.subject_org_id)
         .single();
       return data;
@@ -500,10 +501,93 @@ const AdminPublicationDetail = () => {
               <div className="mt-2">
                 <CopyField label="Product ID" value={asset.product_id} mono copyTitle={t('assets.copyToClipboard')} />
               </div>
+              <Button
+                variant="outline"
+                className="w-full mt-3"
+                onClick={() => setShowDDOModal(true)}
+              >
+                <FileJson className="h-4 w-4 mr-2" />
+                Ver DDO (Operador)
+              </Button>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      {/* DDO Modal */}
+      <Dialog open={showDDOModal} onOpenChange={setShowDDOModal}>
+        <DialogContent className="max-w-2xl max-h-[80vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileJson className="h-5 w-5" />
+              DDO Generado para Pontus-X
+            </DialogTitle>
+            <DialogDescription>
+              Documento DID (DDO) ensamblado con los metadatos del activo y su política ODRL.
+            </DialogDescription>
+          </DialogHeader>
+          {(() => {
+            const accessTimeoutDays = customMeta?.access_control?.access_timeout_days || customMeta?.access_policy?.access_timeout_days || 90;
+            const allowedWallets = customMeta?.access_control?.allowed_wallets || customMeta?.access_policy?.allowed_wallets || [];
+            const deniedWallets = customMeta?.access_control?.denied_wallets || customMeta?.access_policy?.denied_wallets || [];
+            const odrl = customMeta?.additionalInformation?.odrlPolicy || customMeta?.odrl_policy || null;
+
+            const ddo = {
+              "@context": ["https://w3id.org/did/v1"],
+              id: `did:op:${asset.id}`,
+              metadata: {
+                name: product?.name,
+                description: product?.description,
+                author: orgName?.name,
+                type: "dataset",
+                additionalInformation: {
+                  odrlPolicy: odrl,
+                },
+              },
+              services: [
+                {
+                  type: "access",
+                  timeout: accessTimeoutDays * 86400,
+                },
+              ],
+              credentials: {
+                allow: allowedWallets.map((w: any) => ({
+                  type: "address",
+                  values: [w.wallet_address],
+                })),
+                deny: deniedWallets.map((w: any) => ({
+                  type: "address",
+                  values: [w.wallet_address],
+                })),
+              },
+            };
+
+            const ddoJson = JSON.stringify(ddo, null, 2);
+
+            return (
+              <>
+                <div className="bg-muted/30 rounded-lg border max-h-[50vh] overflow-auto">
+                  <pre className="p-4 text-xs font-mono whitespace-pre-wrap break-all">
+                    {ddoJson}
+                  </pre>
+                </div>
+                <DialogFooter>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      navigator.clipboard.writeText(ddoJson);
+                      toast.success("DDO Copiado correctamente");
+                    }}
+                  >
+                    <Copy className="h-4 w-4 mr-2" />
+                    Copiar JSON
+                  </Button>
+                </DialogFooter>
+              </>
+            );
+          })()}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
