@@ -55,14 +55,10 @@ export function generateODRLPolicy(
   const assigner = `urn:uuid:${providerId}`;
 
   return {
-    "@context": [
-      "http://www.w3.org/ns/odrl.jsonld",
-      { "dct": "http://purl.org/dc/terms/" }
-    ],
-    "type": "Offer",
+    "@context": "http://www.w3.org/ns/odrl.jsonld",
+    "@type": "Offer",
     uid: `urn:uuid:${crypto.randomUUID()}`,
     profile: "http://www.w3.org/ns/odrl/2/",
-    "dct:source": "PROCUREDATA",
     permission: mapLabels(permissions, ODRL_PERMISSIONS, target, assigner),
     prohibition: mapLabels(prohibitions, ODRL_PROHIBITIONS, target, assigner),
     duty: mapLabels(obligations, ODRL_DUTIES, target, assigner),
