@@ -505,6 +505,24 @@ export default function PublishDataset() {
         access_timeout_days: step3Data.accessTimeout,
       };
 
+      // --- Fase 1: INSERT sin ODRL ---
+      const initialMetadata = {
+        ...apiConfig,
+        quality_metrics: {
+          completeness: 99,
+          accuracy: 98,
+          timeliness: 97,
+          consistency: 96,
+        },
+        published_by: user.id,
+        published_at: new Date().toISOString(),
+        language: step4Data.language,
+        connection_type: "api_gateway",
+        access_policy: accessPolicy,
+        access_control: accessControl,
+        additionalInformation: {},
+      };
+
       const { data: asset, error } = await supabase
         .from("data_assets")
         .insert({
@@ -516,35 +534,36 @@ export default function PublishDataset() {
           price: step4Data.pricingModel === "free" ? 0 : step4Data.price,
           currency: "EUR",
           is_public_marketplace: true,
-          custom_metadata: {
-            ...apiConfig,
-            quality_metrics: {
-              completeness: 99,
-              accuracy: 98,
-              timeliness: 97,
-              consistency: 96,
-            },
-            published_by: user.id,
-            published_at: new Date().toISOString(),
-            language: step4Data.language,
-            connection_type: "api_gateway",
-            access_policy: accessPolicy,
-            access_control: accessControl,
-            additionalInformation: {
-              odrlPolicy: generateODRLPolicy(
-                step3Data.permissions.map((r) => r.label),
-                step3Data.prohibitions.map((r) => r.label),
-                step3Data.obligations.map((r) => r.label),
-                activeOrgId,
-                undefined
-              ),
-            },
-          },
+          custom_metadata: initialMetadata,
         } as any)
-        .select("id")
+        .select("id, custom_metadata")
         .single();
 
       if (error) throw error;
+
+      // --- Fase 2: Generar ODRL con ID real ---
+      const odrlPolicy = generateODRLPolicy(
+        step3Data.permissions.map((r) => r.label),
+        step3Data.prohibitions.map((r) => r.label),
+        step3Data.obligations.map((r) => r.label),
+        activeOrgId,
+        asset.id
+      );
+
+      // --- Fase 3: UPDATE con ODRL ---
+      const currentMeta = (asset.custom_metadata as Record<string, any>) || {};
+      const { error: updateError } = await supabase
+        .from("data_assets")
+        .update({
+          custom_metadata: {
+            ...currentMeta,
+            additionalInformation: { odrlPolicy },
+          },
+        } as any)
+        .eq("id", asset.id);
+
+      if (updateError) throw updateError;
+
       return asset.id;
     },
     onSuccess: (assetId) => {
