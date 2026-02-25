@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Étape 3 : Politiques d'Accès Pontus-X",
+    "description": "Définissez les règles de gouvernance et les conditions d'utilisation de votre jeu de données",
+    "permissions": {
+      "heading": "Permissions — Ce que l'utilisateur PEUT faire",
+      "addCustom": "Ajouter une permission personnalisée...",
+      "COMMERCIAL_USE": "Usage commercial",
+      "INTERNAL_ANALYSIS": "Analyse interne",
+      "DERIVATIVE_WORKS": "Générer des rapports dérivés",
+      "SYSTEM_INTEGRATION": "Intégration dans les systèmes internes",
+      "RESEARCH_USE": "Usage en recherche"
+    },
+    "prohibitions": {
+      "heading": "Interdictions — Ce que l'utilisateur NE PEUT PAS faire",
+      "addCustom": "Ajouter une interdiction personnalisée...",
+      "NO_REDISTRIBUTION": "Pas de redistribution",
+      "NO_REVERSE_ENGINEERING": "Pas d'ingénierie inverse",
+      "NO_RESALE": "Pas de revente à des tiers",
+      "NO_PUBLIC_DISCLOSURE": "Pas de divulgation publique"
+    },
+    "obligations": {
+      "heading": "Obligations — Engagements supplémentaires",
+      "addCustom": "Ajouter une obligation personnalisée...",
+      "ATTRIBUTION_REQUIRED": "Attribution requise",
+      "GDPR_COMPLIANCE": "Conformité RGPD",
+      "NOTIFY_PROVIDER": "Notifier le fournisseur de l'utilisation",
+      "LICENSE_RENEWAL": "Renouvellement de licence"
+    },
+    "termsUrl": {
+      "label": "Lien vers les Conditions Générales (Optionnel)",
+      "placeholder": "https://exemple.com/conditions",
+      "invalidUrl": "Entrez une URL valide (ex : https://exemple.com/conditions)",
+      "hint": "Entrez une URL résolvable vers votre document juridique de CGU"
+    },
+    "accessControl": {
+      "heading": "Contrôle d'Accès (Pontus-X)",
+      "whitelist": "Organisations avec Accès Autorisé (Whitelist)",
+      "whitelistHint": "Si vous ajoutez des organisations ici, l'actif devient PRIVÉ.",
+      "blacklist": "Organisations avec Accès Refusé (Blacklist)",
+      "blacklistHint": "Ces organisations ne pourront ni voir ni demander l'actif.",
+      "searchPlaceholder": "Rechercher une organisation par nom..."
+    }
+  }
+}

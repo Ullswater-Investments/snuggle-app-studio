@@ -1,26 +1,20 @@
 // ODRL 2.2 Compact Policy Generator — W3C Best Practices §3.3.1 / UNE 0087
-// Maps user-friendly Spanish labels to official ODRL actions
+// Maps decoupled Keys to official ODRL actions + standard English descriptions
 
-const ODRL_PERMISSIONS: Record<string, string> = {
-  "Uso comercial": "commercialize",
-  "Análisis interno": "use",
-  "Generar informes derivados": "derive",
-  "Integración en sistemas internos": "execute",
-  "Uso en investigación": "use",
-};
-
-const ODRL_PROHIBITIONS: Record<string, string> = {
-  "No redistribución": "distribute",
-  "No ingeniería inversa": "reverseEngineer",
-  "No reventa a terceros": "sell",
-  "No divulgación pública": "display",
-};
-
-const ODRL_DUTIES: Record<string, string> = {
-  "Atribución requerida": "attribute",
-  "Cumplimiento GDPR": "ensureExclusivity",
-  "Notificar uso a proveedor": "inform",
-  "Renovación de licencia": "use",
+const ODRL_DICTIONARY: Record<string, { action: string; enDesc: string }> = {
+  COMMERCIAL_USE:         { action: "commercialize",     enDesc: "Commercial use" },
+  INTERNAL_ANALYSIS:      { action: "use",               enDesc: "Internal analysis" },
+  DERIVATIVE_WORKS:       { action: "derive",            enDesc: "Generate derivative reports" },
+  SYSTEM_INTEGRATION:     { action: "execute",           enDesc: "System integration" },
+  RESEARCH_USE:           { action: "use",               enDesc: "Research use" },
+  NO_REDISTRIBUTION:      { action: "distribute",        enDesc: "No redistribution" },
+  NO_REVERSE_ENGINEERING: { action: "reverseEngineer",   enDesc: "No reverse engineering" },
+  NO_RESALE:              { action: "sell",              enDesc: "No resale to third parties" },
+  NO_PUBLIC_DISCLOSURE:   { action: "display",           enDesc: "No public disclosure" },
+  ATTRIBUTION_REQUIRED:   { action: "attribute",         enDesc: "Attribution required" },
+  GDPR_COMPLIANCE:        { action: "ensureExclusivity", enDesc: "GDPR compliance" },
+  NOTIFY_PROVIDER:        { action: "inform",            enDesc: "Notify provider of usage" },
+  LICENSE_RENEWAL:        { action: "use",               enDesc: "License renewal" },
 };
 
 interface OdrlRule {
@@ -31,17 +25,19 @@ interface OdrlRule {
 }
 
 function mapLabels(
-  labels: string[],
-  dictionary: Record<string, string>,
+  items: string[],
   target: string,
   assigner: string
 ): OdrlRule[] {
-  return labels.map((label) => ({
-    target,
-    assigner,
-    action: dictionary[label] ?? "use",
-    description: label,
-  }));
+  return items.map((item) => {
+    const config = ODRL_DICTIONARY[item];
+    return {
+      target,
+      assigner,
+      action: config ? config.action : "use",
+      description: config ? config.enDesc : item, // custom rules keep original text
+    };
+  });
 }
 
 export function generateODRLPolicy(
@@ -63,9 +59,9 @@ export function generateODRLPolicy(
     type: "Offer",
     uid: `urn:uuid:${crypto.randomUUID()}`,
     profile: "http://www.w3.org/ns/odrl/2/",
-    permission: mapLabels(permissions, ODRL_PERMISSIONS, target, assigner),
-    prohibition: mapLabels(prohibitions, ODRL_PROHIBITIONS, target, assigner),
-    duty: mapLabels(obligations, ODRL_DUTIES, target, assigner),
+    permission: mapLabels(permissions, target, assigner),
+    prohibition: mapLabels(prohibitions, target, assigner),
+    duty: mapLabels(obligations, target, assigner),
   };
 
   if (termsUrl) {

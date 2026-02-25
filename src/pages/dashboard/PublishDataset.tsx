@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { generateODRLPolicy } from "@/utils/odrlGenerator";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -114,27 +115,25 @@ interface Step4Data {
 }
 
 const QUICK_PERMISSIONS: PolicyRule[] = [
-  { id: "commercial_use", label: "Uso comercial" },
-  { id: "internal_analysis", label: "Análisis interno" },
-  { id: "derive_reports", label: "Generar informes derivados" },
-  { id: "integrate_systems", label: "Integración en sistemas internos" },
-  { id: "research_use", label: "Uso en investigación" },
+  { id: "COMMERCIAL_USE", label: "COMMERCIAL_USE" },
+  { id: "INTERNAL_ANALYSIS", label: "INTERNAL_ANALYSIS" },
+  { id: "DERIVATIVE_WORKS", label: "DERIVATIVE_WORKS" },
+  { id: "SYSTEM_INTEGRATION", label: "SYSTEM_INTEGRATION" },
+  { id: "RESEARCH_USE", label: "RESEARCH_USE" },
 ];
 
 const QUICK_PROHIBITIONS: PolicyRule[] = [
-  { id: "no_redistribution", label: "No redistribución" },
-  { id: "no_reverse_engineering", label: "No ingeniería inversa" },
-  { id: "no_illegal_use", label: "No uso ilegal o discriminatorio" },
-  { id: "no_resale", label: "No reventa a terceros" },
-  { id: "no_public_disclosure", label: "No divulgación pública" },
+  { id: "NO_REDISTRIBUTION", label: "NO_REDISTRIBUTION" },
+  { id: "NO_REVERSE_ENGINEERING", label: "NO_REVERSE_ENGINEERING" },
+  { id: "NO_RESALE", label: "NO_RESALE" },
+  { id: "NO_PUBLIC_DISCLOSURE", label: "NO_PUBLIC_DISCLOSURE" },
 ];
 
 const QUICK_OBLIGATIONS: PolicyRule[] = [
-  { id: "attribution", label: "Atribución requerida" },
-  { id: "gdpr_compliance", label: "Cumplimiento GDPR" },
-  { id: "license_renewal", label: "Renovación de licencia" },
-  { id: "cite_source", label: "Citar fuente de datos" },
-  { id: "notify_usage", label: "Notificar uso a proveedor" },
+  { id: "ATTRIBUTION_REQUIRED", label: "ATTRIBUTION_REQUIRED" },
+  { id: "GDPR_COMPLIANCE", label: "GDPR_COMPLIANCE" },
+  { id: "NOTIFY_PROVIDER", label: "NOTIFY_PROVIDER" },
+  { id: "LICENSE_RENEWAL", label: "LICENSE_RENEWAL" },
 ];
 
 const LANGUAGES = [
@@ -191,6 +190,7 @@ export default function PublishDataset() {
   const { activeOrg, activeOrgId, isDemo } = useOrganizationContext();
   const { user } = useAuth();
   const { autoApproveAssets, maintenanceMode } = useGovernanceSettings();
+  const { t } = useTranslation('publish');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -1035,10 +1035,10 @@ export default function PublishDataset() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="h-5 w-5 text-primary" />
-                    Paso 3: Políticas de Acceso Pontus-X
+                    {t('step3.title')}
                   </CardTitle>
                   <CardDescription>
-                    Define las reglas de gobernanza y condiciones de uso para tu dataset
+                    {t('step3.description')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-8">
@@ -1047,7 +1047,7 @@ export default function PublishDataset() {
                   <div className="space-y-3">
                     <h3 className="flex items-center gap-2 font-semibold text-green-700 dark:text-green-400">
                       <CheckCircle2 className="h-5 w-5" />
-                      Permisos — Lo que el usuario PUEDE hacer
+                      {t('step3.permissions.heading')}
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {QUICK_PERMISSIONS.map((q) => (
@@ -1069,7 +1069,7 @@ export default function PublishDataset() {
                           }}
                         >
                           <Plus className="h-3 w-3 mr-1" />
-                          {q.label}
+                          {t(`step3.permissions.${q.label}`, q.label)}
                         </Badge>
                       ))}
                     </div>
@@ -1079,7 +1079,7 @@ export default function PublishDataset() {
                           <div key={rule.id} className="flex items-center justify-between rounded-md border border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/20 px-3 py-2">
                             <span className="flex items-center gap-2 text-sm">
                               <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
-                              {rule.label}
+                              {t(`step3.permissions.${rule.label}`, rule.label)}
                             </span>
                             <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => removeRule("permissions", rule.id)}>
                               <Trash2 className="h-3.5 w-3.5" />
@@ -1090,7 +1090,7 @@ export default function PublishDataset() {
                     )}
                     <div className="flex gap-2">
                       <Input
-                        placeholder="Añadir permiso personalizado..."
+                        placeholder={t('step3.permissions.addCustom')}
                         value={customRuleInputs.permissions}
                         onChange={(e) => setCustomRuleInputs((p) => ({ ...p, permissions: e.target.value }))}
                         onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addCustomRule("permissions"))}
@@ -1108,7 +1108,7 @@ export default function PublishDataset() {
                   <div className="space-y-3">
                     <h3 className="flex items-center gap-2 font-semibold text-red-700 dark:text-red-400">
                       <XCircle className="h-5 w-5" />
-                      Prohibiciones — Lo que el usuario NO PUEDE hacer
+                      {t('step3.prohibitions.heading')}
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {QUICK_PROHIBITIONS.map((q) => (
@@ -1130,7 +1130,7 @@ export default function PublishDataset() {
                           }}
                         >
                           <Plus className="h-3 w-3 mr-1" />
-                          {q.label}
+                          {t(`step3.prohibitions.${q.label}`, q.label)}
                         </Badge>
                       ))}
                     </div>
@@ -1140,7 +1140,7 @@ export default function PublishDataset() {
                           <div key={rule.id} className="flex items-center justify-between rounded-md border border-red-200 bg-red-50/50 dark:border-red-800 dark:bg-red-950/20 px-3 py-2">
                             <span className="flex items-center gap-2 text-sm">
                               <XCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
-                              {rule.label}
+                              {t(`step3.prohibitions.${rule.label}`, rule.label)}
                             </span>
                             <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => removeRule("prohibitions", rule.id)}>
                               <Trash2 className="h-3.5 w-3.5" />
@@ -1151,7 +1151,7 @@ export default function PublishDataset() {
                     )}
                     <div className="flex gap-2">
                       <Input
-                        placeholder="Añadir prohibición personalizada..."
+                        placeholder={t('step3.prohibitions.addCustom')}
                         value={customRuleInputs.prohibitions}
                         onChange={(e) => setCustomRuleInputs((p) => ({ ...p, prohibitions: e.target.value }))}
                         onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addCustomRule("prohibitions"))}
@@ -1169,7 +1169,7 @@ export default function PublishDataset() {
                   <div className="space-y-3">
                     <h3 className="flex items-center gap-2 font-semibold text-blue-700 dark:text-blue-400">
                       <Shield className="h-5 w-5" />
-                      Obligaciones — Compromisos adicionales
+                      {t('step3.obligations.heading')}
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {QUICK_OBLIGATIONS.map((q) => (
@@ -1191,7 +1191,7 @@ export default function PublishDataset() {
                           }}
                         >
                           <Plus className="h-3 w-3 mr-1" />
-                          {q.label}
+                          {t(`step3.obligations.${q.label}`, q.label)}
                         </Badge>
                       ))}
                     </div>
@@ -1201,7 +1201,7 @@ export default function PublishDataset() {
                           <div key={rule.id} className="flex items-center justify-between rounded-md border border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/20 px-3 py-2">
                             <span className="flex items-center gap-2 text-sm">
                               <Shield className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                              {rule.label}
+                              {t(`step3.obligations.${rule.label}`, rule.label)}
                             </span>
                             <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => removeRule("obligations", rule.id)}>
                               <Trash2 className="h-3.5 w-3.5" />
@@ -1212,7 +1212,7 @@ export default function PublishDataset() {
                     )}
                     <div className="flex gap-2">
                       <Input
-                        placeholder="Añadir obligación personalizada..."
+                        placeholder={t('step3.obligations.addCustom')}
                         value={customRuleInputs.obligations}
                         onChange={(e) => setCustomRuleInputs((p) => ({ ...p, obligations: e.target.value }))}
                         onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addCustomRule("obligations"))}
@@ -1230,22 +1230,22 @@ export default function PublishDataset() {
                   <div className="space-y-2">
                     <Label htmlFor="termsUrl" className="flex items-center gap-2">
                       <LinkIcon className="h-4 w-4" />
-                      Enlace a Términos y Condiciones (Opcional)
+                      {t('step3.termsUrl.label')}
                     </Label>
                     <Input
                       id="termsUrl"
-                      placeholder="https://ejemplo.com/terminos"
+                      placeholder={t('step3.termsUrl.placeholder')}
                       value={step3Data.termsUrl}
                       onChange={(e) => setStep3Data((prev) => ({ ...prev, termsUrl: e.target.value }))}
                     />
                     {step3Data.termsUrl && !isValidUrl(step3Data.termsUrl) && (
                       <p className="text-xs text-destructive flex items-center gap-1">
                         <Info className="h-3 w-3" />
-                        Introduce una URL válida (ej: https://ejemplo.com/terminos)
+                        {t('step3.termsUrl.invalidUrl')}
                       </p>
                     )}
                     <p className="text-xs text-muted-foreground">
-                      Introduce una URL resoluble a su documento legal de T&C
+                      {t('step3.termsUrl.hint')}
                     </p>
                   </div>
 
@@ -1255,14 +1255,14 @@ export default function PublishDataset() {
                   <div className="space-y-6">
                     <h3 className="flex items-center gap-2 font-semibold text-foreground">
                       <Users className="h-5 w-5 text-primary" />
-                      Control de Acceso (Pontus-X)
+                      {t('step3.accessControl.heading')}
                     </h3>
 
                     {/* BLOCK 1: Whitelist */}
                     <div className="space-y-3 p-4 border rounded-lg bg-emerald-50/30 dark:bg-emerald-950/10 border-emerald-200 dark:border-emerald-800">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-                        <h4 className="font-semibold text-emerald-800 dark:text-emerald-300">Organizaciones con Acceso Permitido (Whitelist)</h4>
+                        <h4 className="font-semibold text-emerald-800 dark:text-emerald-300">{t('step3.accessControl.whitelist')}</h4>
                       </div>
                       <p className="text-xs text-muted-foreground">
                         Si añades organizaciones aquí, el activo se vuelve <strong>PRIVADO</strong>. Solo ellas podrán verlo y solicitarlo. La lista de denegados se ignorará automáticamente.
@@ -1270,7 +1270,7 @@ export default function PublishDataset() {
                       <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
-                          placeholder="Buscar organización por nombre..."
+                          placeholder={t('step3.accessControl.searchPlaceholder')}
                           value={allowedSearchQuery}
                           onChange={(e) => setAllowedSearchQuery(e.target.value)}
                           className="pl-10"
@@ -1324,7 +1324,7 @@ export default function PublishDataset() {
                     <div className={`space-y-3 p-4 border rounded-lg ${step3Data.allowedList.length > 0 ? "opacity-50 pointer-events-none" : ""} bg-red-50/30 dark:bg-red-950/10 border-red-200 dark:border-red-800`}>
                       <div className="flex items-center gap-2">
                         <XCircle className="h-5 w-5 text-red-600" />
-                        <h4 className="font-semibold text-red-800 dark:text-red-300">Organizaciones con Acceso Denegado (Blacklist)</h4>
+                        <h4 className="font-semibold text-red-800 dark:text-red-300">{t('step3.accessControl.blacklist')}</h4>
                       </div>
                       <p className="text-xs text-muted-foreground">
                         Solo efectivo si la lista de permitidos está vacía. El activo será <strong>PÚBLICO</strong> para todos, excepto para las organizaciones listadas aquí.
@@ -1340,7 +1340,7 @@ export default function PublishDataset() {
                       <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
-                          placeholder="Buscar organización por nombre..."
+                          placeholder={t('step3.accessControl.searchPlaceholder')}
                           value={deniedSearchQuery}
                           onChange={(e) => setDeniedSearchQuery(e.target.value)}
                           className="pl-10"

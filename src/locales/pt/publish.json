@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Passo 3: Políticas de Acesso Pontus-X",
+    "description": "Defina as regras de governança e condições de uso para o seu dataset",
+    "permissions": {
+      "heading": "Permissões — O que o utilizador PODE fazer",
+      "addCustom": "Adicionar permissão personalizada...",
+      "COMMERCIAL_USE": "Uso comercial",
+      "INTERNAL_ANALYSIS": "Análise interna",
+      "DERIVATIVE_WORKS": "Gerar relatórios derivados",
+      "SYSTEM_INTEGRATION": "Integração em sistemas internos",
+      "RESEARCH_USE": "Uso em investigação"
+    },
+    "prohibitions": {
+      "heading": "Proibições — O que o utilizador NÃO PODE fazer",
+      "addCustom": "Adicionar proibição personalizada...",
+      "NO_REDISTRIBUTION": "Sem redistribuição",
+      "NO_REVERSE_ENGINEERING": "Sem engenharia reversa",
+      "NO_RESALE": "Sem revenda a terceiros",
+      "NO_PUBLIC_DISCLOSURE": "Sem divulgação pública"
+    },
+    "obligations": {
+      "heading": "Obrigações — Compromissos adicionais",
+      "addCustom": "Adicionar obrigação personalizada...",
+      "ATTRIBUTION_REQUIRED": "Atribuição obrigatória",
+      "GDPR_COMPLIANCE": "Conformidade RGPD",
+      "NOTIFY_PROVIDER": "Notificar o fornecedor do uso",
+      "LICENSE_RENEWAL": "Renovação de licença"
+    },
+    "termsUrl": {
+      "label": "Link para Termos e Condições (Opcional)",
+      "placeholder": "https://exemplo.com/termos",
+      "invalidUrl": "Introduza um URL válido (ex.: https://exemplo.com/termos)",
+      "hint": "Introduza um URL resolvível para o seu documento legal de T&C"
+    },
+    "accessControl": {
+      "heading": "Controlo de Acesso (Pontus-X)",
+      "whitelist": "Organizações com Acesso Permitido (Whitelist)",
+      "whitelistHint": "Se adicionar organizações aqui, o ativo torna-se PRIVADO.",
+      "blacklist": "Organizações com Acesso Negado (Blacklist)",
+      "blacklistHint": "Estas organizações não poderão ver nem solicitar o ativo.",
+      "searchPlaceholder": "Pesquisar organização por nome..."
+    }
+  }
+}

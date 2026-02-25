@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Step 3: Pontus-X Access Policies",
+    "description": "Define governance rules and usage conditions for your dataset",
+    "permissions": {
+      "heading": "Permissions — What the user CAN do",
+      "addCustom": "Add custom permission...",
+      "COMMERCIAL_USE": "Commercial use",
+      "INTERNAL_ANALYSIS": "Internal analysis",
+      "DERIVATIVE_WORKS": "Generate derivative reports",
+      "SYSTEM_INTEGRATION": "System integration",
+      "RESEARCH_USE": "Research use"
+    },
+    "prohibitions": {
+      "heading": "Prohibitions — What the user CANNOT do",
+      "addCustom": "Add custom prohibition...",
+      "NO_REDISTRIBUTION": "No redistribution",
+      "NO_REVERSE_ENGINEERING": "No reverse engineering",
+      "NO_RESALE": "No resale to third parties",
+      "NO_PUBLIC_DISCLOSURE": "No public disclosure"
+    },
+    "obligations": {
+      "heading": "Obligations — Additional commitments",
+      "addCustom": "Add custom obligation...",
+      "ATTRIBUTION_REQUIRED": "Attribution required",
+      "GDPR_COMPLIANCE": "GDPR compliance",
+      "NOTIFY_PROVIDER": "Notify provider of usage",
+      "LICENSE_RENEWAL": "License renewal"
+    },
+    "termsUrl": {
+      "label": "Terms & Conditions Link (Optional)",
+      "placeholder": "https://example.com/terms",
+      "invalidUrl": "Enter a valid URL (e.g.: https://example.com/terms)",
+      "hint": "Enter a resolvable URL to your legal T&C document"
+    },
+    "accessControl": {
+      "heading": "Access Control (Pontus-X)",
+      "whitelist": "Organisations with Allowed Access (Whitelist)",
+      "whitelistHint": "If you add organisations here, the asset becomes PRIVATE.",
+      "blacklist": "Organisations with Denied Access (Blacklist)",
+      "blacklistHint": "These organisations will not be able to view or request the asset.",
+      "searchPlaceholder": "Search organisation by name..."
+    }
+  }
+}

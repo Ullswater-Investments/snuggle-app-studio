@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Schritt 3: Pontus-X Zugriffsrichtlinien",
+    "description": "Definieren Sie Governance-Regeln und Nutzungsbedingungen für Ihren Datensatz",
+    "permissions": {
+      "heading": "Berechtigungen — Was der Nutzer tun DARF",
+      "addCustom": "Benutzerdefinierte Berechtigung hinzufügen...",
+      "COMMERCIAL_USE": "Kommerzielle Nutzung",
+      "INTERNAL_ANALYSIS": "Interne Analyse",
+      "DERIVATIVE_WORKS": "Abgeleitete Berichte erstellen",
+      "SYSTEM_INTEGRATION": "Integration in interne Systeme",
+      "RESEARCH_USE": "Forschungsnutzung"
+    },
+    "prohibitions": {
+      "heading": "Verbote — Was der Nutzer NICHT tun darf",
+      "addCustom": "Benutzerdefiniertes Verbot hinzufügen...",
+      "NO_REDISTRIBUTION": "Keine Weiterverteilung",
+      "NO_REVERSE_ENGINEERING": "Kein Reverse Engineering",
+      "NO_RESALE": "Kein Weiterverkauf an Dritte",
+      "NO_PUBLIC_DISCLOSURE": "Keine öffentliche Offenlegung"
+    },
+    "obligations": {
+      "heading": "Pflichten — Zusätzliche Verpflichtungen",
+      "addCustom": "Benutzerdefinierte Pflicht hinzufügen...",
+      "ATTRIBUTION_REQUIRED": "Quellenangabe erforderlich",
+      "GDPR_COMPLIANCE": "DSGVO-Konformität",
+      "NOTIFY_PROVIDER": "Anbieter über Nutzung benachrichtigen",
+      "LICENSE_RENEWAL": "Lizenzerneuerung"
+    },
+    "termsUrl": {
+      "label": "Link zu den AGB (Optional)",
+      "placeholder": "https://beispiel.de/agb",
+      "invalidUrl": "Geben Sie eine gültige URL ein (z.B.: https://beispiel.de/agb)",
+      "hint": "Geben Sie eine auflösbare URL zu Ihrem rechtlichen AGB-Dokument ein"
+    },
+    "accessControl": {
+      "heading": "Zugriffskontrolle (Pontus-X)",
+      "whitelist": "Organisationen mit erlaubtem Zugriff (Whitelist)",
+      "whitelistHint": "Wenn Sie hier Organisationen hinzufügen, wird das Asset PRIVAT.",
+      "blacklist": "Organisationen mit verweigertem Zugriff (Blacklist)",
+      "blacklistHint": "Diese Organisationen können das Asset weder sehen noch anfordern.",
+      "searchPlaceholder": "Organisation nach Name suchen..."
+    }
+  }
+}
