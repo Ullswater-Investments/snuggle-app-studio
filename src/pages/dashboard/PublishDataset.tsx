@@ -555,7 +555,8 @@ export default function PublishDataset() {
         step3Data.prohibitions.map((r) => r.label),
         step3Data.obligations.map((r) => r.label),
         providerWallet,
-        asset.id
+        asset.id,
+        step3Data.termsUrl?.trim() || undefined
       );
 
       // --- Fase 3: UPDATE con ODRL ---
