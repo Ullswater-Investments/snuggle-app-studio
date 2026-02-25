@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Stap 3: Pontus-X Toegangsbeleid",
+    "description": "Definieer de governance-regels en gebruiksvoorwaarden voor uw dataset",
+    "permissions": {
+      "heading": "Machtigingen — Wat de gebruiker WEL mag doen",
+      "addCustom": "Aangepaste machtiging toevoegen...",
+      "COMMERCIAL_USE": "Commercieel gebruik",
+      "INTERNAL_ANALYSIS": "Interne analyse",
+      "DERIVATIVE_WORKS": "Afgeleide rapporten genereren",
+      "SYSTEM_INTEGRATION": "Integratie in interne systemen",
+      "RESEARCH_USE": "Gebruik voor onderzoek"
+    },
+    "prohibitions": {
+      "heading": "Verboden — Wat de gebruiker NIET mag doen",
+      "addCustom": "Aangepast verbod toevoegen...",
+      "NO_REDISTRIBUTION": "Geen herverdeling",
+      "NO_REVERSE_ENGINEERING": "Geen reverse engineering",
+      "NO_RESALE": "Geen doorverkoop aan derden",
+      "NO_PUBLIC_DISCLOSURE": "Geen openbare bekendmaking"
+    },
+    "obligations": {
+      "heading": "Verplichtingen — Aanvullende toezeggingen",
+      "addCustom": "Aangepaste verplichting toevoegen...",
+      "ATTRIBUTION_REQUIRED": "Bronvermelding vereist",
+      "GDPR_COMPLIANCE": "AVG-conformiteit",
+      "NOTIFY_PROVIDER": "Aanbieder van gebruik op de hoogte stellen",
+      "LICENSE_RENEWAL": "Licentievernieuwing"
+    },
+    "termsUrl": {
+      "label": "Link naar Algemene Voorwaarden (Optioneel)",
+      "placeholder": "https://voorbeeld.nl/voorwaarden",
+      "invalidUrl": "Voer een geldige URL in (bijv.: https://voorbeeld.nl/voorwaarden)",
+      "hint": "Voer een oplosbare URL in naar uw juridische AV-document"
+    },
+    "accessControl": {
+      "heading": "Toegangscontrole (Pontus-X)",
+      "whitelist": "Organisaties met Toegestane Toegang (Whitelist)",
+      "whitelistHint": "Als u hier organisaties toevoegt, wordt het asset PRIVÉ.",
+      "blacklist": "Organisaties met Geweigerde Toegang (Blacklist)",
+      "blacklistHint": "Deze organisaties kunnen het asset niet zien of aanvragen.",
+      "searchPlaceholder": "Zoek organisatie op naam..."
+    }
+  }
+}

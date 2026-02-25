@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Passo 3: Politiche di Accesso Pontus-X",
+    "description": "Definisci le regole di governance e le condizioni d'uso per il tuo dataset",
+    "permissions": {
+      "heading": "Permessi — Cosa l'utente PUÒ fare",
+      "addCustom": "Aggiungi permesso personalizzato...",
+      "COMMERCIAL_USE": "Uso commerciale",
+      "INTERNAL_ANALYSIS": "Analisi interna",
+      "DERIVATIVE_WORKS": "Generare report derivati",
+      "SYSTEM_INTEGRATION": "Integrazione nei sistemi interni",
+      "RESEARCH_USE": "Uso nella ricerca"
+    },
+    "prohibitions": {
+      "heading": "Divieti — Cosa l'utente NON PUÒ fare",
+      "addCustom": "Aggiungi divieto personalizzato...",
+      "NO_REDISTRIBUTION": "Nessuna ridistribuzione",
+      "NO_REVERSE_ENGINEERING": "Nessun reverse engineering",
+      "NO_RESALE": "Nessuna rivendita a terzi",
+      "NO_PUBLIC_DISCLOSURE": "Nessuna divulgazione pubblica"
+    },
+    "obligations": {
+      "heading": "Obblighi — Impegni aggiuntivi",
+      "addCustom": "Aggiungi obbligo personalizzato...",
+      "ATTRIBUTION_REQUIRED": "Attribuzione richiesta",
+      "GDPR_COMPLIANCE": "Conformità GDPR",
+      "NOTIFY_PROVIDER": "Notificare il fornitore dell'utilizzo",
+      "LICENSE_RENEWAL": "Rinnovo della licenza"
+    },
+    "termsUrl": {
+      "label": "Link ai Termini e Condizioni (Opzionale)",
+      "placeholder": "https://esempio.com/termini",
+      "invalidUrl": "Inserisci un URL valido (es.: https://esempio.com/termini)",
+      "hint": "Inserisci un URL risolvibile al tuo documento legale di T&C"
+    },
+    "accessControl": {
+      "heading": "Controllo di Accesso (Pontus-X)",
+      "whitelist": "Organizzazioni con Accesso Consentito (Whitelist)",
+      "whitelistHint": "Se aggiungi organizzazioni qui, l'asset diventa PRIVATO.",
+      "blacklist": "Organizzazioni con Accesso Negato (Blacklist)",
+      "blacklistHint": "Queste organizzazioni non potranno vedere né richiedere l'asset.",
+      "searchPlaceholder": "Cerca organizzazione per nome..."
+    }
+  }
+}

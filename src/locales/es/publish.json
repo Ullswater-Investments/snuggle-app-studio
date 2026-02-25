@@ -1,0 +1,45 @@
+{
+  "step3": {
+    "title": "Paso 3: Políticas de Acceso Pontus-X",
+    "description": "Define las reglas de gobernanza y condiciones de uso para tu dataset",
+    "permissions": {
+      "heading": "Permisos — Lo que el usuario PUEDE hacer",
+      "addCustom": "Añadir permiso personalizado...",
+      "COMMERCIAL_USE": "Uso comercial",
+      "INTERNAL_ANALYSIS": "Análisis interno",
+      "DERIVATIVE_WORKS": "Generar informes derivados",
+      "SYSTEM_INTEGRATION": "Integración en sistemas internos",
+      "RESEARCH_USE": "Uso en investigación"
+    },
+    "prohibitions": {
+      "heading": "Prohibiciones — Lo que el usuario NO PUEDE hacer",
+      "addCustom": "Añadir prohibición personalizada...",
+      "NO_REDISTRIBUTION": "No redistribución",
+      "NO_REVERSE_ENGINEERING": "No ingeniería inversa",
+      "NO_RESALE": "No reventa a terceros",
+      "NO_PUBLIC_DISCLOSURE": "No divulgación pública"
+    },
+    "obligations": {
+      "heading": "Obligaciones — Compromisos adicionales",
+      "addCustom": "Añadir obligación personalizada...",
+      "ATTRIBUTION_REQUIRED": "Atribución requerida",
+      "GDPR_COMPLIANCE": "Cumplimiento GDPR",
+      "NOTIFY_PROVIDER": "Notificar uso a proveedor",
+      "LICENSE_RENEWAL": "Renovación de licencia"
+    },
+    "termsUrl": {
+      "label": "Enlace a Términos y Condiciones (Opcional)",
+      "placeholder": "https://ejemplo.com/terminos",
+      "invalidUrl": "Introduce una URL válida (ej: https://ejemplo.com/terminos)",
+      "hint": "Introduce una URL resoluble a su documento legal de T&C"
+    },
+    "accessControl": {
+      "heading": "Control de Acceso (Pontus-X)",
+      "whitelist": "Organizaciones con Acceso Permitido (Whitelist)",
+      "whitelistHint": "Si añades organizaciones aquí, el activo se vuelve PRIVADO.",
+      "blacklist": "Organizaciones con Acceso Denegado (Blacklist)",
+      "blacklistHint": "Estas organizaciones no podrán ver ni solicitar el activo.",
+      "searchPlaceholder": "Buscar organización por nombre..."
+    }
+  }
+}
