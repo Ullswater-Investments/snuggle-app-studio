@@ -1,10 +1,14 @@
 
 
-## Traductor Silencioso ODRL 2.0 -- Reestructuracion Completa
+## ODRL con Asset ID Real: Insercion en Dos Pasos + Enriquecimiento Semantico
 
-### Objetivo
+### Problema actual
 
-Alinear el generador ODRL con los ejemplos oficiales W3C y reestructurar el payload de `custom_metadata` para separar claramente la semantica ODRL del control de acceso tecnico (Smart Contract).
+La politica ODRL se genera con `target: "urn:uuid:pending-asset"` porque el Asset ID aun no existe al momento de la insercion. Esto invalida semanticamente el JSON-LD.
+
+### Solucion: Two-Step Save
+
+Dividir el guardado en dos fases para obtener primero el ID real de la base de datos y luego generar el ODRL con ese ID.
 
 ---
 
@@ -12,66 +16,60 @@ Alinear el generador ODRL con los ejemplos oficiales W3C y reestructurar el payl
 
 #### 1. `src/utils/odrlGenerator.ts`
 
-- Cambiar `"@type": "Offer"` a `"type": "Offer"` (formato W3C correcto cuando se usa `@context`)
-- Renombrar campo `source_label` a `description` en la interfaz `OdrlRule` y en `mapLabels`
-- Anadir `"Renovacion de licencia": "use"` al diccionario `ODRL_DUTIES`
-- La firma y logica de `mapLabels` y `generateODRLPolicy` se mantienen (ya reciben `providerId` y `assetId`)
+Enriquecer el sobre JSON-LD:
 
-Estructura resultante de cada regla:
+- Cambiar `"@context"` de un string simple a un array que incluya el contexto Dublin Core:
+  ```text
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    { "dct": "http://purl.org/dc/terms/" }
+  ]
+  ```
+- Anadir propiedad `"dct:source": "PROCUREDATA"` al objeto raiz
+- Hacer `assetId` un parametro obligatorio (ya no opcional) puesto que ahora siempre se llamara con el ID real
+
+#### 2. `src/pages/dashboard/PublishDataset.tsx` (lineas 508-548)
+
+Reestructurar la mutacion `publishMutation` en tres fases:
+
+**Fase 1 - INSERT sin ODRL:**
+- Insertar el activo en `data_assets` con `custom_metadata` que incluya `access_policy`, `access_control`, y `additionalInformation: {}` (vacio, sin ODRL)
+- Obtener el `id` devuelto por Supabase
+
+**Fase 2 - Generar ODRL con ID real:**
+- Llamar a `generateODRLPolicy()` pasando el `id` real como `assetId` y `activeOrgId` como `providerId`
+
+**Fase 3 - UPDATE con ODRL:**
+- Realizar un UPDATE al registro recien creado para inyectar el ODRL en `custom_metadata.additionalInformation.odrlPolicy`
+- Se usara una lectura del `custom_metadata` actual, se le anadira el `odrlPolicy`, y se hara el UPDATE completo del campo
+
+Pseudocodigo del flujo:
 
 ```text
-{
-  "target": "urn:uuid:<assetId>",
-  "assigner": "urn:uuid:<providerId>",
-  "action": "use",
-  "description": "Analisis interno"
-}
-```
+// Fase 1: INSERT
+const { data: asset } = await supabase
+  .from("data_assets")
+  .insert({ ..., custom_metadata: { ...sin odrlPolicy } })
+  .select("id, custom_metadata")
+  .single();
 
-#### 2. `src/pages/dashboard/PublishDataset.tsx` (lineas 485-535)
+// Fase 2: Generar ODRL con ID real
+const odrlPolicy = generateODRLPolicy(
+  permissions, prohibitions, obligations,
+  activeOrgId,
+  asset.id   // <-- ID REAL
+);
 
-Reestructurar `custom_metadata` para separar responsabilidades:
-
-**Antes:**
-```text
-custom_metadata: {
-  ...apiConfig,
-  access_policy: { permissions, prohibitions, obligations, allowed_wallets, denied_wallets, access_timeout_days },
-  odrl_policy: { ... }
-}
-```
-
-**Despues:**
-```text
-custom_metadata: {
-  ...apiConfig,
-  access_policy: { permissions, prohibitions, obligations, terms_url },  // Labels amigables (legacy/UI)
-  access_control: { allowed_wallets, denied_wallets, access_timeout_days },  // Smart Contract / Pontus-X
-  additionalInformation: {
-    odrlPolicy: { ... }  // JSON-LD ODRL 2.0 completo
-  }
-}
-```
-
-Esto implica:
-- Mover `allowed_wallets`, `denied_wallets` y `access_timeout_days` de `access_policy` a un nuevo bloque `access_control`
-- Mover `odrl_policy` dentro de `additionalInformation.odrlPolicy`
-- `access_policy` conserva solo los labels de permisos/prohibiciones/obligaciones y `terms_url`
-
-#### 3. `src/pages/admin/AdminPublicationDetail.tsx`
-
-Actualizar las referencias para leer de la nueva estructura:
-
-| Antes | Despues |
-|---|---|
-| `customMeta.access_policy.allowed_wallets` | `customMeta.access_control?.allowed_wallets` |
-| `customMeta.access_policy.denied_wallets` | `customMeta.access_control?.denied_wallets` |
-| `customMeta.access_policy.access_timeout_days` | `customMeta.access_control?.access_timeout_days` |
-| `customMeta.odrl_policy` | `customMeta.additionalInformation?.odrlPolicy` |
-
-**Retrocompatibilidad:** Usar fallbacks con `||` para que registros antiguos (con la estructura anterior) sigan funcionando. Por ejemplo:
-```text
-const allowed = customMeta.access_control?.allowed_wallets || customMeta.access_policy?.allowed_wallets || [];
+// Fase 3: UPDATE
+await supabase
+  .from("data_assets")
+  .update({
+    custom_metadata: {
+      ...asset.custom_metadata,
+      additionalInformation: { odrlPolicy }
+    }
+  })
+  .eq("id", asset.id);
 ```
 
 ---
@@ -80,14 +78,14 @@ const allowed = customMeta.access_control?.allowed_wallets || customMeta.access_
 
 | Archivo | Cambio |
 |---|---|
-| `src/utils/odrlGenerator.ts` | `type` en vez de `@type`, `description` en vez de `source_label`, nuevo duty |
-| `src/pages/dashboard/PublishDataset.tsx` | Reestructurar custom_metadata con `access_control` y `additionalInformation.odrlPolicy` |
-| `src/pages/admin/AdminPublicationDetail.tsx` | Actualizar lecturas con fallbacks retrocompatibles |
+| `src/utils/odrlGenerator.ts` | Enriquecer `@context` con Dublin Core, anadir `dct:source`, hacer `assetId` obligatorio |
+| `src/pages/dashboard/PublishDataset.tsx` | Reestructurar mutacion en 3 fases (INSERT, generar ODRL, UPDATE) |
 
 ### Lo que NO cambia
 
-- La interfaz del usuario (checkboxes, textos, wizard)
-- La logica de aprobacion/rechazo del admin
+- La interfaz del usuario (wizard, checkboxes, pasos)
+- La vista admin (`AdminPublicationDetail.tsx`) — ya lee de `additionalInformation.odrlPolicy`
+- El bloque `access_policy` y `access_control`
 - Las traducciones
-- Ningun otro archivo del proyecto
+- Ningun otro archivo
 
