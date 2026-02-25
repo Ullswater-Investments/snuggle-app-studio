@@ -141,5 +141,20 @@
     "noDataSource": "This asset doesn't have a configured data source yet.",
     "downloading": "Downloading data through the Gateway...",
     "connectionError": "Connection Error: The provider server is not responding."
+  },
+  "pubTabs": {
+    "published": "Published",
+    "pending": "Pending",
+    "rejected": "Rejected"
+  },
+  "rejectedCard": {
+    "reason": "Reason",
+    "viewAndEdit": "View Reason & Edit",
+    "emptyTitle": "No rejected assets",
+    "emptyDesc": "You have no rejected assets. Assets that fail technical validation will appear here."
+  },
+  "pendingEmpty": {
+    "title": "No pending assets",
+    "desc": "You have no assets under review currently."
   }
 }

@@ -68,6 +68,7 @@ interface MarketplaceListing {
   version?: string;
   schema_definition?: Record<string, any> | null;
   custom_metadata?: Record<string, any> | null;
+  admin_notes?: string | null;
 }
 
 // Star rating component
@@ -158,7 +159,7 @@ export default function ProductDetail() {
       const { data: asset, error: assetError } = await supabase
         .from('data_assets')
         .select(`
-          id, status, pricing_model, price, currency, billing_period, custom_metadata, sample_data,
+          id, status, pricing_model, price, currency, billing_period, custom_metadata, sample_data, admin_notes,
           product:data_products(name, description, category, schema_definition, version),
           org:organizations!subject_org_id(id, name)
         `)
@@ -189,6 +190,7 @@ export default function ProductDetail() {
         schema_definition: (asset.product as any)?.schema_definition || null,
         custom_metadata: asset.custom_metadata as any || null,
         sample_data: (asset as any).sample_data || null,
+        admin_notes: asset.admin_notes || null,
       } as MarketplaceListing;
     }
   });
@@ -317,6 +319,29 @@ export default function ProductDetail() {
   if (!product) return <div className="container py-20 text-center">{t('common.assetDetail.notFound')}</div>;
   if (shouldBlockAccess) return <ProductSkeleton />;
   if (isAllowlistBlocked) return <ProductSkeleton />;
+
+  // Rejected asset guard: non-owners see 404
+  const isRejected = product.status === "rejected";
+  const isOwnerOfRejected = isRejected && activeOrgId === product.provider_id;
+
+  if (isRejected && !isOwnerOfRejected) {
+    return (
+      <div className="container py-8 fade-in min-h-screen bg-muted/10">
+        <div className="flex flex-col items-center justify-center py-20 space-y-6">
+          <div className="h-20 w-20 rounded-full bg-muted/30 flex items-center justify-center">
+            <XCircle className="h-10 w-10 text-muted-foreground" />
+          </div>
+          <h1 className="text-2xl font-bold text-center">{t('common.assetDetail.notFoundTitle')}</h1>
+          <p className="text-muted-foreground text-center max-w-md">
+            {t('common.assetDetail.notFoundDesc')}
+          </p>
+          <Button variant="outline" onClick={() => navigate("/catalog")}>
+            {t('common.assetDetail.notFoundBack')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   // Pending validation screen
   if (product.status === "pending") {
@@ -454,6 +479,17 @@ export default function ProductDetail() {
 
   return (
     <div className="container py-8 fade-in min-h-screen bg-muted/10">
+
+      {/* Rejected asset banner for owners */}
+      {isOwnerOfRejected && (
+        <Alert variant="destructive" className="mb-6">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>{t('common.assetDetail.rejectedBannerTitle')}</AlertTitle>
+          <AlertDescription>
+            {t('common.assetDetail.rejectedBannerDesc', { reason: product.admin_notes || '—' })}
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         

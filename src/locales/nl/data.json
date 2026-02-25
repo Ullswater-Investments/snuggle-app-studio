@@ -141,5 +141,20 @@
     "noDataSource": "Dit asset heeft nog geen geconfigureerde databron.",
     "downloading": "Gegevens downloaden via de Gateway...",
     "connectionError": "Verbindingsfout: De server van de aanbieder reageert niet."
+  },
+  "pubTabs": {
+    "published": "Gepubliceerd",
+    "pending": "In afwachting",
+    "rejected": "Afgewezen"
+  },
+  "rejectedCard": {
+    "reason": "Reden",
+    "viewAndEdit": "Reden Bekijken & Bewerken",
+    "emptyTitle": "Geen afgewezen assets",
+    "emptyDesc": "U heeft geen afgewezen assets. Assets die de technische validatie niet doorstaan, verschijnen hier."
+  },
+  "pendingEmpty": {
+    "title": "Geen assets in afwachting",
+    "desc": "U heeft momenteel geen assets in beoordeling."
   }
 }

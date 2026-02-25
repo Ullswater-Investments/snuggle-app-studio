@@ -141,5 +141,20 @@
     "noDataSource": "Cet actif n'a pas encore de source de données configurée.",
     "downloading": "Téléchargement des données via le Gateway...",
     "connectionError": "Erreur de Connexion: Le serveur du fournisseur ne répond pas."
+  },
+  "pubTabs": {
+    "published": "Publiés",
+    "pending": "En attente",
+    "rejected": "Rejetés"
+  },
+  "rejectedCard": {
+    "reason": "Motif",
+    "viewAndEdit": "Voir le Motif et Modifier",
+    "emptyTitle": "Aucun actif rejeté",
+    "emptyDesc": "Vous n'avez aucun actif rejeté. Les actifs qui ne passent pas la validation technique apparaîtront ici."
+  },
+  "pendingEmpty": {
+    "title": "Aucun actif en attente",
+    "desc": "Vous n'avez aucun actif en cours de révision actuellement."
   }
 }

@@ -89,6 +89,11 @@
       "toastReviewSuccess": "Bewertung erfolgreich veröffentlicht",
       "toastReviewError": "Fehler beim Veröffentlichen der Bewertung",
       "toastSheetDownloaded": "Technisches Datenblatt heruntergeladen",
+      "rejectedBannerTitle": "Asset Abgelehnt",
+      "rejectedBannerDesc": "Dieses Asset wurde zur Veröffentlichung abgelehnt. Grund: {{reason}}",
+      "notFoundTitle": "Produkt nicht gefunden",
+      "notFoundDesc": "Dieses Produkt existiert nicht oder Sie haben keinen Zugriff darauf.",
+      "notFoundBack": "Zurück zum Katalog",
       "chat": {
         "title": "Fragen Sie den KI-Assistenten",
         "expertIn": "Experte für Datensatz",

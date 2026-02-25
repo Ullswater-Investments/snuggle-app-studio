@@ -89,6 +89,11 @@
       "toastReviewSuccess": "Recensione pubblicata con successo",
       "toastReviewError": "Errore nella pubblicazione della recensione",
       "toastSheetDownloaded": "Scheda tecnica scaricata",
+      "rejectedBannerTitle": "Asset Rifiutato",
+      "rejectedBannerDesc": "Questo asset è stato rifiutato per la pubblicazione. Motivo: {{reason}}",
+      "notFoundTitle": "Prodotto non trovato",
+      "notFoundDesc": "Questo prodotto non esiste o non hai accesso.",
+      "notFoundBack": "Torna al Catalogo",
       "chat": {
         "title": "Chiedi all'Assistente IA",
         "expertIn": "Esperto sull'asset",
