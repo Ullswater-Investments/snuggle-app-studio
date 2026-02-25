@@ -1,60 +1,78 @@
 
 
-## Refactorizacion ODRL a Politica Compacta (W3C Best Practices 3.3.1)
+## Reglas Explicitas + dcterms:references en la Raiz
 
 ### Objetivo
 
-Alinear `generateODRLPolicy` con el patron de "Compact Policies" de la W3C ODRL 2.2, moviendo `target` y `assigner` a la raiz y simplificando las reglas internas.
+Reincorporar `target` y `assigner` dentro de cada regla (permission, prohibition, duty) para pasar validadores estrictos, manteniendo el enlace legal `dcterms:references` en la raiz.
 
 ---
 
-### Cambios
+### Cambios en `src/utils/odrlGenerator.ts`
 
-#### 1. `src/utils/odrlGenerator.ts`
+#### 1. Actualizar la interfaz `OdrlRule`
 
-**Simplificar la interfaz `OdrlRule`** para que solo contenga `action` y `description` (eliminar `target` y `assigner`).
+Anadir `target` y `assigner` a la interfaz:
 
-**Simplificar `mapLabels`** para que no reciba `target` ni `assigner`, y devuelva solo `{ action, description }`.
+```text
+interface OdrlRule {
+  target: string;
+  assigner: string;
+  action: string;
+  description: string;
+}
+```
 
-**Actualizar `generateODRLPolicy`:**
+#### 2. Actualizar `mapLabels` para recibir `target` y `assigner`
 
-- Anadir parametro opcional `termsUrl?: string`
-- Mover `target` y `assigner` a la raiz del objeto
-- Cambiar `@context` a un array con Dublin Core Terms: `["http://www.w3.org/ns/odrl.jsonld", { "dcterms": "http://purl.org/dc/terms/" }]`
-- Usar `"type": "Offer"` (sin @)
-- Si `termsUrl` tiene valor, incluir `"dcterms:references": termsUrl` en la raiz
-- Si no tiene valor, omitir la propiedad completamente
+```text
+function mapLabels(
+  labels: string[],
+  dictionary: Record<string, string>,
+  target: string,
+  assigner: string
+): OdrlRule[]
+```
+
+Cada regla devuelta incluira los cuatro campos: `target`, `assigner`, `action`, `description`.
+
+#### 3. Actualizar `generateODRLPolicy`
+
+- Eliminar `assigner` y `target` de la raiz del objeto (ya no van ahi)
+- Pasar `target` y `assigner` a cada llamada de `mapLabels`
+- Mantener `dcterms` en el `@context` y la inyeccion condicional de `dcterms:references`
 
 Estructura resultante:
 
 ```text
 {
-  "@context": ["http://www.w3.org/ns/odrl.jsonld", { "dcterms": "http://purl.org/dc/terms/" }],
+  "@context": [
+    "http://www.w3.org/ns/odrl.jsonld",
+    { "dcterms": "http://purl.org/dc/terms/" }
+  ],
   "type": "Offer",
   "uid": "urn:uuid:<uuid>",
   "profile": "http://www.w3.org/ns/odrl/2/",
-  "assigner": "did:ethr:<wallet>",
-  "target": "urn:uuid:<assetId>",
   "dcterms:references": "<terms_url>",   // solo si existe
-  "permission": [{ "action": "...", "description": "..." }],
-  "prohibition": [{ "action": "...", "description": "..." }],
-  "duty": [{ "action": "...", "description": "..." }]
+  "permission": [{
+    "target": "urn:uuid:<assetId>",
+    "assigner": "did:ethr:<wallet>",
+    "action": "commercialize",
+    "description": "Uso comercial"
+  }],
+  "prohibition": [{
+    "target": "urn:uuid:<assetId>",
+    "assigner": "did:ethr:<wallet>",
+    "action": "distribute",
+    "description": "No redistribucion"
+  }],
+  "duty": [{
+    "target": "urn:uuid:<assetId>",
+    "assigner": "did:ethr:<wallet>",
+    "action": "attribute",
+    "description": "Atribucion requerida"
+  }]
 }
-```
-
-#### 2. `src/pages/dashboard/PublishDataset.tsx` (linea 553)
-
-Pasar `termsUrl` como sexto argumento a `generateODRLPolicy`:
-
-```text
-const odrlPolicy = generateODRLPolicy(
-  step3Data.permissions.map((r) => r.label),
-  step3Data.prohibitions.map((r) => r.label),
-  step3Data.obligations.map((r) => r.label),
-  providerWallet,
-  asset.id,
-  step3Data.termsUrl?.trim() || undefined
-);
 ```
 
 ---
@@ -63,12 +81,12 @@ const odrlPolicy = generateODRLPolicy(
 
 | Archivo | Cambio |
 |---|---|
-| `src/utils/odrlGenerator.ts` | Compact Policy: target/assigner en raiz, reglas simplificadas, dcterms:references condicional |
-| `src/pages/dashboard/PublishDataset.tsx` | Pasar termsUrl a generateODRLPolicy |
+| `src/utils/odrlGenerator.ts` | Reglas explicitas con target/assigner + dcterms:references condicional en raiz |
 
 ### Lo que NO cambia
 
-- La interfaz del usuario (wizard, checkboxes, pasos)
-- La vista admin (`AdminPublicationDetail.tsx`)
-- El flujo de guardado en dos pasos (INSERT, generar, UPDATE)
-- Los bloques `access_policy` y `access_control`
+- `PublishDataset.tsx` (ya pasa `termsUrl` correctamente)
+- `AdminPublicationDetail.tsx`
+- El flujo de guardado en dos pasos
+- Los diccionarios de mapeo de acciones
+
