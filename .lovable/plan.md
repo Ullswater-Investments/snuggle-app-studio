@@ -1,183 +1,172 @@
 
 
-## Internacionalizacion del Paso 3: Arquitectura de Llaves Desacopladas
+## Internacionalizacion completa de /datos/publicar (Pasos 1, 2, 4 + elementos globales)
 
 ### Objetivo
 
-Desacoplar la logica ODRL del idioma de la UI. Las llaves (keys) se almacenan en el estado y se pasan al generador, mientras la UI muestra textos traducidos via `t()`. El JSON-LD final usa descripciones en ingles estandar para llaves predefinidas, y texto original para reglas personalizadas.
+El Paso 3 ya esta internacionalizado. Ahora se trata de pasar por `t()` **todos** los strings hardcodeados en espanol del resto del wizard: cabecera de pagina, alertas, modo demo, stepper, Paso 1 (Fuente de Datos), Paso 2 (Esquema), Paso 4 (Publicacion + Precio + Terminos), toasts de validacion/exito/error, y las constantes estaticas (LANGUAGES, CATEGORIES, PRICING_MODELS, FIELD_TYPES, STEPS).
 
 ---
 
-### 1. Nuevo namespace de traducciones: `publish`
+### 1. Ampliar los 7 archivos `publish.json` existentes
 
-Crear `src/locales/{es,en,fr,de,it,pt,nl}/publish.json` con las traducciones del Paso 3.
-
-**Estructura del JSON** (ejemplo `es`):
+Anadir las siguientes secciones nuevas al namespace `publish` en cada idioma:
 
 ```text
 {
-  "step3": {
-    "title": "Paso 3: Politicas de Acceso Pontus-X",
-    "description": "Define las reglas de gobernanza y condiciones de uso para tu dataset",
-    "permissions": {
-      "heading": "Permisos -- Lo que el usuario PUEDE hacer",
-      "addCustom": "Anadir permiso personalizado...",
-      "COMMERCIAL_USE": "Uso comercial",
-      "INTERNAL_ANALYSIS": "Analisis interno",
-      "DERIVATIVE_WORKS": "Generar informes derivados",
-      "SYSTEM_INTEGRATION": "Integracion en sistemas internos",
-      "RESEARCH_USE": "Uso en investigacion"
+  "header": {
+    "backToData": "Volver a Mis Datos",
+    "title": "Publicar Dataset",
+    "subtitle": "Conecta tu API al ecosistema de ProcureData"
+  },
+  "alerts": {
+    "maintenance": "Sistema en mantenimiento programado. La publicacion de datasets esta temporalmente desactivada.",
+    "publishingAs": "Publicando como:",
+    "orgTypes": {
+      "consumer": "Consumidor",
+      "provider": "Proveedor",
+      "holder": "Poseedor de Datos"
     },
-    "prohibitions": {
-      "heading": "Prohibiciones -- Lo que el usuario NO PUEDE hacer",
-      "addCustom": "Anadir prohibicion personalizada...",
-      "NO_REDISTRIBUTION": "No redistribucion",
-      "NO_REVERSE_ENGINEERING": "No ingenieria inversa",
-      "NO_RESALE": "No reventa a terceros",
-      "NO_PUBLIC_DISCLOSURE": "No divulgacion publica"
+    "securityNote": "ProcureData no almacena sus datos. Solo facilitamos la conexion segura entre su API y el consumidor autorizado."
+  },
+  "demo": {
+    "title": "Funcion no disponible",
+    "description": "La publicacion de activos no esta disponible en modo demostracion.",
+    "backButton": "Volver al Dashboard"
+  },
+  "stepper": {
+    "step1": { "title": "Fuente de Datos", "description": "Conexion API" },
+    "step2": { "title": "Esquema", "description": "Estructura tecnica" },
+    "step3": { "title": "Politicas", "description": "Pontus-X" },
+    "step4": { "title": "Publicacion", "description": "Marketplace" }
+  },
+  "step1": {
+    "title": "Paso 1: Fuente de Datos (API)",
+    "description": "Define el endpoint y la autenticacion de tu fuente de datos",
+    "originName": { "label": "Nombre del Origen *", "placeholder": "Ej: API ERP - Inventario 2024", "hint": "Identificador interno para tu referencia" },
+    "originDescription": { "label": "Descripcion del Origen", "placeholder": "Describe brevemente la fuente de estos datos..." },
+    "apiUrl": { "label": "URL de la API *", "placeholder": "https://api.ejemplo.com/v1/datos", "hint": "Endpoint GET desde el que los consumidores autorizados recibiran los datos" },
+    "headers": { "label": "Headers Personalizados", "addButton": "Anadir Header", "keyPlaceholder": "Key (ej: Authorization)", "valuePlaceholder": "Value (ej: Bearer token...)", "hint": "Los headers se almacenan de forma segura y se envian unicamente en las llamadas autorizadas" },
+    "saving": "Guardando...",
+    "continue": "Continuar",
+    "validation": { "nameRequired": "El nombre del origen es obligatorio", "urlRequired": "La URL de la API es obligatoria" },
+    "success": "Configuracion de origen guardada correctamente",
+    "error": "Error al guardar el origen"
+  },
+  "step2": {
+    "title": "Paso 2: Esquema de Datos Tecnico",
+    "description": "Define la estructura que veran los consumidores al consultar tu API",
+    "assistant": { "label": "Asistente de Esquema", "description": "Sube un archivo JSON o CSV de ejemplo y detectaremos los campos automaticamente. Tambien puedes definirlos manualmente.", "uploadButton": "Cargar JSON / CSV" },
+    "fields": { "label": "Definicion de Campos", "fieldHeader": "Campo *", "typeHeader": "Tipo *", "descHeader": "Descripcion", "fieldPlaceholder": "nombre_campo", "descPlaceholder": "Descripcion del campo...", "addButton": "Anadir Campo" },
+    "fieldTypes": { "Texto": "Texto", "Numero": "Numero", "Fecha": "Fecha", "Booleano": "Booleano", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Timestamp", "Decimal": "Decimal", "Entero": "Entero" },
+    "validation": { "minOneField": "Define al menos un campo en el esquema" },
+    "fileErrors": { "parseError": "No se pudo procesar el archivo. Verifica el formato.", "noFields": "No se detectaron campos en el archivo." },
+    "fieldsDetected": "{{count}} campos detectados automaticamente"
+  },
+  "step3": { ... (ya existente) },
+  "step4": {
+    "title": "Paso 4: Publicacion en Marketplace",
+    "description": "Define como aparecera tu dataset en el catalogo",
+    "publicName": { "label": "Nombre Comercial *", "placeholder": "Ej: Indice de Precios Industriales Q1 2024" },
+    "descriptionField": { "label": "Descripcion", "placeholder": "Describe el contenido, fuentes y utilidad de los datos..." },
+    "category": { "label": "Categoria *", "placeholder": "Selecciona una categoria" },
+    "language": { "label": "Idioma del Dataset *", "placeholder": "Selecciona el idioma" },
+    "categories": { "Compliance": "Compliance", "ESG": "ESG / Sostenibilidad", "Ops": "Operaciones", "Market": "Mercado / Precios", "R&D": "I+D / Innovacion", "Logistics": "Logistica", "Finance": "Finanzas", "HR": "Recursos Humanos", "IoT": "IoT / Telemetria", "Otros": "Otros" },
+    "languages": { "es": "Espanol", "en": "Ingles", "de": "Aleman", "fr": "Frances", "pt": "Portugues", "it": "Italiano" },
+    "pricing": {
+      "title": "Modelo de Precio",
+      "description": "Define como quieres monetizar tus datos",
+      "models": { "free": { "label": "Gratuito", "description": "Sin coste para consumidores" }, "subscription": { "label": "Suscripcion", "description": "Pago mensual recurrente" }, "one_time": { "label": "Pago Unico", "description": "Licencia perpetua" }, "usage": { "label": "Por Uso", "description": "Basado en consumo de API" } },
+      "priceLabel": "Precio (EUR)",
+      "perMonth": "/mes"
     },
-    "obligations": {
-      "heading": "Obligaciones -- Compromisos adicionales",
-      "addCustom": "Anadir obligacion personalizada...",
-      "ATTRIBUTION_REQUIRED": "Atribucion requerida",
-      "GDPR_COMPLIANCE": "Cumplimiento GDPR",
-      "NOTIFY_PROVIDER": "Notificar uso a proveedor",
-      "LICENSE_RENEWAL": "Renovacion de licencia"
+    "terms": {
+      "title": "Terminos de Uso",
+      "description": "Acepta las condiciones para publicar en el marketplace",
+      "acceptTerms": "Acepto los Terminos y Condiciones de ProcureData",
+      "acceptTermsDesc": "Incluyendo las obligaciones como proveedor de datos y las politicas de uso del marketplace.",
+      "acceptDataPolicy": "Confirmo que tengo derecho a compartir estos datos",
+      "acceptDataPolicyDesc": "Declaro que los datos cumplen con GDPR y no contienen informacion personal sin consentimiento."
     },
-    "termsUrl": {
-      "label": "Enlace a Terminos y Condiciones (Opcional)",
-      "placeholder": "https://ejemplo.com/terminos",
-      "invalidUrl": "Introduce una URL valida (ej: https://ejemplo.com/terminos)",
-      "hint": "Introduce una URL resoluble a su documento legal de T&C"
-    },
-    "accessControl": {
-      "heading": "Control de Acceso (Pontus-X)",
-      "whitelist": "Organizaciones con Acceso Permitido (Whitelist)",
-      "whitelistHint": "Si anades organizaciones aqui, el activo se vuelve PRIVADO.",
-      "blacklist": "Organizaciones con Acceso Denegado (Blacklist)",
-      "blacklistHint": "Estas organizaciones no podran ver ni solicitar el activo.",
-      "searchPlaceholder": "Buscar organizacion por nombre..."
-    }
+    "submit": "Enviar para Validacion Tecnica",
+    "submitting": "Enviando...",
+    "validation": { "nameRequired": "El nombre publico es obligatorio", "categoryRequired": "Selecciona una categoria", "languageRequired": "Selecciona el idioma del dataset", "termsRequired": "Debes aceptar los terminos y la politica de datos", "maintenanceMode": "Sistema en mantenimiento. La publicacion esta temporalmente desactivada." },
+    "successAutoApprove": "Dataset publicado exitosamente en el catalogo.",
+    "successReview": "Dataset enviado a revision tecnica. Se le notificara cuando este disponible en el catalogo.",
+    "errorPublish": "Error al publicar"
+  },
+  "navigation": { "back": "Atras", "continue": "Continuar" },
+  "accessTimeout": {
+    "title": "Caducidad del Servicio (Timeout)",
+    "description": "Define cuanto tiempo podra el consumidor acceder a los datos antes de que expire su licencia.",
+    "unit": "dias",
+    "defaultHint": "Valor por defecto: 90 dias. Los consumidores veran este periodo en la licencia de uso."
+  },
+  "accessControl": {
+    "whitelistHintLong": "Si anades organizaciones aqui, el activo se vuelve PRIVADO. Solo ellas podran verlo y solicitarlo. La lista de denegados se ignorara automaticamente.",
+    "blacklistHintLong": "Solo efectivo si la lista de permitidos esta vacia. El activo sera PUBLICO para todos, excepto para las organizaciones listadas aqui.",
+    "blacklistDisabledWarning": "La whitelist tiene prioridad. Esta seccion se ignora mientras haya organizaciones en la lista de permitidos.",
+    "noWallet": "Sin wallet",
+    "emptyWhitelist": "Sin organizaciones anadidas -- el activo no sera privado por whitelist.",
+    "emptyBlacklist": "Sin organizaciones denegadas -- acceso publico total.",
+    "termsUrlError": "La URL de T&C no es valida"
   }
 }
 ```
 
-Se crearan los 7 archivos con traducciones nativas para cada idioma. El namespace `publish` se registrara en `src/i18n.ts`.
+Se crearan traducciones nativas para los 7 idiomas: **es, en, fr, de, it, pt, nl**.
 
 ---
 
-### 2. Refactorizar constantes con Keys en `PublishDataset.tsx`
+### 2. Refactorizar constantes en `PublishDataset.tsx`
 
-**Reemplazar** los arrays `QUICK_PERMISSIONS`, `QUICK_PROHIBITIONS`, `QUICK_OBLIGATIONS` para usar Keys en mayusculas como `label`:
+**Convertir constantes estaticas a funciones dinamicas** que reciban `t`:
 
-```text
-const QUICK_PERMISSIONS: PolicyRule[] = [
-  { id: "COMMERCIAL_USE", label: "COMMERCIAL_USE" },
-  { id: "INTERNAL_ANALYSIS", label: "INTERNAL_ANALYSIS" },
-  { id: "DERIVATIVE_WORKS", label: "DERIVATIVE_WORKS" },
-  { id: "SYSTEM_INTEGRATION", label: "SYSTEM_INTEGRATION" },
-  { id: "RESEARCH_USE", label: "RESEARCH_USE" },
-];
-
-const QUICK_PROHIBITIONS: PolicyRule[] = [
-  { id: "NO_REDISTRIBUTION", label: "NO_REDISTRIBUTION" },
-  { id: "NO_REVERSE_ENGINEERING", label: "NO_REVERSE_ENGINEERING" },
-  { id: "NO_RESALE", label: "NO_RESALE" },
-  { id: "NO_PUBLIC_DISCLOSURE", label: "NO_PUBLIC_DISCLOSURE" },
-];
-
-const QUICK_OBLIGATIONS: PolicyRule[] = [
-  { id: "ATTRIBUTION_REQUIRED", label: "ATTRIBUTION_REQUIRED" },
-  { id: "GDPR_COMPLIANCE", label: "GDPR_COMPLIANCE" },
-  { id: "NOTIFY_PROVIDER", label: "NOTIFY_PROVIDER" },
-  { id: "LICENSE_RENEWAL", label: "LICENSE_RENEWAL" },
-];
-```
-
-**NOTA**: Se elimina "No uso ilegal o discriminatorio" (no tenia mapeo ODRL) y "Citar fuente de datos" (duplicado de ATTRIBUTION). Si se desean mantener, se agregan como keys adicionales.
-
-**En la UI**, al renderizar badges y reglas seleccionadas, se usara `t()` para mostrar el texto traducido:
-
-- Badge text: `t(\`publish:step3.permissions.${q.label}\`, q.label)` (fallback a la key si no existe traduccion)
-- Regla seleccionada: `t(\`publish:step3.permissions.${rule.label}\`, rule.label)` -- si la key no se encuentra en el diccionario (regla personalizada), se muestra el texto original
-
-**Titulos y placeholders**: reemplazar todos los strings hardcodeados del Paso 3 por llamadas a `t()`.
+- `STEPS` -> `getSteps(t)` retorna array con titulos traducidos
+- `CATEGORIES` -> se renderiza con `t(\`step4.categories.${cat.value}\`)`
+- `LANGUAGES` -> se renderiza con `t(\`step4.languages.${lang.value}\`)`
+- `PRICING_MODELS` -> se renderiza con `t(\`step4.pricing.models.${model.value}.label\`)` y `.description`
+- `FIELD_TYPES` -> se renderiza con `t(\`step2.fieldTypes.${type}\`)`
 
 ---
 
-### 3. Refactorizar `odrlGenerator.ts` con diccionario de Keys
+### 3. Reemplazar TODOS los strings hardcodeados en la UI
 
-**Reemplazar** los tres diccionarios separados por un unico `ODRL_DICTIONARY`:
+Secciones a actualizar con `t()`:
 
-```text
-const ODRL_DICTIONARY: Record<string, { action: string; enDesc: string }> = {
-  COMMERCIAL_USE:       { action: "commercialize", enDesc: "Commercial use" },
-  INTERNAL_ANALYSIS:    { action: "use",           enDesc: "Internal analysis" },
-  DERIVATIVE_WORKS:     { action: "derive",        enDesc: "Generate derivative reports" },
-  SYSTEM_INTEGRATION:   { action: "execute",       enDesc: "System integration" },
-  RESEARCH_USE:         { action: "use",           enDesc: "Research use" },
-  NO_REDISTRIBUTION:    { action: "distribute",    enDesc: "No redistribution" },
-  NO_REVERSE_ENGINEERING: { action: "reverseEngineer", enDesc: "No reverse engineering" },
-  NO_RESALE:            { action: "sell",          enDesc: "No resale to third parties" },
-  NO_PUBLIC_DISCLOSURE: { action: "display",       enDesc: "No public disclosure" },
-  ATTRIBUTION_REQUIRED: { action: "attribute",     enDesc: "Attribution required" },
-  GDPR_COMPLIANCE:      { action: "ensureExclusivity", enDesc: "GDPR compliance" },
-  NOTIFY_PROVIDER:      { action: "inform",        enDesc: "Notify provider of usage" },
-  LICENSE_RENEWAL:      { action: "use",           enDesc: "License renewal" },
-};
-```
-
-**Actualizar `mapLabels`** para usar el diccionario unificado:
-
-```text
-function mapLabels(items: string[], target: string, assigner: string): OdrlRule[] {
-  return items.map((item) => {
-    const config = ODRL_DICTIONARY[item];
-    return {
-      target,
-      assigner,
-      action: config ? config.action : "use",
-      description: config ? config.enDesc : item,  // custom rules keep original text
-    };
-  });
-}
-```
-
-**Actualizar `generateODRLPolicy`** para pasar un solo array a `mapLabels` (sin el diccionario de texto espanol):
-
-```text
-permission: mapLabels(permissions, target, assigner),
-prohibition: mapLabels(prohibitions, target, assigner),
-duty: mapLabels(obligations, target, assigner),
-```
+| Seccion | Strings a reemplazar |
+|---|---|
+| Cabecera | "Publicar Dataset", "Conecta tu API...", "Volver a Mis Datos" |
+| Alerta mantenimiento | "Sistema en mantenimiento programado..." |
+| Alerta organizacion | "Publicando como:", badges de tipo org |
+| Alerta seguridad | "ProcureData no almacena sus datos..." |
+| Modo demo | "Funcion no disponible", "La publicacion de activos...", "Volver al Dashboard" |
+| Paso 1 completo | Titulo, descripcion, labels, placeholders, hints, boton guardar |
+| Paso 2 completo | Titulo, descripcion, asistente esquema, tabla headers, boton anadir campo |
+| Paso 3 (parcial) | Strings restantes en access control (hints largos, empty states, timeout) |
+| Paso 4 completo | Titulo, labels, placeholders, modelo de precio, terminos de uso, boton publicar |
+| Toasts | Todos los mensajes de validacion, exito y error |
+| Botones navegacion | "Atras", "Continuar", "Guardando...", "Enviando..." |
 
 ---
 
-### 4. Registrar namespace en `src/i18n.ts`
-
-Anadir imports para `publish.json` en los 7 idiomas y registrar `publish` en el objeto `resources` y en el array `ns`.
-
----
-
-### Archivos a modificar/crear
+### 4. Archivos a modificar/crear
 
 | Archivo | Cambio |
 |---|---|
-| `src/locales/es/publish.json` | CREAR -- traducciones Step 3 en espanol |
-| `src/locales/en/publish.json` | CREAR -- traducciones Step 3 en ingles |
-| `src/locales/fr/publish.json` | CREAR -- traducciones Step 3 en frances |
-| `src/locales/de/publish.json` | CREAR -- traducciones Step 3 en aleman |
-| `src/locales/it/publish.json` | CREAR -- traducciones Step 3 en italiano |
-| `src/locales/pt/publish.json` | CREAR -- traducciones Step 3 en portugues |
-| `src/locales/nl/publish.json` | CREAR -- traducciones Step 3 en neerlandes |
-| `src/i18n.ts` | Registrar namespace `publish` (7 imports + resources + ns) |
-| `src/utils/odrlGenerator.ts` | Diccionario unificado ODRL_DICTIONARY, mapLabels simplificado |
-| `src/pages/dashboard/PublishDataset.tsx` | Keys en QUICK_*, UI con t(), useTranslation('publish') |
+| `src/locales/es/publish.json` | Ampliar con step1, step2, step4, header, alerts, demo, stepper, navigation, accessTimeout, accessControl |
+| `src/locales/en/publish.json` | Idem en ingles |
+| `src/locales/fr/publish.json` | Idem en frances |
+| `src/locales/de/publish.json` | Idem en aleman |
+| `src/locales/it/publish.json` | Idem en italiano |
+| `src/locales/pt/publish.json` | Idem en portugues |
+| `src/locales/nl/publish.json` | Idem en neerlandes |
+| `src/pages/dashboard/PublishDataset.tsx` | Reemplazar todos los strings por llamadas a `t()`, convertir constantes a dinamicas |
 
 ### Lo que NO cambia
 
-- La interfaz `PolicyRule` (sigue con `id` y `label`)
-- El flujo de guardado en dos pasos (INSERT, UPDATE)
-- `AdminPublicationDetail.tsx` (DDO viewer)
-- Las reglas personalizadas siguen siendo texto libre
-- La estructura del JSON-LD ODRL (target/assigner explicitos, dcterms:references)
+- `src/i18n.ts` (el namespace `publish` ya esta registrado)
+- `src/utils/odrlGenerator.ts` (ya usa keys desacopladas)
+- La logica de negocio (mutaciones, validaciones, flujo de pasos)
+- `AdminPublicationDetail.tsx`
+
