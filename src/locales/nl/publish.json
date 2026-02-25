@@ -1,4 +1,53 @@
 {
+  "header": {
+    "backToData": "Terug naar Mijn Data",
+    "title": "Dataset publiceren",
+    "subtitle": "Verbind uw API met het ProcureData-ecosysteem"
+  },
+  "alerts": {
+    "maintenance": "Gepland onderhoud gaande. Het publiceren van datasets is tijdelijk uitgeschakeld.",
+    "publishingAs": "Publiceren als:",
+    "orgTypes": {
+      "consumer": "Consument",
+      "provider": "Aanbieder",
+      "holder": "Gegevenshouder"
+    },
+    "securityNote": "ProcureData slaat uw gegevens niet op. Wij faciliteren alleen de beveiligde verbinding tussen uw API en de geautoriseerde consument."
+  },
+  "demo": {
+    "title": "Functie niet beschikbaar",
+    "description": "Het publiceren van assets is niet beschikbaar in demomodus.",
+    "backButton": "Terug naar Dashboard"
+  },
+  "stepper": {
+    "step1": { "title": "Gegevensbron", "description": "API-verbinding" },
+    "step2": { "title": "Schema", "description": "Technische structuur" },
+    "step3": { "title": "Beleid", "description": "Pontus-X" },
+    "step4": { "title": "Publicatie", "description": "Marketplace" }
+  },
+  "step1": {
+    "title": "Stap 1: Gegevensbron (API)",
+    "description": "Definieer het eindpunt en de authenticatie van uw gegevensbron",
+    "originName": { "label": "Bronnaam *", "placeholder": "Bijv.: ERP API - Inventaris 2024", "hint": "Interne identificatie voor uw referentie" },
+    "originDescription": { "label": "Bronbeschrijving", "placeholder": "Beschrijf kort de bron van deze gegevens..." },
+    "apiUrl": { "label": "API-URL *", "placeholder": "https://api.voorbeeld.nl/v1/gegevens", "hint": "GET-eindpunt waarvan geautoriseerde consumenten de gegevens ontvangen" },
+    "headers": { "label": "Aangepaste Headers", "addButton": "Header toevoegen", "keyPlaceholder": "Key (bijv.: Authorization)", "valuePlaceholder": "Value (bijv.: Bearer token...)", "hint": "Headers worden veilig opgeslagen en alleen verzonden bij geautoriseerde oproepen" },
+    "saving": "Opslaan...",
+    "continue": "Doorgaan",
+    "validation": { "nameRequired": "De bronnaam is verplicht", "urlRequired": "De API-URL is verplicht" },
+    "success": "Bronconfiguratie succesvol opgeslagen",
+    "error": "Fout bij het opslaan van de bron"
+  },
+  "step2": {
+    "title": "Stap 2: Technisch Gegevensschema",
+    "description": "Definieer de structuur die consumenten zien bij het bevragen van uw API",
+    "assistant": { "label": "Schema-assistent", "description": "Upload een voorbeeld JSON- of CSV-bestand en wij detecteren de velden automatisch. U kunt ze ook handmatig definiëren.", "uploadButton": "JSON / CSV laden" },
+    "fields": { "label": "Velddefinitie", "fieldHeader": "Veld *", "typeHeader": "Type *", "descHeader": "Beschrijving", "fieldPlaceholder": "veldnaam", "descPlaceholder": "Veldbeschrijving...", "addButton": "Veld toevoegen" },
+    "fieldTypes": { "Texto": "Tekst", "Numero": "Getal", "Fecha": "Datum", "Booleano": "Boolean", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Tijdstempel", "Decimal": "Decimaal", "Entero": "Geheel getal" },
+    "validation": { "minOneField": "Definieer ten minste één veld in het schema" },
+    "fileErrors": { "parseError": "Het bestand kon niet worden verwerkt. Controleer het formaat.", "noFields": "Geen velden gedetecteerd in het bestand." },
+    "fieldsDetected": "{{count}} velden automatisch gedetecteerd"
+  },
   "step3": {
     "title": "Stap 3: Pontus-X Toegangsbeleid",
     "description": "Definieer de governance-regels en gebruiksvoorwaarden voor uw dataset",
@@ -41,5 +90,63 @@
       "blacklistHint": "Deze organisaties kunnen het asset niet zien of aanvragen.",
       "searchPlaceholder": "Zoek organisatie op naam..."
     }
+  },
+  "step4": {
+    "title": "Stap 4: Marketplace-publicatie",
+    "description": "Definieer hoe uw dataset in de catalogus verschijnt",
+    "publicName": { "label": "Commerciële Naam *", "placeholder": "Bijv.: Industriële Prijsindex Q1 2024" },
+    "descriptionField": { "label": "Beschrijving", "placeholder": "Beschrijf de inhoud, bronnen en bruikbaarheid van de gegevens..." },
+    "category": { "label": "Categorie *", "placeholder": "Selecteer een categorie" },
+    "language": { "label": "Taal van de Dataset *", "placeholder": "Selecteer de taal" },
+    "categories": { "Compliance": "Compliance", "ESG": "ESG / Duurzaamheid", "Ops": "Operaties", "Market": "Markt / Prijzen", "R&D": "O&O / Innovatie", "Logistics": "Logistiek", "Finance": "Financiën", "HR": "Personeelszaken", "IoT": "IoT / Telemetrie", "Otros": "Overig" },
+    "languages": { "es": "Spaans", "en": "Engels", "de": "Duits", "fr": "Frans", "pt": "Portugees", "it": "Italiaans" },
+    "pricing": {
+      "title": "Prijsmodel",
+      "description": "Definieer hoe u uw gegevens wilt monetiseren",
+      "models": {
+        "free": { "label": "Gratis", "description": "Geen kosten voor consumenten" },
+        "subscription": { "label": "Abonnement", "description": "Maandelijkse terugkerende betaling" },
+        "one_time": { "label": "Eenmalige Betaling", "description": "Eeuwigdurende licentie" },
+        "usage": { "label": "Per Gebruik", "description": "Gebaseerd op API-verbruik" }
+      },
+      "priceLabel": "Prijs (€)",
+      "perMonth": "/maand"
+    },
+    "terms": {
+      "title": "Gebruiksvoorwaarden",
+      "description": "Accepteer de voorwaarden om te publiceren op de marketplace",
+      "acceptTerms": "Ik accepteer de Algemene Voorwaarden van ProcureData",
+      "acceptTermsDesc": "Inclusief de verplichtingen als gegevensaanbieder en het gebruiksbeleid van de marketplace.",
+      "acceptDataPolicy": "Ik bevestig dat ik het recht heb om deze gegevens te delen",
+      "acceptDataPolicyDesc": "Ik verklaar dat de gegevens voldoen aan de AVG en geen persoonlijke informatie bevatten zonder toestemming."
+    },
+    "submit": "Indienen voor Technische Validatie",
+    "submitting": "Bezig met verzenden...",
+    "validation": {
+      "nameRequired": "De openbare naam is verplicht",
+      "categoryRequired": "Selecteer een categorie",
+      "languageRequired": "Selecteer de taal van de dataset",
+      "termsRequired": "U moet de voorwaarden en het gegevensbeleid accepteren",
+      "maintenanceMode": "Systeem in onderhoud. Publicatie is tijdelijk uitgeschakeld."
+    },
+    "successAutoApprove": "Dataset succesvol gepubliceerd in de catalogus.",
+    "successReview": "Dataset ingediend voor technische beoordeling. U wordt op de hoogte gesteld wanneer het beschikbaar is in de catalogus.",
+    "errorPublish": "Fout bij publicatie"
+  },
+  "navigation": { "back": "Terug", "continue": "Doorgaan" },
+  "accessTimeout": {
+    "title": "Dienstverlening (Timeout)",
+    "description": "Definieer hoe lang de consument toegang heeft tot de gegevens voordat de licentie verloopt.",
+    "unit": "dagen",
+    "defaultHint": "Standaardwaarde: 90 dagen. Consumenten zien deze periode in de gebruikslicentie."
+  },
+  "accessControl": {
+    "whitelistHintLong": "Als u hier organisaties toevoegt, wordt het asset PRIVÉ. Alleen zij kunnen het zien en aanvragen. De weigeringslijst wordt automatisch genegeerd.",
+    "blacklistHintLong": "Alleen effectief als de toelatingslijst leeg is. Het asset is OPENBAAR voor iedereen, behalve voor de hier vermelde organisaties.",
+    "blacklistDisabledWarning": "De whitelist heeft voorrang. Deze sectie wordt genegeerd zolang er organisaties in de toelatingslijst staan.",
+    "noWallet": "Geen wallet",
+    "emptyWhitelist": "Geen organisaties toegevoegd — het asset wordt niet privé door whitelist.",
+    "emptyBlacklist": "Geen organisaties geweigerd — volledige openbare toegang.",
+    "termsUrlError": "De AV-URL is ongeldig"
   }
 }

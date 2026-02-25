@@ -1,4 +1,53 @@
 {
+  "header": {
+    "backToData": "Voltar aos Meus Dados",
+    "title": "Publicar Dataset",
+    "subtitle": "Conecte a sua API ao ecossistema ProcureData"
+  },
+  "alerts": {
+    "maintenance": "Manutenção programada em curso. A publicação de datasets está temporariamente desativada.",
+    "publishingAs": "A publicar como:",
+    "orgTypes": {
+      "consumer": "Consumidor",
+      "provider": "Fornecedor",
+      "holder": "Detentor de Dados"
+    },
+    "securityNote": "ProcureData não armazena os seus dados. Apenas facilitamos a ligação segura entre a sua API e o consumidor autorizado."
+  },
+  "demo": {
+    "title": "Função não disponível",
+    "description": "A publicação de ativos não está disponível em modo de demonstração.",
+    "backButton": "Voltar ao Dashboard"
+  },
+  "stepper": {
+    "step1": { "title": "Fonte de Dados", "description": "Ligação API" },
+    "step2": { "title": "Esquema", "description": "Estrutura técnica" },
+    "step3": { "title": "Políticas", "description": "Pontus-X" },
+    "step4": { "title": "Publicação", "description": "Marketplace" }
+  },
+  "step1": {
+    "title": "Passo 1: Fonte de Dados (API)",
+    "description": "Defina o endpoint e a autenticação da sua fonte de dados",
+    "originName": { "label": "Nome da Fonte *", "placeholder": "Ex: API ERP - Inventário 2024", "hint": "Identificador interno para a sua referência" },
+    "originDescription": { "label": "Descrição da Fonte", "placeholder": "Descreva brevemente a fonte destes dados..." },
+    "apiUrl": { "label": "URL da API *", "placeholder": "https://api.exemplo.com/v1/dados", "hint": "Endpoint GET a partir do qual os consumidores autorizados receberão os dados" },
+    "headers": { "label": "Headers Personalizados", "addButton": "Adicionar Header", "keyPlaceholder": "Key (ex: Authorization)", "valuePlaceholder": "Value (ex: Bearer token...)", "hint": "Os headers são armazenados de forma segura e enviados apenas durante chamadas autorizadas" },
+    "saving": "A guardar...",
+    "continue": "Continuar",
+    "validation": { "nameRequired": "O nome da fonte é obrigatório", "urlRequired": "O URL da API é obrigatório" },
+    "success": "Configuração da fonte guardada com sucesso",
+    "error": "Erro ao guardar a fonte"
+  },
+  "step2": {
+    "title": "Passo 2: Esquema de Dados Técnico",
+    "description": "Defina a estrutura que os consumidores verão ao consultar a sua API",
+    "assistant": { "label": "Assistente de Esquema", "description": "Carregue um ficheiro JSON ou CSV de exemplo e detetaremos os campos automaticamente. Também pode defini-los manualmente.", "uploadButton": "Carregar JSON / CSV" },
+    "fields": { "label": "Definição de Campos", "fieldHeader": "Campo *", "typeHeader": "Tipo *", "descHeader": "Descrição", "fieldPlaceholder": "nome_campo", "descPlaceholder": "Descrição do campo...", "addButton": "Adicionar Campo" },
+    "fieldTypes": { "Texto": "Texto", "Numero": "Número", "Fecha": "Data", "Booleano": "Booleano", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Timestamp", "Decimal": "Decimal", "Entero": "Inteiro" },
+    "validation": { "minOneField": "Defina pelo menos um campo no esquema" },
+    "fileErrors": { "parseError": "Não foi possível processar o ficheiro. Verifique o formato.", "noFields": "Nenhum campo detetado no ficheiro." },
+    "fieldsDetected": "{{count}} campos detetados automaticamente"
+  },
   "step3": {
     "title": "Passo 3: Políticas de Acesso Pontus-X",
     "description": "Defina as regras de governança e condições de uso para o seu dataset",
@@ -41,5 +90,63 @@
       "blacklistHint": "Estas organizações não poderão ver nem solicitar o ativo.",
       "searchPlaceholder": "Pesquisar organização por nome..."
     }
+  },
+  "step4": {
+    "title": "Passo 4: Publicação no Marketplace",
+    "description": "Defina como o seu dataset aparecerá no catálogo",
+    "publicName": { "label": "Nome Comercial *", "placeholder": "Ex: Índice de Preços Industriais T1 2024" },
+    "descriptionField": { "label": "Descrição", "placeholder": "Descreva o conteúdo, fontes e utilidade dos dados..." },
+    "category": { "label": "Categoria *", "placeholder": "Selecione uma categoria" },
+    "language": { "label": "Idioma do Dataset *", "placeholder": "Selecione o idioma" },
+    "categories": { "Compliance": "Compliance", "ESG": "ESG / Sustentabilidade", "Ops": "Operações", "Market": "Mercado / Preços", "R&D": "I&D / Inovação", "Logistics": "Logística", "Finance": "Finanças", "HR": "Recursos Humanos", "IoT": "IoT / Telemetria", "Otros": "Outros" },
+    "languages": { "es": "Espanhol", "en": "Inglês", "de": "Alemão", "fr": "Francês", "pt": "Português", "it": "Italiano" },
+    "pricing": {
+      "title": "Modelo de Preço",
+      "description": "Defina como quer monetizar os seus dados",
+      "models": {
+        "free": { "label": "Gratuito", "description": "Sem custo para consumidores" },
+        "subscription": { "label": "Subscrição", "description": "Pagamento mensal recorrente" },
+        "one_time": { "label": "Pagamento Único", "description": "Licença perpétua" },
+        "usage": { "label": "Por Utilização", "description": "Baseado no consumo de API" }
+      },
+      "priceLabel": "Preço (€)",
+      "perMonth": "/mês"
+    },
+    "terms": {
+      "title": "Termos de Utilização",
+      "description": "Aceite as condições para publicar no marketplace",
+      "acceptTerms": "Aceito os Termos e Condições da ProcureData",
+      "acceptTermsDesc": "Incluindo as obrigações como fornecedor de dados e as políticas de utilização do marketplace.",
+      "acceptDataPolicy": "Confirmo que tenho o direito de partilhar estes dados",
+      "acceptDataPolicyDesc": "Declaro que os dados cumprem com o RGPD e não contêm informação pessoal sem consentimento."
+    },
+    "submit": "Submeter para Validação Técnica",
+    "submitting": "A enviar...",
+    "validation": {
+      "nameRequired": "O nome público é obrigatório",
+      "categoryRequired": "Selecione uma categoria",
+      "languageRequired": "Selecione o idioma do dataset",
+      "termsRequired": "Deve aceitar os termos e a política de dados",
+      "maintenanceMode": "Sistema em manutenção. A publicação está temporariamente desativada."
+    },
+    "successAutoApprove": "Dataset publicado com sucesso no catálogo.",
+    "successReview": "Dataset submetido para revisão técnica. Será notificado quando estiver disponível no catálogo.",
+    "errorPublish": "Erro ao publicar"
+  },
+  "navigation": { "back": "Voltar", "continue": "Continuar" },
+  "accessTimeout": {
+    "title": "Expiração do Serviço (Timeout)",
+    "description": "Defina durante quanto tempo o consumidor poderá aceder aos dados antes da expiração da licença.",
+    "unit": "dias",
+    "defaultHint": "Valor predefinido: 90 dias. Os consumidores verão este período na licença de utilização."
+  },
+  "accessControl": {
+    "whitelistHintLong": "Se adicionar organizações aqui, o ativo torna-se PRIVADO. Apenas elas poderão vê-lo e solicitá-lo. A lista de negados será automaticamente ignorada.",
+    "blacklistHintLong": "Apenas efetivo se a lista de permitidos estiver vazia. O ativo será PÚBLICO para todos, exceto para as organizações listadas aqui.",
+    "blacklistDisabledWarning": "A whitelist tem prioridade. Esta secção é ignorada enquanto houver organizações na lista de permitidos.",
+    "noWallet": "Sem wallet",
+    "emptyWhitelist": "Sem organizações adicionadas — o ativo não será privado por whitelist.",
+    "emptyBlacklist": "Sem organizações negadas — acesso público total.",
+    "termsUrlError": "O URL de T&C não é válido"
   }
 }

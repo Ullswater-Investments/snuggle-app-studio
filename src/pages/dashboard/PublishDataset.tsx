@@ -136,38 +136,33 @@ const QUICK_OBLIGATIONS: PolicyRule[] = [
   { id: "LICENSE_RENEWAL", label: "LICENSE_RENEWAL" },
 ];
 
-const LANGUAGES = [
-  { value: "es", label: "Español", flag: "🇪🇸" },
-  { value: "en", label: "Inglés", flag: "🇬🇧" },
-  { value: "de", label: "Alemán", flag: "🇩🇪" },
-  { value: "fr", label: "Francés", flag: "🇫🇷" },
-  { value: "pt", label: "Portugués", flag: "🇵🇹" },
-  { value: "it", label: "Italiano", flag: "🇮🇹" },
+const LANGUAGE_OPTIONS = [
+  { value: "es", flag: "🇪🇸" },
+  { value: "en", flag: "🇬🇧" },
+  { value: "de", flag: "🇩🇪" },
+  { value: "fr", flag: "🇫🇷" },
+  { value: "pt", flag: "🇵🇹" },
+  { value: "it", flag: "🇮🇹" },
 ];
 
-const CATEGORIES = [
-  { value: "Compliance", label: "Compliance", icon: "🛡️" },
-  { value: "ESG", label: "ESG / Sostenibilidad", icon: "🌿" },
-  { value: "Ops", label: "Operaciones", icon: "⚙️" },
-  { value: "Market", label: "Mercado / Precios", icon: "📊" },
-  { value: "R&D", label: "I+D / Innovación", icon: "🔬" },
-  { value: "Logistics", label: "Logística", icon: "🚚" },
-  { value: "Finance", label: "Finanzas", icon: "💰" },
-  { value: "HR", label: "Recursos Humanos", icon: "👥" },
-  { value: "IoT", label: "IoT / Telemetría", icon: "📡" },
-  { value: "Otros", label: "Otros", icon: "📦" },
+const CATEGORY_OPTIONS = [
+  { value: "Compliance", icon: "🛡️" },
+  { value: "ESG", icon: "🌿" },
+  { value: "Ops", icon: "⚙️" },
+  { value: "Market", icon: "📊" },
+  { value: "R&D", icon: "🔬" },
+  { value: "Logistics", icon: "🚚" },
+  { value: "Finance", icon: "💰" },
+  { value: "HR", icon: "👥" },
+  { value: "IoT", icon: "📡" },
+  { value: "Otros", icon: "📦" },
 ];
 
-const PRICING_MODELS = [
-  { value: "free", label: "Gratuito", description: "Sin coste para consumidores" },
-  { value: "subscription", label: "Suscripción", description: "Pago mensual recurrente" },
-  { value: "one_time", label: "Pago Único", description: "Licencia perpetua" },
-  { value: "usage", label: "Por Uso", description: "Basado en consumo de API" },
-];
+const PRICING_MODEL_VALUES = ["free", "subscription", "one_time", "usage"] as const;
 
 const FIELD_TYPES = [
   "Texto",
-  "Número",
+  "Numero",
   "Fecha",
   "Booleano",
   "UUID",
@@ -178,13 +173,6 @@ const FIELD_TYPES = [
   "Entero",
 ];
 
-const STEPS = [
-  { id: 1, title: "Fuente de Datos", description: "Conexión API" },
-  { id: 2, title: "Esquema", description: "Estructura técnica" },
-  { id: 3, title: "Políticas", description: "Pontus-X" },
-  { id: 4, title: "Publicación", description: "Marketplace" },
-];
-
 export default function PublishDataset() {
   const navigate = useNavigate();
   const { activeOrg, activeOrgId, isDemo } = useOrganizationContext();
@@ -192,6 +180,13 @@ export default function PublishDataset() {
   const { autoApproveAssets, maintenanceMode } = useGovernanceSettings();
   const { t } = useTranslation('publish');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const STEPS = [
+    { id: 1, title: t('stepper.step1.title'), description: t('stepper.step1.description') },
+    { id: 2, title: t('stepper.step2.title'), description: t('stepper.step2.description') },
+    { id: 3, title: t('stepper.step3.title'), description: t('stepper.step3.description') },
+    { id: 4, title: t('stepper.step4.title'), description: t('stepper.step4.description') },
+  ];
 
   const [currentStep, setCurrentStep] = useState(1);
   const [productId, setProductId] = useState<string | null>(null);
@@ -351,7 +346,6 @@ export default function PublishDataset() {
       try {
         if (file.name.endsWith(".json")) {
           const parsed = JSON.parse(content);
-          // Handle array of objects or single object
           const sample = Array.isArray(parsed) ? parsed[0] : parsed;
           if (sample && typeof sample === "object") {
             detectedFields = Object.entries(sample).map(([key, value]) => ({
@@ -361,11 +355,9 @@ export default function PublishDataset() {
             }));
           }
         } else if (file.name.endsWith(".csv")) {
-          // Parse first line of CSV for column names
           const lines = content.split("\n").filter((l) => l.trim());
           if (lines.length > 0) {
             const headers = lines[0].split(",").map((h) => h.trim().replace(/^"|"$/g, ""));
-            // Try to infer types from second row if available
             const secondRow = lines.length > 1 ? lines[1].split(",").map((v) => v.trim().replace(/^"|"$/g, "")) : [];
             detectedFields = headers.map((h, i) => ({
               field: h,
@@ -375,20 +367,19 @@ export default function PublishDataset() {
           }
         }
       } catch {
-        toast.error("No se pudo procesar el archivo. Verifica el formato.");
+        toast.error(t('step2.fileErrors.parseError'));
         return;
       }
 
       if (detectedFields.length > 0) {
         setStep2Data({ schemaFields: detectedFields });
-        toast.success(`${detectedFields.length} campos detectados automáticamente`);
+        toast.success(t('step2.fieldsDetected', { count: detectedFields.length }));
       } else {
-        toast.error("No se detectaron campos en el archivo.");
+        toast.error(t('step2.fileErrors.noFields'));
       }
     };
 
     reader.readAsText(file);
-    // Reset input so same file can be re-uploaded
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -438,11 +429,11 @@ export default function PublishDataset() {
       if (!step4Data.publicName) {
         setStep4Data((prev) => ({ ...prev, publicName: step1Data.originName }));
       }
-      toast.success("Configuración de origen guardada correctamente");
+      toast.success(t('step1.success'));
     },
     onError: (error: Error) => {
       console.error("Error creating product:", error);
-      toast.error("Error al guardar el origen", { description: error.message });
+      toast.error(t('step1.error'), { description: error.message });
     },
   });
 
@@ -577,24 +568,24 @@ export default function PublishDataset() {
     },
     onSuccess: (assetId) => {
       const msg = autoApproveAssets
-        ? "Dataset publicado exitosamente en el catálogo."
-        : "Dataset enviado a revisión técnica. Se le notificará cuando esté disponible en el catálogo.";
+        ? t('step4.successAutoApprove')
+        : t('step4.successReview');
       toast.success(msg, { duration: 6000 });
       navigate("/data");
     },
     onError: (error: Error) => {
       console.error("Error publishing dataset:", error);
-      toast.error("Error al publicar", { description: error.message });
+      toast.error(t('step4.errorPublish'), { description: error.message });
     },
   });
 
   const handleStep1Submit = () => {
     if (!step1Data.originName.trim()) {
-      toast.error("El nombre del origen es obligatorio");
+      toast.error(t('step1.validation.nameRequired'));
       return;
     }
     if (!step1Data.apiUrl.trim()) {
-      toast.error("La URL de la API es obligatoria");
+      toast.error(t('step1.validation.urlRequired'));
       return;
     }
     step1Mutation.mutate(step1Data);
@@ -602,23 +593,23 @@ export default function PublishDataset() {
 
   const handlePublish = () => {
     if (maintenanceMode) {
-      toast.error("Sistema en mantenimiento. La publicación está temporalmente desactivada.");
+      toast.error(t('step4.validation.maintenanceMode'));
       return;
     }
     if (!step4Data.publicName.trim()) {
-      toast.error("El nombre público es obligatorio");
+      toast.error(t('step4.validation.nameRequired'));
       return;
     }
     if (!step4Data.category) {
-      toast.error("Selecciona una categoría");
+      toast.error(t('step4.validation.categoryRequired'));
       return;
     }
     if (!step4Data.language) {
-      toast.error("Selecciona el idioma del dataset");
+      toast.error(t('step4.validation.languageRequired'));
       return;
     }
     if (!step4Data.acceptedTerms || !step4Data.acceptedDataPolicy) {
-      toast.error("Debes aceptar los términos y la política de datos");
+      toast.error(t('step4.validation.termsRequired'));
       return;
     }
     publishMutation.mutate();
@@ -647,14 +638,14 @@ export default function PublishDataset() {
             <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-950/30 flex items-center justify-center mx-auto mb-4">
               <Lock className="h-8 w-8 text-amber-600 dark:text-amber-400" />
             </div>
-            <CardTitle>Función no disponible</CardTitle>
+            <CardTitle>{t('demo.title')}</CardTitle>
             <CardDescription>
-              La publicación de activos no está disponible en modo demostración.
+              {t('demo.description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button className="w-full" onClick={() => navigate("/dashboard")}>
-              Volver al Dashboard
+              {t('demo.backButton')}
             </Button>
           </CardContent>
         </Card>
@@ -669,7 +660,7 @@ export default function PublishDataset() {
           <Alert variant="destructive" className="mb-6">
             <AlertDescription className="flex items-center gap-2">
               <Lock className="h-4 w-4 shrink-0" />
-              Sistema en mantenimiento programado. La publicación de datasets está temporalmente desactivada.
+              {t('alerts.maintenance')}
             </AlertDescription>
           </Alert>
         )}
@@ -685,7 +676,7 @@ export default function PublishDataset() {
             className="mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Volver a Mis Datos
+            {t('header.backToData')}
           </Button>
 
           <div className="flex items-center gap-4">
@@ -693,9 +684,9 @@ export default function PublishDataset() {
               <Globe className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">Publicar Dataset</h1>
+              <h1 className="text-2xl font-bold">{t('header.title')}</h1>
               <p className="text-muted-foreground">
-                Conecta tu API al ecosistema de ProcureData
+                {t('header.subtitle')}
               </p>
             </div>
           </div>
@@ -706,14 +697,10 @@ export default function PublishDataset() {
           <Alert className="mb-6 border-primary/20 bg-primary/5">
             <Info className="h-4 w-4" />
             <AlertDescription>
-              Publicando como:{" "}
+              {t('alerts.publishingAs')}{" "}
               <span className="font-semibold">{activeOrg.name}</span>
               <Badge variant="outline" className="ml-2">
-                {activeOrg.type === "consumer"
-                  ? "Consumidor"
-                  : activeOrg.type === "provider"
-                  ? "Proveedor"
-                  : "Poseedor de Datos"}
+                {t(`alerts.orgTypes.${activeOrg.type === "data_holder" ? "holder" : activeOrg.type}`)}
               </Badge>
             </AlertDescription>
           </Alert>
@@ -723,7 +710,7 @@ export default function PublishDataset() {
         <Alert className="mb-6 border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20">
           <Lock className="h-4 w-4 text-emerald-600" />
           <AlertDescription className="text-emerald-800 dark:text-emerald-300">
-            ProcureData no almacena sus datos. Solo facilitamos la conexión segura entre su API y el consumidor autorizado.
+            {t('alerts.securityNote')}
           </AlertDescription>
         </Alert>
 
@@ -747,33 +734,33 @@ export default function PublishDataset() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <LinkIcon className="h-5 w-5 text-primary" />
-                    Paso 1: Fuente de Datos (API)
+                    {t('step1.title')}
                   </CardTitle>
                   <CardDescription>
-                    Define el endpoint y la autenticación de tu fuente de datos
+                    {t('step1.description')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="originName">Nombre del Origen *</Label>
+                    <Label htmlFor="originName">{t('step1.originName.label')}</Label>
                     <Input
                       id="originName"
-                      placeholder="Ej: API ERP - Inventario 2024"
+                      placeholder={t('step1.originName.placeholder')}
                       value={step1Data.originName}
                       onChange={(e) =>
                         setStep1Data((prev) => ({ ...prev, originName: e.target.value }))
                       }
                     />
                     <p className="text-xs text-muted-foreground">
-                      Identificador interno para tu referencia
+                      {t('step1.originName.hint')}
                     </p>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="originDescription">Descripción del Origen</Label>
+                    <Label htmlFor="originDescription">{t('step1.originDescription.label')}</Label>
                     <Textarea
                       id="originDescription"
-                      placeholder="Describe brevemente la fuente de estos datos..."
+                      placeholder={t('step1.originDescription.placeholder')}
                       rows={3}
                       value={step1Data.originDescription}
                       onChange={(e) =>
@@ -789,27 +776,27 @@ export default function PublishDataset() {
 
                   {/* API URL */}
                   <div className="space-y-2">
-                    <Label htmlFor="apiUrl">URL de la API *</Label>
+                    <Label htmlFor="apiUrl">{t('step1.apiUrl.label')}</Label>
                     <Input
                       id="apiUrl"
-                      placeholder="https://api.ejemplo.com/v1/datos"
+                      placeholder={t('step1.apiUrl.placeholder')}
                       value={step1Data.apiUrl}
                       onChange={(e) =>
                         setStep1Data((prev) => ({ ...prev, apiUrl: e.target.value }))
                       }
                     />
                     <p className="text-xs text-muted-foreground">
-                      Endpoint GET desde el que los consumidores autorizados recibirán los datos
+                      {t('step1.apiUrl.hint')}
                     </p>
                   </div>
 
                   {/* Custom Headers */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <Label>Headers Personalizados</Label>
+                      <Label>{t('step1.headers.label')}</Label>
                       <Button type="button" variant="outline" size="sm" onClick={addHeader}>
                         <Plus className="h-3 w-3 mr-1" />
-                        Añadir Header
+                        {t('step1.headers.addButton')}
                       </Button>
                     </div>
 
@@ -817,13 +804,13 @@ export default function PublishDataset() {
                       {step1Data.headers.map((header, index) => (
                         <div key={index} className="flex items-center gap-2">
                           <Input
-                            placeholder="Key (ej: Authorization)"
+                            placeholder={t('step1.headers.keyPlaceholder')}
                             value={header.key}
                             onChange={(e) => updateHeader(index, "key", e.target.value)}
                             className="flex-1"
                           />
                           <Input
-                            placeholder="Value (ej: Bearer token...)"
+                            placeholder={t('step1.headers.valuePlaceholder')}
                             value={header.value}
                             onChange={(e) => updateHeader(index, "value", e.target.value)}
                             className="flex-1"
@@ -843,7 +830,7 @@ export default function PublishDataset() {
                       ))}
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Los headers se almacenan de forma segura y se envían únicamente en las llamadas autorizadas
+                      {t('step1.headers.hint')}
                     </p>
                   </div>
 
@@ -855,11 +842,11 @@ export default function PublishDataset() {
                       {step1Mutation.isPending ? (
                         <>
                           <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                          Guardando...
+                          {t('step1.saving')}
                         </>
                       ) : (
                         <>
-                          Continuar
+                          {t('step1.continue')}
                           <ArrowRight className="h-4 w-4 ml-2" />
                         </>
                       )}
@@ -884,10 +871,10 @@ export default function PublishDataset() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Database className="h-5 w-5 text-primary" />
-                    Paso 2: Esquema de Datos Técnico
+                    {t('step2.title')}
                   </CardTitle>
                   <CardDescription>
-                    Define la estructura que verán los consumidores al consultar tu API
+                    {t('step2.description')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
@@ -895,10 +882,10 @@ export default function PublishDataset() {
                   <div className="space-y-3">
                     <Label className="flex items-center gap-2">
                       <Wand2 className="h-4 w-4 text-primary" />
-                      Asistente de Esquema
+                      {t('step2.assistant.label')}
                     </Label>
                     <p className="text-sm text-muted-foreground">
-                      Sube un archivo JSON o CSV de ejemplo y detectaremos los campos automáticamente. También puedes definirlos manualmente.
+                      {t('step2.assistant.description')}
                     </p>
                     <div className="flex gap-3">
                       <input
@@ -914,7 +901,7 @@ export default function PublishDataset() {
                         onClick={() => fileInputRef.current?.click()}
                       >
                         <Upload className="h-4 w-4 mr-2" />
-                        Cargar JSON / CSV
+                        {t('step2.assistant.uploadButton')}
                       </Button>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <FileJson className="h-3.5 w-3.5" />
@@ -929,13 +916,13 @@ export default function PublishDataset() {
 
                   {/* Manual Schema Table */}
                   <div className="space-y-3">
-                    <Label>Definición de Campos</Label>
+                    <Label>{t('step2.fields.label')}</Label>
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Campo *</TableHead>
-                          <TableHead>Tipo *</TableHead>
-                          <TableHead>Descripción</TableHead>
+                          <TableHead>{t('step2.fields.fieldHeader')}</TableHead>
+                          <TableHead>{t('step2.fields.typeHeader')}</TableHead>
+                          <TableHead>{t('step2.fields.descHeader')}</TableHead>
                           <TableHead className="w-[50px]" />
                         </TableRow>
                       </TableHeader>
@@ -944,7 +931,7 @@ export default function PublishDataset() {
                           <TableRow key={index}>
                             <TableCell>
                               <Input
-                                placeholder="nombre_campo"
+                                placeholder={t('step2.fields.fieldPlaceholder')}
                                 value={field.field}
                                 onChange={(e) => updateSchemaField(index, "field", e.target.value)}
                                 className="font-mono text-sm"
@@ -953,15 +940,15 @@ export default function PublishDataset() {
                             <TableCell>
                               <Select
                                 value={field.type}
-                                onValueChange={(val) => updateSchemaField(index, "type", val)}
+                                onValueChange={(value) => updateSchemaField(index, "type", value)}
                               >
                                 <SelectTrigger className="w-[130px]">
                                   <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {FIELD_TYPES.map((t) => (
-                                    <SelectItem key={t} value={t}>
-                                      {t}
+                                  {FIELD_TYPES.map((type) => (
+                                    <SelectItem key={type} value={type}>
+                                      {t(`step2.fieldTypes.${type}`, type)}
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
@@ -969,9 +956,10 @@ export default function PublishDataset() {
                             </TableCell>
                             <TableCell>
                               <Input
-                                placeholder="Descripción del campo..."
+                                placeholder={t('step2.fields.descPlaceholder')}
                                 value={field.description}
                                 onChange={(e) => updateSchemaField(index, "description", e.target.value)}
+                                className="text-sm"
                               />
                             </TableCell>
                             <TableCell>
@@ -993,7 +981,7 @@ export default function PublishDataset() {
                     </Table>
                     <Button type="button" variant="outline" size="sm" onClick={addSchemaField}>
                       <Plus className="h-3 w-3 mr-1" />
-                      Añadir Campo
+                      {t('step2.fields.addButton')}
                     </Button>
                   </div>
 
@@ -1001,19 +989,19 @@ export default function PublishDataset() {
                   <div className="flex justify-between pt-4">
                     <Button variant="outline" onClick={() => setCurrentStep(1)}>
                       <ArrowLeft className="h-4 w-4 mr-2" />
-                      Atrás
+                      {t('navigation.back')}
                     </Button>
                     <Button
                       onClick={() => {
                         if (!isStep2Valid) {
-                          toast.error("Define al menos un campo en el esquema");
+                          toast.error(t('step2.validation.minOneField'));
                           return;
                         }
                         setCurrentStep(3);
                       }}
                       disabled={!isStep2Valid}
                     >
-                      Continuar
+                      {t('navigation.continue')}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </div>
@@ -1265,7 +1253,7 @@ export default function PublishDataset() {
                         <h4 className="font-semibold text-emerald-800 dark:text-emerald-300">{t('step3.accessControl.whitelist')}</h4>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Si añades organizaciones aquí, el activo se vuelve <strong>PRIVADO</strong>. Solo ellas podrán verlo y solicitarlo. La lista de denegados se ignorará automáticamente.
+                        {t('accessControl.whitelistHintLong')}
                       </p>
                       <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -1293,7 +1281,7 @@ export default function PublishDataset() {
                                 }}
                               >
                                 <span className="text-sm">{org.name}</span>
-                                <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || "Sin wallet"}</code>
+                                <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || t('accessControl.noWallet')}</code>
                               </div>
                             ))}
                         </div>
@@ -1304,7 +1292,7 @@ export default function PublishDataset() {
                             <div key={org.orgId} className="flex items-center justify-between rounded-md border border-emerald-200 dark:border-emerald-800 px-3 py-2 bg-emerald-50/50 dark:bg-emerald-950/20">
                               <div className="flex flex-col gap-0.5">
                                 <span className="text-sm font-medium">{org.orgName}</span>
-                                <code className="text-[10px] font-mono text-muted-foreground">{org.walletAddress || "Sin wallet"}</code>
+                                <code className="text-[10px] font-mono text-muted-foreground">{org.walletAddress || t('accessControl.noWallet')}</code>
                               </div>
                               <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setStep3Data((prev) => ({ ...prev, allowedList: prev.allowedList.filter((a) => a.orgId !== org.orgId) }))}>
                                 <Trash2 className="h-3.5 w-3.5" />
@@ -1314,7 +1302,7 @@ export default function PublishDataset() {
                         </div>
                       )}
                       {step3Data.allowedList.length === 0 && (
-                        <p className="text-xs text-muted-foreground italic">Sin organizaciones añadidas — el activo no será privado por whitelist.</p>
+                        <p className="text-xs text-muted-foreground italic">{t('accessControl.emptyWhitelist')}</p>
                       )}
                     </div>
 
@@ -1327,13 +1315,13 @@ export default function PublishDataset() {
                         <h4 className="font-semibold text-red-800 dark:text-red-300">{t('step3.accessControl.blacklist')}</h4>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Solo efectivo si la lista de permitidos está vacía. El activo será <strong>PÚBLICO</strong> para todos, excepto para las organizaciones listadas aquí.
+                        {t('accessControl.blacklistHintLong')}
                       </p>
                       {step3Data.allowedList.length > 0 && (
                         <Alert className="border-amber-300 bg-amber-50/50 dark:bg-amber-950/20">
                           <Info className="h-4 w-4 text-amber-600" />
                           <AlertDescription className="text-xs text-amber-800 dark:text-amber-300">
-                            La whitelist tiene prioridad. Esta sección se ignora mientras haya organizaciones en la lista de permitidos.
+                            {t('accessControl.blacklistDisabledWarning')}
                           </AlertDescription>
                         </Alert>
                       )}
@@ -1363,7 +1351,7 @@ export default function PublishDataset() {
                                 }}
                               >
                                 <span className="text-sm">{org.name}</span>
-                                <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || "Sin wallet"}</code>
+                                <code className="text-[10px] font-mono text-muted-foreground">{org.wallet_address || t('accessControl.noWallet')}</code>
                               </div>
                             ))}
                         </div>
@@ -1374,7 +1362,7 @@ export default function PublishDataset() {
                             <div key={org.orgId} className="flex items-center justify-between rounded-md border border-red-200 dark:border-red-800 px-3 py-2 bg-red-50/50 dark:bg-red-950/20">
                               <div className="flex flex-col gap-0.5">
                                 <span className="text-sm font-medium">{org.orgName}</span>
-                                <code className="text-[10px] font-mono text-muted-foreground">{org.walletAddress || "Sin wallet"}</code>
+                                <code className="text-[10px] font-mono text-muted-foreground">{org.walletAddress || t('accessControl.noWallet')}</code>
                               </div>
                               <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive hover:text-destructive" onClick={() => setStep3Data((prev) => ({ ...prev, deniedList: prev.deniedList.filter((a) => a.orgId !== org.orgId) }))}>
                                 <Trash2 className="h-3.5 w-3.5" />
@@ -1384,7 +1372,7 @@ export default function PublishDataset() {
                         </div>
                       )}
                       {step3Data.deniedList.length === 0 && (
-                        <p className="text-xs text-muted-foreground italic">Sin organizaciones denegadas — acceso público total.</p>
+                        <p className="text-xs text-muted-foreground italic">{t('accessControl.emptyBlacklist')}</p>
                       )}
                     </div>
                   </div>
@@ -1395,10 +1383,10 @@ export default function PublishDataset() {
                   <div className="space-y-3">
                     <h3 className="flex items-center gap-2 font-semibold text-foreground">
                       <Clock className="h-5 w-5 text-primary" />
-                      Caducidad del Servicio (Timeout)
+                      {t('accessTimeout.title')}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Define cuánto tiempo podrá el consumidor acceder a los datos antes de que expire su licencia.
+                      {t('accessTimeout.description')}
                     </p>
                     <div className="flex items-center gap-3">
                       <Input
@@ -1414,10 +1402,10 @@ export default function PublishDataset() {
                         }
                         className="w-32"
                       />
-                      <span className="text-sm text-muted-foreground">días</span>
+                      <span className="text-sm text-muted-foreground">{t('accessTimeout.unit')}</span>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Valor por defecto: 90 días. Los consumidores verán este periodo en la licencia de uso.
+                      {t('accessTimeout.defaultHint')}
                     </p>
                   </div>
 
@@ -1425,18 +1413,18 @@ export default function PublishDataset() {
                   <div className="flex justify-between pt-4">
                     <Button variant="outline" onClick={() => setCurrentStep(2)}>
                       <ArrowLeft className="h-4 w-4 mr-2" />
-                      Atrás
+                      {t('navigation.back')}
                     </Button>
                     <Button
                       onClick={() => {
                         if (step3Data.termsUrl && !isValidUrl(step3Data.termsUrl)) {
-                          toast.error("La URL de T&C no es válida");
+                          toast.error(t('accessControl.termsUrlError'));
                           return;
                         }
                         setCurrentStep(4);
                       }}
                     >
-                      Continuar
+                      {t('navigation.continue')}
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </div>
@@ -1460,18 +1448,18 @@ export default function PublishDataset() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Package className="h-5 w-5 text-primary" />
-                    Paso 4: Publicación en Marketplace
+                    {t('step4.title')}
                   </CardTitle>
                   <CardDescription>
-                    Define cómo aparecerá tu dataset en el catálogo
+                    {t('step4.description')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="publicName">Nombre Comercial *</Label>
+                    <Label htmlFor="publicName">{t('step4.publicName.label')}</Label>
                     <Input
                       id="publicName"
-                      placeholder="Ej: Índice de Precios Industriales Q1 2024"
+                      placeholder={t('step4.publicName.placeholder')}
                       value={step4Data.publicName}
                       onChange={(e) =>
                         setStep4Data((prev) => ({ ...prev, publicName: e.target.value }))
@@ -1480,10 +1468,10 @@ export default function PublishDataset() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="description">Descripción</Label>
+                    <Label htmlFor="description">{t('step4.descriptionField.label')}</Label>
                     <Textarea
                       id="description"
-                      placeholder="Describe el contenido, fuentes y utilidad de los datos..."
+                      placeholder={t('step4.descriptionField.placeholder')}
                       rows={4}
                       value={step4Data.description}
                       onChange={(e) =>
@@ -1496,7 +1484,7 @@ export default function PublishDataset() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="category">Categoría *</Label>
+                    <Label htmlFor="category">{t('step4.category.label')}</Label>
                     <Select
                       value={step4Data.category}
                       onValueChange={(value) =>
@@ -1504,14 +1492,14 @@ export default function PublishDataset() {
                       }
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecciona una categoría" />
+                        <SelectValue placeholder={t('step4.category.placeholder')} />
                       </SelectTrigger>
                       <SelectContent>
-                        {CATEGORIES.map((cat) => (
+                        {CATEGORY_OPTIONS.map((cat) => (
                           <SelectItem key={cat.value} value={cat.value}>
                             <span className="flex items-center gap-2">
                               <span>{cat.icon}</span>
-                              <span>{cat.label}</span>
+                              <span>{t(`step4.categories.${cat.value}`, cat.value)}</span>
                             </span>
                           </SelectItem>
                         ))}
@@ -1520,7 +1508,7 @@ export default function PublishDataset() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="language">Idioma del Dataset *</Label>
+                    <Label htmlFor="language">{t('step4.language.label')}</Label>
                     <Select
                       value={step4Data.language}
                       onValueChange={(value) =>
@@ -1528,14 +1516,14 @@ export default function PublishDataset() {
                       }
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecciona el idioma" />
+                        <SelectValue placeholder={t('step4.language.placeholder')} />
                       </SelectTrigger>
                       <SelectContent>
-                        {LANGUAGES.map((lang) => (
+                        {LANGUAGE_OPTIONS.map((lang) => (
                           <SelectItem key={lang.value} value={lang.value}>
                             <span className="flex items-center gap-2">
                               <span>{lang.flag}</span>
-                              <span>{lang.label}</span>
+                              <span>{t(`step4.languages.${lang.value}`, lang.value)}</span>
                             </span>
                           </SelectItem>
                         ))}
@@ -1550,33 +1538,33 @@ export default function PublishDataset() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <DollarSign className="h-5 w-5 text-primary" />
-                    Modelo de Precio
+                    {t('step4.pricing.title')}
                   </CardTitle>
                   <CardDescription>
-                    Define cómo quieres monetizar tus datos
+                    {t('step4.pricing.description')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-3">
-                    {PRICING_MODELS.map((model) => (
+                    {PRICING_MODEL_VALUES.map((modelValue) => (
                       <div
-                        key={model.value}
+                        key={modelValue}
                         onClick={() =>
                           setStep4Data((prev) => ({
                             ...prev,
-                            pricingModel: model.value as Step4Data["pricingModel"],
-                            price: model.value === "free" ? 0 : prev.price,
+                            pricingModel: modelValue,
+                            price: modelValue === "free" ? 0 : prev.price,
                           }))
                         }
                         className={`p-4 border rounded-lg cursor-pointer transition-all ${
-                          step4Data.pricingModel === model.value
+                          step4Data.pricingModel === modelValue
                             ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                             : "border-border hover:border-primary/50"
                         }`}
                       >
-                        <div className="font-medium">{model.label}</div>
+                        <div className="font-medium">{t(`step4.pricing.models.${modelValue}.label`)}</div>
                         <div className="text-xs text-muted-foreground">
-                          {model.description}
+                          {t(`step4.pricing.models.${modelValue}.description`)}
                         </div>
                       </div>
                     ))}
@@ -1585,8 +1573,8 @@ export default function PublishDataset() {
                   {step4Data.pricingModel !== "free" && (
                     <div className="space-y-2 pt-4">
                       <Label htmlFor="price">
-                        Precio (€)
-                        {step4Data.pricingModel === "subscription" && " /mes"}
+                        {t('step4.pricing.priceLabel')}
+                        {step4Data.pricingModel === "subscription" && ` ${t('step4.pricing.perMonth')}`}
                       </Label>
                       <Input
                         id="price"
@@ -1612,10 +1600,10 @@ export default function PublishDataset() {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="h-5 w-5 text-primary" />
-                    Términos de Uso
+                    {t('step4.terms.title')}
                   </CardTitle>
                   <CardDescription>
-                    Acepta las condiciones para publicar en el marketplace
+                    {t('step4.terms.description')}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -1632,11 +1620,10 @@ export default function PublishDataset() {
                     />
                     <div className="grid gap-1.5 leading-none">
                       <Label htmlFor="terms" className="cursor-pointer">
-                        Acepto los Términos y Condiciones de ProcureData
+                        {t('step4.terms.acceptTerms')}
                       </Label>
                       <p className="text-xs text-muted-foreground">
-                        Incluyendo las obligaciones como proveedor de datos y las
-                        políticas de uso del marketplace.
+                        {t('step4.terms.acceptTermsDesc')}
                       </p>
                     </div>
                   </div>
@@ -1656,11 +1643,10 @@ export default function PublishDataset() {
                     />
                     <div className="grid gap-1.5 leading-none">
                       <Label htmlFor="dataPolicy" className="cursor-pointer">
-                        Confirmo que tengo derecho a compartir estos datos
+                        {t('step4.terms.acceptDataPolicy')}
                       </Label>
                       <p className="text-xs text-muted-foreground">
-                        Declaro que los datos cumplen con GDPR y no contienen
-                        información personal sin consentimiento.
+                        {t('step4.terms.acceptDataPolicyDesc')}
                       </p>
                     </div>
                   </div>
@@ -1671,7 +1657,7 @@ export default function PublishDataset() {
               <div className="flex justify-between pt-4">
                 <Button variant="outline" onClick={() => setCurrentStep(3)}>
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  Atrás
+                  {t('navigation.back')}
                 </Button>
                 <Button
                   onClick={handlePublish}
@@ -1680,12 +1666,12 @@ export default function PublishDataset() {
                   {publishMutation.isPending ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Enviando...
+                      {t('step4.submitting')}
                     </>
                   ) : (
                     <>
                       <CheckCircle2 className="h-4 w-4 mr-2" />
-                      Enviar para Validación Técnica
+                      {t('step4.submit')}
                     </>
                   )}
                 </Button>
