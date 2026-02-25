@@ -338,15 +338,15 @@ const AdminPublicationDetail = () => {
                   {/* Access Control — Pontus-X */}
                   <div className="mt-3 space-y-4">
                     {(() => {
-                      const allowed = customMeta.access_policy.allowed_wallets || customMeta.access_policy.access_list || [];
-                      const denied = customMeta.access_policy.denied_wallets || [];
+                      const allowed = customMeta.access_control?.allowed_wallets || customMeta.access_policy?.allowed_wallets || customMeta.access_policy?.access_list || [];
+                      const denied = customMeta.access_control?.denied_wallets || customMeta.access_policy?.denied_wallets || [];
                       const mode = allowed.length > 0 ? t('assets.privateWhitelist') : denied.length > 0 ? t('assets.publicBlacklist') : t('assets.publicTotal');
                       return <CopyField label={t('assets.accessControlMode')} value={mode} copyTitle={t('assets.copyToClipboard')} />;
                     })()}
 
                     {/* Allowed Wallets */}
                     {(() => {
-                      const allowed = customMeta.access_policy.allowed_wallets || customMeta.access_policy.access_list || [];
+                      const allowed = customMeta.access_control?.allowed_wallets || customMeta.access_policy?.allowed_wallets || customMeta.access_policy?.access_list || [];
                       if (allowed.length === 0) return null;
                       return (
                         <div>
@@ -379,7 +379,7 @@ const AdminPublicationDetail = () => {
 
                     {/* Denied Wallets */}
                     {(() => {
-                      const denied = customMeta.access_policy.denied_wallets || [];
+                      const denied = customMeta.access_control?.denied_wallets || customMeta.access_policy?.denied_wallets || [];
                       if (denied.length === 0) return null;
                       return (
                         <div>
@@ -410,26 +410,30 @@ const AdminPublicationDetail = () => {
                       );
                     })()}
 
-                    {customMeta.access_policy.access_timeout_days && (
-                      <CopyField label={t('assets.accessTimeout')} value={`${customMeta.access_policy.access_timeout_days} ${t('assets.days')}`} copyTitle={t('assets.copyToClipboard')} />
+                    {(customMeta.access_control?.access_timeout_days || customMeta.access_policy?.access_timeout_days) && (
+                      <CopyField label={t('assets.accessTimeout')} value={`${customMeta.access_control?.access_timeout_days || customMeta.access_policy?.access_timeout_days} ${t('assets.days')}`} copyTitle={t('assets.copyToClipboard')} />
                     )}
                   </div>
                 </div>
               )}
 
               {/* ODRL 2.0 Policy — UNE 0087 */}
-              {customMeta?.odrl_policy && (
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <FileJson className="h-4 w-4 text-emerald-600" />
-                    <p className="text-xs font-medium text-muted-foreground">Política ODRL 2.0 (UNE 0087)</p>
-                    <Badge variant="success" className="text-[10px]">W3C ODRL 2.0</Badge>
+              {(() => {
+                const odrl = customMeta?.additionalInformation?.odrlPolicy || customMeta?.odrl_policy;
+                if (!odrl) return null;
+                return (
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <FileJson className="h-4 w-4 text-emerald-600" />
+                      <p className="text-xs font-medium text-muted-foreground">Política ODRL 2.0 (UNE 0087)</p>
+                      <Badge variant="success" className="text-[10px]">W3C ODRL 2.0</Badge>
+                    </div>
+                    <div className="bg-muted/30 rounded-lg p-3 max-h-[300px] overflow-auto">
+                      <CopyField label="ODRL JSON-LD" value={JSON.stringify(odrl, null, 2)} mono copyTitle={t('assets.copyToClipboard')} />
+                    </div>
                   </div>
-                  <div className="bg-muted/30 rounded-lg p-3 max-h-[300px] overflow-auto">
-                    <CopyField label="ODRL JSON-LD" value={JSON.stringify(customMeta.odrl_policy, null, 2)} mono copyTitle={t('assets.copyToClipboard')} />
-                  </div>
-                </div>
-              )}
+                );
+              })()}
             </CardContent>
           </Card>
         </div>

@@ -482,12 +482,16 @@ export default function PublishDataset() {
         ),
       };
 
-      // Build access_policy from step 3 — Pontus-X standard
+      // Build access_policy from step 3 — UI labels only
       const accessPolicy = {
         permissions: step3Data.permissions.map((r) => r.label),
         prohibitions: step3Data.prohibitions.map((r) => r.label),
         obligations: step3Data.obligations.map((r) => r.label),
         terms_url: step3Data.termsUrl.trim() || null,
+      };
+
+      // Build access_control — Smart Contract / Pontus-X
+      const accessControl = {
         allowed_wallets: step3Data.allowedList.map((o) => ({
           org_id: o.orgId,
           org_name: o.orgName,
@@ -525,13 +529,16 @@ export default function PublishDataset() {
             language: step4Data.language,
             connection_type: "api_gateway",
             access_policy: accessPolicy,
-            odrl_policy: generateODRLPolicy(
-              step3Data.permissions.map((r) => r.label),
-              step3Data.prohibitions.map((r) => r.label),
-              step3Data.obligations.map((r) => r.label),
-              activeOrgId,
-              undefined
-            ),
+            access_control: accessControl,
+            additionalInformation: {
+              odrlPolicy: generateODRLPolicy(
+                step3Data.permissions.map((r) => r.label),
+                step3Data.prohibitions.map((r) => r.label),
+                step3Data.obligations.map((r) => r.label),
+                activeOrgId,
+                undefined
+              ),
+            },
           },
         } as any)
         .select("id")
