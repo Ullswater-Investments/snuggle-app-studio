@@ -1,37 +1,46 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { User, Session } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useWeb3Wallet } from "@/hooks/useWeb3Wallet";
+import {
+  authService,
+  type RegisterValidationError,
+  type LoginUser,
+} from "@/services/authService";
+import { ApiError } from "@/services/api";
 
-// User metadata for registration
-interface UserMetadata {
-  nombre: string;
-  apellido: string;
-  full_name?: string;
-  document_type?: string;
-  document_number?: string;
-  country?: string;
-  city?: string;
-  address?: string;
-  postal_code?: string;
-  phone?: string;
-  birth_date?: string;
+const TOKEN_KEY = "auth_token";
+const USER_KEY = "auth_user";
+
+export interface AppUser {
+  id: string;
+  email: string;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+  wallet_address: string | null;
+}
+
+function toAppUser(apiUser: LoginUser): AppUser {
+  return {
+    id: apiUser.uuid,
+    email: apiUser.email,
+    email_verified_at: apiUser.email_verified_at,
+    created_at: apiUser.created_at,
+    updated_at: apiUser.updated_at,
+    wallet_address: apiUser.wallet_address,
+  };
 }
 
 interface AuthContextType {
-  user: User | null;
-  session: Session | null;
+  user: AppUser | null;
   loading: boolean;
-  // Web3 identity fields
   walletAddress: string | null;
   did: string | null;
   isWeb3Connected: boolean;
   connectWallet: (silent?: boolean) => Promise<void>;
   disconnectWallet: () => void;
-  // Auth methods
-  signUp: (email: string, password: string, metadata?: UserMetadata) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, passwordConfirmation: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
 }
@@ -39,104 +48,109 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Integrate Web3 wallet
-  const { wallet, connect, disconnect, hasWeb3 } = useWeb3Wallet();
+  const { wallet, connect, disconnect } = useWeb3Wallet();
 
   useEffect(() => {
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        setLoading(false);
+    const storedToken = localStorage.getItem(TOKEN_KEY);
+    const storedUser = localStorage.getItem(USER_KEY);
+
+    if (storedToken && storedUser) {
+      try {
+        setUser(JSON.parse(storedUser) as AppUser);
+      } catch {
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
       }
-    );
-
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const signUp = async (email: string, password: string, metadata?: UserMetadata) => {
-    const redirectUrl = `${window.location.origin}/`;
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: metadata ? {
-          nombre: metadata.nombre,
-          apellido: metadata.apellido,
-          full_name: metadata.full_name,
-          document_type: metadata.document_type,
-          document_number: metadata.document_number,
-          country: metadata.country,
-          city: metadata.city,
-          address: metadata.address,
-          postal_code: metadata.postal_code,
-          phone: metadata.phone,
-          birth_date: metadata.birth_date,
-        } : undefined
-      }
-    });
-
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Registro exitoso. Inicia sesión para continuar.");
     }
 
-    return { error };
+    setLoading(false);
+  }, []);
+
+  const persistSession = (token: string, appUser: AppUser) => {
+    localStorage.setItem(TOKEN_KEY, token);
+    localStorage.setItem(USER_KEY, JSON.stringify(appUser));
+    setUser(appUser);
+  };
+
+  const clearSession = () => {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+    setUser(null);
+  };
+
+  const signUp = async (email: string, password: string, passwordConfirmation: string) => {
+    try {
+      const { login } = await authService.registerAndLogin({
+        email,
+        password,
+        password_confirmation: passwordConfirmation,
+      });
+
+      toast.success("¡Cuenta creada éxitosamente!");
+
+      persistSession(login.token.value, toAppUser(login.user));
+      navigate("/dashboard");
+      return { error: null };
+    } catch (err) {
+      let message = "Error al registrar. Inténtalo de nuevo.";
+
+      if (err instanceof ApiError) {
+        const body = err.data as RegisterValidationError | undefined;
+        const fieldErrors = body?.errors;
+
+        if (Array.isArray(fieldErrors) && fieldErrors.length > 0) {
+          message = fieldErrors.map((e) => e.message).join(". ");
+        } else {
+          message = err.message;
+        }
+      }
+
+      toast.error(message);
+      return { error: err };
+    }
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      toast.error(error.message);
-    } else {
+    try {
+      const response = await authService.login({ email, password });
+      persistSession(response.token.value, toAppUser(response.user));
       toast.success("Sesión iniciada correctamente");
       navigate("/dashboard");
+      return { error: null };
+    } catch (err) {
+      const message =
+        err instanceof ApiError
+          ? err.message
+          : "Error al iniciar sesión. Inténtalo de nuevo.";
+      toast.error(message);
+      return { error: err };
     }
-
-    return { error };
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      toast.error(error.message);
-    } else {
-      toast.success("Sesión cerrada");
-      navigate("/");
+    try {
+      await authService.logout();
+    } catch {
+      // Even if the API call fails we still clear the local session
     }
+
+    clearSession();
+    toast.success("Sesión cerrada");
+    navigate("/");
   };
 
   const contextValue: AuthContextType = {
     user,
-    session,
     loading,
-    // Web3 identity
     walletAddress: wallet.address,
     did: wallet.did,
     isWeb3Connected: wallet.isConnected,
     connectWallet: connect,
     disconnectWallet: disconnect,
-    // Auth methods
     signUp,
     signIn,
     signOut,

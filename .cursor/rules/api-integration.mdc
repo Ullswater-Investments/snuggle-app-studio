@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+---
+
+# Reglas de Migración: De Supabase a Backend Propio
+
+Eres un experto en React encargado de desacoplar este proyecto de Supabase para integrarlo con un Backend personalizado.
+
+## 1. Prioridad de Implementación
+- **Desacoplamiento:** Al editar un componente, identifica la lógica de `supabase.from(...).select(...)` y reemplázala por una llamada a nuestro servicio de API.
+- **Servicios:** Toda petición HTTP debe vivir en `src/services/`. No uses `fetch` o `axios` directamente dentro de los componentes.
+- **Hooks:** Prefiere usar `@tanstack/react-query` para manejar el estado de las peticiones.
+
+## 2. Contratos de Datos
+- Antes de cambiar un componente, verifica si los tipos (interfaces) del nuevo Backend coinciden con las Props del componente de UI de Lovable.
+- Si hay discrepancias, crea una función "adapter" o "transformer" para no tener que modificar la UI (CSS/Tailwind) del componente original.
+
+## 3. Estándares Técnicos
+- **Cliente Base:** Usa el cliente de API centralizado en `src/services/api.ts`.
+- **URL Base:** Se lee de `import.meta.env.VITE_API_URL`. Nunca escribas URLs directamente en el código; toda configuración de endpoints debe usar variables de entorno definidas en `.env` con prefijo `VITE_`.
+- **Manejo de Errores:** Mantén el sistema de notificaciones actual (`toast`) para mostrar errores de la API al usuario.

@@ -54,7 +54,7 @@ const Index = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await signUp(email, password);
+    await signUp(email, password, password);
     setLoading(false);
     setEmail("");
     setPassword("");
@@ -68,7 +68,7 @@ const Index = () => {
     const { error: loginError } = await signIn(demoEmail, demoPassword);
 
     if (loginError) {
-      const { error: signupError } = await signUp(demoEmail, demoPassword);
+      const { error: signupError } = await signUp(demoEmail, demoPassword, demoPassword);
 
       if (!signupError) {
         await signIn(demoEmail, demoPassword);
