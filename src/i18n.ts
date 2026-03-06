@@ -174,7 +174,7 @@ import ptCloserstillProyecto from './locales/pt/closerstill-proyecto.json';
 import ptValerdata from './locales/pt/valerdata.json';
 import ptAracea from './locales/pt/aracea.json';
 import ptTelenatura from './locales/pt/telenatura.json';
-import ptAerce from './locales/pt/aerce.json';
+
 import ptUserGuide from './locales/pt/userGuide.json';
 import ptGuide from './locales/pt/guide.json';
 import ptWhitepaper from './locales/pt/whitepaper.json';
