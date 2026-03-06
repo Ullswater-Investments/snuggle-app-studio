@@ -721,7 +721,7 @@ i18n
         valerdata: ptValerdata,
         aracea: ptAracea,
         telenatura: ptTelenatura,
-        aerce: ptAerce,
+        
         architecture: ptArchitecture,
         userGuide: ptUserGuide,
         guide: ptGuide,
