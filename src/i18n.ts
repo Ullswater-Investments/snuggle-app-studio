@@ -46,7 +46,7 @@ import esCloserstillProyecto from './locales/es/closerstill-proyecto.json';
 import esValerdata from './locales/es/valerdata.json';
 import esAracea from './locales/es/aracea.json';
 import esTelenatura from './locales/es/telenatura.json';
-import esAerce from './locales/es/aerce.json';
+
 import esArchitecture from './locales/es/architecture.json';
 import esDocs from './locales/es/docs.json';
 import esChat from './locales/es/chat.json';
