@@ -147,6 +147,14 @@ const EMAIL_TEMPLATES = {
       <p>Todos los datos han sido transferidos según la política acordada.</p>
     `,
   },
+  download: {
+    subject: "Descarga de datos disponible - ProcureData",
+    html: `
+      <h1>Descarga disponible</h1>
+      <p>Los datos solicitados están listos para su descarga.</p>
+      <p>Acceda a la plataforma para descargar los datos.</p>
+    `,
+  },
 };
 
 serve(async (req) => {
@@ -376,7 +384,7 @@ serve(async (req) => {
   } catch (error) {
     console.error("Error in notification-handler:", error);
     return new Response(
-      JSON.stringify({ error: error.message || "Internal server error" }),
+      JSON.stringify({ error: (error as Error).message || "Internal server error" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }

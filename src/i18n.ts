@@ -46,7 +46,7 @@ import esCloserstillProyecto from './locales/es/closerstill-proyecto.json';
 import esValerdata from './locales/es/valerdata.json';
 import esAracea from './locales/es/aracea.json';
 import esTelenatura from './locales/es/telenatura.json';
-import esAerce from './locales/es/aerce.json';
+
 import esArchitecture from './locales/es/architecture.json';
 import esDocs from './locales/es/docs.json';
 import esChat from './locales/es/chat.json';
@@ -107,7 +107,7 @@ import frCloserstillProyecto from './locales/fr/closerstill-proyecto.json';
 import frValerdata from './locales/fr/valerdata.json';
 import frAracea from './locales/fr/aracea.json';
 import frTelenatura from './locales/fr/telenatura.json';
-import frAerce from './locales/fr/aerce.json';
+
 import frArchitecture from './locales/fr/architecture.json';
 import frUserGuide from './locales/fr/userGuide.json';
 import frGuide from './locales/fr/guide.json';
@@ -174,7 +174,7 @@ import ptCloserstillProyecto from './locales/pt/closerstill-proyecto.json';
 import ptValerdata from './locales/pt/valerdata.json';
 import ptAracea from './locales/pt/aracea.json';
 import ptTelenatura from './locales/pt/telenatura.json';
-import ptAerce from './locales/pt/aerce.json';
+
 import ptUserGuide from './locales/pt/userGuide.json';
 import ptGuide from './locales/pt/guide.json';
 import ptWhitepaper from './locales/pt/whitepaper.json';
@@ -239,7 +239,7 @@ import deCloserstillProyecto from './locales/de/closerstill-proyecto.json';
 import deValerdata from './locales/de/valerdata.json';
 import deAracea from './locales/de/aracea.json';
 import deTelenatura from './locales/de/telenatura.json';
-import deAerce from './locales/de/aerce.json';
+
 import deUserGuide from './locales/de/userGuide.json';
 import deGuide from './locales/de/guide.json';
 import deWhitepaper from './locales/de/whitepaper.json';
@@ -305,7 +305,7 @@ import itCloserstillProyecto from './locales/it/closerstill-proyecto.json';
 import itValerdata from './locales/it/valerdata.json';
 import itAracea from './locales/it/aracea.json';
 import itTelenatura from './locales/it/telenatura.json';
-import itAerce from './locales/it/aerce.json';
+
 import itArchitecture from './locales/it/architecture.json';
 import itUserGuide from './locales/it/userGuide.json';
 import itGuide from './locales/it/guide.json';
@@ -371,7 +371,7 @@ import nlCloserstillProyecto from './locales/nl/closerstill-proyecto.json';
 import nlValerdata from './locales/nl/valerdata.json';
 import nlAracea from './locales/nl/aracea.json';
 import nlTelenatura from './locales/nl/telenatura.json';
-import nlAerce from './locales/nl/aerce.json';
+
 import nlArchitecture from './locales/nl/architecture.json';
 import nlUserGuide from './locales/nl/userGuide.json';
 import nlGuide from './locales/nl/guide.json';
@@ -438,7 +438,7 @@ import enCloserstillProyecto from './locales/en/closerstill-proyecto.json';
 import enValerdata from './locales/en/valerdata.json';
 import enAracea from './locales/en/aracea.json';
 import enTelenatura from './locales/en/telenatura.json';
-import enAerce from './locales/en/aerce.json';
+
 import enArchitecture from './locales/en/architecture.json';
 import enUserGuide from './locales/en/userGuide.json';
 import enGuide from './locales/en/guide.json';
@@ -521,7 +521,7 @@ i18n
         valerdata: esValerdata,
         aracea: esAracea,
         telenatura: esTelenatura,
-        aerce: esAerce,
+        
         architecture: esArchitecture,
         userGuide: esUserGuide,
         guide: esGuide,
@@ -588,7 +588,7 @@ i18n
         valerdata: enValerdata,
         aracea: enAracea,
         telenatura: enTelenatura,
-        aerce: enAerce,
+        
         architecture: enArchitecture,
         userGuide: enUserGuide,
         guide: enGuide,
@@ -654,7 +654,7 @@ i18n
         valerdata: frValerdata,
         aracea: frAracea,
         telenatura: frTelenatura,
-        aerce: frAerce,
+        
         architecture: frArchitecture,
         userGuide: frUserGuide,
         guide: frGuide,
@@ -721,7 +721,7 @@ i18n
         valerdata: ptValerdata,
         aracea: ptAracea,
         telenatura: ptTelenatura,
-        aerce: ptAerce,
+        
         architecture: ptArchitecture,
         userGuide: ptUserGuide,
         guide: ptGuide,
@@ -787,7 +787,7 @@ i18n
         valerdata: deValerdata,
         aracea: deAracea,
         telenatura: deTelenatura,
-        aerce: deAerce,
+        
         architecture: deArchitecture,
         userGuide: deUserGuide,
         guide: deGuide,
@@ -854,7 +854,7 @@ i18n
         valerdata: itValerdata,
         aracea: itAracea,
         telenatura: itTelenatura,
-        aerce: itAerce,
+        
         architecture: itArchitecture,
         userGuide: itUserGuide,
         guide: itGuide,
@@ -920,7 +920,7 @@ i18n
         valerdata: nlValerdata,
         aracea: nlAracea,
         telenatura: nlTelenatura,
-        aerce: nlAerce,
+        
         architecture: nlArchitecture,
         userGuide: nlUserGuide,
         guide: nlGuide,
@@ -955,7 +955,7 @@ i18n
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'aerce', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications', 'reports', 'data', 'requests', 'analytics', 'admin', 'dataView', 'publish'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications', 'reports', 'data', 'requests', 'analytics', 'admin', 'dataView', 'publish'],
     interpolation: {
       escapeValue: false,
     },

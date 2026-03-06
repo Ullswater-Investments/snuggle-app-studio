@@ -214,11 +214,6 @@ import TeleNaturaAcuerdo from "./pages/partners/TeleNaturaAcuerdo";
 import TeleNaturaMiembros from "./pages/partners/TeleNaturaMiembros";
 import TeleNaturaDocTecnico from "./pages/partners/TeleNaturaDocTecnico";
 import TeleNaturaWhitepaper from "./pages/partners/TeleNaturaWhitepaper";
-import AerceProyecto from "./pages/partners/AerceProyecto";
-import AerceMiembros from "./pages/partners/AerceMiembros";
-import AerceDocInstitucional from "./pages/partners/AerceDocInstitucional";
-import AerceWhitepaper from "./pages/partners/AerceWhitepaper";
-import AerceDocTecnico from "./pages/partners/AerceDocTecnico";
 import AraceaProyecto from "./pages/partners/AraceaProyecto";
 import AraceaMiembros from "./pages/partners/AraceaMiembros";
 import CloserStillProyecto from "./pages/partners/CloserStillProyecto";
@@ -453,27 +448,6 @@ const App = () => (
                     <Route path="/partners/telenatura-ebt/acuerdo" element={
                       <PartnerProtectedRoute partnerSlug="telenatura-ebt">
                         <TeleNaturaAcuerdo />
-                      </PartnerProtectedRoute>
-                    } />
-
-                    {/* Partner Pages - AERCE */}
-                    <Route path="/partners/aerce/proyecto" element={<AerceProyecto />} />
-                    <Route path="/partners/aerce/miembros" element={
-                      <PartnerProtectedRoute partnerSlug="aerce">
-                        <AerceMiembros />
-                      </PartnerProtectedRoute>
-                    } />
-                    <Route path="/partners/aerce/doc-tecnico" element={
-                      <PartnerProtectedRoute partnerSlug="aerce">
-                        <AerceDocTecnico />
-                      </PartnerProtectedRoute>
-                    } />
-                    <Route path="/partners/aerce/doc-institucional" element={
-                      <Navigate to="/partners/aerce/doc-tecnico" replace />
-                    } />
-                    <Route path="/partners/aerce/whitepaper" element={
-                      <PartnerProtectedRoute partnerSlug="aerce">
-                        <AerceWhitepaper />
                       </PartnerProtectedRoute>
                     } />
 
