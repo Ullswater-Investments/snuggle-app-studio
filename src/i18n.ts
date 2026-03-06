@@ -107,7 +107,7 @@ import frCloserstillProyecto from './locales/fr/closerstill-proyecto.json';
 import frValerdata from './locales/fr/valerdata.json';
 import frAracea from './locales/fr/aracea.json';
 import frTelenatura from './locales/fr/telenatura.json';
-import frAerce from './locales/fr/aerce.json';
+
 import frArchitecture from './locales/fr/architecture.json';
 import frUserGuide from './locales/fr/userGuide.json';
 import frGuide from './locales/fr/guide.json';
