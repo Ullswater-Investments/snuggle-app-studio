@@ -239,7 +239,7 @@ import deCloserstillProyecto from './locales/de/closerstill-proyecto.json';
 import deValerdata from './locales/de/valerdata.json';
 import deAracea from './locales/de/aracea.json';
 import deTelenatura from './locales/de/telenatura.json';
-import deAerce from './locales/de/aerce.json';
+
 import deUserGuide from './locales/de/userGuide.json';
 import deGuide from './locales/de/guide.json';
 import deWhitepaper from './locales/de/whitepaper.json';
