@@ -3711,7 +3711,7 @@ export const premiumPartnersData: PremiumPartner[] = [
   vda,
   vci,
   medicalValley,
-  aerce,
+  
   gaiaCluster,
   // Paquete 4: Automoción Latina y Deep Tech
   anfia,

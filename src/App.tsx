@@ -451,27 +451,6 @@ const App = () => (
                       </PartnerProtectedRoute>
                     } />
 
-                    {/* Partner Pages - AERCE */}
-                    <Route path="/partners/aerce/proyecto" element={<AerceProyecto />} />
-                    <Route path="/partners/aerce/miembros" element={
-                      <PartnerProtectedRoute partnerSlug="aerce">
-                        <AerceMiembros />
-                      </PartnerProtectedRoute>
-                    } />
-                    <Route path="/partners/aerce/doc-tecnico" element={
-                      <PartnerProtectedRoute partnerSlug="aerce">
-                        <AerceDocTecnico />
-                      </PartnerProtectedRoute>
-                    } />
-                    <Route path="/partners/aerce/doc-institucional" element={
-                      <Navigate to="/partners/aerce/doc-tecnico" replace />
-                    } />
-                    <Route path="/partners/aerce/whitepaper" element={
-                      <PartnerProtectedRoute partnerSlug="aerce">
-                        <AerceWhitepaper />
-                      </PartnerProtectedRoute>
-                    } />
-
                     {/* Partner Pages - ARACEA */}
                     <Route path="/partners/aracea/proyecto" element={<AraceaProyecto />} />
                     <Route path="/partners/aracea/miembros" element={
