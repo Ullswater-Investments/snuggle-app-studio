@@ -521,7 +521,7 @@ i18n
         valerdata: esValerdata,
         aracea: esAracea,
         telenatura: esTelenatura,
-        aerce: esAerce,
+        
         architecture: esArchitecture,
         userGuide: esUserGuide,
         guide: esGuide,
