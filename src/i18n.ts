@@ -654,7 +654,7 @@ i18n
         valerdata: frValerdata,
         aracea: frAracea,
         telenatura: frTelenatura,
-        aerce: frAerce,
+        
         architecture: frArchitecture,
         userGuide: frUserGuide,
         guide: frGuide,
