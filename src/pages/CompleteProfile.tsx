@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { kycService } from "@/services/kycService";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ import {
 } from "lucide-react";
 
 const CompleteProfile = () => {
-  const { signOut, user, refreshProfile } = useAuth();
+  const { signOut, user, refreshProfile, profileComplete } = useAuth();
   const { i18n } = useTranslation();
 
   const [isVerifying, setIsVerifying] = useState(false);
@@ -108,6 +109,10 @@ const CompleteProfile = () => {
     );
     return () => clearTimeout(timer);
   }, [countdown, handleKycComplete]);
+
+  if (profileComplete) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30 relative overflow-hidden">
