@@ -78,6 +78,46 @@ export interface LogoutResponse {
   message: string;
 }
 
+// --- Me (current user + profile) ---
+export interface MeResponse {
+  user: MeUser;
+}
+export interface MeUser {
+  uuid: string;
+  email: string;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+  wallet_address: string | null;
+  roles: MeRole[];
+  permissions: MePermission[];
+  profile: Record<string, unknown> | null;
+}
+
+export interface MeRole {
+  id: string;
+  slug: string;
+  title: string | null;
+  entity_type: string;
+  entity_id: string | null;
+  scope: string;
+  allowed: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface MePermission {
+  id: string;
+  slug: string;
+  title: string | null;
+  entity_type: string;
+  entity_id: string | null;
+  scope: string;
+  allowed: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 // --- Compound ---
 export interface RegisterAndLoginResult {
   register: RegisterResponse;
@@ -85,7 +125,6 @@ export interface RegisterAndLoginResult {
 }
 
 // --- Service ---
-
 const AUTH_GUARD = "users";
 
 export const authService = {
@@ -98,7 +137,12 @@ export const authService = {
   logout: (): Promise<LogoutResponse> =>
     api.post<LogoutResponse>(`/auth/logout/${AUTH_GUARD}`),
 
-  registerAndLogin: async (data: RegisterRequest): Promise<RegisterAndLoginResult> => {
+  getMe: (): Promise<MeResponse> =>
+    api.get<MeResponse>(`/auth/me/${AUTH_GUARD}`),
+
+  registerAndLogin: async (
+    data: RegisterRequest,
+  ): Promise<RegisterAndLoginResult> => {
     const { email, password } = data;
     const register = await authService.register(data);
     const login = await authService.login({ email, password });

@@ -5,7 +5,9 @@ import { useWeb3Wallet } from "@/hooks/useWeb3Wallet";
 import {
   authService,
   type RegisterValidationError,
-  type LoginUser,
+  type MeUser,
+  MePermission,
+  MeRole,
 } from "@/services/authService";
 import { ApiError } from "@/services/api";
 
@@ -19,30 +21,42 @@ export interface AppUser {
   created_at: string;
   updated_at: string;
   wallet_address: string | null;
+  profile: Record<string, unknown> | null;
+  roles: MeRole[];
+  permissions: MePermission[];
 }
 
-function toAppUser(apiUser: LoginUser): AppUser {
+function meUserToAppUser(me: MeUser): AppUser {
   return {
-    id: apiUser.uuid,
-    email: apiUser.email,
-    email_verified_at: apiUser.email_verified_at,
-    created_at: apiUser.created_at,
-    updated_at: apiUser.updated_at,
-    wallet_address: apiUser.wallet_address,
+    id: me.uuid,
+    email: me.email,
+    email_verified_at: me.email_verified_at,
+    created_at: me.created_at,
+    updated_at: me.updated_at,
+    wallet_address: me.wallet_address,
+    profile: me.profile,
+    roles: me.roles,
+    permissions: me.permissions,
   };
 }
 
 interface AuthContextType {
   user: AppUser | null;
   loading: boolean;
+  profileComplete: boolean;
   walletAddress: string | null;
   did: string | null;
   isWeb3Connected: boolean;
   connectWallet: (silent?: boolean) => Promise<void>;
   disconnectWallet: () => void;
-  signUp: (email: string, password: string, passwordConfirmation: string) => Promise<{ error: any }>;
+  signUp: (
+    email: string,
+    password: string,
+    passwordConfirmation: string,
+  ) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -54,24 +68,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const { wallet, connect, disconnect } = useWeb3Wallet();
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem(TOKEN_KEY);
-    const storedUser = localStorage.getItem(USER_KEY);
-
-    if (storedToken && storedUser) {
-      try {
-        setUser(JSON.parse(storedUser) as AppUser);
-      } catch {
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(USER_KEY);
-      }
-    }
-
-    setLoading(false);
-  }, []);
-
-  const persistSession = (token: string, appUser: AppUser) => {
-    localStorage.setItem(TOKEN_KEY, token);
+  const persistUser = (appUser: AppUser) => {
     localStorage.setItem(USER_KEY, JSON.stringify(appUser));
     setUser(appUser);
   };
@@ -82,7 +79,47 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null);
   };
 
-  const signUp = async (email: string, password: string, passwordConfirmation: string) => {
+  const fetchAndPersistMe = async (): Promise<AppUser> => {
+    const { user: meUser } = await authService.getMe();
+    const appUser = meUserToAppUser(meUser);
+    persistUser(appUser);
+    return appUser;
+  };
+
+  const navigateByProfile = (appUser: AppUser) => {
+    if (appUser.profile) {
+      navigate("/dashboard");
+    } else {
+      navigate("/complete-profile");
+    }
+  };
+
+  useEffect(() => {
+    const restore = async () => {
+      const storedToken = localStorage.getItem(TOKEN_KEY);
+      if (!storedToken) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        await fetchAndPersistMe();
+      } catch {
+        clearSession();
+      }
+
+      setLoading(false);
+    };
+
+    restore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const signUp = async (
+    email: string,
+    password: string,
+    passwordConfirmation: string,
+  ) => {
     try {
       const { login } = await authService.registerAndLogin({
         email,
@@ -90,10 +127,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         password_confirmation: passwordConfirmation,
       });
 
-      toast.success("¡Cuenta creada éxitosamente!");
+      localStorage.setItem(TOKEN_KEY, login.token.value);
+      toast.success("¡Cuenta creada exitosamente!");
 
-      persistSession(login.token.value, toAppUser(login.user));
-      navigate("/dashboard");
+      const appUser = await fetchAndPersistMe();
+      navigateByProfile(appUser);
       return { error: null };
     } catch (err) {
       let message = "Error al registrar. Inténtalo de nuevo.";
@@ -117,9 +155,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signIn = async (email: string, password: string) => {
     try {
       const response = await authService.login({ email, password });
-      persistSession(response.token.value, toAppUser(response.user));
+      localStorage.setItem(TOKEN_KEY, response.token.value);
+
       toast.success("Sesión iniciada correctamente");
-      navigate("/dashboard");
+
+      const appUser = await fetchAndPersistMe();
+      navigateByProfile(appUser);
       return { error: null };
     } catch (err) {
       const message =
@@ -129,6 +170,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       toast.error(message);
       return { error: err };
     }
+  };
+
+  const refreshProfile = async () => {
+    const appUser = await fetchAndPersistMe();
+    navigateByProfile(appUser);
   };
 
   const signOut = async () => {
@@ -146,6 +192,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const contextValue: AuthContextType = {
     user,
     loading,
+    profileComplete: user?.profile !== null && user?.profile !== undefined,
     walletAddress: wallet.address,
     did: wallet.did,
     isWeb3Connected: wallet.isConnected,
@@ -154,12 +201,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signUp,
     signIn,
     signOut,
+    refreshProfile,
   };
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
