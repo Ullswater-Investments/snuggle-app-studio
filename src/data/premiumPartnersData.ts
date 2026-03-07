@@ -1075,62 +1075,6 @@ export const medicalValley: PremiumPartner = {
   tier: "strategic"
 };
 
-export const aerce: PremiumPartner = {
-  id: "aerce",
-  name: "AERCE",
-  fullName: "Asociación Española de Profesionales de Compras, Contratación y Aprovisionamientos",
-  country: { code: "ES", flag: "🇪🇸", name: "España" },
-  vertical: "Compras y Aprovisionamiento",
-  
-  authorityContext: {
-    narrative: "La Asociación Española de Profesionales de Compras (AERCE) es el referente en España. Con más de 30 años de historia, certifica a los compradores del IBEX 35 y conecta el mercado español con Latinoamérica. Su valor estratégico radica en su profunda conexión con sectores como la construcción, la energía y el turismo, motores de la economía española.",
-    keyStats: [
-      { value: "2.000+", label: "Profesionales Miembro" },
-      { value: "30+", label: "Años de Historia" },
-      { value: "#1", label: "Asociación Compras España" }
-    ],
-    headquarters: "Madrid, España"
-  },
-  
-  ecosystem: [
-    { name: "Repsol", description: "Energía" },
-    { name: "Telefónica", description: "Telecomunicaciones" },
-    { name: "Inditex", description: "Retail/Moda" },
-    { name: "Iberdrola", description: "Energía renovable" },
-    { name: "Mercadona", description: "Distribución" },
-    { name: "Ferrovial", description: "Infraestructuras" },
-    { name: "CaixaBank", description: "Servicios financieros" },
-    { name: "Cepsa", description: "Energía/Química" }
-  ],
-  
-  dataAnalysis: {
-    summary: "AERCE maneja datos clave sobre salarios en España, costes energéticos y riesgo de proveedores en el mercado hispano. Son fundamentales para entender la estructura de costes en el sur de Europa.",
-    capabilities: [
-      "Barómetro compras España",
-      "Salarios por CCAA",
-      "Plazos pago reales",
-      "Riesgo LATAM"
-    ],
-    uniqueValue: "El único termómetro fiable del coste de comprar en España y el puente de datos hacia el mercado latinoamericano."
-  },
-  
-  useCases: [
-    { id: "spain-barometer", title: "Barómetro de Compras España", description: "Encuesta mensual sobre intenciones de compra y niveles de stock (similar al PMI).", type: "index" },
-    { id: "ccaa-salaries", title: "Salarios de Compradores por CCAA", description: "Diferencias salariales entre Madrid, Cataluña y País Vasco.", type: "benchmark" },
-    { id: "payment-terms-es", title: "Plazos de Pago Reales (Ley Crea y Crece)", description: "Datos de cumplimiento de pagos a 60 días en empresas españolas.", type: "benchmark" },
-    { id: "fleet-costs", title: "Costes de Flota Corporativa", description: "Renting y gestión de vehículos de empresa en España.", type: "cost" },
-    { id: "electricity-prices", title: "Tarifas Eléctricas Industriales", description: "Impacto del 'tope al gas' y evolución del precio MWh para industria.", type: "cost" },
-    { id: "sme-digitalization", title: "Digitalización de Compras en PYMEs", description: "Nivel de adopción de ERPs y factura electrónica en empresas medianas.", type: "index" },
-    { id: "cleaning-security", title: "Precios de Servicios de Limpieza y Seguridad", description: "Convenios colectivos y repercusión en costes de servicios.", type: "cost" },
-    { id: "latam-risk", title: "Riesgo de Cadena de Suministro LATAM", description: "Datos de volatilidad en proveedores de América Latina conectados con España.", type: "risk" },
-    { id: "women-procurement", title: "Mujeres en Compras", description: "Estadísticas de diversidad y liderazgo femenino en departamentos de compras.", type: "index" },
-    { id: "construction-materials", title: "Índice de Precios de Materiales de Construcción", description: "Evolución de costes para obras civiles y edificación en España.", type: "index" }
-  ],
-  
-  status: "active",
-  tier: "strategic"
-};
-
 export const gaiaCluster: PremiumPartner = {
   id: "gaia-cluster",
   name: "GAIA",
@@ -3767,7 +3711,7 @@ export const premiumPartnersData: PremiumPartner[] = [
   vda,
   vci,
   medicalValley,
-  aerce,
+  
   gaiaCluster,
   // Paquete 4: Automoción Latina y Deep Tech
   anfia,
