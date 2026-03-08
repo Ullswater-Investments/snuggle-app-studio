@@ -11,7 +11,8 @@ import { DemoHelpButton } from "@/components/DemoHelpButton";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Search, LogIn, LogOut, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, LogIn, ChevronLeft, ChevronRight } from "lucide-react";
+import { UserMenu } from "@/components/UserMenu";
 
 export const UnifiedHeader = () => {
   const { t } = useTranslation('common');
@@ -93,10 +94,7 @@ export const UnifiedHeader = () => {
               <LanguageSwitcher />
               <ThemeToggle />
               <DemoHelpButton />
-              <Button variant="outline" size="sm" onClick={signOut} className="gap-2">
-                <LogOut className="h-4 w-4" />
-                <span className="hidden sm:inline">{t('logout')}</span>
-              </Button>
+              <UserMenu user={user} onSignOut={signOut} />
             </>
           ) : (
             <>

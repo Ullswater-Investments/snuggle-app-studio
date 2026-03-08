@@ -148,9 +148,9 @@ const Auth = () => {
       {/* Botón Volver al inicio */}
       <div className="fixed top-12 left-10 z-50">
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
-          className="bg-transparent border-none hover:text-foreground gap-2 px-4"
+          className=" gap-2 px-4"
           onClick={() => navigate("/")}
         >
           <ArrowLeft className="h-4 w-4" />

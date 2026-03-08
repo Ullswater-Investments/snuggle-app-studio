@@ -51,20 +51,14 @@ export default function CreateOrganization() {
       </div>
 
       {/* Top bar */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <ProcuredataLogo size="md" />
-
-          <div className="flex items-center gap-2">
-            <LanguageSwitcher />
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
 
       <div className="max-w-5xl mx-auto relative z-10 container px-4 pb-8 sm:pb-10">
         {/* Back button */}
-        <div className="pt-4 pb-2">
+        <div className="py-10">
           <Button
             variant="ghost"
             className="gap-2"
