@@ -57,6 +57,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  reloadUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -177,6 +178,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     navigateByProfile(appUser);
   };
 
+  const reloadUser = async () => {
+    await fetchAndPersistMe();
+  };
+
   const signOut = async () => {
     try {
       await authService.logout();
@@ -202,6 +207,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signIn,
     signOut,
     refreshProfile,
+    reloadUser,
   };
 
   return (

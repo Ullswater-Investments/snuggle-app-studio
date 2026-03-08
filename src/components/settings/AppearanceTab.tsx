@@ -1,4 +1,5 @@
 import { Palette } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   Card,
   CardContent,
@@ -8,19 +9,21 @@ import {
 } from "@/components/ui/card";
 
 export function AppearanceTab() {
+  const { t } = useTranslation("settings");
+
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center gap-2">
           <Palette className="size-5 text-primary" />
-          <CardTitle>Apariencia</CardTitle>
+          <CardTitle>{t("profile.appearanceTab.title")}</CardTitle>
         </div>
         <CardDescription>
-          Personaliza el tema y la interfaz
+          {t("profile.appearanceTab.description")}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground text-sm">Próximamente</p>
+        <p className="text-muted-foreground text-sm">{t("profile.appearanceTab.comingSoon")}</p>
       </CardContent>
     </Card>
   );

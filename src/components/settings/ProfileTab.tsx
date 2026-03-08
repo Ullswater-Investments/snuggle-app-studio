@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,8 +12,12 @@ import {
   CreditCard,
   CalendarDays,
   Phone,
+  Loader2,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
+import { userService } from "@/services/userService";
+import { ApiError } from "@/services/api";
 import {
   Card,
   CardContent,
@@ -116,8 +121,10 @@ function formatDate(dateStr: string | null | undefined): string {
 }
 
 export function ProfileTab() {
-  const { user } = useAuth();
+  const { t } = useTranslation("settings");
+  const { user, reloadUser } = useAuth();
   const profile = user?.profile as unknown as UserProfile | null;
+  const [isSaving, setIsSaving] = useState(false);
 
   const { register, handleSubmit, setValue, watch } =
     useForm<ProfileFormValues>({
@@ -135,11 +142,33 @@ export function ProfileTab() {
   const countryValue = watch("country");
   const languageValue = watch("language");
 
-  const onSubmit = (_data: ProfileFormValues) => {
-    toast.info("Función disponible próximamente", {
-      description:
-        "La actualización de perfil estará habilitada en una próxima versión.",
-    });
+  const onSubmit = async (data: ProfileFormValues) => {
+    setIsSaving(true);
+    try {
+      await userService.updateProfile({
+        first_name: profile?.first_name ?? "",
+        last_name: profile?.last_name ?? "",
+        id_number: profile?.id_number ?? "",
+        birthdate: profile?.birthdate ?? "",
+        gender: profile?.gender ?? "",
+        phone_number: data.phone_number ?? "",
+        address: data.address ?? "",
+        city: data.city ?? "",
+        country: data.country ?? "",
+        postal_code: data.postal_code ?? "",
+        language: data.language ?? "",
+      });
+      toast.success(t("profile.saveSuccess"));
+      await reloadUser();
+    } catch (err) {
+      const message =
+        err instanceof ApiError
+          ? String((err.data as { message?: string })?.message ?? err.message)
+          : t("profile.unknownError");
+      toast.error(t("profile.saveError"), { description: message });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -147,10 +176,10 @@ export function ProfileTab() {
       <CardHeader>
         <div className="flex items-center gap-2">
           <User className="size-5 text-primary" />
-          <CardTitle>Información Personal</CardTitle>
+          <CardTitle>{t("profile.personalInfo.title")}</CardTitle>
         </div>
         <CardDescription>
-          Actualiza tu información personal y datos de contacto
+          {t("profile.personalInfo.description")}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -159,12 +188,11 @@ export function ProfileTab() {
           <div className="space-y-2">
             <Label className="flex items-center gap-2">
               <Mail className="size-4 text-muted-foreground" />
-              Email
+              {t("profile.personalInfo.email")}
             </Label>
             <Input disabled value={user?.email ?? ""} />
             <p className="text-xs text-muted-foreground">
-              El email no se puede cambiar. Contacta a soporte si necesitas
-              actualizarlo.
+              {t("profile.personalInfo.emailHint")}
             </p>
           </div>
 
@@ -172,7 +200,7 @@ export function ProfileTab() {
           <div className="space-y-2">
             <Label className="flex items-center gap-2">
               <CreditCard className="size-4 text-muted-foreground" />
-              Documento de Identidad (ID / Pasaporte)
+              {t("profile.personalInfo.identityDocument")}
             </Label>
             <Input disabled value={profile?.id_number ?? ""} />
           </div>
@@ -181,13 +209,13 @@ export function ProfileTab() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>
-                Nombre <span className="text-destructive">*</span>
+                {t("profile.personalInfo.firstName")} <span className="text-destructive">*</span>
               </Label>
               <Input disabled value={profile?.first_name ?? ""} />
             </div>
             <div className="space-y-2">
               <Label>
-                Apellido <span className="text-destructive">*</span>
+                {t("profile.personalInfo.lastName")} <span className="text-destructive">*</span>
               </Label>
               <Input disabled value={profile?.last_name ?? ""} />
             </div>
@@ -198,17 +226,17 @@ export function ProfileTab() {
             <div className="space-y-2">
               <Label className="flex items-center gap-2">
                 <CalendarDays className="size-4 text-muted-foreground" />
-                Fecha de Nacimiento
+                {t("profile.personalInfo.dateOfBirth")}
               </Label>
               <Input disabled value={formatDate(profile?.birthdate)} />
             </div>
             <div className="space-y-2">
               <Label className="flex items-center gap-2">
                 <Phone className="size-4 text-muted-foreground" />
-                Teléfono
+                {t("profile.personalInfo.phone")}
               </Label>
               <Input
-                placeholder="+58 412 1234567"
+                placeholder={t("profile.personalInfo.phonePlaceholder")}
                 {...register("phone_number")}
               />
             </div>
@@ -219,34 +247,34 @@ export function ProfileTab() {
             <div className="flex items-center gap-2">
               <MapPin className="size-4 text-primary" />
               <span className="text-sm font-semibold">
-                Dirección y Ubicación
+                {t("profile.addressLocation.title")}
               </span>
             </div>
 
             <div className="space-y-2">
-              <Label>Dirección</Label>
+              <Label>{t("profile.addressLocation.address")}</Label>
               <Input
-                placeholder="Calle, número, piso..."
+                placeholder={t("profile.addressLocation.addressPlaceholder")}
                 {...register("address")}
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label>Ciudad / Provincia</Label>
+                <Label>{t("profile.addressLocation.city")}</Label>
                 <Input
-                  placeholder="Madrid, Barcelona..."
+                  placeholder={t("profile.addressLocation.cityPlaceholder")}
                   {...register("city")}
                 />
               </div>
               <div className="space-y-2">
-                <Label>País</Label>
+                <Label>{t("profile.addressLocation.country")}</Label>
                 <Select
                   value={countryValue}
                   onValueChange={(val) => setValue("country", val)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Seleccionar país" />
+                    <SelectValue placeholder={t("profile.addressLocation.countryPlaceholder")} />
                   </SelectTrigger>
                   <SelectContent>
                     {COUNTRIES.map((c) => (
@@ -258,8 +286,8 @@ export function ProfileTab() {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Código Postal</Label>
-                <Input placeholder="28001" {...register("postal_code")} />
+                <Label>{t("profile.addressLocation.postalCode")}</Label>
+                <Input placeholder={t("profile.addressLocation.postalCodePlaceholder")} {...register("postal_code")} />
               </div>
             </div>
           </div>
@@ -268,14 +296,14 @@ export function ProfileTab() {
           <div className="space-y-2">
             <Label className="flex items-center gap-2">
               <Globe className="size-4 text-muted-foreground" />
-              Idioma
+              {t("profile.language")}
             </Label>
             <Select
               value={languageValue}
               onValueChange={(val) => setValue("language", val)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Seleccionar idioma" />
+                <SelectValue placeholder={t("profile.languagePlaceholder")} />
               </SelectTrigger>
               <SelectContent>
                 {LANGUAGES.map((l) => (
@@ -288,9 +316,13 @@ export function ProfileTab() {
           </div>
 
           {/* Save Button */}
-          <Button type="submit" className="gap-2">
-            <Save className="size-4" />
-            Guardar cambios
+          <Button type="submit" className="gap-2" disabled={isSaving}>
+            {isSaving ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Save className="size-4" />
+            )}
+            {isSaving ? t("profile.saving") : t("profile.saveChanges")}
           </Button>
         </form>
       </CardContent>

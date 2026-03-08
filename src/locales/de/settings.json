@@ -242,6 +242,61 @@
       "empty": "Noch keine Logs verfügbar."
     }
   },
+  "profile": {
+    "pageTitle": "Einstellungen",
+    "pageDescription": "Verwalten Sie Ihr Profil, Einstellungen und Kontosicherheit.",
+    "tabs": {
+      "profile": "Profil",
+      "wallet": "Wallet",
+      "appearance": "Darstellung",
+      "security": "Sicherheit"
+    },
+    "personalInfo": {
+      "title": "Persönliche Informationen",
+      "description": "Aktualisieren Sie Ihre persönlichen Daten und Kontaktinformationen",
+      "email": "E-Mail",
+      "emailHint": "Die E-Mail kann nicht geändert werden. Kontaktieren Sie den Support, wenn Sie sie aktualisieren müssen.",
+      "identityDocument": "Ausweisdokument (Personalausweis / Reisepass)",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "dateOfBirth": "Geburtsdatum",
+      "phone": "Telefon",
+      "phonePlaceholder": "+49 170 1234567"
+    },
+    "addressLocation": {
+      "title": "Adresse und Standort",
+      "address": "Adresse",
+      "addressPlaceholder": "Straße, Hausnummer, Etage...",
+      "city": "Stadt / Bundesland",
+      "cityPlaceholder": "Berlin, München...",
+      "country": "Land",
+      "countryPlaceholder": "Land auswählen",
+      "postalCode": "Postleitzahl",
+      "postalCodePlaceholder": "10115"
+    },
+    "language": "Sprache",
+    "languagePlaceholder": "Sprache auswählen",
+    "saving": "Speichern...",
+    "saveChanges": "Änderungen speichern",
+    "saveSuccess": "Profil erfolgreich aktualisiert",
+    "saveError": "Profil konnte nicht aktualisiert werden",
+    "unknownError": "Unbekannter Fehler",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Verwalten Sie Ihre Wallet und Web3-Konfiguration",
+      "comingSoon": "Demnächst verfügbar"
+    },
+    "appearanceTab": {
+      "title": "Darstellung",
+      "description": "Passen Sie das Design und die Oberfläche an",
+      "comingSoon": "Demnächst verfügbar"
+    },
+    "securityTab": {
+      "title": "Sicherheit",
+      "description": "Passwort, aktive Sitzungen und Authentifizierung",
+      "comingSoon": "Demnächst verfügbar"
+    }
+  },
   "erp": {
     "title": "Externe Integrationen",
     "subtitle": "Verwalten Sie die Konnektivität mit ERPs, Dataspaces und Wallets.",

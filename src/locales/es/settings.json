@@ -242,6 +242,61 @@
       "empty": "No hay logs disponibles todavía."
     }
   },
+  "profile": {
+    "pageTitle": "Configuración",
+    "pageDescription": "Administra tu perfil, preferencias y seguridad de tu cuenta.",
+    "tabs": {
+      "profile": "Perfil",
+      "wallet": "Wallet",
+      "appearance": "Apariencia",
+      "security": "Seguridad"
+    },
+    "personalInfo": {
+      "title": "Información Personal",
+      "description": "Actualiza tu información personal y datos de contacto",
+      "email": "Email",
+      "emailHint": "El email no se puede cambiar. Contacta a soporte si necesitas actualizarlo.",
+      "identityDocument": "Documento de Identidad (ID / Pasaporte)",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "dateOfBirth": "Fecha de Nacimiento",
+      "phone": "Teléfono",
+      "phonePlaceholder": "+58 412 1234567"
+    },
+    "addressLocation": {
+      "title": "Dirección y Ubicación",
+      "address": "Dirección",
+      "addressPlaceholder": "Calle, número, piso...",
+      "city": "Ciudad / Provincia",
+      "cityPlaceholder": "Madrid, Barcelona...",
+      "country": "País",
+      "countryPlaceholder": "Seleccionar país",
+      "postalCode": "Código Postal",
+      "postalCodePlaceholder": "28001"
+    },
+    "language": "Idioma",
+    "languagePlaceholder": "Seleccionar idioma",
+    "saving": "Guardando...",
+    "saveChanges": "Guardar cambios",
+    "saveSuccess": "Perfil actualizado correctamente",
+    "saveError": "No se pudo actualizar el perfil",
+    "unknownError": "Error desconocido",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Gestiona tu wallet y configuración Web3",
+      "comingSoon": "Próximamente"
+    },
+    "appearanceTab": {
+      "title": "Apariencia",
+      "description": "Personaliza el tema y la interfaz",
+      "comingSoon": "Próximamente"
+    },
+    "securityTab": {
+      "title": "Seguridad",
+      "description": "Contraseña, sesiones activas y autenticación",
+      "comingSoon": "Próximamente"
+    }
+  },
   "erp": {
     "title": "Integraciones Externas",
     "subtitle": "Gestiona la conectividad con ERPs, Dataspaces y Wallets.",

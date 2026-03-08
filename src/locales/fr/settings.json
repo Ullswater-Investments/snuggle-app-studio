@@ -242,6 +242,61 @@
       "empty": "Aucun log disponible pour le moment."
     }
   },
+  "profile": {
+    "pageTitle": "Paramètres",
+    "pageDescription": "Gérez votre profil, préférences et sécurité de votre compte.",
+    "tabs": {
+      "profile": "Profil",
+      "wallet": "Wallet",
+      "appearance": "Apparence",
+      "security": "Sécurité"
+    },
+    "personalInfo": {
+      "title": "Informations Personnelles",
+      "description": "Mettez à jour vos informations personnelles et de contact",
+      "email": "Email",
+      "emailHint": "L'email ne peut pas être modifié. Contactez le support si vous devez le mettre à jour.",
+      "identityDocument": "Document d'Identité (ID / Passeport)",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "dateOfBirth": "Date de Naissance",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+33 6 12 34 56 78"
+    },
+    "addressLocation": {
+      "title": "Adresse et Localisation",
+      "address": "Adresse",
+      "addressPlaceholder": "Rue, numéro, étage...",
+      "city": "Ville / Province",
+      "cityPlaceholder": "Paris, Lyon...",
+      "country": "Pays",
+      "countryPlaceholder": "Sélectionner le pays",
+      "postalCode": "Code Postal",
+      "postalCodePlaceholder": "75001"
+    },
+    "language": "Langue",
+    "languagePlaceholder": "Sélectionner la langue",
+    "saving": "Enregistrement...",
+    "saveChanges": "Enregistrer les modifications",
+    "saveSuccess": "Profil mis à jour avec succès",
+    "saveError": "Impossible de mettre à jour le profil",
+    "unknownError": "Erreur inconnue",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Gérez votre wallet et la configuration Web3",
+      "comingSoon": "Bientôt disponible"
+    },
+    "appearanceTab": {
+      "title": "Apparence",
+      "description": "Personnalisez le thème et l'interface",
+      "comingSoon": "Bientôt disponible"
+    },
+    "securityTab": {
+      "title": "Sécurité",
+      "description": "Mot de passe, sessions actives et authentification",
+      "comingSoon": "Bientôt disponible"
+    }
+  },
   "erp": {
     "title": "Intégrations Externes",
     "subtitle": "Gérez la connectivité avec les ERP, Dataspaces et Wallets.",

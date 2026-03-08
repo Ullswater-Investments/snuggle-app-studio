@@ -1,4 +1,5 @@
 import { Wallet } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   Card,
   CardContent,
@@ -8,19 +9,21 @@ import {
 } from "@/components/ui/card";
 
 export function WalletTab() {
+  const { t } = useTranslation("settings");
+
   return (
     <Card>
       <CardHeader>
         <div className="flex items-center gap-2">
           <Wallet className="size-5 text-primary" />
-          <CardTitle>Wallet</CardTitle>
+          <CardTitle>{t("profile.walletTab.title")}</CardTitle>
         </div>
         <CardDescription>
-          Gestiona tu wallet y configuración Web3
+          {t("profile.walletTab.description")}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground text-sm">Próximamente</p>
+        <p className="text-muted-foreground text-sm">{t("profile.walletTab.comingSoon")}</p>
       </CardContent>
     </Card>
   );

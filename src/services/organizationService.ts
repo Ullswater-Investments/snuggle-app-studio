@@ -33,6 +33,10 @@ export interface WalletData {
   provider: string;
   wallet_node: string;
   public_key: string | null;
+  private_key: string | null;
+  uuid: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export const organizationService = {

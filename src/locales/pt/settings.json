@@ -242,6 +242,61 @@
       "empty": "Nenhum log disponível ainda."
     }
   },
+  "profile": {
+    "pageTitle": "Configurações",
+    "pageDescription": "Gerencie seu perfil, preferências e segurança da sua conta.",
+    "tabs": {
+      "profile": "Perfil",
+      "wallet": "Wallet",
+      "appearance": "Aparência",
+      "security": "Segurança"
+    },
+    "personalInfo": {
+      "title": "Informações Pessoais",
+      "description": "Atualize suas informações pessoais e dados de contato",
+      "email": "Email",
+      "emailHint": "O email não pode ser alterado. Entre em contato com o suporte se precisar atualizá-lo.",
+      "identityDocument": "Documento de Identidade (ID / Passaporte)",
+      "firstName": "Nome",
+      "lastName": "Sobrenome",
+      "dateOfBirth": "Data de Nascimento",
+      "phone": "Telefone",
+      "phonePlaceholder": "+55 11 91234-5678"
+    },
+    "addressLocation": {
+      "title": "Endereço e Localização",
+      "address": "Endereço",
+      "addressPlaceholder": "Rua, número, andar...",
+      "city": "Cidade / Estado",
+      "cityPlaceholder": "São Paulo, Lisboa...",
+      "country": "País",
+      "countryPlaceholder": "Selecionar país",
+      "postalCode": "Código Postal",
+      "postalCodePlaceholder": "01001"
+    },
+    "language": "Idioma",
+    "languagePlaceholder": "Selecionar idioma",
+    "saving": "Salvando...",
+    "saveChanges": "Salvar alterações",
+    "saveSuccess": "Perfil atualizado com sucesso",
+    "saveError": "Não foi possível atualizar o perfil",
+    "unknownError": "Erro desconhecido",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Gerencie sua wallet e configuração Web3",
+      "comingSoon": "Em breve"
+    },
+    "appearanceTab": {
+      "title": "Aparência",
+      "description": "Personalize o tema e a interface",
+      "comingSoon": "Em breve"
+    },
+    "securityTab": {
+      "title": "Segurança",
+      "description": "Senha, sessões ativas e autenticação",
+      "comingSoon": "Em breve"
+    }
+  },
   "erp": {
     "title": "Integrações Externas",
     "subtitle": "Gerencie a conectividade com ERPs, Dataspaces e Carteiras.",

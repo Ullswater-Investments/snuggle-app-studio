@@ -242,6 +242,61 @@
       "empty": "Nessun log disponibile ancora."
     }
   },
+  "profile": {
+    "pageTitle": "Impostazioni",
+    "pageDescription": "Gestisci il tuo profilo, le preferenze e la sicurezza del tuo account.",
+    "tabs": {
+      "profile": "Profilo",
+      "wallet": "Wallet",
+      "appearance": "Aspetto",
+      "security": "Sicurezza"
+    },
+    "personalInfo": {
+      "title": "Informazioni Personali",
+      "description": "Aggiorna le tue informazioni personali e i dati di contatto",
+      "email": "Email",
+      "emailHint": "L'email non può essere modificata. Contatta il supporto se hai bisogno di aggiornarla.",
+      "identityDocument": "Documento di Identità (ID / Passaporto)",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "dateOfBirth": "Data di Nascita",
+      "phone": "Telefono",
+      "phonePlaceholder": "+39 333 1234567"
+    },
+    "addressLocation": {
+      "title": "Indirizzo e Posizione",
+      "address": "Indirizzo",
+      "addressPlaceholder": "Via, numero, piano...",
+      "city": "Città / Provincia",
+      "cityPlaceholder": "Roma, Milano...",
+      "country": "Paese",
+      "countryPlaceholder": "Seleziona paese",
+      "postalCode": "Codice Postale",
+      "postalCodePlaceholder": "00100"
+    },
+    "language": "Lingua",
+    "languagePlaceholder": "Seleziona lingua",
+    "saving": "Salvataggio...",
+    "saveChanges": "Salva modifiche",
+    "saveSuccess": "Profilo aggiornato con successo",
+    "saveError": "Impossibile aggiornare il profilo",
+    "unknownError": "Errore sconosciuto",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Gestisci il tuo wallet e la configurazione Web3",
+      "comingSoon": "Prossimamente"
+    },
+    "appearanceTab": {
+      "title": "Aspetto",
+      "description": "Personalizza il tema e l'interfaccia",
+      "comingSoon": "Prossimamente"
+    },
+    "securityTab": {
+      "title": "Sicurezza",
+      "description": "Password, sessioni attive e autenticazione",
+      "comingSoon": "Prossimamente"
+    }
+  },
   "erp": {
     "title": "Integrazioni Esterne",
     "subtitle": "Gestisci la connettività con ERP, Dataspace e Wallet.",

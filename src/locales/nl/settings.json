@@ -242,6 +242,61 @@
       "empty": "Nog geen logs beschikbaar."
     }
   },
+  "profile": {
+    "pageTitle": "Instellingen",
+    "pageDescription": "Beheer je profiel, voorkeuren en accountbeveiliging.",
+    "tabs": {
+      "profile": "Profiel",
+      "wallet": "Wallet",
+      "appearance": "Uiterlijk",
+      "security": "Beveiliging"
+    },
+    "personalInfo": {
+      "title": "Persoonlijke Informatie",
+      "description": "Werk je persoonlijke gegevens en contactinformatie bij",
+      "email": "E-mail",
+      "emailHint": "Het e-mailadres kan niet worden gewijzigd. Neem contact op met de ondersteuning als u het moet bijwerken.",
+      "identityDocument": "Identiteitsbewijs (ID / Paspoort)",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "dateOfBirth": "Geboortedatum",
+      "phone": "Telefoon",
+      "phonePlaceholder": "+31 6 12345678"
+    },
+    "addressLocation": {
+      "title": "Adres en Locatie",
+      "address": "Adres",
+      "addressPlaceholder": "Straat, nummer, verdieping...",
+      "city": "Stad / Provincie",
+      "cityPlaceholder": "Amsterdam, Rotterdam...",
+      "country": "Land",
+      "countryPlaceholder": "Selecteer land",
+      "postalCode": "Postcode",
+      "postalCodePlaceholder": "1012"
+    },
+    "language": "Taal",
+    "languagePlaceholder": "Selecteer taal",
+    "saving": "Opslaan...",
+    "saveChanges": "Wijzigingen opslaan",
+    "saveSuccess": "Profiel succesvol bijgewerkt",
+    "saveError": "Kon het profiel niet bijwerken",
+    "unknownError": "Onbekende fout",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Beheer je wallet en Web3-configuratie",
+      "comingSoon": "Binnenkort beschikbaar"
+    },
+    "appearanceTab": {
+      "title": "Uiterlijk",
+      "description": "Pas het thema en de interface aan",
+      "comingSoon": "Binnenkort beschikbaar"
+    },
+    "securityTab": {
+      "title": "Beveiliging",
+      "description": "Wachtwoord, actieve sessies en authenticatie",
+      "comingSoon": "Binnenkort beschikbaar"
+    }
+  },
   "erp": {
     "title": "Externe Integraties",
     "subtitle": "Beheer de connectiviteit met ERP's, Dataspaces en Wallets.",

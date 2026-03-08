@@ -242,6 +242,61 @@
       "empty": "No logs available yet."
     }
   },
+  "profile": {
+    "pageTitle": "Settings",
+    "pageDescription": "Manage your profile, preferences, and account security.",
+    "tabs": {
+      "profile": "Profile",
+      "wallet": "Wallet",
+      "appearance": "Appearance",
+      "security": "Security"
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "description": "Update your personal information and contact details",
+      "email": "Email",
+      "emailHint": "Email cannot be changed. Contact support if you need to update it.",
+      "identityDocument": "Identity Document (ID / Passport)",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "dateOfBirth": "Date of Birth",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 555 1234567"
+    },
+    "addressLocation": {
+      "title": "Address & Location",
+      "address": "Address",
+      "addressPlaceholder": "Street, number, floor...",
+      "city": "City / Province",
+      "cityPlaceholder": "New York, London...",
+      "country": "Country",
+      "countryPlaceholder": "Select country",
+      "postalCode": "Postal Code",
+      "postalCodePlaceholder": "10001"
+    },
+    "language": "Language",
+    "languagePlaceholder": "Select language",
+    "saving": "Saving...",
+    "saveChanges": "Save changes",
+    "saveSuccess": "Profile updated successfully",
+    "saveError": "Could not update profile",
+    "unknownError": "Unknown error",
+    "walletTab": {
+      "title": "Wallet",
+      "description": "Manage your wallet and Web3 configuration",
+      "comingSoon": "Coming soon"
+    },
+    "appearanceTab": {
+      "title": "Appearance",
+      "description": "Customize the theme and interface",
+      "comingSoon": "Coming soon"
+    },
+    "securityTab": {
+      "title": "Security",
+      "description": "Password, active sessions, and authentication",
+      "comingSoon": "Coming soon"
+    }
+  },
   "erp": {
     "title": "External Integrations",
     "subtitle": "Manage connectivity with ERPs, Dataspaces, and Wallets.",
