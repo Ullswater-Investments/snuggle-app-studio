@@ -36,5 +36,10 @@
     "disconnected": "Getrennt",
     "disconnectedDesc": "Du hast die Sitzung deiner Wallet geschlossen.",
     "metamaskDisconnected": "Trennung in MetaMask erkannt"
+  },
+  "userMenu": {
+    "profile": "Profil",
+    "preferences": "Einstellungen",
+    "logout": "Abmelden"
   }
 }

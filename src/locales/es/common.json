@@ -36,5 +36,10 @@
     "disconnected": "Desconectado",
     "disconnectedDesc": "Has cerrado la sesión de tu wallet.",
     "metamaskDisconnected": "Desconexión detectada en MetaMask"
+  },
+  "userMenu": {
+    "profile": "Perfil",
+    "preferences": "Preferencias",
+    "logout": "Cerrar Sesión"
   }
 }

@@ -36,5 +36,10 @@
     "disconnected": "Desconectado",
     "disconnectedDesc": "Você fechou a sessão da sua carteira.",
     "metamaskDisconnected": "Desconexão detectada no MetaMask"
+  },
+  "userMenu": {
+    "profile": "Perfil",
+    "preferences": "Preferências",
+    "logout": "Encerrar Sessão"
   }
 }

@@ -36,5 +36,10 @@
     "disconnected": "Losgekoppeld",
     "disconnectedDesc": "Je hebt de sessie van je portemonnee gesloten.",
     "metamaskDisconnected": "Loskoppeling gedetecteerd in MetaMask"
+  },
+  "userMenu": {
+    "profile": "Profiel",
+    "preferences": "Voorkeuren",
+    "logout": "Uitloggen"
   }
 }

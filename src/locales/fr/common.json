@@ -36,5 +36,10 @@
     "disconnected": "Déconnecté",
     "disconnectedDesc": "Vous avez fermé la session de votre portefeuille.",
     "metamaskDisconnected": "Déconnexion détectée dans MetaMask"
+  },
+  "userMenu": {
+    "profile": "Profil",
+    "preferences": "Préférences",
+    "logout": "Se déconnecter"
   }
 }

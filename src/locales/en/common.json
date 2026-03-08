@@ -36,5 +36,10 @@
     "disconnected": "Disconnected",
     "disconnectedDesc": "You have logged out of your wallet.",
     "metamaskDisconnected": "Disconnection detected in MetaMask"
+  },
+  "userMenu": {
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "logout": "Log Out"
   }
 }

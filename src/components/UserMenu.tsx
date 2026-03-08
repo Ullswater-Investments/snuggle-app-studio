@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { ChevronDown, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ChevronDown, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -17,10 +18,10 @@ interface UserMenuProps {
 }
 
 function getNameFromUser(user: AppUser): string {
-  const firstName = user.profile?.first_name;
+  const firstName = user?.profile?.first_name;
   if (typeof firstName === "string" && firstName.trim())
     return firstName.trim();
-  return user.email.slice(0, 2).toUpperCase();
+  return user?.email?.slice(0, 2).toUpperCase() || "";
 }
 
 function getInitials(fullName: string): string {
@@ -34,8 +35,8 @@ function getInitials(fullName: string): string {
 
 export function UserMenu({ user, onSignOut }: UserMenuProps) {
   const { t } = useTranslation("common");
-
-  const fullName = getNameFromUser(user);
+  const navigate = useNavigate();
+  const fullName = getNameFromUser(user!);
   const displayName = fullName.split(" ")[0];
   const initials = getInitials(fullName);
 
@@ -58,8 +59,19 @@ export function UserMenu({ user, onSignOut }: UserMenuProps) {
       <DropdownMenuContent align="end" className="w-64 shadow-lg border-border">
         <div className="px-3 py-2">
           <p className="text-sm font-medium truncate">{fullName}</p>
-          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+          <p className="text-xs text-muted-foreground truncate">
+            {user && user.email}
+          </p>
         </div>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem
+          className="cursor-pointer py-2"
+          onClick={() => navigate("/settings/preferences")}
+        >
+          <User className="mr-2 size-4" />
+          <span>{t("userMenu.profile")}</span>
+        </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
