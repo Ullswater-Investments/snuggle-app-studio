@@ -39,6 +39,61 @@ export interface WalletData {
   updated_at: string;
 }
 
+export interface GetOrganizationsResponse {
+  meta: PaginationMeta;
+  data: ApiOrganization[];
+}
+
+export interface PaginationMeta {
+  total: number;
+  per_page: number;
+  current_page: number;
+  last_page: number;
+  first_page: number;
+  first_page_url: string;
+  last_page_url: string;
+  next_page_url: string | null;
+  previous_page_url: string | null;
+}
+
+export interface ApiOrganization {
+  uuid: string;
+  name: string;
+  document_type: string;
+  document: string;
+  document_country_code: string;
+  registration_number: string;
+  headquarters_address: AddressDetails;
+  legal_address: AddressDetails;
+  external_id: string;
+  created_by_user_uuid: string;
+  created_at: string;
+  updated_at: string;
+  primaryWallets: ApiWallet[];
+  wallets: ApiWallet[];
+  createdByUser: ApiCreatedByUser;
+}
+export interface ApiWallet {
+  uuid: string;
+  address: string;
+  provider: string;
+  wallet_mode: string;
+  public_key: string | null;
+  kms_key_id: string | null;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ApiCreatedByUser {
+  uuid: string;
+  email: string;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+  wallet_address: string | null;
+}
+
 export const organizationService = {
   importOrganization: (
     walletFile: File,
@@ -52,4 +107,12 @@ export const organizationService = {
       formData,
     );
   },
+
+  getOrganizations: (
+    page = 1,
+    perPage = 15,
+  ): Promise<GetOrganizationsResponse> =>
+    api.get<GetOrganizationsResponse>(
+      `/organizations?page=${page}&per_page=${perPage}`,
+    ),
 };

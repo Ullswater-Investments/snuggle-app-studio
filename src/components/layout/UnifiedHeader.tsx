@@ -97,9 +97,9 @@ export const UnifiedHeader = () => {
 
           {user ? (
             <>
-              <div data-tour="org-switcher">
+              {/* <div data-tour="org-switcher">
                 <OrganizationSwitcher />
-              </div>
+              </div> */}
               <NotificationsBell />
               <LanguageSwitcher />
               <ThemeToggle />

@@ -1,14 +1,38 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
 import { toast } from "sonner";
+import {
+  organizationService,
+  type ApiWallet,
+  type AddressDetails,
+} from "@/services/organizationService";
 
-interface Organization {
+export interface Organization {
   id: string;
   name: string;
-  type: 'consumer' | 'data_holder' | 'provider';
-  is_demo: boolean;
+  document_type: string;
+  document: string;
+  document_country_code: string;
+  registration_number: string;
+  headquarters_address: AddressDetails;
+  legal_address: AddressDetails;
+  external_id: string;
+  created_by_user_uuid: string;
+  wallet_address: string | null;
+  primaryWallets: ApiWallet[];
+  wallets: ApiWallet[];
+  created_at: string;
+  updated_at: string;
+  /** @deprecated Supabase-era fields kept for compile compat -- will be removed */
+  type?: string;
+  is_demo?: boolean;
   sector?: string;
   logo_url?: string;
   banner_url?: string;
@@ -27,105 +51,80 @@ interface OrganizationContextType {
   loading: boolean;
 }
 
-const OrganizationContext = createContext<OrganizationContextType | undefined>(undefined);
+const OrganizationContext = createContext<OrganizationContextType | undefined>(
+  undefined,
+);
 
 export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [activeOrgId, setActiveOrgId] = useState<string | null>(() => {
-    // Recuperar organización activa del sessionStorage
-    return sessionStorage.getItem('activeOrgId');
+    return sessionStorage.getItem("activeOrgId");
   });
 
-  // Obtener organizaciones disponibles para el usuario
   const { data: availableOrgs = [], isLoading } = useQuery({
-    queryKey: ['user-organizations', user?.id],
+    queryKey: ["user-organizations", user?.id],
     queryFn: async () => {
       if (!user) return [];
-      
-      // Obtener los roles del usuario para ver a qué organizaciones tiene acceso
-      const { data: userRoles, error } = await supabase
-        .from('user_roles')
-        .select('organization_id, organizations(id, name, type)')
-        .eq('user_id', user.id);
 
-      if (error) throw error;
-
-      // Extraer organizaciones y obtener is_demo por separado
-      const orgIds = userRoles
-        .map(role => role.organizations)
-        .filter((org): org is { id: string; name: string; type: 'consumer' | 'data_holder' | 'provider' } => org !== null);
-
-      // Obtener el campo is_demo y sector directamente de organizations
-      const { data: orgsWithDemo } = await supabase
-        .from('organizations')
-        .select('id, is_demo, sector')
-        .in('id', orgIds.map(o => o.id)) as any; // Temporal hasta que se actualicen los tipos
-
-      // Combinar los datos y deduplicar por ID
-      const seen = new Set<string>();
-      const orgs: Organization[] = [];
-      for (const org of orgIds) {
-        if (seen.has(org.id)) continue;
-        seen.add(org.id);
-        orgs.push({
-          ...org,
-          is_demo: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.is_demo ?? false,
-          sector: (orgsWithDemo as any)?.find((od: any) => od.id === org.id)?.sector,
-        });
-      }
-
-      return orgs;
+      const response = await organizationService.getOrganizations();
+      return response.data.map(
+        (apiOrg): Organization => ({
+          id: apiOrg.uuid,
+          name: apiOrg.name,
+          document_type: apiOrg.document_type,
+          document: apiOrg.document,
+          document_country_code: apiOrg.document_country_code,
+          registration_number: apiOrg.registration_number,
+          headquarters_address: apiOrg.headquarters_address,
+          legal_address: apiOrg.legal_address,
+          external_id: apiOrg.external_id,
+          created_by_user_uuid: apiOrg.created_by_user_uuid,
+          wallet_address: apiOrg.primaryWallets?.[0]?.address ?? null,
+          primaryWallets: apiOrg.primaryWallets,
+          wallets: apiOrg.wallets,
+          created_at: apiOrg.created_at,
+          updated_at: apiOrg.updated_at,
+        }),
+      );
     },
     enabled: !!user,
   });
 
-  // Detectar si estamos en modo demo
-  const isDemo = availableOrgs.some(org => org.is_demo) || user?.email === 'demo@procuredata.app';
+  const activeOrg = availableOrgs.find((org) => org.id === activeOrgId) || null;
 
-  // Obtener la organización activa
-  const activeOrg = availableOrgs.find(org => org.id === activeOrgId) || null;
-
-  // Validación cruzada: limpiar activeOrgId obsoleto de sessionStorage
   useEffect(() => {
     if (!isLoading && availableOrgs.length === 0) {
-      // Usuario sin organizaciones: limpiar cualquier valor obsoleto
       if (activeOrgId) {
-        console.log("useOrganizationContext: Clearing stale activeOrgId (no orgs available):", activeOrgId);
         setActiveOrgId(null);
-        sessionStorage.removeItem('activeOrgId');
+        sessionStorage.removeItem("activeOrgId");
       }
-    } else if (!isLoading && activeOrgId && !availableOrgs.find(o => o.id === activeOrgId)) {
-      // activeOrgId obsoleto: no existe en las orgs disponibles
-      console.log("useOrganizationContext: Clearing stale activeOrgId (not in availableOrgs):", activeOrgId);
+    } else if (
+      !isLoading &&
+      activeOrgId &&
+      !availableOrgs.find((o) => o.id === activeOrgId)
+    ) {
       setActiveOrgId(null);
-      sessionStorage.removeItem('activeOrgId');
+      sessionStorage.removeItem("activeOrgId");
     } else if (!isLoading && !activeOrgId && availableOrgs.length > 0) {
-      // Sin org activa pero hay disponibles: seleccionar la primera
       const firstOrg = availableOrgs[0];
-      setActiveOrgId(firstOrg.id);
-      sessionStorage.setItem('activeOrgId', firstOrg.id);
+      // *Aqui se selecciona la primera organización por defecto
+      // setActiveOrgId(firstOrg.id);
+      // sessionStorage.setItem("activeOrgId", firstOrg.id);
     }
   }, [isLoading, availableOrgs, activeOrgId]);
 
   const switchOrganization = (orgId: string) => {
-    const org = availableOrgs.find(o => o.id === orgId);
+    const org = availableOrgs.find((o) => o.id === orgId);
     if (!org) {
       toast.error("Organización no disponible");
       return;
     }
 
     setActiveOrgId(orgId);
-    sessionStorage.setItem('activeOrgId', orgId);
-    
-    // 🔐 CRÍTICO: Limpiar cache completo para evitar fuga de datos entre organizaciones
-    // Esto previene que datos de Org A sean visibles después de cambiar a Org B
+    sessionStorage.setItem("activeOrgId", orgId);
     queryClient.invalidateQueries();
-    
-    // Mensaje de cambio de contexto
-    const roleLabel = org.type === 'consumer' ? 'Consumidor' : 
-                      org.type === 'data_holder' ? 'Poseedor' : 'Proveedor';
-    toast.success(`Cambiado a: ${org.name} (${roleLabel})`);
+    toast.success(`Cambiado a: ${org.name}`);
   };
 
   return (
@@ -135,8 +134,13 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
         activeOrg,
         availableOrgs,
         switchOrganization,
-        isDemo,
-        loading: isLoading || (!!sessionStorage.getItem('activeOrgId') && !isLoading && activeOrgId !== null && !activeOrg),
+        isDemo: false,
+        loading:
+          isLoading ||
+          (!!sessionStorage.getItem("activeOrgId") &&
+            !isLoading &&
+            activeOrgId !== null &&
+            !activeOrg),
       }}
     >
       {children}
@@ -147,7 +151,9 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
 export const useOrganizationContext = () => {
   const context = useContext(OrganizationContext);
   if (context === undefined) {
-    throw new Error("useOrganizationContext must be used within an OrganizationProvider");
+    throw new Error(
+      "useOrganizationContext must be used within an OrganizationProvider",
+    );
   }
   return context;
 };
