@@ -2,6 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useState,
   ReactNode,
 } from "react";
@@ -12,6 +13,7 @@ import {
   organizationService,
   type ApiWallet,
   type AddressDetails,
+  type PaginationMeta,
 } from "@/services/organizationService";
 
 export interface Organization {
@@ -49,6 +51,9 @@ interface OrganizationContextType {
   switchOrganization: (orgId: string) => void;
   isDemo: boolean;
   loading: boolean;
+  paginationMeta: PaginationMeta | null;
+  currentPage: number;
+  goToPage: (page: number) => void;
 }
 
 const OrganizationContext = createContext<OrganizationContextType | undefined>(
@@ -61,14 +66,15 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
   const [activeOrgId, setActiveOrgId] = useState<string | null>(() => {
     return sessionStorage.getItem("activeOrgId");
   });
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: availableOrgs = [], isLoading } = useQuery({
-    queryKey: ["user-organizations", user?.id],
-    queryFn: async () => {
-      if (!user) return [];
+  const { data: queryData, isLoading } = useQuery({
+    queryKey: ["user-organizations", user?.id, currentPage],
+    queryFn: async (): Promise<{ orgs: Organization[]; meta: PaginationMeta | null }> => {
+      if (!user) return { orgs: [], meta: null };
 
-      const response = await organizationService.getOrganizations();
-      return response.data.map(
+      const response = await organizationService.getOrganizations(currentPage);
+      const orgs = response.data.map(
         (apiOrg): Organization => ({
           id: apiOrg.uuid,
           name: apiOrg.name,
@@ -87,9 +93,13 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
           updated_at: apiOrg.updated_at,
         }),
       );
+      return { orgs, meta: response.meta };
     },
     enabled: !!user,
   });
+
+  const availableOrgs = useMemo(() => queryData?.orgs ?? [], [queryData]);
+  const paginationMeta = queryData?.meta ?? null;
 
   const activeOrg = availableOrgs.find((org) => org.id === activeOrgId) || null;
 
@@ -127,6 +137,10 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
     toast.success(`Cambiado a: ${org.name}`);
   };
 
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <OrganizationContext.Provider
       value={{
@@ -135,6 +149,9 @@ export const OrganizationProvider = ({ children }: { children: ReactNode }) => {
         availableOrgs,
         switchOrganization,
         isDemo: false,
+        paginationMeta,
+        currentPage,
+        goToPage,
         loading:
           isLoading ||
           (!!sessionStorage.getItem("activeOrgId") &&
