@@ -5,6 +5,7 @@ interface Step {
   id: number;
   title: string;
   description?: string;
+  icon?: React.ReactNode;
 }
 
 interface OnboardingStepperProps {
@@ -12,7 +13,10 @@ interface OnboardingStepperProps {
   currentStep: number;
 }
 
-export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps) {
+export function OnboardingStepper({
+  steps,
+  currentStep,
+}: OnboardingStepperProps) {
   return (
     <div className="w-full px-2 sm:px-0">
       <div className="flex items-start w-full">
@@ -22,7 +26,7 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
             className={cn(
               "flex items-start",
               index === 0 ? "flex-shrink-0" : "",
-              index === steps.length - 1 ? "flex-shrink-0" : "flex-1"
+              index === steps.length - 1 ? "flex-shrink-0" : "flex-1",
             )}
           >
             {/* Step Circle and Text */}
@@ -34,14 +38,15 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
                     ? "bg-primary text-primary-foreground shadow-primary/25"
                     : currentStep === step.id
                       ? "bg-primary text-primary-foreground ring-4 ring-primary/20 shadow-primary/30"
-                      : "bg-muted text-muted-foreground border-2 border-muted-foreground/20"
+                      : "bg-muted text-muted-foreground border-2 border-muted-foreground/20",
                 )}
               >
-                {currentStep > step.id ? (
+                {step.icon}
+                {/* {currentStep > step.id ? (
                   <Check className="h-5 w-5 sm:h-6 sm:w-6" />
                 ) : (
-                  step.id
-                )}
+                  step.icon
+                )} */}
               </div>
               <div className="mt-3 text-center max-w-[100px] sm:max-w-[140px]">
                 <p
@@ -49,16 +54,16 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
                     "text-xs sm:text-sm font-medium leading-tight",
                     currentStep >= step.id
                       ? "text-foreground"
-                      : "text-muted-foreground"
+                      : "text-muted-foreground",
                   )}
                 >
                   {step.title}
                 </p>
-                {step.description && (
+                {/* {step.description && (
                   <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 hidden sm:block">
                     {step.description}
                   </p>
-                )}
+                )} */}
               </div>
             </div>
 
@@ -70,7 +75,7 @@ export function OnboardingStepper({ steps, currentStep }: OnboardingStepperProps
                     "w-full h-1 rounded-full transition-all duration-500",
                     currentStep > step.id
                       ? "bg-gradient-to-r from-primary to-primary/80"
-                      : "bg-muted"
+                      : "bg-muted",
                   )}
                 />
               </div>

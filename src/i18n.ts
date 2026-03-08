@@ -68,6 +68,7 @@ import esTransparency from './locales/es/transparency.json';
 import esAdmin from './locales/es/admin.json';
 import esDataView from './locales/es/dataView.json';
 import esPublish from './locales/es/publish.json';
+import esOnboarding from './locales/es/onboarding.json';
 // French
 import frCommon from './locales/fr/common.json';
 import frNav from './locales/fr/nav.json';
@@ -134,6 +135,7 @@ import frTransparency from './locales/fr/transparency.json';
 import frAdmin from './locales/fr/admin.json';
 import frDataView from './locales/fr/dataView.json';
 import frPublish from './locales/fr/publish.json';
+import frOnboarding from './locales/fr/onboarding.json';
 
 // Portuguese
 import ptCommon from './locales/pt/common.json';
@@ -199,6 +201,7 @@ import ptTransparency from './locales/pt/transparency.json';
 import ptAdmin from './locales/pt/admin.json';
 import ptDataView from './locales/pt/dataView.json';
 import ptPublish from './locales/pt/publish.json';
+import ptOnboarding from './locales/pt/onboarding.json';
 
 // German
 import deCommon from './locales/de/common.json';
@@ -265,6 +268,7 @@ import deTransparency from './locales/de/transparency.json';
 import deAdmin from './locales/de/admin.json';
 import deDataView from './locales/de/dataView.json';
 import dePublish from './locales/de/publish.json';
+import deOnboarding from './locales/de/onboarding.json';
 
 // Italian
 import itCommon from './locales/it/common.json';
@@ -331,6 +335,7 @@ import itTransparency from './locales/it/transparency.json';
 import itAdmin from './locales/it/admin.json';
 import itDataView from './locales/it/dataView.json';
 import itPublish from './locales/it/publish.json';
+import itOnboarding from './locales/it/onboarding.json';
 
 // Dutch
 import nlCommon from './locales/nl/common.json';
@@ -397,6 +402,7 @@ import nlTransparency from './locales/nl/transparency.json';
 import nlAdmin from './locales/nl/admin.json';
 import nlDataView from './locales/nl/dataView.json';
 import nlPublish from './locales/nl/publish.json';
+import nlOnboarding from './locales/nl/onboarding.json';
 
 // English
 import enCommon from './locales/en/common.json';
@@ -464,6 +470,7 @@ import enTransparency from './locales/en/transparency.json';
 import enAdmin from './locales/en/admin.json';
 import enDataView from './locales/en/dataView.json';
 import enPublish from './locales/en/publish.json';
+import enOnboarding from './locales/en/onboarding.json';
 
 // German and Portuguese architecture imports
 import deArchitecture from './locales/de/architecture.json';
@@ -552,6 +559,7 @@ i18n
         admin: esAdmin,
         dataView: esDataView,
         publish: esPublish,
+        onboarding: esOnboarding,
       },
       en: {
         common: enCommon,
@@ -619,6 +627,7 @@ i18n
         admin: enAdmin,
         dataView: enDataView,
         publish: enPublish,
+        onboarding: enOnboarding,
       },
       fr: {
         common: frCommon,
@@ -686,6 +695,7 @@ i18n
         admin: frAdmin,
         dataView: frDataView,
         publish: frPublish,
+        onboarding: frOnboarding,
       },
       pt: {
         common: ptCommon,
@@ -752,6 +762,7 @@ i18n
         admin: ptAdmin,
         dataView: ptDataView,
         publish: ptPublish,
+        onboarding: ptOnboarding,
       },
       de: {
         common: deCommon,
@@ -819,6 +830,7 @@ i18n
         admin: deAdmin,
         dataView: deDataView,
         publish: dePublish,
+        onboarding: deOnboarding,
       },
       it: {
         common: itCommon,
@@ -885,6 +897,7 @@ i18n
         admin: itAdmin,
         dataView: itDataView,
         publish: itPublish,
+        onboarding: itOnboarding,
       },
       nl: {
         common: nlCommon,
@@ -951,11 +964,12 @@ i18n
         admin: nlAdmin,
         dataView: nlDataView,
         publish: nlPublish,
+        onboarding: nlOnboarding,
       },
     },
     fallbackLng: 'es',
     defaultNS: 'common',
-    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications', 'reports', 'data', 'requests', 'analytics', 'admin', 'dataView', 'publish'],
+    ns: ['common', 'nav', 'landing', 'simulators', 'success', 'catalog', 'services', 'innovation', 'sustainability', 'opportunities', 'models', 'motor', 'syntheticData', 'partnerProducts', 'premiumPartners', 'partners', 'demo-tour', 'settings', 'register', 'contract', 'closerstill', 'catalogDetails', 'greenProcurement', 'diagrams', 'useCases', 'dashboard', 'seres', 'closerstill-proyecto', 'valerdata', 'aracea', 'telenatura', 'architecture', 'userGuide', 'guide', 'whitepaper', 'kit', 'chat', 'fundamentos', 'catalogoDatos', 'flujo3Actores', 'politicasOdrl', 'web3Dids', 'iaConversacional', 'conectoresErp', 'redGaiaX', 'analyticsBi', 'multiSector', 'une0087', 'uneRecommendations', 'rulebook', 'glossaryUne', 'transparency', 'notifications', 'reports', 'data', 'requests', 'analytics', 'admin', 'dataView', 'publish', 'onboarding'],
     interpolation: {
       escapeValue: false,
     },

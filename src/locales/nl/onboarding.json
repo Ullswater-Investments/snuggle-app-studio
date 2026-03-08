@@ -1,0 +1,53 @@
+{
+  "createOrg": {
+    "back": "Terug",
+    "title": "Organisatie aanmaken",
+    "subtitle": "Registreer uw organisatie in de dataruimte.",
+    "steps": {
+      "onboarding": "Onboarding",
+      "onboardingDesc": "DeltaDAO / Pontus-X",
+      "wallet": "Wallet",
+      "walletDesc": "Keypair importeren",
+      "confirmation": "Bevestiging",
+      "confirmationDesc": "Organisatie aanmaken"
+    }
+  },
+  "pontusX": {
+    "title": "Pontus-X Onboardingproces",
+    "description": "Voordat u uw organisatie aanmaakt, moet u het verificatieproces met deltaDAO/Pontus-X voltooien.",
+    "stepsTitle": "Te volgen stappen:",
+    "step1": "Ga naar het deltaDAO/Pontus-X onboardingplatform en registreer uw organisatie.",
+    "step2": "Voltooi het verificatieproces van uw organisatie. Dit kan enkele werkdagen duren.",
+    "step3": "Na voltooiing ontvangt u een geverifieerde wallet om in de volgende stap te gebruiken.",
+    "portalButton": "Ga naar het Pontus-X onboardingportaal",
+    "warning": "De organisatie wordt alleen aangemaakt als het Pontus-X onboardingproces succesvol is afgerond. Als u dit nog niet heeft gedaan, voltooi het eerst.",
+    "checkbox": "Ik heb de onboarding voltooid en ik heb mijn geverifieerde wallet"
+  },
+  "walletImport": {
+    "title": "Geverifieerde Wallet importeren",
+    "description": "Upload het keypair-bestand (.json) dat u tijdens de onboarding hebt gedownload en voer het wachtwoord in.",
+    "fileLabel": "Keypair-bestand (.json)",
+    "selectFile": "Keypair-bestand selecteren",
+    "passwordLabel": "Keypair-wachtwoord",
+    "passwordPlaceholder": "Voer het keypair-wachtwoord in",
+    "infoText": "Het keypair-bestand en wachtwoord worden gebruikt om uw wallet te verifiëren en de organisatie op het platform te registreren. Ze worden veilig verzonden."
+  },
+  "confirmation": {
+    "title": "Aanmaak bevestigen",
+    "description": "Controleer de gegevens voordat u de organisatie aanmaakt.",
+    "walletVerified": "Geverifieerde wallet",
+    "infoText": "Bij het aanmaken van de organisatie wordt gecontroleerd of de wallet correct is geregistreerd op Pontus-X. De naam van de organisatie wordt automatisch uit de on-chain identiteit gehaald.",
+    "retryButton": "Opnieuw proberen",
+    "createButton": "Organisatie aanmaken",
+    "creating": "Organisatie wordt aangemaakt...",
+    "creatingDesc": "We verifiëren de wallet en registreren de organisatie. Sluit deze pagina niet.",
+    "errorDefault": "Kan de organisatie niet importeren. Controleer uw bestand en wachtwoord.",
+    "successTitle": "Organisatie succesvol aangemaakt!",
+    "successDesc": "U kunt nu werken met uw nieuwe bedrijf."
+  },
+  "common": {
+    "cancel": "Annuleren",
+    "next": "Volgende",
+    "previous": "Vorige"
+  }
+}

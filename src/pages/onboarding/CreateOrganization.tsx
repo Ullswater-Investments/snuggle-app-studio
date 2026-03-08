@@ -1,53 +1,45 @@
-import { useState, useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ArrowLeft, Check, Rocket, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { toast } from "sonner";
-import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { OnboardingStepper } from "@/components/onboarding/OnboardingStepper";
-import { WalletGenerationStep } from "@/components/onboarding/WalletGenerationStep";
-import { OrganizationRegistrationStep } from "@/components/onboarding/OrganizationRegistrationStep";
-
-const ONBOARDING_STEPS = [
-  { id: 1, title: "Generar Wallet", description: "Identidad soberana" },
-  { id: 2, title: "Registrar Organización", description: "Datos de empresa" },
-];
+import { PontusXOnboardingStep } from "@/components/onboarding/PontusXOnboardingStep";
+import { WalletImportStep } from "@/components/onboarding/WalletImportStep";
+import { OrganizationConfirmationStep } from "@/components/onboarding/OrganizationConfirmationStep";
 
 export default function CreateOrganization() {
   const navigate = useNavigate();
-  const { t } = useTranslation('common');
-  const { isDemo } = useOrganizationContext();
+  const { t } = useTranslation("onboarding");
   const [currentStep, setCurrentStep] = useState(1);
-  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const [walletFile, setWalletFile] = useState<File | null>(null);
+  const [walletPassword, setWalletPassword] = useState("");
 
-  // Block demo users
-  useEffect(() => {
-    if (isDemo) {
-      toast.error("Creación de organizaciones no disponible en modo demo");
-      navigate('/dashboard', { replace: true });
-    }
-  }, [isDemo, navigate]);
+  const ONBOARDING_STEPS = [
+    {
+      id: 1,
+      title: t("createOrg.steps.onboarding"),
+      description: t("createOrg.steps.onboardingDesc"),
+      icon: <Rocket className="size-5 sm:size-6" />,
+    },
+    {
+      id: 2,
+      title: t("createOrg.steps.wallet"),
+      description: t("createOrg.steps.walletDesc"),
+      icon: <Wallet className="size-5 sm:size-6" />,
+    },
+    {
+      id: 3,
+      title: t("createOrg.steps.confirmation"),
+      description: t("createOrg.steps.confirmationDesc"),
+      icon: <Check className="size-5 sm:size-6" />,
+    },
+  ];
 
-  // Check for existing wallet address in localStorage on mount
-  useEffect(() => {
-    const storedWallet = localStorage.getItem('pending_wallet_address');
-    if (storedWallet) {
-      setWalletAddress(storedWallet);
-    }
-  }, []);
-
-  const handleWalletComplete = (address: string) => {
-    setWalletAddress(address);
-    setCurrentStep(2);
-  };
-
-  const handleBackToWallet = () => {
-    setCurrentStep(1);
-  };
-
-  if (isDemo) return null;
+  const handleCancel = () => navigate("/dashboard");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
@@ -58,45 +50,76 @@ export default function CreateOrganization() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-primary/5 to-transparent rounded-full" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-6 sm:py-8">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <Button 
-            variant="ghost" 
+      {/* Top bar */}
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+          <ProcuredataLogo size="md" />
+
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-5xl mx-auto relative z-10 container px-4 pb-8 sm:pb-10">
+        {/* Back button */}
+        <div className="pt-4 pb-2">
+          <Button
+            variant="ghost"
             className="gap-2"
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate("/dashboard")}
           >
             <ArrowLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">{t('onboarding.back', 'Volver')}</span>
+            <span className="hidden sm:inline">{t("createOrg.back")}</span>
           </Button>
-          <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-10 sm:h-12 object-contain" />
         </div>
 
         {/* Title */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold mb-2">
-            {t('onboarding.createOrg.title', 'Registrar Nueva Organización')}
+            {t("createOrg.title")}
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
-            {t('onboarding.createOrg.description', 'Complete el proceso de verificación para dar de alta su empresa en la red PROCUREDATA.')}
+            {t("createOrg.subtitle")}
           </p>
         </div>
 
-        {/* Stepper - Full width container */}
+        {/* Stepper */}
         <div className="max-w-3xl mx-auto mb-8 sm:mb-10">
-          <OnboardingStepper steps={ONBOARDING_STEPS} currentStep={currentStep} />
+          <OnboardingStepper
+            steps={ONBOARDING_STEPS}
+            currentStep={currentStep}
+          />
         </div>
 
         {/* Step Content */}
         <div className="max-w-3xl mx-auto">
           {currentStep === 1 && (
-            <WalletGenerationStep onComplete={handleWalletComplete} />
+            <PontusXOnboardingStep
+              onNext={() => setCurrentStep(2)}
+              onCancel={handleCancel}
+            />
           )}
 
           {currentStep === 2 && (
-            <OrganizationRegistrationStep 
-              walletAddress={walletAddress} 
-              onBack={handleBackToWallet}
+            <WalletImportStep
+              walletFile={walletFile}
+              onWalletFileChange={setWalletFile}
+              walletPassword={walletPassword}
+              onPasswordChange={setWalletPassword}
+              onNext={() => setCurrentStep(3)}
+              onBack={() => setCurrentStep(1)}
+              onCancel={handleCancel}
+            />
+          )}
+
+          {currentStep === 3 && walletFile && (
+            <OrganizationConfirmationStep
+              walletFile={walletFile}
+              walletPassword={walletPassword}
+              onBack={() => setCurrentStep(2)}
+              onCancel={handleCancel}
             />
           )}
         </div>

@@ -1,0 +1,53 @@
+{
+  "createOrg": {
+    "back": "Voltar",
+    "title": "Criar Organização",
+    "subtitle": "Registre sua organização no espaço de dados.",
+    "steps": {
+      "onboarding": "Onboarding",
+      "onboardingDesc": "DeltaDAO / Pontus-X",
+      "wallet": "Wallet",
+      "walletDesc": "Importar keypair",
+      "confirmation": "Confirmação",
+      "confirmationDesc": "Criar organização"
+    }
+  },
+  "pontusX": {
+    "title": "Processo de Onboarding Pontus-X",
+    "description": "Antes de criar sua organização, você deve concluir o processo de verificação com deltaDAO/Pontus-X.",
+    "stepsTitle": "Passos a seguir:",
+    "step1": "Acesse a plataforma de onboarding deltaDAO/Pontus-X e registre sua organização.",
+    "step2": "Conclua o processo de verificação da sua organização. Isso pode levar alguns dias úteis.",
+    "step3": "Ao concluir, você receberá uma wallet verificada para usar na próxima etapa.",
+    "portalButton": "Ir ao portal de onboarding Pontus-X",
+    "warning": "A organização só será criada se o processo de onboarding do Pontus-X tiver sido concluído com sucesso. Se ainda não o fez, conclua-o primeiro.",
+    "checkbox": "Concluí o onboarding e tenho minha wallet verificada"
+  },
+  "walletImport": {
+    "title": "Importar Wallet Verificada",
+    "description": "Envie o arquivo keypair (.json) que você baixou durante o onboarding e insira sua senha.",
+    "fileLabel": "Arquivo Keypair (.json)",
+    "selectFile": "Selecionar arquivo keypair",
+    "passwordLabel": "Senha do keypair",
+    "passwordPlaceholder": "Insira a senha do keypair",
+    "infoText": "O arquivo keypair e a senha são usados para verificar sua wallet e registrar a organização na plataforma. Eles são transmitidos de forma segura."
+  },
+  "confirmation": {
+    "title": "Confirmar criação",
+    "description": "Revise os dados antes de criar a organização.",
+    "walletVerified": "Wallet verificada",
+    "infoText": "Ao criar a organização, será verificado que a wallet está corretamente registrada no Pontus-X. O nome da organização será extraído automaticamente da identidade on-chain.",
+    "retryButton": "Tentar novamente",
+    "createButton": "Criar Organização",
+    "creating": "Criando organização...",
+    "creatingDesc": "Estamos verificando a wallet e registrando a organização. Não feche esta página.",
+    "errorDefault": "Não foi possível importar a organização. Verifique seu arquivo e senha.",
+    "successTitle": "Organização criada com sucesso!",
+    "successDesc": "Agora você pode operar com sua nova empresa."
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "next": "Próximo",
+    "previous": "Anterior"
+  }
+}

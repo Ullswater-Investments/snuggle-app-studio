@@ -65,6 +65,47 @@ function extractErrorMessage(data: unknown): string {
   return "Error inesperado del servidor";
 }
 
+async function uploadRequest<T>(
+  endpoint: string,
+  formData: FormData,
+  options: Omit<RequestOptions, "body"> = {},
+): Promise<T> {
+  const { headers: customHeaders, ...restOptions } = options;
+
+  const headers: Record<string, string> = {
+    Accept: "application/json",
+    ...(customHeaders as Record<string, string>),
+  };
+
+  const token = localStorage.getItem("auth_token");
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...restOptions,
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  if (!response.ok) {
+    let errorData: unknown;
+    try {
+      errorData = await response.json();
+    } catch {
+      errorData = { message: response.statusText };
+    }
+    throw new ApiError(response.status, errorData, extractErrorMessage(errorData));
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return response.json() as Promise<T>;
+}
+
 export const api = {
   get: <T>(endpoint: string, options?: RequestOptions) =>
     request<T>(endpoint, { ...options, method: "GET" }),
@@ -80,4 +121,10 @@ export const api = {
 
   delete: <T>(endpoint: string, options?: RequestOptions) =>
     request<T>(endpoint, { ...options, method: "DELETE" }),
+
+  upload: <T>(
+    endpoint: string,
+    formData: FormData,
+    options?: Omit<RequestOptions, "body">,
+  ) => uploadRequest<T>(endpoint, formData, options),
 };
