@@ -26,6 +26,13 @@ const Settings = () => {
 
   const settingsModules = [
     {
+      title: "Perfil de Usuario",
+      description: "Gestiona tu información personal y datos de contacto",
+      icon: User,
+      path: "/settings/profile",
+      color: "text-cyan-600 dark:text-cyan-400",
+    },
+    {
       title: t("main.modules.erp.title"),
       description: t("main.modules.erp.description"),
       icon: Server,

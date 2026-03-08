@@ -67,7 +67,7 @@ export function UserMenu({ user, onSignOut }: UserMenuProps) {
 
         <DropdownMenuItem
           className="cursor-pointer py-2"
-          onClick={() => navigate("/settings/preferences")}
+          onClick={() => navigate("/settings/profile")}
         >
           <User className="mr-2 size-4" />
           <span>{t("userMenu.profile")}</span>
