@@ -2,24 +2,31 @@ import { useEffect } from "react";
 import { Users, ArrowLeft, Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { toast } from "sonner";
-import procuredataHeroLogo from "@/assets/procuredata-hero-logo.png";
+import procuredataHeroLogoLight from "@/assets/procuredata-hero-logo-light.png";
+import procuredataHeroLogoDark from "@/assets/procuredata-hero-logo-dark.png";
 
 export default function RequestInvite() {
   const navigate = useNavigate();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const { isDemo } = useOrganizationContext();
 
   // Block demo users
   useEffect(() => {
     if (isDemo) {
       toast.error("Solicitud de invitación no disponible en modo demo");
-      navigate('/dashboard', { replace: true });
+      navigate("/dashboard", { replace: true });
     }
   }, [isDemo, navigate]);
 
@@ -29,7 +36,16 @@ export default function RequestInvite() {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex flex-col items-center justify-center p-4">
       <div className="max-w-2xl w-full space-y-6">
         <div className="flex justify-center mb-6">
-          <img src={procuredataHeroLogo} alt="PROCUREDATA" className="h-16 md:h-20 object-contain" />
+          <img
+            src={procuredataHeroLogoLight}
+            alt="PROCUREDATA"
+            className="h-16 md:h-20 object-contain dark:hidden"
+          />
+          <img
+            src={procuredataHeroLogoDark}
+            alt="PROCUREDATA"
+            className="h-16 md:h-20 object-contain hidden dark:block"
+          />
         </div>
 
         <Card className="border-2 shadow-xl">
@@ -38,23 +54,32 @@ export default function RequestInvite() {
               <Users className="h-10 w-10 text-secondary-foreground" />
             </div>
             <CardTitle className="text-3xl font-bold">
-              {t('onboarding.requestInvite.title', 'Solicitar Invitación')}
+              {t("onboarding.requestInvite.title", "Solicitar Invitación")}
             </CardTitle>
             <CardDescription className="text-lg">
-              {t('onboarding.requestInvite.description', 'Busque su organización y solicite acceso al administrador.')}
+              {t(
+                "onboarding.requestInvite.description",
+                "Busque su organización y solicite acceso al administrador.",
+              )}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6 pt-6">
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="org-search">
-                  {t('onboarding.requestInvite.searchLabel', 'Buscar organización')}
+                  {t(
+                    "onboarding.requestInvite.searchLabel",
+                    "Buscar organización",
+                  )}
                 </Label>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input 
+                  <Input
                     id="org-search"
-                    placeholder={t('onboarding.requestInvite.searchPlaceholder', 'Nombre o NIF de la empresa...')}
+                    placeholder={t(
+                      "onboarding.requestInvite.searchPlaceholder",
+                      "Nombre o NIF de la empresa...",
+                    )}
                     className="pl-10"
                     disabled
                   />
@@ -63,29 +88,31 @@ export default function RequestInvite() {
 
               <div className="bg-muted/50 rounded-lg p-8 text-center">
                 <p className="text-muted-foreground text-lg">
-                  {t('onboarding.requestInvite.placeholder', 'La funcionalidad de búsqueda y solicitud estará disponible próximamente.')}
+                  {t(
+                    "onboarding.requestInvite.placeholder",
+                    "La funcionalidad de búsqueda y solicitud estará disponible próximamente.",
+                  )}
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">
-                  {t('onboarding.requestInvite.contact', 'Contacte directamente con el administrador de su organización para obtener una invitación.')}
+                  {t(
+                    "onboarding.requestInvite.contact",
+                    "Contacte directamente con el administrador de su organización para obtener una invitación.",
+                  )}
                 </p>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="flex-1 gap-2"
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate("/dashboard")}
               >
                 <ArrowLeft className="h-4 w-4" />
-                {t('onboarding.back', 'Volver')}
+                {t("onboarding.back", "Volver")}
               </Button>
-              <Button 
-                variant="brand" 
-                className="flex-1"
-                disabled
-              >
-                {t('onboarding.requestInvite.submit', 'Enviar Solicitud')}
+              <Button variant="brand" className="flex-1" disabled>
+                {t("onboarding.requestInvite.submit", "Enviar Solicitud")}
               </Button>
             </div>
           </CardContent>

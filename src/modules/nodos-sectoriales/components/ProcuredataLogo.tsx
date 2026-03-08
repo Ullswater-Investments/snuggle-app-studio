@@ -7,55 +7,54 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import procuredataLogo from "@/assets/procuredata-hero-logo.png";
+import procuredataLogoLight from "@/assets/procuredata-logo-light.png";
 import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
 
 interface ProcuredataLogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   showNavigation?: boolean;
   linkToHome?: boolean;
-  variant?: 'light' | 'dark' | 'auto';
+  variant?: "light" | "dark" | "auto";
 }
 
 const sizes = {
   sm: { height: 24 },
-  md: { height: 32 },
+  md: { height: 28 },
   lg: { height: 40 },
-  xl: { height: 48 }
+  xl: { height: 48 },
 };
 
-export function ProcuredataLogo({ 
-  size = 'md', 
+export function ProcuredataLogo({
+  size = "md",
   showNavigation = false,
   linkToHome = true,
-  variant = 'auto',
-  className 
+  variant = "auto",
+  className,
 }: ProcuredataLogoProps) {
   const navigate = useNavigate();
 
-  const logoSrc = variant === 'dark' ? procuredataLogoDark : procuredataLogo;
+  const logoSrc =
+    variant === "dark" ? procuredataLogoDark : procuredataLogoLight;
 
   const logoElement = (
-    <img 
-      src={logoSrc} 
-      alt="PROCUREDATA" 
+    <img
+      src={logoSrc}
+      alt="PROCUREDATA"
       style={{ height: sizes[size].height }}
-      className={cn(
-        "object-contain",
-        variant === 'auto' && "dark:hidden"
-      )}
+      className={cn("object-contain", variant === "auto" && "dark:hidden")}
     />
   );
 
-  const logoDarkElement = variant === 'auto' ? (
-    <img 
-      src={procuredataLogoDark} 
-      alt="PROCUREDATA" 
-      style={{ height: sizes[size].height }}
-      className="object-contain hidden dark:block"
-    />
-  ) : null;
+  const logoDarkElement =
+    variant === "auto" ? (
+      <img
+        src={procuredataLogoDark}
+        alt="PROCUREDATA"
+        style={{ height: sizes[size].height }}
+        className="object-contain hidden dark:block"
+      />
+    ) : null;
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
@@ -94,7 +93,10 @@ export function ProcuredataLogo({
       )}
 
       {linkToHome ? (
-        <Link to="/" className="hover:opacity-80 transition-opacity flex-shrink-0">
+        <Link
+          to="/"
+          className="hover:opacity-80 transition-opacity flex-shrink-0"
+        >
           {logoElement}
           {logoDarkElement}
         </Link>

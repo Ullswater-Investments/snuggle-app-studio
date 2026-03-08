@@ -21,6 +21,7 @@ import {
   AlertCircle,
   CheckCircle2,
 } from "lucide-react";
+import { UserMenu } from "@/components/UserMenu";
 
 const CompleteProfile = () => {
   const { signOut, user, refreshProfile, profileComplete } = useAuth();
@@ -124,21 +125,13 @@ const CompleteProfile = () => {
 
       {/* Top bar */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border mb-10">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+        <div className="px-6 h-14 flex items-center justify-between">
           <ProcuredataLogo size="md" />
 
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={signOut}
-              className="gap-2 text-muted-foreground"
-            >
-              <LogOut className="h-4 w-4" />
-              Cerrar sesión
-            </Button>
+            <UserMenu user={user} onSignOut={signOut} />
           </div>
         </div>
       </header>

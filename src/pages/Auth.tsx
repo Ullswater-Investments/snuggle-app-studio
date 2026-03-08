@@ -26,6 +26,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { toast } from "sonner";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 // Login schema
 const loginSchema = z.object({
@@ -160,8 +161,8 @@ const Auth = () => {
 
       <Card className="w-full max-w-lg relative z-10 shadow-xl border-0 bg-card/95 backdrop-blur-sm">
         <CardHeader className="text-center pb-2">
-          <CardTitle className="text-3xl font-bold">
-            <span className="procuredata-gradient">PROCUREDATA</span>
+          <CardTitle className="flex justify-center">
+            <ProcuredataLogo size="lg" variant="text" />
           </CardTitle>
           <CardDescription className="text-base">
             Sistema de Gobernanza de Datos

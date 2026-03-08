@@ -20,7 +20,7 @@ function getNameFromUser(user: AppUser): string {
   const firstName = user.profile?.first_name;
   if (typeof firstName === "string" && firstName.trim())
     return firstName.trim();
-  return user.email;
+  return user.email.slice(0, 2).toUpperCase();
 }
 
 function getInitials(fullName: string): string {

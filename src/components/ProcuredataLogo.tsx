@@ -7,66 +7,64 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import procuredataLogo from "@/assets/procuredata-hero-logo.png";
+import procuredataLogoLight from "@/assets/procuredata-logo-light.png";
 import procuredataLogoDark from "@/assets/procuredata-logo-dark.png";
-import procuredataLogoFull from "@/assets/procuredata-logo-full.png";
 
 interface ProcuredataLogoProps {
   className?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   showNavigation?: boolean;
   linkToHome?: boolean;
-  variant?: 'light' | 'dark' | 'auto' | 'full' | 'text';
+  variant?: "light" | "dark" | "auto" | "text";
 }
 
 const sizes = {
-  sm: { height: 24, fontSize: 'text-lg' },
-  md: { height: 32, fontSize: 'text-xl' },
-  lg: { height: 40, fontSize: 'text-2xl' },
-  xl: { height: 48, fontSize: 'text-3xl' }
+  sm: { height: 18, fontSize: "text-md" },
+  md: { height: 24, fontSize: "text-xl" },
+  lg: { height: 40, fontSize: "text-2xl" },
+  xl: { height: 48, fontSize: "text-3xl" },
 };
 
 export function ProcuredataLogo({
-  size = 'md',
+  size = "md",
   showNavigation = false,
   linkToHome = true,
-  variant = 'auto',
-  className
+  variant = "auto",
+  className,
 }: ProcuredataLogoProps) {
   const navigate = useNavigate();
 
-  let logoSrc = variant === 'dark' ? procuredataLogoDark : procuredataLogo;
-  if (variant === 'full') {
-    logoSrc = procuredataLogoFull;
-  }
+  const logoSrc =
+    variant === "dark" ? procuredataLogoDark : procuredataLogoLight;
 
-  const logoElement = variant === 'text' ? (
-    <span className={cn(
-      "procuredata-gradient font-bold tracking-tight",
-      sizes[size].fontSize
-    )}>
-      PROCUREDATA
-    </span>
-  ) : (
-    <img
-      src={logoSrc}
-      alt="PROCUREDATA"
-      style={{ height: sizes[size].height }}
-      className={cn(
-        "object-contain",
-        (variant === 'auto' || variant === 'full') && "dark:hidden"
-      )}
-    />
-  );
+  const logoElement =
+    variant === "text" ? (
+      <span
+        className={cn(
+          "procuredata-gradient dark:text-white font-bold tracking-tight",
+          sizes[size].fontSize,
+        )}
+      >
+        PROCUREDATA
+      </span>
+    ) : (
+      <img
+        src={logoSrc}
+        alt="PROCUREDATA"
+        style={{ height: sizes[size].height }}
+        className={cn("object-contain", variant === "auto" && "dark:hidden")}
+      />
+    );
 
-  const logoDarkElement = (variant === 'auto' || variant === 'full') ? (
-    <img
-      src={procuredataLogoDark}
-      alt="PROCUREDATA"
-      style={{ height: sizes[size].height }}
-      className="object-contain hidden dark:block"
-    />
-  ) : null;
+  const logoDarkElement =
+    variant === "auto" ? (
+      <img
+        src={procuredataLogoDark}
+        alt="PROCUREDATA"
+        style={{ height: sizes[size].height }}
+        className="object-contain hidden dark:block"
+      />
+    ) : null;
 
   return (
     <div className={cn("flex items-center gap-2", className)}>
@@ -105,7 +103,10 @@ export function ProcuredataLogo({
       )}
 
       {linkToHome ? (
-        <Link to="/" className="hover:opacity-80 transition-opacity flex-shrink-0">
+        <Link
+          to="/"
+          className="hover:opacity-80 transition-opacity flex-shrink-0"
+        >
           {logoElement}
           {logoDarkElement}
         </Link>

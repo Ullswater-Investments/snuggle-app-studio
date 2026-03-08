@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, Check, Rocket, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { OnboardingStepper } from "@/components/onboarding/OnboardingStepper";

@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 
 interface DocumentLayoutProps {
   children: React.ReactNode;
@@ -11,10 +10,10 @@ interface DocumentLayoutProps {
   backLabel?: string;
 }
 
-export function DocumentLayout({ 
-  children, 
-  backLink = "/user-guide", 
-  backLabel = "Volver a Guía" 
+export function DocumentLayout({
+  children,
+  backLink = "/user-guide",
+  backLabel = "Volver a Guía",
 }: DocumentLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
@@ -34,7 +33,7 @@ export function DocumentLayout({
           </div>
         </div>
       </header>
-      
+
       {/* Content */}
       {children}
     </div>
