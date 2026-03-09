@@ -38,6 +38,12 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 | `16_USER_STORIES_LIBRARY.md` | Historias de usuario por perfil profesional | Doc. Explicativo 14 |
 | `17_GLOSSARY_DICTIONARY.md` | Diccionario completo de términos técnicos | Doc. Explicativo 15 |
 
+### Casos de Uso Sectoriales (Subdominios)
+
+| Archivo | Descripción | Documento Base |
+|---------|-------------|----------------|
+| `18_CASO_ETAILERS_CONSTRUCCION.md` | Caso de uso nicho: estandarización de catálogos en construcción | etailers.procuredata.org |
+
 ---
 
 ## 🚀 Cómo Usar estos Documentos
