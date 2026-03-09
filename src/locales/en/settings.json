@@ -301,9 +301,20 @@
       }
     },
     "securityTab": {
-      "title": "Security",
-      "description": "Password, active sessions, and authentication",
-      "comingSoon": "Coming soon"
+      "title": "Change Password",
+      "description": "Manage your password and account security",
+      "currentPassword": "Current Password",
+      "currentPasswordPlaceholder": "Your current password",
+      "newPassword": "New Password",
+      "newPasswordPlaceholder": "Your new password",
+      "confirmPassword": "Confirm New Password",
+      "confirmPasswordPlaceholder": "Confirm your new password",
+      "passwordHint": "Your password must be at least {{count}} characters long. We recommend using a combination of letters, numbers, and symbols.",
+      "updateButton": "Update Password",
+      "updating": "Updating...",
+      "success": "Password updated successfully",
+      "errorUnauthorized": "Current password is incorrect",
+      "errorGeneric": "Could not update password"
     }
   },
   "erp": {

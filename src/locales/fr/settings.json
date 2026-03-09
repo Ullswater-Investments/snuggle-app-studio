@@ -301,9 +301,20 @@
       }
     },
     "securityTab": {
-      "title": "Sécurité",
-      "description": "Mot de passe, sessions actives et authentification",
-      "comingSoon": "Bientôt disponible"
+      "title": "Changer le mot de passe",
+      "description": "Gérez votre mot de passe et la sécurité de votre compte",
+      "currentPassword": "Mot de passe actuel",
+      "currentPasswordPlaceholder": "Votre mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "newPasswordPlaceholder": "Votre nouveau mot de passe",
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+      "passwordHint": "Votre mot de passe doit comporter au moins {{count}} caractères. Nous recommandons d'utiliser une combinaison de lettres, chiffres et symboles.",
+      "updateButton": "Mettre à jour le mot de passe",
+      "updating": "Mise à jour...",
+      "success": "Mot de passe mis à jour avec succès",
+      "errorUnauthorized": "Le mot de passe actuel est incorrect",
+      "errorGeneric": "Impossible de mettre à jour le mot de passe"
     }
   },
   "erp": {

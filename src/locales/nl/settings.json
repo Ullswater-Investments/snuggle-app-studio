@@ -301,9 +301,20 @@
       }
     },
     "securityTab": {
-      "title": "Beveiliging",
-      "description": "Wachtwoord, actieve sessies en authenticatie",
-      "comingSoon": "Binnenkort beschikbaar"
+      "title": "Wachtwoord wijzigen",
+      "description": "Beheer je wachtwoord en accountbeveiliging",
+      "currentPassword": "Huidig wachtwoord",
+      "currentPasswordPlaceholder": "Je huidige wachtwoord",
+      "newPassword": "Nieuw wachtwoord",
+      "newPasswordPlaceholder": "Je nieuwe wachtwoord",
+      "confirmPassword": "Bevestig nieuw wachtwoord",
+      "confirmPasswordPlaceholder": "Bevestig je nieuwe wachtwoord",
+      "passwordHint": "Je wachtwoord moet minstens {{count}} tekens bevatten. We raden een combinatie van letters, cijfers en symbolen aan.",
+      "updateButton": "Wachtwoord bijwerken",
+      "updating": "Bijwerken...",
+      "success": "Wachtwoord succesvol bijgewerkt",
+      "errorUnauthorized": "Het huidige wachtwoord is onjuist",
+      "errorGeneric": "Kan het wachtwoord niet bijwerken"
     }
   },
   "erp": {

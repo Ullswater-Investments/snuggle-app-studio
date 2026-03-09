@@ -301,9 +301,20 @@
       }
     },
     "securityTab": {
-      "title": "Sicherheit",
-      "description": "Passwort, aktive Sitzungen und Authentifizierung",
-      "comingSoon": "Demnächst verfügbar"
+      "title": "Passwort ändern",
+      "description": "Verwalten Sie Ihr Passwort und die Kontosicherheit",
+      "currentPassword": "Aktuelles Passwort",
+      "currentPasswordPlaceholder": "Ihr aktuelles Passwort",
+      "newPassword": "Neues Passwort",
+      "newPasswordPlaceholder": "Ihr neues Passwort",
+      "confirmPassword": "Neues Passwort bestätigen",
+      "confirmPasswordPlaceholder": "Bestätigen Sie Ihr neues Passwort",
+      "passwordHint": "Ihr Passwort muss mindestens {{count}} Zeichen lang sein. Wir empfehlen eine Kombination aus Buchstaben, Zahlen und Symbolen.",
+      "updateButton": "Passwort aktualisieren",
+      "updating": "Wird aktualisiert...",
+      "success": "Passwort erfolgreich aktualisiert",
+      "errorUnauthorized": "Das aktuelle Passwort ist falsch",
+      "errorGeneric": "Passwort konnte nicht aktualisiert werden"
     }
   },
   "erp": {

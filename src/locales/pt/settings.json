@@ -301,9 +301,20 @@
       }
     },
     "securityTab": {
-      "title": "Segurança",
-      "description": "Senha, sessões ativas e autenticação",
-      "comingSoon": "Em breve"
+      "title": "Alterar senha",
+      "description": "Gerencie sua senha e a segurança da conta",
+      "currentPassword": "Senha atual",
+      "currentPasswordPlaceholder": "Sua senha atual",
+      "newPassword": "Nova senha",
+      "newPasswordPlaceholder": "Sua nova senha",
+      "confirmPassword": "Confirmar nova senha",
+      "confirmPasswordPlaceholder": "Confirme sua nova senha",
+      "passwordHint": "Sua senha deve ter pelo menos {{count}} caracteres. Recomendamos usar uma combinação de letras, números e símbolos.",
+      "updateButton": "Atualizar senha",
+      "updating": "Atualizando...",
+      "success": "Senha atualizada com sucesso",
+      "errorUnauthorized": "A senha atual está incorreta",
+      "errorGeneric": "Não foi possível atualizar a senha"
     }
   },
   "erp": {

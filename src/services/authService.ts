@@ -118,6 +118,17 @@ export interface MePermission {
   updated_at: string;
 }
 
+// --- Update Password ---
+export interface UpdatePasswordRequest {
+  current_password: string;
+  new_password: string;
+  new_password_confirmation: string;
+}
+
+export interface UpdatePasswordResponse {
+  message: string;
+}
+
 // --- Compound ---
 export interface RegisterAndLoginResult {
   register: RegisterResponse;
@@ -139,6 +150,9 @@ export const authService = {
 
   getMe: (): Promise<MeResponse> =>
     api.get<MeResponse>(`/auth/me/${AUTH_GUARD}`),
+
+  updatePassword: (data: UpdatePasswordRequest): Promise<UpdatePasswordResponse> =>
+    api.post<UpdatePasswordResponse>(`/auth/password/update/${AUTH_GUARD}`, data),
 
   registerAndLogin: async (
     data: RegisterRequest,

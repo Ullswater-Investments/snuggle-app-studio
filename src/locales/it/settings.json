@@ -301,9 +301,20 @@
       }
     },
     "securityTab": {
-      "title": "Sicurezza",
-      "description": "Password, sessioni attive e autenticazione",
-      "comingSoon": "Prossimamente"
+      "title": "Cambia password",
+      "description": "Gestisci la tua password e la sicurezza dell'account",
+      "currentPassword": "Password attuale",
+      "currentPasswordPlaceholder": "La tua password attuale",
+      "newPassword": "Nuova password",
+      "newPasswordPlaceholder": "La tua nuova password",
+      "confirmPassword": "Conferma nuova password",
+      "confirmPasswordPlaceholder": "Conferma la tua nuova password",
+      "passwordHint": "La tua password deve avere almeno {{count}} caratteri. Ti consigliamo di usare una combinazione di lettere, numeri e simboli.",
+      "updateButton": "Aggiorna password",
+      "updating": "Aggiornamento...",
+      "success": "Password aggiornata con successo",
+      "errorUnauthorized": "La password attuale non è corretta",
+      "errorGeneric": "Impossibile aggiornare la password"
     }
   },
   "erp": {
