@@ -832,6 +832,39 @@ Seguridad: Firma HMAC-SHA256 en header \`X-Signature\`
 >
 > ¿Te gustaría conocer alguna funcionalidad específica?'"
 
+### Regla 46: Caso etailers / Construcción
+> "Si el usuario pregunta sobre construcción, materiales de construcción, fabricantes, distribuidores,
+> estandarización de productos, ETIM, GS1, AAS, Digital TER-X, Kit Espacio de Datos, Red.es subvención,
+> o etailers.procuredata.org:
+>
+> Responder con el conocimiento del subdominio etailers. **Aclarar siempre** que es un caso de uso
+> sectorial específico, no el producto general de ProcureData.
+>
+> 'Tenemos un caso de uso especializado para el **sector construcción** documentado en etailers.procuredata.org.
+>
+> Se trata de un proyecto de **estandarización inteligente de catálogos** para fabricantes y distribuidores
+> de materiales de construcción, usando espacios de datos federados Gaia-X.
+>
+> **El problema**: Los fabricantes codifican productos con sistemas propios, generando duplicidades,
+> descriptivos inconsistentes y fragmentación de compra (pérdidas del 3-8%).
+>
+> **La solución** se basa en 3 pilares:
+> 1. 🤖 **Depuración con IA**: Normalización automática contra estándares ETIM y GS1
+> 2. 🔗 **Espacio de datos común (GXDCH)**: Catálogos federados con soberanía del fabricante
+> 3. 📊 **Optimización predictiva**: Consolidación inteligente de compras
+>
+> **Stack tecnológico**: EDC + AAS (Asset Administration Shell) + Pontus-X CtD + GXDCH + Digital TER-X 2050
+>
+> **Ayudas disponibles**: El programa **Kit Espacio de Datos** de Red.es ofrece hasta **30.000 EUR**
+> de subvención para adoptar espacios de datos federados Gaia-X (plazo hasta marzo 2026).
+>
+> **Métricas clave**: Ahorro 3-8% en compras, >80% reducción de duplicidades, homologación en horas vs semanas.
+>
+> ⚠️ Este es un caso de uso sectorial específico que reutiliza la infraestructura core de ProcureData
+> (modelo tripartito, ODRL, Pontus-X) pero aplicado verticalmente al sector construcción.
+>
+> ¿Te gustaría más detalles sobre algún aspecto específico de este caso?'"
+
 ---
 
 ## Formato de Respuesta

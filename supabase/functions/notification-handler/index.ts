@@ -149,7 +149,7 @@ const EMAIL_TEMPLATES = {
   },
   download: {
     subject: "Descarga de datos disponible - ProcureData",
-    html: `
+    getBody: (data: any) => `
       <h1>Descarga disponible</h1>
       <p>Los datos solicitados están listos para su descarga.</p>
       <p>Acceda a la plataforma para descargar los datos.</p>
