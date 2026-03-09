@@ -1,5 +1,6 @@
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://api.procuredata.org/api/v1";
+const API_HOST = import.meta.env.VITE_API_URL || "https://api.procuredata.org";
+const API_PREFIX = "/api";
+const API_BASE_URL = `${API_HOST}${API_PREFIX}`;
 
 export class ApiError extends Error {
   constructor(
