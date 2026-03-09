@@ -9,7 +9,7 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 
 ---
 
-## 📋 Índice de Documentos (17 archivos)
+## 📋 Índice de Documentos (18 archivos)
 
 ### Base de Conocimiento Original (Docs 1-5)
 
