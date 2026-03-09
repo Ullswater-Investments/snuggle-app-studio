@@ -954,6 +954,9 @@ serve(async (req) => {
     
     enrichedInstructions += SYSTEM_INSTRUCTIONS;
     
+    // Inject niche case knowledge (isolated from core)
+    enrichedInstructions += ETAILERS_KNOWLEDGE;
+    
     // If DID provided, fetch DDO context from Aquarius (PONTUS-X)
     if (did) {
       const ddoContext = await fetchDDOContext(did);
