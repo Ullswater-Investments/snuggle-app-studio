@@ -14,18 +14,18 @@ import {
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import {
-  LogOut,
-  ShieldCheck,
-  Loader2,
-  AlertCircle,
-  CheckCircle2,
-} from "lucide-react";
+import { ShieldCheck, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
 import { UserMenu } from "@/components/UserMenu";
+import logoEdcLight from "@/assets/logo-EDC-light.svg";
+import logoEdcDark from "@/assets/logo-EDC-dark.png";
+import logoKitEspacioDatos from "@/assets/logo-kit-espacio-de-datos.svg";
+import logoGobiernoEspana from "@/assets/logo.png";
+import { useTheme } from "next-themes";
 
 const CompleteProfile = () => {
   const { signOut, user, refreshProfile, profileComplete } = useAuth();
   const { i18n } = useTranslation();
+  const { resolvedTheme } = useTheme();
 
   const [isVerifying, setIsVerifying] = useState(false);
   const [kycUrl, setKycUrl] = useState<string | null>(null);
@@ -116,19 +116,40 @@ const CompleteProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30 flex flex-col relative overflow-hidden">
       {/* Decorative geometric elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full translate-x-1/3 translate-y-1/3" />
       <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-primary/10 rotate-45 transform" />
       <div className="absolute bottom-1/4 left-1/4 w-24 h-24 border-2 border-primary/20 rotate-12 transform" />
 
-      {/* Top bar */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border mb-10">
-        <div className="px-6 h-14 flex items-center justify-between">
-          <ProcuredataLogo size="md" />
+      {/* Navbar */}
+      <header className="border-b bg-background/95 backdrop-blur z-50 shrink-0">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <ProcuredataLogo size="md" linkToHome />
+            <div className="h-6 sm:h-8 border-l border-muted-foreground/30 hidden sm:block" />
+            <img
+              src={resolvedTheme === "dark" ? logoEdcDark : logoEdcLight}
+              alt="Espacio de datos de confianza"
+              className="h-8 object-contain hidden sm:block"
+              draggable={false}
+            />
+            <img
+              src={logoKitEspacioDatos}
+              alt="Kit Espacios de Datos"
+              className="h-8 object-contain dark:invert hidden sm:block"
+              draggable={false}
+            />
+            <img
+              src={logoGobiernoEspana}
+              alt="Gobierno de España – Ministerio para la Transformación Digital y de la Función Pública"
+              className="h-10 object-contain hidden md:block"
+              draggable={false}
+            />
+          </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <ThemeToggle />
             <UserMenu user={user} onSignOut={signOut} />
@@ -137,7 +158,7 @@ const CompleteProfile = () => {
       </header>
 
       {/* Centered content */}
-      <div className="flex items-center justify-center px-4 min-h-[calc(100vh-3.5rem)] relative z-10 pb-10">
+      <div className="flex-1 flex items-center justify-center p-4 relative z-10">
         <Card
           className={`w-full shadow-xl border-0 bg-[linear-gradient(rgb(6,151,224),rgb(6,95,217))] backdrop-blur-sm transition-all min-h-[380px] ${isVerifying ? "max-w-2xl" : "max-w-lg"}`}
         >

@@ -60,6 +60,11 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import procuredataLogoLight from "@/assets/procuredata-hero-logo-light.png";
 import procuredataLogoDark from "@/assets/procuredata-hero-logo-dark.png";
 import procuredataTransparentLogo from "@/assets/procuredata-transparent-logo.png";
+import logoEdcLight from "@/assets/logo-EDC-light.svg";
+import logoEdcDark from "@/assets/logo-EDC-dark.png";
+import logoKitEspacioDatos from "@/assets/logo-kit-espacio-de-datos.svg";
+import logoGobiernoEspana from "@/assets/logo.png";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { FederatedHeroChat } from "@/components/landing/FederatedHeroChat";
 import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
@@ -93,6 +98,7 @@ export default function Landing() {
   const { t } = useTranslation("landing");
   const { t: tc } = useTranslation("common");
   const { user } = useAuth();
+  const { resolvedTheme } = useTheme();
   const [isAgentProcessing, setIsAgentProcessing] = useState(false);
   const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
 
@@ -385,20 +391,33 @@ export default function Landing() {
   ];
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Navbar Simplificado */}
+      {/* Navbar */}
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <ProcuredataLogo size="md" linkToHome variant="auto" />
-            <Link to="/partners">
-              <Badge
-                variant="outline"
-                className="text-xs hover:bg-primary/10 cursor-pointer transition-colors"
-              >
-                {t("nav.partners")}
-              </Badge>
-            </Link>
+          <div className="flex items-center gap-6">
+            <ProcuredataLogo size="md" linkToHome />
+            <div className="h-6 sm:h-8 border-l border-muted-foreground/30 hidden sm:block"></div>
+            <img
+              src={resolvedTheme === "dark" ? logoEdcDark : logoEdcLight}
+              alt="Espacio de datos de confianza"
+              className="h-8 object-contain"
+              draggable={false}
+            />
+            <img
+              src={logoKitEspacioDatos}
+              alt="Kit Espacios de Datos"
+              className="h-8 object-contain dark:invert"
+              draggable={false}
+            />
+            <img
+              src={logoGobiernoEspana}
+              alt="Gobierno de España – Ministerio para la Transformación Digital y de la Función Pública"
+              className="h-10 object-contain"
+              draggable={false}
+            />
           </div>
+
+          {/* Nav links comentados por ahora
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <a href="#features" className="hover:text-primary">
               {t("nav.features")}
@@ -420,6 +439,8 @@ export default function Landing() {
               <span>{t("successCases")}</span>
             </Link>
           </nav>
+          */}
+
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <ThemeToggle />

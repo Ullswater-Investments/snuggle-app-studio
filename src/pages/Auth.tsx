@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -25,8 +26,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { toast } from "sonner";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
+import { useTheme } from "next-themes";
+import logoEdcLight from "@/assets/logo-EDC-light.svg";
+import logoEdcDark from "@/assets/logo-EDC-dark.png";
+import logoKitEspacioDatos from "@/assets/logo-kit-espacio-de-datos.svg";
+import logoGobiernoEspana from "@/assets/logo.png";
 
 // Login schema
 const loginSchema = z.object({
@@ -72,12 +78,14 @@ type LoginFormData = z.infer<typeof loginSchema>;
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 const Auth = () => {
+  const { t } = useTranslation("landing");
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
+  const { resolvedTheme } = useTheme();
 
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -133,255 +141,271 @@ const Auth = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-background to-muted/30 p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30 flex flex-col relative overflow-hidden">
       {/* Decorative geometric elements */}
       <div className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full translate-x-1/3 translate-y-1/3" />
       <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-primary/10 rotate-45 transform" />
       <div className="absolute bottom-1/4 left-1/4 w-24 h-24 border-2 border-primary/20 rotate-12 transform" />
 
-      {/* Fixed Language/Theme Toggle */}
-      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
-        <LanguageSwitcher />
-        <ThemeToggle />
-      </div>
+      {/* Navbar */}
+      <header className="border-b bg-background/95 backdrop-blur z-50 shrink-0">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <ProcuredataLogo size="md" linkToHome />
+            <div className="h-6 sm:h-8 border-l border-muted-foreground/30 hidden sm:block" />
+            <img
+              src={resolvedTheme === "dark" ? logoEdcDark : logoEdcLight}
+              alt="Espacio de datos de confianza"
+              className="h-8 object-contain hidden sm:block"
+              draggable={false}
+            />
+            <img
+              src={logoKitEspacioDatos}
+              alt="Kit Espacios de Datos"
+              className="h-8 object-contain dark:invert hidden sm:block"
+              draggable={false}
+            />
+            <img
+              src={logoGobiernoEspana}
+              alt="Gobierno de España – Ministerio para la Transformación Digital y de la Función Pública"
+              className="h-10 object-contain hidden md:block"
+              draggable={false}
+            />
+          </div>
 
-      {/* Botón Volver al inicio */}
-      <div className="fixed top-12 left-10 z-50">
-        <Button
-          variant="ghost"
-          size="sm"
-          className=" gap-2 px-4"
-          onClick={() => navigate("/")}
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Volver a inicio
-        </Button>
-      </div>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
+        </div>
+      </header>
 
-      <Card className="w-full max-w-lg relative z-10 shadow-xl border-0 bg-card/95 backdrop-blur-sm">
-        <CardHeader className="text-center pb-2">
-          <CardTitle className="flex justify-center">
-            <ProcuredataLogo size="lg" variant="text" />
-          </CardTitle>
-          <CardDescription className="text-base">
-            Sistema de Gobernanza de Datos
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-4">
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger
-                value="login"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                Iniciar Sesión
-              </TabsTrigger>
-              <TabsTrigger
-                value="register"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                Registrarse
-              </TabsTrigger>
-            </TabsList>
-
-            {/* Login Tab */}
-            <TabsContent value="login" className="space-y-4">
-              <Form {...loginForm}>
-                <form
-                  onSubmit={loginForm.handleSubmit(handleSignIn)}
-                  className="space-y-4"
+      {/* Centered card */}
+      <div className="flex-1 flex items-center justify-center p-4">
+        <Card className="w-full max-w-lg relative z-10 shadow-xl border-0 bg-card/95 backdrop-blur-sm">
+          <CardHeader className="text-center pb-2">
+            <CardTitle className="flex justify-center">
+              <ProcuredataLogo size="lg" variant="text" />
+            </CardTitle>
+            <CardDescription className="text-base">
+              Sistema de Gobernanza de Datos
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-4">
+            <Tabs
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
+              <TabsList className="grid w-full grid-cols-2 mb-6">
+                <TabsTrigger
+                  value="login"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
-                  <FormField
-                    control={loginForm.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Correo electrónico</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="tu@email.com"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={loginForm.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              type={showPassword ? "text" : "password"}
-                              placeholder="••••••••"
-                              {...field}
-                            />
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              {showPassword ? (
-                                <EyeOff className="h-4 w-4" />
-                              ) : (
-                                <Eye className="h-4 w-4" />
-                              )}
-                            </Button>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <button
-                    type="button"
-                    onClick={handleForgotPassword}
-                    className="text-sm text-primary hover:underline block text-right w-full"
-                  >
-                    ¿Olvidaste tu contraseña?
-                  </button>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90"
-                    disabled={loading}
-                  >
-                    {loading ? "Cargando..." : "Iniciar Sesión"}
-                  </Button>
-                </form>
-              </Form>
-            </TabsContent>
-
-            {/* Register Tab */}
-            <TabsContent value="register" className="space-y-4">
-              <Form {...registerForm}>
-                <form
-                  onSubmit={registerForm.handleSubmit(handleRegister)}
-                  className="space-y-4"
+                  Iniciar Sesión
+                </TabsTrigger>
+                <TabsTrigger
+                  value="register"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
                 >
-                  <FormField
-                    control={registerForm.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Correo electrónico</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="tu@email.com"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  Registrarse
+                </TabsTrigger>
+              </TabsList>
 
-                  <FormField
-                    control={registerForm.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Contraseña</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              type={showPassword ? "text" : "password"}
-                              placeholder="••••••••"
-                              {...field}
-                            />
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                              onClick={() => setShowPassword(!showPassword)}
-                            >
-                              {showPassword ? (
-                                <EyeOff className="h-4 w-4" />
-                              ) : (
-                                <Eye className="h-4 w-4" />
-                              )}
-                            </Button>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={registerForm.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Confirmar contraseña</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              type={showConfirmPassword ? "text" : "password"}
-                              placeholder="••••••••"
-                              {...field}
-                            />
-                            <Button
-                              type="button"
-                              variant="ghost"
-                              size="sm"
-                              className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-                              onClick={() =>
-                                setShowConfirmPassword(!showConfirmPassword)
-                              }
-                            >
-                              {showConfirmPassword ? (
-                                <EyeOff className="h-4 w-4" />
-                              ) : (
-                                <Eye className="h-4 w-4" />
-                              )}
-                            </Button>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <div className="space-y-3 pt-1">
-                    <p className="text-xs text-muted-foreground">
-                      Mínimo 8 caracteres, una letra, un número y un símbolo
-                    </p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      Tras registrarte, deberás completar la verificación de
-                      identidad (KYC) para acceder al panel.
-                    </p>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90"
-                    disabled={loading}
+              {/* Login Tab */}
+              <TabsContent value="login" className="space-y-4">
+                <Form {...loginForm}>
+                  <form
+                    onSubmit={loginForm.handleSubmit(handleSignIn)}
+                    className="space-y-4"
                   >
-                    {loading ? "Registrando..." : "Crear cuenta"}
-                  </Button>
-                </form>
-              </Form>
-            </TabsContent>
-          </Tabs>
+                    <FormField
+                      control={loginForm.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Correo electrónico</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="tu@email.com"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={loginForm.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Contraseña</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="••••••••"
+                                {...field}
+                              />
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                                onClick={() => setShowPassword(!showPassword)}
+                              >
+                                {showPassword ? (
+                                  <EyeOff className="h-4 w-4" />
+                                ) : (
+                                  <Eye className="h-4 w-4" />
+                                )}
+                              </Button>
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-          {/* Demo Access Button */}
-          {/* <div className="mt-6 pt-4 border-t">
+                    <button
+                      type="button"
+                      onClick={handleForgotPassword}
+                      className="text-sm text-primary hover:underline block text-right w-full"
+                    >
+                      ¿Olvidaste tu contraseña?
+                    </button>
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-primary hover:bg-primary/90"
+                      disabled={loading}
+                    >
+                      {loading ? "Cargando..." : "Iniciar Sesión"}
+                    </Button>
+                  </form>
+                </Form>
+              </TabsContent>
+
+              {/* Register Tab */}
+              <TabsContent value="register" className="space-y-4">
+                <Form {...registerForm}>
+                  <form
+                    onSubmit={registerForm.handleSubmit(handleRegister)}
+                    className="space-y-4"
+                  >
+                    <FormField
+                      control={registerForm.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Correo electrónico</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="tu@email.com"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={registerForm.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Contraseña</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="••••••••"
+                                {...field}
+                              />
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                                onClick={() => setShowPassword(!showPassword)}
+                              >
+                                {showPassword ? (
+                                  <EyeOff className="h-4 w-4" />
+                                ) : (
+                                  <Eye className="h-4 w-4" />
+                                )}
+                              </Button>
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={registerForm.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirmar contraseña</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Input
+                                type={showConfirmPassword ? "text" : "password"}
+                                placeholder="••••••••"
+                                {...field}
+                              />
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="sm"
+                                className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                                onClick={() =>
+                                  setShowConfirmPassword(!showConfirmPassword)
+                                }
+                              >
+                                {showConfirmPassword ? (
+                                  <EyeOff className="h-4 w-4" />
+                                ) : (
+                                  <Eye className="h-4 w-4" />
+                                )}
+                              </Button>
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <div className="space-y-3 pt-1">
+                      <p className="text-xs text-muted-foreground">
+                        Mínimo 8 caracteres, una letra, un número y un símbolo
+                      </p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        Tras registrarte, deberás completar la verificación de
+                        identidad (KYC) para acceder al panel.
+                      </p>
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-primary hover:bg-primary/90"
+                      disabled={loading}
+                    >
+                      {loading ? "Registrando..." : "Crear cuenta"}
+                    </Button>
+                  </form>
+                </Form>
+              </TabsContent>
+            </Tabs>
+
+            {/* Demo Access Button */}
+            {/* <div className="mt-6 pt-4 border-t">
             <Button
               type="button"
               variant="outline"
@@ -392,8 +416,9 @@ const Auth = () => {
               🎭 Acceder a Versión Demo
             </Button>
           </div> */}
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };

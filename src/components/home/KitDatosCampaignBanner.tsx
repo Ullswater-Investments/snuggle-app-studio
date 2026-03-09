@@ -4,7 +4,7 @@ import { Euro, CheckCircle2, ArrowRight, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
-import logoKitEspacioDatos from "@/assets/logo-kit-espacio-datos.jpg";
+import logoKitEspacioDatos from "@/assets/logo-kit-espacio-de-datos.svg";
 import logoGobiernoRedEs from "@/assets/logo-gobierno-red-es.jpg";
 
 export function KitDatosCampaignBanner() {
@@ -17,7 +17,10 @@ export function KitDatosCampaignBanner() {
   ];
 
   return (
-    <section id="cases" className="py-16 bg-gradient-to-b from-emerald-50/80 to-background dark:from-emerald-950/20 dark:to-background">
+    <section
+      id="cases"
+      className="py-16 bg-gradient-to-b from-emerald-50/80 to-background dark:from-emerald-950/20 dark:to-background"
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto bg-card rounded-2xl border shadow-xl p-8 md:p-12 relative overflow-hidden">
           {/* Background decoration */}
@@ -63,7 +66,10 @@ export function KitDatosCampaignBanner() {
           {/* Benefits */}
           <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-10">
             {benefits.map((benefit, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-sm md:text-base">
+              <div
+                key={idx}
+                className="flex items-center gap-2 text-sm md:text-base"
+              >
                 <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0" />
                 <span className="text-foreground font-medium">{benefit}</span>
               </div>
@@ -103,11 +109,29 @@ export function KitDatosCampaignBanner() {
 
           {/* Institutional logos */}
           <div className="flex items-center justify-center gap-8 pt-6 border-t border-border">
-            <a href="https://acelerapyme.gob.es" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
-              <img src={logoKitEspacioDatos} alt="Kit Espacio de Datos" className="h-12 md:h-16 object-contain" />
+            <a
+              href="https://acelerapyme.gob.es"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            >
+              <img
+                src={logoKitEspacioDatos}
+                alt="Kit Espacio de Datos"
+                className="h-12 md:h-16 object-contain"
+              />
             </a>
-            <a href="https://www.red.es" target="_blank" rel="noopener noreferrer" className="opacity-80 hover:opacity-100 transition-opacity">
-              <img src={logoGobiernoRedEs} alt="Gobierno de España - Red.es" className="h-12 md:h-16 object-contain" />
+            <a
+              href="https://www.red.es"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            >
+              <img
+                src={logoGobiernoRedEs}
+                alt="Gobierno de España - Red.es"
+                className="h-12 md:h-16 object-contain"
+              />
             </a>
           </div>
         </div>
