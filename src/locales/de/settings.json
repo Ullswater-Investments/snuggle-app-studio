@@ -288,8 +288,17 @@
     },
     "appearanceTab": {
       "title": "Darstellung",
-      "description": "Passen Sie das Design und die Oberfläche an",
-      "comingSoon": "Demnächst verfügbar"
+      "description": "Passen Sie das Erscheinungsbild der Anwendung an",
+      "themeLabel": "Design",
+      "themeDescription": "Wählen Sie Ihr bevorzugtes Design für die Anwendung",
+      "themes": {
+        "light": "Hell",
+        "lightDescription": "Helles Design",
+        "dark": "Dunkel",
+        "darkDescription": "Dunkles Design",
+        "system": "System",
+        "systemDescription": "Gemäß Ihrem Gerät"
+      }
     },
     "securityTab": {
       "title": "Sicherheit",

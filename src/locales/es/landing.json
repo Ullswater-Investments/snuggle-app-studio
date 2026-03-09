@@ -85,7 +85,8 @@
     "architecture": "Arquitectura Técnica",
     "startRegistration": "Empezar Registro",
     "partners": "Partners",
-    "goToDashboard": "Ir al Dashboard"
+    "goToDashboard": "Ir al Dashboard",
+    "access": "Acceder"
   },
   "useCasesSection": {
     "badge": "Versatilidad Industrial",

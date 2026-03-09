@@ -433,8 +433,7 @@ export default function Landing() {
             ) : (
               <Button asChild variant="hero">
                 <Link to="/auth">
-                  {t("nav.startRegistration")}{" "}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  {t("nav.access")} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             )}

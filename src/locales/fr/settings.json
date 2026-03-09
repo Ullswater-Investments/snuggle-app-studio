@@ -288,8 +288,17 @@
     },
     "appearanceTab": {
       "title": "Apparence",
-      "description": "Personnalisez le thème et l'interface",
-      "comingSoon": "Bientôt disponible"
+      "description": "Personnalisez l'apparence de l'application",
+      "themeLabel": "Thème",
+      "themeDescription": "Sélectionnez votre thème préféré pour l'application",
+      "themes": {
+        "light": "Clair",
+        "lightDescription": "Thème clair",
+        "dark": "Sombre",
+        "darkDescription": "Thème sombre",
+        "system": "Système",
+        "systemDescription": "Selon votre appareil"
+      }
     },
     "securityTab": {
       "title": "Sécurité",

@@ -288,8 +288,17 @@
     },
     "appearanceTab": {
       "title": "Appearance",
-      "description": "Customize the theme and interface",
-      "comingSoon": "Coming soon"
+      "description": "Customize the application appearance",
+      "themeLabel": "Theme",
+      "themeDescription": "Select your preferred theme for the application",
+      "themes": {
+        "light": "Light",
+        "lightDescription": "Light theme",
+        "dark": "Dark",
+        "darkDescription": "Dark theme",
+        "system": "System",
+        "systemDescription": "Match your device"
+      }
     },
     "securityTab": {
       "title": "Security",

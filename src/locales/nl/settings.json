@@ -288,8 +288,17 @@
     },
     "appearanceTab": {
       "title": "Uiterlijk",
-      "description": "Pas het thema en de interface aan",
-      "comingSoon": "Binnenkort beschikbaar"
+      "description": "Pas het uiterlijk van de applicatie aan",
+      "themeLabel": "Thema",
+      "themeDescription": "Selecteer je voorkeur thema voor de applicatie",
+      "themes": {
+        "light": "Licht",
+        "lightDescription": "Licht thema",
+        "dark": "Donker",
+        "darkDescription": "Donker thema",
+        "system": "Systeem",
+        "systemDescription": "Volgens je apparaat"
+      }
     },
     "securityTab": {
       "title": "Beveiliging",
