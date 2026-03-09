@@ -17,6 +17,7 @@ import {
 import { Search, LogIn, ChevronLeft, ChevronRight } from "lucide-react";
 import { UserMenu } from "@/components/UserMenu";
 import { ProcuredataLogo } from "../ProcuredataLogo";
+import { InstitutionalLogos } from "@/components/InstitutionalLogos";
 
 export const UnifiedHeader = () => {
   const { t } = useTranslation("common");
@@ -31,38 +32,13 @@ export const UnifiedHeader = () => {
         <div className="flex items-center gap-3 flex-shrink-0">
           <SidebarTrigger />
           <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
-            <ProcuredataLogo size="md" linkToHome={false} />
+            <ProcuredataLogo
+              size="md"
+              linkToHome={false}
+              showNavigation={true}
+            />
           </Link>
-          <div className="flex items-center gap-0.5">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigate(-1)}
-                  className="h-7 w-7 p-0"
-                  aria-label={tNav("back")}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>{tNav("back")}</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigate(1)}
-                  className="h-7 w-7 p-0"
-                  aria-label={tNav("forward")}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>{tNav("forward")}</TooltipContent>
-            </Tooltip>
-          </div>
+          <InstitutionalLogos size="sm" showFrom="lg" />
         </div>
 
         {/* Central: Command Palette */}

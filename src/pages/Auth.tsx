@@ -28,11 +28,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { toast } from "sonner";
 import { Eye, EyeOff } from "lucide-react";
 import { ProcuredataLogo } from "@/components/ProcuredataLogo";
-import { useTheme } from "next-themes";
-import logoEdcLight from "@/assets/logo-EDC-light.svg";
-import logoEdcDark from "@/assets/logo-EDC-dark.png";
-import logoKitEspacioDatos from "@/assets/logo-kit-espacio-de-datos.svg";
-import logoGobiernoEspana from "@/assets/logo.png";
+import { InstitutionalLogos } from "@/components/InstitutionalLogos";
 
 // Login schema
 const loginSchema = z.object({
@@ -85,8 +81,6 @@ const Auth = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
-  const { resolvedTheme } = useTheme();
-
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -153,25 +147,7 @@ const Auth = () => {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <ProcuredataLogo size="md" linkToHome />
-            <div className="h-6 sm:h-8 border-l border-muted-foreground/30 hidden sm:block" />
-            <img
-              src={resolvedTheme === "dark" ? logoEdcDark : logoEdcLight}
-              alt="Espacio de datos de confianza"
-              className="h-8 object-contain hidden sm:block"
-              draggable={false}
-            />
-            <img
-              src={logoKitEspacioDatos}
-              alt="Kit Espacios de Datos"
-              className="h-8 object-contain dark:invert hidden sm:block"
-              draggable={false}
-            />
-            <img
-              src={logoGobiernoEspana}
-              alt="Gobierno de España – Ministerio para la Transformación Digital y de la Función Pública"
-              className="h-10 object-contain hidden md:block"
-              draggable={false}
-            />
+            <InstitutionalLogos size="md" showFrom="sm" />
           </div>
 
           <div className="flex items-center gap-4">

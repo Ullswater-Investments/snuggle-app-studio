@@ -60,11 +60,7 @@ import { ProcuredataLogo } from "@/components/ProcuredataLogo";
 import procuredataLogoLight from "@/assets/procuredata-hero-logo-light.png";
 import procuredataLogoDark from "@/assets/procuredata-hero-logo-dark.png";
 import procuredataTransparentLogo from "@/assets/procuredata-transparent-logo.png";
-import logoEdcLight from "@/assets/logo-EDC-light.svg";
-import logoEdcDark from "@/assets/logo-EDC-dark.png";
-import logoKitEspacioDatos from "@/assets/logo-kit-espacio-de-datos.svg";
-import logoGobiernoEspana from "@/assets/logo.png";
-import { useTheme } from "next-themes";
+import { InstitutionalLogos } from "@/components/InstitutionalLogos";
 import { cn } from "@/lib/utils";
 import { FederatedHeroChat } from "@/components/landing/FederatedHeroChat";
 import { FederatedNetworkDiagram } from "@/components/landing/FederatedNetworkDiagram";
@@ -98,7 +94,6 @@ export default function Landing() {
   const { t } = useTranslation("landing");
   const { t: tc } = useTranslation("common");
   const { user } = useAuth();
-  const { resolvedTheme } = useTheme();
   const [isAgentProcessing, setIsAgentProcessing] = useState(false);
   const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
 
@@ -396,25 +391,7 @@ export default function Landing() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <ProcuredataLogo size="md" linkToHome />
-            <div className="h-6 sm:h-8 border-l border-muted-foreground/30 hidden sm:block"></div>
-            <img
-              src={resolvedTheme === "dark" ? logoEdcDark : logoEdcLight}
-              alt="Espacio de datos de confianza"
-              className="h-8 object-contain"
-              draggable={false}
-            />
-            <img
-              src={logoKitEspacioDatos}
-              alt="Kit Espacios de Datos"
-              className="h-8 object-contain dark:invert"
-              draggable={false}
-            />
-            <img
-              src={logoGobiernoEspana}
-              alt="Gobierno de España – Ministerio para la Transformación Digital y de la Función Pública"
-              className="h-10 object-contain"
-              draggable={false}
-            />
+            <InstitutionalLogos size="md" showFrom="sm" />
           </div>
 
           {/* Nav links comentados por ahora
