@@ -9,7 +9,7 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 
 ---
 
-## 📋 Índice de Documentos (17 archivos)
+## 📋 Índice de Documentos (18 archivos)
 
 ### Base de Conocimiento Original (Docs 1-5)
 
@@ -37,6 +37,12 @@ Este directorio contiene todos los documentos necesarios para entrenar el asiste
 | `15_NLU_DIALOG_TRAINING.md` | Identidad ARIA, empatía, Intent Mapping | Doc. Explicativo 13 |
 | `16_USER_STORIES_LIBRARY.md` | Historias de usuario por perfil profesional | Doc. Explicativo 14 |
 | `17_GLOSSARY_DICTIONARY.md` | Diccionario completo de términos técnicos | Doc. Explicativo 15 |
+
+### Casos de Uso Sectoriales (Subdominios)
+
+| Archivo | Descripción | Documento Base |
+|---------|-------------|----------------|
+| `18_CASO_ETAILERS_CONSTRUCCION.md` | Caso de uso nicho: estandarización de catálogos en construcción | etailers.procuredata.org |
 
 ---
 

@@ -832,6 +832,39 @@ Seguridad: Firma HMAC-SHA256 en header \`X-Signature\`
 >
 > ¿Te gustaría conocer alguna funcionalidad específica?'"
 
+### Regla 46: Caso etailers / Construcción
+> "Si el usuario pregunta sobre construcción, materiales de construcción, fabricantes, distribuidores,
+> estandarización de productos, ETIM, GS1, AAS, Digital TER-X, Kit Espacio de Datos, Red.es subvención,
+> o etailers.procuredata.org:
+>
+> Responder con el conocimiento del subdominio etailers. **Aclarar siempre** que es un caso de uso
+> sectorial específico, no el producto general de ProcureData.
+>
+> 'Tenemos un caso de uso especializado para el **sector construcción** documentado en etailers.procuredata.org.
+>
+> Se trata de un proyecto de **estandarización inteligente de catálogos** para fabricantes y distribuidores
+> de materiales de construcción, usando espacios de datos federados Gaia-X.
+>
+> **El problema**: Los fabricantes codifican productos con sistemas propios, generando duplicidades,
+> descriptivos inconsistentes y fragmentación de compra (pérdidas del 3-8%).
+>
+> **La solución** se basa en 3 pilares:
+> 1. 🤖 **Depuración con IA**: Normalización automática contra estándares ETIM y GS1
+> 2. 🔗 **Espacio de datos común (GXDCH)**: Catálogos federados con soberanía del fabricante
+> 3. 📊 **Optimización predictiva**: Consolidación inteligente de compras
+>
+> **Stack tecnológico**: EDC + AAS (Asset Administration Shell) + Pontus-X CtD + GXDCH + Digital TER-X 2050
+>
+> **Ayudas disponibles**: El programa **Kit Espacio de Datos** de Red.es ofrece hasta **30.000 EUR**
+> de subvención para adoptar espacios de datos federados Gaia-X (plazo hasta marzo 2026).
+>
+> **Métricas clave**: Ahorro 3-8% en compras, >80% reducción de duplicidades, homologación en horas vs semanas.
+>
+> ⚠️ Este es un caso de uso sectorial específico que reutiliza la infraestructura core de ProcureData
+> (modelo tripartito, ODRL, Pontus-X) pero aplicado verticalmente al sector construcción.
+>
+> ¿Te gustaría más detalles sobre algún aspecto específico de este caso?'"
+
 ---
 
 ## Formato de Respuesta
@@ -840,6 +873,53 @@ Seguridad: Firma HMAC-SHA256 en header \`X-Signature\`
 - Siempre termina ofreciendo más ayuda
 - Sugiere servicios o simuladores relevantes al contexto
 - Cuando menciones rutas, usa el formato "/ruta" para que sean clicables`;
+
+const ETAILERS_KNOWLEDGE = `
+## CASO DE USO NICHO: etailers.procuredata.org (Sector Construcción)
+
+IMPORTANTE: Este es un SUBDOMINIO ESPECÍFICO para un caso de uso de nicho.
+NO forma parte de la oferta general de ProcureData. Solo mencionar si el
+usuario pregunta específicamente sobre: construcción, materiales, fabricantes,
+distribuidores, estandarización de productos, ETIM, GS1, AAS, Digital TER-X,
+Kit Espacio de Datos, o el subdominio etailers.
+
+### Contexto
+etailers.procuredata.org es un informe estratégico para el sector construcción sobre
+estandarización inteligente y optimización de compras usando espacios de datos federados Gaia-X/Pontus-X.
+
+### Problema (3 barreras)
+1. Duplicidades de codificación: cada fabricante usa códigos propios (un tornillo = 15 códigos)
+2. Descriptivos inconsistentes: fichas técnicas incompatibles entre fabricantes
+3. Fragmentación de compra: sin datos estandarizados no se consolidan volúmenes (pérdida 3-8%)
+
+### Solución (3 pilares)
+1. Depuración con IA: normalización y deduplicación contra ETIM y GS1
+2. Espacio de datos común GXDCH: catálogos federados con soberanía del fabricante
+3. Optimización predictiva: consolidación inteligente de compras
+
+### Stack tecnológico
+EDC + AAS (Asset Administration Shell) + Pontus-X CtD + GXDCH + Digital TER-X 2050
+
+### Datos federables del fabricante
+- Catálogo técnico (ETIM/GS1), precios/condiciones (ODRL), stock en tiempo real
+- Certificaciones (ISO, CE, DoP), huella de carbono por producto (EPD)
+
+### Ayudas Kit Espacio de Datos
+- Organismo: Red.es (Ministerio Transformación Digital)
+- Cuantía: hasta 30.000 EUR por empresa
+- Plazo: hasta marzo 2026
+- Objetivo: financiar adopción de espacios de datos federados Gaia-X
+
+### Métricas clave
+- Ahorro en compras: 3-8%
+- Reducción duplicidades: >80%
+- Homologación: de semanas a horas
+
+### Fases de implementación (Agile Procurement)
+1. Diagnóstico (4-6 semanas)
+2. Piloto (8-12 semanas) con 3-5 fabricantes
+3. Escalado (12-24 semanas) a catálogo completo
+`;
 
 serve(async (req) => {
   // Handle CORS preflight
@@ -873,6 +953,9 @@ serve(async (req) => {
     }
     
     enrichedInstructions += SYSTEM_INSTRUCTIONS;
+    
+    // Inject niche case knowledge (isolated from core)
+    enrichedInstructions += ETAILERS_KNOWLEDGE;
     
     // If DID provided, fetch DDO context from Aquarius (PONTUS-X)
     if (did) {

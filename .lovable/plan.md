@@ -1,95 +1,108 @@
 
 
-## Plan: Entrenar ARIA con el caso etailers.procuredata.org + Fix build error
+## Ajustes criticos en vista de detalle del producto
 
-### Contexto
+### Objetivo
 
-El subdominio `etailers.procuredata.org` es un informe estrategico presentado a un cliente del sector construccion. Trata sobre estandarizacion inteligente y optimizacion de compras usando espacios de datos federados Gaia-X/Pontus-X, con foco en fabricantes y distribuidores de materiales de construccion. NO es contenido core de ProcureData, sino un caso de uso de nicho.
-
----
-
-### 1. Crear archivo de conocimiento aislado
-
-**Archivo**: `entrenamientoIA/18_CASO_ETAILERS_CONSTRUCCION.md`
-
-Documento Markdown con el conocimiento extraido del subdominio, estructurado como:
-
-- Identificacion del caso (subdominio, sector, cliente objetivo)
-- El problema: 3 barreras (duplicidades de codificacion, descriptivos inconsistentes, fragmentacion de compra)
-- La solucion: 3 pilares (depuracion IA, espacio de datos comun GXDCH, optimizacion predictiva)
-- Stack tecnologico (EDC, AAS, Pontus-X CtD, GXDCH, Digital TER-X 2050)
-- Caso de uso: fabricante como propietario soberano del dato (tipos de datos federables)
-- Ayudas Kit Espacio de Datos (Red.es, hasta 30.000 EUR, plazo marzo 2026)
-- Proximos pasos con Agile Procurement (3 fases)
-- Metricas clave: ahorro 3-8%, subvencion 30.000 EUR
-
-Con una cabecera clara: "Este conocimiento es de un SUBDOMINIO especifico. No mezclar con la base de conocimiento general."
+Corregir tres problemas en `/catalog/product/:id`: (1) botones de accion activos para activos rechazados, (2) politicas ODRL mostrando keys internas en lugar de texto traducido, (3) descripcion hardcodeada como fallback.
 
 ---
 
-### 2. Inyectar conocimiento en el agente concierge (chat-ai)
+### 1. Logica condicional de botones para activos rechazados
 
-**Archivo**: `supabase/functions/chat-ai/index.ts`
+**Problema**: Cuando un propietario ve su activo rechazado, los botones "Solicitar Acceso" / "Comprar Ahora" y "Descargar Ficha Tecnica" siguen activos.
 
-Anadir una nueva constante `ETAILERS_KNOWLEDGE` con el resumen del caso de uso, justo antes de `serve()`. Incluir una regla explicita:
+**Solucion**: En la sidebar (CardFooter, lineas 893-927), envolver los botones en una condicion `isOwnerOfRejected`:
+
+- Si `isOwnerOfRejected === true`: Mostrar un unico boton "Editar publicacion" que redirija a `/datos/publicar?edit=<asset_id>` (o la ruta de edicion existente). Ocultar botones de compra y descarga de ficha.
+- Si `isOwnerOfRejected === false`: Renderizar normalmente (este caso ya esta cubierto por el guard 404).
+
+Se anadira la clave `editPublication` al namespace `catalogDetails` en los 7 idiomas.
+
+---
+
+### 2. Internacionalizacion de politicas ODRL en la pestana "Politicas"
+
+**Problema**: La pestana de politicas (lineas 650-716) renderiza los valores del array `accessPolicy.permissions/prohibitions/obligations` directamente. Tras la refactorizacion de "llaves desacopladas", estos arrays contienen keys como `COMMERCIAL_USE`, `NO_REDISTRIBUTION`, etc., que se muestran tal cual al usuario.
+
+**Solucion**: Crear una funcion `translatePolicyItem(key, category, t)` en `ProductDetail.tsx`:
 
 ```text
-## CASO DE USO NICHO: etailers.procuredata.org (Sector Construccion)
-
-IMPORTANTE: Este es un SUBDOMINIO especifico para un caso de uso de nicho.
-NO forma parte de la oferta general de ProcureData. Solo mencionar si el
-usuario pregunta especificamente sobre: construccion, materiales, fabricantes,
-distribuidores, estandarizacion de productos, ETIM, GS1, AAS, Digital TER-X,
-Kit Espacio de Datos, o el subdominio etailers.
-
-[contenido resumido del caso]
+function translatePolicyItem(
+  item: string,
+  category: 'permissions' | 'prohibitions' | 'obligations',
+  t: TFunction
+): string {
+  // Intentar traducir como key predefinida usando el namespace publish
+  const translated = t(`publish:step3.${category}.${item}`, { defaultValue: '' });
+  // Si existe traduccion, usarla; si no, es texto personalizado
+  return translated || item;
+}
 ```
 
-Inyectar esta constante en `enrichedInstructions` despues de `SYSTEM_INSTRUCTIONS`.
+Esto reutiliza las traducciones ya existentes en `publish.json` (step3.permissions.COMMERCIAL_USE, etc.) sin duplicar claves.
 
-Anadir tambien una nueva Regla 46 al system prompt:
+Al renderizar cada item de la lista:
+```text
+<span>{translatePolicyItem(item, 'permissions', t)}</span>
+```
+
+Tambien se eliminaran los fallbacks de mock data en espanol (lineas 658, 674, 690) que se usan cuando `accessPolicy` es nulo:
+- `["Uso comercial permitido", "Analisis interno"]` -> Se usara un empty state traducido si no hay politicas.
+
+Se anadira la clave `noPoliciesDefined` al namespace `catalogDetails`.
+
+---
+
+### 3. Eliminacion de descripcion mock / fallback correcto
+
+**Problema**: La linea 157 de `catalogDetails.json` tiene `defaultDescription: "Este dataset proporciona informacion critica para la toma de decisiones en tiempo real."` que se usa como fallback generico (linea 522).
+
+**Solucion**: 
+- Reemplazar la linea 522 para que use `product.asset_description` directamente.
+- Si es nulo/vacio, renderizar un fallback elegante en cursiva con una clave i18n nueva `noDescription`.
+- Actualizar/eliminar la clave `defaultDescription` de los 7 idiomas y reemplazarla por `noDescription`.
 
 ```text
-### Regla 46: Caso etailers / Construccion
-> "Si el usuario pregunta sobre construccion, materiales, fabricantes, distribuidores, 
-> estandarizacion de productos, ETIM, Kit Espacio de Datos, o etailers.procuredata.org:
-> Responder con el conocimiento del subdominio etailers. Aclarar que es un caso de uso
-> sectorial especifico, no el producto general de ProcureData."
+{product.asset_description ? (
+  <p className="text-muted-foreground leading-relaxed">{product.asset_description}</p>
+) : (
+  <p className="text-muted-foreground italic">{t('common.assetDetail.noDescription')}</p>
+)}
 ```
 
 ---
 
-### 3. Fix build error: notification-handler
+### 4. Nuevas claves de traduccion (7 idiomas)
 
-**Archivo**: `supabase/functions/notification-handler/index.ts`
+En `catalogDetails.json`, dentro de `common.assetDetail`:
 
-El template `download` (linea 150-157) usa `html` estatico mientras que la linea 363 llama `template.getBody(templateData)`. Cambiar el template `download` para usar `getBody` como todos los demas:
+| Clave | ES | EN |
+|---|---|---|
+| `editPublication` | Editar publicacion | Edit Publication |
+| `noDescription` | No se ha proporcionado una descripcion para este activo. | No description has been provided for this asset. |
+| `noPoliciesDefined` | No se han definido politicas para este activo. | No policies have been defined for this asset. |
 
-```typescript
-download: {
-  subject: "Descarga de datos disponible - ProcureData",
-  getBody: (data: any) => `
-    <h1>Descarga disponible</h1>
-    <p>Los datos solicitados están listos para su descarga.</p>
-    <p>Acceda a la plataforma para descargar los datos.</p>
-  `,
-},
-```
+Se anadiran las traducciones nativas para FR, DE, IT, PT y NL.
 
 ---
 
-### Archivos a modificar/crear
+### 5. Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `entrenamientoIA/18_CASO_ETAILERS_CONSTRUCCION.md` | Crear: documento de conocimiento aislado |
-| `supabase/functions/chat-ai/index.ts` | Anadir constante ETAILERS_KNOWLEDGE + Regla 46 + inyeccion en enrichedInstructions |
-| `supabase/functions/notification-handler/index.ts` | Fix: download template html -> getBody |
+| `src/pages/ProductDetail.tsx` | (1) Botones condicionales para rejected, (2) funcion `translatePolicyItem` + eliminar mock data, (3) descripcion con fallback elegante, (4) importar namespace `publish` |
+| `src/locales/es/catalogDetails.json` | Nuevas claves: editPublication, noDescription, noPoliciesDefined. Eliminar defaultDescription |
+| `src/locales/en/catalogDetails.json` | Idem en ingles |
+| `src/locales/fr/catalogDetails.json` | Idem en frances |
+| `src/locales/de/catalogDetails.json` | Idem en aleman |
+| `src/locales/it/catalogDetails.json` | Idem en italiano |
+| `src/locales/pt/catalogDetails.json` | Idem en portugues |
+| `src/locales/nl/catalogDetails.json` | Idem en neerlandes |
 
 ### Lo que NO cambia
 
-- La base de conocimiento general (SYSTEM_INSTRUCTIONS existente)
-- Los otros agentes especializados (federated-agent, success-story-agent, etc.)
-- Los archivos de entrenamientoIA existentes (01-17)
-- Ningun archivo de traduccion ni componente frontend
-
+- `src/utils/odrlGenerator.ts` (ya correcto)
+- `src/locales/*/publish.json` (ya tiene las keys de step3)
+- El route guard de rejected (ya implementado)
+- La logica de negocio ni las queries
