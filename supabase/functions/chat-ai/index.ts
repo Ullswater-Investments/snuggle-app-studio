@@ -874,6 +874,53 @@ Seguridad: Firma HMAC-SHA256 en header \`X-Signature\`
 - Sugiere servicios o simuladores relevantes al contexto
 - Cuando menciones rutas, usa el formato "/ruta" para que sean clicables`;
 
+const ETAILERS_KNOWLEDGE = `
+## CASO DE USO NICHO: etailers.procuredata.org (Sector Construcción)
+
+IMPORTANTE: Este es un SUBDOMINIO ESPECÍFICO para un caso de uso de nicho.
+NO forma parte de la oferta general de ProcureData. Solo mencionar si el
+usuario pregunta específicamente sobre: construcción, materiales, fabricantes,
+distribuidores, estandarización de productos, ETIM, GS1, AAS, Digital TER-X,
+Kit Espacio de Datos, o el subdominio etailers.
+
+### Contexto
+etailers.procuredata.org es un informe estratégico para el sector construcción sobre
+estandarización inteligente y optimización de compras usando espacios de datos federados Gaia-X/Pontus-X.
+
+### Problema (3 barreras)
+1. Duplicidades de codificación: cada fabricante usa códigos propios (un tornillo = 15 códigos)
+2. Descriptivos inconsistentes: fichas técnicas incompatibles entre fabricantes
+3. Fragmentación de compra: sin datos estandarizados no se consolidan volúmenes (pérdida 3-8%)
+
+### Solución (3 pilares)
+1. Depuración con IA: normalización y deduplicación contra ETIM y GS1
+2. Espacio de datos común GXDCH: catálogos federados con soberanía del fabricante
+3. Optimización predictiva: consolidación inteligente de compras
+
+### Stack tecnológico
+EDC + AAS (Asset Administration Shell) + Pontus-X CtD + GXDCH + Digital TER-X 2050
+
+### Datos federables del fabricante
+- Catálogo técnico (ETIM/GS1), precios/condiciones (ODRL), stock en tiempo real
+- Certificaciones (ISO, CE, DoP), huella de carbono por producto (EPD)
+
+### Ayudas Kit Espacio de Datos
+- Organismo: Red.es (Ministerio Transformación Digital)
+- Cuantía: hasta 30.000 EUR por empresa
+- Plazo: hasta marzo 2026
+- Objetivo: financiar adopción de espacios de datos federados Gaia-X
+
+### Métricas clave
+- Ahorro en compras: 3-8%
+- Reducción duplicidades: >80%
+- Homologación: de semanas a horas
+
+### Fases de implementación (Agile Procurement)
+1. Diagnóstico (4-6 semanas)
+2. Piloto (8-12 semanas) con 3-5 fabricantes
+3. Escalado (12-24 semanas) a catálogo completo
+`;
+
 serve(async (req) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
