@@ -25,7 +25,7 @@ const beneficios = [
 ];
 
 const pasos = [
-  { num: 1, title: "Adhesión", desc: "Firma del contrato y Acta de Conformidad. Inicio de la Fase 1 (6 meses)." },
+  { num: 1, title: "Adhesión", desc: "RED.ES evalúa y concede la subvención. Se activa la Fase 2 (Permanencia 24 meses - Sujeto a recepción de la subvención)." },
   { num: 2, title: "Solicitud", desc: "Global Data Care tramita la solicitud ante RED.ES como Representante Voluntario." },
   { num: 3, title: "Concesión", desc: "RED.ES evalúa y concede la subvención. Se activa la Fase 2 (24 meses)." },
   { num: 4, title: "Justificación", desc: "Justificación completa del proyecto ante RED.ES. Servicio incluido." },
