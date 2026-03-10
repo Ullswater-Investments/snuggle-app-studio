@@ -481,11 +481,11 @@ Las modificaciones al presente Libro de Reglas siguen el siguiente proceso:
 
 | Canal | Detalle |
 |-------|---------|
-| **Soporte técnico** | soporte@procuredata.eu |
-| **Comité de Gobierno** | gobierno@procuredata.eu |
-| **Comité de Ética** | etica@procuredata.eu |
-| **Delegado de Protección de Datos** | dpd@procuredata.eu |
-| **Web** | https://procuredata.eu |
+| **Soporte técnico** | soporte@procuredata.org |
+| **Comité de Gobierno** | gobierno@procuredata.org |
+| **Comité de Ética** | etica@procuredata.org |
+| **Delegado de Protección de Datos** | dpd@procuredata.org |
+| **Web** | https://procuredata.org |
 
 ---
 
