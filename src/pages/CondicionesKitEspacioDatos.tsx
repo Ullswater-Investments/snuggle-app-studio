@@ -106,7 +106,7 @@ export default function CondicionesKitEspacioDatos() {
         {/* Summary Cards */}
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           {[
-            { value: "250€/mes", label: "Cuota Mensual", sub: "6 meses iniciales" },
+            { value: "250€/mes", label: "Cuota Mensual", sub: "Compromiso 2 años" },
             { value: "6 meses", label: "Fase inicial", sub: "Compromiso irrevocable" },
             { value: "30.000€", label: "Subvención máxima", sub: "A fondo perdido de RED.ES" },
           ].map((card, i) => (
