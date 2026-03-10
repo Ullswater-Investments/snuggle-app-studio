@@ -107,7 +107,7 @@ export default function CondicionesKitEspacioDatos() {
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           {[
             { value: "250€/mes", label: "Cuota Mensual", sub: "Compromiso 2 años" },
-            { value: "2 años", label: "Fase inicial", sub: "Compromiso irrevocable" },
+            { value: "2 años", label: "Permanencia", sub: "Compromiso irrevocable" },
             { value: "30.000€", label: "Subvención máxima", sub: "A fondo perdido de RED.ES" },
           ].map((card, i) => (
             <motion.div key={card.value} {...fadeInUp} transition={{ delay: i * 0.1 }}>
