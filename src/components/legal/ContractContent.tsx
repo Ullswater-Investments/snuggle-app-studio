@@ -63,7 +63,7 @@ export default function ContractContent({ clinicName = '[NOMBRE DE LA EMPRESA]' 
         <div>
           <h4 className="font-bold text-foreground">5. ACTA DE CONFORMIDAD Y ACTIVACIÓN</h4>
           <p className="text-muted-foreground mt-1">
-            La firma digital del Acta de Entrega y Conformidad activa la financiación de HOKODO y constituye el inicio formal de la prestación del servicio. El Cliente renuncia a retener pagos por causas ajenas al presente contrato.
+            La firma digital del Acta de Entrega y Conformidad constituye el inicio formal de la prestación del servicio y activa la obligación de pago. El Cliente renuncia a retener pagos por causas ajenas al presente contrato.
           </p>
         </div>
 

@@ -26,7 +26,7 @@ const actaPoints = [
   { num: 1, title: "Recepción efectiva del servicio", color: "border-primary" },
   { num: 2, title: "Inicio de la consultoría", color: "border-primary" },
   { num: 3, title: "Conformidad y ausencia de incidencias", color: "border-primary" },
-  { num: 4, title: "Activación de la financiación (HOKODO)", color: "border-amber-500", highlight: true },
+  { num: 4, title: "Activación del pago de adhesión (1.500€ + IVA)", color: "border-amber-500", highlight: true },
   { num: 5, title: "Validez de la firma digital", color: "border-primary" },
 ];
 

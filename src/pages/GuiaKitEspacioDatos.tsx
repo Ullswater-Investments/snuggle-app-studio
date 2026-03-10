@@ -91,9 +91,9 @@ export default function GuiaKitEspacioDatos() {
             <h3 className="text-xl font-bold mb-4">Inversión</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <div className="text-sm text-muted-foreground">Tu inversión (Fase 1)</div>
+                <div className="text-sm text-muted-foreground">Fase 1 — Tu inversión</div>
                 <div className="text-3xl font-black">1.500€ <span className="text-base font-normal">+ IVA</span></div>
-                <div className="text-sm text-muted-foreground">Pago anticipado - Cuota de adhesión</div>
+                <div className="text-sm text-muted-foreground">Pago único de adhesión</div>
               </div>
               <div>
                 <div className="text-sm text-muted-foreground">Subvención (hasta)</div>
