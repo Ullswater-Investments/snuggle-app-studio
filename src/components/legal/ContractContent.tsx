@@ -53,9 +53,9 @@ export default function ContractContent({ clinicName = '[NOMBRE DE LA EMPRESA]' 
 
         {/* Cláusula 4 */}
         <div>
-          <h4 className="font-bold text-foreground">4. FORMA DE PAGO Y FINANCIACIÓN</h4>
+          <h4 className="font-bold text-foreground">4. FORMA DE PAGO</h4>
           <p className="text-muted-foreground mt-1">
-            El pago de la Fase 1 se realizará en 6 cuotas mensuales de 190€ + IVA, financiadas a través de HOKODO. La deuda es cierta, líquida y exigible desde la firma del Acta de Conformidad.
+            El pago de la Fase 1 (1.500€ + IVA) se realizará de forma anticipada mediante transferencia bancaria o domiciliación. La deuda es cierta, líquida y exigible desde la firma del Acta de Conformidad.
           </p>
         </div>
 
