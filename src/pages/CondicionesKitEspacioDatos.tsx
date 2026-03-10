@@ -144,24 +144,24 @@ export default function CondicionesKitEspacioDatos() {
         {/* ROI Calculator */}
         <motion.div {...fadeInUp} className="mb-12">
           <Card className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20">
-            <CardContent className="p-8">
-              <h3 className="text-xl font-bold text-center mb-6">Calculadora ROI</h3>
-              <div className="grid grid-cols-3 gap-4 items-center text-center">
-                <div>
-                  <div className="text-sm text-muted-foreground">TU INVERSIÓN</div>
-                  <div className="text-2xl font-black text-foreground">1.140€</div>
-                </div>
-                <div>
-                  <div className="text-sm text-muted-foreground">ROI</div>
-                  <div className="text-3xl font-black text-primary">26x</div>
-                </div>
-                <div>
-                  <div className="text-sm text-muted-foreground">SUBVENCIÓN</div>
-                  <div className="text-2xl font-black text-emerald-600">30.000€</div>
-                </div>
-              </div>
-              <p className="text-center text-sm text-muted-foreground mt-4">Financiación cubierta al 85-90%</p>
-            </CardContent>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
           </Card>
         </motion.div>
 
