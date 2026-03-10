@@ -89,13 +89,13 @@ export default function PropuestaKitEspacioDatos() {
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <div className="text-sm text-muted-foreground mb-1">Fase 1 — Tu inversión</div>
-                <div className="text-4xl font-black">190€<span className="text-lg font-normal text-muted-foreground">/mes</span></div>
-                <div className="text-sm text-muted-foreground">6 meses × 190€ = 1.140€ + IVA</div>
+                <div className="text-4xl font-black">1.500€<span className="text-lg font-normal text-muted-foreground"> + IVA</span></div>
+                <div className="text-sm text-muted-foreground">Pago único de adhesión</div>
               </div>
               <div>
-                <div className="text-sm text-muted-foreground mb-1">Fase 2 — Subvención RED.ES</div>
-                <div className="text-4xl font-black text-emerald-600">30.000€</div>
-                <div className="text-sm text-muted-foreground">Máximo a fondo perdido</div>
+                <div className="text-sm text-muted-foreground mb-1">Fase 2 — Permanencia (24 meses)</div>
+                <div className="text-4xl font-black text-emerald-600">250€<span className="text-lg font-normal text-muted-foreground">/mes</span></div>
+                <div className="text-sm text-muted-foreground">Condicionado a subvención RED.ES (hasta 30.000€)</div>
               </div>
             </div>
           </CardContent>

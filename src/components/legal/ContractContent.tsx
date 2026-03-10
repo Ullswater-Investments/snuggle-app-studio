@@ -43,19 +43,19 @@ export default function ContractContent({ clinicName = '[NOMBRE DE LA EMPRESA]' 
           <h4 className="font-bold text-foreground">3. PRECIO Y CONDICIONES ECONÓMICAS</h4>
           <div className="mt-1 space-y-2">
             <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded border-l-4 border-blue-500">
-              <strong>Fase 1:</strong> 1.140€ + IVA (190€/mes × 6 meses)
+              <strong>Fase 1:</strong> 1.500€ + IVA (pago único de adhesión)
             </div>
             <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded border-l-4 border-blue-500">
-              <strong>Fase 2:</strong> El importe total será equivalente a la subvención concedida por RED.ES (hasta 30.000€).
+              <strong>Fase 2:</strong> 250€/mes × 24 meses de permanencia, condicionado a la concesión efectiva de la subvención por RED.ES (hasta 30.000€).
             </div>
           </div>
         </div>
 
         {/* Cláusula 4 */}
         <div>
-          <h4 className="font-bold text-foreground">4. FORMA DE PAGO Y FINANCIACIÓN</h4>
+          <h4 className="font-bold text-foreground">4. FORMA DE PAGO</h4>
           <p className="text-muted-foreground mt-1">
-            El pago de la Fase 1 se realizará en 6 cuotas mensuales de 190€ + IVA, financiadas a través de HOKODO. La deuda es cierta, líquida y exigible desde la firma del Acta de Conformidad.
+            El pago de la Fase 1 (1.500€ + IVA) se realizará de forma anticipada mediante transferencia bancaria o domiciliación. La deuda es cierta, líquida y exigible desde la firma del Acta de Conformidad.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export default function ContractContent({ clinicName = '[NOMBRE DE LA EMPRESA]' 
         <div>
           <h4 className="font-bold text-foreground">5. ACTA DE CONFORMIDAD Y ACTIVACIÓN</h4>
           <p className="text-muted-foreground mt-1">
-            La firma digital del Acta de Entrega y Conformidad activa la financiación de HOKODO y constituye el inicio formal de la prestación del servicio. El Cliente renuncia a retener pagos por causas ajenas al presente contrato.
+            La firma digital del Acta de Entrega y Conformidad constituye el inicio formal de la prestación del servicio y activa la obligación de pago. El Cliente renuncia a retener pagos por causas ajenas al presente contrato.
           </p>
         </div>
 
