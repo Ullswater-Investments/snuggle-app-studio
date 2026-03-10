@@ -576,6 +576,14 @@ export default function Landing() {
                 </motion.div>
               ))}
             </motion.div>
+            <div className="flex justify-center mt-8">
+              <Button asChild variant="outline" size="lg" className="gap-2">
+                <Link to="/success-stories">
+                  <Sparkles className="h-4 w-4" />
+                  {t("successCases")}
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
 
