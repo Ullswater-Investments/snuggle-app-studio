@@ -25,13 +25,12 @@ const serviciosIncluidos = [
 
 
 const faqItems = [
-{ q: "¿Puedo cancelar en los 6 primeros meses?", a: "No. La Fase 1 es un compromiso irrevocable de 6 meses. No se admite cancelación anticipada una vez firmada el Acta de Conformidad." },
-{ q: "¿Qué ocurre si me conceden la subvención?", a: "Se activa automáticamente la Fase 2 (prórroga de 24 meses). El importe de la Fase 2 será equivalente a la subvención concedida." },
-{ q: "¿Qué es el Acta de Conformidad?", a: "Es el documento que certifica la recepción del servicio y activa la financiación de HOKODO. Su firma es digital y tiene plena validez jurídica." },
+{ q: "¿En qué consiste la cuota de adhesión?", a: "La cuota de adhesión es un pago único de 1.500€ + IVA que se abona de forma anticipada tras la firma del Acta de Conformidad. Constituye el compromiso firme e irrevocable de la Fase 1." },
+{ q: "¿Qué ocurre si me conceden la subvención?", a: "Se activa automáticamente la Fase 2: permanencia de 24 meses a 250€/mes. La subvención de RED.ES puede cubrir hasta 30.000€." },
+{ q: "¿Qué es el Acta de Conformidad?", a: "Es el documento que certifica la recepción del servicio y activa la obligación de pago de la cuota de adhesión (1.500€ + IVA). Su firma es digital y tiene plena validez jurídica conforme al Reglamento eIDAS." },
 { q: "¿Quién tramita la ayuda?", a: "Global Data Care actúa como Representante Voluntario ante RED.ES, gestionando toda la tramitación administrativa." },
 { q: "¿Las incidencias técnicas afectan a los pagos?", a: "No. Las reclamaciones técnicas o comerciales se gestionan por canales de soporte separados y no afectan al flujo de pagos." },
-{ q: "¿Qué pasa si no me conceden la subvención?", a: "El contrato finaliza al término de la Fase 1 (6 meses). No se genera ninguna obligación adicional." },
-{ q: "¿Qué es la financiación HOKODO?", a: "HOKODO es una entidad financiera externa que facilita el pago fraccionado de la Fase 1 en 6 cuotas mensuales." }];
+{ q: "¿Qué pasa si no me conceden la subvención?", a: "El contrato finaliza al término de la Fase 1. Sin permanencia ni cuotas mensuales adicionales." }];
 
 
 export default function CondicionesKitEspacioDatos() {
