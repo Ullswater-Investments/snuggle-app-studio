@@ -112,7 +112,21 @@
     "published": "Publié",
     "rejected": "Rejeté",
     "draft": "Brouillon",
-    "archived": "Archivé"
+    "archived": "Archivé",
+    "error": "Erreur",
+    "publishing": "Publication"
+  },
+  "publicationsTable": {
+    "searchPlaceholder": "Rechercher par nom ou DID...",
+    "filterAll": "Tous",
+    "didDate": "DID / DATE",
+    "price": "PRIX",
+    "status": "STATUT",
+    "actions": "ACTIONS",
+    "edit": "Modifier",
+    "retry": "Réessayer",
+    "priceFree": "Gratuit",
+    "pricePaid": "Payant"
   },
   "expiration": {
     "expired": "Expiré",

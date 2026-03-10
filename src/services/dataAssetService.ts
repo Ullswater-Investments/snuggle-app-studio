@@ -80,6 +80,38 @@ export interface CreateDataAssetResponse {
   data: DataAssetCreated;
 }
 
+// --- List Response ---
+
+export interface DataAssetListItem {
+  uuid: string;
+  name: string;
+  did: string | null;
+  status: string;
+  pricing_type: string;
+  price: string;
+  created_at: string;
+  updated_at: string;
+  onchain_error?: string | null;
+  [key: string]: unknown;
+}
+
+export interface ListDataAssetsMeta {
+  total: number;
+  per_page: number;
+  current_page: number;
+  last_page: number;
+  first_page: number;
+  first_page_url: string;
+  last_page_url: string;
+  next_page_url: string | null;
+  previous_page_url: string | null;
+}
+
+export interface ListDataAssetsResponse {
+  meta: ListDataAssetsMeta;
+  data: DataAssetListItem[];
+}
+
 // --- Service ---
 
 export const dataAssetService = {
@@ -90,5 +122,13 @@ export const dataAssetService = {
     api.post<CreateDataAssetResponse>(
       `/organizations/${organizationUuid}/data-assets`,
       data,
+    ),
+
+  list: (
+    organizationUuid: string,
+    page = 1,
+  ): Promise<ListDataAssetsResponse> =>
+    api.get<ListDataAssetsResponse>(
+      `/organizations/${organizationUuid}/data-assets?page=${page}`,
     ),
 };

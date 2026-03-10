@@ -1,11 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { useGovernanceSettings } from "@/hooks/useGovernanceSettings";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Database, Plus, Library, Upload } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
 import { MyLibraryTab } from "@/components/data/MyLibraryTab";
@@ -13,10 +10,7 @@ import { MyPublicationsTab } from "@/components/data/MyPublicationsTab";
 
 const Data = () => {
   const navigate = useNavigate();
-  const { activeOrg } = useOrganizationContext();
-  const { requireKyb } = useGovernanceSettings();
   const { t } = useTranslation('data');
-  const kybDisabled = requireKyb && !(activeOrg as any)?.kyb_verified;
 
   return (
     <div className="container mx-auto p-6 space-y-8">
@@ -36,28 +30,15 @@ const Data = () => {
               </p>
             </div>
 
-            {/* Prominent Publish Button */}
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className="shrink-0">
-                    <Button
-                      size="lg"
-                      onClick={() => navigate("/datos/publicar")}
-                      disabled={kybDisabled}
-                    >
-                      <Plus className="h-5 w-5 mr-2" />
-                      {t('hero.publishBtn')}
-                    </Button>
-                  </span>
-                </TooltipTrigger>
-                {kybDisabled && (
-                  <TooltipContent>
-                    <p>Se requiere validación KYB de tu organización</p>
-                  </TooltipContent>
-                )}
-              </Tooltip>
-            </TooltipProvider>
+            <div className="shrink-0">
+              <Button
+                size="lg"
+                onClick={() => navigate("/datos/publicar")}
+              >
+                <Plus className="h-5 w-5 mr-2" />
+                {t('hero.publishBtn')}
+              </Button>
+            </div>
           </div>
         </div>
       </FadeIn>

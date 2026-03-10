@@ -112,7 +112,21 @@
     "published": "Gepubliceerd",
     "rejected": "Afgewezen",
     "draft": "Concept",
-    "archived": "Gearchiveerd"
+    "archived": "Gearchiveerd",
+    "error": "Fout",
+    "publishing": "Publiceren"
+  },
+  "publicationsTable": {
+    "searchPlaceholder": "Zoeken op naam of DID...",
+    "filterAll": "Alle",
+    "didDate": "DID / DATUM",
+    "price": "PRIJS",
+    "status": "STATUS",
+    "actions": "ACTIES",
+    "edit": "Bewerken",
+    "retry": "Opnieuw proberen",
+    "priceFree": "Gratis",
+    "pricePaid": "Betaald"
   },
   "expiration": {
     "expired": "Verlopen",

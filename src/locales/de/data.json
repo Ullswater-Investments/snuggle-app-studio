@@ -112,7 +112,21 @@
     "published": "Veröffentlicht",
     "rejected": "Abgelehnt",
     "draft": "Entwurf",
-    "archived": "Archiviert"
+    "archived": "Archiviert",
+    "error": "Fehler",
+    "publishing": "Veröffentlichung"
+  },
+  "publicationsTable": {
+    "searchPlaceholder": "Nach Name oder DID suchen...",
+    "filterAll": "Alle",
+    "didDate": "DID / DATUM",
+    "price": "PREIS",
+    "status": "STATUS",
+    "actions": "AKTIONEN",
+    "edit": "Bearbeiten",
+    "retry": "Wiederholen",
+    "priceFree": "Kostenlos",
+    "pricePaid": "Kostenpflichtig"
   },
   "expiration": {
     "expired": "Abgelaufen",

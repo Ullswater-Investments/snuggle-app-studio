@@ -1,36 +1,28 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { supabase } from "@/integrations/supabase/client";
+import { Search, Edit, RotateCcw, AlertCircle, ArrowUp, Database, Plus } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { useGovernanceSettings } from "@/hooks/useGovernanceSettings";
+import { dataAssetService, type DataAssetListItem } from "@/services/dataAssetService";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-    Database,
-    Plus,
-    Eye,
-    Edit,
-    BarChart3,
-    Package,
-    TrendingUp,
-    DollarSign,
-    Calendar,
-    Clock,
-    AlertCircle,
-    XCircle,
-} from "lucide-react";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { EmptyState } from "@/components/EmptyState";
 import { format } from "date-fns";
 import { es, fr, pt, de, it, nl, enUS } from "date-fns/locale";
@@ -38,417 +30,248 @@ import { toast } from "sonner";
 
 const DATE_LOCALES: Record<string, typeof es> = { es, fr, pt, de, it, nl, en: enUS };
 
-interface PublishedAsset {
-    id: string;
-    status: string;
-    price: number | null;
-    pricing_model: string | null;
-    currency: string | null;
-    created_at: string;
-    is_visible: boolean;
-    admin_notes: string | null;
-    product: {
-        id: string;
-        name: string;
-        description: string | null;
-        category: string | null;
-    } | null;
-}
+const getStatusBadge = (status: string, t: (key: string) => string) => {
+  switch (status) {
+    case "error":
+      return (
+        <Badge variant="destructive" className="gap-1">
+          <AlertCircle className="h-3 w-3" />
+          {t("pubStatus.error")}
+        </Badge>
+      );
+    case "publishing":
+    case "publicando":
+      return (
+        <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 gap-1">
+          <ArrowUp className="h-3 w-3" />
+          {t("pubStatus.publishing")}
+        </Badge>
+      );
+    case "published":
+    case "active":
+    case "available":
+      return (
+        <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+          {t("pubStatus.published")}
+        </Badge>
+      );
+    case "pending":
+    case "pending_validation":
+      return (
+        <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">
+          {t("pubStatus.validation")}
+        </Badge>
+      );
+    case "rejected":
+      return (
+        <Badge variant="destructive">
+          <AlertCircle className="h-3 w-3 mr-1" />
+          {t("pubStatus.rejected")}
+        </Badge>
+      );
+    default:
+      return <Badge variant="outline">{status}</Badge>;
+  }
+};
+
+const getPriceLabel = (pricingType: string, t: (key: string) => string) => {
+  if (pricingType === "free") return t("publicationsTable.priceFree");
+  return t("publicationsTable.pricePaid");
+};
 
 export const MyPublicationsTab = () => {
-    const navigate = useNavigate();
-    const { activeOrgId, activeOrg } = useOrganizationContext();
-    const queryClient = useQueryClient();
-    const { t, i18n } = useTranslation('data');
-    const { requireKyb } = useGovernanceSettings();
-    const kybDisabled = requireKyb && !(activeOrg as any)?.kyb_verified;
-    const dateLocale = DATE_LOCALES[i18n.language] || DATE_LOCALES.en;
+  const navigate = useNavigate();
+  const { activeOrgId } = useOrganizationContext();
+  const { t, i18n } = useTranslation("data");
+  const dateLocale = DATE_LOCALES[i18n.language] || DATE_LOCALES.en;
 
-    const { data: publications, isLoading } = useQuery({
-        queryKey: ["my-publications", activeOrgId],
-        queryFn: async () => {
-            if (!activeOrgId) return [];
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
 
-            const { data, error } = await supabase
-                .from("data_assets" as any)
-                .select(`
-          id,
-          status,
-          price,
-          pricing_model,
-          currency,
-          created_at,
-          is_visible,
-          admin_notes,
-          product:data_products (
-            id,
-            name,
-            description,
-            category
-          )
-        `)
-                .eq("subject_org_id", activeOrgId)
-                .order("created_at", { ascending: false });
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["data-assets", activeOrgId, page],
+    queryFn: () => dataAssetService.list(activeOrgId!, page),
+    enabled: !!activeOrgId,
+  });
 
-            if (error) throw error;
-            return (data || []) as unknown as PublishedAsset[];
-        },
-        enabled: !!activeOrgId,
-    });
+  const assets = data?.data ?? [];
+  const meta = data?.meta;
 
-    const toggleVisibilityMutation = useMutation({
-        mutationFn: async ({ assetId, isVisible }: { assetId: string; isVisible: boolean }) => {
-            const { error } = await supabase
-                .from("data_assets")
-                .update({ is_visible: isVisible } as any)
-                .eq("id", assetId);
-            if (error) throw error;
-        },
-        onSuccess: (_, variables) => {
-            queryClient.invalidateQueries({ queryKey: ["my-publications"] });
-            toast.success(variables.isVisible ? t('toast.visibleOn') : t('toast.visibleOff'));
-        },
-        onError: () => {
-            toast.error(t('toast.visibilityError'));
-        },
-    });
+  const filteredAssets = useMemo(() => {
+    let list = assets;
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      list = list.filter(
+        (a) =>
+          a.name?.toLowerCase().includes(q) || (a.did && a.did.toLowerCase().includes(q))
+      );
+    }
+    if (statusFilter !== "all") {
+      list = list.filter((a) => a.status === statusFilter);
+    }
+    return list;
+  }, [assets, search, statusFilter]);
 
-    // Filtered lists
-    const publishedList = useMemo(() => 
-        (publications || []).filter(p => ['active', 'available'].includes(p.status)), 
-        [publications]
-    );
-    const pendingList = useMemo(() => 
-        (publications || []).filter(p => ['pending', 'pending_validation'].includes(p.status)), 
-        [publications]
-    );
-    const rejectedList = useMemo(() => 
-        (publications || []).filter(p => p.status === 'rejected'), 
-        [publications]
-    );
+  const handleEdit = (asset: DataAssetListItem) => {
+    toast.info(t("publicationsTable.edit") + " - Próximamente");
+    // TODO: navigate to edit flow when available
+  };
 
-    const stats = useMemo(() => {
-        if (!publications) return { total: 0, active: 0, totalRevenue: 0 };
+  const handleRetry = (asset: DataAssetListItem) => {
+    toast.info(t("publicationsTable.retry") + " - Próximamente");
+    // TODO: call retry endpoint when available
+  };
 
-        return {
-            total: publications.length,
-            active: publishedList.length,
-            totalRevenue: publications.reduce((acc, p) => acc + (p.price || 0), 0),
-        };
-    }, [publications, publishedList]);
-
-    const getPricingLabel = (model: string | null) => {
-        switch (model) {
-            case "free": return t('pricing.free');
-            case "subscription": return t('pricing.subscription');
-            case "one_time": return t('pricing.oneTime');
-            case "usage": return t('pricing.usage');
-            default: return t('pricing.undefined');
-        }
-    };
-
-    const getStatusBadge = (status: string) => {
-        switch (status) {
-            case "pending_validation":
-                return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">🔍 {t('pubStatus.validation')}</Badge>;
-            case "pending":
-                return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">⏳ {t('pubStatus.validation')}</Badge>;
-            case "available":
-                return <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">{t('pubStatus.available')}</Badge>;
-            case "active":
-                return <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">{t('pubStatus.published')}</Badge>;
-            case "rejected":
-                return <Badge variant="destructive"><AlertCircle className="h-3 w-3 mr-1" />{t('pubStatus.rejected')}</Badge>;
-            case "draft":
-                return <Badge variant="secondary">{t('pubStatus.draft')}</Badge>;
-            case "archived":
-                return <Badge variant="outline">{t('pubStatus.archived')}</Badge>;
-            default:
-                return <Badge variant="outline">{status}</Badge>;
-        }
-    };
-
-    const renderCard = (publication: PublishedAsset) => {
-        const isRejected = publication.status === 'rejected';
-        const isPending = publication.status === 'pending_validation' || publication.status === 'pending';
-
-        return (
-            <Card 
-                key={publication.id} 
-                className={`group hover:shadow-lg transition-all duration-300 ${
-                    isRejected 
-                        ? 'border-destructive/50 hover:border-destructive' 
-                        : 'hover:border-primary'
-                }`}
-            >
-                <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between mb-2">
-                        <div className="flex-1 min-w-0">
-                            <CardTitle className={`text-base mb-1 transition-colors truncate ${
-                                isRejected ? 'group-hover:text-destructive' : 'group-hover:text-primary'
-                            }`}>
-                                {publication.product?.name || t('card.noName')}
-                            </CardTitle>
-                            <CardDescription className="text-sm line-clamp-2">
-                                {publication.product?.description || t('card.noDesc')}
-                            </CardDescription>
-                        </div>
-                    </div>
-
-                    {/* Rejection reason inline */}
-                    {isRejected && publication.admin_notes && (
-                        <div className="flex items-start gap-2 mt-2 p-2 rounded-md bg-destructive/5 border border-destructive/20">
-                            <XCircle className="h-4 w-4 text-destructive shrink-0 mt-0.5" />
-                            <p className="text-xs text-destructive line-clamp-2">
-                                <span className="font-semibold">{t('rejectedCard.reason')}:</span> {publication.admin_notes}
-                            </p>
-                        </div>
-                    )}
-
-                    {/* Badges Row */}
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                        {isRejected && publication.admin_notes ? (
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        {getStatusBadge(publication.status)}
-                                    </TooltipTrigger>
-                                    <TooltipContent className="max-w-xs">
-                                        <p className="text-xs font-medium mb-1">{t('rejectedCard.reason')}:</p>
-                                        <p className="text-xs">{publication.admin_notes}</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
-                        ) : (
-                            getStatusBadge(publication.status)
-                        )}
-                        {publication.product?.category && (
-                            <Badge variant="outline" className="text-xs">
-                                {publication.product.category}
-                            </Badge>
-                        )}
-                        <Badge variant="secondary" className="text-xs">
-                            {getPricingLabel(publication.pricing_model)}
-                        </Badge>
-                    </div>
-
-                    {/* Visibility Toggle - hidden for rejected and pending */}
-                    {isPending || isRejected ? (
-                        !isRejected && (
-                            <div className="mt-3 pt-3 border-t">
-                                <p className="text-xs text-muted-foreground italic">
-                                    {t('card.notEditable')}
-                                </p>
-                            </div>
-                        )
-                    ) : (
-                        <div className="flex items-center justify-between mt-3 pt-3 border-t">
-                            <Label htmlFor={`visible-${publication.id}`} className="text-xs text-muted-foreground cursor-pointer">
-                                {t('card.visibleInCatalog')}
-                            </Label>
-                            <Switch
-                                id={`visible-${publication.id}`}
-                                checked={publication.is_visible !== false}
-                                onCheckedChange={(checked) =>
-                                    toggleVisibilityMutation.mutate({ assetId: publication.id, isVisible: checked })
-                                }
-                            />
-                        </div>
-                    )}
-                </CardHeader>
-
-                <CardContent className="space-y-4">
-                    {/* Price */}
-                    <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">{t('card.price')}:</span>
-                        <span className="font-semibold">
-                            {publication.pricing_model === "free"
-                                ? t('pricing.free')
-                                : `€${publication.price?.toLocaleString() || 0}${publication.pricing_model === "subscription" ? t('pricing.perMonth') : ""}`
-                            }
-                        </span>
-                    </div>
-
-                    {/* Published Date */}
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Calendar className="h-3 w-3" />
-                        {t('card.published')} {format(new Date(publication.created_at), "d MMMM, yyyy", { locale: dateLocale })}
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-2 pt-2">
-                        {isRejected ? (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                className="flex-1 border-destructive/30 text-destructive hover:bg-destructive/5"
-                                onClick={() => navigate(`/catalog/product/${publication.id}`)}
-                            >
-                                <Edit className="h-4 w-4 mr-1" />
-                                {t('rejectedCard.viewAndEdit')}
-                            </Button>
-                        ) : isPending ? (
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                className="flex-1"
-                                onClick={() => navigate(`/catalog/product/${publication.id}`)}
-                            >
-                                <Clock className="h-4 w-4 mr-1" />
-                                {t('card.inReview')}
-                            </Button>
-                        ) : (
-                            <>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="flex-1"
-                                    onClick={() => navigate(`/catalog/product/${publication.id}`)}
-                                >
-                                    <Eye className="h-4 w-4 mr-1" />
-                                    {t('card.view')}
-                                </Button>
-                                <Button
-                                    variant="default"
-                                    size="sm"
-                                    className="flex-1"
-                                    onClick={() => navigate("/analytics")}
-                                >
-                                    <BarChart3 className="h-4 w-4 mr-1" />
-                                    {t('card.analytics')}
-                                </Button>
-                            </>
-                        )}
-                    </div>
-                </CardContent>
-            </Card>
-        );
-    };
-
-    const renderGrid = (items: PublishedAsset[]) => (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {items.map(renderCard)}
-        </div>
-    );
-
+  if (error) {
     return (
-        <div className="space-y-6">
-            {/* Stats Cards */}
-            <div className="grid gap-4 md:grid-cols-3">
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">
-                            {t('stats.published')}
-                        </CardTitle>
-                        <Package className="h-5 w-5 text-primary" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold">{stats.total}</div>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">
-                            {t('stats.listed')}
-                        </CardTitle>
-                        <TrendingUp className="h-5 w-5 text-green-600" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold">{stats.active}</div>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">
-                            {t('stats.totalValue')}
-                        </CardTitle>
-                        <DollarSign className="h-5 w-5 text-primary" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold">
-                            €{stats.totalRevenue.toLocaleString()}
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
-
-            {/* Publications with Tabs */}
-            {isLoading ? (
-                <div className="text-center py-12">
-                    <p className="text-muted-foreground">{t('loadingPub')}</p>
-                </div>
-            ) : !publications || publications.length === 0 ? (
-                <EmptyState
-                    icon={Database}
-                    title={t('empty.pubTitle')}
-                    description={t('empty.pubDesc')}
-                    action={
-                        <Button
-                            onClick={() => navigate("/datos/publicar")}
-                            disabled={kybDisabled}
-                            title={kybDisabled ? "Se requiere validación KYB de tu organización" : undefined}
-                        >
-                            <Plus className="h-4 w-4 mr-2" />
-                            {t('empty.pubBtn')}
-                        </Button>
-                    }
-                />
-            ) : (
-                <Tabs defaultValue="published" className="w-full">
-                    <TabsList className="mb-4">
-                        <TabsTrigger value="published">
-                            {t('pubTabs.published')} ({publishedList.length})
-                        </TabsTrigger>
-                        <TabsTrigger value="pending">
-                            {t('pubTabs.pending')} ({pendingList.length})
-                        </TabsTrigger>
-                        <TabsTrigger value="rejected">
-                            {t('pubTabs.rejected')} ({rejectedList.length})
-                        </TabsTrigger>
-                    </TabsList>
-
-                    <TabsContent value="published">
-                        {publishedList.length === 0 ? (
-                            <EmptyState
-                                icon={Package}
-                                title={t('empty.pubTitle')}
-                                description={t('empty.pubDesc')}
-                                action={
-                                    <Button
-                                        onClick={() => navigate("/datos/publicar")}
-                                        disabled={kybDisabled}
-                                    >
-                                        <Plus className="h-4 w-4 mr-2" />
-                                        {t('empty.pubBtn')}
-                                    </Button>
-                                }
-                            />
-                        ) : renderGrid(publishedList)}
-                    </TabsContent>
-
-                    <TabsContent value="pending">
-                        {pendingList.length === 0 ? (
-                            <EmptyState
-                                icon={Clock}
-                                title={t('pendingEmpty.title')}
-                                description={t('pendingEmpty.desc')}
-                            />
-                        ) : renderGrid(pendingList)}
-                    </TabsContent>
-
-                    <TabsContent value="rejected">
-                        {rejectedList.length === 0 ? (
-                            <EmptyState
-                                icon={XCircle}
-                                title={t('rejectedCard.emptyTitle')}
-                                description={t('rejectedCard.emptyDesc')}
-                            />
-                        ) : renderGrid(rejectedList)}
-                    </TabsContent>
-                </Tabs>
-            )}
-        </div>
+      <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-6 text-center">
+        <p className="text-destructive font-medium">
+          {error instanceof Error ? error.message : "Error al cargar publicaciones"}
+        </p>
+      </div>
     );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Search + Filter bar */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder={t("publicationsTable.searchPlaceholder")}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-full sm:w-[160px]">
+            <SelectValue placeholder={t("publicationsTable.filterAll")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t("publicationsTable.filterAll")}</SelectItem>
+            <SelectItem value="error">{t("pubStatus.error")}</SelectItem>
+            <SelectItem value="publishing"> {t("pubStatus.publishing")}</SelectItem>
+            <SelectItem value="published">{t("pubStatus.published")}</SelectItem>
+            <SelectItem value="pending">{t("pubStatus.validation")}</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Table */}
+      {isLoading ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">{t("loadingPub")}</p>
+        </div>
+      ) : !assets.length ? (
+        <EmptyState
+          icon={Database}
+          title={t("empty.pubTitle")}
+          description={t("empty.pubDesc")}
+          action={
+            <Button onClick={() => navigate("/datos/publicar")}>
+              <Plus className="h-4 w-4 mr-2" />
+              {t("empty.pubBtn")}
+            </Button>
+          }
+        />
+      ) : filteredAssets.length === 0 ? (
+        <div className="rounded-lg border p-8 text-center">
+          <p className="text-muted-foreground">{t("noResults")}</p>
+          <p className="text-sm text-muted-foreground mt-1">{t("adjustFilters")}</p>
+        </div>
+      ) : (
+        <div className="rounded-lg border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="uppercase text-muted-foreground font-medium">
+                  {t("publicationsTable.didDate")}
+                </TableHead>
+                <TableHead className="uppercase text-muted-foreground font-medium">
+                  {t("publicationsTable.price")}
+                </TableHead>
+                <TableHead className="uppercase text-muted-foreground font-medium">
+                  {t("publicationsTable.status")}
+                </TableHead>
+                <TableHead className="uppercase text-muted-foreground font-medium text-right">
+                  {t("publicationsTable.actions")}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredAssets.map((asset) => (
+                <TableRow key={asset.uuid}>
+                  <TableCell>
+                    <div className="space-y-0.5">
+                      <p className="font-medium">{asset.name || "—"}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {asset.did ? asset.did : "—"}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {asset.created_at
+                          ? format(new Date(asset.created_at), "d MMM yyyy", {
+                              locale: dateLocale,
+                            })
+                          : "—"}
+                      </p>
+                    </div>
+                  </TableCell>
+                  <TableCell>{getPriceLabel(asset.pricing_type, t)}</TableCell>
+                  <TableCell>{getStatusBadge(asset.status, t)}</TableCell>
+                  <TableCell className="text-right">
+                    <div className="flex items-center justify-end gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleEdit(asset)}
+                        aria-label={t("publicationsTable.edit")}
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleRetry(asset)}
+                        aria-label={t("publicationsTable.retry")}
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
+
+      {/* Pagination (if multiple pages) */}
+      {meta && meta.last_page > 1 && (
+        <div className="flex justify-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page <= 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            Anterior
+          </Button>
+          <span className="flex items-center px-4 text-sm text-muted-foreground">
+            {meta.current_page} / {meta.last_page}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page >= meta.last_page}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Siguiente
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 };
