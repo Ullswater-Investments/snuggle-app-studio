@@ -959,6 +959,12 @@ const App = () => (
                       }
                     />
 
+                    {/* Public success stories - no auth required */}
+                    <Route element={<AppLayout />}>
+                      <Route path="/success-stories" element={<SuccessStories />} />
+                      <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
+                    </Route>
+
                     {/* Protected routes with AppLayout (requires completed profile) */}
                     <Route
                       element={
@@ -1383,14 +1389,6 @@ const App = () => (
                           element={<ServiceDetail />}
                         />
                         <Route path="/innovation" element={<InnovationLab />} />
-                        <Route
-                          path="/success-stories"
-                          element={<SuccessStories />}
-                        />
-                        <Route
-                          path="/success-stories/:id"
-                          element={<SuccessStoryDetail />}
-                        />
                         <Route path="/partners" element={<Partners />} />
                         <Route path="/requests" element={<Requests />} />
                         <Route

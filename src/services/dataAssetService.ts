@@ -89,6 +89,7 @@ export interface DataAssetListItem {
   status: string;
   pricing_type: string;
   price: string;
+  description?: string;
   created_at: string;
   updated_at: string;
   onchain_error?: string | null;

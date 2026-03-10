@@ -1,45 +1,108 @@
 
 
-## Acceso directo a Casos de Exito desde Landing + Fix build error
+## Ajustes criticos en vista de detalle del producto
 
-### Problema
+### Objetivo
 
-1. Las rutas `/success-stories` y `/success-stories/:id` estan dentro del bloque `ProtectedRoute > ProfileGuard > AppLayout` (lineas 962-1478 de App.tsx), lo que obliga a registrarse para ver los casos de exito.
-2. Los links en la Landing (linea 567: `<Link to={/success-stories/${sector.caseId}}>`) apuntan correctamente pero el destino requiere autenticacion.
-3. Build error en `CatalogTab.tsx` linea 197: `asset.description` es `unknown` (por el index signature `[key: string]: unknown` en `DataAssetListItem`).
+Corregir tres problemas en `/catalog/product/:id`: (1) botones de accion activos para activos rechazados, (2) politicas ODRL mostrando keys internas en lugar de texto traducido, (3) descripcion hardcodeada como fallback.
 
-### Solucion
+---
 
-#### 1. Mover rutas de success-stories fuera del bloque protegido
+### 1. Logica condicional de botones para activos rechazados
 
-En `src/App.tsx`, extraer las 2 rutas de success-stories (lineas 1386-1393) del bloque protegido y colocarlas como rutas publicas (junto a las rutas de partners, motor, etc., antes de la linea 962). Se necesita envolver en un layout minimo (AppLayout) sin proteccion, o renderizar directamente sin layout.
+**Problema**: Cuando un propietario ve su activo rechazado, los botones "Solicitar Acceso" / "Comprar Ahora" y "Descargar Ficha Tecnica" siguen activos.
 
-Como las paginas de success-stories ya usan AppLayout internamente o necesitan sidebar, la solucion mas limpia es crear un bloque publico con AppLayout:
+**Solucion**: En la sidebar (CardFooter, lineas 893-927), envolver los botones en una condicion `isOwnerOfRejected`:
+
+- Si `isOwnerOfRejected === true`: Mostrar un unico boton "Editar publicacion" que redirija a `/datos/publicar?edit=<asset_id>` (o la ruta de edicion existente). Ocultar botones de compra y descarga de ficha.
+- Si `isOwnerOfRejected === false`: Renderizar normalmente (este caso ya esta cubierto por el guard 404).
+
+Se anadira la clave `editPublication` al namespace `catalogDetails` en los 7 idiomas.
+
+---
+
+### 2. Internacionalizacion de politicas ODRL en la pestana "Politicas"
+
+**Problema**: La pestana de politicas (lineas 650-716) renderiza los valores del array `accessPolicy.permissions/prohibitions/obligations` directamente. Tras la refactorizacion de "llaves desacopladas", estos arrays contienen keys como `COMMERCIAL_USE`, `NO_REDISTRIBUTION`, etc., que se muestran tal cual al usuario.
+
+**Solucion**: Crear una funcion `translatePolicyItem(key, category, t)` en `ProductDetail.tsx`:
 
 ```text
-{/* Public success stories - no auth required */}
-<Route element={<AppLayout />}>
-  <Route path="/success-stories" element={<SuccessStories />} />
-  <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
-</Route>
+function translatePolicyItem(
+  item: string,
+  category: 'permissions' | 'prohibitions' | 'obligations',
+  t: TFunction
+): string {
+  // Intentar traducir como key predefinida usando el namespace publish
+  const translated = t(`publish:step3.${category}.${item}`, { defaultValue: '' });
+  // Si existe traduccion, usarla; si no, es texto personalizado
+  return translated || item;
+}
 ```
 
-Colocar esto justo antes del bloque protegido (antes de linea 962), y eliminar las 2 rutas del bloque protegido.
+Esto reutiliza las traducciones ya existentes en `publish.json` (step3.permissions.COMMERCIAL_USE, etc.) sin duplicar claves.
 
-#### 2. Fix build error CatalogTab.tsx
-
-En linea 197, castear `asset.description` a string:
-
-```typescript
-{String(asset.description || '') || t("card.noDesc")}
+Al renderizar cada item de la lista:
+```text
+<span>{translatePolicyItem(item, 'permissions', t)}</span>
 ```
 
-O alternativamente anadir `description` como campo explicito en `DataAssetListItem`. La opcion mas limpia es anadir `description?: string;` al interface.
+Tambien se eliminaran los fallbacks de mock data en espanol (lineas 658, 674, 690) que se usan cuando `accessPolicy` es nulo:
+- `["Uso comercial permitido", "Analisis interno"]` -> Se usara un empty state traducido si no hay politicas.
 
-### Archivos a modificar
+Se anadira la clave `noPoliciesDefined` al namespace `catalogDetails`.
+
+---
+
+### 3. Eliminacion de descripcion mock / fallback correcto
+
+**Problema**: La linea 157 de `catalogDetails.json` tiene `defaultDescription: "Este dataset proporciona informacion critica para la toma de decisiones en tiempo real."` que se usa como fallback generico (linea 522).
+
+**Solucion**: 
+- Reemplazar la linea 522 para que use `product.asset_description` directamente.
+- Si es nulo/vacio, renderizar un fallback elegante en cursiva con una clave i18n nueva `noDescription`.
+- Actualizar/eliminar la clave `defaultDescription` de los 7 idiomas y reemplazarla por `noDescription`.
+
+```text
+{product.asset_description ? (
+  <p className="text-muted-foreground leading-relaxed">{product.asset_description}</p>
+) : (
+  <p className="text-muted-foreground italic">{t('common.assetDetail.noDescription')}</p>
+)}
+```
+
+---
+
+### 4. Nuevas claves de traduccion (7 idiomas)
+
+En `catalogDetails.json`, dentro de `common.assetDetail`:
+
+| Clave | ES | EN |
+|---|---|---|
+| `editPublication` | Editar publicacion | Edit Publication |
+| `noDescription` | No se ha proporcionado una descripcion para este activo. | No description has been provided for this asset. |
+| `noPoliciesDefined` | No se han definido politicas para este activo. | No policies have been defined for this asset. |
+
+Se anadiran las traducciones nativas para FR, DE, IT, PT y NL.
+
+---
+
+### 5. Archivos a modificar
 
 | Archivo | Cambio |
 |---|---|
-| `src/App.tsx` | Mover 2 rutas success-stories a bloque publico con AppLayout |
-| `src/services/dataAssetService.ts` | Anadir `description?: string` a `DataAssetListItem` (fix build error) |
+| `src/pages/ProductDetail.tsx` | (1) Botones condicionales para rejected, (2) funcion `translatePolicyItem` + eliminar mock data, (3) descripcion con fallback elegante, (4) importar namespace `publish` |
+| `src/locales/es/catalogDetails.json` | Nuevas claves: editPublication, noDescription, noPoliciesDefined. Eliminar defaultDescription |
+| `src/locales/en/catalogDetails.json` | Idem en ingles |
+| `src/locales/fr/catalogDetails.json` | Idem en frances |
+| `src/locales/de/catalogDetails.json` | Idem en aleman |
+| `src/locales/it/catalogDetails.json` | Idem en italiano |
+| `src/locales/pt/catalogDetails.json` | Idem en portugues |
+| `src/locales/nl/catalogDetails.json` | Idem en neerlandes |
 
+### Lo que NO cambia
+
+- `src/utils/odrlGenerator.ts` (ya correcto)
+- `src/locales/*/publish.json` (ya tiene las keys de step3)
+- El route guard de rejected (ya implementado)
+- La logica de negocio ni las queries
