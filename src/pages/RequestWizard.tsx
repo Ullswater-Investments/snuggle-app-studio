@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, useLocation, Navigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { dataAssetService } from "@/services/dataAssetService";
 import { useAuth } from "@/hooks/useAuth";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useNotifications } from "@/hooks/useNotifications";
@@ -96,44 +97,64 @@ const RequestWizard = () => {
     }
   }, [assetId]);
 
-  // Obtener información del activo
+  // Obtener información del activo (API o Supabase)
+  const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const { data: asset, isLoading } = useQuery({
     queryKey: ["asset-detail", assetId],
     queryFn: async () => {
       if (!assetId) throw new Error("Asset ID is required");
-      
-      const { data, error } = await supabase
-        .from("data_assets")
-        .select(`
-          id,
-          price,
-          currency,
-          pricing_model,
-          billing_period,
-          status,
-          custom_metadata,
-          subject_org:organizations!data_assets_subject_org_id_fkey (
-            id, name, tax_id, type
-          ),
-          holder_org:organizations!data_assets_holder_org_id_fkey (
-            id, name, tax_id, type
-          ),
-          product:data_products (
-            id, name, description, category
-          )
-        `)
-        .eq("id", assetId)
-        .single();
 
-      if (error) throw error;
-      
-      // Mapear para compatibilidad con OrderSummary
-      return {
-        ...data,
-        name: data.product?.name || "Dataset",
-        org: data.subject_org,
-        asset_name: data.product?.name
-      };
+      // 1. Intentar API para UUIDs (assets de producción)
+      if (UUID_REGEX.test(assetId)) {
+        try {
+          const res = await dataAssetService.getById(assetId);
+          const d = res.data;
+          const publisher = d.publisher_info ?? {};
+          const publisherId = (publisher.uuid ?? d.uuid) as string;
+          const publisherName = publisher.name ?? "Proveedor";
+          const orgShape = { id: publisherId, name: publisherName, tax_id: null, type: null };
+          const ddoMeta = d.ddo?.metadata;
+
+          return {
+            id: d.uuid,
+            price: parseFloat(d.price) || 0,
+            currency: d.payment_token_symbol || "EUR",
+            pricing_model: d.pricing_type || "free",
+            billing_period: d.pricing_type === "free" ? null : "monthly",
+            status: d.status,
+            custom_metadata: {},
+            subject_org: orgShape,
+            holder_org: orgShape,
+            product: {
+              id: d.uuid,
+              name: d.name || "Dataset",
+              description: d.description ?? ddoMeta?.description ?? "",
+              category: (ddoMeta?.type as string) || "General",
+            },
+            name: d.name || "Dataset",
+            org: orgShape,
+            asset_name: d.name || "Dataset",
+          };
+        } catch {
+          throw new Error("Activo no encontrado");
+        }
+      }
+
+      // 2. Fallback Supabase (comentado: migrado a API)
+      // const { data, error } = await supabase
+      //   .from("data_assets")
+      //   .select(`
+      //     id, price, currency, pricing_model, billing_period, status, custom_metadata,
+      //     subject_org:organizations!data_assets_subject_org_id_fkey (id, name, tax_id, type),
+      //     holder_org:organizations!data_assets_holder_org_id_fkey (id, name, tax_id, type),
+      //     product:data_products (id, name, description, category)
+      //   `)
+      //   .eq("id", assetId)
+      //   .single();
+      // if (error) throw error;
+      // return { ...data, name: data.product?.name || "Dataset", org: data.subject_org, asset_name: data.product?.name };
+
+      throw new Error("Activo no encontrado");
     },
     enabled: !!assetId,
   });
