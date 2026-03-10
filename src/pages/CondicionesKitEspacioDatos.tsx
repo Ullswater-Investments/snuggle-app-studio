@@ -166,28 +166,28 @@ export default function CondicionesKitEspacioDatos() {
         </motion.div>
 
         {/* Monthly installments */}
-        <div className="mb-12">
-          <h3 className="text-xl font-bold text-center mb-6">Cuotas Mensuales</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }, (_, i) =>
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}>
-              
-                <Card>
-                  <CardContent className="p-4 text-center">
-                    <div className="text-sm text-muted-foreground">Mes {i + 1}</div>
-                    <div className="text-xl font-bold text-foreground">190€</div>
-                    <div className="text-xs text-muted-foreground">+ IVA</div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
-          </div>
-          <p className="text-center text-sm text-muted-foreground mt-3">Financiación por HOKODO</p>
-        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         {/* FAQ */}
         <div className="mb-12">
