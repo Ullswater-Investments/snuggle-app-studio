@@ -960,7 +960,7 @@ const App = () => (
                     />
 
                     {/* Public success stories - no auth required */}
-                    <Route element={<AppLayout />}>
+                    <Route element={<PublicAppLayout />}>
                       <Route path="/success-stories" element={<SuccessStories />} />
                       <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
                     </Route>
