@@ -10,6 +10,7 @@
   },
   "tabs": {
     "library": "Minha Biblioteca",
+    "catalog": "Catálogo",
     "publications": "Minhas Publicações"
   },
   "categories": {
@@ -77,12 +78,15 @@
     "description": "Você não tem ativos de dados registrados. Comece criando seu primeiro ativo.",
     "libraryTitle": "Sua biblioteca está vazia",
     "libraryDesc": "Quando concluir uma transação, os dados aparecerão aqui. Explore o catálogo para encontrar os datasets que precisa.",
+    "catalogTitle": "Sem datasets publicados",
+    "catalogDesc": "Não há datasets com status publicado no catálogo. Explore o marketplace para mais ofertas.",
     "libraryBtn": "Explorar Marketplace",
     "pubTitle": "Sem publicações",
     "pubDesc": "Você ainda não publicou nenhum dataset. Compartilhe seus dados com o ecossistema e gere receita.",
     "pubBtn": "Publicar Dataset"
   },
   "card": {
+    "publisher": "Fornecedor",
     "downloadData": "Baixar Dados",
     "viewDetails": "Ver Detalhes",
     "noDataSource": "Ativo sem fonte de dados configurada",

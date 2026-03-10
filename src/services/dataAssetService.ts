@@ -131,4 +131,13 @@ export const dataAssetService = {
     api.get<ListDataAssetsResponse>(
       `/organizations/${organizationUuid}/data-assets?page=${page}`,
     ),
+
+  /** Global catalog: published data assets (no org scope) */
+  listCatalog: (
+    page = 1,
+    status = "published",
+  ): Promise<ListDataAssetsResponse> =>
+    api.get<ListDataAssetsResponse>(
+      `/data-assets?page=${page}&status=${status}`,
+    ),
 };

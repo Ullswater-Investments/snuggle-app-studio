@@ -10,6 +10,7 @@
   },
   "tabs": {
     "library": "Mijn Bibliotheek",
+    "catalog": "Catalogus",
     "publications": "Mijn Publicaties"
   },
   "categories": {
@@ -77,12 +78,15 @@
     "description": "U heeft geen data-assets geregistreerd. Begin met het maken van uw eerste asset.",
     "libraryTitle": "Uw bibliotheek is leeg",
     "libraryDesc": "Wanneer u een transactie voltooit, verschijnen de gegevens hier. Verken de catalogus om datasets te vinden die u nodig heeft.",
+    "catalogTitle": "Geen gepubliceerde datasets",
+    "catalogDesc": "Er zijn geen datasets met gepubliceerde status in de catalogus. Verken de marketplace voor meer aanbiedingen.",
     "libraryBtn": "Marketplace Verkennen",
     "pubTitle": "Geen publicaties",
     "pubDesc": "U heeft nog geen datasets gepubliceerd. Deel uw gegevens met het ecosysteem en genereer inkomsten.",
     "pubBtn": "Dataset Publiceren"
   },
   "card": {
+    "publisher": "Aanbieder",
     "downloadData": "Gegevens Downloaden",
     "viewDetails": "Details Bekijken",
     "noDataSource": "Asset zonder geconfigureerde databron",

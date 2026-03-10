@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Database, Plus, Library, Upload } from "lucide-react";
 import { FadeIn } from "@/components/AnimatedSection";
-import { MyLibraryTab } from "@/components/data/MyLibraryTab";
+import { CatalogTab } from "@/components/data/CatalogTab";
 import { MyPublicationsTab } from "@/components/data/MyPublicationsTab";
 
 const Data = () => {
@@ -44,11 +44,11 @@ const Data = () => {
       </FadeIn>
 
       <FadeIn delay={0.1}>
-        <Tabs defaultValue="biblioteca" className="w-full">
+        <Tabs defaultValue="catalog" className="w-full">
           <TabsList className="grid w-full max-w-md grid-cols-2">
-            <TabsTrigger value="biblioteca" className="flex items-center gap-2">
+            <TabsTrigger value="catalog" className="flex items-center gap-2">
               <Library className="h-4 w-4" />
-              {t('tabs.library')}
+              {t('tabs.catalog')}
             </TabsTrigger>
             <TabsTrigger value="publicaciones" className="flex items-center gap-2">
               <Upload className="h-4 w-4" />
@@ -56,8 +56,8 @@ const Data = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="biblioteca" className="mt-6">
-            <MyLibraryTab />
+          <TabsContent value="catalog" className="mt-6">
+            <CatalogTab />
           </TabsContent>
 
           <TabsContent value="publicaciones" className="mt-6">

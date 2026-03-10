@@ -10,6 +10,7 @@
   },
   "tabs": {
     "library": "La Mia Libreria",
+    "catalog": "Catalogo",
     "publications": "Le Mie Pubblicazioni"
   },
   "categories": {
@@ -77,12 +78,15 @@
     "description": "Non hai asset di dati registrati. Inizia creando il tuo primo asset.",
     "libraryTitle": "La tua libreria è vuota",
     "libraryDesc": "Quando completerai una transazione, i dati appariranno qui. Esplora il catalogo per trovare i dataset di cui hai bisogno.",
+    "catalogTitle": "Nessun dataset pubblicato",
+    "catalogDesc": "Non ci sono dataset con stato pubblicato nel catalogo. Esplora il marketplace per altre offerte.",
     "libraryBtn": "Esplora il Marketplace",
     "pubTitle": "Nessuna pubblicazione",
     "pubDesc": "Non hai ancora pubblicato alcun dataset. Condividi i tuoi dati con l'ecosistema e genera entrate.",
     "pubBtn": "Pubblica Dataset"
   },
   "card": {
+    "publisher": "Fornitore",
     "downloadData": "Scarica Dati",
     "viewDetails": "Vedi Dettagli",
     "noDataSource": "Asset senza fonte dati configurata",

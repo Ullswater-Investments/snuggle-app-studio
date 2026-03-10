@@ -10,6 +10,7 @@
   },
   "tabs": {
     "library": "My Library",
+    "catalog": "Catalog",
     "publications": "My Publications"
   },
   "categories": {
@@ -77,12 +78,15 @@
     "description": "You don't have any data assets registered. Start by creating your first asset.",
     "libraryTitle": "Your library is empty",
     "libraryDesc": "When you complete a transaction, data will appear here. Explore the catalog to find datasets you need.",
+    "catalogTitle": "No published datasets",
+    "catalogDesc": "There are no datasets with published status in the catalog. Explore the marketplace for more offerings.",
     "libraryBtn": "Explore Marketplace",
     "pubTitle": "No publications",
     "pubDesc": "You haven't published any datasets yet. Share your data with the ecosystem and generate revenue.",
     "pubBtn": "Publish Dataset"
   },
   "card": {
+    "publisher": "Provider",
     "downloadData": "Download Data",
     "viewDetails": "View Details",
     "noDataSource": "Asset without configured data source",
