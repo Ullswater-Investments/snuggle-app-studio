@@ -43,10 +43,10 @@ export default function ContractContent({ clinicName = '[NOMBRE DE LA EMPRESA]' 
           <h4 className="font-bold text-foreground">3. PRECIO Y CONDICIONES ECONÓMICAS</h4>
           <div className="mt-1 space-y-2">
             <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded border-l-4 border-blue-500">
-              <strong>Fase 1:</strong> 1.140€ + IVA (190€/mes × 6 meses)
+              <strong>Fase 1:</strong> 1.500€ + IVA (pago único de adhesión)
             </div>
             <div className="bg-blue-50 dark:bg-blue-950/30 p-3 rounded border-l-4 border-blue-500">
-              <strong>Fase 2:</strong> El importe total será equivalente a la subvención concedida por RED.ES (hasta 30.000€).
+              <strong>Fase 2:</strong> 250€/mes × 24 meses de permanencia, condicionado a la concesión efectiva de la subvención por RED.ES (hasta 30.000€).
             </div>
           </div>
         </div>
