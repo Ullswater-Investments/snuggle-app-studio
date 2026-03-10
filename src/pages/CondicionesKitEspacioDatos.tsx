@@ -11,28 +11,28 @@ import logoGobiernoRedEs from "@/assets/logo-gobierno-red-es.jpg";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
+  transition: { duration: 0.5 }
 };
 
 const serviciosIncluidos = [
-  { icon: Shield, label: "Acceso al Espacio de Datos Federado" },
-  { icon: Users, label: "Consultoría técnica y administrativa" },
-  { icon: FileText, label: "Tramitación de la ayuda" },
-  { icon: FileCheck, label: "Redacción de memoria técnica" },
-  { icon: Building2, label: "Presentación de solicitud" },
-  { icon: CheckCircle2, label: "Justificación completa del proyecto" },
-  { icon: Headphones, label: "Soporte durante el proceso" },
-];
+{ icon: Shield, label: "Acceso al Espacio de Datos Federado" },
+{ icon: Users, label: "Consultoría técnica y administrativa" },
+{ icon: FileText, label: "Tramitación de la ayuda" },
+{ icon: FileCheck, label: "Redacción de memoria técnica" },
+{ icon: Building2, label: "Presentación de solicitud" },
+{ icon: CheckCircle2, label: "Justificación completa del proyecto" },
+{ icon: Headphones, label: "Soporte durante el proceso" }];
+
 
 const faqItems = [
-  { q: "¿Puedo cancelar en los 6 primeros meses?", a: "No. La Fase 1 es un compromiso irrevocable de 6 meses. No se admite cancelación anticipada una vez firmada el Acta de Conformidad." },
-  { q: "¿Qué ocurre si me conceden la subvención?", a: "Se activa automáticamente la Fase 2 (prórroga de 24 meses). El importe de la Fase 2 será equivalente a la subvención concedida." },
-  { q: "¿Qué es el Acta de Conformidad?", a: "Es el documento que certifica la recepción del servicio y activa la financiación de HOKODO. Su firma es digital y tiene plena validez jurídica." },
-  { q: "¿Quién tramita la ayuda?", a: "Global Data Care actúa como Representante Voluntario ante RED.ES, gestionando toda la tramitación administrativa." },
-  { q: "¿Las incidencias técnicas afectan a los pagos?", a: "No. Las reclamaciones técnicas o comerciales se gestionan por canales de soporte separados y no afectan al flujo de pagos." },
-  { q: "¿Qué pasa si no me conceden la subvención?", a: "El contrato finaliza al término de la Fase 1 (6 meses). No se genera ninguna obligación adicional." },
-  { q: "¿Qué es la financiación HOKODO?", a: "HOKODO es una entidad financiera externa que facilita el pago fraccionado de la Fase 1 en 6 cuotas mensuales." },
-];
+{ q: "¿Puedo cancelar en los 6 primeros meses?", a: "No. La Fase 1 es un compromiso irrevocable de 6 meses. No se admite cancelación anticipada una vez firmada el Acta de Conformidad." },
+{ q: "¿Qué ocurre si me conceden la subvención?", a: "Se activa automáticamente la Fase 2 (prórroga de 24 meses). El importe de la Fase 2 será equivalente a la subvención concedida." },
+{ q: "¿Qué es el Acta de Conformidad?", a: "Es el documento que certifica la recepción del servicio y activa la financiación de HOKODO. Su firma es digital y tiene plena validez jurídica." },
+{ q: "¿Quién tramita la ayuda?", a: "Global Data Care actúa como Representante Voluntario ante RED.ES, gestionando toda la tramitación administrativa." },
+{ q: "¿Las incidencias técnicas afectan a los pagos?", a: "No. Las reclamaciones técnicas o comerciales se gestionan por canales de soporte separados y no afectan al flujo de pagos." },
+{ q: "¿Qué pasa si no me conceden la subvención?", a: "El contrato finaliza al término de la Fase 1 (6 meses). No se genera ninguna obligación adicional." },
+{ q: "¿Qué es la financiación HOKODO?", a: "HOKODO es una entidad financiera externa que facilita el pago fraccionado de la Fase 1 en 6 cuotas mensuales." }];
+
 
 export default function CondicionesKitEspacioDatos() {
   return (
@@ -87,12 +87,12 @@ export default function CondicionesKitEspacioDatos() {
                 <strong>Nota:</strong> El importe exacto dependerá de la evaluación de RED.ES. La consultoría incluye un análisis previo para maximizar el importe solicitado.
               </div>
               <div className="mt-6 space-y-2">
-                {serviciosIncluidos.map((s) => (
-                  <div key={s.label} className="flex items-center gap-3">
+                {serviciosIncluidos.map((s) =>
+                <div key={s.label} className="flex items-center gap-3">
                     <s.icon className="h-5 w-5 text-primary flex-shrink-0" />
                     <span className="text-foreground">{s.label}</span>
                   </div>
-                ))}
+                )}
               </div>
               <div className="mt-6 text-center">
                 <div className="text-sm text-muted-foreground">Precio anticipado (Fase 1)</div>
@@ -106,11 +106,11 @@ export default function CondicionesKitEspacioDatos() {
         {/* Summary Cards */}
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           {[
-            { value: "250€/mes", label: "Cuota Mensual", sub: "Compromiso 2 años" },
-            { value: "2 años", label: "Permanencia", sub: "Condicionado a la recepción de la subvención" },
-            { value: "30.000€", label: "Subvención máxima", sub: "A fondo perdido de RED.ES" },
-          ].map((card, i) => (
-            <motion.div key={card.value} {...fadeInUp} transition={{ delay: i * 0.1 }}>
+          { value: "250€/mes", label: "Cuota Mensual", sub: "Compromiso 2 años" },
+          { value: "2 años", label: "Permanencia", sub: "Condicionado a la recepción de la subvención" },
+          { value: "30.000€", label: "Subvención máxima", sub: "A fondo perdido de RED.ES" }].
+          map((card, i) =>
+          <motion.div key={card.value} {...fadeInUp} transition={{ delay: i * 0.1 }}>
               <Card>
                 <CardContent className="p-6 text-center">
                   <div className="text-2xl font-black text-primary">{card.value}</div>
@@ -119,7 +119,7 @@ export default function CondicionesKitEspacioDatos() {
                 </CardContent>
               </Card>
             </motion.div>
-          ))}
+          )}
         </div>
 
         {/* Timeline */}
@@ -169,13 +169,13 @@ export default function CondicionesKitEspacioDatos() {
         <div className="mb-12">
           <h3 className="text-xl font-bold text-center mb-6">Cuotas Mensuales</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {Array.from({ length: 6 }, (_, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-              >
+            {Array.from({ length: 6 }, (_, i) =>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}>
+              
                 <Card>
                   <CardContent className="p-4 text-center">
                     <div className="text-sm text-muted-foreground">Mes {i + 1}</div>
@@ -184,21 +184,21 @@ export default function CondicionesKitEspacioDatos() {
                   </CardContent>
                 </Card>
               </motion.div>
-            ))}
+            )}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-3">Financiación por HOKODO</p>
         </div>
 
         {/* FAQ */}
         <div className="mb-12">
-          <h3 className="text-xl font-bold text-center mb-6">Preguntas Frecuentes</h3>
+          
           <Accordion type="single" collapsible className="space-y-2">
-            {faqItems.map((item, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="border rounded-lg px-4">
+            {faqItems.map((item, i) =>
+            <AccordionItem key={i} value={`faq-${i}`} className="border rounded-lg px-4">
                 <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
                 <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
               </AccordionItem>
-            ))}
+            )}
           </Accordion>
         </div>
 
@@ -230,6 +230,6 @@ export default function CondicionesKitEspacioDatos() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
