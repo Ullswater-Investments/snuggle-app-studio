@@ -1,108 +1,60 @@
 
 
-## Ajustes criticos en vista de detalle del producto
+## Problem Analysis
 
-### Objetivo
+There are **two categories** of issues to resolve:
 
-Corregir tres problemas en `/catalog/product/:id`: (1) botones de accion activos para activos rechazados, (2) politicas ODRL mostrando keys internas en lugar de texto traducido, (3) descripcion hardcodeada como fallback.
+### 1. Outdated pricing (190€/mes → 1.500€ adhesión + 250€/mes)
 
----
+Per the memory context, the updated commercial terms are: **1.500€ prepaid adhesion** + **250€/mes with 2-year commitment**. The old "190€/mes × 6 meses = 1.140€" model with HOKODO financing is obsolete. Found in **5 files**:
 
-### 1. Logica condicional de botones para activos rechazados
+| File | What's wrong |
+|------|-------------|
+| `src/pages/GuiaKitEspacioDatos.tsx` (line 22) | "Sin inversión inicial significativa (190€/mes)" |
+| `src/pages/PropuestaKitEspacioDatos.tsx` (lines 92-93) | "190€/mes" hero pricing + "6 meses × 190€ = 1.140€" |
+| `src/pages/ContratoKitEspacioDatos.tsx` (lines 13-14) | Clauses 3 & 4 reference 190€/mes and HOKODO |
+| `src/components/legal/ContractContent.tsx` (lines 46, 58) | Same clauses 3 & 4 with old pricing |
+| `src/components/legal/AcceptanceActContent.tsx` (line 40) | HOKODO authorization with 190€ amounts |
 
-**Problema**: Cuando un propietario ve su activo rechazado, los botones "Solicitar Acceso" / "Comprar Ahora" y "Descargar Ficha Tecnica" siguen activos.
+**Updated text will reflect:**
+- Fase 1: 1.500€ + IVA (pago único de adhesión)
+- Fase 2: 250€/mes × 24 meses (condicionado a subvención)
+- Remove HOKODO financing references (replaced by prepaid model)
 
-**Solucion**: En la sidebar (CardFooter, lineas 893-927), envolver los botones en una condicion `isOwnerOfRejected`:
+### 2. Security findings (4 issues)
 
-- Si `isOwnerOfRejected === true`: Mostrar un unico boton "Editar publicacion" que redirija a `/datos/publicar?edit=<asset_id>` (o la ruta de edicion existente). Ocultar botones de compra y descarga de ficha.
-- Si `isOwnerOfRejected === false`: Renderizar normalmente (este caso ya esta cubierto por el guard 404).
+| Finding | Level | Action |
+|---------|-------|--------|
+| **Security Definer View** | Error | Needs investigation — identify which view and assess if it's intentional |
+| **ERP Credentials Exposure** | Error | Restrict SELECT on `erp_configurations` to admins/configurators only (remove the general org-level SELECT policy) |
+| **Kit Inscriptions Data Exposure** | Error | Restrict SELECT on `kit_inscriptions` to admins only (currently any authenticated user can read all inscriptions) |
+| **RLS Policy Always True** | Warn | Audit INSERT policies using `true` (e.g., `signed_contracts`, `registration_requests`, `node_eligibility_requests`) — these are intentional for public submission forms, will document/acknowledge |
+| **Leaked Password Protection** | Warn | Enable via auth configuration |
+| **Extension in Public** | Warn | Low priority, acknowledge |
 
-Se anadira la clave `editPublication` al namespace `catalogDetails` en los 7 idiomas.
+## Implementation Plan
 
----
+### Step 1: Update all pricing from 190€ to new model
 
-### 2. Internacionalizacion de politicas ODRL en la pestana "Politicas"
+**`src/pages/GuiaKitEspacioDatos.tsx`** — Change benefit text from "190€/mes" to "1.500€ adhesión + 250€/mes"
 
-**Problema**: La pestana de politicas (lineas 650-716) renderiza los valores del array `accessPolicy.permissions/prohibitions/obligations` directamente. Tras la refactorizacion de "llaves desacopladas", estos arrays contienen keys como `COMMERCIAL_USE`, `NO_REDISTRIBUTION`, etc., que se muestran tal cual al usuario.
+**`src/pages/PropuestaKitEspacioDatos.tsx`** — Replace the pricing summary section: Fase 1 shows "1.500€" (pago único), Fase 2 shows "250€/mes × 24 meses"
 
-**Solucion**: Crear una funcion `translatePolicyItem(key, category, t)` en `ProductDetail.tsx`:
+**`src/pages/ContratoKitEspacioDatos.tsx`** — Update clauses 3 and 4 to reflect new pricing model without HOKODO
 
-```text
-function translatePolicyItem(
-  item: string,
-  category: 'permissions' | 'prohibitions' | 'obligations',
-  t: TFunction
-): string {
-  // Intentar traducir como key predefinida usando el namespace publish
-  const translated = t(`publish:step3.${category}.${item}`, { defaultValue: '' });
-  // Si existe traduccion, usarla; si no, es texto personalizado
-  return translated || item;
-}
-```
+**`src/components/legal/ContractContent.tsx`** — Same clause updates as above
 
-Esto reutiliza las traducciones ya existentes en `publish.json` (step3.permissions.COMMERCIAL_USE, etc.) sin duplicar claves.
+**`src/components/legal/AcceptanceActContent.tsx`** — Update point 4 to remove HOKODO/190€ references, replace with new adhesion model
 
-Al renderizar cada item de la lista:
-```text
-<span>{translatePolicyItem(item, 'permissions', t)}</span>
-```
+### Step 2: Fix security — ERP credentials policy
 
-Tambien se eliminaran los fallbacks de mock data en espanol (lineas 658, 674, 690) que se usan cuando `accessPolicy` es nulo:
-- `["Uso comercial permitido", "Analisis interno"]` -> Se usara un empty state traducido si no hay politicas.
+Database migration to replace the broad SELECT policy on `erp_configurations` with one restricted to admins and API configurators only (drop the "Usuarios pueden ver configuraciones de su organización" policy).
 
-Se anadira la clave `noPoliciesDefined` al namespace `catalogDetails`.
+### Step 3: Fix security — Kit inscriptions policy
 
----
+Database migration to replace the "Authenticated users can read kit inscriptions" policy with one restricted to admins only.
 
-### 3. Eliminacion de descripcion mock / fallback correcto
+### Step 4: Enable leaked password protection
 
-**Problema**: La linea 157 de `catalogDetails.json` tiene `defaultDescription: "Este dataset proporciona informacion critica para la toma de decisiones en tiempo real."` que se usa como fallback generico (linea 522).
+Use auth configuration tool to enable leaked password protection.
 
-**Solucion**: 
-- Reemplazar la linea 522 para que use `product.asset_description` directamente.
-- Si es nulo/vacio, renderizar un fallback elegante en cursiva con una clave i18n nueva `noDescription`.
-- Actualizar/eliminar la clave `defaultDescription` de los 7 idiomas y reemplazarla por `noDescription`.
-
-```text
-{product.asset_description ? (
-  <p className="text-muted-foreground leading-relaxed">{product.asset_description}</p>
-) : (
-  <p className="text-muted-foreground italic">{t('common.assetDetail.noDescription')}</p>
-)}
-```
-
----
-
-### 4. Nuevas claves de traduccion (7 idiomas)
-
-En `catalogDetails.json`, dentro de `common.assetDetail`:
-
-| Clave | ES | EN |
-|---|---|---|
-| `editPublication` | Editar publicacion | Edit Publication |
-| `noDescription` | No se ha proporcionado una descripcion para este activo. | No description has been provided for this asset. |
-| `noPoliciesDefined` | No se han definido politicas para este activo. | No policies have been defined for this asset. |
-
-Se anadiran las traducciones nativas para FR, DE, IT, PT y NL.
-
----
-
-### 5. Archivos a modificar
-
-| Archivo | Cambio |
-|---|---|
-| `src/pages/ProductDetail.tsx` | (1) Botones condicionales para rejected, (2) funcion `translatePolicyItem` + eliminar mock data, (3) descripcion con fallback elegante, (4) importar namespace `publish` |
-| `src/locales/es/catalogDetails.json` | Nuevas claves: editPublication, noDescription, noPoliciesDefined. Eliminar defaultDescription |
-| `src/locales/en/catalogDetails.json` | Idem en ingles |
-| `src/locales/fr/catalogDetails.json` | Idem en frances |
-| `src/locales/de/catalogDetails.json` | Idem en aleman |
-| `src/locales/it/catalogDetails.json` | Idem en italiano |
-| `src/locales/pt/catalogDetails.json` | Idem en portugues |
-| `src/locales/nl/catalogDetails.json` | Idem en neerlandes |
-
-### Lo que NO cambia
-
-- `src/utils/odrlGenerator.ts` (ya correcto)
-- `src/locales/*/publish.json` (ya tiene las keys de step3)
-- El route guard de rejected (ya implementado)
-- La logica de negocio ni las queries
