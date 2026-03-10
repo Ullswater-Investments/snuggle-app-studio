@@ -128,7 +128,7 @@ export default function CondicionesKitEspacioDatos() {
           <Card className="border-l-4 border-amber-500">
             <CardContent className="p-6">
               <Badge className="bg-amber-500 text-white hover:bg-amber-500 mb-2">FASE 1</Badge>
-              <h4 className="font-bold text-foreground">6 meses — Compromiso irrevocable</h4>
+              <h4 className="font-bold text-foreground">Cuota de Adhesión — Pago anticipado</h4>
               <p className="text-muted-foreground mt-1">Inversión: 1.140€ + IVA. Financiación a través de HOKODO. Sin cancelación anticipada.</p>
             </CardContent>
           </Card>
