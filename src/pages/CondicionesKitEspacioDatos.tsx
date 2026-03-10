@@ -142,29 +142,6 @@ export default function CondicionesKitEspacioDatos() {
         </div>
 
         {/* ROI Calculator */}
-        <motion.div {...fadeInUp} className="mb-12">
-          <Card className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20">
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-          </Card>
-        </motion.div>
-
         {/* Monthly installments */}
         
 
