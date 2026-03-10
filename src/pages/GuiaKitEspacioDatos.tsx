@@ -36,7 +36,7 @@ const faqItems = [
   
   
   
-  { q: "¿Cuánto tarda el proceso?", a: "La Fase 1 dura 6 meses. La resolución de RED.ES puede tardar entre 3 y 6 meses adicionales." },
+  
   { q: "¿Es compatible con otras ayudas?", a: "Consulta las bases de la convocatoria para verificar la compatibilidad con otras subvenciones." },
   { q: "¿Qué pasa si no me conceden la subvención?", a: "El contrato finaliza al término de la Fase 1 sin obligaciones adicionales." },
 ];
