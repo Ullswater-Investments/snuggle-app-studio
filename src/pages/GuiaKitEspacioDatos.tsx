@@ -33,7 +33,7 @@ const pasos = [
 
 const faqItems = [
   
-  { q: "¿Quién puede solicitarlo?", a: "Empresas y organizaciones españolas que deseen digitalizar su cadena de suministro con tecnología de espacios de datos." },
+  
   { q: "¿Cuánto cuesta?", a: "La Fase 1 tiene un coste de 190€/mes durante 6 meses (1.140€ + IVA). Si se concede la subvención, esta cubre hasta el 85-90% del proyecto." },
   { q: "¿Qué hace Global Data Care?", a: "Global Data Care, operada por ACCURO TECHNOLOGY S.L., proporciona la plataforma tecnológica y gestiona toda la tramitación administrativa de la ayuda." },
   { q: "¿Cuánto tarda el proceso?", a: "La Fase 1 dura 6 meses. La resolución de RED.ES puede tardar entre 3 y 6 meses adicionales." },
