@@ -142,29 +142,6 @@ export default function CondicionesKitEspacioDatos() {
         </div>
 
         {/* ROI Calculator */}
-        {/* Monthly installments */}
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
 
         {/* FAQ */}
         <div className="mb-12">
