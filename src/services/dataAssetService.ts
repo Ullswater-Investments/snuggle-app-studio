@@ -137,8 +137,9 @@ export const dataAssetService = {
   listCatalog: (
     page = 1,
     status = "published",
+    paginate = false,
   ): Promise<ListDataAssetsResponse> =>
     api.get<ListDataAssetsResponse>(
-      `/data-assets?page=${page}&status=${status}`,
+      `/data-assets?page=${page}&status=${status}&paginate=${paginate}`,
     ),
 };
