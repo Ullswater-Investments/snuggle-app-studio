@@ -96,8 +96,8 @@ export default function CondicionesKitEspacioDatos() {
               </div>
               <div className="mt-6 text-center">
                 <div className="text-sm text-muted-foreground">Precio anticipado (Fase 1)</div>
-                <div className="text-2xl font-bold text-foreground">1.140€ + IVA</div>
-                <div className="text-sm text-muted-foreground">190€/mes × 6 meses</div>
+                <div className="text-2xl font-bold text-foreground">1.500€ + IVA</div>
+                <div className="text-sm text-muted-foreground">Precio único de adhesión</div>
               </div>
             </CardContent>
           </Card>
