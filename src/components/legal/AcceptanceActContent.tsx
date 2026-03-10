@@ -36,8 +36,8 @@ export default function AcceptanceActContent({
     },
     {
       num: 4,
-      title: "Activación de la financiación (HOKODO)",
-      content: "AUTORIZO IRREVOCABLEMENTE la activación de la financiación a través de HOKODO por importe de 1.140€ + IVA, pagaderos en 6 cuotas mensuales de 190€ + IVA.",
+      title: "Activación del pago de adhesión",
+      content: "AUTORIZO IRREVOCABLEMENTE el pago de la cuota de adhesión por importe de 1.500€ + IVA, correspondiente a la Fase 1 del programa Kit Espacio de Datos.",
       color: "border-amber-500",
       highlight: true,
     },

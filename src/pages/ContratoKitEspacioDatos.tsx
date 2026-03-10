@@ -10,9 +10,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 const clausulas = [
   { num: 1, title: "Objeto del contrato", content: "El presente contrato tiene por objeto la licencia de uso de la plataforma Global Data Care (Espacio de Datos Federado) y la consultoría de tramitación de las ayudas del programa Kit Espacio de Datos de RED.ES." },
   { num: 2, title: "Duración y condicionalidad", content: "Fase 1 (Irrevocable): 6 meses desde la firma del Acta de Conformidad. Compromiso firme e irrevocable. No admite cancelación anticipada. Fase 2 (Condicional): Prórroga automática de 24 meses, condicionada a la concesión efectiva de la subvención por RED.ES." },
-  { num: 3, title: "Precio y condiciones económicas", content: "Fase 1: 1.140€ + IVA (190€/mes × 6 meses). Fase 2: El importe total será equivalente a la subvención concedida por RED.ES (hasta 30.000€)." },
-  { num: 4, title: "Forma de pago y financiación", content: "El pago de la Fase 1 se realizará en 6 cuotas mensuales de 190€ + IVA, financiadas a través de HOKODO. La deuda es cierta, líquida y exigible desde la firma del Acta de Conformidad." },
-  { num: 5, title: "Acta de conformidad y activación", content: "La firma digital del Acta de Entrega y Conformidad activa la financiación de HOKODO y constituye el inicio formal de la prestación del servicio. El Cliente renuncia a retener pagos por causas ajenas al presente contrato." },
+  { num: 3, title: "Precio y condiciones económicas", content: "Fase 1: 1.500€ + IVA (pago único de adhesión). Fase 2: 250€/mes × 24 meses de permanencia, condicionado a la concesión efectiva de la subvención por RED.ES (hasta 30.000€)." },
+  { num: 4, title: "Forma de pago", content: "El pago de la Fase 1 (1.500€ + IVA) se realizará de forma anticipada mediante transferencia bancaria o domiciliación. La deuda es cierta, líquida y exigible desde la firma del Acta de Conformidad." },
+  { num: 5, title: "Acta de conformidad y activación", content: "La firma digital del Acta de Entrega y Conformidad constituye el inicio formal de la prestación del servicio y activa la obligación de pago. El Cliente renuncia a retener pagos por causas ajenas al presente contrato." },
   { num: 6, title: "Obligaciones del cliente (mandato)", content: "El Cliente designa a Global Data Care como Representante Voluntario ante RED.ES para la tramitación de la ayuda. El Cliente se compromete a entregar la documentación requerida en un plazo máximo de 5 días hábiles. Penalización del 15% por incumplimiento." },
   { num: 7, title: "Disputas comerciales", content: "Las reclamaciones técnicas o comerciales del Cliente no afectarán al flujo de pagos establecido. Cualquier incidencia técnica se gestionará por los canales de soporte habilitados." },
   { num: 8, title: "Protección de datos", content: "El tratamiento de datos personales se realizará conforme al RGPD (UE) 2016/679 y la LOPD-GDD. El Prestador actuará como encargado del tratamiento en los términos definidos." },
@@ -26,7 +26,7 @@ const actaPoints = [
   { num: 1, title: "Recepción efectiva del servicio", color: "border-primary" },
   { num: 2, title: "Inicio de la consultoría", color: "border-primary" },
   { num: 3, title: "Conformidad y ausencia de incidencias", color: "border-primary" },
-  { num: 4, title: "Activación de la financiación (HOKODO)", color: "border-amber-500", highlight: true },
+  { num: 4, title: "Activación del pago de adhesión (1.500€ + IVA)", color: "border-amber-500", highlight: true },
   { num: 5, title: "Validez de la firma digital", color: "border-primary" },
 ];
 
