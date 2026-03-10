@@ -249,7 +249,8 @@
       "profile": "Profilo",
       "wallet": "Wallet",
       "appearance": "Aspetto",
-      "security": "Sicurezza"
+      "security": "Sicurezza",
+      "ecosystem": "Ecosistema"
     },
     "personalInfo": {
       "title": "Informazioni Personali",
@@ -316,6 +317,28 @@
         "system": "Sistema",
         "systemDescription": "Secondo il tuo dispositivo"
       }
+    },
+    "ecosystemTab": {
+      "title": "Informazioni sulla partecipazione all'ecosistema",
+      "description": "Identificatori e dati della tua organizzazione per i kit di registrazione.",
+      "userSection": "Utente",
+      "userSectionDesc": "Identificatori e dati del tuo account utente",
+      "orgSection": "Organizzazione",
+      "orgSectionDesc": "Identificatori e dati dell'organizzazione attiva",
+      "userId": "Identificativo utente",
+      "orgId": "Identificativo organizzazione",
+      "wallet": "wallet",
+      "address": "Indirizzo",
+      "orgWallet": "Wallet",
+      "email": "Email",
+      "companyName": "Nome azienda",
+      "cif": "P.IVA / Codice fiscale",
+      "documentType": "Tipo documento",
+      "registrationNumber": "Numero di registrazione",
+      "registrationDate": "Data di registrazione",
+      "walletLabel": "Wallet",
+      "noOrgSelected": "Seleziona un'organizzazione per vedere le sue informazioni.",
+      "notSignedIn": "Devi effettuare l'accesso per vedere queste informazioni."
     },
     "securityTab": {
       "title": "Cambia password",

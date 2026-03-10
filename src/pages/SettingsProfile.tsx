@@ -1,10 +1,11 @@
-import { User, Wallet, Palette, Lock } from "lucide-react";
+import { User, Wallet, Palette, Lock, Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProfileTab } from "@/components/settings/ProfileTab";
 import { WalletTab } from "@/components/settings/WalletTab";
 import { AppearanceTab } from "@/components/settings/AppearanceTab";
 import { SecurityTab } from "@/components/settings/SecurityTab";
+import { EcosystemInfoTab } from "@/components/settings/EcosystemInfoTab";
 
 export default function SettingsProfile() {
   const { t } = useTranslation("settings");
@@ -19,7 +20,7 @@ export default function SettingsProfile() {
       </div>
 
       <Tabs defaultValue="profile">
-        <TabsList className="w-full">
+      <TabsList className="w-full">
           <TabsTrigger value="profile" className="flex-1 gap-2">
             <User className="size-4" />
             {t("profile.tabs.profile")}
@@ -35,6 +36,10 @@ export default function SettingsProfile() {
           <TabsTrigger value="security" className="flex-1 gap-2">
             <Lock className="size-4" />
             {t("profile.tabs.security")}
+          </TabsTrigger>
+          <TabsTrigger value="ecosystem" className="flex-1 gap-2">
+            <Info className="size-4" />
+            {t("profile.tabs.ecosystem")}
           </TabsTrigger>
         </TabsList>
 
@@ -52,6 +57,10 @@ export default function SettingsProfile() {
 
         <TabsContent value="security">
           <SecurityTab />
+        </TabsContent>
+
+        <TabsContent value="ecosystem">
+          <EcosystemInfoTab />
         </TabsContent>
       </Tabs>
     </div>

@@ -249,7 +249,8 @@
       "profile": "Profiel",
       "wallet": "Wallet",
       "appearance": "Uiterlijk",
-      "security": "Beveiliging"
+      "security": "Beveiliging",
+      "ecosystem": "Ecosysteem"
     },
     "personalInfo": {
       "title": "Persoonlijke Informatie",
@@ -316,6 +317,28 @@
         "system": "Systeem",
         "systemDescription": "Volgens je apparaat"
       }
+    },
+    "ecosystemTab": {
+      "title": "Informatie over deelname aan het ecosysteem",
+      "description": "Identificatiegegevens en organisatiedata voor de inschrijvingskits.",
+      "userSection": "Gebruiker",
+      "userSectionDesc": "Identificatiegegevens en data van uw gebruikersaccount",
+      "orgSection": "Organisatie",
+      "orgSectionDesc": "Identificatiegegevens en data van de actieve organisatie",
+      "userId": "Gebruikers-ID",
+      "orgId": "Organisatie-ID",
+      "wallet": "wallet",
+      "address": "Adres",
+      "orgWallet": "Wallet",
+      "email": "E-mail",
+      "companyName": "Bedrijfsnaam",
+      "cif": "BTW-nummer / KvK",
+      "documentType": "Documenttype",
+      "registrationNumber": "Registratienummer",
+      "registrationDate": "Registratiedatum",
+      "walletLabel": "Wallet",
+      "noOrgSelected": "Selecteer een organisatie om de gegevens te bekijken.",
+      "notSignedIn": "U moet inloggen om deze informatie te bekijken."
     },
     "securityTab": {
       "title": "Wachtwoord wijzigen",

@@ -249,7 +249,8 @@
       "profile": "Profile",
       "wallet": "Wallet",
       "appearance": "Appearance",
-      "security": "Security"
+      "security": "Security",
+      "ecosystem": "Ecosystem"
     },
     "personalInfo": {
       "title": "Personal Information",
@@ -316,6 +317,28 @@
         "system": "System",
         "systemDescription": "Match your device"
       }
+    },
+    "ecosystemTab": {
+      "title": "Ecosystem participation information",
+      "description": "Identifiers and organization data for enrollment kits.",
+      "userSection": "User",
+      "userSectionDesc": "Identifiers and data for your user account",
+      "orgSection": "Organization",
+      "orgSectionDesc": "Identifiers and data for the active organization",
+      "userId": "User identifier",
+      "orgId": "Organization identifier",
+      "wallet": "wallet",
+      "address": "Address",
+      "orgWallet": "Wallet",
+      "email": "Email",
+      "companyName": "Company name",
+      "cif": "Tax ID / CIF",
+      "documentType": "Document type",
+      "registrationNumber": "Registration number",
+      "registrationDate": "Registration date",
+      "walletLabel": "Wallet",
+      "noOrgSelected": "Select an organization to view its information.",
+      "notSignedIn": "You must sign in to view this information."
     },
     "securityTab": {
       "title": "Change Password",
