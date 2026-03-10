@@ -394,20 +394,7 @@ export default function Landing() {
             <InstitutionalLogos size="md" showFrom="sm" />
           </div>
 
-          {/* Nav links comentados por ahora
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <a href="#features" className="hover:text-primary">
-              {t("nav.features")}
-            </a>
-            <Link to="/models" className="hover:text-primary">
-              {t("nav.businessModels")}
-            </Link>
-            <a href="#use-cases" className="hover:text-primary">
-              {t("nav.useCases")}
-            </a>
-            <Link to="/architecture" className="hover:text-primary">
-              {t("nav.architecture")}
-            </Link>
             <Link
               to="/success-stories"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
@@ -416,7 +403,6 @@ export default function Landing() {
               <span>{t("successCases")}</span>
             </Link>
           </nav>
-          */}
 
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
@@ -590,6 +576,14 @@ export default function Landing() {
                 </motion.div>
               ))}
             </motion.div>
+            <div className="flex justify-center mt-8">
+              <Button asChild variant="outline" size="lg" className="gap-2">
+                <Link to="/success-stories">
+                  <Sparkles className="h-4 w-4" />
+                  {t("successCases")}
+                </Link>
+              </Button>
+            </div>
           </div>
         </section>
 
