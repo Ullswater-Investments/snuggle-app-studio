@@ -1,152 +1,125 @@
 {
   "header": {
     "backToData": "Torna ai Miei Dati",
-    "title": "Pubblica Dataset",
-    "subtitle": "Connetti la tua API all'ecosistema ProcureData"
+    "title": "Pubblica asset di dati",
+    "subtitle": "Pubblica un asset nello spazio dati a nome dell'organizzazione. Scegli una fonte URL o IPFS."
   },
   "alerts": {
-    "maintenance": "Manutenzione programmata in corso. La pubblicazione di dataset è temporaneamente disabilitata.",
-    "publishingAs": "Pubblicando come:",
-    "orgTypes": {
-      "consumer": "Consumatore",
-      "provider": "Fornitore",
-      "holder": "Detentore di Dati"
-    },
+    "publishingAs": "Pubblicazione come:",
     "securityNote": "ProcureData non memorizza i tuoi dati. Facilitiamo solo la connessione sicura tra la tua API e il consumatore autorizzato."
   },
-  "demo": {
-    "title": "Funzione non disponibile",
-    "description": "La pubblicazione di asset non è disponibile in modalità dimostrazione.",
-    "backButton": "Torna alla Dashboard"
-  },
   "stepper": {
-    "step1": { "title": "Fonte Dati", "description": "Connessione API" },
-    "step2": { "title": "Schema", "description": "Struttura tecnica" },
-    "step3": { "title": "Politiche", "description": "Pontus-X" },
-    "step4": { "title": "Pubblicazione", "description": "Marketplace" }
+    "step1": { "title": "Fonte" },
+    "step2": { "title": "Metadati" },
+    "step3": { "title": "Configurazione" },
+    "step4": { "title": "Pubblica" }
   },
   "step1": {
-    "title": "Passo 1: Fonte Dati (API)",
-    "description": "Definisci l'endpoint e l'autenticazione della tua fonte dati",
-    "originName": { "label": "Nome della Fonte *", "placeholder": "Es: API ERP - Inventario 2024", "hint": "Identificatore interno per il tuo riferimento" },
-    "originDescription": { "label": "Descrizione della Fonte", "placeholder": "Descrivi brevemente la fonte di questi dati..." },
-    "apiUrl": { "label": "URL dell'API *", "placeholder": "https://api.esempio.com/v1/dati", "hint": "Endpoint GET da cui i consumatori autorizzati riceveranno i dati" },
-    "headers": { "label": "Header Personalizzati", "addButton": "Aggiungi Header", "keyPlaceholder": "Key (es: Authorization)", "valuePlaceholder": "Value (es: Bearer token...)", "hint": "Gli header sono memorizzati in modo sicuro e inviati solo durante le chiamate autorizzate" },
-    "saving": "Salvataggio...",
-    "continue": "Continua",
-    "validation": { "nameRequired": "Il nome della fonte è obbligatorio", "urlRequired": "L'URL dell'API è obbligatorio" },
-    "success": "Configurazione della fonte salvata con successo",
-    "error": "Errore nel salvataggio della fonte"
+    "title": "Fonte dati",
+    "description": "Seleziona il tipo di fonte e configura la connessione",
+    "sourceType": { "label": "Tipo di fonte" },
+    "url": {
+      "label": "URL della risorsa",
+      "placeholder": "https://..."
+    },
+    "method": { "label": "Metodo HTTP" },
+    "queryParams": {
+      "label": "Parametri di query",
+      "keyPlaceholder": "Parametro",
+      "valuePlaceholder": "Valore",
+      "addButton": "+ Aggiungi"
+    },
+    "headers": {
+      "label": "Intestazioni HTTP",
+      "keyPlaceholder": "Intestazione",
+      "valuePlaceholder": "Valore",
+      "addButton": "+ Aggiungi"
+    },
+    "ipfs": {
+      "label": "CID IPFS",
+      "placeholder": "Qm..."
+    }
   },
   "step2": {
-    "title": "Passo 2: Schema Dati Tecnico",
-    "description": "Definisci la struttura che i consumatori vedranno interrogando la tua API",
-    "assistant": { "label": "Assistente Schema", "description": "Carica un file JSON o CSV di esempio e rileveremo i campi automaticamente. Puoi anche definirli manualmente.", "uploadButton": "Carica JSON / CSV" },
-    "fields": { "label": "Definizione Campi", "fieldHeader": "Campo *", "typeHeader": "Tipo *", "descHeader": "Descrizione", "fieldPlaceholder": "nome_campo", "descPlaceholder": "Descrizione del campo...", "addButton": "Aggiungi Campo" },
-    "fieldTypes": { "Texto": "Testo", "Numero": "Numero", "Fecha": "Data", "Booleano": "Booleano", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Timestamp", "Decimal": "Decimale", "Entero": "Intero" },
-    "validation": { "minOneField": "Definisci almeno un campo nello schema" },
-    "fileErrors": { "parseError": "Impossibile elaborare il file. Verifica il formato.", "noFields": "Nessun campo rilevato nel file." },
-    "fieldsDetected": "{{count}} campi rilevati automaticamente"
+    "title": "Metadati dell'asset",
+    "description": "Informazioni descrittive sull'asset di dati",
+    "name": {
+      "label": "Nome (opzionale)",
+      "placeholder": "Nome dell'asset di dati"
+    },
+    "license": {
+      "label": "Licenza (opzionale)",
+      "placeholder": "GDC-Privacy-Standard-v1"
+    },
+    "descriptionField": {
+      "label": "Descrizione (opzionale)",
+      "placeholder": "Descrivi il contenuto e l'utilità dei dati..."
+    }
   },
   "step3": {
-    "title": "Passo 3: Politiche di Accesso Pontus-X",
-    "description": "Definisci le regole di governance e le condizioni d'uso per il tuo dataset",
-    "permissions": {
-      "heading": "Permessi — Cosa l'utente PUÒ fare",
-      "addCustom": "Aggiungi permesso personalizzato...",
-      "COMMERCIAL_USE": "Uso commerciale",
-      "INTERNAL_ANALYSIS": "Analisi interna",
-      "DERIVATIVE_WORKS": "Generare report derivati",
-      "SYSTEM_INTEGRATION": "Integrazione nei sistemi interni",
-      "RESEARCH_USE": "Uso nella ricerca"
+    "title": "Prezzi e accesso",
+    "description": "Definisci il modello di prezzo e la configurazione di accesso",
+    "pricing": {
+      "label": "Commercializzazione",
+      "free": "Gratuito",
+      "paid": "A pagamento",
+      "priceLabel": "Prezzo (token)"
     },
-    "prohibitions": {
-      "heading": "Divieti — Cosa l'utente NON PUÒ fare",
-      "addCustom": "Aggiungi divieto personalizzato...",
-      "NO_REDISTRIBUTION": "Nessuna ridistribuzione",
-      "NO_REVERSE_ENGINEERING": "Nessun reverse engineering",
-      "NO_RESALE": "Nessuna rivendita a terzi",
-      "NO_PUBLIC_DISCLOSURE": "Nessuna divulgazione pubblica"
-    },
-    "obligations": {
-      "heading": "Obblighi — Impegni aggiuntivi",
-      "addCustom": "Aggiungi obbligo personalizzato...",
-      "ATTRIBUTION_REQUIRED": "Attribuzione richiesta",
-      "GDPR_COMPLIANCE": "Conformità GDPR",
-      "NOTIFY_PROVIDER": "Notificare il fornitore dell'utilizzo",
-      "LICENSE_RENEWAL": "Rinnovo della licenza"
-    },
-    "termsUrl": {
-      "label": "Link ai Termini e Condizioni (Opzionale)",
-      "placeholder": "https://esempio.com/termini",
-      "invalidUrl": "Inserisci un URL valido (es.: https://esempio.com/termini)",
-      "hint": "Inserisci un URL risolvibile al tuo documento legale di T&C"
-    },
-    "accessControl": {
-      "heading": "Controllo di Accesso (Pontus-X)",
-      "whitelist": "Organizzazioni con Accesso Consentito (Whitelist)",
-      "whitelistHint": "Se aggiungi organizzazioni qui, l'asset diventa PRIVATO.",
-      "blacklist": "Organizzazioni con Accesso Negato (Blacklist)",
-      "blacklistHint": "Queste organizzazioni non potranno vedere né richiedere l'asset.",
-      "searchPlaceholder": "Cerca organizzazione per nome..."
+    "accessConfig": {
+      "title": "Configurazione di accesso",
+      "timeoutLabel": "Tempo di accesso",
+      "permanentLabel": "Accesso permanente (senza limite di tempo)",
+      "customLabel": "Durata personalizzata",
+      "totalDuration": "Durata totale: {{seconds}} secondi",
+      "units": {
+        "minutes": "Minuti",
+        "hours": "Ore",
+        "days": "Giorni",
+        "weeks": "Settimane",
+        "months": "Mesi (30g)"
+      },
+      "usersAllowed": "Utenti Consentiti",
+      "usersAllowedPlaceholder": "Cerca utenti da consentire...",
+      "usersAllowedHint": "Opzionale. Lascia vuoto per consentire l'accesso pubblico (nessuna restrizione).",
+      "usersDenied": "Utenti Negati",
+      "usersDeniedPlaceholder": "Cerca utenti da negare...",
+      "orgsAllowed": "Organizzazioni Consentite",
+      "orgsAllowedPlaceholder": "Cerca organizzazioni da consentire...",
+      "orgsDenied": "Organizzazioni Negate",
+      "orgsDeniedPlaceholder": "Cerca organizzazioni da negare...",
+      "walletsAllowed": "Wallet consentiti (manuale)",
+      "walletsAllowedHint": "Aggiungi indirizzi 0x... per wallet non registrati.",
+      "walletsDenied": "Wallet negati (manuale)",
+      "walletsDeniedHint": "Per bloccare wallet di persone/aziende non registrate."
     }
   },
   "step4": {
-    "title": "Passo 4: Pubblicazione su Marketplace",
-    "description": "Definisci come apparirà il tuo dataset nel catalogo",
-    "publicName": { "label": "Nome Commerciale *", "placeholder": "Es: Indice dei Prezzi Industriali Q1 2024" },
-    "descriptionField": { "label": "Descrizione", "placeholder": "Descrivi il contenuto, le fonti e l'utilità dei dati..." },
-    "category": { "label": "Categoria *", "placeholder": "Seleziona una categoria" },
-    "language": { "label": "Lingua del Dataset *", "placeholder": "Seleziona la lingua" },
-    "categories": { "Compliance": "Compliance", "ESG": "ESG / Sostenibilità", "Ops": "Operazioni", "Market": "Mercato / Prezzi", "R&D": "R&S / Innovazione", "Logistics": "Logistica", "Finance": "Finanza", "HR": "Risorse Umane", "IoT": "IoT / Telemetria", "Otros": "Altro" },
-    "languages": { "es": "Spagnolo", "en": "Inglese", "de": "Tedesco", "fr": "Francese", "pt": "Portoghese", "it": "Italiano" },
-    "pricing": {
-      "title": "Modello di Prezzo",
-      "description": "Definisci come vuoi monetizzare i tuoi dati",
-      "models": {
-        "free": { "label": "Gratuito", "description": "Nessun costo per i consumatori" },
-        "subscription": { "label": "Abbonamento", "description": "Pagamento mensile ricorrente" },
-        "one_time": { "label": "Pagamento Unico", "description": "Licenza perpetua" },
-        "usage": { "label": "A Consumo", "description": "Basato sul consumo API" }
-      },
-      "priceLabel": "Prezzo (€)",
-      "perMonth": "/mese"
+    "title": "Riepilogo e pubblicazione",
+    "description": "Rivedi la configurazione e pubblica l'asset",
+    "instruction": "Scegli il wallet con cui firmare e premi Pubblica per registrare l'asset sulla blockchain.",
+    "summary": {
+      "title": "Riepilogo",
+      "sourceType": "Tipo di fonte",
+      "name": "Nome (opzionale)",
+      "pricing": "Commercializzazione"
     },
-    "terms": {
-      "title": "Termini di Utilizzo",
-      "description": "Accetta le condizioni per pubblicare sul marketplace",
-      "acceptTerms": "Accetto i Termini e Condizioni di ProcureData",
-      "acceptTermsDesc": "Inclusi gli obblighi come fornitore di dati e le politiche di utilizzo del marketplace.",
-      "acceptDataPolicy": "Confermo di avere il diritto di condividere questi dati",
-      "acceptDataPolicyDesc": "Dichiaro che i dati sono conformi al GDPR e non contengono informazioni personali senza consenso."
+    "wallet": {
+      "label": "Wallet per pubblicare",
+      "placeholder": "Seleziona wallet...",
+      "loading": "Caricamento wallet...",
+      "primary": "Wallet principale (predefinito)",
+      "managed": "Wallet gestito",
+      "primaryBadge": "Principale",
+      "noOrgWallets": "Questa organizzazione non ha wallet registrate. Registra una wallet per l'organizzazione per poter pubblicare."
     },
-    "submit": "Invia per Validazione Tecnica",
-    "submitting": "Invio in corso...",
-    "validation": {
-      "nameRequired": "Il nome pubblico è obbligatorio",
-      "categoryRequired": "Seleziona una categoria",
-      "languageRequired": "Seleziona la lingua del dataset",
-      "termsRequired": "Devi accettare i termini e la politica dei dati",
-      "maintenanceMode": "Sistema in manutenzione. La pubblicazione è temporaneamente disabilitata."
-    },
-    "successAutoApprove": "Dataset pubblicato con successo nel catalogo.",
-    "successReview": "Dataset inviato per revisione tecnica. Sarai notificato quando sarà disponibile nel catalogo.",
-    "errorPublish": "Errore nella pubblicazione"
+    "publishButton": "Pubblica asset",
+    "publishing": "Pubblicazione in corso...",
+    "success": "Asset di dati pubblicato con successo.",
+    "errorPublish": "Errore durante la pubblicazione dell'asset"
   },
-  "navigation": { "back": "Indietro", "continue": "Continua" },
-  "accessTimeout": {
-    "title": "Scadenza del Servizio (Timeout)",
-    "description": "Definisci per quanto tempo il consumatore potrà accedere ai dati prima della scadenza della licenza.",
-    "unit": "giorni",
-    "defaultHint": "Valore predefinito: 90 giorni. I consumatori vedranno questo periodo nella licenza d'uso."
-  },
-  "accessControl": {
-    "whitelistHintLong": "Se aggiungi organizzazioni qui, l'asset diventa PRIVATO. Solo loro potranno vederlo e richiederlo. La lista dei negati verrà automaticamente ignorata.",
-    "blacklistHintLong": "Effettivo solo se la lista dei consentiti è vuota. L'asset sarà PUBBLICO per tutti, tranne per le organizzazioni elencate qui.",
-    "blacklistDisabledWarning": "La whitelist ha la priorità. Questa sezione viene ignorata finché ci sono organizzazioni nella lista dei consentiti.",
-    "noWallet": "Senza wallet",
-    "emptyWhitelist": "Nessuna organizzazione aggiunta — l'asset non sarà privato per whitelist.",
-    "emptyBlacklist": "Nessuna organizzazione negata — accesso pubblico totale.",
-    "termsUrlError": "L'URL dei T&C non è valido"
+  "navigation": {
+    "back": "Indietro",
+    "next": "Avanti",
+    "cancel": "Annulla"
   }
 }

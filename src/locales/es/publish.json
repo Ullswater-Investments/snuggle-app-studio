@@ -1,152 +1,125 @@
 {
   "header": {
     "backToData": "Volver a Mis Datos",
-    "title": "Publicar Dataset",
-    "subtitle": "Conecta tu API al ecosistema de ProcureData"
+    "title": "Publicar activo de datos",
+    "subtitle": "Publica un activo en el espacio de datos a nombre de la organización. Elige una fuente URL o IPFS."
   },
   "alerts": {
-    "maintenance": "Sistema en mantenimiento programado. La publicación de datasets está temporalmente desactivada.",
     "publishingAs": "Publicando como:",
-    "orgTypes": {
-      "consumer": "Consumidor",
-      "provider": "Proveedor",
-      "holder": "Poseedor de Datos"
-    },
     "securityNote": "ProcureData no almacena sus datos. Solo facilitamos la conexión segura entre su API y el consumidor autorizado."
   },
-  "demo": {
-    "title": "Función no disponible",
-    "description": "La publicación de activos no está disponible en modo demostración.",
-    "backButton": "Volver al Dashboard"
-  },
   "stepper": {
-    "step1": { "title": "Fuente de Datos", "description": "Conexión API" },
-    "step2": { "title": "Esquema", "description": "Estructura técnica" },
-    "step3": { "title": "Políticas", "description": "Pontus-X" },
-    "step4": { "title": "Publicación", "description": "Marketplace" }
+    "step1": { "title": "Fuente" },
+    "step2": { "title": "Metadata" },
+    "step3": { "title": "Configuración" },
+    "step4": { "title": "Publicar" }
   },
   "step1": {
-    "title": "Paso 1: Fuente de Datos (API)",
-    "description": "Define el endpoint y la autenticación de tu fuente de datos",
-    "originName": { "label": "Nombre del Origen *", "placeholder": "Ej: API ERP - Inventario 2024", "hint": "Identificador interno para tu referencia" },
-    "originDescription": { "label": "Descripción del Origen", "placeholder": "Describe brevemente la fuente de estos datos..." },
-    "apiUrl": { "label": "URL de la API *", "placeholder": "https://api.ejemplo.com/v1/datos", "hint": "Endpoint GET desde el que los consumidores autorizados recibirán los datos" },
-    "headers": { "label": "Headers Personalizados", "addButton": "Añadir Header", "keyPlaceholder": "Key (ej: Authorization)", "valuePlaceholder": "Value (ej: Bearer token...)", "hint": "Los headers se almacenan de forma segura y se envían únicamente en las llamadas autorizadas" },
-    "saving": "Guardando...",
-    "continue": "Continuar",
-    "validation": { "nameRequired": "El nombre del origen es obligatorio", "urlRequired": "La URL de la API es obligatoria" },
-    "success": "Configuración de origen guardada correctamente",
-    "error": "Error al guardar el origen"
+    "title": "Fuente de datos",
+    "description": "Selecciona el tipo de fuente y configura la conexión",
+    "sourceType": { "label": "Tipo de fuente" },
+    "url": {
+      "label": "URL del recurso",
+      "placeholder": "https://..."
+    },
+    "method": { "label": "Método HTTP" },
+    "queryParams": {
+      "label": "Parámetros de consulta (query)",
+      "keyPlaceholder": "Parámetro",
+      "valuePlaceholder": "Valor",
+      "addButton": "+ Añadir"
+    },
+    "headers": {
+      "label": "Cabeceras HTTP",
+      "keyPlaceholder": "Cabecera",
+      "valuePlaceholder": "Valor",
+      "addButton": "+ Añadir"
+    },
+    "ipfs": {
+      "label": "CID de IPFS",
+      "placeholder": "Qm..."
+    }
   },
   "step2": {
-    "title": "Paso 2: Esquema de Datos Técnico",
-    "description": "Define la estructura que verán los consumidores al consultar tu API",
-    "assistant": { "label": "Asistente de Esquema", "description": "Sube un archivo JSON o CSV de ejemplo y detectaremos los campos automáticamente. También puedes definirlos manualmente.", "uploadButton": "Cargar JSON / CSV" },
-    "fields": { "label": "Definición de Campos", "fieldHeader": "Campo *", "typeHeader": "Tipo *", "descHeader": "Descripción", "fieldPlaceholder": "nombre_campo", "descPlaceholder": "Descripción del campo...", "addButton": "Añadir Campo" },
-    "fieldTypes": { "Texto": "Texto", "Numero": "Número", "Fecha": "Fecha", "Booleano": "Booleano", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Timestamp", "Decimal": "Decimal", "Entero": "Entero" },
-    "validation": { "minOneField": "Define al menos un campo en el esquema" },
-    "fileErrors": { "parseError": "No se pudo procesar el archivo. Verifica el formato.", "noFields": "No se detectaron campos en el archivo." },
-    "fieldsDetected": "{{count}} campos detectados automáticamente"
+    "title": "Metadata del activo",
+    "description": "Información descriptiva del activo de datos",
+    "name": {
+      "label": "Nombre (opcional)",
+      "placeholder": "Nombre del activo de datos"
+    },
+    "license": {
+      "label": "Licencia (opcional)",
+      "placeholder": "GDC-Privacy-Standard-v1"
+    },
+    "descriptionField": {
+      "label": "Descripción (opcional)",
+      "placeholder": "Describe el contenido y utilidad de los datos..."
+    }
   },
   "step3": {
-    "title": "Paso 3: Políticas de Acceso Pontus-X",
-    "description": "Define las reglas de gobernanza y condiciones de uso para tu dataset",
-    "permissions": {
-      "heading": "Permisos — Lo que el usuario PUEDE hacer",
-      "addCustom": "Añadir permiso personalizado...",
-      "COMMERCIAL_USE": "Uso comercial",
-      "INTERNAL_ANALYSIS": "Análisis interno",
-      "DERIVATIVE_WORKS": "Generar informes derivados",
-      "SYSTEM_INTEGRATION": "Integración en sistemas internos",
-      "RESEARCH_USE": "Uso en investigación"
+    "title": "Comercialización y acceso",
+    "description": "Define el modelo de precio y la configuración de acceso",
+    "pricing": {
+      "label": "Comercialización",
+      "free": "Gratuito",
+      "paid": "De pago",
+      "priceLabel": "Precio (tokens)"
     },
-    "prohibitions": {
-      "heading": "Prohibiciones — Lo que el usuario NO PUEDE hacer",
-      "addCustom": "Añadir prohibición personalizada...",
-      "NO_REDISTRIBUTION": "No redistribución",
-      "NO_REVERSE_ENGINEERING": "No ingeniería inversa",
-      "NO_RESALE": "No reventa a terceros",
-      "NO_PUBLIC_DISCLOSURE": "No divulgación pública"
-    },
-    "obligations": {
-      "heading": "Obligaciones — Compromisos adicionales",
-      "addCustom": "Añadir obligación personalizada...",
-      "ATTRIBUTION_REQUIRED": "Atribución requerida",
-      "GDPR_COMPLIANCE": "Cumplimiento GDPR",
-      "NOTIFY_PROVIDER": "Notificar uso a proveedor",
-      "LICENSE_RENEWAL": "Renovación de licencia"
-    },
-    "termsUrl": {
-      "label": "Enlace a Términos y Condiciones (Opcional)",
-      "placeholder": "https://ejemplo.com/terminos",
-      "invalidUrl": "Introduce una URL válida (ej: https://ejemplo.com/terminos)",
-      "hint": "Introduce una URL resoluble a su documento legal de T&C"
-    },
-    "accessControl": {
-      "heading": "Control de Acceso (Pontus-X)",
-      "whitelist": "Organizaciones con Acceso Permitido (Whitelist)",
-      "whitelistHint": "Si añades organizaciones aquí, el activo se vuelve PRIVADO.",
-      "blacklist": "Organizaciones con Acceso Denegado (Blacklist)",
-      "blacklistHint": "Estas organizaciones no podrán ver ni solicitar el activo.",
-      "searchPlaceholder": "Buscar organización por nombre..."
+    "accessConfig": {
+      "title": "Configuración de acceso",
+      "timeoutLabel": "Tiempo de Acceso",
+      "permanentLabel": "Acceso permanente (sin límite de tiempo)",
+      "customLabel": "Duración personalizada",
+      "totalDuration": "Duración total: {{seconds}} segundos",
+      "units": {
+        "minutes": "Minutos",
+        "hours": "Horas",
+        "days": "Días",
+        "weeks": "Semanas",
+        "months": "Meses (30d)"
+      },
+      "usersAllowed": "Usuarios Permitidos",
+      "usersAllowedPlaceholder": "Buscar usuarios para permitir...",
+      "usersAllowedHint": "Opcional. Deje en blanco para permitir acceso público (si no hay restricciones).",
+      "usersDenied": "Usuarios Denegados",
+      "usersDeniedPlaceholder": "Buscar usuarios para denegar...",
+      "orgsAllowed": "Organizaciones Permitidas",
+      "orgsAllowedPlaceholder": "Buscar organizaciones para permitir...",
+      "orgsDenied": "Organizaciones Denegadas",
+      "orgsDeniedPlaceholder": "Buscar organizaciones para denegar...",
+      "walletsAllowed": "Wallets permitidas (manual)",
+      "walletsAllowedHint": "Añada direcciones 0x... para wallets no registradas.",
+      "walletsDenied": "Wallets denegadas (manual)",
+      "walletsDeniedHint": "Para bloquear wallets de personas/empresas no registradas."
     }
   },
   "step4": {
-    "title": "Paso 4: Publicación en Marketplace",
-    "description": "Define cómo aparecerá tu dataset en el catálogo",
-    "publicName": { "label": "Nombre Comercial *", "placeholder": "Ej: Índice de Precios Industriales Q1 2024" },
-    "descriptionField": { "label": "Descripción", "placeholder": "Describe el contenido, fuentes y utilidad de los datos..." },
-    "category": { "label": "Categoría *", "placeholder": "Selecciona una categoría" },
-    "language": { "label": "Idioma del Dataset *", "placeholder": "Selecciona el idioma" },
-    "categories": { "Compliance": "Compliance", "ESG": "ESG / Sostenibilidad", "Ops": "Operaciones", "Market": "Mercado / Precios", "R&D": "I+D / Innovación", "Logistics": "Logística", "Finance": "Finanzas", "HR": "Recursos Humanos", "IoT": "IoT / Telemetría", "Otros": "Otros" },
-    "languages": { "es": "Español", "en": "Inglés", "de": "Alemán", "fr": "Francés", "pt": "Portugués", "it": "Italiano" },
-    "pricing": {
-      "title": "Modelo de Precio",
-      "description": "Define cómo quieres monetizar tus datos",
-      "models": {
-        "free": { "label": "Gratuito", "description": "Sin coste para consumidores" },
-        "subscription": { "label": "Suscripción", "description": "Pago mensual recurrente" },
-        "one_time": { "label": "Pago Único", "description": "Licencia perpetua" },
-        "usage": { "label": "Por Uso", "description": "Basado en consumo de API" }
-      },
-      "priceLabel": "Precio (€)",
-      "perMonth": "/mes"
+    "title": "Resumen y publicación",
+    "description": "Revisa la configuración y publica el activo",
+    "instruction": "Elige la wallet con la que firmar y pulsa Publicar para registrar el activo en blockchain.",
+    "summary": {
+      "title": "Resumen",
+      "sourceType": "Tipo de fuente",
+      "name": "Nombre (opcional)",
+      "pricing": "Comercialización"
     },
-    "terms": {
-      "title": "Términos de Uso",
-      "description": "Acepta las condiciones para publicar en el marketplace",
-      "acceptTerms": "Acepto los Términos y Condiciones de ProcureData",
-      "acceptTermsDesc": "Incluyendo las obligaciones como proveedor de datos y las políticas de uso del marketplace.",
-      "acceptDataPolicy": "Confirmo que tengo derecho a compartir estos datos",
-      "acceptDataPolicyDesc": "Declaro que los datos cumplen con GDPR y no contienen información personal sin consentimiento."
+    "wallet": {
+      "label": "Wallet para publicar",
+      "placeholder": "Seleccionar wallet...",
+      "loading": "Cargando wallets...",
+      "primary": "Wallet primaria (por defecto)",
+      "managed": "Wallet gestionada",
+      "primaryBadge": "Principal",
+      "noOrgWallets": "Esta organización no tiene wallets registradas. Registre una wallet en la organización para poder publicar."
     },
-    "submit": "Enviar para Validación Técnica",
-    "submitting": "Enviando...",
-    "validation": {
-      "nameRequired": "El nombre público es obligatorio",
-      "categoryRequired": "Selecciona una categoría",
-      "languageRequired": "Selecciona el idioma del dataset",
-      "termsRequired": "Debes aceptar los términos y la política de datos",
-      "maintenanceMode": "Sistema en mantenimiento. La publicación está temporalmente desactivada."
-    },
-    "successAutoApprove": "Dataset publicado exitosamente en el catálogo.",
-    "successReview": "Dataset enviado a revisión técnica. Se le notificará cuando esté disponible en el catálogo.",
-    "errorPublish": "Error al publicar"
+    "publishButton": "Publicar activo",
+    "publishing": "Publicando...",
+    "success": "Activo de datos publicado correctamente.",
+    "errorPublish": "Error al publicar el activo"
   },
-  "navigation": { "back": "Atrás", "continue": "Continuar" },
-  "accessTimeout": {
-    "title": "Caducidad del Servicio (Timeout)",
-    "description": "Define cuánto tiempo podrá el consumidor acceder a los datos antes de que expire su licencia.",
-    "unit": "días",
-    "defaultHint": "Valor por defecto: 90 días. Los consumidores verán este periodo en la licencia de uso."
-  },
-  "accessControl": {
-    "whitelistHintLong": "Si añades organizaciones aquí, el activo se vuelve PRIVADO. Solo ellas podrán verlo y solicitarlo. La lista de denegados se ignorará automáticamente.",
-    "blacklistHintLong": "Solo efectivo si la lista de permitidos está vacía. El activo será PÚBLICO para todos, excepto para las organizaciones listadas aquí.",
-    "blacklistDisabledWarning": "La whitelist tiene prioridad. Esta sección se ignora mientras haya organizaciones en la lista de permitidos.",
-    "noWallet": "Sin wallet",
-    "emptyWhitelist": "Sin organizaciones añadidas — el activo no será privado por whitelist.",
-    "emptyBlacklist": "Sin organizaciones denegadas — acceso público total.",
-    "termsUrlError": "La URL de T&C no es válida"
+  "navigation": {
+    "back": "Atrás",
+    "next": "Siguiente",
+    "cancel": "Cancelar"
   }
 }

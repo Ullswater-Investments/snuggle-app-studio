@@ -1,152 +1,125 @@
 {
   "header": {
     "backToData": "Back to My Data",
-    "title": "Publish Dataset",
-    "subtitle": "Connect your API to the ProcureData ecosystem"
+    "title": "Publish data asset",
+    "subtitle": "Publish an asset in the data space on behalf of the organization. Choose a URL or IPFS source."
   },
   "alerts": {
-    "maintenance": "Scheduled maintenance in progress. Dataset publishing is temporarily disabled.",
     "publishingAs": "Publishing as:",
-    "orgTypes": {
-      "consumer": "Consumer",
-      "provider": "Provider",
-      "holder": "Data Holder"
-    },
-    "securityNote": "ProcureData does not store your data. We only facilitate the secure connection between your API and the authorised consumer."
-  },
-  "demo": {
-    "title": "Feature not available",
-    "description": "Asset publishing is not available in demo mode.",
-    "backButton": "Back to Dashboard"
+    "securityNote": "ProcureData does not store your data. We only facilitate the secure connection between your API and the authorized consumer."
   },
   "stepper": {
-    "step1": { "title": "Data Source", "description": "API Connection" },
-    "step2": { "title": "Schema", "description": "Technical structure" },
-    "step3": { "title": "Policies", "description": "Pontus-X" },
-    "step4": { "title": "Publication", "description": "Marketplace" }
+    "step1": { "title": "Source" },
+    "step2": { "title": "Metadata" },
+    "step3": { "title": "Configuration" },
+    "step4": { "title": "Publish" }
   },
   "step1": {
-    "title": "Step 1: Data Source (API)",
-    "description": "Define the endpoint and authentication of your data source",
-    "originName": { "label": "Source Name *", "placeholder": "E.g.: ERP API - Inventory 2024", "hint": "Internal identifier for your reference" },
-    "originDescription": { "label": "Source Description", "placeholder": "Briefly describe the source of this data..." },
-    "apiUrl": { "label": "API URL *", "placeholder": "https://api.example.com/v1/data", "hint": "GET endpoint from which authorised consumers will receive the data" },
-    "headers": { "label": "Custom Headers", "addButton": "Add Header", "keyPlaceholder": "Key (e.g.: Authorization)", "valuePlaceholder": "Value (e.g.: Bearer token...)", "hint": "Headers are stored securely and sent only during authorised calls" },
-    "saving": "Saving...",
-    "continue": "Continue",
-    "validation": { "nameRequired": "Source name is required", "urlRequired": "API URL is required" },
-    "success": "Source configuration saved successfully",
-    "error": "Error saving source"
+    "title": "Data source",
+    "description": "Select the source type and configure the connection",
+    "sourceType": { "label": "Source type" },
+    "url": {
+      "label": "Resource URL",
+      "placeholder": "https://..."
+    },
+    "method": { "label": "HTTP Method" },
+    "queryParams": {
+      "label": "Query parameters",
+      "keyPlaceholder": "Parameter",
+      "valuePlaceholder": "Value",
+      "addButton": "+ Add"
+    },
+    "headers": {
+      "label": "HTTP Headers",
+      "keyPlaceholder": "Header",
+      "valuePlaceholder": "Value",
+      "addButton": "+ Add"
+    },
+    "ipfs": {
+      "label": "IPFS CID",
+      "placeholder": "Qm..."
+    }
   },
   "step2": {
-    "title": "Step 2: Technical Data Schema",
-    "description": "Define the structure consumers will see when querying your API",
-    "assistant": { "label": "Schema Assistant", "description": "Upload a sample JSON or CSV file and we'll detect the fields automatically. You can also define them manually.", "uploadButton": "Load JSON / CSV" },
-    "fields": { "label": "Field Definition", "fieldHeader": "Field *", "typeHeader": "Type *", "descHeader": "Description", "fieldPlaceholder": "field_name", "descPlaceholder": "Field description...", "addButton": "Add Field" },
-    "fieldTypes": { "Texto": "Text", "Numero": "Number", "Fecha": "Date", "Booleano": "Boolean", "UUID": "UUID", "JSON": "JSON", "Array": "Array", "Timestamp": "Timestamp", "Decimal": "Decimal", "Entero": "Integer" },
-    "validation": { "minOneField": "Define at least one field in the schema" },
-    "fileErrors": { "parseError": "Could not process the file. Please check the format.", "noFields": "No fields detected in the file." },
-    "fieldsDetected": "{{count}} fields detected automatically"
+    "title": "Asset metadata",
+    "description": "Descriptive information about the data asset",
+    "name": {
+      "label": "Name (optional)",
+      "placeholder": "Data asset name"
+    },
+    "license": {
+      "label": "License (optional)",
+      "placeholder": "GDC-Privacy-Standard-v1"
+    },
+    "descriptionField": {
+      "label": "Description (optional)",
+      "placeholder": "Describe the content and usefulness of the data..."
+    }
   },
   "step3": {
-    "title": "Step 3: Pontus-X Access Policies",
-    "description": "Define governance rules and usage conditions for your dataset",
-    "permissions": {
-      "heading": "Permissions — What the user CAN do",
-      "addCustom": "Add custom permission...",
-      "COMMERCIAL_USE": "Commercial use",
-      "INTERNAL_ANALYSIS": "Internal analysis",
-      "DERIVATIVE_WORKS": "Generate derivative reports",
-      "SYSTEM_INTEGRATION": "System integration",
-      "RESEARCH_USE": "Research use"
+    "title": "Pricing and access",
+    "description": "Define the pricing model and access configuration",
+    "pricing": {
+      "label": "Pricing",
+      "free": "Free",
+      "paid": "Paid",
+      "priceLabel": "Price (tokens)"
     },
-    "prohibitions": {
-      "heading": "Prohibitions — What the user CANNOT do",
-      "addCustom": "Add custom prohibition...",
-      "NO_REDISTRIBUTION": "No redistribution",
-      "NO_REVERSE_ENGINEERING": "No reverse engineering",
-      "NO_RESALE": "No resale to third parties",
-      "NO_PUBLIC_DISCLOSURE": "No public disclosure"
-    },
-    "obligations": {
-      "heading": "Obligations — Additional commitments",
-      "addCustom": "Add custom obligation...",
-      "ATTRIBUTION_REQUIRED": "Attribution required",
-      "GDPR_COMPLIANCE": "GDPR compliance",
-      "NOTIFY_PROVIDER": "Notify provider of usage",
-      "LICENSE_RENEWAL": "License renewal"
-    },
-    "termsUrl": {
-      "label": "Terms & Conditions Link (Optional)",
-      "placeholder": "https://example.com/terms",
-      "invalidUrl": "Enter a valid URL (e.g.: https://example.com/terms)",
-      "hint": "Enter a resolvable URL to your legal T&C document"
-    },
-    "accessControl": {
-      "heading": "Access Control (Pontus-X)",
-      "whitelist": "Organisations with Allowed Access (Whitelist)",
-      "whitelistHint": "If you add organisations here, the asset becomes PRIVATE.",
-      "blacklist": "Organisations with Denied Access (Blacklist)",
-      "blacklistHint": "These organisations will not be able to view or request the asset.",
-      "searchPlaceholder": "Search organisation by name..."
+    "accessConfig": {
+      "title": "Access configuration",
+      "timeoutLabel": "Access Time",
+      "permanentLabel": "Permanent access (no time limit)",
+      "customLabel": "Custom duration",
+      "totalDuration": "Total duration: {{seconds}} seconds",
+      "units": {
+        "minutes": "Minutes",
+        "hours": "Hours",
+        "days": "Days",
+        "weeks": "Weeks",
+        "months": "Months (30d)"
+      },
+      "usersAllowed": "Allowed Users",
+      "usersAllowedPlaceholder": "Search users to allow...",
+      "usersAllowedHint": "Optional. Leave blank to allow public access (no restrictions).",
+      "usersDenied": "Denied Users",
+      "usersDeniedPlaceholder": "Search users to deny...",
+      "orgsAllowed": "Allowed Organizations",
+      "orgsAllowedPlaceholder": "Search organizations to allow...",
+      "orgsDenied": "Denied Organizations",
+      "orgsDeniedPlaceholder": "Search organizations to deny...",
+      "walletsAllowed": "Allowed wallets (manual)",
+      "walletsAllowedHint": "Add 0x... addresses for unregistered wallets.",
+      "walletsDenied": "Denied wallets (manual)",
+      "walletsDeniedHint": "To block wallets of unregistered persons/companies."
     }
   },
   "step4": {
-    "title": "Step 4: Marketplace Publication",
-    "description": "Define how your dataset will appear in the catalogue",
-    "publicName": { "label": "Commercial Name *", "placeholder": "E.g.: Industrial Price Index Q1 2024" },
-    "descriptionField": { "label": "Description", "placeholder": "Describe the content, sources and utility of the data..." },
-    "category": { "label": "Category *", "placeholder": "Select a category" },
-    "language": { "label": "Dataset Language *", "placeholder": "Select the language" },
-    "categories": { "Compliance": "Compliance", "ESG": "ESG / Sustainability", "Ops": "Operations", "Market": "Market / Pricing", "R&D": "R&D / Innovation", "Logistics": "Logistics", "Finance": "Finance", "HR": "Human Resources", "IoT": "IoT / Telemetry", "Otros": "Other" },
-    "languages": { "es": "Spanish", "en": "English", "de": "German", "fr": "French", "pt": "Portuguese", "it": "Italian" },
-    "pricing": {
-      "title": "Pricing Model",
-      "description": "Define how you want to monetise your data",
-      "models": {
-        "free": { "label": "Free", "description": "No cost for consumers" },
-        "subscription": { "label": "Subscription", "description": "Monthly recurring payment" },
-        "one_time": { "label": "One-time Payment", "description": "Perpetual licence" },
-        "usage": { "label": "Pay-per-Use", "description": "Based on API consumption" }
-      },
-      "priceLabel": "Price (€)",
-      "perMonth": "/month"
+    "title": "Summary and publish",
+    "description": "Review the configuration and publish the asset",
+    "instruction": "Choose the wallet to sign with and press Publish to register the asset on blockchain.",
+    "summary": {
+      "title": "Summary",
+      "sourceType": "Source type",
+      "name": "Name (optional)",
+      "pricing": "Pricing"
     },
-    "terms": {
-      "title": "Terms of Use",
-      "description": "Accept the conditions to publish on the marketplace",
-      "acceptTerms": "I accept ProcureData's Terms and Conditions",
-      "acceptTermsDesc": "Including the obligations as a data provider and the marketplace usage policies.",
-      "acceptDataPolicy": "I confirm that I have the right to share this data",
-      "acceptDataPolicyDesc": "I declare that the data complies with GDPR and does not contain personal information without consent."
+    "wallet": {
+      "label": "Wallet for publishing",
+      "placeholder": "Select wallet...",
+      "loading": "Loading wallets...",
+      "primary": "Primary wallet (default)",
+      "managed": "Managed wallet",
+      "primaryBadge": "Primary",
+      "noOrgWallets": "This organization has no registered wallets. Register a wallet for the organization to publish."
     },
-    "submit": "Submit for Technical Validation",
-    "submitting": "Submitting...",
-    "validation": {
-      "nameRequired": "Public name is required",
-      "categoryRequired": "Select a category",
-      "languageRequired": "Select the dataset language",
-      "termsRequired": "You must accept the terms and data policy",
-      "maintenanceMode": "System under maintenance. Publishing is temporarily disabled."
-    },
-    "successAutoApprove": "Dataset successfully published in the catalogue.",
-    "successReview": "Dataset submitted for technical review. You will be notified when it is available in the catalogue.",
-    "errorPublish": "Error publishing"
+    "publishButton": "Publish asset",
+    "publishing": "Publishing...",
+    "success": "Data asset published successfully.",
+    "errorPublish": "Error publishing the asset"
   },
-  "navigation": { "back": "Back", "continue": "Continue" },
-  "accessTimeout": {
-    "title": "Service Expiry (Timeout)",
-    "description": "Define how long the consumer can access the data before their licence expires.",
-    "unit": "days",
-    "defaultHint": "Default value: 90 days. Consumers will see this period in the usage licence."
-  },
-  "accessControl": {
-    "whitelistHintLong": "If you add organisations here, the asset becomes PRIVATE. Only they will be able to view and request it. The denied list will be automatically ignored.",
-    "blacklistHintLong": "Only effective if the allowed list is empty. The asset will be PUBLIC for everyone, except for the organisations listed here.",
-    "blacklistDisabledWarning": "The whitelist takes priority. This section is ignored while there are organisations in the allowed list.",
-    "noWallet": "No wallet",
-    "emptyWhitelist": "No organisations added — the asset will not be private by whitelist.",
-    "emptyBlacklist": "No organisations denied — full public access.",
-    "termsUrlError": "The T&C URL is not valid"
+  "navigation": {
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel"
   }
 }
