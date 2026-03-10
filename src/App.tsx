@@ -12,6 +12,7 @@ import { ProfileGuard } from "@/components/ProfileGuard";
 import { OrganizationGuard } from "@/components/OrganizationGuard";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
+import { PublicAppLayout } from "@/components/PublicAppLayout";
 import CompleteProfile from "@/pages/CompleteProfile";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { AdminProtectedRoute } from "@/components/admin/AdminProtectedRoute";
