@@ -1389,14 +1389,6 @@ const App = () => (
                           element={<ServiceDetail />}
                         />
                         <Route path="/innovation" element={<InnovationLab />} />
-                        <Route
-                          path="/success-stories"
-                          element={<SuccessStories />}
-                        />
-                        <Route
-                          path="/success-stories/:id"
-                          element={<SuccessStoryDetail />}
-                        />
                         <Route path="/partners" element={<Partners />} />
                         <Route path="/requests" element={<Requests />} />
                         <Route
