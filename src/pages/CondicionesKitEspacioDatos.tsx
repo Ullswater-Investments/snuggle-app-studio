@@ -206,9 +206,8 @@ export default function CondicionesKitEspacioDatos() {
         <Card className="mb-12 border-amber-300 bg-amber-50 dark:bg-amber-950/20">
           <CardContent className="p-6 text-sm text-amber-800 dark:text-amber-200">
             <h4 className="font-bold mb-2">Aviso Legal</h4>
-            <p><strong>ACCURO TECHNOLOGY, S.L.</strong></p>
-            <p>CIF: B87617981</p>
-            <p>Domicilio: C/ Colquide, 6 – Portal 2, 1ª planta, Edificio Prisma de Las Rozas – Madrid</p>
+            <p><strong>AGILE PROCUREMENT, S.L.</strong></p>
+            <p>Domicilio: Calle General Álvarez de Castro, 44 – BJ IZ, 28010 Madrid</p>
             <p className="mt-2">Firma digital con validez conforme al Reglamento eIDAS (UE) 910/2014</p>
           </CardContent>
         </Card>
