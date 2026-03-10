@@ -31,15 +31,7 @@ const pasos = [
   { num: 4, title: "Justificación", desc: "Justificación completa del proyecto ante RED.ES. Servicio incluido." },
 ];
 
-const faqItems = [
-  
-  
-  
-  
-  
-  
-  { q: "¿Qué pasa si no me conceden la subvención?", a: "El contrato finaliza al término de la Fase 1 sin obligaciones adicionales." },
-];
+const faqItems: { q: string; a: string }[] = [];
 
 export default function GuiaKitEspacioDatos() {
   return (
