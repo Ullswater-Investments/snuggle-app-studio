@@ -48,6 +48,7 @@ import { ArrayDataView } from "@/components/ArrayDataView";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Textarea } from "@/components/ui/textarea";
 import { AssetDetailChatAgent } from "@/components/asset-detail/AssetDetailChatAgent";
+import { dataAssetService } from "@/services/dataAssetService";
 
 interface MarketplaceListing {
   asset_id: string;
@@ -109,93 +110,86 @@ export default function ProductDetail() {
   const [reviewComment, setReviewComment] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // --- Fetch Data (Marketplace View) ---
+  // --- Fetch Data (API data-assets or synthetic from translations) ---
+  const { t: tCatalog } = useTranslation("catalog");
   const { data: product, isLoading } = useQuery<MarketplaceListing>({
     queryKey: ["product-detail", id],
     queryFn: async (): Promise<MarketplaceListing> => {
-      // Intentar leer de la vista marketplace
-      const { data, error } = await supabase
-        .from('marketplace_listings' as any)
-        .select('*')
-        .eq('asset_id', id)
-        .maybeSingle();
+      if (!id) throw new Error("Producto no encontrado");
 
-      if (!error && data) {
-        const { data: assetExtra } = await supabase
-          .from('data_assets')
-          .select(`
-            custom_metadata,
-            sample_data,
-            product:data_products(schema_definition, version, description)
-          `)
-          .eq('id', id)
-          .maybeSingle();
+      const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+      const isUuid = UUID_REGEX.test(id);
 
-        const listing = data as any;
+      // 1. Try API for UUID assets (production)
+      if (isUuid) {
+        try {
+          const res = await dataAssetService.getById(id);
+          const d = res.data;
+          const ddoMeta = d.ddo?.metadata;
+          const publisher = d.publisher_info ?? {};
+          return {
+            asset_id: d.uuid,
+            asset_name: d.name || "Dataset",
+            asset_description: d.description ?? ddoMeta?.description ?? "",
+            product_name: d.name || "Dataset",
+            category: (ddoMeta?.type as string) || "General",
+            provider_id: (publisher.uuid ?? d.uuid) as string,
+            provider_name: publisher.name ?? "Proveedor",
+            seller_category: "Enterprise",
+            kyb_verified: false,
+            pricing_model: d.pricing_type || "free",
+            price: parseFloat(d.price) || 0,
+            currency: d.payment_token_symbol || "EUR",
+            billing_period: d.pricing_type === "free" ? undefined : "monthly",
+            has_green_badge: false,
+            reputation_score: 0,
+            review_count: 0,
+            status: d.status,
+            version: d.ddo?.version || "1.0",
+            schema_definition: null,
+            custom_metadata: null,
+            admin_notes: null,
+          } as MarketplaceListing;
+        } catch {
+          throw new Error("Producto no encontrado");
+        }
+      }
+
+      // 2. Synthetic/demo assets from translations
+      const syntheticAssets = tCatalog("syntheticAssets", {
+        returnObjects: true,
+      }) as Array<{ id: string; name: string; description: string; category: string; provider: string; price: number; pricingModel: string; hasGreenBadge: boolean; kybVerified: boolean; reputationScore: number; reviewCount: number }>;
+      const synthetic = Array.isArray(syntheticAssets)
+        ? syntheticAssets.find((a) => a.id === id)
+        : null;
+      if (synthetic) {
         return {
-          ...listing,
-          asset_id: listing.asset_id,
-          asset_name: listing.product_name || 'Dataset',
-          asset_description: listing.product_description || (assetExtra?.product as any)?.description,
-          product_name: listing.product_name,
-          category: listing.category || "General",
-          provider_id: listing.provider_id,
-          provider_name: listing.provider_name || 'Proveedor',
-          seller_category: listing.seller_category || "Enterprise",
-          kyb_verified: listing.kyb_verified ?? true,
-          pricing_model: listing.pricing_model || 'subscription',
-          price: listing.price || 0,
-          currency: listing.currency || 'EUR',
-          billing_period: listing.billing_period,
-          has_green_badge: listing.has_green_badge ?? false,
-          reputation_score: listing.reputation_score || 0,
-          review_count: listing.review_count || 0,
-          version: listing.version || (assetExtra?.product as any)?.version || '1.0',
-          schema_definition: (assetExtra?.product as any)?.schema_definition || null,
-          custom_metadata: assetExtra?.custom_metadata as any || null,
-          sample_data: (assetExtra as any)?.sample_data || null,
+          asset_id: synthetic.id,
+          asset_name: synthetic.name,
+          asset_description: synthetic.description,
+          product_name: synthetic.name,
+          category: synthetic.category,
+          provider_id: "synthetic-provider",
+          provider_name: synthetic.provider,
+          seller_category: "Enterprise",
+          kyb_verified: synthetic.kybVerified,
+          pricing_model: synthetic.pricingModel as string,
+          price: synthetic.price,
+          currency: "EUR",
+          billing_period: synthetic.pricingModel === "subscription" ? "monthly" : undefined,
+          has_green_badge: synthetic.hasGreenBadge,
+          reputation_score: synthetic.reputationScore,
+          review_count: synthetic.reviewCount,
+          status: "published",
+          version: "1.0",
+          schema_definition: null,
+          custom_metadata: null,
+          admin_notes: null,
         } as MarketplaceListing;
       }
 
-      // Fallback
-      console.warn("Usando fallback para detalle de producto");
-      const { data: asset, error: assetError } = await supabase
-        .from('data_assets')
-        .select(`
-          id, status, pricing_model, price, currency, billing_period, custom_metadata, sample_data, admin_notes,
-          product:data_products(name, description, category, schema_definition, version),
-          org:organizations!subject_org_id(id, name)
-        `)
-        .eq('id', id)
-        .single();
-      
-      if (assetError || !asset) throw new Error("Producto no encontrado");
-
-      return {
-        asset_id: asset.id,
-        asset_name: (asset.product as any)?.name || 'Dataset',
-        asset_description: (asset.product as any)?.description,
-        product_name: (asset.product as any)?.name,
-        category: (asset.product as any)?.category || "General",
-        provider_id: (asset.org as any)?.id,
-        provider_name: (asset.org as any)?.name || 'Proveedor',
-        seller_category: "Enterprise",
-        kyb_verified: true,
-        pricing_model: asset.pricing_model || 'subscription',
-        price: asset.price || 0,
-        currency: asset.currency || 'EUR',
-        billing_period: asset.billing_period || 'monthly',
-        has_green_badge: true,
-        reputation_score: 0,
-        review_count: 0,
-        status: asset.status,
-        version: (asset.product as any)?.version || '1.0',
-        schema_definition: (asset.product as any)?.schema_definition || null,
-        custom_metadata: asset.custom_metadata as any || null,
-        sample_data: (asset as any).sample_data || null,
-        admin_notes: asset.admin_notes || null,
-      } as MarketplaceListing;
-    }
+      throw new Error("Producto no encontrado");
+    },
   });
 
   // === QUERY: Verified Access (completed transaction) ===

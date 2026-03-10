@@ -113,6 +113,42 @@ export interface ListDataAssetsResponse {
   data: DataAssetListItem[];
 }
 
+// --- Detail Response (GET /data-assets/{uuid}) ---
+
+export interface DataAssetDetailDdo {
+  id?: string;
+  version?: string;
+  metadata?: {
+    name?: string;
+    type?: string;
+    author?: string;
+    description?: string;
+    license?: string;
+  };
+  [key: string]: unknown;
+}
+
+export interface DataAssetDetail {
+  uuid: string;
+  name: string;
+  description?: string | null;
+  pricing_type: string;
+  price: string;
+  status: string;
+  publisher_info?: {
+    uuid?: string;
+    name?: string;
+    context?: string;
+  };
+  ddo?: DataAssetDetailDdo;
+  payment_token_symbol?: string;
+  [key: string]: unknown;
+}
+
+export interface DataAssetDetailResponse {
+  data: DataAssetDetail;
+}
+
 // --- Service ---
 
 export const dataAssetService = {
@@ -142,4 +178,8 @@ export const dataAssetService = {
     api.get<ListDataAssetsResponse>(
       `/data-assets?page=${page}&status=${status}&paginate=${paginate}`,
     ),
+
+  /** Single asset detail by UUID */
+  getById: (uuid: string): Promise<DataAssetDetailResponse> =>
+    api.get<DataAssetDetailResponse>(`/data-assets/${uuid}`),
 };
