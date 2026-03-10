@@ -330,15 +330,18 @@
       "wallet": "wallet",
       "address": "Adresse",
       "orgWallet": "Wallet",
+      "orgBalance": "Solde",
       "email": "Email",
       "companyName": "Nom de l'entreprise",
       "cif": "NIF / CIF",
       "documentType": "Type de document",
       "registrationNumber": "Numéro d'enregistrement",
       "registrationDate": "Date d'inscription",
-      "walletLabel": "Wallet",
+      "walletLabel": "Wallet principale",
       "noOrgSelected": "Sélectionnez une organisation pour voir ses informations.",
-      "notSignedIn": "Vous devez vous connecter pour voir ces informations."
+      "notSignedIn": "Vous devez vous connecter pour voir ces informations.",
+      "copyTooltip": "Copier",
+      "refreshTooltip": "Actualiser"
     },
     "securityTab": {
       "title": "Changer le mot de passe",

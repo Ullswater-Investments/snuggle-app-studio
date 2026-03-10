@@ -60,4 +60,11 @@ export const walletService = {
     api.get<WalletBalanceResponse>(
       `/profile/wallets/balance?wallet_uuid=${walletUuid}`,
     ),
+
+  getOrganizationWalletBalance: (
+    organizationUuid: string,
+  ): Promise<WalletBalanceResponse> =>
+    api.get<WalletBalanceResponse>(
+      `/organizations/${organizationUuid}/wallets/balance`,
+    ),
 };

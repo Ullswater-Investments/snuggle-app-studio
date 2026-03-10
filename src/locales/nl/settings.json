@@ -330,15 +330,18 @@
       "wallet": "wallet",
       "address": "Adres",
       "orgWallet": "Wallet",
+      "orgBalance": "Saldo",
       "email": "E-mail",
       "companyName": "Bedrijfsnaam",
       "cif": "BTW-nummer / KvK",
       "documentType": "Documenttype",
       "registrationNumber": "Registratienummer",
       "registrationDate": "Registratiedatum",
-      "walletLabel": "Wallet",
+      "walletLabel": "Primaire wallet",
       "noOrgSelected": "Selecteer een organisatie om de gegevens te bekijken.",
-      "notSignedIn": "U moet inloggen om deze informatie te bekijken."
+      "notSignedIn": "U moet inloggen om deze informatie te bekijken.",
+      "copyTooltip": "Kopiëren",
+      "refreshTooltip": "Vernieuwen"
     },
     "securityTab": {
       "title": "Wachtwoord wijzigen",
