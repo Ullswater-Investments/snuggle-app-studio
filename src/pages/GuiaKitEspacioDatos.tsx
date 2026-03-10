@@ -19,7 +19,7 @@ const beneficios = [
   "Subvención de hasta 30.000€ a fondo perdido",
   "Tramitación completa incluida",
   "Consultoría técnica especializada",
-  "Sin inversión inicial significativa (190€/mes)",
+  "Cuota de adhesión de 1.500€ + IVA (pago único)",
   "Acceso a tecnología de vanguardia",
   "Soporte durante todo el proceso",
 ];
