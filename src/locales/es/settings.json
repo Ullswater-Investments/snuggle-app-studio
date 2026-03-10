@@ -333,7 +333,7 @@
       "orgBalance": "Balance",
       "email": "Email",
       "companyName": "Nombre de la empresa",
-      "cif": "CIF / NIF",
+      "cif": "Número de documento",
       "documentType": "Tipo de documento",
       "registrationNumber": "Número de registro",
       "registrationDate": "Fecha de alta",

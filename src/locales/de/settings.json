@@ -333,7 +333,7 @@
       "orgBalance": "Kontostand",
       "email": "E-Mail",
       "companyName": "Unternehmensname",
-      "cif": "NIF / Steuer-ID",
+      "cif": "Dokumentnummer",
       "documentType": "Dokumenttyp",
       "registrationNumber": "Registrierungsnummer",
       "registrationDate": "Registrierungsdatum",

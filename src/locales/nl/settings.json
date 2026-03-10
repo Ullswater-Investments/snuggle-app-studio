@@ -333,7 +333,7 @@
       "orgBalance": "Saldo",
       "email": "E-mail",
       "companyName": "Bedrijfsnaam",
-      "cif": "BTW-nummer / KvK",
+      "cif": "Documentnummer",
       "documentType": "Documenttype",
       "registrationNumber": "Registratienummer",
       "registrationDate": "Registratiedatum",
