@@ -120,6 +120,8 @@
     "error": "Fout",
     "publishing": "Publiceren"
   },
+  "onchainErrorLabel": "Beschrijving van de onchain-fout",
+  "noErrorDetails": "Geen aanvullende foutdetails beschikbaar.",
   "publicationsTable": {
     "searchPlaceholder": "Zoeken op naam of DID...",
     "filterAll": "Alle",
@@ -129,6 +131,7 @@
     "actions": "ACTIES",
     "edit": "Bewerken",
     "retry": "Opnieuw proberen",
+    "errorTooltip": "Klik om foutdetails te bekijken",
     "priceFree": "Gratis",
     "pricePaid": "Betaald"
   },

@@ -120,6 +120,8 @@
     "error": "Error",
     "publishing": "Publicando"
   },
+  "onchainErrorLabel": "Descripción del error onchain",
+  "noErrorDetails": "No hay detalles adicionales del error.",
   "publicationsTable": {
     "searchPlaceholder": "Buscar por nombre o DID...",
     "filterAll": "Todos",
@@ -129,6 +131,7 @@
     "actions": "ACCIONES",
     "edit": "Editar",
     "retry": "Reintentar",
+    "errorTooltip": "Haz clic para ver el detalle del error",
     "priceFree": "Gratuito",
     "pricePaid": "De pago"
   },

@@ -2,9 +2,20 @@ import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { Search, Edit, RotateCcw, AlertCircle, ArrowUp, Database, Plus } from "lucide-react";
+import {
+  Search,
+  Edit,
+  RotateCcw,
+  AlertCircle,
+  ArrowUp,
+  Database,
+  Plus,
+} from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { dataAssetService, type DataAssetListItem } from "@/services/dataAssetService";
+import {
+  dataAssetService,
+  type DataAssetListItem,
+} from "@/services/dataAssetService";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -23,22 +34,70 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { EmptyState } from "@/components/EmptyState";
 import { format } from "date-fns";
 import { es, fr, pt, de, it, nl, enUS } from "date-fns/locale";
 import { toast } from "sonner";
 
-const DATE_LOCALES: Record<string, typeof es> = { es, fr, pt, de, it, nl, en: enUS };
+const DATE_LOCALES: Record<string, typeof es> = {
+  es,
+  fr,
+  pt,
+  de,
+  it,
+  nl,
+  en: enUS,
+};
 
-const getStatusBadge = (status: string, t: (key: string) => string) => {
+const getStatusBadge = (
+  status: string,
+  t: (key: string) => string,
+  opts?: { asset: DataAssetListItem; onOpenError: () => void },
+) => {
   switch (status) {
-    case "error":
-      return (
-        <Badge variant="destructive" className="gap-1">
+    case "error": {
+      const badgeContent = (
+        <>
           <AlertCircle className="h-3 w-3" />
           {t("pubStatus.error")}
+        </>
+      );
+      return opts ? (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-7 gap-1 cursor-pointer border-destructive/50 bg-destructive/10 text-destructive hover:bg-destructive/20 hover:text-destructive font-medium"
+                onClick={opts.onOpenError}
+              >
+                {badgeContent}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{t("publicationsTable.errorTooltip")}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ) : (
+        <Badge variant="destructive" className="gap-1">
+          {badgeContent}
         </Badge>
       );
+    }
     case "publishing":
     case "publicando":
       return (
@@ -88,6 +147,8 @@ export const MyPublicationsTab = () => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [errorModalAsset, setErrorModalAsset] =
+    useState<DataAssetListItem | null>(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["data-assets", activeOrgId, page],
@@ -104,7 +165,8 @@ export const MyPublicationsTab = () => {
       const q = search.trim().toLowerCase();
       list = list.filter(
         (a) =>
-          a.name?.toLowerCase().includes(q) || (a.did && a.did.toLowerCase().includes(q))
+          a.name?.toLowerCase().includes(q) ||
+          (a.did && a.did.toLowerCase().includes(q)),
       );
     }
     if (statusFilter !== "all") {
@@ -127,7 +189,9 @@ export const MyPublicationsTab = () => {
     return (
       <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-6 text-center">
         <p className="text-destructive font-medium">
-          {error instanceof Error ? error.message : "Error al cargar publicaciones"}
+          {error instanceof Error
+            ? error.message
+            : "Error al cargar publicaciones"}
         </p>
       </div>
     );
@@ -151,10 +215,17 @@ export const MyPublicationsTab = () => {
             <SelectValue placeholder={t("publicationsTable.filterAll")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t("publicationsTable.filterAll")}</SelectItem>
+            <SelectItem value="all">
+              {t("publicationsTable.filterAll")}
+            </SelectItem>
             <SelectItem value="error">{t("pubStatus.error")}</SelectItem>
-            <SelectItem value="publishing"> {t("pubStatus.publishing")}</SelectItem>
-            <SelectItem value="published">{t("pubStatus.published")}</SelectItem>
+            <SelectItem value="publishing">
+              {" "}
+              {t("pubStatus.publishing")}
+            </SelectItem>
+            <SelectItem value="published">
+              {t("pubStatus.published")}
+            </SelectItem>
             <SelectItem value="pending">{t("pubStatus.validation")}</SelectItem>
           </SelectContent>
         </Select>
@@ -180,7 +251,9 @@ export const MyPublicationsTab = () => {
       ) : filteredAssets.length === 0 ? (
         <div className="rounded-lg border p-8 text-center">
           <p className="text-muted-foreground">{t("noResults")}</p>
-          <p className="text-sm text-muted-foreground mt-1">{t("adjustFilters")}</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            {t("adjustFilters")}
+          </p>
         </div>
       ) : (
         <div className="rounded-lg border">
@@ -220,7 +293,18 @@ export const MyPublicationsTab = () => {
                     </div>
                   </TableCell>
                   <TableCell>{getPriceLabel(asset.pricing_type, t)}</TableCell>
-                  <TableCell>{getStatusBadge(asset.status, t)}</TableCell>
+                  <TableCell>
+                    {getStatusBadge(
+                      asset.status,
+                      t,
+                      asset.status === "error"
+                        ? {
+                            asset,
+                            onOpenError: () => setErrorModalAsset(asset),
+                          }
+                        : undefined,
+                    )}
+                  </TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-1">
                       <Button
@@ -272,6 +356,29 @@ export const MyPublicationsTab = () => {
           </Button>
         </div>
       )}
+
+      {/* Modal con detalle del error onchain */}
+      <Dialog
+        open={!!errorModalAsset}
+        onOpenChange={(open) => !open && setErrorModalAsset(null)}
+      >
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertCircle className="h-5 w-5 text-destructive" />
+              {t("pubStatus.error")} — {errorModalAsset?.name || "Activo"}
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-2">
+            <p className="text-sm font-medium text-muted-foreground">
+              {t("onchainErrorLabel")}:
+            </p>
+            <p className="rounded-md border bg-muted/50 p-4 text-sm font-mono whitespace-pre-wrap break-words">
+              {errorModalAsset?.onchain_error || t("noErrorDetails")}
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
