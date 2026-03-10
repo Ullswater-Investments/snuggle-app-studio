@@ -283,8 +283,25 @@
     "unknownError": "Unbekannter Fehler",
     "walletTab": {
       "title": "Wallet",
-      "description": "Verwalten Sie Ihre Wallet und Web3-Konfiguration",
-      "comingSoon": "Demnächst verfügbar"
+      "description": "Verwalten Sie Ihre Wallets und prüfen Sie Salden",
+      "comingSoon": "Demnächst verfügbar",
+      "primaryWallet": "Ihre primäre Wallet",
+      "primaryBadge": "Primär",
+      "managedBadge": "Verwaltet",
+      "balance": "Saldo",
+      "refresh": "Aktualisieren",
+      "transfer": "Überweisen",
+      "createManaged": "Verwaltete Wallet erstellen",
+      "importKeypair": "Wallet importieren (Keypair)",
+      "allWallets": "Alle meine Wallets",
+      "copy": "Adresse kopieren",
+      "copied": "Adresse kopiert",
+      "qrCode": "QR-Code",
+      "export": "Exportieren",
+      "delete": "Löschen",
+      "loadError": "Wallets konnten nicht geladen werden",
+      "retry": "Erneut versuchen",
+      "viewBalance": "Saldo anzeigen"
     },
     "appearanceTab": {
       "title": "Darstellung",

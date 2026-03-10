@@ -283,8 +283,25 @@
     "unknownError": "Onbekende fout",
     "walletTab": {
       "title": "Wallet",
-      "description": "Beheer je wallet en Web3-configuratie",
-      "comingSoon": "Binnenkort beschikbaar"
+      "description": "Beheer je wallets en bekijk saldi",
+      "comingSoon": "Binnenkort beschikbaar",
+      "primaryWallet": "Je primaire wallet",
+      "primaryBadge": "Primair",
+      "managedBadge": "Beheerd",
+      "balance": "Saldo",
+      "refresh": "Vernieuwen",
+      "transfer": "Overboeken",
+      "createManaged": "Beheerde wallet aanmaken",
+      "importKeypair": "Wallet importeren (keypair)",
+      "allWallets": "Al mijn wallets",
+      "copy": "Adres kopiëren",
+      "copied": "Adres gekopieerd",
+      "qrCode": "QR-code",
+      "export": "Exporteren",
+      "delete": "Verwijderen",
+      "loadError": "Kon wallets niet laden",
+      "retry": "Opnieuw proberen",
+      "viewBalance": "Saldo bekijken"
     },
     "appearanceTab": {
       "title": "Uiterlijk",

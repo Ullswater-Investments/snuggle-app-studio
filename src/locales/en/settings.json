@@ -283,8 +283,25 @@
     "unknownError": "Unknown error",
     "walletTab": {
       "title": "Wallet",
-      "description": "Manage your wallet and Web3 configuration",
-      "comingSoon": "Coming soon"
+      "description": "Manage your wallets and check balances",
+      "comingSoon": "Coming soon",
+      "primaryWallet": "Your primary wallet",
+      "primaryBadge": "Primary",
+      "managedBadge": "Managed",
+      "balance": "Balance",
+      "refresh": "Refresh",
+      "transfer": "Transfer",
+      "createManaged": "Create managed wallet",
+      "importKeypair": "Import wallet (keypair)",
+      "allWallets": "All my wallets",
+      "copy": "Copy address",
+      "copied": "Address copied",
+      "qrCode": "QR Code",
+      "export": "Export",
+      "delete": "Delete",
+      "loadError": "Could not load wallets",
+      "retry": "Retry",
+      "viewBalance": "View balance"
     },
     "appearanceTab": {
       "title": "Appearance",
