@@ -106,7 +106,7 @@ export default function CondicionesKitEspacioDatos() {
         {/* Summary Cards */}
         <div className="grid md:grid-cols-3 gap-4 mb-12">
           {[
-            { value: "190€/mes", label: "Cuota fija + IVA", sub: "6 meses iniciales" },
+            { value: "250€/mes", label: "Cuota fija + IVA", sub: "6 meses iniciales" },
             { value: "6 meses", label: "Fase inicial", sub: "Compromiso irrevocable" },
             { value: "30.000€", label: "Subvención máxima", sub: "A fondo perdido de RED.ES" },
           ].map((card, i) => (
@@ -217,7 +217,7 @@ export default function CondicionesKitEspacioDatos() {
         <div className="text-center space-y-4">
           <Button asChild size="lg" className="w-full sm:w-auto">
             <Link to="/inscripcion-kit-espacio-datos">
-              Solicitar Inscripción por 190€/mes <ArrowRight className="ml-2 h-4 w-4" />
+              Solicitar Inscripción por 250€/mes <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
