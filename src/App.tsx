@@ -12,7 +12,6 @@ import { ProfileGuard } from "@/components/ProfileGuard";
 import { OrganizationGuard } from "@/components/OrganizationGuard";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppLayout } from "@/components/AppLayout";
-import { PublicAppLayout } from "@/components/PublicAppLayout";
 import CompleteProfile from "@/pages/CompleteProfile";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { AdminProtectedRoute } from "@/components/admin/AdminProtectedRoute";
@@ -960,12 +959,6 @@ const App = () => (
                       }
                     />
 
-                    {/* Public success stories - no auth required */}
-                    <Route element={<PublicAppLayout />}>
-                      <Route path="/success-stories" element={<SuccessStories />} />
-                      <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
-                    </Route>
-
                     {/* Protected routes with AppLayout (requires completed profile) */}
                     <Route
                       element={
@@ -976,6 +969,8 @@ const App = () => (
                     >
                       <Route element={<AppLayout />}>
                         <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/success-stories" element={<SuccessStories />} />
+                        <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
                         <Route path="/catalog" element={<Catalog />} />
                         <Route
                           path="/catalog/product/:id"
