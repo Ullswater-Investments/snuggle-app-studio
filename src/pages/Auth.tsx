@@ -224,6 +224,7 @@ const Auth = () => {
                               <Input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="••••••••"
+                                autoComplete="new-password"
                                 {...field}
                               />
                               <Button
@@ -301,6 +302,7 @@ const Auth = () => {
                               <Input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="••••••••"
+                                autoComplete="new-password"
                                 {...field}
                               />
                               <Button
@@ -334,6 +336,7 @@ const Auth = () => {
                               <Input
                                 type={showConfirmPassword ? "text" : "password"}
                                 placeholder="••••••••"
+                                autoComplete="new-password"
                                 {...field}
                               />
                               <Button
