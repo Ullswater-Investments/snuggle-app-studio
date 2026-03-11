@@ -488,6 +488,17 @@ export const supportedLanguages = [
 
 export type SupportedLanguage = typeof supportedLanguages[number]['code'];
 
+/** Códigos de idioma soportados por la app para APIs externas (p. ej. sesión KYC) */
+export const APP_LANGUAGE_CODES: SupportedLanguage[] = ['es', 'en', 'fr', 'pt', 'de', 'it', 'nl'];
+
+/** Normaliza i18n.language al formato de idioma soportado por la app (solo es, en, fr, pt, de, it, nl). */
+export function normalizeLanguageForApi(lang: string): SupportedLanguage {
+  const base = lang?.split('-')[0]?.toLowerCase() || 'es';
+  return APP_LANGUAGE_CODES.includes(base as SupportedLanguage)
+    ? (base as SupportedLanguage)
+    : 'es';
+}
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)

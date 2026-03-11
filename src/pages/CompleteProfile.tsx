@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { normalizeLanguageForApi } from "@/i18n";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { kycService } from "@/services/kycService";
@@ -36,7 +37,8 @@ const CompleteProfile = () => {
     setLoadingSession(true);
     setSessionError(false);
     try {
-      const { session } = await kycService.createKycSession(i18n.language);
+      const lang = normalizeLanguageForApi(i18n.language);
+      const { session } = await kycService.createKycSession(lang);
       setKycUrl(session.url);
       setSessionId(session.session_id);
     } catch {
