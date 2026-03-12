@@ -65,15 +65,15 @@ export function AppSidebar() {
   const menuItems = [
     { title: t("dashboard"), url: "/dashboard", icon: LayoutDashboard },
     { title: t("catalog"), url: "/catalog", icon: Package },
-    // { title: t("requests"), url: "/requests", icon: ClipboardList },
+    { title: t("requests"), url: "/requests", icon: ClipboardList },
     { title: t("data"), url: "/data", icon: Database },
-    // { title: t("sustainability"), url: "/sustainability", icon: Leaf },
-    // { title: t("services"), url: "/services", icon: Sparkles },
-    // { title: t("innovationLab"), url: "/innovation", icon: Lightbulb },
-    // { title: t("successStories"), url: "/success-stories", icon: Award },
-    // { title: t("opportunities"), url: "/opportunities", icon: Megaphone },
-    // { title: t("reports"), url: "/reports", icon: BarChart3 },
-    // { title: t("notifications"), url: "/notifications", icon: Bell },
+    { title: t("sustainability"), url: "/sustainability", icon: Leaf },
+    { title: t("services"), url: "/services", icon: Sparkles },
+    { title: t("innovationLab"), url: "/innovation", icon: Lightbulb },
+    { title: t("successStories"), url: "/success-stories", icon: Award },
+    { title: t("opportunities"), url: "/opportunities", icon: Megaphone },
+    { title: t("reports"), url: "/reports", icon: BarChart3 },
+    { title: t("notifications"), url: "/notifications", icon: Bell },
     { title: t("settings"), url: "/settings", icon: Settings },
   ];
 
