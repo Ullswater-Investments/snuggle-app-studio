@@ -49,6 +49,7 @@
   "inviteEmailPlaceholder": "email@exemplo.com",
   "searchingUser": "A procurar utilizador...",
   "userNotFound": "Utilizador não encontrado",
+  "userAlreadyAdded": "Utilizador já adicionado",
   "role": "Papel",
   "selectRole": "Selecionar papel",
   "roleMember": "Membro",

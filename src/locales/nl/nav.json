@@ -49,6 +49,7 @@
   "inviteEmailPlaceholder": "email@voorbeeld.com",
   "searchingUser": "Gebruiker zoeken...",
   "userNotFound": "Gebruiker niet gevonden",
+  "userAlreadyAdded": "Gebruiker al toegevoegd",
   "role": "Rol",
   "selectRole": "Selecteer rol",
   "roleMember": "Lid",

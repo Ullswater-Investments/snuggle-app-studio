@@ -47,7 +47,7 @@ export default function OrganizationInvitationsTab() {
   const { t } = useTranslation("nav");
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [foundUser, setFoundUser] = useState<InvitationSearchUser | null>(null);
+  const [selectedUsers, setSelectedUsers] = useState<InvitationSearchUser[]>([]);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedRole, setSelectedRole] = useState<string>("member");
@@ -59,29 +59,34 @@ export default function OrganizationInvitationsTab() {
     if (!orgId || !email.trim() || !isValidEmail) return;
     setIsSearching(true);
     setSearchError(null);
-    setFoundUser(null);
     try {
       const res = await organizationService.searchUserForInvitation(
         orgId,
         email.trim(),
       );
       if (res.data) {
-        setFoundUser(res.data);
+        const alreadyAdded = selectedUsers.some(
+          (u) => u.uuid === res.data!.uuid || u.email === res.data!.email
+        );
+        if (alreadyAdded) {
+          setSearchError(t("userAlreadyAdded"));
+        } else {
+          setSelectedUsers((prev) => [...prev, res.data!]);
+          setEmail("");
+          setSearchError(null);
+        }
       } else {
-        setFoundUser(null);
         setSearchError(res.message ?? t("userNotFound"));
       }
     } catch {
-      setFoundUser(null);
       setSearchError(t("userNotFound"));
     } finally {
       setIsSearching(false);
     }
-  }, [orgId, email, isValidEmail, t]);
+  }, [orgId, email, isValidEmail, t, selectedUsers]);
 
   useEffect(() => {
     if (!isValidEmail) {
-      setFoundUser(null);
       setSearchError(null);
       return;
     }
@@ -93,19 +98,19 @@ export default function OrganizationInvitationsTab() {
     setOpen(next);
     if (!next) {
       setEmail("");
-      setFoundUser(null);
+      setSelectedUsers([]);
       setSearchError(null);
       setSelectedRole("member");
       setMessage("");
     }
   };
 
-  const handleRemoveUser = () => {
-    setFoundUser(null);
+  const handleRemoveUser = (userUuid: string) => {
+    setSelectedUsers((prev) => prev.filter((u) => u.uuid !== userUuid));
     setSearchError(null);
   };
 
-  const canSend = !!foundUser;
+  const canSend = selectedUsers.length > 0;
   const hasSearched = isValidEmail && !isSearching;
 
   return (
@@ -164,19 +169,26 @@ export default function OrganizationInvitationsTab() {
                 <p className="text-sm text-destructive">{searchError}</p>
               )}
 
-              {foundUser && (
+              {selectedUsers.length > 0 && (
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-2 rounded-full bg-emerald-50 dark:bg-emerald-950/30 px-4 py-2 text-emerald-800 dark:text-emerald-200 min-w-0">
-                    <span className="text-sm truncate min-w-0">
-                      {foundUser.name} • {foundUser.email}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleRemoveUser}
-                      className="shrink-0 rounded-full p-1 hover:bg-emerald-200/50 dark:hover:bg-emerald-800/50"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
+                  <div className="flex flex-col gap-2">
+                    {selectedUsers.map((user) => (
+                      <div
+                        key={user.uuid}
+                        className="flex items-center justify-between gap-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 px-4 py-2 text-emerald-800 dark:text-emerald-200 min-w-0"
+                      >
+                        <span className="text-sm truncate min-w-0 flex-1">
+                          {user.name ? `${user.name} • ` : ""}{user.email}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveUser(user.uuid)}
+                          className="shrink-0 rounded-full p-1 hover:bg-emerald-200/50 dark:hover:bg-emerald-800/50"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
+                    ))}
                   </div>
                   <div className="grid gap-2">
                     <Label>{t("role")}</Label>
