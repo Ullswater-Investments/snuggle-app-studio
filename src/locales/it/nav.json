@@ -43,5 +43,19 @@
   "membersLoadError": "Errore nel caricamento dei membri.",
   "manageMembers": "Gestisci i membri dell'organizzazione e i loro ruoli.",
   "searchMembersPlaceholder": "Cerca per nome, email o ruolo...",
-  "noMembersFound": "Nessun membro trovato"
+  "noMembersFound": "Nessun membro trovato",
+  "inviteUser": "Invita utente",
+  "inviteUserDescription": "Cerca un utente per email esatta per inviargli un invito.",
+  "inviteEmailPlaceholder": "email@esempio.com",
+  "searchingUser": "Ricerca utente...",
+  "userNotFound": "Utente non trovato",
+  "role": "Ruolo",
+  "selectRole": "Seleziona ruolo",
+  "roleMember": "Membro",
+  "roleAdmin": "Admin",
+  "messageOptional": "Messaggio (opzionale)",
+  "inviteMessagePlaceholder": "Un messaggio per l'invitato...",
+  "cancel": "Annulla",
+  "sendInvitation": "Invia invito",
+  "noInvitations": "Nessun invito"
 }

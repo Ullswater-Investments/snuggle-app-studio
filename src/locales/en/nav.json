@@ -43,5 +43,19 @@
   "membersLoadError": "Error loading members.",
   "manageMembers": "Manage organization members and their roles.",
   "searchMembersPlaceholder": "Search by name, email or role...",
-  "noMembersFound": "No members found"
+  "noMembersFound": "No members found",
+  "inviteUser": "Invite user",
+  "inviteUserDescription": "Search for a user by exact email to send them an invitation.",
+  "inviteEmailPlaceholder": "email@example.com",
+  "searchingUser": "Searching user...",
+  "userNotFound": "User not found",
+  "role": "Role",
+  "selectRole": "Select role",
+  "roleMember": "Member",
+  "roleAdmin": "Admin",
+  "messageOptional": "Message (optional)",
+  "inviteMessagePlaceholder": "A message for the invited person...",
+  "cancel": "Cancel",
+  "sendInvitation": "Send invitation",
+  "noInvitations": "No invitations"
 }

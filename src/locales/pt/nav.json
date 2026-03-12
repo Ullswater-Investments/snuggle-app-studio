@@ -43,5 +43,19 @@
   "membersLoadError": "Erro ao carregar os membros.",
   "manageMembers": "Gerir os membros da organização e os seus papéis.",
   "searchMembersPlaceholder": "Pesquisar por nome, email ou papel...",
-  "noMembersFound": "Nenhum membro encontrado"
+  "noMembersFound": "Nenhum membro encontrado",
+  "inviteUser": "Convidar utilizador",
+  "inviteUserDescription": "Procura um utilizador por email exato para enviar um convite.",
+  "inviteEmailPlaceholder": "email@exemplo.com",
+  "searchingUser": "A procurar utilizador...",
+  "userNotFound": "Utilizador não encontrado",
+  "role": "Papel",
+  "selectRole": "Selecionar papel",
+  "roleMember": "Membro",
+  "roleAdmin": "Admin",
+  "messageOptional": "Mensagem (opcional)",
+  "inviteMessagePlaceholder": "Uma mensagem para o convidado...",
+  "cancel": "Cancelar",
+  "sendInvitation": "Enviar convite",
+  "noInvitations": "Sem convites"
 }

@@ -43,5 +43,19 @@
   "membersLoadError": "Fehler beim Laden der Mitglieder.",
   "manageMembers": "Verwalten Sie die Mitglieder der Organisation und ihre Rollen.",
   "searchMembersPlaceholder": "Nach Name, E-Mail oder Rolle suchen...",
-  "noMembersFound": "Keine Mitglieder gefunden"
+  "noMembersFound": "Keine Mitglieder gefunden",
+  "inviteUser": "Benutzer einladen",
+  "inviteUserDescription": "Suchen Sie einen Benutzer anhand der exakten E-Mail-Adresse, um eine Einladung zu senden.",
+  "inviteEmailPlaceholder": "email@beispiel.com",
+  "searchingUser": "Benutzer wird gesucht...",
+  "userNotFound": "Benutzer nicht gefunden",
+  "role": "Rolle",
+  "selectRole": "Rolle auswählen",
+  "roleMember": "Mitglied",
+  "roleAdmin": "Admin",
+  "messageOptional": "Nachricht (optional)",
+  "inviteMessagePlaceholder": "Eine Nachricht für den eingeladenen...",
+  "cancel": "Abbrechen",
+  "sendInvitation": "Einladung senden",
+  "noInvitations": "Keine Einladungen"
 }

@@ -43,5 +43,19 @@
   "membersLoadError": "Fout bij het laden van leden.",
   "manageMembers": "Beheer de leden van de organisatie en hun rollen.",
   "searchMembersPlaceholder": "Zoeken op naam, e-mail of rol...",
-  "noMembersFound": "Geen leden gevonden"
+  "noMembersFound": "Geen leden gevonden",
+  "inviteUser": "Gebruiker uitnodigen",
+  "inviteUserDescription": "Zoek een gebruiker op exact e-mailadres om een uitnodiging te sturen.",
+  "inviteEmailPlaceholder": "email@voorbeeld.com",
+  "searchingUser": "Gebruiker zoeken...",
+  "userNotFound": "Gebruiker niet gevonden",
+  "role": "Rol",
+  "selectRole": "Selecteer rol",
+  "roleMember": "Lid",
+  "roleAdmin": "Beheerder",
+  "messageOptional": "Bericht (optioneel)",
+  "inviteMessagePlaceholder": "Een bericht voor de uitgenodigde...",
+  "cancel": "Annuleren",
+  "sendInvitation": "Uitnodiging versturen",
+  "noInvitations": "Geen uitnodigingen"
 }

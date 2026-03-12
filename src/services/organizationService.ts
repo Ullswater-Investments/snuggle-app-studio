@@ -130,6 +130,42 @@ export interface GetMembersResponse {
   data: OrganizationMember[];
 }
 
+/** User found by email for invitation (GET /organizations/:id/invitations/search-user) */
+export interface InvitationSearchUserProfile {
+  uuid: string;
+  user_uuid: string;
+  first_name: string;
+  last_name: string;
+  nationality: string | null;
+  country: string;
+  ip_country: string;
+  city: string | null;
+  address: string | null;
+  id_number: string;
+  postal_code: string | null;
+  phone_number: string | null;
+  birthdate: string;
+  kyc_verified_at: string | null;
+  gender: string;
+  language: string | null;
+  created_at: string;
+  updated_at: string;
+  primary_wallet_address: string | null;
+  primary_wallet: string | null;
+}
+
+export interface InvitationSearchUser {
+  uuid: string;
+  email: string;
+  name: string;
+  profile: InvitationSearchUserProfile;
+}
+
+export interface SearchUserForInvitationResponse {
+  data: InvitationSearchUser | null;
+  message?: string;
+}
+
 export const organizationService = {
   importOrganization: (
     walletFile: File,
@@ -154,4 +190,12 @@ export const organizationService = {
 
   getMembers: (organizationId: string): Promise<GetMembersResponse> =>
     api.get<GetMembersResponse>(`/organizations/${organizationId}/members`),
+
+  searchUserForInvitation: (
+    organizationId: string,
+    email: string,
+  ): Promise<SearchUserForInvitationResponse> =>
+    api.get<SearchUserForInvitationResponse>(
+      `/organizations/${organizationId}/invitations/search-user?email=${encodeURIComponent(email)}`,
+    ),
 };
