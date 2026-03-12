@@ -64,5 +64,7 @@
   "invitationsSent": "Invitaciones enviadas",
   "invitationsSentDescription": "{{count}} invitaciones enviadas correctamente",
   "invitationSendError": "Error al enviar la invitación",
-  "noInvitations": "No hay invitaciones"
+  "noInvitations": "No hay invitaciones",
+  "statusPending": "Pendiente",
+  "statusCancelled": "Cancelada"
 }

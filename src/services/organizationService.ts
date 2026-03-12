@@ -188,6 +188,67 @@ export interface CreateInvitationResponse {
   };
 }
 
+/** Invitation from GET /organizations/:id/invitations */
+export interface OrgInvitationProfile {
+  uuid: string;
+  user_uuid: string;
+  first_name: string;
+  last_name: string;
+  nationality: string | null;
+  country: string;
+  ip_country: string;
+  city: string | null;
+  address: string | null;
+  id_number: string;
+  postal_code: string | null;
+  phone_number: string | null;
+  birthdate: string;
+  kyc_verified_at: string | null;
+  gender: string;
+  language: string | null;
+  created_at: string;
+  updated_at: string;
+  primary_wallet_address: string | null;
+  primary_wallet: string | null;
+}
+
+export interface OrgInvitationInvitedUser {
+  uuid: string;
+  email: string;
+  profile: OrgInvitationProfile | null;
+  wallet_address: string | null;
+}
+
+export interface OrgInvitationRole {
+  uuid: string;
+  slug: string;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrganizationInvitation {
+  uuid: string;
+  organization_uuid: string;
+  invited_by_user_uuid: string;
+  invited_user_uuid: string;
+  role_uuid: string;
+  status: "pending" | "cancelled" | "accepted" | "rejected";
+  message: string | null;
+  expires_at: string | null;
+  responded_at: string | null;
+  created_at: string;
+  updated_at: string;
+  role: OrgInvitationRole;
+  invitedUser: OrgInvitationInvitedUser;
+  invitedBy: { uuid: string; email: string; profile: OrgInvitationProfile | null; wallet_address: string | null };
+}
+
+export interface GetInvitationsResponse {
+  data: OrganizationInvitation[];
+}
+
 export const organizationService = {
   importOrganization: (
     walletFile: File,
@@ -228,5 +289,10 @@ export const organizationService = {
     api.post<CreateInvitationResponse>(
       `/organizations/${organizationId}/invitations`,
       payload,
+    ),
+
+  getInvitations: (organizationId: string): Promise<GetInvitationsResponse> =>
+    api.get<GetInvitationsResponse>(
+      `/organizations/${organizationId}/invitations`,
     ),
 };

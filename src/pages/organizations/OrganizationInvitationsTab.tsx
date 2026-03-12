@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { Mail, UserPlus, Search, X, Loader2 } from "lucide-react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Mail, UserPlus, Search, X, Loader2, User } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,10 +30,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import {
   organizationService,
   type InvitationSearchUser,
+  type OrganizationInvitation,
 } from "@/services/organizationService";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,9 +46,28 @@ const ROLES = [
   { value: "member", labelKey: "roleMember" },
 ] as const;
 
+function getInvitedUserDisplay(inv: OrganizationInvitation): { name: string; email: string } {
+  const u = inv.invitedUser;
+  const profile = u?.profile;
+  const name = profile
+    ? [profile.first_name, profile.last_name].filter(Boolean).join(" ").trim()
+    : "";
+  return {
+    name: name || u?.email || "",
+    email: u?.email || "",
+  };
+}
+
 export default function OrganizationInvitationsTab() {
   const { id: orgId } = useParams<{ id: string }>();
   const { t } = useTranslation("nav");
+  const queryClient = useQueryClient();
+  const { data: invitationsData, isLoading: loadingInvitations, isError: invitationsError } = useQuery({
+    queryKey: ["organization-invitations", orgId],
+    queryFn: () => organizationService.getInvitations(orgId!),
+    enabled: !!orgId,
+  });
+  const invitations = invitationsData?.data ?? [];
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [selectedUsers, setSelectedUsers] = useState<InvitationSearchUser[]>([]);
@@ -146,12 +168,17 @@ export default function OrganizationInvitationsTab() {
             ? undefined
             : t("invitationsSentDescription", { count: successCount }),
       });
+      queryClient.invalidateQueries({ queryKey: ["organization-invitations", orgId] });
       handleOpenChange(false);
     }
   };
 
   const canSend = selectedUsers.length > 0 && !isSending;
   const hasSearched = isValidEmail && !isSearching;
+
+  const handleCancelInvitation = (_invitationUuid: string) => {
+    // TODO: Endpoint para cancelar aún por definir
+  };
 
   return (
     <Card>
@@ -284,10 +311,62 @@ export default function OrganizationInvitationsTab() {
         </Dialog>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
-          <Mail className="h-12 w-12 mb-4 opacity-50" />
-          <p className="text-sm font-medium">{t("noInvitations")}</p>
-        </div>
+        {loadingInvitations ? (
+          <div className="flex flex-col items-center justify-center py-16">
+            <Loader2 className="h-10 w-10 animate-spin text-muted-foreground" />
+            <p className="mt-2 text-sm text-muted-foreground">{t("loadingMembers")}</p>
+          </div>
+        ) : invitations.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
+            <Mail className="h-12 w-12 mb-4 opacity-50" />
+            <p className="text-sm font-medium">{t("noInvitations")}</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-border">
+            {invitations.map((inv) => {
+              const { name, email: invEmail } = getInvitedUserDisplay(inv);
+              const isPending = inv.status === "pending";
+              const statusKey = inv.status === "cancelled" ? "statusCancelled" : "statusPending";
+              return (
+                <div
+                  key={inv.uuid}
+                  className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0"
+                >
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <p className="text-sm font-medium truncate">{name || invEmail}</p>
+                    <p className="text-xs text-muted-foreground truncate">{invEmail}</p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <Badge variant="secondary" className="gap-1">
+                      <User className="h-3 w-3" />
+                      {inv.role?.name ?? t("roleMember")}
+                    </Badge>
+                    <Badge
+                      variant={isPending ? "default" : "secondary"}
+                      className={
+                        isPending
+                          ? "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
+                          : "bg-muted text-muted-foreground"
+                      }
+                    >
+                      {t(statusKey)}
+                    </Badge>
+                    {isPending && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                        onClick={() => handleCancelInvitation(inv.uuid)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </CardContent>
     </Card>
   );

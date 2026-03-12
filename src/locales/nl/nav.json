@@ -64,5 +64,7 @@
   "invitationsSent": "Uitnodigingen verzonden",
   "invitationsSentDescription": "{{count}} uitnodigingen succesvol verzonden",
   "invitationSendError": "Fout bij het versturen van de uitnodiging",
-  "noInvitations": "Geen uitnodigingen"
+  "noInvitations": "Geen uitnodigingen",
+  "statusPending": "In afwachting",
+  "statusCancelled": "Geannuleerd"
 }
