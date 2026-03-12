@@ -32,5 +32,9 @@
   "members": "Membres",
   "invitations": "Invitations",
   "manageInvitations": "Gérez les invitations de l'organisation",
-  "inviteMember": "Inviter un membre"
+  "inviteMember": "Inviter un membre",
+  "myInvitations": "Mes invitations",
+  "invitationsSubtitle": "Invitations reçues pour rejoindre des organisations",
+  "noPendingInvitations": "Vous n'avez pas d'invitations en attente pour le moment",
+  "noInvitationsDescription": "Lorsque quelqu'un vous invitera à une organisation, cela apparaîtra ici."
 }

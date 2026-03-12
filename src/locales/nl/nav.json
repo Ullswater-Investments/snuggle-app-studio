@@ -32,5 +32,9 @@
   "members": "Leden",
   "invitations": "Uitnodigingen",
   "manageInvitations": "Beheer de uitnodigingen van de organisatie",
-  "inviteMember": "Lid uitnodigen"
+  "inviteMember": "Lid uitnodigen",
+  "myInvitations": "Mijn uitnodigingen",
+  "invitationsSubtitle": "Uitnodigingen ontvangen om lid te worden van organisaties",
+  "noPendingInvitations": "Je hebt momenteel geen openstaande uitnodigingen",
+  "noInvitationsDescription": "Wanneer iemand je uitnodigt voor een organisatie, verschijnt dat hier."
 }

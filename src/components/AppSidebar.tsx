@@ -222,6 +222,26 @@ export function AppSidebar() {
           </SidebarGroup>
         )}
 
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink
+                    to="/invitations"
+                    end
+                    className="flex items-center gap-3 hover:bg-muted/50 transition-colors"
+                    activeClassName="bg-muted text-primary font-medium"
+                  >
+                    <Mail className="h-5 w-5 shrink-0" />
+                    {open && <span>{t("myInvitations")}</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
         {/* <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
             {t("quickActions")}

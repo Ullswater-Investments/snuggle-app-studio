@@ -22,6 +22,7 @@ import Auth from "./pages/Auth";
 import Guide from "./pages/Guide";
 import Dashboard from "./pages/Dashboard";
 import OrganizationMembersPage from "./pages/organizations/OrganizationMembersPage";
+import InvitationsView from "./pages/InvitationsView";
 import Architecture from "./pages/Architecture";
 import Catalog from "./pages/Catalog";
 import ProductDetail from "./pages/ProductDetail";
@@ -974,6 +975,7 @@ const App = () => (
                           path="/organizations/:id"
                           element={<OrganizationMembersPage />}
                         />
+                        <Route path="/invitations" element={<InvitationsView />} />
                         <Route path="/success-stories" element={<SuccessStories />} />
                         <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
                         <Route path="/catalog" element={<Catalog />} />

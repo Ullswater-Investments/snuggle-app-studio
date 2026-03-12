@@ -32,5 +32,9 @@
   "members": "Membros",
   "invitations": "Convites",
   "manageInvitations": "Gerencie os convites da organização",
-  "inviteMember": "Convidar membro"
+  "inviteMember": "Convidar membro",
+  "myInvitations": "Meus convites",
+  "invitationsSubtitle": "Convites recebidos para aderir a organizações",
+  "noPendingInvitations": "Não tens convites pendentes neste momento",
+  "noInvitationsDescription": "Quando alguém te convidar para uma organização, aparecerá aqui."
 }
