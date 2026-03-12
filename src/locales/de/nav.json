@@ -42,5 +42,6 @@
   "loadingMembers": "Mitglieder werden geladen...",
   "membersLoadError": "Fehler beim Laden der Mitglieder.",
   "manageMembers": "Verwalten Sie die Mitglieder der Organisation und ihre Rollen.",
-  "searchMembersPlaceholder": "Nach Name, E-Mail oder Rolle suchen..."
+  "searchMembersPlaceholder": "Nach Name, E-Mail oder Rolle suchen...",
+  "noMembersFound": "Keine Mitglieder gefunden"
 }

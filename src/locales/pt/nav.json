@@ -42,5 +42,6 @@
   "loadingMembers": "A carregar membros...",
   "membersLoadError": "Erro ao carregar os membros.",
   "manageMembers": "Gerir os membros da organização e os seus papéis.",
-  "searchMembersPlaceholder": "Pesquisar por nome, email ou papel..."
+  "searchMembersPlaceholder": "Pesquisar por nome, email ou papel...",
+  "noMembersFound": "Nenhum membro encontrado"
 }

@@ -42,5 +42,6 @@
   "loadingMembers": "Loading members...",
   "membersLoadError": "Error loading members.",
   "manageMembers": "Manage organization members and their roles.",
-  "searchMembersPlaceholder": "Search by name, email or role..."
+  "searchMembersPlaceholder": "Search by name, email or role...",
+  "noMembersFound": "No members found"
 }

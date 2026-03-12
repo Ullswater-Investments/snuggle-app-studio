@@ -42,5 +42,6 @@
   "loadingMembers": "Cargando miembros...",
   "membersLoadError": "Error al cargar los miembros.",
   "manageMembers": "Gestiona los miembros de la organización y sus roles.",
-  "searchMembersPlaceholder": "Buscar por nombre, email o rol..."
+  "searchMembersPlaceholder": "Buscar por nombre, email o rol...",
+  "noMembersFound": "No se encontraron miembros"
 }

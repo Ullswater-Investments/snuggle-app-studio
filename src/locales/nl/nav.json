@@ -42,5 +42,6 @@
   "loadingMembers": "Leden laden...",
   "membersLoadError": "Fout bij het laden van leden.",
   "manageMembers": "Beheer de leden van de organisatie en hun rollen.",
-  "searchMembersPlaceholder": "Zoeken op naam, e-mail of rol..."
+  "searchMembersPlaceholder": "Zoeken op naam, e-mail of rol...",
+  "noMembersFound": "Geen leden gevonden"
 }
