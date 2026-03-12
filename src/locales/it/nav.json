@@ -36,5 +36,11 @@
   "myInvitations": "Le mie inviti",
   "invitationsSubtitle": "Inviti ricevuti per unirti alle organizzazioni",
   "noPendingInvitations": "Non hai inviti in sospeso al momento",
-  "noInvitationsDescription": "Quando qualcuno ti inviterà a un'organizzazione, apparirà qui."
+  "noInvitationsDescription": "Quando qualcuno ti inviterà a un'organizzazione, apparirà qui.",
+  "backToList": "Torna all'elenco",
+  "organization": "Organizzazione",
+  "loadingMembers": "Caricamento membri...",
+  "membersLoadError": "Errore nel caricamento dei membri.",
+  "manageMembers": "Gestisci i membri dell'organizzazione e i loro ruoli.",
+  "searchMembersPlaceholder": "Cerca per nome, email o ruolo..."
 }

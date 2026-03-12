@@ -36,5 +36,11 @@
   "myInvitations": "My Invitations",
   "invitationsSubtitle": "Invitations received to join organizations",
   "noPendingInvitations": "You have no pending invitations at this time.",
-  "noInvitationsDescription": "When someone invites you to an organization, it will appear here."
+  "noInvitationsDescription": "When someone invites you to an organization, it will appear here.",
+  "backToList": "Back to list",
+  "organization": "Organization",
+  "loadingMembers": "Loading members...",
+  "membersLoadError": "Error loading members.",
+  "manageMembers": "Manage organization members and their roles.",
+  "searchMembersPlaceholder": "Search by name, email or role..."
 }

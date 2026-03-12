@@ -36,5 +36,11 @@
   "myInvitations": "Mijn uitnodigingen",
   "invitationsSubtitle": "Uitnodigingen ontvangen om lid te worden van organisaties",
   "noPendingInvitations": "Je hebt momenteel geen openstaande uitnodigingen",
-  "noInvitationsDescription": "Wanneer iemand je uitnodigt voor een organisatie, verschijnt dat hier."
+  "noInvitationsDescription": "Wanneer iemand je uitnodigt voor een organisatie, verschijnt dat hier.",
+  "backToList": "Terug naar lijst",
+  "organization": "Organisatie",
+  "loadingMembers": "Leden laden...",
+  "membersLoadError": "Fout bij het laden van leden.",
+  "manageMembers": "Beheer de leden van de organisatie en hun rollen.",
+  "searchMembersPlaceholder": "Zoeken op naam, e-mail of rol..."
 }

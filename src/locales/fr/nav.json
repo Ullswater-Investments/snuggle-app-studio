@@ -36,5 +36,11 @@
   "myInvitations": "Mes invitations",
   "invitationsSubtitle": "Invitations reçues pour rejoindre des organisations",
   "noPendingInvitations": "Vous n'avez pas d'invitations en attente pour le moment",
-  "noInvitationsDescription": "Lorsque quelqu'un vous invitera à une organisation, cela apparaîtra ici."
+  "noInvitationsDescription": "Lorsque quelqu'un vous invitera à une organisation, cela apparaîtra ici.",
+  "backToList": "Retour à la liste",
+  "organization": "Organisation",
+  "loadingMembers": "Chargement des membres...",
+  "membersLoadError": "Erreur lors du chargement des membres.",
+  "manageMembers": "Gérer les membres de l'organisation et leurs rôles.",
+  "searchMembersPlaceholder": "Rechercher par nom, email ou rôle..."
 }

@@ -32,7 +32,7 @@ export default function OrganizationMembersPage() {
         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
-        Volver al listado
+        {t("backToList")}
       </Link>
 
       <div className="flex items-center gap-3">
@@ -41,7 +41,7 @@ export default function OrganizationMembersPage() {
         </div>
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
-            {activeOrg?.name || "Organización"}
+            {activeOrg?.name || t("organization")}
           </h1>
         </div>
       </div>

@@ -36,5 +36,11 @@
   "myInvitations": "Meine Einladungen",
   "invitationsSubtitle": "Einladungen zum Beitritt zu Organisationen",
   "noPendingInvitations": "Sie haben derzeit keine ausstehenden Einladungen",
-  "noInvitationsDescription": "Wenn Sie zu einer Organisation eingeladen werden, erscheint dies hier."
+  "noInvitationsDescription": "Wenn Sie zu einer Organisation eingeladen werden, erscheint dies hier.",
+  "backToList": "Zurück zur Liste",
+  "organization": "Organisation",
+  "loadingMembers": "Mitglieder werden geladen...",
+  "membersLoadError": "Fehler beim Laden der Mitglieder.",
+  "manageMembers": "Verwalten Sie die Mitglieder der Organisation und ihre Rollen.",
+  "searchMembersPlaceholder": "Nach Name, E-Mail oder Rolle suchen..."
 }

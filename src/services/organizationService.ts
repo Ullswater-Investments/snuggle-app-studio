@@ -94,6 +94,42 @@ export interface ApiCreatedByUser {
   wallet_address: string | null;
 }
 
+/** Member of an organization (from GET /organizations/:id/members) */
+export interface OrgMemberUserProfile {
+  first_name: string;
+  last_name: string;
+}
+
+export interface OrgMemberUser {
+  uuid: string;
+  email: string;
+  profile: OrgMemberUserProfile;
+}
+
+export interface OrgMemberRole {
+  uuid: string;
+  slug: string;
+  name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrganizationMember {
+  uuid: string;
+  user_uuid: string;
+  role_uuid: string;
+  joined_at: string;
+  user: OrgMemberUser;
+  role: OrgMemberRole;
+  roles: OrgMemberRole[];
+  extraPermissions: unknown[];
+}
+
+export interface GetMembersResponse {
+  data: OrganizationMember[];
+}
+
 export const organizationService = {
   importOrganization: (
     walletFile: File,
@@ -115,4 +151,7 @@ export const organizationService = {
     api.get<GetOrganizationsResponse>(
       `/organizations?page=${page}&per_page=${perPage}`,
     ),
+
+  getMembers: (organizationId: string): Promise<GetMembersResponse> =>
+    api.get<GetMembersResponse>(`/organizations/${organizationId}/members`),
 };

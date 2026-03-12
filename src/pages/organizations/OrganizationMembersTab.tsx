@@ -1,4 +1,6 @@
-import { Users, User, Search, Star } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Users, User, Search, Star, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Card,
@@ -8,45 +10,80 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
+import {
+  organizationService,
+  type OrganizationMember,
+} from "@/services/organizationService";
 
-const MEMBERS_PLACEHOLDER = [
-  {
-    name: "Diego Alejandro Castellanos Hernandez",
-    email: "diego.castellanos.doz@gmail.com",
-    role: "Propietario",
-  },
-];
+function getMemberDisplayName(member: OrganizationMember): string {
+  const profile = member.user?.profile;
+  if (profile) {
+    const parts = [profile.first_name, profile.last_name].filter(Boolean);
+    return parts.length > 0 ? parts.join(" ") : member.user.email;
+  }
+  return member.user?.email ?? "—";
+}
 
 export default function OrganizationMembersTab() {
+  const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation("nav");
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["organization-members", id],
+    queryFn: () => organizationService.getMembers(id!),
+    enabled: !!id,
+  });
+
+  const members = Array.isArray(data?.data) ? data.data : [];
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardContent className="flex flex-col items-center justify-center py-16">
+          <Loader2 className="h-10 w-10 animate-spin text-muted-foreground" />
+          <p className="mt-2 text-sm text-muted-foreground">
+            {t("loadingMembers")}
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Card>
+        <CardContent className="py-8 text-center text-muted-foreground">
+          <p className="text-sm">{t("membersLoadError")}</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 gap-4">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
             <Users className="h-5 w-5 text-muted-foreground" />
-            <CardTitle className="text-xl">Miembros</CardTitle>
+            <CardTitle className="text-xl">{t("members")}</CardTitle>
             <Badge variant="secondary" className="rounded-full">
-              {MEMBERS_PLACEHOLDER.length}
+              {members.length ?? 0}
             </Badge>
           </div>
-          <CardDescription>
-            Gestiona los miembros de la organización y sus roles.
-          </CardDescription>
+          <CardDescription>{t("manageMembers")}</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Buscar por nombre, email o rol..."
-            className="pl-9"
-          />
+          <Input placeholder={t("searchMembersPlaceholder")} className="pl-9" />
         </div>
 
         <div className="space-y-3">
-          {MEMBERS_PLACEHOLDER.map((member) => (
+          {members.map((member) => (
             <div
-              key={member.email}
+              key={member.uuid}
               className="flex items-center justify-between rounded-lg border p-4 hover:bg-muted/50 transition-colors"
             >
               <div className="flex items-center gap-3">
@@ -54,8 +91,10 @@ export default function OrganizationMembersTab() {
                   <User className="h-5 w-5 text-muted-foreground" />
                 </div>
                 <div>
-                  <p className="font-medium">{member.name}</p>
-                  <p className="text-sm text-muted-foreground">{member.email}</p>
+                  <p className="font-medium">{getMemberDisplayName(member)}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {member.user?.email ?? "—"}
+                  </p>
                 </div>
               </div>
               <Badge
@@ -63,7 +102,7 @@ export default function OrganizationMembersTab() {
                 className="gap-1 border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-500"
               >
                 <Star className="h-3.5 w-3.5" />
-                {member.role}
+                {member.role?.name ?? "—"}
               </Badge>
             </div>
           ))}

@@ -36,5 +36,11 @@
   "myInvitations": "Meus convites",
   "invitationsSubtitle": "Convites recebidos para aderir a organizações",
   "noPendingInvitations": "Não tens convites pendentes neste momento",
-  "noInvitationsDescription": "Quando alguém te convidar para uma organização, aparecerá aqui."
+  "noInvitationsDescription": "Quando alguém te convidar para uma organização, aparecerá aqui.",
+  "backToList": "Voltar à lista",
+  "organization": "Organização",
+  "loadingMembers": "A carregar membros...",
+  "membersLoadError": "Erro ao carregar os membros.",
+  "manageMembers": "Gerir os membros da organização e os seus papéis.",
+  "searchMembersPlaceholder": "Pesquisar por nome, email ou papel..."
 }
