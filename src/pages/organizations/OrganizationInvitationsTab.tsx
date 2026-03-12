@@ -13,6 +13,16 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -46,7 +56,10 @@ const ROLES = [
   { value: "member", labelKey: "roleMember" },
 ] as const;
 
-function getInvitedUserDisplay(inv: OrganizationInvitation): { name: string; email: string } {
+function getInvitedUserDisplay(inv: OrganizationInvitation): {
+  name: string;
+  email: string;
+} {
   const u = inv.invitedUser;
   const profile = u?.profile;
   const name = profile
@@ -62,7 +75,11 @@ export default function OrganizationInvitationsTab() {
   const { id: orgId } = useParams<{ id: string }>();
   const { t } = useTranslation("nav");
   const queryClient = useQueryClient();
-  const { data: invitationsData, isLoading: loadingInvitations, isError: invitationsError } = useQuery({
+  const {
+    data: invitationsData,
+    isLoading: loadingInvitations,
+    isError: invitationsError,
+  } = useQuery({
     queryKey: ["organization-invitations", orgId],
     queryFn: () => organizationService.getInvitations(orgId!),
     enabled: !!orgId,
@@ -70,12 +87,16 @@ export default function OrganizationInvitationsTab() {
   const invitations = invitationsData?.data ?? [];
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [selectedUsers, setSelectedUsers] = useState<InvitationSearchUser[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<InvitationSearchUser[]>(
+    [],
+  );
   const [searchError, setSearchError] = useState<string | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedRole, setSelectedRole] = useState<string>("member");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [cancellingUuid, setCancellingUuid] = useState<string | null>(null);
+  const [cancelConfirmUuid, setCancelConfirmUuid] = useState<string | null>(null);
 
   const isValidEmail = EMAIL_REGEX.test(email.trim());
 
@@ -90,7 +111,7 @@ export default function OrganizationInvitationsTab() {
       );
       if (res.data) {
         const alreadyAdded = selectedUsers.some(
-          (u) => u.uuid === res.data!.uuid || u.email === res.data!.email
+          (u) => u.uuid === res.data!.uuid || u.email === res.data!.email,
         );
         if (alreadyAdded) {
           setSearchError(t("userAlreadyAdded"));
@@ -160,15 +181,16 @@ export default function OrganizationInvitationsTab() {
     }
     setIsSending(false);
     if (successCount > 0) {
-      const key =
-        successCount === 1 ? "invitationSent" : "invitationsSent";
+      const key = successCount === 1 ? "invitationSent" : "invitationsSent";
       toast.success(t(key), {
         description:
           successCount === 1
             ? undefined
             : t("invitationsSentDescription", { count: successCount }),
       });
-      queryClient.invalidateQueries({ queryKey: ["organization-invitations", orgId] });
+      queryClient.invalidateQueries({
+        queryKey: ["organization-invitations", orgId],
+      });
       handleOpenChange(false);
     }
   };
@@ -176,8 +198,23 @@ export default function OrganizationInvitationsTab() {
   const canSend = selectedUsers.length > 0 && !isSending;
   const hasSearched = isValidEmail && !isSearching;
 
-  const handleCancelInvitation = (_invitationUuid: string) => {
-    // TODO: Endpoint para cancelar aún por definir
+  const handleCancelInvitation = async (invitationUuid: string) => {
+    if (!orgId) return;
+    setCancellingUuid(invitationUuid);
+    setCancelConfirmUuid(null);
+    try {
+      await organizationService.cancelInvitation(orgId, invitationUuid);
+      toast.success(t("invitationCancelled"));
+      queryClient.invalidateQueries({
+        queryKey: ["organization-invitations", orgId],
+      });
+    } catch (err) {
+      toast.error(t("invitationCancelError"), {
+        description: err instanceof Error ? err.message : undefined,
+      });
+    } finally {
+      setCancellingUuid(null);
+    }
   };
 
   return (
@@ -245,7 +282,8 @@ export default function OrganizationInvitationsTab() {
                         className="flex items-center justify-between gap-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 px-4 py-2 text-emerald-800 dark:text-emerald-200 min-w-0"
                       >
                         <span className="text-sm truncate min-w-0 flex-1">
-                          {user.name ? `${user.name} • ` : ""}{user.email}
+                          {user.name ? `${user.name} • ` : ""}
+                          {user.email}
                         </span>
                         <button
                           type="button"
@@ -291,10 +329,7 @@ export default function OrganizationInvitationsTab() {
               <Button variant="outline" onClick={() => handleOpenChange(false)}>
                 {t("cancel")}
               </Button>
-              <Button
-                disabled={!canSend}
-                onClick={handleSendInvitations}
-              >
+              <Button disabled={!canSend} onClick={handleSendInvitations}>
                 {isSending ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -314,7 +349,9 @@ export default function OrganizationInvitationsTab() {
         {loadingInvitations ? (
           <div className="flex flex-col items-center justify-center py-16">
             <Loader2 className="h-10 w-10 animate-spin text-muted-foreground" />
-            <p className="mt-2 text-sm text-muted-foreground">{t("loadingMembers")}</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {t("loadingMembers")}
+            </p>
           </div>
         ) : invitations.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
@@ -326,15 +363,22 @@ export default function OrganizationInvitationsTab() {
             {invitations.map((inv) => {
               const { name, email: invEmail } = getInvitedUserDisplay(inv);
               const isPending = inv.status === "pending";
-              const statusKey = inv.status === "cancelled" ? "statusCancelled" : "statusPending";
+              const statusKey =
+                inv.status === "cancelled"
+                  ? "statusCancelled"
+                  : "statusPending";
               return (
                 <div
                   key={inv.uuid}
                   className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0"
                 >
                   <div className="min-w-0 flex-1 space-y-1">
-                    <p className="text-sm font-medium truncate">{name || invEmail}</p>
-                    <p className="text-xs text-muted-foreground truncate">{invEmail}</p>
+                    <p className="text-sm font-medium truncate">
+                      {name || invEmail}
+                    </p>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {invEmail}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant="secondary" className="gap-1">
@@ -356,9 +400,14 @@ export default function OrganizationInvitationsTab() {
                         variant="ghost"
                         size="icon"
                         className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
-                        onClick={() => handleCancelInvitation(inv.uuid)}
+                        disabled={cancellingUuid === inv.uuid}
+                        onClick={() => setCancelConfirmUuid(inv.uuid)}
                       >
-                        <X className="h-4 w-4" />
+                        {cancellingUuid === inv.uuid ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <X className="h-4 w-4" />
+                        )}
                       </Button>
                     )}
                   </div>
@@ -368,6 +417,35 @@ export default function OrganizationInvitationsTab() {
           </div>
         )}
       </CardContent>
+      <AlertDialog
+        open={cancelConfirmUuid !== null}
+        onOpenChange={(open) => !open && setCancelConfirmUuid(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {t("cancelInvitationConfirmTitle")}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("cancelInvitationConfirmDescription")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={!!cancellingUuid}>
+              {t("cancel")}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() =>
+                cancelConfirmUuid && handleCancelInvitation(cancelConfirmUuid)
+              }
+              disabled={!!cancellingUuid}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {t("cancelInvitationConfirmAction")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 }

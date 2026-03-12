@@ -66,5 +66,10 @@
   "invitationSendError": "Erreur lors de l'envoi de l'invitation",
   "noInvitations": "Aucune invitation",
   "statusPending": "En attente",
-  "statusCancelled": "Annulée"
+  "statusCancelled": "Annulée",
+  "invitationCancelled": "Invitation annulée",
+  "invitationCancelError": "Erreur lors de l'annulation de l'invitation",
+  "cancelInvitationConfirmTitle": "Annuler l'invitation ?",
+  "cancelInvitationConfirmDescription": "Êtes-vous sûr de vouloir annuler cette invitation ? L'utilisateur ne pourra pas rejoindre l'organisation avec cette invitation.",
+  "cancelInvitationConfirmAction": "Oui, annuler"
 }

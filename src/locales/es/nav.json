@@ -66,5 +66,10 @@
   "invitationSendError": "Error al enviar la invitación",
   "noInvitations": "No hay invitaciones",
   "statusPending": "Pendiente",
-  "statusCancelled": "Cancelada"
+  "statusCancelled": "Cancelada",
+  "invitationCancelled": "Invitación cancelada",
+  "invitationCancelError": "Error al cancelar la invitación",
+  "cancelInvitationConfirmTitle": "¿Cancelar invitación?",
+  "cancelInvitationConfirmDescription": "¿Estás seguro de que quieres cancelar esta invitación? El usuario no podrá unirse a la organización con esta invitación.",
+  "cancelInvitationConfirmAction": "Sí, cancelar"
 }

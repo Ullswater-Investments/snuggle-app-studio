@@ -66,5 +66,10 @@
   "invitationSendError": "Fout bij het versturen van de uitnodiging",
   "noInvitations": "Geen uitnodigingen",
   "statusPending": "In afwachting",
-  "statusCancelled": "Geannuleerd"
+  "statusCancelled": "Geannuleerd",
+  "invitationCancelled": "Uitnodiging geannuleerd",
+  "invitationCancelError": "Fout bij het annuleren van de uitnodiging",
+  "cancelInvitationConfirmTitle": "Uitnodiging annuleren?",
+  "cancelInvitationConfirmDescription": "Weet je zeker dat je deze uitnodiging wilt annuleren? De gebruiker kan zich niet bij de organisatie aansluiten met deze uitnodiging.",
+  "cancelInvitationConfirmAction": "Ja, annuleren"
 }

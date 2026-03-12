@@ -66,5 +66,10 @@
   "invitationSendError": "Error sending invitation",
   "noInvitations": "No invitations",
   "statusPending": "Pending",
-  "statusCancelled": "Cancelled"
+  "statusCancelled": "Cancelled",
+  "invitationCancelled": "Invitation cancelled",
+  "invitationCancelError": "Error cancelling invitation",
+  "cancelInvitationConfirmTitle": "Cancel invitation?",
+  "cancelInvitationConfirmDescription": "Are you sure you want to cancel this invitation? The user will not be able to join the organization with this invitation.",
+  "cancelInvitationConfirmAction": "Yes, cancel"
 }

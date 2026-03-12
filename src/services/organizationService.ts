@@ -295,4 +295,12 @@ export const organizationService = {
     api.get<GetInvitationsResponse>(
       `/organizations/${organizationId}/invitations`,
     ),
+
+  cancelInvitation: (
+    organizationId: string,
+    invitationUuid: string,
+  ): Promise<{ message: string; data: { uuid: string; status: string } }> =>
+    api.delete(
+      `/organizations/${organizationId}/invitations/${invitationUuid}`,
+    ),
 };
