@@ -96,7 +96,9 @@ export default function OrganizationInvitationsTab() {
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [cancellingUuid, setCancellingUuid] = useState<string | null>(null);
-  const [cancelConfirmUuid, setCancelConfirmUuid] = useState<string | null>(null);
+  const [cancelConfirmUuid, setCancelConfirmUuid] = useState<string | null>(
+    null,
+  );
 
   const isValidEmail = EMAIL_REGEX.test(email.trim());
 
@@ -250,6 +252,7 @@ export default function OrganizationInvitationsTab() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="flex-1 min-w-0"
+                  autoComplete="off"
                 />
                 <Button
                   type="button"
