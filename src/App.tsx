@@ -21,6 +21,7 @@ import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Guide from "./pages/Guide";
 import Dashboard from "./pages/Dashboard";
+import OrganizationMembersPage from "./pages/organizations/OrganizationMembersPage";
 import Architecture from "./pages/Architecture";
 import Catalog from "./pages/Catalog";
 import ProductDetail from "./pages/ProductDetail";
@@ -969,6 +970,10 @@ const App = () => (
                     >
                       <Route element={<AppLayout />}>
                         <Route path="/dashboard" element={<Dashboard />} />
+                        <Route
+                          path="/organizations/:id"
+                          element={<OrganizationMembersPage />}
+                        />
                         <Route path="/success-stories" element={<SuccessStories />} />
                         <Route path="/success-stories/:id" element={<SuccessStoryDetail />} />
                         <Route path="/catalog" element={<Catalog />} />

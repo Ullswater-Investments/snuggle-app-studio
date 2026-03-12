@@ -1,5 +1,6 @@
+import { useState } from "react";
+import { useLocation, useMatch } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
@@ -18,6 +19,10 @@ import {
   Award,
   Handshake,
   Shield,
+  Building2,
+  Users,
+  Mail,
+  ChevronDown,
 } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useIsDataSpaceOwner } from "@/hooks/useIsDataSpaceOwner";
@@ -31,36 +36,49 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
   SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export function AppSidebar() {
   const { open } = useSidebar();
   const location = useLocation();
-  const { t } = useTranslation('nav');
-  const { activeOrg } = useOrganizationContext();
+  const { t } = useTranslation("nav");
+  const { activeOrg, availableOrgs, switchOrganization, loading } =
+    useOrganizationContext();
+  const membersMatch = useMatch("/organizations/:id");
+  const [localExpandedId, setLocalExpandedId] = useState<string | null>(null);
+  const expandedOrgId = membersMatch?.params?.id ?? localExpandedId;
   const { isOwner } = useIsDataSpaceOwner();
 
-  const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
+  const isProvider =
+    activeOrg?.type === "provider" || activeOrg?.type === "data_holder";
 
   const menuItems = [
-    { title: t('dashboard'), url: "/dashboard", icon: LayoutDashboard },
-    { title: t('catalog'), url: "/catalog", icon: Package },
-    { title: t('requests'), url: "/requests", icon: ClipboardList },
-    { title: t('data'), url: "/data", icon: Database },
-    { title: t('sustainability'), url: "/sustainability", icon: Leaf },
-    { title: t('services'), url: "/services", icon: Sparkles },
-    { title: t('innovationLab'), url: "/innovation", icon: Lightbulb },
-    { title: t('successStories'), url: "/success-stories", icon: Award },
-    { title: t('opportunities'), url: "/opportunities", icon: Megaphone },
-    { title: t('reports'), url: "/reports", icon: BarChart3 },
-    { title: t('notifications'), url: "/notifications", icon: Bell },
-    { title: t('settings'), url: "/settings", icon: Settings },
+    { title: t("dashboard"), url: "/dashboard", icon: LayoutDashboard },
+    { title: t("catalog"), url: "/catalog", icon: Package },
+    // { title: t("requests"), url: "/requests", icon: ClipboardList },
+    { title: t("data"), url: "/data", icon: Database },
+    // { title: t("sustainability"), url: "/sustainability", icon: Leaf },
+    // { title: t("services"), url: "/services", icon: Sparkles },
+    // { title: t("innovationLab"), url: "/innovation", icon: Lightbulb },
+    // { title: t("successStories"), url: "/success-stories", icon: Award },
+    // { title: t("opportunities"), url: "/opportunities", icon: Megaphone },
+    // { title: t("reports"), url: "/reports", icon: BarChart3 },
+    // { title: t("notifications"), url: "/notifications", icon: Bell },
+    { title: t("settings"), url: "/settings", icon: Settings },
   ];
 
   const providerMenuItems = [
-    { title: t('analytics'), url: "/analytics", icon: TrendingUp },
+    { title: t("analytics"), url: "/analytics", icon: TrendingUp },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -75,7 +93,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            {t('mainNav')}
+            {t("mainNav")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -83,12 +101,17 @@ export function AppSidebar() {
                 <SidebarMenuItem
                   key={item.url}
                   data-tour={
-                    item.url === "/requests" ? "requests-link" :
-                      item.url === "/catalog" ? "catalog-link" :
-                        item.url === "/data" ? "data-link" :
-                          item.url === "/reports" ? "reports-link" :
-                            item.url === "/notifications" ? "notifications-link" :
-                              undefined
+                    item.url === "/requests"
+                      ? "requests-link"
+                      : item.url === "/catalog"
+                        ? "catalog-link"
+                        : item.url === "/data"
+                          ? "data-link"
+                          : item.url === "/reports"
+                            ? "reports-link"
+                            : item.url === "/notifications"
+                              ? "notifications-link"
+                              : undefined
                   }
                 >
                   <SidebarMenuButton asChild>
@@ -104,28 +127,104 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              {isProvider && providerMenuItems.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild>
-                    <NavLink
-                      to={item.url}
-                      end
-                      className="flex items-center gap-3 hover:bg-muted/50 transition-colors"
-                      activeClassName="bg-muted text-primary font-medium"
-                    >
-                      <item.icon className="h-5 w-5 shrink-0" />
-                      {open && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {isProvider &&
+                providerMenuItems.map((item) => (
+                  <SidebarMenuItem key={item.url}>
+                    <SidebarMenuButton asChild>
+                      <NavLink
+                        to={item.url}
+                        end
+                        className="flex items-center gap-3 hover:bg-muted/50 transition-colors"
+                        activeClassName="bg-muted text-primary font-medium"
+                      >
+                        <item.icon className="h-5 w-5 shrink-0" />
+                        {open && <span>{item.title}</span>}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup>
+        {!loading && availableOrgs.length > 0 && (
+          <SidebarGroup>
+            <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
+              {t("organizations")}
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {availableOrgs.map((org) => (
+                  <SidebarMenuItem key={org.id}>
+                    <Collapsible
+                      open={expandedOrgId === org.id}
+                      onOpenChange={(isOpen) => {
+                        setLocalExpandedId(isOpen ? org.id : null);
+                      }}
+                      className="group/collapsible"
+                    >
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton className="w-full">
+                          <Building2 className="h-5 w-5 shrink-0" />
+                          {open && (
+                            <>
+                              <span className="truncate">{org.name}</span>
+                              <ChevronDown className="ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-180" />
+                            </>
+                          )}
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <SidebarMenuSub>
+                          <SidebarMenuSubItem>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={
+                                location.pathname ===
+                                  `/organizations/${org.id}` &&
+                                location.search.includes("tab=members")
+                              }
+                            >
+                              <NavLink
+                                to={`/organizations/${org.id}?tab=members`}
+                                className="flex items-center gap-2"
+                              >
+                                <Users className="h-4 w-4" />
+                                {open && <span>{t("members")}</span>}
+                              </NavLink>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                          <SidebarMenuSubItem>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={
+                                location.pathname ===
+                                  `/organizations/${org.id}` &&
+                                location.search.includes("tab=invitations")
+                              }
+                            >
+                              <NavLink
+                                to={`/organizations/${org.id}?tab=invitations`}
+                                className="flex items-center gap-2"
+                              >
+                                <Mail className="h-4 w-4" />
+                                {open && <span>{t("invitations")}</span>}
+                              </NavLink>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        </SidebarMenuSub>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
+
+        {/* <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            {t('quickActions')}
+            {t("quickActions")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -137,13 +236,13 @@ export function AppSidebar() {
                     activeClassName="bg-muted text-primary font-medium"
                   >
                     <Plus className="h-5 w-5 shrink-0" />
-                    {open && <span>{t('newRequest')}</span>}
+                    {open && <span>{t("newRequest")}</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
 
         {isOwner && (
           <SidebarGroup>
@@ -169,9 +268,9 @@ export function AppSidebar() {
           </SidebarGroup>
         )}
 
-        <SidebarGroup>
+        {/* <SidebarGroup>
           <SidebarGroupLabel className={!open ? "opacity-0" : ""}>
-            {t('partners')}
+            {t("partners")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -183,13 +282,13 @@ export function AppSidebar() {
                     activeClassName="bg-muted text-primary font-medium"
                   >
                     <Handshake className="h-5 w-5 shrink-0" />
-                    {open && <span>{t('directory')}</span>}
+                    {open && <span>{t("directory")}</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
       </SidebarContent>
     </Sidebar>
   );

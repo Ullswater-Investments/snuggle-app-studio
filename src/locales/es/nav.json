@@ -27,5 +27,10 @@
   "analytics": "Analíticas",
   "back": "Volver",
   "home": "Inicio",
-  "forward": "Siguiente"
+  "forward": "Siguiente",
+  "organizations": "Organizaciones",
+  "members": "Miembros",
+  "invitations": "Invitaciones",
+  "manageInvitations": "Gestiona las invitaciones de la organización",
+  "inviteMember": "Invitar miembro"
 }
