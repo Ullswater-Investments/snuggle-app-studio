@@ -58,5 +58,11 @@
   "inviteMessagePlaceholder": "Een bericht voor de uitgenodigde...",
   "cancel": "Annuleren",
   "sendInvitation": "Uitnodiging versturen",
+  "sendInvitations": "Uitnodigingen versturen",
+  "sendingInvitations": "Versturen...",
+  "invitationSent": "Uitnodiging verzonden",
+  "invitationsSent": "Uitnodigingen verzonden",
+  "invitationsSentDescription": "{{count}} uitnodigingen succesvol verzonden",
+  "invitationSendError": "Fout bij het versturen van de uitnodiging",
   "noInvitations": "Geen uitnodigingen"
 }

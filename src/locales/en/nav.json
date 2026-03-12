@@ -58,5 +58,11 @@
   "inviteMessagePlaceholder": "A message for the invited person...",
   "cancel": "Cancel",
   "sendInvitation": "Send invitation",
+  "sendInvitations": "Send invitations",
+  "sendingInvitations": "Sending...",
+  "invitationSent": "Invitation sent",
+  "invitationsSent": "Invitations sent",
+  "invitationsSentDescription": "{{count}} invitations sent successfully",
+  "invitationSendError": "Error sending invitation",
   "noInvitations": "No invitations"
 }

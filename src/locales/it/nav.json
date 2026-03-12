@@ -58,5 +58,11 @@
   "inviteMessagePlaceholder": "Un messaggio per l'invitato...",
   "cancel": "Annulla",
   "sendInvitation": "Invia invito",
+  "sendInvitations": "Invia inviti",
+  "sendingInvitations": "Invio in corso...",
+  "invitationSent": "Invito inviato",
+  "invitationsSent": "Inviti inviati",
+  "invitationsSentDescription": "{{count}} inviti inviati con successo",
+  "invitationSendError": "Errore nell'invio dell'invito",
   "noInvitations": "Nessun invito"
 }

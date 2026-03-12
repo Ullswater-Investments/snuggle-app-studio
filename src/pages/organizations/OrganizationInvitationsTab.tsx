@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { Mail, UserPlus, Search, X } from "lucide-react";
+import { Mail, UserPlus, Search, X, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -52,6 +53,7 @@ export default function OrganizationInvitationsTab() {
   const [isSearching, setIsSearching] = useState(false);
   const [selectedRole, setSelectedRole] = useState<string>("member");
   const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const isValidEmail = EMAIL_REGEX.test(email.trim());
 
@@ -110,7 +112,45 @@ export default function OrganizationInvitationsTab() {
     setSearchError(null);
   };
 
-  const canSend = selectedUsers.length > 0;
+  const handleSendInvitations = async () => {
+    if (!orgId || selectedUsers.length === 0) return;
+    setIsSending(true);
+    const msg = message.trim() || undefined;
+    const roleSlug = selectedRole;
+    let successCount = 0;
+    let lastError: string | null = null;
+    for (const user of selectedUsers) {
+      try {
+        await organizationService.createInvitation(orgId, {
+          invited_user_uuid: user.uuid,
+          role_slug: roleSlug,
+          message: msg,
+        });
+        successCount += 1;
+      } catch (err) {
+        lastError =
+          err instanceof Error ? err.message : t("invitationSendError");
+        toast.error(t("invitationSendError"), {
+          description: lastError,
+        });
+        break;
+      }
+    }
+    setIsSending(false);
+    if (successCount > 0) {
+      const key =
+        successCount === 1 ? "invitationSent" : "invitationsSent";
+      toast.success(t(key), {
+        description:
+          successCount === 1
+            ? undefined
+            : t("invitationsSentDescription", { count: successCount }),
+      });
+      handleOpenChange(false);
+    }
+  };
+
+  const canSend = selectedUsers.length > 0 && !isSending;
   const hasSearched = isValidEmail && !isSearching;
 
   return (
@@ -224,7 +264,21 @@ export default function OrganizationInvitationsTab() {
               <Button variant="outline" onClick={() => handleOpenChange(false)}>
                 {t("cancel")}
               </Button>
-              <Button disabled={!canSend}>{t("sendInvitation")}</Button>
+              <Button
+                disabled={!canSend}
+                onClick={handleSendInvitations}
+              >
+                {isSending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t("sendingInvitations")}
+                  </>
+                ) : selectedUsers.length === 1 ? (
+                  t("sendInvitation")
+                ) : (
+                  t("sendInvitations")
+                )}
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

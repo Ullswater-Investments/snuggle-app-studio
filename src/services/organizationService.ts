@@ -166,6 +166,28 @@ export interface SearchUserForInvitationResponse {
   message?: string;
 }
 
+/** Payload for POST /organizations/:id/invitations */
+export interface CreateInvitationPayload {
+  invited_user_uuid: string;
+  role_slug: string;
+  message?: string;
+}
+
+export interface CreateInvitationResponse {
+  message: string;
+  data: {
+    uuid: string;
+    organization_uuid: string;
+    invited_by_user_uuid: string;
+    invited_user_uuid: string;
+    role_uuid: string;
+    status: string;
+    message: string | null;
+    created_at: string;
+    updated_at: string;
+  };
+}
+
 export const organizationService = {
   importOrganization: (
     walletFile: File,
@@ -197,5 +219,14 @@ export const organizationService = {
   ): Promise<SearchUserForInvitationResponse> =>
     api.get<SearchUserForInvitationResponse>(
       `/organizations/${organizationId}/invitations/search-user?email=${encodeURIComponent(email)}`,
+    ),
+
+  createInvitation: (
+    organizationId: string,
+    payload: CreateInvitationPayload,
+  ): Promise<CreateInvitationResponse> =>
+    api.post<CreateInvitationResponse>(
+      `/organizations/${organizationId}/invitations`,
+      payload,
     ),
 };
