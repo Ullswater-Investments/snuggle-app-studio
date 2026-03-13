@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Mail, Loader2, User, Clock, Check, X, FileText } from "lucide-react";
 import { toast } from "sonner";
@@ -16,6 +16,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { usePendingInvitations } from "@/hooks/usePendingInvitations";
 import {
   invitationsService,
   type PendingInvitation,
@@ -53,10 +54,7 @@ export default function InvitationsView() {
   const { t } = useTranslation("nav");
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["profile-invitations"],
-    queryFn: () => invitationsService.getPendingInvitations(),
-  });
+  const { data, isLoading, isError, error } = usePendingInvitations();
 
   const invitations = Array.isArray(data?.data) ? data.data : [];
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useLocation, useMatch } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
 import { useTranslation } from "react-i18next";
@@ -27,7 +26,7 @@ import {
 } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useIsDataSpaceOwner } from "@/hooks/useIsDataSpaceOwner";
-import { invitationsService } from "@/services/invitationsService";
+import { usePendingInvitations } from "@/hooks/usePendingInvitations";
 import { Badge } from "@/components/ui/badge";
 import {
   Sidebar,
@@ -59,10 +58,7 @@ export function AppSidebar() {
     useOrganizationContext();
   const membersMatch = useMatch("/organizations/:id");
   const [localExpandedId, setLocalExpandedId] = useState<string | null>(null);
-  const { data: invitationsData } = useQuery({
-    queryKey: ["profile-invitations"],
-    queryFn: () => invitationsService.getPendingInvitations(),
-  });
+  const { data: invitationsData } = usePendingInvitations();
   const pendingInvitationsCount =
     invitationsData?.data?.filter((i) => i.status === "pending").length ?? 0;
   const expandedOrgId = membersMatch?.params?.id ?? localExpandedId;

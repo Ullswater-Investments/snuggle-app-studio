@@ -1,13 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { NotificationsBell } from "@/components/NotificationsBell";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
-import { invitationsService } from "@/services/invitationsService";
+import { usePendingInvitations } from "@/hooks/usePendingInvitations";
 
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/components/ui/sidebar";
@@ -23,9 +22,7 @@ export const UnifiedHeader = () => {
   const { t: tNav } = useTranslation("nav");
   const { toggleSidebar } = useSidebar();
 
-  const { data: invitationsData } = useQuery({
-    queryKey: ["profile-invitations"],
-    queryFn: () => invitationsService.getPendingInvitations(),
+  const { data: invitationsData } = usePendingInvitations({
     enabled: !!user,
   });
   const pendingInvitationsCount =
