@@ -1,20 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { NotificationsBell } from "@/components/NotificationsBell";
 import { OrganizationSwitcher } from "@/components/OrganizationSwitcher";
 import { DemoHelpButton } from "@/components/DemoHelpButton";
+import { invitationsService } from "@/services/invitationsService";
 
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Search, LogIn, ChevronLeft, ChevronRight } from "lucide-react";
+import { useSidebar } from "@/components/ui/sidebar";
+import { Search, LogIn, PanelLeft } from "lucide-react";
 import { UserMenu } from "@/components/UserMenu";
 import { ProcuredataLogo } from "../ProcuredataLogo";
 import { InstitutionalLogos } from "@/components/InstitutionalLogos";
@@ -24,13 +21,37 @@ export const UnifiedHeader = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { t: tNav } = useTranslation("nav");
+  const { toggleSidebar } = useSidebar();
+
+  const { data: invitationsData } = useQuery({
+    queryKey: ["profile-invitations"],
+    queryFn: () => invitationsService.getPendingInvitations(),
+    enabled: !!user,
+  });
+  const pendingInvitationsCount =
+    invitationsData?.data?.filter((i) => i.status === "pending").length ?? 0;
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center px-4 gap-4">
         {/* Izquierda: Menu + Marca + Navegación */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          <SidebarTrigger />
+          <Button
+            data-sidebar="trigger"
+            variant="ghost"
+            size="icon"
+            className="relative h-9 w-9 shrink-0"
+            onClick={toggleSidebar}
+            title={tNav("myInvitations")}
+          >
+            <PanelLeft className="h-5 w-5 text-muted-foreground" />
+            {user && pendingInvitationsCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 min-w-5 items-center justify-center rounded-full bg-red-600 text-[11px] font-semibold text-white leading-none border-2 border-background">
+                {pendingInvitationsCount}
+              </span>
+            )}
+            <span className="sr-only">{tNav("myInvitations")}</span>
+          </Button>
           <Link to="/dashboard" className="hover:opacity-80 transition-opacity">
             <ProcuredataLogo
               size="md"
@@ -76,8 +97,8 @@ export const UnifiedHeader = () => {
               {/* <div data-tour="org-switcher">
                 <OrganizationSwitcher />
               </div> */}
-              <NotificationsBell />
-              <LanguageSwitcher />
+              {/* <NotificationsBell /> */}
+              {/* <LanguageSwitcher /> */}
               <ThemeToggle />
               <DemoHelpButton />
               <UserMenu user={user} onSignOut={signOut} />
