@@ -12,6 +12,8 @@
     "walletBalance": "Saldo da Carteira",
     "walletAvailable": "Disponível para transações",
     "walletNotConfigured": "Nenhuma carteira configurada",
+    "walletConfigured": "Carteira configurada",
+    "walletNoPermission": "Você não tem permissão para ver o saldo",
     "revenueMonth": "Receitas do Mês",
     "spendMonth": "Despesas do Mês",
     "vsPrevMonth": "vs mês anterior",

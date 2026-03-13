@@ -1,30 +1,60 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { ActivityFeed } from "@/components/ActivityFeed";
 import { RecentTransactions } from "@/components/RecentTransactions";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, Legend } from "recharts";
-import { DollarSign, ShoppingCart, TrendingUp, ArrowUpRight, ArrowDownRight, Activity, Wallet, BarChart3, RefreshCw } from "lucide-react";
-import { useEthWalletBalance } from "@/hooks/useEthWalletBalance";
+import {
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  Legend,
+} from "recharts";
+import {
+  DollarSign,
+  ShoppingCart,
+  TrendingUp,
+  ArrowUpRight,
+  ArrowDownRight,
+  Activity,
+  Wallet,
+  BarChart3,
+  RefreshCw,
+} from "lucide-react";
 import { useBlockchainActivity } from "@/hooks/useBlockchainActivity";
+import { walletService, type TokenBalance } from "@/services/walletService";
+import { ApiError } from "@/services/api";
 import { Link } from "react-router-dom";
 import { format, subMonths, startOfMonth, endOfMonth } from "date-fns";
 import { es, enUS, de, fr, pt, it, nl, Locale } from "date-fns/locale";
-import { CHART_COLORS, CHART_GRADIENTS, CHART_TOOLTIP_STYLE, CHART_GRID_STYLE, CHART_ANIMATION_CONFIG } from "@/lib/chartTheme";
-import { StaggerContainer, StaggerItem, ChartFadeIn } from "@/components/AnimatedSection";
+import {
+  CHART_COLORS,
+  CHART_GRADIENTS,
+  CHART_TOOLTIP_STYLE,
+  CHART_GRID_STYLE,
+  CHART_ANIMATION_CONFIG,
+} from "@/lib/chartTheme";
+import {
+  StaggerContainer,
+  StaggerItem,
+  ChartFadeIn,
+} from "@/components/AnimatedSection";
 import { useTranslation } from "react-i18next";
 import { formatCurrency as formatCurrencyI18n } from "@/lib/i18nFormatters";
 import { WelcomeScreen } from "@/components/WelcomeScreen";
 import { OrganizationCardsGrid } from "@/components/OrganizationCardsGrid";
-
-interface WalletData {
-  id: string;
-  balance: number;
-  currency: string;
-}
 
 interface TransactionData {
   id: string;
@@ -56,7 +86,7 @@ const localeMap: Record<string, Locale> = { es, en: enUS, de, fr, pt, it, nl };
 const processTransactionsForChart = (
   transactions: TransactionData[] | undefined,
   orgId: string | undefined,
-  locale: Locale
+  locale: Locale,
 ): MonthlyData[] => {
   if (!transactions || !orgId) return [];
 
@@ -100,9 +130,10 @@ const processTransactionsForChart = (
 // Calculate current month metrics
 const calculateCurrentMonthMetrics = (
   transactions: TransactionData[] | undefined,
-  orgId: string | undefined
+  orgId: string | undefined,
 ) => {
-  if (!transactions || !orgId) return { revenue: 0, spend: 0, prevRevenue: 0, prevSpend: 0 };
+  if (!transactions || !orgId)
+    return { revenue: 0, spend: 0, prevRevenue: 0, prevSpend: 0 };
 
   const now = new Date();
   const currentMonthStart = startOfMonth(now);
@@ -110,7 +141,10 @@ const calculateCurrentMonthMetrics = (
   const prevMonthStart = startOfMonth(subMonths(now, 1));
   const prevMonthEnd = endOfMonth(subMonths(now, 1));
 
-  let revenue = 0, spend = 0, prevRevenue = 0, prevSpend = 0;
+  let revenue = 0,
+    spend = 0,
+    prevRevenue = 0,
+    prevSpend = 0;
 
   transactions.forEach((tx) => {
     if (tx.status !== "completed") return;
@@ -118,7 +152,8 @@ const calculateCurrentMonthMetrics = (
     const txDate = new Date(tx.created_at);
     const amount = tx.asset?.price || 0;
 
-    const isCurrentMonth = txDate >= currentMonthStart && txDate <= currentMonthEnd;
+    const isCurrentMonth =
+      txDate >= currentMonthStart && txDate <= currentMonthEnd;
     const isPrevMonth = txDate >= prevMonthStart && txDate <= prevMonthEnd;
 
     if (tx.subject_org_id === orgId) {
@@ -135,34 +170,54 @@ const calculateCurrentMonthMetrics = (
   return { revenue, spend, prevRevenue, prevSpend };
 };
 
+/** amount viene ya formateado del backend (ej. "861.619064") */
+function parseTokenAmount(t: TokenBalance): number {
+  return parseFloat(t.amount) || 0;
+}
+
 export default function Dashboard() {
   const { activeOrg } = useOrganizationContext();
-  const { t, i18n } = useTranslation('dashboard');
-  const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
+  const { t, i18n } = useTranslation("dashboard");
+  const isProvider =
+    activeOrg?.type === "provider" || activeOrg?.type === "data_holder";
   const currentLocale = localeMap[i18n.language] || es;
 
-
-  // Fetch internal wallet balance (legacy)
-  const { data: wallet, isLoading: walletLoading } = useQuery({
-    queryKey: ["wallet", activeOrg?.id],
-    queryFn: async () => {
-      if (!activeOrg) return null;
-      const { data, error } = await supabase
-        .from("wallets")
-        .select("id, balance, currency")
-        .eq("organization_id", activeOrg.id)
-        .maybeSingle();
-      if (error) throw error;
-      return data as WalletData | null;
-    },
+  // Fetch wallet balance from API (organizations/:uuid/wallets/balance)
+  const {
+    data: apiWalletBalance,
+    isLoading: apiWalletLoading,
+    isError: walletBalanceError,
+    error: walletBalanceErrorData,
+    refetch: refetchWalletBalance,
+    isFetching: walletBalanceFetching,
+  } = useQuery({
+    queryKey: ["organization-wallet-balance", activeOrg?.id],
+    queryFn: () => walletService.getOrganizationWalletBalance(activeOrg!.id),
     enabled: !!activeOrg,
+    staleTime: 60_000,
   });
 
-  // Fetch real ETH wallet balance
-  const { data: ethWallet, isLoading: ethWalletLoading, refetch: refetchEthWallet, isFetching: ethWalletFetching } = useEthWalletBalance(activeOrg?.id);
+  const apiWallet = (() => {
+    const data = {
+      address: "",
+      balanceLines: [],
+      isConfigured: false,
+    };
+    if (!apiWalletBalance?.balance) return data;
+    const b = apiWalletBalance.balance;
+    data.address = b.address;
+    data.balanceLines = (b.balances ?? [])
+      .filter(
+        (t) => t.symbol?.toUpperCase() !== "GAS" && parseTokenAmount(t) > 0,
+      )
+      .map((t) => `${parseTokenAmount(t).toFixed(2)} ${t.symbol}`);
+    data.isConfigured = data.balanceLines.length > 0;
+    return data;
+  })();
 
   // Fetch blockchain activity (transaction count, cumulative received)
-  const { data: blockchainActivity, isLoading: blockchainActivityLoading } = useBlockchainActivity(activeOrg?.id);
+  const { data: blockchainActivity, isLoading: blockchainActivityLoading } =
+    useBlockchainActivity(activeOrg?.id);
 
   // Fetch transactions for the last 6 months
   const sixMonthsAgo = subMonths(new Date(), 6).toISOString();
@@ -174,7 +229,8 @@ export default function Dashboard() {
 
       const { data, error } = await supabase
         .from("data_transactions")
-        .select(`
+        .select(
+          `
           id,
           created_at,
           status,
@@ -190,8 +246,11 @@ export default function Dashboard() {
           ),
           consumer_org:organizations!data_transactions_consumer_org_id_fkey (name),
           subject_org:organizations!data_transactions_subject_org_id_fkey (name)
-        `)
-        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id}`)
+        `,
+        )
+        .or(
+          `consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id}`,
+        )
         .gte("created_at", sixMonthsAgo)
         .order("created_at", { ascending: false });
 
@@ -210,8 +269,14 @@ export default function Dashboard() {
       const { count, error } = await supabase
         .from("data_transactions")
         .select("id", { count: "exact", head: true })
-        .or(`consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`)
-        .not("status", "in", '("completed","cancelled","denied_subject","denied_holder")');
+        .or(
+          `consumer_org_id.eq.${activeOrg.id},subject_org_id.eq.${activeOrg.id},holder_org_id.eq.${activeOrg.id}`,
+        )
+        .not(
+          "status",
+          "in",
+          '("completed","cancelled","denied_subject","denied_holder")',
+        );
 
       if (error) throw error;
       return count || 0;
@@ -220,16 +285,23 @@ export default function Dashboard() {
   });
 
   // Process data
-  const chartData = processTransactionsForChart(transactions, activeOrg?.id, currentLocale);
-  const hasRealData = chartData.some(d => d.revenue > 0 || d.spend > 0);
+  const chartData = processTransactionsForChart(
+    transactions,
+    activeOrg?.id,
+    currentLocale,
+  );
+  const hasRealData = chartData.some((d) => d.revenue > 0 || d.spend > 0);
 
-  const { revenue, spend, prevRevenue, prevSpend } = calculateCurrentMonthMetrics(transactions, activeOrg?.id);
+  const { revenue, spend, prevRevenue, prevSpend } =
+    calculateCurrentMonthMetrics(transactions, activeOrg?.id);
 
   // Calculate percentage changes
-  const revenueChange = prevRevenue > 0 ? ((revenue - prevRevenue) / prevRevenue) * 100 : 0;
-  const spendChange = prevSpend > 0 ? ((spend - prevSpend) / prevSpend) * 100 : 0;
+  const revenueChange =
+    prevRevenue > 0 ? ((revenue - prevRevenue) / prevRevenue) * 100 : 0;
+  const spendChange =
+    prevSpend > 0 ? ((spend - prevSpend) / prevSpend) * 100 : 0;
 
-  const isLoading = walletLoading || transactionsLoading;
+  const isLoading = apiWalletLoading || transactionsLoading;
 
   const formatCurrency = (amount: number, currency: string = "EUR") => {
     return formatCurrencyI18n(amount, i18n.language, currency);
@@ -252,7 +324,7 @@ export default function Dashboard() {
       <div className="container py-8 flex items-center justify-center min-h-[400px]">
         <div className="text-center space-y-4">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="text-muted-foreground">{t('loading', 'Cargando...')}</p>
+          <p className="text-muted-foreground">{t("loading", "Cargando...")}</p>
         </div>
       </div>
     );
@@ -265,73 +337,86 @@ export default function Dashboard() {
 
   return (
     <div className="container py-4 space-y-6 fade-in bg-muted/10 min-h-[calc(100vh-4rem)]">
-
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">{t('greeting')} {activeOrg?.name}</h2>
+          <h2 className="text-3xl font-bold tracking-tight">
+            {t("greeting")} {activeOrg?.name}
+          </h2>
           <p className="text-muted-foreground">
-            {isProvider
-              ? t('summary.provider')
-              : t('summary.consumer')}
+            {isProvider ? t("summary.provider") : t("summary.consumer")}
           </p>
         </div>
         <div className="flex gap-2">
           {isProvider ? (
             <Link to="/analytics">
-              <Button variant="outline" className="gap-2"><TrendingUp className="h-4 w-4" /> {t('buttons.viewAnalytics')}</Button>
+              <Button variant="outline" className="gap-2">
+                <TrendingUp className="h-4 w-4" /> {t("buttons.viewAnalytics")}
+              </Button>
             </Link>
           ) : (
             <Link to="/catalog">
-              <Button variant="brand" className="gap-2"><ShoppingCart className="h-4 w-4" /> {t('buttons.goToMarket')}</Button>
+              <Button variant="brand" className="gap-2">
+                <ShoppingCart className="h-4 w-4" /> {t("buttons.goToMarket")}
+              </Button>
             </Link>
           )}
         </div>
       </div>
 
       {/* Financial KPIs */}
-      <StaggerContainer className="grid gap-4 md:grid-cols-4">
+      <StaggerContainer className="grid gap-4 md:grid-cols-4 [&>div]:min-h-[140px]">
         {/* Wallet Balance */}
         <StaggerItem>
-          <Card>
+          <Card className="min-h-[140px] flex flex-col">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {t('cards.walletBalance')}
+                {t("cards.walletBalance")}
               </CardTitle>
               <div className="flex items-center gap-1">
                 <button
-                  onClick={() => refetchEthWallet()}
-                  disabled={ethWalletFetching}
+                  onClick={() => refetchWalletBalance()}
+                  disabled={walletBalanceFetching}
                   className="p-1 rounded-md hover:bg-muted transition-colors disabled:opacity-50"
                   title="Refrescar saldo"
                 >
-                  <RefreshCw className={`h-3.5 w-3.5 text-muted-foreground ${ethWalletFetching ? 'animate-spin' : ''}`} />
+                  <RefreshCw
+                    className={`h-3.5 w-3.5 text-muted-foreground ${walletBalanceFetching ? "animate-spin" : ""}`}
+                  />
                 </button>
                 <Wallet className="h-4 w-4 text-primary" />
               </div>
             </CardHeader>
             <CardContent>
-              {ethWalletLoading ? (
-                <Skeleton className="h-8 w-24" />
-              ) : ethWallet?.isConfigured ? (
+              {apiWalletLoading || walletBalanceFetching ? (
+                <div className="text-2xl font-bold text-muted-foreground tracking-widest animate-pulse">
+                  ...
+                </div>
+              ) : walletBalanceError &&
+                walletBalanceErrorData instanceof ApiError &&
+                walletBalanceErrorData.status === 403 ? (
+                <p className="text-sm font-medium text-muted-foreground mt-2">
+                  {t(
+                    "cards.walletNoPermission",
+                    "No tienes permiso para ver el saldo",
+                  )}
+                </p>
+              ) : apiWallet?.isConfigured ? (
                 <>
                   <div className="text-2xl font-bold">
-                    {formatCurrency(ethWallet.balanceEur, "EUR")}
+                    {apiWallet.balanceLines[0]}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {ethWallet.balanceNative.toFixed(4)} EURAU
-                    {ethWallet.euroeBalance > 0 && ` · ${ethWallet.euroeBalance.toFixed(2)} EUROe`}
+                    {t("cards.walletConfigured", "Wallet configurada")}
+                    {apiWallet.balanceLines.length > 1 &&
+                      ` · ${apiWallet.balanceLines.slice(1).join(" · ")}`}
                   </p>
                 </>
               ) : (
                 <>
-                  <div className="text-2xl font-bold">
-                    {formatCurrency(wallet?.balance || 0, wallet?.currency || "EUR")}
-                  </div>
+                  <div className="text-2xl font-bold">0</div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {ethWallet?.walletAddress === null
-                      ? t('cards.walletNotConfigured', 'Wallet no configurada')
-                      : t('cards.walletAvailable')}
+                    {t("cards.walletNotConfigured", "Sin wallet configurada")}
                   </p>
                 </>
               )}
@@ -341,10 +426,10 @@ export default function Dashboard() {
 
         {/* Revenue/Spend this month */}
         <StaggerItem>
-          <Card>
+          <Card className="min-h-[140px] flex flex-col">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {isProvider ? t('cards.revenueMonth') : t('cards.spendMonth')}
+                {isProvider ? t("cards.revenueMonth") : t("cards.spendMonth")}
               </CardTitle>
               <DollarSign className="h-4 w-4 text-primary" />
             </CardHeader>
@@ -358,23 +443,30 @@ export default function Dashboard() {
                   </div>
                   {blockchainActivity?.cumulativeEuroeReceived ? (
                     <p className="text-xs text-muted-foreground mt-1">
-                      +{blockchainActivity.cumulativeEuroeReceived.toFixed(2)} EUROe {t('cards.totalClosed', 'acumulados')}
+                      +{blockchainActivity.cumulativeEuroeReceived.toFixed(2)}{" "}
+                      EUROe {t("cards.totalClosed", "acumulados")}
                     </p>
-                  ) : (prevRevenue > 0 || prevSpend > 0) ? (
-                    <p className={`text-xs mt-1 flex items-center gap-1 ${(isProvider ? revenueChange : spendChange) >= 0
-                      ? "text-green-600"
-                      : "text-red-600"
-                      }`}>
+                  ) : prevRevenue > 0 || prevSpend > 0 ? (
+                    <p
+                      className={`text-xs mt-1 flex items-center gap-1 ${
+                        (isProvider ? revenueChange : spendChange) >= 0
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
                       {(isProvider ? revenueChange : spendChange) >= 0 ? (
                         <ArrowUpRight className="h-3 w-3" />
                       ) : (
                         <ArrowDownRight className="h-3 w-3" />
                       )}
-                      {Math.abs(isProvider ? revenueChange : spendChange).toFixed(1)}% {t('cards.vsPrevMonth')}
+                      {Math.abs(
+                        isProvider ? revenueChange : spendChange,
+                      ).toFixed(1)}
+                      % {t("cards.vsPrevMonth")}
                     </p>
                   ) : (
                     <p className="text-xs text-muted-foreground mt-1">
-                      {t('cards.vsPrevMonth')}
+                      {t("cards.vsPrevMonth")}
                     </p>
                   )}
                 </>
@@ -385,10 +477,10 @@ export default function Dashboard() {
 
         {/* Active Transactions */}
         <StaggerItem>
-          <Card>
+          <Card className="min-h-[140px] flex flex-col">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {t('cards.activeTransactions')}
+                {t("cards.activeTransactions")}
               </CardTitle>
               <Activity className="h-4 w-4 text-primary" />
             </CardHeader>
@@ -396,10 +488,12 @@ export default function Dashboard() {
               {isLoading ? (
                 <Skeleton className="h-8 w-12" />
               ) : (
-                <div className="text-2xl font-bold">{activeTransactionsCount}</div>
+                <div className="text-2xl font-bold">
+                  {activeTransactionsCount}
+                </div>
               )}
               <p className="text-xs text-muted-foreground mt-1">
-                {t('cards.pendingAction')}
+                {t("cards.pendingAction")}
               </p>
             </CardContent>
           </Card>
@@ -407,10 +501,10 @@ export default function Dashboard() {
 
         {/* Completed Transactions (On-chain) */}
         <StaggerItem>
-          <Card>
+          <Card className="min-h-[140px] flex flex-col">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
-                {t('cards.completed6Months')}
+                {t("cards.completed6Months")}
               </CardTitle>
               <TrendingUp className="h-4 w-4 text-primary" />
             </CardHeader>
@@ -423,16 +517,20 @@ export default function Dashboard() {
                     {blockchainActivity.transactionCount}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {t('cards.onchainVerified', 'Actividad Verificada On-chain')}
+                    {t(
+                      "cards.onchainVerified",
+                      "Actividad Verificada On-chain",
+                    )}
                   </p>
                 </>
               ) : (
                 <>
                   <div className="text-2xl font-bold">
-                    {transactions?.filter(t => t.status === "completed").length || 0}
+                    {transactions?.filter((t) => t.status === "completed")
+                      .length || 0}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    {t('cards.totalClosed')}
+                    {t("cards.totalClosed")}
                   </p>
                 </>
               )}
@@ -443,69 +541,97 @@ export default function Dashboard() {
 
       {/* Financial Chart */}
       <Card className="shadow-sm">
-          <CardHeader>
-            <CardTitle>{t('chart.title')}</CardTitle>
-            <CardDescription>
-              {t('chart.description')}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="h-[350px]">
-            {isLoading ? (
-              <div className="flex items-center justify-center h-full">
-                <Skeleton className="w-full h-full" />
-              </div>
-            ) : !hasRealData ? (
-              <div className="flex flex-col items-center justify-center h-full text-muted-foreground gap-2">
-                <BarChart3 className="h-10 w-10" />
-                <p>{t('chart.noData', 'No hay datos históricos disponibles')}</p>
-              </div>
-            ) : (
-              <ChartFadeIn delay={0.2} className="h-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={chartData}>
-                    <defs>
-                      <linearGradient id={CHART_GRADIENTS.primary.id} x1="0" y1="0" x2="0" y2="1">
-                        {CHART_GRADIENTS.primary.stops.map((stop, i) => (
-                          <stop key={i} offset={stop.offset} stopColor={CHART_GRADIENTS.primary.color} stopOpacity={stop.opacity} />
-                        ))}
-                      </linearGradient>
-                      <linearGradient id={CHART_GRADIENTS.secondary.id} x1="0" y1="0" x2="0" y2="1">
-                        {CHART_GRADIENTS.secondary.stops.map((stop, i) => (
-                          <stop key={i} offset={stop.offset} stopColor={CHART_GRADIENTS.secondary.color} stopOpacity={stop.opacity} />
-                        ))}
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid {...CHART_GRID_STYLE} />
-                    <XAxis dataKey="name" className="text-xs" />
-                    <YAxis className="text-xs" />
-                    <Tooltip
-                      formatter={(value: number) => formatCurrency(value)}
-                      {...CHART_TOOLTIP_STYLE}
-                    />
-                    <Legend />
-                    <Area
-                      type="monotone"
-                      dataKey="revenue"
-                      name={t('chart.revenue')}
-                      stroke={CHART_COLORS.primary}
-                      fill={`url(#${CHART_GRADIENTS.primary.id})`}
-                      animationDuration={CHART_ANIMATION_CONFIG.area.animationDuration}
-                      animationEasing={CHART_ANIMATION_CONFIG.area.animationEasing}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="spend"
-                      name={t('chart.expenses')}
-                      stroke={CHART_COLORS.secondary}
-                      fill={`url(#${CHART_GRADIENTS.secondary.id})`}
-                      animationDuration={CHART_ANIMATION_CONFIG.area.animationDuration}
-                      animationEasing={CHART_ANIMATION_CONFIG.area.animationEasing}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </ChartFadeIn>
-            )}
-          </CardContent>
+        <CardHeader>
+          <CardTitle>{t("chart.title")}</CardTitle>
+          <CardDescription>{t("chart.description")}</CardDescription>
+        </CardHeader>
+        <CardContent className="h-[350px]">
+          {isLoading ? (
+            <div className="flex items-center justify-center h-full">
+              <Skeleton className="w-full h-full" />
+            </div>
+          ) : !hasRealData ? (
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground gap-2">
+              <BarChart3 className="h-10 w-10" />
+              <p>{t("chart.noData", "No hay datos históricos disponibles")}</p>
+            </div>
+          ) : (
+            <ChartFadeIn delay={0.2} className="h-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={chartData}>
+                  <defs>
+                    <linearGradient
+                      id={CHART_GRADIENTS.primary.id}
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      {CHART_GRADIENTS.primary.stops.map((stop, i) => (
+                        <stop
+                          key={i}
+                          offset={stop.offset}
+                          stopColor={CHART_GRADIENTS.primary.color}
+                          stopOpacity={stop.opacity}
+                        />
+                      ))}
+                    </linearGradient>
+                    <linearGradient
+                      id={CHART_GRADIENTS.secondary.id}
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      {CHART_GRADIENTS.secondary.stops.map((stop, i) => (
+                        <stop
+                          key={i}
+                          offset={stop.offset}
+                          stopColor={CHART_GRADIENTS.secondary.color}
+                          stopOpacity={stop.opacity}
+                        />
+                      ))}
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid {...CHART_GRID_STYLE} />
+                  <XAxis dataKey="name" className="text-xs" />
+                  <YAxis className="text-xs" />
+                  <Tooltip
+                    formatter={(value: number) => formatCurrency(value)}
+                    {...CHART_TOOLTIP_STYLE}
+                  />
+                  <Legend />
+                  <Area
+                    type="monotone"
+                    dataKey="revenue"
+                    name={t("chart.revenue")}
+                    stroke={CHART_COLORS.primary}
+                    fill={`url(#${CHART_GRADIENTS.primary.id})`}
+                    animationDuration={
+                      CHART_ANIMATION_CONFIG.area.animationDuration
+                    }
+                    animationEasing={
+                      CHART_ANIMATION_CONFIG.area.animationEasing
+                    }
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="spend"
+                    name={t("chart.expenses")}
+                    stroke={CHART_COLORS.secondary}
+                    fill={`url(#${CHART_GRADIENTS.secondary.id})`}
+                    animationDuration={
+                      CHART_ANIMATION_CONFIG.area.animationDuration
+                    }
+                    animationEasing={
+                      CHART_ANIMATION_CONFIG.area.animationEasing
+                    }
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </ChartFadeIn>
+          )}
+        </CardContent>
       </Card>
 
       {/* Recent Transactions */}
@@ -518,7 +644,7 @@ export default function Dashboard() {
 
       {/* Activity Feed */}
       <div className="grid gap-4">
-        <h3 className="text-lg font-semibold">{t('activity.title')}</h3>
+        <h3 className="text-lg font-semibold">{t("activity.title")}</h3>
         <ActivityFeed />
       </div>
     </div>

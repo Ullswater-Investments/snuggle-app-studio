@@ -12,6 +12,8 @@
     "walletBalance": "Balance Wallet",
     "walletAvailable": "Disponible para transacciones",
     "walletNotConfigured": "Sin wallet configurada",
+    "walletConfigured": "Wallet configurada",
+    "walletNoPermission": "No tienes permiso para ver el saldo",
     "revenueMonth": "Ingresos del Mes",
     "spendMonth": "Gastos del Mes",
     "vsPrevMonth": "vs mes anterior",

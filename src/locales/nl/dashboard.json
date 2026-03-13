@@ -12,6 +12,8 @@
     "walletBalance": "Wallet Saldo",
     "walletAvailable": "Beschikbaar voor transacties",
     "walletNotConfigured": "Geen wallet geconfigureerd",
+    "walletConfigured": "Wallet geconfigureerd",
+    "walletNoPermission": "Je hebt geen toestemming om het saldo te bekijken",
     "revenueMonth": "Maandelijkse Inkomsten",
     "spendMonth": "Maandelijkse Uitgaven",
     "vsPrevMonth": "vs vorige maand",

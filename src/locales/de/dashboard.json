@@ -12,6 +12,8 @@
     "walletBalance": "Wallet-Guthaben",
     "walletAvailable": "Verfügbar für Transaktionen",
     "walletNotConfigured": "Keine Wallet konfiguriert",
+    "walletConfigured": "Wallet konfiguriert",
+    "walletNoPermission": "Du hast keine Berechtigung, den Kontostand einzusehen",
     "revenueMonth": "Monatliche Einnahmen",
     "spendMonth": "Monatliche Ausgaben",
     "vsPrevMonth": "vs. Vormonat",

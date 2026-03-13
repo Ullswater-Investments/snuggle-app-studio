@@ -12,6 +12,8 @@
     "walletBalance": "Solde du Portefeuille",
     "walletAvailable": "Disponible pour les transactions",
     "walletNotConfigured": "Aucun portefeuille configuré",
+    "walletConfigured": "Portefeuille configuré",
+    "walletNoPermission": "Vous n'avez pas la permission de voir le solde",
     "revenueMonth": "Revenus du Mois",
     "spendMonth": "Dépenses du Mois",
     "vsPrevMonth": "vs mois précédent",
