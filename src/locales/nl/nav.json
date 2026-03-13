@@ -69,6 +69,8 @@
   "statusCancelled": "Geannuleerd",
   "invitationCancelled": "Uitnodiging geannuleerd",
   "invitationCancelError": "Fout bij het annuleren van de uitnodiging",
+  "invitationAccepted": "Uitnodiging geaccepteerd",
+  "invitationAcceptError": "Fout bij het accepteren van de uitnodiging",
   "cancelInvitationConfirmTitle": "Uitnodiging annuleren?",
   "cancelInvitationConfirmDescription": "Weet je zeker dat je deze uitnodiging wilt annuleren? De gebruiker kan zich niet bij de organisatie aansluiten met deze uitnodiging.",
   "cancelInvitationConfirmAction": "Ja, annuleren",

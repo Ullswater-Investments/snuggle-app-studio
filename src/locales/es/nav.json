@@ -69,6 +69,8 @@
   "statusCancelled": "Cancelada",
   "invitationCancelled": "Invitación cancelada",
   "invitationCancelError": "Error al cancelar la invitación",
+  "invitationAccepted": "Invitación aceptada",
+  "invitationAcceptError": "Error al aceptar la invitación",
   "cancelInvitationConfirmTitle": "¿Cancelar invitación?",
   "cancelInvitationConfirmDescription": "¿Estás seguro de que quieres cancelar esta invitación? El usuario no podrá unirse a la organización con esta invitación.",
   "cancelInvitationConfirmAction": "Sí, cancelar",

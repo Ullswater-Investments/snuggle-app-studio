@@ -69,13 +69,14 @@
   "statusCancelled": "Cancelled",
   "invitationCancelled": "Invitation cancelled",
   "invitationCancelError": "Error cancelling invitation",
+  "invitationAccepted": "Invitation accepted",
+  "invitationAcceptError": "Error accepting invitation",
   "cancelInvitationConfirmTitle": "Cancel invitation?",
   "cancelInvitationConfirmDescription": "Are you sure you want to cancel this invitation? The user will not be able to join the organization with this invitation.",
   "cancelInvitationConfirmAction": "Yes, cancel",
   "acceptInvitation": "Accept",
   "rejectInvitation": "Reject",
   "invitedBy": "Invited by",
-  "pendingSection": "Pending",
   "pendingSection": "Pending",
   "endpointComingSoon": "Endpoint available soon"
 }

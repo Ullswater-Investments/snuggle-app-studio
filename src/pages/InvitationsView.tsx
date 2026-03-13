@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Mail, Loader2, User, Clock, Check, X, FileText } from "lucide-react";
 import { toast } from "sonner";
@@ -40,6 +41,7 @@ function formatInvitationDate(isoDate: string): string {
 
 export default function InvitationsView() {
   const { t } = useTranslation("nav");
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profile-invitations"],
@@ -48,11 +50,24 @@ export default function InvitationsView() {
 
   const invitations = Array.isArray(data?.data) ? data.data : [];
 
+  const [acceptingUuid, setAcceptingUuid] = useState<string | null>(null);
+
   const handleAccept = async (inv: PendingInvitation) => {
-    // TODO: llamar al endpoint cuando el usuario lo indique
-    toast.info(t("acceptInvitation"), {
-      description: inv.organization?.name ?? inv.organization_uuid,
-    });
+    setAcceptingUuid(inv.uuid);
+    try {
+      await invitationsService.acceptInvitation(inv.uuid);
+      toast.success(t("invitationAccepted"), {
+        description: inv.organization?.name ?? inv.organization_uuid,
+      });
+      queryClient.invalidateQueries({ queryKey: ["profile-invitations"] });
+      queryClient.invalidateQueries({ queryKey: ["user-organizations"] });
+    } catch (err) {
+      toast.error(t("invitationAcceptError"), {
+        description: err instanceof Error ? err.message : undefined,
+      });
+    } finally {
+      setAcceptingUuid(null);
+    }
   };
 
   const handleReject = async (inv: PendingInvitation) => {
@@ -179,8 +194,13 @@ export default function InvitationsView() {
                           size="sm"
                           className="gap-1.5"
                           onClick={() => handleAccept(inv)}
+                          disabled={acceptingUuid === inv.uuid}
                         >
-                          <Check className="h-4 w-4" />
+                          {acceptingUuid === inv.uuid ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Check className="h-4 w-4" />
+                          )}
                           {t("acceptInvitation")}
                         </Button>
                         <Button

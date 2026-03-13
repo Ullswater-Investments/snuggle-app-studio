@@ -87,7 +87,22 @@ export interface PendingInvitationsResponse {
   data: PendingInvitation[];
 }
 
+/** Response from accept invitation endpoint */
+export interface AcceptInvitationResponse {
+  message: string;
+  data: {
+    organization: InvitationOrganization;
+    role: InvitationRole;
+    user_uuid: string;
+  };
+}
+
 export const invitationsService = {
   getPendingInvitations: (): Promise<PendingInvitationsResponse> =>
     api.get<PendingInvitationsResponse>("/profile/invitations"),
+
+  acceptInvitation: (invitationUuid: string): Promise<AcceptInvitationResponse> =>
+    api.post<AcceptInvitationResponse>(
+      `/profile/invitations/${invitationUuid}/accept`,
+    ),
 };
