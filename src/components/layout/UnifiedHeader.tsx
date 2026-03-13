@@ -98,7 +98,7 @@ export const UnifiedHeader = () => {
                 <OrganizationSwitcher />
               </div> */}
               {/* <NotificationsBell /> */}
-              {/* <LanguageSwitcher /> */}
+              <LanguageSwitcher />
               <ThemeToggle />
               <DemoHelpButton />
               <UserMenu user={user} onSignOut={signOut} />

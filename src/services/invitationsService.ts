@@ -105,4 +105,7 @@ export const invitationsService = {
     api.post<AcceptInvitationResponse>(
       `/profile/invitations/${invitationUuid}/accept`,
     ),
+
+  declineInvitation: (invitationUuid: string): Promise<unknown> =>
+    api.post<unknown>(`/profile/invitations/${invitationUuid}/decline`),
 };

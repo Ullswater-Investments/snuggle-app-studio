@@ -3,6 +3,16 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Mail, Loader2, User, Clock, Check, X, FileText } from "lucide-react";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -51,6 +61,10 @@ export default function InvitationsView() {
   const invitations = Array.isArray(data?.data) ? data.data : [];
 
   const [acceptingUuid, setAcceptingUuid] = useState<string | null>(null);
+  const [decliningUuid, setDecliningUuid] = useState<string | null>(null);
+  const [declineConfirmUuid, setDeclineConfirmUuid] = useState<string | null>(
+    null,
+  );
 
   const handleAccept = async (inv: PendingInvitation) => {
     setAcceptingUuid(inv.uuid);
@@ -70,11 +84,24 @@ export default function InvitationsView() {
     }
   };
 
-  const handleReject = async (inv: PendingInvitation) => {
-    // TODO: llamar al endpoint cuando el usuario lo indique
-    toast.info(t("rejectInvitation"), {
-      description: inv.organization?.name ?? inv.organization_uuid,
-    });
+  const handleReject = async (invitationUuid: string) => {
+    const inv = invitations.find((i) => i.uuid === invitationUuid);
+    if (!inv) return;
+    setDeclineConfirmUuid(null);
+    setDecliningUuid(invitationUuid);
+    try {
+      await invitationsService.declineInvitation(invitationUuid);
+      toast.success(t("invitationDeclined"), {
+        description: inv.organization?.name ?? inv.organization_uuid,
+      });
+      queryClient.invalidateQueries({ queryKey: ["profile-invitations"] });
+    } catch (err) {
+      toast.error(t("invitationDeclineError"), {
+        description: err instanceof Error ? err.message : undefined,
+      });
+    } finally {
+      setDecliningUuid(null);
+    }
   };
 
   if (isLoading) {
@@ -207,9 +234,14 @@ export default function InvitationsView() {
                           variant="outline"
                           size="sm"
                           className="gap-1.5"
-                          onClick={() => handleReject(inv)}
+                          onClick={() => setDeclineConfirmUuid(inv.uuid)}
+                          disabled={decliningUuid === inv.uuid}
                         >
-                          <X className="h-4 w-4" />
+                          {decliningUuid === inv.uuid ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <X className="h-4 w-4" />
+                          )}
                           {t("rejectInvitation")}
                         </Button>
                       </div>
@@ -221,6 +253,36 @@ export default function InvitationsView() {
           </div>
         </div>
       )}
+
+      <AlertDialog
+        open={declineConfirmUuid !== null}
+        onOpenChange={(open) => !open && setDeclineConfirmUuid(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {t("rejectInvitationConfirmTitle")}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("rejectInvitationConfirmDescription")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={!!decliningUuid}>
+              {t("cancel")}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() =>
+                declineConfirmUuid && handleReject(declineConfirmUuid)
+              }
+              disabled={!!decliningUuid}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {t("rejectInvitationConfirmAction")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
