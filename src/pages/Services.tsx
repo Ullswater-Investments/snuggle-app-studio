@@ -3,14 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { 
-  BrainCircuit, 
-  ShieldCheck, 
+import {
+  BrainCircuit,
+  ShieldCheck,
   Sparkles,
   TrendingUp,
   Zap,
@@ -48,7 +54,7 @@ import {
   Activity,
   ArrowRightLeft,
   Plug,
-  Check
+  Check,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState, useMemo } from "react";
@@ -56,6 +62,9 @@ import { motion } from "framer-motion";
 import { ServiceInteractiveWidget } from "@/components/services/ServiceInteractiveWidget";
 import { ServiceMetrics } from "@/components/services/ServiceMetrics";
 import { ServicePopularityBadge } from "@/components/services/ServicePopularityBadge";
+import { FeaturePlaceholder } from "@/components/FeaturePlaceholder";
+
+const SHOW_PLACEHOLDER = true;
 
 const iconMap: Record<string, any> = {
   BrainCircuit,
@@ -100,7 +109,7 @@ const iconMap: Record<string, any> = {
 const Services = () => {
   const { activeOrg } = useOrganizationContext();
   const navigate = useNavigate();
-  const { t } = useTranslation('services');
+  const { t } = useTranslation("services");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -109,10 +118,12 @@ const Services = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("value_services")
-        .select(`
+        .select(
+          `
           *,
           provider:organizations!provider_org_id (id, name, sector, type)
-        `)
+        `,
+        )
         .order("created_at", { ascending: false });
 
       if (error) throw error;
@@ -121,70 +132,102 @@ const Services = () => {
   });
 
   const handleActivateService = (serviceName: string) => {
-    toast.success(t('toast.serviceActivated', { name: serviceName }), {
-      description: t('toast.availableInDashboard'),
+    toast.success(t("toast.serviceActivated", { name: serviceName }), {
+      description: t("toast.availableInDashboard"),
     });
   };
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
       // Nuevas categorías PROCUREDATA
-      "Sostenibilidad": "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
-      "Privacidad": "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200",
-      "IA & Analytics": "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
-      "Compliance": "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200",
-      "Data Ops": "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
-      "Blockchain": "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+      Sostenibilidad:
+        "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+      Privacidad:
+        "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200",
+      "IA & Analytics":
+        "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+      Compliance:
+        "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200",
+      "Data Ops":
+        "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
+      Blockchain:
+        "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
       // Categorías existentes
-      "Mantenimiento": "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-      "Logística": "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-      "Certificación": "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-      "Operaciones": "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
-      "ESG": "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
-      "Analítica": "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
-      "I+D": "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
-      "Bioinformática": "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200",
-      "Ventas": "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-      "Marketing": "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
-      "Seguridad": "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-200",
-      "Riesgo": "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
-      "Legal": "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200",
-      "Financiación": "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
-      "IoT": "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
-      "Ingeniería": "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-200",
-      "IT": "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200",
-      "IA": "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+      Mantenimiento:
+        "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+      Logística:
+        "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
+      Certificación:
+        "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+      Operaciones:
+        "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
+      ESG: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200",
+      Analítica:
+        "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
+      "I+D":
+        "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
+      Bioinformática:
+        "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200",
+      Ventas:
+        "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+      Marketing: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+      Seguridad:
+        "bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-200",
+      Riesgo:
+        "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
+      Legal:
+        "bg-violet-100 text-violet-800 dark:bg-violet-900 dark:text-violet-200",
+      Financiación:
+        "bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200",
+      IoT: "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
+      Ingeniería:
+        "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900 dark:text-fuchsia-200",
+      IT: "bg-rose-100 text-rose-800 dark:bg-rose-900 dark:text-rose-200",
+      IA: "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200",
     };
-    return colors[category] || "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
+    return (
+      colors[category] ||
+      "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
+    );
   };
 
-  const formatPrice = (price: number | null, currency: string, priceModel: string | null) => {
+  const formatPrice = (
+    price: number | null,
+    currency: string,
+    priceModel: string | null,
+  ) => {
     if (price === null || price === 0) {
-      return t('pricing.free');
+      return t("pricing.free");
     }
-    
+
     // Use EUROe format for consistency with PROCUREDATA
     const formatted = `${price} EUROe`;
-    
-    return priceModel === "subscription" 
-      ? `${formatted}${t('pricing.perMonth')}` 
-      : `${formatted}${t('pricing.perUse')}`;
+
+    return priceModel === "subscription"
+      ? `${formatted}${t("pricing.perMonth")}`
+      : `${formatted}${t("pricing.perUse")}`;
   };
 
   // Simulated subscription state
   const [subscribedServices, setSubscribedServices] = useState<string[]>([]);
 
-  const handleSubscribe = (serviceId: string, serviceName: string, price: number | null) => {
+  const handleSubscribe = (
+    serviceId: string,
+    serviceName: string,
+    price: number | null,
+  ) => {
     if (subscribedServices.includes(serviceId)) return;
 
-    const priceText = price && price > 0 ? `${price} EUROe` : t('pricing.free');
-    toast.loading(t('toast.processingPayment', { price: priceText }), { id: "payment" });
-    
+    const priceText = price && price > 0 ? `${price} EUROe` : t("pricing.free");
+    toast.loading(t("toast.processingPayment", { price: priceText }), {
+      id: "payment",
+    });
+
     setTimeout(() => {
-      setSubscribedServices(prev => [...prev, serviceId]);
-      toast.success(t('toast.serviceActivated', { name: serviceName }), {
+      setSubscribedServices((prev) => [...prev, serviceId]);
+      toast.success(t("toast.serviceActivated", { name: serviceName }), {
         id: "payment",
-        description: t('toast.availableInDashboard'),
+        description: t("toast.availableInDashboard"),
       });
     }, 1500);
   };
@@ -193,17 +236,19 @@ const Services = () => {
   const { myServices, marketplaceServices } = useMemo(() => {
     if (!services) return { myServices: [], marketplaceServices: [] };
 
-    const my = activeOrg 
-      ? services.filter(s => s.provider_org_id === activeOrg.id)
+    const my = activeOrg
+      ? services.filter((s) => s.provider_org_id === activeOrg.id)
       : [];
-    const marketplace = activeOrg 
-      ? services.filter(s => s.provider_org_id !== activeOrg.id)
+    const marketplace = activeOrg
+      ? services.filter((s) => s.provider_org_id !== activeOrg.id)
       : services; // Si no hay org activa, mostrar todos los servicios
 
     // Sort marketplace by sector relevance
     const sorted = [...marketplace].sort((a, b) => {
-      const aSameSector = activeOrg && a.provider?.sector === activeOrg.sector ? 1 : 0;
-      const bSameSector = activeOrg && b.provider?.sector === activeOrg.sector ? 1 : 0;
+      const aSameSector =
+        activeOrg && a.provider?.sector === activeOrg.sector ? 1 : 0;
+      const bSameSector =
+        activeOrg && b.provider?.sector === activeOrg.sector ? 1 : 0;
       return bSameSector - aSameSector;
     });
 
@@ -213,14 +258,16 @@ const Services = () => {
   // Apply search and category filters
   const filterServices = (serviceList: typeof services) => {
     if (!serviceList) return [];
-    
-    return serviceList.filter(service => {
-      const matchesSearch = searchQuery === "" || 
+
+    return serviceList.filter((service) => {
+      const matchesSearch =
+        searchQuery === "" ||
         service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         service.description?.toLowerCase().includes(searchQuery.toLowerCase());
-      
-      const matchesCategory = selectedCategory === "all" || service.category === selectedCategory;
-      
+
+      const matchesCategory =
+        selectedCategory === "all" || service.category === selectedCategory;
+
       return matchesSearch && matchesCategory;
     });
   };
@@ -228,11 +275,12 @@ const Services = () => {
   // Get all unique categories
   const categories = useMemo(() => {
     if (!services) return [];
-    const cats = new Set(services.map(s => s.category).filter(Boolean));
+    const cats = new Set(services.map((s) => s.category).filter(Boolean));
     return Array.from(cats).sort();
   }, [services]);
 
-  const isProvider = activeOrg?.type === 'provider' || activeOrg?.type === 'data_holder';
+  const isProvider =
+    activeOrg?.type === "provider" || activeOrg?.type === "data_holder";
 
   const renderServiceGrid = (serviceList: typeof services) => {
     const filtered = filterServices(serviceList);
@@ -242,9 +290,11 @@ const Services = () => {
         <Card>
           <CardContent className="py-12 text-center">
             <Sparkles className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">{t('emptyState.title')}</h3>
+            <h3 className="text-lg font-semibold mb-2">
+              {t("emptyState.title")}
+            </h3>
             <p className="text-sm text-muted-foreground">
-              {t('emptyState.description')}
+              {t("emptyState.description")}
             </p>
           </CardContent>
         </Card>
@@ -256,7 +306,7 @@ const Services = () => {
         {filtered.map((service, index) => {
           const IconComponent = iconMap[service.icon_name] || Sparkles;
           const isSameSector = service.provider?.sector === activeOrg?.sector;
-          
+
           return (
             <motion.div
               key={service.id}
@@ -265,8 +315,8 @@ const Services = () => {
               transition={{ delay: index * 0.05, duration: 0.3 }}
               whileHover={{ scale: 1.02, y: -4 }}
             >
-              <Card 
-                className={`h-full hover:shadow-xl transition-all cursor-pointer ${isSameSector ? 'ring-2 ring-primary/20' : ''}`}
+              <Card
+                className={`h-full hover:shadow-xl transition-all cursor-pointer ${isSameSector ? "ring-2 ring-primary/20" : ""}`}
                 onClick={() => navigate(`/services/${service.id}`)}
               >
                 <CardHeader className="pb-2">
@@ -279,7 +329,7 @@ const Services = () => {
                         <Badge className={getCategoryColor(service.category)}>
                           {service.category}
                         </Badge>
-                        <ServicePopularityBadge 
+                        <ServicePopularityBadge
                           serviceName={service.name}
                           price={service.price}
                           createdAt={service.created_at}
@@ -287,20 +337,18 @@ const Services = () => {
                       </div>
                       {isSameSector && (
                         <Badge variant="outline" className="text-xs">
-                          {t('card.recommended')}
+                          {t("card.recommended")}
                         </Badge>
                       )}
                     </div>
                   </div>
                   <CardTitle className="text-xl">{service.name}</CardTitle>
-                  <CardDescription>
-                    {service.provider?.name}
-                  </CardDescription>
+                  <CardDescription>{service.provider?.name}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {/* Interactive Widget */}
-                  <ServiceInteractiveWidget 
-                    category={service.category || "default"} 
+                  <ServiceInteractiveWidget
+                    category={service.category || "default"}
                     serviceName={service.name}
                   />
 
@@ -311,33 +359,42 @@ const Services = () => {
                   {/* Features List */}
                   {service.features && Array.isArray(service.features) && (
                     <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      {(service.features as string[]).slice(0, 3).map((feature, idx) => (
-                        <span key={idx} className="text-xs text-muted-foreground flex items-center gap-1">
-                          <Check className="h-3 w-3 text-green-500" />
-                          {feature}
-                        </span>
-                      ))}
+                      {(service.features as string[])
+                        .slice(0, 3)
+                        .map((feature, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs text-muted-foreground flex items-center gap-1"
+                          >
+                            <Check className="h-3 w-3 text-green-500" />
+                            {feature}
+                          </span>
+                        ))}
                     </div>
                   )}
-                  
+
                   {/* Metrics Row */}
                   <ServiceMetrics serviceName={service.name} />
-                  
+
                   <div className="flex items-center justify-between pt-3 border-t">
                     <div>
                       <p className="text-lg font-bold">
-                        {formatPrice(service.price, service.currency || 'EUR', service.price_model)}
+                        {formatPrice(
+                          service.price,
+                          service.currency || "EUR",
+                          service.price_model,
+                        )}
                       </p>
                       {service.price === 0 && (
                         <Badge variant="secondary" className="text-xs mt-1">
-                          {t('card.coreService')}
+                          {t("card.coreService")}
                         </Badge>
                       )}
                     </div>
                     {subscribedServices.includes(service.id) ? (
                       <Badge className="bg-green-500/20 text-green-600 border-green-500/30 py-2 px-4">
                         <CheckCircle className="h-4 w-4 mr-2" />
-                        {t('card.active')}
+                        {t("card.active")}
                       </Badge>
                     ) : (
                       <div className="flex gap-2">
@@ -351,18 +408,26 @@ const Services = () => {
                           className="gap-1"
                         >
                           <FileText className="h-4 w-4" />
-                          <span className="hidden sm:inline">{t('card.docs')}</span>
+                          <span className="hidden sm:inline">
+                            {t("card.docs")}
+                          </span>
                         </Button>
                         <Button
                           size="sm"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleSubscribe(service.id, service.name, service.price);
+                            handleSubscribe(
+                              service.id,
+                              service.name,
+                              service.price,
+                            );
                           }}
                           className="gap-1"
                         >
                           <Zap className="h-4 w-4" />
-                          {service.price === 0 ? t('card.free') : t('card.subscribe')}
+                          {service.price === 0
+                            ? t("card.free")
+                            : t("card.subscribe")}
                         </Button>
                       </div>
                     )}
@@ -376,15 +441,23 @@ const Services = () => {
     );
   };
 
+  if (SHOW_PLACEHOLDER) {
+    return (
+      <FeaturePlaceholder
+        title="Servicios"
+        description="Servicios profesionales y consultoría especializada."
+        icon={Sparkles}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto p-6 space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold mb-2">{t('pageTitle')}</h1>
-          <p className="text-muted-foreground">
-            {t('pageDescription')}
-          </p>
+          <h1 className="text-3xl font-bold mb-2">{t("pageTitle")}</h1>
+          <p className="text-muted-foreground">{t("pageDescription")}</p>
         </div>
 
         {/* Search and Filters */}
@@ -392,7 +465,7 @@ const Services = () => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder={t('searchPlaceholder')}
+              placeholder={t("searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -404,7 +477,7 @@ const Services = () => {
               size="sm"
               onClick={() => setSelectedCategory("all")}
             >
-              {t('all')}
+              {t("all")}
             </Button>
             {categories.slice(0, 5).map((cat) => (
               <Button
@@ -437,9 +510,11 @@ const Services = () => {
         ) : isProvider ? (
           <Tabs defaultValue="marketplace" className="w-full">
             <TabsList>
-              <TabsTrigger value="marketplace">{t('tabs.globalMarket')}</TabsTrigger>
+              <TabsTrigger value="marketplace">
+                {t("tabs.globalMarket")}
+              </TabsTrigger>
               <TabsTrigger value="my-services">
-                {t('tabs.myServices')} ({myServices.length})
+                {t("tabs.myServices")} ({myServices.length})
               </TabsTrigger>
             </TabsList>
             <TabsContent value="marketplace" className="mt-6">

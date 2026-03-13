@@ -3,12 +3,27 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useAuth } from "@/hooks/useAuth";
-import { Megaphone, Plus, Calendar, DollarSign, Tag, Loader2, Search, BadgeCheck, TrendingUp, ShoppingBag, Users, Clock, Flame } from "lucide-react";
+import {
+  Megaphone,
+  Plus,
+  Calendar,
+  DollarSign,
+  Tag,
+  Loader2,
+  Search,
+  BadgeCheck,
+  TrendingUp,
+  ShoppingBag,
+  Users,
+  Clock,
+  Flame,
+} from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import type { MarketplaceOpportunity } from "@/types/database.extensions";
 import { EmptyState } from "@/components/EmptyState";
+import { FeaturePlaceholder } from "@/components/FeaturePlaceholder";
 import { differenceInDays } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -17,9 +32,24 @@ import { useTranslation } from "react-i18next";
 
 // UI Components
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -31,48 +61,87 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 
 // Category IDs (internal, not translated)
 const CATEGORY_IDS = [
   // Sectores estratégicos ProcureData
-  "Industrial", "AgriFood", "Logistics", "Pharma", "Retail",
+  "Industrial",
+  "AgriFood",
+  "Logistics",
+  "Pharma",
+  "Retail",
   // Tecnologías transversales
-  "ESG", "AI", "IoT", "Blockchain", "Fintech",
+  "ESG",
+  "AI",
+  "IoT",
+  "Blockchain",
+  "Fintech",
   // Especializaciones
-  "Aerospace", "Energy", "Automotive", "Construction", "Finance", "Tech"
+  "Aerospace",
+  "Energy",
+  "Automotive",
+  "Construction",
+  "Finance",
+  "Tech",
 ];
 
+const SHOW_PLACEHOLDER = true;
+
 export default function Opportunities() {
-  const { t } = useTranslation('opportunities');
+  const { t } = useTranslation("opportunities");
   const { activeOrg } = useOrganizationContext();
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [submittingProposalId, setSubmittingProposalId] = useState<string | null>(null);
+  const [submittingProposalId, setSubmittingProposalId] = useState<
+    string | null
+  >(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
   // Translated categories (inside component to react to language changes)
-  const CATEGORIES = useMemo(() => 
-    CATEGORY_IDS.map(id => ({
-      id,
-      label: t(`categories.${id}`)
-    })), [t]
+  const CATEGORIES = useMemo(
+    () =>
+      CATEGORY_IDS.map((id) => ({
+        id,
+        label: t(`categories.${id}`),
+      })),
+    [t],
   );
 
   // Esquema de validación with translated messages
-  const opportunitySchema = useMemo(() => z.object({
-    title: z.string().min(10, t('validation.titleMin')).max(100),
-    category: z.string().min(1, t('validation.selectCategory')),
-    budget_range: z.string().min(1, t('validation.budgetRequired')),
-    description: z.string().min(50, t('validation.descriptionMin')).max(500),
-  }), [t]);
+  const opportunitySchema = useMemo(
+    () =>
+      z.object({
+        title: z.string().min(10, t("validation.titleMin")).max(100),
+        category: z.string().min(1, t("validation.selectCategory")),
+        budget_range: z.string().min(1, t("validation.budgetRequired")),
+        description: z
+          .string()
+          .min(50, t("validation.descriptionMin"))
+          .max(500),
+      }),
+    [t],
+  );
 
   type OpportunityFormData = z.infer<typeof opportunitySchema>;
 
@@ -82,15 +151,17 @@ export default function Opportunities() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("marketplace_opportunities")
-        .select(`
+        .select(
+          `
           *,
           consumer:organizations!consumer_org_id(id, name, kyb_verified)
-        `)
+        `,
+        )
         .eq("status", "active")
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data as any[] || [];
+      return (data as any[]) || [];
     },
   });
 
@@ -112,13 +183,15 @@ export default function Opportunities() {
 
       const { data, error } = await supabase
         .from("marketplace_opportunities")
-        .insert([{
-          consumer_org_id: activeOrg.id,
-          title: values.title,
-          category: values.category,
-          budget_range: values.budget_range,
-          description: values.description,
-        }])
+        .insert([
+          {
+            consumer_org_id: activeOrg.id,
+            title: values.title,
+            category: values.category,
+            budget_range: values.budget_range,
+            description: values.description,
+          },
+        ])
         .select()
         .single();
 
@@ -126,15 +199,17 @@ export default function Opportunities() {
       return data;
     },
     onSuccess: () => {
-      toast.success(t('toast.opportunityPublished'), {
-        description: t('toast.opportunityPublishedDesc'),
+      toast.success(t("toast.opportunityPublished"), {
+        description: t("toast.opportunityPublishedDesc"),
       });
-      queryClient.invalidateQueries({ queryKey: ["marketplace-opportunities"] });
+      queryClient.invalidateQueries({
+        queryKey: ["marketplace-opportunities"],
+      });
       setDialogOpen(false);
       form.reset();
     },
     onError: (error) => {
-      toast.error(t('toast.publishError'), {
+      toast.error(t("toast.publishError"), {
         description: error.message,
       });
     },
@@ -144,21 +219,19 @@ export default function Opportunities() {
   const proposalMutation = useMutation({
     mutationFn: async (opportunityId: string) => {
       if (!activeOrg?.id || !user?.id) {
-        throw new Error(t('toast.loginRequired'));
+        throw new Error(t("toast.loginRequired"));
       }
 
       // Get the opportunity to find the consumer org
-      const opportunity = opportunities.find(o => o.id === opportunityId);
+      const opportunity = opportunities.find((o) => o.id === opportunityId);
       if (!opportunity) throw new Error("Oportunidad no encontrada");
 
       // Insert a message as a proposal notification
-      const { error } = await supabase
-        .from("transaction_messages")
-        .insert({
-          transaction_id: opportunityId, // Using opportunity ID as reference
-          sender_org_id: activeOrg.id,
-          content: `[PROPUESTA] ${activeOrg.name} está interesado en ofrecer datos para la oportunidad: "${opportunity.title}". Presupuesto indicado: ${opportunity.budget_range}`,
-        });
+      const { error } = await supabase.from("transaction_messages").insert({
+        transaction_id: opportunityId, // Using opportunity ID as reference
+        sender_org_id: activeOrg.id,
+        content: `[PROPUESTA] ${activeOrg.name} está interesado en ofrecer datos para la oportunidad: "${opportunity.title}". Presupuesto indicado: ${opportunity.budget_range}`,
+      });
 
       // If transaction_messages fails due to FK constraint, create a notification instead
       if (error) {
@@ -182,13 +255,13 @@ export default function Opportunities() {
     },
     onSuccess: () => {
       setSubmittingProposalId(null);
-      toast.success(t('toast.proposalSent'), {
-        description: t('toast.proposalSentDesc'),
+      toast.success(t("toast.proposalSent"), {
+        description: t("toast.proposalSentDesc"),
       });
     },
     onError: (error) => {
       setSubmittingProposalId(null);
-      toast.error(t('toast.proposalError'), {
+      toast.error(t("toast.proposalError"), {
         description: error.message,
       });
     },
@@ -206,13 +279,15 @@ export default function Opportunities() {
   // Filtrar oportunidades
   const filteredOpportunities = useMemo(() => {
     return opportunities.filter((opp) => {
-      const matchesSearch = searchTerm === "" || 
+      const matchesSearch =
+        searchTerm === "" ||
         opp.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         opp.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         opp.consumer?.name?.toLowerCase().includes(searchTerm.toLowerCase());
-      
-      const matchesCategory = categoryFilter === "all" || opp.category === categoryFilter;
-      
+
+      const matchesCategory =
+        categoryFilter === "all" || opp.category === categoryFilter;
+
       return matchesSearch && matchesCategory;
     });
   }, [opportunities, searchTerm, categoryFilter]);
@@ -225,23 +300,45 @@ export default function Opportunities() {
 
   // Calculate deadline progress
   const getDeadlineProgress = (createdAt: string, expiresAt: string) => {
-    const totalDays = differenceInDays(new Date(expiresAt), new Date(createdAt));
+    const totalDays = differenceInDays(
+      new Date(expiresAt),
+      new Date(createdAt),
+    );
     const elapsedDays = differenceInDays(new Date(), new Date(createdAt));
-    const progress = Math.min(100, Math.max(0, (elapsedDays / totalDays) * 100));
-    const daysRemaining = Math.max(0, differenceInDays(new Date(expiresAt), new Date()));
+    const progress = Math.min(
+      100,
+      Math.max(0, (elapsedDays / totalDays) * 100),
+    );
+    const daysRemaining = Math.max(
+      0,
+      differenceInDays(new Date(expiresAt), new Date()),
+    );
     return { progress, daysRemaining };
   };
 
   // Simulate proposals count based on opportunity age
   const getProposalsCount = (createdAt: string) => {
     const daysSinceCreated = differenceInDays(new Date(), new Date(createdAt));
-    return Math.min(12, Math.floor(daysSinceCreated / 2) + Math.floor(Math.random() * 3) + 1);
+    return Math.min(
+      12,
+      Math.floor(daysSinceCreated / 2) + Math.floor(Math.random() * 3) + 1,
+    );
   };
 
   // Get translated category label
   const getCategoryLabel = (categoryId: string) => {
     return t(`categories.${categoryId}`, { defaultValue: categoryId });
   };
+
+  if (SHOW_PLACEHOLDER) {
+    return (
+      <FeaturePlaceholder
+        title="Oportunidades"
+        description="Marketplace de licitaciones y proyectos dentro del ecosistema."
+        icon={Megaphone}
+      />
+    );
+  }
 
   return (
     <div className="container py-8 space-y-6 fade-in">
@@ -250,11 +347,9 @@ export default function Opportunities() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
             <Megaphone className="h-8 w-8 text-primary" />
-            {t('pageTitle')}
+            {t("pageTitle")}
           </h1>
-          <p className="text-muted-foreground mt-2">
-            {t('pageDescription')}
-          </p>
+          <p className="text-muted-foreground mt-2">{t("pageDescription")}</p>
         </div>
 
         {/* Botón Publicar Necesidad */}
@@ -262,27 +357,31 @@ export default function Opportunities() {
           <DialogTrigger asChild>
             <Button size="lg" className="gap-2">
               <Plus className="h-5 w-5" />
-              {t('publishNeed')}
+              {t("publishNeed")}
             </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
-              <DialogTitle>{t('dialog.title')}</DialogTitle>
-              <DialogDescription>
-                {t('dialog.description')}
-              </DialogDescription>
+              <DialogTitle>{t("dialog.title")}</DialogTitle>
+              <DialogDescription>{t("dialog.description")}</DialogDescription>
             </DialogHeader>
 
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('dialog.titleLabel')}</FormLabel>
+                      <FormLabel>{t("dialog.titleLabel")}</FormLabel>
                       <FormControl>
-                        <Input placeholder={t('dialog.titlePlaceholder')} {...field} />
+                        <Input
+                          placeholder={t("dialog.titlePlaceholder")}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -294,11 +393,16 @@ export default function Opportunities() {
                   name="category"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('dialog.categoryLabel')}</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormLabel>{t("dialog.categoryLabel")}</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder={t('dialog.categoryPlaceholder')} />
+                            <SelectValue
+                              placeholder={t("dialog.categoryPlaceholder")}
+                            />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -319,9 +423,12 @@ export default function Opportunities() {
                   name="budget_range"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('dialog.budgetLabel')}</FormLabel>
+                      <FormLabel>{t("dialog.budgetLabel")}</FormLabel>
                       <FormControl>
-                        <Input placeholder={t('dialog.budgetPlaceholder')} {...field} />
+                        <Input
+                          placeholder={t("dialog.budgetPlaceholder")}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -333,10 +440,10 @@ export default function Opportunities() {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('dialog.descriptionLabel')}</FormLabel>
+                      <FormLabel>{t("dialog.descriptionLabel")}</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder={t('dialog.descriptionPlaceholder')}
+                          placeholder={t("dialog.descriptionPlaceholder")}
                           className="min-h-[120px]"
                           {...field}
                         />
@@ -347,11 +454,17 @@ export default function Opportunities() {
                 />
 
                 <DialogFooter>
-                  <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
-                    {t('dialog.cancel')}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setDialogOpen(false)}
+                  >
+                    {t("dialog.cancel")}
                   </Button>
                   <Button type="submit" disabled={createMutation.isPending}>
-                    {createMutation.isPending ? t('dialog.publishing') : t('dialog.publish')}
+                    {createMutation.isPending
+                      ? t("dialog.publishing")
+                      : t("dialog.publish")}
                   </Button>
                 </DialogFooter>
               </form>
@@ -364,8 +477,8 @@ export default function Opportunities() {
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1 md:max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input 
-            placeholder={t('searchPlaceholder')} 
+          <Input
+            placeholder={t("searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -373,12 +486,14 @@ export default function Opportunities() {
         </div>
         <Select value={categoryFilter} onValueChange={setCategoryFilter}>
           <SelectTrigger className="md:w-48">
-            <SelectValue placeholder={t('allCategories')} />
+            <SelectValue placeholder={t("allCategories")} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t('allCategories')}</SelectItem>
+            <SelectItem value="all">{t("allCategories")}</SelectItem>
             {CATEGORIES.map((cat) => (
-              <SelectItem key={cat.id} value={cat.id}>{cat.label}</SelectItem>
+              <SelectItem key={cat.id} value={cat.id}>
+                {cat.label}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -408,36 +523,57 @@ export default function Opportunities() {
           <CardContent className="py-12">
             <EmptyState
               icon={Megaphone}
-              title={opportunities.length === 0 ? t('emptyState.noOpportunities') : t('emptyState.noResults')}
-              description={opportunities.length === 0 
-                ? t('emptyState.noOpportunitiesDesc')
-                : t('emptyState.noResultsDesc')
+              title={
+                opportunities.length === 0
+                  ? t("emptyState.noOpportunities")
+                  : t("emptyState.noResults")
               }
-              action={opportunities.length === 0 && (
-                <div className="flex flex-col sm:flex-row gap-3 mt-4">
-                  <Button onClick={() => setDialogOpen(true)} className="gap-2">
-                    <Plus className="h-4 w-4" />
-                    {t('publishNeed')}
-                  </Button>
-                  <Button variant="outline" onClick={() => navigate('/catalog')} className="gap-2">
-                    <ShoppingBag className="h-4 w-4" />
-                    {t('emptyState.exploreCatalog')}
-                  </Button>
-                  <Button variant="ghost" onClick={() => navigate('/reports')} className="gap-2">
-                    <TrendingUp className="h-4 w-4" />
-                    {t('emptyState.viewTrends')}
-                  </Button>
-                </div>
-              )}
+              description={
+                opportunities.length === 0
+                  ? t("emptyState.noOpportunitiesDesc")
+                  : t("emptyState.noResultsDesc")
+              }
+              action={
+                opportunities.length === 0 && (
+                  <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                    <Button
+                      onClick={() => setDialogOpen(true)}
+                      className="gap-2"
+                    >
+                      <Plus className="h-4 w-4" />
+                      {t("publishNeed")}
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => navigate("/catalog")}
+                      className="gap-2"
+                    >
+                      <ShoppingBag className="h-4 w-4" />
+                      {t("emptyState.exploreCatalog")}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => navigate("/reports")}
+                      className="gap-2"
+                    >
+                      <TrendingUp className="h-4 w-4" />
+                      {t("emptyState.viewTrends")}
+                    </Button>
+                  </div>
+                )
+              }
             />
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredOpportunities.map((opp, index) => {
-            const deadline = getDeadlineProgress(opp.created_at, opp.expires_at);
+            const deadline = getDeadlineProgress(
+              opp.created_at,
+              opp.expires_at,
+            );
             const proposalsCount = getProposalsCount(opp.created_at);
-            
+
             return (
               <motion.div
                 key={opp.id}
@@ -455,51 +591,68 @@ export default function Opportunities() {
                       </Badge>
                       <div className="flex items-center gap-1">
                         {isUrgent(opp.expires_at) && (
-                          <Badge variant="destructive" className="gap-1 text-xs animate-pulse">
+                          <Badge
+                            variant="destructive"
+                            className="gap-1 text-xs animate-pulse"
+                          >
                             <Flame className="h-3 w-3" />
-                            {t('card.urgent')}
+                            {t("card.urgent")}
                           </Badge>
                         )}
                       </div>
                     </div>
-                    <CardTitle className="text-lg line-clamp-2">{opp.title}</CardTitle>
+                    <CardTitle className="text-lg line-clamp-2">
+                      {opp.title}
+                    </CardTitle>
                     <CardDescription className="text-xs flex items-center gap-2 mt-1">
                       <span className="flex items-center gap-1">
-                        {t('card.by')}: <span className="font-medium">{opp.consumer?.name || "Organización"}</span>
+                        {t("card.by")}:{" "}
+                        <span className="font-medium">
+                          {opp.consumer?.name || "Organización"}
+                        </span>
                       </span>
                       {opp.consumer?.kyb_verified && (
-                        <Badge variant="outline" className="gap-1 text-xs text-green-600 border-green-600">
+                        <Badge
+                          variant="outline"
+                          className="gap-1 text-xs text-green-600 border-green-600"
+                        >
                           <BadgeCheck className="h-3 w-3" />
-                          {t('card.verified')}
+                          {t("card.verified")}
                         </Badge>
                       )}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-1 space-y-4">
-                    <p className="text-sm text-muted-foreground line-clamp-3">{opp.description}</p>
-                    
+                    <p className="text-sm text-muted-foreground line-clamp-3">
+                      {opp.description}
+                    </p>
+
                     {/* Deadline Progress */}
                     <div className="space-y-1.5">
                       <div className="flex justify-between text-xs">
                         <span className="text-muted-foreground flex items-center gap-1">
                           <Clock className="h-3 w-3" />
-                          {t('card.daysLeft', { count: deadline.daysRemaining })}
+                          {t("card.daysLeft", {
+                            count: deadline.daysRemaining,
+                          })}
                         </span>
-                        <span className={`font-medium ${deadline.daysRemaining <= 7 ? 'text-destructive' : 'text-foreground'}`}>
+                        <span
+                          className={`font-medium ${deadline.daysRemaining <= 7 ? "text-destructive" : "text-foreground"}`}
+                        >
                           {deadline.daysRemaining}d
                         </span>
                       </div>
-                      <Progress 
-                        value={100 - deadline.progress} 
-                        className={`h-1.5 ${deadline.daysRemaining <= 7 ? '[&>div]:bg-destructive' : ''}`}
+                      <Progress
+                        value={100 - deadline.progress}
+                        className={`h-1.5 ${deadline.daysRemaining <= 7 ? "[&>div]:bg-destructive" : ""}`}
                       />
                     </div>
-                    
+
                     {/* Proposals Badge */}
                     <div className="flex items-center justify-between">
                       <Badge variant="outline" className="gap-1 text-xs">
                         <Users className="h-3 w-3" />
-                        {t('card.proposals', { count: proposalsCount })}
+                        {t("card.proposals", { count: proposalsCount })}
                       </Badge>
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
@@ -508,42 +661,54 @@ export default function Opportunities() {
                     </div>
                   </CardContent>
                   <CardFooter className="flex items-center justify-between gap-2 pt-4 border-t">
-                    <Badge variant="outline" className="gap-1 text-green-700 border-green-600 bg-green-50 dark:bg-green-950/20">
+                    <Badge
+                      variant="outline"
+                      className="gap-1 text-green-700 border-green-600 bg-green-50 dark:bg-green-950/20"
+                    >
                       <DollarSign className="h-3 w-3" />
                       {opp.budget_range}
                     </Badge>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
-                        <Button 
+                        <Button
                           size="sm"
-                          disabled={submittingProposalId === opp.id || opp.consumer_org_id === activeOrg?.id}
+                          disabled={
+                            submittingProposalId === opp.id ||
+                            opp.consumer_org_id === activeOrg?.id
+                          }
                         >
                           {submittingProposalId === opp.id ? (
                             <>
                               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                              {t('card.submitting')}
+                              {t("card.submitting")}
                             </>
                           ) : opp.consumer_org_id === activeOrg?.id ? (
-                            t('card.isOwner')
+                            t("card.isOwner")
                           ) : (
-                            t('card.submitProposal')
+                            t("card.submitProposal")
                           )}
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>{t('card.deleteConfirmTitle')}</AlertDialogTitle>
+                          <AlertDialogTitle>
+                            {t("card.deleteConfirmTitle")}
+                          </AlertDialogTitle>
                           <AlertDialogDescription>
-                            {t('card.deleteConfirmDesc')}
+                            {t("card.deleteConfirmDesc")}
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>{t('dialog.cancel')}</AlertDialogCancel>
-                          <AlertDialogAction 
+                          <AlertDialogCancel>
+                            {t("dialog.cancel")}
+                          </AlertDialogCancel>
+                          <AlertDialogAction
                             onClick={() => handleProposal(opp.id)}
                             disabled={proposalMutation.isPending}
                           >
-                            {proposalMutation.isPending ? t('card.submitting') : t('card.submitProposal')}
+                            {proposalMutation.isPending
+                              ? t("card.submitting")
+                              : t("card.submitProposal")}
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

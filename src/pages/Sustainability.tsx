@@ -21,6 +21,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { FeaturePlaceholder } from "@/components/FeaturePlaceholder";
 
 // --- Schema de Validación (Zod) ---
 const esgFormSchema = z.object({
@@ -34,6 +35,8 @@ type ESGFormValues = z.infer<typeof esgFormSchema>;
 
 // Factor de ponderación para Scope 3
 const SCOPE3_WEIGHT_FACTOR = 0.1;
+
+const SHOW_PLACEHOLDER = true;
 
 export default function Sustainability() {
   const { activeOrg } = useOrganizationContext();
@@ -244,6 +247,15 @@ export default function Sustainability() {
   }, [latestReport, scope3Data, t]);
 
   // --- Renderizado ---
+  if (SHOW_PLACEHOLDER) {
+    return (
+      <FeaturePlaceholder
+        title="Sostenibilidad"
+        description="Gestión y reporte de métricas ESG y huella de carbono."
+        icon={Leaf}
+      />
+    );
+  }
   if (isLoading) {
     return (
       <div className="container py-8 space-y-8">
