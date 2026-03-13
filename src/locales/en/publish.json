@@ -9,10 +9,10 @@
     "securityNote": "ProcureData does not store your data. We only facilitate the secure connection between your API and the authorized consumer."
   },
   "stepper": {
-    "step1": { "title": "Source" },
-    "step2": { "title": "Metadata" },
-    "step3": { "title": "Configuration" },
-    "step4": { "title": "Publish" }
+    "step1": { "title": "Data Source", "description": "API Connection" },
+    "step2": { "title": "Schema", "description": "Technical structure" },
+    "step3": { "title": "Policies", "description": "Pontus-X" },
+    "step4": { "title": "Publication", "description": "Marketplace" }
   },
   "step1": {
     "title": "Data source",
@@ -43,6 +43,21 @@
   "step2": {
     "title": "Asset metadata",
     "description": "Descriptive information about the data asset",
+    "schemaTitle": "Technical Data Schema",
+    "schemaDescription": "Define the structure that consumers will see when querying your API",
+    "uploadLabel": "Schema Assistant",
+    "uploadButton": "Upload JSON / CSV",
+    "uploadHint": "Upload an example JSON or CSV file and we will automatically detect the fields. You can also define them manually.",
+    "fieldsLabel": "Field Definition",
+    "fieldLabel": "Field *",
+    "typeLabel": "Type *",
+    "descriptionLabel": "Description",
+    "fieldPlaceholder": "field_name",
+    "fieldDescPlaceholder": "Description of the field...",
+    "addField": "Add Field",
+    "fileError": "Could not process the file.",
+    "fieldsDetected": "{{count}} fields detected automatically",
+    "noFields": "No fields were detected.",
     "name": {
       "label": "Name (optional)",
       "placeholder": "Data asset name"
@@ -57,16 +72,63 @@
     }
   },
   "step3": {
-    "title": "Pricing and access",
-    "description": "Define the pricing model and access configuration",
+    "title": "Pontus-X Access Policies",
+    "description": "Define governance rules and conditions of use for your dataset",
     "pricing": {
       "label": "Pricing",
       "free": "Free",
       "paid": "Paid",
       "priceLabel": "Price (tokens)"
     },
+    "odrl": {
+      "permissionsTitle": "Permissions — What the user CAN do",
+      "prohibitionsTitle": "Prohibitions — What the user CANNOT do",
+      "obligationsTitle": "Obligations — Additional commitments",
+      "permissionCustomPlaceholder": "Add custom permission...",
+      "prohibitionCustomPlaceholder": "Add custom prohibition...",
+      "obligationCustomPlaceholder": "Add custom obligation...",
+      "permissions": {
+        "commercialUse": "Commercial use",
+        "internalAnalysis": "Internal analysis",
+        "derivedReports": "Generate derived reports",
+        "internalIntegration": "Integration into internal systems",
+        "researchUse": "Research use"
+      },
+      "prohibitions": {
+        "noRedistribution": "No redistribution",
+        "noReverseEngineering": "No reverse engineering",
+        "noIllegalUse": "No illegal or discriminatory use",
+        "noResale": "No resale to third parties",
+        "noPublicDisclosure": "No public disclosure"
+      },
+      "obligations": {
+        "attributionRequired": "Attribution required",
+        "gdprCompliance": "GDPR compliance",
+        "licenseRenewal": "License renewal",
+        "citeDataSource": "Cite data source",
+        "notifyProvider": "Notify provider of use"
+      }
+    },
+    "termsAndConditions": {
+      "label": "Link to Terms and Conditions (Optional)",
+      "placeholder": "https://example.com/terms",
+      "hint": "Enter a resolvable URL to your legal T&C document"
+    },
     "accessConfig": {
+      "accessControlTitle": "Access Control (Pontus-X)",
       "title": "Access configuration",
+      "whitelistTitle": "Organizations with Allowed Access (Whitelist)",
+      "whitelistDescription": "If you add organizations here, the asset becomes PRIVATE. Only they will be able to see and request it. The denied list will be ignored automatically.",
+      "whitelistSearchPlaceholder": "Search organization by name...",
+      "whitelistEmptyStatus": "No organizations added — the asset will not be private by whitelist.",
+      "blacklistTitle": "Organizations with Denied Access (Blacklist)",
+      "blacklistDescription": "Only effective if the allowed list is empty. The asset will be PUBLIC for everyone, except for the organizations listed here.",
+      "blacklistSearchPlaceholder": "Search organization by name...",
+      "blacklistEmptyStatus": "No organizations denied — total public access.",
+      "serviceExpiryTitle": "Service Expiry (Timeout)",
+      "serviceExpiryDescription": "Define how long the consumer can access the data before their license expires.",
+      "serviceExpiryUnit": "days",
+      "serviceExpiryHint": "Default value: 90 days. Consumers will see this period in the license of use.",
       "timeoutLabel": "Access Time",
       "permanentLabel": "Permanent access (no time limit)",
       "customLabel": "Custom duration",
@@ -94,14 +156,65 @@
     }
   },
   "step4": {
-    "title": "Summary and publish",
-    "description": "Review the configuration and publish the asset",
+    "title": "Publication",
+    "description": "Define how your dataset will appear in the catalog",
+    "nameLabel": "Commercial Name *",
+    "namePlaceholder": "Dataset name",
+    "descriptionField": { "label": "Description", "placeholder": "Describe the content, sources and utility of the data..." },
+    "categoryLabel": "Category *",
+    "categoryPlaceholder": "Select a category",
+    "languageLabel": "Dataset Language *",
+    "languagePlaceholder": "Select the language",
+    "pricingModel": {
+      "title": "Pricing Model",
+      "description": "Define how you want to monetize your data",
+      "free": "Free",
+      "freeSubtitle": "No cost for consumers",
+      "subscription": "Subscription",
+      "subscriptionSubtitle": "Recurring monthly payment",
+      "oneTime": "One-time Payment",
+      "oneTimeSubtitle": "Perpetual license",
+      "perUse": "Per Use",
+      "perUseSubtitle": "Based on API consumption",
+      "pricePerMonth": "Price (€) /month",
+      "price": "Price (€)"
+    },
+    "categories": {
+      "compliance": "Compliance",
+      "esg": "ESG / Sustainability",
+      "operaciones": "Operations",
+      "mercadoPrecios": "Market / Prices",
+      "iDyInnovacion": "R&D / Innovation",
+      "logistica": "Logistics",
+      "finanzas": "Finance",
+      "recursosHumanos": "Human Resources",
+      "iotTelemetria": "IoT / Telemetry",
+      "otros": "Other"
+    },
+    "languages": {
+      "es": "Spanish",
+      "en": "English",
+      "de": "German",
+      "fr": "French",
+      "it": "Italian",
+      "pt": "Portuguese",
+      "nl": "Dutch",
+      "other": "Other"
+    },
     "instruction": "Choose the wallet to sign with and press Publish to register the asset on blockchain.",
     "summary": {
       "title": "Summary",
       "sourceType": "Source type",
-      "name": "Name (optional)",
+      "name": "Name",
       "pricing": "Pricing"
+    },
+    "termsOfUse": {
+      "title": "Terms of Use",
+      "description": "Accept the conditions to publish in the marketplace",
+      "checkbox1": "I accept the ProcureData Terms and Conditions",
+      "checkbox1Subtitle": "Including obligations as a data provider and marketplace usage policies.",
+      "checkbox2": "I confirm that I have the right to share this data",
+      "checkbox2Subtitle": "I declare that the data complies with GDPR and does not contain personal information without consent."
     },
     "wallet": {
       "label": "Wallet for publishing",
@@ -112,7 +225,7 @@
       "primaryBadge": "Primary",
       "noOrgWallets": "This organization has no registered wallets. Register a wallet for the organization to publish."
     },
-    "publishButton": "Publish asset",
+    "publishButton": "Submit for technical validation",
     "publishing": "Publishing...",
     "success": "Data asset published successfully.",
     "errorPublish": "Error publishing the asset"

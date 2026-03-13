@@ -59,11 +59,11 @@ export function OnboardingStepper({
                 >
                   {step.title}
                 </p>
-                {/* {step.description && (
+                {step.description && (
                   <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 hidden sm:block">
                     {step.description}
                   </p>
-                )} */}
+                )}
               </div>
             </div>
 

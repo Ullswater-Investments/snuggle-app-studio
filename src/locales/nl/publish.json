@@ -9,10 +9,10 @@
     "securityNote": "ProcureData slaat uw gegevens niet op. Wij faciliteren alleen de veilige verbinding tussen uw API en de geautoriseerde consument."
   },
   "stepper": {
-    "step1": { "title": "Bron" },
-    "step2": { "title": "Metadata" },
-    "step3": { "title": "Configuratie" },
-    "step4": { "title": "Publiceren" }
+    "step1": { "title": "Databron", "description": "API-verbinding" },
+    "step2": { "title": "Schema", "description": "Technische structuur" },
+    "step3": { "title": "Beleid", "description": "Pontus-X" },
+    "step4": { "title": "Publicatie", "description": "Catalogus" }
   },
   "step1": {
     "title": "Databron",
@@ -43,6 +43,21 @@
   "step2": {
     "title": "Asset-metadata",
     "description": "Beschrijvende informatie over het data-asset",
+    "schemaTitle": "Technisch gegevensschema",
+    "schemaDescription": "Definieer de structuur die consumenten zien bij het raadplegen van uw API",
+    "uploadLabel": "Schema-assistent",
+    "uploadButton": "JSON / CSV uploaden",
+    "uploadHint": "Upload een voorbeeld JSON- of CSV-bestand en we detecteren automatisch de velden. U kunt ze ook handmatig definiëren.",
+    "fieldsLabel": "Velddefinitie",
+    "fieldLabel": "Veld *",
+    "typeLabel": "Type *",
+    "descriptionLabel": "Beschrijving",
+    "fieldPlaceholder": "veldnaam",
+    "fieldDescPlaceholder": "Beschrijving van het veld...",
+    "addField": "Veld toevoegen",
+    "fileError": "Bestand kon niet worden verwerkt.",
+    "fieldsDetected": "{{count}} velden automatisch gedetecteerd",
+    "noFields": "Geen velden gedetecteerd.",
     "name": {
       "label": "Naam (optioneel)",
       "placeholder": "Naam van het data-asset"
@@ -57,16 +72,59 @@
     }
   },
   "step3": {
-    "title": "Prijsmodel en toegang",
-    "description": "Definieer het prijsmodel en de toegangsconfiguratie",
+    "title": "Pontus-X toegangsbeleid",
+    "description": "Definieer governance-regels en gebruiksvoorwaarden voor uw dataset",
     "pricing": {
       "label": "Prijsmodel",
       "free": "Gratis",
       "paid": "Betaald",
       "priceLabel": "Prijs (tokens)"
     },
+    "odrl": {
+      "permissionsTitle": "Rechten — Wat de gebruiker MAG doen",
+      "prohibitionsTitle": "Verboden — Wat de gebruiker NIET mag doen",
+      "obligationsTitle": "Verplichtingen — Aanvullende verbintenissen",
+      "permissionCustomPlaceholder": "Aangepast recht toevoegen...",
+      "prohibitionCustomPlaceholder": "Aangepast verbod toevoegen...",
+      "obligationCustomPlaceholder": "Aangepaste verplichting toevoegen...",
+      "permissions": {
+        "commercialUse": "Commercieel gebruik",
+        "internalAnalysis": "Interne analyse",
+        "derivedReports": "Afgeleide rapporten genereren",
+        "internalIntegration": "Integratie in interne systemen",
+        "researchUse": "Onderzoeksgebruik"
+      },
+      "prohibitions": {
+        "noRedistribution": "Geen herverwerking",
+        "noReverseEngineering": "Geen reverse engineering",
+        "noIllegalUse": "Geen illegaal of discriminerend gebruik",
+        "noResale": "Geen doorverkoop aan derden",
+        "noPublicDisclosure": "Geen openbaarmaking"
+      },
+      "obligations": {
+        "attributionRequired": "Naamsvermelding vereist",
+        "gdprCompliance": "AVG-naleving",
+        "licenseRenewal": "Licentievoor verlenging",
+        "citeDataSource": "Gegevensbron citeren",
+        "notifyProvider": "Aanbieder op de hoogte stellen van gebruik"
+      }
+    },
+    "termsAndConditions": {
+      "label": "Link naar Algemene Voorwaarden (Optioneel)",
+      "placeholder": "https://voorbeeld.nl/voorwaarden",
+      "hint": "Voer een bruikbare URL in naar uw juridische AV-document"
+    },
     "accessConfig": {
+      "accessControlTitle": "Toegangscontrole (Pontus-X)",
       "title": "Toegangsconfiguratie",
+      "whitelistTitle": "Organisaties met toegestane toegang (Whitelist)",
+      "whitelistDescription": "Als u hier organisaties toevoegt, wordt het asset PRIVAAT. Alleen zij kunnen het zien en aanvragen. De geweigerde lijst wordt automatisch genegeerd.",
+      "whitelistSearchPlaceholder": "Zoek organisatie op naam...",
+      "whitelistEmptyStatus": "Geen organisaties toegevoegd — het asset wordt niet privé via whitelist.",
+      "blacklistTitle": "Organisaties met geweigerde toegang (Blacklist)",
+      "blacklistDescription": "Alleen effectief als de toegestane lijst leeg is. Het asset is PUBLIEK voor iedereen, behalve voor de hier vermelde organisaties.",
+      "blacklistSearchPlaceholder": "Zoek organisatie op naam...",
+      "blacklistEmptyStatus": "Geen organisaties geweigerd — volledige openbare toegang.",
       "timeoutLabel": "Toegangstijd",
       "permanentLabel": "Permanente toegang (geen tijdslimiet)",
       "customLabel": "Aangepaste duur",
@@ -94,13 +152,64 @@
     }
   },
   "step4": {
-    "title": "Samenvatting en publicatie",
-    "description": "Controleer de configuratie en publiceer het asset",
+    "title": "Publicatie",
+    "description": "Definieer hoe uw dataset in de catalogus verschijnt",
+    "nameLabel": "Commerciële naam *",
+    "namePlaceholder": "Datasetnaam",
+    "descriptionField": { "label": "Beschrijving", "placeholder": "Beschrijf de inhoud, bronnen en het nut van de gegevens..." },
+    "categoryLabel": "Categorie *",
+    "categoryPlaceholder": "Selecteer een categorie",
+    "languageLabel": "Datasettaal *",
+    "languagePlaceholder": "Selecteer de taal",
+    "pricingModel": {
+      "title": "Prijsmodel",
+      "description": "Definieer hoe u uw gegevens wilt monetaire",
+      "free": "Gratis",
+      "freeSubtitle": "Geen kosten voor consumenten",
+      "subscription": "Abonnement",
+      "subscriptionSubtitle": "Terugkerende maandelijkse betaling",
+      "oneTime": "Eenmalige betaling",
+      "oneTimeSubtitle": "Perpetuele licentie",
+      "perUse": "Per gebruik",
+      "perUseSubtitle": "Gebaseerd op API-verbruik",
+      "pricePerMonth": "Prijs (€) /maand",
+      "price": "Prijs (€)"
+    },
+    "categories": {
+      "compliance": "Compliance",
+      "esg": "ESG / Duurzaamheid",
+      "operaciones": "Operaties",
+      "mercadoPrecios": "Markt / Prijzen",
+      "iDyInnovacion": "R&D / Innovatie",
+      "logistica": "Logistiek",
+      "finanzas": "Financiën",
+      "recursosHumanos": "Menselijke hulpbronnen",
+      "iotTelemetria": "IoT / Telemetrie",
+      "otros": "Overig"
+    },
+    "termsOfUse": {
+      "title": "Gebruiksvoorwaarden",
+      "description": "Accepteer de voorwaarden om te publiceren op de marktplaats",
+      "checkbox1": "Ik accepteer de Algemene Voorwaarden van ProcureData",
+      "checkbox1Subtitle": "Inclusief verplichtingen als data-aanbieder en het marktplaatsgebruiksbeleid.",
+      "checkbox2": "Ik bevestig dat ik het recht heb om deze gegevens te delen",
+      "checkbox2Subtitle": "Ik verklaar dat de gegevens voldoen aan de AVG en geen persoonlijke gegevens bevatten zonder toestemming."
+    },
+    "languages": {
+      "es": "Spaans",
+      "en": "Engels",
+      "de": "Duits",
+      "fr": "Frans",
+      "it": "Italiaans",
+      "pt": "Portugees",
+      "nl": "Nederlands",
+      "other": "Overig"
+    },
     "instruction": "Kies de wallet om mee te ondertekenen en klik op Publiceren om het asset op de blockchain te registreren.",
     "summary": {
       "title": "Samenvatting",
       "sourceType": "Brontype",
-      "name": "Naam (optioneel)",
+      "name": "Naam",
       "pricing": "Prijsmodel"
     },
     "wallet": {
@@ -112,7 +221,7 @@
       "primaryBadge": "Primair",
       "noOrgWallets": "Deze organisatie heeft geen geregistreerde wallets. Registreer een wallet voor de organisatie om te kunnen publiceren."
     },
-    "publishButton": "Asset publiceren",
+    "publishButton": "Versturen voor technische validatie",
     "publishing": "Bezig met publiceren...",
     "success": "Data-asset succesvol gepubliceerd.",
     "errorPublish": "Fout bij het publiceren van het asset"

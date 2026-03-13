@@ -9,10 +9,10 @@
     "securityNote": "ProcureData no almacena sus datos. Solo facilitamos la conexión segura entre su API y el consumidor autorizado."
   },
   "stepper": {
-    "step1": { "title": "Fuente" },
-    "step2": { "title": "Metadata" },
-    "step3": { "title": "Configuración" },
-    "step4": { "title": "Publicar" }
+    "step1": { "title": "Fuente de Datos", "description": "Conexión API" },
+    "step2": { "title": "Esquema", "description": "Estructura técnica" },
+    "step3": { "title": "Políticas", "description": "Pontus-X" },
+    "step4": { "title": "Publicación", "description": "Catálogo" }
   },
   "step1": {
     "title": "Fuente de datos",
@@ -43,8 +43,23 @@
   "step2": {
     "title": "Metadata del activo",
     "description": "Información descriptiva del activo de datos",
+    "schemaTitle": "Esquema de Datos Técnico",
+    "schemaDescription": "Define la estructura que verán los consumidores al consultar tu API",
+    "uploadLabel": "Asistente de Esquema",
+    "uploadButton": "Cargar JSON / CSV",
+    "uploadHint": "Sube un archivo JSON o CSV de ejemplo y detectaremos los campos automáticamente. También puedes definirlos manualmente.",
+    "fieldsLabel": "Definición de Campos",
+    "fieldLabel": "Campo *",
+    "typeLabel": "Tipo *",
+    "descriptionLabel": "Descripción",
+    "fieldPlaceholder": "nombre_campo",
+    "fieldDescPlaceholder": "Descripción del campo...",
+    "addField": "Añadir Campo",
+    "fileError": "No se pudo procesar el archivo.",
+    "fieldsDetected": "{{count}} campos detectados automáticamente",
+    "noFields": "No se detectaron campos.",
     "name": {
-      "label": "Nombre (opcional)",
+      "label": "Nombre *",
       "placeholder": "Nombre del activo de datos"
     },
     "license": {
@@ -57,16 +72,63 @@
     }
   },
   "step3": {
-    "title": "Comercialización y acceso",
-    "description": "Define el modelo de precio y la configuración de acceso",
+    "title": "Políticas de Acceso Pontus-X",
+    "description": "Define las reglas de gobernanza y condiciones de uso para tu dataset",
     "pricing": {
       "label": "Comercialización",
       "free": "Gratuito",
       "paid": "De pago",
       "priceLabel": "Precio (tokens)"
     },
+    "odrl": {
+      "permissionsTitle": "Permisos — Lo que el usuario PUEDE hacer",
+      "prohibitionsTitle": "Prohibiciones — Lo que el usuario NO PUEDE hacer",
+      "obligationsTitle": "Obligaciones — Compromisos adicionales",
+      "permissionCustomPlaceholder": "Añadir permiso personalizado...",
+      "prohibitionCustomPlaceholder": "Añadir prohibición personalizada...",
+      "obligationCustomPlaceholder": "Añadir obligación personalizada...",
+      "permissions": {
+        "commercialUse": "Uso comercial",
+        "internalAnalysis": "Análisis interno",
+        "derivedReports": "Generar informes derivados",
+        "internalIntegration": "Integración en sistemas internos",
+        "researchUse": "Uso en investigación"
+      },
+      "prohibitions": {
+        "noRedistribution": "No redistribución",
+        "noReverseEngineering": "No ingeniería inversa",
+        "noIllegalUse": "No uso ilegal o discriminatorio",
+        "noResale": "No reventa a terceros",
+        "noPublicDisclosure": "No divulgación pública"
+      },
+      "obligations": {
+        "attributionRequired": "Atribución requerida",
+        "gdprCompliance": "Cumplimiento GDPR",
+        "licenseRenewal": "Renovación de licencia",
+        "citeDataSource": "Citar fuente de datos",
+        "notifyProvider": "Notificar uso a proveedor"
+      }
+    },
+    "termsAndConditions": {
+      "label": "Enlace a Términos y Condiciones (Opcional)",
+      "placeholder": "https://ejemplo.com/terminos",
+      "hint": "Introduce una URL resoluble a su documento legal de T&C"
+    },
     "accessConfig": {
+      "accessControlTitle": "Control de Acceso (Pontus-X)",
       "title": "Configuración de acceso",
+      "whitelistTitle": "Organizaciones con Acceso Permitido (Whitelist)",
+      "whitelistDescription": "Si añades organizaciones aquí, el activo se vuelve PRIVADO. Solo ellas podrán verlo y solicitarlo. La lista de denegados se ignorará automáticamente.",
+      "whitelistSearchPlaceholder": "Buscar organización por nombre...",
+      "whitelistEmptyStatus": "Sin organizaciones añadidas — el activo no será privado por whitelist.",
+      "blacklistTitle": "Organizaciones con Acceso Denegado (Blacklist)",
+      "blacklistDescription": "Solo efectivo si la lista de permitidos está vacía. El activo será PÚBLICO para todos, excepto para las organizaciones listadas aquí.",
+      "blacklistSearchPlaceholder": "Buscar organización por nombre...",
+      "blacklistEmptyStatus": "Sin organizaciones denegadas — acceso público total.",
+      "serviceExpiryTitle": "Caducidad del Servicio (Timeout)",
+      "serviceExpiryDescription": "Define cuánto tiempo podrá el consumidor acceder a los datos antes de que expire su licencia.",
+      "serviceExpiryUnit": "días",
+      "serviceExpiryHint": "Valor por defecto: 90 días. Los consumidores verán este periodo en la licencia de uso.",
       "timeoutLabel": "Tiempo de Acceso",
       "permanentLabel": "Acceso permanente (sin límite de tiempo)",
       "customLabel": "Duración personalizada",
@@ -94,13 +156,56 @@
     }
   },
   "step4": {
-    "title": "Resumen y publicación",
-    "description": "Revisa la configuración y publica el activo",
+    "title": "Publicación",
+    "description": "Define cómo aparecerá tu dataset en el catálogo",
+    "nameLabel": "Nombre Comercial *",
+    "namePlaceholder": "Nombre del dataset",
+    "descriptionField": { "label": "Descripción *", "placeholder": "Describe el contenido, fuentes y utilidad de los datos..." },
+    "categoryLabel": "Categoría *",
+    "categoryPlaceholder": "Selecciona una categoría",
+    "languageLabel": "Idioma del Dataset *",
+    "languagePlaceholder": "Selecciona el idioma",
+    "pricingModel": {
+      "title": "Modelo de Precio",
+      "description": "Define cómo quieres monetizar tus datos",
+      "free": "Gratuito",
+      "freeSubtitle": "Sin coste para consumidores",
+      "subscription": "Suscripción",
+      "subscriptionSubtitle": "Pago mensual recurrente",
+      "oneTime": "Pago Único",
+      "oneTimeSubtitle": "Licencia perpetua",
+      "perUse": "Por Uso",
+      "perUseSubtitle": "Basado en consumo de API",
+      "pricePerMonth": "Precio (€) /mes",
+      "price": "Precio (€)"
+    },
+    "categories": {
+      "compliance": "Compliance",
+      "esg": "ESG / Sostenibilidad",
+      "operaciones": "Operaciones",
+      "mercadoPrecios": "Mercado / Precios",
+      "iDyInnovacion": "I+D / Innovación",
+      "logistica": "Logística",
+      "finanzas": "Finanzas",
+      "recursosHumanos": "Recursos Humanos",
+      "iotTelemetria": "IoT / Telemetría",
+      "otros": "Otros"
+    },
+    "languages": {
+      "es": "Español",
+      "en": "Inglés",
+      "de": "Alemán",
+      "fr": "Francés",
+      "it": "Italiano",
+      "pt": "Portugués",
+      "nl": "Neerlandés",
+      "other": "Otro"
+    },
     "instruction": "Elige la wallet con la que firmar y pulsa Publicar para registrar el activo en blockchain.",
     "summary": {
       "title": "Resumen",
       "sourceType": "Tipo de fuente",
-      "name": "Nombre (opcional)",
+      "name": "Nombre",
       "pricing": "Comercialización"
     },
     "wallet": {
@@ -112,7 +217,15 @@
       "primaryBadge": "Principal",
       "noOrgWallets": "Esta organización no tiene wallets registradas. Registre una wallet en la organización para poder publicar."
     },
-    "publishButton": "Publicar activo",
+    "termsOfUse": {
+      "title": "Términos de Uso",
+      "description": "Acepta las condiciones para publicar en el marketplace",
+      "checkbox1": "Acepto los Términos y Condiciones de ProcureData",
+      "checkbox1Subtitle": "Incluyendo las obligaciones como proveedor de datos y las políticas de uso del marketplace.",
+      "checkbox2": "Confirmo que tengo derecho a compartir estos datos",
+      "checkbox2Subtitle": "Declaro que los datos cumplen con GDPR y no contienen información personal sin consentimiento."
+    },
+    "publishButton": "Enviar para validación técnica",
     "publishing": "Publicando...",
     "success": "Activo de datos publicado correctamente.",
     "errorPublish": "Error al publicar el activo"

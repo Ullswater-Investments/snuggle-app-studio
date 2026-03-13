@@ -9,10 +9,10 @@
     "securityNote": "ProcureData speichert Ihre Daten nicht. Wir ermöglichen lediglich die sichere Verbindung zwischen Ihrer API und dem autorisierten Verbraucher."
   },
   "stepper": {
-    "step1": { "title": "Quelle" },
-    "step2": { "title": "Metadaten" },
-    "step3": { "title": "Konfiguration" },
-    "step4": { "title": "Veröffentlichen" }
+    "step1": { "title": "Datenquelle", "description": "API-Verbindung" },
+    "step2": { "title": "Schema", "description": "Technische Struktur" },
+    "step3": { "title": "Richtlinien", "description": "Pontus-X" },
+    "step4": { "title": "Veröffentlichung", "description": "Katalog" }
   },
   "step1": {
     "title": "Datenquelle",
@@ -43,6 +43,21 @@
   "step2": {
     "title": "Asset-Metadaten",
     "description": "Beschreibende Informationen über das Datenasset",
+    "schemaTitle": "Technisches Datenschema",
+    "schemaDescription": "Definieren Sie die Struktur, die Verbraucher bei der Abfrage Ihrer API sehen",
+    "uploadLabel": "Schema-Assistent",
+    "uploadButton": "JSON / CSV hochladen",
+    "uploadHint": "Laden Sie eine Beispiel-JSON- oder CSV-Datei hoch und wir erkennen die Felder automatisch. Sie können sie auch manuell definieren.",
+    "fieldsLabel": "Felddefinition",
+    "fieldLabel": "Feld *",
+    "typeLabel": "Typ *",
+    "descriptionLabel": "Beschreibung",
+    "fieldPlaceholder": "feldname",
+    "fieldDescPlaceholder": "Beschreibung des Feldes...",
+    "addField": "Feld hinzufügen",
+    "fileError": "Die Datei konnte nicht verarbeitet werden.",
+    "fieldsDetected": "{{count}} Felder automatisch erkannt",
+    "noFields": "Keine Felder erkannt.",
     "name": {
       "label": "Name (optional)",
       "placeholder": "Name des Datenassets"
@@ -57,16 +72,59 @@
     }
   },
   "step3": {
-    "title": "Preisgestaltung und Zugang",
-    "description": "Definieren Sie das Preismodell und die Zugangskonfiguration",
+    "title": "Pontus-X Zugangsrichtlinien",
+    "description": "Definieren Sie Governance-Regeln und Nutzungsbedingungen für Ihren Datensatz",
     "pricing": {
       "label": "Preisgestaltung",
       "free": "Kostenlos",
       "paid": "Kostenpflichtig",
       "priceLabel": "Preis (Token)"
     },
+    "odrl": {
+      "permissionsTitle": "Berechtigungen — Was der Nutzer tun DARF",
+      "prohibitionsTitle": "Verbote — Was der Nutzer NICHT tun darf",
+      "obligationsTitle": "Verpflichtungen — Zusätzliche Auflagen",
+      "permissionCustomPlaceholder": "Eigene Berechtigung hinzufügen...",
+      "prohibitionCustomPlaceholder": "Eigenes Verbot hinzufügen...",
+      "obligationCustomPlaceholder": "Eigene Verpflichtung hinzufügen...",
+      "permissions": {
+        "commercialUse": "Kommerzielle Nutzung",
+        "internalAnalysis": "Interne Analyse",
+        "derivedReports": "Abgeleitete Berichte erstellen",
+        "internalIntegration": "Integration in interne Systeme",
+        "researchUse": "Forschungsnutzung"
+      },
+      "prohibitions": {
+        "noRedistribution": "Keine Weiterverbreitung",
+        "noReverseEngineering": "Kein Reverse Engineering",
+        "noIllegalUse": "Keine illegale oder diskriminierende Nutzung",
+        "noResale": "Kein Weiterverkauf an Dritte",
+        "noPublicDisclosure": "Keine öffentliche Offenlegung"
+      },
+      "obligations": {
+        "attributionRequired": "Namensnennung erforderlich",
+        "gdprCompliance": "DSGVO-Konformität",
+        "licenseRenewal": "Lizenzverlängerung",
+        "citeDataSource": "Datenquelle zitieren",
+        "notifyProvider": "Anbieter über Nutzung informieren"
+      }
+    },
+    "termsAndConditions": {
+      "label": "Link zu Nutzungsbedingungen (Optional)",
+      "placeholder": "https://beispiel.de/agb",
+      "hint": "Geben Sie eine auflösbare URL zu Ihrem rechtlichen AGB-Dokument ein"
+    },
     "accessConfig": {
+      "accessControlTitle": "Zugriffskontrolle (Pontus-X)",
       "title": "Zugangskonfiguration",
+      "whitelistTitle": "Organisationen mit erlaubtem Zugang (Whitelist)",
+      "whitelistDescription": "Wenn Sie hier Organisationen hinzufügen, wird das Asset PRIVAT. Nur diese können es sehen und anfordern. Die abgelehnte Liste wird automatisch ignoriert.",
+      "whitelistSearchPlaceholder": "Organisation nach Name suchen...",
+      "whitelistEmptyStatus": "Keine Organisationen hinzugefügt — das Asset wird nicht über Whitelist privat sein.",
+      "blacklistTitle": "Organisationen mit verweigertem Zugang (Blacklist)",
+      "blacklistDescription": "Nur wirksam, wenn die erlaubte Liste leer ist. Das Asset wird für alle ÖFFENTLICH sein, außer für die hier gelisteten Organisationen.",
+      "blacklistSearchPlaceholder": "Organisation nach Name suchen...",
+      "blacklistEmptyStatus": "Keine Organisationen abgelehnt — vollständiger öffentlicher Zugang.",
       "timeoutLabel": "Zugangsdauer",
       "permanentLabel": "Permanenter Zugang (ohne Zeitlimit)",
       "customLabel": "Benutzerdefinierte Dauer",
@@ -94,13 +152,64 @@
     }
   },
   "step4": {
-    "title": "Zusammenfassung und Veröffentlichung",
-    "description": "Überprüfen Sie die Konfiguration und veröffentlichen Sie das Asset",
+    "title": "Veröffentlichung",
+    "description": "Definieren Sie, wie Ihr Dataset im Katalog erscheint",
+    "nameLabel": "Handelsname *",
+    "namePlaceholder": "Name des Datasets",
+    "descriptionField": { "label": "Beschreibung", "placeholder": "Beschreiben Sie Inhalt, Quellen und Nutzen der Daten..." },
+    "categoryLabel": "Kategorie *",
+    "categoryPlaceholder": "Kategorie auswählen",
+    "languageLabel": "Dataset-Sprache *",
+    "languagePlaceholder": "Sprache auswählen",
+    "termsOfUse": {
+      "title": "Nutzungsbedingungen",
+      "description": "Akzeptieren Sie die Bedingungen, um im Marketplace zu veröffentlichen",
+      "checkbox1": "Ich akzeptiere die ProcureData Allgemeinen Geschäftsbedingungen",
+      "checkbox1Subtitle": "Einschließlich der Verpflichtungen als Datenanbieter und der Marketplace-Nutzungsrichtlinien.",
+      "checkbox2": "Ich bestätige, dass ich das Recht habe, diese Daten zu teilen",
+      "checkbox2Subtitle": "Ich erkläre, dass die Daten der DSGVO entsprechen und keine personenbezogenen Daten ohne Zustimmung enthalten."
+    },
+    "pricingModel": {
+      "title": "Preismodell",
+      "description": "Definieren Sie, wie Sie Ihre Daten monetarisieren möchten",
+      "free": "Kostenlos",
+      "freeSubtitle": "Keine Kosten für Verbraucher",
+      "subscription": "Abonnement",
+      "subscriptionSubtitle": "Wiederkehrende monatliche Zahlung",
+      "oneTime": "Einmalzahlung",
+      "oneTimeSubtitle": "Dauerhafte Lizenz",
+      "perUse": "Nach Nutzung",
+      "perUseSubtitle": "Basierend auf API-Verbrauch",
+      "pricePerMonth": "Preis (€) /Monat",
+      "price": "Preis (€)"
+    },
+    "categories": {
+      "compliance": "Compliance",
+      "esg": "ESG / Nachhaltigkeit",
+      "operaciones": "Betrieb",
+      "mercadoPrecios": "Markt / Preise",
+      "iDyInnovacion": "F&E / Innovation",
+      "logistica": "Logistik",
+      "finanzas": "Finanzen",
+      "recursosHumanos": "Personalwesen",
+      "iotTelemetria": "IoT / Telemetrie",
+      "otros": "Sonstige"
+    },
+    "languages": {
+      "es": "Spanisch",
+      "en": "Englisch",
+      "de": "Deutsch",
+      "fr": "Französisch",
+      "it": "Italienisch",
+      "pt": "Portugiesisch",
+      "nl": "Niederländisch",
+      "other": "Andere"
+    },
     "instruction": "Wählen Sie die Wallet zum Signieren und klicken Sie auf Veröffentlichen, um das Asset in der Blockchain zu registrieren.",
     "summary": {
       "title": "Zusammenfassung",
       "sourceType": "Quelltyp",
-      "name": "Name (optional)",
+      "name": "Name",
       "pricing": "Preisgestaltung"
     },
     "wallet": {
@@ -112,7 +221,7 @@
       "primaryBadge": "Primär",
       "noOrgWallets": "Diese Organisation hat keine registrierten Wallets. Registrieren Sie eine Wallet für die Organisation zum Veröffentlichen."
     },
-    "publishButton": "Asset veröffentlichen",
+    "publishButton": "Zur technischen Validierung einreichen",
     "publishing": "Wird veröffentlicht...",
     "success": "Datenasset erfolgreich veröffentlicht.",
     "errorPublish": "Fehler beim Veröffentlichen des Assets"

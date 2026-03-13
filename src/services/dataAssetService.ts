@@ -49,6 +49,48 @@ export interface ConsumerParameter {
   options?: string[];
 }
 
+// --- Meta / Schema ---
+
+export interface SchemaFieldMeta {
+  type: string;
+  field: string;
+  description: string;
+}
+
+export interface OdrlPermission {
+  action: string;
+  "dcterms:title"?: string;
+}
+
+export interface OdrlProhibition {
+  action: string;
+  "dcterms:title"?: string;
+}
+
+export interface OdrlObligation {
+  action: string;
+  "dcterms:title"?: string;
+}
+
+export interface OdrlObject {
+  "@context": (string | Record<string, string>)[];
+  type: string;
+  uid?: string;
+  profile: string;
+  permissions: OdrlPermission[];
+  prohibitions: OdrlProhibition[];
+  obligations: OdrlObligation[];
+  duty?: unknown[];
+}
+
+export interface DataAssetMeta {
+  schema?: SchemaFieldMeta[];
+  odrlObject?: OdrlObject;
+  termsAndConditionsUrl?: string;
+  category?: string;
+  language?: string;
+}
+
 // --- Request Body ---
 
 export interface CreateDataAssetRequest {
@@ -62,6 +104,7 @@ export interface CreateDataAssetRequest {
   consumer_parameters: ConsumerParameter[];
   usage_terms: string;
   requested_by_wallet_uuid: string;
+  meta?: DataAssetMeta;
 }
 
 // --- Response ---
@@ -161,10 +204,7 @@ export const dataAssetService = {
       data,
     ),
 
-  list: (
-    organizationUuid: string,
-    page = 1,
-  ): Promise<ListDataAssetsResponse> =>
+  list: (organizationUuid: string, page = 1): Promise<ListDataAssetsResponse> =>
     api.get<ListDataAssetsResponse>(
       `/organizations/${organizationUuid}/data-assets?page=${page}`,
     ),
