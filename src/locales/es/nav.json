@@ -71,5 +71,10 @@
   "invitationCancelError": "Error al cancelar la invitación",
   "cancelInvitationConfirmTitle": "¿Cancelar invitación?",
   "cancelInvitationConfirmDescription": "¿Estás seguro de que quieres cancelar esta invitación? El usuario no podrá unirse a la organización con esta invitación.",
-  "cancelInvitationConfirmAction": "Sí, cancelar"
+  "cancelInvitationConfirmAction": "Sí, cancelar",
+  "acceptInvitation": "Aceptar",
+  "rejectInvitation": "Rechazar",
+  "invitedBy": "Invitado por",
+  "pendingSection": "Pendientes",
+  "endpointComingSoon": "Endpoint disponible próximamente"
 }

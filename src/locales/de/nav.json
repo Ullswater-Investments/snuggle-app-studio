@@ -71,5 +71,10 @@
   "invitationCancelError": "Fehler beim Stornieren der Einladung",
   "cancelInvitationConfirmTitle": "Einladung stornieren?",
   "cancelInvitationConfirmDescription": "Sind Sie sicher, dass Sie diese Einladung stornieren möchten? Der Benutzer kann sich mit dieser Einladung nicht der Organisation anschließen.",
-  "cancelInvitationConfirmAction": "Ja, stornieren"
+  "cancelInvitationConfirmAction": "Ja, stornieren",
+  "acceptInvitation": "Annehmen",
+  "rejectInvitation": "Ablehnen",
+  "invitedBy": "Eingeladen von",
+  "pendingSection": "Ausstehend",
+  "endpointComingSoon": "Endpoint bald verfügbar"
 }

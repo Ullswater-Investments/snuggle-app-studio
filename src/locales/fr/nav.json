@@ -71,5 +71,10 @@
   "invitationCancelError": "Erreur lors de l'annulation de l'invitation",
   "cancelInvitationConfirmTitle": "Annuler l'invitation ?",
   "cancelInvitationConfirmDescription": "Êtes-vous sûr de vouloir annuler cette invitation ? L'utilisateur ne pourra pas rejoindre l'organisation avec cette invitation.",
-  "cancelInvitationConfirmAction": "Oui, annuler"
+  "cancelInvitationConfirmAction": "Oui, annuler",
+  "acceptInvitation": "Accepter",
+  "rejectInvitation": "Refuser",
+  "invitedBy": "Invité par",
+  "pendingSection": "En attente",
+  "endpointComingSoon": "Endpoint disponible prochainement"
 }

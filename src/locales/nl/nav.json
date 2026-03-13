@@ -71,5 +71,10 @@
   "invitationCancelError": "Fout bij het annuleren van de uitnodiging",
   "cancelInvitationConfirmTitle": "Uitnodiging annuleren?",
   "cancelInvitationConfirmDescription": "Weet je zeker dat je deze uitnodiging wilt annuleren? De gebruiker kan zich niet bij de organisatie aansluiten met deze uitnodiging.",
-  "cancelInvitationConfirmAction": "Ja, annuleren"
+  "cancelInvitationConfirmAction": "Ja, annuleren",
+  "acceptInvitation": "Accepteren",
+  "rejectInvitation": "Afwijzen",
+  "invitedBy": "Uitgenodigd door",
+  "pendingSection": "In afwachting",
+  "endpointComingSoon": "Endpoint binnenkort beschikbaar"
 }
