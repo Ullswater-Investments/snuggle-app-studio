@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useLocation, useMatch } from "react-router-dom";
 import { NavLink } from "@/components/NavLink";
 import { useTranslation } from "react-i18next";
@@ -26,7 +27,8 @@ import {
 } from "lucide-react";
 import { useOrganizationContext } from "@/hooks/useOrganizationContext";
 import { useIsDataSpaceOwner } from "@/hooks/useIsDataSpaceOwner";
-import { SidebarWorkspaceSwitcher } from "@/components/SidebarWorkspaceSwitcher";
+import { invitationsService } from "@/services/invitationsService";
+import { Badge } from "@/components/ui/badge";
 import {
   Sidebar,
   SidebarContent,
@@ -47,6 +49,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { SidebarWorkspaceSwitcher } from "@/components/SidebarWorkspaceSwitcher";
 
 export function AppSidebar() {
   const { open } = useSidebar();
@@ -56,6 +59,12 @@ export function AppSidebar() {
     useOrganizationContext();
   const membersMatch = useMatch("/organizations/:id");
   const [localExpandedId, setLocalExpandedId] = useState<string | null>(null);
+  const { data: invitationsData } = useQuery({
+    queryKey: ["profile-invitations"],
+    queryFn: () => invitationsService.getPendingInvitations(),
+  });
+  const pendingInvitationsCount =
+    invitationsData?.data?.filter((i) => i.status === "pending").length ?? 0;
   const expandedOrgId = membersMatch?.params?.id ?? localExpandedId;
   const { isOwner } = useIsDataSpaceOwner();
 
@@ -234,7 +243,19 @@ export function AppSidebar() {
                     activeClassName="bg-muted text-primary font-medium"
                   >
                     <Mail className="h-5 w-5 shrink-0" />
-                    {open && <span>{t("myInvitations")}</span>}
+                    {open && (
+                      <>
+                        <span>{t("myInvitations")}</span>
+                        {pendingInvitationsCount > 0 && (
+                          <Badge
+                            variant="destructive"
+                            className="h-5 min-w-5 rounded-full px-1.5 justify-center text-xs ml-auto"
+                          >
+                            {pendingInvitationsCount}
+                          </Badge>
+                        )}
+                      </>
+                    )}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
